@@ -32,8 +32,8 @@ LINES = [
     ("sa_kariru_2", "metan", "おてほん", {}),
     ("sq_hoken", "meebaa", "しんぱい", {"into": 1.35}),
     ("sr_hoken", "meebaa", "おどろき→なだめる", {"speed": .88, "into": 1.4}),
-    ("sq_netsu", "meebaa", "おどろき・しんぱい", {"pitch": 0}),
-    ("sr_tabesugi", "meebaa", "やさしく", {"speed": .82}),
+    ("sq_netsu", "meebaa", "おどろき・しんぱい", {"pitch": 0, "into": 1.4}),
+    ("sr_tabesugi", "meebaa", "おどろき→やさしく", {"speed": .84, "into": 1.4}),
     ("sq_uwabaki", "kamejii", "ふしぎそう", {}),
     ("sr_shitsurei", "kamejii", "ほめる", {}),
     ("sq_osaki", "kamejii", "ゆったり", {"speed": .82}),
@@ -47,7 +47,7 @@ LINES = [
     ("sr_tetsudau", "chu", "うれしい", {"style": 32}),
     ("sq_kowai", "chu", "こわい", {"style": 33}),
     ("sr_otoshimono", "chu", "びっくり→うれしい", {"style": 32}),
-    ("sq_sayonara", "doshin", "のんびり", {}),
+    ("sq_sayonara", "doshin", "がっかり", {"speed": .76}),
     ("sr_sayonara", "doshin", "げんきに", {"into": 1.15, "speed": .85}),
     ("sq_dekkai", "doshin", "あれっ？", {"into": 1.1}),
     ("sr_dekkai", "doshin", "おおらか", {}),
@@ -74,7 +74,10 @@ def text_of(key):
 
 # 気持ちの強調: 句ごとに 高さ(p: 対数F0に加算)・最後の母音の長さ倍率(len)・直後の間(pause)
 EMPH = {
-    "sq_netsu": [{"i": 2, "last_p": .2, "len": 1.7}],
+    "sq_netsu": [{"i": 2, "p": .06, "last_p": .38, "len": 1.9, "pause": .3}],
+    "sr_tabesugi": [{"i": 0, "p": .16, "len": 1.5, "pause": .25}],
+    "sr_otoshimono": [{"i": 0, "p": .18, "len": 1.4}],
+    "sq_sayonara": [{"i": 0, "p": .1, "len": 1.6, "pause": 0}, {"i": 1, "p": -.04}],
     "sr_hoken": [{"i": 0, "p": .14, "len": 1.7, "pause": .12}, {"i": 1, "p": .12, "skip_first": True, "len": 1.15, "pause": .32}],
 }
 PUNCT = "、。！？…"
@@ -141,7 +144,7 @@ def tuned(key, who, ov, rate):
             if m.pitch > 0 and not (e.get("skip_first") and j == 0): m.pitch += e.get("p", 0)
         ap.moras[-1].vowel_length *= e.get("len", 1)
         if "last_p" in e and len(ap.moras) > 1 and ap.moras[-1].pitch > 0: ap.moras[-1].pitch += e["last_p"]
-        if "pause" in e and ap.pause_mora is not None: ap.pause_mora = mk_pause(e["pause"])
+        if "pause" in e and ap.pause_mora is not None: ap.pause_mora = mk_pause(e["pause"]) if e["pause"] else None
     q.accent_phrases = aps
     q.speed_scale, q.pitch_scale, q.intonation_scale = sp, pi, it
     q.pre_phoneme_length, q.post_phoneme_length = .05, .1
