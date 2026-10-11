@@ -1,0 +1,27 @@
+{
+ "chars": {
+  "metan":   {"model": "1b2830f4-8cf1-4184-a0d9-3a1bace3a844", "style": "標準", "speed": 0.95},
+  "meebaa":  {"model": "baaae3c0-7b22-4605-8ba5-80c959b41a48", "style": "ノーマル", "speed": 0.9},
+  "kamejii": {"model": "696c98a2-c0b7-4fe7-8cf2-c7e9b8a9bd82", "style": "ノーマル", "speed": 0.92},
+  "gao":     {"model": "2e1fdde8-d089-42d7-b64f-cf89952b1bdc", "style": "ノーマル", "speed": 1.05},
+  "chu":     {"model": "9f36ec0d-8dac-42dc-aff4-149c5f99faad", "style": "標準", "speed": 1.05},
+  "doshin":  {"model": "47e53151-a378-46f3-abee-ce13aa07feb1", "style": "Calm", "speed": 0.88},
+  "pyon":    {"model": "f5017410-fbb5-49e1-97cb-e785f42e15f5", "style": "Happy", "speed": 1.05},
+  "mii":     {"model": "a59cb814-0083-4369-8542-f51a29e72af7", "style": "ふつー", "speed": 1.0},
+  "nobbo":   {"model": "71e72188-2726-4739-9aa9-39567396fb2a", "style": "ノーマル", "speed": 1.0}
+ },
+ "lines": {
+  "p_ask": {"style": "喜び"},
+  "sq_locker": {"style": "close-shout"},
+  "sq_tobioriru": {"style": "close-shout"},
+  "sq_tetsudau": {"style": "悲しみ"},
+  "sq_kowai": {"style": "恐怖"},
+  "sr_tetsudau": {"style": "喜び"},
+  "sr_otoshimono": {"style": "驚き"},
+  "sr_sayonara": {"style": "Mid"},
+  "sq_mizu": {"style": "Surprise"},
+  "sq_gyaku": {"style": "からかい"},
+  "sr_gyaku": {"style": "からかい"},
+  "sr_tearai": {"style": "あまあま"}
+ }
+}

@@ -1,0 +1,66 @@
+import json, sys, time, urllib.request, urllib.parse, subprocess, io, wave
+from pathlib import Path
+import numpy as np
+OUT = Path(sys.argv[1]); (OUT / "aivis").mkdir(parents=True, exist_ok=True)
+E = "http://127.0.0.1:10101"
+cast = json.loads(Path("cast.json").read_text()); lines = json.loads(Path("lines.json").read_text())
+def call(method, path, data=None, ctype=None, timeout=600):
+    req = urllib.request.Request(E + path, data=data, method=method)
+    if ctype: req.add_header("Content-Type", ctype)
+    with urllib.request.urlopen(req, timeout=timeout) as r: return r.read()
+installed = json.loads(call("GET", "/aivm_models"))
+for who, c in cast["chars"].items():
+    if c["model"] in installed: continue
+    url = f"https://api.aivis-project.com/v1/aivm-models/{c['model']}/download?model_type=AIVMX"
+    body = urllib.parse.urlencode({"url": url}).encode()
+    try: call("POST", "/aivm_models/install", body, "application/x-www-form-urlencoded"); print("installed", who, c["model"])
+    except Exception as e: print("install fail", who, e, getattr(e, "read", lambda: b"")()[:300])
+    installed = json.loads(call("GET", "/aivm_models"))
+(OUT / "installed.json").write_text(json.dumps(installed, ensure_ascii=False, indent=1)[:300000])
+speakers = json.loads(call("GET", "/speakers")); (OUT / "speakers.json").write_text(json.dumps(speakers, ensure_ascii=False, indent=1))
+def style_id(model, style):
+    info = installed.get(model, {}); names = [s["name"] for s in info.get("manifest", {}).get("speakers", [])]
+    for sp in speakers:
+        if sp["name"] in names or not names and False:
+            for st in sp["styles"]:
+                if st["name"] == style: return st["id"], st["name"]
+            return sp["styles"][0]["id"], sp["styles"][0]["name"] + "(fallback)"
+    return None, None
+def room_ir(sr, sec=.35):
+    r = np.random.default_rng(1); n = int(sr * sec); t = np.arange(n) / sr
+    ir = r.standard_normal(n) * np.exp(-t / .07)
+    for d, g in [(.007, .5), (.013, .35), (.021, .25)]: ir[int(d * sr)] += g * 4
+    ir[:int(.003 * sr)] = 0
+    return ir / np.abs(ir).sum() * 6
+def post(wav, out):
+    with wave.open(io.BytesIO(wav)) as w:
+        sr = w.getframerate(); ch = w.getnchannels()
+        x = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float32) / 32768
+    if ch > 1: x = x.reshape(-1, ch).mean(1)
+    wet = np.convolve(x, room_ir(sr))[:len(x) + int(.25 * sr)]
+    y = np.zeros_like(wet); y[:len(x)] = x; y = y + wet * .16
+    y = (np.clip(y, -1, 1) * 32767).astype(np.int16)
+    tmp = out.with_suffix(".wav")
+    with wave.open(str(tmp), "wb") as w: w.setnchannels(1); w.setsampwidth(2); w.setframerate(sr); w.writeframes(y.tobytes())
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(tmp), "-af",
+        "highpass=f=75,equalizer=f=280:t=q:w=1:g=-1.5,equalizer=f=3200:t=q:w=1.2:g=2,acompressor=threshold=-20dB:ratio=2:attack=5:release=80,loudnorm=I=-17:TP=-1.5:LRA=8",
+        "-ar", "48000", "-ac", "1", "-b:a", "112k", str(out)], check=True)
+    tmp.unlink()
+report = []
+for l in lines:
+    c = dict(cast["chars"][l["who"]]); c.update(cast["lines"].get(l["key"], {}))
+    sid, sname = style_id(c["model"], c["style"])
+    text = l["text"].replace(" ", "")
+    if sid is None: report.append({"key": l["key"], "error": "no speaker"}); continue
+    t0 = time.time()
+    try:
+        q = json.loads(call("POST", "/audio_query?" + urllib.parse.urlencode({"text": text, "speaker": sid})))
+        q["speedScale"] = c.get("speed", 1.0); q["intonationScale"] = c.get("into", q.get("intonationScale", 1.0))
+        q["prePhonemeLength"] = .05; q["postPhonemeLength"] = .1
+        wav = call("POST", f"/synthesis?speaker={sid}", json.dumps(q).encode(), "application/json")
+        post(wav, OUT / "aivis" / f"{l['key']}.mp3")
+        report.append({"key": l["key"], "who": l["who"], "style": sname, "sec": round(time.time() - t0, 1), "kana": q.get("kana")})
+    except Exception as e:
+        report.append({"key": l["key"], "error": str(e)[:200]})
+    print(report[-1], flush=True)
+(OUT / "report.json").write_text(json.dumps(report, ensure_ascii=False, indent=1))
