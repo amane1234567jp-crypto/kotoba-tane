@@ -742,7 +742,7 @@ const ROUTE = { session: "なし", out: "ふつう" };
 const audioBase = audio;
 audio = function () {
   const first = !ctx;
-  if (first) { try { if (navigator.audioSession) { navigator.audioSession.type = "playback"; ROUTE.session = "playback"; } } catch (e) { ROUTE.session = "設定できず"; } }
+  if (first && !(typeof MIC !== "undefined" && (MIC.stream || micTrying))) { try { if (navigator.audioSession) { navigator.audioSession.type = "playback"; ROUTE.session = "playback"; } } catch (e) { ROUTE.session = "設定できず"; } }
   audioBase();
   if (first) routeThroughMedia();
   return ctx;
@@ -965,8 +965,10 @@ let started = false;
    iPhoneはマイクを入れ・切りするたびに音の出し方を切り替え、そのたびにBGMが途切れたり、直後の声の頭が欠けたりする（調査ページで確認）。
    「録音もできる再生」にしてからマイクを開けたままにすると、切り替えが起きない。許可されなければ元の方式（返事の前を長めにあける）。 */
 const MIC = { stream: null };
-async function micAlwaysOn() {
-  if (!SRC || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
+let micTrying = null;
+function micAlwaysOn() { if (!micTrying && !MIC.stream) micTrying = micOpen().finally(() => { micTrying = null; micBadge(); }); return micTrying; }
+async function micOpen() {
+  if (MIC.stream || !SRC || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
   try {
     if (navigator.audioSession) { navigator.audioSession.type = "play-and-record"; ROUTE.session = "play-and-record（マイクずっとオン）"; }
     MIC.stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true } });
@@ -978,10 +980,12 @@ async function micAlwaysOn() {
 }
 function boot() { // 最初のタップで音を使えるようにする
   if (started) return; started = true;
-  audio(); loadSfx(); bgmStart(); micAlwaysOn();
+  micAlwaysOn(); audio(); loadSfx(); bgmStart();
   preloadVoices(Object.keys(AUD).filter(k => !/^k\d|^gk/.test(k)));
 }
+function micBadge() { const b = document.getElementById("micBadge"); if (b) b.textContent = MIC.stream ? "🎤 マイク オン" : (SRC ? "🎤 マイク：がめんを タップすると オン" : ""); }
 function showMenu() {
+  micAlwaysOn(); // メニューのうちにマイクを入れておく（入れる前は音が小さいため）
   let box = document.getElementById("startBox");
   if (!box) { box = document.createElement("div"); box.id = "startBox"; box.className = "start"; stage.appendChild(box); }
   box.innerHTML = ""; box.className = "start menu";
@@ -989,6 +993,8 @@ function showMenu() {
   const card = h("div", "mcard");
   card.append(h("div", "mtitle", "ことばのたね"));
   card.append(h("div", "mlap", SAVE.lap >= 2 ? `${SAVE.lap}しゅうめ（むずかしい）` : "1しゅうめ"));
+  const mb = h("div", "mmic"); mb.id = "micBadge"; card.append(mb); micBadge();
+  box.addEventListener("pointerdown", () => { if (!MIC.stream) micAlwaysOn(); }, { once: true });
   const go = (fn) => { boot(); box.remove(); fn(); };
   if (SAVE.play) {
     const st = STAGES.find(s => s.id === SAVE.play.stage) || STAGES[0];
@@ -1033,7 +1039,8 @@ function showMenu() {
 .start.menu .mst.locked{background:#ece7df;color:#8a8073;box-shadow:0 6px 0 #a59a8c;border-color:#a59a8c;cursor:default}
 .mst.locked .mico{filter:grayscale(1);opacity:.45}.mst.locked .mstat{background:#fff;border-color:#a59a8c}
 .start.menu .mreset{margin-top:4px;color:#8a8073;font-size:13px;text-decoration:underline;cursor:pointer;font-family:inherit}
-.again.menuBtn{background:#fff}`;
+.again.menuBtn{background:#fff}
+.mmic{font:400 clamp(13px,1.7vw,16px) var(--display);color:#6b5e4f}`;
   document.head.appendChild(st);
 })();
 drawBoard(); P.shima.s0 = .22; P.gao.s0 = .22; P.doshin.s0 = .3; setPiece(P.shima, "0"); setPiece(P.gao, "0"); setPiece(P.doshin, BLOCK); P.doshin.tm.closed = 1e6;
