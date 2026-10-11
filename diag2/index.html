@@ -40,6 +40,7 @@ p{line-height:1.7;margin:6px 0}
 
 <div class="card">
   <div class="row"><span class="lab">音の出口</span><span class="seg" data-k="route"><button data-v="media" class="on">いまのゲーム</button><button data-v="direct">ふつう</button></span></div>
+  <div class="row"><span class="lab">マイク</span><span class="seg" data-k="mic"><button data-v="each" class="on">そのつど（いまのゲーム）</button><button data-v="keep">ずっとオン</button></span></div>
   <div class="row"><span class="lab">マイクの前</span><span class="seg" data-k="pre"><button data-v="0" class="on">すぐ</button><button data-v="500">0.5秒まつ</button><button data-v="1000">1秒まつ</button></span></div>
   <div class="row"><span class="lab">返事の前</span><span class="seg" data-k="post"><button data-v="1000" class="on">1秒</button><button data-v="2000">2秒</button><button data-v="3000">3秒</button></span></div>
   <button class="big" id="go" disabled>② ためす</button>
@@ -62,11 +63,12 @@ p{line-height:1.7;margin:6px 0}
 </main>
 <script>
 const $ = s => document.querySelector(s);
-const opt = { route: "media", pre: 0, post: 1000 };
+const opt = { route: "media", pre: 0, post: 1000, mic: "each" };
 document.querySelectorAll(".seg").forEach(g => g.addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
   g.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
-  opt[g.dataset.k] = g.dataset.k === "route" ? b.dataset.v : +b.dataset.v;
+  opt[g.dataset.k] = (g.dataset.k === "route" || g.dataset.k === "mic") ? b.dataset.v : +b.dataset.v;
+  if (g.dataset.k === "mic") micKeep(opt.mic === "keep");
   if (g.dataset.k === "route" && ctx) setRoute(opt.route);
 }));
 const fb = {};
@@ -109,6 +111,14 @@ $("#start").onclick = async () => {
   $("#go").disabled = false;
   if (!SRC) log("この端末は音声認識なし");
 };
+let keepStream = null;
+async function micKeep(on) { // マイクをずっと開けておく（端末の切り替えを起こさないため）
+  if (on && !keepStream) {
+    try { keepStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true } }); log("マイクずっとオン：開始");
+      keepStream.getTracks().forEach(t => { t.onended = () => log("◆ ずっとオンのマイクが止まった"); t.onmute = () => log("◆ マイク mute"); t.onunmute = () => log("◆ マイク unmute"); }); }
+    catch (e) { log("マイクずっとオン 失敗 " + e); }
+  } else if (!on && keepStream) { keepStream.getTracks().forEach(t => t.stop()); keepStream = null; log("マイクずっとオン：終了"); }
+}
 function playBuf(b, name) {
   return new Promise(res => {
     const s = ctx.createBufferSource(); s.buffer = b; s.connect(master);
@@ -134,7 +144,7 @@ function listenOnce(ms) {
 $("#go").onclick = async () => {
   $("#go").disabled = true; trial++;
   Object.keys(fb).forEach(k => delete fb[k]); document.querySelectorAll(".fb button").forEach(x => x.classList.remove("on"));
-  log(`===== ${trial}回目：出口=${opt.route === "media" ? "いまのゲーム" : "ふつう"} マイク前=${opt.pre}ms 返事前=${opt.post}ms =====`);
+  log(`===== ${trial}回目：出口=${opt.route === "media" ? "いまのゲーム" : "ふつう"} マイク=${opt.mic === "keep" ? "ずっとオン" : "そのつど"} マイク前=${opt.pre}ms 返事前=${opt.post}ms =====`);
   status("お手本が鳴ります…");
   await playBuf(buf.model, "お手本");
   await sleep(opt.pre);
