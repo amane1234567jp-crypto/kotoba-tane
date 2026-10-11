@@ -19,13 +19,12 @@ for who, c in cast["chars"].items():
 (OUT / "installed.json").write_text(json.dumps(installed, ensure_ascii=False, indent=1)[:300000])
 speakers = json.loads(call("GET", "/speakers")); (OUT / "speakers.json").write_text(json.dumps(speakers, ensure_ascii=False, indent=1))
 def style_id(model, style):
-    info = installed.get(model, {}); names = [s["name"] for s in info.get("manifest", {}).get("speakers", [])]
-    for sp in speakers:
-        if sp["name"] in names or not names and False:
-            for st in sp["styles"]:
-                if st["name"] == style: return st["id"], st["name"]
-            return sp["styles"][0]["id"], sp["styles"][0]["name"] + "(fallback)"
-    return None, None
+    info = installed.get(model)
+    if not info: return None, None
+    sts = [st for ls in info.get("speakers", []) for st in ls["speaker"]["styles"]]
+    for st in sts:
+        if st["name"] == style: return st["id"], st["name"]
+    return (sts[0]["id"], sts[0]["name"] + "(fallback)") if sts else (None, None)
 def room_ir(sr, sec=.35):
     r = np.random.default_rng(1); n = int(sr * sec); t = np.arange(n) / sr
     ir = r.standard_normal(n) * np.exp(-t / .07)
