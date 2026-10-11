@@ -4020,14 +4020,10 @@ srStatus(SRC ? "ready" : "off");
 const kata2hira = s => s.replace(/[ァ-ヶ]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60));
 const norm = s => kata2hira(s).replace(/[\s、。！？!?,.・「」]/g, "");
 const countMatch = (t, groups) => groups.filter(g => g.some(v => norm(t).includes(norm(v)) || t.includes(v))).length;
-function sessionMode(m) { try { if (navigator.audioSession) navigator.audioSession.type = m; } catch (e) { } }
-let sessTimer = null;
-function micOn() { } // マイクの前後で再生モードを切り替えると音が乱れるため、何もしない（元の動きに戻した）
-function micOff() { }
 function hear(onText, ms) {
   let stopped = false, rec = null, resolveDone; const endAt = performance.now() + ms;
   const done = new Promise(r => resolveDone = r);
-  const finish = () => { stopped = true; micOff(); resolveDone(); };
+  const finish = () => { stopped = true; resolveDone(); };
   const start = () => {
     if (stopped || !srUsable) return finish();
     try {
@@ -4035,11 +4031,11 @@ function hear(onText, ms) {
       rec.onresult = e => { const out = []; for (let i = 0; i < e.results.length; i++) for (let j = 0; j < e.results[i].length; j++) out.push(e.results[i][j].transcript); onText(out); };
       rec.onerror = e => { if (e.error !== "no-speech" && e.error !== "aborted") { srUsable = false; srStatus("off"); } };
       rec.onend = () => { rec = null; if (!stopped && srUsable && performance.now() < endAt - 700) start(); else { srStatus(srUsable ? "idle" : "off"); finish(); } };
-      micOn(); rec.start(); srStatus("on");
+      rec.start(); srStatus("on");
     } catch (err) { srUsable = false; srStatus("off"); finish(); }
   };
   start();
-  return { done, stop() { if (stopped) return; stopped = true; try { rec && rec.abort(); } catch (e) { } micOff(); resolveDone(); } };
+  return { done, stop() { if (stopped) return; stopped = true; try { rec && rec.abort(); } catch (e) { } resolveDone(); } };
 }
 function devOn(cb) { Object.entries(devB).forEach(([k, b]) => { b.disabled = false; b.onclick = () => cb(k, "（確認ボタン）"); }); }
 function devOff() { Object.values(devB).forEach(b => { b.disabled = true; b.onclick = null; }); }
@@ -4397,16 +4393,7 @@ async function ending() {
    2) さらに、作った音を全部「音声ファイルの再生」（audio要素）を通して鳴らす。音声ファイル扱いはマナーモードでも鳴る
    2がうまく動かないときは、自動でふつうの出口に戻す */
 const ROUTE = { session: "なし", out: "ふつう" };
-/* 音を消すボタン（マイクを使ったあと、iPhone・iPadの音量ボタンで0にできないことがあるため） */
-const MUTE = { on: false, master: null, el: null, btn: null };
-(function () {
-  const b = document.createElement("button"); b.type = "button"; b.id = "muteBtn"; b.setAttribute("aria-label", "音を消す");
-  b.style.cssText = "position:fixed;right:14px;top:12px;z-index:9999;width:58px;height:58px;border-radius:50%;border:3px solid #fff;background:rgba(60,45,30,.72);color:#fff;font-size:28px;line-height:1;box-shadow:0 3px 10px rgba(0,0,0,.25);cursor:pointer;padding:0";
-  const show = () => { b.textContent = MUTE.on ? "🔇" : "🔊"; b.setAttribute("aria-pressed", MUTE.on); b.setAttribute("aria-label", MUTE.on ? "音を出す" : "音を消す"); };
-  b.onclick = e => { e.stopPropagation(); MUTE.on = !MUTE.on; if (MUTE.master) MUTE.master.gain.value = MUTE.on ? 0 : 1; if (MUTE.el) MUTE.el.muted = MUTE.on;
-    try { speechSynthesis.cancel(); } catch (x) { } show(); };
-  show(); MUTE.btn = b; document.body.appendChild(b);
-})();
+
 const audioBase = audio;
 audio = function () {
   const first = !ctx;
@@ -4418,7 +4405,6 @@ audio = function () {
 function routeThroughMedia() {
   const real = ctx.destination;
   const master = ctx.createGain(); master.connect(real); // まずはふつうの出口へ
-  MUTE.master = master; master.gain.value = MUTE.on ? 0 : 1;
   Object.defineProperty(ctx, "destination", { value: master, configurable: true }); // 以後の音はすべて master を通る
   analyser.disconnect(); analyser.connect(master);
   const back = why => { try { master.disconnect(); } catch (e) { } master.connect(real); ROUTE.out = "ふつう（" + why + "）"; showRoute(); };
@@ -4426,7 +4412,7 @@ function routeThroughMedia() {
   try {
     if (!ctx.createMediaStreamDestination) { back("未対応"); return; }
     const dest = ctx.createMediaStreamDestination();
-    const el = document.createElement("audio"); el.setAttribute("playsinline", ""); el.srcObject = dest.stream; el.style.display = "none"; MUTE.el = el; el.muted = MUTE.on;
+    const el = document.createElement("audio"); el.setAttribute("playsinline", ""); el.srcObject = dest.stream; el.style.display = "none";
     document.body.appendChild(el);
     master.disconnect(); master.connect(dest); ROUTE.out = "音声ファイル経由"; showRoute();
     const p = el.play(); if (p && p.catch) p.catch(() => back("再生できず"));
@@ -4516,22 +4502,13 @@ function dataToArrayBuffer(uri) {
 function decodeData(uri) {
   return new Promise((ok, ng) => { try { const p = ctx.decodeAudioData(dataToArrayBuffer(uri), ok, ng); if (p && p.catch) p.catch(ng); } catch (e) { ng(e); } });
 }
-const VORDER = [], VMAX = 48;
 function voiceBuf(key) {
-  if (!VBUF[key]) {
-    VBUF[key] = decodeData(AUD[key]).catch(() => decodeData(AUD[key]).catch(() => null)); // 失敗したら1回やり直す
-    VORDER.push(key);
-    while (VORDER.length > VMAX) delete VBUF[VORDER.shift()]; // メモリを使いすぎないよう古い声から捨てる
-  } else { const i = VORDER.indexOf(key); if (i >= 0) { VORDER.splice(i, 1); VORDER.push(key); } }
+  if (!VBUF[key]) VBUF[key] = decodeData(AUD[key]).catch(() => null);
   return VBUF[key];
 }
-function keepAlive() { // マイクのあとなどに音の出口が止まっていたら動かしなおす
-  try { if (ctx && ctx.state === "suspended") ctx.resume(); if (MUTE.el && MUTE.el.paused && !MUTE.on) { const p = MUTE.el.play(); if (p && p.catch) p.catch(() => { }); } } catch (e) { }
-}
-setInterval(keepAlive, 800);
 function preloadVoices(keys) { keys.forEach(k => AUD[k] && voiceBuf(k)); }
 async function playVoice(c, key, text, frac = 1) {
-  audio(); keepAlive(); const buf = AUD[key] ? await voiceBuf(key) : null;
+  audio(); const buf = AUD[key] ? await voiceBuf(key) : null;
   speaker = c; say(c, text);
   if (!buf) { speaker = null; await speakEl(c, key, text); return; } // 予備：前のやり方で鳴らす
   const s = ctx.createBufferSource(); s.buffer = buf; s.connect(analyser);
@@ -4636,7 +4613,7 @@ let started = false;
 function boot() { // 最初のタップで音を使えるようにする
   if (started) return; started = true;
   audio(); loadSfx(); bgmStart();
-  preloadVoices(["roll", "p_your", "n1", "n2", "n3", "g_go", "g_rival", "g_rival2", "p_rival", "p_resume", "p_ask", "p_help", "p_great"]);
+  preloadVoices(Object.keys(AUD).filter(k => !/^k\d|^gk/.test(k)));
 }
 function showMenu() {
   let box = document.getElementById("startBox");
