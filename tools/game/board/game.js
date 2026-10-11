@@ -388,7 +388,7 @@ function listen(groups, ms = 7000) {
   return new Promise(resolve => {
     let best = 0, heard = "", fin = false;
     const verdict = () => best === groups.length ? "ok" : best > 0 ? "part" : "none";
-    const end = (r, why) => { if (fin) return; fin = true; taskListen(false); h.stop(); devOff(); clearTimeout(tmr); if (why) heard = why; heardEl.textContent = heard || "（きこえなかった）"; resolve({ r, heard }); };
+    const end = (r, why) => { if (fin) return; fin = true; taskListen(false); h.stop(); devOff(); clearTimeout(tmr); if (why) heard = why; heardEl.textContent = heard || "（きこえなかった）"; setTimeout(() => resolve({ r, heard }), 400); }; // マイクが止まりきってから次の声へ
     heardEl.textContent = "…"; taskListen(true);
     devOn(end);
     const h = hear(texts => {
@@ -742,7 +742,10 @@ const ROUTE = { session: "なし", out: "ふつう" };
 const audioBase = audio;
 audio = function () {
   const first = !ctx;
-  if (first) { try { if (navigator.audioSession) { navigator.audioSession.type = "playback"; ROUTE.session = "playback"; } } catch (e) { ROUTE.session = "設定できず"; } }
+  // 音声認識を使う端末では、はじめから「録音もできる再生」にしておく。
+  // マイクが動き出す／止まるたびに端末が音の出し方を切り替えて、BGMや直後の声が途切れるのを防ぐ。
+  if (first) { const mode = SRC ? "play-and-record" : "playback";
+    try { if (navigator.audioSession) { navigator.audioSession.type = mode; ROUTE.session = mode; } } catch (e) { ROUTE.session = "設定できず"; } }
   audioBase();
   if (first) routeThroughMedia();
   return ctx;
