@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex">
 <title>こえの ききくらべ</title>
 <style>
-:root{--bg:#fff8ec;--card:#ffffff;--ink:#3b2f22;--sub:#8a7a66;--line:#eadfcc;--a:#ff9f43;--b:#4bb3fd;--c:#2ecc71;--d:#b39ddb;--pick:#ff5d8f;--btn:#fff3e0}
+:root{--warn:#e8590c;--bg:#fff8ec;--card:#ffffff;--ink:#3b2f22;--sub:#8a7a66;--line:#eadfcc;--a:#ff9f43;--b:#4bb3fd;--c:#2ecc71;--d:#b39ddb;--pick:#ff5d8f;--btn:#fff3e0}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1f1b16;--card:#2a251f;--ink:#f3e9dc;--sub:#b5a690;--line:#40382e;--btn:#3a3128}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Maru Gothic ProN","Hiragino Sans",system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
@@ -29,6 +29,14 @@ h2{font-size:19px;margin:26px 0 8px;display:flex;align-items:center;gap:8px}
 .play.playing{outline:4px solid var(--ink);outline-offset:2px}
 .play[disabled]{background:#cfc6b8!important;color:#fff;cursor:default;font-size:14px;font-weight:600}
 .like{border:2px solid var(--line);background:var(--btn);color:var(--ink);border-radius:12px;min-height:40px;font-size:15px;cursor:pointer;font-family:inherit}
+.row.flag{border-color:var(--warn);box-shadow:0 0 0 2px var(--warn) inset}
+.flagbtn{margin-top:10px;border:2px dashed var(--line);background:transparent;color:var(--ink);border-radius:12px;min-height:40px;padding:0 14px;font-size:15px;cursor:pointer;font-family:inherit}
+.flagbtn.on{border-style:solid;border-color:var(--warn);background:var(--warn);color:#fff;font-weight:700}
+.fpanel{margin-top:10px;display:grid;gap:8px}
+.fcols{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:14px;color:var(--sub)}
+.fchip{border:2px solid var(--line);background:var(--btn);color:var(--ink);border-radius:999px;padding:6px 12px;font-size:14px;cursor:pointer;font-family:inherit}
+.fchip.on{border-color:var(--warn);background:var(--warn);color:#fff}
+.fnote{width:100%;min-height:64px;border:2px solid var(--line);border-radius:12px;padding:10px;font-size:16px;font-family:inherit;background:var(--card);color:var(--ink);resize:vertical}
 .like.on{background:var(--pick);border-color:var(--pick);color:#fff;font-weight:700}
 .res{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px;margin-top:28px}
 .res h2{margin-top:0}
@@ -57,7 +65,10 @@ h2{font-size:19px;margin:26px 0 8px;display:flex;align-items:center;gap:8px}
   <div id="bywho" class="note" style="margin-top:10px"></div>
   <p style="margin:16px 0 6px"><button class="big" id="copy">けっかをコピー</button><span id="copied"></span></p>
   <p class="note">コピーしたら、そのまま Claude のチャットに貼りつけて送ってください。</p>
-  <p><button class="small" id="reset">♥ をぜんぶ消す</button></p>
+  <h2 style="margin-top:22px">⚠ 変なところ</h2>
+  <div id="flags" class="note"></div>
+  <p style="margin:12px 0 6px"><button class="big" id="copyflags">変なところをコピー</button><span id="copied2"></span></p>
+  <p><button class="small" id="reset">♥ をぜんぶ消す</button> <button class="small" id="resetflags">⚠ をぜんぶ消す</button></p>
 </section>
 </main>
 <audio id="au" playsinline preload="none"></audio>
@@ -77,6 +88,8 @@ const DESC = {now:"いまゲームで使っている声", tuned:"言葉の切れ
 function load(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 let votes = load("kk_votes",{});
+let notes = load("kk_notes",{});
+const NM = ()=>Object.fromEntries(VARS.map(v=>[v.id,v.name]));
 let blind = load("kk_blind",true);
 let order = load(OK,null);
 if(!order||Object.keys(order).length!==LINES.length){order={};for(const l of LINES){const a=VARS.map((_,i)=>i);for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}order[l.key]=a}save(OK,order)}
@@ -106,7 +119,18 @@ function render(){
       o.append(b,k);opts.appendChild(o)});
     if(!HAS_AIVIS){const o=document.createElement("div");o.className="opt";
     const b=document.createElement("button");b.className="play";b.disabled=true;b.innerHTML="AivisSpeech<br>じゅんびちゅう";o.appendChild(b);opts.appendChild(o);}
-    row.append(t,m,opts);list.appendChild(row)}
+    const fl=notes[l.key];if(fl)row.classList.add("flag");
+    const fb=document.createElement("button");fb.className="flagbtn"+(fl?" on":"");fb.textContent=fl?"⚠ 変なところ（印あり）":"⚠ 変なところがある";
+    fb.onclick=()=>{if(notes[l.key]){if(notes[l.key].text&&!confirm("この印とコメントを消しますか？"))return;delete notes[l.key]}else notes[l.key]={cols:[],text:""};save("kk_notes",notes);render();flags()};
+    row.append(t,m,opts,fb);
+    if(fl){const pn=document.createElement("div");pn.className="fpanel";
+      const cs=document.createElement("div");cs.className="fcols";cs.append("どの声？（えらばなければ ぜんぶ）");
+      seq.forEach((v,i)=>{const c=document.createElement("button");c.className="fchip"+(fl.cols.includes(v.id)?" on":"");c.textContent=blind?KANA[i]:v.name;
+        c.onclick=()=>{const a=fl.cols;const j=a.indexOf(v.id);if(j>=0)a.splice(j,1);else a.push(v.id);save("kk_notes",notes);c.classList.toggle("on");flags()};cs.appendChild(c)});
+      const ta=document.createElement("textarea");ta.className="fnote";ta.placeholder="どこが どう変？（例：「よ」が急に下がる／気持ちがこもってない）　キーボードのマイクで話しても入力できます";ta.value=fl.text||"";
+      ta.oninput=()=>{fl.text=ta.value;save("kk_notes",notes);flags()};
+      pn.append(cs,ta);row.appendChild(pn)}
+    list.appendChild(row)}
 }
 function tally(){
   const n={};for(const v of VARS)n[v.id]=0;for(const k in votes)n[votes[k]]=(n[votes[k]]||0)+1;
@@ -117,17 +141,29 @@ function tally(){
   const nm=Object.fromEntries(VARS.map(v=>[v.id,v.name]));
   document.getElementById("bywho").innerHTML=`えらんだ数：${tot} / ${LINES.length}<br>`+Object.entries(by).map(([w,c])=>`${w}：`+Object.entries(c).map(([k,x])=>`${nm[k]} ${x}`).join("、")).join("<br>");
 }
+function flagText(){const nm=NM();let s="";
+  for(const l of LINES){const f=notes[l.key];if(!f)continue;
+    s+=`⚠ ${l.key} ${l.name.split("（")[0]}「${l.text}」［${f.cols.length?f.cols.map(c=>nm[c]).join("・"):"ぜんぶ"}］ ${f.text||"(コメントなし)"}\n`}
+  return s}
+function flags(){const n=Object.keys(notes).length;const el=document.getElementById("flags");
+  el.textContent=n?`${n} 本に印があります`:"まだ印はありません。変だと思ったセリフの「⚠ 変なところがある」を押してください。"}
 function resultText(){
   const nm=Object.fromEntries(VARS.map(v=>[v.id,v.name]));const n={};for(const k in votes)n[votes[k]]=(n[votes[k]]||0)+1;
   let s="ききくらべ結果\n"+VARS.map(v=>`${v.name}: ${n[v.id]||0}`).join(" / ")+"\n";
-  for(const l of LINES)s+=`${l.key} ${l.name.split("（")[0]}「${l.text}」→ ${votes[l.key]?nm[votes[l.key]]:"-"}\n`;return s}
+  for(const l of LINES)s+=`${l.key} ${l.name.split("（")[0]}「${l.text}」→ ${votes[l.key]?nm[votes[l.key]]:"-"}\n`;
+  const f=flagText();if(f)s+="\n変なところ\n"+f;return s}
+async function copyText(s,id){let ok=false;
+  try{await navigator.clipboard.writeText(s);ok=true}catch(e){const ta=document.createElement("textarea");ta.value=s;document.body.appendChild(ta);ta.select();try{ok=document.execCommand("copy")}catch(e2){}ta.remove()}
+  document.getElementById(id).textContent=ok?"コピーしました！":"コピーできませんでした"}
+document.getElementById("copyflags").onclick=()=>{const f=flagText();if(!f){document.getElementById("copied2").textContent="印がありません";return}copyText("変なところ\n"+f,"copied2")};
+document.getElementById("resetflags").onclick=()=>{if(confirm("⚠ の印とコメントをぜんぶ消しますか？")){notes={};save("kk_notes",notes);render();flags()}};
 document.getElementById("copy").onclick=async()=>{const s=resultText();let ok=false;
   try{await navigator.clipboard.writeText(s);ok=true}catch(e){const ta=document.createElement("textarea");ta.value=s;document.body.appendChild(ta);ta.select();try{ok=document.execCommand("copy")}catch(e2){}ta.remove()}
   document.getElementById("copied").textContent=ok?"コピーしました！":"コピーできませんでした"};
 document.getElementById("reset").onclick=()=>{if(confirm("♥ をぜんぶ消しますか？")){votes={};save("kk_votes",votes);render();tally()}};
 document.getElementById("jump").onclick=()=>document.getElementById("result").scrollIntoView({behavior:"smooth"});
 const bl=document.getElementById("blind");bl.checked=blind;bl.onchange=()=>{blind=bl.checked;save("kk_blind",blind);legend();render()};
-legend();render();tally();
+legend();render();tally();flags();
 </script>
 </body>
 </html>
