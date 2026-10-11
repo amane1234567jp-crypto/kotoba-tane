@@ -210,8 +210,7 @@ async function resolve(s, h, a, ok) {
   await speak(a, "sr_" + s.id, s.res);
   if (POST[s.id]) await POST[s.id](h, a);
   else if (RESOLVE[s.item]) await RESOLVE[s.item](h, a); else if (ok) (a.kind === "kamejii" ? playMove(a, "nod") : SPECIAL[a.kind](a));
-  await sleep(500);
-  await showWord(s);
+  await sleep(500); // 最後の「おぼえる物カード」は出さない（ややこしいので）
 }
 async function runSit(place) {
   const s = pickSit(place, false), ti = tierOf(), t = s.tiers[ti];
