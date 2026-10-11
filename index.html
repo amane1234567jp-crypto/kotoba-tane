@@ -2405,19 +2405,21 @@ const ZONES = [
   { name: "ろうか", x: 900, y: 200, w: 390, h: 250, fill: "#FFF1C9", lx: 918, ly: 238 },
   { name: "ゴール", x: 1290, y: 240, w: 280, h: 210, fill: "#FFD25E", lx: 1430, ly: 285, goal: true },
 ];
+// 15マスでゴール（トイレで道が上下に分かれる）
 const NODES = {
-  "0": [170, 880, "start"], "1": [310, 880], "2": [450, 880], "3": [590, 880], "4": [730, 880], "5": [870, 880],
-  "6": [1010, 880, "block"], "7": [1150, 880], "8": [1380, 880], "9": [1430, 700, "fork"],
-  "10u": [1200, 540], "11u": [1040, 540], "12u": [880, 540],
-  "10d": [1220, 700], "11d": [1060, 700], "12d": [900, 700],
-  "13": [740, 640], "14": [590, 640], "15": [440, 640], "16": [250, 620], "17": [200, 470],
-  "18": [450, 320], "19": [610, 320], "20": [770, 320], "21": [950, 320], "22": [1110, 320], "23": [1250, 320], "24": [1430, 370, "goal"],
+  "0": [170, 880, "start"], "1": [400, 880], "2": [610, 880], "3": [820, 880],
+  "4": [1010, 880, "block"], "5": [1200, 880], "6": [1430, 720, "fork"],
+  "7u": [1150, 540], "8u": [900, 540],
+  "7d": [1150, 700], "8d": [900, 700],
+  "9": [620, 650], "10": [250, 620], "11": [220, 450],
+  "12": [500, 320], "13": [780, 320], "14": [1090, 320], "15": [1430, 370, "goal"],
 };
-const GOAL = "24";
+const GOAL = "15", BLOCK = "4", FORK = "6", UP = "7u", DOWN = "7d", MERGE_FROM = ["8u", "8d"], MERGE_TO = "9";
+const GOAL_IDX = 15;
 const idx = id => parseInt(id, 10);
 function NEXT(id) {
-  if (id === "9") return ["10u", "10d"];
-  if (id === "12u" || id === "12d") return ["13"];
+  if (id === FORK) return [UP, DOWN];
+  if (MERGE_FROM.includes(id)) return [MERGE_TO];
   if (/[ud]$/.test(id)) return [(idx(id) + 1) + id.slice(-1)];
   if (id === GOAL) return [];
   return [String(idx(id) + 1)];
@@ -2455,13 +2457,13 @@ function drawBoard() {
   for (let i = 0; i < 4; i++) el("rect", { x: 60 + i * 42, y: 690, width: 36, height: 74, rx: 4, fill: ["#FF8FA3", "#7FCBF0", "#FFD25E", "#7CC36A"][i], ...S6(4) }, prop);
   el("path", { d: "M54 690 H230", ...S6(5), fill: "none" }, prop);
   el("rect", { x: 1488, y: 760, width: 64, height: 40, rx: 10, fill: "#FFFFFF", ...S6(4) }, prop); el("path", { d: "M1520 760 V744 H1534", ...S6(4), fill: "none" }, prop);
-  el("rect", { x: 690, y: 386, width: 190, height: 50, rx: 6, fill: "#C98A4B", ...S6(4) }, prop);
-  el("path", { d: "M720 386 v-14 h22 v14", fill: "#FFFFFF", ...S6(4) }, prop);
+  el("rect", { x: 600, y: 386, width: 190, height: 50, rx: 6, fill: "#C98A4B", ...S6(4) }, prop);
+  el("path", { d: "M630 386 v-14 h22 v14", fill: "#FFFFFF", ...S6(4) }, prop);
   for (let x = 930; x < 1270; x += 90) el("rect", { x, y: 380, width: 60, height: 50, rx: 6, fill: "#BDE3F2", ...S6(4) }, prop);
   for (let x = 400; x < 1280; x += 46) el("path", { d: `M${x} 728 h30`, stroke: "#C9B9E6", "stroke-width": 8, "stroke-linecap": "round" }, prop);
   el("path", { d: "M1236 470 h28 M1250 456 v28", stroke: "#E2456F", "stroke-width": 8, "stroke-linecap": "round" }, prop);
   // 道
-  const order = [["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10u", "11u", "12u", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"], ["9", "10d", "11d", "12d", "13"]];
+  const order = [["0", "1", "2", "3", "4", "5", "6", "7u", "8u", "9", "10", "11", "12", "13", "14", "15"], ["6", "7d", "8d", "9"]];
   order.forEach(o => { const d = o.map((id, i) => (i ? "L" : "M") + NODES[id][0] + " " + NODES[id][1]).join(" ");
     el("path", { d, fill: "none", stroke: INK, "stroke-width": 66, "stroke-linejoin": "round", "stroke-linecap": "round" }, boardLayer);
     el("path", { d, fill: "none", stroke: "#FFF8E8", "stroke-width": 54, "stroke-linejoin": "round", "stroke-linecap": "round" }, boardLayer);
@@ -2605,7 +2607,7 @@ const OFF = { shima: -26, gao: 30, doshin: 0 };
 function nodeXY(pc, id) {
   const [x, y] = NODES[id];
   if (pc === P.doshin) return [x, y + 16];
-  const onDoshin = pc === P.gao && id === "6" && doshinAsleep;
+  const onDoshin = pc === P.gao && id === BLOCK && doshinAsleep;
   return [x + OFF[pc.kind], y + 18 - (onDoshin ? 92 : 0)];
 }
 function setPiece(pc, id) { pc.node = id; [pc.px, pc.py] = nodeXY(pc, id); }
@@ -2631,7 +2633,7 @@ async function moveBy(pc, n) {
     const nx = NEXT(pc.node); if (!nx.length) break;
     let to = nx[0];
     if (nx.length > 1) to = pc === P.shima ? await askFork() : nx[rnd(2)];
-    if (to === "6" && doshinAsleep && pc === P.shima) await blockEvent();
+    if (to === BLOCK && doshinAsleep && pc === P.shima) await blockEvent();
     await hop(pc, to, fast ? .2 : .38, i);
     if (fast && i < n - 1) await sleep(40);
     if (to === GOAL) { if (!winner) winner = pc === P.shima ? "child" : "gao"; break; }
@@ -2839,15 +2841,15 @@ async function askFork() {
   await speak(C.pony, "fork", "うえと したの、どっちに いく？");
   const mk = (label, id) => { const b = document.createElement("button"); b.type = "button"; b.className = "arrow"; b.textContent = label;
     const [x, y] = NODES[id]; b.style.left = `calc(${x / 16}% - 4.5%)`; b.style.top = `calc(${y / 10}% - 7.2%)`; stage.appendChild(b); return b; };
-  const up = mk("うえ", "10u"), down = mk("した", "10d");
+  const up = mk("うえ", UP), down = mk("した", DOWN);
   const pick = await new Promise(res => {
     let done = false; const fin = v => { if (done) return; done = true; h && h.stop(); up.remove(); down.remove(); res(v); };
-    up.onclick = () => fin("10u"); down.onclick = () => fin("10d");
+    up.onclick = () => fin(UP); down.onclick = () => fin(DOWN);
     setListen(P.shima, true);
-    const h = srUsable ? hear(texts => { const t = texts.join(" "); if (/うえ|上/.test(kata2hira(t))) fin("10u"); else if (/した|下/.test(kata2hira(t))) fin("10d"); heardEl.textContent = t; }, 15000) : null;
+    const h = srUsable ? hear(texts => { const t = texts.join(" "); if (/うえ|上/.test(kata2hira(t))) fin(UP); else if (/した|下/.test(kata2hira(t))) fin(DOWN); heardEl.textContent = t; }, 15000) : null;
   });
   setListen(P.shima, false);
-  await speak(C.pony, pick === "10u" ? "up" : "down", pick === "10u" ? "うえ！" : "した！");
+  await speak(C.pony, pick === UP ? "up" : "down", pick === UP ? "うえ！" : "した！");
   return pick;
 }
 async function blockEvent() {
@@ -2862,7 +2864,7 @@ async function blockEvent() {
   hideTask(); doshinAsleep = false; delete P.doshin.tm.closed; surprise(P.doshin); await sleep(700);
   await speak(P.doshin, "doshin", "どいて、あげるよ");
   P.doshin.tm.run = 1.2;
-  if (P.gao.node === "6") { const [gx, gy] = nodeXY(P.gao, "6"); slide(P.gao, gx, gy, .4, .3); }
+  if (P.gao.node === BLOCK) { const [gx, gy] = nodeXY(P.gao, BLOCK); slide(P.gao, gx, gy, .4, .3); }
   await slide(P.doshin, 1000, 792, 1.1); P.doshin.node = null;
 }
 const ABE = [17, 18, 20];
@@ -2916,12 +2918,12 @@ let childShouldWin = true;
 function gaoRoll() {
   const g = idx(P.gao.node), k = idx(P.shima.node); let r = 1 + rnd(3);
   if (childShouldWin) {
-    const lead = 24 - k > 8 ? 1 : -1;
-    const cap = Math.min(23 - g, Math.max(0, k + lead - g));
+    const lead = GOAL_IDX - k > 5 ? 1 : -1;
+    const cap = Math.min(GOAL_IDX - 1 - g, Math.max(0, k + lead - g));
     r = Math.min(r, cap);
   } else {
     if (k + 1 - g > r) r = Math.min(3, k + 1 - g);
-    if (24 - g <= 3) r = 24 - g;
+    if (GOAL_IDX - g <= 3) r = GOAL_IDX - g;
   }
   return r;
 }
@@ -3235,7 +3237,7 @@ function newGame() {
   const rec = store.get(); childShouldWin = (rec.games || 0) < 3 ? true : Math.random() < .75;
   drawBoard(); stT.textContent = "× 0";
   P.shima.s0 = .22; P.gao.s0 = .22; P.doshin.s0 = .3;
-  setPiece(P.shima, "0"); setPiece(P.gao, "0"); setPiece(P.doshin, "6"); P.doshin.tm.closed = 1e6;
+  setPiece(P.shima, "0"); setPiece(P.gao, "0"); setPiece(P.doshin, BLOCK); P.doshin.tm.closed = 1e6;
   setView("board"); showEngine(null, childShouldWin ? "こんかいは きみが勝つ回（はじめの3回は必ず）" : "こんかいは がおが本気の回");
   run();
 }
@@ -3244,7 +3246,7 @@ async function run() {
   while (!winner) { await childTurn(first); first = false; if (winner) break; await gaoTurn(); }
   await sleep(500); await ending();
 }
-drawBoard(); P.shima.s0 = .22; P.gao.s0 = .22; P.doshin.s0 = .3; setPiece(P.shima, "0"); setPiece(P.gao, "0"); setPiece(P.doshin, "6"); P.doshin.tm.closed = 1e6;
+drawBoard(); P.shima.s0 = .22; P.gao.s0 = .22; P.doshin.s0 = .3; setPiece(P.shima, "0"); setPiece(P.gao, "0"); setPiece(P.doshin, BLOCK); P.doshin.tm.closed = 1e6;
 setView("board"); diceBtn.style.visibility = "visible"; showEngine(null);
 document.getElementById("startBtn").onclick = () => { audio(); loadSfx(); bgmStart(); preloadVoices(Object.keys(AUD).filter(k => !/^k\d|^gk/.test(k))); document.getElementById("startBox").remove(); newGame(); };
 requestAnimationFrame(frame);
