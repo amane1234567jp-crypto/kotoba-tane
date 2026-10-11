@@ -1,0 +1,1027 @@
+[
+{
+"key": "sq_hoken",
+"who": "meebaa",
+"text": "あら、どうしたの？"
+},
+{
+"key": "sr_hoken",
+"who": "meebaa",
+"text": "まあ、たいへん。ばんそうこうを はりましょうね"
+},
+{
+"key": "sg_hoken_0",
+"who": "gao",
+"text": "いたい"
+},
+{
+"key": "sg_hoken_1",
+"who": "gao",
+"text": "ひざが いたいです"
+},
+{
+"key": "sx_hoken_1",
+"who": "gao",
+"text": "ひざを いたいです"
+},
+{
+"key": "sg_hoken_2",
+"who": "gao",
+"text": "ころんで、けがを しました"
+},
+{
+"key": "sx_hoken_2",
+"who": "gao",
+"text": "ころんで、けがが しました"
+},
+{
+"key": "sg_hoken_3",
+"who": "gao",
+"text": "ろうかで ころんで、ひざを けがしました"
+},
+{
+"key": "sx_hoken_3",
+"who": "gao",
+"text": "ろうかを ころんで、ひざを けがしました"
+},
+{
+"key": "sq_uwabaki",
+"who": "kamejii",
+"text": "おや、どうしたのかね？"
+},
+{
+"key": "sr_uwabaki",
+"who": "kamejii",
+"text": "それなら、スリッパを かして あげよう"
+},
+{
+"key": "sg_uwabaki_0",
+"who": "gao",
+"text": "わすれた"
+},
+{
+"key": "sg_uwabaki_1",
+"who": "gao",
+"text": "うわばきを わすれました"
+},
+{
+"key": "sx_uwabaki_1",
+"who": "gao",
+"text": "うわばきが わすれました"
+},
+{
+"key": "sg_uwabaki_2",
+"who": "gao",
+"text": "うわばきを いえに わすれて きました"
+},
+{
+"key": "sx_uwabaki_2",
+"who": "gao",
+"text": "うわばきを いえで わすれて きました"
+},
+{
+"key": "sg_uwabaki_3",
+"who": "gao",
+"text": "きのう もって かえって、いえに わすれて きました"
+},
+{
+"key": "sq_zukan",
+"who": "nobbo",
+"text": "なにか、さがして いるのですか？"
+},
+{
+"key": "sr_zukan",
+"who": "nobbo",
+"text": "ずかんなら、いちばん うえの たなに ありますよ"
+},
+{
+"key": "sg_zukan_0",
+"who": "gao",
+"text": "ほん"
+},
+{
+"key": "sg_zukan_1",
+"who": "gao",
+"text": "どうぶつの ほんです"
+},
+{
+"key": "sx_zukan_1",
+"who": "gao",
+"text": "どうぶつが ほんです"
+},
+{
+"key": "sg_zukan_2",
+"who": "gao",
+"text": "どうぶつの ほんは どこですか"
+},
+{
+"key": "sx_zukan_2",
+"who": "gao",
+"text": "どうぶつの ほんを どこですか"
+},
+{
+"key": "sg_zukan_3",
+"who": "gao",
+"text": "シマウマが のって いる ずかんは どこですか"
+},
+{
+"key": "sq_butsukaru",
+"who": "gao",
+"text": "わ、わりい！ だいじょうぶか？"
+},
+{
+"key": "sr_butsukaru",
+"who": "gao",
+"text": "ごめんな。つぎから ろうかは あるくよ"
+},
+{
+"key": "sq_tearai",
+"who": "mii",
+"text": "ちょっと。なにか、わすれて ない？"
+},
+{
+"key": "sr_tearai",
+"who": "mii",
+"text": "そうそう。せっけんで、あわあわに してね"
+},
+{
+"key": "sg_tearai_0",
+"who": "gao",
+"text": "てを あらう"
+},
+{
+"key": "sg_tearai_1",
+"who": "gao",
+"text": "てを あらうのを わすれた"
+},
+{
+"key": "sx_tearai_1",
+"who": "gao",
+"text": "てが あらうのを わすれた"
+},
+{
+"key": "sg_tearai_2",
+"who": "gao",
+"text": "せっけんで てを あらいます"
+},
+{
+"key": "sx_tearai_2",
+"who": "gao",
+"text": "せっけんを てを あらいます"
+},
+{
+"key": "sg_tearai_3",
+"who": "gao",
+"text": "トイレの あとは、せっけんで てを あらいます"
+},
+{
+"key": "sq_tetsudau",
+"who": "chu",
+"text": "お、おもいよう……"
+},
+{
+"key": "sr_tetsudau",
+"who": "chu",
+"text": "あ、ありがとう！ たすかったよう"
+},
+{
+"key": "sg_tetsudau_0",
+"who": "gao",
+"text": "てつだう"
+},
+{
+"key": "sg_tetsudau_1",
+"who": "gao",
+"text": "てつだおうか？"
+},
+{
+"key": "sg_tetsudau_2",
+"who": "gao",
+"text": "いっしょに もとうか？"
+},
+{
+"key": "sx_tetsudau_2",
+"who": "gao",
+"text": "いっしょを もとうか？"
+},
+{
+"key": "sg_tetsudau_3",
+"who": "gao",
+"text": "はんぶん もって あげるよ"
+},
+{
+"key": "sq_shitsurei",
+"who": "kamejii",
+"text": "おや、だれかな？ はいって いいですよ"
+},
+{
+"key": "sr_shitsurei",
+"who": "kamejii",
+"text": "ほっほ。ありがとう。りっぱな あいさつですね"
+},
+{
+"key": "sg_shitsurei_0",
+"who": "gao",
+"text": "しつれいします"
+},
+{
+"key": "sg_shitsurei_1",
+"who": "gao",
+"text": "しつれいします。プリントです"
+},
+{
+"key": "sg_shitsurei_2",
+"who": "gao",
+"text": "しつれいします。プリントを もって きました"
+},
+{
+"key": "sx_shitsurei_2",
+"who": "gao",
+"text": "しつれいします。プリントが もって きました"
+},
+{
+"key": "sg_shitsurei_3",
+"who": "gao",
+"text": "しつれいします。しゅくだいの プリントを とどけに きました"
+},
+{
+"key": "sq_ohayou",
+"who": "kamejii",
+"text": "おはよう。きょうも げんきかね？"
+},
+{
+"key": "sr_ohayou",
+"who": "kamejii",
+"text": "ほっほ。よい あいさつだ。いってらっしゃい"
+},
+{
+"key": "sg_ohayou_0",
+"who": "gao",
+"text": "おはよう"
+},
+{
+"key": "sg_ohayou_1",
+"who": "gao",
+"text": "おはようございます"
+},
+{
+"key": "sg_ohayou_2",
+"who": "gao",
+"text": "おはようございます。げんきです"
+},
+{
+"key": "sg_ohayou_3",
+"who": "gao",
+"text": "おはようございます。きょうも げんきです"
+},
+{
+"key": "sq_kinou",
+"who": "pyon",
+"text": "ねえねえ、きのう、なに したの？"
+},
+{
+"key": "sr_kinou",
+"who": "pyon",
+"text": "いいなあ！ こんど、いっしょに いこうね"
+},
+{
+"key": "sg_kinou_0",
+"who": "gao",
+"text": "ブランコ"
+},
+{
+"key": "sg_kinou_1",
+"who": "gao",
+"text": "ブランコで あそんだ"
+},
+{
+"key": "sx_kinou_1",
+"who": "gao",
+"text": "ブランコを あそんだ"
+},
+{
+"key": "sg_kinou_2",
+"who": "gao",
+"text": "きのう、ブランコで あそびました"
+},
+{
+"key": "sx_kinou_2",
+"who": "gao",
+"text": "さっき、ブランコで あそびました"
+},
+{
+"key": "sg_kinou_3",
+"who": "gao",
+"text": "きのう、こうえんで ブランコに のりました"
+},
+{
+"key": "sq_osareta",
+"who": "meebaa",
+"text": "あらあら、なにが あったの？"
+},
+{
+"key": "sr_osareta",
+"who": "meebaa",
+"text": "まあ。がおくんには、あとで おはなし しておくわね"
+},
+{
+"key": "sq_kasa",
+"who": "pyon",
+"text": "あっ、あめだ！ かさ、もってる？"
+},
+{
+"key": "sr_kasa",
+"who": "pyon",
+"text": "いいよ！ いっしょに はいろう"
+},
+{
+"key": "sg_kasa_0",
+"who": "gao",
+"text": "わすれた"
+},
+{
+"key": "sg_kasa_1",
+"who": "gao",
+"text": "かさを わすれた"
+},
+{
+"key": "sx_kasa_1",
+"who": "gao",
+"text": "かさが わすれた"
+},
+{
+"key": "sg_kasa_2",
+"who": "gao",
+"text": "かさを わすれたから、いれて"
+},
+{
+"key": "sg_kasa_3",
+"who": "gao",
+"text": "かさを わすれたので、いっしょに いれて くれる？"
+},
+{
+"key": "sq_gyaku",
+"who": "mii",
+"text": "その くつ、なんか へんじゃない？"
+},
+{
+"key": "sr_gyaku",
+"who": "mii",
+"text": "ふふっ。はきなおしたら？"
+},
+{
+"key": "sg_gyaku_0",
+"who": "gao",
+"text": "はんたい"
+},
+{
+"key": "sg_gyaku_1",
+"who": "gao",
+"text": "くつが はんたい"
+},
+{
+"key": "sx_gyaku_1",
+"who": "gao",
+"text": "くつを はんたい"
+},
+{
+"key": "sg_gyaku_2",
+"who": "gao",
+"text": "くつを はんたいに はいちゃった"
+},
+{
+"key": "sx_gyaku_2",
+"who": "gao",
+"text": "くつが はんたいに はいちゃった"
+},
+{
+"key": "sg_gyaku_3",
+"who": "gao",
+"text": "みぎと ひだりを、はんたいに はいちゃった"
+},
+{
+"key": "sq_sayonara",
+"who": "doshin",
+"text": "もう、かえるの？"
+},
+{
+"key": "sr_sayonara",
+"who": "doshin",
+"text": "また あしたね！ ぶおーっ！"
+},
+{
+"key": "sg_sayonara_0",
+"who": "gao",
+"text": "さようなら"
+},
+{
+"key": "sg_sayonara_1",
+"who": "gao",
+"text": "うん。さようなら"
+},
+{
+"key": "sg_sayonara_2",
+"who": "gao",
+"text": "さようなら。また あした"
+},
+{
+"key": "sg_sayonara_3",
+"who": "gao",
+"text": "きょうは もう かえるね。また あした"
+},
+{
+"key": "sq_dekkai",
+"who": "doshin",
+"text": "あれっ？ それ、ぼくの くつ だよ"
+},
+{
+"key": "sr_dekkai",
+"who": "doshin",
+"text": "いいよ。ぼくの くつは、おおきすぎるもんね"
+},
+{
+"key": "sg_dekkai_0",
+"who": "gao",
+"text": "ごめん"
+},
+{
+"key": "sg_dekkai_1",
+"who": "gao",
+"text": "ごめんなさい"
+},
+{
+"key": "sg_dekkai_2",
+"who": "gao",
+"text": "まちがえて ごめんね"
+},
+{
+"key": "sg_dekkai_3",
+"who": "gao",
+"text": "まちがえて、どしんの くつを はいちゃった"
+},
+{
+"key": "sx_dekkai_3",
+"who": "gao",
+"text": "まちがえて、どしんが くつを はいちゃった"
+},
+{
+"key": "sq_doro",
+"who": "mii",
+"text": "あしあとが いっぱい！ どうしたの？"
+},
+{
+"key": "sr_doro",
+"who": "mii",
+"text": "えらいね。ぞうきんは、ここに あるよ"
+},
+{
+"key": "sg_doro_0",
+"who": "gao",
+"text": "どろ"
+},
+{
+"key": "sg_doro_1",
+"who": "gao",
+"text": "くつが どろだらけ"
+},
+{
+"key": "sx_doro_1",
+"who": "gao",
+"text": "くつを どろだらけ"
+},
+{
+"key": "sg_doro_2",
+"who": "gao",
+"text": "そとで、どろが ついちゃった"
+},
+{
+"key": "sx_doro_2",
+"who": "gao",
+"text": "そとで、どろを ついちゃった"
+},
+{
+"key": "sg_doro_3",
+"who": "gao",
+"text": "どろを、ぞうきんで ふいて きます"
+},
+{
+"key": "sq_locker",
+"who": "gao",
+"text": "うぐぐ……あかないぞ！"
+},
+{
+"key": "sr_locker",
+"who": "gao",
+"text": "あいた！ ……いてて。ありがとな"
+},
+{
+"key": "sq_otoshimono",
+"who": "chu",
+"text": "ふんふふーん♪"
+},
+{
+"key": "sr_otoshimono",
+"who": "chu",
+"text": "わあっ！ ……あ、ありがとう！"
+},
+{
+"key": "sg_otoshimono_0",
+"who": "gao",
+"text": "おとしたよ"
+},
+{
+"key": "sg_otoshimono_1",
+"who": "gao",
+"text": "ハンカチ、おとしたよ"
+},
+{
+"key": "sg_otoshimono_2",
+"who": "gao",
+"text": "ちゅう、ハンカチを おとしたよ"
+},
+{
+"key": "sx_otoshimono_2",
+"who": "gao",
+"text": "ちゅう、ハンカチが おとしたよ"
+},
+{
+"key": "sg_otoshimono_3",
+"who": "gao",
+"text": "ちゅう、まって！ ハンカチを おとしたよ"
+},
+{
+"key": "sq_kowai",
+"who": "chu",
+"text": "か、かいだん、こわいよう……"
+},
+{
+"key": "sr_kowai",
+"who": "chu",
+"text": "う、うん……ありがとう"
+},
+{
+"key": "sg_kowai_0",
+"who": "gao",
+"text": "だいじょうぶ"
+},
+{
+"key": "sg_kowai_1",
+"who": "gao",
+"text": "だいじょうぶだよ"
+},
+{
+"key": "sg_kowai_2",
+"who": "gao",
+"text": "てを つないで いこう"
+},
+{
+"key": "sg_kowai_3",
+"who": "gao",
+"text": "いっしょに、ゆっくり のぼろうね"
+},
+{
+"key": "sx_kowai_3",
+"who": "gao",
+"text": "いっしょを、ゆっくり のぼろうね"
+},
+{
+"key": "sq_osaki",
+"who": "kamejii",
+"text": "ほっほ。わしは ゆっくりじゃから、さきに いきなさい"
+},
+{
+"key": "sr_osaki",
+"who": "kamejii",
+"text": "ほっほ。れいぎ ただしいのう"
+},
+{
+"key": "sg_osaki_0",
+"who": "gao",
+"text": "おさきに"
+},
+{
+"key": "sg_osaki_1",
+"who": "gao",
+"text": "おさきに しつれいします"
+},
+{
+"key": "sg_osaki_2",
+"who": "gao",
+"text": "せんせい、おさきに しつれいします"
+},
+{
+"key": "sg_osaki_3",
+"who": "gao",
+"text": "ありがとうございます。おさきに しつれいします"
+},
+{
+"key": "sq_tobioriru",
+"who": "gao",
+"text": "へへっ、みてろよ！ いっきに とびおりるぞ！"
+},
+{
+"key": "sr_tobioriru",
+"who": "gao",
+"text": "わ、わかったよ……"
+},
+{
+"key": "sq_kaminai",
+"who": "mii",
+"text": "どうしたの？ こまった かお して"
+},
+{
+"key": "sr_kaminai",
+"who": "mii",
+"text": "はい、どうぞ！ ころころ〜"
+},
+{
+"key": "sg_kaminai_0",
+"who": "gao",
+"text": "かみが ない"
+},
+{
+"key": "sg_kaminai_1",
+"who": "gao",
+"text": "トイレットペーパーが ない"
+},
+{
+"key": "sx_kaminai_1",
+"who": "gao",
+"text": "トイレットペーパーを ない"
+},
+{
+"key": "sg_kaminai_2",
+"who": "gao",
+"text": "トイレットペーパーが ありません"
+},
+{
+"key": "sx_kaminai_2",
+"who": "gao",
+"text": "トイレットペーパーを ありません"
+},
+{
+"key": "sg_kaminai_3",
+"who": "gao",
+"text": "トイレットペーパーが ないので、もって きて ください"
+},
+{
+"key": "sq_mizu",
+"who": "pyon",
+"text": "きゃっ！ つめたーい！"
+},
+{
+"key": "sr_mizu",
+"who": "pyon",
+"text": "いいよ。タオルで ふくから"
+},
+{
+"key": "sg_mizu_0",
+"who": "gao",
+"text": "ごめん"
+},
+{
+"key": "sg_mizu_1",
+"who": "gao",
+"text": "ごめんね"
+},
+{
+"key": "sg_mizu_2",
+"who": "gao",
+"text": "みずを かけて ごめんね"
+},
+{
+"key": "sx_mizu_2",
+"who": "gao",
+"text": "みずが かけて ごめんね"
+},
+{
+"key": "sg_mizu_3",
+"who": "gao",
+"text": "わざとじゃ ないよ。みずを かけて ごめんね"
+},
+{
+"key": "sq_netsu",
+"who": "meebaa",
+"text": "あら、おかおが まっかよ。どうしたの？"
+},
+{
+"key": "sr_netsu",
+"who": "meebaa",
+"text": "たいおんけいで、はかって みましょうね"
+},
+{
+"key": "sg_netsu_0",
+"who": "gao",
+"text": "あつい"
+},
+{
+"key": "sg_netsu_1",
+"who": "gao",
+"text": "あたまが いたい"
+},
+{
+"key": "sx_netsu_1",
+"who": "gao",
+"text": "あたまを いたい"
+},
+{
+"key": "sg_netsu_2",
+"who": "gao",
+"text": "ねつが あるみたいです"
+},
+{
+"key": "sx_netsu_2",
+"who": "gao",
+"text": "ねつを あるみたいです"
+},
+{
+"key": "sg_netsu_3",
+"who": "gao",
+"text": "さむくて、あたまが いたいです"
+},
+{
+"key": "sq_hachi",
+"who": "meebaa",
+"text": "あらまあ、どうしたの？"
+},
+{
+"key": "sr_hachi",
+"who": "meebaa",
+"text": "まあ、いたかったわね。こおりで ひやしましょう"
+},
+{
+"key": "sg_hachi_0",
+"who": "gao",
+"text": "さされた"
+},
+{
+"key": "sg_hachi_1",
+"who": "gao",
+"text": "はちに さされた"
+},
+{
+"key": "sx_hachi_1",
+"who": "gao",
+"text": "はちを さされた"
+},
+{
+"key": "sg_hachi_2",
+"who": "gao",
+"text": "はちに、てを さされました"
+},
+{
+"key": "sx_hachi_2",
+"who": "gao",
+"text": "はちが、てを さされました"
+},
+{
+"key": "sg_hachi_3",
+"who": "gao",
+"text": "こうていで、はちに てを さされました"
+},
+{
+"key": "sq_tabesugi",
+"who": "meebaa",
+"text": "あら、おなかを おさえて、どうしたの？"
+},
+{
+"key": "sr_tabesugi",
+"who": "meebaa",
+"text": "あらあら。ベッドで、すこし やすみましょうね"
+},
+{
+"key": "sg_tabesugi_0",
+"who": "gao",
+"text": "おなか"
+},
+{
+"key": "sg_tabesugi_1",
+"who": "gao",
+"text": "おなかが いたい"
+},
+{
+"key": "sx_tabesugi_1",
+"who": "gao",
+"text": "おなかを いたい"
+},
+{
+"key": "sg_tabesugi_2",
+"who": "gao",
+"text": "きゅうしょくを たべすぎました"
+},
+{
+"key": "sx_tabesugi_2",
+"who": "gao",
+"text": "きゅうしょくが たべすぎました"
+},
+{
+"key": "sg_tabesugi_3",
+"who": "gao",
+"text": "カレーを さんばいも たべて、おなかが いたいです"
+},
+{
+"key": "sq_enpitsu",
+"who": "kamejii",
+"text": "おや、こまった かおを して、どうしたね？"
+},
+{
+"key": "sr_enpitsu",
+"who": "kamejii",
+"text": "ほっほ。これを つかいなさい"
+},
+{
+"key": "sg_enpitsu_0",
+"who": "gao",
+"text": "えんぴつ"
+},
+{
+"key": "sg_enpitsu_1",
+"who": "gao",
+"text": "えんぴつを わすれた"
+},
+{
+"key": "sx_enpitsu_1",
+"who": "gao",
+"text": "えんぴつが わすれた"
+},
+{
+"key": "sg_enpitsu_2",
+"who": "gao",
+"text": "えんぴつを かして ください"
+},
+{
+"key": "sx_enpitsu_2",
+"who": "gao",
+"text": "えんぴつが かして ください"
+},
+{
+"key": "sg_enpitsu_3",
+"who": "gao",
+"text": "えんぴつを わすれたので、かして ください"
+},
+{
+"key": "sq_kabin",
+"who": "kamejii",
+"text": "おや？ いまの おとは、なにかね？"
+},
+{
+"key": "sr_kabin",
+"who": "kamejii",
+"text": "ほっほ。しょうじきに いえて、えらいのう"
+},
+{
+"key": "sg_kabin_0",
+"who": "gao",
+"text": "ごめんなさい"
+},
+{
+"key": "sg_kabin_1",
+"who": "gao",
+"text": "かびんを わりました"
+},
+{
+"key": "sx_kabin_1",
+"who": "gao",
+"text": "かびんが わりました"
+},
+{
+"key": "sg_kabin_2",
+"who": "gao",
+"text": "かびんを わって しまいました"
+},
+{
+"key": "sx_kabin_2",
+"who": "gao",
+"text": "かびんが わって しまいました"
+},
+{
+"key": "sg_kabin_3",
+"who": "gao",
+"text": "ボールが あたって、かびんを わって しまいました"
+},
+{
+"key": "sq_shizuka",
+"who": "gao",
+"text": "うおー！ この ほん、おもしれー！"
+},
+{
+"key": "sr_shizuka",
+"who": "gao",
+"text": "……おっと。ごめん、しずかに するよ"
+},
+{
+"key": "sq_kariru",
+"who": "nobbo",
+"text": "その ほんを、かりますか？"
+},
+{
+"key": "sr_kariru",
+"who": "nobbo",
+"text": "はい。らいしゅう、かえして くださいね"
+},
+{
+"key": "sg_kariru_0",
+"who": "gao",
+"text": "はい、かります"
+},
+{
+"key": "sg_kariru_1",
+"who": "gao",
+"text": "この ほんを かります"
+},
+{
+"key": "sx_kariru_1",
+"who": "gao",
+"text": "この ほんが かります"
+},
+{
+"key": "sg_kariru_2",
+"who": "gao",
+"text": "この ほんを、かして ください"
+},
+{
+"key": "sx_kariru_2",
+"who": "gao",
+"text": "この ほんが、かして ください"
+},
+{
+"key": "sg_kariru_3",
+"who": "gao",
+"text": "この ほんを、いっしゅうかん かして ください"
+},
+{
+"key": "sq_takai",
+"who": "nobbo",
+"text": "どうか しましたか？"
+},
+{
+"key": "sr_takai",
+"who": "nobbo",
+"text": "はい、どうぞ"
+},
+{
+"key": "sg_takai_0",
+"who": "gao",
+"text": "とって"
+},
+{
+"key": "sg_takai_1",
+"who": "gao",
+"text": "ほんを とって"
+},
+{
+"key": "sg_takai_2",
+"who": "gao",
+"text": "その ほんを、とって ください"
+},
+{
+"key": "sx_takai_2",
+"who": "gao",
+"text": "その ほんが、とって ください"
+},
+{
+"key": "sg_takai_3",
+"who": "gao",
+"text": "いちばん うえの ほんを、とって ください"
+},
+{
+"key": "g_go",
+"who": "gao",
+"text": "いくぞ！"
+},
+{
+"key": "g_huh",
+"who": "gao",
+"text": "あれ？ ちがった？"
+},
+{
+"key": "g_thanks",
+"who": "gao",
+"text": "そっか、ありがとな"
+},
+{
+"key": "g_good",
+"who": "gao",
+"text": "いい しょうぶ だったな"
+},
+{
+"key": "g_win",
+"who": "gao",
+"text": "へへっ、おれの かちだ"
+},
+{
+"key": "gao",
+"who": "gao",
+"text": "つぎは、まけないぞ"
+},
+{
+"key": "doshin",
+"who": "doshin",
+"text": "どいて、あげるよ"
+},
+{
+"key": "kamejii",
+"who": "kamejii",
+"text": "よく いえましたね"
+}
+]

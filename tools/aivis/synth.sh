@@ -9,4 +9,5 @@ docker run -d --name aivis -p 10101:10101 -v ~/.local/share/AivisSpeech-Engine:/
 for i in $(seq 1 120); do curl -sf 127.0.0.1:10101/version && break; sleep 10; done
 echo; docker logs aivis 2>&1 | tail -20
 python3 synth.py "$OUT"
+for j in jobs/*/; do [ -f "$j/lines.json" ] && python3 synth.py "$OUT" "${j%/}"; done
 docker logs aivis 2>&1 | tail -40 > "$OUT/engine_log_tail.txt"

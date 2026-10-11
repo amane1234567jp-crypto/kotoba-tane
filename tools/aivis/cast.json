@@ -97,6 +97,22 @@
    "style": "Heavy",
    "speed": 0.85,
    "into": 1.4
+  },
+  "sr_locker": {
+   "style": "close-shout",
+   "into": 1.5
+  },
+  "sq_shizuka": {
+   "style": "close-shout"
+  },
+  "sq_osareta": {
+   "into": 1.4
+  },
+  "sq_ashiato": {
+   "into": 1.4
+  },
+  "sq_kinou": {
+   "into": 1.3
   }
  }
 }

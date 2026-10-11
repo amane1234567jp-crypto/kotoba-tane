@@ -1,11 +1,14 @@
 import json, sys, time, urllib.request, urllib.parse, subprocess, io, wave
 from pathlib import Path
 import numpy as np
-OUT = Path(sys.argv[1]); (OUT / "aivis").mkdir(parents=True, exist_ok=True)
+OUT = Path(sys.argv[1]); JOB = Path(sys.argv[2]) if len(sys.argv) > 2 else Path(".")
+SUB = "aivis" if JOB == Path(".") else JOB.name
+(OUT / SUB).mkdir(parents=True, exist_ok=True)
 E = "http://127.0.0.1:10101"
-yomi = json.loads(Path("yomi.json").read_text()) if Path("yomi.json").exists() else {}
+yomi = json.loads((JOB / "yomi.json").read_text()) if (JOB / "yomi.json").exists() else {}
 ACC = json.loads(Path("acc.json").read_text()) if Path("acc.json").exists() else {}
-cast = json.loads(Path("cast.json").read_text()); lines = json.loads(Path("lines.json").read_text())
+if (JOB / "acc.json").exists() and JOB != Path("."): ACC.update(json.loads((JOB / "acc.json").read_text()))
+cast = json.loads(Path("cast.json").read_text()); lines = json.loads((JOB / "lines.json").read_text())
 def call(method, path, data=None, ctype=None, timeout=600):
     req = urllib.request.Request(E + path, data=data, method=method)
     if ctype: req.add_header("Content-Type", ctype)
@@ -71,9 +74,9 @@ for l in lines:
         q["speedScale"] = c.get("speed", 1.0); q["intonationScale"] = c.get("into", q.get("intonationScale", 1.0))
         q["prePhonemeLength"] = .05; q["postPhonemeLength"] = .1
         wav = call("POST", f"/synthesis?speaker={sid}", json.dumps(q).encode(), "application/json")
-        post(wav, OUT / "aivis" / f"{l['key']}.mp3")
+        post(wav, OUT / SUB / f"{l['key']}.mp3")
         report.append({"key": l["key"], "who": l["who"], "style": sname, "sec": round(time.time() - t0, 1), "text": text, "acc": " / ".join("".join(m["text"] for m in ap["moras"]) + f"[{ap['accent']}]" for ap in q["accent_phrases"])})
     except Exception as e:
         report.append({"key": l["key"], "error": str(e)[:200]})
     print(report[-1], flush=True)
-(OUT / "report.json").write_text(json.dumps(report, ensure_ascii=False, indent=1))
+(OUT / ("report.json" if SUB == "aivis" else f"report_{SUB}.json")).write_text(json.dumps(report, ensure_ascii=False, indent=1))
