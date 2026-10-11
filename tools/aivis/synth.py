@@ -4,6 +4,7 @@ import numpy as np
 OUT = Path(sys.argv[1]); (OUT / "aivis").mkdir(parents=True, exist_ok=True)
 E = "http://127.0.0.1:10101"
 yomi = json.loads(Path("yomi.json").read_text()) if Path("yomi.json").exists() else {}
+ACC = json.loads(Path("acc.json").read_text()) if Path("acc.json").exists() else {}
 cast = json.loads(Path("cast.json").read_text()); lines = json.loads(Path("lines.json").read_text())
 def call(method, path, data=None, ctype=None, timeout=600):
     req = urllib.request.Request(E + path, data=data, method=method)
@@ -26,6 +27,17 @@ def style_id(model, style):
     for st in sts:
         if st["name"] == style: return st["id"], st["name"]
     return (sts[0]["id"], sts[0]["name"] + "(fallback)") if sts else (None, None)
+def reshape(aps, spec, key):
+    moras = [m for ap in aps for m in ap["moras"]]
+    flat = "".join(m["text"] for m in moras)
+    if flat != "".join(t for t, _ in spec):
+        print("ACC MISMATCH", key, flat, spec, flush=True); return aps
+    out, i = [], 0
+    for t, a in spec:
+        grp, acc = [], ""
+        while acc != t: grp.append(moras[i]); acc += moras[i]["text"]; i += 1
+        out.append({"moras": grp, "accent": a, "pause_mora": None, "is_interrogative": t.endswith("?")})
+    return out
 def room_ir(sr, sec=.35):
     r = np.random.default_rng(1); n = int(sr * sec); t = np.arange(n) / sr
     ir = r.standard_normal(n) * np.exp(-t / .07)
@@ -55,6 +67,7 @@ for l in lines:
     t0 = time.time()
     try:
         q = json.loads(call("POST", "/audio_query?" + urllib.parse.urlencode({"text": text, "speaker": sid})))
+        if l["key"] in ACC: q["accent_phrases"] = reshape(q["accent_phrases"], ACC[l["key"]], l["key"])
         q["speedScale"] = c.get("speed", 1.0); q["intonationScale"] = c.get("into", q.get("intonationScale", 1.0))
         q["prePhonemeLength"] = .05; q["postPhonemeLength"] = .1
         wav = call("POST", f"/synthesis?speaker={sid}", json.dumps(q).encode(), "application/json")
