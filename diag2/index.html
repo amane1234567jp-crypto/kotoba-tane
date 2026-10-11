@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>音の途切れ調査</title>
+<style>
+:root{--bg:#fff8ec;--ink:#3b2f22;--sub:#7a6a58;--line:#eadfcc;--card:#fff;--a:#ffd25e;--ok:#2fb36b;--ng:#e8590c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Maru Gothic ProN","Hiragino Sans",system-ui,sans-serif}
+main{max-width:720px;margin:0 auto;padding:16px 16px 80px}
+h1{font-size:24px;margin:6px 0}
+p{line-height:1.7;margin:6px 0}
+.card{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px;margin:12px 0}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+.lab{font-weight:700;min-width:7.5em}
+.seg button{border:2px solid var(--line);background:#fff7e6;border-radius:12px;padding:10px 14px;font-size:16px;font-family:inherit;color:var(--ink)}
+.seg button.on{background:var(--a);border-color:var(--ink);font-weight:700}
+.big{width:100%;border:0;border-radius:16px;padding:18px;font-size:22px;font-weight:700;font-family:inherit;background:var(--ink);color:#fff;margin-top:6px}
+.big:disabled{opacity:.4}
+.fb{display:grid;grid-template-columns:auto 1fr 1fr;gap:8px;align-items:center}
+.fb button{border:2px solid var(--line);background:#fff;border-radius:12px;padding:10px;font-size:15px;font-family:inherit}
+.fb button.ok.on{background:var(--ok);color:#fff;border-color:var(--ok)}
+.fb button.ng.on{background:var(--ng);color:#fff;border-color:var(--ng)}
+#log{font:12px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap;background:#2b2a33;color:#e9e3d8;border-radius:12px;padding:10px;max-height:300px;overflow:auto}
+#status{font-weight:700;font-size:18px;min-height:1.5em}
+.small{font-size:14px;color:var(--sub)}
+</style>
+</head>
+<body>
+<main>
+<h1>音の途切れ調査</h1>
+<p class="small">ゲームと同じ音の鳴らし方で、「お手本 → マイク → 返事」の流れを再現します。条件を変えて何回か試し、最後に「ログをコピー」して送ってください。</p>
+
+<div class="card">
+  <button class="big" id="start">① はじめる（BGMが鳴ります）</button>
+  <div id="status"></div>
+</div>
+
+<div class="card">
+  <div class="row"><span class="lab">音の出口</span><span class="seg" data-k="route"><button data-v="media" class="on">いまのゲーム</button><button data-v="direct">ふつう</button></span></div>
+  <div class="row"><span class="lab">マイクの前</span><span class="seg" data-k="pre"><button data-v="0" class="on">すぐ</button><button data-v="500">0.5秒まつ</button><button data-v="1000">1秒まつ</button></span></div>
+  <div class="row"><span class="lab">返事の前</span><span class="seg" data-k="post"><button data-v="1000" class="on">1秒</button><button data-v="2000">2秒</button><button data-v="3000">3秒</button></span></div>
+  <button class="big" id="go" disabled>② ためす</button>
+  <p class="small">ぽにーのお手本「ころんで、けがを しました」が鳴ったら、同じように言ってください。そのあと、ひつじ先生が返事をします。</p>
+</div>
+
+<div class="card">
+  <div class="fb">
+    <span>お手本の終わり</span><button class="ok" data-q="model" data-v="聞こえた">聞こえた</button><button class="ng" data-q="model" data-v="切れた">切れた</button>
+    <span>返事のはじめ</span><button class="ok" data-q="reply" data-v="聞こえた">聞こえた</button><button class="ng" data-q="reply" data-v="切れた">切れた</button>
+    <span>BGM</span><button class="ok" data-q="bgm" data-v="ずっと鳴った">ずっと鳴った</button><button class="ng" data-q="bgm" data-v="途切れた">途切れた</button>
+  </div>
+  <button class="big" id="rec" style="background:#6b5e4f">③ この回の結果を記録</button>
+</div>
+
+<div class="card">
+  <div class="row" style="justify-content:space-between"><b>ログ</b><button id="copy" class="big" style="width:auto;padding:10px 16px;font-size:16px">ログをコピー</button></div>
+  <div id="log"></div>
+</div>
+</main>
+<script>
+const $ = s => document.querySelector(s);
+const opt = { route: "media", pre: 0, post: 1000 };
+document.querySelectorAll(".seg").forEach(g => g.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  g.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
+  opt[g.dataset.k] = g.dataset.k === "route" ? b.dataset.v : +b.dataset.v;
+  if (g.dataset.k === "route" && ctx) setRoute(opt.route);
+}));
+const fb = {};
+document.querySelectorAll(".fb button").forEach(b => b.onclick = () => {
+  fb[b.dataset.q] = b.dataset.v;
+  document.querySelectorAll(`.fb button[data-q="${b.dataset.q}"]`).forEach(x => x.classList.toggle("on", x === b));
+});
+let t0 = performance.now(), trial = 0;
+const lines = [];
+function log(m) { const t = ((performance.now() - t0) / 1000).toFixed(2); const s = `${t.padStart(7)}  ${m}`; lines.push(s); const el = $("#log"); el.textContent = lines.slice(-400).join("\n"); el.scrollTop = 1e9; }
+function status(m) { $("#status").textContent = m; }
+log("UA: " + navigator.userAgent);
+
+let ctx, master, mediaDest, el, bgmSrc, buf = {};
+const SRC = window.SpeechRecognition || window.webkitSpeechRecognition;
+async function load(name) { const r = await fetch(name); const a = await r.arrayBuffer(); return await new Promise((ok, ng) => ctx.decodeAudioData(a, ok, ng)); }
+function setRoute(r) {
+  try { master.disconnect(); } catch (e) {}
+  if (r === "media") { master.connect(mediaDest); if (el.paused) el.play().catch(e => log("el.play 失敗 " + e)); }
+  else { master.connect(ctx.destination); }
+  log("出口 = " + (r === "media" ? "いまのゲーム（audio要素経由）" : "ふつう"));
+}
+$("#start").onclick = async () => {
+  $("#start").disabled = true;
+  try { if (navigator.audioSession) { navigator.audioSession.type = "playback"; log("audioSession.type = playback, state=" + navigator.audioSession.state);
+    navigator.audioSession.onstatechange = () => log("◆ audioSession.state → " + navigator.audioSession.state); } else log("audioSession なし"); } catch (e) { log("audioSession エラー " + e); }
+  ctx = new (window.AudioContext || window.webkitAudioContext)();
+  ctx.onstatechange = () => log("◆ AudioContext.state → " + ctx.state);
+  master = ctx.createGain();
+  mediaDest = ctx.createMediaStreamDestination();
+  el = document.createElement("audio"); el.setAttribute("playsinline", ""); el.srcObject = mediaDest.stream; document.body.appendChild(el);
+  ["play", "playing", "pause", "waiting", "stalled", "suspend", "emptied", "ended", "error"].forEach(ev => el.addEventListener(ev, () => log("◆ audio要素: " + ev)));
+  log("sampleRate=" + ctx.sampleRate + " baseLatency=" + (ctx.baseLatency ?? "-") + " outputLatency=" + (ctx.outputLatency ?? "-"));
+  try { [buf.model, buf.reply, buf.bgm] = await Promise.all([load("model.mp3"), load("reply.mp3"), load("bgm.mp3")]); }
+  catch (e) { log("読み込み失敗 " + e); status("読み込みに失敗しました"); return; }
+  setRoute(opt.route);
+  const g = ctx.createGain(); g.gain.value = .6; g.connect(master);
+  bgmSrc = ctx.createBufferSource(); bgmSrc.buffer = buf.bgm; bgmSrc.loop = true; bgmSrc.connect(g); bgmSrc.start();
+  log("BGM 開始"); status("BGMが鳴っていればOK。②ためす を押してください");
+  $("#go").disabled = false;
+  if (!SRC) log("この端末は音声認識なし");
+};
+function playBuf(b, name) {
+  return new Promise(res => {
+    const s = ctx.createBufferSource(); s.buffer = b; s.connect(master);
+    const at = ctx.currentTime; s.start();
+    log(`▶ ${name} 開始（長さ ${b.duration.toFixed(2)}秒）`);
+    s.onended = () => { log(`■ ${name} 終わり（プログラム上）`); res(); };
+  });
+}
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+function listenOnce(ms) {
+  return new Promise(res => {
+    if (!SRC) { log("音声認識なし → 4秒待つ"); return setTimeout(res, 4000); }
+    const rec = new SRC(); rec.lang = "ja-JP"; rec.interimResults = true; rec.continuous = false;
+    let done = false; const fin = why => { if (done) return; done = true; log("マイク停止の指示（" + why + "）→ abort()"); try { rec.abort(); } catch (e) {} res(); };
+    ["start", "audiostart", "soundstart", "speechstart", "speechend", "soundend", "audioend", "end", "nomatch"].forEach(ev => rec.addEventListener(ev, () => log("● 認識: " + ev)));
+    rec.onerror = e => { log("● 認識エラー: " + e.error); fin("エラー"); };
+    rec.onresult = e => { const r = e.results[e.results.length - 1]; log("● 認識結果: " + r[0].transcript + (r.isFinal ? "（確定）" : "")); if (/けが|怪我|ころん|転ん/.test(r[0].transcript)) fin("聞き取れた"); };
+    rec.addEventListener("end", () => fin("認識が終わった"));
+    setTimeout(() => fin("時間切れ"), ms);
+    try { rec.start(); log("マイク開始の指示 start()"); } catch (e) { log("start 失敗 " + e); fin("start失敗"); }
+  });
+}
+$("#go").onclick = async () => {
+  $("#go").disabled = true; trial++;
+  Object.keys(fb).forEach(k => delete fb[k]); document.querySelectorAll(".fb button").forEach(x => x.classList.remove("on"));
+  log(`===== ${trial}回目：出口=${opt.route === "media" ? "いまのゲーム" : "ふつう"} マイク前=${opt.pre}ms 返事前=${opt.post}ms =====`);
+  status("お手本が鳴ります…");
+  await playBuf(buf.model, "お手本");
+  await sleep(opt.pre);
+  status("🎤 言ってください：「ころんで、けがを しました」");
+  await listenOnce(7000);
+  status("返事を待っています…");
+  await sleep(opt.post);
+  await playBuf(buf.reply, "ひつじ先生の返事");
+  status("③ で結果を記録してください"); $("#go").disabled = false;
+};
+$("#rec").onclick = () => {
+  log(`★ 結果 ${trial}回目：お手本の終わり=${fb.model || "?"}／返事のはじめ=${fb.reply || "?"}／BGM=${fb.bgm || "?"}`);
+  status("記録しました。条件を変えてもう一度どうぞ");
+};
+$("#copy").onclick = async () => {
+  const s = "音の途切れ調査ログ\n" + lines.join("\n"); let ok = false;
+  try { await navigator.clipboard.writeText(s); ok = true; } catch (e) { const ta = document.createElement("textarea"); ta.value = s; document.body.appendChild(ta); ta.select(); try { ok = document.execCommand("copy"); } catch (e2) {} ta.remove(); }
+  $("#copy").textContent = ok ? "コピーしました！" : "コピーできませんでした";
+};
+</script>
+</body>
+</html>
