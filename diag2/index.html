@@ -114,10 +114,12 @@ $("#start").onclick = async () => {
 let keepStream = null;
 async function micKeep(on) { // マイクをずっと開けておく（端末の切り替えを起こさないため）
   if (on && !keepStream) {
+    try { if (navigator.audioSession) { navigator.audioSession.type = "play-and-record"; log("audioSession.type = play-and-record"); } } catch (e) { log("type 変更失敗 " + e); }
     try { keepStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true } }); log("マイクずっとオン：開始");
       keepStream.getTracks().forEach(t => { t.onended = () => log("◆ ずっとオンのマイクが止まった"); t.onmute = () => log("◆ マイク mute"); t.onunmute = () => log("◆ マイク unmute"); }); }
     catch (e) { log("マイクずっとオン 失敗 " + e); }
-  } else if (!on && keepStream) { keepStream.getTracks().forEach(t => t.stop()); keepStream = null; log("マイクずっとオン：終了"); }
+  } else if (!on && keepStream) { keepStream.getTracks().forEach(t => t.stop()); keepStream = null; log("マイクずっとオン：終了");
+    try { if (navigator.audioSession) { navigator.audioSession.type = "playback"; log("audioSession.type = playback"); } } catch (e) { } }
 }
 function playBuf(b, name) {
   return new Promise(res => {
