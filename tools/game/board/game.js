@@ -368,7 +368,7 @@ const countMatch = (t, groups) => groups.filter(g => g.some(v => norm(t).include
 function sessionMode(m) { try { if (navigator.audioSession) navigator.audioSession.type = m; } catch (e) { } }
 let sessTimer = null;
 function micOn() { clearTimeout(sessTimer); sessionMode("play-and-record"); }
-function micOff() { clearTimeout(sessTimer); sessTimer = setTimeout(() => { sessionMode("auto"); setTimeout(() => sessionMode("playback"), 120); }, 250); }
+function micOff() { clearTimeout(sessTimer); sessTimer = setTimeout(() => { sessionMode("auto"); setTimeout(() => { sessionMode("playback"); keepAlive(); setTimeout(keepAlive, 300); }, 120); }, 250); }
 function hear(onText, ms) {
   let stopped = false, rec = null, resolveDone; const endAt = performance.now() + ms;
   const done = new Promise(r => resolveDone = r);
@@ -723,11 +723,18 @@ async function ending() {
   await sleep(900);
   await speak(C.gao, "g_good", "いい しょうぶ だったな");
   if (childWon) await speak(C.gao, "gao", "つぎは、まけないぞ");
+  const lapUp = childWon ? markClear() : false;
+  if (childWon) { await speak(C.pony, "p_clear", "ステージ クリア！"); }
+  if (lapUp) { const t = slam(`${SAVE.lap}しゅうめへ！`, 520, 150, "#FF9E7A"); fanfare(); await speak(C.pony, "p_lap2", "にしゅうめの はじまりだよ！ こんどは もっと むずかしいよ"); await sleep(600); t.remove(); }
   // 5) もういっかい
   const again = document.createElement("button"); again.type = "button"; again.className = "again"; again.textContent = "もういっかい";
   again.style.left = "70%"; again.style.top = "50%"; stage.appendChild(again);
   again.animate && again.animate([{ transform: "translateX(-50%) scale(1)" }, { transform: "translateX(-50%) scale(1.08)" }, { transform: "translateX(-50%) scale(1)" }], { duration: 900, iterations: Infinity });
-  again.onclick = () => { again.remove(); md.remove(); card.remove(); newGame(); };
+  if (lapUp) again.textContent = `${SAVE.lap}しゅうめへ`;
+  const toMenu = document.createElement("button"); toMenu.type = "button"; toMenu.className = "again menuBtn"; toMenu.textContent = "メニュー";
+  toMenu.style.left = "70%"; toMenu.style.top = "68%"; stage.appendChild(toMenu);
+  again.onclick = () => { again.remove(); toMenu.remove(); md.remove(); card.remove(); newGame(); };
+  toMenu.onclick = () => { again.remove(); toMenu.remove(); md.remove(); card.remove(); setView("board"); showMenu(); };
 }
 
 /* ---------- 音の出口（iPhone・iPadのマナーモード対策） ----------
@@ -854,13 +861,22 @@ function dataToArrayBuffer(uri) {
 function decodeData(uri) {
   return new Promise((ok, ng) => { try { const p = ctx.decodeAudioData(dataToArrayBuffer(uri), ok, ng); if (p && p.catch) p.catch(ng); } catch (e) { ng(e); } });
 }
+const VORDER = [], VMAX = 48;
 function voiceBuf(key) {
-  if (!VBUF[key]) VBUF[key] = decodeData(AUD[key]).catch(() => null);
+  if (!VBUF[key]) {
+    VBUF[key] = decodeData(AUD[key]).catch(() => decodeData(AUD[key]).catch(() => null)); // 失敗したら1回やり直す
+    VORDER.push(key);
+    while (VORDER.length > VMAX) delete VBUF[VORDER.shift()]; // メモリを使いすぎないよう古い声から捨てる
+  } else { const i = VORDER.indexOf(key); if (i >= 0) { VORDER.splice(i, 1); VORDER.push(key); } }
   return VBUF[key];
 }
+function keepAlive() { // マイクのあとなどに音の出口が止まっていたら動かしなおす
+  try { if (ctx && ctx.state === "suspended") ctx.resume(); if (MUTE.el && MUTE.el.paused && !MUTE.on) { const p = MUTE.el.play(); if (p && p.catch) p.catch(() => { }); } } catch (e) { }
+}
+setInterval(keepAlive, 800);
 function preloadVoices(keys) { keys.forEach(k => AUD[k] && voiceBuf(k)); }
 async function playVoice(c, key, text, frac = 1) {
-  audio(); const buf = AUD[key] ? await voiceBuf(key) : null;
+  audio(); keepAlive(); const buf = AUD[key] ? await voiceBuf(key) : null;
   speaker = c; say(c, text);
   if (!buf) { speaker = null; await speakEl(c, key, text); return; } // 予備：前のやり方で鳴らす
   const s = ctx.createBufferSource(); s.buffer = buf; s.connect(analyser);
@@ -895,22 +911,134 @@ function frame(now) {
 }
 
 /* ---------- はじめる ---------- */
-function newGame() {
-  GS.ok = 0; GS.tasks = 0; GS.startL = E.L; sitUsed.clear();
+/* ---------- ステージ・自動セーブ・メニュー ----------
+   ステージは STAGES に足していく（ready: false は「じゅんびちゅう」と表示）。
+   セーブは毎回の「きみの ばん」の始めに自動で。全部のステージをクリアすると、むずかしくなった2しゅうめへ。 */
+const STAGES = [
+  { id: "kousha", name: "こうしゃ", icon: "🏫", ready: true },
+  { id: "undou", name: "うんどうじょう", icon: "⚽", ready: false },
+  { id: "kouen", name: "こうえん", icon: "🌳", ready: false },
+  { id: "omise", name: "おみせ", icon: "🛒", ready: false },
+];
+const SAVE_KEY = "kotoba-tane-save";
+const SAVE = (() => { try { return JSON.parse(localStorage.getItem(SAVE_KEY)) || null; } catch (e) { return null; } })() || { v: 1, lap: 1, cleared: {}, E: null, play: null };
+function saveNow() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(SAVE)); } catch (e) { /* 保存できなくても遊べる */ } }
+if (SAVE.E) Object.assign(E, SAVE.E);
+let curStage = "kousha";
+const lapClears = () => SAVE.cleared[SAVE.lap] || (SAVE.cleared[SAVE.lap] = []);
+function snapshot() {
+  SAVE.E = { ...E };
+  SAVE.play = { stage: curStage, lap: SAVE.lap, shima: P.shima.node, gao: P.gao.node, doshinAsleep, sitUsed: [...sitUsed], GS: { ...GS }, childShouldWin, t: Date.now() };
+  saveNow();
+}
+function markClear() { // クリアを記録。全部クリアしたら つぎの しゅうへ（true を返す）
+  const c = lapClears(); if (!c.includes(curStage)) c.push(curStage);
+  const all = STAGES.filter(s => s.ready).every(s => c.includes(s.id));
+  if (all) { SAVE.lap++; lapSetup(); }
+  SAVE.E = { ...E }; saveNow(); return all;
+}
+function lapSetup() { // しゅうが進むほど むずかしく：はじめから長めの答え・お手本は半分から
+  if (SAVE.lap >= 2) { E.L = Math.max(E.L, SAVE.lap >= 3 ? 8 : 5); E.h = Math.max(E.h, 2); }
+}
+function newGame(opt = {}) {
+  const resume = !!(opt.resume && SAVE.play);
+  if (opt.stage) curStage = opt.stage; else if (resume) curStage = SAVE.play.stage;
+  GS.ok = 0; GS.tasks = 0; sitUsed.clear();
   winner = null; doshinAsleep = true; stickers = 0; got.clear(); abeLeft = ABE.slice(); E.h = Math.max(1, E.h);
-  const rec = store.get(); childShouldWin = (rec.games || 0) < 3 ? true : Math.random() < .75;
+  const rec = store.get(); childShouldWin = (rec.games || 0) < 3 ? true : Math.random() < (SAVE.lap >= 2 ? .6 : .75);
+  if (!resume) lapSetup();
+  GS.startL = E.L;
   drawBoard(); stT.textContent = "× 0";
   P.shima.s0 = .22; P.gao.s0 = .22; P.doshin.s0 = .3;
   setPiece(P.shima, "0"); setPiece(P.gao, "0"); setPiece(P.doshin, BLOCK); P.doshin.tm.closed = 1e6;
-  setView("board"); showEngine(null, childShouldWin ? "こんかいは きみが勝つ回（はじめの3回は必ず）" : "こんかいは がおが本気の回");
-  run();
+  if (resume) {
+    const p = SAVE.play;
+    setPiece(P.shima, p.shima); setPiece(P.gao, p.gao);
+    doshinAsleep = p.doshinAsleep; (p.sitUsed || []).forEach(x => sitUsed.add(x)); Object.assign(GS, p.GS || {}); childShouldWin = p.childShouldWin;
+    if (!doshinAsleep) { delete P.doshin.tm.closed; P.doshin.node = null; P.doshin.px = 1000; P.doshin.py = 792; }
+  }
+  setView("board"); showEngine(null, (childShouldWin ? "こんかいは きみが勝つ回" : "こんかいは がおが本気の回") + `／${SAVE.lap}しゅうめ`);
+  run({ resume, intro: !resume });
 }
-async function run() {
+async function rivalIntro() {
+  setTurn("gao"); turnT.textContent = "ライバル！";
+  if (SAVE.lap >= 2) { await showBanner(`${SAVE.lap}しゅうめ スタート！`, 1400); }
+  await showBanner("ライバル がお が きた！", 1500);
+  markAbove(P.gao, "ex"); jump(P.gao, .9);
+  if (SAVE.lap >= 2) await speak(P.gao, "g_rival2", "こんどは ほんきで いくぞ！");
+  else await speak(P.gao, "g_rival", "おれは がお！ どっちが さきに ゴールするか、きょうそうだ！");
+  await speak(C.pony, "p_rival", "がおと きょうそうだよ。さきに ゴールに ついた ほうが かち！");
+}
+async function run(o = {}) {
   let first = true;
-  while (!winner) { await childTurn(first); first = false; if (winner) break; await gaoTurn(); }
+  if (o.intro) await rivalIntro();
+  else if (o.resume) await speak(C.pony, "p_resume", "つづきから はじめるよ");
+  while (!winner) { snapshot(); await childTurn(first && !o.resume); first = false; if (winner) break; await gaoTurn(); }
+  SAVE.play = null; SAVE.E = { ...E }; saveNow();
   await sleep(500); await ending();
 }
+let started = false;
+function boot() { // 最初のタップで音を使えるようにする
+  if (started) return; started = true;
+  audio(); loadSfx(); bgmStart();
+  preloadVoices(["roll", "p_your", "n1", "n2", "n3", "g_go", "g_rival", "g_rival2", "p_rival", "p_resume", "p_ask", "p_help", "p_great"]);
+}
+function showMenu() {
+  let box = document.getElementById("startBox");
+  if (!box) { box = document.createElement("div"); box.id = "startBox"; box.className = "start"; stage.appendChild(box); }
+  box.innerHTML = ""; box.className = "start menu";
+  const h = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+  const card = h("div", "mcard");
+  card.append(h("div", "mtitle", "ことばのたね"));
+  card.append(h("div", "mlap", SAVE.lap >= 2 ? `${SAVE.lap}しゅうめ（むずかしい）` : "1しゅうめ"));
+  const go = (fn) => { boot(); box.remove(); fn(); };
+  if (SAVE.play) {
+    const st = STAGES.find(s => s.id === SAVE.play.stage) || STAGES[0];
+    const b = h("button", "mbig", "▶ つづきから"); b.type = "button";
+    const sub = h("span", "msub", `${st.icon} ${st.name}の とちゅうから`); b.append(sub);
+    b.onclick = () => go(() => newGame({ resume: true })); card.append(b);
+  }
+  card.append(h("div", "mhead", "ステージを えらぶ"));
+  const list = h("div", "mstages");
+  const clears = SAVE.cleared[SAVE.lap] || [];
+  STAGES.forEach((s, i) => {
+    const b = h("button", "mst" + (s.ready ? "" : " locked")); b.type = "button";
+    b.append(h("span", "mno", String(i + 1)), h("span", "mico", s.icon), h("span", "mname", s.name),
+      h("span", "mstat", !s.ready ? "じゅんびちゅう" : clears.includes(s.id) ? "★ クリア" : SAVE.play && SAVE.play.stage === s.id ? "とちゅう" : "あそぶ"));
+    if (!s.ready) b.disabled = true;
+    else b.onclick = () => { if (SAVE.play && !confirm("とちゅうの きろくは きえるよ。はじめから あそぶ？")) return; SAVE.play = null; saveNow(); go(() => newGame({ stage: s.id })); };
+    list.append(b);
+  });
+  card.append(list);
+  const rs = h("button", "mreset", "セーブを けす（おとなの かたへ）"); rs.type = "button";
+  rs.onclick = () => { if (!confirm("レベル・クリア・とちゅうの きろくを ぜんぶ けしますか？")) return; SAVE.lap = 1; SAVE.cleared = {}; SAVE.E = null; SAVE.play = null; saveNow(); Object.assign(E, { L: 1, h: 1, streak: 0 }); showMenu(); };
+  card.append(rs);
+  box.append(card);
+}
+(function menuStyle() {
+  const st = document.createElement("style");
+  st.textContent = `.start.menu{background:rgba(255,248,225,.86);overflow:auto;padding:10px}
+.start.menu button{font:inherit;padding:0;box-shadow:none;border-radius:0;background:none;border:none;color:inherit}
+.mcard{background:#fff;border:6px solid #2B2A33;border-radius:32px;box-shadow:0 8px 0 #2B2A33;padding:16px 22px 12px;display:grid;gap:10px;justify-items:center;width:min(92%,780px)}
+.mtitle{font:400 clamp(30px,5.2vw,58px) var(--display);color:#2B2A33;letter-spacing:.06em;line-height:1.1}
+.mlap{font:400 clamp(15px,2.2vw,22px) var(--display);background:#FFD25E;border:4px solid #2B2A33;border-radius:999px;padding:2px 16px}
+.start.menu .mbig{font:400 clamp(22px,3.4vw,34px) var(--display);padding:10px 38px;border-radius:999px;border:6px solid #2B2A33;background:#7BD389;color:#2B2A33;cursor:pointer;box-shadow:0 6px 0 #2B2A33;display:grid;gap:0;justify-items:center}
+.msub{font:400 clamp(13px,1.7vw,17px) var(--display)}
+.mhead{font:400 clamp(15px,2vw,20px) var(--display);color:#6b5e4f}
+.mstages{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:100%}
+@media (max-width:640px){.mstages{grid-template-columns:repeat(2,1fr)}}
+.start.menu .mst{position:relative;display:grid;justify-items:center;gap:4px;padding:12px 4px 10px;border-radius:22px;border:5px solid #2B2A33;background:#FFF3D6;cursor:pointer;font-family:var(--display);color:#2B2A33;box-shadow:0 6px 0 #2B2A33}
+.mst .mno{position:absolute;left:10px;top:4px;font-size:17px}
+.mst .mico{font-size:clamp(30px,4.4vw,46px);line-height:1.15}
+.mst .mname{font-size:clamp(14px,1.9vw,19px);white-space:nowrap}
+.mst .mstat{font-size:clamp(12px,1.5vw,15px);background:#FFD25E;border-radius:999px;padding:1px 10px;border:3px solid #2B2A33;white-space:nowrap}
+.start.menu .mst.locked{background:#ece7df;color:#8a8073;box-shadow:0 6px 0 #a59a8c;border-color:#a59a8c;cursor:default}
+.mst.locked .mico{filter:grayscale(1);opacity:.45}.mst.locked .mstat{background:#fff;border-color:#a59a8c}
+.start.menu .mreset{margin-top:4px;color:#8a8073;font-size:13px;text-decoration:underline;cursor:pointer;font-family:inherit}
+.again.menuBtn{background:#fff}`;
+  document.head.appendChild(st);
+})();
 drawBoard(); P.shima.s0 = .22; P.gao.s0 = .22; P.doshin.s0 = .3; setPiece(P.shima, "0"); setPiece(P.gao, "0"); setPiece(P.doshin, BLOCK); P.doshin.tm.closed = 1e6;
 setView("board"); diceBtn.style.visibility = "visible"; showEngine(null);
-document.getElementById("startBtn").onclick = () => { audio(); loadSfx(); bgmStart(); preloadVoices(Object.keys(AUD).filter(k => !/^k\d|^gk/.test(k))); document.getElementById("startBox").remove(); newGame(); };
+showMenu();
 requestAnimationFrame(frame);
