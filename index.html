@@ -3840,7 +3840,7 @@ function hideTask() { taskText = null; task.setAttribute("opacity", 0); }
 function taskListen(on) { taskR.setAttribute("stroke", on ? "#E8735A" : INK); taskR.setAttribute("stroke-width", on ? 12 : 8); }
 
 /* ---------- 場面（部屋の背景） ---------- */
-function drawRoom(place) {
+function drawRoom(place, noSign = false) {
   sceneLayer.innerHTML = "";
   const L = sceneLayer, wallC = { げんかん: "#FFE9C7", げたばこ: "#E3F1FF", ろうか: "#FFF4D6", かいだん: "#EEE6FA", トイレ: "#DDF3EE", ほけんしつ: "#FFF0F3", しょくいんしつ: "#F6EEDF", としょしつ: "#FFEFE4", ゴール: "#BDE3F2" }[place] || "#FFF4D6";
   el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: wallC }, L);
@@ -3862,7 +3862,7 @@ function drawRoom(place) {
     el("rect", { x: 1300, y: 460, width: 64, height: 60, rx: 10, fill: "#FFFFFF", ...S6(5) }, L); el("rect", { x: 900, y: 180, width: 420, height: 220, rx: 10, fill: "#3F7F5E", ...S6(6) }, L); }
   if (place === "としょしつ") { shelf(820, 160, 340, 6, 5, ["#FF8FA3", "#7FCBF0", "#FFD25E", "#7CC36A", "#B9A8D9"]); shelf(1200, 160, 340, 6, 5, ["#7CC36A", "#FFD25E", "#FF8FA3", "#B9A8D9", "#7FCBF0"]); }
   if (place === "ゴール") { for (let i = 0; i < 12; i++) el("path", { d: `M${i * 140} 60 l70 0 l-35 60 Z`, fill: ["#FF6F91", "#FFD25E", "#7FCBF0", "#7CC36A"][i % 4], ...S6(4) }, L); el("path", { d: "M0 60 H1600", ...S6(5) }, L); }
-  if (place !== "ゴール") { const g = el("g", {}, L); el("rect", { x: 620, y: 24, width: 360, height: 92, rx: 20, fill: "#FFFFFF", ...S6(6) }, g); txt(g, 800, 88, place, 46, { "text-anchor": "middle" }); }
+  if (place !== "ゴール" && !noSign) { const g = el("g", {}, L); el("rect", { x: 620, y: 24, width: 360, height: 92, rx: 20, fill: "#FFFFFF", ...S6(6) }, g); txt(g, 800, 88, place, 46, { "text-anchor": "middle" }); }
 }
 
 /* ---------- 画面の切りかえ ---------- */
@@ -4578,14 +4578,17 @@ function resetChar(c) { c.dx.v = 0; c.dx.t = 0; c.lean.t = 0; c.lift.t = 0; c.ar
 function setSitView(s, heroKind) {
   clearMarks(); view = "scene"; chars.forEach(c => c.root.style.display = "none"); visible.length = 0; unsay(); showEar(null, false); hideTask();
   boardLayer.style.display = "none"; sceneLayer.style.display = ""; hud.style.display = "none"; diceBtn.style.visibility = "hidden";
-  drawRoom(s.place); propG = el("g", {}, sceneLayer);
+  const atDoor = s.intro === "door";
+  drawRoom(atDoor ? "ろうか" : s.place, atDoor); propG = el("g", {}, sceneLayer);
   const hero = C[heroKind], ask = C[s.asker];
   [C.pony, C.shima, hero, ask].forEach(resetChar);
   place(C.pony, 120, 975, .46); show(C.pony);
   if (heroKind === "gao") { place(C.shima, 320, 975, .55); show(C.shima); place(hero, 650, 975, .9); }
   else place(hero, 600, 975, .88);
   show(hero);
-  const [ax, as] = ASK_AT[s.asker]; place(ask, ax, 975, as); show(ask);
+  const [ax, as] = ASK_AT[s.asker];
+  if (atDoor) { place(ask, 930, 770, .55); } // ドアの向こうに立っている（ドアが開くまで見せない）
+  else { place(ask, ax, 975, as); show(ask); }
   // 登場する人は画面の外で待たせておく（途中でワープして見えないように）
   if (motion >= .9) { // 動きを減らす設定のときは、最初から舞台に立たせる
     hero.dx.v = hero.dx.t = -1100;
@@ -4692,21 +4695,19 @@ const INTRO = {
     enter(h, -600); await sleep(1100); playMove(h, "look"); markAbove(h, "ex"); await sleep(900);
   },
   async door(h, a) {
+    // ろうかから見た「しょくいんしつのドア」。かめじいはドアの向こう（見えない）から声だけ聞こえる
     const d = el("g", {}, propG);
-    // しょくいんしつの「かべ」と「ドア」。まるシマはドアの外（左）、かめじいは中（右）
-    el("rect", { x: 0, y: 130, width: 800, height: 630, fill: "#FFF4D6" }, d);
-    el("rect", { x: 780, y: 130, width: 40, height: 640, fill: "#E6D3B0", stroke: INK, "stroke-width": 6 }, d);
-    el("rect", { x: 80, y: 160, width: 240, height: 200, rx: 10, fill: "#BDE3F2", stroke: INK, "stroke-width": 6 }, d);
-    el("rect", { x: 820, y: 360, width: 20, height: 400, fill: "#C98A4B", stroke: INK, "stroke-width": 5 }, d);
-    const plate = el("g", {}, d); el("rect", { x: 830, y: 290, width: 220, height: 56, rx: 10, fill: "#FFFFFF", stroke: INK, "stroke-width": 5 }, plate);
-    el("text", { x: 940, y: 330, "text-anchor": "middle", "font-family": FONT, "font-size": 30, fill: INK }, plate).textContent = "しょくいんしつ";
+    el("rect", { x: 760, y: 140, width: 340, height: 620, fill: "#E6D3B0", stroke: INK, "stroke-width": 6 }, d);
+    const plate = el("g", {}, d); el("rect", { x: 800, y: 180, width: 260, height: 70, rx: 12, fill: "#FFFFFF", stroke: INK, "stroke-width": 6 }, plate);
+    el("text", { x: 930, y: 230, "text-anchor": "middle", "font-family": FONT, "font-size": 36, fill: INK }, plate).textContent = "しょくいんしつ";
+    el("rect", { x: 820, y: 290, width: 220, height: 470, fill: "#5E4A3A", stroke: INK, "stroke-width": 6 }, d); // ドアの奥（へやの中）
     const leaf = el("g", {}, d);
-    el("rect", { x: 840, y: 360, width: 170, height: 400, rx: 6, fill: "#B9824A", stroke: INK, "stroke-width": 6 }, leaf);
-    el("rect", { x: 870, y: 400, width: 110, height: 100, rx: 6, fill: "#BDE3F2", stroke: INK, "stroke-width": 5 }, leaf);
-    el("circle", { cx: 990, cy: 580, r: 10, fill: "#FFD25E", stroke: INK, "stroke-width": 4 }, leaf);
+    el("rect", { x: 820, y: 290, width: 220, height: 470, rx: 6, fill: "#B9824A", stroke: INK, "stroke-width": 6 }, leaf);
+    el("rect", { x: 860, y: 330, width: 140, height: 120, rx: 6, fill: "#BDE3F2", stroke: INK, "stroke-width": 5 }, leaf);
+    el("circle", { cx: 1015, cy: 540, r: 12, fill: "#FFD25E", stroke: INK, "stroke-width": 4 }, leaf);
     window.__door = leaf;
     const pr = el("g", {}, propG); drawItem(pr, "print"); follow(pr, () => { const p = world(h, 330, 300); return [p.x, p.y, -8, .45 * h.s / .88]; });
-    enter(h, -600); await sleep(1100); h.armR.t = -60; await sleep(300);
+    enter(h); await sleep(1100); h.armR.t = -60; await sleep(300);
     knock(); markAbove(h, "note"); await sleep(800); h.armR.t = 0; await sleep(300);
   },
   async arrive(h, a) {
@@ -4750,8 +4751,7 @@ const RESOLVE = {
   slipper(h) { [-1, 1].forEach(sd => { const b = el("g", {}, propG); drawItem(b, "slipper"); follow(b, () => { const p = world(h, 200 + sd * 42, 408); return [p.x, p.y, 90, .3 * h.s]; }); }); },
   book(h, a) { a.lift.t = 120; later(1400, () => a.lift.t = 0); const b = el("g", {}, propG); drawItem(b, "book"); follow(b, () => { const p = world(h, 330, 300); return [p.x, p.y, -10, .45 * h.s]; }); },
   soap(h) { hold(h, "clap", 2.2); for (let i = 0; i < 10; i++) later(i * 180, () => { const p = world(h, 200, 300); mark("puff", p.x + (Math.random() - .5) * 160, p.y, { vy: -120, life: 1.2, s: .7 + Math.random() * .5 }); }); },
-  async print(h, a) { if (window.__door) tween(500, k => window.__door.setAttribute("transform", `translate(840 0) scale(${(1 - .85 * k).toFixed(3)} 1) translate(-840 0)`)); playMove(h, "bow");
-    await sleep(1300); await walk(h, 330, 1200); /* ドアから中へ入る */ },
+  print() { },
   swing() { },
 };
 
@@ -4928,11 +4928,16 @@ Object.assign(INTRO, {
     enter(h); await sleep(1000); h.armR.t = -150; for (let i = 0; i < 3; i++) later(i * 600, () => jump(h, .6)); await sleep(1900); h.armR.t = 0; playMove(h, "sad"); await sleep(600); enter(a); await sleep(900); },
 });
 const PRE = {
+  async shitsurei(h, a) { // ドアが開いて、かめじいが顔を出す
+    if (window.__door) await tween(500, k => window.__door.setAttribute("transform", `translate(820 0) scale(${(1 - .85 * k).toFixed(3)} 1) translate(-820 0)`));
+    a.root.style.display = ""; visible.push(a); wave(a); await sleep(500); },
   async otoshimono(h, a) { jump(a, 1.2); surprise(a); blip(900, 1800, .15, "square"); await sleep(700);
     await walk(h, 330, 900); // ちゅうのところまで行って、ハンカチをわたす
     if (window.__hk) { window.__hk.remove(); const g = prop("hankachi", 0, 0, .3); follow(g, () => { const p = world(a, 330, 300); return [p.x, p.y, 0, .3]; }); } joy(a); await sleep(400); },
 };
 const POST = {
+  async shitsurei(h, a) { playMove(h, "bow"); await sleep(1300); // おじぎをして、ドアから中へ入る
+    const go = walk(h, 330, 1300); const f = front(); await go; tween(400, k => { h.root.style.opacity = (1 - k).toFixed(2); f.style.opacity = (1 - k).toFixed(2); }); await sleep(450); h.root.style.display = "none"; h.root.style.opacity = ""; },
   async butsukaru(h, a) { playMove(a, "bow"); await sleep(1300); a.lean.t = 0; await walk(a, 700, 2200); /* あやまって、ろうかを歩いて行く */ },
   async tearai(h, a) { await walk(h, 300, 1000); RESOLVE.soap(h); await sleep(2000); /* 手洗い場へ行って洗う */ },
   async tetsudau(h, a) { if (window.__setCarrier) window.__setCarrier(h); await sleep(900); climb(h, 650, 2600); await climb(a, 650, 2600); /* 箱を持って いっしょに のぼる */ },
