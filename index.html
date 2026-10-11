@@ -4022,8 +4022,8 @@ const norm = s => kata2hira(s).replace(/[\s、。！？!?,.・「」]/g, "");
 const countMatch = (t, groups) => groups.filter(g => g.some(v => norm(t).includes(norm(v)) || t.includes(v))).length;
 function sessionMode(m) { try { if (navigator.audioSession) navigator.audioSession.type = m; } catch (e) { } }
 let sessTimer = null;
-function micOn() { clearTimeout(sessTimer); sessionMode("play-and-record"); }
-function micOff() { clearTimeout(sessTimer); sessTimer = setTimeout(() => { sessionMode("auto"); setTimeout(() => { sessionMode("playback"); keepAlive(); setTimeout(keepAlive, 300); }, 120); }, 250); }
+function micOn() { } // マイクの前後で再生モードを切り替えると音が乱れるため、何もしない（元の動きに戻した）
+function micOff() { }
 function hear(onText, ms) {
   let stopped = false, rec = null, resolveDone; const endAt = performance.now() + ms;
   const done = new Promise(r => resolveDone = r);
