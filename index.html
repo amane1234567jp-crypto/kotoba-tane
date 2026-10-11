@@ -2574,7 +2574,7 @@ let partners = [];
 function show(c) { c.root.style.display = ""; visible.push(c); }
 let doer = null;
 function setView(v, sc, opt = {}) {
-  view = v; chars.forEach(c => c.root.style.display = "none"); visible.length = 0; unsay(); showEar(null, false); hideTask();
+  clearMarks(); view = v; chars.forEach(c => c.root.style.display = "none"); visible.length = 0; unsay(); showEar(null, false); hideTask();
   boardLayer.style.display = v === "board" ? "" : "none"; sceneLayer.style.display = v === "board" ? "none" : ""; hud.style.display = v === "board" ? "" : "none";
   diceBtn.style.visibility = v === "board" ? "visible" : "hidden";
   if (v === "board") {
@@ -3251,6 +3251,7 @@ setView("board"); diceBtn.style.visibility = "visible"; showEngine(null);
 document.getElementById("startBtn").onclick = () => { audio(); loadSfx(); bgmStart(); preloadVoices(Object.keys(AUD).filter(k => !/^k\d|^gk/.test(k))); document.getElementById("startBox").remove(); newGame(); };
 requestAnimationFrame(frame);
 
+function clearMarks() { marks.forEach(k => k.g.remove()); marks.length = 0; }
 /* ================= 場面（シチュエーション）で こたえる =================
    1) アニメで「何が起きたか」を見せる → 2) 相手が話しかける → 3) 子どもが場面に合う言葉でこたえる
    → 4) 相手がこたえ、出てきた物の名前（ばんそうこう など）を絵と声で見せる。
@@ -3264,11 +3265,12 @@ function pickSit(place, forGao) {
   if (!pool.length) { sitUsed.clear(); pool = SITS.filter(s => okFor(s) && s.place === place); if (!pool.length) pool = SITS.filter(okFor); }
   const s = pool[rnd(pool.length)]; sitUsed.add(s.id); return s;
 }
+const ASK_ON_STAGE = new Set(["door", "arrive"]); // 最初から相手がその場にいる場面
 const ASK_AT = { meebaa: [1190, .9], kamejii: [1180, .9], nobbo: [1220, 1.0], gao: [1190, .95], mii: [1190, .9], chu: [1220, .42], pyon: [1190, .9] };
 let propG = null;
 function resetChar(c) { c.dx.v = 0; c.dx.t = 0; c.lean.t = 0; c.lift.t = 0; c.armL.t = 0; c.armR.t = 0; c.headRot.t = 0; c.tm = {}; c.sadMouth = false; c.roundMouth = false; c.happyOn = false; c.eyeScale.t = 1; c.squash.t = 1; }
 function setSitView(s, heroKind) {
-  view = "scene"; chars.forEach(c => c.root.style.display = "none"); visible.length = 0; unsay(); showEar(null, false); hideTask();
+  clearMarks(); view = "scene"; chars.forEach(c => c.root.style.display = "none"); visible.length = 0; unsay(); showEar(null, false); hideTask();
   boardLayer.style.display = "none"; sceneLayer.style.display = ""; hud.style.display = "none"; diceBtn.style.visibility = "hidden";
   drawRoom(s.place); propG = el("g", {}, sceneLayer);
   const hero = C[heroKind], ask = C[s.asker];
@@ -3278,6 +3280,11 @@ function setSitView(s, heroKind) {
   else place(hero, 600, 975, .88);
   show(hero);
   const [ax, as] = ASK_AT[s.asker]; place(ask, ax, 975, as); show(ask);
+  // 登場する人は画面の外で待たせておく（途中でワープして見えないように）
+  if (motion >= .9) { // 動きを減らす設定のときは、最初から舞台に立たせる
+    hero.dx.v = hero.dx.t = -1100;
+    if (!ASK_ON_STAGE.has(s.intro)) ask.dx.v = ask.dx.t = 1000;
+  }
   return { hero, ask };
 }
 function follow(g, fn) { addTick(() => { if (!g.isConnected) return false; const [x, y, r = 0, k = 1] = fn(); g.setAttribute("transform", `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${r.toFixed(1)}) scale(${k})`); }); }
@@ -3320,7 +3327,8 @@ async function showWord(s, sayIt = true) {
 }
 
 /* ---------- できごとのアニメ ---------- */
-function enter(c, from, ms = 0) { c.dx.v = from; c.dx.t = 0; hold(c, "run", .9); }
+// 画面の外から歩いて入ってくる（いまの位置から 0 へ。すでに舞台にいるときは何もしない）
+function enter(c) { if (Math.abs(c.dx.v) < 5) return; c.dx.t = 0; hold(c, "run", .9); }
 const INTRO = {
   async fall(h, a) {
     enter(h, -720); h.lean.t = -10; await sleep(850); h.lean.t = 0;
@@ -3345,7 +3353,7 @@ const INTRO = {
   },
   async bump(h, a) {
     enter(h, -500); await sleep(900);
-    a.dx.v = 900; a.dx.t = -360; hold(a, "run", 1); a.lean.t = -14; await sleep(650);
+    a.dx.t = -360; hold(a, "run", 1.4); a.lean.t = -14; await sleep(900);
     thud(); boom(.5); flop(h); flop(a); markAbove(h, "ex"); markAbove(a, "ex");
     for (let i = 0; i < 6; i++) mark("sparkle", 900, 700, { vx: Math.cos(i) * 300, vy: -200 - i * 40, life: .8, s: .6 });
     await sleep(900); a.dx.t = 0; a.lean.t = 0; await sleep(500); playMove(h, "sad"); await sleep(600);
@@ -3356,27 +3364,36 @@ const INTRO = {
     el("circle", { cx: 455, cy: 600, r: 9, fill: INK }, d);
     el("rect", { x: 360, y: 455, width: 90, height: 50, rx: 10, fill: "#FFFFFF", stroke: INK, "stroke-width": 5 }, d);
     el("text", { x: 405, y: 492, "text-anchor": "middle", "font-family": FONT, "font-size": 30, fill: INK }, d).textContent = "WC";
-    h.dx.v = -200; h.dx.t = 0; await sleep(700); joy(h); await sleep(900);
-    h.dx.t = -420; hold(h, "run", 1.2); await sleep(700);
+    h.dx.v = -200; h.dx.t = 0; await sleep(700); joy(h); await sleep(900); // ドアから出てくる
+    h.dx.t = -230; hold(h, "run", 1.2); await sleep(700);
     enter(a, 500); await sleep(500); playMove(a, "point"); markAbove(a, "anger"); await sleep(600);
     h.dx.t = 0; surprise(h); await sleep(700);
   },
   async heavy(h, a) {
     const box = el("g", {}, propG);
-    el("rect", { x: -80, y: -60, width: 160, height: 120, rx: 8, fill: "#C98A4B", stroke: INK, "stroke-width": 6 }, box);
-    el("path", { d: "M-80 -10 H80", stroke: "#F2D9A8", "stroke-width": 16 }, box);
+    el("rect", { x: -70, y: -50, width: 140, height: 100, rx: 8, fill: "#C98A4B", stroke: INK, "stroke-width": 6 }, box);
+    el("path", { d: "M-70 -8 H70", stroke: "#F2D9A8", "stroke-width": 14 }, box);
     let carrier = a; box.carrier = () => carrier; window.__setCarrier = c => carrier = c;
-    follow(box, () => { const c = carrier, p = headTop(c); return [p.x, p.y - 50 * Math.max(.5, c.s), Math.sin(performance.now() / 160) * 4]; });
+    let bx = null, by = null;
+    follow(box, () => { const c = carrier, p = headTop(c), tx = p.x, ty = p.y - 70;
+      if (bx === null) { bx = tx; by = ty; } bx += (tx - bx) * .12; by += (ty - by) * .12; return [bx, by, Math.sin(performance.now() / 160) * 4]; });
     enter(a, 500); await sleep(900); hold(a, "shiver", 3); a.squash.t = .85;
     for (let i = 0; i < 6; i++) later(i * 380, () => markAbove(a, "drop", { dx: i % 2 ? 60 : -60, vy: 60 }));
-    enter(h, -600); await sleep(1100); playMove(h, "surprise" in INTRO ? "look" : "look"); markAbove(h, "ex"); await sleep(900);
+    enter(h, -600); await sleep(1100); playMove(h, "look"); markAbove(h, "ex"); await sleep(900);
   },
   async door(h, a) {
     const d = el("g", {}, propG);
+    // しょくいんしつの「かべ」と「ドア」。まるシマはドアの外（左）、かめじいは中（右）
+    el("rect", { x: 0, y: 130, width: 800, height: 630, fill: "#FFF4D6" }, d);
+    el("rect", { x: 780, y: 130, width: 40, height: 640, fill: "#E6D3B0", stroke: INK, "stroke-width": 6 }, d);
+    el("rect", { x: 80, y: 160, width: 240, height: 200, rx: 10, fill: "#BDE3F2", stroke: INK, "stroke-width": 6 }, d);
+    el("rect", { x: 820, y: 360, width: 20, height: 400, fill: "#C98A4B", stroke: INK, "stroke-width": 5 }, d);
+    const plate = el("g", {}, d); el("rect", { x: 830, y: 290, width: 220, height: 56, rx: 10, fill: "#FFFFFF", stroke: INK, "stroke-width": 5 }, plate);
+    el("text", { x: 940, y: 330, "text-anchor": "middle", "font-family": FONT, "font-size": 30, fill: INK }, plate).textContent = "しょくいんしつ";
     const leaf = el("g", {}, d);
-    el("rect", { x: 870, y: 400, width: 170, height: 360, rx: 8, fill: "#B9824A", stroke: INK, "stroke-width": 6 }, leaf);
-    el("rect", { x: 900, y: 440, width: 110, height: 90, rx: 6, fill: "#BDE3F2", stroke: INK, "stroke-width": 5 }, leaf);
-    el("circle", { cx: 895, cy: 600, r: 10, fill: "#FFD25E", stroke: INK, "stroke-width": 4 }, leaf);
+    el("rect", { x: 840, y: 360, width: 170, height: 400, rx: 6, fill: "#B9824A", stroke: INK, "stroke-width": 6 }, leaf);
+    el("rect", { x: 870, y: 400, width: 110, height: 100, rx: 6, fill: "#BDE3F2", stroke: INK, "stroke-width": 5 }, leaf);
+    el("circle", { cx: 990, cy: 580, r: 10, fill: "#FFD25E", stroke: INK, "stroke-width": 4 }, leaf);
     window.__door = leaf;
     const pr = el("g", {}, propG); drawItem(pr, "print"); follow(pr, () => { const p = world(h, 330, 300); return [p.x, p.y, -8, .45 * h.s / .88]; });
     enter(h, -600); await sleep(1100); h.armR.t = -60; await sleep(300);
@@ -3390,10 +3407,12 @@ const INTRO = {
   },
   async push(h, a) {
     enter(h, -500); await sleep(1000);
+    // がおが右から走ってきて、まるシマを押して左へ走り去る（一定の速さで）
     const g = C.gao; resetChar(g); place(g, 1300, 975, .9); g.root.style.display = ""; visible.push(g);
-    g.dx.v = 500; g.dx.t = -2200; hold(g, "run", 2.4); g.lean.t = -14;
-    await sleep(900); thud(); flop(h); markAbove(h, "ex"); h.dx.t = -60;
-    await sleep(1300); g.root.style.display = "none"; visible.splice(visible.indexOf(g), 1); g.dx.v = 0; g.dx.t = 0; g.lean.t = 0;
+    hold(g, "run", 2.4); g.lean.t = -14;
+    const run = tween(2000, k => { g.dx.v = g.dx.t = 500 - 2700 * k; });
+    await sleep(1150); thud(); playMove(g, "point"); flop(h); markAbove(h, "ex"); h.dx.t = -60;
+    await run; g.root.style.display = "none"; visible.splice(visible.indexOf(g), 1); g.dx.v = 0; g.dx.t = 0; g.lean.t = 0;
     playMove(h, "sad"); tears(h, 1.4); await sleep(900);
     enter(a, 520); await sleep(900); surprise(a);
   },
@@ -3421,7 +3440,7 @@ const RESOLVE = {
   slipper(h) { [-1, 1].forEach(sd => { const b = el("g", {}, propG); drawItem(b, "slipper"); follow(b, () => { const p = world(h, 200 + sd * 42, 408); return [p.x, p.y, 90, .3 * h.s]; }); }); },
   book(h, a) { a.lift.t = 120; later(1400, () => a.lift.t = 0); const b = el("g", {}, propG); drawItem(b, "book"); follow(b, () => { const p = world(h, 330, 300); return [p.x, p.y, -10, .45 * h.s]; }); },
   soap(h) { hold(h, "clap", 2.2); for (let i = 0; i < 10; i++) later(i * 180, () => { const p = world(h, 200, 300); mark("puff", p.x + (Math.random() - .5) * 160, p.y, { vy: -120, life: 1.2, s: .7 + Math.random() * .5 }); }); },
-  print(h, a) { if (window.__door) tween(500, k => window.__door.setAttribute("transform", `translate(870 0) scale(${(1 - .85 * k).toFixed(3)} 1) translate(-870 0)`)); playMove(h, "bow"); },
+  print(h, a) { if (window.__door) tween(500, k => window.__door.setAttribute("transform", `translate(840 0) scale(${(1 - .85 * k).toFixed(3)} 1) translate(-840 0)`)); playMove(h, "bow"); },
   swing() { },
 };
 
@@ -3462,7 +3481,7 @@ async function runSit(place) {
   if (!ok) { await speak(C.pony, "p_together", "いっしょに いおうね"); await speak(C.pony, `sa_${s.id}_${ti}`, t.a); playMove(h, "nod"); await sleep(600); }
   hideTask();
   await resolve(s, h, a, ok);
-  if (ok) await (rnd(2) ? speak(C.shima, "shima", "やったー！ いえたね！") : speak(C.pony, "p_great", "すごい！ いえたね！"));
+  if (ok) { joy(C.pony); await speak(C.pony, "p_great", "すごい！ いえたね！"); }
   if (up > 0) { tune([[N.C5, .5], [N.E5, .5], [N.G5, .5], [N.C6, 1.5]], 220); later(100, () => showBanner("レベル アップ！")); await speak(C.pony, "p_levelup", "レベル アップ！"); await sleep(900); }
   showEngine(null, ok ? (n === 0 ? "1回目で言えた" : `${n + 1}回目で言えた`) : "3回とも言えなかった");
   await sleep(600); setView("board");
