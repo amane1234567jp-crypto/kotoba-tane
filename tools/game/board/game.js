@@ -417,13 +417,13 @@ const JOY = ["banzai", "dance", "spin", "laugh", "clap", "pump", "heart"];
 const E = { L: 1, h: 1, streak: 0 };
 const used = new Set();
 function showEngine(sc, note = "") {
-  engEl.textContent = `むずかしさ: レベル ${E.L}／ヒント段階 ${E.h}（1=お手本ぜんぶ 2=はじめだけ 3=声なし）／連続あがり ${E.streak}` + (sc ? `／いまの場面 No.${sc.no}「${sc.main}」` : "") + (note ? `／${note}` : "");
+  engEl.textContent = `むずかしさ: レベル ${E.L}／ヒント段階 ${E.h}（いつも お手本あり）／連続あがり ${E.streak}` + (sc ? `／いまの場面 No.${sc.no}「${sc.main}」` : "") + (note ? `／${note}` : "");
   lvT.textContent = `レベル ${E.L}`;
 }
-function grade(firstOk) {
-  const before = E.L;
-  if (firstOk) { if (E.h < 3) E.h++; else { E.streak++; E.L = Math.min(10, E.L + [1, 2, 4][Math.min(E.streak, 3) - 1]); E.h = 2; } }
-  else { E.streak = 0; if (E.h > 1) E.h--; else if (E.L > 1) { E.L--; E.h = 2; } }
+function grade(firstOk) { // お手本はいつも全部聞かせる。1回目で言えたらレベルが1つ上がり、言えなかったら1つ下がる
+  const before = E.L; E.h = 1;
+  if (firstOk) { E.streak++; E.L = Math.min(10, E.L + 1); }
+  else { E.streak = 0; if (E.L > 1) E.L--; }
   return E.L - before;
 }
 function pickScene(place) {
@@ -920,10 +920,11 @@ function markClear() { // クリアを記録。全部クリアしたら つぎ�
   SAVE.E = { ...E }; saveNow(); return all;
 }
 function lapSetup() { // しゅうが進むほど むずかしく：はじめから長めの答え・お手本は半分から
-  if (SAVE.lap >= 2) { E.L = Math.max(E.L, SAVE.lap >= 3 ? 8 : 5); E.h = Math.max(E.h, 2); }
+  if (SAVE.lap >= 2) { E.L = Math.max(E.L, SAVE.lap >= 3 ? 8 : 5); }
 }
 function newGame(opt = {}) {
   const resume = !!(opt.resume && SAVE.play);
+  E.h = 1; // お手本はいつも全部聞かせる
   if (opt.stage) curStage = opt.stage; else if (resume) curStage = SAVE.play.stage;
   GS.ok = 0; GS.tasks = 0; sitUsed.clear();
   winner = null; doshinAsleep = true; stickers = 0; got.clear(); abeLeft = ABE.slice(); E.h = Math.max(1, E.h);

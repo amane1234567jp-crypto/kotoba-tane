@@ -223,14 +223,13 @@ async function runSit(place) {
   showTask(t.a, s.help ? "いって あげよう" : "こたえよう");
   let hh = E.h, ok = false, n = 0;
   for (; n < 3; n++) {
-    if (hh === 1) await speak(C.pony, `sa_${s.id}_${ti}`, t.a);
-    else if (hh === 2) await speakPart(C.pony, `sa_${s.id}_${ti}`, t.a.slice(0, Math.max(1, Math.ceil(t.a.length * .45))) + "…", .45);
+    if (hh < 3) await speak(C.pony, `sa_${s.id}_${ti}`, t.a);
     else { playMove(h, "think"); await sleep(700); }
     unsay();
     setListen(h, true); const r = await listen(t.keys, 8000); setListen(h, false);
     if (r.r === "ok") { ok = true; break; }
     if (r.r === "part") { playMove(h, "think"); await speak(C.pony, "p_close", "おしい！"); } else { playMove(h, "think"); await sleep(600); }
-    if (n < 2) { hh = Math.max(1, hh - 1); if (hh === 1) await speak(C.pony, "p_again", "もう いっかい いってみよう"); }
+    if (n < 2) { hh = 1; await speak(C.pony, "p_again", "もう いっかい いってみよう"); }
   }
   const up = grade(ok && n === 0); GS.tasks++; if (ok) GS.ok++;
   if (!ok) { await speak(C.pony, "p_together", "いっしょに いおうね"); await speak(C.pony, `sa_${s.id}_${ti}`, t.a); playMove(h, "nod"); await sleep(600); }
