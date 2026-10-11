@@ -47,7 +47,7 @@ h2{font-size:19px;margin:26px 0 8px;display:flex;align-items:center;gap:8px}
 <p class="lead">おなじセリフを、ちがう作り方の声で聞きくらべます。▶で聞いて、いちばん「人がしゃべってるみたい」と思ったものに <b>♥</b> を押してください。親子で聞くときは「かくして聞く」をオンにすると、どれがどれか分からないまま選べます。</p>
 <div class="legend" id="legend"></div>
 <div class="bar">
-  <label class="tog"><input type="checkbox" id="blind"> かくして聞く（ア・イ・ウ）</label>
+  <label class="tog"><input type="checkbox" id="blind"> かくして聞く（ア・イ・ウ…）</label>
   <button class="small" id="jump">けっかを見る ↓</button>
 </div>
 <div id="list"></div>
@@ -69,14 +69,17 @@ const VARS = [
   {id:"hq",    name:"ちょうせい＋高音質",   color:"var(--c)"},
 ];
 const AIVIS = {id:"aivis", name:"AivisSpeech", color:"var(--d)"};
-const KANA = ["ア","イ","ウ"];
-const DESC = {now:"いまゲームで使っている声", tuned:"言葉の切れ目で止まらない・気持ちに合わせた声色と抑揚", hq:"ちょうせい＋音をきれいに・少しだけ部屋の響き", aivis:"べつの合成エンジン（じゅんびちゅう）"};
+const HAS_AIVIS = false;
+if(HAS_AIVIS)VARS.push(AIVIS);
+const KANA = ["ア","イ","ウ","エ"];
+const OK = "kk_order"+VARS.length;
+const DESC = {now:"いまゲームで使っている声", tuned:"言葉の切れ目で止まらない・気持ちに合わせた声色と抑揚", hq:"ちょうせい＋音をきれいに・少しだけ部屋の響き", aivis:"べつの合成エンジン AivisSpeech"+(typeof HAS_AIVIS!=="undefined"&&HAS_AIVIS?"":"（じゅんびちゅう）")};
 function load(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 let votes = load("kk_votes",{});
 let blind = load("kk_blind",true);
-let order = load("kk_order",null);
-if(!order||Object.keys(order).length!==LINES.length){order={};for(const l of LINES){const a=[0,1,2];for(let i=2;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}order[l.key]=a}save("kk_order",order)}
+let order = load(OK,null);
+if(!order||Object.keys(order).length!==LINES.length){order={};for(const l of LINES){const a=VARS.map((_,i)=>i);for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}order[l.key]=a}save(OK,order)}
 try{if(navigator.audioSession)navigator.audioSession.type="playback"}catch(e){}
 const au=document.getElementById("au");let playingBtn=null;
 function play(btn,src){if(playingBtn)playingBtn.classList.remove("playing");au.src=src;au.currentTime=0;au.play().catch(()=>{});btn.classList.add("playing");playingBtn=btn}
@@ -84,7 +87,7 @@ au.addEventListener("ended",()=>{if(playingBtn)playingBtn.classList.remove("play
 
 function legend(){const el=document.getElementById("legend");el.innerHTML="";
   if(blind){const c=document.createElement("span");c.className="chip";c.textContent="ア・イ・ウは セリフごとに 入れかわっています";el.appendChild(c);return}
-  for(const v of [...VARS,AIVIS]){const c=document.createElement("span");c.className="chip";c.innerHTML=`<b style="color:${v.color}">●</b> ${v.name}：${DESC[v.id]}`;el.appendChild(c)}}
+  for(const v of (HAS_AIVIS?VARS:[...VARS,AIVIS])){const c=document.createElement("span");c.className="chip";c.innerHTML=`<b style="color:${v.color}">●</b> ${v.name}：${DESC[v.id]}`;el.appendChild(c)}}
 function render(){
   const list=document.getElementById("list");list.innerHTML="";let who=null;
   for(const l of LINES){
@@ -101,8 +104,8 @@ function render(){
       const k=document.createElement("button");k.className="like"+(votes[l.key]===v.id?" on":"");k.textContent="♥ これがいい";
       k.onclick=()=>{votes[l.key]=votes[l.key]===v.id?undefined:v.id;if(!votes[l.key])delete votes[l.key];save("kk_votes",votes);render();tally()};
       o.append(b,k);opts.appendChild(o)});
-    const o=document.createElement("div");o.className="opt";
-    const b=document.createElement("button");b.className="play";b.disabled=true;b.innerHTML="AivisSpeech<br>じゅんびちゅう";o.appendChild(b);opts.appendChild(o);
+    if(!HAS_AIVIS){const o=document.createElement("div");o.className="opt";
+    const b=document.createElement("button");b.className="play";b.disabled=true;b.innerHTML="AivisSpeech<br>じゅんびちゅう";o.appendChild(b);opts.appendChild(o);}
     row.append(t,m,opts);list.appendChild(row)}
 }
 function tally(){

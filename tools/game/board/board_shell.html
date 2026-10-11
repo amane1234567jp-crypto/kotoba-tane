@@ -1,0 +1,101 @@
+<title>ことばのたね すごろく試作</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@500;700&display=swap">
+<style>
+/* layout: the game stage (16:10) with overlay controls; a small developer panel below */
+:root {
+  --bg: #FFF8E1; --surface: #FFFFFF; --ink: #2B2A33; --muted: #5E5A6B; --line: #2B2A33;
+  --accent: #FFD25E; --soft: #FFEFB8; --focus: #2F79F7; --dev: #EEF3FF; --devline: #9DB2E8;
+  --display: "Mochiy Pop One", "Zen Maru Gothic", system-ui, sans-serif;
+  --body: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #1F1D26; --surface: #2B2935; --ink: #F4F1FA; --muted: #BDB8CC; --line: #6B667D; --soft: #4A4536; --focus: #8DB4FF; --dev: #262C3F; --devline: #4D5C88; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #1F1D26; --surface: #2B2935; --ink: #F4F1FA; --muted: #BDB8CC; --line: #6B667D; --soft: #4A4536; --focus: #8DB4FF; --dev: #262C3F; --devline: #4D5C88; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6 }
+.wrap { max-width: 1100px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 40px; display: grid; gap: 12px }
+h1 { font-family: var(--display); font-weight: 400; font-size: clamp(22px, 5vw, 32px); margin: 0 }
+.lead { color: var(--muted); margin: 2px 0 0; max-width: 70ch }
+.stage { position: relative; width: 100%; aspect-ratio: 16 / 10; max-width: 100%; border: 4px solid #2B2A33; border-radius: 22px; overflow: hidden; background: #CFE8B8; user-select: none; -webkit-user-select: none; touch-action: manipulation }
+.stage svg { display: block; width: 100%; height: 100% }
+.dice { position: absolute; right: 2.2%; top: 3%; width: 12%; aspect-ratio: 1; border: 5px solid #2B2A33; border-radius: 22%; background: #FFFFFF; box-shadow: 0 8px 0 #2B2A33; cursor: pointer; padding: 0; display: grid; place-items: center; transition: transform .15s }
+.dice svg { width: 82%; height: 82% }
+.dice:disabled { opacity: .45; box-shadow: 0 4px 0 #2B2A33; cursor: default }
+.dice.ready { animation: bob 1s ease-in-out infinite }
+@keyframes bob { 50% { transform: translateY(-8%) rotate(-6deg) } }
+@media (prefers-reduced-motion: reduce) { .dice.ready { animation: none } }
+.arrow { position: absolute; width: 9%; aspect-ratio: 1; border-radius: 50%; border: 5px solid #2B2A33; background: #FFD25E; font: 400 clamp(18px, 3.4vw, 40px) var(--display); color: #2B2A33; cursor: pointer; display: grid; place-items: center; padding: 0; animation: bob 1s ease-in-out infinite }
+.again { position: absolute; left: 50%; top: 44%; transform: translateX(-50%); font: 400 clamp(18px, 3vw, 30px) var(--display); padding: 12px 34px; border-radius: 999px; border: 5px solid #2B2A33; background: #FFD25E; color: #2B2A33; cursor: pointer }
+.start { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(255, 248, 225, .55) }
+.start button { font: 400 clamp(22px, 4vw, 44px) var(--display); padding: 18px 48px; border-radius: 999px; border: 6px solid #2B2A33; background: #FFD25E; color: #2B2A33; cursor: pointer; box-shadow: 0 8px 0 #2B2A33 }
+button:focus-visible { outline: 4px solid var(--focus); outline-offset: 3px }
+.dev { border: 2px dashed var(--devline); background: var(--dev); border-radius: 16px; padding: 12px 14px; display: grid; gap: 8px }
+.dev h2 { margin: 0; font-size: 15px; font-weight: 700 }
+.dev .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center }
+.dev button { font: 700 15px var(--body); min-height: 40px; padding: 4px 14px; border-radius: 10px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer }
+.dev button:disabled { opacity: .4; cursor: default }
+.dev .stat { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; min-width: 0; overflow-wrap: anywhere }
+.dev .heard { font-weight: 700; color: var(--ink) }
+.note { color: var(--muted); font-size: 13px; margin: 0 }
+</style>
+<div class="wrap">
+  <header>
+    <h1>ことばのたね すごろく試作</h1>
+    <p class="lead">ステージ「こうしゃ」の1回の旅です。サイコロを振って進み、止まったマスで「できごと」が起きます。話しかけられたら、場面に合う言葉でこたえます。ライバルのがおも同じように場面にこたえ、ときどき言いまちがえるので、正しく教えてあげると、がおは1マスもどります。</p>
+  </header>
+  <div class="stage" id="stage">
+    <svg id="scene" viewBox="0 0 1600 1000" role="img" aria-label="校舎の中をめぐるすごろく盤"></svg>
+    <button class="dice" id="dice" type="button" aria-label="サイコロをふる" disabled></button>
+    <div class="start" id="startBox"><button id="startBtn" type="button">はじめる</button></div>
+  </div>
+  <section class="dev" aria-label="試作の確認用">
+    <h2>試作の確認用（本番の画面にはありません）</h2>
+    <div class="row">
+      <span class="stat" id="srState">音声認識: しらべています</span>
+      <button id="d-bgm" type="button" aria-pressed="true">BGM: オン</button>
+      <span class="stat" id="route">音の出口: ―</span>
+    </div>
+    <div class="row" role="group" aria-label="判定の代わり">
+      <button id="d-ok" type="button" disabled>言えた</button>
+      <button id="d-part" type="button" disabled>一部だけ</button>
+      <button id="d-none" type="button" disabled>言えなかった</button>
+      <span class="stat">聞きとり: <span class="heard" id="heard">―</span></span>
+    </div>
+    <div class="row"><span class="stat" id="engine">―</span></div>
+    <p class="note">このページは公開ページの制限でマイクを使えないため、音声認識の代わりに上のボタンで判定します。iPadのSafariで直接開いた本番では、声で判定します。</p>
+  </section>
+  <p class="note">音声：VOICEVOX:四国めたん、VOICEVOX:猫使アル、VOICEVOX:玄野武宏、VOICEVOX:麒ヶ島宗麟、VOICEVOX:剣崎雌雄、VOICEVOX:白上虎太郎、VOICEVOX:満別花丸、VOICEVOX:九州そら、VOICEVOX:ちび式じい、VOICEVOX:東北イタコ　／　効果音はその場で合成しています。</p>
+</div>
+<script>
+"use strict";
+const AUD = __AUDIO__;
+const SCENES = __SCENES__;
+const KEYS = __KEYS__;
+const SITS = __SITS__;
+const NS = "http://www.w3.org/2000/svg";
+const INK = "#2B2A33";
+const svg = document.getElementById("scene");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let motion = reduce ? 0.35 : 1;
+
+/* ---------- 小さな道具 ---------- */
+class Spring {
+  constructor(v = 0, k = 170, d = 13) { this.v = v; this.t = v; this.vel = 0; this.k = k; this.d = d; }
+  step(dt) { const f = -this.k * (this.v - this.t) - this.d * this.vel; this.vel += f * dt; this.v += this.vel * dt; return this.v; }
+}
+const el = (tag, attrs = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+const lerp = (a, b, t) => a + (b - a) * t;
+const rot = (deg, x, y) => `rotate(${deg.toFixed(2)} ${x} ${y})`;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const defs = el("defs", {}, svg);
+const boardLayer = el("g", {}, svg);
+const sceneLayer = el("g", { style: "display:none" }, svg);
+const charLayer = el("g", {}, svg);
+const fxLayer = el("g", {}, svg);
+const hudLayer = el("g", {}, svg);
+__CHARS__
+__SOUND__
+__MOVES__
+__GAME__
+__SIT__
+</script>

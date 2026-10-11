@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>こえの ききくらべ</title>
+<style>
+:root{--bg:#fff8ec;--card:#ffffff;--ink:#3b2f22;--sub:#8a7a66;--line:#eadfcc;--a:#ff9f43;--b:#4bb3fd;--c:#2ecc71;--d:#b39ddb;--pick:#ff5d8f;--btn:#fff3e0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1f1b16;--card:#2a251f;--ink:#f3e9dc;--sub:#b5a690;--line:#40382e;--btn:#3a3128}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Maru Gothic ProN","Hiragino Sans",system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+main{max-width:860px;margin:0 auto;padding:16px 16px 120px}
+h1{font-size:28px;margin:8px 0 4px}
+.lead{color:var(--sub);line-height:1.7;margin:0 0 12px;font-size:15px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
+.chip{border-radius:999px;padding:6px 12px;font-size:14px;background:var(--btn);border:1px solid var(--line)}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;display:flex;gap:10px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--line)}
+.tog{display:flex;align-items:center;gap:8px;font-size:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 12px}
+.tog input{width:22px;height:22px}
+h2{font-size:19px;margin:26px 0 8px;display:flex;align-items:center;gap:8px}
+.row{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px;margin:10px 0}
+.txt{font-size:20px;line-height:1.5;margin:0 0 2px}
+.mood{font-size:13px;color:var(--sub);margin:0 0 10px}
+.opts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media (max-width:560px){.opts{grid-template-columns:repeat(2,1fr)}}
+.opt{display:flex;flex-direction:column;gap:6px}
+.play{border:0;border-radius:14px;min-height:64px;font-size:16px;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;font-family:inherit}
+.play.playing{outline:4px solid var(--ink);outline-offset:2px}
+.play[disabled]{background:#cfc6b8!important;color:#fff;cursor:default;font-size:14px;font-weight:600}
+.like{border:2px solid var(--line);background:var(--btn);color:var(--ink);border-radius:12px;min-height:40px;font-size:15px;cursor:pointer;font-family:inherit}
+.like.on{background:var(--pick);border-color:var(--pick);color:#fff;font-weight:700}
+.res{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px;margin-top:28px}
+.res h2{margin-top:0}
+.tally{display:grid;gap:8px}
+.t{display:grid;grid-template-columns:150px 1fr 40px;align-items:center;gap:8px;font-size:15px}
+.t .b{height:18px;border-radius:9px}
+.big{border:0;border-radius:14px;padding:14px 18px;font-size:17px;font-weight:700;background:var(--ink);color:var(--bg);cursor:pointer;font-family:inherit}
+.small{border:1px solid var(--line);background:var(--btn);color:var(--ink);border-radius:12px;padding:10px 14px;font-size:15px;cursor:pointer;font-family:inherit}
+#copied{color:var(--c);font-weight:700;margin-left:8px}
+.note{font-size:13px;color:var(--sub);line-height:1.7}
+</style>
+</head>
+<body>
+<main>
+<h1>こえの ききくらべ</h1>
+<p class="lead">おなじセリフを、ちがう作り方の声で聞きくらべます。▶で聞いて、いちばん「人がしゃべってるみたい」と思ったものに <b>♥</b> を押してください。親子で聞くときは「かくして聞く」をオンにすると、どれがどれか分からないまま選べます。</p>
+<div class="legend" id="legend"></div>
+<div class="bar">
+  <label class="tog"><input type="checkbox" id="blind"> かくして聞く（ア・イ・ウ…）</label>
+  <button class="small" id="jump">けっかを見る ↓</button>
+</div>
+<div id="list"></div>
+<section class="res" id="result">
+  <h2>けっか</h2>
+  <div class="tally" id="tally"></div>
+  <div id="bywho" class="note" style="margin-top:10px"></div>
+  <p style="margin:16px 0 6px"><button class="big" id="copy">けっかをコピー</button><span id="copied"></span></p>
+  <p class="note">コピーしたら、そのまま Claude のチャットに貼りつけて送ってください。</p>
+  <p><button class="small" id="reset">♥ をぜんぶ消す</button></p>
+</section>
+</main>
+<audio id="au" playsinline preload="none"></audio>
+<script>
+const LINES = __LINES__;
+const VARS = [
+  {id:"now",   name:"いまの声",            color:"var(--a)"},
+  {id:"tuned", name:"ちょうせい",          color:"var(--b)"},
+  {id:"hq",    name:"ちょうせい＋高音質",   color:"var(--c)"},
+];
+const AIVIS = {id:"aivis", name:"AivisSpeech", color:"var(--d)"};
+const HAS_AIVIS = __HAS_AIVIS__;
+if(HAS_AIVIS)VARS.push(AIVIS);
+const KANA = ["ア","イ","ウ","エ"];
+const OK = "kk_order"+VARS.length;
+const DESC = {now:"いまゲームで使っている声", tuned:"言葉の切れ目で止まらない・気持ちに合わせた声色と抑揚", hq:"ちょうせい＋音をきれいに・少しだけ部屋の響き", aivis:"べつの合成エンジン AivisSpeech"+(typeof HAS_AIVIS!=="undefined"&&HAS_AIVIS?"":"（じゅんびちゅう）")};
+function load(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+let votes = load("kk_votes",{});
+let blind = load("kk_blind",true);
+let order = load(OK,null);
+if(!order||Object.keys(order).length!==LINES.length){order={};for(const l of LINES){const a=VARS.map((_,i)=>i);for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}order[l.key]=a}save(OK,order)}
+try{if(navigator.audioSession)navigator.audioSession.type="playback"}catch(e){}
+const au=document.getElementById("au");let playingBtn=null;
+function play(btn,src){if(playingBtn)playingBtn.classList.remove("playing");au.src=src;au.currentTime=0;au.play().catch(()=>{});btn.classList.add("playing");playingBtn=btn}
+au.addEventListener("ended",()=>{if(playingBtn)playingBtn.classList.remove("playing");playingBtn=null});
+
+function legend(){const el=document.getElementById("legend");el.innerHTML="";
+  if(blind){const c=document.createElement("span");c.className="chip";c.textContent="ア・イ・ウは セリフごとに 入れかわっています";el.appendChild(c);return}
+  for(const v of (HAS_AIVIS?VARS:[...VARS,AIVIS])){const c=document.createElement("span");c.className="chip";c.innerHTML=`<b style="color:${v.color}">●</b> ${v.name}：${DESC[v.id]}`;el.appendChild(c)}}
+function render(){
+  const list=document.getElementById("list");list.innerHTML="";let who=null;
+  for(const l of LINES){
+    if(l.who!==who){who=l.who;const h=document.createElement("h2");h.textContent=l.name;list.appendChild(h)}
+    const row=document.createElement("div");row.className="row";
+    const t=document.createElement("p");t.className="txt";t.textContent="「"+l.text+"」";
+    const m=document.createElement("p");m.className="mood";m.textContent="きもち："+l.mood;
+    const opts=document.createElement("div");opts.className="opts";
+    const seq=blind?order[l.key].map(i=>VARS[i]):VARS;
+    seq.forEach((v,i)=>{
+      const o=document.createElement("div");o.className="opt";
+      const b=document.createElement("button");b.className="play";b.style.background=blind?"#8d7b68":v.color;
+      b.textContent="▶ "+(blind?KANA[i]:v.name);b.onclick=()=>play(b,`a/${v.id}/${l.key}.mp3`);
+      const k=document.createElement("button");k.className="like"+(votes[l.key]===v.id?" on":"");k.textContent="♥ これがいい";
+      k.onclick=()=>{votes[l.key]=votes[l.key]===v.id?undefined:v.id;if(!votes[l.key])delete votes[l.key];save("kk_votes",votes);render();tally()};
+      o.append(b,k);opts.appendChild(o)});
+    if(!HAS_AIVIS){const o=document.createElement("div");o.className="opt";
+    const b=document.createElement("button");b.className="play";b.disabled=true;b.innerHTML="AivisSpeech<br>じゅんびちゅう";o.appendChild(b);opts.appendChild(o);}
+    row.append(t,m,opts);list.appendChild(row)}
+}
+function tally(){
+  const n={};for(const v of VARS)n[v.id]=0;for(const k in votes)n[votes[k]]=(n[votes[k]]||0)+1;
+  const tot=Object.keys(votes).length;const el=document.getElementById("tally");el.innerHTML="";
+  for(const v of VARS){const r=document.createElement("div");r.className="t";const w=tot?n[v.id]/tot*100:0;
+    r.innerHTML=`<span>${v.name}</span><span style="background:var(--line);border-radius:9px"><span class="b" style="display:block;width:${w}%;background:${v.color}"></span></span><b>${n[v.id]}</b>`;el.appendChild(r)}
+  const by={};for(const l of LINES){if(!votes[l.key])continue;(by[l.name]=by[l.name]||{})[votes[l.key]]=(by[l.name][votes[l.key]]||0)+1}
+  const nm=Object.fromEntries(VARS.map(v=>[v.id,v.name]));
+  document.getElementById("bywho").innerHTML=`えらんだ数：${tot} / ${LINES.length}<br>`+Object.entries(by).map(([w,c])=>`${w}：`+Object.entries(c).map(([k,x])=>`${nm[k]} ${x}`).join("、")).join("<br>");
+}
+function resultText(){
+  const nm=Object.fromEntries(VARS.map(v=>[v.id,v.name]));const n={};for(const k in votes)n[votes[k]]=(n[votes[k]]||0)+1;
+  let s="ききくらべ結果\n"+VARS.map(v=>`${v.name}: ${n[v.id]||0}`).join(" / ")+"\n";
+  for(const l of LINES)s+=`${l.key} ${l.name.split("（")[0]}「${l.text}」→ ${votes[l.key]?nm[votes[l.key]]:"-"}\n`;return s}
+document.getElementById("copy").onclick=async()=>{const s=resultText();let ok=false;
+  try{await navigator.clipboard.writeText(s);ok=true}catch(e){const ta=document.createElement("textarea");ta.value=s;document.body.appendChild(ta);ta.select();try{ok=document.execCommand("copy")}catch(e2){}ta.remove()}
+  document.getElementById("copied").textContent=ok?"コピーしました！":"コピーできませんでした"};
+document.getElementById("reset").onclick=()=>{if(confirm("♥ をぜんぶ消しますか？")){votes={};save("kk_votes",votes);render();tally()}};
+document.getElementById("jump").onclick=()=>document.getElementById("result").scrollIntoView({behavior:"smooth"});
+const bl=document.getElementById("blind");bl.checked=blind;bl.onchange=()=>{blind=bl.checked;save("kk_blind",blind);legend();render()};
+legend();render();tally();
+</script>
+</body>
+</html>
