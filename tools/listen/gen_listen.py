@@ -31,7 +31,7 @@ LINES = [
     ("sa_kaminai_3", "metan", "おてほん", {}),
     ("sa_kariru_2", "metan", "おてほん", {}),
     ("sq_hoken", "meebaa", "しんぱい", {"into": 1.35}),
-    ("sr_hoken", "meebaa", "なだめる", {"speed": .82}),
+    ("sr_hoken", "meebaa", "おどろき→なだめる", {"speed": .88, "into": 1.4}),
     ("sq_netsu", "meebaa", "おどろき・しんぱい", {"pitch": 0}),
     ("sr_tabesugi", "meebaa", "やさしく", {"speed": .82}),
     ("sq_uwabaki", "kamejii", "ふしぎそう", {}),
@@ -72,6 +72,10 @@ def text_of(key):
     sid, i = rest.rsplit("_", 1); t = S[sid]["tiers"][int(i)]
     return t["a"] if pre == "sa" else t["wrong"]
 
+# 気持ちの強調: 句ごとに 高さ(p: 対数F0に加算)・最後の母音の長さ倍率(len)・直後の間(pause)
+EMPH = {
+    "sr_hoken": [{"i": 0, "p": .14, "len": 1.7, "pause": .12}, {"i": 1, "p": .12, "skip_first": True, "len": 1.15, "pause": .32}],
+}
 PUNCT = "、。！？…"
 def separators(text):
     """テキスト中の区切り(空白 or 句読点)を順に。末尾は除く"""
@@ -130,6 +134,12 @@ def tuned(key, who, ov, rate):
         # 先頭句(多くは感嘆)を持ち上げる
         for m in aps[0].moras:
             if m.pitch > 0: m.pitch += .05
+    for e in EMPH.get(key, []):
+        ap = aps[e["i"]]
+        for j, m in enumerate(ap.moras):
+            if m.pitch > 0 and not (e.get("skip_first") and j == 0): m.pitch += e.get("p", 0)
+        ap.moras[-1].vowel_length *= e.get("len", 1)
+        if "pause" in e and ap.pause_mora is not None: ap.pause_mora = mk_pause(e["pause"])
     q.accent_phrases = aps
     q.speed_scale, q.pitch_scale, q.intonation_scale = sp, pi, it
     q.pre_phoneme_length, q.post_phoneme_length = .05, .1
