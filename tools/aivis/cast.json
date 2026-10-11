@@ -86,6 +86,17 @@
   "sr_hoken": {
    "into": 1.5,
    "speed": 0.95
+  },
+  "sq_netsu": {
+   "into": 1.5
+  },
+  "sr_tabesugi": {
+   "into": 1.5
+  },
+  "sq_sayonara": {
+   "style": "Heavy",
+   "speed": 0.85,
+   "into": 1.4
   }
  }
 }
