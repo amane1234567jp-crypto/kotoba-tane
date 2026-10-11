@@ -2406,12 +2406,12 @@ const ZONES = [
   { name: "ゴール", x: 1290, y: 240, w: 280, h: 210, fill: "#FFD25E", lx: 1430, ly: 285, goal: true },
 ];
 const NODES = {
-  "0": [170, 880, "start"], "1": [310, 880], "2": [450, 880], "3": [590, 880, "treasure"], "4": [730, 880], "5": [870, 880],
+  "0": [170, 880, "start"], "1": [310, 880], "2": [450, 880], "3": [590, 880], "4": [730, 880], "5": [870, 880],
   "6": [1010, 880, "block"], "7": [1150, 880], "8": [1380, 880], "9": [1430, 700, "fork"],
-  "10u": [1200, 540], "11u": [1040, 540, "treasure"], "12u": [880, 540],
-  "10d": [1220, 700], "11d": [1060, 700], "12d": [900, 700, "treasure"],
-  "13": [740, 640], "14": [590, 640], "15": [440, 640, "treasure"], "16": [250, 620], "17": [200, 470],
-  "18": [450, 320], "19": [610, 320], "20": [770, 320, "treasure"], "21": [950, 320], "22": [1110, 320], "23": [1250, 320], "24": [1430, 370, "goal"],
+  "10u": [1200, 540], "11u": [1040, 540], "12u": [880, 540],
+  "10d": [1220, 700], "11d": [1060, 700], "12d": [900, 700],
+  "13": [740, 640], "14": [590, 640], "15": [440, 640], "16": [250, 620], "17": [200, 470],
+  "18": [450, 320], "19": [610, 320], "20": [770, 320], "21": [950, 320], "22": [1110, 320], "23": [1250, 320], "24": [1430, 370, "goal"],
 };
 const GOAL = "24";
 const idx = id => parseInt(id, 10);
@@ -2490,8 +2490,8 @@ const hud = el("g", {}, hudLayer);
 hudLayer.insertBefore(hud, bub);
 function pill(g, x, y, w, h, fill) { return el("rect", { x, y, width: w, height: h, rx: h / 2, fill, ...S6(5) }, g); }
 const lvG = el("g", {}, hud); pill(lvG, 320, 34, 230, 76, "#FFFFFF"); const lvT = txt(lvG, 435, 86, "レベル 1", 36, { "text-anchor": "middle" });
-const stG = el("g", {}, hud); pill(stG, 570, 34, 210, 76, "#FFFFFF"); chest(stG, 630, 80, .75, true); const stT = txt(stG, 720, 86, "× 0", 34, { "text-anchor": "middle" });
-const turnG = el("g", {}, hud); const turnR = pill(turnG, 800, 34, 330, 76, "#FFD25E"); const turnT = txt(turnG, 965, 86, "", 36, { "text-anchor": "middle" });
+const stG = el("g", { style: "display:none" }, hud); pill(stG, 570, 34, 210, 76, "#FFFFFF"); chest(stG, 630, 80, .75, true); const stT = txt(stG, 720, 86, "× 0", 34, { "text-anchor": "middle" });
+const turnG = el("g", {}, hud); const turnR = pill(turnG, 600, 34, 330, 76, "#FFD25E"); const turnT = txt(turnG, 765, 86, "", 36, { "text-anchor": "middle" });
 function setTurn(who) { turnT.textContent = who === "child" ? "きみの ばん" : "がおの ばん"; turnR.setAttribute("fill", who === "child" ? "#FFD25E" : "#FF9E7A"); }
 const banner = el("g", { opacity: 0 }, hudLayer);
 const bannerR = el("rect", { x: 420, y: 400, width: 760, height: 160, rx: 80, fill: "#FFD25E", ...S6(8) }, banner);
@@ -3061,11 +3061,10 @@ async function ending() {
   await sleep(1300);
   // 4) 数がどんどん増える（できた数・シール・レベル）
   const card = el("g", {}, hudLayer);
-  el("rect", { x: 620, y: 120, width: 900, height: 330, rx: 34, fill: "#FFFFFF", ...S6(8), opacity: .95 }, card);
+  el("rect", { x: 620, y: 120, width: 900, height: 260, rx: 34, fill: "#FFFFFF", ...S6(8), opacity: .95 }, card);
   await countLine(card, 670, 210, "まねっこ できた", GS.ok, "こ");
-  await countLine(card, 670, 300, "シール", stickers, "まい");
-  const lvT2 = await countLine(card, 670, 390, "レベル", E.L, "", GS.startL);
-  if (E.L > GS.startL) { const up = el("text", { x: 1150, y: 390, "font-family": FONT, "font-size": 44, fill: "#E8735A", stroke: "#FFFFFF", "stroke-width": 8, "paint-order": "stroke" }, card); up.textContent = `${E.L - GS.startL}つ アップ！`; boom(.4); tween(300, k => up.setAttribute("opacity", k)); }
+  const lvT2 = await countLine(card, 670, 320, "レベル", E.L, "", GS.startL);
+  if (E.L > GS.startL) { const up = el("text", { x: 1150, y: 320, "font-family": FONT, "font-size": 44, fill: "#E8735A", stroke: "#FFFFFF", "stroke-width": 8, "paint-order": "stroke" }, card); up.textContent = `${E.L - GS.startL}つ アップ！`; boom(.4); tween(300, k => up.setAttribute("opacity", k)); }
   firework(1450, 200, 1); later(500, () => firework(1150, 160, 3));
   await sleep(900);
   await speak(C.gao, "g_good", "いい しょうぶ だったな");
