@@ -388,7 +388,7 @@ function listen(groups, ms = 7000) {
   return new Promise(resolve => {
     let best = 0, heard = "", fin = false;
     const verdict = () => best === groups.length ? "ok" : best > 0 ? "part" : "none";
-    const end = (r, why) => { if (fin) return; fin = true; taskListen(false); h.stop(); devOff(); clearTimeout(tmr); if (why) heard = why; heardEl.textContent = heard || "（きこえなかった）"; setTimeout(() => resolve({ r, heard }), 1000); }; // マイクが止まって端末の音が戻るのを待ってから次の声へ（すぐ話すと声の頭が欠ける）
+    const end = (r, why) => { if (fin) return; fin = true; taskListen(false); h.stop(); devOff(); clearTimeout(tmr); if (why) heard = why; heardEl.textContent = heard || "（きこえなかった）"; setTimeout(() => resolve({ r, heard }), MIC.stream ? 700 : 3000); }; // マイクずっとオンなら短く。そうでなければ端末の音が戻るまで待つ
     heardEl.textContent = "…"; taskListen(true);
     devOn(end);
     const h = hear(texts => {
@@ -856,8 +856,13 @@ async function playVoice(c, key, text, frac = 1) {
   audio(); const buf = AUD[key] ? await voiceBuf(key) : null;
   speaker = c; say(c, text);
   if (!buf) { speaker = null; await speakEl(c, key, text); return; } // 予備：前のやり方で鳴らす
-  const s = ctx.createBufferSource(); s.buffer = buf; s.connect(analyser);
+  const s = ctx.createBufferSource(); s.buffer = buf;
   const dur = buf.duration * frac;
+  if (frac < 1) { // 「はじめだけ」は、ぶつっと切らずに すっと小さくして消す
+    const g = ctx.createGain(), t = ctx.currentTime, fade = Math.min(.35, dur * .4);
+    g.gain.setValueAtTime(1, t + dur - fade); g.gain.linearRampToValueAtTime(0, t + dur);
+    s.connect(g).connect(analyser);
+  } else s.connect(analyser);
   await new Promise(res => { let done = false; const fin = () => { if (done) return; done = true; try { s.stop(); } catch (e) { } res(); };
     s.onended = fin; s.start(); setTimeout(fin, dur * 1000 + 80); });
   speaker = null; c.speakingLevel = 0;
@@ -955,9 +960,24 @@ async function run(o = {}) {
   await sleep(500); await ending();
 }
 let started = false;
+/* マイクはゲームの始めに1回だけ入れて、最後まで切らない。
+   iPhoneはマイクを入れ・切りするたびに音の出し方を切り替え、そのたびにBGMが途切れたり、直後の声の頭が欠けたりする（調査ページで確認）。
+   「録音もできる再生」にしてからマイクを開けたままにすると、切り替えが起きない。許可されなければ元の方式（返事の前を長めにあける）。 */
+const MIC = { stream: null };
+async function micAlwaysOn() {
+  if (!SRC || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
+  try {
+    if (navigator.audioSession) { navigator.audioSession.type = "play-and-record"; ROUTE.session = "play-and-record（マイクずっとオン）"; }
+    MIC.stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true } });
+  } catch (e) {
+    MIC.stream = null;
+    try { if (navigator.audioSession) { navigator.audioSession.type = "playback"; ROUTE.session = "playback（マイクずっとオンにできず）"; } } catch (x) { }
+  }
+  showRoute();
+}
 function boot() { // 最初のタップで音を使えるようにする
   if (started) return; started = true;
-  audio(); loadSfx(); bgmStart();
+  audio(); loadSfx(); bgmStart(); micAlwaysOn();
   preloadVoices(Object.keys(AUD).filter(k => !/^k\d|^gk/.test(k)));
 }
 function showMenu() {
