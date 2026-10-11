@@ -102,11 +102,11 @@ def mk_pause(l): return Mora(text='、', consonant=None, consonant_length=None, 
 PAUSE = {"、": .15, "。": .36, "…": .5}
 FINAL = set("ねよなのぞかわいう")
 
-def tuned(key, who, ov, rate):
-    text = text_of(key)
+def tuned(key, who, ov, rate, text=None, extra_fix=None):
+    text = text or text_of(key)
     st, sp, pi, it = BASE[who]
     st = ov.get("style", st); sp = ov.get("speed", sp); pi = ov.get("pitch", pi); it = ov.get("into", it)
-    fk = FIX.get(key) or FIX.get(text)
+    fk = (extra_fix or {}).get(key) or FIX.get(key) or FIX.get(text)
     q = syn.create_audio_query_from_kana(fk, st) if fk else syn.create_audio_query(text, st)
     seps = separators(text)
     aps = q.accent_phrases

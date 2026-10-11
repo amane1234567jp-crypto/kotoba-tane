@@ -365,10 +365,14 @@ srStatus(SRC ? "ready" : "off");
 const kata2hira = s => s.replace(/[ァ-ヶ]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60));
 const norm = s => kata2hira(s).replace(/[\s、。！？!?,.・「」]/g, "");
 const countMatch = (t, groups) => groups.filter(g => g.some(v => norm(t).includes(norm(v)) || t.includes(v))).length;
+function sessionMode(m) { try { if (navigator.audioSession) navigator.audioSession.type = m; } catch (e) { } }
+let sessTimer = null;
+function micOn() { clearTimeout(sessTimer); sessionMode("play-and-record"); }
+function micOff() { clearTimeout(sessTimer); sessTimer = setTimeout(() => { sessionMode("auto"); setTimeout(() => sessionMode("playback"), 120); }, 250); }
 function hear(onText, ms) {
   let stopped = false, rec = null, resolveDone; const endAt = performance.now() + ms;
   const done = new Promise(r => resolveDone = r);
-  const finish = () => { stopped = true; resolveDone(); };
+  const finish = () => { stopped = true; micOff(); resolveDone(); };
   const start = () => {
     if (stopped || !srUsable) return finish();
     try {
@@ -376,11 +380,11 @@ function hear(onText, ms) {
       rec.onresult = e => { const out = []; for (let i = 0; i < e.results.length; i++) for (let j = 0; j < e.results[i].length; j++) out.push(e.results[i][j].transcript); onText(out); };
       rec.onerror = e => { if (e.error !== "no-speech" && e.error !== "aborted") { srUsable = false; srStatus("off"); } };
       rec.onend = () => { rec = null; if (!stopped && srUsable && performance.now() < endAt - 700) start(); else { srStatus(srUsable ? "idle" : "off"); finish(); } };
-      rec.start(); srStatus("on");
+      micOn(); rec.start(); srStatus("on");
     } catch (err) { srUsable = false; srStatus("off"); finish(); }
   };
   start();
-  return { done, stop() { if (stopped) return; stopped = true; try { rec && rec.abort(); } catch (e) { } resolveDone(); } };
+  return { done, stop() { if (stopped) return; stopped = true; try { rec && rec.abort(); } catch (e) { } micOff(); resolveDone(); } };
 }
 function devOn(cb) { Object.entries(devB).forEach(([k, b]) => { b.disabled = false; b.onclick = () => cb(k, "（確認ボタン）"); }); }
 function devOff() { Object.values(devB).forEach(b => { b.disabled = true; b.onclick = null; }); }
@@ -731,6 +735,16 @@ async function ending() {
    2) さらに、作った音を全部「音声ファイルの再生」（audio要素）を通して鳴らす。音声ファイル扱いはマナーモードでも鳴る
    2がうまく動かないときは、自動でふつうの出口に戻す */
 const ROUTE = { session: "なし", out: "ふつう" };
+/* 音を消すボタン（マイクを使ったあと、iPhone・iPadの音量ボタンで0にできないことがあるため） */
+const MUTE = { on: false, master: null, el: null, btn: null };
+(function () {
+  const b = document.createElement("button"); b.type = "button"; b.id = "muteBtn"; b.setAttribute("aria-label", "音を消す");
+  b.style.cssText = "position:fixed;right:14px;top:12px;z-index:9999;width:58px;height:58px;border-radius:50%;border:3px solid #fff;background:rgba(60,45,30,.72);color:#fff;font-size:28px;line-height:1;box-shadow:0 3px 10px rgba(0,0,0,.25);cursor:pointer;padding:0";
+  const show = () => { b.textContent = MUTE.on ? "🔇" : "🔊"; b.setAttribute("aria-pressed", MUTE.on); b.setAttribute("aria-label", MUTE.on ? "音を出す" : "音を消す"); };
+  b.onclick = e => { e.stopPropagation(); MUTE.on = !MUTE.on; if (MUTE.master) MUTE.master.gain.value = MUTE.on ? 0 : 1; if (MUTE.el) MUTE.el.muted = MUTE.on;
+    try { speechSynthesis.cancel(); } catch (x) { } show(); };
+  show(); MUTE.btn = b; document.body.appendChild(b);
+})();
 const audioBase = audio;
 audio = function () {
   const first = !ctx;
@@ -742,6 +756,7 @@ audio = function () {
 function routeThroughMedia() {
   const real = ctx.destination;
   const master = ctx.createGain(); master.connect(real); // まずはふつうの出口へ
+  MUTE.master = master; master.gain.value = MUTE.on ? 0 : 1;
   Object.defineProperty(ctx, "destination", { value: master, configurable: true }); // 以後の音はすべて master を通る
   analyser.disconnect(); analyser.connect(master);
   const back = why => { try { master.disconnect(); } catch (e) { } master.connect(real); ROUTE.out = "ふつう（" + why + "）"; showRoute(); };
@@ -749,7 +764,7 @@ function routeThroughMedia() {
   try {
     if (!ctx.createMediaStreamDestination) { back("未対応"); return; }
     const dest = ctx.createMediaStreamDestination();
-    const el = document.createElement("audio"); el.setAttribute("playsinline", ""); el.srcObject = dest.stream; el.style.display = "none";
+    const el = document.createElement("audio"); el.setAttribute("playsinline", ""); el.srcObject = dest.stream; el.style.display = "none"; MUTE.el = el; el.muted = MUTE.on;
     document.body.appendChild(el);
     master.disconnect(); master.connect(dest); ROUTE.out = "音声ファイル経由"; showRoute();
     const p = el.play(); if (p && p.catch) p.catch(() => back("再生できず"));
