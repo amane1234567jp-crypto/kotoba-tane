@@ -47,7 +47,7 @@ button:focus-visible { outline: 4px solid var(--focus); outline-offset: 3px }
 <div class="wrap">
   <header>
     <h1>ことばのたね すごろく試作</h1>
-    <p class="lead">ステージ「こうしゃ」の1回の旅です。サイコロを振って進み、止まったマスで「できごと」が起きます。話しかけられたら、場面に合う言葉でこたえます。言えたらおまけで1マス進みます。ライバルのがおも同じように場面にこたえ、ときどき言いまちがえるので、正しく教えてあげます。</p>
+    <p class="lead">ステージ「こうしゃ」の1回の旅です。サイコロを振って進み、止まったマスで「できごと」が起きます。話しかけられたら、場面に合う言葉でこたえます。ライバルのがおも同じように場面にこたえ、ときどき言いまちがえるので、正しく教えてあげると、がおは1マスもどります。</p>
   </header>
   <div class="stage" id="stage">
     <svg id="scene" viewBox="0 0 1600 1000" role="img" aria-label="校舎の中をめぐるすごろく盤"></svg>
@@ -2834,7 +2834,6 @@ async function landChild() {
   if (k === "treasure" && !got.has(id)) { await treasure(id); return; }
   if (k === "start" || k === "treasure") return;
   const ok = await runSit(zoneOf(id));
-  if (ok) { await speak(C.pony, "p_bonus", "おまけで ひとつ すすもう"); await moveBy(P.shima, 1); const k2 = kindOf(P.shima.node); if (k2 === "treasure" && !got.has(P.shima.node) && !winner) await treasure(P.shima.node); }
 }
 async function askFork() {
   await speak(C.pony, "fork", "うえと したの、どっちに いく？");
@@ -3502,8 +3501,6 @@ async function gaoSit(before) {
   await sleep(400); setView("board");
   if (ok) {
     markAbove(P.gao, "drop"); P.gao.node = before; const [x, y] = nodeXY(P.gao, before); await slide(P.gao, x, y, .5, .3);
-    await speak(C.pony, "p_bonus", "おまけで ひとつ すすもう"); await moveBy(P.shima, 1);
-    if (kindOf(P.shima.node) === "treasure" && !got.has(P.shima.node) && !winner) await treasure(P.shima.node);
   }
 }
 
