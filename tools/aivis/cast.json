@@ -232,6 +232,42 @@
   },
   "sr_sagasu": {
    "into": 1.35
+  },
+  "rv_mii_rival": {
+   "style": "からかい"
+  },
+  "rv_mii_win": {
+   "style": "からかい"
+  },
+  "rv_mii_next": {
+   "style": "からかい"
+  },
+  "rv_mii_good": {
+   "style": "おちつき"
+  },
+  "rv_chu_rival": {
+   "style": "喜び"
+  },
+  "rv_chu_win": {
+   "style": "喜び"
+  },
+  "rv_chu_huh": {
+   "style": "驚き"
+  },
+  "rv_chu_good": {
+   "style": "喜び"
+  },
+  "rv_pyon_huh": {
+   "style": "ノーマル"
+  },
+  "rv_doshin_rival2": {
+   "style": "Mid"
+  },
+  "rv_doshin_win": {
+   "style": "Mid"
+  },
+  "rv_doshin_go": {
+   "style": "Mid"
   }
  }
 }
