@@ -1,0 +1,97 @@
+[
+{
+"key": "sg_kowai_5",
+"who": "gao",
+"text": "こわく ないよ。てすりに つかまって、いっぽずつ のぼろう"
+},
+{
+"key": "sg_tabesugi_5",
+"who": "gao",
+"text": "カレーが おいしくて、さんばいも おかわり しちゃいました"
+},
+{
+"key": "sg_kawatte_4",
+"who": "gao",
+"text": "ずっと まって いるから、つぎ かわって くれる？"
+},
+{
+"key": "sg_oshite_4",
+"who": "gao",
+"text": "こわかったら いってね。ゆっくり おすからね"
+},
+{
+"key": "sg_hanbunko_4",
+"who": "gao",
+"text": "ひとりで たべるより、ふたりで たべたほうが おいしいね"
+},
+{
+"key": "sg_nozoku_4",
+"who": "gao",
+"text": "いけに おちたら たいへんだから、さくの うちがわで みよう"
+},
+{
+"key": "sg_pan_4",
+"who": "gao",
+"text": "メロンパンと、あんパンを ひとつずつ ください"
+},
+{
+"key": "sx_pan_4",
+"who": "gao",
+"text": "メロンパンと、あんパンが ひとつずつ ください"
+},
+{
+"key": "sg_maigo_1",
+"who": "gao",
+"text": "ママと はぐれたの？"
+},
+{
+"key": "sq_fukuro",
+"who": "doshin",
+"text": "ふくろは いりますか？"
+},
+{
+"key": "sg_fukuro_1",
+"who": "gao",
+"text": "ふくろは いりません"
+},
+{
+"key": "sg_fukuro_4",
+"who": "gao",
+"text": "ふくろは いりません。この バッグに いれて ください"
+},
+{
+"key": "sg_fukuro_5",
+"who": "gao",
+"text": "じぶんの バッグを もって きたので、ふくろは いりません"
+},
+{
+"key": "sr_jikan",
+"who": "nobbo",
+"text": "あと ごふんで きますよ。えきに いきますよ"
+},
+{
+"key": "sq_tobidashi",
+"who": "chu",
+"text": "ボール、まてー！"
+},
+{
+"key": "sg_tobidashi_5",
+"who": "gao",
+"text": "きゅうに とびだすと くるまに ぶつかるよ。みぎと ひだりを みてね"
+},
+{
+"key": "sg_hanbunko_2",
+"who": "gao",
+"text": "はんぶんこ しよう"
+},
+{
+"key": "sg_hanbunko_3",
+"who": "gao",
+"text": "おかし、はんぶんこ して たべよう"
+},
+{
+"key": "sg_hanbunko_5",
+"who": "gao",
+"text": "いっしょに たべよう。はんぶんこ すると、もっと おいしいよ"
+}
+]
