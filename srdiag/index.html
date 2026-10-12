@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>音声認識しらべ</title>
+<style>
+body{font:16px/1.5 -apple-system,sans-serif;margin:0;padding:16px;background:#FFF8E1;color:#2B2A33}
+h1{font-size:20px;margin:0 0 8px}
+.env{background:#fff;border:2px solid #2B2A33;border-radius:12px;padding:10px;font-size:14px;white-space:pre-wrap}
+button{display:block;width:100%;margin:10px 0;padding:14px;font-size:17px;border-radius:14px;border:3px solid #2B2A33;background:#7BD389;color:#2B2A33}
+button.sub{background:#fff;font-size:15px;padding:10px}
+#log{background:#222;color:#cfe;border-radius:12px;padding:10px;font:13px/1.45 ui-monospace,monospace;white-space:pre-wrap;min-height:120px}
+p{margin:6px 0}
+</style></head><body>
+<h1>音声認識しらべ（iPad用）</h1>
+<p>A→B→C の順に押して、それぞれ「りんご」と言ってください。終わったら「きろくをコピー」。</p>
+<div class="env" id="env"></div>
+<button id="a">A：音声認識だけ</button>
+<button id="b">B：マイクを開けたまま＋音声認識（いまのゲームと同じ）</button>
+<button id="c">C：マイクを閉じてから音声認識</button>
+<button class="sub" id="copy">きろくをコピー</button>
+<div id="log"></div>
+<script>
+const L=document.getElementById("log"),t0=performance.now();
+const log=s=>{L.textContent+=((performance.now()-t0)/1000).toFixed(1)+"s "+s+"\n";};
+const SRC=window.SpeechRecognition||window.webkitSpeechRecognition;
+const standalone=!!navigator.standalone||matchMedia("(display-mode: standalone)").matches;
+document.getElementById("env").textContent=
+ "ホーム画面から開いた: "+(standalone?"はい":"いいえ（Safari）")+
+ "\n音声認識の機能: "+(window.SpeechRecognition?"SpeechRecognition":window.webkitSpeechRecognition?"webkitSpeechRecognition":"なし")+
+ "\naudioSession: "+(navigator.audioSession?navigator.audioSession.type:"なし")+
+ "\n"+navigator.userAgent;
+let stream=null;
+function sr(label){return new Promise(res=>{
+  if(!SRC){log(label+": 音声認識の機能なし");return res();}
+  let r;try{r=new SRC();}catch(e){log(label+": new でエラー "+e);return res();}
+  r.lang="ja-JP";r.interimResults=true;r.continuous=false;
+  ["start","audiostart","soundstart","speechstart","speechend","soundend","audioend","nomatch"].forEach(ev=>r.addEventListener(ev,()=>log(label+": "+ev)));
+  r.onresult=e=>{const o=[];for(const x of e.results)o.push(x[0].transcript+(x.isFinal?"（確定）":""));log(label+": 結果 "+o.join(" / "));};
+  r.onerror=e=>log(label+": エラー "+e.error+(e.message?" "+e.message:""));
+  r.onend=()=>{log(label+": end");clearTimeout(tm);res();};
+  const tm=setTimeout(()=>{log(label+": 10秒たったので止めます");try{r.stop();}catch(e){}},10000);
+  try{r.start();log(label+": start() よんだ");}catch(e){log(label+": start() でエラー "+e);clearTimeout(tm);res();}
+});}
+document.getElementById("a").onclick=()=>sr("A");
+document.getElementById("b").onclick=async()=>{
+  try{if(navigator.audioSession){navigator.audioSession.type="play-and-record";log("B: audioSession="+navigator.audioSession.type);}}catch(e){log("B: audioSession エラー "+e);}
+  if(!stream){try{stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true}});log("B: マイクを開いた（"+stream.getAudioTracks()[0].label+"）");}catch(e){log("B: マイクを開けない "+e.name+" "+e.message);}}
+  await sr("B");
+};
+document.getElementById("c").onclick=async()=>{
+  if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;log("C: マイクを閉じた");}
+  await new Promise(r=>setTimeout(r,500));
+  await sr("C");
+};
+document.getElementById("copy").onclick=async()=>{
+  const txt=document.getElementById("env").textContent+"\n---\n"+L.textContent;
+  try{await navigator.clipboard.writeText(txt);log("（コピーしました）");}catch(e){const ta=document.createElement("textarea");ta.value=txt;document.body.append(ta);ta.select();document.execCommand("copy");ta.remove();log("（コピーしました）");}
+};
+</script>
+</body></html>
