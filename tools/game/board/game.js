@@ -323,7 +323,8 @@ async function moveBy(pc, n) {
 
 /* ---------- サイコロ ---------- */
 const diceBtn = document.getElementById("dice");
-const PIPS = { 1: [[50, 50]], 2: [[28, 28], [72, 72]], 3: [[26, 26], [50, 50], [74, 74]] };
+const PIPS = { 1: [[50, 50]], 2: [[28, 28], [72, 72]], 3: [[26, 26], [50, 50], [74, 74]], 4: [[28, 28], [72, 28], [28, 72], [72, 72]], 5: [[26, 26], [74, 26], [50, 50], [26, 74], [74, 74]], 6: [[28, 24], [72, 24], [28, 50], [72, 50], [28, 76], [72, 76]] };
+const diceMax = () => MODE === "multi" ? 6 : 3; // みんなで あそぶ ときは 1〜6、ひとりの ときは 1〜3（場面を たくさん 練習できるように）
 function drawFace(v) { diceBtn.innerHTML = `<svg viewBox="0 0 100 100" aria-hidden="true">${PIPS[v].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="11" fill="#E8735A" stroke="#2B2A33" stroke-width="4"/>`).join("")}</svg>`; diceBtn.setAttribute("aria-label", `サイコロ ${v}`); }
 drawFace(3);
 function whoosh() {
@@ -370,7 +371,7 @@ function thunk() { // コトン！
 const numPop = el("g", { opacity: 0 }, hudLayer);
 el("circle", { cx: 0, cy: 0, r: 70, fill: "#FFD25E", stroke: INK, "stroke-width": 6 }, numPop);
 const numPopT = el("text", { x: 0, y: 30, "text-anchor": "middle", "font-family": FONT, "font-size": 90, fill: INK }, numPop);
-const NUMS = { 1: "いち！", 2: "に！", 3: "さん！" };
+const NUMS = { 1: "いち！", 2: "に！", 3: "さん！", 4: "よん！", 5: "ご！", 6: "ろく！" };
 function popNumber(v) {
   numPopT.textContent = v; numPop.setAttribute("opacity", 1); const t0 = performance.now();
   const f = () => { const k = (performance.now() - t0) / 1000; const s = k < .25 ? .4 + 2.4 * k + Math.sin(k * 40) * .1 * (1 - k * 4) : 1;
@@ -378,11 +379,11 @@ function popNumber(v) {
 }
 async function rollDice(forced) {
   diceBtn.classList.remove("ready"); let v = 1; whoosh(); playSfx("sfx_rattle");
-  for (let i = 0; i < 12; i++) { v = 1 + rnd(3); drawFace(v); diceBtn.style.transform = `rotate(${(i % 2 ? -1 : 1) * (18 - i) * motion}deg) translateY(${-8 * motion * (1 - i / 12)}%)`; await sleep(45 + i * 13); }
+  for (let i = 0; i < 12; i++) { v = 1 + rnd(diceMax()); drawFace(v); diceBtn.style.transform = `rotate(${(i % 2 ? -1 : 1) * (18 - i) * motion}deg) translateY(${-8 * motion * (1 - i / 12)}%)`; await sleep(45 + i * 13); }
   if (forced) v = forced; drawFace(v); diceBtn.style.transform = `scale(${1 + .12 * motion})`; playSfx("sfx_thunk");
   await sleep(120); diceBtn.style.transform = "";
   // 出た目の数だけ「ぴん」と鳴らす（数を音でも感じられるように）
-  popNumber(v); for (let i = 0; i < v; i++) { const f = [N.C6, N.E5 * 2, N.G5 * 2][i]; later(i * 170, () => blip(f, f * 1.01, .25, "triangle")); }
+  popNumber(v); for (let i = 0; i < v; i++) { const f = [N.C6, N.E5 * 2, N.G5 * 2, N.C6 * 1.5, N.E5 * 3, N.C6 * 2][i]; later(i * 170, () => blip(f, f * 1.01, .25, "triangle")); }
   await sleep(250 + v * 170); return v;
 }
 function waitDice() { return new Promise(res => { diceBtn.disabled = false; diceBtn.classList.add("ready"); diceBtn.onclick = () => { audio(); diceBtn.onclick = null; diceBtn.disabled = true; res(); }; }); }
@@ -924,7 +925,7 @@ function frame(now) {
     if (k >= 1) { tweens.splice(i, 1); w.res(); }
   }
   Object.values(PIECE).forEach(p => { if (p.px != null) place(p, p.px, p.py, p.s0); });
-  if (doshinAsleep && view === "board") { zt -= dt; if (zt < 0) { zt = 1.5; markAbove(P.doshin, "z", { i: zi++ % 3, vx: 30, vy: -50, sway: 10, life: 1.8 }); } }
+  if (doshinAsleep && blockSleeps() && view === "board") { zt -= dt; if (zt < 0) { zt = 1.5; markAbove(P.doshin, "z", { i: zi++ % 3, vx: 30, vy: -50, sway: 10, life: 1.8 }); } }
   visible.forEach(c => { if (!(c === P.doshin && doshinAsleep)) idleTick(c, dt, c.moving || c === speaker || earOn === c || view === "parade"); drawChar(c, dt, false); });
   stepBits(dt); stepMarks(dt); stepEar(now / 1000); stepFx(dt);
 
@@ -972,7 +973,7 @@ async function newGame(opt = {}) {
   await withLoading(() => loadPack(curStage)); // このステージの声を 全部 読みこんでから はじめる
   if (opt.multi) { // みんなで あそぶ
     GS.ok = 0; GS.tasks = 0; sitUsed.clear(); winner = null; winnerPc = null; doshinAsleep = true;
-    drawBoard(); P.doshin.s0 = SLEEPER === "doshin" ? .3 : .24; setPiece(P.doshin, BLOCK); P.doshin.tm.closed = 1e6;
+    drawBoard(); P.doshin.s0 = SLEEPER.startsWith("doshin") ? .3 : .24; setPiece(P.doshin, BLOCK); if (blockSleeps()) P.doshin.tm.closed = 1e6;
     setupMulti(opt.multi); setView("board");
     playLog({ type: "start", multi: opt.multi, stage: curStage });
     return runMulti();
@@ -983,8 +984,8 @@ async function newGame(opt = {}) {
   if (!resume) lapSetup();
   GS.startL = E.L;
   drawBoard(); stT.textContent = "× 0";
-  P.shima.s0 = .22; P.gao.s0 = PIECE_S[RIVAL] || .22; P.doshin.s0 = SLEEPER === "doshin" ? .3 : .24;
-  setPiece(P.shima, "0"); setPiece(P.gao, "0"); setPiece(P.doshin, BLOCK); P.doshin.tm.closed = 1e6;
+  P.shima.s0 = .22; P.gao.s0 = PIECE_S[RIVAL] || .22; P.doshin.s0 = SLEEPER.startsWith("doshin") ? .3 : .24;
+  setPiece(P.shima, "0"); setPiece(P.gao, "0"); setPiece(P.doshin, BLOCK); if (blockSleeps()) P.doshin.tm.closed = 1e6;
   if (resume) {
     const p = SAVE.play;
     const ok = id => NODES[id] ? id : "0"; setPiece(P.shima, ok(p.shima)); setPiece(P.gao, ok(p.gao)); // 盤の形が かわった 古い セーブでも こわれない

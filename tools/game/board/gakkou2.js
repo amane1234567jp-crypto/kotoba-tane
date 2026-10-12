@@ -32,7 +32,8 @@ playIntro = async function (s, h, a) {
   if (STORY[s.id]) await STORY[s.id](cast, line, h); else for (let i = 0; i < s.talk.length; i++) await line(i);
   await sleep(400);
   // 先生が 来て、主人公の ほうを 向く
-  a.dx.t = 0; hold(a, "run", .9); await sleep(1000); playMove(a, "look"); await sleep(500);
+  const tx = h.x + 200 * h.s + 230 + 60 * (a.s - .8), dist = Math.abs(a.x + a.dx.v + 200 * a.s - tx);
+  a.dx.t = tx - (a.x + 200 * a.s); hold(a, "run", .4 + dist / 900); await sleep(400 + dist / 0.9); playMove(a, "nod"); await sleep(400);
 };
 // 先生の 返事の あとの やりとり（あやまる・なかなおり など）
 const resolveBase = resolve;
@@ -118,16 +119,18 @@ const STORY = {
     cl1.remove(); const rb = F(prop("clayrabbit", 880, 830, .9)); markAbove(pyon, "sparkle"); await line(2);
     joy(mii); await line(3);
     await Promise.all([moveProp(rb, 880, 830, 940, 830, 500, .9), moveProp(cat, 1080, 830, 1030, 830, 500, .9)]); joy(pyon); markAbove(pyon, "heart"); await line(4); },
-  async ninjin(c, line) { const { gao, doshin } = c; const d1 = seat(gao, 300), d2 = seat(doshin, 300), F = g => (front().appendChild(g), g), ty = +d1.firstChild.getAttribute("y");
-    const t1 = F(prop("tray", at(gao, 200, 0).x, ty - 6, .7)), t2 = F(prop("tray", at(doshin, 200, 0).x, ty - 6, .7));
-    const cr = [0, 1, 2].map(i => F(prop("carrot2", at(gao, 200, 0).x - 40 + i * 30, ty - 30, .6))); await sleep(500);
-    gao.sadMouth = true; playMove(gao, "no"); await line(0);
-    cr.forEach((g, i) => moveProp(g, at(gao, 200, 0).x - 40 + i * 30, ty - 30, at(gao, 200, 0).x + 80 + i * 14, ty - 26, 500, .6)); await sleep(500);
-    playMove(doshin, "point"); await line(1);
-    gao.sadMouth = false; const p = at(gao, 200, 230); await moveProp(cr[0], at(gao, 200, 0).x + 80, ty - 26, p.x, p.y, 500, .6, 60); cr[0].remove();
-    for (let i = 0; i < 4; i++) later(i * 220, () => { gao.mouthOpen.t = i % 2 ? 0 : .5; }); await line(2); gao.mouthOpen.t = 0;
-    surprise(gao); later(500, () => { joy(gao); markAbove(gao, "sparkle"); }); await line(3);
-    joy(doshin); await line(4); },
+  async ninjin(c, line, h) { const { gao, doshin } = c; // 主人公が にがてな にんじんを たべて みる
+    const dh = seat(h), d1 = seat(gao, 300), d2 = seat(doshin, 300), F = g => (front().appendChild(g), g), ty = +dh.firstChild.getAttribute("y");
+    [h, gao, doshin].forEach(k => F(prop("tray", at(k, 200, 0).x, ty - 6, .7)));
+    const hx = at(h, 200, 0).x, cr = [0, 1, 2].map(i => F(prop("carrot2", hx - 40 + i * 30, ty - 30, .6))); await sleep(500);
+    await line(0);
+    h.sadMouth = true; playMove(h, "no"); cr.forEach((g, i) => moveProp(g, hx - 40 + i * 30, ty - 30, hx + 70 + i * 14, ty - 26, 500, .6)); await sleep(700);
+    gao.eyeX.t = -14; await line(1); gao.eyeX.t = 0;
+    playMove(doshin, "point"); await line(2);
+    h.sadMouth = false; const p = at(h, 200, 230); await moveProp(cr[0], hx + 70, ty - 26, p.x, p.y, 500, .6, 60); cr[0].remove();
+    for (let i = 0; i < 4; i++) later(i * 220, () => { h.mouthOpen.t = i % 2 ? 0 : .5; }); await sleep(1000); h.mouthOpen.t = 0;
+    surprise(h); await sleep(500); h.happyOn = true; markAbove(h, "sparkle"); markAbove(h, "heart", { dx: 80 }); await sleep(800);
+    playMove(gao, "point"); await line(3); },
   async soup(c, line) { const { chu, pyon, doshin } = c; chu.dx.v = chu.dx.t = -120; const tr = prop("tray", 0, 0, .55);
     follow(tr, () => { const q = at(chu, 200, 300); return [q.x, q.y, 0, .55]; }); window.__tray = tr;
     hold(chu, "tiptoe", 2.6); await walk(chu, 150, 1400); await line(0);
@@ -182,7 +185,7 @@ const STORY_END = {
   async taiko(c) { const { doshin } = c; for (let i = 0; i < 6; i++) later(i * 300, () => tap(160 + (i % 3) * 30, .3)); hold(c.pyon, "dance", 1.8); hold(c.chu, "dance", 1.8); await sleep(1800); },
   async enogu(c) { const { chu, gao } = c; await walk(gao, -60, 500); playMove(chu, "crouch"); playMove(gao, "crouch"); hold(chu, "shake", 1.4); hold(gao, "shake", 1.4); await sleep(1400); joy(chu); joy(gao); },
   async nendo(c) { joy(c.pyon); joy(c.mii); await sleep(400); },
-  async ninjin(c) { joy(c.gao); await sleep(400); },
+  async ninjin(c, h) { joy(c.doshin); h.happyOn = false; await sleep(400); },
   async soup(c) { joy(c.chu); await sleep(400); },
   async honsagashi(c) { const { mii, doshin } = c; await walk(doshin, -120, 600); joy(mii); await sleep(400); },
   async oogoe(c) { const { gao } = c; gao.happyOn = true; playMove(gao, "nod"); await sleep(800); },

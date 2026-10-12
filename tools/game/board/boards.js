@@ -200,3 +200,76 @@ STAGE_DEF.gakkou2 = { ground: "#BFE3A6", sky: "#CFEAFB", names: ["きょうし�
   fills: { きょうしつ: "#FFE3B3", おんがくしつ: "#E7DCFA", ずこうしつ: "#FFE0CC", きゅうしょく: "#FFF1B8", としょしつ: "#D7F0D2", たいいくかん: "#F0DDB8" } };
 RIVAL_OF.gakkou2 = "kon";
 RIVAL_TEXT.kon = { go: "いくよっ", huh: "あれ？ ちがった？", thanks: "そっか。ありがとう！", rival: "てんこうせいの こんだよ。がっこうの なかで きょうそうしよう！", rival2: "こんどは まけないよ！", win: "やった、こんの かち！", good: "たのしかったね", next: "つぎも がんばるね" };
+
+/* ================= 盤の しかけ（ステージごと） =================
+   ・とおせんぼ（"4"）：ステージごとに いる人・言う ことばが ちがう（BLOCK_DEF）
+   ・とまると うごく マス（events）：〇マス すすむ／〇マス もどる／スタートに もどる */
+const BLOCK_DEF = {
+  undou: { who: "doshin", sleep: false, intro: ["p_blk_undou", "どしんが たいそうしてて とおれない！"], say: ["blk_undou", "とおして ください"], to: "どしんに いおう",
+    keys: [["とおして", "通して", "とうして"], ["ください", "下さい"]], res: ["rs_undou", "あっ、ごめんね。どうぞ、どうぞ"] },
+  kouen: { who: "kamejii", sleep: false, intro: ["p_blk_kouen", "かめじいが はとに えさを あげてる！"], say: ["blk_kouen", "すみません、とおります"], to: "かめじいに いおう",
+    keys: [["すみません", "済みません"], ["とおります", "通ります", "とうります"]], res: ["rs_kouen", "ほっほ、どうぞ どうぞ"] },
+  omise: { who: "doshinpapa", sleep: false, intro: ["p_blk_omise", "どしんの おとうさんが にもつで たいへんそう！"], say: ["blk_omise", "てつだいましょうか"], to: "どしんの おとうさんに いおう",
+    keys: [["てつだ", "手伝"]], res: ["rs_omise", "ありがとう。もう だいじょうぶ。さきに どうぞ"] },
+  densha: { who: "kamejii", sleep: true, intro: ["p_kame", "かめじいが ねてる！"], say: ["blk_densha", "すみません、とおして ください"], to: "かめじいに いおう",
+    keys: [["すみません", "済みません"], ["とおして", "通して", "とうして"], ["ください", "下さい"]], res: ["rs_densha", "おお、すまんのう。どうぞ"] },
+  gakkou2: { who: "kamejii", sleep: false, intro: ["p_blk_gakkou2", "こうちょうせんせいが いるよ。あいさつ しよう！"], say: ["blk_gakkou2", "おはよう ございます"], to: "こうちょうせんせいに いおう",
+    keys: [["おはよう", "お早う"], ["ござい", "御座い"]], res: ["rs_gakkou2", "ほっほ、おはよう。げんきが いいのう"] },
+};
+Object.entries(BLOCK_DEF).forEach(([st, d]) => SLEEPER_OF[st] = d.who);
+PIECE_S.doshinpapa = .28;
+function blockSleeps() { const d = BLOCK_DEF[curStage]; return d ? d.sleep : true; }
+const blockEventK = blockEvent;
+blockEvent = async function (pc = P.shima) {
+  const d = BLOCK_DEF[curStage]; if (!d) return blockEventK(pc);
+  const dtries = [];
+  await speak(C.pony, d.intro[0], d.intro[1]); surprise(pc);
+  showTask(d.say[1], d.to, 520);
+  for (let a = 0; a < 2; a++) {
+    await speak(C.pony, d.say[0], d.say[1]);
+    setListen(pc, true); const r = await listen(d.keys); setListen(pc, false);
+    dtries.push(`${r.r === "ok" ? "○" : r.r === "part" ? "△" : "×"}${r.heard || ""}`);
+    if (r.r === "ok") { joy(pc); GS.ok++; if (pc.player) pc.player.ok++; break; }
+    if (a === 0) await speak(C.pony, "p_again", "もう いっかい いってみよう");
+  }
+  playLog({ type: "doite", ok: dtries.some(x => x[0] === "○"), tries: dtries, stage: curStage });
+  hideTask(); doshinAsleep = false; delete P.doshin.tm.closed; surprise(P.doshin); await sleep(700);
+  await speak(P.doshin, d.res[0], d.res[1]);
+  P.doshin.tm.run = 1.2;
+  if (MODE === "solo" && P.gao.node === BLOCK) { const [gx, gy] = nodeXY(P.gao, BLOCK); slide(P.gao, gx, gy, .4, .3); }
+  const [ax, ay] = sleeperAway(); await slide(P.doshin, ax, ay, 1.1); P.doshin.node = null;
+};
+/* とまると うごく マス */
+const EVENTS = {
+  undou: { a2: ["fwd", 3, "ev_baton", "バトンを もらった！ 3マス すすむよ"], b3: ["home", 0, "ev_sunaba", "すなに はまっちゃった！ スタートに もどるよ"], m2: ["back", 2, "ev_kutsu", "くつが ぬげちゃった！ 2マス もどるよ"] },
+  kouen: { "5": ["fwd", 2, "ev_kaze", "かぜに のって 2マス すすむよ"], b1: ["home", 0, "ev_ishi", "いしから すべって びしょぬれ！ スタートに もどるよ"], c2: ["back", 2, "ev_boushi", "ぼうしが とんだ！ 2マス もどるよ"] },
+  omise: { a3: ["fwd", 3, "ev_kuji", "くじびきで あたり！ 3マス すすむよ"], b2: ["back", 2, "ev_otsuri", "おつりを わすれた！ 2マス もどるよ"], d1: ["home", 0, "ev_saifu", "おさいふを わすれた！ スタートに もどるよ"] },
+  densha: { a2: ["fwd", 3, "ev_kyuukou", "きゅうこうに のれた！ 3マス すすむよ"], b3: ["back", 2, "ev_juutai", "バスが じゅうたい！ 2マス もどるよ"], d1: ["home", 0, "ev_norisugoshi", "のりすごしちゃった！ スタートに もどるよ"] },
+  gakkou2: { a1: ["fwd", 2, "ev_kaidan", "かいだんを かけあがって 2マス すすむよ"], m2: ["back", 2, "ev_wasuremono", "わすれものを とりに 2マス もどるよ"], d1: ["home", 0, "ev_uwabaki", "うわばきを わすれた！ スタートに もどるよ"] },
+};
+const EV_STYLE = { fwd: ["#7CC36A", n => `+${n}`], back: ["#FF8FA3", n => `−${n}`], home: ["#B9A8D9", () => "もどる"] };
+// 通った マスを おぼえて おく（「もどる」は 来た 道を もどる）
+const hopB = hop;
+hop = async function (pc, id, dur, i = 0) { if (!pc.backing) (pc.trail = pc.trail || []).push(pc.node); return hopB(pc, id, dur, i); };
+const setPieceB = setPiece;
+setPiece = function (pc, id) { pc.trail = []; setPieceB(pc, id); };
+const moveByE = moveBy;
+moveBy = async function (pc, n) { await moveByE(pc, n); if (!winner) await boardEvent(pc); };
+async function boardEvent(pc) {
+  const ev = (EVENTS[curStage] || {})[pc.node]; if (!ev) return;
+  const [type, n, key, text] = ev;
+  await sleep(300); markAbove(pc, type === "fwd" ? "sparkle" : "ex"); if (type === "fwd") chime(); else blip(500, 200, .3, "triangle");
+  showBanner(text.split("！")[0] + (text.includes("！") ? "！" : ""), 1400); await speak(C.pony, key, text);
+  if (type === "fwd") { for (let i = 0; i < n; i++) { const nx = NEXT(pc.node); if (!nx.length) break; const to = nx[0]; await hop(pc, to, .3, i);
+      if (to === GOAL) { if (!winner) { winnerPc = pc; winner = MODE === "multi" ? pc.kind : pc === P.shima ? "child" : "gao"; } return; } } }
+  else if (type === "back") { pc.backing = true; for (let i = 0; i < n; i++) { const to = (pc.trail || []).pop(); if (!to) break; await hop(pc, to, .3, i); } pc.backing = false; }
+  else { pc.trail = []; const [x, y] = nodeXY(pc, "0"); pc.node = "0"; jump(pc, 1); await slide(pc, x, y, 1.2, .8); }
+  await sleep(300);
+}
+// しかけの マスは 色と しるしで 見せる
+const drawBoardE = drawBoard;
+drawBoard = function () {
+  drawBoardE(); const evs = EVENTS[curStage]; if (!evs || !BOARD[curStage]) return;
+  Object.entries(evs).forEach(([id, [type, n]]) => { const [x, y] = NODES[id]; const [c, label] = EV_STYLE[type];
+    el("circle", { cx: x, cy: y, r: 34, fill: c, ...S6(4) }, boardLayer); txt(boardLayer, x, y + (type === "home" ? 7 : 11), label(n), type === "home" ? 20 : 32, { "text-anchor": "middle" }); });
+};
