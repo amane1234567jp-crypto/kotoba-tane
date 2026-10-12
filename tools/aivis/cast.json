@@ -121,6 +121,117 @@
   "g_rival2": {
    "style": "close-shout",
    "into": 1.4
+  },
+  "sq_junban": {
+   "style": "close-shout"
+  },
+  "sq_kakekko": {
+   "style": "close-shout"
+  },
+  "sr_kakekko": {
+   "style": "close-shout"
+  },
+  "sq_sakasama": {
+   "style": "close-shout"
+  },
+  "sq_hashiru": {
+   "style": "close-shout"
+  },
+  "sq_hoomu": {
+   "style": "close-shout"
+  },
+  "sq_shizukani": {
+   "style": "close-shout"
+  },
+  "sq_shitabutsu": {
+   "style": "悲しみ"
+  },
+  "sq_oshite": {
+   "style": "喜び"
+  },
+  "sr_oshite": {
+   "style": "喜び"
+  },
+  "sq_hanbunko": {
+   "style": "悲しみ"
+  },
+  "sr_hanbunko": {
+   "style": "喜び"
+  },
+  "sq_maigo": {
+   "style": "悲しみ"
+  },
+  "sq_tobidashi": {
+   "style": "喜び"
+  },
+  "sr_tobidashi": {
+   "style": "恐怖"
+  },
+  "sr_kiiro": {
+   "style": "驚き"
+  },
+  "sr_botan": {
+   "style": "喜び"
+  },
+  "sr_irete": {
+   "style": "喜び"
+  },
+  "sq_koronda": {
+   "style": "Sad"
+  },
+  "sq_kurakura": {
+   "style": "Sad"
+  },
+  "sr_kurakura": {
+   "style": "ノーマル"
+  },
+  "sr_nozoku": {
+   "style": "ノーマル"
+  },
+  "sq_aisu": {
+   "style": "せつなめ"
+  },
+  "sr_aisu": {
+   "style": "あまあま"
+  },
+  "sq_yoi": {
+   "style": "せつなめ"
+  },
+  "sr_yoi": {
+   "style": "あまあま"
+  },
+  "sq_ouen": {
+   "style": "Heavy"
+  },
+  "sr_ouen": {
+   "style": "Mid"
+  },
+  "sq_unko": {
+   "style": "Mid"
+  },
+  "sr_unko": {
+   "style": "Surprise"
+  },
+  "sr_oshiro": {
+   "style": "Mid"
+  },
+  "sq_sunanome": {
+   "into": 1.35
+  },
+  "sr_sunanome": {
+   "into": 1.35
+  },
+  "sq_erabu": {
+   "into": 1.35
+  },
+  "sr_erabu": {
+   "into": 1.35
+  },
+  "sq_sagasu": {
+   "into": 1.35
+  },
+  "sr_sagasu": {
+   "into": 1.35
   }
  }
 }
