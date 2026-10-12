@@ -573,18 +573,13 @@ async function gaoTask(before) {
 }
 
 /* ---------- 番の流れ ---------- */
-let childShouldWin = true;
+let gaoEasy = false; // 2かい つづけて まけたあとの 回だけ true（がおの サイコロが すこし 小さめ）
 function gaoRoll() {
-  const g = idx(P.gao.node), k = idx(P.shima.node); let r = 1 + rnd(3);
-  if (childShouldWin) {
-    const lead = GOAL_IDX - k > 5 ? 1 : -1;
-    const cap = Math.min(GOAL_IDX - 1 - g, Math.max(0, k + lead - g));
-    r = Math.min(r, cap);
-  } else {
-    if (k + 1 - g > r) r = Math.min(3, k + 1 - g);
-    if (GOAL_IDX - g <= 3) r = GOAL_IDX - g;
-  }
-  return r;
+  // がおも ふつうに サイコロ（1〜3）。追いこしても よい。
+  // 先に ふる・がおが教わると もどる ぶん、子どもが 5かい中 だいたい 3〜4かい 勝つ（5:2 くらい）。
+  // 2かい つづけて まけたときだけ、つぎの 回は がおの サイコロを すこし 小さめにする。
+  if (gaoEasy) { const w = [2, 2, 1], t = rnd(5); return t < w[0] ? 1 : t < w[0] + w[1] ? 2 : 3; }
+  return 1 + rnd(3);
 }
 async function childTurn(first) {
   setTurn("child"); await sleep(300);
@@ -599,8 +594,7 @@ async function gaoTurn() {
   await speak(P.gao, "g_go", "いくぞ！");
   const r = gaoRoll(); const shown = await rollDice(Math.max(1, r));
   await speak(C.pony, "n" + shown, NUMS[shown]);
-  if (r <= 0) { P.gao.tm.run = .3; await sleep(300); flop(P.gao); markAbove(P.gao, "drop"); await sleep(1300); return; }
-  const before = P.gao.node; await moveBy(P.gao, r); await sleep(200);
+    const before = P.gao.node; await moveBy(P.gao, r); await sleep(200);
   if (winner) return;
   if (kindOf(P.gao.node) === "normal") await gaoSit(before);
 }
@@ -690,7 +684,7 @@ async function countLine(g, x, y, label, to, unit, from = 0) {
   return t;
 }
 async function ending() {
-  const childWon = winner === "child"; const rec = store.get(); rec.games = (rec.games || 0) + 1; rec.wins = (rec.wins || 0) + (childWon ? 1 : 0); rec.stickers = (rec.stickers || 0) + stickers; store.set(rec);
+  const childWon = winner === "child"; const rec = store.get(); rec.games = (rec.games || 0) + 1; rec.wins = (rec.wins || 0) + (childWon ? 1 : 0); rec.lost = childWon ? 0 : (rec.lost || 0) + 1; rec.stickers = (rec.stickers || 0) + stickers; store.set(rec);
   const winP = childWon ? P.shima : P.gao;
   // 1) 盤の上で：フラッシュ＋どーん＋紙ふぶき大砲
   flash(); fanfare(); const title = slam("ゴール！！", 470, 210); cannon(60, 1); cannon(1540, -1);
@@ -866,6 +860,7 @@ function preloadVoices(keys) { keys.forEach(k => AUD[k] && voiceBuf(k)); }
 async function playVoice(c, key, text, frac = 1) {
   audio(); const buf = AUD[key] ? await voiceBuf(key) : null;
   speaker = c; say(c, text);
+  if (!AUD[key]) { await sleep(700 + (text || "").length * 110); speaker = null; return; } // 声が ないときは 文字だけ しばらく 見せる
   if (!buf) { speaker = null; await speakEl(c, key, text); return; } // 予備：前のやり方で鳴らす
   const s = ctx.createBufferSource(); s.buffer = buf;
   const dur = buf.duration * frac;
@@ -909,9 +904,10 @@ function frame(now) {
    セーブは毎回の「きみの ばん」の始めに自動で。全部のステージをクリアすると、むずかしくなった2しゅうめへ。 */
 const STAGES = [
   { id: "kousha", name: "こうしゃ", icon: "🏫", ready: true },
-  { id: "undou", name: "うんどうじょう", icon: "⚽", ready: false },
-  { id: "kouen", name: "こうえん", icon: "🌳", ready: false },
-  { id: "omise", name: "おみせ", icon: "🛒", ready: false },
+  { id: "undou", name: "うんどうじょう", icon: "⚽", ready: true },
+  { id: "kouen", name: "こうえん", icon: "🌳", ready: true },
+  { id: "omise", name: "おみせ", icon: "🛒", ready: true },
+  { id: "densha", name: "でんしゃとバス", icon: "🚃", ready: true },
 ];
 const SAVE_KEY = "kotoba-tane-save";
 const SAVE = (() => { try { return JSON.parse(localStorage.getItem(SAVE_KEY)) || null; } catch (e) { return null; } })() || { v: 1, lap: 1, cleared: {}, E: null, play: null };
@@ -921,7 +917,7 @@ let curStage = "kousha";
 const lapClears = () => SAVE.cleared[SAVE.lap] || (SAVE.cleared[SAVE.lap] = []);
 function snapshot() {
   SAVE.E = { ...E };
-  SAVE.play = { stage: curStage, lap: SAVE.lap, shima: P.shima.node, gao: P.gao.node, doshinAsleep, sitUsed: [...sitUsed], GS: { ...GS }, childShouldWin, t: Date.now() };
+  SAVE.play = { stage: curStage, lap: SAVE.lap, shima: P.shima.node, gao: P.gao.node, doshinAsleep, sitUsed: [...sitUsed], GS: { ...GS }, gaoEasy, t: Date.now() };
   saveNow();
 }
 function markClear() { // クリアを記録。全部クリアしたら つぎの しゅうへ（true を返す）
@@ -933,13 +929,15 @@ function markClear() { // クリアを記録。全部クリアしたら つぎ�
 function lapSetup() { // しゅうが進むほど むずかしく：はじめから長めの答え・お手本は半分から
   if (SAVE.lap >= 2) { E.L = Math.max(E.L, SAVE.lap >= 3 ? 8 : 5); }
 }
-function newGame(opt = {}) {
+async function newGame(opt = {}) {
   const resume = !!(opt.resume && SAVE.play);
   E.h = 1; // お手本はいつも全部聞かせる
   if (opt.stage) curStage = opt.stage; else if (resume) curStage = SAVE.play.stage;
+  applyStage(curStage);
+  await withLoading(() => loadPack(curStage)); // このステージの声を 全部 読みこんでから はじめる
   GS.ok = 0; GS.tasks = 0; sitUsed.clear();
   winner = null; doshinAsleep = true; stickers = 0; got.clear(); abeLeft = ABE.slice(); E.h = Math.max(1, E.h);
-  const rec = store.get(); childShouldWin = (rec.games || 0) < 3 ? true : Math.random() < (SAVE.lap >= 2 ? .6 : .75);
+  const rec = store.get(); gaoEasy = (rec.lost || 0) >= 2;
   if (!resume) lapSetup();
   GS.startL = E.L;
   drawBoard(); stT.textContent = "× 0";
@@ -948,10 +946,10 @@ function newGame(opt = {}) {
   if (resume) {
     const p = SAVE.play;
     setPiece(P.shima, p.shima); setPiece(P.gao, p.gao);
-    doshinAsleep = p.doshinAsleep; (p.sitUsed || []).forEach(x => sitUsed.add(x)); Object.assign(GS, p.GS || {}); childShouldWin = p.childShouldWin;
+    doshinAsleep = p.doshinAsleep; (p.sitUsed || []).forEach(x => sitUsed.add(x)); Object.assign(GS, p.GS || {}); gaoEasy = !!p.gaoEasy;
     if (!doshinAsleep) { delete P.doshin.tm.closed; P.doshin.node = null; P.doshin.px = 1000; P.doshin.py = 792; }
   }
-  setView("board"); showEngine(null, (childShouldWin ? "こんかいは きみが勝つ回" : "こんかいは がおが本気の回") + `／${SAVE.lap}しゅうめ`);
+  setView("board"); showEngine(null, (gaoEasy ? "がお すこし ゆっくり（2れんぱいの あと）" : "がおも ふつうの サイコロ") + `／${SAVE.lap}しゅうめ`);
   playLog({ type: "start", resume, lap: SAVE.lap, L: E.L, stage: curStage });
   run({ resume, intro: !resume });
 }
@@ -993,7 +991,7 @@ async function micOpen() {
 function boot() { // 最初のタップで音を使えるようにする
   if (started) return; started = true;
   micAlwaysOn(); audio(); loadSfx(); bgmStart();
-  preloadVoices(Object.keys(AUD).filter(k => !/^k\d|^gk/.test(k)));
+  preloadVoices(Object.keys(AUD).filter(k => !/^k\d|^gk/.test(k) && !/^(sq|sr|sa|sg|sx|sw)_/.test(k))); // 場面の声は ステージを はじめるときに（loadPack）
 }
 function micBadge() { const b = document.getElementById("micBadge"); if (b) b.textContent = MIC.stream ? "🎤 マイク オン" : (SRC ? "🎤 マイク：がめんを タップすると オン" : ""); }
 function showMenu() {
@@ -1072,8 +1070,8 @@ function showLog() {
 .start.menu .mbig{font:400 clamp(22px,3.4vw,34px) var(--display);padding:10px 38px;border-radius:999px;border:6px solid #2B2A33;background:#7BD389;color:#2B2A33;cursor:pointer;box-shadow:0 6px 0 #2B2A33;display:grid;gap:0;justify-items:center}
 .msub{font:400 clamp(13px,1.7vw,17px) var(--display)}
 .mhead{font:400 clamp(15px,2vw,20px) var(--display);color:#6b5e4f}
-.mstages{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:100%}
-@media (max-width:640px){.mstages{grid-template-columns:repeat(2,1fr)}}
+.mstages{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;width:100%}
+@media (max-width:760px){.mstages{grid-template-columns:repeat(3,1fr)}}
 .start.menu .mst{position:relative;display:grid;justify-items:center;gap:4px;padding:12px 4px 10px;border-radius:22px;border:5px solid #2B2A33;background:#FFF3D6;cursor:pointer;font-family:var(--display);color:#2B2A33;box-shadow:0 6px 0 #2B2A33}
 .mst .mno{position:absolute;left:10px;top:4px;font-size:17px}
 .mst .mico{font-size:clamp(30px,4.4vw,46px);line-height:1.15}

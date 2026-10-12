@@ -1,0 +1,33 @@
+"""ステージごとの声のパック（packs/<ステージ>.json）を作る: python3 tools/game/make_packs.py
+声は tools/game/stage_audio/<key>.mp3（ゲーム用に そろえた もの）。ゲームは ステージを はじめるときに パックを まとめて 読みこむ。
+  ぽにーのお手本 sa_*   : VOICEVOX 調整版（scratch の pony_gen.py で作り、ここへ置く）
+  相手・がお sq_/sr_/sg_/sx_ : AivisSpeech（GitHub Actions → aivis-out ブランチ → 変換してここへ）"""
+import base64, json, sys
+from pathlib import Path
+G = Path(__file__).resolve().parent; R = G.parents[1]
+A = G / "stage_audio"; OUT = R / "packs"; OUT.mkdir(exist_ok=True)
+S = json.loads((G / "sit/sits.json").read_text())
+def keys_of(s):
+    new = s["stage"] != "kousha" or s["id"] == "unko"
+    ks = []
+    if new: ks += [f"sq_{s['id']}", f"sr_{s['id']}"]
+    for i, t in enumerate(s["tiers"]):
+        if not new and i < 4: continue
+        ks.append(f"sa_{s['id']}_{i}")
+        if s.get("gaoOk"):
+            ks.append(f"sg_{s['id']}_{i}")
+            if t.get("wrong"): ks.append(f"sx_{s['id']}_{i}")
+    return ks
+missing = []
+for st in ["kousha", "undou", "kouen", "omise", "densha"]:
+    pack = {}
+    for s in S:
+        if s["stage"] != st: continue
+        for k in keys_of(s):
+            p = A / f"{k}.mp3"
+            if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
+            else: missing.append(k)
+    (OUT / f"{st}.json").write_text(json.dumps(pack, separators=(",", ":")))
+    print(st, len(pack), round((OUT / f"{st}.json").stat().st_size / 1e6, 2), "MB")
+print("missing", len(missing), missing[:20])
+if missing and "--strict" in sys.argv: sys.exit(1)

@@ -6,12 +6,13 @@ function clearMarks() { marks.forEach(k => k.g.remove()); marks.length = 0; if (
    → 4) 相手がこたえ、出てきた物の名前（ばんそうこう など）を絵と声で見せる。
    こたえの長さ・文法はレベルで4段（tier）に変わる。 */
 const sitUsed = new Set();
-const tierOf = () => E.L <= 2 ? 0 : E.L <= 4 ? 1 : E.L <= 7 ? 2 : 3;
+// レベルで 4段（0〜3）。2しゅうめは 1段、3しゅうめ からは 2段 ずらして もっと むずかしく（最大 6段め）
+const tierOf = () => Math.min(5, (E.L <= 2 ? 0 : E.L <= 4 ? 1 : E.L <= 7 ? 2 : 3) + Math.min(2, Math.max(0, (SAVE.lap || 1) - 1)));
 function pickSit(place, forGao) {
-  const okFor = s => !forGao || s.gaoOk;
+  const okFor = s => (!forGao || s.gaoOk) && (s.stage || "kousha") === curStage;
   let pool = SITS.filter(s => okFor(s) && s.place === place && !sitUsed.has(s.id));
   if (!pool.length) pool = SITS.filter(s => okFor(s) && !sitUsed.has(s.id));
-  if (!pool.length) { sitUsed.clear(); pool = SITS.filter(s => okFor(s) && s.place === place); if (!pool.length) pool = SITS.filter(okFor); }
+  if (!pool.length) { [...sitUsed].forEach(id => { const x = SITS.find(s => s.id === id); if (x && (x.stage || "kousha") === curStage) sitUsed.delete(id); }); pool = SITS.filter(s => okFor(s) && s.place === place && !sitUsed.has(s.id)); if (!pool.length) pool = SITS.filter(s => okFor(s) && !sitUsed.has(s.id)); if (!pool.length) pool = SITS.filter(okFor); }
   const s = pool[rnd(pool.length)]; sitUsed.add(s.id); return s;
 }
 const ASK_ON_STAGE = new Set(["door", "arrive", "stuck", "scared", "jumpdown", "loud", "borrow", "slow"]); // 最初から相手がその場にいる場面
@@ -126,14 +127,16 @@ const INTRO = {
     h.dx.t = 0; surprise(h); await sleep(700);
   },
   async heavy(h, a) {
-    const box = el("g", {}, propG);
-    el("rect", { x: -70, y: -50, width: 140, height: 100, rx: 8, fill: "#C98A4B", stroke: INK, "stroke-width": 6 }, box);
-    el("path", { d: "M-70 -8 H70", stroke: "#F2D9A8", "stroke-width": 14 }, box);
-    let carrier = a; box.carrier = () => carrier; window.__setCarrier = c => carrier = c;
-    let bx = null, by = null;
-    follow(box, () => { const c = carrier, p = headTop(c), tx = p.x, ty = p.y - 70;
-      if (bx === null) { bx = tx; by = ty; } bx += (tx - bx) * .12; by += (ty - by) * .12; return [bx, by, Math.sin(performance.now() / 160) * 4]; });
-    enter(a, 500); await sleep(900); hold(a, "shiver", 3); a.squash.t = .85;
+    // ちゅうが 箱を 2つ かさねて はこんでいる（「はんぶん もつ」と 1つ わたせるように）
+    const mkBox = (fill) => { const box = el("g", {}, propG);
+      el("rect", { x: -70, y: -50, width: 140, height: 100, rx: 8, fill, stroke: INK, "stroke-width": 6 }, box);
+      el("path", { d: "M-70 -8 H70", stroke: "#F2D9A8", "stroke-width": 14 }, box); return box; };
+    const boxes = [{ g: mkBox("#C98A4B"), c: a, n: 0 }, { g: mkBox("#D9A066"), c: a, n: 1 }];
+    window.__boxes = boxes;
+    boxes.forEach((b, i) => { let bx = null, by = null;
+      follow(b.g, () => { const c = b.c, p = headTop(c), tx = p.x, ty = p.y - 70 - b.n * 96;
+        if (bx === null) { bx = tx; by = ty; } bx += (tx - bx) * .12; by += (ty - by) * .12; return [bx, by, Math.sin(performance.now() / 160 + i) * (3 + i * 3)]; }); });
+    enter(a, 500); await sleep(900); hold(a, "shiver", 3); a.squash.t = .8;
     for (let i = 0; i < 6; i++) later(i * 380, () => markAbove(a, "drop", { dx: i % 2 ? 60 : -60, vy: 60 }));
     enter(h, -600); await sleep(1100); playMove(h, "look"); markAbove(h, "ex"); await sleep(900);
   },
@@ -385,7 +388,10 @@ const POST = {
     const go = walk(h, 330, 1300); const f = front(); await go; tween(400, k => { h.root.style.opacity = (1 - k).toFixed(2); f.style.opacity = (1 - k).toFixed(2); }); await sleep(450); h.root.style.display = "none"; h.root.style.opacity = ""; },
   async butsukaru(h, a) { playMove(a, "bow"); await sleep(1300); a.lean.t = 0; await walk(a, 700, 2200); /* あやまって、ろうかを歩いて行く */ },
   async tearai(h, a) { await walk(h, 300, 1000); RESOLVE.soap(h); await sleep(2000); /* 手洗い場へ行って洗う */ },
-  async tetsudau(h, a) { if (window.__setCarrier) window.__setCarrier(h); await sleep(900); climb(h, 650, 2600); await climb(a, 650, 2600); /* 箱を持って いっしょに のぼる */ },
+  async tetsudau(h, a) { // 上の 箱を 1つ うけとって、1つずつ もって いっしょに のぼる
+    await walk(h, 330, 900);
+    const bs = window.__boxes; if (bs) { bs[1].c = h; bs[1].n = 0; } a.squash.t = 1; joy(a); await sleep(900);
+    climb(h, 650, 2600); await climb(a, 650, 2600); },
   async ohayou(h, a) { playMove(a, "nod"); wave(h); await sleep(700); await walk(h, 1300, 1800); /* 校舎へ入っていく */ },
   async doro(h, a) { playMove(h, "crouch"); hand(h, prop("rag", 0, 0, .3), .3, 0); await sleep(600);
     propG.querySelectorAll(".print").forEach(e => tween(1400, k => e.setAttribute("opacity", (.8 * (1 - k)).toFixed(2)))); hold(h, "shake", 1.4); await sleep(1500); },
@@ -398,7 +404,11 @@ const POST = {
   async dekkai(h, a) { const s = window.__bigshoe; if (s) { const p = world(h, 200, 395); s.remove(); const g = prop("slipper", p.x, p.y, 1.1 * h.s, 90); g.querySelectorAll("path").forEach(e => e.setAttribute("fill", "#B9824A"));
       const q = world(a, 200, 560); await tween(800, k => g.setAttribute("transform", `translate(${(p.x + (q.x - p.x) * k).toFixed(0)} ${(p.y + (q.y - p.y) * k - Math.sin(k * Math.PI) * 150).toFixed(0)}) rotate(${90 + 360 * k}) scale(${(1.1 * h.s).toFixed(2)})`)); g.remove(); }
     SPECIAL.doshin(a); joy(h); await sleep(600); },
-  locker(h, a) { boom(.5); noise(.2, 900, .6); flop(a); later(150, () => flop(h)); if (window.__locker) window.__locker.remove(); return sleep(900); },
+  async locker(h, a) { // まるシマも そばへ行き、がおの うしろから いっしょに ひっぱる
+    await walk(h, 420, 1000); h.lean.t = 18; h.armR.t = 80; h.armL.t = 80; hold(h, "shiver", 1.4); hold(a, "shiver", 1.4); await sleep(1400);
+    boom(.5); noise(.2, 900, .6); h.lean.t = 0; h.armR.t = 0; h.armL.t = 0; a.lean.t = 0; a.armL.t = 0; a.armR.t = 0;
+    flop(a); later(150, () => flop(h)); if (window.__locker) { const lk = window.__locker; tween(500, k => lk.setAttribute("transform", `translate(${(-140 * k).toFixed(0)} 0)`)); }
+    return sleep(900); },
   async kowai(h, a) { await walk(h, 380, 900); a.happyOn = true; joy(a); await sleep(500); climb(h, 700, 2600); await climb(a, 700, 2600); /* てを つないで いっしょに のぼる */ },
   async osaki(h, a) { playMove(h, "bow"); await sleep(1200); await climb(h, 1100, 2400); /* 先に階段をのぼっていく */ },
   async tobioriru(h, a) { await climb(a, -320, 1600); a.y += 230 - 320 * .72; thud(); flop(a); markAbove(a, "drop"); await sleep(900); /* ゆっくり下りたのに、さいごで ころぶ */ },
