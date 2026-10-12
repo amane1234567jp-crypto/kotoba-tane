@@ -366,7 +366,8 @@ const SRC = window.SpeechRecognition || window.webkitSpeechRecognition;
 let srUsable = !!SRC;
 const srEl = document.getElementById("srState"), heardEl = document.getElementById("heard"), engEl = document.getElementById("engine");
 const devB = { ok: document.getElementById("d-ok"), part: document.getElementById("d-part"), none: document.getElementById("d-none") };
-function srStatus(s) { srEl.textContent = "音声認識: " + ({ ready: "つかえます（はじめるとマイクの許可を聞かれます）", on: "きいています", idle: "まっています", off: "このページでは使えません。判定は下のボタンで行います" }[s] || s); }
+const fbB = { ok: document.getElementById("f-ok"), part: document.getElementById("f-part"), none: document.getElementById("f-none") };
+function srStatus(s) { if (s === "off") document.body.classList.add("srfail"); srEl.textContent = "音声認識: " + ({ ready: "つかえます（はじめるとマイクの許可を聞かれます）", on: "きいています", idle: "まっています", off: "このページでは使えません。判定は下のボタンで行います" }[s] || s); }
 srStatus(SRC ? "ready" : "off");
 const kata2hira = s => s.replace(/[ァ-ヶ]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60));
 const norm = s => kata2hira(s).replace(/[\s、。！？!?,.・「」]/g, "");
@@ -380,7 +381,7 @@ function hear(onText, ms) {
     try {
       rec = new SRC(); rec.lang = "ja-JP"; rec.interimResults = true; rec.maxAlternatives = 3; rec.continuous = false;
       rec.onresult = e => { const out = []; for (let i = 0; i < e.results.length; i++) for (let j = 0; j < e.results[i].length; j++) out.push(e.results[i][j].transcript); onText(out); };
-      rec.onerror = e => { if (e.error !== "no-speech" && e.error !== "aborted") { srUsable = false; srStatus("off"); } };
+      rec.onerror = e => { if (e.error !== "no-speech" && e.error !== "aborted") { srUsable = false; srStatus("off"); playLog({ type: "srerr", error: e.error }); } };
       rec.onend = () => { rec = null; if (!stopped && srUsable && performance.now() < endAt - 700) start(); else { srStatus(srUsable ? "idle" : "off"); finish(); } };
       rec.start(); srStatus("on");
     } catch (err) { srUsable = false; srStatus("off"); finish(); }
@@ -388,8 +389,8 @@ function hear(onText, ms) {
   start();
   return { done, stop() { if (stopped) return; stopped = true; try { rec && rec.abort(); } catch (e) { } resolveDone(); } };
 }
-function devOn(cb) { Object.entries(devB).forEach(([k, b]) => { b.disabled = false; b.onclick = () => cb(k, "（確認ボタン）"); }); }
-function devOff() { Object.values(devB).forEach(b => { b.disabled = true; b.onclick = null; }); }
+function devOn(cb) { [devB, fbB].forEach(g => Object.entries(g).forEach(([k, b]) => { if (!b) return; b.disabled = false; b.onclick = () => cb(k, "（確認ボタン）"); })); }
+function devOff() { [devB, fbB].forEach(g => Object.values(g).forEach(b => { if (!b) return; b.disabled = true; b.onclick = null; })); }
 function listen(groups, ms = 7000) {
   return new Promise(resolve => {
     let best = 0, heard = "", fin = false;
@@ -1043,6 +1044,7 @@ function logText() {
     : x.type === "doite" ? `${d(x.t)} どしん「どいてください」 ${x.ok ? "○" : "×"} 聞きとり: ${x.tries.join(" / ")}`
     : x.type === "goal" ? `${d(x.t)} ゴール ${x.winner === "child" ? "かち" : "まけ"}（${x.lap}しゅうめ、レベル${x.L}）`
     : x.type === "start" ? `${d(x.t)} ── ${x.resume ? "つづきから" : "はじめから"}（${x.lap}しゅうめ、レベル${x.L}）`
+    : x.type === "srerr" ? `${d(x.t)} ⚠ 音声認識が使えない（${x.error}）→ 判定ボタンに切りかえ`
     : `${d(x.t)} ${JSON.stringify(x)}`);
   return { sum, text: "ことばのたね あそんだきろく\n" + sum + "\n\n" + lines.join("\n") };
 }

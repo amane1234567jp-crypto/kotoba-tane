@@ -41,6 +41,14 @@ button:focus-visible { outline: 4px solid var(--focus); outline-offset: 3px }
 body.kid header, body.kid .dev { display: none }
 body.kid .wrap { padding-block: 8px 12px; max-width: min(1100px, calc((100dvh - 40px) * 1.6)) }
 body.kid { -webkit-touch-callout: none }
+.srfb { display: none; border: 3px solid #2B2A33; background: #FFF3D6; border-radius: 18px; padding: 10px 14px; gap: 6px }
+body.kid.srfail .srfb { display: grid }
+.srfb p { margin: 0 }
+.srfb-msg { font-weight: 700; font-size: 15px }
+.srfb-hint { font-size: 12px; color: var(--muted) }
+.srfb-row { display: flex; flex-wrap: wrap; gap: 10px }
+.srfb-row button { flex: 1 1 140px; font: 700 18px var(--body); min-height: 52px; border-radius: 14px; border: 3px solid #2B2A33; background: #fff; color: #2B2A33; cursor: pointer }
+.srfb-row button:disabled { opacity: .35; cursor: default }
 </style>
 <div class="wrap">
   <header>
@@ -52,6 +60,15 @@ body.kid { -webkit-touch-callout: none }
     <button class="dice" id="dice" type="button" aria-label="サイコロをふる" disabled></button>
     <div class="start" id="startBox"><button id="startBtn" type="button">はじめる</button></div>
   </div>
+  <section class="srfb" id="srFallback" aria-label="おとなの かたへ">
+    <p class="srfb-msg">おとなの かたへ：この たんまつでは 音声認識が つかえません。お子さんが 言えたかどうか、ボタンで えらんでください。</p>
+    <div class="srfb-row" role="group" aria-label="判定">
+      <button id="f-ok" type="button" disabled>⭕ 言えた</button>
+      <button id="f-part" type="button" disabled>🔺 一部だけ</button>
+      <button id="f-none" type="button" disabled>✖ 言えなかった</button>
+    </div>
+    <p class="srfb-hint">声で あそぶには：設定の「Siri」をオン、「プライバシーとセキュリティ」→「音声認識」で Safari をオンにして、Safari を閉じてから 開きなおしてください。</p>
+  </section>
   <section class="dev" aria-label="試作の確認用">
     <h2>試作の確認用（本番の画面にはありません）</h2>
     <div class="row">
