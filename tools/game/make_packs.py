@@ -7,6 +7,7 @@ from pathlib import Path
 G = Path(__file__).resolve().parent; R = G.parents[1]
 A = G / "stage_audio"; OUT = R / "packs"; OUT.mkdir(exist_ok=True)
 S = json.loads((G / "sit/sits.json").read_text())
+RIVAL_OF = {"kousha": "gao", "undou": "pyon", "kouen": "mii", "omise": "chu", "densha": "doshin"}
 def keys_of(s):
     new = s["stage"] != "kousha" or s["id"] == "unko"
     ks = []
@@ -14,7 +15,7 @@ def keys_of(s):
     for i, t in enumerate(s["tiers"]):
         if not new and i < 4: continue
         ks.append(f"sa_{s['id']}_{i}")
-        if s.get("gaoOk"):
+        if s.get("gaoOk") and s["asker"] != RIVAL_OF[s["stage"]]:
             ks.append(f"sg_{s['id']}_{i}")
             if t.get("wrong"): ks.append(f"sx_{s['id']}_{i}")
     return ks

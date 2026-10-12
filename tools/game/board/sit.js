@@ -7,9 +7,12 @@ function clearMarks() { marks.forEach(k => k.g.remove()); marks.length = 0; if (
    こたえの長さ・文法はレベルで4段（tier）に変わる。 */
 const sitUsed = new Set();
 // レベルで 4段（0〜3）。2しゅうめは 1段、3しゅうめ からは 2段 ずらして もっと むずかしく（最大 6段め）
-const tierOf = () => Math.min(5, (E.L <= 2 ? 0 : E.L <= 4 ? 1 : E.L <= 7 ? 2 : 3) + Math.min(2, Math.max(0, (SAVE.lap || 1) - 1)));
-function pickSit(place, forGao) {
-  const okFor = s => (!forGao || s.gaoOk) && (s.stage || "kousha") === curStage;
+const tierOf = () => Math.min(5, (E.L <= 2 ? 0 : E.L <= 4 ? 1 : E.L <= 7 ? 2 : 3) + (MODE === "multi" ? 0 : Math.min(2, Math.max(0, (SAVE.lap || 1) - 1))));
+// heroKind: こたえる キャラ（まるシマ・ライバル・みんなモードの人）。相手が じぶんと 同じ場面や、がお・ちゅうが 出てくる場面を よける
+function pickSit(place, heroKind = "shima") {
+  const okFor = s => (s.stage || "kousha") === curStage && s.asker !== heroKind
+    && (heroKind === "shima" || (MODE === "solo" ? s.gaoOk : (heroKind !== "gao" || s.gaoOk)))
+    && !(heroKind === "chu" && s.intro === "tag");
   let pool = SITS.filter(s => okFor(s) && s.place === place && !sitUsed.has(s.id));
   if (!pool.length) pool = SITS.filter(s => okFor(s) && !sitUsed.has(s.id));
   if (!pool.length) { [...sitUsed].forEach(id => { const x = SITS.find(s => s.id === id); if (x && (x.stage || "kousha") === curStage) sitUsed.delete(id); }); pool = SITS.filter(s => okFor(s) && s.place === place && !sitUsed.has(s.id)); if (!pool.length) pool = SITS.filter(s => okFor(s) && !sitUsed.has(s.id)); if (!pool.length) pool = SITS.filter(okFor); }
@@ -27,8 +30,9 @@ function setSitView(s, heroKind) {
   const hero = C[heroKind], ask = C[s.asker];
   [C.pony, C.shima, hero, ask].forEach(resetChar);
   place(C.pony, 120, 975, .46); show(C.pony);
-  if (heroKind === "gao") { place(C.shima, 320, 975, .55); show(C.shima); place(hero, 650, 975, .9); }
-  else place(hero, 600, 975, .88);
+  const HS = { shima: .88, gao: .9, pyon: .86, mii: .86, chu: .42, doshin: 1.35, meebaa: .86, kamejii: .86 };
+  if (MODE === "solo" && heroKind !== "shima") { place(C.shima, 320, 975, .55); show(C.shima); place(hero, 650, 975, HS[heroKind] || .9); }
+  else place(hero, 600, 975, HS[heroKind] || .88);
   show(hero);
   const [ax, as] = ASK_AT[s.asker];
   if (atDoor) { place(ask, 930, 770, .55); } // ドアの向こうに立っている（ドアが開くまで見せない）
@@ -215,9 +219,9 @@ async function resolve(s, h, a, ok) {
   else if (RESOLVE[s.item]) await RESOLVE[s.item](h, a); else if (ok) (a.kind === "kamejii" ? playMove(a, "nod") : SPECIAL[a.kind](a));
   await sleep(500); // 最後の「おぼえる物カード」は出さない（ややこしいので）
 }
-async function runSit(place) {
-  const s = pickSit(place, false), ti = tierOf(), t = s.tiers[ti];
-  const { hero: h, ask: a } = setSitView(s, "shima");
+async function runSit(place, heroKind = "shima") {
+  const s = pickSit(place, heroKind), ti = tierOf(), t = s.tiers[ti];
+  const { hero: h, ask: a } = setSitView(s, heroKind);
   showEngine({ no: s.id, main: t.a }, `場面「${s.id}」こたえの段 ${ti + 1}/4`);
   await playIntro(s, h, a);
   await askQ(s, h, a);
@@ -234,7 +238,7 @@ async function runSit(place) {
     if (r.r === "part") { playMove(h, "think"); await speak(C.pony, "p_close", "おしい！"); } else { playMove(h, "think"); await sleep(600); }
     if (n < 2) { hh = 1; await speak(C.pony, "p_again", "もう いっかい いってみよう"); }
   }
-  playLog({ type: "scene", id: s.id, tier: ti + 1, L: L0, ok, answer: t.a, tries, sec: Math.round((performance.now() - t0) / 1000) });
+  playLog({ type: "scene", id: s.id, tier: ti + 1, L: L0, ok, answer: t.a, tries, sec: Math.round((performance.now() - t0) / 1000), ...(MODE === "multi" ? { who: NAMES[heroKind] } : {}) });
   const up = grade(ok && n === 0); GS.tasks++; if (ok) GS.ok++;
   if (!ok) { await speak(C.pony, "p_together", "いっしょに いおうね"); await speak(C.pony, `sa_${s.id}_${ti}`, t.a); playMove(h, "nod"); await sleep(600); }
   hideTask();
@@ -248,15 +252,15 @@ async function runSit(place) {
 
 /* ---------- がおの番の場面（ときどき言いまちがえる） ---------- */
 async function gaoSit(before) {
-  const s = pickSit(zoneOf(P.gao.node), true), ti = tierOf(), t = s.tiers[ti];
+  const s = pickSit(zoneOf(P.gao.node), RIVAL), ti = tierOf(), t = s.tiers[ti];
   const mistake = !!t.wrong && E.L >= 2 && Math.random() < .35;
-  const { hero: h, ask: a } = setSitView(s, "gao");
-  showEngine({ no: s.id, main: t.a }, `がおの場面${mistake ? "（まちがえる回）" : ""}`);
+  const { hero: h, ask: a } = setSitView(s, RIVAL);
+  showEngine({ no: s.id, main: t.a }, `${NAMES[RIVAL]}の場面${mistake ? "（まちがえる回）" : ""}`);
   await playIntro(s, h, a);
   await askQ(s, h, a);
   playMove(h, "think"); await sleep(700);
   if (!mistake) {
-    showTask(t.a, "がおの こたえ");
+    showTask(t.a, `${NAMES[RIVAL]}の こたえ`);
     await speak(h, `sg_${s.id}_${ti}`, t.a); unsay(); hideTask();
     playMove(C.shima, "clap");
     await resolve(s, h, a, true);
@@ -264,9 +268,9 @@ async function gaoSit(before) {
   }
   await speak(h, `sx_${s.id}_${ti}`, t.wrong);
   surprise(C.shima); surprise(a); markAbove(C.pony, "q"); await sleep(500);
-  showTask(t.a, "がおに おしえよう");
-  await speak(C.pony, "teach", "がおに おしえて あげよう");
-  playMove(h, "think"); await speak(h, "g_huh", "あれ？ ちがった？");
+  showTask(t.a, `${NAMES[RIVAL]}に おしえよう`);
+  await speak(C.pony, RIVAL === "gao" ? "teach" : `teach_${RIVAL}`, `${NAMES[RIVAL]}に おしえて あげよう`);
+  playMove(h, "think"); await rivalSay(h, "huh");
   let ok = false; const ttries = [];
   for (let n = 0; n < 2 && !ok; n++) {
     await speak(C.pony, `sa_${s.id}_${ti}`, t.a); unsay();
@@ -275,7 +279,7 @@ async function gaoSit(before) {
     ok = r.r === "ok"; if (ok) GS.ok++; if (!ok && n === 0) await speak(C.pony, "p_again", "もう いっかい いってみよう");
   }
   playLog({ type: "teach", id: s.id, ok, tries: ttries });
-  if (ok) { joy(C.shima); confetti(50); chime(); markAbove(h, "ex"); await speak(h, "g_thanks", "そっか、ありがとな"); }
+  if (ok) { joy(C.shima); confetti(50); chime(); markAbove(h, "ex"); await rivalSay(h, "thanks"); }
   else { await speak(C.pony, "p_together", "いっしょに いおうね"); await speak(C.pony, `sa_${s.id}_${ti}`, t.a); }
   await speak(h, `sg_${s.id}_${ti}`, t.a); unsay(); hideTask();
   await resolve(s, h, a, true);

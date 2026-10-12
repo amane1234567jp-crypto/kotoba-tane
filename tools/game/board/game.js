@@ -16,6 +16,23 @@ const C = {}; KINDS.forEach(k => C[k] = makeChar(k));
 const P = { doshin: makeChar("doshin"), shima: makeChar("shima"), gao: makeChar("gao") };
 Object.values(P).forEach(p => p.isPiece = true);
 const chars = [...KINDS.map(k => C[k]), ...Object.values(P)];
+/* コマは キャラごとに 1つずつ。P.gao は「いまの ライバル」、P.doshin は「ねている 役」を さす（ステージで 入れかわる） */
+const PIECE = { doshin: P.doshin, shima: P.shima, gao: P.gao };
+function piece(kind) { if (!PIECE[kind]) { const c = makeChar(kind); c.isPiece = true; PIECE[kind] = c; chars.push(c); } return PIECE[kind]; }
+const PIECE_S = { shima: .22, gao: .22, pyon: .21, mii: .21, chu: .13, doshin: .27, kamejii: .21, meebaa: .21 };
+let RIVAL = "gao", SLEEPER = "doshin", MODE = "solo", PLAYERS = [], BOARD_PIECES = [P.doshin, P.shima, P.gao], winnerPc = null;
+P.shima.human = true;
+// ライバルの セリフ（がおは 前からの 声。ほかの キャラは rv_<キャラ>_<名前>）
+const RIVAL_TEXT = {
+  gao: { go: "いくぞ！", huh: "あれ？ ちがった？", thanks: "そっか、ありがとな", rival: "おれは がお！ どっちが さきに ゴールするか、きょうそうだ！", rival2: "こんどは ほんきで いくぞ！", win: "へへっ、おれの かちだ", good: "いい しょうぶ だったな", next: "つぎは、まけないぞ" },
+  pyon: { go: "いくよー！", huh: "あれ？ ちがった？", thanks: "そっか、ありがとう！", rival: "わたしは ぴょん！ かけっこなら まけないよ！", rival2: "こんどは もっと はやいよ！", win: "やったー、わたしの かち！", good: "いい しょうぶ だったね", next: "つぎも まけないよ！" },
+  mii: { go: "いくわよ", huh: "あら？ ちがった？", thanks: "ふうん、ありがと", rival: "みいよ。こうえんでは まけないわ", rival2: "こんどは ほんきよ", win: "ふふん、みいの かち", good: "なかなか やるじゃない", next: "つぎも かつわよ" },
+  chu: { go: "い、いくよ！", huh: "あれれ？ ちがった？", thanks: "そっか、ありがとう！", rival: "ぼく、ちゅう。おみせまで きょうそうだよ！", rival2: "こんどは まけないよう！", win: "やった、ぼくの かち！", good: "たのしかったね", next: "つぎも がんばるよ" },
+  doshin: { go: "いくよ、のっしのっし", huh: "あれ？ ちがった？", thanks: "そっか、ありがとう", rival: "ぼく、どしん。のりものの たびで きょうそうしよう", rival2: "こんどは ほんきだよ。ぶおーっ", win: "ぼくの かちだね", good: "いい しょうぶ だったね", next: "つぎも まけないよ" },
+};
+const GAO_KEYS = { go: "g_go", huh: "g_huh", thanks: "g_thanks", rival: "g_rival", rival2: "g_rival2", win: "g_win", good: "g_good", next: "gao" };
+const RK = name => RIVAL === "gao" ? GAO_KEYS[name] : `rv_${RIVAL}_${name}`;
+const rivalSay = (c, name) => speak(c, RK(name), RIVAL_TEXT[RIVAL][name]);
 const visible = [];
 
 /* ---------- 吹き出しと耳の印 ---------- */
@@ -149,7 +166,10 @@ function pill(g, x, y, w, h, fill) { return el("rect", { x, y, width: w, height:
 const lvG = el("g", {}, hud); pill(lvG, 320, 34, 230, 76, "#FFFFFF"); const lvT = txt(lvG, 435, 86, "レベル 1", 36, { "text-anchor": "middle" });
 const stG = el("g", { style: "display:none" }, hud); pill(stG, 570, 34, 210, 76, "#FFFFFF"); chest(stG, 630, 80, .75, true); const stT = txt(stG, 720, 86, "× 0", 34, { "text-anchor": "middle" });
 const turnG = el("g", {}, hud); const turnR = pill(turnG, 600, 34, 330, 76, "#FFD25E"); const turnT = txt(turnG, 765, 86, "", 36, { "text-anchor": "middle" });
-function setTurn(who) { turnT.textContent = who === "child" ? "きみの ばん" : "がおの ばん"; turnR.setAttribute("fill", who === "child" ? "#FFD25E" : "#FF9E7A"); }
+const TURN_COL = ["#FFD25E", "#FFC2D1", "#B9E3FF", "#C9EBB5", "#FFB98A", "#E2D4FF"];
+function setTurn(who, idx = 0) {
+  if (MODE === "multi") { turnT.textContent = `${NAMES[who]}の ばん`; turnR.setAttribute("fill", TURN_COL[idx % 6]); return; }
+  turnT.textContent = who === "child" ? "きみの ばん" : `${NAMES[RIVAL]}の ばん`; turnR.setAttribute("fill", who === "child" ? "#FFD25E" : "#FF9E7A"); }
 const banner = el("g", { opacity: 0 }, hudLayer);
 const bannerR = el("rect", { x: 420, y: 400, width: 760, height: 160, rx: 80, fill: "#FFD25E", ...S6(8) }, banner);
 const bannerT = txt(banner, 800, 505, "", 68, { "text-anchor": "middle" });
@@ -234,7 +254,7 @@ function setView(v, sc, opt = {}) {
   diceBtn.style.visibility = v === "board" ? "visible" : "hidden";
   if (v === "board") {
     place(C.pony, 200, 372, .42); show(C.pony);
-    [P.doshin, P.shima, P.gao].forEach(show);
+    BOARD_PIECES.forEach(show);
   } else if (v === "scene") {
     drawRoom(sc.place);
     place(C.pony, 200, 975, .7); show(C.pony);
@@ -262,8 +282,9 @@ const OFF = { shima: -26, gao: 30, doshin: 0 };
 function nodeXY(pc, id) {
   const [x, y] = NODES[id];
   if (pc === P.doshin) return [x, y + 16];
-  const onDoshin = pc === P.gao && id === BLOCK && doshinAsleep;
-  return [x + OFF[pc.kind], y + 18 - (onDoshin ? 92 : 0)];
+  const onDoshin = MODE === "solo" && pc === P.gao && id === BLOCK && doshinAsleep;
+  const [ox, oy] = pc.off || [OFF[pc.kind] ?? 30, 0];
+  return [x + ox, y + 18 + oy - (onDoshin ? 92 : 0)];
 }
 function setPiece(pc, id) { pc.node = id; [pc.px, pc.py] = nodeXY(pc, id); }
 const tweens = [];
@@ -273,25 +294,25 @@ function slide(pc, x, y, dur, hopPower = 0) {
 const STEP_NOTES = [N.C5, N.D5, N.E5, N.F5, N.G5, N.A5];
 function stepSound(pc, i) {
   if (!ctx) return;
-  if (pc === P.gao) { const f = STEP_NOTES[i % 6] * .5; blip(f, f * 1.6, .09, "square"); }
+  if (!pc.human) { const f = STEP_NOTES[i % 6] * .5; blip(f, f * 1.6, .09, "square"); }
   else { const f = STEP_NOTES[i % 6]; blip(f, f * 1.5, .14, "triangle"); later(60, () => blip(f * 2, f * 2.2, .06, "sine")); }
 }
-function landSound(pc) { if (!ctx) return; noise(.06, pc === P.gao ? 900 : 1400, .22); blip(pc === P.gao ? 160 : 220, 90, .08, "sine"); }
+function landSound(pc) { if (!ctx) return; noise(.06, !pc.human ? 900 : 1400, .22); blip(!pc.human ? 160 : 220, 90, .08, "sine"); }
 async function hop(pc, id, dur, i = 0) {
   pc.node = id; const [x, y] = nodeXY(pc, id); pc.moving = true; stepSound(pc, i);
   await slide(pc, x, y, dur, dur * 1.45); landSound(pc); pc.moving = false; await sleep(dur * 250);
 }
 let winner = null, doshinAsleep = true;
 async function moveBy(pc, n) {
-  const fast = pc === P.gao;
+  const fast = !pc.human;
   for (let i = 0; i < n; i++) {
     const nx = NEXT(pc.node); if (!nx.length) break;
     let to = nx[0];
-    if (nx.length > 1) to = pc === P.shima ? await askFork() : nx[rnd(2)];
-    if (to === BLOCK && doshinAsleep && pc === P.shima) await blockEvent();
+    if (nx.length > 1) to = pc.human ? await askFork(pc) : nx[rnd(2)];
+    if (to === BLOCK && doshinAsleep && pc.human) await blockEvent(pc);
     await hop(pc, to, fast ? .2 : .38, i);
     if (fast && i < n - 1) await sleep(40);
-    if (to === GOAL) { if (!winner) winner = pc === P.shima ? "child" : "gao"; break; }
+    if (to === GOAL) { if (!winner) { winnerPc = pc; winner = MODE === "multi" ? pc.kind : pc === P.shima ? "child" : "gao"; } break; }
   }
 }
 
@@ -393,14 +414,19 @@ function devOn(cb) { [devB, fbB].forEach(g => Object.entries(g).forEach(([k, b])
 function devOff() { [devB, fbB].forEach(g => Object.values(g).forEach(b => { if (!b) return; b.disabled = true; b.onclick = null; })); }
 function listen(groups, ms = 7000) {
   return new Promise(resolve => {
-    let best = 0, heard = "", fin = false;
-    const verdict = () => best === groups.length ? "ok" : best > 0 ? "part" : "none";
-    const end = (r, why) => { if (fin) return; fin = true; taskListen(false); h.stop(); devOff(); clearTimeout(tmr); if (why) heard = why; heardEl.textContent = heard || "（きこえなかった）"; setTimeout(() => resolve({ r, heard }), MIC.stream ? 700 : 3000); }; // マイクずっとオンなら短く。そうでなければ端末の音が戻るまで待つ
+    // 判定をゆるく：聞きとれた言葉は 言い直し・とちゅうで切れた分も 合わせて数える。
+    // キーが3つ以上ある長い答えは、1つ欠けても「言えた」。2つまでの短い答えは 全部。
+    let best = 0, heard = "", fin = false, soon = null; const got = new Set();
+    const need = groups.length >= 3 ? groups.length - 1 : groups.length;
+    const verdict = () => best >= need ? "ok" : best > 0 ? "part" : "none";
+    const end = (r, why) => { if (fin) return; fin = true; clearTimeout(soon); taskListen(false); h.stop(); devOff(); clearTimeout(tmr); if (why) heard = why; heardEl.textContent = heard || "（きこえなかった）"; setTimeout(() => resolve({ r, heard }), MIC.stream ? 700 : 3000); }; // マイクずっとオンなら短く。そうでなければ端末の音が戻るまで待つ
     heardEl.textContent = "…"; taskListen(true);
     devOn(end);
     const h = hear(texts => {
-      for (const t of texts) { const n = countMatch(t, groups); if (n > best || !heard) { best = Math.max(best, n); heard = t; } }
+      for (const t of texts) { groups.forEach((g, i) => { if (g.some(v => norm(t).includes(norm(v)) || t.includes(v))) got.add(i); }); const n = countMatch(t, groups); if (n >= best || !heard) heard = t; }
+      best = got.size;
       heardEl.textContent = heard; if (best === groups.length) end("ok");
+      else if (best >= need) { clearTimeout(soon); soon = setTimeout(() => end("ok"), 1300); } // ほぼ言えたら、少し待って「言えた」
     }, ms);
     h.done.then(() => { if (srUsable) end(verdict()); });
     const tmr = setTimeout(() => { if (srUsable) end(verdict()); }, ms + 400);
@@ -486,14 +512,15 @@ async function treasure(id) {
   await speak(C.pony, "takara", "たからばこ だよ！"); await speak(C.pony, "p_sticker", "シールを ゲット！");
   stT.textContent = `× ${stickers}`;
 }
-async function landChild() {
-  const id = P.shima.node; if (winner) return;
+async function landChild(pc = P.shima) {
+  const id = pc.node; if (winner) return;
   const k = kindOf(id);
   if (k === "treasure" && !got.has(id)) { await treasure(id); return; }
   if (k === "start" || k === "treasure") return;
-  const ok = await runSit(zoneOf(id));
+  const ok = await runSit(zoneOf(id), pc.kind);
+  if (ok && pc.player) pc.player.ok++;
 }
-async function askFork() {
+async function askFork(pc = P.shima) {
   await speak(C.pony, "fork", "うえと したの、どっちに いく？");
   const mk = (label, id) => { const b = document.createElement("button"); b.type = "button"; b.className = "arrow"; b.textContent = label;
     const [x, y] = NODES[id]; b.style.left = `calc(${x / 16}% - 4.5%)`; b.style.top = `calc(${y / 10}% - 7.2%)`; stage.appendChild(b); return b; };
@@ -501,30 +528,31 @@ async function askFork() {
   const pick = await new Promise(res => {
     let done = false; const fin = v => { if (done) return; done = true; h && h.stop(); up.remove(); down.remove(); res(v); };
     up.onclick = () => fin(UP); down.onclick = () => fin(DOWN);
-    setListen(P.shima, true);
+    setListen(pc, true);
     const h = srUsable ? hear(texts => { const t = texts.join(" "); if (/うえ|上/.test(kata2hira(t))) fin(UP); else if (/した|下/.test(kata2hira(t))) fin(DOWN); heardEl.textContent = t; }, 15000) : null;
   });
-  setListen(P.shima, false);
+  setListen(pc, false);
   await speak(C.pony, pick === UP ? "up" : "down", pick === UP ? "うえ！" : "した！");
   return pick;
 }
-async function blockEvent() {
+async function blockEvent(pc = P.shima) {
   const dtries = [];
-  await speak(C.pony, "p_doshin", "どしんが ねてる！"); surprise(P.shima);
+  if (SLEEPER === "kamejii") await speak(C.pony, "p_kame", "かめじいが ねてる！"); else await speak(C.pony, "p_doshin", "どしんが ねてる！");
+  surprise(pc);
   showTask("どいて ください", "どしんに いおう", 520);
   for (let a = 0; a < 2; a++) {
     await speak(C.pony, "block", "どいて ください");
-    setListen(P.shima, true); const r = await listen([["どいて", "退いて", "どいで"]]); setListen(P.shima, false);
+    setListen(pc, true); const r = await listen([["どいて", "退いて", "どいで"]]); setListen(pc, false);
     dtries.push(`${r.r === "ok" ? "○" : r.r === "part" ? "△" : "×"}${r.heard || ""}`);
-    if (r.r === "ok") { joy(P.shima); GS.ok++; break; }
+    if (r.r === "ok") { joy(pc); GS.ok++; if (pc.player) pc.player.ok++; break; }
     if (a === 0) await speak(C.pony, "p_again", "もう いっかい いってみよう");
   }
   playLog({ type: "doite", ok: dtries.some(x => x[0] === "○"), tries: dtries });
   hideTask(); doshinAsleep = false; delete P.doshin.tm.closed; surprise(P.doshin); await sleep(700);
-  await speak(P.doshin, "doshin", "どいて、あげるよ");
+  if (SLEEPER === "kamejii") await speak(P.doshin, "sl_kamejii", "ほっほ、どいて あげよう"); else await speak(P.doshin, "doshin", "どいて、あげるよ");
   P.doshin.tm.run = 1.2;
-  if (P.gao.node === BLOCK) { const [gx, gy] = nodeXY(P.gao, BLOCK); slide(P.gao, gx, gy, .4, .3); }
-  await slide(P.doshin, 1000, 792, 1.1); P.doshin.node = null;
+  if (MODE === "solo" && P.gao.node === BLOCK) { const [gx, gy] = nodeXY(P.gao, BLOCK); slide(P.gao, gx, gy, .4, .3); }
+  const [ax, ay] = sleeperAway(); await slide(P.doshin, ax, ay, 1.1); P.doshin.node = null;
 }
 const ABE = [17, 18, 20];
 let abeLeft = [];
@@ -591,7 +619,7 @@ async function childTurn(first) {
 }
 async function gaoTurn() {
   setTurn("gao"); await sleep(300);
-  await speak(P.gao, "g_go", "いくぞ！");
+  await rivalSay(P.gao, "go");
   const r = gaoRoll(); const shown = await rollDice(Math.max(1, r));
   await speak(C.pony, "n" + shown, NUMS[shown]);
     const before = P.gao.node; await moveBy(P.gao, r); await sleep(200);
@@ -704,13 +732,13 @@ async function ending() {
     setListen(C.shima, true); const r = await listen(KEYS[16]); setListen(C.shima, false);
     hideTask(); if (r.r === "ok") { joy(C.shima); chime(); confetti(50); }
   } else {
-    await speak(C.gao, "g_win", "へへっ、おれの かちだ"); jump(C.gao, .8); later(500, () => flop(C.gao)); later(700, () => noise(.12, 600, .4)); await sleep(1300);
+    const R = C[RIVAL]; await rivalSay(R, "win"); jump(R, .8); later(500, () => flop(R)); later(700, () => noise(.12, 600, .4)); await sleep(1300);
     await speak(C.pony, "p_kuya", "くやしい、って いってみよう"); showTask("くやしい", "いってみよう", 260); await speak(C.pony, "k13_main", "くやしい");
     setListen(C.shima, true); const r = await listen(KEYS[13]); setListen(C.shima, false);
     hideTask(); if (r.r === "ok") { playMove(C.shima, "pump"); chime(); }
   }
   // 3) メダルと王かん（負けても まるシマにメダル。がんばりをほめる）
-  crownOn(childWon ? C.shima : C.gao); later(200, () => blip(600, 1800, .3, "triangle"));
+  crownOn(childWon ? C.shima : C[RIVAL]); later(200, () => blip(600, 1800, .3, "triangle"));
   const md = medal(330, 300, childWon, childWon ? "1い！" : "よく がんばった！"); fanfare();
   await sleep(1300);
   // 4) 数がどんどん増える（できた数・シール・レベル）
@@ -721,8 +749,8 @@ async function ending() {
   if (E.L > GS.startL) { const up = el("text", { x: 1150, y: 320, "font-family": FONT, "font-size": 44, fill: "#E8735A", stroke: "#FFFFFF", "stroke-width": 8, "paint-order": "stroke" }, card); up.textContent = `${E.L - GS.startL}つ アップ！`; boom(.4); tween(300, k => up.setAttribute("opacity", k)); }
   firework(1450, 200, 1); later(500, () => firework(1150, 160, 3));
   await sleep(900);
-  await speak(C.gao, "g_good", "いい しょうぶ だったな");
-  if (childWon) await speak(C.gao, "gao", "つぎは、まけないぞ");
+  await rivalSay(C[RIVAL], "good");
+  if (childWon) await rivalSay(C[RIVAL], "next");
   playLog({ type: "goal", winner, lap: SAVE.lap, L: E.L });
   const lapUp = childWon ? markClear() : false;
   if (childWon) { await speak(C.pony, "p_clear", "ステージ クリア！"); }
@@ -890,7 +918,7 @@ function frame(now) {
     w.pc.px = lerp(w.x0, w.x1, e); w.pc.py = lerp(w.y0, w.y1, e);
     if (k >= 1) { tweens.splice(i, 1); w.res(); }
   }
-  Object.values(P).forEach(p => place(p, p.px, p.py, p.s0));
+  Object.values(PIECE).forEach(p => { if (p.px != null) place(p, p.px, p.py, p.s0); });
   if (doshinAsleep && view === "board") { zt -= dt; if (zt < 0) { zt = 1.5; markAbove(P.doshin, "z", { i: zi++ % 3, vx: 30, vy: -50, sway: 10, life: 1.8 }); } }
   visible.forEach(c => { if (!(c === P.doshin && doshinAsleep)) idleTick(c, dt, c.moving || c === speaker || earOn === c || view === "parade"); drawChar(c, dt, false); });
   stepBits(dt); stepMarks(dt); stepEar(now / 1000); stepFx(dt);
@@ -933,21 +961,29 @@ async function newGame(opt = {}) {
   const resume = !!(opt.resume && SAVE.play);
   E.h = 1; // お手本はいつも全部聞かせる
   if (opt.stage) curStage = opt.stage; else if (resume) curStage = SAVE.play.stage;
+  if (MODE === "multi" && !opt.multi) endMultiState();
   applyStage(curStage);
   await withLoading(() => loadPack(curStage)); // このステージの声を 全部 読みこんでから はじめる
-  GS.ok = 0; GS.tasks = 0; sitUsed.clear();
+  if (opt.multi) { // みんなで あそぶ
+    GS.ok = 0; GS.tasks = 0; sitUsed.clear(); winner = null; winnerPc = null; doshinAsleep = true;
+    drawBoard(); P.doshin.s0 = SLEEPER === "doshin" ? .3 : .24; setPiece(P.doshin, BLOCK); P.doshin.tm.closed = 1e6;
+    setupMulti(opt.multi); setView("board");
+    playLog({ type: "start", multi: opt.multi, stage: curStage });
+    return runMulti();
+  }
+  GS.ok = 0; GS.tasks = 0; sitUsed.clear(); winnerPc = null;
   winner = null; doshinAsleep = true; stickers = 0; got.clear(); abeLeft = ABE.slice(); E.h = Math.max(1, E.h);
   const rec = store.get(); gaoEasy = (rec.lost || 0) >= 2;
   if (!resume) lapSetup();
   GS.startL = E.L;
   drawBoard(); stT.textContent = "× 0";
-  P.shima.s0 = .22; P.gao.s0 = .22; P.doshin.s0 = .3;
+  P.shima.s0 = .22; P.gao.s0 = PIECE_S[RIVAL] || .22; P.doshin.s0 = SLEEPER === "doshin" ? .3 : .24;
   setPiece(P.shima, "0"); setPiece(P.gao, "0"); setPiece(P.doshin, BLOCK); P.doshin.tm.closed = 1e6;
   if (resume) {
     const p = SAVE.play;
     setPiece(P.shima, p.shima); setPiece(P.gao, p.gao);
     doshinAsleep = p.doshinAsleep; (p.sitUsed || []).forEach(x => sitUsed.add(x)); Object.assign(GS, p.GS || {}); gaoEasy = !!p.gaoEasy;
-    if (!doshinAsleep) { delete P.doshin.tm.closed; P.doshin.node = null; P.doshin.px = 1000; P.doshin.py = 792; }
+    if (!doshinAsleep) { delete P.doshin.tm.closed; P.doshin.node = null; [P.doshin.px, P.doshin.py] = sleeperAway(); }
   }
   setView("board"); showEngine(null, (gaoEasy ? "がお すこし ゆっくり（2れんぱいの あと）" : "がおも ふつうの サイコロ") + `／${SAVE.lap}しゅうめ`);
   playLog({ type: "start", resume, lap: SAVE.lap, L: E.L, stage: curStage });
@@ -956,11 +992,11 @@ async function newGame(opt = {}) {
 async function rivalIntro() {
   setTurn("gao"); turnT.textContent = "ライバル！";
   if (SAVE.lap >= 2) { await showBanner(`${SAVE.lap}しゅうめ スタート！`, 1400); }
-  await showBanner("ライバル がお が きた！", 1500);
+  await showBanner(`ライバル ${NAMES[RIVAL]} が きた！`, 1500);
   markAbove(P.gao, "ex"); jump(P.gao, .9);
-  if (SAVE.lap >= 2) await speak(P.gao, "g_rival2", "こんどは ほんきで いくぞ！");
-  else await speak(P.gao, "g_rival", "おれは がお！ どっちが さきに ゴールするか、きょうそうだ！");
-  await speak(C.pony, "p_rival", "がおと きょうそうだよ。さきに ゴールに ついた ほうが かち！");
+  await rivalSay(P.gao, SAVE.lap >= 2 ? "rival2" : "rival");
+  const nm = NAMES[RIVAL];
+  await speak(C.pony, RIVAL === "gao" ? "p_rival" : `p_rival_${RIVAL}`, `${nm}と きょうそうだよ。さきに ゴールに ついた ほうが かち！`);
 }
 async function run(o = {}) {
   let first = true;
@@ -1024,6 +1060,7 @@ function showMenu() {
     list.append(b);
   });
   card.append(list);
+  const mm = h("button", "mmulti", "👥 みんなで あそぶ（2〜6にん）"); mm.type = "button"; mm.onclick = () => showMultiMenu(); card.append(mm);
   const adult = h("div", "madult"); adult.append(h("span", "", "おとなの かたへ："));
   const lg = h("button", "mreset", "あそんだ きろくを 見る"); lg.type = "button"; lg.onclick = showLog; adult.append(lg);
   const rs = h("button", "mreset", "セーブを けす"); rs.type = "button";

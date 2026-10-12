@@ -13,9 +13,31 @@ const STAGE_DEF = {
   densha: { ground: "#D9DDE3", sky: "#CFEAFB", names: ["えき", "えき", "でんしゃ", "バスてい", "バスてい", "バス", "えき", "でんしゃ", "バス"],
     fills: { えき: "#FFF1C9", でんしゃ: "#D7ECFF", バスてい: "#E9E0F5", バス: "#DDF3EE" } },
 };
+/* ステージごとの ライバル と ねている役 */
+const RIVAL_OF = { kousha: "gao", undou: "pyon", kouen: "mii", omise: "chu", densha: "doshin" };
+const SLEEPER_OF = { densha: "kamejii" };
+/* ステージごとの 盤の形（マスの つながりは 同じ・置き場所が ちがう）。run = 色分けの まとまり（道に そって 色の帯を ひく） */
+const KOUSHA_NODES = JSON.parse(JSON.stringify(NODES));
+const LAYOUT = {
+  undou: { nodes: { "0": [180, 880, "start"], "1": [400, 900], "2": [620, 910], "3": [840, 910], "4": [1060, 900, "block"], "5": [1280, 870], "6": [1450, 720, "fork"], "7u": [1420, 520], "8u": [1260, 330], "7d": [1240, 640], "8d": [1100, 520], "9": [1000, 330], "10": [780, 280], "11": [560, 300], "12": [420, 450], "13": [520, 620], "14": [720, 650], "15": [920, 630, "goal"] },
+    runs: [["てつぼう", ["0", "1", "2"]], ["トラック", ["3", "4", "5"]], ["すなば", ["6", "7u", "8u"]], ["すなば", ["6", "7d", "8d"]], ["みずのみば", ["9", "10", "11"]], ["てつぼう", ["12", "13", "14"]]], away: [1060, 760] },
+  kouen: { nodes: { "0": [180, 900, "start"], "1": [380, 880], "2": [560, 800], "3": [720, 880], "4": [900, 920, "block"], "5": [1100, 880], "6": [1260, 780, "fork"], "7u": [1120, 560], "8u": [1040, 400], "7d": [1420, 660], "8d": [1400, 480], "9": [1220, 320], "10": [930, 250], "11": [700, 320], "12": [500, 440], "13": [480, 640], "14": [680, 660], "15": [860, 600, "goal"] },
+    runs: [["すべりだい", ["0", "1", "2"]], ["ブランコ", ["3", "4", "5"]], ["いけ", ["6", "7u", "8u"]], ["いけ", ["6", "7d", "8d"]], ["ベンチ", ["9", "10", "11"]], ["すべりだい", ["12", "13", "14"]]], away: [900, 780] },
+  omise: { nodes: { "0": [480, 260, "start"], "1": [700, 260], "2": [920, 260], "3": [1140, 280], "4": [1360, 330, "block"], "5": [1460, 520], "6": [1300, 660, "fork"], "7u": [1080, 560], "8u": [860, 520], "7d": [1100, 780], "8d": [860, 780], "9": [640, 660], "10": [420, 760], "11": [260, 900], "12": [480, 920], "13": [700, 920], "14": [940, 930], "15": [1180, 915, "goal"] },
+    runs: [["パンや", ["0", "1", "2"]], ["やおや", ["3", "4", "5"]], ["おかしや", ["6", "7u", "8u"]], ["おかしや", ["6", "7d", "8d"]], ["パンや", ["9", "10", "11"]], ["レジ", ["12", "13", "14"]]], away: [1240, 430] },
+  densha: { nodes: { "0": [1250, 290, "start"], "1": [1030, 270], "2": [810, 260], "3": [590, 280], "4": [440, 430, "block"], "5": [400, 640], "6": [480, 840, "fork"], "7u": [680, 700], "8u": [900, 680], "7d": [720, 900], "8d": [960, 910], "9": [1160, 800], "10": [1360, 860], "11": [1470, 680], "12": [1360, 510], "13": [1150, 560], "14": [960, 470], "15": [760, 470, "goal"] },
+    runs: [["えき", ["0", "1", "2", "3"]], ["でんしゃ", ["4", "5"]], ["バスてい", ["6", "7u", "8u"]], ["バスてい", ["6", "7d", "8d"]], ["バス", ["9", "10", "11"]], ["でんしゃ", ["12", "13", "14"]]], away: [280, 540] },
+};
+const zoneOfKousha = zoneOf;
+zoneOf = function (id) { const L = LAYOUT[curStage]; if (!L) return zoneOfKousha(id); const r = L.runs.find(([, ids]) => ids.includes(id)); return r ? r[0] : L.runs[0][0]; };
+function sleeperAway() { const L = LAYOUT[curStage]; return L ? L.away : [1000, 792]; }
 function applyStage(id) {
   curStage = id;
   ZONES.forEach((z, i) => Object.assign(z, KOUSHA_ZONES[i]));
+  Object.keys(NODES).forEach(k => NODES[k] = (LAYOUT[id] ? LAYOUT[id].nodes : KOUSHA_NODES)[k].slice());
+  RIVAL = RIVAL_OF[id] || "gao"; SLEEPER = SLEEPER_OF[id] || "doshin";
+  P.gao = piece(RIVAL); P.doshin = piece(SLEEPER); delete P.gao.tm.closed; P.gao.human = false;
+  BOARD_PIECES = [P.doshin, P.shima, P.gao];
   const d = STAGE_DEF[id]; if (!d) return;
   ZMAP.forEach(i => { const z = ZONES[i]; z.name = d.names[i]; z.fill = d.fills[z.name]; });
 }
@@ -27,30 +49,38 @@ drawBoard = function () {
   boardLayer.innerHTML = "";
   el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: d.ground }, boardLayer);
   BOARD_DECO[curStage] && BOARD_DECO[curStage](boardLayer);
-  ZONES.forEach(z => el("rect", { x: z.x + 6, y: z.y + 6, width: z.w - 12, height: z.h - 12, rx: 26, fill: z.fill, ...S6(5) }, boardLayer));
-  BOARD_ROOMS[curStage] && BOARD_ROOMS[curStage](boardLayer);
+  const L = LAYOUT[curStage], fills = d.fills;
+  const pts = ids => ids.map((id, i) => (i ? "L" : "M") + NODES[id][0] + " " + NODES[id][1]).join(" ");
+  L.runs.forEach(([name, ids]) => { const p = pts(ids); // 部屋の色の帯（道より 太く）
+    el("path", { d: p, fill: "none", stroke: INK, "stroke-width": 184, "stroke-linejoin": "round", "stroke-linecap": "round" }, boardLayer);
+    el("path", { d: p, fill: "none", stroke: fills[name], "stroke-width": 172, "stroke-linejoin": "round", "stroke-linecap": "round" }, boardLayer); });
+  { const [gx, gy] = NODES[GOAL]; el("circle", { cx: gx, cy: gy, r: 110, fill: "#FFD25E", ...S6(6) }, boardLayer); }
   const order = [["0", "1", "2", "3", "4", "5", "6", "7u", "8u", "9", "10", "11", "12", "13", "14", "15"], ["6", "7d", "8d", "9"]];
-  order.forEach(o => { const p = o.map((id, i) => (i ? "L" : "M") + NODES[id][0] + " " + NODES[id][1]).join(" ");
+  order.forEach(o => { const p = pts(o);
     el("path", { d: p, fill: "none", stroke: INK, "stroke-width": 66, "stroke-linejoin": "round", "stroke-linecap": "round" }, boardLayer);
     el("path", { d: p, fill: "none", stroke: "#FFF8E8", "stroke-width": 54, "stroke-linejoin": "round", "stroke-linecap": "round" }, boardLayer);
     el("path", { d: p, fill: "none", stroke: "#F2D9A8", "stroke-width": 6, "stroke-dasharray": "2 22", "stroke-linecap": "round" }, boardLayer); });
-  ZONES.forEach((z, i) => txt(boardLayer, i === 3 ? z.x + z.w / 2 : z.lx, z.ly, z.name, z.goal ? 40 : 28, z.goal || i === 3 ? { "text-anchor": "middle" } : {}));
+  { const [gx, gy] = NODES[GOAL]; txt(boardLayer, gx, gy - 72, "ゴール", 34, { "text-anchor": "middle", stroke: "#FFFFFF", "stroke-width": 8, "paint-order": "stroke" }); }
   Object.entries(NODES).forEach(([id, [x, y, k]]) => {
-    const g = el("g", {}, boardLayer); const z = ZONES.find(z => z.name === zoneOf(id));
+    const g = el("g", {}, boardLayer); const z = { fill: fills[zoneOf(id)] };
     if (k === "goal") { el("circle", { cx: x, cy: y, r: 58, fill: "#FFFFFF", ...S6(6) }, g); el("path", { d: `M${x - 14} ${y + 34} V${y - 40}`, ...S6(6) }, g);
       el("path", { d: `M${x - 12} ${y - 40} L${x + 34} ${y - 26} L${x - 12} ${y - 10} Z`, fill: "#FF6F91", ...S6(5) }, g); return; }
     el("circle", { cx: x, cy: y, r: 44, fill: "#FFFFFF", ...S6(6) }, g);
     if (k === "start") txt(g, x, y + 10, "スタート", 22, { "text-anchor": "middle" });
     else if (k === "fork") el("path", { d: `M${x - 20} ${y + 18} L${x} ${y - 4} L${x + 20} ${y + 18} M${x} ${y - 4} V${y - 26} M${x - 10} ${y - 16} L${x} ${y - 26} L${x + 10} ${y - 16}`, fill: "none", ...S6(6) }, g);
     else el("circle", { cx: x, cy: y, r: 26, fill: z ? z.fill : "#FFF1C9", ...S6(4) }, g);
-  });
+  });  // 部屋の名前（分かれ道の 2本目は くりかえさない）
+  const named = new Set();
+  L.runs.forEach(([name, ids]) => { if (ids[0] === FORK && named.has(name)) return; named.add(name);
+    const cx = ids.reduce((a, i) => a + NODES[i][0], 0) / ids.length, cy = ids.reduce((a, i) => a + NODES[i][1], 0) / ids.length;
+    const ty = cy < 500 ? cy - 100 : cy + 124; txt(boardLayer, cx, Math.max(150, Math.min(988, ty)), name, 28, { "text-anchor": "middle", stroke: "#FFFFFF", "stroke-width": 8, "paint-order": "stroke" }); });
 };
 const tree2 = (L, x, y, r = 40) => { el("rect", { x: x - 10, y: y - 20, width: 20, height: 46, rx: 6, fill: "#9A6B43", ...S6(4) }, L); el("circle", { cx: x, cy: y - 40, r, fill: "#6DBB5E", ...S6(4) }, L); };
-const BOARD_DECO = {
-  undou(L) { el("ellipse", { cx: 820, cy: 540, rx: 380, ry: 120, fill: "none", stroke: "#FFFFFF", "stroke-width": 10 }, L); [[470, 540], [1430, 520]].forEach(([x, y]) => tree2(L, x, y, 34)); },
-  kouen(L) { [[470, 540], [620, 500], [1430, 520], [760, 560]].forEach(([x, y], i) => tree2(L, x, y, 36 - i * 3)); },
+const BOARD_DECO = { // 盤の 地面の もよう（道に かからない 軽い もの）
+  undou(L) { for (let y = 60; y < 1000; y += 120) el("path", { d: `M0 ${y} H1600`, stroke: "#FFFFFF55", "stroke-width": 6, "stroke-dasharray": "40 30" }, L); },
+  kouen(L) { for (let i = 0; i < 40; i++) { const x = (i * 397) % 1600, y = 140 + (i * 233) % 860; el("path", { d: `M${x} ${y} l8 -16 l8 16`, fill: "none", stroke: "#6DBB5E", "stroke-width": 4 }, L); } },
   omise(L) { for (let x = 0; x < 1600; x += 120) el("rect", { x, y: 0, width: 60, height: 1000, fill: "#00000008" }, L); },
-  densha(L) { el("path", { d: "M0 560 H1600 M0 600 H1600", stroke: "#8A8F99", "stroke-width": 8 }, L); for (let x = 10; x < 1600; x += 50) el("path", { d: `M${x} 548 v64`, stroke: "#9A6B43", "stroke-width": 10 }, L); },
+  densha(L) { for (let y = 40; y < 1000; y += 80) el("path", { d: `M0 ${y} H1600`, stroke: "#00000010", "stroke-width": 30 }, L); },
 };
 const BOARD_ROOMS = {
   undou(L) { // てつぼう・すなば・みずのみば の目じるし
