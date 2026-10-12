@@ -1,0 +1,6153 @@
+[
+{
+"key": "sq_hoken",
+"who": "meebaa",
+"text": "あら、どうしたの？",
+"yomi": "あら、どうしたの？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_hoken",
+"who": "meebaa",
+"text": "まあ、たいへん。ばんそうこうを はりましょうね",
+"yomi": "まあ！大変！ばんそうこうを貼りましょうね",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_hoken_0",
+"who": "gao",
+"text": "いたい",
+"yomi": "痛い",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_hoken_1",
+"who": "gao",
+"text": "ひざが いたいです",
+"yomi": "ひざが痛いです",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_hoken_1",
+"who": "gao",
+"text": "ひざを いたいです",
+"yomi": "ひざを痛いです",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_hoken_2",
+"who": "gao",
+"text": "ころんで、けがを しました",
+"yomi": "転んで、怪我をしました",
+"acc": [
+[
+"コロンデ,",
+4
+],
+[
+"ケガオ",
+2
+],
+[
+"シマシタ",
+2
+]
+],
+"job": "game"
+},
+{
+"key": "sx_hoken_2",
+"who": "gao",
+"text": "ころんで、けがが しました",
+"yomi": "転んで、怪我がしました",
+"acc": [
+[
+"コロンデ,",
+4
+],
+[
+"ケガガ",
+2
+],
+[
+"シマシタ",
+2
+]
+],
+"job": "game"
+},
+{
+"key": "sg_hoken_3",
+"who": "gao",
+"text": "ろうかで ころんで、ひざを けがしました",
+"yomi": "廊下で転んで、ひざを怪我しました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_hoken_3",
+"who": "gao",
+"text": "ろうかを ころんで、ひざを けがしました",
+"yomi": "廊下を転んで、ひざを怪我しました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_uwabaki",
+"who": "kamejii",
+"text": "おや、どうしたのかね？",
+"yomi": "おや、どうしたのかね？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_uwabaki",
+"who": "kamejii",
+"text": "それなら、スリッパを かして あげよう",
+"yomi": "それなら、スリッパを貸してあげよう",
+"acc": [
+[
+"ソレナラ,",
+3
+],
+[
+"スリッパオ",
+2
+],
+[
+"カシテアゲヨオ",
+6
+]
+],
+"job": "game"
+},
+{
+"key": "sg_uwabaki_0",
+"who": "gao",
+"text": "わすれた",
+"yomi": "忘れた",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_uwabaki_1",
+"who": "gao",
+"text": "うわばきを わすれました",
+"yomi": "上履きを忘れました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_uwabaki_1",
+"who": "gao",
+"text": "うわばきが わすれました",
+"yomi": "上履きが忘れました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_uwabaki_2",
+"who": "gao",
+"text": "うわばきを いえに わすれて きました",
+"yomi": "上履きを家に忘れてきました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_uwabaki_2",
+"who": "gao",
+"text": "うわばきを いえで わすれて きました",
+"yomi": "上履きを家で忘れてきました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_uwabaki_3",
+"who": "gao",
+"text": "きのう もって かえって、いえに わすれて きました",
+"yomi": "昨日持って帰って、家に忘れてきました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_zukan",
+"who": "nobbo",
+"text": "なにか、さがして いるのですか？",
+"yomi": "なにか、探しているのですか？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_zukan",
+"who": "nobbo",
+"text": "ずかんなら、いちばん うえの たなに ありますよ",
+"yomi": "図鑑なら、一番上の棚にありますよ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_zukan_0",
+"who": "gao",
+"text": "ほん",
+"yomi": "本",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_zukan_1",
+"who": "gao",
+"text": "どうぶつの ほんです",
+"yomi": "動物の本です",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_zukan_1",
+"who": "gao",
+"text": "どうぶつが ほんです",
+"yomi": "動物が本です",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_zukan_2",
+"who": "gao",
+"text": "どうぶつの ほんは どこですか",
+"yomi": "動物の本はどこですか",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_zukan_2",
+"who": "gao",
+"text": "どうぶつの ほんを どこですか",
+"yomi": "動物の本をどこですか",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_zukan_3",
+"who": "gao",
+"text": "シマウマが のって いる ずかんは どこですか",
+"yomi": "シマウマが載っている図鑑はどこですか",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_butsukaru",
+"who": "gao",
+"text": "わ、わりい！ だいじょうぶか？",
+"yomi": "わ、わりい！大丈夫か？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_butsukaru",
+"who": "gao",
+"text": "ごめんな。つぎから ろうかは あるくよ",
+"yomi": "ごめんな。次から廊下は歩くよ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_tearai",
+"who": "mii",
+"text": "ちょっと。なにか、わすれて ない？",
+"yomi": "ちょっと。なにか、忘れてない？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_tearai",
+"who": "mii",
+"text": "そうそう。せっけんで、あわあわに してね",
+"yomi": "そうそう。石けんで、あわあわにしてね",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_tearai_0",
+"who": "gao",
+"text": "てを あらう",
+"yomi": "手を洗う",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_tearai_1",
+"who": "gao",
+"text": "てを あらうのを わすれた",
+"yomi": "手を洗うのを忘れた",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_tearai_1",
+"who": "gao",
+"text": "てが あらうのを わすれた",
+"yomi": "手が洗うのを忘れた",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_tearai_2",
+"who": "gao",
+"text": "せっけんで てを あらいます",
+"yomi": "石けんで手を洗います",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_tearai_2",
+"who": "gao",
+"text": "せっけんを てを あらいます",
+"yomi": "石けんを手を洗います",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_tearai_3",
+"who": "gao",
+"text": "トイレの あとは、せっけんで てを あらいます",
+"yomi": "トイレのあとは、石けんで手を洗います",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_tetsudau",
+"who": "chu",
+"text": "お、おもいよう……",
+"yomi": "お、重いよう……",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_tetsudau",
+"who": "chu",
+"text": "あ、ありがとう！ たすかったよう",
+"yomi": "あ、ありがとう！助かったよう",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_tetsudau_0",
+"who": "gao",
+"text": "てつだう",
+"yomi": "手伝う",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_tetsudau_1",
+"who": "gao",
+"text": "てつだおうか？",
+"yomi": "手伝おうか？",
+"acc": [
+[
+"テツダオオカ?",
+4
+]
+],
+"job": "game"
+},
+{
+"key": "sg_tetsudau_2",
+"who": "gao",
+"text": "いっしょに もとうか？",
+"yomi": "一緒に持とうか？",
+"acc": [
+[
+"イッショニ",
+4
+],
+[
+"モトオカ?",
+2
+]
+],
+"job": "game"
+},
+{
+"key": "sx_tetsudau_2",
+"who": "gao",
+"text": "いっしょを もとうか？",
+"yomi": "一緒を持とうか？",
+"acc": [
+[
+"イッショオ",
+4
+],
+[
+"モトオカ?",
+2
+]
+],
+"job": "game"
+},
+{
+"key": "sg_tetsudau_3",
+"who": "gao",
+"text": "はんぶん もって あげるよ",
+"yomi": "半分持ってあげるよ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_shitsurei",
+"who": "kamejii",
+"text": "おや、だれかな？ はいって いいですよ",
+"yomi": "おや、だれかな？入っていいですよ",
+"acc": [
+[
+"オヤ,",
+1
+],
+[
+"ダレカナ?",
+1
+],
+[
+"ハイッテイイデスヨ",
+1
+]
+],
+"job": "game"
+},
+{
+"key": "sr_shitsurei",
+"who": "kamejii",
+"text": "ほっほ。ありがとう。りっぱな あいさつですね",
+"yomi": "ほっほ。ありがとう。立派なあいさつですね",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_shitsurei_0",
+"who": "gao",
+"text": "しつれいします",
+"yomi": "失礼します",
+"acc": [
+[
+"シツレエシマス",
+6
+]
+],
+"job": "game"
+},
+{
+"key": "sg_shitsurei_1",
+"who": "gao",
+"text": "しつれいします。プリントです",
+"yomi": "失礼します。プリントです",
+"acc": [
+[
+"シツレエシマス.",
+6
+],
+[
+"プリントデス",
+5
+]
+],
+"job": "game"
+},
+{
+"key": "sg_shitsurei_2",
+"who": "gao",
+"text": "しつれいします。プリントを もって きました",
+"yomi": "失礼します。プリントを持ってきました",
+"acc": [
+[
+"シツレエシマス.",
+6
+],
+[
+"プリントオモッテキマシタ",
+6
+]
+],
+"job": "game"
+},
+{
+"key": "sx_shitsurei_2",
+"who": "gao",
+"text": "しつれいします。プリントが もって きました",
+"yomi": "失礼します。プリントが持ってきました",
+"acc": [
+[
+"シツレエシマス.",
+6
+],
+[
+"プリントガモッテキマシタ",
+6
+]
+],
+"job": "game"
+},
+{
+"key": "sg_shitsurei_3",
+"who": "gao",
+"text": "しつれいします。しゅくだいの プリントを とどけに きました",
+"yomi": "失礼します。宿題のプリントを届けにきました",
+"acc": [
+[
+"シツレエシマス.",
+6
+],
+[
+"シュクダイノ",
+5
+],
+[
+"プリントオ",
+5
+],
+[
+"トドケニ",
+3
+],
+[
+"キマシタ",
+2
+]
+],
+"job": "game"
+},
+{
+"key": "sq_ohayou",
+"who": "kamejii",
+"text": "おはよう。きょうも げんきかね？",
+"yomi": "おはよう。今日も元気かね？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_ohayou",
+"who": "kamejii",
+"text": "ほっほ。よい あいさつだ。いってらっしゃい",
+"yomi": "ほっほ。よいあいさつだ。行ってらっしゃい",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_ohayou_0",
+"who": "gao",
+"text": "おはよう",
+"yomi": "おはよう",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_ohayou_1",
+"who": "gao",
+"text": "おはようございます",
+"yomi": "おはようございます",
+"acc": [
+[
+"オハヨオゴザイマス",
+8
+]
+],
+"job": "game"
+},
+{
+"key": "sg_ohayou_2",
+"who": "gao",
+"text": "おはようございます。げんきです",
+"yomi": "おはようございます。元気です",
+"acc": [
+[
+"オハヨオゴザイマス.",
+8
+],
+[
+"ゲンキデス",
+1
+]
+],
+"job": "game"
+},
+{
+"key": "sg_ohayou_3",
+"who": "gao",
+"text": "おはようございます。きょうも げんきです",
+"yomi": "おはようございます。今日も元気です",
+"acc": [
+[
+"オハヨオゴザイマス.",
+8
+],
+[
+"キョオモ",
+1
+],
+[
+"ゲンキデス",
+1
+]
+],
+"job": "game"
+},
+{
+"key": "sq_kinou",
+"who": "pyon",
+"text": "ねえねえ、きのう、なに したの？",
+"yomi": "ねえねえ、昨日、なにしたの？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_kinou",
+"who": "pyon",
+"text": "いいなあ！ こんど、いっしょに いこうね",
+"yomi": "いいなあ！今度、一緒に行こうね",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kinou_0",
+"who": "gao",
+"text": "ブランコ",
+"yomi": "ブランコ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kinou_1",
+"who": "gao",
+"text": "ブランコで あそんだ",
+"yomi": "ブランコで遊んだ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_kinou_1",
+"who": "gao",
+"text": "ブランコを あそんだ",
+"yomi": "ブランコを遊んだ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kinou_2",
+"who": "gao",
+"text": "きのう、ブランコで あそびました",
+"yomi": "昨日、ブランコで遊びました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_kinou_2",
+"who": "gao",
+"text": "さっき、ブランコで あそびました",
+"yomi": "さっき、ブランコで遊びました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kinou_3",
+"who": "gao",
+"text": "きのう、こうえんで ブランコに のりました",
+"yomi": "昨日、公園でブランコに乗りました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_osareta",
+"who": "meebaa",
+"text": "あらあら、なにが あったの？",
+"yomi": "あらあら、何があったの？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_osareta",
+"who": "meebaa",
+"text": "まあ。がおくんには、あとで おはなし しておくわね",
+"yomi": "まあ。がおくんには、あとでお話しておくわね",
+"acc": [
+[
+"マア.",
+1
+],
+[
+"ガオクンニワ,",
+1
+],
+[
+"アトデ",
+1
+],
+[
+"オハナシシテオクワネ",
+8
+]
+],
+"job": "game"
+},
+{
+"key": "sq_kasa",
+"who": "pyon",
+"text": "あっ、あめだ！ かさ、もってる？",
+"yomi": "あっ、雨だ！傘、持ってる？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_kasa",
+"who": "pyon",
+"text": "いいよ！ いっしょに はいろう",
+"yomi": "いいよ！一緒に入ろう",
+"acc": [
+[
+"イイヨ!",
+1
+],
+[
+"イッショニハイロオ",
+7
+]
+],
+"job": "game"
+},
+{
+"key": "sg_kasa_0",
+"who": "gao",
+"text": "わすれた",
+"yomi": "忘れた",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kasa_1",
+"who": "gao",
+"text": "かさを わすれた",
+"yomi": "傘を忘れた",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_kasa_1",
+"who": "gao",
+"text": "かさが わすれた",
+"yomi": "傘が忘れた",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kasa_2",
+"who": "gao",
+"text": "かさを わすれたから、いれて",
+"yomi": "傘を忘れたから、入れて",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kasa_3",
+"who": "gao",
+"text": "かさを わすれたので、いっしょに いれて くれる？",
+"yomi": "傘を忘れたので、一緒に入れてくれる？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_gyaku",
+"who": "mii",
+"text": "その くつ、なんか へんじゃない？",
+"yomi": "その靴、なんか変じゃない？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_gyaku",
+"who": "mii",
+"text": "ふふっ。はきなおしたら？",
+"yomi": "ふふっ。履き直したら？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_gyaku_0",
+"who": "gao",
+"text": "はんたい",
+"yomi": "反対",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_gyaku_1",
+"who": "gao",
+"text": "くつが はんたい",
+"yomi": "靴が反対",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_gyaku_1",
+"who": "gao",
+"text": "くつを はんたい",
+"yomi": "靴を反対",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_gyaku_2",
+"who": "gao",
+"text": "くつを はんたいに はいちゃった",
+"yomi": "靴を反対に履いちゃった",
+"acc": [
+[
+"クツオ",
+2
+],
+[
+"ハンタイニ",
+5
+],
+[
+"ハイチャッタ",
+1
+]
+],
+"job": "game"
+},
+{
+"key": "sx_gyaku_2",
+"who": "gao",
+"text": "くつが はんたいに はいちゃった",
+"yomi": "靴が反対に履いちゃった",
+"acc": [
+[
+"クツガ",
+2
+],
+[
+"ハンタイニ",
+5
+],
+[
+"ハイチャッタ",
+1
+]
+],
+"job": "game"
+},
+{
+"key": "sg_gyaku_3",
+"who": "gao",
+"text": "みぎと ひだりを、はんたいに はいちゃった",
+"yomi": "右と左を、反対に履いちゃった",
+"acc": [
+[
+"ミギト",
+3
+],
+[
+"ヒダリオ,",
+4
+],
+[
+"ハンタイニ",
+5
+],
+[
+"ハイチャッタ",
+1
+]
+],
+"job": "game"
+},
+{
+"key": "sq_sayonara",
+"who": "doshin",
+"text": "もう、かえるの？",
+"yomi": "もう帰るの……？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_sayonara",
+"who": "doshin",
+"text": "また あしたね！ ぶおーっ！",
+"yomi": "また明日ね！ぶおーっ！",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_sayonara_0",
+"who": "gao",
+"text": "さようなら",
+"yomi": "さようなら",
+"acc": [
+[
+"サヨオナラ",
+4
+]
+],
+"job": "game"
+},
+{
+"key": "sg_sayonara_1",
+"who": "gao",
+"text": "うん。さようなら",
+"yomi": "うん。さようなら",
+"acc": [
+[
+"ウン.",
+1
+],
+[
+"サヨオナラ",
+4
+]
+],
+"job": "game"
+},
+{
+"key": "sg_sayonara_2",
+"who": "gao",
+"text": "さようなら。また あした",
+"yomi": "さようなら。また明日",
+"acc": [
+[
+"サヨオナラ.",
+4
+],
+[
+"マタ",
+2
+],
+[
+"アシタ",
+3
+]
+],
+"job": "game"
+},
+{
+"key": "sg_sayonara_3",
+"who": "gao",
+"text": "きょうは もう かえるね。また あした",
+"yomi": "今日はもう帰るね。また明日",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_dekkai",
+"who": "doshin",
+"text": "あれっ？ それ、ぼくの くつ だよ",
+"yomi": "あれっ？それ、ぼくの靴だよ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_dekkai",
+"who": "doshin",
+"text": "いいよ。ぼくの くつは、おおきすぎるもんね",
+"yomi": "いいよ。ぼくの靴は、大きすぎるもんね",
+"acc": [
+[
+"イイヨ.",
+1
+],
+[
+"ボクノ",
+1
+],
+[
+"クツワ,",
+2
+],
+[
+"オオキスギルモンネ",
+5
+]
+],
+"job": "game"
+},
+{
+"key": "sg_dekkai_0",
+"who": "gao",
+"text": "ごめん",
+"yomi": "ごめん",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_dekkai_1",
+"who": "gao",
+"text": "ごめんなさい",
+"yomi": "ごめんなさい",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_dekkai_2",
+"who": "gao",
+"text": "まちがえて ごめんね",
+"yomi": "間違えてごめんね",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_dekkai_3",
+"who": "gao",
+"text": "まちがえて、どしんの くつを はいちゃった",
+"yomi": "間違えて、どしんの靴を履いちゃった",
+"acc": [
+[
+"マチガエテ,",
+3
+],
+[
+"ドシンノ",
+2
+],
+[
+"クツオ",
+2
+],
+[
+"ハイチャッタ",
+1
+]
+],
+"job": "game"
+},
+{
+"key": "sx_dekkai_3",
+"who": "gao",
+"text": "まちがえて、どしんが くつを はいちゃった",
+"yomi": "間違えて、どしんが靴を履いちゃった",
+"acc": [
+[
+"マチガエテ,",
+3
+],
+[
+"ドシンガ",
+2
+],
+[
+"クツオ",
+2
+],
+[
+"ハイチャッタ",
+1
+]
+],
+"job": "game"
+},
+{
+"key": "sq_doro",
+"who": "mii",
+"text": "あしあとが いっぱい！ どうしたの？",
+"yomi": "足跡がいっぱい！どうしたの？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_doro",
+"who": "mii",
+"text": "そっか。ぞうきんで いっしょに ふこうね",
+"yomi": "そっか。雑巾で、一緒に拭こうね",
+"acc": [
+[
+"ソッカ.",
+1
+],
+[
+"ゾオキンデ,",
+5
+],
+[
+"イッショニ",
+4
+],
+[
+"フコオネ",
+2
+]
+],
+"job": "fix1"
+},
+{
+"key": "sg_doro_0",
+"who": "gao",
+"text": "どろ",
+"yomi": "どろ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_doro_1",
+"who": "gao",
+"text": "くつが どろだらけ",
+"yomi": "靴が泥だらけ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_doro_1",
+"who": "gao",
+"text": "くつを どろだらけ",
+"yomi": "靴を泥だらけ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_doro_2",
+"who": "gao",
+"text": "そとで、どろが ついちゃった",
+"yomi": "外で、どろが付いちゃった",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_doro_2",
+"who": "gao",
+"text": "そとで、どろを ついちゃった",
+"yomi": "外で、どろを付いちゃった",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_doro_3",
+"who": "gao",
+"text": "どろを、ぞうきんで ふいて きます",
+"yomi": "どろを、雑巾で拭いてきます",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_locker",
+"who": "gao",
+"text": "うぐぐ……あかないぞ！",
+"yomi": "うぐぐ……あかないぞ！",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_locker",
+"who": "gao",
+"text": "あいた！ ……いてて。ありがとな",
+"yomi": "あいた！……いてて。ありがとな",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_otoshimono",
+"who": "chu",
+"text": "ふんふふーん♪",
+"yomi": "ふんふふーん",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_otoshimono",
+"who": "chu",
+"text": "わあっ！ ……あ、ありがとう！",
+"yomi": "わあっ！……あ、ありがとう！",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_otoshimono_0",
+"who": "gao",
+"text": "おとしたよ",
+"yomi": "落としたよ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_otoshimono_1",
+"who": "gao",
+"text": "ハンカチ、おとしたよ",
+"yomi": "ハンカチ、落としたよ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_otoshimono_2",
+"who": "gao",
+"text": "ちゅう、ハンカチを おとしたよ",
+"yomi": "ちゅう、ハンカチを落としたよ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_otoshimono_2",
+"who": "gao",
+"text": "ちゅう、ハンカチが おとしたよ",
+"yomi": "ちゅう、ハンカチが落としたよ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_otoshimono_3",
+"who": "gao",
+"text": "ちゅう、まって！ ハンカチを おとしたよ",
+"yomi": "ちゅう、待って！ハンカチを落としたよ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_kowai",
+"who": "chu",
+"text": "か、かいだん、こわいよう……",
+"yomi": "か、階段、怖いよう……",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_kowai",
+"who": "chu",
+"text": "う、うん……ありがとう",
+"yomi": "う、うん……ありがとう",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kowai_0",
+"who": "gao",
+"text": "だいじょうぶ",
+"yomi": "大丈夫",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kowai_1",
+"who": "gao",
+"text": "だいじょうぶだよ",
+"yomi": "大丈夫だよ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kowai_2",
+"who": "gao",
+"text": "てを つないで いこう",
+"yomi": "手をつないで行こう",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kowai_3",
+"who": "gao",
+"text": "いっしょに、ゆっくり のぼろうね",
+"yomi": "一緒に、ゆっくり登ろうね",
+"acc": [
+[
+"イッショニ,",
+4
+],
+[
+"ユックリ",
+3
+],
+[
+"ノボロオネ",
+3
+]
+],
+"job": "game"
+},
+{
+"key": "sx_kowai_3",
+"who": "gao",
+"text": "いっしょを、ゆっくり のぼろうね",
+"yomi": "一緒を、ゆっくり登ろうね",
+"acc": [
+[
+"イッショオ,",
+4
+],
+[
+"ユックリ",
+3
+],
+[
+"ノボロオネ",
+3
+]
+],
+"job": "game"
+},
+{
+"key": "sq_osaki",
+"who": "kamejii",
+"text": "ほっほ。わしは ゆっくりじゃから、さきに いきなさい",
+"yomi": "ほっほ。わしはゆっくりじゃから、先に行きなさい",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_osaki",
+"who": "kamejii",
+"text": "ほっほ。れいぎ ただしいのう",
+"yomi": "ほっほ。礼儀正しいのう",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_osaki_0",
+"who": "gao",
+"text": "おさきに",
+"yomi": "お先に",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_osaki_1",
+"who": "gao",
+"text": "おさきに しつれいします",
+"yomi": "お先に失礼します",
+"acc": [
+[
+"オサキニ",
+4
+],
+[
+"シツレエシマス",
+6
+]
+],
+"job": "game"
+},
+{
+"key": "sg_osaki_2",
+"who": "gao",
+"text": "せんせい、おさきに しつれいします",
+"yomi": "先生、お先に失礼します",
+"acc": [
+[
+"センセエ,",
+3
+],
+[
+"オサキニ",
+4
+],
+[
+"シツレエシマス",
+6
+]
+],
+"job": "game"
+},
+{
+"key": "sg_osaki_3",
+"who": "gao",
+"text": "ありがとうございます。おさきに しつれいします",
+"yomi": "ありがとうございます。お先に失礼します",
+"acc": [
+[
+"アリガトオ",
+2
+],
+[
+"ゴザイマス.",
+4
+],
+[
+"オサキニ",
+4
+],
+[
+"シツレエシマス",
+6
+]
+],
+"job": "game"
+},
+{
+"key": "sq_tobioriru",
+"who": "gao",
+"text": "へへっ、みてろよ！ いっきに とびおりるぞ！",
+"yomi": "へへっ、見てろよ！一気に飛び降りるぞ！",
+"acc": [
+[
+"ヘヘッ,",
+3
+],
+[
+"ミテロヨ!",
+1
+],
+[
+"イッキニ",
+4
+],
+[
+"トビオリルゾ!",
+4
+]
+],
+"job": "game"
+},
+{
+"key": "sr_tobioriru",
+"who": "gao",
+"text": "わ、わかったよ……",
+"yomi": "わ、わかったよ……",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_kaminai",
+"who": "mii",
+"text": "どうしたの？ こまった かお して",
+"yomi": "どうしたの？困った顔して",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_kaminai",
+"who": "mii",
+"text": "はい、どうぞ！ ころころ〜",
+"yomi": "はい、どうぞ！ころころー",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kaminai_0",
+"who": "gao",
+"text": "かみが ない",
+"yomi": "紙がない",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kaminai_1",
+"who": "gao",
+"text": "トイレットペーパーが ない",
+"yomi": "トイレットペーパーがない",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_kaminai_1",
+"who": "gao",
+"text": "トイレットペーパーを ない",
+"yomi": "トイレットペーパーをない",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kaminai_2",
+"who": "gao",
+"text": "トイレットペーパーが ありません",
+"yomi": "トイレットペーパーがありません",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_kaminai_2",
+"who": "gao",
+"text": "トイレットペーパーを ありません",
+"yomi": "トイレットペーパーをありません",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kaminai_3",
+"who": "gao",
+"text": "トイレットペーパーが ないので、もって きて ください",
+"yomi": "トイレットペーパーがないので、持ってきてください",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_mizu",
+"who": "pyon",
+"text": "きゃっ！ つめたーい！",
+"yomi": "きゃっ！冷たーい！",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_mizu",
+"who": "pyon",
+"text": "いいよ。タオルで ふくから",
+"yomi": "いいよ。タオルで拭くから",
+"acc": [
+[
+"イイヨ.",
+1
+],
+[
+"タオルデ",
+1
+],
+[
+"フクカラ",
+3
+]
+],
+"job": "game"
+},
+{
+"key": "sg_mizu_0",
+"who": "gao",
+"text": "ごめん",
+"yomi": "ごめん",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_mizu_1",
+"who": "gao",
+"text": "ごめんね",
+"yomi": "ごめんね",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_mizu_2",
+"who": "gao",
+"text": "みずを かけて ごめんね",
+"yomi": "水をかけてごめんね",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_mizu_2",
+"who": "gao",
+"text": "みずが かけて ごめんね",
+"yomi": "水がかけてごめんね",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_mizu_3",
+"who": "gao",
+"text": "わざとじゃ ないよ。みずを かけて ごめんね",
+"yomi": "わざとじゃないよ。水をかけてごめんね",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_netsu",
+"who": "meebaa",
+"text": "あら、おかおが まっかよ。どうしたの？",
+"yomi": "あら、お顔が真っ赤よ！どうしたの？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_netsu",
+"who": "meebaa",
+"text": "たいおんけいで、はかって みましょうね",
+"yomi": "体温計で、測ってみましょうね",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_netsu_0",
+"who": "gao",
+"text": "あつい",
+"yomi": "熱い",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_netsu_1",
+"who": "gao",
+"text": "あたまが いたい",
+"yomi": "頭が痛い",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_netsu_1",
+"who": "gao",
+"text": "あたまを いたい",
+"yomi": "頭を痛い",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_netsu_2",
+"who": "gao",
+"text": "ねつが あるみたいです",
+"yomi": "熱があるみたいです",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_netsu_2",
+"who": "gao",
+"text": "ねつを あるみたいです",
+"yomi": "熱をあるみたいです",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_netsu_3",
+"who": "gao",
+"text": "さむくて、あたまが いたいです",
+"yomi": "寒くて、頭が痛いです",
+"acc": [
+[
+"サムクテ,",
+1
+],
+[
+"アタマガ",
+3
+],
+[
+"イタイデス",
+2
+]
+],
+"job": "game"
+},
+{
+"key": "sq_hachi",
+"who": "meebaa",
+"text": "あらまあ、どうしたの？",
+"yomi": "あらまあ、どうしたの？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_hachi",
+"who": "meebaa",
+"text": "まあ、いたかったわね。こおりで ひやしましょう",
+"yomi": "まあ、痛かったわね。氷で冷やしましょう",
+"acc": [
+[
+"マア,",
+1
+],
+[
+"イタカッタワネ.",
+1
+],
+[
+"コオリデ",
+4
+],
+[
+"ヒヤシマショオ",
+5
+]
+],
+"job": "game"
+},
+{
+"key": "sg_hachi_0",
+"who": "gao",
+"text": "さされた",
+"yomi": "刺された",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_hachi_1",
+"who": "gao",
+"text": "はちに さされた",
+"yomi": "蜂に刺された",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_hachi_1",
+"who": "gao",
+"text": "はちを さされた",
+"yomi": "蜂を刺された",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_hachi_2",
+"who": "gao",
+"text": "はちに、てを さされました",
+"yomi": "蜂に、手を刺されました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_hachi_2",
+"who": "gao",
+"text": "はちが、てを さされました",
+"yomi": "蜂が、手を刺されました",
+"acc": [
+[
+"ハチガ,",
+3
+],
+[
+"テオ",
+1
+],
+[
+"ササレマシタ",
+4
+]
+],
+"job": "game"
+},
+{
+"key": "sg_hachi_3",
+"who": "gao",
+"text": "こうていで、はちに てを さされました",
+"yomi": "校庭で、蜂に手を刺されました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_tabesugi",
+"who": "meebaa",
+"text": "あら、おなかを おさえて、どうしたの？",
+"yomi": "あら、お腹を押さえて、どうしたの？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_tabesugi",
+"who": "meebaa",
+"text": "あらあら。ベッドで、すこし やすみましょうね",
+"yomi": "あらあら！ベッドで、少し休みましょうね",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_tabesugi_0",
+"who": "gao",
+"text": "おなか",
+"yomi": "お腹",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_tabesugi_1",
+"who": "gao",
+"text": "おなかが いたい",
+"yomi": "お腹が痛い",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_tabesugi_1",
+"who": "gao",
+"text": "おなかを いたい",
+"yomi": "お腹を痛い",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_tabesugi_2",
+"who": "gao",
+"text": "きゅうしょくを たべすぎました",
+"yomi": "給食を食べすぎました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_tabesugi_2",
+"who": "gao",
+"text": "きゅうしょくが たべすぎました",
+"yomi": "給食が食べすぎました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_tabesugi_3",
+"who": "gao",
+"text": "カレーを さんばいも たべて、おなかが いたいです",
+"yomi": "カレーを三杯も食べて、お腹が痛いです",
+"acc": [
+[
+"カレエオ",
+1
+],
+[
+"サンバイモ",
+1
+],
+[
+"タベテ,",
+1
+],
+[
+"オナカガ",
+4
+],
+[
+"イタイデス",
+2
+]
+],
+"job": "game"
+},
+{
+"key": "sq_enpitsu",
+"who": "kamejii",
+"text": "おや、こまった かおを して、どうしたね？",
+"yomi": "おや、困った顔をして、どうしたね？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_enpitsu",
+"who": "kamejii",
+"text": "ほっほ。これを つかいなさい",
+"yomi": "ほっほ。これを使いなさい",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_enpitsu_0",
+"who": "gao",
+"text": "えんぴつ",
+"yomi": "鉛筆",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_enpitsu_1",
+"who": "gao",
+"text": "えんぴつを わすれた",
+"yomi": "鉛筆を忘れた",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_enpitsu_1",
+"who": "gao",
+"text": "えんぴつが わすれた",
+"yomi": "鉛筆が忘れた",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_enpitsu_2",
+"who": "gao",
+"text": "えんぴつを かして ください",
+"yomi": "鉛筆を貸してください",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_enpitsu_2",
+"who": "gao",
+"text": "えんぴつが かして ください",
+"yomi": "鉛筆が貸してください",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_enpitsu_3",
+"who": "gao",
+"text": "えんぴつを わすれたので、かして ください",
+"yomi": "鉛筆を忘れたので、貸してください",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_kabin",
+"who": "kamejii",
+"text": "おや？ いまの おとは、なにかね？",
+"yomi": "おや？今の音は、なにかね？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_kabin",
+"who": "kamejii",
+"text": "ほっほ。しょうじきに いえて、えらいのう",
+"yomi": "ほっほ。正直に言えて、偉いのう",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kabin_0",
+"who": "gao",
+"text": "ごめんなさい",
+"yomi": "ごめんなさい",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kabin_1",
+"who": "gao",
+"text": "かびんを わりました",
+"yomi": "花瓶を割りました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_kabin_1",
+"who": "gao",
+"text": "かびんが わりました",
+"yomi": "花瓶が割りました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kabin_2",
+"who": "gao",
+"text": "かびんを わって しまいました",
+"yomi": "花瓶を割ってしまいました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_kabin_2",
+"who": "gao",
+"text": "かびんが わって しまいました",
+"yomi": "花瓶が割ってしまいました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kabin_3",
+"who": "gao",
+"text": "ボールが あたって、かびんを わって しまいました",
+"yomi": "ボールが当たって、花瓶を割ってしまいました",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_shizuka",
+"who": "gao",
+"text": "うおー！ この ほん、おもしれー！",
+"yomi": "うおー！この本、おもしれー！",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_shizuka",
+"who": "gao",
+"text": "……おっと。ごめん、しずかに するよ",
+"yomi": "……おっと。ごめん、静かにするよ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_kariru",
+"who": "nobbo",
+"text": "その ほんを、かりますか？",
+"yomi": "その本を、借りますか？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_kariru",
+"who": "nobbo",
+"text": "はい。らいしゅう、かえして くださいね",
+"yomi": "はい。来週、返してくださいね",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kariru_0",
+"who": "gao",
+"text": "はい、かります",
+"yomi": "はい、借ります",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kariru_1",
+"who": "gao",
+"text": "この ほんを かります",
+"yomi": "この本を借ります",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_kariru_1",
+"who": "gao",
+"text": "この ほんが かります",
+"yomi": "この本が借ります",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kariru_2",
+"who": "gao",
+"text": "この ほんを、かして ください",
+"yomi": "この本を、貸してください",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_kariru_2",
+"who": "gao",
+"text": "この ほんが、かして ください",
+"yomi": "この本が、貸してください",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_kariru_3",
+"who": "gao",
+"text": "この ほんを、いっしゅうかん かして ください",
+"yomi": "この本を、一週間貸してください",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sq_takai",
+"who": "nobbo",
+"text": "どうか しましたか？",
+"yomi": "どうかしましたか？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sr_takai",
+"who": "nobbo",
+"text": "はい、どうぞ",
+"yomi": "はい、どうぞ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_takai_0",
+"who": "gao",
+"text": "とって",
+"yomi": "取って",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_takai_1",
+"who": "gao",
+"text": "ほんを とって",
+"yomi": "本を取って",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_takai_2",
+"who": "gao",
+"text": "その ほんを、とって ください",
+"yomi": "その本を、取ってください",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sx_takai_2",
+"who": "gao",
+"text": "その ほんが、とって ください",
+"yomi": "その本が、取ってください",
+"acc": null,
+"job": "game"
+},
+{
+"key": "sg_takai_3",
+"who": "gao",
+"text": "いちばん うえの ほんを、とって ください",
+"yomi": "一番上の本を、取ってください",
+"acc": null,
+"job": "game"
+},
+{
+"key": "g_go",
+"who": "gao",
+"text": "いくぞ！",
+"yomi": "行くぞ！",
+"acc": null,
+"job": "game"
+},
+{
+"key": "g_huh",
+"who": "gao",
+"text": "あれ？ ちがった？",
+"yomi": "あれ？違った？",
+"acc": null,
+"job": "game"
+},
+{
+"key": "g_thanks",
+"who": "gao",
+"text": "そっか、ありがとな",
+"yomi": "そっか、ありがとな",
+"acc": null,
+"job": "game"
+},
+{
+"key": "g_good",
+"who": "gao",
+"text": "いい しょうぶ だったな",
+"yomi": "いい勝負だったな",
+"acc": null,
+"job": "game"
+},
+{
+"key": "g_win",
+"who": "gao",
+"text": "へへっ、おれの かちだ",
+"yomi": "へへっ、おれの勝ちだ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "gao",
+"who": "gao",
+"text": "つぎは、まけないぞ",
+"yomi": "次は、負けないぞ",
+"acc": null,
+"job": "game"
+},
+{
+"key": "doshin",
+"who": "doshin",
+"text": "どいて、あげるよ",
+"yomi": "どいて、あげるよ",
+"acc": [
+[
+"ドイテ,",
+1
+],
+[
+"アゲルヨ",
+3
+]
+],
+"job": "game"
+},
+{
+"key": "kamejii",
+"who": "kamejii",
+"text": "よく いえましたね",
+"yomi": "よく言えましたね",
+"acc": null,
+"job": "game"
+},
+{
+"key": "g_rival",
+"who": "gao",
+"text": "おれは がお！ どっちが さきに ゴールするか、きょうそうだ！",
+"yomi": "おれは、がお！どっちが先にゴールするか、競争だ！",
+"acc": [
+[
+"オレワ,",
+3
+],
+[
+"ガオ!",
+1
+],
+[
+"ドッチガ",
+1
+],
+[
+"サキニゴオルスルカ,",
+4
+],
+[
+"キョオソオダ!",
+5
+]
+],
+"job": "extra"
+},
+{
+"key": "g_rival2",
+"who": "gao",
+"text": "こんどは ほんきで いくぞ！",
+"yomi": "今度は本気で行くぞ！",
+"acc": null,
+"job": "extra"
+},
+{
+"key": "sg_hoken_4",
+"who": "gao",
+"text": "ろうかで ころんで、ひざから ちが でて います",
+"yomi": "廊下で転んで、膝から血が出ています",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_hoken_4",
+"who": "gao",
+"text": "ろうかで ころんで、ひざから ちを でて います",
+"yomi": "廊下で転んで、膝から血を出ています",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_hoken_5",
+"who": "gao",
+"text": "やすみじかんに ろうかで ころんで、ひざを すりむきました",
+"yomi": "休み時間に廊下で転んで、膝をすりむきました",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_uwabaki_4",
+"who": "gao",
+"text": "うわばきを いえに わすれたので、スリッパを かして ください",
+"yomi": "上履きを家に忘れたので、スリッパを貸してください",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_uwabaki_4",
+"who": "gao",
+"text": "うわばきが いえに わすれたので、スリッパを かして ください",
+"yomi": "上履きが家に忘れたので、スリッパを貸してください",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_uwabaki_5",
+"who": "gao",
+"text": "きのう もって かえって あらった あと、いえに わすれて きました",
+"yomi": "昨日持って帰って洗ったあと、家に忘れてきました",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_zukan_4",
+"who": "gao",
+"text": "シマウマが のって いる ずかんを さがして います",
+"yomi": "シマウマが載っている図鑑を探しています",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_zukan_4",
+"who": "gao",
+"text": "シマウマが のって いる ずかんが さがして います",
+"yomi": "シマウマが載っている図鑑が探しています",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_zukan_5",
+"who": "gao",
+"text": "どうぶつの ずかんを かりたいのですが、どこに ありますか",
+"yomi": "動物の図鑑を借りたいのですが、どこにありますか",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_tearai_4",
+"who": "gao",
+"text": "トイレの あとは、せっけんで ゆびの あいだまで あらいます",
+"yomi": "トイレのあとは、石けんで指の間まで洗います",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_tearai_4",
+"who": "gao",
+"text": "トイレの あとは、せっけんを ゆびの あいだまで あらいます",
+"yomi": "トイレのあとは、石けんを指の間まで洗います",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_tearai_5",
+"who": "gao",
+"text": "ばいきんが つかないように、せっけんで てを あらいます",
+"yomi": "ばい菌がつかないように、石けんで手を洗います",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_tetsudau_4",
+"who": "gao",
+"text": "はこが おもそうだね。ひとつ もって あげるよ",
+"yomi": "箱が重そうだね。一つ持ってあげるよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_tetsudau_4",
+"who": "gao",
+"text": "はこを おもそうだね。ひとつ もって あげるよ",
+"yomi": "箱を重そうだね。一つ持ってあげるよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_tetsudau_5",
+"who": "gao",
+"text": "ふたりで ひとつずつ もてば、かるく なるよ",
+"yomi": "二人で一つずつ持てば、軽くなるよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_shitsurei_4",
+"who": "gao",
+"text": "しつれいします。いちねんせいの しゅくだいを もって きました",
+"yomi": "失礼します。一年生の宿題を持ってきました",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_shitsurei_4",
+"who": "gao",
+"text": "しつれいします。いちねんせいの しゅくだいが もって きました",
+"yomi": "失礼します。一年生の宿題が持ってきました",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_shitsurei_5",
+"who": "gao",
+"text": "しつれいします。せんせいに たのまれて、プリントを とどけに きました",
+"yomi": "失礼します。先生に頼まれて、プリントを届けに来ました",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_ohayou_4",
+"who": "gao",
+"text": "おはようございます。きょうは はやく おきました",
+"yomi": "おはようございます。今日は早く起きました",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_ohayou_5",
+"who": "gao",
+"text": "こうちょうせんせい、おはようございます。きょうも よろしく おねがいします",
+"yomi": "校長先生、おはようございます。今日もよろしくお願いします",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kinou_4",
+"who": "gao",
+"text": "きのうは こうえんで、ブランコに たくさん のりました",
+"yomi": "昨日は公園で、ブランコにたくさん乗りました",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_kinou_4",
+"who": "gao",
+"text": "きのうは こうえんを、ブランコに たくさん のりました",
+"yomi": "昨日は公園を、ブランコにたくさん乗りました",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kinou_5",
+"who": "gao",
+"text": "きのう、ともだちと こうえんへ いって、ブランコで あそびました",
+"yomi": "昨日、友達と公園へ行って、ブランコで遊びました",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kasa_4",
+"who": "gao",
+"text": "かさを いえに わすれたので、いっしょに いれて ください",
+"yomi": "傘を家に忘れたので、一緒に入れてください",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_kasa_4",
+"who": "gao",
+"text": "かさが いえに わすれたので、いっしょに いれて ください",
+"yomi": "傘が家に忘れたので、一緒に入れてください",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kasa_5",
+"who": "gao",
+"text": "あめが ふって きたけど、かさが ないの。いっしょに かえっても いい？",
+"yomi": "雨が降ってきたけど、傘がないの。一緒に帰ってもいい？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_gyaku_4",
+"who": "gao",
+"text": "くつを いそいで はいたら、みぎと ひだりが はんたいに なっちゃった",
+"yomi": "靴を急いで履いたら、右と左が反対になっちゃった",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_gyaku_4",
+"who": "gao",
+"text": "くつが いそいで はいたら、みぎと ひだりが はんたいに なっちゃった",
+"yomi": "靴が急いで履いたら、右と左が反対になっちゃった",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_gyaku_5",
+"who": "gao",
+"text": "あ、ほんとだ。みぎと ひだりを はきかえて くるね",
+"yomi": "あ、本当だ。右と左を履き替えてくるね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_sayonara_4",
+"who": "gao",
+"text": "きょうは たのしかったね。また あした あそぼうね",
+"yomi": "今日は楽しかったね。またあした遊ぼうね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_sayonara_5",
+"who": "gao",
+"text": "もう かえる じかん だから、さようなら。また あした",
+"yomi": "もう帰る時間だから、さようなら。またあした",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_dekkai_4",
+"who": "gao",
+"text": "まちがえて、どしんの くつを はいちゃった。すぐ かえすね",
+"yomi": "間違えて、どしんの靴を履いちゃった。すぐ返すね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_dekkai_4",
+"who": "gao",
+"text": "まちがえて、どしんが くつを はいちゃった。すぐ かえすね",
+"yomi": "間違えて、どしんが靴を履いちゃった。すぐ返すね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_dekkai_5",
+"who": "gao",
+"text": "どしんの くつと まちがえちゃった。ごめんね、すぐ かえすね",
+"yomi": "どしんの靴と間違えちゃった。ごめんね、すぐ返すね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_doro_4",
+"who": "gao",
+"text": "そとで どろが ついたので、ぞうきんで ふいて きます",
+"yomi": "外で泥がついたので、雑巾でふいてきます",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_doro_4",
+"who": "gao",
+"text": "そとで どろを ついたので、ぞうきんで ふいて きます",
+"yomi": "外で泥をついたので、雑巾でふいてきます",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_doro_5",
+"who": "gao",
+"text": "ろうかを よごして ごめんね。すぐに ふいて きれいに するね",
+"yomi": "廊下を汚してごめんね。すぐにふいてきれいにするね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_otoshimono_4",
+"who": "gao",
+"text": "ちゅう、まって！ ピンクの ハンカチを おとしたよ",
+"yomi": "ちゅう、待って！ピンクのハンカチを落としたよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_otoshimono_4",
+"who": "gao",
+"text": "ちゅう、まって！ ピンクの ハンカチが おとしたよ",
+"yomi": "ちゅう、待って！ピンクのハンカチが落としたよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_otoshimono_5",
+"who": "gao",
+"text": "ちゅう、ハンカチを おとしたよ。はい、どうぞ",
+"yomi": "ちゅう、ハンカチを落としたよ。はい、どうぞ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kowai_4",
+"who": "gao",
+"text": "てを つないで、いっしょに ゆっくり のぼろうね",
+"yomi": "手をつないで、一緒にゆっくり登ろうね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_kowai_4",
+"who": "gao",
+"text": "てが つないで、いっしょに ゆっくり のぼろうね",
+"yomi": "手がつないで、一緒にゆっくり登ろうね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kowai_5",
+"who": "gao",
+"text": "こわく ないよ。てすりに つかまって、いっぽずつ のぼろう",
+"yomi": "怖くないよ。手すりにつかまって、いっぽずつ登ろう",
+"acc": null,
+"job": "fix2"
+},
+{
+"key": "sg_osaki_4",
+"who": "gao",
+"text": "ありがとうございます。それでは、おさきに しつれいします",
+"yomi": "ありがとうございます。それでは、お先に失礼します",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_osaki_5",
+"who": "gao",
+"text": "こうちょうせんせい、ありがとうございます。おさきに しつれいします",
+"yomi": "校長先生、ありがとうございます。お先に失礼します",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kaminai_4",
+"who": "gao",
+"text": "トイレットペーパーが ないので、とって もらえますか",
+"yomi": "トイレットペーパーがないので、取ってもらえますか",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_kaminai_4",
+"who": "gao",
+"text": "トイレットペーパーを ないので、とって もらえますか",
+"yomi": "トイレットペーパーをないので、取ってもらえますか",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kaminai_5",
+"who": "gao",
+"text": "トイレの かみが きれて いるので、あたらしいのを ください",
+"yomi": "トイレの紙が切れているので、新しいのをください",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_mizu_4",
+"who": "gao",
+"text": "わざとじゃ ないけど、みずを かけちゃって ごめんね",
+"yomi": "わざとじゃないけど、水をかけちゃってごめんね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_mizu_4",
+"who": "gao",
+"text": "わざとじゃ ないけど、みずが かけちゃって ごめんね",
+"yomi": "わざとじゃないけど、水がかけちゃってごめんね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_mizu_5",
+"who": "gao",
+"text": "てを あらって いたら、みずが とんじゃった。ごめんね",
+"yomi": "手を洗っていたら、水が飛んじゃった。ごめんね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_netsu_4",
+"who": "gao",
+"text": "さむくて、あたまが ずきずき いたいです",
+"yomi": "寒くて、頭がずきずき痛いです",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_netsu_4",
+"who": "gao",
+"text": "さむくて、あたまを ずきずき いたいです",
+"yomi": "寒くて、頭をずきずき痛いです",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_netsu_5",
+"who": "gao",
+"text": "けさから さむくて、あたまが いたいです。ねつが あるかも しれません",
+"yomi": "今朝から寒くて、頭が痛いです。熱があるかもしれません",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_hachi_4",
+"who": "gao",
+"text": "こうていで あそんで いたら、はちに てを さされました",
+"yomi": "校庭で遊んでいたら、蜂に手を刺されました",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_hachi_4",
+"who": "gao",
+"text": "こうていで あそんで いたら、はちが てを さされました",
+"yomi": "校庭で遊んでいたら、蜂が手を刺されました",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_hachi_5",
+"who": "gao",
+"text": "はちに さされた ところが、あかく はれて いたいです",
+"yomi": "蜂に刺されたところが、赤く腫れて痛いです",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_tabesugi_4",
+"who": "gao",
+"text": "きゅうしょくの カレーを たべすぎて、おなかが いたいです",
+"yomi": "給食のカレーを食べすぎて、お腹が痛いです",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_tabesugi_4",
+"who": "gao",
+"text": "きゅうしょくの カレーが たべすぎて、おなかが いたいです",
+"yomi": "給食のカレーが食べすぎて、お腹が痛いです",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_tabesugi_5",
+"who": "gao",
+"text": "カレーが おいしくて、さんばいも おかわり しちゃいました",
+"yomi": "カレーがおいしくて、三杯もお代わりしちゃいました",
+"acc": null,
+"job": "fix2"
+},
+{
+"key": "sg_enpitsu_4",
+"who": "gao",
+"text": "ふでばこを わすれたので、えんぴつを いっぽん かして ください",
+"yomi": "筆箱を忘れたので、鉛筆を一本貸してください",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_enpitsu_4",
+"who": "gao",
+"text": "ふでばこが わすれたので、えんぴつを いっぽん かして ください",
+"yomi": "筆箱が忘れたので、鉛筆を一本貸してください",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_enpitsu_5",
+"who": "gao",
+"text": "こうちょうせんせい、えんぴつを わすれました。かして いただけますか",
+"yomi": "校長先生、鉛筆を忘れました。貸していただけますか",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kabin_4",
+"who": "gao",
+"text": "ボールあそびを して いたら、かびんを わって しまいました。ごめんなさい",
+"yomi": "ボール遊びをしていたら、花瓶を割ってしまいました。ごめんなさい",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_kabin_4",
+"who": "gao",
+"text": "ボールあそびを して いたら、かびんが わって しまいました。ごめんなさい",
+"yomi": "ボール遊びをしていたら、花瓶が割ってしまいました。ごめんなさい",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kabin_5",
+"who": "gao",
+"text": "わざとじゃ ないけど、ボールで かびんを わって しまいました",
+"yomi": "わざとじゃないけど、ボールで花瓶を割ってしまいました",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kariru_4",
+"who": "gao",
+"text": "この ほんを、いっしゅうかん かりても いいですか",
+"yomi": "この本を、一週間借りてもいいですか",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_kariru_4",
+"who": "gao",
+"text": "この ほんが、いっしゅうかん かりても いいですか",
+"yomi": "この本が、一週間借りてもいいですか",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kariru_5",
+"who": "gao",
+"text": "この ずかんが おもしろそうなので、かして ください",
+"yomi": "この図鑑が面白そうなので、貸してください",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_takai_4",
+"who": "gao",
+"text": "いちばん うえの あかい ほんを、とって ください",
+"yomi": "一番上の赤い本を、取ってください",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_takai_4",
+"who": "gao",
+"text": "いちばん うえの あかい ほんが、とって ください",
+"yomi": "一番上の赤い本が、取ってください",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_takai_5",
+"who": "gao",
+"text": "てが とどかないので、うえの ほんを とって もらえますか",
+"yomi": "手が届かないので、上の本を取ってもらえますか",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_unko",
+"who": "doshin",
+"text": "ふう、すっきりした！ あれ、どうしたの？",
+"yomi": "ふう、すっきりした！あれ、どうしたの？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_unko",
+"who": "doshin",
+"text": "あっ、わすれてた！ ごめんね。ジャーッ！",
+"yomi": "あっ、忘れてた！ごめんね。ジャーッ！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_unko_0",
+"who": "gao",
+"text": "ながして",
+"yomi": "流して",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_unko_1",
+"who": "gao",
+"text": "うんち、ながしてね",
+"yomi": "ウンチ、流してね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_unko_2",
+"who": "gao",
+"text": "うんちを ながして ないよ",
+"yomi": "ウンチを流してないよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_unko_2",
+"who": "gao",
+"text": "うんちが ながして ないよ",
+"yomi": "ウンチが流してないよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_unko_3",
+"who": "gao",
+"text": "どしん、トイレの うんちを ながしてね",
+"yomi": "どしん、トイレのウンチを流してね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_unko_3",
+"who": "gao",
+"text": "どしん、トイレの うんちが ながしてね",
+"yomi": "どしん、トイレのウンチが流してね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_unko_4",
+"who": "gao",
+"text": "トイレの あとは、ちゃんと うんちを ながそうね",
+"yomi": "トイレのあとは、ちゃんとウンチを流そうね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_unko_4",
+"who": "gao",
+"text": "トイレの あとは、ちゃんと うんちが ながそうね",
+"yomi": "トイレのあとは、ちゃんとウンチが流そうね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_unko_5",
+"who": "gao",
+"text": "つぎの ひとが こまるから、うんちは ちゃんと ながしてね",
+"yomi": "次の人が困るから、ウンチはちゃんと流してね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_junban",
+"who": "gao",
+"text": "へへっ、おれが さきだぞ！",
+"yomi": "へへっ、俺が先だぞ！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_junban",
+"who": "gao",
+"text": "わ、わるかった。うしろに ならぶよ",
+"yomi": "わ、悪かった。後ろに並ぶよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_sakaagari",
+"who": "pyon",
+"text": "みて！ さかあがり、できたよ！",
+"yomi": "見て！さかあがり、できたよ！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_sakaagari",
+"who": "pyon",
+"text": "いいよ！ おなかを ぼうに くっつけるんだよ",
+"yomi": "いいよ！お腹を棒にくっつけるんだよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_sakaagari_0",
+"who": "gao",
+"text": "すごい",
+"yomi": "すごい",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_sakaagari_1",
+"who": "gao",
+"text": "すごいね",
+"yomi": "すごいね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_sakaagari_2",
+"who": "gao",
+"text": "さかあがり、じょうずだね",
+"yomi": "さかあがり、上手だね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_sakaagari_3",
+"who": "gao",
+"text": "いっかいで できるなんて、すごいね",
+"yomi": "一回でできるなんて、すごいね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_sakaagari_3",
+"who": "gao",
+"text": "いっかいを できるなんて、すごいね",
+"yomi": "一回をできるなんて、すごいね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_sakaagari_4",
+"who": "gao",
+"text": "すごいね。こんど、こつを おしえて くれる？",
+"yomi": "すごいね。今度、コツを教えてくれる？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_sakaagari_4",
+"who": "gao",
+"text": "すごいね。こんど、こつが おしえて くれる？",
+"yomi": "すごいね。今度、コツが教えてくれる？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_sakaagari_5",
+"who": "gao",
+"text": "さかあがり、かっこよかった。どう やるのか おしえて",
+"yomi": "さかあがり、かっこよかった。どうやるのか教えて",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_boushi",
+"who": "nobbo",
+"text": "おや、どうか しましたか？",
+"yomi": "おや、どうかしましたか？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_boushi",
+"who": "nobbo",
+"text": "はい、どうぞ。きょうは かぜが つよいですね",
+"yomi": "はい、どうぞ。今日は風が強いですね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_boushi_0",
+"who": "pyon",
+"text": "ぼうし",
+"yomi": "帽子",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_boushi_1",
+"who": "pyon",
+"text": "ぼうしが とんだ",
+"yomi": "帽子が飛んだ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_boushi_1",
+"who": "pyon",
+"text": "ぼうしを とんだ",
+"yomi": "帽子を飛んだ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_boushi_2",
+"who": "pyon",
+"text": "ぼうしが きに ひっかかりました",
+"yomi": "帽子が木に引っかかりました",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_boushi_2",
+"who": "pyon",
+"text": "ぼうしを きに ひっかかりました",
+"yomi": "帽子を木に引っかかりました",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_boushi_3",
+"who": "pyon",
+"text": "かぜで ぼうしが とんで、きに ひっかかりました",
+"yomi": "風で帽子が飛んで、木に引っかかりました",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_boushi_4",
+"who": "pyon",
+"text": "ぼうしが きに ひっかかって とれないので、とって ください",
+"yomi": "帽子が木に引っかかって取れないので、取ってください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_boushi_4",
+"who": "pyon",
+"text": "ぼうしを きに ひっかかって とれないので、とって ください",
+"yomi": "帽子を木に引っかかって取れないので、取ってください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_boushi_5",
+"who": "pyon",
+"text": "せの たかい せんせい、きの ぼうしを とって もらえますか",
+"yomi": "背の高い先生、木の帽子を取ってもらえますか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_sunanome",
+"who": "meebaa",
+"text": "あら、めを こすって、どうしたの？",
+"yomi": "あら、目をこすって、どうしたの？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_sunanome",
+"who": "meebaa",
+"text": "こすったら だめよ。おみずで あらいましょうね",
+"yomi": "こすったらだめよ。お水で洗いましょうね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_sunanome_0",
+"who": "pyon",
+"text": "いたい",
+"yomi": "痛い",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_sunanome_1",
+"who": "pyon",
+"text": "めが いたい",
+"yomi": "目が痛い",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_sunanome_1",
+"who": "pyon",
+"text": "めを いたい",
+"yomi": "目を痛い",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_sunanome_2",
+"who": "pyon",
+"text": "すなが めに はいりました",
+"yomi": "砂が目に入りました",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_sunanome_2",
+"who": "pyon",
+"text": "すなを めに はいりました",
+"yomi": "砂を目に入りました",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_sunanome_3",
+"who": "pyon",
+"text": "すなばで あそんで いたら、めに すなが はいりました",
+"yomi": "砂場で遊んでいたら、目に砂が入りました",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_sunanome_4",
+"who": "pyon",
+"text": "すなが めに はいって、いたくて あけられません",
+"yomi": "砂が目に入って、痛くてあけられません",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_sunanome_4",
+"who": "pyon",
+"text": "すなを めに はいって、いたくて あけられません",
+"yomi": "砂を目に入って、痛くてあけられません",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_sunanome_5",
+"who": "pyon",
+"text": "かぜで すなが とんで きて、めに はいって しまいました",
+"yomi": "風で砂が飛んできて、目に入ってしまいました",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_oshiro",
+"who": "doshin",
+"text": "あっ……ごめん。ふんじゃった……",
+"yomi": "あっ……ごめん。踏んじゃった……",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_oshiro",
+"who": "doshin",
+"text": "ありがとう！ ぼく、みずを はこぶね",
+"yomi": "ありがとう！僕、水を運ぶね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_oshiro_0",
+"who": "pyon",
+"text": "いいよ",
+"yomi": "いいよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_oshiro_1",
+"who": "pyon",
+"text": "いいよ、だいじょうぶ",
+"yomi": "いいよ、大丈夫",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_oshiro_2",
+"who": "pyon",
+"text": "また いっしょに つくろう",
+"yomi": "また一緒に作ろう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_oshiro_3",
+"who": "pyon",
+"text": "わざとじゃ ないから、いいよ",
+"yomi": "わざとじゃないから、いいよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_oshiro_4",
+"who": "pyon",
+"text": "だいじょうぶだよ。こんどは もっと おおきいのを つくろう",
+"yomi": "大丈夫だよ。今度はもっと大きいのを作ろう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_oshiro_4",
+"who": "pyon",
+"text": "だいじょうぶだよ。こんどは もっと おおきいのが つくろう",
+"yomi": "大丈夫だよ。今度はもっと大きいのが作ろう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_oshiro_5",
+"who": "pyon",
+"text": "わざとじゃ ないって わかってるよ。もういちど いっしょに つくろう",
+"yomi": "わざとじゃないってわかってるよ。もう一度一緒に作ろう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_scoop",
+"who": "mii",
+"text": "なあに？ この スコップ？",
+"yomi": "なあに？このスコップ？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_scoop",
+"who": "mii",
+"text": "いいよ。じゃあ、いっしょに つくろう",
+"yomi": "いいよ。じゃあ、一緒に作ろう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_scoop_0",
+"who": "pyon",
+"text": "かして",
+"yomi": "貸して",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_scoop_1",
+"who": "pyon",
+"text": "スコップ、かして",
+"yomi": "スコップ、貸して",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_scoop_2",
+"who": "pyon",
+"text": "スコップを かして くれる？",
+"yomi": "スコップを貸してくれる？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_scoop_2",
+"who": "pyon",
+"text": "スコップが かして くれる？",
+"yomi": "スコップが貸してくれる？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_scoop_3",
+"who": "pyon",
+"text": "つかいおわったら、スコップを かして くれる？",
+"yomi": "使い終わったら、スコップを貸してくれる？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_scoop_4",
+"who": "pyon",
+"text": "すなで やまを つくりたいから、スコップを かして くれる？",
+"yomi": "砂で山を作りたいから、スコップを貸してくれる？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_scoop_4",
+"who": "pyon",
+"text": "すなで やまを つくりたいから、スコップが かして くれる？",
+"yomi": "砂で山を作りたいから、スコップが貸してくれる？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_scoop_5",
+"who": "pyon",
+"text": "あとで いいから、つかいおわったら スコップを かして くれないかな",
+"yomi": "あとでいいから、使い終わったらスコップを貸してくれないかな",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_kakekko",
+"who": "gao",
+"text": "へへーん、おれの かちー！",
+"yomi": "へへーん、俺の勝ちー！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_kakekko",
+"who": "gao",
+"text": "おう！ いつでも うけて たつぜ",
+"yomi": "おう！いつでも受けて立つぜ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_koronda",
+"who": "pyon",
+"text": "いたたた……",
+"yomi": "いたたた……",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_koronda",
+"who": "pyon",
+"text": "ありがとう……やさしいね",
+"yomi": "ありがとう……優しいね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_koronda_0",
+"who": "gao",
+"text": "だいじょうぶ？",
+"yomi": "大丈夫？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_koronda_1",
+"who": "gao",
+"text": "だいじょうぶ？ たてる？",
+"yomi": "大丈夫？立てる？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_koronda_2",
+"who": "gao",
+"text": "てを かそうか？",
+"yomi": "手を貸そうか？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_koronda_2",
+"who": "gao",
+"text": "てが かそうか？",
+"yomi": "手が貸そうか？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_koronda_3",
+"who": "gao",
+"text": "いっしょに ほけんしつに いこうか",
+"yomi": "一緒に保健室に行こうか",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_koronda_3",
+"who": "gao",
+"text": "いっしょに ほけんしつを いこうか",
+"yomi": "一緒に保健室を行こうか",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_koronda_4",
+"who": "gao",
+"text": "ちが でてるよ。ほけんしつで みて もらおう",
+"yomi": "血が出てるよ。保健室で見てもらおう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_koronda_5",
+"who": "gao",
+"text": "むりしないでね。いっしょに ほけんしつまで ゆっくり あるこう",
+"yomi": "無理しないでね。一緒に保健室までゆっくり歩こう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_ouen",
+"who": "doshin",
+"text": "はあ、はあ……もう、はしれないよう",
+"yomi": "はあ、はあ……もう、走れないよう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_ouen",
+"who": "doshin",
+"text": "ありがとう！ ……ゴール！ ぶおーっ！",
+"yomi": "ありがとう！……ゴール！ぶおーっ！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_ouen_0",
+"who": "pyon",
+"text": "がんばれ",
+"yomi": "頑張れ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_ouen_1",
+"who": "pyon",
+"text": "がんばって",
+"yomi": "頑張って",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_ouen_2",
+"who": "pyon",
+"text": "あと すこしだよ、がんばれ",
+"yomi": "あと少しだよ、頑張れ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_ouen_3",
+"who": "pyon",
+"text": "ゴールまで あと すこし。がんばって",
+"yomi": "ゴールまであと少し。頑張って",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_ouen_4",
+"who": "pyon",
+"text": "ゆっくりで いいよ。さいごまで いっしょに はしろう",
+"yomi": "ゆっくりでいいよ。最後まで一緒に走ろう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_ouen_5",
+"who": "pyon",
+"text": "どしん、もう すこしで ゴールだよ。いっしょに がんばろう",
+"yomi": "どしん、もう少しでゴールだよ。一緒に頑張ろう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_mizunomi",
+"who": "mii",
+"text": "まだ？ わたしも のみたいんだけど",
+"yomi": "まだ？私も飲みたいんだけど",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_mizunomi",
+"who": "mii",
+"text": "ありがと。ごくごく……",
+"yomi": "ありがと。ごくごく……",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_mizunomi_0",
+"who": "pyon",
+"text": "ごめん",
+"yomi": "ごめん",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_mizunomi_1",
+"who": "pyon",
+"text": "ごめんね、どうぞ",
+"yomi": "ごめんね、どうぞ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_mizunomi_2",
+"who": "pyon",
+"text": "おまたせ、どうぞ",
+"yomi": "お待たせ、どうぞ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_mizunomi_3",
+"who": "pyon",
+"text": "ながく のんで ごめんね。どうぞ",
+"yomi": "長く飲んでごめんね。どうぞ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_mizunomi_4",
+"who": "pyon",
+"text": "のどが かわいて いて、ながく のんじゃった。どうぞ",
+"yomi": "喉が渇いていて、長く飲んじゃった。どうぞ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_mizunomi_4",
+"who": "pyon",
+"text": "のどを かわいて いて、ながく のんじゃった。どうぞ",
+"yomi": "喉を渇いていて、長く飲んじゃった。どうぞ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_mizunomi_5",
+"who": "pyon",
+"text": "まって いたのに、きが つかなくて ごめんね",
+"yomi": "待っていたのに、気がつかなくてごめんね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_jaguchi",
+"who": "gao",
+"text": "ぷはーっ、うまかった！ さあ、いこうぜ",
+"yomi": "ぷはーっ、うまかった！さあ、行こうぜ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_jaguchi",
+"who": "gao",
+"text": "おっと、いけねえ。きゅっきゅっと",
+"yomi": "おっと、いけねえ。きゅっきゅっと",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_kurakura",
+"who": "pyon",
+"text": "なんだか、くらくら するよう……",
+"yomi": "なんだか、くらくらするよう……",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_kurakura",
+"who": "pyon",
+"text": "ありがとう。……すこし らくに なったよ",
+"yomi": "ありがとう。……少し楽になったよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kurakura_0",
+"who": "gao",
+"text": "やすもう",
+"yomi": "休もう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kurakura_1",
+"who": "gao",
+"text": "ひかげで やすもう",
+"yomi": "日陰で休もう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kurakura_2",
+"who": "gao",
+"text": "みずを のんで やすもう",
+"yomi": "水を飲んで休もう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_kurakura_2",
+"who": "gao",
+"text": "みずが のんで やすもう",
+"yomi": "水が飲んで休もう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kurakura_3",
+"who": "gao",
+"text": "あついから、ひかげで すこし やすもう",
+"yomi": "暑いから、日陰で少し休もう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kurakura_4",
+"who": "gao",
+"text": "かおが あかいよ。みずを のんで、ひかげで やすもう",
+"yomi": "顔が赤いよ。水を飲んで、日陰で休もう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kurakura_5",
+"who": "gao",
+"text": "ねっちゅうしょう かも しれないから、せんせいを よんで くるね",
+"yomi": "熱中症かもしれないから、先生を呼んでくるね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_sakasama",
+"who": "gao",
+"text": "へへっ、したから のぼって やるぜ！",
+"yomi": "へへっ、下から登ってやるぜ！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_sakasama",
+"who": "gao",
+"text": "ちぇっ、わかったよ。かいだんから いくよ",
+"yomi": "ちぇっ、わかったよ。階段から行くよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_irete",
+"who": "mii",
+"text": "なあに？",
+"yomi": "なあに？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_irete",
+"who": "mii",
+"text": "いいよ！ じゃあ、おには ちゅうね",
+"yomi": "いいよ！じゃあ、鬼はちゅうね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_irete_0",
+"who": "gao",
+"text": "いれて",
+"yomi": "入れて",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_irete_1",
+"who": "gao",
+"text": "いれて ください",
+"yomi": "入れてください",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_irete_2",
+"who": "gao",
+"text": "いっしょに あそぼう",
+"yomi": "一緒に遊ぼう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_irete_3",
+"who": "gao",
+"text": "おにごっこ、いっしょに やっても いい？",
+"yomi": "鬼ごっこ、一緒にやってもいい？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_irete_4",
+"who": "gao",
+"text": "たのしそうだね。おにごっこに いれて くれる？",
+"yomi": "楽しそうだね。鬼ごっこに入れてくれる？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_irete_4",
+"who": "gao",
+"text": "たのしそうだね。おにごっこを いれて くれる？",
+"yomi": "楽しそうだね。鬼ごっこを入れてくれる？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_irete_5",
+"who": "gao",
+"text": "ずっと みて いたら、やりたく なっちゃった。なかまに いれて",
+"yomi": "ずっと見ていたら、やりたくなっちゃった。仲間に入れて",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_shitabutsu",
+"who": "chu",
+"text": "いたた……",
+"yomi": "いたた……",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_shitabutsu",
+"who": "chu",
+"text": "ううん、だいじょうぶ。ありがとう",
+"yomi": "ううん、大丈夫。ありがとう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_shitabutsu_0",
+"who": "mii",
+"text": "ごめん",
+"yomi": "ごめん",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_shitabutsu_1",
+"who": "mii",
+"text": "ごめんね",
+"yomi": "ごめんね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_shitabutsu_2",
+"who": "mii",
+"text": "ぶつかって ごめんね",
+"yomi": "ぶつかってごめんね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_shitabutsu_3",
+"who": "mii",
+"text": "したに いるのに きが つかなくて、ごめんね",
+"yomi": "下にいるのに気がつかなくて、ごめんね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_shitabutsu_4",
+"who": "mii",
+"text": "ぶつかって ごめんね。けがは ない？",
+"yomi": "ぶつかってごめんね。怪我はない？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_shitabutsu_5",
+"who": "mii",
+"text": "つぎからは したを よく みてから すべるね。ごめんね",
+"yomi": "次からは下をよく見てから滑るね。ごめんね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_kawatte",
+"who": "pyon",
+"text": "♪ゆーら、ゆーら",
+"yomi": "ゆーら、ゆーら",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_kawatte",
+"who": "pyon",
+"text": "いいよ！ じゅう かぞえるね。いーち、にー……",
+"yomi": "いいよ！じゅう数えるね。いーち、にー……",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kawatte_0",
+"who": "mii",
+"text": "かわって",
+"yomi": "代わって",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kawatte_1",
+"who": "mii",
+"text": "かわって くれる？",
+"yomi": "代わってくれる？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kawatte_2",
+"who": "mii",
+"text": "つぎ、かわって くれる？",
+"yomi": "次、代わってくれる？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kawatte_3",
+"who": "mii",
+"text": "じゅう かぞえたら、かわって くれる？",
+"yomi": "じゅう数えたら、代わってくれる？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kawatte_4",
+"who": "mii",
+"text": "ずっと まって いるから、つぎ かわって くれる？",
+"yomi": "ずっと待っているから、次、代わってくれる？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kawatte_5",
+"who": "mii",
+"text": "わたしも のりたいな。じゅう かぞえたら、こうたい しよう",
+"yomi": "私も乗りたいな。じゅう数えたら、交代しよう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_oshite",
+"who": "chu",
+"text": "せなか、おして くれる？",
+"yomi": "背中、押してくれる？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_oshite",
+"who": "chu",
+"text": "わーい！ たかい、たかーい！",
+"yomi": "わーい！高い、たかーい！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_oshite_0",
+"who": "mii",
+"text": "いいよ",
+"yomi": "いいよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_oshite_1",
+"who": "mii",
+"text": "いいよ、おすね",
+"yomi": "いいよ、押すね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_oshite_2",
+"who": "mii",
+"text": "いくよ。しっかり つかまってね",
+"yomi": "行くよ。しっかりつかまってね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_oshite_3",
+"who": "mii",
+"text": "しっかり つかまってね。そっと おすよ",
+"yomi": "しっかりつかまってね。そっと押すよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_oshite_4",
+"who": "mii",
+"text": "こわかったら いってね。ゆっくり おすからね",
+"yomi": "怖かったら、いってね。ゆっくり押すからね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_oshite_5",
+"who": "mii",
+"text": "てを はなさないでね。いち、にの、さんで おすよ",
+"yomi": "手を離さないでね。いち、にの、さんで押すよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_chime",
+"who": "pyon",
+"text": "もっと あそぼうよー",
+"yomi": "もっと遊ぼうよー",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_chime",
+"who": "pyon",
+"text": "そうだね。また あしたね！",
+"yomi": "そうだね。またあしたね！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_chime_0",
+"who": "mii",
+"text": "かえろう",
+"yomi": "帰ろう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_chime_1",
+"who": "mii",
+"text": "もう かえる じかんだよ",
+"yomi": "もう帰る時間だよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_chime_2",
+"who": "mii",
+"text": "チャイムが なったから かえろう",
+"yomi": "チャイムが鳴ったから帰ろう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_chime_2",
+"who": "mii",
+"text": "チャイムを なったから かえろう",
+"yomi": "チャイムを鳴ったから帰ろう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_chime_3",
+"who": "mii",
+"text": "ごじの チャイムが なったから、もう かえろうね",
+"yomi": "五時のチャイムが鳴ったから、もう帰ろうね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_chime_4",
+"who": "mii",
+"text": "おうちの ひとが しんぱい するから、きょうは かえろう",
+"yomi": "おうちの人が心配するから、今日は帰ろう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_chime_5",
+"who": "mii",
+"text": "また あした あそぼう。きょうは チャイムが なったから かえろうね",
+"yomi": "またあした遊ぼう。今日はチャイムが鳴ったから帰ろうね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_gomi",
+"who": "gao",
+"text": "ぽいっ。あー、うまかった",
+"yomi": "ぽいっ。あー、うまかった",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_gomi",
+"who": "gao",
+"text": "ちぇっ、わかったよ。ひろって すてるよ",
+"yomi": "ちぇっ、わかったよ。拾って捨てるよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_hanbunko",
+"who": "chu",
+"text": "いいなあ……おいしそう……",
+"yomi": "いいなあ……おいしそう……",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_hanbunko",
+"who": "chu",
+"text": "わあ、ありがとう！ はんぶんこ、うれしいな",
+"yomi": "わあ、ありがとう！半分こ、うれしいな",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_hanbunko_0",
+"who": "mii",
+"text": "どうぞ",
+"yomi": "どうぞ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_hanbunko_1",
+"who": "mii",
+"text": "はんぶん どうぞ",
+"yomi": "半分どうぞ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_hanbunko_2",
+"who": "mii",
+"text": "はんぶんこ しよう",
+"yomi": "半分こしよう",
+"acc": [
+[
+"ハンブンコ",
+5
+],
+[
+"シヨオ",
+2
+]
+],
+"job": "rivals"
+},
+{
+"key": "sg_hanbunko_3",
+"who": "mii",
+"text": "おかし、はんぶんこ して たべよう",
+"yomi": "お菓子、半分こして食べよう",
+"acc": [
+[
+"オカシ,",
+2
+],
+[
+"ハンブンコシテ",
+5
+],
+[
+"タベヨオ",
+2
+]
+],
+"job": "rivals"
+},
+{
+"key": "sg_hanbunko_4",
+"who": "mii",
+"text": "ひとりで たべるより、ふたりで たべたほうが おいしいね",
+"yomi": "一人で食べるより、二人で食べた方がおいしいね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_hanbunko_5",
+"who": "mii",
+"text": "いっしょに たべよう。はんぶんこ すると、もっと おいしいよ",
+"yomi": "一緒に食べよう。半分こすると、もっとおいしいよ",
+"acc": [
+[
+"イッショニ",
+4
+],
+[
+"タベヨオ.",
+2
+],
+[
+"ハンブンコスルト,",
+5
+],
+[
+"モット",
+1
+],
+[
+"オイシイヨ",
+3
+]
+],
+"job": "rivals"
+},
+{
+"key": "sq_aisu",
+"who": "mii",
+"text": "あーん……アイス、おとしちゃった……",
+"yomi": "あーん……アイス、落としちゃった……",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_aisu",
+"who": "mii",
+"text": "うん……ありがとう。げんき でたよ",
+"yomi": "うん……ありがとう。元気出たよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_aisu_0",
+"who": "gao",
+"text": "だいじょうぶ？",
+"yomi": "大丈夫？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_aisu_1",
+"who": "gao",
+"text": "ざんねんだったね",
+"yomi": "残念だったね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_aisu_2",
+"who": "gao",
+"text": "かなしいね。だいじょうぶ？",
+"yomi": "悲しいね。大丈夫？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_aisu_3",
+"who": "gao",
+"text": "おいしそうだったのに、ざんねんだったね",
+"yomi": "おいしそうだったのに、残念だったね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_aisu_4",
+"who": "gao",
+"text": "なかないで。わたしの アイス、ひとくち どうぞ",
+"yomi": "泣かないで。私のアイス、一口どうぞ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_aisu_5",
+"who": "gao",
+"text": "アイスが おちて かなしいね。いっしょに おみせで かいなおそう",
+"yomi": "アイスが落ちて悲しいね。一緒にお店で買い直そう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_michi",
+"who": "kamejii",
+"text": "すみません。トイレは どこかのう？",
+"yomi": "すみません。トイレはどこかのう？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_michi",
+"who": "kamejii",
+"text": "ほっほ、ありがとう。たすかったよ",
+"yomi": "ほっほ、ありがとう。助かったよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_michi_0",
+"who": "mii",
+"text": "あっち",
+"yomi": "あっち",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_michi_1",
+"who": "mii",
+"text": "あっちです",
+"yomi": "あっちです",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_michi_2",
+"who": "mii",
+"text": "トイレは あっちに あります",
+"yomi": "トイレはあっちにあります",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_michi_3",
+"who": "mii",
+"text": "トイレは、すべりだいの となりに あります",
+"yomi": "トイレは、滑り台の隣にあります",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_michi_3",
+"who": "mii",
+"text": "トイレを、すべりだいの となりに あります",
+"yomi": "トイレを、滑り台の隣にあります",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_michi_4",
+"who": "mii",
+"text": "いけの むこうに ある、すべりだいの となりです",
+"yomi": "池の向こうにある、滑り台の隣です",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_michi_5",
+"who": "mii",
+"text": "いっしょに いきましょうか。トイレは、すべりだいの となりです",
+"yomi": "一緒に行きましょうか。トイレは、滑り台の隣です",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_kaeru",
+"who": "mii",
+"text": "なに みてるの？",
+"yomi": "何見てるの？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_kaeru",
+"who": "mii",
+"text": "ほんとだ！ ぴょーんって とんだ！",
+"yomi": "本当だ！ぴょーんって跳んだ！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kaeru_0",
+"who": "gao",
+"text": "かえる",
+"yomi": "カエル",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kaeru_1",
+"who": "gao",
+"text": "かえるが いる",
+"yomi": "カエルがいる",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_kaeru_1",
+"who": "gao",
+"text": "かえるを いる",
+"yomi": "カエルをいる",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kaeru_2",
+"who": "gao",
+"text": "いけに かえるが いるよ",
+"yomi": "池にカエルがいるよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kaeru_3",
+"who": "gao",
+"text": "みて！ はっぱの うえに かえるが いるよ",
+"yomi": "見て！葉っぱの上にカエルがいるよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_kaeru_3",
+"who": "gao",
+"text": "みて！ はっぱの うえを かえるが いるよ",
+"yomi": "見て！葉っぱの上をカエルがいるよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kaeru_4",
+"who": "gao",
+"text": "みどりいろの ちいさな かえるが、はっぱの うえに いるよ",
+"yomi": "緑色の小さなカエルが、葉っぱの上にいるよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kaeru_5",
+"who": "gao",
+"text": "しーっ。おおきな こえを だすと、かえるが にげちゃうよ",
+"yomi": "しーっ。大きな声を出すと、カエルが逃げちゃうよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_nozoku",
+"who": "pyon",
+"text": "みて みて！ さかなが いるよ！",
+"yomi": "見て見て！魚がいるよ！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_nozoku",
+"who": "pyon",
+"text": "わっ、ほんとだ。ありがとう",
+"yomi": "わっ、本当だ。ありがとう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_nozoku_0",
+"who": "mii",
+"text": "あぶない",
+"yomi": "危ない",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_nozoku_1",
+"who": "mii",
+"text": "あぶないよ",
+"yomi": "危ないよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_nozoku_2",
+"who": "mii",
+"text": "おちるから、さがって",
+"yomi": "落ちるから、下がって",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_nozoku_3",
+"who": "mii",
+"text": "のりだすと、いけに おちちゃうよ",
+"yomi": "乗り出すと、池に落ちちゃうよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_nozoku_3",
+"who": "mii",
+"text": "のりだすと、いけを おちちゃうよ",
+"yomi": "乗り出すと、池を落ちちゃうよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_nozoku_4",
+"who": "mii",
+"text": "いけに おちたら たいへんだから、さくの うちがわで みよう",
+"yomi": "池に落ちたら大変だから、さくの内側で見よう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_nozoku_5",
+"who": "mii",
+"text": "ぴょん、あぶない！ いけに おちるから、うしろに さがって",
+"yomi": "ぴょん、危ない！池に落ちるから、後ろに下がって",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_pan",
+"who": "nobbo",
+"text": "いらっしゃいませ。なにに しますか？",
+"yomi": "いらっしゃいませ。何にしますか？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_pan",
+"who": "nobbo",
+"text": "はい、どうぞ。やきたてですよ",
+"yomi": "はい、どうぞ。焼きたてですよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_pan_0",
+"who": "chu",
+"text": "メロンパン",
+"yomi": "メロンパン",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_pan_1",
+"who": "chu",
+"text": "メロンパン、ください",
+"yomi": "メロンパン、ください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_pan_2",
+"who": "chu",
+"text": "メロンパンを ひとつ ください",
+"yomi": "メロンパンを一つください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_pan_2",
+"who": "chu",
+"text": "メロンパンが ひとつ ください",
+"yomi": "メロンパンが一つください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_pan_3",
+"who": "chu",
+"text": "メロンパンを ふたつ、ふくろに いれて ください",
+"yomi": "メロンパンを二つ、袋に入れてください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_pan_4",
+"who": "chu",
+"text": "メロンパンと、あんパンを ひとつずつ ください",
+"yomi": "メロンパンと、あんぱんを一つずつください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_pan_4",
+"who": "chu",
+"text": "メロンパンと、あんパンが ひとつずつ ください",
+"yomi": "メロンパンと、あんぱんが一つずつください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_pan_5",
+"who": "chu",
+"text": "いちばん にんきの パンは どれですか。それを ください",
+"yomi": "一番にんきのパンはどれですか。それをください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_ikura",
+"who": "nobbo",
+"text": "その パンが、きに なりますか？",
+"yomi": "そのパンが、気になりますか？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_ikura",
+"who": "nobbo",
+"text": "ひゃくえんですよ。くまさんパン、にんきなんです",
+"yomi": "百円ですよ。くまさんパン、にんきなんです",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_ikura_0",
+"who": "chu",
+"text": "いくら？",
+"yomi": "いくら？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_ikura_1",
+"who": "chu",
+"text": "これ、いくら？",
+"yomi": "これ、いくら？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_ikura_2",
+"who": "chu",
+"text": "この パンは いくらですか",
+"yomi": "このパンはいくらですか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_ikura_2",
+"who": "chu",
+"text": "この パンを いくらですか",
+"yomi": "このパンをいくらですか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_ikura_3",
+"who": "chu",
+"text": "すみません。この くまの パンは いくらですか",
+"yomi": "すみません。このクマのパンはいくらですか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_ikura_4",
+"who": "chu",
+"text": "おかねが ひゃくえん あるのですが、この パンは かえますか",
+"yomi": "お金が百円あるのですが、このパンは買えますか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_ikura_5",
+"who": "chu",
+"text": "くまの かたちの パンが かわいいですね。いくらですか",
+"yomi": "クマの形のパンがかわいいですね。いくらですか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_tsumami",
+"who": "gao",
+"text": "うまそう！ いっこ たべちゃお",
+"yomi": "うまそう！一個食べちゃお",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_tsumami",
+"who": "gao",
+"text": "そ、そうだった。さきに おかね はらうよ",
+"yomi": "そ、そうだった。先にお金払うよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_otsukai",
+"who": "kamejii",
+"text": "いらっしゃい。おつかいかね？",
+"yomi": "いらっしゃい。お使いかね？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_otsukai",
+"who": "kamejii",
+"text": "ほっほ、えらいのう。おまけに りんごも どうぞ",
+"yomi": "ほっほ、偉いのう。おまけにりんごもどうぞ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_otsukai_0",
+"who": "chu",
+"text": "はい",
+"yomi": "はい",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_otsukai_1",
+"who": "chu",
+"text": "はい、おつかいです",
+"yomi": "はい、お使いです",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_otsukai_2",
+"who": "chu",
+"text": "にんじんを ください",
+"yomi": "にんじんをください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_otsukai_2",
+"who": "chu",
+"text": "にんじんが ください",
+"yomi": "にんじんがください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_otsukai_3",
+"who": "chu",
+"text": "にんじんを さんぼん ください",
+"yomi": "にんじんを三本ください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_otsukai_4",
+"who": "chu",
+"text": "おつかいです。にんじんを さんぼんと、たまねぎを ください",
+"yomi": "お使いです。にんじんを三本と、玉ねぎをください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_otsukai_4",
+"who": "chu",
+"text": "おつかいです。にんじんを さんぼんと、たまねぎが ください",
+"yomi": "お使いです。にんじんを三本と、玉ねぎがください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_otsukai_5",
+"who": "chu",
+"text": "カレーを つくるので、にんじんと たまねぎと じゃがいもを ください",
+"yomi": "カレーを作るので、にんじんと玉ねぎとじゃがいもをください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_ringo",
+"who": "kamejii",
+"text": "おや、りんごが ころがって しまったのう",
+"yomi": "おや、りんごが転がってしまったのう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_ringo",
+"who": "kamejii",
+"text": "ほっほ、しょうじきで いい こだ。ありがとう",
+"yomi": "ほっほ、正直でいい子だ。ありがとう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_ringo_0",
+"who": "chu",
+"text": "ごめんなさい",
+"yomi": "ごめんなさい",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_ringo_1",
+"who": "chu",
+"text": "ぶつかって ごめんなさい",
+"yomi": "ぶつかってごめんなさい",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_ringo_2",
+"who": "chu",
+"text": "ごめんなさい。ひろいます",
+"yomi": "ごめんなさい。拾います",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_ringo_3",
+"who": "chu",
+"text": "ぶつかって ごめんなさい。いっしょに ひろいます",
+"yomi": "ぶつかってごめんなさい。一緒に拾います",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_ringo_4",
+"who": "chu",
+"text": "よそみを して いて、ぶつかって しまいました。ごめんなさい",
+"yomi": "よそ見をしていて、ぶつかってしまいました。ごめんなさい",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_ringo_5",
+"who": "chu",
+"text": "りんごを おとして ごめんなさい。ぜんぶ ひろって もどします",
+"yomi": "りんごを落としてごめんなさい。全部拾って戻します",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_maigo",
+"who": "chu",
+"text": "ママ、どこ……？ ぐすっ",
+"yomi": "ママ、どこ……？ぐすっ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_maigo",
+"who": "chu",
+"text": "うん……いっしょに いて くれて ありがとう",
+"yomi": "うん……一緒にいてくれてありがとう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_maigo_0",
+"who": "gao",
+"text": "どうしたの？",
+"yomi": "どうしたの？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_maigo_1",
+"who": "gao",
+"text": "ママと はぐれたの？",
+"yomi": "ママと、はぐれたの？",
+"acc": null,
+"job": "fix2"
+},
+{
+"key": "sg_maigo_2",
+"who": "gao",
+"text": "いっしょに ママを さがそう",
+"yomi": "一緒にママを探そう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_maigo_2",
+"who": "gao",
+"text": "いっしょに ママが さがそう",
+"yomi": "一緒にママが探そう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_maigo_3",
+"who": "gao",
+"text": "おみせの ひとに、いっしょに いいに いこう",
+"yomi": "お店の人に、一緒に言いに行こう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_maigo_4",
+"who": "gao",
+"text": "なかないで。おみせの ひとに ママを よんで もらおう",
+"yomi": "泣かないで。お店の人にママを呼んでもらおう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_maigo_5",
+"who": "gao",
+"text": "だいじょうぶだよ。うごかないで、おみせの ひとに たすけて もらおう",
+"yomi": "大丈夫だよ。動かないで、お店の人に助けてもらおう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_erabu",
+"who": "meebaa",
+"text": "どれに するか、きまったかしら？",
+"yomi": "どれにするか、決まったかしら？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_erabu",
+"who": "meebaa",
+"text": "はい、どうぞ。だいじに たべてね",
+"yomi": "はい、どうぞ。大事に食べてね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_erabu_0",
+"who": "chu",
+"text": "これ",
+"yomi": "これ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_erabu_1",
+"who": "chu",
+"text": "これに します",
+"yomi": "これにします",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_erabu_2",
+"who": "chu",
+"text": "チョコに します",
+"yomi": "チョコにします",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_erabu_2",
+"who": "chu",
+"text": "チョコを します",
+"yomi": "チョコをします",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_erabu_3",
+"who": "chu",
+"text": "チョコと あめを ひとつずつ ください",
+"yomi": "チョコと飴を一つずつください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_erabu_4",
+"who": "chu",
+"text": "いもうとの ぶんも かいたいので、チョコを ふたつ ください",
+"yomi": "妹の分も買いたいので、チョコを二つください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_erabu_5",
+"who": "chu",
+"text": "まよったけど、いちごの あめに します。ひとつ ください",
+"yomi": "迷ったけど、いちごの飴にします。一つください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_hashiru",
+"who": "gao",
+"text": "わーい！ おかしだ、おかしだー！",
+"yomi": "わーい！お菓子だ、お菓子だー！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_hashiru",
+"who": "gao",
+"text": "おっと……ごめん。ゆっくり あるくよ",
+"yomi": "おっと……ごめん。ゆっくり歩くよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_sagasu",
+"who": "meebaa",
+"text": "なにか、さがして いるのかしら？",
+"yomi": "何か、探しているのかしら？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_sagasu",
+"who": "meebaa",
+"text": "ガムなら、レジの よこに あるわよ",
+"yomi": "ガムなら、レジの横にあるわよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_sagasu_0",
+"who": "chu",
+"text": "ガム",
+"yomi": "ガム",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_sagasu_1",
+"who": "chu",
+"text": "ガムが ほしいです",
+"yomi": "ガムが欲しいです",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_sagasu_1",
+"who": "chu",
+"text": "ガムを ほしいです",
+"yomi": "ガムを欲しいです",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_sagasu_2",
+"who": "chu",
+"text": "ガムは どこに ありますか",
+"yomi": "ガムはどこにありますか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_sagasu_2",
+"who": "chu",
+"text": "ガムを どこに ありますか",
+"yomi": "ガムをどこにありますか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_sagasu_3",
+"who": "chu",
+"text": "すみません。ぶどうの ガムは どこですか",
+"yomi": "すみません。ぶどうのガムはどこですか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_sagasu_4",
+"who": "chu",
+"text": "ぶどうの ガムを さがして いるのですが、どこに ありますか",
+"yomi": "ぶどうのガムを探しているのですが、どこにありますか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_sagasu_5",
+"who": "chu",
+"text": "まえに かった ぶどうの ガムが ほしいのですが、もう ありませんか",
+"yomi": "前に買ったぶどうのガムが欲しいのですが、もうありませんか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_fukuro",
+"who": "doshin",
+"text": "ふくろは いりますか？",
+"yomi": "袋は要りますか？",
+"acc": null,
+"job": "fix2"
+},
+{
+"key": "sr_fukuro",
+"who": "doshin",
+"text": "ありがとう ございます。エコだね！",
+"yomi": "ありがとうございます。エコだね！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_fukuro_0",
+"who": "chu",
+"text": "いりません",
+"yomi": "いりません",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_fukuro_1",
+"who": "chu",
+"text": "ふくろは いりません",
+"yomi": "袋は要りません",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_fukuro_2",
+"who": "chu",
+"text": "だいじょうぶです。いりません",
+"yomi": "大丈夫です。いりません",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_fukuro_3",
+"who": "chu",
+"text": "エコバッグが あるので、いりません",
+"yomi": "エコバッグがあるので、いりません",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_fukuro_3",
+"who": "chu",
+"text": "エコバッグを あるので、いりません",
+"yomi": "エコバッグをあるので、いりません",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_fukuro_4",
+"who": "chu",
+"text": "ふくろは いりません。この バッグに いれて ください",
+"yomi": "袋は要りません。このバッグに入れてください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_fukuro_5",
+"who": "chu",
+"text": "じぶんの バッグを もって きたので、ふくろは いりません",
+"yomi": "自分のバッグを持ってきたので、袋は要りません",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_otsuri",
+"who": "doshin",
+"text": "はい、おつり ですよ",
+"yomi": "はい、お釣りですよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_otsuri",
+"who": "doshin",
+"text": "あっ、ほんとだ！ しょうじきで ありがとう",
+"yomi": "あっ、本当だ！正直でありがとう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_otsuri_0",
+"who": "chu",
+"text": "おおいです",
+"yomi": "多いです",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_otsuri_1",
+"who": "chu",
+"text": "おつりが おおいです",
+"yomi": "お釣りが多いです",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_otsuri_1",
+"who": "chu",
+"text": "おつりを おおいです",
+"yomi": "お釣りを多いです",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_otsuri_2",
+"who": "chu",
+"text": "おつりが じゅうえん おおいです",
+"yomi": "お釣りが十円多いです",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_otsuri_3",
+"who": "chu",
+"text": "すみません、おつりが じゅうえん おおいみたいです",
+"yomi": "すみません、お釣りが十円多いみたいです",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_otsuri_4",
+"who": "chu",
+"text": "おつりが おおいので、じゅうえん おかえし します",
+"yomi": "お釣りが多いので、十円お返しします",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_otsuri_4",
+"who": "chu",
+"text": "おつりを おおいので、じゅうえん おかえし します",
+"yomi": "お釣りを多いので、十円お返しします",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_otsuri_5",
+"who": "chu",
+"text": "かぞえたら、おつりが じゅうえん おおかったです。おかえし します",
+"yomi": "数えたら、お釣りが十円多かったです。お返しします",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_tarinai",
+"who": "doshin",
+"text": "ぜんぶで、ひゃくごじゅうえん です",
+"yomi": "全部で、百五十円です",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_tarinai",
+"who": "doshin",
+"text": "わかりました。また きてね",
+"yomi": "わかりました。また来てね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_tarinai_0",
+"who": "chu",
+"text": "たりない",
+"yomi": "足りない",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_tarinai_1",
+"who": "chu",
+"text": "おかねが たりない",
+"yomi": "お金が足りない",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_tarinai_1",
+"who": "chu",
+"text": "おかねを たりない",
+"yomi": "お金を足りない",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_tarinai_2",
+"who": "chu",
+"text": "おかねが たりないので、ひとつ やめます",
+"yomi": "お金が足りないので、一つやめます",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_tarinai_3",
+"who": "chu",
+"text": "ひゃくえんしか ないので、あめは やめます",
+"yomi": "百円しかないので、飴はやめます",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_tarinai_4",
+"who": "chu",
+"text": "ごめんなさい、おかねが たりません。あめを もどして ください",
+"yomi": "ごめんなさい、お金が足りません。飴を戻してください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_tarinai_5",
+"who": "chu",
+"text": "おかねが ごじゅうえん たりないので、きょうは チョコだけに します",
+"yomi": "お金が五十円足りないので、今日はチョコだけにします",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_kippu",
+"who": "kamejii",
+"text": "ほっほ。どこまで いくのかね？",
+"yomi": "ほっほ。どこまで行くのかね？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_kippu",
+"who": "kamejii",
+"text": "ほっほ。はい、こどもの きっぷだよ",
+"yomi": "ほっほ。はい、子どもの切符だよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kippu_0",
+"who": "doshin",
+"text": "こうえん",
+"yomi": "公園",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kippu_1",
+"who": "doshin",
+"text": "こうえんえきまで",
+"yomi": "公園駅まで",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kippu_2",
+"who": "doshin",
+"text": "こうえんえきまで いきます",
+"yomi": "公園駅まで行きます",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_kippu_2",
+"who": "doshin",
+"text": "こうえんえきを いきます",
+"yomi": "公園駅を行きます",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kippu_3",
+"who": "doshin",
+"text": "こうえんえきまで、こども いちまい ください",
+"yomi": "公園駅まで、子ども一枚ください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kippu_4",
+"who": "doshin",
+"text": "こうえんえきまで いきたいのですが、きっぷは いくらですか",
+"yomi": "公園駅まで行きたいのですが、切符はいくらですか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_kippu_4",
+"who": "doshin",
+"text": "こうえんえきまで いきたいのですが、きっぷを いくらですか",
+"yomi": "公園駅まで行きたいのですが、切符をいくらですか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kippu_5",
+"who": "doshin",
+"text": "おばあちゃんの いえに いくので、こうえんえきまで の きっぷを ください",
+"yomi": "おばあちゃんの家に行くので、公園駅までの切符をください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_hoomu",
+"who": "gao",
+"text": "でんしゃが くる！ はしるぞー！",
+"yomi": "電車が来る！走るぞー！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_hoomu",
+"who": "gao",
+"text": "わ、わかったよ。つぎので いいや",
+"yomi": "わ、わかったよ。次のでいいや",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_kiiro",
+"who": "chu",
+"text": "でんしゃ、まだかなー",
+"yomi": "電車、まだかなー",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_kiiro",
+"who": "chu",
+"text": "わっ、ほんとだ。ありがとう",
+"yomi": "わっ、本当だ。ありがとう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kiiro_0",
+"who": "doshin",
+"text": "あぶない",
+"yomi": "危ない",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kiiro_1",
+"who": "doshin",
+"text": "うしろに さがって",
+"yomi": "後ろに下がって",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kiiro_2",
+"who": "doshin",
+"text": "きいろい せんの うちがわに いようね",
+"yomi": "黄色い線の内側にいようね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_kiiro_2",
+"who": "doshin",
+"text": "きいろい せんの うちがわを いようね",
+"yomi": "黄色い線の内側をいようね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kiiro_3",
+"who": "doshin",
+"text": "でんしゃが くるから、きいろい せんの うちがわに さがって",
+"yomi": "電車が来るから、黄色い線の内側に下がって",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kiiro_4",
+"who": "doshin",
+"text": "ちゅう、あぶない！ きいろい せんより まえに でたら だめだよ",
+"yomi": "ちゅう、危ない！黄色い線より前に出たらだめだよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kiiro_5",
+"who": "doshin",
+"text": "でんしゃは はやいから、きいろい せんの うちがわで まとうね",
+"yomi": "電車は速いから、黄色い線の内側で待とうね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_yuzuru",
+"who": "kamejii",
+"text": "ふう……きょうは こんで おるのう",
+"yomi": "ふう……今日は混んでおるのう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_yuzuru",
+"who": "kamejii",
+"text": "ほっほ、ありがとう。やさしいのう",
+"yomi": "ほっほ、ありがとう。優しいのう",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_yuzuru_0",
+"who": "doshin",
+"text": "どうぞ",
+"yomi": "どうぞ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_yuzuru_1",
+"who": "doshin",
+"text": "どうぞ、すわって ください",
+"yomi": "どうぞ、座ってください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_yuzuru_2",
+"who": "doshin",
+"text": "せきを どうぞ",
+"yomi": "席をどうぞ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_yuzuru_2",
+"who": "doshin",
+"text": "せきが どうぞ",
+"yomi": "席がどうぞ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_yuzuru_3",
+"who": "doshin",
+"text": "こうちょうせんせい、ここに すわって ください",
+"yomi": "校長先生、ここに座ってください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_yuzuru_4",
+"who": "doshin",
+"text": "つぎの えきで おりるので、ここに すわって ください",
+"yomi": "次の駅で降りるので、ここに座ってください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_yuzuru_4",
+"who": "doshin",
+"text": "つぎの えきを おりるので、ここに すわって ください",
+"yomi": "次の駅を降りるので、ここに座ってください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_yuzuru_5",
+"who": "doshin",
+"text": "たって いるのは たいへん でしょう。どうぞ、すわって ください",
+"yomi": "立っているのは大変でしょう。どうぞ、座ってください",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_shizukani",
+"who": "gao",
+"text": "おーい！ そとに やまが みえるぞー！",
+"yomi": "おーい！外に山が見えるぞー！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_shizukani",
+"who": "gao",
+"text": "おっと……ごめん。こそこそ はなすよ",
+"yomi": "おっと……ごめん。こそこそ話すよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_orimasu",
+"who": "doshin",
+"text": "ぐうぐう……ん？",
+"yomi": "ぐうぐう……ん？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_orimasu",
+"who": "doshin",
+"text": "あっ、ごめんね。どうぞ、どうぞ",
+"yomi": "あっ、ごめんね。どうぞ、どうぞ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_orimasu_0",
+"who": "gao",
+"text": "おります",
+"yomi": "降ります",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_orimasu_1",
+"who": "gao",
+"text": "すみません、おります",
+"yomi": "すみません、降ります",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_orimasu_2",
+"who": "gao",
+"text": "おります。とおして ください",
+"yomi": "降ります。通してください",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_orimasu_3",
+"who": "gao",
+"text": "すみません、つぎで おりるので とおして ください",
+"yomi": "すみません、次で降りるので通してください",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_orimasu_4",
+"who": "gao",
+"text": "どしん、この えきで おりるから、すこし よけて くれる？",
+"yomi": "どしん、この駅で降りるから、少しよけてくれる？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sx_orimasu_4",
+"who": "gao",
+"text": "どしん、この えきを おりるから、すこし よけて くれる？",
+"yomi": "どしん、この駅を降りるから、少しよけてくれる？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_orimasu_5",
+"who": "gao",
+"text": "おこして ごめんね。ここで おりるので、とおして もらえる？",
+"yomi": "起こしてごめんね。ここで降りるので、通してもらえる？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sq_jikan",
+"who": "nobbo",
+"text": "バスを まって いるのですか？",
+"yomi": "バスを待っているのですか？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_jikan",
+"who": "nobbo",
+"text": "あと ごふんで きますよ。えきに いきますよ",
+"yomi": "あとごふんで来ますよ。駅に行きますよ",
+"acc": null,
+"job": "fix2"
+},
+{
+"key": "sg_jikan_0",
+"who": "doshin",
+"text": "はい",
+"yomi": "はい",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_jikan_1",
+"who": "doshin",
+"text": "はい、まって います",
+"yomi": "はい、待っています",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_jikan_2",
+"who": "doshin",
+"text": "つぎの バスは なんじですか",
+"yomi": "次のバスはなんじですか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_jikan_2",
+"who": "doshin",
+"text": "つぎの バスを なんじですか",
+"yomi": "次のバスをなんじですか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_jikan_3",
+"who": "doshin",
+"text": "すみません。つぎの バスは、なんじに きますか",
+"yomi": "すみません。次のバスは、なんじに来ますか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_jikan_4",
+"who": "doshin",
+"text": "えきに いく バスを まって いるのですが、あと なんぷんですか",
+"yomi": "駅に行くバスを待っているのですが、あと何分ですか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_jikan_5",
+"who": "doshin",
+"text": "えきまで いきたいのですが、この バスていで あって いますか",
+"yomi": "駅まで行きたいのですが、このバス停で合っていますか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_kaban",
+"who": "pyon",
+"text": "あっ、バスが きた！ のろう！",
+"yomi": "あっ、バスが来た！乗ろう！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_kaban",
+"who": "pyon",
+"text": "わあ、ほんとだ！ ありがとう！",
+"yomi": "わあ、本当だ！ありがとう！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_kaban_0",
+"who": "doshin",
+"text": "かばん",
+"yomi": "かばん",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kaban_1",
+"who": "doshin",
+"text": "かばん、わすれてるよ",
+"yomi": "かばん、忘れてるよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kaban_2",
+"who": "doshin",
+"text": "ぴょん、かばんを わすれてるよ",
+"yomi": "ぴょん、かばんを忘れてるよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_kaban_2",
+"who": "doshin",
+"text": "ぴょん、かばんが わすれてるよ",
+"yomi": "ぴょん、かばんが忘れてるよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kaban_3",
+"who": "doshin",
+"text": "まって！ ベンチに かばんを わすれてるよ",
+"yomi": "待って！ベンチにかばんを忘れてるよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kaban_4",
+"who": "doshin",
+"text": "ぴょん、ベンチに かばんが あるよ。わすれものだよ",
+"yomi": "ぴょん、ベンチにかばんがあるよ。忘れ物だよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_kaban_5",
+"who": "doshin",
+"text": "のる まえに まって！ だいじな かばんを わすれてるよ",
+"yomi": "乗る前に待って！大事なかばんを忘れてるよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_tobidashi",
+"who": "chu",
+"text": "ボール、まてー！",
+"yomi": "ボール、まてー！",
+"acc": null,
+"job": "fix2"
+},
+{
+"key": "sr_tobidashi",
+"who": "chu",
+"text": "ひゃっ……ありがとう。あぶなかった",
+"yomi": "ひゃっ……ありがとう。危なかった",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_tobidashi_0",
+"who": "doshin",
+"text": "とまって",
+"yomi": "止まって",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_tobidashi_1",
+"who": "doshin",
+"text": "あぶない、とまって",
+"yomi": "危ない、止まって",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_tobidashi_2",
+"who": "doshin",
+"text": "どうろに でたら あぶないよ",
+"yomi": "道路に出たら危ないよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_tobidashi_2",
+"who": "doshin",
+"text": "どうろを でたら あぶないよ",
+"yomi": "道路を出たら危ないよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_tobidashi_3",
+"who": "doshin",
+"text": "くるまが くるから、どうろに でちゃ だめ",
+"yomi": "車が来るから、道路に出ちゃだめ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_tobidashi_4",
+"who": "doshin",
+"text": "ちゅう、とまって！ ボールは おとなに とって もらおう",
+"yomi": "ちゅう、止まって！ボールは大人に取ってもらおう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_tobidashi_5",
+"who": "doshin",
+"text": "きゅうに とびだすと くるまに ぶつかるよ。みぎと ひだりを みてね",
+"yomi": "急に飛び出すと、車にぶつかるよ。右と左を見てね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_untenshu",
+"who": "nobbo",
+"text": "おはよう。のって いいですよ",
+"yomi": "おはよう。乗っていいですよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_untenshu",
+"who": "nobbo",
+"text": "はい、いい あいさつですね",
+"yomi": "はい、いい挨拶ですね",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_untenshu_0",
+"who": "doshin",
+"text": "おはよう",
+"yomi": "おはよう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_untenshu_1",
+"who": "doshin",
+"text": "おはようございます",
+"yomi": "おはようございます",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_untenshu_2",
+"who": "doshin",
+"text": "おはようございます。おねがいします",
+"yomi": "おはようございます。お願いします",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_untenshu_3",
+"who": "doshin",
+"text": "おはようございます。えきまで おねがいします",
+"yomi": "おはようございます。駅までお願いします",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_untenshu_4",
+"who": "doshin",
+"text": "おはようございます。この バスは えきに いきますか",
+"yomi": "おはようございます。このバスは駅に行きますか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_untenshu_4",
+"who": "doshin",
+"text": "おはようございます。この バスを えきに いきますか",
+"yomi": "おはようございます。このバスを駅に行きますか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_untenshu_5",
+"who": "doshin",
+"text": "うんてんしゅさん、おはようございます。きょうも よろしく おねがいします",
+"yomi": "運転手さん、おはようございます。今日もよろしくお願いします",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_botan",
+"who": "chu",
+"text": "ねえ、どこで おりるの？",
+"yomi": "ねえ、どこで降りるの？",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_botan",
+"who": "chu",
+"text": "わかった！ ボタン、ポチッ。ピンポーン！",
+"yomi": "わかった！ボタン、ポチッ。ピンポーン！",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_botan_0",
+"who": "doshin",
+"text": "つぎ",
+"yomi": "次",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_botan_1",
+"who": "doshin",
+"text": "つぎで おりる",
+"yomi": "次で降りる",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_botan_2",
+"who": "doshin",
+"text": "つぎの バスていで おります",
+"yomi": "次のバス停で降ります",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_botan_2",
+"who": "doshin",
+"text": "つぎの バスていを おります",
+"yomi": "次のバス停を降ります",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_botan_3",
+"who": "doshin",
+"text": "つぎの バスていで おりるから、ボタンを おしてね",
+"yomi": "次のバス停で降りるから、ボタンを押してね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_botan_4",
+"who": "doshin",
+"text": "こうえんまえで おりるよ。つぎだから ボタンを おそう",
+"yomi": "公園前で降りるよ。次だからボタンを押そう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_botan_4",
+"who": "doshin",
+"text": "こうえんまえを おりるよ。つぎだから ボタンを おそう",
+"yomi": "公園前を降りるよ。次だからボタンを押そう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_botan_5",
+"who": "doshin",
+"text": "つぎの こうえんまえで おりるよ。バスが とまってから たとうね",
+"yomi": "次の公園前で降りるよ。バスが止まってから立とうね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sq_yoi",
+"who": "mii",
+"text": "なんだか、きもち わるい……",
+"yomi": "なんだか、気持ち悪い……",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sr_yoi",
+"who": "mii",
+"text": "ありがとう……すこし らくに なったよ",
+"yomi": "ありがとう……少し楽になったよ",
+"acc": null,
+"job": "stages"
+},
+{
+"key": "sg_yoi_0",
+"who": "doshin",
+"text": "だいじょうぶ？",
+"yomi": "大丈夫？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_yoi_1",
+"who": "doshin",
+"text": "だいじょうぶ？ くるしい？",
+"yomi": "大丈夫？苦しい？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_yoi_2",
+"who": "doshin",
+"text": "まどの そとを みると いいよ",
+"yomi": "窓の外を見るといいよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sx_yoi_2",
+"who": "doshin",
+"text": "まどの そとが みると いいよ",
+"yomi": "窓の外が見るといいよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_yoi_3",
+"who": "doshin",
+"text": "うんてんしゅさんに、いって こようか",
+"yomi": "運転手さんに、言ってこようか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_yoi_4",
+"who": "doshin",
+"text": "まどを すこし あけて、とおくの けしきを みよう",
+"yomi": "窓を少しあけて、遠くの景色を見よう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sg_yoi_5",
+"who": "doshin",
+"text": "つらかったら がまん しないで。つぎで いっしょに おりようか",
+"yomi": "つらかったら我慢しないで。次で一緒に降りようか",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_pyon_go",
+"who": "pyon",
+"text": "いくよー！",
+"yomi": "行くよー！",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_pyon_huh",
+"who": "pyon",
+"text": "あれ？ ちがった？",
+"yomi": "あれ？違った？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_pyon_thanks",
+"who": "pyon",
+"text": "そっか、ありがとう！",
+"yomi": "そっか、ありがとう！",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_pyon_rival",
+"who": "pyon",
+"text": "わたしは ぴょん！ かけっこなら まけないよ！",
+"yomi": "私はぴょん！かけっこなら負けないよ！",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_pyon_rival2",
+"who": "pyon",
+"text": "こんどは もっと はやいよ！",
+"yomi": "今度はもっと速いよ！",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_pyon_win",
+"who": "pyon",
+"text": "やったー、わたしの かち！",
+"yomi": "やったー、私の勝ち！",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_pyon_good",
+"who": "pyon",
+"text": "いい しょうぶ だったね",
+"yomi": "いい勝負だったね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_pyon_next",
+"who": "pyon",
+"text": "つぎも まけないよ！",
+"yomi": "次も負けないよ！",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_mii_go",
+"who": "mii",
+"text": "いくわよ",
+"yomi": "行くわよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_mii_huh",
+"who": "mii",
+"text": "あら？ ちがった？",
+"yomi": "あら？違った？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_mii_thanks",
+"who": "mii",
+"text": "ふうん、ありがと",
+"yomi": "ふうん、ありがと",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_mii_rival",
+"who": "mii",
+"text": "みいよ。こうえんでは まけないわ",
+"yomi": "みいよ。公園では負けないわ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_mii_rival2",
+"who": "mii",
+"text": "こんどは ほんきよ",
+"yomi": "今度は本気よ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_mii_win",
+"who": "mii",
+"text": "ふふん、みいの かち",
+"yomi": "ふふん、みいの勝ち",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_mii_good",
+"who": "mii",
+"text": "なかなか やるじゃない",
+"yomi": "なかなかやるじゃない",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_mii_next",
+"who": "mii",
+"text": "つぎも かつわよ",
+"yomi": "次も勝つわよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_chu_go",
+"who": "chu",
+"text": "い、いくよ！",
+"yomi": "い、行くよ！",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_chu_huh",
+"who": "chu",
+"text": "あれれ？ ちがった？",
+"yomi": "あれれ？違った？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_chu_thanks",
+"who": "chu",
+"text": "そっか、ありがとう！",
+"yomi": "そっか、ありがとう！",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_chu_rival",
+"who": "chu",
+"text": "ぼく、ちゅう。おみせまで きょうそうだよ！",
+"yomi": "僕、ちゅう。お店まで競争だよ！",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_chu_rival2",
+"who": "chu",
+"text": "こんどは まけないよう！",
+"yomi": "今度は負けないよう！",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_chu_win",
+"who": "chu",
+"text": "やった、ぼくの かち！",
+"yomi": "やった、僕の勝ち！",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_chu_good",
+"who": "chu",
+"text": "たのしかったね",
+"yomi": "楽しかったね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_chu_next",
+"who": "chu",
+"text": "つぎも がんばるよ",
+"yomi": "次も頑張るよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_doshin_go",
+"who": "doshin",
+"text": "いくよ、のっしのっし",
+"yomi": "行くよ、のっしのっし",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_doshin_huh",
+"who": "doshin",
+"text": "あれ？ ちがった？",
+"yomi": "あれ？違った？",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_doshin_thanks",
+"who": "doshin",
+"text": "そっか、ありがとう",
+"yomi": "そっか、ありがとう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_doshin_rival",
+"who": "doshin",
+"text": "ぼく、どしん。のりものの たびで きょうそうしよう",
+"yomi": "僕、どしん。乗り物の旅で競争しよう",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_doshin_rival2",
+"who": "doshin",
+"text": "こんどは ほんきだよ。ぶおーっ",
+"yomi": "今度は本気だよ。ぶおーっ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_doshin_win",
+"who": "doshin",
+"text": "ぼくの かちだね",
+"yomi": "僕の勝ちだね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_doshin_good",
+"who": "doshin",
+"text": "いい しょうぶ だったね",
+"yomi": "いい勝負だったね",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "rv_doshin_next",
+"who": "doshin",
+"text": "つぎも まけないよ",
+"yomi": "次も負けないよ",
+"acc": null,
+"job": "rivals"
+},
+{
+"key": "sl_kamejii",
+"who": "kamejii",
+"text": "ほっほ、どいて あげよう",
+"yomi": "ほっほ、どいてあげよう",
+"acc": null,
+"job": "rivals"
+}
+]
