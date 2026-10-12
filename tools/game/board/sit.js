@@ -19,7 +19,7 @@ function pickSit(place, heroKind = "shima") {
   const s = pool[rnd(pool.length)]; sitUsed.add(s.id); return s;
 }
 const ASK_ON_STAGE = new Set(["door", "arrive", "stuck", "scared", "jumpdown", "loud", "borrow", "slow"]); // 最初から相手がその場にいる場面
-const ASK_AT = { meebaa: [1190, .9], kamejii: [1180, .9], nobbo: [1220, 1.0], gao: [1190, .95], mii: [1190, .9], chu: [1220, .42], pyon: [1190, .9], doshin: [1320, 1.45] };
+const ASK_AT = { meebaa: [1190, .9], kamejii: [1180, .9], nobbo: [1220, 1.0], gao: [1190, .95], mii: [1190, .9], chu: [1220, .42], pyon: [1190, .9], doshin: [1260, 1.38] };
 let propG = null;
 function resetChar(c) { c.dx.v = 0; c.dx.t = 0; c.lean.t = 0; c.lift.t = 0; c.armL.t = 0; c.armR.t = 0; c.headRot.t = 0; c.tm = {}; c.sadMouth = false; c.roundMouth = false; c.happyOn = false; c.eyeScale.t = 1; c.squash.t = 1; }
 function setSitView(s, heroKind) {
@@ -30,7 +30,7 @@ function setSitView(s, heroKind) {
   const hero = C[heroKind], ask = C[s.asker];
   [C.pony, C.shima, hero, ask].forEach(resetChar);
   place(C.pony, 120, 975, .46); show(C.pony);
-  const HS = { shima: .88, gao: .9, pyon: .86, mii: .86, chu: .42, doshin: 1.35, meebaa: .86, kamejii: .86 };
+  const HS = { shima: .88, gao: .9, pyon: .86, mii: .86, chu: .42, doshin: 1.15, meebaa: .86, kamejii: .86 };
   if (MODE === "solo" && heroKind !== "shima") { place(C.shima, 320, 975, .55); show(C.shima); place(hero, 650, 975, HS[heroKind] || .9); }
   else place(hero, 600, 975, HS[heroKind] || .88);
   show(hero);
@@ -211,8 +211,10 @@ async function askQ(s, h, a) {
   await speak(a, "sq_" + s.id, s.q); unsay();
   if (AFTER_Q[s.intro]) await AFTER_Q[s.intro](h);
 }
+// けが・びょうき・こわい・あぶない場面：せいかいでも くるっと回らず、やさしく うなずく
+const SOFT_INTRO = new Set(["fall", "push", "fever", "bee", "belly", "sandeye", "bump", "trip", "icedrop", "lostkid", "carsick", "dizzy", "scared", "ballroad", "slidebump", "applespill"]);
 async function resolve(s, h, a, ok) {
-  if (ok) { playMove(h, JOY[rnd(JOY.length)]); confetti(50); }
+  if (ok) { playMove(h, SOFT_INTRO.has(s.intro) ? "nod" : JOY[rnd(JOY.length)]); confetti(50); }
   if (PRE[s.id]) await PRE[s.id](h, a);
   await speak(a, "sr_" + s.id, s.res);
   if (POST[s.id]) await POST[s.id](h, a);
@@ -309,7 +311,7 @@ const ITEM2 = {
 const drawItemBase = drawItem;
 drawItem = function (g, kind) { if (ITEM2[kind]) ITEM2[kind](g); else drawItemBase(g, kind); };
 function prop(kind, x, y, k = 1, r = 0) { const g = el("g", { transform: `translate(${x} ${y}) rotate(${r}) scale(${k})` }, propG); drawItem(g, kind); return g; }
-function hand(h, g, k = .4, r = -10) { follow(g, () => { const p = world(h, 330, 300); return [p.x, p.y, r, k * h.s / .88]; }); }
+function hand(h, g, k = .4, r = -10) { follow(g, () => { const p = world(h, 330, 300); return [p.x, p.y, r, k * Math.max(h.s, .62) / .88]; }); } // ちいさい ちゅうでも 見える 大きさに
 function rainOn() {
   const g = el("g", {}, propG), drops = [];
   addTick(dt => { if (!g.isConnected) return false;
@@ -320,7 +322,11 @@ function rainOn() {
 const buzz = () => { if (!ctx) return; for (let i = 0; i < 8; i++) later(i * 120, () => blip(220 + (i % 2) * 30, 200, .1, "sawtooth")); };
 Object.assign(INTRO, {
   async rain(h, a) { enter(h); await sleep(900); rainOn(); noise(.6, 3000, .15); await sleep(600);
-    hold(h, "shiver", 2); markAbove(h, "drop"); await sleep(900); playMove(h, "sneeze"); await sleep(1200); enter(a); await sleep(900); },
+    hold(h, "shiver", 2); markAbove(h, "drop"); await sleep(900); playMove(h, "sneeze"); await sleep(1200);
+    const u = prop("umbrella", 0, 0, 1), um = window.__umb = { u, share: false }; el("path", { d: "M0 -100 V-120 M0 0 V150 Q0 175 -22 175", fill: "none", stroke: INK, "stroke-width": 9, "stroke-linecap": "round" }, u); // ぴょんは かさを さして やってくる
+    follow(u, () => { const p = headTop(a); if (!um.share) return [p.x + 40, p.y - 20, 0, 1.2];
+      const q = headTop(h); return [(p.x + q.x) / 2, Math.min(p.y, q.y) - 40, 0, 1.5]; });
+    enter(a); await sleep(900); },
   async wobble(h, a) { enter(h); h.dx.v = -700; h.dx.t = 0; for (let i = 0; i < 8; i++) later(i * 160, () => h.lean.t = i % 2 ? 16 : -16);
     await sleep(1400); h.lean.t = 0; thud(); flop(h); markAbove(h, "q"); await sleep(1200); enter(a); await sleep(900); },
   async bye(h, a) { enter(h); await sleep(900); wave(h); for (let i = 0; i < 4; i++) later(i * 300, () => { thud(); }); enter(a); await sleep(1300); },
@@ -397,23 +403,31 @@ const POST = {
     const bs = window.__boxes; if (bs) { bs[1].c = h; bs[1].n = 0; } a.squash.t = 1; joy(a); await sleep(900);
     climb(h, 650, 2600); await climb(a, 650, 2600); },
   async ohayou(h, a) { playMove(a, "nod"); wave(h); await sleep(700); await walk(h, 1300, 1800); /* 校舎へ入っていく */ },
-  async doro(h, a) { playMove(h, "crouch"); hand(h, prop("rag", 0, 0, .3), .3, 0); await sleep(600);
-    propG.querySelectorAll(".print").forEach(e => tween(1400, k => e.setAttribute("opacity", (.8 * (1 - k)).toFixed(2)))); hold(h, "shake", 1.4); await sleep(1500); },
+  async doro(h, a) { walk(a, -200, 700); playMove(h, "crouch"); hand(h, prop("rag", 0, 0, .3), .3, 0); await sleep(700);
+    playMove(a, "crouch"); hand(a, prop("rag", 0, 0, .3), .3, 0); // みいも いっしょに ふく
+    propG.querySelectorAll(".print").forEach(e => tween(1400, k => e.setAttribute("opacity", (.8 * (1 - k)).toFixed(2)))); hold(h, "shake", 1.4); hold(a, "shake", 1.4); await sleep(1500);
+    joy(a); await sleep(300); },
   async mizu(h, a) { hand(a, prop("towel", 0, 0, .3), .3, 0); hold(a, "shake", 1.2); await sleep(1300); },
   async kabin(h, a) { playMove(a, "nod"); later(400, () => joy(h)); await sleep(1000); },
-  async kasa(h, a) { const u = prop("umbrella", 0, 0, 1); follow(u, () => { const p = world(h, 200, 0); return [p.x + 140, p.y - 40, 0, 1.4]; });
-    await walk(a, -380, 800); joy(a); await sleep(700); walk(h, 1300, 2200); await walk(a, 1300, 2200); /* いっしょに かさに入って帰る */ },
-  gyaku(h) { playMove(h, "spin"); later(900, () => joy(h)); return sleep(1000); },
+  async kasa(h, a) { // ぴょんが となりに来て、かさに いれて くれる
+    const gap = (h.x + h.dx.v + h.s * 200) + 330 - (a.x + a.dx.v + a.s * 200); await walk(a, gap, 800);
+    if (window.__umb) window.__umb.share = true; else { const u = prop("umbrella", 0, 0, 1); follow(u, () => { const p = world(h, 200, 0); return [p.x + 140, p.y - 40, 0, 1.4]; }); }
+    a.happyOn = true; joy(a); await sleep(700); walk(h, 1300, 2200); await walk(a, 1300, 2200); /* いっしょに かさに入って帰る */ },
+  async gyaku(h) { playMove(h, "crouch"); hold(h, "shake", 1); for (let i = 0; i < 2; i++) later(300 + i * 450, () => noise(.08, 1200, .3)); await sleep(1200); jump(h, .5); joy(h); await sleep(500); },
   async sayonara(h, a) { a.armR.t = -60; noise(1.2, 400, .9); hold(h, "spin", 1.2); h.dx.t = -1400; await sleep(1300); },
   async dekkai(h, a) { const s = window.__bigshoe; if (s) { const p = world(h, 200, 395); s.remove(); const g = prop("slipper", p.x, p.y, 1.1 * h.s, 90); g.querySelectorAll("path").forEach(e => e.setAttribute("fill", "#B9824A"));
       const q = world(a, 200, 560); await tween(800, k => g.setAttribute("transform", `translate(${(p.x + (q.x - p.x) * k).toFixed(0)} ${(p.y + (q.y - p.y) * k - Math.sin(k * Math.PI) * 150).toFixed(0)}) rotate(${90 + 360 * k}) scale(${(1.1 * h.s).toFixed(2)})`)); g.remove(); }
     SPECIAL.doshin(a); joy(h); await sleep(600); },
+  async osareta(h, a) { playMove(a, "nod"); await sleep(500); playMove(h, "nod"); await sleep(600); },
   async locker(h, a) { // まるシマも そばへ行き、がおの うしろから いっしょに ひっぱる
     await walk(h, 420, 1000); h.lean.t = 18; h.armR.t = 80; h.armL.t = 80; hold(h, "shiver", 1.4); hold(a, "shiver", 1.4); await sleep(1400);
     boom(.5); noise(.2, 900, .6); h.lean.t = 0; h.armR.t = 0; h.armL.t = 0; a.lean.t = 0; a.armL.t = 0; a.armR.t = 0;
     flop(a); later(150, () => flop(h)); if (window.__locker) { const lk = window.__locker; tween(500, k => lk.setAttribute("transform", `translate(${(-140 * k).toFixed(0)} 0)`)); }
     return sleep(900); },
-  async kowai(h, a) { await walk(h, 380, 900); a.happyOn = true; joy(a); await sleep(500); climb(h, 700, 2600); await climb(a, 700, 2600); /* てを つないで いっしょに のぼる */ },
+  async kowai(h, a) { const gap = (a.x + a.dx.v + a.s * 200) - (h.x + h.dx.v + h.s * 200) - 150; await walk(h, gap, 900); a.happyOn = true; joy(a); await sleep(500);
+    h.armR.t = 70; a.armL.t = 70; const hd = el("circle", { r: 16, fill: "#FFFFFF", ...S6p(5) }, front()); // つないだ手
+    follow(hd, () => { const p = world(h, 330, 330), q = world(a, 70, 330); return [(p.x + q.x) / 2, (p.y + q.y) / 2, 0, 1]; });
+    await sleep(500); climb(h, 700, 2600); await climb(a, 700, 2600); /* てを つないで いっしょに のぼる */ },
   async osaki(h, a) { playMove(h, "bow"); await sleep(1200); await climb(h, 1100, 2400); /* 先に階段をのぼっていく */ },
   async tobioriru(h, a) { await climb(a, -320, 1600); a.y += 230 - 320 * .72; thud(); flop(a); markAbove(a, "drop"); await sleep(900); /* ゆっくり下りたのに、さいごで ころぶ */ },
   kaminai(h) { const r = prop("paper", 1250, 900, .35); tween(1200, k => r.setAttribute("transform", `translate(${(1250 - 520 * k).toFixed(0)} 900) rotate(${(-720 * k).toFixed(0)}) scale(.35)`)); blip(300, 500, 1, "triangle"); return sleep(1300); },
