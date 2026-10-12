@@ -340,9 +340,6 @@
   "st_happyou_3": {
    "style": "Happy"
   },
-  "st_ninjin_0": {
-   "style": "close"
-  },
   "st_ninjin_3": {
    "style": "close-shout"
   },
@@ -360,6 +357,9 @@
   },
   "st_nawatobi_2b": {
    "style": "close-shout"
+  },
+  "st_ninjin_1": {
+   "style": "close"
   }
  }
 }

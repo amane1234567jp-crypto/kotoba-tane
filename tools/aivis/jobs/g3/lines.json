@@ -1,0 +1,97 @@
+[
+{
+"key": "sq_ninjin",
+"who": "kamejii",
+"text": "ほっほ。にんじんを たべて みて、どうだったかね？"
+},
+{
+"key": "sr_ninjin",
+"who": "kamejii",
+"text": "ほっほ、えらいのう。にがてな ものが ひとつ へったのう"
+},
+{
+"key": "st_ninjin_0",
+"who": "doshin",
+"text": "きょうの カレー、にんじんが いっぱいだね"
+},
+{
+"key": "st_ninjin_1",
+"who": "gao",
+"text": "あれ？ にんじん、よけてる？"
+},
+{
+"key": "st_ninjin_2",
+"who": "doshin",
+"text": "ひとくち だけ、たべて みたら？ あまくて おいしいよ"
+},
+{
+"key": "st_ninjin_3",
+"who": "gao",
+"text": "お！ なんだか うれしそうな かお！"
+},
+{
+"key": "se_ninjin_0",
+"who": "doshin",
+"text": "でしょ！ ここの にんじん、あまいんだよ"
+},
+{
+"key": "sg_ninjin_0",
+"who": "kon",
+"text": "おいしかった"
+},
+{
+"key": "sg_ninjin_1",
+"who": "kon",
+"text": "あまくて おいしかった"
+},
+{
+"key": "sg_ninjin_2",
+"who": "kon",
+"text": "にんじんは、あまくて おいしかったです"
+},
+{
+"key": "sx_ninjin_2",
+"who": "kon",
+"text": "にんじんを、あまくて おいしかったです"
+},
+{
+"key": "sg_ninjin_3",
+"who": "kon",
+"text": "にがてだったけど、たべたら おいしかったです"
+},
+{
+"key": "sg_ninjin_4",
+"who": "kon",
+"text": "ひとくち たべて みたら、あまくて おいしかったです"
+},
+{
+"key": "sg_ninjin_5",
+"who": "kon",
+"text": "にがてだと おもって いたけど、たべて みたら あまくて びっくりしました"
+},
+{
+"key": "rs_undou",
+"who": "doshin",
+"text": "あっ、ごめんね。どうぞ、どうぞ"
+},
+{
+"key": "rs_kouen",
+"who": "kamejii",
+"text": "ほっほ、どうぞ どうぞ"
+},
+{
+"key": "rs_omise",
+"who": "doshinpapa",
+"text": "ありがとう。もう だいじょうぶ。さきに どうぞ"
+},
+{
+"key": "rs_densha",
+"who": "kamejii",
+"text": "おお、すまんのう。どうぞ"
+},
+{
+"key": "rs_gakkou2",
+"who": "kamejii",
+"text": "ほっほ、おはよう。げんきが いいのう"
+}
+]
