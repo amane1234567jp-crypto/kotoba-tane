@@ -1,0 +1,197 @@
+[
+{
+"key": "rv_mii_win",
+"who": "mii",
+"text": "ふふん、みいの かち"
+},
+{
+"key": "sg_dekkai_4",
+"who": "gao",
+"text": "まちがえて、どしんの くつを はいちゃった。すぐ かえすね"
+},
+{
+"key": "sg_dekkai_5",
+"who": "gao",
+"text": "どしんの くつと まちがえちゃった。ごめんね、すぐ かえすね"
+},
+{
+"key": "sg_gyaku_5",
+"who": "gao",
+"text": "あ、ほんとだ。みぎと ひだりを はきかえて くるね"
+},
+{
+"key": "sg_kowai_4",
+"who": "gao",
+"text": "てを つないで、いっしょに ゆっくり のぼろうね"
+},
+{
+"key": "sg_netsu_4",
+"who": "gao",
+"text": "さむくて、あたまが ずきずき いたいです"
+},
+{
+"key": "sg_netsu_5",
+"who": "gao",
+"text": "けさから さむくて、あたまが いたいです。ねつが あるかも しれません"
+},
+{
+"key": "sg_ohayou_4",
+"who": "gao",
+"text": "おはようございます。きょうは はやく おきました"
+},
+{
+"key": "sg_ohayou_5",
+"who": "gao",
+"text": "こうちょうせんせい、おはようございます。きょうも よろしく おねがいします"
+},
+{
+"key": "sg_osaki_4",
+"who": "gao",
+"text": "ありがとうございます。それでは、おさきに しつれいします"
+},
+{
+"key": "sg_osaki_5",
+"who": "gao",
+"text": "こうちょうせんせい、ありがとうございます。おさきに しつれいします"
+},
+{
+"key": "sg_otsukai_5",
+"who": "chu",
+"text": "カレーを つくるので、にんじんと たまねぎと じゃがいもを ください"
+},
+{
+"key": "sg_sayonara_5",
+"who": "gao",
+"text": "もう かえる じかん だから、さようなら。また あした"
+},
+{
+"key": "sg_shitsurei_4",
+"who": "gao",
+"text": "しつれいします。いちねんせいの しゅくだいを もって きました"
+},
+{
+"key": "sg_shitsurei_5",
+"who": "gao",
+"text": "しつれいします。せんせいに たのまれて、プリントを とどけに きました"
+},
+{
+"key": "sg_tabesugi_4",
+"who": "gao",
+"text": "きゅうしょくの カレーを たべすぎて、おなかが いたいです"
+},
+{
+"key": "sg_untenshu_1",
+"who": "doshin",
+"text": "おはようございます"
+},
+{
+"key": "sg_untenshu_2",
+"who": "doshin",
+"text": "おはようございます。おねがいします"
+},
+{
+"key": "sg_untenshu_3",
+"who": "doshin",
+"text": "おはようございます。えきまで おねがいします"
+},
+{
+"key": "sg_untenshu_4",
+"who": "doshin",
+"text": "おはようございます。この バスは えきに いきますか"
+},
+{
+"key": "sg_untenshu_5",
+"who": "doshin",
+"text": "うんてんしゅさん、おはようございます。きょうも よろしく おねがいします"
+},
+{
+"key": "sg_uwabaki_4",
+"who": "gao",
+"text": "うわばきを いえに わすれたので、スリッパを かして ください"
+},
+{
+"key": "sq_hashiru",
+"who": "gao",
+"text": "わーい！ おかしだ、おかしだー！"
+},
+{
+"key": "sq_locker",
+"who": "gao",
+"text": "うぐぐ……あかないぞ！"
+},
+{
+"key": "sq_mizu",
+"who": "pyon",
+"text": "きゃっ！ つめたーい！"
+},
+{
+"key": "sq_shizuka",
+"who": "gao",
+"text": "うおー！ この ほん、おもしれー！"
+},
+{
+"key": "sr_hanbunko",
+"who": "chu",
+"text": "わあ、ありがとう！ はんぶんこ、うれしいな"
+},
+{
+"key": "sr_kaban",
+"who": "pyon",
+"text": "わあ、ほんとだ！ ありがとう！"
+},
+{
+"key": "sr_kaeru",
+"who": "mii",
+"text": "ほんとだ！ ぴょーんって とんだ！"
+},
+{
+"key": "sr_kiiro",
+"who": "chu",
+"text": "わっ、ほんとだ。ありがとう"
+},
+{
+"key": "sr_nozoku",
+"who": "pyon",
+"text": "わっ、ほんとだ。ありがとう"
+},
+{
+"key": "sr_otsuri",
+"who": "doshin",
+"text": "あっ、ほんとだ！ しょうじきで ありがとう"
+},
+{
+"key": "sr_tearai",
+"who": "mii",
+"text": "そうそう。せっけんで、あわあわに してね"
+},
+{
+"key": "sx_dekkai_4",
+"who": "gao",
+"text": "まちがえて、どしんが くつを はいちゃった。すぐ かえすね"
+},
+{
+"key": "sx_kowai_4",
+"who": "gao",
+"text": "てが つないで、いっしょに ゆっくり のぼろうね"
+},
+{
+"key": "sx_netsu_4",
+"who": "gao",
+"text": "さむくて、あたまを ずきずき いたいです"
+},
+{
+"key": "sx_shitsurei_4",
+"who": "gao",
+"text": "しつれいします。いちねんせいの しゅくだいが もって きました"
+},
+{
+"key": "sx_untenshu_4",
+"who": "doshin",
+"text": "おはようございます。この バスを えきに いきますか"
+},
+{
+"key": "sx_uwabaki_4",
+"who": "gao",
+"text": "うわばきが いえに わすれたので、スリッパを かして ください"
+}
+]
