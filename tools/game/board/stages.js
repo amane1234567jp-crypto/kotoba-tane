@@ -34,7 +34,7 @@ function sleeperAway() { const L = LAYOUT[curStage]; return L ? L.away : [1000, 
 function applyStage(id) {
   curStage = id;
   ZONES.forEach((z, i) => Object.assign(z, KOUSHA_ZONES[i]));
-  Object.keys(NODES).forEach(k => NODES[k] = (LAYOUT[id] ? LAYOUT[id].nodes : KOUSHA_NODES)[k].slice());
+  Object.keys(NODES).forEach(k => delete NODES[k]); Object.entries(LAYOUT[id] ? LAYOUT[id].nodes : KOUSHA_NODES).forEach(([k, v]) => NODES[k] = v.slice());
   RIVAL = RIVAL_OF[id] || "gao"; SLEEPER = SLEEPER_OF[id] || "doshin";
   P.gao = piece(RIVAL); P.doshin = piece(SLEEPER); delete P.gao.tm.closed; P.gao.human = false;
   BOARD_PIECES = [P.doshin, P.shima, P.gao];
@@ -405,7 +405,7 @@ Object.assign(POST, {
 
 /* ---------- 声の まとめ読み（ステージごと） ---------- */
 const PACK = { loaded: {} };
-const SCENE_KEY = /^(sq|sr|sa|sg|sx|sw)_([a-z0-9]+)/;
+const SCENE_KEY = /^(sq|sr|sa|sg|sx|sw|st|se)_([a-z0-9]+)/;
 const STAGE_OF = {}; SITS.forEach(s => STAGE_OF[s.id] = s.stage || "kousha");
 const stageOfKey = k => { const m = SCENE_KEY.exec(k); return m ? STAGE_OF[m[2]] : null; };
 async function loadPack(id) {

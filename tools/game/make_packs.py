@@ -7,11 +7,12 @@ from pathlib import Path
 G = Path(__file__).resolve().parent; R = G.parents[1]
 A = G / "stage_audio"; OUT = R / "packs"; OUT.mkdir(exist_ok=True)
 S = json.loads((G / "sit/sits.json").read_text())
-RIVAL_OF = {"kousha": "gao", "undou": "pyon", "kouen": "mii", "omise": "chu", "densha": "doshin"}
+RIVAL_OF = {"kousha": "gao", "undou": "pyon", "kouen": "mii", "omise": "chu", "densha": "doshin", "gakkou2": "kon"}
 def keys_of(s):
     new = s["stage"] != "kousha" or s["id"] == "unko"
     ks = []
     if new: ks += [f"sq_{s['id']}", f"sr_{s['id']}"]
+    ks += [f"st_{s['id']}_{i}" for i, r in enumerate(s.get("talk", [])) if r[2]] + [f"se_{s['id']}_{i}" for i, r in enumerate(s.get("after", [])) if r[2]]
     for i, t in enumerate(s["tiers"]):
         if not new and i < 4: continue
         ks.append(f"sa_{s['id']}_{i}")
@@ -20,7 +21,7 @@ def keys_of(s):
             if t.get("wrong"): ks.append(f"sx_{s['id']}_{i}")
     return ks
 missing = []
-for st in ["kousha", "undou", "kouen", "omise", "densha"]:
+for st in ["kousha", "undou", "kouen", "omise", "densha", "gakkou2"]:
     pack = {}
     for s in S:
         if s["stage"] != st: continue

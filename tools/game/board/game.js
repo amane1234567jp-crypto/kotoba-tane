@@ -11,7 +11,7 @@ const rnd = n => Math.floor(Math.random() * n);
 const pad = n => String(n).padStart(2, "0");
 
 /* ---------- キャラ ---------- */
-const KINDS = ["doshin", "nobbo", "kamejii", "meebaa", "pony", "shima", "pyon", "mii", "gao", "chu"];
+const KINDS = ["doshin", "nobbo", "kamejii", "meebaa", "pyonmama", "gaojii", "miibaa", "doshinpapa", "kon", "pony", "shima", "pyon", "mii", "gao", "chu"];
 const C = {}; KINDS.forEach(k => C[k] = makeChar(k));
 const P = { doshin: makeChar("doshin"), shima: makeChar("shima"), gao: makeChar("gao") };
 Object.values(P).forEach(p => p.isPiece = true);
@@ -19,7 +19,7 @@ const chars = [...KINDS.map(k => C[k]), ...Object.values(P)];
 /* コマは キャラごとに 1つずつ。P.gao は「いまの ライバル」、P.doshin は「ねている 役」を さす（ステージで 入れかわる） */
 const PIECE = { doshin: P.doshin, shima: P.shima, gao: P.gao };
 function piece(kind) { if (!PIECE[kind]) { const c = makeChar(kind); c.isPiece = true; PIECE[kind] = c; chars.push(c); } return PIECE[kind]; }
-const PIECE_S = { shima: .22, gao: .22, pyon: .21, mii: .21, chu: .13, doshin: .27, kamejii: .21, meebaa: .21 };
+const PIECE_S = { shima: .22, gao: .22, pyon: .21, mii: .21, chu: .13, doshin: .27, kamejii: .21, meebaa: .21, kon: .21 };
 let RIVAL = "gao", SLEEPER = "doshin", MODE = "solo", PLAYERS = [], BOARD_PIECES = [P.doshin, P.shima, P.gao], winnerPc = null;
 P.shima.human = true;
 // ライバルの セリフ（がおは 前からの 声。ほかの キャラは rv_<キャラ>_<名前>）
@@ -42,13 +42,18 @@ const bubTip = el("path", { fill: "#FFFFFF", stroke: INK, "stroke-width": 5, "st
 const bubT = el("text", { "font-family": "Zen Maru Gothic, sans-serif", "font-weight": 700, "font-size": 44, fill: INK, "text-anchor": "middle" }, bub);
 function say(c, text) {
   if (taskText && (text === taskText || text.endsWith("…"))) { unsay(); return; } // おだいはカードに出ているので吹き出しは出さない
-  bubT.textContent = text;
-  const w = Math.min(1500, text.length * 44 + 70);
+  // 長い 文は 2行に わける（まんなかに 近い 「、」や すきまで）
+  let lines = [text];
+  if (text.length > 26) { let best = -1, mid = text.length / 2;
+    for (let i = 6; i < text.length - 6; i++) if ("、。？！ ".includes(text[i]) && (best < 0 || Math.abs(i - mid) < Math.abs(best - mid))) best = i;
+    if (best < 0) best = Math.round(mid); lines = [text.slice(0, best + 1).trim(), text.slice(best + 1).trim()]; }
+  bubT.textContent = ""; lines.forEach((t, i) => { const sp = document.createElementNS(NS, "tspan"); sp.textContent = t; sp.setAttribute("dy", i ? 56 : 0); bubT.appendChild(sp); });
+  const w = Math.min(1500, Math.max(...lines.map(t => t.length)) * 44 + 70), extra = (lines.length - 1) * 56;
   const hx = c.x + 200 * c.s, cx = Math.max(w / 2 + 20, Math.min(1580 - w / 2, hx + (c.isPiece || c === C.pony && view === "board" ? w / 2 - 60 : 0)));
-  const y = Math.max(110, c.y + c.top * c.s - 30), tipX = Math.max(60, Math.min(1540, hx));
-  bubR.setAttribute("x", cx - w / 2); bubR.setAttribute("y", y - 78); bubR.setAttribute("width", w); bubR.setAttribute("height", 88);
+  const y = Math.max(110 + extra, c.y + c.top * c.s - 30), tipX = Math.max(60, Math.min(1540, hx));
+  bubR.setAttribute("x", cx - w / 2); bubR.setAttribute("y", y - 78 - extra); bubR.setAttribute("width", w); bubR.setAttribute("height", 88 + extra);
   bubTip.setAttribute("d", `M${tipX - 18} ${y + 8} L${tipX} ${y + 38} L${tipX + 18} ${y + 8}`);
-  bubT.setAttribute("x", cx); bubT.setAttribute("y", y - 18); bub.setAttribute("opacity", 1);
+  bubT.setAttribute("x", cx); bubT.setAttribute("y", y - 18 - extra); bubT.querySelectorAll("tspan").forEach(sp => sp.setAttribute("x", cx)); bub.setAttribute("opacity", 1);
 }
 function unsay() { bub.setAttribute("opacity", 0); }
 const ear = el("g", { opacity: 0 }, hudLayer);
@@ -936,6 +941,7 @@ const STAGES = [
   { id: "kouen", name: "こうえん", icon: "🌳", ready: true },
   { id: "omise", name: "おみせ", icon: "🛒", ready: true },
   { id: "densha", name: "でんしゃとバス", icon: "🚃", ready: true },
+  { id: "gakkou2", name: "がっこう2", icon: "📖", ready: true },
 ];
 const SAVE_KEY = "kotoba-tane-save";
 const SAVE = (() => { try { return JSON.parse(localStorage.getItem(SAVE_KEY)) || null; } catch (e) { return null; } })() || { v: 1, lap: 1, cleared: {}, E: null, play: null };
@@ -981,7 +987,7 @@ async function newGame(opt = {}) {
   setPiece(P.shima, "0"); setPiece(P.gao, "0"); setPiece(P.doshin, BLOCK); P.doshin.tm.closed = 1e6;
   if (resume) {
     const p = SAVE.play;
-    setPiece(P.shima, p.shima); setPiece(P.gao, p.gao);
+    const ok = id => NODES[id] ? id : "0"; setPiece(P.shima, ok(p.shima)); setPiece(P.gao, ok(p.gao)); // 盤の形が かわった 古い セーブでも こわれない
     doshinAsleep = p.doshinAsleep; (p.sitUsed || []).forEach(x => sitUsed.add(x)); Object.assign(GS, p.GS || {}); gaoEasy = !!p.gaoEasy;
     if (!doshinAsleep) { delete P.doshin.tm.closed; P.doshin.node = null; [P.doshin.px, P.doshin.py] = sleeperAway(); }
   }

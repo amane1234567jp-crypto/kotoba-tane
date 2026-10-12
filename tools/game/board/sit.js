@@ -12,14 +12,14 @@ const tierOf = () => Math.min(5, (E.L <= 2 ? 0 : E.L <= 4 ? 1 : E.L <= 7 ? 2 : 3
 function pickSit(place, heroKind = "shima") {
   const okFor = s => (s.stage || "kousha") === curStage && s.asker !== heroKind
     && (heroKind === "shima" || (MODE === "solo" ? s.gaoOk : (heroKind !== "gao" || s.gaoOk)))
-    && !(heroKind === "chu" && s.intro === "tag");
+    && !(heroKind === "chu" && s.intro === "tag") && !(s.cast && s.cast.includes(heroKind)); // やりとりに 出ている キャラは、その場面の 主人公に しない
   let pool = SITS.filter(s => okFor(s) && s.place === place && !sitUsed.has(s.id));
   if (!pool.length) pool = SITS.filter(s => okFor(s) && !sitUsed.has(s.id));
   if (!pool.length) { [...sitUsed].forEach(id => { const x = SITS.find(s => s.id === id); if (x && (x.stage || "kousha") === curStage) sitUsed.delete(id); }); pool = SITS.filter(s => okFor(s) && s.place === place && !sitUsed.has(s.id)); if (!pool.length) pool = SITS.filter(s => okFor(s) && !sitUsed.has(s.id)); if (!pool.length) pool = SITS.filter(okFor); }
   const s = pool[rnd(pool.length)]; sitUsed.add(s.id); return s;
 }
 const ASK_ON_STAGE = new Set(["door", "arrive", "stuck", "scared", "jumpdown", "loud", "borrow", "slow"]); // 最初から相手がその場にいる場面
-const ASK_AT = { meebaa: [1190, .9], kamejii: [1180, .9], nobbo: [1220, 1.0], gao: [1190, .95], mii: [1190, .9], chu: [1220, .42], pyon: [1190, .9], doshin: [1260, 1.38] };
+const ASK_AT = { meebaa: [1190, .9], kamejii: [1180, .9], nobbo: [1220, 1.0], gao: [1190, .95], mii: [1190, .9], chu: [1220, .42], pyon: [1190, .9], doshin: [1260, 1.38], pyonmama: [1200, 1.0], gaojii: [1190, 1.0], miibaa: [1190, .98], doshinpapa: [1250, 1.48], kon: [1190, .88] };
 let propG = null;
 function resetChar(c) { c.dx.v = 0; c.dx.t = 0; c.lean.t = 0; c.lift.t = 0; c.armL.t = 0; c.armR.t = 0; c.headRot.t = 0; c.tm = {}; c.sadMouth = false; c.roundMouth = false; c.happyOn = false; c.eyeScale.t = 1; c.squash.t = 1; }
 function setSitView(s, heroKind) {
@@ -30,7 +30,7 @@ function setSitView(s, heroKind) {
   const hero = C[heroKind], ask = C[s.asker];
   [C.pony, C.shima, hero, ask].forEach(resetChar);
   place(C.pony, 120, 975, .46); show(C.pony);
-  const HS = { shima: .88, gao: .9, pyon: .86, mii: .86, chu: .42, doshin: 1.15, meebaa: .86, kamejii: .86 };
+  const HS = { shima: .88, gao: .9, pyon: .86, mii: .86, chu: .42, doshin: 1.15, meebaa: .86, kamejii: .86, kon: .88 };
   if (MODE === "solo" && heroKind !== "shima") { place(C.shima, 320, 975, .55); show(C.shima); place(hero, 650, 975, HS[heroKind] || .9); }
   else place(hero, 600, 975, HS[heroKind] || .88);
   show(hero);

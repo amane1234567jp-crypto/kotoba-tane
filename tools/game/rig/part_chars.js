@@ -39,6 +39,8 @@ function ring(g, cx, cy, R, r, fill, sw = 6) {
   el("circle", { cx, cy, r: R + 2, fill }, g);
 }
 
+function recolor(root, map) { root.querySelectorAll("*").forEach(e => { ["fill", "stroke"].forEach(a => { const v = e.getAttribute(a); if (v && map[v]) e.setAttribute(a, map[v]); }); }); }
+function hideFill(root, colors) { root.querySelectorAll("*").forEach(e => { if (colors.includes(e.getAttribute("fill"))) e.setAttribute("display", "none"); }); }
 const BUILD = {
   pony(root) {
     const s = ST(), B = "#D98A4E", H = "#6B4A36", T = "#FFD36E";
@@ -275,10 +277,59 @@ const BUILD = {
     const mouth = mouthAt(head, 200, 218, 16, 4);
     [152, 248].forEach(x => el("ellipse", { cx: x, cy: 204, rx: 13, ry: 9, fill: "#FF9FB0" }, head));
     return { base: 408, top: 10, tail: null, legs, arms, head: { g: head, px: 200, py: 272 }, ears, eyes, happy: null, mouth, closedEyes, noBlink: true };
+  },  // ---------- おみせの 店員さん（学校の友だちの 家族）と、てんこうせい こん ----------
+  pyonmama(root) { // ぴょんの おかあさん（パンや）：エプロンと 三角きん
+    const p = BUILD.pyon(root); recolor(root, { "#FFE3EA": "#FFF2E8", "#FF7FA0": "#8FB8E8" }); hideFill(p.head.g, ["#FF4F7B", "#FFD36E"]);
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M160 300 Q200 290 240 300 L262 372 Q200 388 138 372 Z", fill: "#FFFFFF", ...ST(5) }, bd); el("path", { d: "M176 330 h48", fill: "none", ...ST(4) }, bd);
+    el("path", { d: "M104 128 Q200 52 296 128 Q250 112 200 112 Q150 112 104 128 Z", fill: "#FFFFFF", ...ST(6) }, p.head.g);
+    el("path", { d: "M138 160 l-10 -8 M262 160 l10 -8", fill: "none", ...ST(4) }, p.head.g);
+    return p; },
+  gaojii(root) { // がおの おじいちゃん（やおや）：白い たてがみ・めがね・ひげ・はちまき・前かけ
+    const p = BUILD.gao(root); recolor(root, { "#C8662B": "#C9C1B6", "#FFC94D": "#F0C978" }); p.brows.innerHTML = ""; el("path", { d: "M134 136 Q160 122 186 138 M214 138 Q240 122 266 136", fill: "none", stroke: "#FFFFFF", "stroke-width": 12, "stroke-linecap": "round" }, p.brows); el("path", { d: "M134 136 Q160 122 186 138 M214 138 Q240 122 266 136", fill: "none", ...ST(3) }, p.brows);
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M138 330 Q200 316 262 330 L268 394 Q200 408 132 394 Z", fill: "#5BA34D", ...ST(5) }, bd); el("text", { x: 200, y: 376, "text-anchor": "middle", "font-family": "Zen Maru Gothic, sans-serif", "font-weight": 700, "font-size": 30, fill: "#FFFFFF" }, bd).textContent = "やおや";
+    el("path", { d: "M120 118 Q200 92 280 118 L276 136 Q200 112 124 136 Z", fill: "#FFFFFF", ...ST(5) }, p.head.g); el("path", { d: "M276 124 l22 -12 l4 20 Z", fill: "#FFFFFF", ...ST(4) }, p.head.g);
+    [160, 240].forEach(x => el("circle", { cx: x, cy: 163, r: 26, fill: "#FFFFFF", "fill-opacity": .3, ...ST(5) }, p.head.g)); el("path", { d: "M186 160 Q200 154 214 160", fill: "none", ...ST(5) }, p.head.g);
+    el("path", { d: "M200 208 Q182 212 170 226 Q186 224 200 216 Q214 224 230 226 Q218 212 200 208 Z", fill: "#FFFFFF", ...ST(4) }, p.head.g);
+    p.tempo = .8; return p; },
+  miibaa(root) { // みいの おばあちゃん（おかしや）：めがね・ショール
+    const p = BUILD.mii(root); recolor(root, { "#B9A8D9": "#CFC6D8", "#EDE6F8": "#F4F0F8", "#FF4F7B": "#E89BB8" }); hideFill(p.head.g, ["#FFD36E"]);
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M126 286 Q200 318 274 286 L282 318 Q200 352 118 318 Z", fill: "#F7A8C4", ...ST(5) }, bd); el("path", { d: "M150 300 l6 12 M176 308 l4 12 M224 308 l-4 12 M250 300 l-6 12", fill: "none", ...ST(3) }, bd);
+    [157, 243].forEach(x => el("circle", { cx: x, cy: 172, r: 30, fill: "#FFFFFF", "fill-opacity": .3, ...ST(5) }, p.head.g)); el("path", { d: "M187 170 Q200 162 213 170", fill: "none", ...ST(5) }, p.head.g);
+    el("circle", { cx: 200, cy: 72, r: 26, fill: "#CFC6D8", ...ST(5) }, p.head.g);
+    p.tempo = .8; return p; },
+  doshinpapa(root) { // どしんの おとうさん（レジ）：ぼうしと 前かけ
+    const p = BUILD.doshin(root); recolor(root, { "#A9BEDD": "#93A8C8", "#D3DEF0": "#C4D1E6" });
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M126 300 Q200 280 274 300 L280 380 Q200 400 120 380 Z", fill: "#3E9BD6", ...ST(5) }, bd); el("rect", { x: 216, y: 318, width: 48, height: 26, rx: 5, fill: "#FFFFFF", ...ST(4) }, bd);
+    el("path", { d: "M110 96 Q200 30 290 96 L290 108 L110 108 Z", fill: "#3E9BD6", ...ST(6) }, p.head.g); el("path", { d: "M180 108 Q230 104 300 122 L296 132 Q232 118 176 120 Z", fill: "#2E7DB5", ...ST(5) }, p.head.g);
+    return p; },
+  kon(root) { // きつねの こん（がっこう2の てんこうせい）
+    const s = ST(), O = "#F29F4C", W = "#FFF6E9";
+    const tail = el("g", {}, root);
+    el("path", { d: "M258 360 Q340 380 352 300 Q358 250 322 238 Q300 280 300 312 Q290 340 258 344 Z", fill: O, ...s }, tail);
+    el("path", { d: "M322 238 Q358 250 352 300 Q336 288 318 272 Q314 254 322 238 Z", fill: W, ...ST(4) }, tail);
+    const legs = [170, 230].map(x => leg(root, x, 362, 34, 44, "#7A4A2A", null));
+    el("ellipse", { cx: 200, cy: 328, rx: 68, ry: 58, fill: O, ...s }, root);
+    el("ellipse", { cx: 200, cy: 342, rx: 36, ry: 34, fill: W }, root);
+    const arms = [arm(root, 130, 296, 18, 36, O, "#7A4A2A", 16), arm(root, 270, 296, 18, 36, O, "#7A4A2A", -16)];
+    el("path", { d: "M150 278 Q200 300 250 278 L240 300 Q200 318 160 300 Z", fill: "#7CC36A", ...ST(5) }, root); el("path", { d: "M214 300 l16 30 l-26 -8 Z", fill: "#7CC36A", ...ST(4) }, root);
+    const head = el("g", {}, root);
+    const ears = [["M98 150 L112 40 L182 104 Z", "M112 128 L118 70 L160 106 Z", 132], ["M302 150 L288 40 L218 104 Z", "M288 128 L282 70 L240 106 Z", 268]].map(([a, b, px]) => {
+      const g = el("g", {}, head); el("path", { d: a, fill: O, ...s }, g); el("path", { d: b, fill: "#5A3A2A" }, g); return { g, px, py: 118 }; });
+    el("ellipse", { cx: 200, cy: 178, rx: 114, ry: 96, fill: O, ...s }, head);
+    el("path", { d: "M92 190 Q140 196 168 176 Q200 196 232 176 Q260 196 308 190 Q290 266 200 274 Q110 266 92 190 Z", fill: W, "clip-path": clipEllipse("c-kon", 200, 178, 114, 96) }, head);
+    el("ellipse", { cx: 200, cy: 178, rx: 114, ry: 96, fill: "none", ...s }, head);
+    const eyes = eyesAt(head, [[156, 166, 13, 18], [244, 166, 13, 18]]);
+    el("path", { d: "M188 204 Q200 196 212 204 Q200 216 188 204 Z", fill: INK, ...ST(4) }, head);
+    const mouth = mouthAt(head, 200, 224, 18, 4, "M182 222 Q191 232 200 222 Q209 232 218 222");
+    const happy = happyAt(head, [156, 244], 166);
+    [122, 278].forEach(x => el("ellipse", { cx: x, cy: 206, rx: 13, ry: 8, fill: "#FF9FB0" }, head));
+    el("path", { d: "M176 96 Q190 80 200 96 Q210 80 224 96", fill: "none", ...ST(5) }, head);
+    return { base: 406, top: 40, tail: { g: tail, px: 258, py: 350 }, legs, arms, head: { g: head, px: 200, py: 272 }, ears, eyes, happy, mouth };
   },
 };
 
-const NAMES = { pony: "ぽにー", shima: "まるシマ", doshin: "どしん", nobbo: "のっぽ", gao: "がお", chu: "ちゅう", pyon: "ぴょん", mii: "みい", kamejii: "かめじい", meebaa: "めえばあ" };
+const NAMES = { pony: "ぽにー", shima: "まるシマ", doshin: "どしん", nobbo: "のっぽ", gao: "がお", chu: "ちゅう", pyon: "ぴょん", mii: "みい", kamejii: "かめじい", meebaa: "めえばあ",
+  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", kon: "こん" };
 const LINES = { pony: "きょねん、うみに いったね", shima: "やったー！ いえたね！", doshin: "どいて、あげるよ", nobbo: "それは、ずかんに のって いますよ", gao: "つぎは、まけないぞ",
   chu: "こ、こわかったよう", pyon: "いっしょに あそぼう！", mii: "ふーん。まあまあ じゃない", kamejii: "よく いえましたね", meebaa: "いらっしゃいませ" };
 
@@ -407,5 +458,10 @@ const SPECIAL = {
   pyon: c => { jump(c, .75); c.happyOn = true; c.earL.t = -25; c.earR.t = 25; later(480, () => jump(c, .75)); later(1300, () => { c.happyOn = false; c.earL.t = 0; c.earR.t = 0; }); },
   mii: c => { c.headRot.t = -18; c.blink = 0; c.nextBlink = 1.4; c.tm.wag = 1.6; later(1600, () => c.headRot.t = 0); },
   kamejii: c => { c.dx.t = 2200; c.lean.t = -20; blip(200, 900, .4, "sawtooth"); later(900, () => { c.dx.t = 0; c.lean.t = 0; }); },
+  pyonmama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
+  gaojii: c => { c.tm.nod = 1.2; c.happyOn = true; later(1300, () => c.happyOn = false); },
+  miibaa: c => { c.tm.nod = 1.2; c.happyOn = true; c.tm.wag = 1.4; later(1300, () => c.happyOn = false); },
+  doshinpapa: c => { c.tm.clap = 1.6; c.mouthOpen.t = .5; later(1600, () => c.mouthOpen.t = 0); },
+  kon: c => { jump(c, .8); c.happyOn = true; c.tm.wag = 1.6; later(1300, () => c.happyOn = false); },
   meebaa: c => { c.armL.t = -55; c.armR.t = 55; c.happyOn = true; c.lean.t = 6; later(500, () => c.lean.t = -6); later(1000, () => c.lean.t = 0); later(1400, () => { c.armL.t = 0; c.armR.t = 0; c.happyOn = false; }); },
 };
