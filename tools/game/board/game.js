@@ -1,4 +1,10 @@
 /* ================= すごろく本体 ================= */
+if (!/[?&]dev\b/.test(location.search)) document.body.classList.add("kid"); // ?dev を付けたときだけ確認用パネルを出す
+/* 遊んだ記録（保護者が「おとなの かたへ」から見てコピーできる）。端末の中だけに保存 */
+const LOG_KEY = "kotoba-tane-log";
+function playLog(o) {
+  try { const a = JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); a.push({ t: Date.now(), ...o }); while (a.length > 800) a.shift(); localStorage.setItem(LOG_KEY, JSON.stringify(a)); } catch (e) { }
+}
 const W_KEY = "kotoba-tane-board";
 const store = { get() { try { return JSON.parse(localStorage.getItem(W_KEY)) || {}; } catch (e) { return {}; } }, set(v) { try { localStorage.setItem(W_KEY, JSON.stringify(v)); } catch (e) { /* なくても動く */ } } };
 const rnd = n => Math.floor(Math.random() * n);
@@ -502,14 +508,17 @@ async function askFork() {
   return pick;
 }
 async function blockEvent() {
+  const dtries = [];
   await speak(C.pony, "p_doshin", "どしんが ねてる！"); surprise(P.shima);
   showTask("どいて ください", "どしんに いおう", 520);
   for (let a = 0; a < 2; a++) {
     await speak(C.pony, "block", "どいて ください");
     setListen(P.shima, true); const r = await listen([["どいて", "退いて", "どいで"]]); setListen(P.shima, false);
+    dtries.push(`${r.r === "ok" ? "○" : r.r === "part" ? "△" : "×"}${r.heard || ""}`);
     if (r.r === "ok") { joy(P.shima); GS.ok++; break; }
     if (a === 0) await speak(C.pony, "p_again", "もう いっかい いってみよう");
   }
+  playLog({ type: "doite", ok: dtries.some(x => x[0] === "○"), tries: dtries });
   hideTask(); doshinAsleep = false; delete P.doshin.tm.closed; surprise(P.doshin); await sleep(700);
   await speak(P.doshin, "doshin", "どいて、あげるよ");
   P.doshin.tm.run = 1.2;
@@ -719,6 +728,7 @@ async function ending() {
   await sleep(900);
   await speak(C.gao, "g_good", "いい しょうぶ だったな");
   if (childWon) await speak(C.gao, "gao", "つぎは、まけないぞ");
+  playLog({ type: "goal", winner, lap: SAVE.lap, L: E.L });
   const lapUp = childWon ? markClear() : false;
   if (childWon) { await speak(C.pony, "p_clear", "ステージ クリア！"); }
   if (lapUp) { const t = slam(`${SAVE.lap}しゅうめへ！`, 520, 150, "#FF9E7A"); fanfare(); await speak(C.pony, "p_lap2", "にしゅうめの はじまりだよ！ こんどは もっと むずかしいよ"); await sleep(600); t.remove(); }
@@ -941,6 +951,7 @@ function newGame(opt = {}) {
     if (!doshinAsleep) { delete P.doshin.tm.closed; P.doshin.node = null; P.doshin.px = 1000; P.doshin.py = 792; }
   }
   setView("board"); showEngine(null, (childShouldWin ? "こんかいは きみが勝つ回" : "こんかいは がおが本気の回") + `／${SAVE.lap}しゅうめ`);
+  playLog({ type: "start", resume, lap: SAVE.lap, L: E.L, stage: curStage });
   run({ resume, intro: !resume });
 }
 async function rivalIntro() {
@@ -1014,10 +1025,40 @@ function showMenu() {
     list.append(b);
   });
   card.append(list);
-  const rs = h("button", "mreset", "セーブを けす（おとなの かたへ）"); rs.type = "button";
+  const adult = h("div", "madult"); adult.append(h("span", "", "おとなの かたへ："));
+  const lg = h("button", "mreset", "あそんだ きろくを 見る"); lg.type = "button"; lg.onclick = showLog; adult.append(lg);
+  const rs = h("button", "mreset", "セーブを けす"); rs.type = "button";
   rs.onclick = () => { if (!confirm("レベル・クリア・とちゅうの きろくを ぜんぶ けしますか？")) return; SAVE.lap = 1; SAVE.cleared = {}; SAVE.E = null; SAVE.play = null; saveNow(); Object.assign(E, { L: 1, h: 1, streak: 0 }); showMenu(); };
-  card.append(rs);
+  adult.append(rs); card.append(adult);
   box.append(card);
+}
+function logText() {
+  let a = []; try { a = JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); } catch (e) { }
+  const d = t => { const x = new Date(t); return `${x.getMonth() + 1}/${x.getDate()} ${String(x.getHours()).padStart(2, "0")}:${String(x.getMinutes()).padStart(2, "0")}`; };
+  const sc = a.filter(x => x.type === "scene"), first = sc.filter(x => x.ok && x.tries.length === 1).length;
+  const sum = `場面 ${sc.length}回／1回目で言えた ${first}回／言い直して言えた ${sc.filter(x => x.ok && x.tries.length > 1).length}回／言えなかった ${sc.filter(x => !x.ok).length}回`
+    + `\nゴール ${a.filter(x => x.type === "goal").length}回（勝ち ${a.filter(x => x.type === "goal" && x.winner === "child").length}回）／がおに教えた ${a.filter(x => x.type === "teach").length}回`;
+  const lines = a.map(x => x.type === "scene" ? `${d(x.t)} 場面 ${x.id} 段${x.tier} Lv${x.L} ${x.ok ? "○" : "×"} 「${x.answer}」 聞きとり: ${x.tries.join(" / ")} (${x.sec}秒)`
+    : x.type === "teach" ? `${d(x.t)} がおに教える ${x.id} ${x.ok ? "○" : "×"} 聞きとり: ${x.tries.join(" / ")}`
+    : x.type === "doite" ? `${d(x.t)} どしん「どいてください」 ${x.ok ? "○" : "×"} 聞きとり: ${x.tries.join(" / ")}`
+    : x.type === "goal" ? `${d(x.t)} ゴール ${x.winner === "child" ? "かち" : "まけ"}（${x.lap}しゅうめ、レベル${x.L}）`
+    : x.type === "start" ? `${d(x.t)} ── ${x.resume ? "つづきから" : "はじめから"}（${x.lap}しゅうめ、レベル${x.L}）`
+    : `${d(x.t)} ${JSON.stringify(x)}`);
+  return { sum, text: "ことばのたね あそんだきろく\n" + sum + "\n\n" + lines.join("\n") };
+}
+function showLog() {
+  const { sum, text } = logText();
+  const box = document.createElement("div"); box.className = "logbox";
+  const c = document.createElement("div"); c.className = "logcard";
+  const h3 = document.createElement("h3"); h3.textContent = "あそんだ きろく";
+  const s1 = document.createElement("div"); s1.className = "logsum"; s1.textContent = sum;
+  const pre = document.createElement("pre"); pre.className = "logpre"; pre.textContent = text.split("\n\n").slice(1).join("\n\n") || "まだ きろくは ありません";
+  const bt = document.createElement("div"); bt.className = "logbtns";
+  const mk = (t, f) => { const b = document.createElement("button"); b.type = "button"; b.textContent = t; b.onclick = f; bt.append(b); return b; };
+  const cp = mk("コピー", async () => { let ok = false; try { await navigator.clipboard.writeText(text); ok = true; } catch (e) { const ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select(); try { ok = document.execCommand("copy"); } catch (x) { } ta.remove(); } cp.textContent = ok ? "コピーしました" : "コピーできませんでした"; });
+  mk("きろくを けす", () => { if (confirm("あそんだ きろくを ぜんぶ けしますか？（レベルやセーブは のこります）")) { try { localStorage.removeItem(LOG_KEY); } catch (e) { } box.remove(); showLog(); } });
+  mk("とじる", () => box.remove());
+  c.append(h3, s1, pre, bt); box.append(c); stage.appendChild(box);
 }
 (function menuStyle() {
   const st = document.createElement("style");
@@ -1040,6 +1081,14 @@ function showMenu() {
 .mst.locked .mico{filter:grayscale(1);opacity:.45}.mst.locked .mstat{background:#fff;border-color:#a59a8c}
 .start.menu .mreset{margin-top:4px;color:#8a8073;font-size:13px;text-decoration:underline;cursor:pointer;font-family:inherit}
 .again.menuBtn{background:#fff}
+.madult{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;justify-content:center;font-size:13px;color:#8a8073}
+.logbox{position:absolute;inset:0;background:rgba(43,42,51,.55);display:grid;place-items:center;padding:12px;z-index:50}
+.logcard{background:#fff;border:5px solid #2B2A33;border-radius:24px;padding:16px 18px;width:min(94%,820px);max-height:92%;display:grid;grid-template-rows:auto auto 1fr auto;gap:10px;font-family:var(--body);color:#2B2A33}
+.logcard h3{margin:0;font:400 22px var(--display)}
+.logsum{font-size:15px;line-height:1.7;white-space:pre-line}
+.logpre{margin:0;overflow:auto;background:#FFF8E1;border-radius:12px;padding:10px;font:13px/1.55 ui-monospace,Menlo,monospace;white-space:pre-wrap}
+.logbtns{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.start.menu .logbtns button,.logbtns button{font:700 16px var(--body);padding:10px 18px;border-radius:12px;border:3px solid #2B2A33;background:#FFD25E;cursor:pointer}
 .mmic{font:400 clamp(13px,1.7vw,16px) var(--display);color:#6b5e4f}`;
   document.head.appendChild(st);
 })();

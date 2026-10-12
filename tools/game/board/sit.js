@@ -220,16 +220,18 @@ async function runSit(place) {
   await askQ(s, h, a);
   await speak(C.pony, s.help ? "p_help" : "p_ask", s.help ? "なんて いって あげる？" : "なんて こたえる？");
   showTask(t.a, s.help ? "いって あげよう" : "こたえよう");
-  let hh = E.h, ok = false, n = 0;
+  let hh = E.h, ok = false, n = 0; const tries = [], L0 = E.L, t0 = performance.now();
   for (; n < 3; n++) {
     if (hh < 3) await speak(C.pony, `sa_${s.id}_${ti}`, t.a);
     else { playMove(h, "think"); await sleep(700); }
     unsay();
     setListen(h, true); const r = await listen(t.keys, 8000); setListen(h, false);
+    tries.push(`${r.r === "ok" ? "○" : r.r === "part" ? "△" : "×"}${r.heard || ""}`);
     if (r.r === "ok") { ok = true; break; }
     if (r.r === "part") { playMove(h, "think"); await speak(C.pony, "p_close", "おしい！"); } else { playMove(h, "think"); await sleep(600); }
     if (n < 2) { hh = 1; await speak(C.pony, "p_again", "もう いっかい いってみよう"); }
   }
+  playLog({ type: "scene", id: s.id, tier: ti + 1, L: L0, ok, answer: t.a, tries, sec: Math.round((performance.now() - t0) / 1000) });
   const up = grade(ok && n === 0); GS.tasks++; if (ok) GS.ok++;
   if (!ok) { await speak(C.pony, "p_together", "いっしょに いおうね"); await speak(C.pony, `sa_${s.id}_${ti}`, t.a); playMove(h, "nod"); await sleep(600); }
   hideTask();
@@ -262,12 +264,14 @@ async function gaoSit(before) {
   showTask(t.a, "がおに おしえよう");
   await speak(C.pony, "teach", "がおに おしえて あげよう");
   playMove(h, "think"); await speak(h, "g_huh", "あれ？ ちがった？");
-  let ok = false;
+  let ok = false; const ttries = [];
   for (let n = 0; n < 2 && !ok; n++) {
     await speak(C.pony, `sa_${s.id}_${ti}`, t.a); unsay();
     setListen(C.shima, true); const r = await listen(t.keys, 8000); setListen(C.shima, false);
+    ttries.push(`${r.r === "ok" ? "○" : r.r === "part" ? "△" : "×"}${r.heard || ""}`);
     ok = r.r === "ok"; if (ok) GS.ok++; if (!ok && n === 0) await speak(C.pony, "p_again", "もう いっかい いってみよう");
   }
+  playLog({ type: "teach", id: s.id, ok, tries: ttries });
   if (ok) { joy(C.shima); confetti(50); chime(); markAbove(h, "ex"); await speak(h, "g_thanks", "そっか、ありがとな"); }
   else { await speak(C.pony, "p_together", "いっしょに いおうね"); await speak(C.pony, `sa_${s.id}_${ti}`, t.a); }
   await speak(h, `sg_${s.id}_${ti}`, t.a); unsay(); hideTask();
