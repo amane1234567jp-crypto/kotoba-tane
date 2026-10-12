@@ -17,6 +17,8 @@ p{margin:6px 0}
 <button id="a">A：音声認識だけ</button>
 <button id="b">B：マイクを開けたまま＋音声認識（いまのゲームと同じ）</button>
 <button id="c">C：マイクを閉じてから音声認識</button>
+<button id="d">D：英語で音声認識（"apple" と言う）</button>
+<button id="e">E：言語を指定せずに音声認識</button>
 <button class="sub" id="copy">きろくをコピー</button>
 <div id="log"></div>
 <script>
@@ -30,10 +32,10 @@ document.getElementById("env").textContent=
  "\naudioSession: "+(navigator.audioSession?navigator.audioSession.type:"なし")+
  "\n"+navigator.userAgent;
 let stream=null;
-function sr(label){return new Promise(res=>{
+function sr(label,lang){if(lang===undefined)lang="ja-JP";return new Promise(res=>{
   if(!SRC){log(label+": 音声認識の機能なし");return res();}
   let r;try{r=new SRC();}catch(e){log(label+": new でエラー "+e);return res();}
-  r.lang="ja-JP";r.interimResults=true;r.continuous=false;
+  if(lang)r.lang=lang;log(label+": 言語="+(lang||"指定なし（"+(r.lang||document.documentElement.lang)+"）"));r.interimResults=true;r.continuous=false;
   ["start","audiostart","soundstart","speechstart","speechend","soundend","audioend","nomatch"].forEach(ev=>r.addEventListener(ev,()=>log(label+": "+ev)));
   r.onresult=e=>{const o=[];for(const x of e.results)o.push(x[0].transcript+(x.isFinal?"（確定）":""));log(label+": 結果 "+o.join(" / "));};
   r.onerror=e=>log(label+": エラー "+e.error+(e.message?" "+e.message:""));
@@ -52,6 +54,8 @@ document.getElementById("c").onclick=async()=>{
   await new Promise(r=>setTimeout(r,500));
   await sr("C");
 };
+document.getElementById("d").onclick=()=>sr("D","en-US");
+document.getElementById("e").onclick=()=>sr("E","");
 document.getElementById("copy").onclick=async()=>{
   const txt=document.getElementById("env").textContent+"\n---\n"+L.textContent;
   try{await navigator.clipboard.writeText(txt);log("（コピーしました）");}catch(e){const ta=document.createElement("textarea");ta.value=txt;document.body.append(ta);ta.select();document.execCommand("copy");ta.remove();log("（コピーしました）");}
