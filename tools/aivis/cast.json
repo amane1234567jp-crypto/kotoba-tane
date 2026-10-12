@@ -44,6 +44,32 @@
    "model": "71e72188-2726-4739-9aa9-39567396fb2a",
    "style": "ノーマル",
    "speed": 1.0
+  },
+  "pyonmama": {
+   "model": "f83c385c-829b-40c4-8c11-639027e61636",
+   "style": "普通",
+   "speed": 0.95
+  },
+  "gaojii": {
+   "model": "470a41e2-863f-4bf2-8a20-bf7cde0d8f7b",
+   "style": "Happy",
+   "speed": 0.9
+  },
+  "miibaa": {
+   "model": "2ff1c526-27d4-4eeb-b069-4207ae5fe259",
+   "style": "hutuu_hutuu",
+   "speed": 0.82,
+   "pitch": -0.06
+  },
+  "doshinpapa": {
+   "model": "e5bd2b5e-90a8-4fb3-a69f-2fbd2d3a8a43",
+   "style": "落ち着き",
+   "speed": 0.92
+  },
+  "kon": {
+   "model": "a670e6b8-0852-45b2-8704-1bc9862f2fe6",
+   "style": "ノーマル",
+   "speed": 1.05
   }
  },
  "lines": {
@@ -268,6 +294,69 @@
   },
   "rv_doshin_go": {
    "style": "Mid"
+  },
+  "st_keshigomu_4": {
+   "style": "悲しみ"
+  },
+  "st_keshigomu_2": {
+   "style": "悲しみ"
+  },
+  "st_keshigomu_0": {
+   "style": "驚き"
+  },
+  "st_taiko_2": {
+   "style": "恐怖"
+  },
+  "st_taiko_3": {
+   "style": "Mid"
+  },
+  "st_enogu_2": {
+   "style": "驚き"
+  },
+  "st_enogu_4": {
+   "style": "悲しみ"
+  },
+  "st_soup_1": {
+   "style": "驚き"
+  },
+  "st_soup_4": {
+   "style": "喜び"
+  },
+  "st_nawatobi_0": {
+   "style": "標準"
+  },
+  "st_nawatobi_1": {
+   "style": "悲しみ"
+  },
+  "st_dodge_1": {
+   "style": "Fear"
+  },
+  "st_dodge_2": {
+   "style": "せつなめ"
+  },
+  "st_happyou_1": {
+   "style": "Sad"
+  },
+  "st_happyou_3": {
+   "style": "Happy"
+  },
+  "st_ninjin_0": {
+   "style": "close"
+  },
+  "st_ninjin_3": {
+   "style": "close-shout"
+  },
+  "st_oogoe_0": {
+   "style": "close-shout"
+  },
+  "st_recorder_1": {
+   "style": "close-shout"
+  },
+  "st_dodge_0": {
+   "style": "close-shout"
+  },
+  "st_nawatobi_2": {
+   "style": "close-shout"
   }
  }
 }

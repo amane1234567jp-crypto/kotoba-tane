@@ -72,6 +72,7 @@ for l in lines:
         q = json.loads(call("POST", "/audio_query?" + urllib.parse.urlencode({"text": text, "speaker": sid})))
         if l["key"] in ACC: q["accent_phrases"] = reshape(q["accent_phrases"], ACC[l["key"]], l["key"])
         q["speedScale"] = c.get("speed", 1.0); q["intonationScale"] = c.get("into", q.get("intonationScale", 1.0))
+        if "pitch" in c: q["pitchScale"] = c["pitch"]
         q["prePhonemeLength"] = .05; q["postPhonemeLength"] = .1
         wav = call("POST", f"/synthesis?speaker={sid}", json.dumps(q).encode(), "application/json")
         post(wav, OUT / SUB / f"{l['key']}.mp3")
