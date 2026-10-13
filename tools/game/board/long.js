@@ -24,6 +24,7 @@ PIECE_S.nobbo = .2;
 /* マスの 課題（色と しるし） */
 const LTASK = { kaiwa: ["#FFB98A", "💬"], hantai: ["#B9E3FF", "↔"], joshi: ["#C9EBB5", "🧩"], machi: ["#FFE27A", "🔍"], teinei: ["#E2D4FF", "🎩"], scene: ["#FFFFFF", "🗣"] };
 const LONG_TASK = {};
+const LEGEND_L = [["kaiwa", "かいわ"], ["hantai", "はんたい"], ["joshi", "パズル"], ["machi", "まちがい"], ["teinei", "ていねい"], ["scene", "いってみよう"]];
 { const order = ["kaiwa", "scene", "hantai", "kaiwa", "joshi", "machi", "kaiwa", "teinei", "scene", "kaiwa", "hantai", "joshi", "kaiwa", "machi", "teinei"]; let i = 0;
   Object.keys(BOARD.long.nodes).forEach(id => { if (["0", "4", "15"].includes(id)) return; LONG_TASK[id] = order[i++ % order.length]; }); }
 /* しかけ（とまると おきる） */
@@ -255,8 +256,8 @@ drawBoard = function () {
   Object.entries(LONG_TASK).forEach(([id, t]) => { const [x, y] = NODES[id]; const [c, ic] = LTASK[t]; el("circle", { cx: x, cy: y, r: 34, fill: c, ...S6(4) }, boardLayer); txt(boardLayer, x, y + 13, ic, 34, { "text-anchor": "middle" }); });
   Object.entries(EVENTS.long).forEach(([id, [type]]) => { const [x, y] = NODES[id]; el("circle", { cx: x, cy: y, r: 36, fill: type === "warp" ? "#D9C2F0" : "#FFF1C9", ...S6(4) }, boardLayer); txt(boardLayer, x, y + 14, EV_ICON[type], 38, { "text-anchor": "middle" }); });
   // しるしの せつめい
-  const lg = el("g", {}, boardLayer); el("rect", { x: 330, y: 118, width: 960, height: 64, rx: 32, fill: "#FFFFFFDD", ...S6(4) }, lg);
-  [["kaiwa", "かいわ"], ["hantai", "はんたい"], ["joshi", "パズル"], ["machi", "まちがい"], ["teinei", "ていねい"], ["scene", "いってみよう"]].forEach(([k, t], i) => { const x = 372 + i * 150; el("circle", { cx: x, cy: 150, r: 18, fill: LTASK[k][0], ...S6(3) }, lg); txt(lg, x, 158, LTASK[k][1], 20, { "text-anchor": "middle" }); txt(lg, x + 26, 160, t, t.length > 5 ? 22 : 26); });
+  const lg = el("g", {}, boardLayer), W = 1130 / LEGEND_L.length; el("rect", { x: 140, y: 118, width: 1180, height: 64, rx: 32, fill: "#FFFFFFDD", ...S6(4) }, lg);
+  LEGEND_L.forEach(([k, t], i) => { const x = 172 + i * W; el("circle", { cx: x, cy: 150, r: 18, fill: LTASK[k][0], ...S6(3) }, lg); txt(lg, x, 158, LTASK[k][1], 20, { "text-anchor": "middle" }); txt(lg, x + 24, 159, t, Math.min(24, (W - 34) / t.length)); });
 };
 // 「だいぼうけん」は みんなで あそぶ ときだけ（メニューに ボタン）
 const showMultiMenuL = showMultiMenu;

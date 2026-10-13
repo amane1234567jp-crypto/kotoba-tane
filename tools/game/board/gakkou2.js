@@ -221,7 +221,7 @@ const drawRoomG1 = drawRoom;
 drawRoom = function (place, noSign = false) {
   if ((curStage !== "gakkou2" && curStage !== "long") || !ROOMS2[place]) return drawRoomG1(place, noSign);
   sceneLayer.innerHTML = ""; const L = sceneLayer;
-  const wall = { きょうしつ: "#FFF6E0", おんがくしつ: "#F3ECFF", ずこうしつ: "#FFF0E3", きゅうしょく: "#FFF6E0", たいいくかん: "#F4EAD8", いえ: "#FDEBD3" }[place];
+  const wall = { きょうしつ: "#FFF6E0", おんがくしつ: "#F3ECFF", ずこうしつ: "#FFF0E3", きゅうしょく: "#FFF6E0", たいいくかん: "#F4EAD8", いえ: "#FDEBD3" }[place] || "#FDEBD3";
   el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: wall }, L);
   el("rect", { x: 0, y: 760, width: 1600, height: 240, fill: { たいいくかん: "#E9C893" }[place] || "#E3C59A" }, L); el("path", { d: "M0 760 H1600", ...S6(6) }, L);
   for (let x = 0; x < 1600; x += 160) el("path", { d: `M${x} 760 L${x - 80} 1000`, stroke: "#00000010", "stroke-width": 4 }, L);

@@ -144,6 +144,8 @@ def build():
 
 if __name__ == "__main__":
     D = build()
+    from long_fun import fun
+    D.update(fun())
     out = Path(__file__).resolve().parents[1] / "board" / "long_data.js"
     out.write_text("const LONG = " + json.dumps(D, ensure_ascii=False) + ";\n")
     (Path(__file__).resolve().parent / "long.json").write_text(json.dumps(D, ensure_ascii=False, indent=1))

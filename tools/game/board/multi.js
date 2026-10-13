@@ -42,13 +42,28 @@ async function multiTurn(pl, first) {
 }
 async function endingMulti() {
   const w = winnerPc, wk = w ? w.kind : "shima";
-  flash(); fanfare(); const title = slam("ゴール！！", 470, 210); cannon(60, 1); cannon(1540, -1);
-  joy(w); await sleep(700); await speak(C.pony, "goal", "ゴール！"); await sleep(500); title.remove();
-  setView("parade"); rays(); flash();
+  // 1) ドラムロール → ゴール！！
+  drumroll(1.1); joy(w); later(300, () => joy(w)); markAbove(w, "sparkle"); await sleep(1100);
+  flash(); fanfare(); shake(700, 30); const title = slam("ゴール！！", 470, 230); cannon(60, 1, 80); cannon(1540, -1, 80);
+  await sleep(700); await speak(C.pony, "goal", "ゴール！"); await sleep(400); title.remove();
+  // 2) お祝いの ステージ：ひょうしょうだい
+  setView("parade"); visible.slice().forEach(c => { if (c !== C.pony && !PLAYERS.some(p => p.kind === c.kind)) { c.root.style.display = "none"; visible.splice(visible.indexOf(c), 1); } });
+  rays(); flash(); victoryBGM();
+  const rank = PLAYERS.slice().sort((a, b) => (b.pc === w) - (a.pc === w) || distToGoal(a.pc.node) - distToGoal(b.pc.node));
+  const pod = el("g", {}, sceneLayer), POD = [[800, 230, "#FFD25E"], [530, 150, "#D9DEE8"], [1070, 100, "#E8A86B"]];
+  POD.forEach(([x, hgt, col], i) => { if (!rank[i]) return; el("rect", { x: x - 130, y: 975 - hgt, width: 260, height: hgt + 30, rx: 12, fill: col, ...S6(7) }, pod); txt(pod, x, 975 - hgt + 90, String(i + 1), 80, { "text-anchor": "middle", fill: "#FFFFFF", stroke: INK, "stroke-width": 8, "paint-order": "stroke" }); });
+  const side = [[220, 975], [1380, 975], [1520, 975]];
+  rank.forEach((p, i) => { const c = C[p.kind], ks = (KID_S[p.kind] || .8); if (i < 3) place(c, POD[i][0], 975 - POD[i][1], ks * (i ? .7 : .85)); else place(c, side[i - 3][0], side[i - 3][1], ks * .6); c.dx.v = 0; c.dx.t = 0; });
+  place(C.pony, 90, 985, .4);
+  balloons(14);
+  for (let i = 0; i < 12; i++) later(200 + i * 650, () => firework(250 + rnd(1100), 140 + rnd(220), i));
+  later(2500, () => { cannon(60, 1, 50); cannon(1540, -1, 50); }); later(6000, () => { cannon(60, 1, 50); cannon(1540, -1, 50); });
   visible.forEach((c, i) => later(i * 110, () => jump(c, .9)));
-  [[400, 260, 0], [1200, 220, 1], [800, 160, 2]].forEach(([x, y, h], i) => later(300 + i * 650, () => firework(x, y, h)));
-  crownOn(C[wk]); await showBanner(`${NAMES[wk]}の かち！`, 1600);
-  await speak(C.pony, "p_win", "かったね！ おめでとう！");
+  later(1800, () => rank.slice(1).forEach((p, i) => later(i * 120, () => hold(C[p.kind], "clap", 3))));
+  crownOn(C[wk]); later(1400, () => { joy(C[wk]); markAbove(C[wk], "sparkle"); });
+  const big = slam(`${NAMES[wk]}の かち！！`, 330, 150, "#FF8FA3"); rainbow(big);
+  await speak(C.pony, `mw_${wk}`, `${NAMES[wk]}の かち！ おめでとう！`);
+  later(400, () => playMove(C[wk], "dance")); await sleep(2600); big.remove();
   const card = el("g", {}, hudLayer);
   const rows = PLAYERS.slice().sort((a, b) => (b.pc === w) - (a.pc === w) || b.ok - a.ok);
   el("rect", { x: 560, y: 110, width: 980, height: 90 + rows.length * 66, rx: 34, fill: "#FFFFFF", ...S6(8), opacity: .95 }, card);
@@ -63,6 +78,24 @@ async function endingMulti() {
   again.onclick = () => { again.remove(); toMenu.remove(); card.remove(); endMultiState(); newGame({ stage: st, multi: n }); };
   toMenu.onclick = () => { again.remove(); toMenu.remove(); card.remove(); endMultiState(); applyStage(curStage); setView("board"); showMenu(); };
 }
+/* ---------- ゴールの お祝い（BGM・ふうせん・にじいろの 文字） ---------- */
+function drumroll(sec) { if (!ctx) return; const n = Math.round(sec * 22); for (let i = 0; i < n; i++) later(i * 1000 / 22, () => noise(.05, 1800, .12 + .25 * i / n)); later(sec * 1000, () => { noise(.4, 300, .7); boom(.6); }); }
+function victoryBGM() {
+  if (!ctx) return; const D6 = 1174.66, E6 = 1318.51, bpm = 152, beat = 60 / bpm * 1000;
+  const mel = [[N.G5, .5], [N.G5, .5], [N.C6, 1], [N.G5, .5], [N.E5, .5], [N.C5, 1], [N.F5, .5], [N.A5, .5], [N.C6, 1], [N.B5, .5], [N.A5, .5], [N.G5, 1],
+    [N.E5, .5], [N.G5, .5], [N.C6, 1], [D6, .5], [E6, .5], [D6, 1], [N.C6, .5], [N.G5, .5], [N.E5, .5], [N.G5, .5], [N.C6, 2]];
+  const har = [[N.E5, 2], [N.C5, 2], [N.F5, 2], [N.D5, 2], [N.G5, 2], [N.B5, 2], [N.E5, 2], [N.E5, 2]];
+  const bass = [[N.C4 / 2, 1], [N.C4, 1], [N.C4 / 2, 1], [N.C4, 1], [349.23 / 2, 1], [349.23 / 4, 1], [N.G4 / 2, 1], [N.G4 / 4, 1], [N.C4 / 2, 1], [N.C4, 1], [N.A4 / 2, 1], [N.A4 / 4, 1], [N.G4 / 2, 1], [N.G4 / 4, 1], [N.C4 / 2, 2]];
+  for (let r = 0; r < 2; r++) later(r * 16 * beat, () => { tune(mel, bpm, "square", .06); tune(har, bpm, "triangle", .07); tune(bass, bpm, "triangle", .16);
+    for (let b = 0; b < 16; b++) { later(b * beat, () => blip(150, 45, .14, "sine")); if (b % 2) later(b * beat, () => noise(.09, 2200, .22)); later(b * beat + beat / 2, () => noise(.03, 6000, .08)); } });
+  later(32 * beat, () => { tune([[N.C5, .5], [N.E5, .5], [N.G5, .5], [N.C6, 2]], bpm, "square", .07); boom(.5); });
+}
+function balloons(n) { const cols = ["#FF6F91", "#FFD25E", "#7FCBF0", "#7CC36A", "#B9A8D9", "#FF9E5E"];
+  for (let i = 0; i < n; i++) later(i * 280, () => { const g = el("g", {}, fxLayer), x = 120 + rnd(1360), sw = rnd(60) - 30, sp = 5 + rnd(30) / 10;
+    el("path", { d: "M0 60 Q10 100 -6 150", fill: "none", ...S6(3) }, g); el("ellipse", { cx: 0, cy: 0, rx: 46, ry: 58, fill: cols[i % cols.length], ...S6(5) }, g); el("ellipse", { cx: -16, cy: -20, rx: 10, ry: 16, fill: "#FFFFFF", opacity: .6 }, g);
+    tween(sp * 1000, k => g.setAttribute("transform", `translate(${(x + Math.sin(k * 6) * sw).toFixed(0)} ${(1100 - 1400 * k).toFixed(0)})`)).then(() => g.remove()); }); }
+function rainbow(g) { const t = g.querySelector("text"); if (!t) return; const cols = ["#FF6F91", "#FF9E5E", "#FFD25E", "#7CC36A", "#7FCBF0", "#B9A8D9"]; let i = 0;
+  addTick(() => { if (!g.isConnected) return false; i++; if (i % 6 === 0) t.setAttribute("fill", cols[(i / 6) % cols.length]); }); }
 /* ---------- メニュー：みんなで あそぶ ---------- */
 function showMultiMenu() {
   const box = document.getElementById("startBox"); box.innerHTML = ""; box.className = "start menu";

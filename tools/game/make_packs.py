@@ -32,7 +32,7 @@ for st in ["kousha", "undou", "kouen", "omise", "densha", "gakkou2"]:
     (OUT / f"{st}.json").write_text(json.dumps(pack, separators=(",", ":")))
     print(st, len(pack), round((OUT / f"{st}.json").stat().st_size / 1e6, 2), "MB")
 # だいぼうけん（ロングコース）：lk_*（かけあい＝Aivis／ぽにー＝VOICEVOX）。ぽにーの リストは sit/pony_long.json、かけあいは aivis/jobs/long
-lk = [p[0] for p in json.loads((G / "sit/pony_long.json").read_text())] + [l["key"] for l in json.loads((R / "tools/aivis/jobs/long/lines.json").read_text())]
+lk = [p[0] for p in json.loads((G / "sit/pony_long.json").read_text())] + [l["key"] for j in ["long", "long2"] for l in json.loads((R / f"tools/aivis/jobs/{j}/lines.json").read_text())]
 pack = {}
 for k in lk:
     p = A / f"{k}.mp3"
