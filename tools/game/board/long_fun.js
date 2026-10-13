@@ -107,11 +107,17 @@ const GAG_ANIM = {
     mii.armL.t = 0; mii.armR.t = 0; mii.headY.t = 0; playMove(mii, "look"); await line(2);
     for (let i = 0; i < 3; i++) later(i * 420, () => { nobbo.headRot.t = i % 2 ? -8 : 8; }); await line(3); nobbo.headRot.t = 0;
     markAbove(h, "ex"); playMove(mii, "look"); await sleep(600); },
-  async henshin(c, line, h) { const { kon, gao } = c; bigTail(kon, 1.8); const gl = putGlasses(kon), mu = putMustache(kon, 218); window.__dis = [gl, mu];
-    kon.armR.t = -60; await line(0);
+  // こんが こうちょうせんせい（かめじい）に 化けている。でも きつねの しっぽだけ でている
+  async henshin(c, line, h) { const { kon, gao } = c; const kj = C.kamejii; window.__kon = kon; resetChar(kj); place(gao, 640, 975, .9); place(kj, 1080, 975, .9); show(kj);
+    kon.root.style.display = "none"; { const i = visible.indexOf(kon); if (i >= 0) visible.splice(i, 1); } c.kon = kj;
+    const tl = el("g", {}, kj.root); kj.root.insertBefore(tl, kj.root.firstChild); const tg = el("g", { transform: "translate(130 330) scale(-1.9 1.9) translate(-258 -344)" }, tl);
+    el("path", { d: "M258 360 Q340 380 352 300 Q358 250 322 238 Q300 280 300 312 Q290 340 258 344 Z", fill: "#F29F4C", ...S6(6) }, tg); el("path", { d: "M322 238 Q358 250 352 300 Q336 288 318 272 Q314 254 322 238 Z", fill: "#FFF6E9", ...S6(4) }, tg);
+    let wag = 0; const t0 = performance.now(); addTick(() => { if (!tl.isConnected) return false; tl.setAttribute("transform", `rotate(${(Math.sin((performance.now() - t0) / 300) * wag).toFixed(1)} 130 330)`); });
+    window.__ktail = tl; window.__wag = v => wag = v; CLEAN.push(() => tl.remove());
+    await line(0);
     gao.eyeX.t = 14; markAbove(gao, "q"); await line(1); gao.eyeX.t = 0;
-    hold(kon, "wag", 3); for (let i = 0; i < 5; i++) later(i * 300, () => blip(900, 1300, .06, "triangle")); await line(2); kon.armR.t = 0;
-    markAbove(h, "ex"); hold(kon, "wag", 2.5); await sleep(700); },
+    wag = 14; for (let i = 0; i < 5; i++) later(i * 300, () => blip(900, 1300, .06, "triangle")); await line(2);
+    markAbove(h, "ex"); wag = 22; await sleep(900); },
   async megane(c, line, h) { const { meebaa, chu } = c; const gl = putGlasses(meebaa, -110); window.__gl = gl; // めがねは あたまの うえ
     playMove(meebaa, "look"); await line(0);
     jump(chu, .5); await line(1);
@@ -150,7 +156,10 @@ const GAG_RES = { // つっこまれた あとの 動き（ボケた子の 返�
   kazoku: c => { playMove(c.chu, "shy"); },
   osoi: c => { const { pyon } = c; delete pyon.tm.closed; surprise(pyon); },
   kakure: c => { surprise(c.nobbo); },
-  henshin: c => { const { kon } = c; surprise(kon); (window.__dis || []).forEach(g => tween(500, k => { g.setAttribute("transform", `translate(0 ${(-200 * k).toFixed(0)})`); g.setAttribute("opacity", (1 - k).toFixed(2)); }).then(() => g.remove())); },
+  henshin: c => { const kj = C.kamejii, kon = window.__kon || C.kon; // ドロン！ と もとの こんに もどる
+    for (let i = 0; i < 10; i++) { const p = world(kj, 200, 250); mark("puff", p.x + (Math.random() - .5) * 220, p.y + (Math.random() - .5) * 220, { vy: -60, life: 1, s: 1.2 }); } noise(.3, 600, .6);
+    kj.root.style.display = "none"; { const i = visible.indexOf(kj); if (i >= 0) visible.splice(i, 1); } if (window.__ktail) window.__ktail.remove();
+    place(kon, 1080, 975, .88); kon.root.style.display = ""; visible.push(kon); c.kon = kon; surprise(kon); },
   megane: c => { const { meebaa } = c; meebaa.armR.t = -150; const g = window.__gl; if (g) tween(500, k => g.setAttribute("transform", `translate(0 ${(110 * k).toFixed(0)})`)); later(600, () => meebaa.armR.t = 0); },
   jump: c => playMove(c.pyon, "shy"),
   cheese: c => { const p = window.__pile; if (p) tween(500, k => p.setAttribute("opacity", (1 - k * .8).toFixed(2))); jump(c.chu, .3); },
@@ -182,7 +191,7 @@ async function lkGag(pc) {
       if (!sec) return speak(cast[who], k, text);
       const b = AUD[k] ? await voiceBuf(k) : null; await speakPart(cast[who], k, text, b ? Math.min(1, sec / b.duration) : 1); unsay(cast[who]); }; // とちゅうで きる
     await sleep(500); await GAG_ANIM[it.id](cast, line, h); await sleep(300);
-    if (!it.noq) { await speak(a, `lk_g_${it.id}_q`, it.q[1]); unsay(); }
+    if (!it.noq) { await speak(cast[it.boke] || a, `lk_g_${it.id}_q`, it.q[1]); unsay(); }
     await speak(C.pony, "lk_g_ask", "なんて つっこむ？"); showTask(t.a, "つっこもう");
     let hh = E.h;
     for (; n < 3; n++) {
@@ -199,7 +208,7 @@ async function lkGag(pc) {
     hideTask();
     if (ok) { playMove(h, "pump"); noise(.06, 3000, .5); blip(1600, 600, .12, "square"); const st = slam("ナイス つっこみ！", 330, 120, "#FF9E5E"); later(1400, () => st.remove()); confetti(40); await sleep(700); }
     if (GAG_RES[it.id]) GAG_RES[it.id](cast, h);
-    await speak(a, `lk_g_${it.id}_r`, it.res[1]);
+    await speak(cast[it.boke] || a, `lk_g_${it.id}_r`, it.res[1]);
     for (let i = 0; i < it.after.length; i++) { const [who, text] = it.after[i]; await speak(cast[who], `lk_g_${it.id}_e${i}`, text); }
     if (GAG_END[it.id]) await GAG_END[it.id](cast, h);
     if (ok) { joy(C.pony); await speak(C.pony, "p_great", "すごい！ いえたね！"); }

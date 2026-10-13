@@ -157,9 +157,10 @@ SONGS = {
  "gakkou2": dict(bpm=104, root=70, scale=MAJ, bars=8, lead=piano, lead2=flute, drums=D_waltz, comp="pad", per_bar=6,
    mel="3 - - 4 5 - | 1' - - - 5 - | 6 - 5 - 4 - | 3 - - - . . | 2 - - 3 4 - | 7 - - - 6 - | 5 - 4 - 2 - | 1 - - - . .",
    chords=[1, 1, 4, 1, 2, 5, 5, 1]),
- "long": dict(bpm=128, root=69, scale=MIN, bars=8, lead=brass, lead2=clar, drums=D_adv, comp="pad", bass="saw",
-   mel="1 - 1 2 3 - 5 - | 4 - 3 - 2 - . . | 1 - 1 2 3 - 6 - | 5 - - - . . . . | 6 - 5 4 3 - 4 5 | 3 - 2 1 7, - 1 2 | 3 - 4 - 5 - 7# - | 1' - - - . . . .",
-   chords=[1, 4, 1, 7, 6, 7, 5, 1]),
+ # だいぼうけん：ようきに はずむ（長調・はやめ・スウィング）
+ "long": dict(bpm=144, root=67, scale=MAJ, bars=8, lead=brass, lead2=glock, drums=D_adv, comp="piano", bass="sq", swing=.2,
+   mel="1 - 3 5 1' - 5 - | 6 - 5 3 4 - 3 - | 2 - 4 6 5 - 4 - | 3 - 2 - 5 - . . | 1 - 3 5 1' - 5 - | 6 - 1' 6 5 - 3 - | 4 - 3 4 2 - 7, - | 1 - 3 - 1 - . .",
+   chords=[1, 4, 2, 5, 1, 4, 5, 1]),
  "toukou": dict(bpm=116, root=69, scale=MAJ, bars=8, lead=glock, lead2=flute, drums=D_walk, comp="pizz", extra=X_birds,
    mel="5, - 1 - 3 - 5 - | 6 - 5 - 3 - - - | 4 - 6 - 5 - 3 - | 2 - - - . . . . | 5, - 1 - 3 - 5 - | 1' - 7 - 6 - 5 - | 4 - 3 - 2 - 5, - | 1 - - - . . . .",
    chords=[1, 4, 4, 5, 1, 4, 5, 1]),
