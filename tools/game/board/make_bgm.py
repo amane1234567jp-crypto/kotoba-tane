@@ -142,39 +142,39 @@ def X_bell(put, t0, tim, b, pb, c):
     if b == 0 and c % 2 == 0: [put("fx", t0 + i * .32, glock(mf(m), .3), .2) for i, m in enumerate((76, 72, 74, 67))]
 
 SONGS = {
- "undou": dict(bpm=132, root=65, scale=MAJ, bars=8, lead=brass, lead2=clar, drums=D_march, comp="pad", bass="sq",
+ "undou": dict(bpm=138, root=67, scale=MAJ, bars=8, lead=brass, lead2=clar, drums=D_march, comp="pad", bass="sq",
    mel="1 - 1 - 3 - 5 - | 1' - - - 5 - . . | 6 - 5 - 4 - 3 - | 2 - - - 5, - . . | 1 - 1 - 3 - 5 - | 6 - 1' - 6 - 5 - | 4 - 3 - 2 - 7, - | 1 - - - . . . .",
    chords=[1, 1, 4, 5, 1, 4, 5, 1]),
- "kouen": dict(bpm=96, root=67, scale=MAJ, bars=8, lead=flute, lead2=marimba, drums=D_easy, comp="pluck", swing=.25,
+ "kouen": dict(bpm=120, root=69, scale=MAJ, bars=8, lead=marimba, lead2=flute, drums=D_shop, comp="pluck", swing=.25,
    mel="3 - 5 - 6 5 3 - | 2 - - - . . 1 2 | 3 - 5 - 6 1' 6 5 | 5 - - - . . . . | 6 - 6 5 3 - 2 1 | 2 - 3 - 5 - - - | 6 - 5 3 2 - 3 2 | 1 - - - . . . .",
    chords=[1, 5, 4, 1, 4, 1, 5, 1]),
- "omise": dict(bpm=120, root=60, scale=MAJ, bars=8, lead=glock, lead2=marimba, drums=D_shop, comp="piano", swing=.3,
+ "omise": dict(bpm=128, root=64, scale=MAJ, bars=8, lead=glock, lead2=marimba, drums=D_shop, comp="piano", swing=.3,
    mel="5 3 5 - 6 5 3 - | 4 2 4 - 5 4 2 - | 3 1 3 - 5 3 1' - | 7 - 6 - 5 - . . | 5 3 5 - 6 5 3 - | 4 2 4 - 5 4 2 - | 3 5 1' 7 6 5 2 3 | 1 - - - . . . .",
    chords=[1, 5, 1, 5, 1, 5, 4, 1]),
- "densha": dict(bpm=140, root=62, scale=MAJ, bars=8, lead=clar, lead2=flute, drums=D_train, comp="marimba",
+ "densha": dict(bpm=148, root=65, scale=MAJ, bars=8, lead=clar, lead2=flute, drums=D_train, comp="marimba",
    mel="1 - 3 - 5 - 3 - | 4 - 6 - 5 - - - | 3 - 5 - 1' - 6 - | 5 - - - . . . . | 6 - 6 - 5 - 4 - | 3 - 3 - 2 - 1 - | 2 - 3 - 4 - 7, - | 1 - - - . . . .",
    chords=[1, 4, 1, 5, 4, 1, 5, 1]),
- "gakkou2": dict(bpm=104, root=70, scale=MAJ, bars=8, lead=piano, lead2=flute, drums=D_waltz, comp="pad", per_bar=6,
+ "gakkou2": dict(bpm=144, root=72, scale=MAJ, bars=8, lead=glock, lead2=piano, drums=D_waltz, comp="pad", per_bar=6,
    mel="3 - - 4 5 - | 1' - - - 5 - | 6 - 5 - 4 - | 3 - - - . . | 2 - - 3 4 - | 7 - - - 6 - | 5 - 4 - 2 - | 1 - - - . .",
    chords=[1, 1, 4, 1, 2, 5, 5, 1]),
  # だいぼうけん：ようきに はずむ（長調・はやめ・スウィング）
  "long": dict(bpm=144, root=67, scale=MAJ, bars=8, lead=brass, lead2=glock, drums=D_adv, comp="piano", bass="sq", swing=.2,
    mel="1 - 3 5 1' - 5 - | 6 - 5 3 4 - 3 - | 2 - 4 6 5 - 4 - | 3 - 2 - 5 - . . | 1 - 3 5 1' - 5 - | 6 - 1' 6 5 - 3 - | 4 - 3 4 2 - 7, - | 1 - 3 - 1 - . .",
    chords=[1, 4, 2, 5, 1, 4, 5, 1]),
- "toukou": dict(bpm=116, root=69, scale=MAJ, bars=8, lead=glock, lead2=flute, drums=D_walk, comp="pizz", extra=X_birds,
+ "toukou": dict(bpm=128, root=69, scale=MAJ, bars=8, lead=glock, lead2=marimba, drums=D_walk, comp="pizz", extra=X_birds,
    mel="5, - 1 - 3 - 5 - | 6 - 5 - 3 - - - | 4 - 6 - 5 - 3 - | 2 - - - . . . . | 5, - 1 - 3 - 5 - | 1' - 7 - 6 - 5 - | 4 - 3 - 2 - 5, - | 1 - - - . . . .",
    chords=[1, 4, 4, 5, 1, 4, 5, 1]),
- "gakkou3": dict(bpm=108, root=65, scale=MAJ, bars=8, lead=recorder, lead2=glock, drums=D_class, comp="piano", extra=X_bell,
+ "gakkou3": dict(bpm=124, root=67, scale=MAJ, bars=8, lead=recorder, lead2=glock, drums=D_shop, comp="piano", extra=X_bell,
    mel="1 2 3 - 1 2 3 - | 5 3 2 1 2 - - - | 1 2 3 - 1 2 3 - | 5 3 2 3 1 - - - | 5 5 6 - 5 4 3 - | 4 4 5 - 4 3 2 - | 3 3 4 - 5 - 6 7 | 1' - - - . . . .",
    chords=[1, 5, 1, 5, 1, 4, 5, 1]),
  # きゅうしょく：はずむ マリンバと ウクレレ。おなかが すく たのしい おひる
- "kyuushoku": dict(bpm=124, root=67, scale=MAJ, bars=8, lead=marimba, lead2=glock, drums=D_easy, comp="pluck", swing=.3,
+ "kyuushoku": dict(bpm=132, root=69, scale=MAJ, bars=8, lead=marimba, lead2=glock, drums=D_easy, comp="pluck", swing=.3,
    mel="1 3 5 3 6 5 3 - | 4 6 5 4 3 - - - | 2 4 6 4 5 4 2 - | 5 - 4 - 3 - 2 - | 1 3 5 3 6 5 3 - | 1' - 6 - 5 - 3 - | 4 3 2 - 5, 7, 2 - | 1 - - - . . . .",
    chords=[1, 4, 2, 5, 1, 6, 5, 1]),
- # げこう：ゆうやけの かえりみち。ゆったりした ピアノと フルート
- "gekou": dict(bpm=88, root=65, scale=MAJ, bars=8, lead=flute, lead2=piano, drums=D_walk, comp="piano", extra=X_birds,
+ # げこう：たのしい かえりみち。はずむ マリンバと グロッケン
+ "gekou": dict(bpm=120, root=67, scale=MAJ, bars=8, lead=marimba, lead2=glock, drums=D_easy, comp="pluck", swing=.25, extra=X_birds,
    mel="3 - 2 - 1 - 5, - | 6, - 1 - 2 - - - | 3 - 5 - 6 - 5 3 | 2 - - - . . . . | 3 - 2 - 1 - 6, - | 5, - 6, - 1 - 3 - | 2 - 3 - 2 - 7, - | 1 - - - . . . .",
-   chords=[1, 4, 1, 5, 6, 4, 5, 1]),
+   chords=[1, 4, 1, 5, 1, 4, 5, 1]),
 }
 
 if __name__ == "__main__":
