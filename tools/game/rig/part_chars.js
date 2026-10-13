@@ -345,6 +345,17 @@ const BUILD = {
     const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M134 296 Q200 280 266 296 L272 384 Q200 400 128 384 Z", fill: "#7FA7D9", ...ST(5) }, bd); el("path", { d: "M184 290 L200 318 L216 290", fill: "none", ...ST(4) }, bd);
     el("path", { d: "M112 112 Q200 40 288 112 L288 124 L112 124 Z", fill: "#5BA34D", ...ST(6) }, p.head.g); el("path", { d: "M200 124 Q260 120 314 136 L310 146 Q256 134 196 136 Z", fill: "#4A8A3E", ...ST(5) }, p.head.g);
     p.tempo = .95; return p; },
+  tora(root) { // とらの とらお（ステージの 場面で ライバルの かわりに 出る）：オレンジに くろい しま
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); const tip = p.tail.g.lastChild; tip.removeAttribute("display"); tip.setAttribute("fill", "#F7A23B");
+    recolor(root, { "#FFC94D": "#F7A23B" }); const K = { fill: "none", stroke: INK, "stroke-width": 9, "stroke-linecap": "round" };
+    const sh = el("g", {}, p.head.g); ["M184 90 L190 118", "M200 86 V120", "M216 90 L210 118", "M110 170 L134 176", "M112 192 L134 192", "M290 170 L266 176", "M288 192 L266 192"].forEach(d => el("path", { d, ...K }, sh));
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); ["M136 312 Q150 318 154 330", "M134 340 Q148 344 152 354", "M264 312 Q250 318 246 330", "M266 340 Q252 344 248 354"].forEach(d => el("path", { d, ...K, "stroke-width": 8 }, bd));
+    el("path", { d: "M306 300 L326 306", ...K, "stroke-width": 6 }, p.tail.g);
+    return p; },
+  kuma(root) { // くまの くまた（ステージの 場面で ライバルの かわりに 出る）：ちゃいろ・まるい みみ
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); recolor(root, { "#FFC94D": "#A9744A", "#FFF1D6": "#EBCFA8", "#FFB3C1": "#E3A982" }); if (p.brows) p.brows.innerHTML = "";
+    const tip = p.tail.g; tip.setAttribute("display", "none");
+    p.tempo = .92; return p; },
   omawari(root) { // おまわりさん（げこう）：こんの せいふく・ぼうし
     const p = BUILD.doshin(root); recolor(root, { "#A9BEDD": "#B8C2CE", "#D3DEF0": "#DCE2EA" });
     const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M118 296 Q200 270 282 296 L288 390 Q200 410 112 390 Z", fill: "#2E4A7A", ...ST(5) }, bd);
@@ -355,7 +366,7 @@ const BUILD = {
 };
 
 const NAMES = { pony: "ぽにー", shima: "まるシマ", doshin: "どしん", nobbo: "のっぽ", gao: "がお", chu: "ちゅう", pyon: "ぴょん", mii: "みい", kamejii: "かめじい", meebaa: "めえばあ",
-  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", kon: "こん", mama: "ママ", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん" };
+  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", kon: "こん", mama: "ママ", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くまた" };
 const LINES = { pony: "きょねん、うみに いったね", shima: "やったー！ いえたね！", doshin: "どいて、あげるよ", nobbo: "それは、ずかんに のって いますよ", gao: "つぎは、まけないぞ",
   chu: "こ、こわかったよう", pyon: "いっしょに あそぼう！", mii: "ふーん。まあまあ じゃない", kamejii: "よく いえましたね", meebaa: "いらっしゃいませ" };
 
@@ -492,6 +503,8 @@ const SPECIAL = {
   mama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
   ookami: c => { c.tm.shiver = 1; },
   ojisan: c => { c.tm.nod = 1.2; },
+  tora: c => { jump(c, .6); c.happyOn = true; later(1200, () => c.happyOn = false); },
+  kuma: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
   omawari: c => { c.tm.nod = 1.2; c.armR.t = -140; later(1000, () => c.armR.t = 0); },
   meebaa: c => { c.armL.t = -55; c.armR.t = 55; c.happyOn = true; c.lean.t = 6; later(500, () => c.lean.t = -6); later(1000, () => c.lean.t = 0); later(1400, () => { c.armL.t = 0; c.armR.t = 0; c.happyOn = false; }); },
 };

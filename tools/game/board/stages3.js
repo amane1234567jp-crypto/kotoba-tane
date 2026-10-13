@@ -2,7 +2,7 @@
    生活で ひつような ことばを おぼえる 場面。台本は sit/sits_new.py（extras＝いっしょに 出る 子）。 */
 const S3 = ["toukou", "gakkou3", "kyuushoku", "gekou"];
 Object.assign(RIVAL_OF, { toukou: "gao", gakkou3: "mii", kyuushoku: "doshin", gekou: "pyon" });
-Object.assign(KID_S, { ookami: 1.0, ojisan: 1.0, omawari: 1.3, mama: 1.0 });
+Object.assign(KID_S, { ookami: 1.0, ojisan: 1.0, omawari: 1.3, mama: 1.0, tora: .9, kuma: 1.05 });
 PIECE_S.omawari = .27; PIECE_S.mama = .22;
 
 /* ---------- 場面：いま えらばれた 場面を おぼえる（extras のため） ---------- */
@@ -367,7 +367,7 @@ Object.assign(POST, {
 const hide3 = c => { c.root.style.display = "none"; const i = visible.indexOf(c); if (i >= 0) visible.splice(i, 1); };
 Object.assign(INTRO, {
   // ろうか：がおが 走ってきて せなかを たたいて にげる → ないていると めえばあ先生が くる
-  async kshit(h, a) { enter(h); await sleep(1000); const g = C.gao; resetChar(g); place(g, 1300, 975, .9); show(g); g.dx.v = g.dx.t = 500; hold(g, "run", 1); g.dx.t = -360; await sleep(1000);
+  async kshit(h, a) { enter(h); await sleep(1000); const g = C.tora; resetChar(g); place(g, 1300, 975, .9); show(g); g.dx.v = g.dx.t = 500; hold(g, "run", 1); g.dx.t = -360; await sleep(1000);
     g.armR.t = -150; await sleep(250); g.armR.t = 40; thud(); noise(.12, 900, .7); h.lean.t = -16; markAbove(h, "ex"); await sleep(300); h.lean.t = 0; g.armR.t = 0;
     playMove(g, "laugh"); await sleep(500); hold(g, "run", 1); g.dx.t = 700; await sleep(900); hide3(g);
     playMove(h, "sad"); h.sadMouth = true; tears(h, 6); await sleep(900); enter(a); await sleep(900); surprise(a); },
@@ -379,10 +379,12 @@ Object.assign(INTRO, {
   // げたばこ：がおが うわばきを さがして おこっている → こっちを ゆびさす
   async ksblame(h, a) { hold(a, "shake", 1.6); for (let i = 0; i < 3; i++) later(i * 450, () => noise(.08, 1200, .4)); enter(h); await sleep(1500);
     playMove(a, "point"); markAbove(a, "anger"); await sleep(400); surprise(h); markAbove(h, "ex"); await sleep(500); },
-  // かいだん：まるシマが のぼっていると、がおが うしろから おす
-  async kspush(h, a) { place(a, 430, 975, .95); a.dx.v = a.dx.t = -1000; enter(h); await sleep(1000); await climb(h, 300, 1300);
-    hold(a, "run", 1); a.dx.t = 0; await sleep(1100); await climb(a, 140, 600); a.lean.t = 16; a.armR.t = -80; a.armL.t = 80;
-    for (let i = 0; i < 6; i++) later(i * 140, () => h.lean.t = i % 2 ? 18 : -18); noise(.1, 700, .5); markAbove(h, "ex"); await sleep(900); h.lean.t = 0; surprise(h); await sleep(300); a.armR.t = 0; a.armL.t = 0; },
+  // こうえんの ブランコ：まるシマが のっていると、とらおが うしろから つよく おす
+  async kspush(h, a) { stay(h); place(h, 1105, 700, .62); place(a, 1330, 975, .9); a.dx.v = a.dx.t = 600; const t0 = performance.now(); let amp = 40; window.__swingOn = true; window.__swingAmp = () => amp;
+    addTick(() => { if (!window.__swingOn) { h.dx.v = h.dx.t = 0; return false; } h.dx.v = h.dx.t = Math.sin((performance.now() - t0) / 700 * Math.PI) * amp; });
+    h.happyOn = true; await sleep(900); hold(a, "run", 1); a.dx.t = 0; await sleep(1100); h.happyOn = false;
+    for (let i = 0; i < 3; i++) { a.armL.t = -90; a.armR.t = 90; a.lean.t = -14; noise(.08, 700, .4); amp += 45; await sleep(350); a.armL.t = 0; a.armR.t = 0; a.lean.t = 0; await sleep(350); }
+    h.sadMouth = true; h.eyeScale.t = 1.25; markAbove(h, "ex"); for (let i = 0; i < 3; i++) later(i * 300, () => markAbove(h, "drop", { dx: i % 2 ? 50 : -50 })); await sleep(700); },
   // としょしつ：よみきかせ。まえに 立っている どしんが 大きくて 絵が みえない
   async ksblock(h, a) { const st = el("g", {}, propG); el("path", { d: "M1420 760 L1470 520 L1520 760", fill: "none", ...S6p(8) }, st); const b = prop("ehon", 1470, 470, .9); window.__eh = b;
     place(a, 930, 975, 1.15); enter(h); await sleep(1000); hold(h, "tiptoe", 1.6); for (let i = 0; i < 2; i++) later(300 + i * 600, () => jump(h, .45)); await sleep(1500);
@@ -412,8 +414,8 @@ Object.assign(POST, {
   async tatakareta(h, a) { playMove(a, "nod"); h.sadMouth = false; await sleep(600); playMove(h, "nod"); await sleep(500); },
   async kegashita(h, a) { await walk(a, -260, 800); playMove(a, "crouch"); const c = window.__kchu; if (c) { c.sadMouth = false; } await sleep(700); },
   async mayotta(h, a) { a.armR.t = -150; await sleep(700); a.armR.t = 0; h.sadMouth = false; joy(h); await sleep(400); walk(a, 900, 1800); await walk(h, 1200, 1800); },
-  async bokujanai(h, a) { playMove(a, "bow"); await sleep(700); hand(a, prop("slipper", 0, 0, .5), .5, 0); jump(a, .4); markAbove(a, "ex"); await sleep(500); joy(h); await sleep(400); },
-  async osanaide(h, a) { a.lean.t = 0; playMove(a, "bow"); await sleep(700); climb(h, 300, 2200); await climb(a, 300, 2200); },
+  async bokujanai(h, a) { playMove(a, "bow"); await sleep(700); { const e = el("g", {}, propG); el("rect", { x: -40, y: -24, width: 80, height: 48, rx: 8, fill: "#FFFFFF", ...S6p(5) }, e); el("rect", { x: -40, y: -24, width: 34, height: 48, rx: 6, fill: "#7FCBF0", ...S6p(5) }, e); hand(a, e, .6, 0); } jump(a, .4); markAbove(a, "ex"); await sleep(500); joy(h); await sleep(400); },
+  async osanaide(h, a) { playMove(a, "bow"); const t0 = performance.now(), A0 = 175; window.__swingOn = false; await tween(1500, k => { h.dx.v = h.dx.t = Math.sin((performance.now() - t0) / 700 * Math.PI) * A0 * (1 - k); }); h.sadMouth = false; h.eyeScale.t = 1; h.happyOn = true; await sleep(500); },
   async mienai(h, a) { playMove(a, "shy"); await walk(a, 380, 900); h.sadMouth = false; h.happyOn = true; await sleep(600); },
   async haittemasu(h, a) { jump(a, .5); await sleep(700); noise(1.0, 700, .5); await sleep(900); await walk(h, -650, 900); hold(a, "run", .6); await walk(a, -420, 600); },
   async mukae(h, a) { playMove(a, "nod"); h.sadMouth = false; await sleep(600); walk(a, 800, 1600); await walk(h, 1100, 1800); },

@@ -19,3 +19,5 @@
 - 立神ケイ（ニッケル・海月ニケ）
 - 猩々博士（雑談ボイス）（ろてじん・猩々博士）
 - Lux（Lami）
+- kokuren_voice（kokuren）
+- yukyu（yukyu）
