@@ -17,7 +17,7 @@ lines2, yomi2 = [], {}
 def A(k, who, t, y): lines2.append({"key": k, "who": who, "text": t}); yomi2[k] = q(y)
 for g in D["gag"]:
     for i, (w, t, y) in enumerate(g["talk"]): A(f"lk_g_{g['id']}_t{i}", w, t, y)
-    A(f"lk_g_{g['id']}_q", g["boke"], g["q"][1], g["q"][2])
+    if not g.get("noq"): A(f"lk_g_{g['id']}_q", g["boke"], g["q"][1], g["q"][2])
     A(f"lk_g_{g['id']}_r", g["boke"], g["res"][1], g["res"][2])
     for i, (w, t, y) in enumerate(g["after"]): A(f"lk_g_{g['id']}_e{i}", w, t, y)
 for h in D["haya"]: A(f"lk_y_{h['id']}_b", h["botch"][0], h["botch"][1], h["botch"][2])

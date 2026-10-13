@@ -70,6 +70,26 @@
    "model": "a670e6b8-0852-45b2-8704-1bc9862f2fe6",
    "style": "ノーマル",
    "speed": 1.05
+  },
+  "mama": {
+   "model": "21d8d535-f206-462d-a3bb-05f8252dede7",
+   "style": "hutuu_hutuu",
+   "speed": 0.98
+  },
+  "ookami": {
+   "model": "b2bee8fc-3f65-4c99-9607-a1075a10066b",
+   "style": "ノーマル",
+   "speed": 0.95
+  },
+  "ojisan": {
+   "model": "70a875a9-feae-41e6-a586-8cf9e47c6c0b",
+   "style": "ノーマル",
+   "speed": 1.0
+  },
+  "omawari": {
+   "model": "3dabea2b-cc10-41da-955b-4618ce84e716",
+   "style": "ノーマル",
+   "speed": 1.0
   }
  },
  "lines": {

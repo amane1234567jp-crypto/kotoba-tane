@@ -94,12 +94,10 @@ const GAG_ANIM = {
     markAbove(h, "ex"); hold(h, "shiver", 1.4);
     const a3 = add(6); await line(3); await a3; shake(400, 12);
     CLONES.forEach((m, i) => later(i * 60, () => jump(m, .3))); await sleep(800); },
-  async osoi(c, line, h) { const { kamejii, pyon } = c;
+  async osoi(c, line, h) { const { kamejii, pyon } = c; // かめじいの 話が おそすぎる → 5びょうくらいで つっこむ
     wave(pyon); await line(0);
-    await line(1); await showBanner("〜 30ぷん ご 〜", 1200);
-    pyon.tm.closed = 1e6; markAbove(pyon, "z"); playMove(h, "sleepy");
-    await line(2); await showBanner("〜 1じかん ご 〜", 1200);
-    for (let i = 0; i < 3; i++) later(i * 500, () => markAbove(pyon, "z", { dx: 40 * i })); playMove(pyon, "sleep"); await line(3); },
+    later(2200, () => { pyon.tm.closed = 1e6; markAbove(pyon, "z"); later(700, () => markAbove(pyon, "z", { dx: 40 })); }); later(3400, () => playMove(h, "sleepy"));
+    await line(1, 5); markAbove(h, "ex"); },
   async kakure(c, line, h) { const { nobbo, mii } = c;
     mii.armL.t = -160; mii.armR.t = 160; mii.headY.t = 14; hold(mii, "shake", 3); await line(0);
     playMove(nobbo, "nod"); await line(1);
@@ -180,9 +178,11 @@ async function lkGag(pc) {
   Object.entries(GAG_POS[it.id] || {}).forEach(([k, [x, sc]]) => place(cast[k], x, 975, sc));
   const L0 = E.L, t0 = performance.now(); let ok = false, n = 0; const tries = [];
   try {
-    const line = async i => { const [who, text] = it.talk[i]; await speak(cast[who], `lk_g_${it.id}_t${i}`, text); };
+    const line = async (i, sec) => { const [who, text] = it.talk[i], k = `lk_g_${it.id}_t${i}`;
+      if (!sec) return speak(cast[who], k, text);
+      const b = AUD[k] ? await voiceBuf(k) : null; await speakPart(cast[who], k, text, b ? Math.min(1, sec / b.duration) : 1); unsay(cast[who]); }; // とちゅうで きる
     await sleep(500); await GAG_ANIM[it.id](cast, line, h); await sleep(300);
-    await speak(a, `lk_g_${it.id}_q`, it.q[1]); unsay();
+    if (!it.noq) { await speak(a, `lk_g_${it.id}_q`, it.q[1]); unsay(); }
     await speak(C.pony, "lk_g_ask", "なんて つっこむ？"); showTask(t.a, "つっこもう");
     let hh = E.h;
     for (; n < 3; n++) {

@@ -6,10 +6,10 @@
 """
 
 def T(a, y, keys): return {"a": a, "y": y, "keys": keys}
-def G(id, place, boke, cast, talk, q, tiers, res, after):
+def G(id, place, boke, cast, talk, q, tiers, res, after, noq=False):
     assert boke in cast and all(w in cast for w, _, _ in talk + after), id
     assert len(tiers) == 6, id
-    return {"id": id, "place": place, "boke": boke, "cast": cast, "talk": [list(t) for t in talk], "q": list(q), "tiers": tiers, "res": list(res), "after": [list(t) for t in after]}
+    return {"id": id, "place": place, "boke": boke, "cast": cast, "talk": [list(t) for t in talk], "q": list(q), "tiers": tiers, "res": list(res), "after": [list(t) for t in after], **({"noq": True} if noq else {})}
 
 DAME = ["だめ", "ダメ", "駄目"]; TABE = ["たべ", "食べ"]; TSUMA = ["つまみぐい", "つまみ食い", "摘み食い", "つまみ"]
 NANNIN = ["なんにん", "何人", "なんびき", "何匹"]; OOSUGI = ["おおすぎ", "多すぎ"]
@@ -53,8 +53,7 @@ GAG = [
  G("osoi", "ベンチ", "kamejii", ["kamejii", "pyon"], [
    ("pyon", "かめじい、こんにちは！", "かめじい、こんにちは！"),
    ("kamejii", "こ……ん……に……ち……は……", "こ……ん……に……ち……は……"),
-   ("kamejii", "きょう……は……いい……てん……き……じゃ……のう……", "きょう……は……いい……てん……き……じゃ……のう……"),
-   ("pyon", "ぐう……ぐう……", "ぐう……ぐう……")],
+],
    ("kamejii", "……な……ん……じゃ……な……？", "……な……ん……じゃ……な……？"), [
    T("はやく！", "早く！", [HAYAKU]),
    T("もっと はやく！", "もっと早く！", [["もっと"], HAYAKU]),
@@ -63,7 +62,7 @@ GAG = [
    T("おそすぎて ねむく なっちゃうよ！ もっと はやく しゃべって", "遅すぎて眠くなっちゃうよ！もっと早く喋って", [["おそすぎ", "遅すぎ"], ["ねむ", "眠"], HAYAKU]),
    T("ゆっくりすぎて、ひが くれちゃうよ。もっと はやく しゃべって！", "ゆっくりすぎて、日が暮れちゃうよ。もっと早く喋って！", [["ゆっくり"], ["くれ", "暮れ"], HAYAKU])],
    ("kamejii", "ほっほ、では はやくちで いうぞ。きょうはいいてんきじゃのう！", "ほっほ、では早口で言うぞ。今日はいい天気じゃのう！"),
-   [("pyon", "はやっ！", "はやっ！")]),
+   [("pyon", "はやっ！", "はやっ！")], noq=True),
  G("kakure", "すなば", "nobbo", ["nobbo", "mii"], [
    ("mii", "かくれんぼ しましょう！ いーち、にーい、さーん……", "かくれんぼしましょう！いーち、にーい、さーん……"),
    ("nobbo", "よし、この きの うしろに かくれましょう", "よし、この木の後ろに隠れましょう"),

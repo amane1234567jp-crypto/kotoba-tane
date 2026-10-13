@@ -11,7 +11,7 @@ const rnd = n => Math.floor(Math.random() * n);
 const pad = n => String(n).padStart(2, "0");
 
 /* ---------- キャラ ---------- */
-const KINDS = ["doshin", "nobbo", "kamejii", "meebaa", "pyonmama", "gaojii", "miibaa", "doshinpapa", "kon", "pony", "shima", "pyon", "mii", "gao", "chu"];
+const KINDS = ["doshin", "nobbo", "kamejii", "meebaa", "pyonmama", "gaojii", "miibaa", "doshinpapa", "kon", "mama", "ookami", "ojisan", "omawari", "pony", "shima", "pyon", "mii", "gao", "chu"];
 const C = {}; KINDS.forEach(k => C[k] = makeChar(k));
 const P = { doshin: makeChar("doshin"), shima: makeChar("shima"), gao: makeChar("gao") };
 Object.values(P).forEach(p => p.isPiece = true);
@@ -943,6 +943,10 @@ const STAGES = [
   { id: "omise", name: "おみせ", icon: "🛒", ready: true },
   { id: "densha", name: "でんしゃとバス", icon: "🚃", ready: true },
   { id: "gakkou2", name: "がっこう2", icon: "📖", ready: true },
+  { id: "toukou", name: "とうこう", icon: "🎒", ready: true },
+  { id: "gakkou3", name: "がっこう3", icon: "✏️", ready: true },
+  { id: "kyuushoku", name: "きゅうしょく", icon: "🍛", ready: true },
+  { id: "gekou", name: "げこう", icon: "🏠", ready: true },
 ];
 const SAVE_KEY = "kotoba-tane-save";
 const SAVE = (() => { try { return JSON.parse(localStorage.getItem(SAVE_KEY)) || null; } catch (e) { return null; } })() || { v: 1, lap: 1, cleared: {}, E: null, play: null };
