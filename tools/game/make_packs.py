@@ -9,7 +9,7 @@ A = G / "stage_audio"; OUT = R / "packs"; OUT.mkdir(exist_ok=True)
 S = json.loads((G / "sit/sits.json").read_text())
 RIVAL_OF = {"kousha": "gao", "undou": "pyon", "kouen": "mii", "omise": "chu", "densha": "doshin", "gakkou2": "kon", "toukou": "gao", "gakkou3": "mii", "kyuushoku": "doshin", "gekou": "pyon"}
 def keys_of(s):
-    new = s["stage"] != "kousha" or s["id"] == "unko"
+    new = s["stage"] != "kousha" or not (G / "sit/audio" / f"sq_{s['id']}.mp3").exists()  # こうしゃの はじめの 場面は 段1〜4が ページに 入っている
     ks = []
     if new: ks += [f"sq_{s['id']}", f"sr_{s['id']}"]
     ks += [f"st_{s['id']}_{i}" for i, r in enumerate(s.get("talk", [])) if r[2]] + [f"se_{s['id']}_{i}" for i, r in enumerate(s.get("after", [])) if r[2]]

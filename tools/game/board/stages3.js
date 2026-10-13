@@ -9,7 +9,7 @@ PIECE_S.omawari = .27; PIECE_S.mama = .22;
 let CUR_S = null;
 { const ssv = setSitView; setSitView = function (s, k) { CUR_S = s; return ssv(s, k); }; }
 { const ps = pickSit; pickSit = function (place, heroKind = "shima") {
-    if (!S3.includes(curStage)) return ps(place, heroKind);
+    if (curStage === "long") return ps(place, heroKind);
     // extras に 主人公が いる 場面は えらばない（なんども ためして だめなら そのまま）
     for (let i = 0; i < 12; i++) { const s = ps(place, heroKind); if (!(s.extras || []).includes(heroKind)) return s; sitUsed.delete(s.id); }
     return ps(place, heroKind); }; }
@@ -359,4 +359,68 @@ Object.assign(POST, {
   async saifu(h, a) { hand(h, prop("purse", 0, 0, .3), .3, 0); h.sadMouth = false; joy(h); await sleep(500); },
   async norisugoshi(h, a) { playMove(a, "nod"); await sleep(500); },
   async kippunakushi(h, a) { h.sadMouth = false; playMove(h, "bow"); await sleep(500); },
+});
+
+/* ================= こうしゃの 見直し・がっこう3の 追加（2026-10-13。台本 sit/sits_fix2.py・sits_new.py） ================= */
+["ksblame", "kspush", "ksblock", "ksknock", "ksfound", "kssneak", "gskenkou", "gsdone", "gslost"].forEach(k => ASK_ON_STAGE.add(k));
+["kshit", "kschufall", "ksalone", "kswait", "kswet"].forEach(k => SOFT_INTRO.add(k));
+const hide3 = c => { c.root.style.display = "none"; const i = visible.indexOf(c); if (i >= 0) visible.splice(i, 1); };
+Object.assign(INTRO, {
+  // ろうか：がおが 走ってきて せなかを たたいて にげる → ないていると めえばあ先生が くる
+  async kshit(h, a) { enter(h); await sleep(1000); const g = C.gao; resetChar(g); place(g, 1300, 975, .9); show(g); g.dx.v = g.dx.t = 500; hold(g, "run", 1); g.dx.t = -360; await sleep(1000);
+    g.armR.t = -150; await sleep(250); g.armR.t = 40; thud(); noise(.12, 900, .7); h.lean.t = -16; markAbove(h, "ex"); await sleep(300); h.lean.t = 0; g.armR.t = 0;
+    playMove(g, "laugh"); await sleep(500); hold(g, "run", 1); g.dx.t = 700; await sleep(900); hide3(g);
+    playMove(h, "sad"); h.sadMouth = true; tears(h, 6); await sleep(900); enter(a); await sleep(900); surprise(a); },
+  // げんかん：ちゅうが 走って ころぶ → めえばあ先生が とおりかかる
+  async kschufall(h, a) { const c = xtra("chu", 860); window.__kchu = c; c.dx.v = 500; c.dx.t = 0; hold(c, "run", 1); enter(h); await sleep(1000);
+    thud(); flop(c); later(300, () => { c.squash.t = .8; c.sadMouth = true; tears(c, 8); hold(c, "shiver", 6); }); markAbove(c, "drop"); surprise(h); markAbove(h, "ex"); await sleep(1100); enter(a); await sleep(900); },
+  // ろうか：みんなと はぐれて、ひとりで きょろきょろ
+  async ksalone(h, a) { enter(h); await sleep(1000); playMove(h, "look"); await sleep(1000); markAbove(h, "q"); h.sadMouth = true; await sleep(700); enter(a); await sleep(900); },
+  // げたばこ：がおが うわばきを さがして おこっている → こっちを ゆびさす
+  async ksblame(h, a) { hold(a, "shake", 1.6); for (let i = 0; i < 3; i++) later(i * 450, () => noise(.08, 1200, .4)); enter(h); await sleep(1500);
+    playMove(a, "point"); markAbove(a, "anger"); await sleep(400); surprise(h); markAbove(h, "ex"); await sleep(500); },
+  // かいだん：まるシマが のぼっていると、がおが うしろから おす
+  async kspush(h, a) { place(a, 430, 975, .95); a.dx.v = a.dx.t = -1000; enter(h); await sleep(1000); await climb(h, 300, 1300);
+    hold(a, "run", 1); a.dx.t = 0; await sleep(1100); await climb(a, 140, 600); a.lean.t = 16; a.armR.t = -80; a.armL.t = 80;
+    for (let i = 0; i < 6; i++) later(i * 140, () => h.lean.t = i % 2 ? 18 : -18); noise(.1, 700, .5); markAbove(h, "ex"); await sleep(900); h.lean.t = 0; surprise(h); await sleep(300); a.armR.t = 0; a.armL.t = 0; },
+  // としょしつ：よみきかせ。まえに 立っている どしんが 大きくて 絵が みえない
+  async ksblock(h, a) { const st = el("g", {}, propG); el("path", { d: "M1420 760 L1470 520 L1520 760", fill: "none", ...S6p(8) }, st); const b = prop("ehon", 1470, 470, .9); window.__eh = b;
+    place(a, 930, 975, 1.15); enter(h); await sleep(1000); hold(h, "tiptoe", 1.6); for (let i = 0; i < 2; i++) later(300 + i * 600, () => jump(h, .45)); await sleep(1500);
+    markAbove(h, "q"); h.sadMouth = true; await sleep(500); playMove(a, "look"); await sleep(500); },
+  // トイレ：こしかけの かべの むこうに まるシマ。ちゅうが トントン
+  async ksknock(h, a) { stay(h); const w = el("g", {}, front()); window.__stall = w; [470, 966].forEach(x => el("rect", { x, y: 520, width: 24, height: 455, rx: 6, fill: "#5FA9D6", ...S6p(5) }, w)); el("rect", { x: 494, y: 790, width: 472, height: 185, rx: 8, fill: "#7FCBF0", ...S6p() }, w); el("circle", { cx: 930, cy: 880, r: 10, fill: INK }, w);
+    el("rect", { x: 530, y: 815, width: 100, height: 50, rx: 10, fill: "#FFFFFF", ...S6p(4) }, w); txt(w, 580, 851, "WC", 30, { "text-anchor": "middle" });
+    place(a, 1060, 975, .46); await sleep(600); hold(a, "shiver", 3); markAbove(a, "drop", { dx: 60 }); await sleep(600); knock(); markAbove(a, "note"); await sleep(700); surprise(h); markAbove(h, "ex"); await sleep(500); },
+  // げんかん：ゆうがた。おむかえが こない
+  async kswait(h, a) { el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#FF9E5E", opacity: .16 }, propG); hand(h, prop("bag", 0, 0, .4), .4, 0); enter(h); await sleep(1100);
+    playMove(h, "look"); await sleep(1100); markAbove(h, "q"); h.sadMouth = true; await sleep(800); enter(a); await sleep(900); },
+  // しょくいんしつ：ひろった ハンカチを もって いく
+  async ksfound(h, a) { const hk = prop("hankachi", 0, 0, .35); hand(h, hk, .35, 0); window.__hk2 = hk; knock(); await sleep(600); enter(h); await sleep(1100); playMove(a, "look"); await sleep(500); },
+  // しょくいんしつ：つくえの おかしを がおが こっそり ねらう
+  async kssneak(h, a) { prop("snack", 1180, 500, .6); playMove(a, "sneak"); enter(h); await sleep(1300); a.armR.t = -100; markAbove(a, "note"); await sleep(600); a.armR.t = 0; },
+  // ほけんしつ：てを あらって いたら、みずが はねて びしょびしょ
+  async kswet(h, a) { enter(h); await sleep(900); h.armL.t = -40; h.armR.t = 40; h.sadMouth = true; drip(h, 40); hold(h, "shiver", 2); await sleep(1600); enter(a); await sleep(900); surprise(a); },
+  // ---- がっこう3 ----
+  async gskenkou(h, a) { const ks = exKids([940]); desk3(h, ...ks); hand(a, prop("memo", 0, 0, .4), .4, 0); await sleep(500);
+    if (ks[0]) { ks[0].armR.t = -150; markAbove(ks[0], "note"); await sleep(800); ks[0].armR.t = 0; } playMove(a, "look"); await sleep(500); },
+  async gsdone(h, a) { const ks = exKids([940]); desk3(h, ...ks); onDesk(h, "memo", .4); ks.forEach(c => onDesk(c, "memo", .4)); await sleep(400);
+    hold(h, "shake", 1.4); ks.forEach(c => hold(c, "shake", 2.5)); await sleep(1500); h.armR.t = -150; markAbove(h, "ex"); await sleep(500); playMove(a, "look"); await sleep(400); },
+  async gslost(h, a) { const ks = exKids([880, 1030]); desk3(h, ...ks); [h, ...ks].forEach(c => onDesk(c, "kbook", .45)); await sleep(400);
+    ks.forEach(c => hold(c, "shake", 3)); playMove(h, "look"); await sleep(1200); markAbove(h, "q"); await sleep(700); },
+});
+Object.assign(POST, {
+  async tatakareta(h, a) { playMove(a, "nod"); h.sadMouth = false; await sleep(600); playMove(h, "nod"); await sleep(500); },
+  async kegashita(h, a) { await walk(a, -260, 800); playMove(a, "crouch"); const c = window.__kchu; if (c) { c.sadMouth = false; } await sleep(700); },
+  async mayotta(h, a) { a.armR.t = -150; await sleep(700); a.armR.t = 0; h.sadMouth = false; joy(h); await sleep(400); walk(a, 900, 1800); await walk(h, 1200, 1800); },
+  async bokujanai(h, a) { playMove(a, "bow"); await sleep(700); hand(a, prop("slipper", 0, 0, .5), .5, 0); jump(a, .4); markAbove(a, "ex"); await sleep(500); joy(h); await sleep(400); },
+  async osanaide(h, a) { a.lean.t = 0; playMove(a, "bow"); await sleep(700); climb(h, 300, 2200); await climb(a, 300, 2200); },
+  async mienai(h, a) { playMove(a, "shy"); await walk(a, 380, 900); h.sadMouth = false; h.happyOn = true; await sleep(600); },
+  async haittemasu(h, a) { jump(a, .5); await sleep(700); noise(1.0, 700, .5); await sleep(900); await walk(h, -650, 900); hold(a, "run", .6); await walk(a, -420, 600); },
+  async mukae(h, a) { playMove(a, "nod"); h.sadMouth = false; await sleep(600); walk(a, 800, 1600); await walk(h, 1100, 1800); },
+  async hirotta(h, a) { await walk(h, 250, 800); const hk = window.__hk2; if (hk) hk.remove(); hand(a, prop("hankachi", 0, 0, .35), .35, 0); playMove(a, "nod"); joy(h); await sleep(600); },
+  async damedayo(h, a) { playMove(a, "frustrated"); await sleep(800); const k = xtra("kamejii", 1500, .86); k.dx.v = 300; k.dx.t = 0; hold(k, "run", .8); await sleep(900); surprise(a); jump(a, .6); await sleep(500); playMove(k, "nod"); await sleep(600); },
+  async nureta(h, a) { hand(a, prop("towel", 0, 0, .3), .3, 0); await walk(a, -250, 700); h.armL.t = 0; h.armR.t = 0; h.sadMouth = false; hand(h, prop("towel", 0, 0, .3), .3, 0); joy(h); await sleep(500); },
+  async gskenkou(h, a) { playMove(a, "nod"); h.happyOn = true; await sleep(600); },
+  async gsdekimashita(h, a) { h.armR.t = 0; await walk(a, -260, 800); for (let i = 0; i < 4; i++) later(i * 200, () => markAbove(h, "sparkle", { dx: (i - 1.5) * 40 })); h.happyOn = true; await sleep(900); },
+  async gsnanisuru(h, a) { a.armR.t = -120; await sleep(800); a.armR.t = 0; hold(h, "shake", 1.6); await sleep(1400); },
 });
