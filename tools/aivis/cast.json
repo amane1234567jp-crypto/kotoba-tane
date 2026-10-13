@@ -90,6 +90,16 @@
    "model": "3dabea2b-cc10-41da-955b-4618ce84e716",
    "style": "ノーマル",
    "speed": 1.0
+  },
+  "tora": {
+   "model": "e40d5b99-8cde-4442-a45b-0ebec9167506",
+   "style": "ノーマル",
+   "speed": 1.05
+  },
+  "kuma": {
+   "model": "1f04a608-916c-4d9e-bf6e-b9da5c176f85",
+   "style": "デフォルト",
+   "speed": 0.92
   }
  },
  "lines": {

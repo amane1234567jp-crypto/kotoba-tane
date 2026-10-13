@@ -1,0 +1,527 @@
+[
+{
+"key": "sq_butsukaru",
+"who": "tora",
+"text": "わ、わりい！ だいじょうぶか？"
+},
+{
+"key": "sr_butsukaru",
+"who": "tora",
+"text": "ごめんな。つぎから ろうかは あるくよ"
+},
+{
+"key": "sq_sakaagari",
+"who": "tora",
+"text": "みて！ さかあがり、できたよ！"
+},
+{
+"key": "sr_sakaagari",
+"who": "tora",
+"text": "えへへ、ありがとう！ おなかを ぼうに くっつけるのが コツだよ"
+},
+{
+"key": "sg_sakaagari_0",
+"who": "pyon",
+"text": "すごい"
+},
+{
+"key": "sg_sakaagari_1",
+"who": "pyon",
+"text": "すごいね"
+},
+{
+"key": "sg_sakaagari_2",
+"who": "pyon",
+"text": "さかあがり、じょうずだね"
+},
+{
+"key": "sg_sakaagari_3",
+"who": "pyon",
+"text": "いっかいで できるなんて、すごいね"
+},
+{
+"key": "sx_sakaagari_3",
+"who": "pyon",
+"text": "いっかいを できるなんて、すごいね"
+},
+{
+"key": "sg_sakaagari_4",
+"who": "pyon",
+"text": "すごいね。こんど、こつを おしえて くれる？"
+},
+{
+"key": "sx_sakaagari_4",
+"who": "pyon",
+"text": "すごいね。こんど、こつが おしえて くれる？"
+},
+{
+"key": "sg_sakaagari_5",
+"who": "pyon",
+"text": "さかあがり、かっこよかった。どう やるのか おしえて"
+},
+{
+"key": "sq_koronda",
+"who": "kuma",
+"text": "いたたた……"
+},
+{
+"key": "sr_koronda",
+"who": "kuma",
+"text": "ありがとう……やさしいね"
+},
+{
+"key": "sg_koronda_0",
+"who": "pyon",
+"text": "だいじょうぶ？"
+},
+{
+"key": "sg_koronda_1",
+"who": "pyon",
+"text": "だいじょうぶ？ たてる？"
+},
+{
+"key": "sg_koronda_2",
+"who": "pyon",
+"text": "てを かそうか？"
+},
+{
+"key": "sx_koronda_2",
+"who": "pyon",
+"text": "てが かそうか？"
+},
+{
+"key": "sg_koronda_3",
+"who": "pyon",
+"text": "いっしょに ほけんしつに いこうか"
+},
+{
+"key": "sx_koronda_3",
+"who": "pyon",
+"text": "いっしょに ほけんしつを いこうか"
+},
+{
+"key": "sg_koronda_4",
+"who": "pyon",
+"text": "ちが でてるよ。ほけんしつで みて もらおう"
+},
+{
+"key": "sg_koronda_5",
+"who": "pyon",
+"text": "むりしないでね。いっしょに ほけんしつまで ゆっくり あるこう"
+},
+{
+"key": "sq_kurakura",
+"who": "kuma",
+"text": "なんだか、くらくら するよう……"
+},
+{
+"key": "sr_kurakura",
+"who": "kuma",
+"text": "ありがとう。……すこし らくに なったよ"
+},
+{
+"key": "sg_kurakura_0",
+"who": "pyon",
+"text": "やすもう"
+},
+{
+"key": "sg_kurakura_1",
+"who": "pyon",
+"text": "ひかげで やすもう"
+},
+{
+"key": "sg_kurakura_2",
+"who": "pyon",
+"text": "みずを のんで やすもう"
+},
+{
+"key": "sx_kurakura_2",
+"who": "pyon",
+"text": "みずが のんで やすもう"
+},
+{
+"key": "sg_kurakura_3",
+"who": "pyon",
+"text": "あついから、ひかげで すこし やすもう"
+},
+{
+"key": "sg_kurakura_4",
+"who": "pyon",
+"text": "かおが あかいよ。みずを のんで、ひかげで やすもう"
+},
+{
+"key": "sg_kurakura_5",
+"who": "pyon",
+"text": "ねっちゅうしょう かも しれないよ。ひかげで みずを のもう"
+},
+{
+"key": "sq_irete",
+"who": "tora",
+"text": "なあに？"
+},
+{
+"key": "sr_irete",
+"who": "tora",
+"text": "いいよ！ じゃあ、おには ちゅうね"
+},
+{
+"key": "sg_irete_0",
+"who": "mii",
+"text": "いれて"
+},
+{
+"key": "sg_irete_1",
+"who": "mii",
+"text": "いれて ください"
+},
+{
+"key": "sg_irete_2",
+"who": "mii",
+"text": "いっしょに あそぼう"
+},
+{
+"key": "sg_irete_3",
+"who": "mii",
+"text": "おにごっこ、いっしょに やっても いい？"
+},
+{
+"key": "sg_irete_4",
+"who": "mii",
+"text": "たのしそうだね。おにごっこに いれて くれる？"
+},
+{
+"key": "sx_irete_4",
+"who": "mii",
+"text": "たのしそうだね。おにごっこを いれて くれる？"
+},
+{
+"key": "sg_irete_5",
+"who": "mii",
+"text": "ずっと みて いたら、やりたく なっちゃった。なかまに いれて"
+},
+{
+"key": "sq_maigo",
+"who": "kuma",
+"text": "ママ、どこ……？ ぐすっ"
+},
+{
+"key": "sr_maigo",
+"who": "kuma",
+"text": "うん……いっしょに いて くれて ありがとう"
+},
+{
+"key": "sg_maigo_0",
+"who": "chu",
+"text": "どうしたの？"
+},
+{
+"key": "sg_maigo_1",
+"who": "chu",
+"text": "ママと はぐれたの？"
+},
+{
+"key": "sg_maigo_2",
+"who": "chu",
+"text": "いっしょに ママを さがそう"
+},
+{
+"key": "sx_maigo_2",
+"who": "chu",
+"text": "いっしょに ママが さがそう"
+},
+{
+"key": "sg_maigo_3",
+"who": "chu",
+"text": "おみせの ひとに、いっしょに いいに いこう"
+},
+{
+"key": "sg_maigo_4",
+"who": "chu",
+"text": "なかないで。おみせの ひとに ママを よんで もらおう"
+},
+{
+"key": "sg_maigo_5",
+"who": "chu",
+"text": "だいじょうぶだよ。うごかないで、おみせの ひとに たすけて もらおう"
+},
+{
+"key": "sq_orimasu",
+"who": "kuma",
+"text": "ぐうぐう……ん？"
+},
+{
+"key": "sr_orimasu",
+"who": "kuma",
+"text": "あっ、ごめんね。どうぞ、どうぞ"
+},
+{
+"key": "sg_orimasu_0",
+"who": "doshin",
+"text": "おります"
+},
+{
+"key": "sg_orimasu_1",
+"who": "doshin",
+"text": "すみません、おります"
+},
+{
+"key": "sg_orimasu_2",
+"who": "doshin",
+"text": "おります。とおして ください"
+},
+{
+"key": "sg_orimasu_3",
+"who": "doshin",
+"text": "すみません、つぎで おりるので とおして ください"
+},
+{
+"key": "sg_orimasu_4",
+"who": "doshin",
+"text": "くまたくん、この えきで おりるから、すこし よけて くれる？"
+},
+{
+"key": "sx_orimasu_4",
+"who": "doshin",
+"text": "くまたくん、この えきを おりるから、すこし よけて くれる？"
+},
+{
+"key": "sg_orimasu_5",
+"who": "doshin",
+"text": "おこして ごめんね。ここで おりるので、とおして もらえる？"
+},
+{
+"key": "sq_tkakashingou",
+"who": "tora",
+"text": "あかだけど、くるま こないぜ。いっちゃおう！"
+},
+{
+"key": "sr_tkakashingou",
+"who": "tora",
+"text": "ちぇっ……わかったよ。まつよ"
+},
+{
+"key": "sq_kygyuunyuu",
+"who": "kuma",
+"text": "あわわわ……"
+},
+{
+"key": "sr_kygyuunyuu",
+"who": "kuma",
+"text": "ご、ごめん！ ひじが あたっちゃった"
+},
+{
+"key": "sg_kygyuunyuu_0",
+"who": "doshin",
+"text": "わあ！"
+},
+{
+"key": "sg_kygyuunyuu_1",
+"who": "doshin",
+"text": "ぎゅうにゅうが こぼれた！"
+},
+{
+"key": "sg_kygyuunyuu_2",
+"who": "doshin",
+"text": "わあ！ ぎゅうにゅうが こぼれた！"
+},
+{
+"key": "sx_kygyuunyuu_2",
+"who": "doshin",
+"text": "わあ！ ぎゅうにゅうを こぼれた！"
+},
+{
+"key": "sg_kygyuunyuu_3",
+"who": "doshin",
+"text": "ぎゅうにゅうが こぼれた！ ぞうきん もって くるね"
+},
+{
+"key": "sg_kygyuunyuu_4",
+"who": "doshin",
+"text": "わあ！ ぎゅうにゅうが こぼれた！ せんせい、ぞうきんを ください"
+},
+{
+"key": "sg_kygyuunyuu_5",
+"who": "doshin",
+"text": "ぎゅうにゅうが こぼれちゃったね。だいじょうぶ、いっしょに ふこう"
+},
+{
+"key": "sq_tatakareta",
+"who": "nobbo",
+"text": "おや、ないて いるのですか？ どうしましたか？"
+},
+{
+"key": "sr_tatakareta",
+"who": "nobbo",
+"text": "おしえて くれて ありがとう。とらおくんには、せんせいから おはなし しますね"
+},
+{
+"key": "sg_tatakareta_0",
+"who": "mii",
+"text": "たたかれた"
+},
+{
+"key": "sg_tatakareta_1",
+"who": "mii",
+"text": "とらおくんに たたかれた"
+},
+{
+"key": "sg_tatakareta_2",
+"who": "mii",
+"text": "せんせい、とらおくんに たたかれました"
+},
+{
+"key": "sx_tatakareta_2",
+"who": "mii",
+"text": "せんせい、とらおくんを たたかれました"
+},
+{
+"key": "sg_tatakareta_3",
+"who": "mii",
+"text": "とらおくんに せなかを たたかれました"
+},
+{
+"key": "sg_tatakareta_4",
+"who": "mii",
+"text": "せんせい、とらおくんに せなかを たたかれて、いたいです"
+},
+{
+"key": "sg_tatakareta_5",
+"who": "mii",
+"text": "なにも して いないのに、とらおくんに せなかを たたかれました"
+},
+{
+"key": "sq_bokujanai",
+"who": "tora",
+"text": "おまえ、おれの けしゴム かくしただろ！"
+},
+{
+"key": "sr_bokujanai",
+"who": "tora",
+"text": "……そっか、わるかった。あっ、ふでばこに はいってた！"
+},
+{
+"key": "sg_bokujanai_0",
+"who": "mii",
+"text": "ちがうよ"
+},
+{
+"key": "sg_bokujanai_1",
+"who": "mii",
+"text": "ぼくじゃ ないよ"
+},
+{
+"key": "sg_bokujanai_2",
+"who": "mii",
+"text": "ぼくは かくして ないよ"
+},
+{
+"key": "sx_bokujanai_2",
+"who": "mii",
+"text": "ぼくを かくして ないよ"
+},
+{
+"key": "sg_bokujanai_3",
+"who": "mii",
+"text": "ぼくじゃ ないよ。いっしょに さがそう"
+},
+{
+"key": "sg_bokujanai_4",
+"who": "mii",
+"text": "ぼくは やって いないよ。なにも しらないよ"
+},
+{
+"key": "sg_bokujanai_5",
+"who": "mii",
+"text": "ぼくは かくして いないよ。きめつけないで、いっしょに さがそう"
+},
+{
+"key": "sq_osanaide",
+"who": "tora",
+"text": "ほらほら、もっと たかく おしてやるぜー！"
+},
+{
+"key": "sr_osanaide",
+"who": "tora",
+"text": "あっ……わるい。そっと おすよ"
+},
+{
+"key": "sg_osanaide_0",
+"who": "mii",
+"text": "おさないで"
+},
+{
+"key": "sg_osanaide_1",
+"who": "mii",
+"text": "おさないで！ こわいよ"
+},
+{
+"key": "sg_osanaide_2",
+"who": "mii",
+"text": "とらおくん、おさないで！"
+},
+{
+"key": "sx_osanaide_2",
+"who": "mii",
+"text": "とらおくんが、おさないで！"
+},
+{
+"key": "sg_osanaide_3",
+"who": "mii",
+"text": "そんなに つよく おすと こわいよ"
+},
+{
+"key": "sg_osanaide_4",
+"who": "mii",
+"text": "おさないで！ ブランコを つよく おすと あぶないよ"
+},
+{
+"key": "sg_osanaide_5",
+"who": "mii",
+"text": "ブランコから おちたら けがを するよ。もう おさないで"
+},
+{
+"key": "sq_damedayo",
+"who": "tora",
+"text": "なあ、この おかし、こっそり たべちゃおうぜ！"
+},
+{
+"key": "sr_damedayo",
+"who": "tora",
+"text": "ちぇっ、わかったよ……"
+},
+{
+"key": "sg_damedayo_0",
+"who": "gao",
+"text": "だめ"
+},
+{
+"key": "sg_damedayo_1",
+"who": "gao",
+"text": "だめだよ"
+},
+{
+"key": "sg_damedayo_2",
+"who": "gao",
+"text": "だめだよ。せんせいの だよ"
+},
+{
+"key": "sx_damedayo_2",
+"who": "gao",
+"text": "だめだよ。せんせいが だよ"
+},
+{
+"key": "sg_damedayo_3",
+"who": "gao",
+"text": "だめだよ。かってに たべたら いけないよ"
+},
+{
+"key": "sg_damedayo_4",
+"who": "gao",
+"text": "それは せんせいの おかしだから、たべちゃ だめだよ"
+},
+{
+"key": "sg_damedayo_5",
+"who": "gao",
+"text": "ぼくは やらないよ。ひとの ものを かってに たべるのは いけないよ"
+}
+]
