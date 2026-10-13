@@ -166,6 +166,14 @@ SONGS = {
  "gakkou3": dict(bpm=108, root=65, scale=MAJ, bars=8, lead=recorder, lead2=glock, drums=D_class, comp="piano", extra=X_bell,
    mel="1 2 3 - 1 2 3 - | 5 3 2 1 2 - - - | 1 2 3 - 1 2 3 - | 5 3 2 3 1 - - - | 5 5 6 - 5 4 3 - | 4 4 5 - 4 3 2 - | 3 3 4 - 5 - 6 7 | 1' - - - . . . .",
    chords=[1, 5, 1, 5, 1, 4, 5, 1]),
+ # きゅうしょく：はずむ マリンバと ウクレレ。おなかが すく たのしい おひる
+ "kyuushoku": dict(bpm=124, root=67, scale=MAJ, bars=8, lead=marimba, lead2=glock, drums=D_easy, comp="pluck", swing=.3,
+   mel="1 3 5 3 6 5 3 - | 4 6 5 4 3 - - - | 2 4 6 4 5 4 2 - | 5 - 4 - 3 - 2 - | 1 3 5 3 6 5 3 - | 1' - 6 - 5 - 3 - | 4 3 2 - 5, 7, 2 - | 1 - - - . . . .",
+   chords=[1, 4, 2, 5, 1, 6, 5, 1]),
+ # げこう：ゆうやけの かえりみち。ゆったりした ピアノと フルート
+ "gekou": dict(bpm=88, root=65, scale=MAJ, bars=8, lead=flute, lead2=piano, drums=D_walk, comp="piano", extra=X_birds,
+   mel="3 - 2 - 1 - 5, - | 6, - 1 - 2 - - - | 3 - 5 - 6 - 5 3 | 2 - - - . . . . | 3 - 2 - 1 - 6, - | 5, - 6, - 1 - 3 - | 2 - 3 - 2 - 7, - | 1 - - - . . . .",
+   chords=[1, 4, 1, 5, 6, 4, 5, 1]),
 }
 
 if __name__ == "__main__":

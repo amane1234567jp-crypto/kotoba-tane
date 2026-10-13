@@ -170,11 +170,11 @@ Object.assign(INTRO, {
   async gkrain(h, a) { const rn = el("g", {}, front()); window.__rain = rn; for (let i = 0; i < 50; i++) el("path", { d: `M${(i * 97) % 1600} ${(i * 53) % 900} l-14 40`, stroke: "#7FCBF0", "stroke-width": 4 }, rn);
     let t = 0; addTick(dt => { if (!rn.isConnected) return false; t += dt; rn.setAttribute("transform", `translate(${(-((t * 140) % 40)).toFixed(0)} ${((t * 400) % 120).toFixed(0)})`); });
     noise(1.2, 3000, .15); a.armL.t = -150; a.armR.t = 150; hold(a, "shiver", 3); const u = prop("umbrella", 0, 0, .55); hand(h, u, .55, 0); window.__umb2 = u; enter(h); await sleep(1300); },
-  async gkhit(h, a) { stay(h); hold(h, "run", 1.2); await sleep(800); const car = vehicle("car", 800); window.__car = car; await pass(car, 700, 800, 1700, 870); thud(); boom(.5); shake(400, 18); flop(h);
-    { const st = slam("ドン！", 300, 110, "#FFD25E"); later(900, () => st.remove()); } await sleep(700); h.sadMouth = true; tears(h, 2); await sleep(400); hold(a, "run", 1); a.dx.t = 0; await sleep(1000); playMove(a, "crouch"); },
+  async gkhit(h, a) { stay(h); hold(h, "run", 1.2); await sleep(800); const car = vehicle("car", 800); window.__car = car; await pass(car, 700, 800, 1700, world(h, 300, 0).x - 20); thud(); boom(.5); shake(400, 18); flop(h);
+    { const st = slam("ドン！", 300, 110, "#FFD25E"); later(900, () => st.remove()); } await sleep(500); playMove(h, "crouch"); h.sadMouth = true; tears(h, 3); for (let i = 0; i < 3; i++) later(i * 300, () => markAbove(h, "drop", { dx: i % 2 ? 60 : -60 })); await sleep(700); hold(a, "run", 1); a.dx.t = 0; await sleep(1000); playMove(a, "crouch"); },
   async gkphone(h, a) { stay(h); const car = vehicle("car", 800); car.setAttribute("transform", "translate(1300 800)"); h.sadMouth = true; const p = prop("phone", 0, 0, .45); hand(h, p, .45, 0);
     await sleep(600); ring3(); a.dx.v = a.dx.t = 0; const ph = prop("phone", 0, 0, .45); hand(a, ph, .45, 0); markAbove(a, "ex"); await sleep(900); },
-  async gkpolice(h, a) { stay(h); const car = vehicle("car", 800); car.setAttribute("transform", "translate(1250 800)"); const oj = xtra("ojisan", 1050, .95); playMove(oj, "shy"); siren(); hold(a, "run", 1.2); a.dx.t = 0; await sleep(1300); playMove(a, "bow"); await sleep(400); },
+  async gkpolice(h, a) { stay(h); const car = vehicle("car", 800); car.setAttribute("transform", "translate(1250 800)"); const oj = xtra("ojisan", 930, .9); playMove(oj, "shy"); siren(); hold(a, "run", 1.2); a.dx.t = 0; await sleep(1300); playMove(a, "bow"); await sleep(400); },
   async gkdoctor(h, a) { stay(h); h.sadMouth = true; await sleep(700); playMove(a, "look"); await sleep(600); },
   async gkbandage(h, a) { stay(h); const p = world(h, 170, h.base - 60); const b = el("g", { transform: `translate(${p.x.toFixed(0)} ${p.y.toFixed(0)}) scale(.3)` }, front()); drawItem(b, "bandage"); await sleep(600); jump(h, .3); h.happyOn = true; await sleep(700); h.happyOn = false; },
   async gkneighbor(h, a) { const w = waterArc(world(a, 330, 300).x, world(a, 330, 300).y); window.__water = w; enter(h); await sleep(1300); w.remove(); wave(a); await sleep(400); },
@@ -327,3 +327,36 @@ EV_STYLE.rest = ["#B9E3FF", () => "やすみ"];
 { const gt = gaoTurn; gaoTurn = async function () { if (P.gao.rest) { P.gao.rest = 0; setTurn("gao"); markAbove(P.gao, "z"); await speak(C.pony, "ev_rest_now", "びょういんで ひとやすみ。つぎの ばんまで まってね"); return; } return gt(); }; }
 { const mt = multiTurn; multiTurn = async function (pl, first) { if (curStage !== "long" && pl.rest) { pl.rest = 0; setTurn(pl.kind, pl.idx); markAbove(pl.pc, "z"); await speak(C.pony, "ev_rest_now", "びょういんで ひとやすみ。つぎの ばんまで まってね"); return; } return mt(pl, first); }; }
 { const as = applyStage; applyStage = function (id) { as(id); [P.shima, P.gao].forEach(p => p && (p.rest = 0)); }; }
+
+/* ================= ステージ2〜5の 見直し（ピンチの ときの ことば） ================= */
+["rptired", "rpsplash", "rplosthat", "rpalone", "rpnewgame", "rpneedtoilet", "rphighshelf", "rplostwallet", "rpmissedstop", "rplostticket"].forEach(k => ASK_ON_STAGE.add(k));
+["rptired", "rplostmama", "rplostwallet", "rplostticket", "rpmissedstop", "rpneedtoilet"].forEach(k => SOFT_INTRO.add(k));
+Object.assign(INTRO, {
+  async rptired(h, a) { stay(h); hold(h, "run", 1.6); await sleep(1600); h.lean.t = 14; h.sadMouth = true; for (let i = 0; i < 4; i++) later(i * 350, () => markAbove(h, "drop", { dx: i % 2 ? 60 : -60 })); await sleep(900); await walk(a, -150, 700); },
+  async rpsplash(h, a) { enter(h); await sleep(1100); for (let i = 0; i < 30; i++) later(i * 40, () => { const t = world(a, 120, 260); mark("drop", t.x, t.y, { vx: -600 - rnd(300), vy: -200 + rnd(200), grav: 800, life: 1, s: .9 }); });
+    noise(.8, 2000, .3); a.armR.t = -60; jump(a, .3); await sleep(700); surprise(h); h.armL.t = -150; h.armR.t = 150; h.sadMouth = true; drip(h, 6); await sleep(700); },
+  async rpswingmine(h, a) { stay(h); place(h, 1105, 700, .62); sway(h, 3200, 14, 600); const s0 = h.dx.v; const t0 = performance.now(); addTick(() => { if (!window.__swingOn) return false; h.dx.v = h.dx.t = Math.sin((performance.now() - t0) / 600 * Math.PI) * 60; });
+    window.__swingOn = true; h.happyOn = true; await sleep(900); place(a, 1460, 975, .42); a.dx.v = 400; a.dx.t = 0; hold(a, "run", .9); await sleep(1000); h.happyOn = false; },
+  async rplosthat(h, a) { enter(h); await sleep(1100); playMove(h, "look"); markAbove(h, "q"); await sleep(1000); h.sadMouth = true; },
+  async rpalone(h, a) { a.sadMouth = true; a.headY.t = 14; enter(h); await sleep(1300); playMove(h, "look"); await sleep(500); },
+  async rpnewgame(h, a) { enter(h); await sleep(1100); wave(a); await sleep(500); },
+  async rpneedtoilet(h, a) { hold(h, "run", 1); h.dx.t = 0; await sleep(1000); hold(h, "shiver", 2.5); for (let i = 0; i < 3; i++) later(i * 450, () => markAbove(h, "drop", { dx: i % 2 ? 60 : -60 })); await sleep(1200); playMove(a, "look"); },
+  async rplostmama(h, a) { stay(h); playMove(h, "look"); h.sadMouth = true; await sleep(1200); tears(h, 2); await sleep(600); enter(a); await sleep(1000); },
+  async rphighshelf(h, a) { enter(h); await sleep(1100); h.armR.t = -160; hold(h, "tiptoe", 2); for (let i = 0; i < 2; i++) later(i * 600, () => jump(h, .35)); await sleep(1500); h.armR.t = 0; markAbove(h, "drop"); await sleep(400); },
+  async rplostwallet(h, a) { enter(h); await sleep(1100); hold(h, "shake", 1.6); playMove(h, "look"); await sleep(1500); h.sadMouth = true; markAbove(h, "drop"); await sleep(500); },
+  async rpmissedstop(h, a) { stay(h); h.tm.closed = 1e6; markAbove(h, "z"); sway(h, 2600, 6, 300); await sleep(1800); ding(); delete h.tm.closed; surprise(h); playMove(h, "look"); markAbove(h, "ex"); await sleep(800); },
+  async rplostticket(h, a) { enter(h); await sleep(1100); hold(h, "shake", 1.4); playMove(h, "look"); await sleep(1400); h.sadMouth = true; markAbove(h, "drop"); await sleep(400); },
+});
+Object.assign(POST, {
+  async yasumu(h, a) { h.lean.t = 0; h.sadMouth = false; await walk(h, -400, 900); },
+  async yamete(h, a) { h.armL.t = 0; h.armR.t = 0; h.sadMouth = false; a.armR.t = 0; playMove(a, "shy"); await sleep(600); },
+  async atodene(h, a) { playMove(a, "nod"); await sleep(800); window.__swingOn = false; },
+  async sagashite(h, a) { a.armR.t = -120; await sleep(400); const g = prop("hat", 0, 0, .35); onHead(h, g, .45); h.sadMouth = false; joy(h); await sleep(600); a.armR.t = 0; },
+  async asobou(h, a) { a.sadMouth = false; a.headY.t = 0; joy(a); await sleep(600); },
+  async toiredoko(h, a) { a.armR.t = -100; await sleep(400); await walk(h, -700, 800); a.armR.t = 0; },
+  async hagure(h, a) { playMove(a, "nod"); h.sadMouth = false; await sleep(500); },
+  async totte(h, a) { hand(h, prop("bread", 0, 0, .35), .35, 0); joy(h); await sleep(500); },
+  async saifu(h, a) { hand(h, prop("purse", 0, 0, .3), .3, 0); h.sadMouth = false; joy(h); await sleep(500); },
+  async norisugoshi(h, a) { playMove(a, "nod"); await sleep(500); },
+  async kippunakushi(h, a) { h.sadMouth = false; playMove(h, "bow"); await sleep(500); },
+});

@@ -100,7 +100,7 @@ function rainbow(g) { const t = g.querySelector("text"); if (!t) return; const c
 function showMultiMenu() {
   const box = document.getElementById("startBox"); box.innerHTML = ""; box.className = "start menu";
   const h = (tag, cls, t) => { const e = document.createElement(tag); if (cls) e.className = cls; if (t != null) e.textContent = t; return e; };
-  const card = h("div", "mcard"); card.append(h("div", "mtitle", "みんなで あそぶ"));
+  const card = h("div", "mcard mmcard"); card.append(h("div", "mtitle", "みんなで あそぶ"));
   card.append(h("div", "mhead", "なんにんで あそぶ？"));
   const nums = h("div", "mnums"); let chosen = 0;
   const who = h("div", "mwho");
@@ -119,7 +119,10 @@ function showMultiMenu() {
 }
 (function multiStyle() {
   const st = document.createElement("style");
-  st.textContent = `.mnums{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  st.textContent = `.mmcard{width:min(96%,900px)}.mmcard .mstages{grid-template-columns:repeat(6,1fr);gap:8px}
+.start.menu .mmcard .mst{padding:8px 2px 6px;gap:2px}.mmcard .mst .mico{font-size:clamp(24px,3.4vw,36px)}.mmcard .mst .mname{font-size:clamp(12px,1.5vw,15px)}.mmcard .mst .mstat{font-size:clamp(11px,1.3vw,13px)}
+@media (max-width:760px){.mmcard .mstages{grid-template-columns:repeat(4,1fr)}}
+.mnums{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 .start.menu .mnum{font:400 clamp(20px,3vw,30px) var(--display);padding:8px 22px;border-radius:999px;border:5px solid #2B2A33;background:#FFF3D6;box-shadow:0 5px 0 #2B2A33;cursor:pointer}
 .start.menu .mnum.on{background:#7BD389}
 .mwho{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;min-height:10px}

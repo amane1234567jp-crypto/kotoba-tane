@@ -12,7 +12,10 @@
 - 凛音エル（kokuren / 電脳天使工業）
 - まお（オズチャット -Oz Chat- / Trippy、CV: ねゆたろ）
 - fumifumi（kokushin / sagawafumiya）
-- わかな、すみれ（声は x.com/dopoiro のAI / ぽいロード〈リアボVC公式〉）
+- わかな、すみれ、さつき（声は x.com/dopoiro のAI / ぽいロード〈リアボVC公式〉）
 - TANAKA（田中）
 - hinakoyuhara（柚原比奈子）
 - 花音（MAHOPROGRAM）
+- 立神ケイ（ニッケル・海月ニケ）
+- 猩々博士（雑談ボイス）（ろてじん・猩々博士）
+- Lux（Lami）

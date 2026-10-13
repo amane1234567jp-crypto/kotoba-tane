@@ -271,5 +271,5 @@ const drawBoardE = drawBoard;
 drawBoard = function () {
   drawBoardE(); const evs = EVENTS[curStage]; if (!evs || !BOARD[curStage]) return;
   Object.entries(evs).forEach(([id, [type, n]]) => { if (!EV_STYLE[type]) return; const [x, y] = NODES[id]; const [c, label] = EV_STYLE[type];
-    el("circle", { cx: x, cy: y, r: 34, fill: c, ...S6(4) }, boardLayer); txt(boardLayer, x, y + (type === "home" ? 7 : 11), label(n), type === "home" ? 20 : 32, { "text-anchor": "middle" }); });
+    el("circle", { cx: x, cy: y, r: 34, fill: c, ...S6(4) }, boardLayer); txt(boardLayer, x, y + (type === "home" || type === "rest" ? 7 : 11), label(n), type === "home" || type === "rest" ? 20 : 32, { "text-anchor": "middle" }); });
 };
