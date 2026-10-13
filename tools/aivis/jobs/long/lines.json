@@ -1,0 +1,307 @@
+[
+{
+"key": "lk_ohayou_t0",
+"who": "kamejii",
+"text": "おはよう。きょうも いい てんきじゃのう"
+},
+{
+"key": "lk_ohayou_t1",
+"who": "pyon",
+"text": "あ、こうちょうせんせいだ！"
+},
+{
+"key": "lk_ohayou_r",
+"who": "kamejii",
+"text": "ほっほ、げんきな あいさつじゃ"
+},
+{
+"key": "lk_itadaki_t0",
+"who": "doshin",
+"text": "きょうは カレーだね！"
+},
+{
+"key": "lk_itadaki_t1",
+"who": "mii",
+"text": "みんな そろったわね。じゃあ、てを あわせて……"
+},
+{
+"key": "lk_itadaki_r",
+"who": "doshin",
+"text": "いただきまーす！"
+},
+{
+"key": "lk_gochisou_t0",
+"who": "gao",
+"text": "あー、おなか いっぱい！"
+},
+{
+"key": "lk_gochisou_t1",
+"who": "chu",
+"text": "ぼくも ぜんぶ たべたよ。じゃあ……"
+},
+{
+"key": "lk_gochisou_r",
+"who": "gao",
+"text": "ごちそうさまでした！"
+},
+{
+"key": "lk_arigatou_t0",
+"who": "pyon",
+"text": "あ、えんぴつ おちてたよ。はい、どうぞ"
+},
+{
+"key": "lk_arigatou_t1",
+"who": "mii",
+"text": "ぴょんちゃん、やさしいわね"
+},
+{
+"key": "lk_arigatou_r",
+"who": "pyon",
+"text": "どういたしまして！"
+},
+{
+"key": "lk_gomen_t0",
+"who": "doshin",
+"text": "あっ、ぼくの つみき……くずれちゃった"
+},
+{
+"key": "lk_gomen_t1",
+"who": "mii",
+"text": "いま、ぶつかったわよね"
+},
+{
+"key": "lk_gomen_r",
+"who": "doshin",
+"text": "いいよ。いっしょに つみなおそう"
+},
+{
+"key": "lk_kashite_t0",
+"who": "mii",
+"text": "あかい クレヨンが ないと、りんごが ぬれないわね"
+},
+{
+"key": "lk_kashite_t1",
+"who": "gao",
+"text": "あかなら、おれが もってるぜ"
+},
+{
+"key": "lk_kashite_r",
+"who": "gao",
+"text": "いいぜ。はい、どうぞ"
+},
+{
+"key": "lk_irete_t0",
+"who": "pyon",
+"text": "おにごっこ、たのしいね！"
+},
+{
+"key": "lk_irete_t1",
+"who": "mii",
+"text": "もっと ひとが いると いいのにね"
+},
+{
+"key": "lk_irete_r",
+"who": "pyon",
+"text": "いいよー！ いっしょに あそぼう"
+},
+{
+"key": "lk_seki_t0",
+"who": "kamejii",
+"text": "ふう……きょうは こんで おるのう"
+},
+{
+"key": "lk_seki_t1",
+"who": "chu",
+"text": "かめじい、つかれてる みたい"
+},
+{
+"key": "lk_seki_r",
+"who": "kamejii",
+"text": "ほっほ、ありがとう。やさしいのう"
+},
+{
+"key": "lk_daijoubu_t0",
+"who": "pyon",
+"text": "きゃっ！ いたたた……"
+},
+{
+"key": "lk_daijoubu_t1",
+"who": "gao",
+"text": "あ、ぴょんが ころんだ！"
+},
+{
+"key": "lk_daijoubu_r",
+"who": "pyon",
+"text": "うん……ありがとう。だいじょうぶ"
+},
+{
+"key": "lk_oshiete_t0",
+"who": "chu",
+"text": "この もんだい、わかる？"
+},
+{
+"key": "lk_oshiete_t1",
+"who": "mii",
+"text": "わたしも わからないの。せんせいに きいて みたら？"
+},
+{
+"key": "lk_oshiete_r",
+"who": "chu",
+"text": "いっしょに ききに いこう"
+},
+{
+"key": "lk_sumimasen_t0",
+"who": "doshin",
+"text": "メロンパン、かいたいね"
+},
+{
+"key": "lk_sumimasen_t1",
+"who": "chu",
+"text": "おみせの ひと、おくに いるみたい"
+},
+{
+"key": "lk_sumimasen_r",
+"who": "chu",
+"text": "あ、きて くれたよ"
+},
+{
+"key": "lk_junban_t0",
+"who": "mii",
+"text": "あ、わたしも ブランコに のりたいな"
+},
+{
+"key": "lk_junban_t1",
+"who": "pyon",
+"text": "ブランコ、ひとつしか あいて ないね"
+},
+{
+"key": "lk_junban_r",
+"who": "mii",
+"text": "うん！ じゅう かぞえたら こうたいね"
+},
+{
+"key": "lk_omedetou_t0",
+"who": "pyon",
+"text": "きょうは ちゅうくんの たんじょうびなんだって！"
+},
+{
+"key": "lk_omedetou_t1",
+"who": "chu",
+"text": "えへへ、7さいに なったんだ"
+},
+{
+"key": "lk_omedetou_r",
+"who": "chu",
+"text": "ありがとう！ うれしいな"
+},
+{
+"key": "lk_odaiji_t0",
+"who": "mii",
+"text": "はっくしょん！ ……かぜ ひいちゃった"
+},
+{
+"key": "lk_odaiji_t1",
+"who": "doshin",
+"text": "みいちゃん、きょうは はやく かえるんだって"
+},
+{
+"key": "lk_odaiji_r",
+"who": "mii",
+"text": "ありがとう。はやく なおすわ"
+},
+{
+"key": "lk_ittekimasu_t0",
+"who": "pyon",
+"text": "ねえ、いまから こうえんに いこうよ！"
+},
+{
+"key": "lk_ittekimasu_t1",
+"who": "pyonmama",
+"text": "あら、ふたりで おでかけ？ くらく なる まえに かえってね"
+},
+{
+"key": "lk_ittekimasu_r",
+"who": "pyonmama",
+"text": "いってらっしゃい。きを つけてね"
+},
+{
+"key": "lk_ojama_t0",
+"who": "pyon",
+"text": "いらっしゃい！ はやく はいって！"
+},
+{
+"key": "lk_ojama_t1",
+"who": "pyonmama",
+"text": "あら、こんにちは。あがって ちょうだい"
+},
+{
+"key": "lk_ojama_r",
+"who": "pyonmama",
+"text": "どうぞ、ゆっくり して いってね"
+},
+{
+"key": "lk_shitsurei_t0",
+"who": "chu",
+"text": "せんせいに プリントを とどけに きたよ"
+},
+{
+"key": "lk_shitsurei_t1",
+"who": "nobbo",
+"text": "どうぞ、はいって いいですよ"
+},
+{
+"key": "lk_shitsurei_r",
+"who": "nobbo",
+"text": "はい、ありがとう"
+},
+{
+"key": "lk_iiyo_t0",
+"who": "gao",
+"text": "その ボール、かして くれる？"
+},
+{
+"key": "lk_iiyo_t1",
+"who": "doshin",
+"text": "がお、いっしょに あそびたいんだって"
+},
+{
+"key": "lk_iiyo_r",
+"who": "gao",
+"text": "やったー！ ありがとな"
+},
+{
+"key": "lk_michi_t0",
+"who": "chu",
+"text": "トイレは どこかな……"
+},
+{
+"key": "lk_michi_t1",
+"who": "pyon",
+"text": "ちゅうくん、こまってる みたい"
+},
+{
+"key": "lk_michi_r",
+"who": "chu",
+"text": "ありがとう！ たすかったよ"
+},
+{
+"key": "lk_atode_t0",
+"who": "mii",
+"text": "ねえ、いっしょに なわとび しない？"
+},
+{
+"key": "lk_atode_t1",
+"who": "pyon",
+"text": "いま、ほんを よんでる ところだよね"
+},
+{
+"key": "lk_atode_r",
+"who": "mii",
+"text": "わかった。まってるわね"
+},
+{
+"key": "lk_blk_res",
+"who": "nobbo",
+"text": "おっと、すみません。どうぞ"
+}
+]
