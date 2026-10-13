@@ -360,6 +360,51 @@
   },
   "st_ninjin_1": {
    "style": "close"
+  },
+  "lk_g_osoi_t1": {
+   "speed": 0.55
+  },
+  "lk_g_osoi_t2": {
+   "speed": 0.55
+  },
+  "lk_g_osoi_q": {
+   "speed": 0.55
+  },
+  "lk_g_osoi_r": {
+   "speed": 1.65
+  },
+  "lk_g_densha_t2": {
+   "speed": 0.7
+  },
+  "lk_y_y7_b": {
+   "speed": 0.7
+  },
+  "lk_y_y0_b": {
+   "speed": 1.15
+  },
+  "lk_y_y1_b": {
+   "speed": 1.15
+  },
+  "lk_y_y2_b": {
+   "speed": 1.15
+  },
+  "lk_y_y3_b": {
+   "speed": 1.15
+  },
+  "lk_y_y4_b": {
+   "speed": 1.15
+  },
+  "lk_y_y5_b": {
+   "speed": 1.15
+  },
+  "lk_y_y6_b": {
+   "speed": 1.15
+  },
+  "lk_y_y8_b": {
+   "speed": 1.15
+  },
+  "lk_y_y9_b": {
+   "speed": 1.15
   }
  }
 }

@@ -1,0 +1,462 @@
+[
+{
+"key": "lk_g_tsumami_t0",
+"who": "gaojii",
+"text": "いらっしゃい！ きょうの いちごは あまいぞ"
+},
+{
+"key": "lk_g_tsumami_t1",
+"who": "doshin",
+"text": "わあ、おいしそう……"
+},
+{
+"key": "lk_g_tsumami_t2",
+"who": "doshin",
+"text": "もぐもぐ……もぐもぐ……"
+},
+{
+"key": "lk_g_tsumami_q",
+"who": "doshin",
+"text": "ん？ どうしたの？ もぐもぐ"
+},
+{
+"key": "lk_g_tsumami_r",
+"who": "doshin",
+"text": "えへへ、ばれちゃった？ ごめんなさい"
+},
+{
+"key": "lk_g_tsumami_e0",
+"who": "gaojii",
+"text": "がっはっは！ ちゃんと かって くれれば いいぞ"
+},
+{
+"key": "lk_g_tsumami_e1",
+"who": "doshin",
+"text": "じゃあ、いちごを ください！"
+},
+{
+"key": "lk_g_kazoku_t0",
+"who": "chu",
+"text": "ぼくの かぞくを しょうかい するね！"
+},
+{
+"key": "lk_g_kazoku_t1",
+"who": "chu",
+"text": "おとうさん、おかあさん、おにいちゃん、おねえちゃん"
+},
+{
+"key": "lk_g_kazoku_t2",
+"who": "chu",
+"text": "おとうと、いもうと、いとこに、はとこに、また いとこ……"
+},
+{
+"key": "lk_g_kazoku_t3",
+"who": "chu",
+"text": "それから、それから……"
+},
+{
+"key": "lk_g_kazoku_q",
+"who": "chu",
+"text": "あれ？ どうしたの？"
+},
+{
+"key": "lk_g_kazoku_r",
+"who": "chu",
+"text": "えっとね……ひゃくにん くらい！"
+},
+{
+"key": "lk_g_kazoku_e0",
+"who": "chu",
+"text": "みんな、よろしくって いってるよ！"
+},
+{
+"key": "lk_g_osoi_t0",
+"who": "pyon",
+"text": "かめじい、こんにちは！"
+},
+{
+"key": "lk_g_osoi_t1",
+"who": "kamejii",
+"text": "こ……ん……に……ち……は……"
+},
+{
+"key": "lk_g_osoi_t2",
+"who": "kamejii",
+"text": "きょう……は……いい……てん……き……じゃ……のう……"
+},
+{
+"key": "lk_g_osoi_t3",
+"who": "pyon",
+"text": "ぐう……ぐう……"
+},
+{
+"key": "lk_g_osoi_q",
+"who": "kamejii",
+"text": "……な……ん……じゃ……な……？"
+},
+{
+"key": "lk_g_osoi_r",
+"who": "kamejii",
+"text": "ほっほ、では はやくちで いうぞ。きょうはいいてんきじゃのう！"
+},
+{
+"key": "lk_g_osoi_e0",
+"who": "pyon",
+"text": "はやっ！"
+},
+{
+"key": "lk_g_kakure_t0",
+"who": "mii",
+"text": "かくれんぼ しましょう！ いーち、にーい、さーん……"
+},
+{
+"key": "lk_g_kakure_t1",
+"who": "nobbo",
+"text": "よし、この きの うしろに かくれましょう"
+},
+{
+"key": "lk_g_kakure_t2",
+"who": "mii",
+"text": "もう いいかい？"
+},
+{
+"key": "lk_g_kakure_t3",
+"who": "nobbo",
+"text": "もう いいですよー"
+},
+{
+"key": "lk_g_kakure_q",
+"who": "nobbo",
+"text": "ふっふっふ。せんせいが どこに いるか、わかるかな？"
+},
+{
+"key": "lk_g_kakure_r",
+"who": "nobbo",
+"text": "なんと！ くびが でて いましたか。これは まいった"
+},
+{
+"key": "lk_g_kakure_e0",
+"who": "mii",
+"text": "せんせい、みーつけた！"
+},
+{
+"key": "lk_g_henshin_t0",
+"who": "kon",
+"text": "えっへん。わたしは あたらしい せんせいです"
+},
+{
+"key": "lk_g_henshin_t1",
+"who": "gao",
+"text": "へえ、あたらしい せんせいか……"
+},
+{
+"key": "lk_g_henshin_t2",
+"who": "kon",
+"text": "みなさん、きょうも おべんきょう しましょう"
+},
+{
+"key": "lk_g_henshin_q",
+"who": "kon",
+"text": "どうしましたか？ しつもんですか？"
+},
+{
+"key": "lk_g_henshin_r",
+"who": "kon",
+"text": "ぎくっ！ ばれちゃった！"
+},
+{
+"key": "lk_g_henshin_e0",
+"who": "gao",
+"text": "なんだ、こんか！"
+},
+{
+"key": "lk_g_megane_t0",
+"who": "meebaa",
+"text": "あらあら、めがねは どこかしら……"
+},
+{
+"key": "lk_g_megane_t1",
+"who": "chu",
+"text": "いっしょに さがそう！"
+},
+{
+"key": "lk_g_megane_t2",
+"who": "meebaa",
+"text": "おかしいわねえ。ここにも ないわ……"
+},
+{
+"key": "lk_g_megane_q",
+"who": "meebaa",
+"text": "ねえ、めがね、しらない？"
+},
+{
+"key": "lk_g_megane_r",
+"who": "meebaa",
+"text": "あら、ほんとう！ ずっと ここに あったのね"
+},
+{
+"key": "lk_g_megane_e0",
+"who": "chu",
+"text": "あはは、よかったね！"
+},
+{
+"key": "lk_g_jump_t0",
+"who": "gao",
+"text": "どっちが たかく とべるか、きょうそうだ！"
+},
+{
+"key": "lk_g_jump_t1",
+"who": "pyon",
+"text": "いくよー！ えいっ！"
+},
+{
+"key": "lk_g_jump_t2",
+"who": "pyon",
+"text": "やっほー！"
+},
+{
+"key": "lk_g_jump_q",
+"who": "pyon",
+"text": "ねえねえ、わたし、どうだった？"
+},
+{
+"key": "lk_g_jump_r",
+"who": "pyon",
+"text": "えへへ、ちょっと がんばりすぎちゃった"
+},
+{
+"key": "lk_g_jump_e0",
+"who": "gao",
+"text": "おれの まけだ……"
+},
+{
+"key": "lk_g_cheese_t0",
+"who": "chu",
+"text": "チーズ、ぜんぶ ください！"
+},
+{
+"key": "lk_g_cheese_t1",
+"who": "doshinpapa",
+"text": "ほ、ほんとうに ぜんぶかい？"
+},
+{
+"key": "lk_g_cheese_t2",
+"who": "chu",
+"text": "よいしょ、よいしょ……"
+},
+{
+"key": "lk_g_cheese_q",
+"who": "chu",
+"text": "た、たすけて……"
+},
+{
+"key": "lk_g_cheese_r",
+"who": "chu",
+"text": "うう……ひとつで いいです……"
+},
+{
+"key": "lk_g_cheese_e0",
+"who": "doshinpapa",
+"text": "はっはっは。まいど あり！"
+},
+{
+"key": "lk_g_mizu_t0",
+"who": "mii",
+"text": "おはなに みずを あげなきゃ"
+},
+{
+"key": "lk_g_mizu_t1",
+"who": "doshin",
+"text": "まかせて！ ぼくの はなで……それーっ！"
+},
+{
+"key": "lk_g_mizu_t2",
+"who": "mii",
+"text": "きゃーっ！"
+},
+{
+"key": "lk_g_mizu_q",
+"who": "doshin",
+"text": "どう？ おはな、げんきに なったかな？"
+},
+{
+"key": "lk_g_mizu_r",
+"who": "doshin",
+"text": "あわわ、ごめん！ ちからが つよすぎた！"
+},
+{
+"key": "lk_g_mizu_e0",
+"who": "mii",
+"text": "もう……でも、ちょっと すずしいわ"
+},
+{
+"key": "lk_g_densha_t0",
+"who": "chu",
+"text": "かめじい、でんしゃが きたよ！"
+},
+{
+"key": "lk_g_densha_t1",
+"who": "kamejii",
+"text": "よし、いそいで のるぞ！ それっ！"
+},
+{
+"key": "lk_g_densha_t2",
+"who": "kamejii",
+"text": "よいしょ……よいしょ……"
+},
+{
+"key": "lk_g_densha_q",
+"who": "kamejii",
+"text": "ふう……まにあった かのう？"
+},
+{
+"key": "lk_g_densha_r",
+"who": "kamejii",
+"text": "なんと！ ……まあ、つぎの でんしゃを まつかのう"
+},
+{
+"key": "lk_g_densha_e0",
+"who": "chu",
+"text": "つぎは もっと はやく いこうね"
+},
+{
+"key": "lk_y_y0_b",
+"who": "gao",
+"text": "なまむぎ、なまごめ、なまたまも……もごっ。かんだー！"
+},
+{
+"key": "lk_y_y1_b",
+"who": "mii",
+"text": "あかまきがみ、あおまきまみ、きままき……あれ？ もう いやー！"
+},
+{
+"key": "lk_y_y2_b",
+"who": "chu",
+"text": "すもももももも、ももも……もももも？ わからなく なっちゃった！"
+},
+{
+"key": "lk_y_y3_b",
+"who": "pyon",
+"text": "かえる ぴょこぴょこ、みぴょこ……ぴょこ？ わたしも ぴょこぴょこ！"
+},
+{
+"key": "lk_y_y4_b",
+"who": "gao",
+"text": "あぶりカルビ、あぶりカルブ、あぶりかるぶ……はらへったー！"
+},
+{
+"key": "lk_y_y5_b",
+"who": "doshin",
+"text": "となりの かきは、よく きゃく くう……かきだ？ あれれ？"
+},
+{
+"key": "lk_y_y6_b",
+"who": "gao",
+"text": "にわには にわにわ、にわにわ……にわとりだらけだー！"
+},
+{
+"key": "lk_y_y7_b",
+"who": "kamejii",
+"text": "ぼうずが……びょうぶに……じょうずに……ぐう……ぐう……"
+},
+{
+"key": "lk_y_y8_b",
+"who": "mii",
+"text": "とうきょう とっきょ きょきゃきょきゅ……きゃー、かんじゃった！"
+},
+{
+"key": "lk_y_y9_b",
+"who": "doshin",
+"text": "この くぎは、ひきにくにく……にく？ おなか すいちゃった"
+},
+{
+"key": "lk_s_no_pyon",
+"who": "pyon",
+"text": "ちがうよ〜！"
+},
+{
+"key": "lk_s_found_pyon",
+"who": "pyon",
+"text": "みつかっちゃった！"
+},
+{
+"key": "lk_s_no_mii",
+"who": "mii",
+"text": "ざんねん、わたしじゃ ないわ"
+},
+{
+"key": "lk_s_found_mii",
+"who": "mii",
+"text": "あら、みつかっちゃった"
+},
+{
+"key": "lk_s_no_chu",
+"who": "chu",
+"text": "ぼくじゃ ないよ〜"
+},
+{
+"key": "lk_s_found_chu",
+"who": "chu",
+"text": "みつかっちゃった〜！"
+},
+{
+"key": "lk_s_no_gao",
+"who": "gao",
+"text": "おれじゃ ねえよ！"
+},
+{
+"key": "lk_s_found_gao",
+"who": "gao",
+"text": "ちぇっ、みつかったか"
+},
+{
+"key": "lk_s_no_doshin",
+"who": "doshin",
+"text": "ちがうよ〜"
+},
+{
+"key": "lk_s_found_doshin",
+"who": "doshin",
+"text": "みつかっちゃった！"
+},
+{
+"key": "lk_s_no_kamejii",
+"who": "kamejii",
+"text": "わしでは ないぞ"
+},
+{
+"key": "lk_s_found_kamejii",
+"who": "kamejii",
+"text": "ほっほ、みつかったのう"
+},
+{
+"key": "lk_s_no_nobbo",
+"who": "nobbo",
+"text": "わたしでは ありませんよ"
+},
+{
+"key": "lk_s_found_nobbo",
+"who": "nobbo",
+"text": "おや、みつかりましたね"
+},
+{
+"key": "lk_s_no_meebaa",
+"who": "meebaa",
+"text": "あらあら、ちがうわよ"
+},
+{
+"key": "lk_s_found_meebaa",
+"who": "meebaa",
+"text": "あらまあ、みつかったわ"
+},
+{
+"key": "lk_s_no_kon",
+"who": "kon",
+"text": "ざんねーん！"
+},
+{
+"key": "lk_s_found_kon",
+"who": "kon",
+"text": "あちゃー、みつかった！"
+}
+]
