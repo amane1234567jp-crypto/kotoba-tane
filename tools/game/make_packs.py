@@ -31,5 +31,13 @@ for st in ["kousha", "undou", "kouen", "omise", "densha", "gakkou2"]:
             else: missing.append(k)
     (OUT / f"{st}.json").write_text(json.dumps(pack, separators=(",", ":")))
     print(st, len(pack), round((OUT / f"{st}.json").stat().st_size / 1e6, 2), "MB")
+# だいぼうけん（ロングコース）：lk_*（かけあい＝Aivis／ぽにー＝VOICEVOX）。ぽにーの リストは sit/pony_long.json、かけあいは aivis/jobs/long
+lk = [p[0] for p in json.loads((G / "sit/pony_long.json").read_text())] + [l["key"] for l in json.loads((R / "tools/aivis/jobs/long/lines.json").read_text())]
+pack = {}
+for k in lk:
+    p = A / f"{k}.mp3"
+    if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
+    else: missing.append(k)
+(OUT / "long.json").write_text(json.dumps(pack, separators=(",", ":"))); print("long", len(pack), round((OUT / "long.json").stat().st_size / 1e6, 2), "MB")
 print("missing", len(missing), missing[:20])
 if missing and "--strict" in sys.argv: sys.exit(1)
