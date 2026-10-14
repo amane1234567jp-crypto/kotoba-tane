@@ -18,13 +18,16 @@
     labels: [["がっこう", 330, 990], ["こうえん", 1300, 680], ["おみせ", 330, 510], ["えき", 1420, 345], ["やま", 1150, 505]] }; }
 STAGE_DEF.long = { ground: "#BFE3A6", sky: "#CFEAFB", names: STAGE_DEF.undou.names, fills: { がっこう: "#FFE3B3", こうえん: "#D7F0D2", おみせ: "#FFE0EE", えき: "#D7ECFF", やま: "#E9D9C3", げんかん: "#FFF1C9", げたばこ: "#FFF1C9", ろうか: "#FFF1C9", ほけんしつ: "#FFF1C9", としょしつ: "#FFF1C9", かいだん: "#FFF1C9", しょくいんしつ: "#FFF1C9" } };
 RIVAL_OF.long = "gao"; SLEEPER_OF.long = "nobbo";
+// ロングコースは ほかにも ある（ltomo＝ともだちの だいぼうけん）。共通の しくみは isLong() で きりかえる
+const LONGS = new Set(["long"]); const isLong = () => LONGS.has(curStage);
 BLOCK_DEF.long = { who: "nobbo", sleep: false, intro: ["lk_blk_intro", "のっぽせんせいが まえを ふさいでる！"], say: ["lk_blk_say", "せんせい、とおして ください"], to: "せんせいに いおう",
   keys: [["せんせい", "先生"], ["とおして", "通して", "とうして"], ["ください", "下さい"]], res: ["lk_blk_res", "おっと、すみません。どうぞ"] };
 PIECE_S.nobbo = .2;
 /* マスの 課題（色と しるし） */
 const LTASK = { kaiwa: ["#FFB98A", "💬"], hantai: ["#B9E3FF", "↔"], joshi: ["#C9EBB5", "🧩"], machi: ["#FFE27A", "🔍"], teinei: ["#E2D4FF", "🎩"], scene: ["#FFFFFF", "🗣"] };
-const LONG_TASK = {};
+const LONG_TASKS = { long: {} }; const LONG_TASK = LONG_TASKS.long;
 const LEGEND_L = [["kaiwa", "かいわ"], ["hantai", "はんたい"], ["joshi", "パズル"], ["machi", "まちがい"], ["teinei", "ていねい"], ["scene", "いってみよう"]];
+const LEGENDS = { long: LEGEND_L };
 { const order = ["kaiwa", "scene", "hantai", "kaiwa", "joshi", "machi", "kaiwa", "teinei", "scene", "kaiwa", "hantai", "joshi", "kaiwa", "machi", "teinei"]; let i = 0;
   Object.keys(BOARD.long.nodes).forEach(id => { if (["0", "4", "15"].includes(id)) return; LONG_TASK[id] = order[i++ % order.length]; }); }
 /* しかけ（とまると おきる） */
@@ -55,8 +58,8 @@ async function warpTo(pc, id) { const [x, y] = nodeXY(pc, id); for (let i = 0; i
   noise(.5, 1800, .3); blip(300, 1400, .5, "sine"); await tween(350, k => { pc.s = pc.s0 * (1 - k); }); pc.node = id; pc.px = x; pc.py = y; pc.trail = []; await tween(350, k => { pc.s = pc.s0 * k; }); pc.s = pc.s0; }
 const boardEventL = boardEvent;
 boardEvent = async function (pc) {
-  if (curStage !== "long") return boardEventL(pc);
-  const ev = EVENTS.long[pc.node]; if (!ev) return;
+  if (!isLong()) return boardEventL(pc);
+  const ev = EVENTS[curStage][pc.node]; if (!ev) return;
   const [type, arg, key, text] = ev;
   if (["fwd", "back", "home"].includes(type)) return boardEventL(pc);
   await sleep(300); markAbove(pc, "ex"); chime(); showBanner(text.split("！")[0] + "！", 1400); await speak(C.pony, key, text);
@@ -76,15 +79,15 @@ boardEvent = async function (pc) {
 /* ばん：ひとやすみ・もういっかい */
 const multiTurnL = multiTurn;
 multiTurn = async function (pl, first) {
-  if (curStage === "long" && pl.rest) { pl.rest = 0; setTurn(pl.kind, pl.idx); markAbove(pl.pc, "z", { i: 2 }); await speak(C.pony, "lk_rest_now", "ひとやすみ ちゅう だから、つぎの ひとの ばんだよ"); return; }
+  if (isLong() && pl.rest) { pl.rest = 0; setTurn(pl.kind, pl.idx); markAbove(pl.pc, "z", { i: 2 }); await speak(C.pony, "lk_rest_now", "ひとやすみ ちゅう だから、つぎの ひとの ばんだよ"); return; }
   await multiTurnL(pl, first);
-  if (curStage === "long" && pl.again && !winner) { pl.again = 0; await speak(C.pony, "lk_again_now", "もう いっかい ふってね"); await multiTurnL(pl, false); }
+  if (isLong() && pl.again && !winner) { pl.again = 0; await speak(C.pony, "lk_again_now", "もう いっかい ふってね"); await multiTurnL(pl, false); }
 };
 /* マスに とまったら：課題 */
 const landChildL = landChild;
 landChild = async function (pc = P.shima) {
-  if (curStage !== "long") return landChildL(pc);
-  if (winner) return; const t = LONG_TASK[pc.node]; if (!t) return;
+  if (!isLong()) return landChildL(pc);
+  if (winner) return; const t = LONG_TASKS[curStage][pc.node]; if (!t) return;
   if (t === "scene") return landChildL(pc);
   const dice = document.getElementById("dice"); if (dice) dice.style.visibility = "hidden";
   let ok = false; try { ok = await LTASK_RUN[t](pc); } finally { if (dice) dice.style.visibility = ""; } if (ok) GS.ok++; if (ok && pc.player) pc.player.ok++;
@@ -102,7 +105,8 @@ loadPack = async function (id) {
 
 /* ---------- 課題の 画面（カード） ---------- */
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = rnd(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const usedL = {}; function pickL(kind, ok = () => true) { const all = LONG[kind].filter(ok); usedL[kind] = usedL[kind] || new Set(); let pool = all.filter(x => !usedL[kind].has(x.id)); if (!pool.length) { usedL[kind].clear(); pool = all; } const x = pool[rnd(pool.length)]; usedL[kind].add(x.id); return x; }
+const LDATA = { long: LONG }; // ステージごとの 課題の データ
+const usedL = {}; function pickL(kind, ok = () => true) { const all = (LDATA[curStage] || LONG)[kind].filter(ok); const u = usedL[curStage + kind] = usedL[curStage + kind] || new Set(); let pool = all.filter(x => !u.has(x.id)); if (!pool.length) { u.clear(); pool = all; } const x = pool[rnd(pool.length)]; u.add(x.id); return x; }
 function panel(title, color = "#FFFFFF") { const g = el("g", {}, hudLayer); el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#2B2A3388" }, g);
   el("rect", { x: 70, y: 60, width: 1460, height: 880, rx: 40, fill: color, ...S6(8) }, g); const t = el("g", {}, g); const tw = title.length * 40 + 80;
   el("rect", { x: 800 - tw / 2, y: 30, width: tw, height: 70, rx: 35, fill: "#FFD25E", ...S6(6) }, t); txt(t, 800, 80, title, 40, { "text-anchor": "middle" }); return g; }
@@ -252,12 +256,12 @@ BOARD_BG.long = function (L) {
 };
 const drawBoardLL = drawBoard;
 drawBoard = function () {
-  drawBoardLL(); if (curStage !== "long") return;
-  Object.entries(LONG_TASK).forEach(([id, t]) => { const [x, y] = NODES[id]; const [c, ic] = LTASK[t]; el("circle", { cx: x, cy: y, r: 34, fill: c, ...S6(4) }, boardLayer); txt(boardLayer, x, y + 13, ic, 34, { "text-anchor": "middle" }); });
-  Object.entries(EVENTS.long).forEach(([id, [type]]) => { const [x, y] = NODES[id]; el("circle", { cx: x, cy: y, r: 36, fill: type === "warp" ? "#D9C2F0" : "#FFF1C9", ...S6(4) }, boardLayer); txt(boardLayer, x, y + 14, EV_ICON[type], 38, { "text-anchor": "middle" }); });
+  drawBoardLL(); if (!isLong()) return;
+  Object.entries(LONG_TASKS[curStage]).forEach(([id, t]) => { const [x, y] = NODES[id]; const [c, ic] = LTASK[t]; el("circle", { cx: x, cy: y, r: 34, fill: c, ...S6(4) }, boardLayer); txt(boardLayer, x, y + 13, ic, 34, { "text-anchor": "middle" }); });
+  Object.entries(EVENTS[curStage]).forEach(([id, [type]]) => { const [x, y] = NODES[id]; el("circle", { cx: x, cy: y, r: 36, fill: type === "warp" ? "#D9C2F0" : "#FFF1C9", ...S6(4) }, boardLayer); txt(boardLayer, x, y + 14, EV_ICON[type], 38, { "text-anchor": "middle" }); });
   // しるしの せつめい
-  const lg = el("g", {}, boardLayer), W = 1130 / LEGEND_L.length; el("rect", { x: 140, y: 118, width: 1180, height: 64, rx: 32, fill: "#FFFFFFDD", ...S6(4) }, lg);
-  LEGEND_L.forEach(([k, t], i) => { const x = 172 + i * W; el("circle", { cx: x, cy: 150, r: 18, fill: LTASK[k][0], ...S6(3) }, lg); txt(lg, x, 158, LTASK[k][1], 20, { "text-anchor": "middle" }); txt(lg, x + 24, 159, t, Math.min(24, (W - 34) / t.length)); });
+  const LG = LEGENDS[curStage], lg = el("g", {}, boardLayer), W = 1130 / LG.length; el("rect", { x: 140, y: 118, width: 1180, height: 64, rx: 32, fill: "#FFFFFFDD", ...S6(4) }, lg);
+  LG.forEach(([k, t], i) => { const x = 172 + i * W; el("circle", { cx: x, cy: 150, r: 18, fill: LTASK[k][0], ...S6(3) }, lg); txt(lg, x, 158, LTASK[k][1], 20, { "text-anchor": "middle" }); txt(lg, x + 24, 159, t, Math.min(24, (W - 34) / t.length)); });
 };
 // 「だいぼうけん」は みんなで あそぶ ときだけ（メニューに ボタン）
 const showMultiMenuL = showMultiMenu;

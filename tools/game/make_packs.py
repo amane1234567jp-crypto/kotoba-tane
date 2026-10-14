@@ -41,5 +41,14 @@ for k in lk:
     else: missing.append(k)
 pack["bgm_long"] = base64.b64encode((A / "bgm_long.mp3").read_bytes()).decode()
 (OUT / "long.json").write_text(json.dumps(pack, separators=(",", ":"))); print("long", len(pack), round((OUT / "long.json").stat().st_size / 1e6, 2), "MB")
+# ともだちの だいぼうけん（ltomo）：場面（sq/sr/sa）＋ 課題（lk_f*/lk_n*/lk_y*）＋ lt_*＋ だいぼうけんと 共通の 声
+pack = {}
+lt = [l["key"] for l in json.loads((R / "tools/aivis/jobs/st10/lines.json").read_text())] + [p[0] for p in json.loads((G / "sit/pony_ltomo.json").read_text())]
+lt += ["lk_ask", "lk_seikai", "lk_tap", "lk_plus1", "lk_minus1", "lk_rest_now", "lk_again_now", "lk_ev_swap_none", "lk_ev_call_none", "bgm_ltomo"]
+for k in dict.fromkeys(lt):
+    p = A / f"{k}.mp3"
+    if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
+    else: missing.append(k)
+(OUT / "ltomo.json").write_text(json.dumps(pack, separators=(",", ":"))); print("ltomo", len(pack), round((OUT / "ltomo.json").stat().st_size / 1e6, 2), "MB")
 print("missing", len(missing), missing[:20])
 if missing and "--strict" in sys.argv: sys.exit(1)

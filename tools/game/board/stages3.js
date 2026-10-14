@@ -320,12 +320,12 @@ EV_STYLE.rest = ["#B9E3FF", () => "やすみ"];
 /* 1かい やすみ（きゅうきゅうしゃ）：ひとりでも みんなでも */
 { const be = boardEvent; boardEvent = async function (pc) {
     const ev = (EVENTS[curStage] || {})[pc.node];
-    if (curStage === "long" || !ev || ev[0] !== "rest") return be(pc);
+    if (isLong() || !ev || ev[0] !== "rest") return be(pc);
     await sleep(300); markAbove(pc, "ex"); siren(); showBanner("きゅうきゅうしゃ！", 1400); await speak(C.pony, ev[2], ev[3]);
     if (pc.player) pc.player.rest = 1; else pc.rest = 1; markAbove(pc, "z"); await sleep(300); }; }
 { const ct = childTurn; childTurn = async function (first) { if (P.shima.rest) { P.shima.rest = 0; setTurn("child"); markAbove(P.shima, "z"); await speak(C.pony, "ev_rest_now", "びょういんで ひとやすみ。つぎの ばんまで まってね"); return; } return ct(first); }; }
 { const gt = gaoTurn; gaoTurn = async function () { if (P.gao.rest) { P.gao.rest = 0; setTurn("gao"); markAbove(P.gao, "z"); await speak(C.pony, "ev_rest_now", "びょういんで ひとやすみ。つぎの ばんまで まってね"); return; } return gt(); }; }
-{ const mt = multiTurn; multiTurn = async function (pl, first) { if (curStage !== "long" && pl.rest) { pl.rest = 0; setTurn(pl.kind, pl.idx); markAbove(pl.pc, "z"); await speak(C.pony, "ev_rest_now", "びょういんで ひとやすみ。つぎの ばんまで まってね"); return; } return mt(pl, first); }; }
+{ const mt = multiTurn; multiTurn = async function (pl, first) { if (!isLong() && pl.rest) { pl.rest = 0; setTurn(pl.kind, pl.idx); markAbove(pl.pc, "z"); await speak(C.pony, "ev_rest_now", "びょういんで ひとやすみ。つぎの ばんまで まってね"); return; } return mt(pl, first); }; }
 { const as = applyStage; applyStage = function (id) { as(id); [P.shima, P.gao].forEach(p => p && (p.rest = 0)); }; }
 
 /* ================= ステージ2〜5の 見直し（ピンチの ときの ことば） ================= */
