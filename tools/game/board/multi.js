@@ -30,7 +30,7 @@ async function runMulti() {
   await sleep(500); await endingMulti();
 }
 async function multiTurn(pl, first) {
-  setTurn(pl.kind, pl.idx); Object.assign(E, pl.E); showEngine(null, `${NAMES[pl.kind]}の ばん`);
+  CUR_PL = pl; setTurn(pl.kind, pl.idx); Object.assign(E, pl.E); showEngine(null, `${NAMES[pl.kind]}の ばん`);
   markAbove(pl.pc, "ex"); jump(pl.pc, .6); await sleep(300);
   await speak(C.pony, `p_turn_${pl.kind}`, `${NAMES[pl.kind]}の ばんだよ`);
   if (first) await speak(C.pony, "roll", "サイコロを ふってね");
@@ -67,13 +67,14 @@ async function endingMulti() {
   const card = el("g", {}, hudLayer);
   const rows = PLAYERS.slice().sort((a, b) => (b.pc === w) - (a.pc === w) || b.ok - a.ok);
   el("rect", { x: 560, y: 110, width: 980, height: 90 + rows.length * 66, rx: 34, fill: "#FFFFFF", ...S6(8), opacity: .95 }, card);
-  rows.forEach((p, i) => { const t = txt(card, 610, 180 + i * 66, `${p.pc === w ? "👑 " : ""}${NAMES[p.kind]}　いえた ${p.ok}こ　レベル ${p.E.L}`, 42, { stroke: "#FFFFFF", "stroke-width": 8, "paint-order": "stroke" }); t.setAttribute("opacity", 0); later(i * 250, () => { t.setAttribute("opacity", 1); blip(700 + i * 90, 900, .1, "square"); }); });
+  rows.forEach((p, i) => { const t = txt(card, 610, 180 + i * 66, `${p.pc === w ? "👑 " : ""}${NAMES[p.kind]}　たね ${p.ok}こ`, 42, { stroke: "#FFFFFF", "stroke-width": 8, "paint-order": "stroke" }); t.setAttribute("opacity", 0); later(i * 250, () => { t.setAttribute("opacity", 1); blip(700 + i * 90, 900, .1, "square"); }); });
   playLog({ type: "goal", winner: NAMES[wk], multi: PLAYERS.length, stage: curStage });
-  await sleep(600 + rows.length * 250);
+  await sleep(1800 + rows.length * 250);
+  card.remove(); await forestScene(PLAYERS.reduce((a, p) => a + p.ok, 0), PLAYERS.map(p => p.kind));
   const again = document.createElement("button"); again.type = "button"; again.className = "again"; again.textContent = "もういっかい";
-  again.style.left = "30%"; again.style.top = "74%"; stage.appendChild(again);
+  again.style.left = "40%"; again.style.top = "38%"; stage.appendChild(again);
   const toMenu = document.createElement("button"); toMenu.type = "button"; toMenu.className = "again menuBtn"; toMenu.textContent = "メニュー";
-  toMenu.style.left = "70%"; toMenu.style.top = "74%"; stage.appendChild(toMenu);
+  toMenu.style.left = "70%"; toMenu.style.top = "38%"; stage.appendChild(toMenu);
   const n = PLAYERS.length, st = curStage;
   again.onclick = () => { again.remove(); toMenu.remove(); card.remove(); endMultiState(); newGame({ stage: st, multi: n }); };
   toMenu.onclick = () => { again.remove(); toMenu.remove(); card.remove(); endMultiState(); applyStage(curStage); setView("board"); showMenu(); };

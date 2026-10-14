@@ -168,7 +168,15 @@ function drawBoard() {
 const hud = el("g", {}, hudLayer);
 hudLayer.insertBefore(hud, bub);
 function pill(g, x, y, w, h, fill) { return el("rect", { x, y, width: w, height: h, rx: h / 2, fill, ...S6(5) }, g); }
-const lvG = el("g", {}, hud); pill(lvG, 320, 34, 230, 76, "#FFFFFF"); const lvT = txt(lvG, 435, 86, "レベル 1", 36, { "text-anchor": "middle" });
+/* たね（言えたら 1つ もらえる）。ゴールで まいて もりを そだてる */
+function seedIcon(g, x, y, s = 1) { const k = el("g", { transform: `translate(${x} ${y}) scale(${s})` }, g);
+  el("path", { d: "M0 -14 C-16 -40 -38 -40 -42 -28 C-28 -16 -12 -16 0 -14 Z", fill: "#7CC36A", ...S6(5) }, k);
+  el("path", { d: "M0 -14 C14 -46 40 -50 44 -36 C30 -18 14 -16 0 -14 Z", fill: "#9FD68A", ...S6(5) }, k);
+  el("path", { d: "M0 -14 V-2", ...S6(6) }, k);
+  el("ellipse", { cx: 0, cy: 12, rx: 30, ry: 20, fill: "#C98A4B", ...S6(5) }, k); el("ellipse", { cx: -10, cy: 6, rx: 8, ry: 5, fill: "#E9B872" }, k);
+  el("circle", { cx: -9, cy: 14, r: 3, fill: INK }, k); el("circle", { cx: 9, cy: 14, r: 3, fill: INK }, k);
+  el("path", { d: "M-5 20 Q0 24 5 20", fill: "none", ...S6(3) }, k); return k; }
+const lvG = el("g", {}, hud); pill(lvG, 320, 34, 230, 76, "#FFFFFF"); seedIcon(lvG, 375, 72, .78); const lvT = txt(lvG, 470, 86, "× 0", 38, { "text-anchor": "middle" });
 const stG = el("g", { style: "display:none" }, hud); pill(stG, 570, 34, 210, 76, "#FFFFFF"); chest(stG, 630, 80, .75, true); const stT = txt(stG, 720, 86, "× 0", 34, { "text-anchor": "middle" });
 const turnG = el("g", {}, hud); const turnR = pill(turnG, 600, 34, 330, 76, "#FFD25E"); const turnT = txt(turnG, 765, 86, "", 36, { "text-anchor": "middle" });
 const TURN_COL = ["#FFD25E", "#FFC2D1", "#B9E3FF", "#C9EBB5", "#FFB98A", "#E2D4FF"];
@@ -457,7 +465,7 @@ const E = { L: 1, h: 1, streak: 0 };
 const used = new Set();
 function showEngine(sc, note = "") {
   engEl.textContent = `むずかしさ: レベル ${E.L}／ヒント段階 ${E.h}（いつも お手本あり）／連続あがり ${E.streak}` + (sc ? `／いまの場面 No.${sc.no}「${sc.main}」` : "") + (note ? `／${note}` : "");
-  lvT.textContent = `レベル ${E.L}`;
+  lvT.textContent = `× ${seedNow()}`;
 }
 function grade(firstOk) { // お手本はいつも全部聞かせる。1回目で言えたらレベルが1つ上がり、言えなかったら1つ下がる
   const before = E.L; E.h = 1;
@@ -502,7 +510,7 @@ async function runScene(place) {
   } else {
     await speak(C.pony, "p_together", "いっしょに いおうね"); await speak(C.pony, `k${pad(sc.no)}_main`, sc.main); playMove(C.shima, "nod");
   }
-  if (up > 0) { tune([[N.C5, .5], [N.E5, .5], [N.G5, .5], [N.C6, 1.5]], 220); later(100, () => showBanner("レベル アップ！")); await speak(C.pony, "p_levelup", "レベル アップ！"); await sleep(900); }
+  if (ok) await seedGet(C.shima);
   showEngine(null, ok ? (a === 0 ? "1回目で言えた" : `${a + 1}回目で言えた`) : "3回とも言えなかった");
   await sleep(700); setView("board");
   return ok;
@@ -633,7 +641,9 @@ async function gaoTurn() {
   if (kindOf(P.gao.node) === "normal") await gaoSit(before);
 }
 /* ---------- ゴールの演出（ドパッと派手に） ---------- */
-const GS = { ok: 0, tasks: 0, startL: 1 };
+const GS = { tasks: 0, startL: 1, _ok: 0, pend: 0, get ok() { return this._ok; }, set ok(v) { if (v > this._ok) this.pend += v - this._ok; else this.pend = 0; this._ok = v; } };
+let CUR_PL = null;
+function seedNow() { const n = MODE === "multi" ? (CUR_PL ? CUR_PL.ok : 0) : GS.ok; return Math.max(0, n - GS.pend); }
 const fxTicks = [];
 const addTick = f => fxTicks.push(f);
 function stepFx(dt) { for (let i = fxTicks.length - 1; i >= 0; i--) if (fxTicks[i](dt) === false) fxTicks.splice(i, 1); }
@@ -747,12 +757,11 @@ async function ending() {
   crownOn(childWon ? C.shima : C[RIVAL]); later(200, () => blip(600, 1800, .3, "triangle"));
   const md = medal(330, 300, childWon, childWon ? "1い！" : "よく がんばった！"); fanfare();
   await sleep(1300);
-  // 4) 数がどんどん増える（できた数・シール・レベル）
+  // 4) もらった たねの 数が どんどん 増える
   const card = el("g", {}, hudLayer);
-  el("rect", { x: 620, y: 120, width: 900, height: 260, rx: 34, fill: "#FFFFFF", ...S6(8), opacity: .95 }, card);
-  await countLine(card, 670, 210, "まねっこ できた", GS.ok, "こ");
-  const lvT2 = await countLine(card, 670, 320, "レベル", E.L, "", GS.startL);
-  if (E.L > GS.startL) { const up = el("text", { x: 1150, y: 320, "font-family": FONT, "font-size": 44, fill: "#E8735A", stroke: "#FFFFFF", "stroke-width": 8, "paint-order": "stroke" }, card); up.textContent = `${E.L - GS.startL}つ アップ！`; boom(.4); tween(300, k => up.setAttribute("opacity", k)); }
+  el("rect", { x: 620, y: 120, width: 900, height: 160, rx: 34, fill: "#FFFFFF", ...S6(8), opacity: .95 }, card);
+  seedIcon(card, 700, 205, 1.1);
+  await countLine(card, 770, 222, "たね", GS.ok, "こ ゲット！");
   firework(1450, 200, 1); later(500, () => firework(1150, 160, 3));
   await sleep(900);
   await rivalSay(C[RIVAL], "good");
@@ -761,7 +770,9 @@ async function ending() {
   const lapUp = childWon ? markClear() : false;
   if (childWon) { await speak(C.pony, "p_clear", "ステージ クリア！"); }
   if (lapUp) { const t = slam(`${SAVE.lap}しゅうめへ！`, 520, 150, "#FF9E7A"); fanfare(); await speak(C.pony, "p_lap2", "にしゅうめの はじまりだよ！ こんどは もっと むずかしいよ"); await sleep(600); t.remove(); }
-  // 5) もういっかい
+  // 5) たねを まいて、もりを そだてる
+  md.remove(); card.remove(); await forestScene(GS.ok, ["shima"]);
+  // 6) もういっかい
   const again = document.createElement("button"); again.type = "button"; again.className = "again"; again.textContent = "もういっかい";
   again.style.left = "70%"; again.style.top = "50%"; stage.appendChild(again);
   again.animate && again.animate([{ transform: "translateX(-50%) scale(1)" }, { transform: "translateX(-50%) scale(1.08)" }, { transform: "translateX(-50%) scale(1)" }], { duration: 900, iterations: Infinity });

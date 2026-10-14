@@ -246,7 +246,7 @@ async function runSit(place, heroKind = "shima") {
   hideTask();
   await resolve(s, h, a, ok);
   if (ok) { joy(C.pony); await speak(C.pony, "p_great", "すごい！ いえたね！"); }
-  if (up > 0) { tune([[N.C5, .5], [N.E5, .5], [N.G5, .5], [N.C6, 1.5]], 220); later(100, () => showBanner("レベル アップ！")); await speak(C.pony, "p_levelup", "レベル アップ！"); await sleep(900); }
+  if (ok) await seedGet(h);
   showEngine(null, ok ? (n === 0 ? "1回目で言えた" : `${n + 1}回目で言えた`) : "3回とも言えなかった");
   await sleep(600); setView("board");
   return ok;

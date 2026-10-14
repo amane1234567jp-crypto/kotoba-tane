@@ -87,7 +87,7 @@ landChild = async function (pc = P.shima) {
   if (winner) return; const t = LONG_TASK[pc.node]; if (!t) return;
   if (t === "scene") return landChildL(pc);
   const dice = document.getElementById("dice"); if (dice) dice.style.visibility = "hidden";
-  let ok = false; try { ok = await LTASK_RUN[t](pc); } finally { if (dice) dice.style.visibility = ""; } if (ok && pc.player) pc.player.ok++;
+  let ok = false; try { ok = await LTASK_RUN[t](pc); } finally { if (dice) dice.style.visibility = ""; } if (ok) GS.ok++; if (ok && pc.player) pc.player.ok++;
 };
 // 読み上げ場面は こうしゃ の場面を つかう
 const pickSitL = pickSit;
