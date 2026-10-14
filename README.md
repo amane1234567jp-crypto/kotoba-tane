@@ -21,3 +21,4 @@
 - Lux（Lami）
 - kokuren_voice（kokuren）
 - yukyu（yukyu）
+- にせ（MAHOPROGRAM）

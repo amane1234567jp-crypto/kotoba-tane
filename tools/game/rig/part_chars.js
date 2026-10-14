@@ -345,6 +345,12 @@ const BUILD = {
     const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M134 296 Q200 280 266 296 L272 384 Q200 400 128 384 Z", fill: "#7FA7D9", ...ST(5) }, bd); el("path", { d: "M184 290 L200 318 L216 290", fill: "none", ...ST(4) }, bd);
     el("path", { d: "M112 112 Q200 40 288 112 L288 124 L112 124 Z", fill: "#5BA34D", ...ST(6) }, p.head.g); el("path", { d: "M200 124 Q260 120 314 136 L310 146 Q256 134 196 136 Z", fill: "#4A8A3E", ...ST(5) }, p.head.g);
     p.tempo = .95; return p; },
+  onii(root) { // まるシマの おにいちゃん（おうち1）：あおい シャツ・めがね。すこし せが たかい
+    const p = BUILD.shima(root);
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M138 290 Q200 274 262 290 L270 384 Q200 400 130 384 Z", fill: "#5B8DEF", ...ST(5) }, bd); el("path", { d: "M180 292 Q200 310 220 292", fill: "none", ...ST(4) }, bd);
+    const gl = el("g", {}, p.head.g); const [a, b] = p.eyes;
+    [a, b].forEach(e => el("rect", { x: e.cx - 30, y: e.cy - 24, width: 60, height: 48, rx: 14, fill: "#FFFFFF33", ...ST(6) }, gl)); el("path", { d: `M${a.cx + 30} ${a.cy - 4} Q${(a.cx + b.cx) / 2} ${a.cy - 16} ${b.cx - 30} ${b.cy - 4}`, fill: "none", ...ST(5) }, gl);
+    p.tempo = .95; return p; },
   tora(root) { // とらの とらお（ステージの 場面で ライバルの かわりに 出る）：オレンジに くろい しま
     const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); const tip = p.tail.g.lastChild; tip.removeAttribute("display"); tip.setAttribute("fill", "#F7A23B");
     recolor(root, { "#FFC94D": "#F7A23B" }); const K = { fill: "none", stroke: INK, "stroke-width": 9, "stroke-linecap": "round" };
@@ -366,7 +372,7 @@ const BUILD = {
 };
 
 const NAMES = { pony: "ぽにー", shima: "まるシマ", doshin: "どしん", nobbo: "のっぽ", gao: "がお", chu: "ちゅう", pyon: "ぴょん", mii: "みい", kamejii: "かめじい", meebaa: "めえばあ",
-  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", kon: "こん", mama: "ママ", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くまた" };
+  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", kon: "こん", mama: "ママ", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くまた", onii: "おにいちゃん" };
 const LINES = { pony: "きょねん、うみに いったね", shima: "やったー！ いえたね！", doshin: "どいて、あげるよ", nobbo: "それは、ずかんに のって いますよ", gao: "つぎは、まけないぞ",
   chu: "こ、こわかったよう", pyon: "いっしょに あそぼう！", mii: "ふーん。まあまあ じゃない", kamejii: "よく いえましたね", meebaa: "いらっしゃいませ" };
 
@@ -503,6 +509,7 @@ const SPECIAL = {
   mama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
   ookami: c => { c.tm.shiver = 1; },
   ojisan: c => { c.tm.nod = 1.2; },
+  onii: c => { c.tm.nod = 1.2; c.happyOn = true; later(1300, () => c.happyOn = false); },
   tora: c => { jump(c, .6); c.happyOn = true; later(1200, () => c.happyOn = false); },
   kuma: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
   omawari: c => { c.tm.nod = 1.2; c.armR.t = -140; later(1000, () => c.armR.t = 0); },

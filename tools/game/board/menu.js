@@ -73,7 +73,7 @@ function menuTitle() {
 @keyframes mbob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(2deg)}}
 .msay{text-align:center;font:400 clamp(14px,2vw,20px) var(--display);color:#2B2A33;background:#FFFFFFd9;border:4px solid #2B2A33;border-radius:999px;padding:3px 18px;width:max-content;margin:4px auto 0;box-shadow:0 4px 0 #2B2A33}
 .start.menu .mcard{background:#FFFFFFe8;backdrop-filter:blur(2px);width:min(80%,860px);padding:12px 18px 10px;gap:8px}
-.start.menu .mcard:not(.mmcard) .mstages{grid-template-columns:repeat(7,1fr)}.start.menu .mcard .mstages{gap:8px}.start.menu .mcard .mst{padding:6px 2px 6px;gap:1px;border-radius:18px}.mcard .mst .mico{font-size:clamp(24px,3.2vw,34px)}.mcard .mst .mname{font-size:clamp(12px,1.6vw,16px)}.mcard .mst .mstat{font-size:clamp(11px,1.3vw,13px)}
+.start.menu .mcard .mstages{grid-template-columns:repeat(7,1fr)}.start.menu .mmcard h2{margin:0}.start.menu .mcard .mstages{gap:8px}.start.menu .mcard .mst{padding:6px 2px 6px;gap:1px;border-radius:18px}.mcard .mst .mico{font-size:clamp(24px,3.2vw,34px)}.mcard .mst .mname{font-size:clamp(12px,1.6vw,16px)}.mcard .mst .mstat{font-size:clamp(11px,1.3vw,13px)}
 .start.menu .mmulti{padding:6px 26px}
 .mmcard .mtitle{color:#7FCBF0;-webkit-text-stroke:6px #2B2A33;paint-order:stroke fill;text-shadow:0 5px 0 #2B2A33}
 @media (prefers-reduced-motion: reduce){.mword span,.mseed{animation:none}}`;
