@@ -4,7 +4,7 @@
    課題の データは sit/ltomo_tasks.py → board/ltomo_data.js（LONG_T）。声：lk_f*・lk_y*・lk_n*・lt_*（packs/ltomo.json）
    場面の 相手は コマに ならない キャラ（くまた・とらお・どしん・こん・どしんの パパ・のっぽせんせい・かめじい）。 */
 LONGS.add("ltomo"); LDATA.ltomo = LONG_T;
-Object.assign(KID_S, { doshinpapa: 1.3, nobbo: .95, kamejii: .86 });
+Object.assign(KID_S, { doshinpapa: 1.12, nobbo: .95, kamejii: .86 });
 
 /* ---------- 盤 ---------- */
 { const n = {}, pl = {}, nx = {}; const R1 = 912, R2 = 748, R3 = 584, R4 = 420, R5 = 268, X = [180, 325, 470, 615, 760, 905, 1050, 1195, 1340, 1470];
@@ -102,7 +102,7 @@ async function lkTsunagu(pc) {
   const okIdx = opts.findIndex(o => o.ok); let ok = false;
   if (pick >= 0 && opts[pick].ok) { ok = true; flashCard(cards[pick], true); confetti(40); chime(); playMove(h, "nod"); await speak(C.pony, "lk_seikai", "せいかい！"); }
   else { if (pick >= 0) { flashCard(cards[pick], false); playMove(f, "sad"); await sleep(600); } flashCard(cards[okIdx], true); await speak(C.pony, `lk_${it.id}_a`, `${it.ok}、って いうと、おはなしが つづくね`); }
-  g.remove(); joy(f); await speak(f, `lk_${it.id}_r`, it.r); if (ok) playMove(h, "laugh");
+  g.remove(); if (ok) { joy(f); await speak(f, `lk_${it.id}_r`, it.r); playMove(h, "laugh"); } else { f.headY.t = 0; playMove(f, "nod"); await sleep(600); }
   grade(ok); playLog({ type: "tsunagu", id: it.id, ok, picked: pick >= 0 ? opts[pick].t : "", who: NAMES[pc.kind] });
   await sleep(500); setView("board"); await moveAfter(pc, ok ? 1 : 0); return ok;
 }
@@ -169,7 +169,9 @@ Object.assign(ITEM2, {
 // あたまに つける もの（おめん・マスク）。つぎの 場面で かならず はずす
 const LT_CLEAN = [];
 const ltClean = () => LT_CLEAN.splice(0).forEach(f => { try { f(); } catch (e) { } });
-{ const ssv = setSitView; setSitView = function (s, k) { ltClean(); return ssv(s, k); }; const sv = setView; setView = function (v, ...a) { ltClean(); return sv(v, ...a); }; }
+{ const ssv = setSitView; setSitView = function (s, k) { ltClean(); const r = ssv(s, k);
+    if (curStage === "ltomo" && s.intro === "kaiwa" && KFX[s.id.slice(3)]) KFX[s.id.slice(3)](STORY_CAST, r.hero);
+    return r; }; const sv = setView; setView = function (v, ...a) { ltClean(); return sv(v, ...a); }; }
 function putOmen(c) { const g = el("g", { transform: "translate(292 92) rotate(24)" }, c.head.g); LT_CLEAN.push(() => g.remove());
   el("path", { d: "M-46 -10 L-40 -62 L-12 -34 L12 -34 L40 -62 L46 -10 Q40 46 0 54 Q-40 46 -46 -10 Z", fill: "#FFFFFF", ...S6(5) }, g);
   el("path", { d: "M-30 -2 Q-18 -10 -8 -2 M8 -2 Q18 -10 30 -2", fill: "none", stroke: "#E8473C", "stroke-width": 5 }, g); el("path", { d: "M-40 -48 L-24 -32 M40 -48 L24 -32", stroke: "#E8473C", "stroke-width": 6 }, g);
@@ -179,6 +181,20 @@ function putMask(c) { const m = c.mouth && c.mouth.getBBox ? null : null; const 
 const ltSit = c => { c.squash.t = .72; c.headY.t = 24; c.armL.t = -60; c.armR.t = 60; }; // しゃがむ（すわりこむ）。ltStand で もどす
 const ltStand = c => { c.squash.t = 1; c.headY.t = 0; c.armL.t = 0; c.armR.t = 0; };
 const sunset = (o = .28) => { const r = el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#FF8A3D", opacity: 0 }, propG); tween(900, k => r.setAttribute("opacity", (o * k).toFixed(2))); return r; };
+
+/* ---------- かいわ：ならびと、せりふに あわせた もの ---------- */
+LONG_T.kaiwa.forEach(it => STORY_POS["lk_" + it.id] = it.cast.includes("doshinpapa") ? [700, 1260] : [740, 1170]);
+const give = (from, to, kind, k = .45) => { const g = handP(from, kind, k); return () => { g.remove(); handP(to, kind, k); }; };
+const KFX = { // かいわの 場面に 出す もの（せりふの タイミングに あわせる）
+  fhanabi() { [[500, 220, 0, 700], [1000, 170, 2, 1300], [760, 260, 3, 2100], [1200, 240, 1, 3600]].forEach(([x, y, c, t]) => later(t, () => firework(x, y, c))); },
+  fame(c, h) { handP(h, "umbrella", .5); later(800, () => rainOn()); },
+  fkingyo(c) { handP(c.doshin, "fishbag", .5); },
+  fpresent(c) { const g = handP(c.kon, "giftbox", .45); later(1900, () => { g.remove(); handP(c.doshin, "book2", .45); }); },
+  foyatsu() { prop("cake", 810, 600, .9); },
+  fochita(c, h) { const g = handP(c.kon, "cap", .45); later(5000, () => { g.remove(); handP(h, "cap", .45); }); },
+  fgemu(c) { handP(c.doshin, "gamebox", .4); },
+};
+Object.assign(ITEM2, { cap(g) { el("path", { d: "M-60 10 Q-60 -60 0 -60 Q60 -60 60 10 Z", fill: "#3E7FD6", ...S6p(5) }, g); el("path", { d: "M40 10 H110 Q110 26 40 26 Z", fill: "#3E7FD6", ...S6p(5) }, g); } });
 
 /* ---------- 場面の 動き（台本の ことばと あわせる） ---------- */
 const FT_ON = ["fttanoshi", "ftganbare", "ftdou", "ftjunbi", "ftgenki", "ftojama", "fttoire", "ftojamashita", "fthanbun", "ftissho", "ftkaesu", "fttanjoubi", "ftniatteru", "ftosoku", "ftbetsu", "ftkuyashii",
@@ -233,7 +249,7 @@ Object.assign(INTRO, {
 Object.assign(POST, {
   async fttanoshi(h, a) { wave(a); wave(h); await sleep(800); },
   async ftbikkuri(h, a) { playMove(a, "bow"); await sleep(600); playMove(h, "nod"); await sleep(400); },
-  async ftganbare(h, a) { a.armL.t = a.armR.t = 0; await tween(700, k => { a.y = 640 - 120 * k; }); joy(a); markAbove(a, "sparkle"); playMove(h, "clap"); await sleep(800); },
+  async ftganbare(h, a) { a.armL.t = a.armR.t = 0; const y0 = a.y; await tween(700, k => { a.y = y0 - 110 * k; }); joy(a); markAbove(a, "sparkle"); playMove(h, "clap"); await sleep(800); },
   async ftjanken(h, a) { for (let i = 0; i < 3; i++) { h.armR.t = a.armL.t = -60; blip(600 + i * 100, 600 + i * 100, .08, "square"); await sleep(250); h.armR.t = a.armL.t = 0; await sleep(150); } markAbove(h, "sparkle"); jump(h, .5); await sleep(500); },
   async ftkoutai(h, a) { if (ft.ball) ft.ball.remove(); for (let i = 0; i < 2; i++) later(i * 500, () => markAbove(a, "note")); handP(a, "ball2", .5); playMove(a, "pump"); await sleep(700); },
   async ftdou(h, a) { joy(a); joy(h); await sleep(500); hold(a, "run", 1.4); hold(h, "run", 1.4); walk(a, 700, 1400); await walk(h, 700, 1400); },
