@@ -100,6 +100,11 @@
    "model": "1f04a608-916c-4d9e-bf6e-b9da5c176f85",
    "style": "デフォルト",
    "speed": 0.92
+  },
+  "onii": {
+   "model": "6d11c6c2-f4a4-4435-887e-23dd60f8b8dd",
+   "style": "ノーマル",
+   "speed": 1.0
   }
  },
  "lines": {
