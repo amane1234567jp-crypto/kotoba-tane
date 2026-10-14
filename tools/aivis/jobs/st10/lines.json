@@ -1,0 +1,767 @@
+[
+{
+"key": "sq_fttanoshi",
+"who": "kuma",
+"text": "あ、ゆうやけだ。もう かえる じかんだね"
+},
+{
+"key": "sr_fttanoshi",
+"who": "kuma",
+"text": "うん！ ぼくも たのしかった。またね！"
+},
+{
+"key": "sq_ftbikkuri",
+"who": "tora",
+"text": "わっ！！ へへへ、びっくりした？"
+},
+{
+"key": "sr_ftbikkuri",
+"who": "tora",
+"text": "あ……ごめん ごめん。もう しないよ"
+},
+{
+"key": "sq_ftganbare",
+"who": "doshin",
+"text": "うーん……あと すこしで、てっぺん なのに……"
+},
+{
+"key": "sr_ftganbare",
+"who": "doshin",
+"text": "やったー！ のぼれた！ おうえん ありがとう！"
+},
+{
+"key": "sq_ftjanken",
+"who": "kon",
+"text": "あ、ぼくも ブランコ のりたい！"
+},
+{
+"key": "sr_ftjanken",
+"who": "kon",
+"text": "いいよ！ じゃん けん ぽん！"
+},
+{
+"key": "sq_ftkoutai",
+"who": "tora",
+"text": "その ボール、おれも つかいたいな"
+},
+{
+"key": "sr_ftkoutai",
+"who": "tora",
+"text": "いいね！ いーち、にーい……"
+},
+{
+"key": "sq_ftdou",
+"who": "kuma",
+"text": "ねえ、なに して あそぶ？"
+},
+{
+"key": "sr_ftdou",
+"who": "kuma",
+"text": "いいね！ おにごっこ しよう！"
+},
+{
+"key": "sq_fttacchi",
+"who": "tora",
+"text": "うわー、つかまっちゃった！"
+},
+{
+"key": "sr_fttacchi",
+"who": "tora",
+"text": "よーし、こんどは おれが おにだ！ いーち、にーい……"
+},
+{
+"key": "sq_ftjunbi",
+"who": "kon",
+"text": "よーい……"
+},
+{
+"key": "sr_ftjunbi",
+"who": "kon",
+"text": "あ、ごめん。むすんだら いってね"
+},
+{
+"key": "sq_ftgenki",
+"who": "doshin",
+"text": "はあ……"
+},
+{
+"key": "sr_ftgenki",
+"who": "doshin",
+"text": "ありがとう。じつはね、たいせつな ボールを なくしちゃったんだ"
+},
+{
+"key": "sq_ftojama",
+"who": "doshinpapa",
+"text": "やあ、いらっしゃい！ どうぞ、あがって"
+},
+{
+"key": "sr_ftojama",
+"who": "doshinpapa",
+"text": "はい、どうぞ。ゆっくり していってね"
+},
+{
+"key": "sq_ftokashi",
+"who": "doshinpapa",
+"text": "はい、おやつだよ。どうぞ"
+},
+{
+"key": "sr_ftokashi",
+"who": "doshinpapa",
+"text": "どういたしまして。たくさん たべてね"
+},
+{
+"key": "sq_fttoire",
+"who": "doshinpapa",
+"text": "おや？ もじもじして、どうしたのかな？"
+},
+{
+"key": "sr_fttoire",
+"who": "doshinpapa",
+"text": "ああ、いいよ。ろうかの つきあたりだよ"
+},
+{
+"key": "sq_ftojamashita",
+"who": "doshinpapa",
+"text": "そろそろ かえる じかんだね。また おいで"
+},
+{
+"key": "sr_ftojamashita",
+"who": "doshinpapa",
+"text": "どういたしまして。きを つけて かえってね"
+},
+{
+"key": "sq_fthanbun",
+"who": "doshin",
+"text": "あ……クッキー、あと ひとつしか ない"
+},
+{
+"key": "sr_fthanbun",
+"who": "doshin",
+"text": "わあ、ありがとう！ はんぶんこだと もっと おいしいね"
+},
+{
+"key": "sq_ftissho",
+"who": "kuma",
+"text": "この パズル、むずかしくて できないや……"
+},
+{
+"key": "sr_ftissho",
+"who": "kuma",
+"text": "ありがとう！ ふたりなら できそう！"
+},
+{
+"key": "sq_ftkaesu",
+"who": "kon",
+"text": "あ、その ほん……"
+},
+{
+"key": "sr_ftkaesu",
+"who": "kon",
+"text": "どういたしまして。また かして あげるね"
+},
+{
+"key": "sq_fttanjoubi",
+"who": "doshin",
+"text": "きょうは ぼくの たんじょうびなんだ"
+},
+{
+"key": "sr_fttanjoubi",
+"who": "doshin",
+"text": "わあ、ありがとう！ すごく うれしい！"
+},
+{
+"key": "sq_ftniatteru",
+"who": "kuma",
+"text": "みて みて、おめん かって もらったんだ"
+},
+{
+"key": "sr_ftniatteru",
+"who": "kuma",
+"text": "えへへ、ありがとう。うれしいな"
+},
+{
+"key": "sq_ftosoku",
+"who": "kuma",
+"text": "あ、やっと きた！ ずっと まってたよ"
+},
+{
+"key": "sr_ftosoku",
+"who": "kuma",
+"text": "ううん、だいじょうぶ。いっしょに まわろう！"
+},
+{
+"key": "sq_ftatode",
+"who": "tora",
+"text": "その ヨーヨー、おれにも かして！"
+},
+{
+"key": "sr_ftatode",
+"who": "tora",
+"text": "わかった。じゃあ、まってる！"
+},
+{
+"key": "sq_ftnaiteru",
+"who": "nobbo",
+"text": "おや、どう しましたか？"
+},
+{
+"key": "sr_ftnaiteru",
+"who": "nobbo",
+"text": "おしえて くれて ありがとう。すぐ いきますね"
+},
+{
+"key": "sq_ftkenka",
+"who": "kamejii",
+"text": "おや、なにやら さわがしいのう"
+},
+{
+"key": "sr_ftkenka",
+"who": "kamejii",
+"text": "ほっほ、おしえて くれて ありがとう。どれ、はなしを きこうかの"
+},
+{
+"key": "sq_ftkuyashii",
+"who": "tora",
+"text": "やった！ きんぎょ すくい、おれの かち！"
+},
+{
+"key": "sr_ftkuyashii",
+"who": "tora",
+"text": "へへっ、ありがとう！ また しょうぶ しようぜ"
+},
+{
+"key": "sq_ftbetsu",
+"who": "tora",
+"text": "なあ、あの ロープの むこうに いって みようぜ"
+},
+{
+"key": "sr_ftbetsu",
+"who": "tora",
+"text": "そっか……そうだな。じゃあ、わたあめ かいに いこう"
+},
+{
+"key": "sq_fttetsudatte",
+"who": "doshin",
+"text": "わっ、にもつ いっぱいだね！"
+},
+{
+"key": "sr_fttetsudatte",
+"who": "doshin",
+"text": "いいよ！ この ふくろ もつね"
+},
+{
+"key": "sq_ftashita",
+"who": "kuma",
+"text": "じゃあね、ばいばい！"
+},
+{
+"key": "sr_ftashita",
+"who": "kuma",
+"text": "うん！ また あしたね！"
+},
+{
+"key": "sq_ftsanji",
+"who": "doshin",
+"text": "あした、なんじに あそぶ？"
+},
+{
+"key": "sr_ftsanji",
+"who": "doshin",
+"text": "わかった！ さんじに こうえんだね。やくそく！"
+},
+{
+"key": "sq_ftyakusoku",
+"who": "kon",
+"text": "きのう、こうえんで ずっと まってたんだよ……"
+},
+{
+"key": "sr_ftyakusoku",
+"who": "kon",
+"text": "うん、いいよ。きょうは いっしょに あそぼうね"
+},
+{
+"key": "sq_ftbokumo",
+"who": "tora",
+"text": "……さっきは ごめんな。おれが わるかった"
+},
+{
+"key": "sr_ftbokumo",
+"who": "tora",
+"text": "うん、なかなおりだ！"
+},
+{
+"key": "sq_ftsabishi",
+"who": "doshin",
+"text": "きのうは かぜで やすんでたんだ"
+},
+{
+"key": "sr_ftsabishi",
+"who": "doshin",
+"text": "えへへ、ありがとう。もう げんきだよ！"
+},
+{
+"key": "sq_ftitakatta",
+"who": "kon",
+"text": "いてて……ころんじゃった"
+},
+{
+"key": "sr_ftitakatta",
+"who": "kon",
+"text": "ありがとう。ちょっと いたいけど、だいじょうぶ"
+},
+{
+"key": "sq_ftiyanan",
+"who": "tora",
+"text": "つんつん、つんつん！ へへへ"
+},
+{
+"key": "sr_ftiyanan",
+"who": "tora",
+"text": "あ……ごめん。もう しないよ"
+},
+{
+"key": "sq_ftdaijoubu",
+"who": "kuma",
+"text": "いたた……あしが いたくて あるけない……"
+},
+{
+"key": "sr_ftdaijoubu",
+"who": "kuma",
+"text": "ありがとう……ここで まってるね"
+},
+{
+"key": "sq_ftirete",
+"who": "doshin",
+"text": "みんなで かえってるんだ。いっしょに かえろうよ！"
+},
+{
+"key": "sr_ftirete",
+"who": "doshin",
+"text": "うん！ みんなで かえると たのしいね"
+},
+{
+"key": "lk_fasobu_t0",
+"who": "kuma",
+"text": "あ、とらおくん！ いっしょに あそぼう"
+},
+{
+"key": "lk_fasobu_t1",
+"who": "tora",
+"text": "いいぜ！ なあ、きみも なに して あそぶ？"
+},
+{
+"key": "lk_fasobu_r",
+"who": "tora",
+"text": "よし、おにごっこだ！"
+},
+{
+"key": "lk_fhajimete_t0",
+"who": "kuma",
+"text": "あれ？ みない かおだね"
+},
+{
+"key": "lk_fhajimete_t1",
+"who": "kon",
+"text": "きのう ひっこして きた こだよ"
+},
+{
+"key": "lk_fhajimete_r",
+"who": "kuma",
+"text": "よろしくね！ ぼく、くまた"
+},
+{
+"key": "lk_fkaeru_t0",
+"who": "doshin",
+"text": "ゆうやけ こやけの チャイムだ"
+},
+{
+"key": "lk_fkaeru_t1",
+"who": "kuma",
+"text": "もう かえる じかんだね"
+},
+{
+"key": "lk_fkaeru_r",
+"who": "doshin",
+"text": "うん、また あした！"
+},
+{
+"key": "lk_fochita_t0",
+"who": "tora",
+"text": "あれ？ きみの ぼうしが ないぞ"
+},
+{
+"key": "lk_fochita_t1",
+"who": "kon",
+"text": "あ、ベンチの したに おちてたよ。はい"
+},
+{
+"key": "lk_fochita_r",
+"who": "kon",
+"text": "どういたしまして！"
+},
+{
+"key": "lk_fitai_t0",
+"who": "doshin",
+"text": "いてっ！ ころんじゃった"
+},
+{
+"key": "lk_fitai_t1",
+"who": "kuma",
+"text": "たいへん！ ひざから ちが でてる"
+},
+{
+"key": "lk_fitai_r",
+"who": "doshin",
+"text": "ありがとう。ちょっと いたいけど へいき"
+},
+{
+"key": "lk_fojama_t0",
+"who": "doshin",
+"text": "パパ、ともだちが きたよ！"
+},
+{
+"key": "lk_fojama_t1",
+"who": "doshinpapa",
+"text": "やあ、いらっしゃい"
+},
+{
+"key": "lk_fojama_r",
+"who": "doshinpapa",
+"text": "どうぞ、あがって"
+},
+{
+"key": "lk_foyatsu_t0",
+"who": "doshinpapa",
+"text": "おやつに ケーキを どうぞ"
+},
+{
+"key": "lk_foyatsu_t1",
+"who": "doshin",
+"text": "わあ、おいしそう！"
+},
+{
+"key": "lk_foyatsu_r",
+"who": "doshinpapa",
+"text": "めしあがれ"
+},
+{
+"key": "lk_fkaeri_t0",
+"who": "doshinpapa",
+"text": "もう ごじだね。おうちの ひとが しんぱい するよ"
+},
+{
+"key": "lk_fkaeri_t1",
+"who": "doshin",
+"text": "えー、もう かえっちゃうの？"
+},
+{
+"key": "lk_fkaeri_r",
+"who": "doshinpapa",
+"text": "また あそびに おいで"
+},
+{
+"key": "lk_fgemu_t0",
+"who": "doshin",
+"text": "この ゲーム、ふたりまで なんだ"
+},
+{
+"key": "lk_fgemu_t1",
+"who": "kuma",
+"text": "ぼくも やりたい……"
+},
+{
+"key": "lk_fgemu_r",
+"who": "kuma",
+"text": "うん、じゅんばんこね！"
+},
+{
+"key": "lk_fpresent_t0",
+"who": "kon",
+"text": "どしんくん、これ プレゼント！"
+},
+{
+"key": "lk_fpresent_t1",
+"who": "doshin",
+"text": "わあ、ほしかった ほんだ！"
+},
+{
+"key": "lk_fpresent_r",
+"who": "doshin",
+"text": "うん！ すごく うれしい！"
+},
+{
+"key": "lk_fyatai_t0",
+"who": "kuma",
+"text": "わたあめと りんごあめ、どっちに しようかな"
+},
+{
+"key": "lk_fyatai_t1",
+"who": "kon",
+"text": "きみは どっちが すき？"
+},
+{
+"key": "lk_fyatai_r",
+"who": "kon",
+"text": "ぼくも！ いっしょに かおう"
+},
+{
+"key": "lk_fhanabi_t0",
+"who": "tora",
+"text": "あっ、はなびが あがった！"
+},
+{
+"key": "lk_fhanabi_t1",
+"who": "doshin",
+"text": "どーん！ おおきいね"
+},
+{
+"key": "lk_fhanabi_r",
+"who": "tora",
+"text": "うん、すっごく きれい！"
+},
+{
+"key": "lk_fhagure_t0",
+"who": "kon",
+"text": "ひとが いっぱいで、くまたくんと はぐれちゃった"
+},
+{
+"key": "lk_fhagure_t1",
+"who": "nobbo",
+"text": "おや、こまりましたね"
+},
+{
+"key": "lk_fhagure_r",
+"who": "kon",
+"text": "ありがとう！ たすかるよ"
+},
+{
+"key": "lk_fbutsukaru_t0",
+"who": "tora",
+"text": "いてっ！"
+},
+{
+"key": "lk_fbutsukaru_t1",
+"who": "kuma",
+"text": "あ、いま ぶつかったよね"
+},
+{
+"key": "lk_fbutsukaru_r",
+"who": "tora",
+"text": "うん、へいき へいき"
+},
+{
+"key": "lk_fkingyo_t0",
+"who": "doshin",
+"text": "みて、きんぎょ さんびき すくえた！"
+},
+{
+"key": "lk_fkingyo_t1",
+"who": "kon",
+"text": "すごい、どしんくん じょうず！"
+},
+{
+"key": "lk_fkingyo_r",
+"who": "doshin",
+"text": "えへへ、ありがとう"
+},
+{
+"key": "lk_fame_t0",
+"who": "kuma",
+"text": "あ、あめが ふって きた"
+},
+{
+"key": "lk_fame_t1",
+"who": "tora",
+"text": "おれ、かさ もって ない……"
+},
+{
+"key": "lk_fame_r",
+"who": "tora",
+"text": "ありがとう！ たすかった"
+},
+{
+"key": "lk_fwasure_t0",
+"who": "kon",
+"text": "あっ、こうえんに すいとうを わすれた！"
+},
+{
+"key": "lk_fwasure_t1",
+"who": "doshin",
+"text": "とりに もどる？"
+},
+{
+"key": "lk_fwasure_r",
+"who": "kon",
+"text": "うん、ありがとう！"
+},
+{
+"key": "lk_fmata_t0",
+"who": "kuma",
+"text": "ぼくの いえ、ここなんだ"
+},
+{
+"key": "lk_fmata_t1",
+"who": "doshin",
+"text": "じゃあ、ここで おわかれだね"
+},
+{
+"key": "lk_fmata_r",
+"who": "kuma",
+"text": "またね！"
+},
+{
+"key": "lk_fshukudai_t0",
+"who": "tora",
+"text": "あしたの しゅくだい、なんだっけ？"
+},
+{
+"key": "lk_fshukudai_t1",
+"who": "kuma",
+"text": "えっと……わすれちゃった"
+},
+{
+"key": "lk_fshukudai_r",
+"who": "tora",
+"text": "そうだった！ ありがとう"
+},
+{
+"key": "lk_ftsukareta_t0",
+"who": "kon",
+"text": "あるきすぎて、つかれちゃった……"
+},
+{
+"key": "lk_ftsukareta_t1",
+"who": "kuma",
+"text": "あしが いたいの？"
+},
+{
+"key": "lk_ftsukareta_r",
+"who": "kon",
+"text": "ありがとう。やさしいね"
+},
+{
+"key": "lk_numi_t",
+"who": "kuma",
+"text": "きのう、うみに いったんだ"
+},
+{
+"key": "lk_numi_r",
+"who": "kuma",
+"text": "すなで おしろを つくったよ！"
+},
+{
+"key": "lk_nkame_t",
+"who": "tora",
+"text": "しってる？ カメって ひゃくさいまで いきるんだって"
+},
+{
+"key": "lk_nkame_r",
+"who": "tora",
+"text": "かめじいせんせいも ながいきだもんな！"
+},
+{
+"key": "lk_nkyouryuu_t",
+"who": "doshin",
+"text": "ぼく、きょうりゅうが だいすきなんだ"
+},
+{
+"key": "lk_nkyouryuu_r",
+"who": "doshin",
+"text": "ティラノサウルス！ つよいんだよ"
+},
+{
+"key": "lk_ninu_t",
+"who": "kon",
+"text": "きのう、いぬに おいかけられて……"
+},
+{
+"key": "lk_ninu_r",
+"who": "kon",
+"text": "きに のぼって にげたんだ！"
+},
+{
+"key": "lk_nboushi_t",
+"who": "kuma",
+"text": "これ、おばあちゃんに もらった ぼうし なんだ"
+},
+{
+"key": "lk_nboushi_r",
+"who": "kuma",
+"text": "えへへ、ありがとう"
+},
+{
+"key": "lk_nnatsu_t",
+"who": "tora",
+"text": "なつやすみ、どこか いく？"
+},
+{
+"key": "lk_nnatsu_r",
+"who": "tora",
+"text": "おれは キャンプ！ たのしみだぜ"
+},
+{
+"key": "lk_nonaka_t",
+"who": "doshin",
+"text": "おなか すいたなあ。ぼく、ドーナツが すき"
+},
+{
+"key": "lk_nonaka_r",
+"who": "doshin",
+"text": "ほんと？ こんど いっしょに たべようね"
+},
+{
+"key": "lk_ntanjou_t",
+"who": "kon",
+"text": "ぼく、あした たんじょうびなんだ"
+},
+{
+"key": "lk_ntanjou_r",
+"who": "kon",
+"text": "ななさいだよ！"
+},
+{
+"key": "lk_nsakaagari_t",
+"who": "kuma",
+"text": "さかあがり、できるように なったんだ"
+},
+{
+"key": "lk_nsakaagari_r",
+"who": "kuma",
+"text": "まいにち こうえんで れんしゅう したよ"
+},
+{
+"key": "lk_nhomerare_t",
+"who": "tora",
+"text": "きょう、せんせいに ほめられたんだ"
+},
+{
+"key": "lk_nhomerare_r",
+"who": "tora",
+"text": "そうじを がんばったから！"
+},
+{
+"key": "lk_nneko_t",
+"who": "doshin",
+"text": "うちで ねこを かいはじめたんだ"
+},
+{
+"key": "lk_nneko_r",
+"who": "doshin",
+"text": "ミルクって いうんだ"
+},
+{
+"key": "lk_ngame_t",
+"who": "kon",
+"text": "どんな あそびが すき？"
+},
+{
+"key": "lk_ngame_r",
+"who": "kon",
+"text": "ぼくも ブロック だいすき！"
+},
+{
+"key": "lt_blk_res",
+"who": "tora",
+"text": "あ、わりい！ どうぞ"
+}
+]
