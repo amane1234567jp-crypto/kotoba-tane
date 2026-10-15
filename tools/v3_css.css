@@ -1,0 +1,102 @@
+/* v3：せかい・かいわ・ボス */
+body.nobar .bar{display:none}
+#world{transition:transform .17s linear}
+#world.noanim{transition:none}
+#field.fadein{animation:fadein .5s ease}
+@keyframes fadein{from{opacity:.2}to{opacity:1}}
+.npcbob{animation:bob2 1.8s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes bob2{0%,100%{transform:translateY(0)}50%{transform:translateY(-.6px)}}
+.bounce{animation:bounce .8s ease-in-out infinite}
+@keyframes bounce{50%{transform:translateY(-2px)}}
+.arrowui{animation:none}
+.mapname{max-width:60vw}
+.prog{position:absolute;left:max(14px,env(safe-area-inset-left,0px));top:56px;background:var(--paper);border:3px solid var(--ink);border-radius:12px;padding:2px 12px;font-weight:700;font-size:15px;pointer-events:none}
+.prog b{font-weight:900}
+.bossmark{color:#fff;background:#e04a4a;border-radius:8px;padding:0 6px}
+ruby.kj{color:var(--blue);font-weight:900}
+rt{font-size:.5em;color:var(--ink2);font-weight:700}
+.mapname rt{font-size:.55em}
+#field.talking .dpad,#field.talking .tip{display:none}
+#talk{position:absolute;left:max(14px,env(safe-area-inset-left,0px));right:max(14px,env(safe-area-inset-right,0px));bottom:14px;z-index:6;background:var(--paper);border:4px solid var(--ink);border-radius:22px;display:flex;gap:14px;align-items:center;padding:10px 16px;box-shadow:0 5px 0 rgba(42,42,58,.25);cursor:pointer;min-height:100px;max-width:900px;margin:0 auto}
+#talk .face{width:84px;height:84px;flex:0 0 auto;background:#e8f6d8;border:3px solid var(--ink);border-radius:18px;overflow:hidden}
+#talk .face svg{width:100%;height:100%;display:block}
+#talk .who{font-size:15px;font-weight:900;color:var(--ink2)}
+#talk .txt{font-size:23px;font-weight:900;line-height:2}
+#talk .nxt{position:absolute;right:14px;bottom:4px;font-size:16px;color:var(--accent);animation:bounce .8s ease-in-out infinite}
+.typein{animation:typein .35s ease}
+@keyframes typein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+#title{background:linear-gradient(#bfe6ff 0 58%,#9ad36b 58%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:16px}
+.logo{margin:0;font-size:clamp(44px,9vw,92px);font-weight:900;color:#fff;-webkit-text-stroke:5px var(--ink);paint-order:stroke fill;letter-spacing:.06em;line-height:1.1}
+.logo.small{font-size:clamp(36px,6vw,60px);text-align:center}
+.sub{margin:0;font-size:20px;font-weight:900;background:var(--paper);border:3px solid var(--ink);border-radius:16px;padding:4px 16px}
+.titleart{width:min(640px,92vw)}
+.titleart>svg{width:100%;height:auto;display:block}
+.btn.big{font-size:26px;padding:12px 40px}
+#story{padding:16px;background:#2a2a3a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.panel{width:min(760px,94vw,calc((100vh - 230px)*1.6));aspect-ratio:16/10;border:5px solid #fff;border-radius:24px;overflow:hidden;background:#fff;flex:0 0 auto}
+.panel>svg{width:100%;height:100%;display:block}
+.storytxt{color:#fff;font-size:22px;font-weight:900;max-width:760px;text-align:center;line-height:1.7;margin:0}
+.storytxt.dark{color:var(--ink)}
+.back{text-align:center;font-weight:900;font-size:18px;margin:8px 0 0}
+.kjbig{font-family:var(--hand);font-size:30px;color:var(--blue)}
+.team{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.slot{width:110px;min-height:128px;border:4px dashed #b8ad94;border-radius:18px;background:#fffaf0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;font-size:22px;color:#b8ad94;padding:4px}
+.slot.on{border-style:solid;border-color:var(--ink);color:var(--ink);background:#fff3c4}
+.slot svg{width:74px;height:74px}
+.pick.chosen{outline:5px solid var(--blue);outline-offset:2px}
+.btn:disabled{opacity:.4}
+.hpbar{width:min(240px,30vw);height:22px;border:3px solid var(--ink);border-radius:12px;background:#eee;overflow:hidden;margin:0 auto}
+.hpbar i{display:block;height:100%;width:100%;background:linear-gradient(#ff8aa8,#e04a4a);transition:width .45s}
+.hearts{display:flex;gap:3px;flex-wrap:wrap;justify-content:center;max-width:120px}
+.hearts i{width:14px;height:12px;display:block;background:radial-gradient(circle at 30% 35%,#ff8aa8 0 40%,#e04a4a 41%);border:2px solid var(--ink);border-radius:50% 50% 50% 50%/60% 60% 40% 40%}
+.hearts i.off{background:#ddd}
+.hearts.big{max-width:200px}
+.hearts.big i{width:22px;height:19px;border-width:3px}
+.bench{display:flex;gap:6px}
+.bench span{width:46px;height:46px;border:3px solid var(--ink);border-radius:12px;background:var(--paper);display:block}
+.bench span.on{background:var(--gold)}
+.bench span.zz{opacity:.4;filter:grayscale(1)}
+.bench svg{width:100%;height:100%;display:block}
+.fighter.sleepy{filter:grayscale(1);opacity:.5;transform:rotate(-70deg) translateY(30px);transition:all .7s}
+.fighter.pop svg{animation:pop .6s cubic-bezier(.2,1.6,.4,1) both}
+.lungeL{animation:lungeL .5s ease-in-out}
+@keyframes lungeL{40%{transform:translate(-60px,-12px) scale(1.08)}100%{transform:none}}
+.mon.boss{width:min(260px,32vw)}
+#ending{background:linear-gradient(#ffe9a8,#fff8e6);display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px;overflow:auto}
+.endart{width:min(260px,50vw)}
+.endart svg{width:100%;height:auto}
+.parade{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:4px;width:100%;max-width:980px}
+.parade div{animation:pop .6s cubic-bezier(.2,1.6,.4,1) both;display:flex;flex-direction:column;align-items:center}
+.parade svg{width:64px;height:64px}
+.zhead{font-size:19px;font-weight:900;margin:16px 0 6px}
+.zhead small{font-size:14px;color:var(--ink2)}
+/* うまれる えんしゅつ */
+.hatchbox{position:relative;width:min(420px,70vw,calc(100vh - 300px));aspect-ratio:1/1;margin:6px auto 0;overflow:visible}
+.rays{position:absolute;inset:-35%;opacity:0;transform:scale(.3);pointer-events:none}
+.rays svg{width:100%;height:100%}
+.rays.on{animation:raysin .7s ease-out forwards,spin 9s linear infinite}
+@keyframes raysin{to{opacity:.9;transform:scale(1)}}
+@keyframes spin{from{rotate:0deg}to{rotate:360deg}}
+.hatchchar{position:absolute;inset:6%;opacity:0;transform:scale(.1)}
+.hatchchar svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 18px #fff6a0)}
+.hatchchar.on{animation:charpop 1s cubic-bezier(.2,1.7,.4,1) forwards}
+@keyframes charpop{0%{opacity:0;transform:scale(.1) translateY(30%)}60%{opacity:1;transform:scale(1.18)}100%{opacity:1;transform:scale(1)}}
+.hatchegg{position:absolute;inset:8% 16%}
+.hatchegg svg{width:100%;height:100%}
+.flash{position:fixed;inset:0;background:radial-gradient(circle,#fff 0 40%,#fff8c8 70%,#ffe680);z-index:40;pointer-events:none;opacity:0}
+.shard{position:absolute;left:50%;top:55%;width:44px;height:44px;pointer-events:none;z-index:3}
+.shard svg{width:100%;height:100%}
+.spark{position:absolute;left:50%;top:50%;font-size:30px;line-height:1;pointer-events:none;-webkit-text-stroke:2px #2a2a3a;z-index:4}
+.confbox{position:absolute;inset:-10% -20%;pointer-events:none;overflow:hidden}
+.confbox i{position:absolute;top:-10%;width:9px;height:14px;border-radius:2px;animation:fall2 2s ease-in forwards}
+@keyframes fall2{to{transform:translateY(560px) rotate(540deg);opacity:0}}
+.chip{position:absolute;width:12px;height:10px;border:2px solid #2a2a3a;border-radius:3px 1px 4px 1px;pointer-events:none;z-index:3}
+.tip{pointer-events:auto;cursor:pointer}
+.tip .spk{margin-right:6px}
+.kjw{font-family:var(--hand);font-size:1.25em;color:var(--blue)}
+.bgmbtn{background:none;border:2px solid rgba(255,255,255,.6);color:var(--paper);border-radius:12px;font-size:13px;font-weight:900;padding:3px 8px}
+.hintbox ruby rt{font-size:.55em}
+.hatchbox{z-index:0}
+#egg>p,#egg>.row{position:relative;z-index:2}
+#egg>p.say{text-shadow:0 0 6px #fff,0 0 12px #fff}
+.shard{width:64px;height:64px}

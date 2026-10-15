@@ -1,0 +1,362 @@
+<title>かんじ牧場 なぞるデモ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700;900&display=swap">
+<style>
+/* layout: egg picker on top, one big tracing board, feedback below. Daytime farm colors, single theme */
+:root{--bg:#dff3ff;--fg:#2a2a3a;--card:#fff;--accent:#ff7a59;--muted:#6b5f4a;--guide:#b9c6d4;--ink:#2a2a3a;--ok:#4ea04a;color-scheme:light}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:'Zen Maru Gothic','Hiragino Maru Gothic ProN',sans-serif;
+ padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:12px;align-items:stretch}
+h1{margin:0;font-size:clamp(20px,4vw,28px);font-weight:900;display:flex;align-items:center;gap:10px}
+h1 span{background:var(--accent);color:#fff;border-radius:10px;padding:2px 10px;font-size:.75em}
+.eggs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
+.egg{flex:0 0 auto;scroll-snap-align:start;border:3px solid var(--fg);background:var(--card);border-radius:16px;padding:6px 10px;min-height:44px;font:inherit;font-weight:900;font-size:15px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;box-shadow:0 3px 0 var(--fg)}
+.egg b{font-size:22px;line-height:1}
+.egg small{font-size:11px;color:var(--muted)}
+.egg[aria-pressed="true"]{background:#fff1c2;outline:3px solid var(--accent);outline-offset:2px}
+.egg:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.egg svg{width:34px;height:40px}
+.board{background:var(--card);border:4px solid var(--fg);border-radius:28px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.pad{width:min(92vw,420px);max-width:100%;aspect-ratio:1/1;touch-action:none;user-select:none;-webkit-user-select:none;display:block;border-radius:20px;background:#fffdf3}
+.msg{min-height:1.6em;font-weight:900;font-size:clamp(18px,4vw,24px);text-align:center;margin:0}
+.sub{margin:0;font-size:14px;color:var(--muted);font-weight:700;text-align:center}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+button.b{font:inherit;font-weight:900;font-size:16px;border:3px solid var(--fg);background:var(--card);color:var(--fg);border-radius:999px;padding:10px 18px;min-height:44px;cursor:pointer;box-shadow:0 4px 0 var(--fg)}
+button.b:active{transform:translateY(3px);box-shadow:0 1px 0 var(--fg)}
+button.b:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.pen{font-size:13px;color:var(--muted);font-weight:700}
+@keyframes pulse{0%,100%{r:7}50%{r:11}}
+@keyframes wob{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes pop{0%{transform:scale(.2)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes conf{0%{transform:translateY(0) rotate(0)}100%{transform:translateY(190px) rotate(540deg);opacity:0}}
+.pulse{animation:pulse 1s ease-in-out infinite}
+.wob{animation:wob .35s ease-in-out}
+.pop{transform-origin:80px 150px;animation:pop .6s cubic-bezier(.3,1.4,.5,1) both}
+.conf{animation:conf 1.6s ease-in both}
+@media (prefers-reduced-motion:reduce){.pulse,.wob,.pop,.conf{animation:none}}
+</style>
+
+<div class="wrap">
+  <h1><span>デモ</span>たまごを なぞって かえそう</h1>
+  <p class="sub" style="text-align:left">1ねんせいの かんじ 80こ（書き順データ：KanjiVG）</p>
+  <div class="eggs" id="eggs" role="group" aria-label="たまごをえらぶ"></div>
+
+  <div class="board">
+    <svg id="pad" class="pad" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="なぞるところ">
+      <defs>
+        <g id="yama-happy">
+          <path d="M12,132 L48,66 L66,104 L80,34 L94,104 L112,66 L148,132 Z" fill="#6ec46a" stroke="#2a2a3a" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M12,132 L48,66 L66,104 L80,34 L82,34 L82,132 Z" fill="#000" opacity=".12"/>
+          <path d="M80,34 L70,56 L90,56 Z" fill="#fff" stroke="#2a2a3a" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M59,92 L75,100 L59,108 M101,92 L85,100 L101,108" fill="none" stroke="#2a2a3a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <ellipse cx="54" cy="114" rx="7" ry="4" fill="#ff8aa8" opacity=".7"/><ellipse cx="106" cy="114" rx="7" ry="4" fill="#ff8aa8" opacity=".7"/>
+          <path d="M64,114 Q80,136 96,114 Z" fill="#c0392b" stroke="#2a2a3a" stroke-width="3" stroke-linejoin="round"/><path d="M70,124 Q80,134 90,124 Z" fill="#ff6b8a"/>
+          <ellipse cx="46" cy="136" rx="12" ry="7" fill="#4ea04a" stroke="#2a2a3a" stroke-width="4"/><ellipse cx="114" cy="136" rx="12" ry="7" fill="#4ea04a" stroke="#2a2a3a" stroke-width="4"/>
+        </g>
+        <g id="ki-happy">
+          <path d="M58,80 Q30,100 26,128" fill="none" stroke="#8b5a2b" stroke-width="12" stroke-linecap="round"/>
+          <path d="M102,80 Q130,100 134,128" fill="none" stroke="#8b5a2b" stroke-width="12" stroke-linecap="round"/>
+          <rect x="70" y="70" width="20" height="80" rx="6" fill="#a66b35" stroke="#2a2a3a" stroke-width="5"/>
+          <circle cx="80" cy="60" r="40" fill="#5fcb75" stroke="#2a2a3a" stroke-width="5"/>
+          <path d="M40,60 A40,40 0 0 0 80,100 L80,20 A40,40 0 0 0 40,60 Z" fill="#000" opacity=".12"/>
+          <ellipse cx="68" cy="58" rx="9" ry="11" fill="#fff" stroke="#2a2a3a" stroke-width="3"/><ellipse cx="92" cy="58" rx="9" ry="11" fill="#fff" stroke="#2a2a3a" stroke-width="3"/>
+          <ellipse cx="70" cy="60" rx="5.5" ry="7.5" fill="#2a2a3a"/><ellipse cx="94" cy="60" rx="5.5" ry="7.5" fill="#2a2a3a"/>
+          <circle cx="72" cy="56" r="2.5" fill="#fff"/><circle cx="96" cy="56" r="2.5" fill="#fff"/>
+          <ellipse cx="54" cy="74" rx="6" ry="4" fill="#ff8aa8" opacity=".7"/><ellipse cx="106" cy="74" rx="6" ry="4" fill="#ff8aa8" opacity=".7"/>
+          <path d="M68,76 Q80,90 92,76 Z" fill="#c0392b" stroke="#2a2a3a" stroke-width="3" stroke-linejoin="round"/><path d="M73,82 Q80,88 87,82 Z" fill="#ff6b8a"/>
+          <ellipse cx="62" cy="150" rx="12" ry="6" fill="#8b5a2b" stroke="#2a2a3a" stroke-width="4"/><ellipse cx="98" cy="150" rx="12" ry="6" fill="#8b5a2b" stroke="#2a2a3a" stroke-width="4"/>
+        </g>
+        <g id="hi-happy">
+          <path d="M30,62 C22,74 24,88 34,92 C44,88 46,74 30,62 Z" fill="#ffb347" stroke="#2a2a3a" stroke-width="4" stroke-linejoin="round"/>
+          <path d="M130,62 C122,74 124,88 134,92 C144,88 146,74 130,62 Z" fill="#ffb347" stroke="#2a2a3a" stroke-width="4" stroke-linejoin="round"/>
+          <path d="M80,16 C100,48 128,68 124,106 C121,136 98,150 80,150 C62,150 39,136 36,106 C32,68 60,48 80,16 Z" fill="#ff6b3d" stroke="#2a2a3a" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M80,16 C60,48 32,68 36,106 C39,136 62,150 80,150 L82,150 L82,16 Z" fill="#000" opacity=".12"/>
+          <path d="M80,60 C92,80 106,90 104,112 C102,130 90,138 80,138 C70,138 58,130 56,112 C54,90 68,80 80,60 Z" fill="#ffd93d"/>
+          <ellipse cx="68" cy="102" rx="10" ry="12" fill="#fff" stroke="#2a2a3a" stroke-width="3"/><ellipse cx="92" cy="102" rx="10" ry="12" fill="#fff" stroke="#2a2a3a" stroke-width="3"/>
+          <ellipse cx="70" cy="104" rx="6.5" ry="8.5" fill="#2a2a3a"/><ellipse cx="94" cy="104" rx="6.5" ry="8.5" fill="#2a2a3a"/>
+          <circle cx="72" cy="99" r="3" fill="#fff"/><circle cx="96" cy="99" r="3" fill="#fff"/>
+          <ellipse cx="56" cy="118" rx="6" ry="4" fill="#ff8aa8" opacity=".7"/><ellipse cx="104" cy="118" rx="6" ry="4" fill="#ff8aa8" opacity=".7"/>
+          <path d="M64,118 Q80,140 96,118 Z" fill="#c0392b" stroke="#2a2a3a" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M66,119 L70,126 L74,119 L78,126 L82,119 L86,126 L90,119 L94,126 L94,119 Z" fill="#fff"/>
+        </g>
+        <g id="sho-happy">
+          <path d="M80,20 L80,52 M80,52 Q72,48 68,40" fill="none" stroke="#2a2a3a" stroke-width="7" stroke-linecap="round"/>
+          <path d="M80,20 L80,52 M80,52 Q72,48 68,40" fill="none" stroke="#b48cff" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="80" cy="100" rx="40" ry="44" fill="#c7a7ff" stroke="#2a2a3a" stroke-width="5"/>
+          <path d="M40,100 A40,44 0 0 0 80,144 L80,56 A40,44 0 0 0 40,100 Z" fill="#000" opacity=".12"/>
+          <path d="M34,92 C24,84 22,98 30,106" fill="#c7a7ff" stroke="#2a2a3a" stroke-width="4" stroke-linejoin="round"/>
+          <path d="M126,92 C136,84 138,98 130,106" fill="#c7a7ff" stroke="#2a2a3a" stroke-width="4" stroke-linejoin="round"/>
+          <circle cx="66" cy="94" r="4.5" fill="#2a2a3a"/><circle cx="94" cy="94" r="4.5" fill="#2a2a3a"/>
+          <circle cx="67.5" cy="92.5" r="1.5" fill="#fff"/><circle cx="95.5" cy="92.5" r="1.5" fill="#fff"/>
+          <ellipse cx="54" cy="108" rx="6" ry="4" fill="#ff8aa8" opacity=".7"/><ellipse cx="106" cy="108" rx="6" ry="4" fill="#ff8aa8" opacity=".7"/>
+          <path d="M70,110 Q75,118 80,110 Q85,118 90,110" fill="none" stroke="#2a2a3a" stroke-width="3.5" stroke-linecap="round"/>
+          <ellipse cx="64" cy="148" rx="10" ry="5" fill="#9b78e0" stroke="#2a2a3a" stroke-width="4"/><ellipse cx="96" cy="148" rx="10" ry="5" fill="#9b78e0" stroke="#2a2a3a" stroke-width="4"/>
+        </g>
+      </defs>
+      <rect x="0" y="0" width="160" height="160" fill="#fffdf3"/>
+      <g stroke="#e6ddc6" stroke-width="1" stroke-dasharray="3 3"><line x1="80" y1="0" x2="80" y2="160"/><line x1="0" y1="80" x2="160" y2="80"/></g>
+      <g id="egg">
+        <ellipse cx="80" cy="86" rx="46" ry="56" fill="#eef6e4" stroke="#2a2a3a" stroke-width="4"/>
+        <circle id="spot1" cx="64" cy="66" r="7" fill="#6ec46a"/><circle id="spot2" cx="96" cy="100" r="9" fill="#6ec46a"/><circle id="spot3" cx="100" cy="62" r="4" fill="#6ec46a"/>
+        <text id="eggGlyph" x="80" y="100" text-anchor="middle" font-size="44" font-weight="900" fill="#2a2a3a" opacity=".18">山</text>
+        <text x="80" y="156" text-anchor="middle" font-size="10" font-weight="900" fill="#6b5f4a">タップして はじめる</text>
+      </g>
+      <g id="guides" style="display:none"></g>
+      <g id="done"></g>
+      <g id="live"></g>
+      <g id="hatch" style="display:none"></g>
+      <g id="confetti"></g>
+    </svg>
+    <p class="msg" id="msg">たまごを タップ！</p>
+    <p class="sub" id="sub">なぞるとき、ひとふでずつ ゆっくりで だいじょうぶ</p>
+    <div class="row">
+      <button class="b" id="btnGuide" type="button">おてほん：みえる</button>
+      <button class="b" id="btnReset" type="button">もういちど</button>
+    </div>
+    <div class="pen" id="penInfo">入力：まだ</div>
+    <div class="pen" id="stars">きれいボーナス：（Apple Pencilのときだけ）</div>
+  </div>
+</div>
+
+<script src="kanji1.js"></script>
+<script>
+(function(){
+  // 書き順データは kanji1.js（KanjiVG を160×160の折れ線に変換したもの）。ends: tome=とめ, hane=はね, harai=はらい
+  var CREATURE={'山':'#yama-happy','木':'#ki-happy','火':'#hi-happy','小':'#sho-happy'};
+  var CCOL={'山':'#6ec46a','木':'#5fcb75','火':'#ff6b3d','小':'#b48cff'};
+  var PALETTE=['#6ec46a','#4fb3f0','#ff6b3d','#b48cff','#ffb400','#ff8aa8','#5fcb75','#f6b9a0','#9ad36b','#9aa3ad'];
+  var KANJI={};
+  (window.KANJI1||[]).forEach(function(k,i){
+    KANJI[k.g]={name:k.r,glyph:k.g,color:CCOL[k.g]||PALETTE[i%PALETTE.length],creature:CREATURE[k.g]||null,strokes:k.s,ends:k.e};
+  });
+  var eggsBox=document.getElementById('eggs');
+  Object.keys(KANJI).forEach(function(g,i){
+    var b=document.createElement('button');b.type='button';b.className='egg';b.setAttribute('data-k',g);b.setAttribute('aria-pressed',i===0?'true':'false');
+    b.innerHTML='<b>'+g+'</b><small>'+KANJI[g].name+'</small>';eggsBox.appendChild(b);
+  });
+  var ENDWORD={tome:'ピタッ',hane:'ピョン',harai:'スーッ'};
+  var ENDNAME={tome:'とめ',hane:'はね',harai:'はらい'};
+  var NS='http://www.w3.org/2000/svg';
+  var pad=document.getElementById('pad'), egg=document.getElementById('egg'), guides=document.getElementById('guides'),
+      done=document.getElementById('done'), live=document.getElementById('live'), hatch=document.getElementById('hatch'),
+      confetti=document.getElementById('confetti'), msg=document.getElementById('msg'), sub=document.getElementById('sub'),
+      penInfo=document.getElementById('penInfo'), btnGuide=document.getElementById('btnGuide'), starsEl=document.getElementById('stars');
+  var cur=Object.keys(KANJI)[0]||'山', state='egg', si=0, showGuide=true, samples=[], target=0, drawing=false, pts=[], pointerType='touch', stars=0, rec=[];
+
+  function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function clear(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function dist(a,b){var dx=a[0]-b[0],dy=a[1]-b[1];return Math.sqrt(dx*dx+dy*dy);}
+  function resample(poly,step){var out=[poly[0]];for(var i=1;i<poly.length;i++){var a=poly[i-1],b=poly[i],d=dist(a,b),n=Math.max(1,Math.round(d/step));for(var j=1;j<=n;j++)out.push([a[0]+(b[0]-a[0])*j/n,a[1]+(b[1]-a[1])*j/n]);}return out;}
+  function pathD(poly){return poly.map(function(p,i){return (i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' ');}
+
+  var ctx=null;
+  function beep(fs){try{if(!ctx)ctx=new (window.AudioContext||window.webkitAudioContext)();var t=ctx.currentTime;fs.forEach(function(f,i){var o=ctx.createOscillator(),g=ctx.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(0.0001,t+i*0.11);g.gain.exponentialRampToValueAtTime(0.22,t+i*0.11+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+i*0.11+0.28);o.connect(g);g.connect(ctx.destination);o.start(t+i*0.11);o.stop(t+i*0.11+0.3);});}catch(e){}}
+  // とめ・はね・はらいの音（合成）
+  function endSound(kind){
+    try{
+      if(!ctx)ctx=new (window.AudioContext||window.webkitAudioContext)();
+      var t=ctx.currentTime,o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);
+      if(kind==='tome'){o.type='square';o.frequency.setValueAtTime(240,t);o.frequency.exponentialRampToValueAtTime(160,t+0.06);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.3,t+0.01);g.gain.exponentialRampToValueAtTime(0.0001,t+0.09);o.start(t);o.stop(t+0.1);}
+      else if(kind==='hane'){o.type='triangle';o.frequency.setValueAtTime(420,t);o.frequency.exponentialRampToValueAtTime(980,t+0.16);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.25,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+0.22);o.start(t);o.stop(t+0.24);}
+      else {o.type='sine';o.frequency.setValueAtTime(700,t);o.frequency.exponentialRampToValueAtTime(220,t+0.42);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.22,t+0.03);g.gain.exponentialRampToValueAtTime(0.0001,t+0.45);o.start(t);o.stop(t+0.48);}
+    }catch(e){}
+  }
+  // ペンのとき、終わり方を筆圧と速度から拾う（ごほうび用。減点はしない）
+  function judgeEnd(kind){
+    if(pointerType!=='pen'||rec.length<8)return false;
+    var n=rec.length,last=rec[n-1];
+    function speedBetween(a,b){var d=0;for(var i=a+1;i<=b;i++)d+=dist(rec[i].p,rec[i-1].p);var dt=(rec[b].t-rec[a].t)||1;return d/dt;}
+    var mid0=Math.floor(n*0.3),mid1=Math.floor(n*0.7),endI=n-1,endStart=Math.max(mid1,n-5);
+    var vMid=speedBetween(mid0,mid1),vEnd=speedBetween(endStart,endI);
+    var pMid=0,c=0;for(var i=mid0;i<=mid1;i++){pMid+=rec[i].pr;c++;}pMid=pMid/(c||1);
+    var pEnd=0,c2=0;for(var j=endStart;j<=endI;j++){pEnd+=rec[j].pr;c2++;}pEnd=pEnd/(c2||1);
+    if(kind==='tome')return vEnd<vMid*0.45;
+    if(kind==='harai')return vEnd>vMid*1.05&&pEnd<pMid*0.75;
+    if(kind==='hane'){
+      var k=n-1;while(k>0&&dist(rec[k].p,last.p)<7)k--; if(k<=0)return false;
+      var m=k;while(m>0&&dist(rec[m].p,rec[k].p)<12)m--; if(m<=0)return false;
+      var a1=Math.atan2(last.p[1]-rec[k].p[1],last.p[0]-rec[k].p[0]),a2=Math.atan2(rec[k].p[1]-rec[m].p[1],rec[k].p[0]-rec[m].p[0]);
+      var diff=Math.abs(a1-a2);if(diff>Math.PI)diff=2*Math.PI-diff;
+      return diff>Math.PI/3&&dist(rec[k].p,last.p)<30;
+    }
+    return false;
+  }
+  function sparkle(p){
+    var cols=['#ffd23f','#ff7a59','#fff'];
+    for(var i=0;i<6;i++){var a=i/6*Math.PI*2,r=el('polygon',{points:'0,-6 1.8,-1.8 6,0 1.8,1.8 0,6 -1.8,1.8 -6,0 -1.8,-1.8',fill:cols[i%3],transform:'translate('+(p[0]+Math.cos(a)*14)+','+(p[1]+Math.sin(a)*14)+')'});r.setAttribute('class','conf');r.style.animationDuration='.9s';confetti.appendChild(r);}
+    setTimeout(function(){clear(confetti);},1000);
+  }
+  // はらいの先細りの始点：最後の線分の途中（画全体の長さの4割ぶん手前）
+  function taperStart(poly){
+    var n=poly.length,e=poly[n-1],b=poly[n-2];
+    var total=0;for(var i=1;i<n;i++)total+=dist(poly[i],poly[i-1]);
+    var back=Math.min(total*0.4,dist(e,b)-2);
+    var dx=e[0]-b[0],dy=e[1]-b[1],L=Math.sqrt(dx*dx+dy*dy)||1;
+    return [e[0]-dx/L*back,e[1]-dy/L*back];
+  }
+  // 端の印。w = その線の太さ（先細りの根元の幅に使う）
+  function endMarker(poly,kind,color,op,w){
+    var n=poly.length,e=poly[n-1],b=poly[n-2],dx=e[0]-b[0],dy=e[1]-b[1],L=Math.sqrt(dx*dx+dy*dy)||1;dx/=L;dy/=L;
+    var qx=-dy,qy=dx,g=el('g',{opacity:op}),hw=(w||10)/2;
+    if(kind==='tome'){g.appendChild(el('circle',{cx:e[0],cy:e[1],r:hw+1,fill:color}));}
+    else if(kind==='harai'){
+      // はらい：根元は線と同じ太さ、先端はとがって少し先まで抜ける。内側がふくらむ曲線で筆っぽく
+      var s=taperStart(poly),tipx=e[0]+dx*7,tipy=e[1]+dy*7;
+      var d='M'+(s[0]+qx*hw)+','+(s[1]+qy*hw)+' Q'+((s[0]+tipx)/2+qx*hw*0.45)+','+((s[1]+tipy)/2+qy*hw*0.45)+' '+tipx+','+tipy
+            +' Q'+((s[0]+tipx)/2-qx*hw*0.45)+','+((s[1]+tipy)/2-qy*hw*0.45)+' '+(s[0]-qx*hw)+','+(s[1]-qy*hw)+' Z';
+      g.appendChild(el('path',{d:d,fill:color}));
+      g.appendChild(el('circle',{cx:s[0],cy:s[1],r:hw,fill:color}));
+    }
+    else {
+      // はね：角（b）から先端（e の少し先）へ細く鋭く跳ね上がる三角
+      var hx=e[0]+dx*6,hy=e[1]+dy*6;
+      g.appendChild(el('polygon',{points:(b[0]+qx*hw*0.9)+','+(b[1]+qy*hw*0.9)+' '+(b[0]-qx*hw*0.9)+','+(b[1]-qy*hw*0.9)+' '+hx+','+hy,fill:color,'stroke-linejoin':'round'}));
+    }
+    return g;
+  }
+  // はらいを「太さが連続的に変わるひとつの形」として作る（継ぎ目なし）
+  // w=線の太さ, extra=終点の先に抜ける長さ
+  function haraiShape(poly,w,extra){
+    var n=poly.length,e=poly[n-1],b=poly[n-2],dx=e[0]-b[0],dy=e[1]-b[1],L=Math.sqrt(dx*dx+dy*dy)||1;dx/=L;dy/=L;
+    var ext=poly.slice(0,n-1).concat([[e[0]+dx*extra,e[1]+dy*extra]]);
+    var pts=resample(ext,1.5),total=0,cum=[0];
+    for(var i=1;i<pts.length;i++){total+=dist(pts[i],pts[i-1]);cum.push(total);}
+    var taperFrom=total*0.55,left=[],right=[];
+    for(var j=0;j<pts.length;j++){
+      var p=pts[j],a=pts[Math.max(0,j-1)],c=pts[Math.min(pts.length-1,j+1)];
+      var tx=c[0]-a[0],ty=c[1]-a[1],tl=Math.sqrt(tx*tx+ty*ty)||1;tx/=tl;ty/=tl;
+      var s=cum[j]<=taperFrom?0:(cum[j]-taperFrom)/(total-taperFrom);
+      var hw=(w/2)*Math.pow(1-s,1.7);
+      left.push([p[0]-ty*hw,p[1]+tx*hw]);right.push([p[0]+ty*hw,p[1]-tx*hw]);
+    }
+    var d='M'+left[0][0].toFixed(1)+','+left[0][1].toFixed(1);
+    for(var k=1;k<left.length;k++)d+=' L'+left[k][0].toFixed(1)+','+left[k][1].toFixed(1);
+    for(var m=right.length-1;m>=0;m--)d+=' L'+right[m][0].toFixed(1)+','+right[m][1].toFixed(1);
+    return d+' Z';
+  }
+  function haraiEl(poly,color,w,extra,op){
+    var g=el('g',{opacity:op});
+    g.appendChild(el('path',{d:haraiShape(poly,w,extra),fill:color,'stroke-linejoin':'round'}));
+    g.appendChild(el('circle',{cx:poly[0][0],cy:poly[0][1],r:w/2,fill:color}));
+    return g;
+  }
+  // 表示用：はねはフックを省く／はらいは先細りの始点までを太線で描く（残りは endMarker）
+  function viewPoly(poly,kind){
+    if(kind==='hane')return poly.slice(0,poly.length-1);
+    if(kind==='harai')return poly.slice(0,poly.length-1).concat([taperStart(poly)]);
+    return poly;
+  }
+  function say(txt){try{if(!window.speechSynthesis)return;var u=new SpeechSynthesisUtterance(txt);u.lang='ja-JP';u.rate=0.95;u.pitch=1.2;window.speechSynthesis.cancel();window.speechSynthesis.speak(u);}catch(e){}}
+
+  function drawGuides(){
+    clear(guides); var k=KANJI[cur];
+    k.strokes.forEach(function(s,i){
+      if(i<si)return;
+      var col=i===si?'#8fb3d9':'#d9d2c0',op=showGuide?1:(i===si?0.25:0),wd=i===si?12:10;
+      if(k.ends[i]==='harai'){guides.appendChild(haraiEl(s,col,wd,8,op));}
+      else{
+        guides.appendChild(el('path',{d:pathD(viewPoly(s,k.ends[i])),fill:'none',stroke:col,'stroke-width':wd,'stroke-linecap':'round','stroke-linejoin':'round',opacity:op}));
+        guides.appendChild(endMarker(s,k.ends[i],k.ends[i]==='tome'?(i===si?'#5f8fc4':'#c9c0aa'):col,showGuide?1:(i===si?0.3:0),wd));
+      }
+      if(i>=si){var t=el('text',{x:s[0][0]-10,y:s[0][1]-4,'font-size':'9','font-weight':'900',fill:'#6b5f4a',opacity:showGuide?1:0});t.textContent=String(i+1);guides.appendChild(t);}
+    });
+    if(si<k.strokes.length){var s0=k.strokes[si][0];var c=el('circle',{cx:s0[0],cy:s0[1],r:8,fill:'#ff7a59',opacity:.9});c.setAttribute('class','pulse');guides.appendChild(c);}
+  }
+  function startStroke(){
+    var k=KANJI[cur]; if(si>=k.strokes.length)return;
+    samples=resample(k.strokes[si],4); target=0; drawGuides();
+    msg.textContent=String(si+1)+'かくめ！ オレンジから なぞろう（さいごは '+ENDNAME[k.ends[si]]+'）';
+  }
+  function begin(){
+    state='trace'; si=0; egg.style.display='none'; guides.style.display=''; clear(done); clear(live); clear(hatch); hatch.style.display='none';
+    sub.textContent=KANJI[cur].glyph+'（'+KANJI[cur].name+'）を かく。ぜんぶ '+KANJI[cur].strokes.length+'かく';
+    startStroke(); beep([523]);
+  }
+  function reset(){state='egg'; si=0; stars=0; starsEl.textContent='きれいボーナス：（Apple Pencilのときだけ）'; egg.style.display=''; guides.style.display='none'; clear(done); clear(live); clear(hatch); hatch.style.display='none'; clear(confetti);
+    msg.textContent='たまごを タップ！'; sub.textContent='なぞるとき、ひとふでずつ ゆっくりで だいじょうぶ';
+    var kc=KANJI[cur]; ['spot1','spot2','spot3'].forEach(function(id){document.getElementById(id).setAttribute('fill',kc.color);}); document.getElementById('eggGlyph').textContent=kc.glyph;}
+
+  function finishStroke(){
+    var k=KANJI[cur], kind=k.ends[si], s=k.strokes[si];
+    if(kind==='harai'){
+      done.appendChild(haraiEl(s,'#2a2a3a',11,8,1));
+      done.appendChild(haraiEl(s,k.color,6,5,1));
+    } else {
+      var vs=viewPoly(s,kind);
+      done.appendChild(el('path',{d:pathD(vs),fill:'none',stroke:'#2a2a3a','stroke-width':11,'stroke-linecap':'round','stroke-linejoin':'round'}));
+      done.appendChild(endMarker(s,kind,'#2a2a3a',1,11));
+      done.appendChild(el('path',{d:pathD(vs),fill:'none',stroke:k.color,'stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'}));
+      if(kind==='hane'){done.appendChild(endMarker(s,kind,k.color,1,5.5));}
+    }
+    endSound(kind);
+    var good=judgeEnd(kind);
+    if(good){stars++; starsEl.textContent='きれいボーナス：'+'★'.repeat(stars)+'（'+ENDNAME[kind]+' きれい！）'; sparkle(s[s.length-1]);}
+    var bonus=good?'　きれい！':'';
+    si++;
+    if(si>=k.strokes.length){ setTimeout(hatchNow,250); }
+    else { startStroke(); msg.textContent=ENDWORD[kind]+'！'+bonus+'　つぎは '+String(si+1)+'かくめ（さいごは '+ENDNAME[k.ends[si]]+'）'; }
+  }
+  function hatchNow(){
+    state='done'; clear(guides); msg.textContent='うまれた！ '+KANJI[cur].name+'ちゃん'; sub.textContent='こんどは「おてほん：みえない」で ちょうせん！';
+    beep([523,659,784,1047]); say(KANJI[cur].name);
+    setTimeout(function(){
+      var k=KANJI[cur]; clear(live);
+      hatch.style.display=''; clear(hatch);
+      var g=el('g',{}); g.setAttribute('class','pop');
+      if(k.creature){ clear(done); g.appendChild(el('use',{href:k.creature})); }
+      else {
+        // 専用キャラがない字は、書いた字そのものに顔がついて生き物になる
+        var xs=[],ys=[];k.strokes.forEach(function(s){s.forEach(function(p){xs.push(p[0]);ys.push(p[1]);});});
+        var cx=(Math.min.apply(null,xs)+Math.max.apply(null,xs))/2, top=Math.min.apply(null,ys), bot=Math.max.apply(null,ys);
+        var fy=top+(bot-top)*0.42;
+        g.appendChild(el('ellipse',{cx:cx-13,cy:fy,rx:8,ry:10,fill:'#fff',stroke:'#2a2a3a','stroke-width':3}));
+        g.appendChild(el('ellipse',{cx:cx+13,cy:fy,rx:8,ry:10,fill:'#fff',stroke:'#2a2a3a','stroke-width':3}));
+        g.appendChild(el('ellipse',{cx:cx-11,cy:fy+2,rx:5,ry:6.5,fill:'#2a2a3a'}));g.appendChild(el('ellipse',{cx:cx+15,cy:fy+2,rx:5,ry:6.5,fill:'#2a2a3a'}));
+        g.appendChild(el('circle',{cx:cx-9,cy:fy-1,r:2,fill:'#fff'}));g.appendChild(el('circle',{cx:cx+17,cy:fy-1,r:2,fill:'#fff'}));
+        g.appendChild(el('ellipse',{cx:cx-24,cy:fy+14,rx:6,ry:4,fill:'#ff8aa8',opacity:.7}));g.appendChild(el('ellipse',{cx:cx+24,cy:fy+14,rx:6,ry:4,fill:'#ff8aa8',opacity:.7}));
+        g.appendChild(el('path',{d:'M'+(cx-9)+','+(fy+16)+' Q'+cx+','+(fy+28)+' '+(cx+9)+','+(fy+16)+' Z',fill:'#c0392b',stroke:'#2a2a3a','stroke-width':3,'stroke-linejoin':'round'}));
+      }
+      hatch.appendChild(g);
+      var cols=['#ff7a59','#ffd23f','#6ec46a','#4fb3f0','#ff8aa8'];
+      clear(confetti);
+      for(var i=0;i<22;i++){var r=el('rect',{x:10+Math.random()*140,y:-10-Math.random()*40,width:5,height:8,rx:1,fill:cols[i%5]});r.setAttribute('class','conf');r.style.animationDelay=(Math.random()*.6)+'s';confetti.appendChild(r);}
+    },350);
+  }
+
+  function pos(ev){var r=pad.getBoundingClientRect();return [(ev.clientX-r.left)/r.width*160,(ev.clientY-r.top)/r.height*160];}
+  function tol(){return pointerType==='pen'?22:30;}
+
+  pad.addEventListener('pointerdown',function(ev){
+    ev.preventDefault(); pointerType=ev.pointerType||'touch';
+    penInfo.textContent='入力：'+(pointerType==='pen'?'Apple Pencil（はんてい きびしめ）':pointerType==='mouse'?'マウス':'ゆび（はんてい ゆるめ）');
+    if(state==='egg'){begin();return;}
+    if(state!=='trace')return;
+    var p=pos(ev);
+    if(dist(p,samples[0])>tol()*1.3){ var g=guides.lastChild; if(g){g.classList.remove('wob');void g.getBoundingClientRect();g.classList.add('wob');} msg.textContent='オレンジの まるから スタート！'; return; }
+    drawing=true; pts=[p]; target=0; rec=[{p:p,t:ev.timeStamp,pr:ev.pressure||0.5}]; pad.setPointerCapture(ev.pointerId);
+    var lp=el('path',{d:pathD(pts),fill:'none',stroke:'#3b6fd9','stroke-width':8,'stroke-linecap':'round','stroke-linejoin':'round',opacity:.85}); clear(live); live.appendChild(lp);
+  });
+  pad.addEventListener('pointermove',function(ev){
+    if(!drawing)return; ev.preventDefault();
+    var p=pos(ev); pts.push(p); rec.push({p:p,t:ev.timeStamp,pr:ev.pressure||0.5});
+    var lp=live.firstChild; if(lp){lp.setAttribute('d',pathD(pts)); if(ev.pressure&&pointerType==='pen')lp.setAttribute('stroke-width',(5+ev.pressure*8).toFixed(1));}
+    while(target<samples.length-1&&dist(p,samples[target+1])<tol())target++;
+  });
+  function up(ev){
+    if(!drawing)return; drawing=false;
+    var okEnd=dist(pts[pts.length-1],samples[samples.length-1])<tol()*1.3;
+    if(target>=samples.length*0.8&&okEnd){ clear(live); finishStroke(); }
+    else { msg.textContent='おしい！ もういちど '+String(si+1)+'かくめ'; var lp=live.firstChild; if(lp){lp.setAttribute('opacity','.3'); setTimeout(function(){clear(live);},500);} beep([392]); }
+  }
+  pad.addEventListener('pointerup',up); pad.addEventListener('pointercancel',up);
+
+  document.querySelectorAll('.egg').forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('.egg').forEach(function(x){x.setAttribute('aria-pressed','false');}); b.setAttribute('aria-pressed','true');
+    cur=b.getAttribute('data-k'); reset();
+  });});
+  btnGuide.addEventListener('click',function(){showGuide=!showGuide; btnGuide.textContent='おてほん：'+(showGuide?'みえる':'みえない'); if(state==='trace')drawGuides();});
+  document.getElementById('btnReset').addEventListener('click',reset);
+  reset();
+})();
+</script>

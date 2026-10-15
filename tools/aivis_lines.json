@@ -1,0 +1,7562 @@
+[
+{
+"key": "kb82d36efc66",
+"who": "kb_fudeko",
+"text": "こんにちは！",
+"pack": "sys",
+"k": "fudeko|こんにちは！"
+},
+{
+"key": "kbd075b7e3e7",
+"who": "kb_fudeko",
+"text": "ぼくは ふでの ようせい、ふでこ。",
+"pack": "sys",
+"k": "fudeko|ぼくは ふでの ようせい、ふでこ。"
+},
+{
+"key": "kb6bb1260349",
+"who": "kb_fudeko",
+"text": "まおう ヒラガナーの せいで、この くにの かんじは ぜんぶ たまごに されちゃったんだ。",
+"pack": "sys",
+"k": "fudeko|まおう ヒラガナーの せいで、この くにの かんじは ぜんぶ たまごに されちゃったんだ。"
+},
+{
+"key": "kbff4ddd072d",
+"who": "kb_fudeko",
+"text": "あっ！",
+"pack": "sys",
+"k": "fudeko|あっ！"
+},
+{
+"key": "kbf42c0d1dec",
+"who": "kb_fudeko",
+"text": "あそこに たまごが ある！",
+"pack": "sys",
+"k": "fudeko|あそこに たまごが ある！"
+},
+{
+"key": "kb89dec3a483",
+"who": "kb_fudeko",
+"text": "いきたい ところを タッチすると、そこまで あるいて いけるよ。",
+"pack": "sys",
+"k": "fudeko|いきたい ところを タッチすると、そこまで あるいて いけるよ。"
+},
+{
+"key": "kbdbf12ef5a3",
+"who": "kb_fudeko",
+"text": "やったね！",
+"pack": "sys",
+"k": "fudeko|やったね！"
+},
+{
+"key": "kb31d723e34a",
+"who": "kb_fudeko",
+"text": "「やま」の かんじが もどってきた！",
+"pack": "sys",
+"k": "fudeko|「やま」の かんじが もどってきた！"
+},
+{
+"key": "kba68cc94165",
+"who": "kb_fudeko",
+"text": "むらの おばあさんに はなしかけて みよう。",
+"pack": "sys",
+"k": "fudeko|むらの おばあさんに はなしかけて みよう。"
+},
+{
+"key": "kb30ebbac158",
+"who": "kb_fudeko",
+"text": "ひとを タッチすると はなせるよ。",
+"pack": "sys",
+"k": "fudeko|ひとを タッチすると はなせるよ。"
+},
+{
+"key": "kbe014266060",
+"who": "kb_fudeko",
+"text": "みて！",
+"pack": "sys",
+"k": "fudeko|みて！"
+},
+{
+"key": "kbe566538364",
+"who": "kb_fudeko",
+"text": "「やま」が かんじの「やま」に なってたよ。",
+"pack": "sys",
+"k": "fudeko|「やま」が かんじの「やま」に なってたよ。"
+},
+{
+"key": "kb801060f49d",
+"who": "kb_fudeko",
+"text": "かんじを とりもどすと、みんなの ことばも もとに もどるんだ。",
+"pack": "sys",
+"k": "fudeko|かんじを とりもどすと、みんなの ことばも もとに もどるんだ。"
+},
+{
+"key": "kb933102cade",
+"who": "kb_fudeko",
+"text": "あっ、スライムが あらわれた！",
+"pack": "sys",
+"k": "fudeko|あっ、スライムが あらわれた！"
+},
+{
+"key": "kb936b7679b7",
+"who": "kb_fudeko",
+"text": "スライムに さわると バトル！",
+"pack": "sys",
+"k": "fudeko|スライムに さわると バトル！"
+},
+{
+"key": "kbfecb1ca0b7",
+"who": "kb_fudeko",
+"text": "かんじを かくと こうげき できるよ。",
+"pack": "sys",
+"k": "fudeko|かんじを かくと こうげき できるよ。"
+},
+{
+"key": "kb1b74eecee0",
+"who": "kb_fudeko",
+"text": "ほしを もらうと レベルアップ！",
+"pack": "sys",
+"k": "fudeko|ほしを もらうと レベルアップ！"
+},
+{
+"key": "kb8104a514c7",
+"who": "kb_fudeko",
+"text": "レベルが あがると、ボスとの たたかいで ながく がんばれるよ。",
+"pack": "sys",
+"k": "fudeko|レベルが あがると、ボスとの たたかいで ながく がんばれるよ。"
+},
+{
+"key": "kb63bdeac08e",
+"who": "kb_fudeko",
+"text": "この くにの たまごを ぜんぶ かえして、てきを やっつけると、ボスが でてくるよ。",
+"pack": "sys",
+"k": "fudeko|この くにの たまごを ぜんぶ かえして、てきを やっつけると、ボスが でてくるよ。"
+},
+{
+"key": "kb0ac07c4c9c",
+"who": "kb_fudeko",
+"text": "ボスを たおせば まおうの いばらが きえて、つぎの くにへ いける！",
+"pack": "sys",
+"k": "fudeko|ボスを たおせば まおうの いばらが きえて、つぎの くにへ いける！"
+},
+{
+"key": "kb828fcdc60b",
+"who": "kb_fudeko",
+"text": "さあ、ぼうけんの はじまりだ！",
+"pack": "sys",
+"k": "fudeko|さあ、ぼうけんの はじまりだ！"
+},
+{
+"key": "kbb3605c2c26",
+"who": "kb_fudeko",
+"text": "ここが まおうの しろ…！",
+"pack": "sys",
+"k": "fudeko|ここが まおうの しろ…！"
+},
+{
+"key": "kbb399422bb3",
+"who": "kb_fudeko",
+"text": "まおう ヒラガナーは いちばん おくの へやに いるよ。",
+"pack": "sys",
+"k": "fudeko|まおう ヒラガナーは いちばん おくの へやに いるよ。"
+},
+{
+"key": "kb59de77f633",
+"who": "kb_fudeko",
+"text": "なかまを 5にん えらんで たたかおう！",
+"pack": "sys",
+"k": "fudeko|なかまを 5にん えらんで たたかおう！"
+},
+{
+"key": "kb677f5e6865",
+"who": "kb_fudeko",
+"text": "まおうの いばらが きえた！",
+"pack": "sys",
+"k": "fudeko|まおうの いばらが きえた！"
+},
+{
+"key": "kb7c588e92d0",
+"who": "kb_fudeko",
+"text": "みぎの みちから、つぎの くにへ すすもう！",
+"pack": "sys",
+"k": "fudeko|みぎの みちから、つぎの くにへ すすもう！"
+},
+{
+"key": "kb80b9bb7f56",
+"who": "kb_fudeko",
+"text": "いろが もどった！",
+"pack": "sys",
+"k": "fudeko|いろが もどった！"
+},
+{
+"key": "kb1f6c87d001",
+"who": "kb_fudeko",
+"text": "おうさまの くにが もとどおりだ！",
+"pack": "sys",
+"k": "fudeko|おうさまの くにが もとどおりだ！"
+},
+{
+"key": "kb1fbead0f9a",
+"who": "kb_fudeko",
+"text": "みぎの みちの さきに、まおうの しろが ある。",
+"pack": "sys",
+"k": "fudeko|みぎの みちの さきに、まおうの しろが ある。"
+},
+{
+"key": "kbc97a1d037a",
+"who": "kb_fudeko",
+"text": "いよいよ さいごの たたかいだ！",
+"pack": "sys",
+"k": "fudeko|いよいよ さいごの たたかいだ！"
+},
+{
+"key": "kb67a78005ce",
+"who": "kb_fudeko",
+"text": "ボス「ゴロゴロキング」が あらわれた！",
+"pack": "sys",
+"k": "fudeko|ボス「ゴロゴロキング」が あらわれた！"
+},
+{
+"key": "kb5792ad0850",
+"who": "kb_fudeko",
+"text": "みちを ふさいでいる！",
+"pack": "sys",
+"k": "fudeko|みちを ふさいでいる！"
+},
+{
+"key": "kb07bb9f798c",
+"who": "kb_fudeko",
+"text": "ボスは こうげきして くるよ。",
+"pack": "sys",
+"k": "fudeko|ボスは こうげきして くるよ。"
+},
+{
+"key": "kb1f3d16b5cd",
+"who": "kb_fudeko",
+"text": "あいしょうの いい なかまと、レベルの たかい なかまを えらぼう。",
+"pack": "sys",
+"k": "fudeko|あいしょうの いい なかまと、レベルの たかい なかまを えらぼう。"
+},
+{
+"key": "kb5c3c2581f8",
+"who": "kb_fudeko",
+"text": "なかまが つかれて ねむっても、つぎの なかまが たたかえる。",
+"pack": "sys",
+"k": "fudeko|なかまが つかれて ねむっても、つぎの なかまが たたかえる。"
+},
+{
+"key": "kb8a002ec944",
+"who": "kb_fudeko",
+"text": "3にんで いどもう！",
+"pack": "sys",
+"k": "fudeko|3にんで いどもう！"
+},
+{
+"key": "kb919cdc0673",
+"who": "kb_boss",
+"text": "ゴロゴロ アタック！",
+"pack": "m0",
+"k": "boss|ゴロゴロ アタック！"
+},
+{
+"key": "kb4d4a763ca7",
+"who": "kb_oba",
+"text": "やまが きれいに みえるねえ。",
+"pack": "m0",
+"k": "oba|やまが きれいに みえるねえ。"
+},
+{
+"key": "kbd504cb1506",
+"who": "kb_oba",
+"text": "きの したで ひとやすみ するのが すきなのよ。",
+"pack": "m0",
+"k": "oba|きの したで ひとやすみ するのが すきなのよ。"
+},
+{
+"key": "kb7e0c152047",
+"who": "kb_farmer",
+"text": "たんぼと はたけの せわを しているんだ。",
+"pack": "m0",
+"k": "farmer|たんぼと はたけの せわを しているんだ。"
+},
+{
+"key": "kb1ee192de7f",
+"who": "kb_farmer",
+"text": "うしは いっとう、にとう… ぜんぶで さんとう いるよ。",
+"pack": "m0",
+"k": "farmer|うしは いっとう、にとう… ぜんぶで さんとう いるよ。"
+},
+{
+"key": "kb6eb89e483e",
+"who": "kb_farmer",
+"text": "つちが げんきだと やさいも げんきだ！",
+"pack": "m0",
+"k": "farmer|つちが げんきだと やさいも げんきだ！"
+},
+{
+"key": "kb71484bb146",
+"who": "kb_boy",
+"text": "ひが のぼると はなが さくんだよ！",
+"pack": "m0",
+"k": "boy|ひが のぼると はなが さくんだよ！"
+},
+{
+"key": "kb6efb17e402",
+"who": "kb_boy",
+"text": "くさむらには スライムが かくれてるよ。",
+"pack": "m0",
+"k": "boy|くさむらには スライムが かくれてるよ。"
+},
+{
+"key": "kbbb07799671",
+"who": "kb_traveler",
+"text": "この さきは みずと かわの さと。",
+"pack": "m0",
+"k": "traveler|この さきは みずと かわの さと。"
+},
+{
+"key": "kb5f84e9dedc",
+"who": "kb_traveler",
+"text": "でも まおうの いばらで とおれない… ボスを たおせば きえるらしい。",
+"pack": "m0",
+"k": "traveler|でも まおうの いばらで とおれない… ボスを たおせば きえるらしい。"
+},
+{
+"key": "kb120d77f26d",
+"who": "kb_traveler",
+"text": "いばらが きえた！",
+"pack": "m0",
+"k": "traveler|いばらが きえた！"
+},
+{
+"key": "kb3fbad6e169",
+"who": "kb_traveler",
+"text": "みずの さとへ いってらっしゃい！",
+"pack": "m0",
+"k": "traveler|みずの さとへ いってらっしゃい！"
+},
+{
+"key": "kb5f20653f3c",
+"who": "kb_narr",
+"text": "← むら → みずと かわの さと",
+"pack": "m0",
+"k": "narr|← むら → みずと かわの さと"
+},
+{
+"key": "kb622b415e32",
+"who": "kb_narr",
+"text": "ボス ゴロゴロキングとの たたかい！",
+"pack": "sys",
+"k": "narr|ボス ゴロゴロキングとの たたかい！"
+},
+{
+"key": "kb56dc3a00d2",
+"who": "kb_narr",
+"text": "なかまを 3にん えらんでね。",
+"pack": "sys",
+"k": "narr|なかまを 3にん えらんでね。"
+},
+{
+"key": "kb6d4581fb5f",
+"who": "kb_narr",
+"text": "いわスライムには、「みず」と「ちから」と「おおきい」と「き」が つよい！",
+"pack": "sys",
+"k": "narr|いわスライムには、「みず」と「ちから」と「おおきい」と「き」が つよい！"
+},
+{
+"key": "kb0e0e1c5d5a",
+"who": "kb_fudeko",
+"text": "ここは「みずと かわの さと」。",
+"pack": "sys",
+"k": "fudeko|ここは「みずと かわの さと」。"
+},
+{
+"key": "kb3bb63db55d",
+"who": "kb_fudeko",
+"text": "この くにには たまごが 12こ。",
+"pack": "sys",
+"k": "fudeko|この くにには たまごが 12こ。"
+},
+{
+"key": "kb54f7a80238",
+"who": "kb_fudeko",
+"text": "てきを ぜんぶ やっつけると、ボスが でてくるよ。",
+"pack": "sys",
+"k": "fudeko|てきを ぜんぶ やっつけると、ボスが でてくるよ。"
+},
+{
+"key": "kbb9558b8d17",
+"who": "kb_fudeko",
+"text": "ボス「メラメラドン」が あらわれた！",
+"pack": "sys",
+"k": "fudeko|ボス「メラメラドン」が あらわれた！"
+},
+{
+"key": "kbc407b2a7ff",
+"who": "kb_boss",
+"text": "メラメラ ビーム！",
+"pack": "m1",
+"k": "boss|メラメラ ビーム！"
+},
+{
+"key": "kba6edbc5781",
+"who": "kb_fisher",
+"text": "かわで さかなを つっているんだ。",
+"pack": "m1",
+"k": "fisher|かわで さかなを つっているんだ。"
+},
+{
+"key": "kbf916eb4107",
+"who": "kb_fisher",
+"text": "あめが ふると みずが ふえるよ。",
+"pack": "m1",
+"k": "fisher|あめが ふると みずが ふえるよ。"
+},
+{
+"key": "kb517ae489f9",
+"who": "kb_girl",
+"text": "すなはまで かいを ひろったよ！",
+"pack": "m1",
+"k": "girl|すなはまで かいを ひろったよ！"
+},
+{
+"key": "kb9173b0935f",
+"who": "kb_girl",
+"text": "いしを よっつ、いつつと ならべたの。",
+"pack": "m1",
+"k": "girl|いしを よっつ、いつつと ならべたの。"
+},
+{
+"key": "kbf1c780c3d9",
+"who": "kb_oji",
+"text": "たけは まっすぐ のびるんだ。",
+"pack": "m1",
+"k": "oji|たけは まっすぐ のびるんだ。"
+},
+{
+"key": "kb21f934f93e",
+"who": "kb_oji",
+"text": "むしかごも たけで つくるよ。",
+"pack": "m1",
+"k": "oji|むしかごも たけで つくるよ。"
+},
+{
+"key": "kbe0dd4b85cc",
+"who": "kb_woman",
+"text": "ひに ちかづくときは きをつけてね。",
+"pack": "m1",
+"k": "woman|ひに ちかづくときは きをつけてね。"
+},
+{
+"key": "kb7883d33a18",
+"who": "kb_woman",
+"text": "メラメラドンは みずが にがて なのよ。",
+"pack": "m1",
+"k": "woman|メラメラドンは みずが にがて なのよ。"
+},
+{
+"key": "kbc49e5caae0",
+"who": "kb_woman",
+"text": "メラメラドンが いなくなって ほっと したわ。",
+"pack": "m1",
+"k": "woman|メラメラドンが いなくなって ほっと したわ。"
+},
+{
+"key": "kb196ec70bb9",
+"who": "kb_narr",
+"text": "ボス メラメラドンとの たたかい！",
+"pack": "sys",
+"k": "narr|ボス メラメラドンとの たたかい！"
+},
+{
+"key": "kb6bdf7a245a",
+"who": "kb_narr",
+"text": "ほのおスライムには、「みず」と「かわ」と「あめ」が つよい！",
+"pack": "sys",
+"k": "narr|ほのおスライムには、「みず」と「かわ」と「あめ」が つよい！"
+},
+{
+"key": "kb1a63a3aefa",
+"who": "kb_fudeko",
+"text": "ここは「もりの むら」。",
+"pack": "sys",
+"k": "fudeko|ここは「もりの むら」。"
+},
+{
+"key": "kb074841d2fe",
+"who": "kb_fudeko",
+"text": "ボス「ヨルノヌシ」が あらわれた！",
+"pack": "sys",
+"k": "fudeko|ボス「ヨルノヌシ」が あらわれた！"
+},
+{
+"key": "kb5e28665730",
+"who": "kb_boss",
+"text": "まっくら ドロン！",
+"pack": "m2",
+"k": "boss|まっくら ドロン！"
+},
+{
+"key": "kb8fb27eaf4a",
+"who": "kb_oji",
+"text": "もりは きが いっぱい。",
+"pack": "m2",
+"k": "oji|もりは きが いっぱい。"
+},
+{
+"key": "kb29f34d8f56",
+"who": "kb_oji",
+"text": "はやしは きが すこし。",
+"pack": "m2",
+"k": "oji|はやしは きが すこし。"
+},
+{
+"key": "kbf12f8ee487",
+"who": "kb_oji",
+"text": "きが みっつで もり、ふたつで はやしだよ。",
+"pack": "m2",
+"k": "oji|きが みっつで もり、ふたつで はやしだよ。"
+},
+{
+"key": "kbd7d3e4c3ff",
+"who": "kb_boy",
+"text": "いぬの ポチと さんぽ ちゅう！",
+"pack": "m2",
+"k": "boy|いぬの ポチと さんぽ ちゅう！"
+},
+{
+"key": "kb7bab859e89",
+"who": "kb_boy",
+"text": "つかれたら きの したで やすもう。",
+"pack": "m2",
+"k": "boy|つかれたら きの したで やすもう。"
+},
+{
+"key": "kb5eb946716f",
+"who": "kb_elder",
+"text": "ここは もりの むら。",
+"pack": "m2",
+"k": "elder|ここは もりの むら。"
+},
+{
+"key": "kba19a81656e",
+"who": "kb_elder",
+"text": "いえは ろっけん。",
+"pack": "m2",
+"k": "elder|いえは ろっけん。"
+},
+{
+"key": "kbd6ca07ec61",
+"who": "kb_elder",
+"text": "よるに なると つきが でて、おばけが でるんだ。",
+"pack": "m2",
+"k": "elder|よるに なると つきが でて、おばけが でるんだ。"
+},
+{
+"key": "kb76711f8bea",
+"who": "kb_elder",
+"text": "ヨルノヌシが いなくなって、よるも あんしんじゃ。",
+"pack": "m2",
+"k": "elder|ヨルノヌシが いなくなって、よるも あんしんじゃ。"
+},
+{
+"key": "kb43f5b40b18",
+"who": "kb_oba",
+"text": "きを つけて いっておいで。",
+"pack": "m2",
+"k": "oba|きを つけて いっておいで。"
+},
+{
+"key": "kb3de3995bc7",
+"who": "kb_oba",
+"text": "いきものは みんな なかまだよ。",
+"pack": "m2",
+"k": "oba|いきものは みんな なかまだよ。"
+},
+{
+"key": "kb18946de2af",
+"who": "kb_oba",
+"text": "ななひきの こりすも いるの。",
+"pack": "m2",
+"k": "oba|ななひきの こりすも いるの。"
+},
+{
+"key": "kb01c5f00921",
+"who": "kb_narr",
+"text": "ここは もりの むら ろっけんの いえ",
+"pack": "m2",
+"k": "narr|ここは もりの むら ろっけんの いえ"
+},
+{
+"key": "kb52dadc2bef",
+"who": "kb_narr",
+"text": "ボス ヨルノヌシとの たたかい！",
+"pack": "sys",
+"k": "narr|ボス ヨルノヌシとの たたかい！"
+},
+{
+"key": "kba5feeb5714",
+"who": "kb_narr",
+"text": "よるおばけには、おひさまの「ひ」と、ほのおの「ひ」と、「つき」と「おう」が つよい！",
+"pack": "sys",
+"k": "narr|よるおばけには、おひさまの「ひ」と、ほのおの「ひ」と、「つき」と「おう」が つよい！"
+},
+{
+"key": "kb76e8a8fe5f",
+"who": "kb_fudeko",
+"text": "ここは「にぎやかな まち」。",
+"pack": "sys",
+"k": "fudeko|ここは「にぎやかな まち」。"
+},
+{
+"key": "kb543a36882b",
+"who": "kb_fudeko",
+"text": "この くにには たまごが 11こ。",
+"pack": "sys",
+"k": "fudeko|この くにには たまごが 11こ。"
+},
+{
+"key": "kb3ee932e5b7",
+"who": "kb_fudeko",
+"text": "ボス「ボスガラス」が あらわれた！",
+"pack": "sys",
+"k": "fudeko|ボス「ボスガラス」が あらわれた！"
+},
+{
+"key": "kb68b1ac27ce",
+"who": "kb_boss",
+"text": "カーカー つっつき！",
+"pack": "m3",
+"k": "boss|カーカー つっつき！"
+},
+{
+"key": "kbdc673e6f21",
+"who": "kb_police",
+"text": "まちには ひとが いっぱい。",
+"pack": "m3",
+"k": "police|まちには ひとが いっぱい。"
+},
+{
+"key": "kbc54cb4ea2d",
+"who": "kb_police",
+"text": "くるまに きを つけてね。",
+"pack": "m3",
+"k": "police|くるまに きを つけてね。"
+},
+{
+"key": "kbd5c813e1c7",
+"who": "kb_clerk",
+"text": "いらっしゃい！",
+"pack": "m3",
+"k": "clerk|いらっしゃい！"
+},
+{
+"key": "kbc22f0330df",
+"who": "kb_clerk",
+"text": "りんごは はちじゅうえんだよ。",
+"pack": "m3",
+"k": "clerk|りんごは はちじゅうえんだよ。"
+},
+{
+"key": "kbf648d71129",
+"who": "kb_clerk",
+"text": "きんいろの りんごも あるよ。",
+"pack": "m3",
+"k": "clerk|きんいろの りんごも あるよ。"
+},
+{
+"key": "kb03127c925f",
+"who": "kb_boy",
+"text": "おとこのこと おんなのこで おにごっこ！",
+"pack": "m3",
+"k": "boy|おとこのこと おんなのこで おにごっこ！"
+},
+{
+"key": "kbf1f42aa406",
+"who": "kb_girl",
+"text": "もう きゅうかいも つかまっちゃった〜。",
+"pack": "m3",
+"k": "girl|もう きゅうかいも つかまっちゃった〜。"
+},
+{
+"key": "kbf10e8212fa",
+"who": "kb_girl",
+"text": "カラスが ひとの パンを とっていくの。",
+"pack": "m3",
+"k": "girl|カラスが ひとの パンを とっていくの。"
+},
+{
+"key": "kbc8ff6b98e1",
+"who": "kb_girl",
+"text": "カラスが いなくなって、パンが たべられる！",
+"pack": "m3",
+"k": "girl|カラスが いなくなって、パンが たべられる！"
+},
+{
+"key": "kb92a70323f4",
+"who": "kb_narr",
+"text": "ボス ボスガラスとの たたかい！",
+"pack": "sys",
+"k": "narr|ボス ボスガラスとの たたかい！"
+},
+{
+"key": "kbc2d1d26468",
+"who": "kb_narr",
+"text": "いたずらカラスには、「ひと」と「おとこ」と「おんな」と「こ」と「いぬ」が つよい！",
+"pack": "sys",
+"k": "narr|いたずらカラスには、「ひと」と「おとこ」と「おんな」と「こ」と「いぬ」が つよい！"
+},
+{
+"key": "kb7cb2f455a9",
+"who": "kb_fudeko",
+"text": "ここは「がっこうの おか」。",
+"pack": "sys",
+"k": "fudeko|ここは「がっこうの おか」。"
+},
+{
+"key": "kb30f4bcd235",
+"who": "kb_fudeko",
+"text": "ボス「モジクイドン」が あらわれた！",
+"pack": "sys",
+"k": "fudeko|ボス「モジクイドン」が あらわれた！"
+},
+{
+"key": "kb96b5f6d187",
+"who": "kb_boss",
+"text": "もぐもぐ パクリ！",
+"pack": "m4",
+"k": "boss|もぐもぐ パクリ！"
+},
+{
+"key": "kbc03f4acbc8",
+"who": "kb_teacher",
+"text": "がっこうへ ようこそ！",
+"pack": "m4",
+"k": "teacher|がっこうへ ようこそ！"
+},
+{
+"key": "kb8d90787c2f",
+"who": "kb_teacher",
+"text": "わたしは せんせいです。",
+"pack": "m4",
+"k": "teacher|わたしは せんせいです。"
+},
+{
+"key": "kbb302bae116",
+"who": "kb_teacher",
+"text": "じを ただしく かくと、ぶんが よめるように なるよ。",
+"pack": "m4",
+"k": "teacher|じを ただしく かくと、ぶんが よめるように なるよ。"
+},
+{
+"key": "kb45c961e3ad",
+"who": "kb_girl",
+"text": "ほんが いっぱい！",
+"pack": "m4",
+"k": "girl|ほんが いっぱい！"
+},
+{
+"key": "kb3dfc5766ae",
+"who": "kb_girl",
+"text": "なまえを かいて かりてね。",
+"pack": "m4",
+"k": "girl|なまえを かいて かりてね。"
+},
+{
+"key": "kbd50a150734",
+"who": "kb_girl",
+"text": "モジクイドンに たべられないように！",
+"pack": "m4",
+"k": "girl|モジクイドンに たべられないように！"
+},
+{
+"key": "kb95033ccfbc",
+"who": "kb_girl",
+"text": "ほんの じが もどってきたよ！",
+"pack": "m4",
+"k": "girl|ほんの じが もどってきたよ！"
+},
+{
+"key": "kb4e49e8300a",
+"who": "kb_boy",
+"text": "ぼく、いちねんせい！",
+"pack": "m4",
+"k": "boy|ぼく、いちねんせい！"
+},
+{
+"key": "kb10e69e500c",
+"who": "kb_boy",
+"text": "じゅうまで かぞえられるよ。",
+"pack": "m4",
+"k": "boy|じゅうまで かぞえられるよ。"
+},
+{
+"key": "kbe6726bea6f",
+"who": "kb_boy",
+"text": "いち、に、さん…",
+"pack": "m4",
+"k": "boy|いち、に、さん…"
+},
+{
+"key": "kbf898d6c7da",
+"who": "kb_narr",
+"text": "ボス モジクイドンとの たたかい！",
+"pack": "sys",
+"k": "narr|ボス モジクイドンとの たたかい！"
+},
+{
+"key": "kb51cb8563c0",
+"who": "kb_narr",
+"text": "もじくいスライムには、「じ」と「ぶん」と「ほん」と「がく」と「な」が つよい！",
+"pack": "sys",
+"k": "narr|もじくいスライムには、「じ」と「ぶん」と「ほん」と「がく」と「な」が つよい！"
+},
+{
+"key": "kbead1678e91",
+"who": "kb_fudeko",
+"text": "ここは「おとの おまつり ひろば」。",
+"pack": "sys",
+"k": "fudeko|ここは「おとの おまつり ひろば」。"
+},
+{
+"key": "kb529f6da57e",
+"who": "kb_fudeko",
+"text": "ボス「ネムネムカバ」が あらわれた！",
+"pack": "sys",
+"k": "fudeko|ボス「ネムネムカバ」が あらわれた！"
+},
+{
+"key": "kb6c41e9de61",
+"who": "kb_boss",
+"text": "ふわぁ〜 あくび こうげき！",
+"pack": "m5",
+"k": "boss|ふわぁ〜 あくび こうげき！"
+},
+{
+"key": "kbe5c44f0dfa",
+"who": "kb_drummer",
+"text": "ドンドン！",
+"pack": "m5",
+"k": "drummer|ドンドン！"
+},
+{
+"key": "kba5a08d1175",
+"who": "kb_drummer",
+"text": "おとが きこえるかい？",
+"pack": "m5",
+"k": "drummer|おとが きこえるかい？"
+},
+{
+"key": "kb0689275c21",
+"who": "kb_drummer",
+"text": "みみを すませてごらん。",
+"pack": "m5",
+"k": "drummer|みみを すませてごらん。"
+},
+{
+"key": "kbda4aaf1e80",
+"who": "kb_boy",
+"text": "あしが はやいんだ！",
+"pack": "m5",
+"k": "boy|あしが はやいんだ！"
+},
+{
+"key": "kbc73deef60e",
+"who": "kb_boy",
+"text": "「よーい、どん！」で たって はしるよ。",
+"pack": "m5",
+"k": "boy|「よーい、どん！」で たって はしるよ。"
+},
+{
+"key": "kba314818215",
+"who": "kb_sumo",
+"text": "ちからくらべ しよう！",
+"pack": "m5",
+"k": "sumo|ちからくらべ しよう！"
+},
+{
+"key": "kb4072f4cc21",
+"who": "kb_sumo",
+"text": "てと てで ぐぐっと！",
+"pack": "m5",
+"k": "sumo|てと てで ぐぐっと！"
+},
+{
+"key": "kb10097d2524",
+"who": "kb_woman",
+"text": "めを つむって、くちで ふえを ふくの。",
+"pack": "m5",
+"k": "woman|めを つむって、くちで ふえを ふくの。"
+},
+{
+"key": "kb833a4ba5d8",
+"who": "kb_woman",
+"text": "みて！",
+"pack": "m5",
+"k": "woman|みて！"
+},
+{
+"key": "kb27e19f801b",
+"who": "kb_woman",
+"text": "はなびが でてきた！",
+"pack": "m5",
+"k": "woman|はなびが でてきた！"
+},
+{
+"key": "kb596860e5c6",
+"who": "kb_woman",
+"text": "ネムネムカバも おきて、いっしょに おどってるわ！",
+"pack": "m5",
+"k": "woman|ネムネムカバも おきて、いっしょに おどってるわ！"
+},
+{
+"key": "kb762551f3e1",
+"who": "kb_narr",
+"text": "ボス ネムネムカバとの たたかい！",
+"pack": "sys",
+"k": "narr|ボス ネムネムカバとの たたかい！"
+},
+{
+"key": "kb030457b212",
+"who": "kb_narr",
+"text": "ねむねむスライムには、「おと」と「はやい」と「みみ」と「め」と「くち」が つよい！",
+"pack": "sys",
+"k": "narr|ねむねむスライムには、「おと」と「はやい」と「みみ」と「め」と「くち」が つよい！"
+},
+{
+"key": "kb0d0853b73b",
+"who": "kb_fudeko",
+"text": "ここは「そらの やまみち」。",
+"pack": "sys",
+"k": "fudeko|ここは「そらの やまみち」。"
+},
+{
+"key": "kbe57155fb23",
+"who": "kb_fudeko",
+"text": "この くにには たまごが 10こ。",
+"pack": "sys",
+"k": "fudeko|この くにには たまごが 10こ。"
+},
+{
+"key": "kb377b7705e2",
+"who": "kb_fudeko",
+"text": "ボス「フブキング」が あらわれた！",
+"pack": "sys",
+"k": "fudeko|ボス「フブキング」が あらわれた！"
+},
+{
+"key": "kb6f124ff298",
+"who": "kb_boss",
+"text": "ビュービュー ふぶき！",
+"pack": "m6",
+"k": "boss|ビュービュー ふぶき！"
+},
+{
+"key": "kb688619829a",
+"who": "kb_oji",
+"text": "やまの うえは そらに ちかい。",
+"pack": "m6",
+"k": "oji|やまの うえは そらに ちかい。"
+},
+{
+"key": "kb8877c3d531",
+"who": "kb_oji",
+"text": "てんきが かわりやすいよ。",
+"pack": "m6",
+"k": "oji|てんきが かわりやすいよ。"
+},
+{
+"key": "kb2de2802733",
+"who": "kb_oji",
+"text": "したを みると、まちが ちいさく みえる！",
+"pack": "m6",
+"k": "oji|したを みると、まちが ちいさく みえる！"
+},
+{
+"key": "kb9c74376224",
+"who": "kb_elder",
+"text": "よるには ほしが ひゃく、せん… かぞえきれない。",
+"pack": "m6",
+"k": "elder|よるには ほしが ひゃく、せん… かぞえきれない。"
+},
+{
+"key": "kbed6894c309",
+"who": "kb_girl",
+"text": "おおきな ゆきだるま つくったよ。",
+"pack": "m6",
+"k": "girl|おおきな ゆきだるま つくったよ。"
+},
+{
+"key": "kb5c3d987709",
+"who": "kb_girl",
+"text": "なかに はいれる かまくらも あるの！",
+"pack": "m6",
+"k": "girl|なかに はいれる かまくらも あるの！"
+},
+{
+"key": "kba2f36d030f",
+"who": "kb_girl",
+"text": "ふぶきが やんで、そりあそびが できる！",
+"pack": "m6",
+"k": "girl|ふぶきが やんで、そりあそびが できる！"
+},
+{
+"key": "kb47f0e7e299",
+"who": "kb_narr",
+"text": "この うえは てんに いちばん ちかい やま",
+"pack": "m6",
+"k": "narr|この うえは てんに いちばん ちかい やま"
+},
+{
+"key": "kb976c462159",
+"who": "kb_narr",
+"text": "ボス フブキングとの たたかい！",
+"pack": "sys",
+"k": "narr|ボス フブキングとの たたかい！"
+},
+{
+"key": "kbd35366add8",
+"who": "kb_narr",
+"text": "こおりスライムには、ほのおの「ひ」と、おひさまの「ひ」と、「てん」が つよい！",
+"pack": "sys",
+"k": "narr|こおりスライムには、ほのおの「ひ」と、おひさまの「ひ」と、「てん」が つよい！"
+},
+{
+"key": "kb77e5e0fa2e",
+"who": "kb_fudeko",
+"text": "ここは「おうさまの くに」。",
+"pack": "sys",
+"k": "fudeko|ここは「おうさまの くに」。"
+},
+{
+"key": "kb1a7cdb1fd9",
+"who": "kb_fudeko",
+"text": "ボス「イロヌスミ」が あらわれた！",
+"pack": "sys",
+"k": "fudeko|ボス「イロヌスミ」が あらわれた！"
+},
+{
+"key": "kb29485387d5",
+"who": "kb_boss",
+"text": "いろ すいとり！",
+"pack": "m7",
+"k": "boss|いろ すいとり！"
+},
+{
+"key": "kb8ca73f1032",
+"who": "kb_king",
+"text": "よくぞ きた！",
+"pack": "m7",
+"k": "king|よくぞ きた！"
+},
+{
+"key": "kbdfa16df88a",
+"who": "kb_king",
+"text": "わしは この くにの おうさま じゃ。",
+"pack": "m7",
+"k": "king|わしは この くにの おうさま じゃ。"
+},
+{
+"key": "kbb6c3024fa3",
+"who": "kb_king",
+"text": "まおうの てしたに、あか・あお・しろの いろを ぬすまれて しもうた…",
+"pack": "m7",
+"k": "king|まおうの てしたに、あか・あお・しろの いろを ぬすまれて しもうた…"
+},
+{
+"key": "kb42898629e4",
+"who": "kb_king",
+"text": "いろが もどった！",
+"pack": "m7",
+"k": "king|いろが もどった！"
+},
+{
+"key": "kba9f3d80fb1",
+"who": "kb_king",
+"text": "まおうの しろは みぎの ほうじゃ。",
+"pack": "m7",
+"k": "king|まおうの しろは みぎの ほうじゃ。"
+},
+{
+"key": "kbf583812c33",
+"who": "kb_king",
+"text": "おうさまからの おねがいじゃ。",
+"pack": "m7",
+"k": "king|おうさまからの おねがいじゃ。"
+},
+{
+"key": "kbecad408664",
+"who": "kb_king",
+"text": "ことばを とりもどしておくれ！",
+"pack": "m7",
+"k": "king|ことばを とりもどしておくれ！"
+},
+{
+"key": "kb455171f5eb",
+"who": "kb_princess",
+"text": "たまの ネックレス、いとが きれちゃったの。",
+"pack": "m7",
+"k": "princess|たまの ネックレス、いとが きれちゃったの。"
+},
+{
+"key": "kb764d9904ca",
+"who": "kb_soldier",
+"text": "ひだり、みぎ、ひだり、みぎ！",
+"pack": "m7",
+"k": "soldier|ひだり、みぎ、ひだり、みぎ！"
+},
+{
+"key": "kbe1c490e9a4",
+"who": "kb_soldier",
+"text": "まいにち はやおき！",
+"pack": "m7",
+"k": "soldier|まいにち はやおき！"
+},
+{
+"key": "kb6d7fdf5aa5",
+"who": "kb_soldier",
+"text": "ゆうがたに なると、おしろが あかく そまるんだ。",
+"pack": "m7",
+"k": "soldier|ゆうがたに なると、おしろが あかく そまるんだ。"
+},
+{
+"key": "kb4d9ff69ea6",
+"who": "kb_narr",
+"text": "ボス イロヌスミとの たたかい！",
+"pack": "sys",
+"k": "narr|ボス イロヌスミとの たたかい！"
+},
+{
+"key": "kb0de8ebae4c",
+"who": "kb_narr",
+"text": "いろぬすみスライムには、「あか」「あお」「しろ」「たま」が つよい！",
+"pack": "sys",
+"k": "narr|いろぬすみスライムには、「あか」「あお」「しろ」「たま」が つよい！"
+},
+{
+"key": "kb0c8fb8503e",
+"who": "kb_boss",
+"text": "ひらがな ビーム！",
+"pack": "m8",
+"k": "boss|ひらがな ビーム！"
+},
+{
+"key": "kb2310cf0c55",
+"who": "kb_ghost",
+"text": "まおうさまは この うえの へやに いるよ。",
+"pack": "m8",
+"k": "ghost|まおうさまは この うえの へやに いるよ。"
+},
+{
+"key": "kb42055c5d7d",
+"who": "kb_ghost",
+"text": "ほんとうは ちょっと さみしがりや なんだって…",
+"pack": "m8",
+"k": "ghost|ほんとうは ちょっと さみしがりや なんだって…"
+},
+{
+"key": "kbdc3e5b07d0",
+"who": "kb_narr",
+"text": "まおう ヒラガナーとの たたかい！",
+"pack": "sys",
+"k": "narr|まおう ヒラガナーとの たたかい！"
+},
+{
+"key": "kbfd76d32767",
+"who": "kb_narr",
+"text": "なかまを 5にん えらんでね。",
+"pack": "sys",
+"k": "narr|なかまを 5にん えらんでね。"
+},
+{
+"key": "kbf8fdb0431a",
+"who": "kb_narr",
+"text": "どの かんじも つよい！",
+"pack": "sys",
+"k": "narr|どの かんじも つよい！"
+},
+{
+"key": "kb9c5543e62f",
+"who": "kb_maou",
+"text": "ひらがなも かんじも、どっちも だいじな ことばだね！",
+"pack": "sys",
+"k": "maou|ひらがなも かんじも、どっちも だいじな ことばだね！"
+},
+{
+"key": "kbe19649dfdd",
+"who": "kb_maou",
+"text": "また あそびに きてね。",
+"pack": "sys",
+"k": "maou|また あそびに きてね。"
+},
+{
+"key": "kb21b5f5f7be",
+"who": "kb_maouA",
+"text": "わっはっは！",
+"pack": "sys",
+"k": "maouA|わっはっは！"
+},
+{
+"key": "kbfeed21b4b3",
+"who": "kb_maouA",
+"text": "よく きたな。",
+"pack": "sys",
+"k": "maouA|よく きたな。"
+},
+{
+"key": "kb8fb55292d0",
+"who": "kb_maouA",
+"text": "ことばは ぜんぶ ひらがなで いいのだ！",
+"pack": "sys",
+"k": "maouA|ことばは ぜんぶ ひらがなで いいのだ！"
+},
+{
+"key": "kbda21fb5f43",
+"who": "kb_maouA",
+"text": "かんじなんて いらない！",
+"pack": "sys",
+"k": "maouA|かんじなんて いらない！"
+},
+{
+"key": "kbfdc67e13b8",
+"who": "kb_fudeko",
+"text": "そんなこと ない！",
+"pack": "sys",
+"k": "fudeko|そんなこと ない！"
+},
+{
+"key": "kb96490c4191",
+"who": "kb_fudeko",
+"text": "みんなで とりもどした かんじの ちから、みせてあげよう！",
+"pack": "sys",
+"k": "fudeko|みんなで とりもどした かんじの ちから、みせてあげよう！"
+},
+{
+"key": "kb4c7df26fe2",
+"who": "kb_maouA",
+"text": "うう… まいった…",
+"pack": "sys",
+"k": "maouA|うう… まいった…"
+},
+{
+"key": "kb14ae2d5b48",
+"who": "kb_maou",
+"text": "ほんとうは、かんじが かっこよくて、うらやましかったんだ…",
+"pack": "sys",
+"k": "maou|ほんとうは、かんじが かっこよくて、うらやましかったんだ…"
+},
+{
+"key": "kb7f7cb82789",
+"who": "kb_fudeko",
+"text": "ひらがなも かんじも、どっちも だいじな ことばだよ。",
+"pack": "sys",
+"k": "fudeko|ひらがなも かんじも、どっちも だいじな ことばだよ。"
+},
+{
+"key": "kb188e948527",
+"who": "kb_fudeko",
+"text": "いっしょに なかよく しよう！",
+"pack": "sys",
+"k": "fudeko|いっしょに なかよく しよう！"
+},
+{
+"key": "kbd3c9ece77b",
+"who": "kb_maou",
+"text": "…うん！",
+"pack": "sys",
+"k": "maou|…うん！"
+},
+{
+"key": "kb75fd036c51",
+"who": "kb_maou",
+"text": "ありがとう！",
+"pack": "sys",
+"k": "maou|ありがとう！"
+},
+{
+"key": "kbcae5b34716",
+"who": "kb_narr",
+"text": "こうして、ことばの くにに かんじが ぜんぶ もどりました。",
+"pack": "sys",
+"k": "narr|こうして、ことばの くにに かんじが ぜんぶ もどりました。"
+},
+{
+"key": "kbcc4bb8e89c",
+"who": "kb_anim",
+"text": "モ〜！",
+"pack": "sys",
+"k": "anim|モ〜！"
+},
+{
+"key": "kbd57302baaf",
+"who": "kb_anim",
+"text": "ピヨピヨ",
+"pack": "sys",
+"k": "anim|ピヨピヨ"
+},
+{
+"key": "kb856225f4cf",
+"who": "kb_anim",
+"text": "ブーブー",
+"pack": "sys",
+"k": "anim|ブーブー"
+},
+{
+"key": "kb20a4830f19",
+"who": "kb_anim",
+"text": "ワンワン！",
+"pack": "sys",
+"k": "anim|ワンワン！"
+},
+{
+"key": "kbbb8ed7be6c",
+"who": "kb_anim",
+"text": "ニャ〜",
+"pack": "sys",
+"k": "anim|ニャ〜"
+},
+{
+"key": "kbcc8bbe33af",
+"who": "kb_anim",
+"text": "ガーガー",
+"pack": "sys",
+"k": "anim|ガーガー"
+},
+{
+"key": "kb3acab7684f",
+"who": "kb_anim",
+"text": "ケロケロ",
+"pack": "sys",
+"k": "anim|ケロケロ"
+},
+{
+"key": "kb512fc3f53e",
+"who": "kb_anim",
+"text": "ホーホー",
+"pack": "sys",
+"k": "anim|ホーホー"
+},
+{
+"key": "kb628fd15a63",
+"who": "kb_anim",
+"text": "ぴょんぴょん",
+"pack": "sys",
+"k": "anim|ぴょんぴょん"
+},
+{
+"key": "kb5c6a24d8b9",
+"who": "kb_anim",
+"text": "ポッポー",
+"pack": "sys",
+"k": "anim|ポッポー"
+},
+{
+"key": "kb613a5781a1",
+"who": "kb_anim",
+"text": "メェ〜",
+"pack": "sys",
+"k": "anim|メェ〜"
+},
+{
+"key": "kb8f8115b347",
+"who": "kb_anim",
+"text": "ヒヒーン！",
+"pack": "sys",
+"k": "anim|ヒヒーン！"
+},
+{
+"key": "kb2d4ba187d8",
+"who": "kb_anim",
+"text": "クワッ",
+"pack": "sys",
+"k": "anim|クワッ"
+},
+{
+"key": "kb9003a96de5",
+"who": "kb_narr",
+"text": "むかしむかし、ことばの くにでは、かんじたちが みんな なかよく くらしていました。",
+"pack": "sys",
+"k": "narr|むかしむかし、ことばの くにでは、かんじたちが みんな なかよく くらしていました。"
+},
+{
+"key": "kbe7126120d1",
+"who": "kb_narr",
+"text": "ある日、まおう ヒラガナーが あらわれて、かんじを ぜんぶ たまごに ふうじこめて しまいました！",
+"pack": "sys",
+"k": "narr|ある日、まおう ヒラガナーが あらわれて、かんじを ぜんぶ たまごに ふうじこめて しまいました！"
+},
+{
+"key": "kb467b5dfca4",
+"who": "kb_narr",
+"text": "たまごは せかいじゅうに ちらばり、ことばは ぜんぶ ひらがなに なって しまいました。",
+"pack": "sys",
+"k": "narr|たまごは せかいじゅうに ちらばり、ことばは ぜんぶ ひらがなに なって しまいました。"
+},
+{
+"key": "kba1bdb1be3b",
+"who": "kb_narr",
+"text": "そこに あらわれたのは、ふでの ようせい ふでこ。",
+"pack": "sys",
+"k": "narr|そこに あらわれたのは、ふでの ようせい ふでこ。"
+},
+{
+"key": "kb63f86f1e9f",
+"who": "kb_narr",
+"text": "「きみが かんじを かけば、たまごの ふういんが とけるんだ！",
+"pack": "sys",
+"k": "narr|「きみが かんじを かけば、たまごの ふういんが とけるんだ！"
+},
+{
+"key": "kb6b7ffb6d5e",
+"who": "kb_narr",
+"text": "いっしょに とりもどそう！」",
+"pack": "sys",
+"k": "narr|いっしょに とりもどそう！」"
+},
+{
+"key": "kb8d6e929468",
+"who": "kb_fudeko",
+"text": "たまごに かいてある 字を、かきじゅんどおりに なぞろう。",
+"pack": "sys",
+"k": "fudeko|たまごに かいてある 字を、かきじゅんどおりに なぞろう。"
+},
+{
+"key": "kb2da5cd2479",
+"who": "kb_fudeko",
+"text": "オレンジの まるから スタート！",
+"pack": "sys",
+"k": "fudeko|オレンジの まるから スタート！"
+},
+{
+"key": "kb605092a9f5",
+"who": "kb_fudeko",
+"text": "ピキッ！",
+"pack": "sys",
+"k": "fudeko|ピキッ！"
+},
+{
+"key": "kbc841ef8fc7",
+"who": "kb_fudeko",
+"text": "ひびが はいった！",
+"pack": "sys",
+"k": "fudeko|ひびが はいった！"
+},
+{
+"key": "kbeecdbfb8a7",
+"who": "kb_fudeko",
+"text": "10かい かくと うまれるよ",
+"pack": "sys",
+"k": "fudeko|10かい かくと うまれるよ"
+},
+{
+"key": "kb5542b59ba3",
+"who": "kb_narr",
+"text": "つづきから かこう！",
+"pack": "sys",
+"k": "narr|つづきから かこう！"
+},
+{
+"key": "kb43c9e02312",
+"who": "kb_narr",
+"text": "こうか ばつぐん！",
+"pack": "sys",
+"k": "narr|こうか ばつぐん！"
+},
+{
+"key": "kb3ed47bd731",
+"who": "kb_narr",
+"text": "みんな つかれちゃった。",
+"pack": "sys",
+"k": "narr|みんな つかれちゃった。"
+},
+{
+"key": "kbbe817ee628",
+"who": "kb_narr",
+"text": "でも ボスも へとへとだ！",
+"pack": "sys",
+"k": "narr|でも ボスも へとへとだ！"
+},
+{
+"key": "kb18bc833cab",
+"who": "kb_narr",
+"text": "また いどもう！",
+"pack": "sys",
+"k": "narr|また いどもう！"
+},
+{
+"key": "kb056f1305b4",
+"who": "kb_narr",
+"text": "やっつけた！",
+"pack": "sys",
+"k": "narr|やっつけた！"
+},
+{
+"key": "kb240e496df6",
+"who": "kb_narr",
+"text": "ほしが でてきた！",
+"pack": "sys",
+"k": "narr|ほしが でてきた！"
+},
+{
+"key": "kb02175a078b",
+"who": "kb_narr",
+"text": "やった！",
+"pack": "sys",
+"k": "narr|やった！"
+},
+{
+"key": "kbb9bc1903ad",
+"who": "kb_narr",
+"text": "まおうを たおした！",
+"pack": "sys",
+"k": "narr|まおうを たおした！"
+},
+{
+"key": "kbc1c5c2ef16",
+"who": "kb_narr",
+"text": "おめでとう！",
+"pack": "sys",
+"k": "narr|おめでとう！"
+},
+{
+"key": "kb96afe2797d",
+"who": "kb_narr",
+"text": "かんじを ぜんぶ とりもどした！",
+"pack": "sys",
+"k": "narr|かんじを ぜんぶ とりもどした！"
+},
+{
+"key": "kb8b13a3abda",
+"who": "kb_narr",
+"text": "オレンジの まるから スタート！",
+"pack": "sys",
+"k": "narr|オレンジの まるから スタート！"
+},
+{
+"key": "kbc56b80fc42",
+"who": "kb_narr",
+"text": "もういっかい！",
+"pack": "sys",
+"k": "narr|もういっかい！"
+},
+{
+"key": "kb80f30ce645",
+"who": "kb_narr",
+"text": "おてほんが ひかったよ。",
+"pack": "sys",
+"k": "narr|おてほんが ひかったよ。"
+},
+{
+"key": "kbe1c763eec5",
+"who": "kb_narr",
+"text": "いっしょに なぞろう",
+"pack": "sys",
+"k": "narr|いっしょに なぞろう"
+},
+{
+"key": "kbff32a104f0",
+"who": "kb_narr",
+"text": "ピキッ！",
+"pack": "sys",
+"k": "narr|ピキッ！"
+},
+{
+"key": "kba6e88d374c",
+"who": "kb_narr",
+"text": "ひびが はいった！",
+"pack": "sys",
+"k": "narr|ひびが はいった！"
+},
+{
+"key": "kb7b10aeb9ae",
+"who": "kb_narr",
+"text": "1かい",
+"pack": "sys",
+"k": "narr|1かい"
+},
+{
+"key": "kbb0aa467710",
+"who": "kb_narr",
+"text": "2かい",
+"pack": "sys",
+"k": "narr|2かい"
+},
+{
+"key": "kbc561bd3d28",
+"who": "kb_narr",
+"text": "ゆれてる！",
+"pack": "sys",
+"k": "narr|ゆれてる！"
+},
+{
+"key": "kb9f00b92910",
+"who": "kb_narr",
+"text": "3かい",
+"pack": "sys",
+"k": "narr|3かい"
+},
+{
+"key": "kbd88f3c449a",
+"who": "kb_narr",
+"text": "4かい",
+"pack": "sys",
+"k": "narr|4かい"
+},
+{
+"key": "kbcc26ddf4a9",
+"who": "kb_narr",
+"text": "5かい",
+"pack": "sys",
+"k": "narr|5かい"
+},
+{
+"key": "kbef7fd0051d",
+"who": "kb_narr",
+"text": "なかで うごいてる！",
+"pack": "sys",
+"k": "narr|なかで うごいてる！"
+},
+{
+"key": "kb2d82cc085b",
+"who": "kb_narr",
+"text": "6かい",
+"pack": "sys",
+"k": "narr|6かい"
+},
+{
+"key": "kb0c54bef863",
+"who": "kb_narr",
+"text": "7かい",
+"pack": "sys",
+"k": "narr|7かい"
+},
+{
+"key": "kb65ff4a2940",
+"who": "kb_narr",
+"text": "8かい",
+"pack": "sys",
+"k": "narr|8かい"
+},
+{
+"key": "kb92fcf904e1",
+"who": "kb_narr",
+"text": "もうすこし！",
+"pack": "sys",
+"k": "narr|もうすこし！"
+},
+{
+"key": "kbe0e2fd0d76",
+"who": "kb_narr",
+"text": "9かい",
+"pack": "sys",
+"k": "narr|9かい"
+},
+{
+"key": "kbc44e5b2df6",
+"who": "kb_narr",
+"text": "みずスライムが あらわれた！",
+"pack": "sys",
+"k": "narr|みずスライムが あらわれた！"
+},
+{
+"key": "kb3392f86973",
+"who": "kb_narr",
+"text": "みずスライムには、ほのおの「ひ」と、おひさまの「ひ」と、「つち」が つよい！",
+"pack": "sys",
+"k": "narr|みずスライムには、ほのおの「ひ」と、おひさまの「ひ」と、「つち」が つよい！"
+},
+{
+"key": "kbf54a3349af",
+"who": "kb_narr",
+"text": "みずは ひで わかすと きえる。",
+"pack": "sys",
+"k": "narr|みずは ひで わかすと きえる。"
+},
+{
+"key": "kb34c9f7876a",
+"who": "kb_narr",
+"text": "ひ（おひさま）で かわく。",
+"pack": "sys",
+"k": "narr|ひ（おひさま）で かわく。"
+},
+{
+"key": "kb89e7b3db40",
+"who": "kb_narr",
+"text": "つちが すいこむ",
+"pack": "sys",
+"k": "narr|つちが すいこむ"
+},
+{
+"key": "kb0f86790b34",
+"who": "kb_narr",
+"text": "ほのおスライムが あらわれた！",
+"pack": "sys",
+"k": "narr|ほのおスライムが あらわれた！"
+},
+{
+"key": "kb898cd4c57b",
+"who": "kb_narr",
+"text": "ほのおは みずや あめで きえる。",
+"pack": "sys",
+"k": "narr|ほのおは みずや あめで きえる。"
+},
+{
+"key": "kba38372bfee",
+"who": "kb_narr",
+"text": "かわの みずでも きえる",
+"pack": "sys",
+"k": "narr|かわの みずでも きえる"
+},
+{
+"key": "kb177bbb174b",
+"who": "kb_narr",
+"text": "くさスライムが あらわれた！",
+"pack": "sys",
+"k": "narr|くさスライムが あらわれた！"
+},
+{
+"key": "kbee77d8c67e",
+"who": "kb_narr",
+"text": "くさスライムには、ほのおの「ひ」と、「むし」と、「て」が つよい！",
+"pack": "sys",
+"k": "narr|くさスライムには、ほのおの「ひ」と、「むし」と、「て」が つよい！"
+},
+{
+"key": "kbfc9d206b3f",
+"who": "kb_narr",
+"text": "くさは ひで もえる。",
+"pack": "sys",
+"k": "narr|くさは ひで もえる。"
+},
+{
+"key": "kbc073a89d1c",
+"who": "kb_narr",
+"text": "むしが たべる。",
+"pack": "sys",
+"k": "narr|むしが たべる。"
+},
+{
+"key": "kb7c4c9b1f25",
+"who": "kb_narr",
+"text": "てで ぬける",
+"pack": "sys",
+"k": "narr|てで ぬける"
+},
+{
+"key": "kb9341c26e0e",
+"who": "kb_narr",
+"text": "いわスライムが あらわれた！",
+"pack": "sys",
+"k": "narr|いわスライムが あらわれた！"
+},
+{
+"key": "kbf41b88d7a0",
+"who": "kb_narr",
+"text": "いわは みずで けずれる。",
+"pack": "sys",
+"k": "narr|いわは みずで けずれる。"
+},
+{
+"key": "kb83bc106a43",
+"who": "kb_narr",
+"text": "ちからもちや おおきい ひとが わる。",
+"pack": "sys",
+"k": "narr|ちからもちや おおきい ひとが わる。"
+},
+{
+"key": "kbb217495835",
+"who": "kb_narr",
+"text": "きの ねっこも わる",
+"pack": "sys",
+"k": "narr|きの ねっこも わる"
+},
+{
+"key": "kbfc78e9af9b",
+"who": "kb_narr",
+"text": "よるおばけが あらわれた！",
+"pack": "sys",
+"k": "narr|よるおばけが あらわれた！"
+},
+{
+"key": "kbe64e3ef0bb",
+"who": "kb_narr",
+"text": "くらやみの おばけは、あかるい ひや ひ、つきの ひかりが にがて。",
+"pack": "sys",
+"k": "narr|くらやみの おばけは、あかるい ひや ひ、つきの ひかりが にがて。"
+},
+{
+"key": "kb59cb8def19",
+"who": "kb_narr",
+"text": "おうさまも こわい",
+"pack": "sys",
+"k": "narr|おうさまも こわい"
+},
+{
+"key": "kbc991d9544f",
+"who": "kb_narr",
+"text": "かぜスライムが あらわれた！",
+"pack": "sys",
+"k": "narr|かぜスライムが あらわれた！"
+},
+{
+"key": "kb94828df663",
+"who": "kb_narr",
+"text": "かぜスライムには、「やま」と「もり」と「はやし」と「いし」が つよい！",
+"pack": "sys",
+"k": "narr|かぜスライムには、「やま」と「もり」と「はやし」と「いし」が つよい！"
+},
+{
+"key": "kb61a2f30a62",
+"who": "kb_narr",
+"text": "かぜは やまや もり・はやしに ぶつかって とまる。",
+"pack": "sys",
+"k": "narr|かぜは やまや もり・はやしに ぶつかって とまる。"
+},
+{
+"key": "kbcf649749be",
+"who": "kb_narr",
+"text": "いしは とばされない",
+"pack": "sys",
+"k": "narr|いしは とばされない"
+},
+{
+"key": "kb13fc2013d4",
+"who": "kb_narr",
+"text": "こおりスライムが あらわれた！",
+"pack": "sys",
+"k": "narr|こおりスライムが あらわれた！"
+},
+{
+"key": "kb26cc456012",
+"who": "kb_narr",
+"text": "こおりは ひや ひの ひかりで とける。",
+"pack": "sys",
+"k": "narr|こおりは ひや ひの ひかりで とける。"
+},
+{
+"key": "kbfbc8b74ae5",
+"who": "kb_narr",
+"text": "てん（そら）の おひさまにも よわい",
+"pack": "sys",
+"k": "narr|てん（そら）の おひさまにも よわい"
+},
+{
+"key": "kb14ff4c0575",
+"who": "kb_narr",
+"text": "ねむねむスライムが あらわれた！",
+"pack": "sys",
+"k": "narr|ねむねむスライムが あらわれた！"
+},
+{
+"key": "kb9611caddf9",
+"who": "kb_narr",
+"text": "おおきな おとで おきる。",
+"pack": "sys",
+"k": "narr|おおきな おとで おきる。"
+},
+{
+"key": "kbb1c26d9d86",
+"who": "kb_narr",
+"text": "はやく おきて！",
+"pack": "sys",
+"k": "narr|はやく おきて！"
+},
+{
+"key": "kb4a3315d3a9",
+"who": "kb_narr",
+"text": "みみもとで くちから よぶと めを さます",
+"pack": "sys",
+"k": "narr|みみもとで くちから よぶと めを さます"
+},
+{
+"key": "kb7336687f13",
+"who": "kb_narr",
+"text": "もじくいスライムが あらわれた！",
+"pack": "sys",
+"k": "narr|もじくいスライムが あらわれた！"
+},
+{
+"key": "kbfceb9cd21c",
+"who": "kb_narr",
+"text": "じや ぶんや ほんを たべすぎると、おなか いっぱいに なる。",
+"pack": "sys",
+"k": "narr|じや ぶんや ほんを たべすぎると、おなか いっぱいに なる。"
+},
+{
+"key": "kba44991c082",
+"who": "kb_narr",
+"text": "がくも なまえも だいすき",
+"pack": "sys",
+"k": "narr|がくも なまえも だいすき"
+},
+{
+"key": "kbde3621ab74",
+"who": "kb_narr",
+"text": "まよいスライムが あらわれた！",
+"pack": "sys",
+"k": "narr|まよいスライムが あらわれた！"
+},
+{
+"key": "kb6c10cccfc4",
+"who": "kb_narr",
+"text": "まよいスライムには、「みぎ」「ひだり」「うえ」「した」「みる」が つよい！",
+"pack": "sys",
+"k": "narr|まよいスライムには、「みぎ」「ひだり」「うえ」「した」「みる」が つよい！"
+},
+{
+"key": "kb807a22e60b",
+"who": "kb_narr",
+"text": "みぎ・ひだり・うえ・したと みちを おしえて、みて あげると おうちに かえれる",
+"pack": "sys",
+"k": "narr|みぎ・ひだり・うえ・したと みちを おしえて、みて あげると おうちに かえれる"
+},
+{
+"key": "kb95be385dcc",
+"who": "kb_narr",
+"text": "いたずらカラスが あらわれた！",
+"pack": "sys",
+"k": "narr|いたずらカラスが あらわれた！"
+},
+{
+"key": "kb0ca5533365",
+"who": "kb_narr",
+"text": "カラスは ひとや いぬが くると にげていく。",
+"pack": "sys",
+"k": "narr|カラスは ひとや いぬが くると にげていく。"
+},
+{
+"key": "kb952bf23eac",
+"who": "kb_narr",
+"text": "おとこのこも おんなのこも こわい",
+"pack": "sys",
+"k": "narr|おとこのこも おんなのこも こわい"
+},
+{
+"key": "kb734b83e7dc",
+"who": "kb_narr",
+"text": "いろぬすみスライムが あらわれた！",
+"pack": "sys",
+"k": "narr|いろぬすみスライムが あらわれた！"
+},
+{
+"key": "kbcd914f889c",
+"who": "kb_narr",
+"text": "ぬすまれた あか・あお・しろの いろや たまを とりもどすと よわくなる",
+"pack": "sys",
+"k": "narr|ぬすまれた あか・あお・しろの いろや たまを とりもどすと よわくなる"
+},
+{
+"key": "kb4dc8fa5d24",
+"who": "kb_narr",
+"text": "すきな ところを ぼうけんしよう",
+"pack": "sys",
+"k": "narr|すきな ところを ぼうけんしよう"
+},
+{
+"key": "kb5c433c6e54",
+"who": "kb_narr",
+"text": "みぎの みちから つぎの くにへ すすもう",
+"pack": "sys",
+"k": "narr|みぎの みちから つぎの くにへ すすもう"
+},
+{
+"key": "kbeeb3f16405",
+"who": "kb_narr",
+"text": "たまごを さがそう！",
+"pack": "sys",
+"k": "narr|たまごを さがそう！"
+},
+{
+"key": "kb3616a7000d",
+"who": "kb_narr",
+"text": "さわると ひらくよ",
+"pack": "sys",
+"k": "narr|さわると ひらくよ"
+},
+{
+"key": "kb7bbff36e5e",
+"who": "kb_narr",
+"text": "とちゅうの たまご。",
+"pack": "sys",
+"k": "narr|とちゅうの たまご。"
+},
+{
+"key": "kb1b8972eef6",
+"who": "kb_narr",
+"text": "あと 1かい！",
+"pack": "sys",
+"k": "narr|あと 1かい！"
+},
+{
+"key": "kb91d5ab50a5",
+"who": "kb_narr",
+"text": "あと 2かい！",
+"pack": "sys",
+"k": "narr|あと 2かい！"
+},
+{
+"key": "kbadb7d8b3e3",
+"who": "kb_narr",
+"text": "あと 3かい！",
+"pack": "sys",
+"k": "narr|あと 3かい！"
+},
+{
+"key": "kbc5358cdb62",
+"who": "kb_narr",
+"text": "あと 4かい！",
+"pack": "sys",
+"k": "narr|あと 4かい！"
+},
+{
+"key": "kb175dd33485",
+"who": "kb_narr",
+"text": "あと 5かい！",
+"pack": "sys",
+"k": "narr|あと 5かい！"
+},
+{
+"key": "kb069ffa91da",
+"who": "kb_narr",
+"text": "あと 6かい！",
+"pack": "sys",
+"k": "narr|あと 6かい！"
+},
+{
+"key": "kb1b56f28938",
+"who": "kb_narr",
+"text": "あと 7かい！",
+"pack": "sys",
+"k": "narr|あと 7かい！"
+},
+{
+"key": "kb1f2c0e8f54",
+"who": "kb_narr",
+"text": "あと 8かい！",
+"pack": "sys",
+"k": "narr|あと 8かい！"
+},
+{
+"key": "kb7de0c69ffa",
+"who": "kb_narr",
+"text": "あと 9かい！",
+"pack": "sys",
+"k": "narr|あと 9かい！"
+},
+{
+"key": "kb75071fc64e",
+"who": "kb_narr",
+"text": "てきを ぜんぶ やっつけよう！",
+"pack": "sys",
+"k": "narr|てきを ぜんぶ やっつけよう！"
+},
+{
+"key": "kbf4c3c3e6a2",
+"who": "kb_narr",
+"text": "のこり 1",
+"pack": "sys",
+"k": "narr|のこり 1"
+},
+{
+"key": "kbffc8bd9ed8",
+"who": "kb_narr",
+"text": "のこり 2",
+"pack": "sys",
+"k": "narr|のこり 2"
+},
+{
+"key": "kb9d407e2a91",
+"who": "kb_narr",
+"text": "のこり 3",
+"pack": "sys",
+"k": "narr|のこり 3"
+},
+{
+"key": "kbb308dd0933",
+"who": "kb_narr",
+"text": "のこり 4",
+"pack": "sys",
+"k": "narr|のこり 4"
+},
+{
+"key": "kb537aec5562",
+"who": "kb_narr",
+"text": "のこり 5",
+"pack": "sys",
+"k": "narr|のこり 5"
+},
+{
+"key": "kb48c4cbedbe",
+"who": "kb_narr",
+"text": "ボス「ゴロゴロキング」に さわって たたかおう！",
+"pack": "sys",
+"k": "narr|ボス「ゴロゴロキング」に さわって たたかおう！"
+},
+{
+"key": "kb67f09fe752",
+"who": "kb_narr",
+"text": "ボス「メラメラドン」に さわって たたかおう！",
+"pack": "sys",
+"k": "narr|ボス「メラメラドン」に さわって たたかおう！"
+},
+{
+"key": "kb594b87c6f4",
+"who": "kb_narr",
+"text": "ボス「ヨルノヌシ」に さわって たたかおう！",
+"pack": "sys",
+"k": "narr|ボス「ヨルノヌシ」に さわって たたかおう！"
+},
+{
+"key": "kb30615f3ae8",
+"who": "kb_narr",
+"text": "ボス「ボスガラス」に さわって たたかおう！",
+"pack": "sys",
+"k": "narr|ボス「ボスガラス」に さわって たたかおう！"
+},
+{
+"key": "kbc9125caff1",
+"who": "kb_narr",
+"text": "ボス「モジクイドン」に さわって たたかおう！",
+"pack": "sys",
+"k": "narr|ボス「モジクイドン」に さわって たたかおう！"
+},
+{
+"key": "kbfd3f568727",
+"who": "kb_narr",
+"text": "ボス「ネムネムカバ」に さわって たたかおう！",
+"pack": "sys",
+"k": "narr|ボス「ネムネムカバ」に さわって たたかおう！"
+},
+{
+"key": "kbd608ab5cde",
+"who": "kb_narr",
+"text": "ボス「フブキング」に さわって たたかおう！",
+"pack": "sys",
+"k": "narr|ボス「フブキング」に さわって たたかおう！"
+},
+{
+"key": "kb3f015bce68",
+"who": "kb_narr",
+"text": "ボス「イロヌスミ」に さわって たたかおう！",
+"pack": "sys",
+"k": "narr|ボス「イロヌスミ」に さわって たたかおう！"
+},
+{
+"key": "kb4431743594",
+"who": "kb_narr",
+"text": "ボス「まおう ヒラガナー」に さわって たたかおう！",
+"pack": "sys",
+"k": "narr|ボス「まおう ヒラガナー」に さわって たたかおう！"
+},
+{
+"key": "kb81423dc12c",
+"who": "kb_narr",
+"text": "たまごを みつけた！",
+"pack": "g0",
+"k": "narr|たまごを みつけた！"
+},
+{
+"key": "kbeaadcddc12",
+"who": "kb_narr",
+"text": "この じは「やま」。",
+"pack": "g0",
+"k": "narr|この じは「やま」。"
+},
+{
+"key": "kbb10932186a",
+"who": "kb_narr",
+"text": "10かい かいてね！",
+"pack": "g0",
+"k": "narr|10かい かいてね！"
+},
+{
+"key": "kb0d360e313a",
+"who": "kb_narr",
+"text": "うまれた！",
+"pack": "g0",
+"k": "narr|うまれた！"
+},
+{
+"key": "kbf8ee4904b3",
+"who": "kb_narr",
+"text": "やまちゃん。",
+"pack": "g0",
+"k": "narr|やまちゃん。"
+},
+{
+"key": "kb3a55c76da0",
+"who": "kb_narr",
+"text": "たかく もりあがった「やま」。",
+"pack": "g0",
+"k": "narr|たかく もりあがった「やま」。"
+},
+{
+"key": "kba8c1a0f7e0",
+"who": "kb_narr",
+"text": "3つの とんがりが やまの かたち。",
+"pack": "g0",
+"k": "narr|3つの とんがりが やまの かたち。"
+},
+{
+"key": "kbede394a5c6",
+"who": "kb_narr",
+"text": "つよいぞ！",
+"pack": "g0",
+"k": "narr|つよいぞ！"
+},
+{
+"key": "kb3884e32996",
+"who": "kb_narr",
+"text": "「やま」を かいて こうげき！",
+"pack": "g0",
+"k": "narr|「やま」を かいて こうげき！"
+},
+{
+"key": "kba01b73117b",
+"who": "kb_narr",
+"text": "やま！",
+"pack": "g0",
+"k": "narr|やま！"
+},
+{
+"key": "kbdd7741b855",
+"who": "kb_narr",
+"text": "やまちゃんは つかれて ねむっちゃった。",
+"pack": "g0",
+"k": "narr|やまちゃんは つかれて ねむっちゃった。"
+},
+{
+"key": "kbd09365f94f",
+"who": "kb_narr",
+"text": "つぎは やまちゃん！",
+"pack": "g0",
+"k": "narr|つぎは やまちゃん！"
+},
+{
+"key": "kbe20ca6e98e",
+"who": "kb_narr",
+"text": "たのんだよ！",
+"pack": "g0",
+"k": "narr|たのんだよ！"
+},
+{
+"key": "kb12ecd5c5ed",
+"who": "kb_narr",
+"text": "いけっ、やまちゃん！",
+"pack": "g0",
+"k": "narr|いけっ、やまちゃん！"
+},
+{
+"key": "kbb8fa6c66db",
+"who": "kb_narr",
+"text": "やまちゃんが レベルアップ！",
+"pack": "g0",
+"k": "narr|やまちゃんが レベルアップ！"
+},
+{
+"key": "kb27a03ee784",
+"who": "kb_narr",
+"text": "この じは「き」。",
+"pack": "g1",
+"k": "narr|この じは「き」。"
+},
+{
+"key": "kb57f7f3b1f9",
+"who": "kb_narr",
+"text": "きーぼう。",
+"pack": "g1",
+"k": "narr|きーぼう。"
+},
+{
+"key": "kb1d5d743997",
+"who": "kb_narr",
+"text": "はえている「き」。",
+"pack": "g1",
+"k": "narr|はえている「き」。"
+},
+{
+"key": "kbf1de7e5d7b",
+"who": "kb_narr",
+"text": "上が えだ、下が ねっこ。",
+"pack": "g1",
+"k": "narr|上が えだ、下が ねっこ。"
+},
+{
+"key": "kb0262a68e5f",
+"who": "kb_narr",
+"text": "「き」を かいて こうげき！",
+"pack": "g1",
+"k": "narr|「き」を かいて こうげき！"
+},
+{
+"key": "kbd2b0bbb379",
+"who": "kb_narr",
+"text": "き！",
+"pack": "g1",
+"k": "narr|き！"
+},
+{
+"key": "kb0a4a88f410",
+"who": "kb_narr",
+"text": "きーぼうは つかれて ねむっちゃった。",
+"pack": "g1",
+"k": "narr|きーぼうは つかれて ねむっちゃった。"
+},
+{
+"key": "kbeb58f452de",
+"who": "kb_narr",
+"text": "つぎは きーぼう！",
+"pack": "g1",
+"k": "narr|つぎは きーぼう！"
+},
+{
+"key": "kb2197b96ee5",
+"who": "kb_narr",
+"text": "いけっ、きーぼう！",
+"pack": "g1",
+"k": "narr|いけっ、きーぼう！"
+},
+{
+"key": "kb29623232bc",
+"who": "kb_narr",
+"text": "きーぼうが レベルアップ！",
+"pack": "g1",
+"k": "narr|きーぼうが レベルアップ！"
+},
+{
+"key": "kbb0a43ede20",
+"who": "kb_narr",
+"text": "この じは「みず」。",
+"pack": "g2",
+"k": "narr|この じは「みず」。"
+},
+{
+"key": "kbfaa74268c8",
+"who": "kb_narr",
+"text": "みずっこ。",
+"pack": "g2",
+"k": "narr|みずっこ。"
+},
+{
+"key": "kb54ffe34210",
+"who": "kb_narr",
+"text": "ながれる「みず」。",
+"pack": "g2",
+"k": "narr|ながれる「みず」。"
+},
+{
+"key": "kbccc4875484",
+"who": "kb_narr",
+"text": "まんなかが ながれ、まわりが しぶき。",
+"pack": "g2",
+"k": "narr|まんなかが ながれ、まわりが しぶき。"
+},
+{
+"key": "kb6689d18aa6",
+"who": "kb_narr",
+"text": "「みず」を かいて こうげき！",
+"pack": "g2",
+"k": "narr|「みず」を かいて こうげき！"
+},
+{
+"key": "kbaa374cf5da",
+"who": "kb_narr",
+"text": "みず！",
+"pack": "g2",
+"k": "narr|みず！"
+},
+{
+"key": "kb573558e111",
+"who": "kb_narr",
+"text": "みずっこは つかれて ねむっちゃった。",
+"pack": "g2",
+"k": "narr|みずっこは つかれて ねむっちゃった。"
+},
+{
+"key": "kb3c967249e6",
+"who": "kb_narr",
+"text": "つぎは みずっこ！",
+"pack": "g2",
+"k": "narr|つぎは みずっこ！"
+},
+{
+"key": "kb1035381442",
+"who": "kb_narr",
+"text": "いけっ、みずっこ！",
+"pack": "g2",
+"k": "narr|いけっ、みずっこ！"
+},
+{
+"key": "kb1f15e2938a",
+"who": "kb_narr",
+"text": "みずっこが レベルアップ！",
+"pack": "g2",
+"k": "narr|みずっこが レベルアップ！"
+},
+{
+"key": "kb9a69e1a271",
+"who": "kb_narr",
+"text": "この じは「かわ」。",
+"pack": "g3",
+"k": "narr|この じは「かわ」。"
+},
+{
+"key": "kb85adc8baea",
+"who": "kb_narr",
+"text": "かわさん。",
+"pack": "g3",
+"k": "narr|かわさん。"
+},
+{
+"key": "kbabd3dabfe2",
+"who": "kb_narr",
+"text": "みずが ながれる「かわ」。",
+"pack": "g3",
+"k": "narr|みずが ながれる「かわ」。"
+},
+{
+"key": "kb6c12996b6a",
+"who": "kb_narr",
+"text": "3ぼんの ながれ。",
+"pack": "g3",
+"k": "narr|3ぼんの ながれ。"
+},
+{
+"key": "kb6db92d7f6a",
+"who": "kb_narr",
+"text": "「かわ」を かいて こうげき！",
+"pack": "g3",
+"k": "narr|「かわ」を かいて こうげき！"
+},
+{
+"key": "kbc8ea12a466",
+"who": "kb_narr",
+"text": "かわ！",
+"pack": "g3",
+"k": "narr|かわ！"
+},
+{
+"key": "kb4da30cf047",
+"who": "kb_narr",
+"text": "かわさんは つかれて ねむっちゃった。",
+"pack": "g3",
+"k": "narr|かわさんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb80811cde15",
+"who": "kb_narr",
+"text": "つぎは かわさん！",
+"pack": "g3",
+"k": "narr|つぎは かわさん！"
+},
+{
+"key": "kb7c96728c27",
+"who": "kb_narr",
+"text": "いけっ、かわさん！",
+"pack": "g3",
+"k": "narr|いけっ、かわさん！"
+},
+{
+"key": "kb0a64b3f9b2",
+"who": "kb_narr",
+"text": "かわさんが レベルアップ！",
+"pack": "g3",
+"k": "narr|かわさんが レベルアップ！"
+},
+{
+"key": "kb7c6a335fba",
+"who": "kb_narr",
+"text": "この じは「ひ」。",
+"pack": "g4",
+"k": "narr|この じは「ひ」。"
+},
+{
+"key": "kbb05b9c09ef",
+"who": "kb_narr",
+"text": "ひーくん。",
+"pack": "g4",
+"k": "narr|ひーくん。"
+},
+{
+"key": "kb83b4825d53",
+"who": "kb_narr",
+"text": "もえる「ひ」。",
+"pack": "g4",
+"k": "narr|もえる「ひ」。"
+},
+{
+"key": "kbf03cf80b1e",
+"who": "kb_narr",
+"text": "ほのおの かたちから できた字。",
+"pack": "g4",
+"k": "narr|ほのおの かたちから できた字。"
+},
+{
+"key": "kb7545284697",
+"who": "kb_narr",
+"text": "「ひ」を かいて こうげき！",
+"pack": "g4",
+"k": "narr|「ひ」を かいて こうげき！"
+},
+{
+"key": "kb16e4731799",
+"who": "kb_narr",
+"text": "ひ！",
+"pack": "g4",
+"k": "narr|ひ！"
+},
+{
+"key": "kb94f391b1c0",
+"who": "kb_narr",
+"text": "ひーくんは つかれて ねむっちゃった。",
+"pack": "g4",
+"k": "narr|ひーくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb6f440badb7",
+"who": "kb_narr",
+"text": "つぎは ひーくん！",
+"pack": "g4",
+"k": "narr|つぎは ひーくん！"
+},
+{
+"key": "kbb7bdf35246",
+"who": "kb_narr",
+"text": "いけっ、ひーくん！",
+"pack": "g4",
+"k": "narr|いけっ、ひーくん！"
+},
+{
+"key": "kbc5341e8f84",
+"who": "kb_narr",
+"text": "ひーくんが レベルアップ！",
+"pack": "g4",
+"k": "narr|ひーくんが レベルアップ！"
+},
+{
+"key": "kbd22e297a36",
+"who": "kb_narr",
+"text": "この じは「あめ」。",
+"pack": "g5",
+"k": "narr|この じは「あめ」。"
+},
+{
+"key": "kb27b841eea3",
+"who": "kb_narr",
+"text": "あめちゃん。",
+"pack": "g5",
+"k": "narr|あめちゃん。"
+},
+{
+"key": "kb514d9330b1",
+"who": "kb_narr",
+"text": "そらから ふる「あめ」。",
+"pack": "g5",
+"k": "narr|そらから ふる「あめ」。"
+},
+{
+"key": "kbf5d3cafbdb",
+"who": "kb_narr",
+"text": "くもから しずくが おちる。",
+"pack": "g5",
+"k": "narr|くもから しずくが おちる。"
+},
+{
+"key": "kb1c6fd73dfb",
+"who": "kb_narr",
+"text": "「あめ」を かいて こうげき！",
+"pack": "g5",
+"k": "narr|「あめ」を かいて こうげき！"
+},
+{
+"key": "kbbe89e1f3a1",
+"who": "kb_narr",
+"text": "あめ！",
+"pack": "g5",
+"k": "narr|あめ！"
+},
+{
+"key": "kb413786b984",
+"who": "kb_narr",
+"text": "あめちゃんは つかれて ねむっちゃった。",
+"pack": "g5",
+"k": "narr|あめちゃんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb112fe95598",
+"who": "kb_narr",
+"text": "つぎは あめちゃん！",
+"pack": "g5",
+"k": "narr|つぎは あめちゃん！"
+},
+{
+"key": "kb14792c3b79",
+"who": "kb_narr",
+"text": "いけっ、あめちゃん！",
+"pack": "g5",
+"k": "narr|いけっ、あめちゃん！"
+},
+{
+"key": "kbc56a4ba0fd",
+"who": "kb_narr",
+"text": "あめちゃんが レベルアップ！",
+"pack": "g5",
+"k": "narr|あめちゃんが レベルアップ！"
+},
+{
+"key": "kba97dcc47b3",
+"who": "kb_narr",
+"text": "この じは「いし」。",
+"pack": "g6",
+"k": "narr|この じは「いし」。"
+},
+{
+"key": "kb704cde4449",
+"who": "kb_narr",
+"text": "いしまる。",
+"pack": "g6",
+"k": "narr|いしまる。"
+},
+{
+"key": "kb7535822874",
+"who": "kb_narr",
+"text": "かたい「いし」。",
+"pack": "g6",
+"k": "narr|かたい「いし」。"
+},
+{
+"key": "kbcde699cc6d",
+"who": "kb_narr",
+"text": "がけの したに ころがる いし。",
+"pack": "g6",
+"k": "narr|がけの したに ころがる いし。"
+},
+{
+"key": "kbb96fc5fbaf",
+"who": "kb_narr",
+"text": "「いし」を かいて こうげき！",
+"pack": "g6",
+"k": "narr|「いし」を かいて こうげき！"
+},
+{
+"key": "kb8cbcd1a230",
+"who": "kb_narr",
+"text": "いし！",
+"pack": "g6",
+"k": "narr|いし！"
+},
+{
+"key": "kbfafdbf02fe",
+"who": "kb_narr",
+"text": "いしまるは つかれて ねむっちゃった。",
+"pack": "g6",
+"k": "narr|いしまるは つかれて ねむっちゃった。"
+},
+{
+"key": "kb50ac2d263a",
+"who": "kb_narr",
+"text": "つぎは いしまる！",
+"pack": "g6",
+"k": "narr|つぎは いしまる！"
+},
+{
+"key": "kb69b1d7840e",
+"who": "kb_narr",
+"text": "いけっ、いしまる！",
+"pack": "g6",
+"k": "narr|いけっ、いしまる！"
+},
+{
+"key": "kb17c3c8fd4e",
+"who": "kb_narr",
+"text": "いしまるが レベルアップ！",
+"pack": "g6",
+"k": "narr|いしまるが レベルアップ！"
+},
+{
+"key": "kb4f80f5c94a",
+"who": "kb_narr",
+"text": "この じは「かい」。",
+"pack": "g7",
+"k": "narr|この じは「かい」。"
+},
+{
+"key": "kb085425c12a",
+"who": "kb_narr",
+"text": "かいちゃん。",
+"pack": "g7",
+"k": "narr|かいちゃん。"
+},
+{
+"key": "kb039d5dcbc0",
+"who": "kb_narr",
+"text": "うみの「かい」。",
+"pack": "g7",
+"k": "narr|うみの「かい」。"
+},
+{
+"key": "kb06a872bb8b",
+"who": "kb_narr",
+"text": "むかしは おかねの かわりだった。",
+"pack": "g7",
+"k": "narr|むかしは おかねの かわりだった。"
+},
+{
+"key": "kba354c40215",
+"who": "kb_narr",
+"text": "「かい」を かいて こうげき！",
+"pack": "g7",
+"k": "narr|「かい」を かいて こうげき！"
+},
+{
+"key": "kbb8062afd3f",
+"who": "kb_narr",
+"text": "かい！",
+"pack": "g7",
+"k": "narr|かい！"
+},
+{
+"key": "kb75b9063b02",
+"who": "kb_narr",
+"text": "かいちゃんは つかれて ねむっちゃった。",
+"pack": "g7",
+"k": "narr|かいちゃんは つかれて ねむっちゃった。"
+},
+{
+"key": "kbbf61c09073",
+"who": "kb_narr",
+"text": "つぎは かいちゃん！",
+"pack": "g7",
+"k": "narr|つぎは かいちゃん！"
+},
+{
+"key": "kbc2284633b4",
+"who": "kb_narr",
+"text": "いけっ、かいちゃん！",
+"pack": "g7",
+"k": "narr|いけっ、かいちゃん！"
+},
+{
+"key": "kb79086b209c",
+"who": "kb_narr",
+"text": "かいちゃんが レベルアップ！",
+"pack": "g7",
+"k": "narr|かいちゃんが レベルアップ！"
+},
+{
+"key": "kbd1199c9e83",
+"who": "kb_narr",
+"text": "この じは「むし」。",
+"pack": "g8",
+"k": "narr|この じは「むし」。"
+},
+{
+"key": "kb228961a5d9",
+"who": "kb_narr",
+"text": "むしまる。",
+"pack": "g8",
+"k": "narr|むしまる。"
+},
+{
+"key": "kb1bae9a4b1e",
+"who": "kb_narr",
+"text": "ちいさな いきもの「むし」。",
+"pack": "g8",
+"k": "narr|ちいさな いきもの「むし」。"
+},
+{
+"key": "kb4407c8e16e",
+"who": "kb_narr",
+"text": "「むし」を かいて こうげき！",
+"pack": "g8",
+"k": "narr|「むし」を かいて こうげき！"
+},
+{
+"key": "kbe7d5c1a271",
+"who": "kb_narr",
+"text": "むし！",
+"pack": "g8",
+"k": "narr|むし！"
+},
+{
+"key": "kb56386068bd",
+"who": "kb_narr",
+"text": "むしまるは つかれて ねむっちゃった。",
+"pack": "g8",
+"k": "narr|むしまるは つかれて ねむっちゃった。"
+},
+{
+"key": "kb6799607ae2",
+"who": "kb_narr",
+"text": "つぎは むしまる！",
+"pack": "g8",
+"k": "narr|つぎは むしまる！"
+},
+{
+"key": "kbbdd707a848",
+"who": "kb_narr",
+"text": "いけっ、むしまる！",
+"pack": "g8",
+"k": "narr|いけっ、むしまる！"
+},
+{
+"key": "kb3761b82158",
+"who": "kb_narr",
+"text": "むしまるが レベルアップ！",
+"pack": "g8",
+"k": "narr|むしまるが レベルアップ！"
+},
+{
+"key": "kb869a57f100",
+"who": "kb_narr",
+"text": "この じは「たけ」。",
+"pack": "g9",
+"k": "narr|この じは「たけ」。"
+},
+{
+"key": "kb15af024818",
+"who": "kb_narr",
+"text": "たけたけ。",
+"pack": "g9",
+"k": "narr|たけたけ。"
+},
+{
+"key": "kb1a98da7557",
+"who": "kb_narr",
+"text": "まっすぐ のびる「たけ」。",
+"pack": "g9",
+"k": "narr|まっすぐ のびる「たけ」。"
+},
+{
+"key": "kbe9a866313c",
+"who": "kb_narr",
+"text": "はっぱが 2つ ならぶ。",
+"pack": "g9",
+"k": "narr|はっぱが 2つ ならぶ。"
+},
+{
+"key": "kbc143b4613f",
+"who": "kb_narr",
+"text": "「たけ」を かいて こうげき！",
+"pack": "g9",
+"k": "narr|「たけ」を かいて こうげき！"
+},
+{
+"key": "kba0b6486949",
+"who": "kb_narr",
+"text": "たけ！",
+"pack": "g9",
+"k": "narr|たけ！"
+},
+{
+"key": "kb739f4f4950",
+"who": "kb_narr",
+"text": "たけたけは つかれて ねむっちゃった。",
+"pack": "g9",
+"k": "narr|たけたけは つかれて ねむっちゃった。"
+},
+{
+"key": "kbe8384f6b5b",
+"who": "kb_narr",
+"text": "つぎは たけたけ！",
+"pack": "g9",
+"k": "narr|つぎは たけたけ！"
+},
+{
+"key": "kbdcc48966c1",
+"who": "kb_narr",
+"text": "いけっ、たけたけ！",
+"pack": "g9",
+"k": "narr|いけっ、たけたけ！"
+},
+{
+"key": "kbcec41afc95",
+"who": "kb_narr",
+"text": "たけたけが レベルアップ！",
+"pack": "g9",
+"k": "narr|たけたけが レベルアップ！"
+},
+{
+"key": "kbaa568546d0",
+"who": "kb_narr",
+"text": "この じは「よん」。",
+"pack": "g10",
+"k": "narr|この じは「よん」。"
+},
+{
+"key": "kb67073d5d10",
+"who": "kb_narr",
+"text": "おべんとうくん。",
+"pack": "g10",
+"k": "narr|おべんとうくん。"
+},
+{
+"key": "kb2b0c2050be",
+"who": "kb_narr",
+"text": "「よっつ」。",
+"pack": "g10",
+"k": "narr|「よっつ」。"
+},
+{
+"key": "kb3d2d0a48a5",
+"who": "kb_narr",
+"text": "しかくい おべんとうばこの かどは よっつ。",
+"pack": "g10",
+"k": "narr|しかくい おべんとうばこの かどは よっつ。"
+},
+{
+"key": "kb408e06d974",
+"who": "kb_narr",
+"text": "「よん」を かいて こうげき！",
+"pack": "g10",
+"k": "narr|「よん」を かいて こうげき！"
+},
+{
+"key": "kbf3c17a8adc",
+"who": "kb_narr",
+"text": "よん！",
+"pack": "g10",
+"k": "narr|よん！"
+},
+{
+"key": "kb5c774cdc3d",
+"who": "kb_narr",
+"text": "おべんとうくんは つかれて ねむっちゃった。",
+"pack": "g10",
+"k": "narr|おべんとうくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb931059d594",
+"who": "kb_narr",
+"text": "つぎは おべんとうくん！",
+"pack": "g10",
+"k": "narr|つぎは おべんとうくん！"
+},
+{
+"key": "kb170b255748",
+"who": "kb_narr",
+"text": "いけっ、おべんとうくん！",
+"pack": "g10",
+"k": "narr|いけっ、おべんとうくん！"
+},
+{
+"key": "kb7fba08c0c5",
+"who": "kb_narr",
+"text": "おべんとうくんが レベルアップ！",
+"pack": "g10",
+"k": "narr|おべんとうくんが レベルアップ！"
+},
+{
+"key": "kb33b10f0936",
+"who": "kb_narr",
+"text": "この じは「ご」。",
+"pack": "g11",
+"k": "narr|この じは「ご」。"
+},
+{
+"key": "kb2e387e525a",
+"who": "kb_narr",
+"text": "サイコロくん。",
+"pack": "g11",
+"k": "narr|サイコロくん。"
+},
+{
+"key": "kb703752a7b3",
+"who": "kb_narr",
+"text": "「いつつ」。",
+"pack": "g11",
+"k": "narr|「いつつ」。"
+},
+{
+"key": "kb71648a44d7",
+"who": "kb_narr",
+"text": "サイコロの 5の めの ならびと おなじ。",
+"pack": "g11",
+"k": "narr|サイコロの 5の めの ならびと おなじ。"
+},
+{
+"key": "kb6354ca933a",
+"who": "kb_narr",
+"text": "「ご」を かいて こうげき！",
+"pack": "g11",
+"k": "narr|「ご」を かいて こうげき！"
+},
+{
+"key": "kb9939bf3bd7",
+"who": "kb_narr",
+"text": "ご！",
+"pack": "g11",
+"k": "narr|ご！"
+},
+{
+"key": "kb037d8c33c3",
+"who": "kb_narr",
+"text": "サイコロくんは つかれて ねむっちゃった。",
+"pack": "g11",
+"k": "narr|サイコロくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb7602456cc2",
+"who": "kb_narr",
+"text": "つぎは サイコロくん！",
+"pack": "g11",
+"k": "narr|つぎは サイコロくん！"
+},
+{
+"key": "kbbfb6164312",
+"who": "kb_narr",
+"text": "いけっ、サイコロくん！",
+"pack": "g11",
+"k": "narr|いけっ、サイコロくん！"
+},
+{
+"key": "kbf8b9feafda",
+"who": "kb_narr",
+"text": "サイコロくんが レベルアップ！",
+"pack": "g11",
+"k": "narr|サイコロくんが レベルアップ！"
+},
+{
+"key": "kb1e8bcaedf9",
+"who": "kb_narr",
+"text": "この じは「つち」。",
+"pack": "g12",
+"k": "narr|この じは「つち」。"
+},
+{
+"key": "kb2d8b711c44",
+"who": "kb_narr",
+"text": "つっちー。",
+"pack": "g12",
+"k": "narr|つっちー。"
+},
+{
+"key": "kb6bbf13bb59",
+"who": "kb_narr",
+"text": "じめんの「つち」。",
+"pack": "g12",
+"k": "narr|じめんの「つち」。"
+},
+{
+"key": "kb67460bf57b",
+"who": "kb_narr",
+"text": "つちから めが でる かたち。",
+"pack": "g12",
+"k": "narr|つちから めが でる かたち。"
+},
+{
+"key": "kb4da336c224",
+"who": "kb_narr",
+"text": "「つち」を かいて こうげき！",
+"pack": "g12",
+"k": "narr|「つち」を かいて こうげき！"
+},
+{
+"key": "kbd73a3e53be",
+"who": "kb_narr",
+"text": "つち！",
+"pack": "g12",
+"k": "narr|つち！"
+},
+{
+"key": "kbb168f2e3b1",
+"who": "kb_narr",
+"text": "つっちーは つかれて ねむっちゃった。",
+"pack": "g12",
+"k": "narr|つっちーは つかれて ねむっちゃった。"
+},
+{
+"key": "kb1f44113978",
+"who": "kb_narr",
+"text": "つぎは つっちー！",
+"pack": "g12",
+"k": "narr|つぎは つっちー！"
+},
+{
+"key": "kb9149bca203",
+"who": "kb_narr",
+"text": "いけっ、つっちー！",
+"pack": "g12",
+"k": "narr|いけっ、つっちー！"
+},
+{
+"key": "kbdcd01a428d",
+"who": "kb_narr",
+"text": "つっちーが レベルアップ！",
+"pack": "g12",
+"k": "narr|つっちーが レベルアップ！"
+},
+{
+"key": "kb1a6d77eb72",
+"who": "kb_narr",
+"text": "この じは「た」。",
+"pack": "g13",
+"k": "narr|この じは「た」。"
+},
+{
+"key": "kbc9ae581841",
+"who": "kb_narr",
+"text": "たんぼ。",
+"pack": "g13",
+"k": "narr|たんぼ。"
+},
+{
+"key": "kba10fdb7f17",
+"who": "kb_narr",
+"text": "おこめを そだてる「たんぼ」。",
+"pack": "g13",
+"k": "narr|おこめを そだてる「たんぼ」。"
+},
+{
+"key": "kb6b33defbbf",
+"who": "kb_narr",
+"text": "あぜみちで 4つに わかれる。",
+"pack": "g13",
+"k": "narr|あぜみちで 4つに わかれる。"
+},
+{
+"key": "kbcfc2af1cb8",
+"who": "kb_narr",
+"text": "「た」を かいて こうげき！",
+"pack": "g13",
+"k": "narr|「た」を かいて こうげき！"
+},
+{
+"key": "kbeadb904d2c",
+"who": "kb_narr",
+"text": "た！",
+"pack": "g13",
+"k": "narr|た！"
+},
+{
+"key": "kb5f5ec603bc",
+"who": "kb_narr",
+"text": "たんぼは つかれて ねむっちゃった。",
+"pack": "g13",
+"k": "narr|たんぼは つかれて ねむっちゃった。"
+},
+{
+"key": "kb2d6055c9bc",
+"who": "kb_narr",
+"text": "つぎは たんぼ！",
+"pack": "g13",
+"k": "narr|つぎは たんぼ！"
+},
+{
+"key": "kbb571f49433",
+"who": "kb_narr",
+"text": "いけっ、たんぼ！",
+"pack": "g13",
+"k": "narr|いけっ、たんぼ！"
+},
+{
+"key": "kb66b1097682",
+"who": "kb_narr",
+"text": "たんぼが レベルアップ！",
+"pack": "g13",
+"k": "narr|たんぼが レベルアップ！"
+},
+{
+"key": "kb87c79a9ff0",
+"who": "kb_narr",
+"text": "この じは「もり」。",
+"pack": "g14",
+"k": "narr|この じは「もり」。"
+},
+{
+"key": "kb275e5f7344",
+"who": "kb_narr",
+"text": "もりおう。",
+"pack": "g14",
+"k": "narr|もりおう。"
+},
+{
+"key": "kb2463aac200",
+"who": "kb_narr",
+"text": "木が 3ぼん、もっと ふかい「もり」。",
+"pack": "g14",
+"k": "narr|木が 3ぼん、もっと ふかい「もり」。"
+},
+{
+"key": "kbb825bbbbf5",
+"who": "kb_narr",
+"text": "「もり」を かいて こうげき！",
+"pack": "g14",
+"k": "narr|「もり」を かいて こうげき！"
+},
+{
+"key": "kb5f95c99aff",
+"who": "kb_narr",
+"text": "もり！",
+"pack": "g14",
+"k": "narr|もり！"
+},
+{
+"key": "kb5d104e123e",
+"who": "kb_narr",
+"text": "もりおうは つかれて ねむっちゃった。",
+"pack": "g14",
+"k": "narr|もりおうは つかれて ねむっちゃった。"
+},
+{
+"key": "kb0e82f8982c",
+"who": "kb_narr",
+"text": "つぎは もりおう！",
+"pack": "g14",
+"k": "narr|つぎは もりおう！"
+},
+{
+"key": "kbaf3ad8d70e",
+"who": "kb_narr",
+"text": "いけっ、もりおう！",
+"pack": "g14",
+"k": "narr|いけっ、もりおう！"
+},
+{
+"key": "kb59b0c89338",
+"who": "kb_narr",
+"text": "もりおうが レベルアップ！",
+"pack": "g14",
+"k": "narr|もりおうが レベルアップ！"
+},
+{
+"key": "kb1047813640",
+"who": "kb_narr",
+"text": "この じは「はやし」。",
+"pack": "g15",
+"k": "narr|この じは「はやし」。"
+},
+{
+"key": "kb78f1e34893",
+"who": "kb_narr",
+"text": "はやしん。",
+"pack": "g15",
+"k": "narr|はやしん。"
+},
+{
+"key": "kbf0cf8bf0f7",
+"who": "kb_narr",
+"text": "木が 2ほん、たくさん ならんだ「はやし」。",
+"pack": "g15",
+"k": "narr|木が 2ほん、たくさん ならんだ「はやし」。"
+},
+{
+"key": "kb9192f9059e",
+"who": "kb_narr",
+"text": "「はやし」を かいて こうげき！",
+"pack": "g15",
+"k": "narr|「はやし」を かいて こうげき！"
+},
+{
+"key": "kbe790dbd46e",
+"who": "kb_narr",
+"text": "はやし！",
+"pack": "g15",
+"k": "narr|はやし！"
+},
+{
+"key": "kb142e4b2922",
+"who": "kb_narr",
+"text": "はやしんは つかれて ねむっちゃった。",
+"pack": "g15",
+"k": "narr|はやしんは つかれて ねむっちゃった。"
+},
+{
+"key": "kbfaf37c6a5e",
+"who": "kb_narr",
+"text": "つぎは はやしん！",
+"pack": "g15",
+"k": "narr|つぎは はやしん！"
+},
+{
+"key": "kbc21488b1be",
+"who": "kb_narr",
+"text": "いけっ、はやしん！",
+"pack": "g15",
+"k": "narr|いけっ、はやしん！"
+},
+{
+"key": "kb1146a01d50",
+"who": "kb_narr",
+"text": "はやしんが レベルアップ！",
+"pack": "g15",
+"k": "narr|はやしんが レベルアップ！"
+},
+{
+"key": "kbc37206154f",
+"who": "kb_narr",
+"text": "この じは「むら」。",
+"pack": "g16",
+"k": "narr|この じは「むら」。"
+},
+{
+"key": "kbaaf67d6ea8",
+"who": "kb_narr",
+"text": "むらぼう。",
+"pack": "g16",
+"k": "narr|むらぼう。"
+},
+{
+"key": "kbe90cbed50e",
+"who": "kb_narr",
+"text": "いえが あつまった いなかの「むら」。",
+"pack": "g16",
+"k": "narr|いえが あつまった いなかの「むら」。"
+},
+{
+"key": "kb331540930a",
+"who": "kb_narr",
+"text": "「むら」を かいて こうげき！",
+"pack": "g16",
+"k": "narr|「むら」を かいて こうげき！"
+},
+{
+"key": "kbddf356ad01",
+"who": "kb_narr",
+"text": "むら！",
+"pack": "g16",
+"k": "narr|むら！"
+},
+{
+"key": "kb25aba6f578",
+"who": "kb_narr",
+"text": "むらぼうは つかれて ねむっちゃった。",
+"pack": "g16",
+"k": "narr|むらぼうは つかれて ねむっちゃった。"
+},
+{
+"key": "kb6209b393ab",
+"who": "kb_narr",
+"text": "つぎは むらぼう！",
+"pack": "g16",
+"k": "narr|つぎは むらぼう！"
+},
+{
+"key": "kb8f4c1114e9",
+"who": "kb_narr",
+"text": "いけっ、むらぼう！",
+"pack": "g16",
+"k": "narr|いけっ、むらぼう！"
+},
+{
+"key": "kb031f8454e9",
+"who": "kb_narr",
+"text": "むらぼうが レベルアップ！",
+"pack": "g16",
+"k": "narr|むらぼうが レベルアップ！"
+},
+{
+"key": "kbaecd239b0d",
+"who": "kb_narr",
+"text": "この じは「いぬ」。",
+"pack": "g17",
+"k": "narr|この じは「いぬ」。"
+},
+{
+"key": "kbe8818d885f",
+"who": "kb_narr",
+"text": "わんすけ。",
+"pack": "g17",
+"k": "narr|わんすけ。"
+},
+{
+"key": "kbfabe840a81",
+"who": "kb_narr",
+"text": "わんわん「いぬ」。",
+"pack": "g17",
+"k": "narr|わんわん「いぬ」。"
+},
+{
+"key": "kb4f709a2bb9",
+"who": "kb_narr",
+"text": "てんは みみ。",
+"pack": "g17",
+"k": "narr|てんは みみ。"
+},
+{
+"key": "kb69022a14c2",
+"who": "kb_narr",
+"text": "「いぬ」を かいて こうげき！",
+"pack": "g17",
+"k": "narr|「いぬ」を かいて こうげき！"
+},
+{
+"key": "kb46d33dc8f1",
+"who": "kb_narr",
+"text": "いぬ！",
+"pack": "g17",
+"k": "narr|いぬ！"
+},
+{
+"key": "kbf0eafcd807",
+"who": "kb_narr",
+"text": "わんすけは つかれて ねむっちゃった。",
+"pack": "g17",
+"k": "narr|わんすけは つかれて ねむっちゃった。"
+},
+{
+"key": "kb37c6ff264a",
+"who": "kb_narr",
+"text": "つぎは わんすけ！",
+"pack": "g17",
+"k": "narr|つぎは わんすけ！"
+},
+{
+"key": "kb0d8c016cc0",
+"who": "kb_narr",
+"text": "いけっ、わんすけ！",
+"pack": "g17",
+"k": "narr|いけっ、わんすけ！"
+},
+{
+"key": "kb602bbc9f65",
+"who": "kb_narr",
+"text": "わんすけが レベルアップ！",
+"pack": "g17",
+"k": "narr|わんすけが レベルアップ！"
+},
+{
+"key": "kb618c902336",
+"who": "kb_narr",
+"text": "この じは「やすむ」。",
+"pack": "g18",
+"k": "narr|この じは「やすむ」。"
+},
+{
+"key": "kb1351df2bd6",
+"who": "kb_narr",
+"text": "ひるねっち。",
+"pack": "g18",
+"k": "narr|ひるねっち。"
+},
+{
+"key": "kb6393787c54",
+"who": "kb_narr",
+"text": "ひとが 木に もたれて「やすむ」。",
+"pack": "g18",
+"k": "narr|ひとが 木に もたれて「やすむ」。"
+},
+{
+"key": "kbc0c2b3ab54",
+"who": "kb_narr",
+"text": "「やすむ」を かいて こうげき！",
+"pack": "g18",
+"k": "narr|「やすむ」を かいて こうげき！"
+},
+{
+"key": "kb3d7283f358",
+"who": "kb_narr",
+"text": "やすむ！",
+"pack": "g18",
+"k": "narr|やすむ！"
+},
+{
+"key": "kb2cb25f28c1",
+"who": "kb_narr",
+"text": "ひるねっちは つかれて ねむっちゃった。",
+"pack": "g18",
+"k": "narr|ひるねっちは つかれて ねむっちゃった。"
+},
+{
+"key": "kbdfa7192fc7",
+"who": "kb_narr",
+"text": "つぎは ひるねっち！",
+"pack": "g18",
+"k": "narr|つぎは ひるねっち！"
+},
+{
+"key": "kbc836533208",
+"who": "kb_narr",
+"text": "いけっ、ひるねっち！",
+"pack": "g18",
+"k": "narr|いけっ、ひるねっち！"
+},
+{
+"key": "kb9b83c1615c",
+"who": "kb_narr",
+"text": "ひるねっちが レベルアップ！",
+"pack": "g18",
+"k": "narr|ひるねっちが レベルアップ！"
+},
+{
+"key": "kb6e4a0f6a90",
+"who": "kb_narr",
+"text": "ゆげっち。",
+"pack": "g19",
+"k": "narr|ゆげっち。"
+},
+{
+"key": "kbe861071e51",
+"who": "kb_narr",
+"text": "くうき、げんき、きもちの「き」。",
+"pack": "g19",
+"k": "narr|くうき、げんき、きもちの「き」。"
+},
+{
+"key": "kbc3d842967f",
+"who": "kb_narr",
+"text": "ゆげっちは つかれて ねむっちゃった。",
+"pack": "g19",
+"k": "narr|ゆげっちは つかれて ねむっちゃった。"
+},
+{
+"key": "kbdbf73c152d",
+"who": "kb_narr",
+"text": "つぎは ゆげっち！",
+"pack": "g19",
+"k": "narr|つぎは ゆげっち！"
+},
+{
+"key": "kbe184c6ac87",
+"who": "kb_narr",
+"text": "いけっ、ゆげっち！",
+"pack": "g19",
+"k": "narr|いけっ、ゆげっち！"
+},
+{
+"key": "kb6f62a953e1",
+"who": "kb_narr",
+"text": "ゆげっちが レベルアップ！",
+"pack": "g19",
+"k": "narr|ゆげっちが レベルアップ！"
+},
+{
+"key": "kb50f6fa064a",
+"who": "kb_narr",
+"text": "この じは「いきる」。",
+"pack": "g20",
+"k": "narr|この じは「いきる」。"
+},
+{
+"key": "kbee5a37065b",
+"who": "kb_narr",
+"text": "めばえちゃん。",
+"pack": "g20",
+"k": "narr|めばえちゃん。"
+},
+{
+"key": "kb754b6e97ad",
+"who": "kb_narr",
+"text": "めが でて「うまれる」「いきる」。",
+"pack": "g20",
+"k": "narr|めが でて「うまれる」「いきる」。"
+},
+{
+"key": "kbf9452f106a",
+"who": "kb_narr",
+"text": "「いきる」を かいて こうげき！",
+"pack": "g20",
+"k": "narr|「いきる」を かいて こうげき！"
+},
+{
+"key": "kb9796901f59",
+"who": "kb_narr",
+"text": "いきる！",
+"pack": "g20",
+"k": "narr|いきる！"
+},
+{
+"key": "kbe3f0f9dc65",
+"who": "kb_narr",
+"text": "めばえちゃんは つかれて ねむっちゃった。",
+"pack": "g20",
+"k": "narr|めばえちゃんは つかれて ねむっちゃった。"
+},
+{
+"key": "kbc739d25422",
+"who": "kb_narr",
+"text": "つぎは めばえちゃん！",
+"pack": "g20",
+"k": "narr|つぎは めばえちゃん！"
+},
+{
+"key": "kbfdf4792294",
+"who": "kb_narr",
+"text": "いけっ、めばえちゃん！",
+"pack": "g20",
+"k": "narr|いけっ、めばえちゃん！"
+},
+{
+"key": "kbaea5f4fc20",
+"who": "kb_narr",
+"text": "めばえちゃんが レベルアップ！",
+"pack": "g20",
+"k": "narr|めばえちゃんが レベルアップ！"
+},
+{
+"key": "kbaa9dd6faa0",
+"who": "kb_narr",
+"text": "この じは「つき」。",
+"pack": "g21",
+"k": "narr|この じは「つき」。"
+},
+{
+"key": "kbf90e8664ee",
+"who": "kb_narr",
+"text": "つきまる。",
+"pack": "g21",
+"k": "narr|つきまる。"
+},
+{
+"key": "kbbf3113373c",
+"who": "kb_narr",
+"text": "よるの「つき」。",
+"pack": "g21",
+"k": "narr|よるの「つき」。"
+},
+{
+"key": "kb51f0e07868",
+"who": "kb_narr",
+"text": "1がつ、2がつの 月でも ある。",
+"pack": "g21",
+"k": "narr|1がつ、2がつの 月でも ある。"
+},
+{
+"key": "kb45cc90c152",
+"who": "kb_narr",
+"text": "「つき」を かいて こうげき！",
+"pack": "g21",
+"k": "narr|「つき」を かいて こうげき！"
+},
+{
+"key": "kbb5a204cb1f",
+"who": "kb_narr",
+"text": "つき！",
+"pack": "g21",
+"k": "narr|つき！"
+},
+{
+"key": "kbea3972265e",
+"who": "kb_narr",
+"text": "つきまるは つかれて ねむっちゃった。",
+"pack": "g21",
+"k": "narr|つきまるは つかれて ねむっちゃった。"
+},
+{
+"key": "kb1f3b0cf8db",
+"who": "kb_narr",
+"text": "つぎは つきまる！",
+"pack": "g21",
+"k": "narr|つぎは つきまる！"
+},
+{
+"key": "kbb9d0be1185",
+"who": "kb_narr",
+"text": "いけっ、つきまる！",
+"pack": "g21",
+"k": "narr|いけっ、つきまる！"
+},
+{
+"key": "kb6050ab792c",
+"who": "kb_narr",
+"text": "つきまるが レベルアップ！",
+"pack": "g21",
+"k": "narr|つきまるが レベルアップ！"
+},
+{
+"key": "kb4394f24681",
+"who": "kb_narr",
+"text": "この じは「ろく」。",
+"pack": "g22",
+"k": "narr|この じは「ろく」。"
+},
+{
+"key": "kbb043f224d3",
+"who": "kb_narr",
+"text": "ありんこ。",
+"pack": "g22",
+"k": "narr|ありんこ。"
+},
+{
+"key": "kb510d59a60c",
+"who": "kb_narr",
+"text": "「むっつ」。",
+"pack": "g22",
+"k": "narr|「むっつ」。"
+},
+{
+"key": "kbca7e028af6",
+"who": "kb_narr",
+"text": "ありの あしは 6ぽん。",
+"pack": "g22",
+"k": "narr|ありの あしは 6ぽん。"
+},
+{
+"key": "kb1684cf4475",
+"who": "kb_narr",
+"text": "「ろく」を かいて こうげき！",
+"pack": "g22",
+"k": "narr|「ろく」を かいて こうげき！"
+},
+{
+"key": "kbf4f17d53c6",
+"who": "kb_narr",
+"text": "ろく！",
+"pack": "g22",
+"k": "narr|ろく！"
+},
+{
+"key": "kb35e157f299",
+"who": "kb_narr",
+"text": "ありんこは つかれて ねむっちゃった。",
+"pack": "g22",
+"k": "narr|ありんこは つかれて ねむっちゃった。"
+},
+{
+"key": "kbde26716735",
+"who": "kb_narr",
+"text": "つぎは ありんこ！",
+"pack": "g22",
+"k": "narr|つぎは ありんこ！"
+},
+{
+"key": "kb5e03c04028",
+"who": "kb_narr",
+"text": "いけっ、ありんこ！",
+"pack": "g22",
+"k": "narr|いけっ、ありんこ！"
+},
+{
+"key": "kb98455741fb",
+"who": "kb_narr",
+"text": "ありんこが レベルアップ！",
+"pack": "g22",
+"k": "narr|ありんこが レベルアップ！"
+},
+{
+"key": "kb3917887bb0",
+"who": "kb_narr",
+"text": "この じは「なな」。",
+"pack": "g23",
+"k": "narr|この じは「なな」。"
+},
+{
+"key": "kbc837777dca",
+"who": "kb_narr",
+"text": "ななほしちゃん。",
+"pack": "g23",
+"k": "narr|ななほしちゃん。"
+},
+{
+"key": "kbdd6ba1ba01",
+"who": "kb_narr",
+"text": "「ななつ」。",
+"pack": "g23",
+"k": "narr|「ななつ」。"
+},
+{
+"key": "kb893537cf16",
+"who": "kb_narr",
+"text": "ななほしてんとうの ほしは 7こ。",
+"pack": "g23",
+"k": "narr|ななほしてんとうの ほしは 7こ。"
+},
+{
+"key": "kb505bcb8468",
+"who": "kb_narr",
+"text": "「なな」を かいて こうげき！",
+"pack": "g23",
+"k": "narr|「なな」を かいて こうげき！"
+},
+{
+"key": "kb83ab9495d9",
+"who": "kb_narr",
+"text": "なな！",
+"pack": "g23",
+"k": "narr|なな！"
+},
+{
+"key": "kb38a1ac7fed",
+"who": "kb_narr",
+"text": "ななほしちゃんは つかれて ねむっちゃった。",
+"pack": "g23",
+"k": "narr|ななほしちゃんは つかれて ねむっちゃった。"
+},
+{
+"key": "kbfcd3bb55eb",
+"who": "kb_narr",
+"text": "つぎは ななほしちゃん！",
+"pack": "g23",
+"k": "narr|つぎは ななほしちゃん！"
+},
+{
+"key": "kb688ec98316",
+"who": "kb_narr",
+"text": "いけっ、ななほしちゃん！",
+"pack": "g23",
+"k": "narr|いけっ、ななほしちゃん！"
+},
+{
+"key": "kb02e20151b4",
+"who": "kb_narr",
+"text": "ななほしちゃんが レベルアップ！",
+"pack": "g23",
+"k": "narr|ななほしちゃんが レベルアップ！"
+},
+{
+"key": "kbf04140dd64",
+"who": "kb_narr",
+"text": "この じは「くさ」。",
+"pack": "g24",
+"k": "narr|この じは「くさ」。"
+},
+{
+"key": "kba52b7157d3",
+"who": "kb_narr",
+"text": "くさっこ。",
+"pack": "g24",
+"k": "narr|くさっこ。"
+},
+{
+"key": "kbdd20b9a2b3",
+"who": "kb_narr",
+"text": "じめんに はえる「くさ」。",
+"pack": "g24",
+"k": "narr|じめんに はえる「くさ」。"
+},
+{
+"key": "kb0d25c978a2",
+"who": "kb_narr",
+"text": "「くさ」を かいて こうげき！",
+"pack": "g24",
+"k": "narr|「くさ」を かいて こうげき！"
+},
+{
+"key": "kb7f6ebe6baa",
+"who": "kb_narr",
+"text": "くさ！",
+"pack": "g24",
+"k": "narr|くさ！"
+},
+{
+"key": "kb137662b50e",
+"who": "kb_narr",
+"text": "くさっこは つかれて ねむっちゃった。",
+"pack": "g24",
+"k": "narr|くさっこは つかれて ねむっちゃった。"
+},
+{
+"key": "kbb7d881dae4",
+"who": "kb_narr",
+"text": "つぎは くさっこ！",
+"pack": "g24",
+"k": "narr|つぎは くさっこ！"
+},
+{
+"key": "kb9cd640b0a9",
+"who": "kb_narr",
+"text": "いけっ、くさっこ！",
+"pack": "g24",
+"k": "narr|いけっ、くさっこ！"
+},
+{
+"key": "kb7f94b5f13a",
+"who": "kb_narr",
+"text": "くさっこが レベルアップ！",
+"pack": "g24",
+"k": "narr|くさっこが レベルアップ！"
+},
+{
+"key": "kb5d6c661d09",
+"who": "kb_narr",
+"text": "ひーさま。",
+"pack": "g25",
+"k": "narr|ひーさま。"
+},
+{
+"key": "kb62ac65ec96",
+"who": "kb_narr",
+"text": "おひさまの「ひ」。",
+"pack": "g25",
+"k": "narr|おひさまの「ひ」。"
+},
+{
+"key": "kb92f7e5c2af",
+"who": "kb_narr",
+"text": "「いちにち」の 日でも ある。",
+"pack": "g25",
+"k": "narr|「いちにち」の 日でも ある。"
+},
+{
+"key": "kb970993c5d2",
+"who": "kb_narr",
+"text": "ひーさまは つかれて ねむっちゃった。",
+"pack": "g25",
+"k": "narr|ひーさまは つかれて ねむっちゃった。"
+},
+{
+"key": "kbfc84808ae6",
+"who": "kb_narr",
+"text": "つぎは ひーさま！",
+"pack": "g25",
+"k": "narr|つぎは ひーさま！"
+},
+{
+"key": "kbf6f47ffc68",
+"who": "kb_narr",
+"text": "いけっ、ひーさま！",
+"pack": "g25",
+"k": "narr|いけっ、ひーさま！"
+},
+{
+"key": "kb1922fa0fa8",
+"who": "kb_narr",
+"text": "ひーさまが レベルアップ！",
+"pack": "g25",
+"k": "narr|ひーさまが レベルアップ！"
+},
+{
+"key": "kbd7e587040d",
+"who": "kb_narr",
+"text": "この じは「まち」。",
+"pack": "g26",
+"k": "narr|この じは「まち」。"
+},
+{
+"key": "kb274edd860c",
+"who": "kb_narr",
+"text": "まちっこ。",
+"pack": "g26",
+"k": "narr|まちっこ。"
+},
+{
+"key": "kb5edb56e89c",
+"who": "kb_narr",
+"text": "みせや いえが あつまる「まち」。",
+"pack": "g26",
+"k": "narr|みせや いえが あつまる「まち」。"
+},
+{
+"key": "kbec8c8bd664",
+"who": "kb_narr",
+"text": "「まち」を かいて こうげき！",
+"pack": "g26",
+"k": "narr|「まち」を かいて こうげき！"
+},
+{
+"key": "kbdbcf5eacb2",
+"who": "kb_narr",
+"text": "まち！",
+"pack": "g26",
+"k": "narr|まち！"
+},
+{
+"key": "kbd0da61dbea",
+"who": "kb_narr",
+"text": "まちっこは つかれて ねむっちゃった。",
+"pack": "g26",
+"k": "narr|まちっこは つかれて ねむっちゃった。"
+},
+{
+"key": "kb1490e6144f",
+"who": "kb_narr",
+"text": "つぎは まちっこ！",
+"pack": "g26",
+"k": "narr|つぎは まちっこ！"
+},
+{
+"key": "kb1177555a91",
+"who": "kb_narr",
+"text": "いけっ、まちっこ！",
+"pack": "g26",
+"k": "narr|いけっ、まちっこ！"
+},
+{
+"key": "kb2b4110cfff",
+"who": "kb_narr",
+"text": "まちっこが レベルアップ！",
+"pack": "g26",
+"k": "narr|まちっこが レベルアップ！"
+},
+{
+"key": "kbb9a9b7ed25",
+"who": "kb_narr",
+"text": "この じは「ひと」。",
+"pack": "g27",
+"k": "narr|この じは「ひと」。"
+},
+{
+"key": "kb6e895646af",
+"who": "kb_narr",
+"text": "ひとっち。",
+"pack": "g27",
+"k": "narr|ひとっち。"
+},
+{
+"key": "kbb94750fb1a",
+"who": "kb_narr",
+"text": "「ひと」。",
+"pack": "g27",
+"k": "narr|「ひと」。"
+},
+{
+"key": "kb0cc484a0d2",
+"who": "kb_narr",
+"text": "ひとが よこを むいて たつ すがた。",
+"pack": "g27",
+"k": "narr|ひとが よこを むいて たつ すがた。"
+},
+{
+"key": "kb5dd281c260",
+"who": "kb_narr",
+"text": "「ひと」を かいて こうげき！",
+"pack": "g27",
+"k": "narr|「ひと」を かいて こうげき！"
+},
+{
+"key": "kb0c4bb2fd28",
+"who": "kb_narr",
+"text": "ひと！",
+"pack": "g27",
+"k": "narr|ひと！"
+},
+{
+"key": "kb83ab78f309",
+"who": "kb_narr",
+"text": "ひとっちは つかれて ねむっちゃった。",
+"pack": "g27",
+"k": "narr|ひとっちは つかれて ねむっちゃった。"
+},
+{
+"key": "kb5b6af87585",
+"who": "kb_narr",
+"text": "つぎは ひとっち！",
+"pack": "g27",
+"k": "narr|つぎは ひとっち！"
+},
+{
+"key": "kbcf460a2919",
+"who": "kb_narr",
+"text": "いけっ、ひとっち！",
+"pack": "g27",
+"k": "narr|いけっ、ひとっち！"
+},
+{
+"key": "kbebaa629b5a",
+"who": "kb_narr",
+"text": "ひとっちが レベルアップ！",
+"pack": "g27",
+"k": "narr|ひとっちが レベルアップ！"
+},
+{
+"key": "kb8d38e3730c",
+"who": "kb_narr",
+"text": "この じは「くるま」。",
+"pack": "g28",
+"k": "narr|この じは「くるま」。"
+},
+{
+"key": "kb77777020c2",
+"who": "kb_narr",
+"text": "くるまる。",
+"pack": "g28",
+"k": "narr|くるまる。"
+},
+{
+"key": "kb6e30e2d93a",
+"who": "kb_narr",
+"text": "うごく「くるま」。",
+"pack": "g28",
+"k": "narr|うごく「くるま」。"
+},
+{
+"key": "kb7e74ff8c9a",
+"who": "kb_narr",
+"text": "上から みた わの かたち。",
+"pack": "g28",
+"k": "narr|上から みた わの かたち。"
+},
+{
+"key": "kb72619fd7cd",
+"who": "kb_narr",
+"text": "「くるま」を かいて こうげき！",
+"pack": "g28",
+"k": "narr|「くるま」を かいて こうげき！"
+},
+{
+"key": "kbbedd58de9f",
+"who": "kb_narr",
+"text": "くるま！",
+"pack": "g28",
+"k": "narr|くるま！"
+},
+{
+"key": "kb2b07aa16f6",
+"who": "kb_narr",
+"text": "くるまるは つかれて ねむっちゃった。",
+"pack": "g28",
+"k": "narr|くるまるは つかれて ねむっちゃった。"
+},
+{
+"key": "kbcedaf446ee",
+"who": "kb_narr",
+"text": "つぎは くるまる！",
+"pack": "g28",
+"k": "narr|つぎは くるまる！"
+},
+{
+"key": "kb415c1baee0",
+"who": "kb_narr",
+"text": "いけっ、くるまる！",
+"pack": "g28",
+"k": "narr|いけっ、くるまる！"
+},
+{
+"key": "kb1524886639",
+"who": "kb_narr",
+"text": "くるまるが レベルアップ！",
+"pack": "g28",
+"k": "narr|くるまるが レベルアップ！"
+},
+{
+"key": "kb91d3ff9ca2",
+"who": "kb_narr",
+"text": "この じは「おとこ」。",
+"pack": "g29",
+"k": "narr|この じは「おとこ」。"
+},
+{
+"key": "kb202d6bec05",
+"who": "kb_narr",
+"text": "りきお。",
+"pack": "g29",
+"k": "narr|りきお。"
+},
+{
+"key": "kbad72037338",
+"who": "kb_narr",
+"text": "たんぼで 力を だす「おとこ」の ひと。",
+"pack": "g29",
+"k": "narr|たんぼで 力を だす「おとこ」の ひと。"
+},
+{
+"key": "kbb9559399b6",
+"who": "kb_narr",
+"text": "「おとこ」を かいて こうげき！",
+"pack": "g29",
+"k": "narr|「おとこ」を かいて こうげき！"
+},
+{
+"key": "kba4e6c1f839",
+"who": "kb_narr",
+"text": "おとこ！",
+"pack": "g29",
+"k": "narr|おとこ！"
+},
+{
+"key": "kbac0afdcd53",
+"who": "kb_narr",
+"text": "りきおは つかれて ねむっちゃった。",
+"pack": "g29",
+"k": "narr|りきおは つかれて ねむっちゃった。"
+},
+{
+"key": "kb3a269e04b4",
+"who": "kb_narr",
+"text": "つぎは りきお！",
+"pack": "g29",
+"k": "narr|つぎは りきお！"
+},
+{
+"key": "kb070c121ba3",
+"who": "kb_narr",
+"text": "いけっ、りきお！",
+"pack": "g29",
+"k": "narr|いけっ、りきお！"
+},
+{
+"key": "kb0f00a69364",
+"who": "kb_narr",
+"text": "りきおが レベルアップ！",
+"pack": "g29",
+"k": "narr|りきおが レベルアップ！"
+},
+{
+"key": "kb2a1d404a2d",
+"who": "kb_narr",
+"text": "この じは「おんな」。",
+"pack": "g30",
+"k": "narr|この じは「おんな」。"
+},
+{
+"key": "kb8051ccfde0",
+"who": "kb_narr",
+"text": "おんなのこ。",
+"pack": "g30",
+"k": "narr|おんなのこ。"
+},
+{
+"key": "kb0218254c99",
+"who": "kb_narr",
+"text": "「おんな」の ひと。",
+"pack": "g30",
+"k": "narr|「おんな」の ひと。"
+},
+{
+"key": "kbb31e6386af",
+"who": "kb_narr",
+"text": "「おんな」を かいて こうげき！",
+"pack": "g30",
+"k": "narr|「おんな」を かいて こうげき！"
+},
+{
+"key": "kb87fe32241b",
+"who": "kb_narr",
+"text": "おんな！",
+"pack": "g30",
+"k": "narr|おんな！"
+},
+{
+"key": "kb57f3b51665",
+"who": "kb_narr",
+"text": "おんなのこは つかれて ねむっちゃった。",
+"pack": "g30",
+"k": "narr|おんなのこは つかれて ねむっちゃった。"
+},
+{
+"key": "kb9b2365c3c1",
+"who": "kb_narr",
+"text": "つぎは おんなのこ！",
+"pack": "g30",
+"k": "narr|つぎは おんなのこ！"
+},
+{
+"key": "kba443705cd8",
+"who": "kb_narr",
+"text": "いけっ、おんなのこ！",
+"pack": "g30",
+"k": "narr|いけっ、おんなのこ！"
+},
+{
+"key": "kbce87065225",
+"who": "kb_narr",
+"text": "おんなのこが レベルアップ！",
+"pack": "g30",
+"k": "narr|おんなのこが レベルアップ！"
+},
+{
+"key": "kbcf8bca6215",
+"who": "kb_narr",
+"text": "この じは「こ」。",
+"pack": "g31",
+"k": "narr|この じは「こ」。"
+},
+{
+"key": "kbe0cc746523",
+"who": "kb_narr",
+"text": "こぼう。",
+"pack": "g31",
+"k": "narr|こぼう。"
+},
+{
+"key": "kb601499dd11",
+"who": "kb_narr",
+"text": "あかちゃん、「こども」。",
+"pack": "g31",
+"k": "narr|あかちゃん、「こども」。"
+},
+{
+"key": "kbb469059fb6",
+"who": "kb_narr",
+"text": "「こ」を かいて こうげき！",
+"pack": "g31",
+"k": "narr|「こ」を かいて こうげき！"
+},
+{
+"key": "kbf7a51a28c9",
+"who": "kb_narr",
+"text": "こ！",
+"pack": "g31",
+"k": "narr|こ！"
+},
+{
+"key": "kb794bac624f",
+"who": "kb_narr",
+"text": "こぼうは つかれて ねむっちゃった。",
+"pack": "g31",
+"k": "narr|こぼうは つかれて ねむっちゃった。"
+},
+{
+"key": "kb6e5c79ef38",
+"who": "kb_narr",
+"text": "つぎは こぼう！",
+"pack": "g31",
+"k": "narr|つぎは こぼう！"
+},
+{
+"key": "kb7812071736",
+"who": "kb_narr",
+"text": "いけっ、こぼう！",
+"pack": "g31",
+"k": "narr|いけっ、こぼう！"
+},
+{
+"key": "kbb116bc6e38",
+"who": "kb_narr",
+"text": "こぼうが レベルアップ！",
+"pack": "g31",
+"k": "narr|こぼうが レベルアップ！"
+},
+{
+"key": "kb7aa1546bc9",
+"who": "kb_narr",
+"text": "この じは「きん」。",
+"pack": "g32",
+"k": "narr|この じは「きん」。"
+},
+{
+"key": "kbea55225d70",
+"who": "kb_narr",
+"text": "きんぞう。",
+"pack": "g32",
+"k": "narr|きんぞう。"
+},
+{
+"key": "kbf1f7319c67",
+"who": "kb_narr",
+"text": "ぴかぴかの「きん」。",
+"pack": "g32",
+"k": "narr|ぴかぴかの「きん」。"
+},
+{
+"key": "kbc953c8b9f7",
+"who": "kb_narr",
+"text": "おかねの「かね」でも ある。",
+"pack": "g32",
+"k": "narr|おかねの「かね」でも ある。"
+},
+{
+"key": "kb4b5e256a85",
+"who": "kb_narr",
+"text": "「きん」を かいて こうげき！",
+"pack": "g32",
+"k": "narr|「きん」を かいて こうげき！"
+},
+{
+"key": "kb3710ea9884",
+"who": "kb_narr",
+"text": "きん！",
+"pack": "g32",
+"k": "narr|きん！"
+},
+{
+"key": "kb84fad9b7c9",
+"who": "kb_narr",
+"text": "きんぞうは つかれて ねむっちゃった。",
+"pack": "g32",
+"k": "narr|きんぞうは つかれて ねむっちゃった。"
+},
+{
+"key": "kb96e56bbf00",
+"who": "kb_narr",
+"text": "つぎは きんぞう！",
+"pack": "g32",
+"k": "narr|つぎは きんぞう！"
+},
+{
+"key": "kb7594ada163",
+"who": "kb_narr",
+"text": "いけっ、きんぞう！",
+"pack": "g32",
+"k": "narr|いけっ、きんぞう！"
+},
+{
+"key": "kb330c957fd5",
+"who": "kb_narr",
+"text": "きんぞうが レベルアップ！",
+"pack": "g32",
+"k": "narr|きんぞうが レベルアップ！"
+},
+{
+"key": "kb3f57d373f5",
+"who": "kb_narr",
+"text": "この じは「えん」。",
+"pack": "g33",
+"k": "narr|この じは「えん」。"
+},
+{
+"key": "kb6329f8fb2b",
+"who": "kb_narr",
+"text": "がまぐちさん。",
+"pack": "g33",
+"k": "narr|がまぐちさん。"
+},
+{
+"key": "kb6f0759bac5",
+"who": "kb_narr",
+"text": "おかねの「えん」（100えん）。",
+"pack": "g33",
+"k": "narr|おかねの「えん」（100えん）。"
+},
+{
+"key": "kb2e7093efa7",
+"who": "kb_narr",
+"text": "まるい ことも 円という。",
+"pack": "g33",
+"k": "narr|まるい ことも 円という。"
+},
+{
+"key": "kbc3c976f978",
+"who": "kb_narr",
+"text": "「えん」を かいて こうげき！",
+"pack": "g33",
+"k": "narr|「えん」を かいて こうげき！"
+},
+{
+"key": "kbe8fc314c40",
+"who": "kb_narr",
+"text": "えん！",
+"pack": "g33",
+"k": "narr|えん！"
+},
+{
+"key": "kbdd878226a8",
+"who": "kb_narr",
+"text": "がまぐちさんは つかれて ねむっちゃった。",
+"pack": "g33",
+"k": "narr|がまぐちさんは つかれて ねむっちゃった。"
+},
+{
+"key": "kbde21ae3bf8",
+"who": "kb_narr",
+"text": "つぎは がまぐちさん！",
+"pack": "g33",
+"k": "narr|つぎは がまぐちさん！"
+},
+{
+"key": "kb7bfefbd686",
+"who": "kb_narr",
+"text": "いけっ、がまぐちさん！",
+"pack": "g33",
+"k": "narr|いけっ、がまぐちさん！"
+},
+{
+"key": "kb8fc47f5c3d",
+"who": "kb_narr",
+"text": "がまぐちさんが レベルアップ！",
+"pack": "g33",
+"k": "narr|がまぐちさんが レベルアップ！"
+},
+{
+"key": "kbd6d642a3b2",
+"who": "kb_narr",
+"text": "この じは「はち」。",
+"pack": "g34",
+"k": "narr|この じは「はち」。"
+},
+{
+"key": "kb5d9821c2d2",
+"who": "kb_narr",
+"text": "はちさん。",
+"pack": "g34",
+"k": "narr|はちさん。"
+},
+{
+"key": "kb0b4007483a",
+"who": "kb_narr",
+"text": "「やっつ」。",
+"pack": "g34",
+"k": "narr|「やっつ」。"
+},
+{
+"key": "kb9c0db3e63a",
+"who": "kb_narr",
+"text": "はち（蜂）の「はち」と おなじ おと。",
+"pack": "g34",
+"k": "narr|はち（蜂）の「はち」と おなじ おと。"
+},
+{
+"key": "kb5c2b893126",
+"who": "kb_narr",
+"text": "「はち」を かいて こうげき！",
+"pack": "g34",
+"k": "narr|「はち」を かいて こうげき！"
+},
+{
+"key": "kb3cf58875a1",
+"who": "kb_narr",
+"text": "はち！",
+"pack": "g34",
+"k": "narr|はち！"
+},
+{
+"key": "kb8cc4667147",
+"who": "kb_narr",
+"text": "はちさんは つかれて ねむっちゃった。",
+"pack": "g34",
+"k": "narr|はちさんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb181f95745b",
+"who": "kb_narr",
+"text": "つぎは はちさん！",
+"pack": "g34",
+"k": "narr|つぎは はちさん！"
+},
+{
+"key": "kbc500287083",
+"who": "kb_narr",
+"text": "いけっ、はちさん！",
+"pack": "g34",
+"k": "narr|いけっ、はちさん！"
+},
+{
+"key": "kb7d67b408e2",
+"who": "kb_narr",
+"text": "はちさんが レベルアップ！",
+"pack": "g34",
+"k": "narr|はちさんが レベルアップ！"
+},
+{
+"key": "kbfa76e9015c",
+"who": "kb_narr",
+"text": "この じは「きゅう」。",
+"pack": "g35",
+"k": "narr|この じは「きゅう」。"
+},
+{
+"key": "kb2f96745ba6",
+"who": "kb_narr",
+"text": "サッカーくん。",
+"pack": "g35",
+"k": "narr|サッカーくん。"
+},
+{
+"key": "kb072d07102f",
+"who": "kb_narr",
+"text": "「ここのつ」。",
+"pack": "g35",
+"k": "narr|「ここのつ」。"
+},
+{
+"key": "kbc823cddee6",
+"who": "kb_narr",
+"text": "ボール（球）の「きゅう」と おなじ おと。",
+"pack": "g35",
+"k": "narr|ボール（球）の「きゅう」と おなじ おと。"
+},
+{
+"key": "kb8dfea125fe",
+"who": "kb_narr",
+"text": "「きゅう」を かいて こうげき！",
+"pack": "g35",
+"k": "narr|「きゅう」を かいて こうげき！"
+},
+{
+"key": "kb730df9ea74",
+"who": "kb_narr",
+"text": "きゅう！",
+"pack": "g35",
+"k": "narr|きゅう！"
+},
+{
+"key": "kb54c346d87b",
+"who": "kb_narr",
+"text": "サッカーくんは つかれて ねむっちゃった。",
+"pack": "g35",
+"k": "narr|サッカーくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb3ffa16372c",
+"who": "kb_narr",
+"text": "つぎは サッカーくん！",
+"pack": "g35",
+"k": "narr|つぎは サッカーくん！"
+},
+{
+"key": "kbc0b144ee9e",
+"who": "kb_narr",
+"text": "いけっ、サッカーくん！",
+"pack": "g35",
+"k": "narr|いけっ、サッカーくん！"
+},
+{
+"key": "kb0a1af9c160",
+"who": "kb_narr",
+"text": "サッカーくんが レベルアップ！",
+"pack": "g35",
+"k": "narr|サッカーくんが レベルアップ！"
+},
+{
+"key": "kbb49fdf8370",
+"who": "kb_narr",
+"text": "この じは「いち」。",
+"pack": "g36",
+"k": "narr|この じは「いち」。"
+},
+{
+"key": "kb1508ad619a",
+"who": "kb_narr",
+"text": "いもむし。",
+"pack": "g36",
+"k": "narr|いもむし。"
+},
+{
+"key": "kbe5778f076d",
+"who": "kb_narr",
+"text": "よこぼう 1ぽんで「ひとつ」。",
+"pack": "g36",
+"k": "narr|よこぼう 1ぽんで「ひとつ」。"
+},
+{
+"key": "kb3924b9e9bc",
+"who": "kb_narr",
+"text": "いもむしも 1ぴき。",
+"pack": "g36",
+"k": "narr|いもむしも 1ぴき。"
+},
+{
+"key": "kb16f8292dfa",
+"who": "kb_narr",
+"text": "「いち」を かいて こうげき！",
+"pack": "g36",
+"k": "narr|「いち」を かいて こうげき！"
+},
+{
+"key": "kb5189603115",
+"who": "kb_narr",
+"text": "いち！",
+"pack": "g36",
+"k": "narr|いち！"
+},
+{
+"key": "kbd727b15aba",
+"who": "kb_narr",
+"text": "いもむしは つかれて ねむっちゃった。",
+"pack": "g36",
+"k": "narr|いもむしは つかれて ねむっちゃった。"
+},
+{
+"key": "kba44d2cd08a",
+"who": "kb_narr",
+"text": "つぎは いもむし！",
+"pack": "g36",
+"k": "narr|つぎは いもむし！"
+},
+{
+"key": "kba5493d85c6",
+"who": "kb_narr",
+"text": "いけっ、いもむし！",
+"pack": "g36",
+"k": "narr|いけっ、いもむし！"
+},
+{
+"key": "kb4fc960274f",
+"who": "kb_narr",
+"text": "いもむしが レベルアップ！",
+"pack": "g36",
+"k": "narr|いもむしが レベルアップ！"
+},
+{
+"key": "kb17a0380575",
+"who": "kb_narr",
+"text": "この じは「がく」。",
+"pack": "g37",
+"k": "narr|この じは「がく」。"
+},
+{
+"key": "kb61a5d81820",
+"who": "kb_narr",
+"text": "まなぶくん。",
+"pack": "g37",
+"k": "narr|まなぶくん。"
+},
+{
+"key": "kba97a66d295",
+"who": "kb_narr",
+"text": "がっこうで「まなぶ」。",
+"pack": "g37",
+"k": "narr|がっこうで「まなぶ」。"
+},
+{
+"key": "kb4231d6d622",
+"who": "kb_narr",
+"text": "「がく」を かいて こうげき！",
+"pack": "g37",
+"k": "narr|「がく」を かいて こうげき！"
+},
+{
+"key": "kb278ff9f9f1",
+"who": "kb_narr",
+"text": "がく！",
+"pack": "g37",
+"k": "narr|がく！"
+},
+{
+"key": "kbe8a6ecfd65",
+"who": "kb_narr",
+"text": "まなぶくんは つかれて ねむっちゃった。",
+"pack": "g37",
+"k": "narr|まなぶくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb5349afdb30",
+"who": "kb_narr",
+"text": "つぎは まなぶくん！",
+"pack": "g37",
+"k": "narr|つぎは まなぶくん！"
+},
+{
+"key": "kb220a062507",
+"who": "kb_narr",
+"text": "いけっ、まなぶくん！",
+"pack": "g37",
+"k": "narr|いけっ、まなぶくん！"
+},
+{
+"key": "kb29ddfeee0a",
+"who": "kb_narr",
+"text": "まなぶくんが レベルアップ！",
+"pack": "g37",
+"k": "narr|まなぶくんが レベルアップ！"
+},
+{
+"key": "kb3932729447",
+"who": "kb_narr",
+"text": "この じは「こう」。",
+"pack": "g38",
+"k": "narr|この じは「こう」。"
+},
+{
+"key": "kbc58aa0c082",
+"who": "kb_narr",
+"text": "こうしゃくん。",
+"pack": "g38",
+"k": "narr|こうしゃくん。"
+},
+{
+"key": "kb9160fede6f",
+"who": "kb_narr",
+"text": "「がっこう」の こう。",
+"pack": "g38",
+"k": "narr|「がっこう」の こう。"
+},
+{
+"key": "kb6a596db732",
+"who": "kb_narr",
+"text": "「こう」を かいて こうげき！",
+"pack": "g38",
+"k": "narr|「こう」を かいて こうげき！"
+},
+{
+"key": "kb521dba0c24",
+"who": "kb_narr",
+"text": "こう！",
+"pack": "g38",
+"k": "narr|こう！"
+},
+{
+"key": "kb869c7a7e1e",
+"who": "kb_narr",
+"text": "こうしゃくんは つかれて ねむっちゃった。",
+"pack": "g38",
+"k": "narr|こうしゃくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb1fc6e84a36",
+"who": "kb_narr",
+"text": "つぎは こうしゃくん！",
+"pack": "g38",
+"k": "narr|つぎは こうしゃくん！"
+},
+{
+"key": "kb12535d52a7",
+"who": "kb_narr",
+"text": "いけっ、こうしゃくん！",
+"pack": "g38",
+"k": "narr|いけっ、こうしゃくん！"
+},
+{
+"key": "kb6bb504483f",
+"who": "kb_narr",
+"text": "こうしゃくんが レベルアップ！",
+"pack": "g38",
+"k": "narr|こうしゃくんが レベルアップ！"
+},
+{
+"key": "kb20abcdc76a",
+"who": "kb_narr",
+"text": "この じは「さき」。",
+"pack": "g39",
+"k": "narr|この じは「さき」。"
+},
+{
+"key": "kb73620b6a3f",
+"who": "kb_narr",
+"text": "せんとうくん。",
+"pack": "g39",
+"k": "narr|せんとうくん。"
+},
+{
+"key": "kbdeaecd6042",
+"who": "kb_narr",
+"text": "いちばん まえ、「さき」。",
+"pack": "g39",
+"k": "narr|いちばん まえ、「さき」。"
+},
+{
+"key": "kb5511597be7",
+"who": "kb_narr",
+"text": "せんせいの 先。",
+"pack": "g39",
+"k": "narr|せんせいの 先。"
+},
+{
+"key": "kb545e802e9e",
+"who": "kb_narr",
+"text": "「さき」を かいて こうげき！",
+"pack": "g39",
+"k": "narr|「さき」を かいて こうげき！"
+},
+{
+"key": "kb534cde593e",
+"who": "kb_narr",
+"text": "さき！",
+"pack": "g39",
+"k": "narr|さき！"
+},
+{
+"key": "kb1aa5dd3b0a",
+"who": "kb_narr",
+"text": "せんとうくんは つかれて ねむっちゃった。",
+"pack": "g39",
+"k": "narr|せんとうくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb4874cc35d1",
+"who": "kb_narr",
+"text": "つぎは せんとうくん！",
+"pack": "g39",
+"k": "narr|つぎは せんとうくん！"
+},
+{
+"key": "kb403ae2fc06",
+"who": "kb_narr",
+"text": "いけっ、せんとうくん！",
+"pack": "g39",
+"k": "narr|いけっ、せんとうくん！"
+},
+{
+"key": "kbc2aae707d4",
+"who": "kb_narr",
+"text": "せんとうくんが レベルアップ！",
+"pack": "g39",
+"k": "narr|せんとうくんが レベルアップ！"
+},
+{
+"key": "kbe5ab00a16b",
+"who": "kb_narr",
+"text": "この じは「じ」。",
+"pack": "g40",
+"k": "narr|この じは「じ」。"
+},
+{
+"key": "kb3845477f64",
+"who": "kb_narr",
+"text": "じっくん。",
+"pack": "g40",
+"k": "narr|じっくん。"
+},
+{
+"key": "kb3e0e7e5c35",
+"who": "kb_narr",
+"text": "かいた「じ」、もじ。",
+"pack": "g40",
+"k": "narr|かいた「じ」、もじ。"
+},
+{
+"key": "kb2507f39dfd",
+"who": "kb_narr",
+"text": "おうちで こどもが ならう。",
+"pack": "g40",
+"k": "narr|おうちで こどもが ならう。"
+},
+{
+"key": "kb1f58592e6a",
+"who": "kb_narr",
+"text": "「じ」を かいて こうげき！",
+"pack": "g40",
+"k": "narr|「じ」を かいて こうげき！"
+},
+{
+"key": "kbb0199067e3",
+"who": "kb_narr",
+"text": "じ！",
+"pack": "g40",
+"k": "narr|じ！"
+},
+{
+"key": "kb5e8562d9a5",
+"who": "kb_narr",
+"text": "じっくんは つかれて ねむっちゃった。",
+"pack": "g40",
+"k": "narr|じっくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kbe8577c48bd",
+"who": "kb_narr",
+"text": "つぎは じっくん！",
+"pack": "g40",
+"k": "narr|つぎは じっくん！"
+},
+{
+"key": "kb5744176ce9",
+"who": "kb_narr",
+"text": "いけっ、じっくん！",
+"pack": "g40",
+"k": "narr|いけっ、じっくん！"
+},
+{
+"key": "kb8681e14bda",
+"who": "kb_narr",
+"text": "じっくんが レベルアップ！",
+"pack": "g40",
+"k": "narr|じっくんが レベルアップ！"
+},
+{
+"key": "kb91bb447fd9",
+"who": "kb_narr",
+"text": "この じは「ぶん」。",
+"pack": "g41",
+"k": "narr|この じは「ぶん」。"
+},
+{
+"key": "kb370cf18eaa",
+"who": "kb_narr",
+"text": "おてがみくん。",
+"pack": "g41",
+"k": "narr|おてがみくん。"
+},
+{
+"key": "kb59498a21ad",
+"who": "kb_narr",
+"text": "かいた ことば、「ぶん」。",
+"pack": "g41",
+"k": "narr|かいた ことば、「ぶん」。"
+},
+{
+"key": "kb3a537059ba",
+"who": "kb_narr",
+"text": "てがみや さくぶん。",
+"pack": "g41",
+"k": "narr|てがみや さくぶん。"
+},
+{
+"key": "kbf44810dbcf",
+"who": "kb_narr",
+"text": "「ぶん」を かいて こうげき！",
+"pack": "g41",
+"k": "narr|「ぶん」を かいて こうげき！"
+},
+{
+"key": "kb51722a015f",
+"who": "kb_narr",
+"text": "ぶん！",
+"pack": "g41",
+"k": "narr|ぶん！"
+},
+{
+"key": "kb91fc5b789f",
+"who": "kb_narr",
+"text": "おてがみくんは つかれて ねむっちゃった。",
+"pack": "g41",
+"k": "narr|おてがみくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb378c85605b",
+"who": "kb_narr",
+"text": "つぎは おてがみくん！",
+"pack": "g41",
+"k": "narr|つぎは おてがみくん！"
+},
+{
+"key": "kb530842f4ef",
+"who": "kb_narr",
+"text": "いけっ、おてがみくん！",
+"pack": "g41",
+"k": "narr|いけっ、おてがみくん！"
+},
+{
+"key": "kb24f30ddadb",
+"who": "kb_narr",
+"text": "おてがみくんが レベルアップ！",
+"pack": "g41",
+"k": "narr|おてがみくんが レベルアップ！"
+},
+{
+"key": "kbf38f0b0000",
+"who": "kb_narr",
+"text": "この じは「ほん」。",
+"pack": "g42",
+"k": "narr|この じは「ほん」。"
+},
+{
+"key": "kb15314cc5e8",
+"who": "kb_narr",
+"text": "ほんよみきーぼう。",
+"pack": "g42",
+"k": "narr|ほんよみきーぼう。"
+},
+{
+"key": "kb175a76eb23",
+"who": "kb_narr",
+"text": "よむ「ほん」。",
+"pack": "g42",
+"k": "narr|よむ「ほん」。"
+},
+{
+"key": "kbad9bc5daf4",
+"who": "kb_narr",
+"text": "木の ねもとに しるしで「もと」の いみも。",
+"pack": "g42",
+"k": "narr|木の ねもとに しるしで「もと」の いみも。"
+},
+{
+"key": "kb94854fd438",
+"who": "kb_narr",
+"text": "「ほん」を かいて こうげき！",
+"pack": "g42",
+"k": "narr|「ほん」を かいて こうげき！"
+},
+{
+"key": "kb8f17e61cb9",
+"who": "kb_narr",
+"text": "ほん！",
+"pack": "g42",
+"k": "narr|ほん！"
+},
+{
+"key": "kb74cfd1749a",
+"who": "kb_narr",
+"text": "ほんよみきーぼうは つかれて ねむっちゃった。",
+"pack": "g42",
+"k": "narr|ほんよみきーぼうは つかれて ねむっちゃった。"
+},
+{
+"key": "kb70f45ed442",
+"who": "kb_narr",
+"text": "つぎは ほんよみきーぼう！",
+"pack": "g42",
+"k": "narr|つぎは ほんよみきーぼう！"
+},
+{
+"key": "kb12f633b7a7",
+"who": "kb_narr",
+"text": "いけっ、ほんよみきーぼう！",
+"pack": "g42",
+"k": "narr|いけっ、ほんよみきーぼう！"
+},
+{
+"key": "kbf78b26e6fe",
+"who": "kb_narr",
+"text": "ほんよみきーぼうが レベルアップ！",
+"pack": "g42",
+"k": "narr|ほんよみきーぼうが レベルアップ！"
+},
+{
+"key": "kb5f9ffc746e",
+"who": "kb_narr",
+"text": "この じは「な」。",
+"pack": "g43",
+"k": "narr|この じは「な」。"
+},
+{
+"key": "kbe1f82b98ce",
+"who": "kb_narr",
+"text": "なまえっち。",
+"pack": "g43",
+"k": "narr|なまえっち。"
+},
+{
+"key": "kb93e1dd3cdc",
+"who": "kb_narr",
+"text": "よばれる「なまえ」。",
+"pack": "g43",
+"k": "narr|よばれる「なまえ」。"
+},
+{
+"key": "kb80733e3aa6",
+"who": "kb_narr",
+"text": "口で なまえを いう。",
+"pack": "g43",
+"k": "narr|口で なまえを いう。"
+},
+{
+"key": "kbe60388b025",
+"who": "kb_narr",
+"text": "「な」を かいて こうげき！",
+"pack": "g43",
+"k": "narr|「な」を かいて こうげき！"
+},
+{
+"key": "kbf30dc3c9c3",
+"who": "kb_narr",
+"text": "な！",
+"pack": "g43",
+"k": "narr|な！"
+},
+{
+"key": "kb5b869255e8",
+"who": "kb_narr",
+"text": "なまえっちは つかれて ねむっちゃった。",
+"pack": "g43",
+"k": "narr|なまえっちは つかれて ねむっちゃった。"
+},
+{
+"key": "kba34d35db2e",
+"who": "kb_narr",
+"text": "つぎは なまえっち！",
+"pack": "g43",
+"k": "narr|つぎは なまえっち！"
+},
+{
+"key": "kb8850c58dc8",
+"who": "kb_narr",
+"text": "いけっ、なまえっち！",
+"pack": "g43",
+"k": "narr|いけっ、なまえっち！"
+},
+{
+"key": "kba67fae6c77",
+"who": "kb_narr",
+"text": "なまえっちが レベルアップ！",
+"pack": "g43",
+"k": "narr|なまえっちが レベルアップ！"
+},
+{
+"key": "kbf36ba63bb6",
+"who": "kb_narr",
+"text": "この じは「とし」。",
+"pack": "g44",
+"k": "narr|この じは「とし」。"
+},
+{
+"key": "kb73c85900e9",
+"who": "kb_narr",
+"text": "ケーキさん。",
+"pack": "g44",
+"k": "narr|ケーキさん。"
+},
+{
+"key": "kb866f59423c",
+"who": "kb_narr",
+"text": "1ねん、2ねんの「とし」。",
+"pack": "g44",
+"k": "narr|1ねん、2ねんの「とし」。"
+},
+{
+"key": "kb82c2bff784",
+"who": "kb_narr",
+"text": "たんじょうびで ひとつ としを とる。",
+"pack": "g44",
+"k": "narr|たんじょうびで ひとつ としを とる。"
+},
+{
+"key": "kbc7da91a63b",
+"who": "kb_narr",
+"text": "「とし」を かいて こうげき！",
+"pack": "g44",
+"k": "narr|「とし」を かいて こうげき！"
+},
+{
+"key": "kb7e455310a2",
+"who": "kb_narr",
+"text": "とし！",
+"pack": "g44",
+"k": "narr|とし！"
+},
+{
+"key": "kb1a34fd04c0",
+"who": "kb_narr",
+"text": "ケーキさんは つかれて ねむっちゃった。",
+"pack": "g44",
+"k": "narr|ケーキさんは つかれて ねむっちゃった。"
+},
+{
+"key": "kbf7c08a3a5c",
+"who": "kb_narr",
+"text": "つぎは ケーキさん！",
+"pack": "g44",
+"k": "narr|つぎは ケーキさん！"
+},
+{
+"key": "kb93d4182488",
+"who": "kb_narr",
+"text": "いけっ、ケーキさん！",
+"pack": "g44",
+"k": "narr|いけっ、ケーキさん！"
+},
+{
+"key": "kb03d53f5a9f",
+"who": "kb_narr",
+"text": "ケーキさんが レベルアップ！",
+"pack": "g44",
+"k": "narr|ケーキさんが レベルアップ！"
+},
+{
+"key": "kb59442b20dd",
+"who": "kb_narr",
+"text": "この じは「ただしい」。",
+"pack": "g45",
+"k": "narr|この じは「ただしい」。"
+},
+{
+"key": "kb940c9f134f",
+"who": "kb_narr",
+"text": "せいかいロボ。",
+"pack": "g45",
+"k": "narr|せいかいロボ。"
+},
+{
+"key": "kb43362627d4",
+"who": "kb_narr",
+"text": "まちがいが ない「ただしい」。",
+"pack": "g45",
+"k": "narr|まちがいが ない「ただしい」。"
+},
+{
+"key": "kbc962b135ac",
+"who": "kb_narr",
+"text": "「ただしい」を かいて こうげき！",
+"pack": "g45",
+"k": "narr|「ただしい」を かいて こうげき！"
+},
+{
+"key": "kb4313a1b3fe",
+"who": "kb_narr",
+"text": "ただしい！",
+"pack": "g45",
+"k": "narr|ただしい！"
+},
+{
+"key": "kbe88416fac5",
+"who": "kb_narr",
+"text": "せいかいロボは つかれて ねむっちゃった。",
+"pack": "g45",
+"k": "narr|せいかいロボは つかれて ねむっちゃった。"
+},
+{
+"key": "kb5202bbf02d",
+"who": "kb_narr",
+"text": "つぎは せいかいロボ！",
+"pack": "g45",
+"k": "narr|つぎは せいかいロボ！"
+},
+{
+"key": "kbdbe3a155ee",
+"who": "kb_narr",
+"text": "いけっ、せいかいロボ！",
+"pack": "g45",
+"k": "narr|いけっ、せいかいロボ！"
+},
+{
+"key": "kb004485f2ae",
+"who": "kb_narr",
+"text": "せいかいロボが レベルアップ！",
+"pack": "g45",
+"k": "narr|せいかいロボが レベルアップ！"
+},
+{
+"key": "kb6a7c0a3994",
+"who": "kb_narr",
+"text": "この じは「じゅう」。",
+"pack": "g46",
+"k": "narr|この じは「じゅう」。"
+},
+{
+"key": "kb6db2943101",
+"who": "kb_narr",
+"text": "りょうてくん。",
+"pack": "g46",
+"k": "narr|りょうてくん。"
+},
+{
+"key": "kb8d8af44132",
+"who": "kb_narr",
+"text": "「とお」。",
+"pack": "g46",
+"k": "narr|「とお」。"
+},
+{
+"key": "kba273b62ecc",
+"who": "kb_narr",
+"text": "りょうての ゆびを ぜんぶ あわせて 10ぽん。",
+"pack": "g46",
+"k": "narr|りょうての ゆびを ぜんぶ あわせて 10ぽん。"
+},
+{
+"key": "kb75b898fc9b",
+"who": "kb_narr",
+"text": "「じゅう」を かいて こうげき！",
+"pack": "g46",
+"k": "narr|「じゅう」を かいて こうげき！"
+},
+{
+"key": "kbd71835b63d",
+"who": "kb_narr",
+"text": "じゅう！",
+"pack": "g46",
+"k": "narr|じゅう！"
+},
+{
+"key": "kb03169e3ddc",
+"who": "kb_narr",
+"text": "りょうてくんは つかれて ねむっちゃった。",
+"pack": "g46",
+"k": "narr|りょうてくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb3ef0da4fc9",
+"who": "kb_narr",
+"text": "つぎは りょうてくん！",
+"pack": "g46",
+"k": "narr|つぎは りょうてくん！"
+},
+{
+"key": "kb39d98d4ed3",
+"who": "kb_narr",
+"text": "いけっ、りょうてくん！",
+"pack": "g46",
+"k": "narr|いけっ、りょうてくん！"
+},
+{
+"key": "kb8ceea7d9e3",
+"who": "kb_narr",
+"text": "りょうてくんが レベルアップ！",
+"pack": "g46",
+"k": "narr|りょうてくんが レベルアップ！"
+},
+{
+"key": "kb8938fbbc57",
+"who": "kb_narr",
+"text": "この じは「に」。",
+"pack": "g47",
+"k": "narr|この じは「に」。"
+},
+{
+"key": "kb7bf1cbbfed",
+"who": "kb_narr",
+"text": "いもむしおやこ。",
+"pack": "g47",
+"k": "narr|いもむしおやこ。"
+},
+{
+"key": "kbf55082beab",
+"who": "kb_narr",
+"text": "よこぼう 2ほんで「ふたつ」。",
+"pack": "g47",
+"k": "narr|よこぼう 2ほんで「ふたつ」。"
+},
+{
+"key": "kb95aca1c953",
+"who": "kb_narr",
+"text": "上が みじかく 下が ながい。",
+"pack": "g47",
+"k": "narr|上が みじかく 下が ながい。"
+},
+{
+"key": "kb13a66f9eae",
+"who": "kb_narr",
+"text": "「に」を かいて こうげき！",
+"pack": "g47",
+"k": "narr|「に」を かいて こうげき！"
+},
+{
+"key": "kbb88a3cb649",
+"who": "kb_narr",
+"text": "に！",
+"pack": "g47",
+"k": "narr|に！"
+},
+{
+"key": "kb6632f09d9d",
+"who": "kb_narr",
+"text": "いもむしおやこは つかれて ねむっちゃった。",
+"pack": "g47",
+"k": "narr|いもむしおやこは つかれて ねむっちゃった。"
+},
+{
+"key": "kbdb6eed025d",
+"who": "kb_narr",
+"text": "つぎは いもむしおやこ！",
+"pack": "g47",
+"k": "narr|つぎは いもむしおやこ！"
+},
+{
+"key": "kb7f89e29342",
+"who": "kb_narr",
+"text": "いけっ、いもむしおやこ！",
+"pack": "g47",
+"k": "narr|いけっ、いもむしおやこ！"
+},
+{
+"key": "kb2c97706ace",
+"who": "kb_narr",
+"text": "いもむしおやこが レベルアップ！",
+"pack": "g47",
+"k": "narr|いもむしおやこが レベルアップ！"
+},
+{
+"key": "kb6154b80e84",
+"who": "kb_narr",
+"text": "この じは「おと」。",
+"pack": "g48",
+"k": "narr|この じは「おと」。"
+},
+{
+"key": "kb80218d00cd",
+"who": "kb_narr",
+"text": "たいこどん。",
+"pack": "g48",
+"k": "narr|たいこどん。"
+},
+{
+"key": "kba86a3d0d5d",
+"who": "kb_narr",
+"text": "みみに きこえる「おと」。",
+"pack": "g48",
+"k": "narr|みみに きこえる「おと」。"
+},
+{
+"key": "kb26ee220c06",
+"who": "kb_narr",
+"text": "「おと」を かいて こうげき！",
+"pack": "g48",
+"k": "narr|「おと」を かいて こうげき！"
+},
+{
+"key": "kb90c7857ae0",
+"who": "kb_narr",
+"text": "おと！",
+"pack": "g48",
+"k": "narr|おと！"
+},
+{
+"key": "kb6580769174",
+"who": "kb_narr",
+"text": "たいこどんは つかれて ねむっちゃった。",
+"pack": "g48",
+"k": "narr|たいこどんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb6bd9673733",
+"who": "kb_narr",
+"text": "つぎは たいこどん！",
+"pack": "g48",
+"k": "narr|つぎは たいこどん！"
+},
+{
+"key": "kb4dbeab4ce5",
+"who": "kb_narr",
+"text": "いけっ、たいこどん！",
+"pack": "g48",
+"k": "narr|いけっ、たいこどん！"
+},
+{
+"key": "kb6f32631334",
+"who": "kb_narr",
+"text": "たいこどんが レベルアップ！",
+"pack": "g48",
+"k": "narr|たいこどんが レベルアップ！"
+},
+{
+"key": "kb73fe19bb5d",
+"who": "kb_narr",
+"text": "この じは「め」。",
+"pack": "g49",
+"k": "narr|この じは「め」。"
+},
+{
+"key": "kb9a3d108e09",
+"who": "kb_narr",
+"text": "めだまん。",
+"pack": "g49",
+"k": "narr|めだまん。"
+},
+{
+"key": "kb5302a1cb3f",
+"who": "kb_narr",
+"text": "ものを みる「め」。",
+"pack": "g49",
+"k": "narr|ものを みる「め」。"
+},
+{
+"key": "kbf162cacc95",
+"who": "kb_narr",
+"text": "「め」を かいて こうげき！",
+"pack": "g49",
+"k": "narr|「め」を かいて こうげき！"
+},
+{
+"key": "kbda5fe2926c",
+"who": "kb_narr",
+"text": "め！",
+"pack": "g49",
+"k": "narr|め！"
+},
+{
+"key": "kbc0d654e224",
+"who": "kb_narr",
+"text": "めだまんは つかれて ねむっちゃった。",
+"pack": "g49",
+"k": "narr|めだまんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb579f57799d",
+"who": "kb_narr",
+"text": "つぎは めだまん！",
+"pack": "g49",
+"k": "narr|つぎは めだまん！"
+},
+{
+"key": "kbb2f0f95c42",
+"who": "kb_narr",
+"text": "いけっ、めだまん！",
+"pack": "g49",
+"k": "narr|いけっ、めだまん！"
+},
+{
+"key": "kb44f916f0e4",
+"who": "kb_narr",
+"text": "めだまんが レベルアップ！",
+"pack": "g49",
+"k": "narr|めだまんが レベルアップ！"
+},
+{
+"key": "kbd5cbf5c9a0",
+"who": "kb_narr",
+"text": "この じは「みみ」。",
+"pack": "g50",
+"k": "narr|この じは「みみ」。"
+},
+{
+"key": "kbbf680b4bc2",
+"who": "kb_narr",
+"text": "みみた。",
+"pack": "g50",
+"k": "narr|みみた。"
+},
+{
+"key": "kb2e5c35cbb6",
+"who": "kb_narr",
+"text": "おとを きく「みみ」。",
+"pack": "g50",
+"k": "narr|おとを きく「みみ」。"
+},
+{
+"key": "kbb7ec063400",
+"who": "kb_narr",
+"text": "「みみ」を かいて こうげき！",
+"pack": "g50",
+"k": "narr|「みみ」を かいて こうげき！"
+},
+{
+"key": "kb9ea73d4de6",
+"who": "kb_narr",
+"text": "みみ！",
+"pack": "g50",
+"k": "narr|みみ！"
+},
+{
+"key": "kbb307f1bf15",
+"who": "kb_narr",
+"text": "みみたは つかれて ねむっちゃった。",
+"pack": "g50",
+"k": "narr|みみたは つかれて ねむっちゃった。"
+},
+{
+"key": "kb4706577862",
+"who": "kb_narr",
+"text": "つぎは みみた！",
+"pack": "g50",
+"k": "narr|つぎは みみた！"
+},
+{
+"key": "kb33a36f1e1d",
+"who": "kb_narr",
+"text": "いけっ、みみた！",
+"pack": "g50",
+"k": "narr|いけっ、みみた！"
+},
+{
+"key": "kb53f479ffac",
+"who": "kb_narr",
+"text": "みみたが レベルアップ！",
+"pack": "g50",
+"k": "narr|みみたが レベルアップ！"
+},
+{
+"key": "kb9b1cc0b751",
+"who": "kb_narr",
+"text": "この じは「くち」。",
+"pack": "g51",
+"k": "narr|この じは「くち」。"
+},
+{
+"key": "kb9741fdf7b0",
+"who": "kb_narr",
+"text": "くちべえ。",
+"pack": "g51",
+"k": "narr|くちべえ。"
+},
+{
+"key": "kb12ed7c413c",
+"who": "kb_narr",
+"text": "たべたり はなしたり する「くち」。",
+"pack": "g51",
+"k": "narr|たべたり はなしたり する「くち」。"
+},
+{
+"key": "kbb8fd03001c",
+"who": "kb_narr",
+"text": "「くち」を かいて こうげき！",
+"pack": "g51",
+"k": "narr|「くち」を かいて こうげき！"
+},
+{
+"key": "kb681c279bcc",
+"who": "kb_narr",
+"text": "くち！",
+"pack": "g51",
+"k": "narr|くち！"
+},
+{
+"key": "kb35009708b5",
+"who": "kb_narr",
+"text": "くちべえは つかれて ねむっちゃった。",
+"pack": "g51",
+"k": "narr|くちべえは つかれて ねむっちゃった。"
+},
+{
+"key": "kbf1ae5354f8",
+"who": "kb_narr",
+"text": "つぎは くちべえ！",
+"pack": "g51",
+"k": "narr|つぎは くちべえ！"
+},
+{
+"key": "kb3677cd7790",
+"who": "kb_narr",
+"text": "いけっ、くちべえ！",
+"pack": "g51",
+"k": "narr|いけっ、くちべえ！"
+},
+{
+"key": "kbc3b380c88a",
+"who": "kb_narr",
+"text": "くちべえが レベルアップ！",
+"pack": "g51",
+"k": "narr|くちべえが レベルアップ！"
+},
+{
+"key": "kb7af380b70b",
+"who": "kb_narr",
+"text": "この じは「て」。",
+"pack": "g52",
+"k": "narr|この じは「て」。"
+},
+{
+"key": "kb3a7fc82631",
+"who": "kb_narr",
+"text": "てっち。",
+"pack": "g52",
+"k": "narr|てっち。"
+},
+{
+"key": "kbc4afa6e57f",
+"who": "kb_narr",
+"text": "ものを もつ「て」。",
+"pack": "g52",
+"k": "narr|ものを もつ「て」。"
+},
+{
+"key": "kbb6dd7b503c",
+"who": "kb_narr",
+"text": "ゆびが 5ほん。",
+"pack": "g52",
+"k": "narr|ゆびが 5ほん。"
+},
+{
+"key": "kb4a120a2667",
+"who": "kb_narr",
+"text": "「て」を かいて こうげき！",
+"pack": "g52",
+"k": "narr|「て」を かいて こうげき！"
+},
+{
+"key": "kb29cb192704",
+"who": "kb_narr",
+"text": "て！",
+"pack": "g52",
+"k": "narr|て！"
+},
+{
+"key": "kb916d9b279f",
+"who": "kb_narr",
+"text": "てっちは つかれて ねむっちゃった。",
+"pack": "g52",
+"k": "narr|てっちは つかれて ねむっちゃった。"
+},
+{
+"key": "kb1a30458544",
+"who": "kb_narr",
+"text": "つぎは てっち！",
+"pack": "g52",
+"k": "narr|つぎは てっち！"
+},
+{
+"key": "kbe076b99663",
+"who": "kb_narr",
+"text": "いけっ、てっち！",
+"pack": "g52",
+"k": "narr|いけっ、てっち！"
+},
+{
+"key": "kbddfc26e5d1",
+"who": "kb_narr",
+"text": "てっちが レベルアップ！",
+"pack": "g52",
+"k": "narr|てっちが レベルアップ！"
+},
+{
+"key": "kb3822987aca",
+"who": "kb_narr",
+"text": "この じは「あし」。",
+"pack": "g53",
+"k": "narr|この じは「あし」。"
+},
+{
+"key": "kb3ab4014900",
+"who": "kb_narr",
+"text": "あしお。",
+"pack": "g53",
+"k": "narr|あしお。"
+},
+{
+"key": "kb4d46526fdd",
+"who": "kb_narr",
+"text": "あるく「あし」。",
+"pack": "g53",
+"k": "narr|あるく「あし」。"
+},
+{
+"key": "kbdd0855721b",
+"who": "kb_narr",
+"text": "「あし」を かいて こうげき！",
+"pack": "g53",
+"k": "narr|「あし」を かいて こうげき！"
+},
+{
+"key": "kb9f62a5eb38",
+"who": "kb_narr",
+"text": "あし！",
+"pack": "g53",
+"k": "narr|あし！"
+},
+{
+"key": "kb0a1043cab4",
+"who": "kb_narr",
+"text": "あしおは つかれて ねむっちゃった。",
+"pack": "g53",
+"k": "narr|あしおは つかれて ねむっちゃった。"
+},
+{
+"key": "kbcffc773e20",
+"who": "kb_narr",
+"text": "つぎは あしお！",
+"pack": "g53",
+"k": "narr|つぎは あしお！"
+},
+{
+"key": "kba5a4041068",
+"who": "kb_narr",
+"text": "いけっ、あしお！",
+"pack": "g53",
+"k": "narr|いけっ、あしお！"
+},
+{
+"key": "kba5872b237d",
+"who": "kb_narr",
+"text": "あしおが レベルアップ！",
+"pack": "g53",
+"k": "narr|あしおが レベルアップ！"
+},
+{
+"key": "kbda0fa8558b",
+"who": "kb_narr",
+"text": "この じは「みる」。",
+"pack": "g54",
+"k": "narr|この じは「みる」。"
+},
+{
+"key": "kb5a1356388d",
+"who": "kb_narr",
+"text": "みるみる。",
+"pack": "g54",
+"k": "narr|みるみる。"
+},
+{
+"key": "kbf5731bc544",
+"who": "kb_narr",
+"text": "目に あしが ついて「みる」。",
+"pack": "g54",
+"k": "narr|目に あしが ついて「みる」。"
+},
+{
+"key": "kb51588c41f7",
+"who": "kb_narr",
+"text": "「みる」を かいて こうげき！",
+"pack": "g54",
+"k": "narr|「みる」を かいて こうげき！"
+},
+{
+"key": "kb623e7908b1",
+"who": "kb_narr",
+"text": "みる！",
+"pack": "g54",
+"k": "narr|みる！"
+},
+{
+"key": "kbdc36ce5a20",
+"who": "kb_narr",
+"text": "みるみるは つかれて ねむっちゃった。",
+"pack": "g54",
+"k": "narr|みるみるは つかれて ねむっちゃった。"
+},
+{
+"key": "kb10515e59f9",
+"who": "kb_narr",
+"text": "つぎは みるみる！",
+"pack": "g54",
+"k": "narr|つぎは みるみる！"
+},
+{
+"key": "kbb2cddb1741",
+"who": "kb_narr",
+"text": "いけっ、みるみる！",
+"pack": "g54",
+"k": "narr|いけっ、みるみる！"
+},
+{
+"key": "kbc845b73b3d",
+"who": "kb_narr",
+"text": "みるみるが レベルアップ！",
+"pack": "g54",
+"k": "narr|みるみるが レベルアップ！"
+},
+{
+"key": "kb12a14b6487",
+"who": "kb_narr",
+"text": "この じは「たつ」。",
+"pack": "g55",
+"k": "narr|この じは「たつ」。"
+},
+{
+"key": "kb63a3ca6cf6",
+"who": "kb_narr",
+"text": "たっちゃん。",
+"pack": "g55",
+"k": "narr|たっちゃん。"
+},
+{
+"key": "kb401783a2fb",
+"who": "kb_narr",
+"text": "じめんに「たつ」。",
+"pack": "g55",
+"k": "narr|じめんに「たつ」。"
+},
+{
+"key": "kbf25b9a886f",
+"who": "kb_narr",
+"text": "「たつ」を かいて こうげき！",
+"pack": "g55",
+"k": "narr|「たつ」を かいて こうげき！"
+},
+{
+"key": "kb7ca6c66623",
+"who": "kb_narr",
+"text": "たつ！",
+"pack": "g55",
+"k": "narr|たつ！"
+},
+{
+"key": "kb48f4a69b4e",
+"who": "kb_narr",
+"text": "たっちゃんは つかれて ねむっちゃった。",
+"pack": "g55",
+"k": "narr|たっちゃんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb92bb76657e",
+"who": "kb_narr",
+"text": "つぎは たっちゃん！",
+"pack": "g55",
+"k": "narr|つぎは たっちゃん！"
+},
+{
+"key": "kb1216f0a685",
+"who": "kb_narr",
+"text": "いけっ、たっちゃん！",
+"pack": "g55",
+"k": "narr|いけっ、たっちゃん！"
+},
+{
+"key": "kbd5e700435d",
+"who": "kb_narr",
+"text": "たっちゃんが レベルアップ！",
+"pack": "g55",
+"k": "narr|たっちゃんが レベルアップ！"
+},
+{
+"key": "kbf9deb7ad04",
+"who": "kb_narr",
+"text": "この じは「ちから」。",
+"pack": "g56",
+"k": "narr|この じは「ちから」。"
+},
+{
+"key": "kb35ac626c67",
+"who": "kb_narr",
+"text": "ちからもち。",
+"pack": "g56",
+"k": "narr|ちからもち。"
+},
+{
+"key": "kb198679132b",
+"who": "kb_narr",
+"text": "うでの「ちから」。",
+"pack": "g56",
+"k": "narr|うでの「ちから」。"
+},
+{
+"key": "kb76b618d8d3",
+"who": "kb_narr",
+"text": "ちからこぶ。",
+"pack": "g56",
+"k": "narr|ちからこぶ。"
+},
+{
+"key": "kbbdc1fb6cdd",
+"who": "kb_narr",
+"text": "「ちから」を かいて こうげき！",
+"pack": "g56",
+"k": "narr|「ちから」を かいて こうげき！"
+},
+{
+"key": "kb669748c75e",
+"who": "kb_narr",
+"text": "ちから！",
+"pack": "g56",
+"k": "narr|ちから！"
+},
+{
+"key": "kb03e77e0994",
+"who": "kb_narr",
+"text": "ちからもちは つかれて ねむっちゃった。",
+"pack": "g56",
+"k": "narr|ちからもちは つかれて ねむっちゃった。"
+},
+{
+"key": "kb7ddc33d28b",
+"who": "kb_narr",
+"text": "つぎは ちからもち！",
+"pack": "g56",
+"k": "narr|つぎは ちからもち！"
+},
+{
+"key": "kbc1cf74c9c1",
+"who": "kb_narr",
+"text": "いけっ、ちからもち！",
+"pack": "g56",
+"k": "narr|いけっ、ちからもち！"
+},
+{
+"key": "kb045af0a624",
+"who": "kb_narr",
+"text": "ちからもちが レベルアップ！",
+"pack": "g56",
+"k": "narr|ちからもちが レベルアップ！"
+},
+{
+"key": "kbed5a94640f",
+"who": "kb_narr",
+"text": "この じは「でる」。",
+"pack": "g57",
+"k": "narr|この じは「でる」。"
+},
+{
+"key": "kb90f0fe8226",
+"who": "kb_narr",
+"text": "ふんすいくん。",
+"pack": "g57",
+"k": "narr|ふんすいくん。"
+},
+{
+"key": "kb67fc7ebc29",
+"who": "kb_narr",
+"text": "なかから そとへ「でる」。",
+"pack": "g57",
+"k": "narr|なかから そとへ「でる」。"
+},
+{
+"key": "kba9ad2c147d",
+"who": "kb_narr",
+"text": "「でる」を かいて こうげき！",
+"pack": "g57",
+"k": "narr|「でる」を かいて こうげき！"
+},
+{
+"key": "kb3238284fff",
+"who": "kb_narr",
+"text": "でる！",
+"pack": "g57",
+"k": "narr|でる！"
+},
+{
+"key": "kbadfdc2f5cb",
+"who": "kb_narr",
+"text": "ふんすいくんは つかれて ねむっちゃった。",
+"pack": "g57",
+"k": "narr|ふんすいくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kbebc5d1163b",
+"who": "kb_narr",
+"text": "つぎは ふんすいくん！",
+"pack": "g57",
+"k": "narr|つぎは ふんすいくん！"
+},
+{
+"key": "kbd864be380f",
+"who": "kb_narr",
+"text": "いけっ、ふんすいくん！",
+"pack": "g57",
+"k": "narr|いけっ、ふんすいくん！"
+},
+{
+"key": "kb5c6936f366",
+"who": "kb_narr",
+"text": "ふんすいくんが レベルアップ！",
+"pack": "g57",
+"k": "narr|ふんすいくんが レベルアップ！"
+},
+{
+"key": "kbe0507bec9a",
+"who": "kb_narr",
+"text": "この じは「さん」。",
+"pack": "g58",
+"k": "narr|この じは「さん」。"
+},
+{
+"key": "kbea16f36a96",
+"who": "kb_narr",
+"text": "いもむしきょうだい。",
+"pack": "g58",
+"k": "narr|いもむしきょうだい。"
+},
+{
+"key": "kb5a81ca51e6",
+"who": "kb_narr",
+"text": "よこぼう 3ぼんで「みっつ」。",
+"pack": "g58",
+"k": "narr|よこぼう 3ぼんで「みっつ」。"
+},
+{
+"key": "kb8e5bda51c8",
+"who": "kb_narr",
+"text": "まんなかが いちばん みじかい。",
+"pack": "g58",
+"k": "narr|まんなかが いちばん みじかい。"
+},
+{
+"key": "kb5dabcc5834",
+"who": "kb_narr",
+"text": "「さん」を かいて こうげき！",
+"pack": "g58",
+"k": "narr|「さん」を かいて こうげき！"
+},
+{
+"key": "kb759c3c248a",
+"who": "kb_narr",
+"text": "さん！",
+"pack": "g58",
+"k": "narr|さん！"
+},
+{
+"key": "kbf46022c7c6",
+"who": "kb_narr",
+"text": "いもむしきょうだいは つかれて ねむっちゃった。",
+"pack": "g58",
+"k": "narr|いもむしきょうだいは つかれて ねむっちゃった。"
+},
+{
+"key": "kbb847def23d",
+"who": "kb_narr",
+"text": "つぎは いもむしきょうだい！",
+"pack": "g58",
+"k": "narr|つぎは いもむしきょうだい！"
+},
+{
+"key": "kb30d8da8f3c",
+"who": "kb_narr",
+"text": "いけっ、いもむしきょうだい！",
+"pack": "g58",
+"k": "narr|いけっ、いもむしきょうだい！"
+},
+{
+"key": "kbe91cefaff2",
+"who": "kb_narr",
+"text": "いもむしきょうだいが レベルアップ！",
+"pack": "g58",
+"k": "narr|いもむしきょうだいが レベルアップ！"
+},
+{
+"key": "kbe7aa3c0d6b",
+"who": "kb_narr",
+"text": "この じは「そら」。",
+"pack": "g59",
+"k": "narr|この じは「そら」。"
+},
+{
+"key": "kbe0bca456ca",
+"who": "kb_narr",
+"text": "そらどり。",
+"pack": "g59",
+"k": "narr|そらどり。"
+},
+{
+"key": "kb5f196eda09",
+"who": "kb_narr",
+"text": "ひろい「そら」。",
+"pack": "g59",
+"k": "narr|ひろい「そら」。"
+},
+{
+"key": "kbe0a933b63a",
+"who": "kb_narr",
+"text": "からっぽの「から」とも よむ。",
+"pack": "g59",
+"k": "narr|からっぽの「から」とも よむ。"
+},
+{
+"key": "kb4e0b6dc19a",
+"who": "kb_narr",
+"text": "「そら」を かいて こうげき！",
+"pack": "g59",
+"k": "narr|「そら」を かいて こうげき！"
+},
+{
+"key": "kb1a586b2b4b",
+"who": "kb_narr",
+"text": "そら！",
+"pack": "g59",
+"k": "narr|そら！"
+},
+{
+"key": "kb0beba7cf25",
+"who": "kb_narr",
+"text": "そらどりは つかれて ねむっちゃった。",
+"pack": "g59",
+"k": "narr|そらどりは つかれて ねむっちゃった。"
+},
+{
+"key": "kbe35b6d8801",
+"who": "kb_narr",
+"text": "つぎは そらどり！",
+"pack": "g59",
+"k": "narr|つぎは そらどり！"
+},
+{
+"key": "kb4e06231f8d",
+"who": "kb_narr",
+"text": "いけっ、そらどり！",
+"pack": "g59",
+"k": "narr|いけっ、そらどり！"
+},
+{
+"key": "kb67834e8341",
+"who": "kb_narr",
+"text": "そらどりが レベルアップ！",
+"pack": "g59",
+"k": "narr|そらどりが レベルアップ！"
+},
+{
+"key": "kba97900b6a5",
+"who": "kb_narr",
+"text": "この じは「てん」。",
+"pack": "g60",
+"k": "narr|この じは「てん」。"
+},
+{
+"key": "kb751bf1d896",
+"who": "kb_narr",
+"text": "てんてん。",
+"pack": "g60",
+"k": "narr|てんてん。"
+},
+{
+"key": "kb8f56b41c38",
+"who": "kb_narr",
+"text": "あたまの うえに ひろがる「てん」（そら）。",
+"pack": "g60",
+"k": "narr|あたまの うえに ひろがる「てん」（そら）。"
+},
+{
+"key": "kb430c7e8e64",
+"who": "kb_narr",
+"text": "「てん」を かいて こうげき！",
+"pack": "g60",
+"k": "narr|「てん」を かいて こうげき！"
+},
+{
+"key": "kba20faeb66d",
+"who": "kb_narr",
+"text": "てん！",
+"pack": "g60",
+"k": "narr|てん！"
+},
+{
+"key": "kb5ded98c3e7",
+"who": "kb_narr",
+"text": "てんてんは つかれて ねむっちゃった。",
+"pack": "g60",
+"k": "narr|てんてんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb0b8cdbabae",
+"who": "kb_narr",
+"text": "つぎは てんてん！",
+"pack": "g60",
+"k": "narr|つぎは てんてん！"
+},
+{
+"key": "kbf1651ee4db",
+"who": "kb_narr",
+"text": "いけっ、てんてん！",
+"pack": "g60",
+"k": "narr|いけっ、てんてん！"
+},
+{
+"key": "kb4bf3fd3028",
+"who": "kb_narr",
+"text": "てんてんが レベルアップ！",
+"pack": "g60",
+"k": "narr|てんてんが レベルアップ！"
+},
+{
+"key": "kbd107a4560a",
+"who": "kb_narr",
+"text": "この じは「うえ」。",
+"pack": "g61",
+"k": "narr|この じは「うえ」。"
+},
+{
+"key": "kb7825ddfe84",
+"who": "kb_narr",
+"text": "はたあげくん。",
+"pack": "g61",
+"k": "narr|はたあげくん。"
+},
+{
+"key": "kbecff8dee93",
+"who": "kb_narr",
+"text": "たかい ほう、うえの こと。",
+"pack": "g61",
+"k": "narr|たかい ほう、うえの こと。"
+},
+{
+"key": "kb3b8c74a813",
+"who": "kb_narr",
+"text": "はたが うえに あがる。",
+"pack": "g61",
+"k": "narr|はたが うえに あがる。"
+},
+{
+"key": "kbba13d1f5b0",
+"who": "kb_narr",
+"text": "「うえ」を かいて こうげき！",
+"pack": "g61",
+"k": "narr|「うえ」を かいて こうげき！"
+},
+{
+"key": "kb770f131fab",
+"who": "kb_narr",
+"text": "うえ！",
+"pack": "g61",
+"k": "narr|うえ！"
+},
+{
+"key": "kbc50bb7ff40",
+"who": "kb_narr",
+"text": "はたあげくんは つかれて ねむっちゃった。",
+"pack": "g61",
+"k": "narr|はたあげくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb38787230a1",
+"who": "kb_narr",
+"text": "つぎは はたあげくん！",
+"pack": "g61",
+"k": "narr|つぎは はたあげくん！"
+},
+{
+"key": "kb6d0a906d23",
+"who": "kb_narr",
+"text": "いけっ、はたあげくん！",
+"pack": "g61",
+"k": "narr|いけっ、はたあげくん！"
+},
+{
+"key": "kb49c3f95f6e",
+"who": "kb_narr",
+"text": "はたあげくんが レベルアップ！",
+"pack": "g61",
+"k": "narr|はたあげくんが レベルアップ！"
+},
+{
+"key": "kbb71c2d249b",
+"who": "kb_narr",
+"text": "この じは「した」。",
+"pack": "g62",
+"k": "narr|この じは「した」。"
+},
+{
+"key": "kbf847ea0589",
+"who": "kb_narr",
+"text": "ぶらーんぐも。",
+"pack": "g62",
+"k": "narr|ぶらーんぐも。"
+},
+{
+"key": "kb0bb6fc8313",
+"who": "kb_narr",
+"text": "ひくい ほう、したの こと。",
+"pack": "g62",
+"k": "narr|ひくい ほう、したの こと。"
+},
+{
+"key": "kb73f3796e55",
+"who": "kb_narr",
+"text": "くもが したへ おりてくる。",
+"pack": "g62",
+"k": "narr|くもが したへ おりてくる。"
+},
+{
+"key": "kb060b98ccab",
+"who": "kb_narr",
+"text": "「した」を かいて こうげき！",
+"pack": "g62",
+"k": "narr|「した」を かいて こうげき！"
+},
+{
+"key": "kb6536f8b933",
+"who": "kb_narr",
+"text": "した！",
+"pack": "g62",
+"k": "narr|した！"
+},
+{
+"key": "kb3e605a24a8",
+"who": "kb_narr",
+"text": "ぶらーんぐもは つかれて ねむっちゃった。",
+"pack": "g62",
+"k": "narr|ぶらーんぐもは つかれて ねむっちゃった。"
+},
+{
+"key": "kbfea7bd6c0d",
+"who": "kb_narr",
+"text": "つぎは ぶらーんぐも！",
+"pack": "g62",
+"k": "narr|つぎは ぶらーんぐも！"
+},
+{
+"key": "kb8ee4aa732d",
+"who": "kb_narr",
+"text": "いけっ、ぶらーんぐも！",
+"pack": "g62",
+"k": "narr|いけっ、ぶらーんぐも！"
+},
+{
+"key": "kb22d84815fa",
+"who": "kb_narr",
+"text": "ぶらーんぐもが レベルアップ！",
+"pack": "g62",
+"k": "narr|ぶらーんぐもが レベルアップ！"
+},
+{
+"key": "kb0c0a3ad19d",
+"who": "kb_narr",
+"text": "この じは「なか」。",
+"pack": "g63",
+"k": "narr|この じは「なか」。"
+},
+{
+"key": "kba331ecf07c",
+"who": "kb_narr",
+"text": "だんごくん。",
+"pack": "g63",
+"k": "narr|だんごくん。"
+},
+{
+"key": "kb05ee85fcce",
+"who": "kb_narr",
+"text": "まんなか、「なか」。",
+"pack": "g63",
+"k": "narr|まんなか、「なか」。"
+},
+{
+"key": "kb90f1292408",
+"who": "kb_narr",
+"text": "「なか」を かいて こうげき！",
+"pack": "g63",
+"k": "narr|「なか」を かいて こうげき！"
+},
+{
+"key": "kb69005620c0",
+"who": "kb_narr",
+"text": "なか！",
+"pack": "g63",
+"k": "narr|なか！"
+},
+{
+"key": "kb071a89dae3",
+"who": "kb_narr",
+"text": "だんごくんは つかれて ねむっちゃった。",
+"pack": "g63",
+"k": "narr|だんごくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kbcc3fc3c0b3",
+"who": "kb_narr",
+"text": "つぎは だんごくん！",
+"pack": "g63",
+"k": "narr|つぎは だんごくん！"
+},
+{
+"key": "kb19f8e102a5",
+"who": "kb_narr",
+"text": "いけっ、だんごくん！",
+"pack": "g63",
+"k": "narr|いけっ、だんごくん！"
+},
+{
+"key": "kb742a7506fd",
+"who": "kb_narr",
+"text": "だんごくんが レベルアップ！",
+"pack": "g63",
+"k": "narr|だんごくんが レベルアップ！"
+},
+{
+"key": "kbc4d2d63f23",
+"who": "kb_narr",
+"text": "この じは「おおきい」。",
+"pack": "g64",
+"k": "narr|この じは「おおきい」。"
+},
+{
+"key": "kb3b6a35e61f",
+"who": "kb_narr",
+"text": "でっかいさん。",
+"pack": "g64",
+"k": "narr|でっかいさん。"
+},
+{
+"key": "kbe455207879",
+"who": "kb_narr",
+"text": "りょうてを ひろげて「おおきい」。",
+"pack": "g64",
+"k": "narr|りょうてを ひろげて「おおきい」。"
+},
+{
+"key": "kb06a62231b5",
+"who": "kb_narr",
+"text": "「おおきい」を かいて こうげき！",
+"pack": "g64",
+"k": "narr|「おおきい」を かいて こうげき！"
+},
+{
+"key": "kbfbca87c1ab",
+"who": "kb_narr",
+"text": "おおきい！",
+"pack": "g64",
+"k": "narr|おおきい！"
+},
+{
+"key": "kb462013f5a3",
+"who": "kb_narr",
+"text": "でっかいさんは つかれて ねむっちゃった。",
+"pack": "g64",
+"k": "narr|でっかいさんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb988ce0cea4",
+"who": "kb_narr",
+"text": "つぎは でっかいさん！",
+"pack": "g64",
+"k": "narr|つぎは でっかいさん！"
+},
+{
+"key": "kbb35d337f66",
+"who": "kb_narr",
+"text": "いけっ、でっかいさん！",
+"pack": "g64",
+"k": "narr|いけっ、でっかいさん！"
+},
+{
+"key": "kb46f58fd6e1",
+"who": "kb_narr",
+"text": "でっかいさんが レベルアップ！",
+"pack": "g64",
+"k": "narr|でっかいさんが レベルアップ！"
+},
+{
+"key": "kb00de784844",
+"who": "kb_narr",
+"text": "この じは「ちいさい」。",
+"pack": "g65",
+"k": "narr|この じは「ちいさい」。"
+},
+{
+"key": "kbb37628e576",
+"who": "kb_narr",
+"text": "ひよこちゃん。",
+"pack": "g65",
+"k": "narr|ひよこちゃん。"
+},
+{
+"key": "kba646167d86",
+"who": "kb_narr",
+"text": "「ちいさい」こと。",
+"pack": "g65",
+"k": "narr|「ちいさい」こと。"
+},
+{
+"key": "kbe4818003c4",
+"who": "kb_narr",
+"text": "ひよこみたいに ちいさい。",
+"pack": "g65",
+"k": "narr|ひよこみたいに ちいさい。"
+},
+{
+"key": "kb7ba3be5844",
+"who": "kb_narr",
+"text": "「ちいさい」を かいて こうげき！",
+"pack": "g65",
+"k": "narr|「ちいさい」を かいて こうげき！"
+},
+{
+"key": "kba575c380c6",
+"who": "kb_narr",
+"text": "ちいさい！",
+"pack": "g65",
+"k": "narr|ちいさい！"
+},
+{
+"key": "kbaeb8e12876",
+"who": "kb_narr",
+"text": "ひよこちゃんは つかれて ねむっちゃった。",
+"pack": "g65",
+"k": "narr|ひよこちゃんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb9a606fa5c1",
+"who": "kb_narr",
+"text": "つぎは ひよこちゃん！",
+"pack": "g65",
+"k": "narr|つぎは ひよこちゃん！"
+},
+{
+"key": "kb6df56a0e67",
+"who": "kb_narr",
+"text": "いけっ、ひよこちゃん！",
+"pack": "g65",
+"k": "narr|いけっ、ひよこちゃん！"
+},
+{
+"key": "kb310e5d5106",
+"who": "kb_narr",
+"text": "ひよこちゃんが レベルアップ！",
+"pack": "g65",
+"k": "narr|ひよこちゃんが レベルアップ！"
+},
+{
+"key": "kbbb2e4c1def",
+"who": "kb_narr",
+"text": "この じは「はいる」。",
+"pack": "g66",
+"k": "narr|この じは「はいる」。"
+},
+{
+"key": "kb731122b771",
+"who": "kb_narr",
+"text": "テントくん。",
+"pack": "g66",
+"k": "narr|テントくん。"
+},
+{
+"key": "kb8b8880b18d",
+"who": "kb_narr",
+"text": "そとから なかへ「はいる」こと。",
+"pack": "g66",
+"k": "narr|そとから なかへ「はいる」こと。"
+},
+{
+"key": "kb4b1e4b8b11",
+"who": "kb_narr",
+"text": "「はいる」を かいて こうげき！",
+"pack": "g66",
+"k": "narr|「はいる」を かいて こうげき！"
+},
+{
+"key": "kbce44092688",
+"who": "kb_narr",
+"text": "はいる！",
+"pack": "g66",
+"k": "narr|はいる！"
+},
+{
+"key": "kb30c8b29f2d",
+"who": "kb_narr",
+"text": "テントくんは つかれて ねむっちゃった。",
+"pack": "g66",
+"k": "narr|テントくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb4b1bd65d5b",
+"who": "kb_narr",
+"text": "つぎは テントくん！",
+"pack": "g66",
+"k": "narr|つぎは テントくん！"
+},
+{
+"key": "kb9866abd90e",
+"who": "kb_narr",
+"text": "いけっ、テントくん！",
+"pack": "g66",
+"k": "narr|いけっ、テントくん！"
+},
+{
+"key": "kb1c2b45e00e",
+"who": "kb_narr",
+"text": "テントくんが レベルアップ！",
+"pack": "g66",
+"k": "narr|テントくんが レベルアップ！"
+},
+{
+"key": "kbb29741e1af",
+"who": "kb_narr",
+"text": "この じは「ひゃく」。",
+"pack": "g67",
+"k": "narr|この じは「ひゃく」。"
+},
+{
+"key": "kb984a8a7ea3",
+"who": "kb_narr",
+"text": "ひゃくてんくん。",
+"pack": "g67",
+"k": "narr|ひゃくてんくん。"
+},
+{
+"key": "kb1ad92a748c",
+"who": "kb_narr",
+"text": "「ひゃく」。",
+"pack": "g67",
+"k": "narr|「ひゃく」。"
+},
+{
+"key": "kbecd2012421",
+"who": "kb_narr",
+"text": "白の うえに いちを のせると 100。",
+"pack": "g67",
+"k": "narr|白の うえに いちを のせると 100。"
+},
+{
+"key": "kb8daab43063",
+"who": "kb_narr",
+"text": "「ひゃく」を かいて こうげき！",
+"pack": "g67",
+"k": "narr|「ひゃく」を かいて こうげき！"
+},
+{
+"key": "kb16e256a5a5",
+"who": "kb_narr",
+"text": "ひゃく！",
+"pack": "g67",
+"k": "narr|ひゃく！"
+},
+{
+"key": "kb5d20930c45",
+"who": "kb_narr",
+"text": "ひゃくてんくんは つかれて ねむっちゃった。",
+"pack": "g67",
+"k": "narr|ひゃくてんくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb7dea4b57e9",
+"who": "kb_narr",
+"text": "つぎは ひゃくてんくん！",
+"pack": "g67",
+"k": "narr|つぎは ひゃくてんくん！"
+},
+{
+"key": "kb33708bc7fd",
+"who": "kb_narr",
+"text": "いけっ、ひゃくてんくん！",
+"pack": "g67",
+"k": "narr|いけっ、ひゃくてんくん！"
+},
+{
+"key": "kb3383347db3",
+"who": "kb_narr",
+"text": "ひゃくてんくんが レベルアップ！",
+"pack": "g67",
+"k": "narr|ひゃくてんくんが レベルアップ！"
+},
+{
+"key": "kb5a6bd60ae4",
+"who": "kb_narr",
+"text": "この じは「せん」。",
+"pack": "g68",
+"k": "narr|この じは「せん」。"
+},
+{
+"key": "kb0babfe8707",
+"who": "kb_narr",
+"text": "かかしさん。",
+"pack": "g68",
+"k": "narr|かかしさん。"
+},
+{
+"key": "kbfdf3b21d38",
+"who": "kb_narr",
+"text": "「せん」。",
+"pack": "g68",
+"k": "narr|「せん」。"
+},
+{
+"key": "kb26f6dda98b",
+"who": "kb_narr",
+"text": "1000の こと。",
+"pack": "g68",
+"k": "narr|1000の こと。"
+},
+{
+"key": "kbfdf975dd50",
+"who": "kb_narr",
+"text": "「せん」を かいて こうげき！",
+"pack": "g68",
+"k": "narr|「せん」を かいて こうげき！"
+},
+{
+"key": "kbca8974a25a",
+"who": "kb_narr",
+"text": "せん！",
+"pack": "g68",
+"k": "narr|せん！"
+},
+{
+"key": "kb953a86e0fb",
+"who": "kb_narr",
+"text": "かかしさんは つかれて ねむっちゃった。",
+"pack": "g68",
+"k": "narr|かかしさんは つかれて ねむっちゃった。"
+},
+{
+"key": "kbda63148715",
+"who": "kb_narr",
+"text": "つぎは かかしさん！",
+"pack": "g68",
+"k": "narr|つぎは かかしさん！"
+},
+{
+"key": "kbc0e5c9ca78",
+"who": "kb_narr",
+"text": "いけっ、かかしさん！",
+"pack": "g68",
+"k": "narr|いけっ、かかしさん！"
+},
+{
+"key": "kb03a645a03d",
+"who": "kb_narr",
+"text": "かかしさんが レベルアップ！",
+"pack": "g68",
+"k": "narr|かかしさんが レベルアップ！"
+},
+{
+"key": "kbdafe982fb9",
+"who": "kb_narr",
+"text": "この じは「おう」。",
+"pack": "g69",
+"k": "narr|この じは「おう」。"
+},
+{
+"key": "kb85d7a9475b",
+"who": "kb_narr",
+"text": "おうさま。",
+"pack": "g69",
+"k": "narr|おうさま。"
+},
+{
+"key": "kb52504f3a4b",
+"who": "kb_narr",
+"text": "くにで いちばん えらい「おう」さま。",
+"pack": "g69",
+"k": "narr|くにで いちばん えらい「おう」さま。"
+},
+{
+"key": "kb822e12d814",
+"who": "kb_narr",
+"text": "「おう」を かいて こうげき！",
+"pack": "g69",
+"k": "narr|「おう」を かいて こうげき！"
+},
+{
+"key": "kbc9afd57197",
+"who": "kb_narr",
+"text": "おう！",
+"pack": "g69",
+"k": "narr|おう！"
+},
+{
+"key": "kb61206ebd3d",
+"who": "kb_narr",
+"text": "おうさまは つかれて ねむっちゃった。",
+"pack": "g69",
+"k": "narr|おうさまは つかれて ねむっちゃった。"
+},
+{
+"key": "kb6b50e713ae",
+"who": "kb_narr",
+"text": "つぎは おうさま！",
+"pack": "g69",
+"k": "narr|つぎは おうさま！"
+},
+{
+"key": "kbd87315c5e3",
+"who": "kb_narr",
+"text": "いけっ、おうさま！",
+"pack": "g69",
+"k": "narr|いけっ、おうさま！"
+},
+{
+"key": "kb18f0170f32",
+"who": "kb_narr",
+"text": "おうさまが レベルアップ！",
+"pack": "g69",
+"k": "narr|おうさまが レベルアップ！"
+},
+{
+"key": "kb02e9658aad",
+"who": "kb_narr",
+"text": "この じは「たま」。",
+"pack": "g70",
+"k": "narr|この じは「たま」。"
+},
+{
+"key": "kb9adbdaa8ea",
+"who": "kb_narr",
+"text": "たまりん。",
+"pack": "g70",
+"k": "narr|たまりん。"
+},
+{
+"key": "kba6c3132019",
+"who": "kb_narr",
+"text": "まるい「たま」。",
+"pack": "g70",
+"k": "narr|まるい「たま」。"
+},
+{
+"key": "kbadfb76e9a4",
+"who": "kb_narr",
+"text": "ほうせきの たま。",
+"pack": "g70",
+"k": "narr|ほうせきの たま。"
+},
+{
+"key": "kbc204b8f9cc",
+"who": "kb_narr",
+"text": "「たま」を かいて こうげき！",
+"pack": "g70",
+"k": "narr|「たま」を かいて こうげき！"
+},
+{
+"key": "kb8d9f8a2b09",
+"who": "kb_narr",
+"text": "たま！",
+"pack": "g70",
+"k": "narr|たま！"
+},
+{
+"key": "kbad5cf3f044",
+"who": "kb_narr",
+"text": "たまりんは つかれて ねむっちゃった。",
+"pack": "g70",
+"k": "narr|たまりんは つかれて ねむっちゃった。"
+},
+{
+"key": "kbe27263a7c9",
+"who": "kb_narr",
+"text": "つぎは たまりん！",
+"pack": "g70",
+"k": "narr|つぎは たまりん！"
+},
+{
+"key": "kbb78f8435d0",
+"who": "kb_narr",
+"text": "いけっ、たまりん！",
+"pack": "g70",
+"k": "narr|いけっ、たまりん！"
+},
+{
+"key": "kbd0cc869884",
+"who": "kb_narr",
+"text": "たまりんが レベルアップ！",
+"pack": "g70",
+"k": "narr|たまりんが レベルアップ！"
+},
+{
+"key": "kb49b3dbfdc5",
+"who": "kb_narr",
+"text": "この じは「あか」。",
+"pack": "g71",
+"k": "narr|この じは「あか」。"
+},
+{
+"key": "kb5c9175a9a9",
+"who": "kb_narr",
+"text": "あかだこ。",
+"pack": "g71",
+"k": "narr|あかだこ。"
+},
+{
+"key": "kb907d8f27fd",
+"who": "kb_narr",
+"text": "ひの いろ、「あか」。",
+"pack": "g71",
+"k": "narr|ひの いろ、「あか」。"
+},
+{
+"key": "kb01086a2ad2",
+"who": "kb_narr",
+"text": "「あか」を かいて こうげき！",
+"pack": "g71",
+"k": "narr|「あか」を かいて こうげき！"
+},
+{
+"key": "kbeea7daae63",
+"who": "kb_narr",
+"text": "あか！",
+"pack": "g71",
+"k": "narr|あか！"
+},
+{
+"key": "kb1f258ef3ff",
+"who": "kb_narr",
+"text": "あかだこは つかれて ねむっちゃった。",
+"pack": "g71",
+"k": "narr|あかだこは つかれて ねむっちゃった。"
+},
+{
+"key": "kbc2c228df08",
+"who": "kb_narr",
+"text": "つぎは あかだこ！",
+"pack": "g71",
+"k": "narr|つぎは あかだこ！"
+},
+{
+"key": "kb849d3c6d3a",
+"who": "kb_narr",
+"text": "いけっ、あかだこ！",
+"pack": "g71",
+"k": "narr|いけっ、あかだこ！"
+},
+{
+"key": "kb20822e71ba",
+"who": "kb_narr",
+"text": "あかだこが レベルアップ！",
+"pack": "g71",
+"k": "narr|あかだこが レベルアップ！"
+},
+{
+"key": "kba420767adb",
+"who": "kb_narr",
+"text": "この じは「あお」。",
+"pack": "g72",
+"k": "narr|この じは「あお」。"
+},
+{
+"key": "kb0f1f4e8f6c",
+"who": "kb_narr",
+"text": "ぺんきくん。",
+"pack": "g72",
+"k": "narr|ぺんきくん。"
+},
+{
+"key": "kbf85d14376f",
+"who": "kb_narr",
+"text": "そらや みずの いろ、「あお」。",
+"pack": "g72",
+"k": "narr|そらや みずの いろ、「あお」。"
+},
+{
+"key": "kb87b9053758",
+"who": "kb_narr",
+"text": "「あお」を かいて こうげき！",
+"pack": "g72",
+"k": "narr|「あお」を かいて こうげき！"
+},
+{
+"key": "kbf77a9fcecf",
+"who": "kb_narr",
+"text": "あお！",
+"pack": "g72",
+"k": "narr|あお！"
+},
+{
+"key": "kba572762a61",
+"who": "kb_narr",
+"text": "ぺんきくんは つかれて ねむっちゃった。",
+"pack": "g72",
+"k": "narr|ぺんきくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb65fdccb310",
+"who": "kb_narr",
+"text": "つぎは ぺんきくん！",
+"pack": "g72",
+"k": "narr|つぎは ぺんきくん！"
+},
+{
+"key": "kb0239d5b559",
+"who": "kb_narr",
+"text": "いけっ、ぺんきくん！",
+"pack": "g72",
+"k": "narr|いけっ、ぺんきくん！"
+},
+{
+"key": "kb3c007c62f3",
+"who": "kb_narr",
+"text": "ぺんきくんが レベルアップ！",
+"pack": "g72",
+"k": "narr|ぺんきくんが レベルアップ！"
+},
+{
+"key": "kb9ae9a42c63",
+"who": "kb_narr",
+"text": "この じは「しろ」。",
+"pack": "g73",
+"k": "narr|この じは「しろ」。"
+},
+{
+"key": "kb78726b7330",
+"who": "kb_narr",
+"text": "おとうふくん。",
+"pack": "g73",
+"k": "narr|おとうふくん。"
+},
+{
+"key": "kb5672d8be07",
+"who": "kb_narr",
+"text": "ゆきや とうふの いろ、「しろ」。",
+"pack": "g73",
+"k": "narr|ゆきや とうふの いろ、「しろ」。"
+},
+{
+"key": "kbf08728416b",
+"who": "kb_narr",
+"text": "「しろ」を かいて こうげき！",
+"pack": "g73",
+"k": "narr|「しろ」を かいて こうげき！"
+},
+{
+"key": "kb7099e99a05",
+"who": "kb_narr",
+"text": "しろ！",
+"pack": "g73",
+"k": "narr|しろ！"
+},
+{
+"key": "kbd4fb2931ed",
+"who": "kb_narr",
+"text": "おとうふくんは つかれて ねむっちゃった。",
+"pack": "g73",
+"k": "narr|おとうふくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb381c4a1124",
+"who": "kb_narr",
+"text": "つぎは おとうふくん！",
+"pack": "g73",
+"k": "narr|つぎは おとうふくん！"
+},
+{
+"key": "kbe317c45b1b",
+"who": "kb_narr",
+"text": "いけっ、おとうふくん！",
+"pack": "g73",
+"k": "narr|いけっ、おとうふくん！"
+},
+{
+"key": "kb483d829412",
+"who": "kb_narr",
+"text": "おとうふくんが レベルアップ！",
+"pack": "g73",
+"k": "narr|おとうふくんが レベルアップ！"
+},
+{
+"key": "kbaadcb45215",
+"who": "kb_narr",
+"text": "この じは「ひだり」。",
+"pack": "g74",
+"k": "narr|この じは「ひだり」。"
+},
+{
+"key": "kbd8a4df972d",
+"who": "kb_narr",
+"text": "ひだりてくん。",
+"pack": "g74",
+"k": "narr|ひだりてくん。"
+},
+{
+"key": "kb3b41b6983e",
+"who": "kb_narr",
+"text": "みぎの はんたい、「ひだり」。",
+"pack": "g74",
+"k": "narr|みぎの はんたい、「ひだり」。"
+},
+{
+"key": "kb25369c3c58",
+"who": "kb_narr",
+"text": "「ひだり」を かいて こうげき！",
+"pack": "g74",
+"k": "narr|「ひだり」を かいて こうげき！"
+},
+{
+"key": "kb11c2838406",
+"who": "kb_narr",
+"text": "ひだり！",
+"pack": "g74",
+"k": "narr|ひだり！"
+},
+{
+"key": "kbe0d14acefc",
+"who": "kb_narr",
+"text": "ひだりてくんは つかれて ねむっちゃった。",
+"pack": "g74",
+"k": "narr|ひだりてくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb2fd3429428",
+"who": "kb_narr",
+"text": "つぎは ひだりてくん！",
+"pack": "g74",
+"k": "narr|つぎは ひだりてくん！"
+},
+{
+"key": "kb5c42126165",
+"who": "kb_narr",
+"text": "いけっ、ひだりてくん！",
+"pack": "g74",
+"k": "narr|いけっ、ひだりてくん！"
+},
+{
+"key": "kbcb3446568a",
+"who": "kb_narr",
+"text": "ひだりてくんが レベルアップ！",
+"pack": "g74",
+"k": "narr|ひだりてくんが レベルアップ！"
+},
+{
+"key": "kb81b1307f72",
+"who": "kb_narr",
+"text": "この じは「みぎ」。",
+"pack": "g75",
+"k": "narr|この じは「みぎ」。"
+},
+{
+"key": "kbd49b920460",
+"who": "kb_narr",
+"text": "みぎてくん。",
+"pack": "g75",
+"k": "narr|みぎてくん。"
+},
+{
+"key": "kb3a3856c133",
+"who": "kb_narr",
+"text": "はしを もつ ほう、「みぎ」（たいていの ひと）。",
+"pack": "g75",
+"k": "narr|はしを もつ ほう、「みぎ」（たいていの ひと）。"
+},
+{
+"key": "kb1e451ba330",
+"who": "kb_narr",
+"text": "「みぎ」を かいて こうげき！",
+"pack": "g75",
+"k": "narr|「みぎ」を かいて こうげき！"
+},
+{
+"key": "kb11c42189c2",
+"who": "kb_narr",
+"text": "みぎ！",
+"pack": "g75",
+"k": "narr|みぎ！"
+},
+{
+"key": "kba548aeb3f3",
+"who": "kb_narr",
+"text": "みぎてくんは つかれて ねむっちゃった。",
+"pack": "g75",
+"k": "narr|みぎてくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb99a4dd9e19",
+"who": "kb_narr",
+"text": "つぎは みぎてくん！",
+"pack": "g75",
+"k": "narr|つぎは みぎてくん！"
+},
+{
+"key": "kb0349ab04c4",
+"who": "kb_narr",
+"text": "いけっ、みぎてくん！",
+"pack": "g75",
+"k": "narr|いけっ、みぎてくん！"
+},
+{
+"key": "kb04645f63a3",
+"who": "kb_narr",
+"text": "みぎてくんが レベルアップ！",
+"pack": "g75",
+"k": "narr|みぎてくんが レベルアップ！"
+},
+{
+"key": "kb0b963f3127",
+"who": "kb_narr",
+"text": "この じは「いと」。",
+"pack": "g76",
+"k": "narr|この じは「いと」。"
+},
+{
+"key": "kb02bbf2d60c",
+"who": "kb_narr",
+"text": "いとこ。",
+"pack": "g76",
+"k": "narr|いとこ。"
+},
+{
+"key": "kbb93d15b35f",
+"who": "kb_narr",
+"text": "ほそい「いと」。",
+"pack": "g76",
+"k": "narr|ほそい「いと」。"
+},
+{
+"key": "kb61db947f9f",
+"who": "kb_narr",
+"text": "「いと」を かいて こうげき！",
+"pack": "g76",
+"k": "narr|「いと」を かいて こうげき！"
+},
+{
+"key": "kbcbb76a63cc",
+"who": "kb_narr",
+"text": "いと！",
+"pack": "g76",
+"k": "narr|いと！"
+},
+{
+"key": "kb3c94cbcc87",
+"who": "kb_narr",
+"text": "いとこは つかれて ねむっちゃった。",
+"pack": "g76",
+"k": "narr|いとこは つかれて ねむっちゃった。"
+},
+{
+"key": "kbf37a467386",
+"who": "kb_narr",
+"text": "つぎは いとこ！",
+"pack": "g76",
+"k": "narr|つぎは いとこ！"
+},
+{
+"key": "kb7d811cba9d",
+"who": "kb_narr",
+"text": "いけっ、いとこ！",
+"pack": "g76",
+"k": "narr|いけっ、いとこ！"
+},
+{
+"key": "kb5648ca7860",
+"who": "kb_narr",
+"text": "いとこが レベルアップ！",
+"pack": "g76",
+"k": "narr|いとこが レベルアップ！"
+},
+{
+"key": "kbcfe8557cb3",
+"who": "kb_narr",
+"text": "この じは「はやい」。",
+"pack": "g77",
+"k": "narr|この じは「はやい」。"
+},
+{
+"key": "kb997b797385",
+"who": "kb_narr",
+"text": "はやおきくん。",
+"pack": "g77",
+"k": "narr|はやおきくん。"
+},
+{
+"key": "kb2992edcbb7",
+"who": "kb_narr",
+"text": "あさ「はやい」。",
+"pack": "g77",
+"k": "narr|あさ「はやい」。"
+},
+{
+"key": "kbc91aec2af9",
+"who": "kb_narr",
+"text": "おひさまが でたばかり。",
+"pack": "g77",
+"k": "narr|おひさまが でたばかり。"
+},
+{
+"key": "kb17dc1a8e12",
+"who": "kb_narr",
+"text": "「はやい」を かいて こうげき！",
+"pack": "g77",
+"k": "narr|「はやい」を かいて こうげき！"
+},
+{
+"key": "kb7b2e15192d",
+"who": "kb_narr",
+"text": "はやい！",
+"pack": "g77",
+"k": "narr|はやい！"
+},
+{
+"key": "kb04c994c801",
+"who": "kb_narr",
+"text": "はやおきくんは つかれて ねむっちゃった。",
+"pack": "g77",
+"k": "narr|はやおきくんは つかれて ねむっちゃった。"
+},
+{
+"key": "kb1d46ea7218",
+"who": "kb_narr",
+"text": "つぎは はやおきくん！",
+"pack": "g77",
+"k": "narr|つぎは はやおきくん！"
+},
+{
+"key": "kb844d1af2b0",
+"who": "kb_narr",
+"text": "いけっ、はやおきくん！",
+"pack": "g77",
+"k": "narr|いけっ、はやおきくん！"
+},
+{
+"key": "kbdac1651af2",
+"who": "kb_narr",
+"text": "はやおきくんが レベルアップ！",
+"pack": "g77",
+"k": "narr|はやおきくんが レベルアップ！"
+},
+{
+"key": "kbc588d704b6",
+"who": "kb_narr",
+"text": "この じは「ゆう」。",
+"pack": "g78",
+"k": "narr|この じは「ゆう」。"
+},
+{
+"key": "kbe47c8595aa",
+"who": "kb_narr",
+"text": "ゆうこ。",
+"pack": "g78",
+"k": "narr|ゆうこ。"
+},
+{
+"key": "kb2bbebf7f02",
+"who": "kb_narr",
+"text": "ひが しずむ「ゆうがた」。",
+"pack": "g78",
+"k": "narr|ひが しずむ「ゆうがた」。"
+},
+{
+"key": "kba77f5fccdc",
+"who": "kb_narr",
+"text": "「ゆう」を かいて こうげき！",
+"pack": "g78",
+"k": "narr|「ゆう」を かいて こうげき！"
+},
+{
+"key": "kbcfd961f548",
+"who": "kb_narr",
+"text": "ゆう！",
+"pack": "g78",
+"k": "narr|ゆう！"
+},
+{
+"key": "kbe933f8bc1a",
+"who": "kb_narr",
+"text": "ゆうこは つかれて ねむっちゃった。",
+"pack": "g78",
+"k": "narr|ゆうこは つかれて ねむっちゃった。"
+},
+{
+"key": "kba727dd3756",
+"who": "kb_narr",
+"text": "つぎは ゆうこ！",
+"pack": "g78",
+"k": "narr|つぎは ゆうこ！"
+},
+{
+"key": "kbe42b490cf4",
+"who": "kb_narr",
+"text": "いけっ、ゆうこ！",
+"pack": "g78",
+"k": "narr|いけっ、ゆうこ！"
+},
+{
+"key": "kbbe225c4fb7",
+"who": "kb_narr",
+"text": "ゆうこが レベルアップ！",
+"pack": "g78",
+"k": "narr|ゆうこが レベルアップ！"
+},
+{
+"key": "kb842d8d5020",
+"who": "kb_narr",
+"text": "この じは「はな」。",
+"pack": "g79",
+"k": "narr|この じは「はな」。"
+},
+{
+"key": "kb7f0c4f4f40",
+"who": "kb_narr",
+"text": "はなっこ。",
+"pack": "g79",
+"k": "narr|はなっこ。"
+},
+{
+"key": "kbdb9602ae21",
+"who": "kb_narr",
+"text": "さく「はな」。",
+"pack": "g79",
+"k": "narr|さく「はな」。"
+},
+{
+"key": "kbe72ea9a299",
+"who": "kb_narr",
+"text": "くさかんむりが ついている。",
+"pack": "g79",
+"k": "narr|くさかんむりが ついている。"
+},
+{
+"key": "kb481c6cb7a6",
+"who": "kb_narr",
+"text": "「はな」を かいて こうげき！",
+"pack": "g79",
+"k": "narr|「はな」を かいて こうげき！"
+},
+{
+"key": "kbe21ff238bd",
+"who": "kb_narr",
+"text": "はな！",
+"pack": "g79",
+"k": "narr|はな！"
+},
+{
+"key": "kb7f9c8888a4",
+"who": "kb_narr",
+"text": "はなっこは つかれて ねむっちゃった。",
+"pack": "g79",
+"k": "narr|はなっこは つかれて ねむっちゃった。"
+},
+{
+"key": "kbdf36766ba8",
+"who": "kb_narr",
+"text": "つぎは はなっこ！",
+"pack": "g79",
+"k": "narr|つぎは はなっこ！"
+},
+{
+"key": "kb0b626b4fde",
+"who": "kb_narr",
+"text": "いけっ、はなっこ！",
+"pack": "g79",
+"k": "narr|いけっ、はなっこ！"
+},
+{
+"key": "kbd1876f3560",
+"who": "kb_narr",
+"text": "はなっこが レベルアップ！",
+"pack": "g79",
+"k": "narr|はなっこが レベルアップ！"
+},
+{
+"key": "kb021053f6c0",
+"who": "kb_narr",
+"text": "ゴロゴロキングを たおした！",
+"pack": "sys",
+"k": "narr|ゴロゴロキングを たおした！"
+},
+{
+"key": "kbf625e297fe",
+"who": "kb_narr",
+"text": "みんな レベルアップ！",
+"pack": "sys",
+"k": "narr|みんな レベルアップ！"
+},
+{
+"key": "kbf218c15ec7",
+"who": "kb_narr",
+"text": "メラメラドンを たおした！",
+"pack": "sys",
+"k": "narr|メラメラドンを たおした！"
+},
+{
+"key": "kb2239d0e12e",
+"who": "kb_narr",
+"text": "ヨルノヌシを たおした！",
+"pack": "sys",
+"k": "narr|ヨルノヌシを たおした！"
+},
+{
+"key": "kbfaa38633cc",
+"who": "kb_narr",
+"text": "ボスガラスを たおした！",
+"pack": "sys",
+"k": "narr|ボスガラスを たおした！"
+},
+{
+"key": "kbb6d309b30d",
+"who": "kb_narr",
+"text": "モジクイドンを たおした！",
+"pack": "sys",
+"k": "narr|モジクイドンを たおした！"
+},
+{
+"key": "kb999a983190",
+"who": "kb_narr",
+"text": "ネムネムカバを たおした！",
+"pack": "sys",
+"k": "narr|ネムネムカバを たおした！"
+},
+{
+"key": "kb03c63bde2e",
+"who": "kb_narr",
+"text": "フブキングを たおした！",
+"pack": "sys",
+"k": "narr|フブキングを たおした！"
+},
+{
+"key": "kb5bac56320e",
+"who": "kb_narr",
+"text": "イロヌスミを たおした！",
+"pack": "sys",
+"k": "narr|イロヌスミを たおした！"
+}
+]

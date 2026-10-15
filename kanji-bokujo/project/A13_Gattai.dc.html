@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>A-13 合体字の演出表</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
+<style>
+body{margin:0}
+a{color:#2a2a3a}a:hover{color:#000}
+table{border-collapse:collapse;width:100%}
+th,td{border-bottom:1px solid #e3dccb;padding:5px 8px;text-align:left;vertical-align:top;font-size:12.5px;line-height:1.35}
+th{font-size:12px;color:#6b5f4a;background:#fff2cf}
+td.g{font-size:24px;font-weight:900;width:36px;line-height:1.1}
+td.l{font-weight:700;width:70px;color:#3b6fd9}
+td.p{width:200px}
+h2{font-size:16px;margin:10px 0 2px;font-weight:900}
+.props{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px 14px;font-size:12px}
+.props b{font-size:18px;margin-right:6px}
+</style>
+</helmet>
+<div style="width: 880px; height: 1900px; box-sizing: border-box; padding: 28px 40px; background: #fff6d6; font-family: 'Zen Maru Gothic', sans-serif; color: #2a2a3a; display: flex; flex-direction: column; gap: 8px">
+  <div style="display: flex; align-items: baseline; gap: 16px">
+    <div style="font-size: 28px; font-weight: 900; background: #ff7a59; color: #fff; padding: 2px 14px; border-radius: 12px">A-13</div>
+    <h1 style="margin: 0; font-size: 26px; font-weight: 900">合体字の演出表</h1>
+    <div style="font-size: 13px; font-weight: 500; color: #6b5f4a">新キャラは作らない。親キャラを字の配置どおりに置いて、意味が見えるシーンにする</div>
+  </div>
+
+  <h2>部首・小道具（キャラではなく「持ち物・舞台」。親キャラに付ける）</h2>
+  <div class="props">
+    <div><b>艹</b>草の帽子（頭にかぶる）</div><div><b>宀</b>おうちの屋根（上にかぶさる）</div><div><b>冖</b>ふろしき・布（上にかぶる）</div><div><b>力</b>力こぶ（腕。すきの形）</div>
+    <div><b>寸</b>ものさし（手に持つ）</div><div><b>丁</b>くぎ（打ちこむ）</div><div><b>儿</b>あんよ（足が生える）</div><div><b>止</b>足あと（地面に残る）</div>
+    <div><b>一</b>地面・棒（下に敷く／上に乗せる）</div><div><b>十</b>十字の杭（立てる）</div><div><b>工</b>道具（持つ）</div><div><b>ナ</b>手（横から出る）</div>
+    <div><b>卜</b>うらないの棒</div><div><b>交</b>足を組んだ人（人の親戚）</div><div><b>匕</b>さじ・人が逆さ</div><div><b>丨</b>一本の棒（さす）</div>
+  </div>
+
+  <h2>合体字 一覧（上下＝上に乗る／左右＝横に並ぶ／囲み＝中に入る）</h2>
+  <table>
+    <thead><tr><th>字</th><th>配置</th><th>登場するもの</th><th>シーン（なぞる前に見せる・声で言う）</th></tr></thead>
+    <tbody>
+      <tr><td class="g">林</td><td class="l">左右</td><td class="p">きーぼう×2</td><td>2本が肩を組む。「きが 2ほん、はやし！」</td></tr>
+      <tr><td class="g">森</td><td class="l">上1下2</td><td class="p">きーぼう×3</td><td>1本が2本の肩に乗る。「きが 3ぼん、もり！」</td></tr>
+      <tr><td class="g">休</td><td class="l">左右</td><td class="p">ひとっち＋きーぼう</td><td>人が木にもたれて昼寝。「きに もたれて、やすむ」</td></tr>
+      <tr><td class="g">明</td><td class="l">左右</td><td class="p">ひーさま＋つきまる</td><td>太陽と月が並ぶと牧場がパッと明るくなる。「ひと つきで、あかるい！」</td></tr>
+      <tr><td class="g">出</td><td class="l">上下</td><td class="p">やまちゃん×2</td><td>山が山に肩車して、上の山が顔を出す。「やまの うえに やま、でる！」</td></tr>
+      <tr><td class="g">名</td><td class="l">上下</td><td class="p">ゆうこ＋くちべえ</td><td>夕方、口が「おーい」と名前を呼ぶ。「ゆうがた くちで よぶ、なまえ」</td></tr>
+      <tr><td class="g">男</td><td class="l">上下</td><td class="p">たんぼ＋力こぶ</td><td>田んぼの下で力こぶが踏んばる。「たんぼで ちからを だす、おとこ」</td></tr>
+      <tr><td class="g">本</td><td class="l">重ね</td><td class="p">きーぼう＋一（印）</td><td>木の根元に「ここ！」の印。「きの ねもとが、もと（ほん）」</td></tr>
+      <tr><td class="g">早</td><td class="l">上下</td><td class="p">ひーさま＋十（杭）</td><td>朝日が杭の上に顔を出す。「あさの ひが でた、はやい」</td></tr>
+      <tr><td class="g">草</td><td class="l">上下</td><td class="p">草の帽子＋早</td><td>早に草の帽子をかぶせる。「はっぱの ぼうし、くさ」</td></tr>
+      <tr><td class="g">花</td><td class="l">上下</td><td class="p">草の帽子＋ひとっち＋匕</td><td>草の帽子の下で人が花を咲かせる（化＝人がかわる）。「はっぱの したで、はな」</td></tr>
+      <tr><td class="g">見</td><td class="l">上下</td><td class="p">めだまん＋あんよ</td><td>目に足が生えて歩き回る。「めが あるいて、みる」</td></tr>
+      <tr><td class="g">貝</td><td class="l">—</td><td class="p">かいちゃん（原画あり）</td><td>目の親戚。「めに にてるけど、かい」</td></tr>
+      <tr><td class="g">白</td><td class="l">重ね</td><td class="p">ひーさま＋ノ（光）</td><td>日のてっぺんから光がひとすじ。「ひの ひかり、しろ」</td></tr>
+      <tr><td class="g">百</td><td class="l">上下</td><td class="p">一＋白</td><td>白の上に棒を1本。「しろの うえに いち、ひゃく」</td></tr>
+      <tr><td class="g">音</td><td class="l">上下</td><td class="p">たっちゃん＋ひーさま</td><td>立の下の日が口になって声を出す。「たって くちから、おと」</td></tr>
+      <tr><td class="g">字</td><td class="l">上下</td><td class="p">屋根＋こぼう</td><td>おうちの中で赤ちゃんが育つ＝字が増える。「おうちで そだつ、じ」</td></tr>
+      <tr><td class="g">学</td><td class="l">上下</td><td class="p">ふろしき＋こぼう（上に⺍）</td><td>布の下で子どもが両手をあげて学ぶ。「こどもが まなぶ、がく」</td></tr>
+      <tr><td class="g">右</td><td class="l">上下</td><td class="p">手（ナ）＋くちべえ</td><td>右手で口を指さす。「みぎてで くちを、みぎ」</td></tr>
+      <tr><td class="g">左</td><td class="l">上下</td><td class="p">手（ナ）＋工（道具）</td><td>左手で道具をささえる。「ひだりてで どうぐを、ひだり」</td></tr>
+      <tr><td class="g">石</td><td class="l">—</td><td class="p">いしまる（原画あり）</td><td>がけ（厂）の下の石。「がけの したの いしころ」</td></tr>
+      <tr><td class="g">空</td><td class="l">上下</td><td class="p">屋根＋八＋工</td><td>屋根の下を道具で掘って穴があく＝からっぽ・空。「あなが あいて、そら」</td></tr>
+      <tr><td class="g">気</td><td class="l">囲み</td><td class="p">气（ゆげ）＋メ</td><td>ごはんの湯気が立ちのぼる。「ゆげが たつ、き」</td></tr>
+      <tr><td class="g">生</td><td class="l">上下</td><td class="p">芽＋つっちー</td><td>土から芽が出る。「つちから めが でて、うまれる」</td></tr>
+      <tr><td class="g">先</td><td class="l">上下</td><td class="p">足あと＋あんよ</td><td>先に歩いた人の足あと。「さきに あるいた、さき」</td></tr>
+      <tr><td class="g">青</td><td class="l">上下</td><td class="p">生＋月（井戸の水）</td><td>生えた草と澄んだ水の色。「くさと みずの いろ、あお」</td></tr>
+      <tr><td class="g">赤</td><td class="l">上下</td><td class="p">でっかいさん＋ひーくん</td><td>大きな火が燃える色。「おおきな ひの いろ、あか」</td></tr>
+      <tr><td class="g">正</td><td class="l">上下</td><td class="p">一＋足あと</td><td>線まで足がまっすぐ進む。「まっすぐ すすんで、ただしい」</td></tr>
+      <tr><td class="g">町</td><td class="l">左右</td><td class="p">たんぼ＋くぎ（丁）</td><td>田んぼの横にくぎで区切り。「たんぼの よこ、まち」</td></tr>
+      <tr><td class="g">村</td><td class="l">左右</td><td class="p">きーぼう＋ものさし（寸）</td><td>木をはかって家を建てる。「きを はかって、むら」</td></tr>
+      <tr><td class="g">校</td><td class="l">左右</td><td class="p">きーぼう＋交（足を組んだ人）</td><td>木と人が交わる＝学校。「きの となりに、こう」</td></tr>
+      <tr><td class="g">金</td><td class="l">上下</td><td class="p">屋根（𠆢）＋土＋点2つ</td><td>土の中に光る粒。「つちの なかの きらきら、きん」</td></tr>
+      <tr><td class="g">中</td><td class="l">貫く</td><td class="p">くちべえ＋棒（丨）</td><td>口のまん中に棒がささる。「まんなかに ぼう、なか」</td></tr>
+      <tr><td class="g">千</td><td class="l">重ね</td><td class="p">ノ＋十</td><td>十の上に1本。「じゅうの うえに、せん」</td></tr>
+      <tr><td class="g">上・下</td><td class="l">—</td><td class="p">一（地面）＋点・卜</td><td>地面の上に点／地面の下に点。「じめんの うえ・した」</td></tr>
+      <tr><td class="g">入</td><td class="l">—</td><td class="p">ひとっち（変形）</td><td>人が頭からもぐりこむ。「はいる」</td></tr>
+      <tr><td class="g">年・円・文・六・九・七・八・十・一〜五</td><td class="l">—</td><td class="p">数字・記号</td><td>牧場の「えさの数」「柵の本数」として最初から使う。キャラ化しない</td></tr>
+    </tbody>
+  </table>
+  <div style="font-size: 12px; color: #6b5f4a; font-weight: 500">これで原画は33体で打ち止め。合体字のアニメは「親キャラが歩いてきて字の位置につく → 光る → 読み上げ」の1パターンで全部作れる</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":880,"height":1900}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
