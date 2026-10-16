@@ -807,7 +807,7 @@ function routeThroughMedia() {
   try {
     if (!ctx.createMediaStreamDestination) { back("未対応"); return; }
     const dest = ctx.createMediaStreamDestination();
-    const el = document.createElement("audio"); el.setAttribute("playsinline", ""); el.srcObject = dest.stream; el.style.display = "none";
+    const el = document.createElement("audio"); el.setAttribute("playsinline", ""); el.srcObject = dest.stream; el.style.display = "none"; ROUTE.el = el;
     document.body.appendChild(el);
     master.disconnect(); master.connect(dest); ROUTE.out = "音声ファイル経由"; showRoute();
     const p = el.play(); if (p && p.catch) p.catch(() => back("再生できず"));
