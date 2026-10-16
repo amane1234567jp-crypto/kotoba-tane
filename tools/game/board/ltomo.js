@@ -96,7 +96,8 @@ async function lkTsunagu(pc) {
   const opts = shuffle([{ t: it.ok, ok: true }, ...it.ng.map(t => ({ t, ok: false }))]);
   const g = el("g", {}, hudLayer); el("rect", { x: 60, y: 108, width: 1480, height: 450, rx: 34, fill: "#FFFFFFEE", ...S6(6) }, g);
   txt(g, 800, 162, "なんて へんじ したら、おはなしが つづくかな？", 42, { "text-anchor": "middle" });
-  const cards = opts.map((o, i) => card(g, 120, 186 + i * 120, 1360, 108, o.t, ["🅰️", "🅱️", "🅲"][i] || null, { fs: 54, es: 64 }));
+  const cards = opts.map((o, i) => card(g, 120, 186 + i * 120, 1360, 108, o.t, " ", { fs: 54, es: 64 }));
+  cards.forEach((c, i) => { const y = 186 + i * 120 + 54; el("circle", { cx: 182, cy: y, r: 36, fill: ["#FF8FA3", "#7FCBF0", "#7BD389"][i], ...S6(5) }, c); txt(c, 182, y + 15, "ABC"[i], 42, { "text-anchor": "middle", fill: "#FFFFFF", stroke: INK, "stroke-width": 5, "paint-order": "stroke" }); });
   await speak(C.pony, "lt_tsuna_ask", "なんて へんじ したら、おはなしが つづくかな？ カードを こえに だして よんでね");
   let pick = -1; for (let n = 0; n < 2 && pick < 0; n++) { pick = await sayChoice(h, opts.map(o => o.t), cards); if (pick < 0 && n === 0) await speak(C.pony, "p_again", "もう いっかい いってみよう"); }
   const okIdx = opts.findIndex(o => o.ok); let ok = false;
@@ -112,7 +113,7 @@ Object.assign(LK_MOVE, {
   fasobu: ["wave", "point", "pump"], fhajimete: ["look", "point", "wave"], fkaeru: ["look", "nod", "wave"], fochita: ["look", "point", "nod"], fitai: ["!hurt", "surprise", "!up"],
   fojama: ["wave", "wave", "nod"], foyatsu: ["nod", "clap", "nod"], fkaeri: ["point", "sad", "wave"], fgemu: ["point", "sad", "nod"], fpresent: ["point", "heart", "banzai"],
   fyatai: ["think", "point", "pump"], fhanabi: ["point", "surprise", "banzai"], fhagure: ["sad", "think", "nod"], fbutsukaru: ["surprise", "point", "nod"], fkingyo: ["pump", "clap", "shy"],
-  fame: ["look", "sad", "banzai"], fwasure: ["surprise", "think", "nod"], fmata: ["point", "nod", "wave"], fshukudai: ["think", "think", "nod"], ftsukareta: ["sad", "look", "shy"],
+  fame: ["look", "sad", "!umbshare"], fwasure: ["surprise", "think", "nod"], fmata: ["point", "nod", "wave"], fshukudai: ["think", "think", "nod"], ftsukareta: ["sad", "look", "shy"],
 });
 
 /* ---------- 場面の へや ---------- */
@@ -182,12 +183,13 @@ const ltSit = c => { c.squash.t = .72; c.headY.t = 24; c.armL.t = -60; c.armR.t 
 const ltStand = c => { c.squash.t = 1; c.headY.t = 0; c.armL.t = 0; c.armR.t = 0; };
 const sunset = (o = .28) => { const r = el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#FF8A3D", opacity: 0 }, propG); tween(900, k => r.setAttribute("opacity", (o * k).toFixed(2))); return r; };
 
+LK_ACT.umbshare = c => { const u = window.__umbL; if (u && u.isConnected) { u.share = c; c.dx.t = -120; } joy(c); };
 /* ---------- かいわ：ならびと、せりふに あわせた もの ---------- */
 LONG_T.kaiwa.forEach(it => STORY_POS["lk_" + it.id] = it.cast.includes("doshinpapa") ? [700, 1260] : [740, 1170]);
 const give = (from, to, kind, k = .45) => { const g = handP(from, kind, k); return () => { g.remove(); handP(to, kind, k); }; };
 const KFX = { // かいわの 場面に 出す もの（せりふの タイミングに あわせる）
   fhanabi() { [[500, 220, 0, 700], [1000, 170, 2, 1300], [760, 260, 3, 2100], [1200, 240, 1, 3600]].forEach(([x, y, c, t]) => later(t, () => firework(x, y, c))); },
-  fame(c, h) { handP(h, "umbrella", .5); later(800, () => rainOn()); },
+  fame(c, h) { window.__umbL = umbOver(h); later(800, () => rainOn()); },
   fkingyo(c) { handP(c.doshin, "fishbag", .5); },
   fpresent(c) { const g = handP(c.kon, "giftbox", .45); later(1900, () => { g.remove(); handP(c.doshin, "book2", .45); }); },
   foyatsu() { prop("cake", 810, 600, .9); },

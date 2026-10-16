@@ -1089,7 +1089,7 @@ function showMenu() {
   const adult = h("div", "madult"); adult.append(h("span", "", "おとなの かたへ："));
   const lg = h("button", "mreset", "あそんだ きろくを 見る"); lg.type = "button"; lg.onclick = showLog; adult.append(lg);
   const rs = h("button", "mreset", "セーブを けす"); rs.type = "button";
-  rs.onclick = () => { if (!confirm("レベル・クリア・とちゅうの きろくを ぜんぶ けしますか？")) return; SAVE.lap = 1; SAVE.cleared = {}; SAVE.E = null; SAVE.play = null; saveNow(); Object.assign(E, { L: 1, h: 1, streak: 0 }); showMenu(); };
+  rs.onclick = () => { if (!confirm("レベル・クリア・とちゅうの きろくを ぜんぶ けしますか？")) return; SAVE.lap = 1; SAVE.cleared = {}; SAVE.E = null; SAVE.play = null; saveNow(); try { localStorage.removeItem("kotoba-tane-multiL"); } catch (e) { } Object.assign(E, { L: 1, h: 1, streak: 0 }); showMenu(); };
   adult.append(rs); card.append(adult);
   box.append(card);
 }

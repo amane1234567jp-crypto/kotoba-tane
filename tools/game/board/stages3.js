@@ -74,7 +74,7 @@ const ROOMS3 = {
   "つうがくろ"(L) { outBase(L); house(L, 60, 380, 300, 260, "#FFF1D6", "#B9A8D9"); house(L, 520, 360, 320, 280, "#E3F0FF", "#E8735A"); house(L, 1040, 380, 300, 260, "#FFE0E6", "#7CC36A"); street(L);
     el("path", { d: "M1460 640 V200", stroke: "#9A8A7A", "stroke-width": 26 }, L); el("path", { d: "M1400 240 H1520", stroke: "#9A8A7A", "stroke-width": 12 }, L); },
   "おうだんほどう"(L) { outBase(L); house(L, 80, 380, 300, 260, "#FFF1D6", "#E8735A"); street(L); for (let x = 560; x < 1160; x += 70) el("rect", { x, y: 650, width: 40, height: 115, fill: "#FFFFFF" }, L); signal(L, 1420); },
-  "こうもん"(L) { outBase(L, "#CFEAFB", "#D9CDB8"); el("rect", { x: 300, y: 220, width: 1000, height: 420, fill: "#FFF4E0", ...S6(8) }, L); el("path", { d: "M300 220 L800 140 L1300 220 Z", fill: "#E8735A", ...S6(8) }, L);
+  "こうもん"(L) { outBase(L, "#CFEAFB", "#D9CDB8"); el("rect", { x: 300, y: 220, width: 1000, height: 540, fill: "#FFF4E0", ...S6(8) }, L); el("rect", { x: 740, y: 620, width: 120, height: 140, rx: 6, fill: "#B9824A", ...S6(5) }, L); el("path", { d: "M800 620 V760", ...S6(4) }, L); [[380, 470], [600, 470], [960, 470], [1180, 470]].forEach(([x, y]) => el("rect", { x, y, width: 110, height: 90, rx: 6, fill: "#CFEAFB", ...S6(4) }, L)); el("path", { d: "M300 220 L800 140 L1300 220 Z", fill: "#E8735A", ...S6(8) }, L);
     [[380, 300], [600, 300], [960, 300], [1180, 300]].forEach(([x, y]) => el("rect", { x, y, width: 110, height: 90, rx: 6, fill: "#CFEAFB", ...S6(4) }, L)); el("circle", { cx: 800, cy: 190, r: 26, fill: "#FFFFFF", ...S6(5) }, L);
     [920, 1460].forEach(x => el("rect", { x: x - 40, y: 440, width: 80, height: 320, rx: 6, fill: "#BDB6AA", ...S6(6) }, L)); el("rect", { x: 1420, y: 480, width: 80, height: 180, fill: "#FFFFFF", ...S6(4) }, L);
     ["が", "っ", "こ", "う"].forEach((t, i) => txt(L, 1460, 520 + i * 40, t, 34, { "text-anchor": "middle" })); el("circle", { cx: 160, cy: 380, r: 130, fill: "#FFC2D1", ...S6(6) }, L); el("rect", { x: 140, y: 480, width: 40, height: 280, fill: "#9A6B43", ...S6(5) }, L); },
@@ -169,7 +169,7 @@ Object.assign(INTRO, {
   async gkdetour(h, a) { prop("arrowsign", 1450, 760, .9); a.armR.t = -130; enter(h); await sleep(1200); a.armR.t = 0; jump(a, .4); await sleep(400); },
   async gkrain(h, a) { const rn = el("g", {}, front()); window.__rain = rn; for (let i = 0; i < 50; i++) el("path", { d: `M${(i * 97) % 1600} ${(i * 53) % 900} l-14 40`, stroke: "#7FCBF0", "stroke-width": 4 }, rn);
     let t = 0; addTick(dt => { if (!rn.isConnected) return false; t += dt; rn.setAttribute("transform", `translate(${(-((t * 140) % 40)).toFixed(0)} ${((t * 400) % 120).toFixed(0)})`); });
-    noise(1.2, 3000, .15); a.armL.t = -150; a.armR.t = 150; hold(a, "shiver", 3); const u = prop("umbrella", 0, 0, .55); hand(h, u, .55, 0); window.__umb2 = u; enter(h); await sleep(1300); },
+    noise(1.2, 3000, .15); a.armL.t = -150; a.armR.t = 150; hold(a, "shiver", 3); const u = umbOver(h); window.__umb2 = u; enter(h); await sleep(1300); },
   async gkhit(h, a) { stay(h); hold(h, "run", 1.2); await sleep(800); const car = vehicle("car", 800); window.__car = car; await pass(car, 700, 800, 1700, world(h, 300, 0).x - 20); thud(); boom(.5); shake(400, 18); flop(h);
     { const st = slam("ドン！", 300, 110, "#FFD25E"); later(900, () => st.remove()); } await sleep(500); playMove(h, "crouch"); h.sadMouth = true; tears(h, 3); for (let i = 0; i < 3; i++) later(i * 300, () => markAbove(h, "drop", { dx: i % 2 ? 60 : -60 })); await sleep(700); hold(a, "run", 1); a.dx.t = 0; await sleep(1000); playMove(a, "crouch"); },
   async gkphone(h, a) { stay(h); const car = vehicle("car", 800); car.setAttribute("transform", "translate(1300 800)"); h.sadMouth = true; const p = prop("phone", 0, 0, .45); hand(h, p, .45, 0);
@@ -213,7 +213,7 @@ Object.assign(POST, {
   async kygochisousama(h, a) { playMove(h, "bow"); CUR_S && (CUR_S.extras || []).forEach(k => playMove(C[k], "bow")); await sleep(700); },
   async gkisshoni(h, a) { a.sadMouth = false; a.headY.t = 0; joy(a); await sleep(500); },
   async gkyorimichi(h, a) { playMove(a, "frustrated"); await sleep(700); },
-  async gkkasa(h, a) { a.armL.t = 0; a.armR.t = 0; await walk(a, -260, 800); a.happyOn = true; await sleep(400); },
+  async gkkasa(h, a) { a.armL.t = 0; a.armR.t = 0; const d = (h.x + 200 * h.s + 170) - (a.x + 200 * a.s + a.dx.v); await walk(a, d, 900); if (window.__umb2) window.__umb2.share = a; a.happyOn = true; await sleep(800); },
   async gkitai(h, a) { playMove(a, "bow"); await sleep(600); },
   async gkdenwa(h, a) { hold(a, "run", 1); await walk(a, 900, 900); },
   async gkomawari(h, a) { playMove(a, "nod"); await sleep(500); },
@@ -426,3 +426,14 @@ Object.assign(POST, {
   async gsdekimashita(h, a) { h.armR.t = 0; await walk(a, -260, 800); for (let i = 0; i < 4; i++) later(i * 200, () => markAbove(h, "sparkle", { dx: (i - 1.5) * 40 })); h.happyOn = true; await sleep(900); },
   async gsnanisuru(h, a) { a.armR.t = -120; await sleep(800); a.armR.t = 0; hold(h, "shake", 1.6); await sleep(1400); },
 });
+
+/* ---------- かさを あたまの 上に さす（2026-10-16。手に もつ だけだと 小さくて からだが 入って いなかった） ----------
+   u.share に もう ひとりを 入れると、ふたりの まんなかで 大きく なる（あいあいがさ）。 */
+function umbOver(c) {
+  const g = el("g", {}); drawItem(g, "umbrella"); front().appendChild(g); g.share = null; let k0 = null, x0 = null;
+  addTick(() => { if (!g.isConnected) return false;
+    const p = headTop(c), w1 = 200 * c.s * 1.45; let cx = p.x, top = p.y, w = w1;
+    if (g.share) { const q = headTop(g.share); cx = (p.x + q.x) / 2; top = Math.min(p.y, q.y); w = Math.min(Math.abs(p.x - q.x) + 200 * Math.max(c.s, g.share.s) * 1.15, w1 * 2.1); }
+    const k = w / 220, ky = w1 / 220; k0 = k0 == null ? k : k0 + (k - k0) * .12; x0 = x0 == null ? cx : x0 + (cx - x0) * .12;
+    g.setAttribute("transform", `translate(${x0.toFixed(1)} ${(top - 18).toFixed(1)}) scale(${k0.toFixed(3)} ${ky.toFixed(3)})`); });
+  c.armR.t = -150; return g; }

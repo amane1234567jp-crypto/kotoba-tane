@@ -4,11 +4,15 @@
 const MULTI_KINDS = ["shima", "pyon", "mii", "chu", "gao", "meebaa"];
 const MULTI_OFF = [[-38, -4], [-12, -4], [14, -4], [40, -4], [-24, -34], [26, -34]];
 let soloE = null, lastMulti = null;
+// むずかしさは キャラごとに おぼえて おく（つぎの たいせんでも つづきから。ひとりで あそぶ ときの レベルとは べつ）
+const ML_KEY = "kotoba-tane-multiL";
+function multiL(kind) { try { const d = JSON.parse(localStorage.getItem(ML_KEY) || "{}"); return Math.max(1, Math.min(10, d[kind] || 1)); } catch (e) { return 1; } }
+function saveMultiL(kind, L) { try { const d = JSON.parse(localStorage.getItem(ML_KEY) || "{}"); d[kind] = L; localStorage.setItem(ML_KEY, JSON.stringify(d)); } catch (e) { } }
 function setupMulti(n) {
   MODE = "multi"; soloE = soloE || { ...E };
   PLAYERS = MULTI_KINDS.slice(0, n).map((kind, idx) => {
     const pc = piece(kind); pc.human = true; pc.off = MULTI_OFF[idx]; pc.s0 = PIECE_S[kind] || .21; delete pc.tm.closed;
-    const pl = { kind, idx, pc, E: { L: 1, h: 1, streak: 0 }, ok: 0 }; pc.player = pl; return pl; });
+    const pl = { kind, idx, pc, E: { L: multiL(kind), h: 1, streak: 0 }, ok: 0 }; pc.player = pl; return pl; });
   BOARD_PIECES = [P.doshin, ...PLAYERS.map(p => p.pc)];
   PLAYERS.forEach(p => setPiece(p.pc, "0"));
 }
@@ -38,7 +42,7 @@ async function multiTurn(pl, first) {
   await speak(C.pony, "n" + v, NUMS[v]);
   await moveBy(pl.pc, v); await sleep(250);
   await landChild(pl.pc);
-  pl.E = { ...E };
+  pl.E = { ...E }; saveMultiL(pl.kind, E.L);
 }
 async function endingMulti() {
   const w = winnerPc, wk = w ? w.kind : "shima";

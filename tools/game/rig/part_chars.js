@@ -41,6 +41,8 @@ function ring(g, cx, cy, R, r, fill, sw = 6) {
 
 function recolor(root, map) { root.querySelectorAll("*").forEach(e => { ["fill", "stroke"].forEach(a => { const v = e.getAttribute(a); if (v && map[v]) e.setAttribute(a, map[v]); }); }); }
 function hideFill(root, colors) { root.querySelectorAll("*").forEach(e => { if (colors.includes(e.getAttribute("fill"))) e.setAttribute("display", "none"); }); }
+// たてがみの ない がお型（くま・とら）は、あたまと からだの あいだが あいて 見えるので、くびを うめる
+function neckFill(root, p, col) { const n = el("g", {}); root.insertBefore(n, p.head.g); el("path", { d: "M150 300 Q150 236 200 232 Q250 236 250 300 Z", fill: col, stroke: INK, "stroke-width": 6, "stroke-linejoin": "round" }, n); el("ellipse", { cx: 200, cy: 286, rx: 64, ry: 30, fill: col }, n); }
 const BUILD = {
   pony(root) {
     const s = ST(), B = "#D98A4E", H = "#6B4A36", T = "#FFD36E";
@@ -356,11 +358,11 @@ const BUILD = {
     recolor(root, { "#FFC94D": "#F7A23B" }); const K = { fill: "none", stroke: INK, "stroke-width": 9, "stroke-linecap": "round" };
     const sh = el("g", {}, p.head.g); ["M184 90 L190 118", "M200 86 V120", "M216 90 L210 118", "M110 170 L134 176", "M112 192 L134 192", "M290 170 L266 176", "M288 192 L266 192"].forEach(d => el("path", { d, ...K }, sh));
     const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); ["M136 312 Q150 318 154 330", "M134 340 Q148 344 152 354", "M264 312 Q250 318 246 330", "M266 340 Q252 344 248 354"].forEach(d => el("path", { d, ...K, "stroke-width": 8 }, bd));
-    el("path", { d: "M306 300 L326 306", ...K, "stroke-width": 6 }, p.tail.g);
+    el("path", { d: "M306 300 L326 306", ...K, "stroke-width": 6 }, p.tail.g); neckFill(root, p, "#F7A23B");
     return p; },
   kuma(root) { // くまの くまた（ステージの 場面で ライバルの かわりに 出る）：ちゃいろ・まるい みみ
     const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); recolor(root, { "#FFC94D": "#A9744A", "#FFF1D6": "#EBCFA8", "#FFB3C1": "#E3A982" }); if (p.brows) p.brows.innerHTML = "";
-    const tip = p.tail.g; tip.setAttribute("display", "none");
+    const tip = p.tail.g; tip.setAttribute("display", "none"); neckFill(root, p, "#A9744A");
     p.tempo = .92; return p; },
   omawari(root) { // おまわりさん（げこう）：こんの せいふく・ぼうし
     const p = BUILD.doshin(root); recolor(root, { "#A9BEDD": "#B8C2CE", "#D3DEF0": "#DCE2EA" });

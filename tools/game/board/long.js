@@ -132,8 +132,9 @@ async function sayChoice(pc, texts, cards, ms = 9000) {
     if (typeof devOn === "function") cards.forEach((c, i) => c.onclick = () => DEV && end(i));
     const h = hear(ts => { for (const t of ts) { heardEl.textContent = t; texts.forEach((x, i) => { const s = scoreOpt(t, x); if (s > best.s) best = { i, s }; }); }
       const sc = texts.map(x => Math.max(...ts.map(t => scoreOpt(t, x)))); const top = Math.max(...sc), cnt = sc.filter(s => s >= top - .05).length;
-      if (top >= .85 && cnt === 1) end(sc.indexOf(top)); }, ms);
-    const tm = setTimeout(() => end(best.s >= .6 ? best.i : -1), ms); h.done.then(() => setTimeout(() => end(best.s >= .6 ? best.i : -1), 300)); });
+      const second = Math.max(0, ...sc.filter((s, i) => i !== sc.indexOf(top)));
+      if ((top >= .85 && cnt === 1) || (top >= .6 && top - second >= .25)) end(sc.indexOf(top)); }, ms);
+    const tm = setTimeout(() => end(best.s >= .5 ? best.i : -1), ms); h.done.then(() => setTimeout(() => end(best.s >= .5 ? best.i : -1), 300)); });
 }
 const DEV = location.search.includes("dev");
 async function moveAfter(pc, n) { await sleep(400); if (n > 0) { await speak(C.pony, "lk_plus1", "1マス よけいに すすむよ！"); await forceStep(pc, n); } else if (n < 0) { await speak(C.pony, "lk_minus1", "1マス もどるよ"); await backStep(pc, -n); } }

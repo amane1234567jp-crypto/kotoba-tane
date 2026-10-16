@@ -57,3 +57,12 @@ const pon = () => { if (!ctx) return; blip(1320, 1320, .08, "sine"); later(70, (
       EARLY.sink = onText; const b = EARLY.buf; EARLY.buf = []; pon(); b.forEach(ts => onText(ts)); return h0; }
     if (EARLY.h && EARLY.sink) return hr(onText, ms); // ひきつぎ ずみの マイクが うごいている（その中の 聞きなおし）
     pon(); return hr(onText, ms); }; }
+
+/* 3) カードを こえで えらぶ とき：聞いている あいだ、カード ぜんたいを ひからせる。
+      はっきり 1まいが いちばん（ほかより 0.25 いじょう 上）なら、すぐ きめる。 */
+{ const sc = sayChoice; sayChoice = async function (pc, texts, cards, ms) {
+    let glow = null;
+    try { const bs = cards.map(c => c.getBBox()), x0 = Math.min(...bs.map(b => b.x)) - 18, y0 = Math.min(...bs.map(b => b.y)) - 18, x1 = Math.max(...bs.map(b => b.x + b.width)) + 18, y1 = Math.max(...bs.map(b => b.y + b.height)) + 18;
+      glow = el("rect", { x: x0, y: y0, width: x1 - x0, height: y1 - y0, rx: 34, fill: "none", stroke: "#FFC93C", "stroke-width": 14, opacity: 0 }, cards[0].parentNode);
+      let t = 0; addTick(dt => { if (!glow.isConnected) return false; t += dt; glow.setAttribute("opacity", (srUsable ? .55 + .45 * Math.sin(t * 6) : 0).toFixed(2)); }); } catch (e) { }
+    try { return await sc(pc, texts, cards, ms); } finally { if (glow) glow.remove(); } }; }

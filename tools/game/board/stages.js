@@ -96,6 +96,8 @@ const BOARD_ROOMS = {
 };
 
 /* ---------- 場面の背景 ---------- */
+// バスが はしる：せきは 左むき（バスは 左へ すすむ）なので、まどの そとの けしきは 右へ ながれる
+function busMove() { const g = window.__busOut; if (!g) return; let x = 0; addTick(dt => { if (!g.isConnected) return false; x = (x + 300 * dt) % 1600; g.setAttribute("transform", `translate(${x.toFixed(1)} 0)`); }); }
 const OUTDOOR = new Set(["てつぼう", "トラック", "すなば", "みずのみば", "すべりだい", "ブランコ", "ベンチ", "いけ", "バスてい", "えき"]);
 const drawRoomKousha = drawRoom;
 drawRoom = function (place, noSign = false) {
@@ -149,7 +151,12 @@ const ROOMS = {
     el("rect", { x: 0, y: 800, width: 1600, height: 22, fill: "#E3E3E3", ...R6(4) }, L); // てまえが ほどう
     el("path", { d: "M1460 880 V420", ...R6(10) }, L); el("circle", { cx: 1460, cy: 390, r: 60, fill: "#FFFFFF", ...R6(6) }, L); txt(L, 1460, 406, "バス", 36, { "text-anchor": "middle" });
     el("rect", { x: 860, y: 780, width: 360, height: 26, rx: 8, fill: "#C98A4B", ...R6(5) }, L); el("path", { d: "M880 806 V870 M1200 806 V870", ...R6(8) }, L); },
-  バス(L) { for (let x = 80; x < 1500; x += 340) el("rect", { x, y: 240, width: 280, height: 200, rx: 20, fill: "#BDE3F2", ...R6(6) }, L);
+  バス(L) { // まどの そとの けしき（まどの 中だけ 見える。うごく ときは busOut を ずらす）
+    const cp = el("clipPath", { id: "buswin" }, el("defs", {}, L)); for (let x = 80; x < 1500; x += 340) { el("rect", { x, y: 240, width: 280, height: 200, rx: 20, fill: "#BDE3F2" }, L); el("rect", { x, y: 240, width: 280, height: 200, rx: 20 }, cp); }
+    const out = el("g", { "clip-path": "url(#buswin)" }, L), mv = el("g", {}, out); window.__busOut = mv;
+    for (let k = -1; k <= 1; k++) { const o = k * 1600; el("path", { d: `M${o - 100} 420 Q${o + 200} 360 ${o + 500} 410 T${o + 1100} 400 T${o + 1700} 410 V460 H${o - 100} Z`, fill: "#9FD38A" }, mv);
+      [[180, "#7CC36A"], [560, "#6DBB5E"], [940, "#7CC36A"], [1320, "#6DBB5E"]].forEach(([x, c]) => { el("rect", { x: o + x - 8, y: 360, width: 16, height: 70, fill: "#9A6A3E", ...R6(3) }, mv); el("circle", { cx: o + x, cy: 345, r: 42, fill: c, ...R6(4) }, mv); }); }
+    for (let x = 80; x < 1500; x += 340) el("rect", { x, y: 240, width: 280, height: 200, rx: 20, fill: "none", ...R6(6) }, L);
     for (let x = 100; x < 1500; x += 340) { el("rect", { x, y: 600, width: 220, height: 50, rx: 14, fill: "#E8735A", ...R6(5) }, L); el("rect", { x: x + 150, y: 500, width: 60, height: 110, rx: 14, fill: "#E8735A", ...R6(5) }, L); }
     el("circle", { cx: 1520, cy: 520, r: 26, fill: "#FFD25E", ...R6(5) }, L); el("path", { d: "M0 150 H1600", ...R6(6) }, L); },
 };
@@ -319,10 +326,9 @@ Object.assign(INTRO, {
     moveProp(b, 900, 900, 1500, 760, 1200, .4, 0, 540); hold(a, "run", 1.3); a.dx.t = 200; const y0 = a.y; tween(900, k => a.y = y0 - 190 * k); // どうろへ とびだす
     await sleep(800); horn(); surprise(h); markAbove(h, "ex"); await sleep(400); },
   async boardbus(h, a) { const wl = prop("wheel", 1360, 620, .7); a.dx.v = a.dx.t = 160; enter(h); await sleep(1300); wave(a); await sleep(500); },
-  async busride(h, a) { h.dx.v = h.dx.t = -120; const g = el("g", {}, propG); const ts = [[300, "#7CC36A"], [700, "#6DBB5E"], [1100, "#7CC36A"], [1500, "#6DBB5E"]].map(([x, c]) => { const t = el("circle", { cx: 0, cy: 380, r: 50, fill: c, ...S6p(4) }, g); return { t, x }; });
-    addTick(dt => { if (!g.isConnected) return false; ts.forEach(o => { o.x -= 300 * dt; if (o.x < 0) o.x += 1600; o.t.setAttribute("cx", o.x.toFixed(0)); }); });
+  async busride(h, a) { h.dx.v = h.dx.t = -120; busMove();
     sway(h, 3000, 6, 300); sway(a, 3000, 6, 300); await sleep(1500); playMove(a, "look"); await sleep(700); },
-  async carsick(h, a) { h.dx.v = h.dx.t = -120; sway(a, 3500, 12, 500); a.eyeScale.t = .7; for (let i = 0; i < 4; i++) later(i * 500, () => markAbove(a, "drop", { dx: 60, vy: 50 })); await sleep(1600); playMove(a, "sad"); await sleep(800); surprise(h); },
+  async carsick(h, a) { h.dx.v = h.dx.t = -120; busMove(); sway(a, 3500, 12, 500); a.eyeScale.t = .7; for (let i = 0; i < 4; i++) later(i * 500, () => markAbove(a, "drop", { dx: 60, vy: 50 })); await sleep(1600); playMove(a, "sad"); await sleep(800); surprise(h); },
 });
 Object.assign(PRE, {
   chime() { window.__swingStop = true; },
