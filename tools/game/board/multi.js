@@ -52,7 +52,7 @@ async function endingMulti() {
   await sleep(700); await speak(C.pony, "goal", "ゴール！"); await sleep(400); title.remove();
   // 2) お祝いの ステージ：ひょうしょうだい
   setView("parade"); visible.slice().forEach(c => { if (c !== C.pony && !PLAYERS.some(p => p.kind === c.kind)) { c.root.style.display = "none"; visible.splice(visible.indexOf(c), 1); } });
-  rays(); flash(); victoryBGM();
+  rays(); flash();
   const rank = PLAYERS.slice().sort((a, b) => (b.pc === w) - (a.pc === w) || distToGoal(a.pc.node) - distToGoal(b.pc.node));
   const pod = el("g", {}, sceneLayer), POD = [[800, 230, "#FFD25E"], [530, 150, "#D9DEE8"], [1070, 100, "#E8A86B"]];
   POD.forEach(([x, hgt, col], i) => { if (!rank[i]) return; el("rect", { x: x - 130, y: 975 - hgt, width: 260, height: hgt + 30, rx: 12, fill: col, ...S6(7) }, pod); txt(pod, x, 975 - hgt + 90, String(i + 1), 80, { "text-anchor": "middle", fill: "#FFFFFF", stroke: INK, "stroke-width": 8, "paint-order": "stroke" }); });

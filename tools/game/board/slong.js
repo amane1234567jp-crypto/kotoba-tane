@@ -24,41 +24,51 @@ const SL_EVT = {
     x2: "たからの ちずを みつけた！ つぎの サイコロは 2ばいだよ", zero: "あしが すなに うまっちゃった！ つぎの サイコロは 0に なるよ", home: "おおきな クジラに のみこまれた！ ふりだしに もどる！",
     back10: "かいぞくに つかまった！ 10マス もどる！", bonus: "たからばこだ！ たねを 3こ ゲット！", allf: "おいかぜだ！ みんな 2マス すすむよ", allb: "おおなみが きた！ みんな 2マス もどるよ",
     janken: "カニさんの じゃんけん しょうぶ！ いちばん まえの ひとと じゃんけん！ かったら いれかわるよ", again: "とびうおが はねた！ もう いっかい サイコロを ふれるよ",
-    nebou: "ハンモックで ねちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "おおきな ふねが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを ボートで むかえに いくよ" },
+    nebou: "ハンモックで ねちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "おおきな ふねが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを ボートで むかえに いくよ", atsumare: "ビーチバレーの じかん！ みんな ここに あつまれ！", kumikae: "おおきな なみで マスが ながされた！ マスが いれかわるよ" },
   sokashi: { dice2: "ドーナツが ふたつ ころがって きた！ つぎは サイコロ 2こで ふれるよ", warp: "ジェットコースターに のった！ ずっと さきまで いけるよ", bigwarp: "わたあめの くもに のって、ゴールの ちかくまで とぶよ",
     fake: "ガムで 3マス のびーる！ …と おもったら、ちぢんで 4マス もどる！", rand: "キャンディの うずまき！ ぐるぐる……どこに いくかな？", rest: "おなか いっぱいで うごけない。つぎは 1かい やすみ",
     x2: "ふくらむ パンを たべた！ つぎの サイコロは 2ばいだよ", zero: "キャラメルで あしが くっついた！ つぎの サイコロは 0に なるよ", home: "チョコの かわに ながされた！ ふりだしに もどる！",
     back10: "クッキーの みちが くずれた！ 10マス もどる！", bonus: "おかしの たからばこ！ たねを 3こ ゲット！", allf: "ポップコーンが はじけた！ みんな 2マス すすむよ", allb: "ゼリーで つるつる すべった！ みんな 2マス もどるよ",
     janken: "グミの じゃんけん しょうぶ！ いちばん まえの ひとと じゃんけん！ かったら いれかわるよ", again: "ラムネが しゅわっ！ もう いっかい サイコロを ふれるよ",
-    nebou: "ふわふわの マシュマロで ねちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "おかしの きしゃが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを ソフトクリームで よびよせるよ" },
+    nebou: "ふわふわの マシュマロで ねちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "おかしの きしゃが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを ソフトクリームで よびよせるよ", atsumare: "おやつの じかん！ みんな ここに あつまれ！", kumikae: "ケーキの やまが くずれた！ マスが いれかわるよ" },
   suchu: { dice2: "ながれぼしが ふたつ！ つぎは サイコロ 2こで ふれるよ", warp: "ワープ ゲートだ！ ずっと さきまで いけるよ", bigwarp: "ロケット はっしゃ！ ゴールの ちかくまで とぶよ",
     fake: "ふわっと 3マス すすむ！ …と おもったら、いんりょくで 4マス もどる！", rand: "うちゅうの うずまき！ ぐるぐる……どこに いくかな？", rest: "うちゅうふくが きつくて ひとやすみ。つぎは 1かい やすみ",
     x2: "つきで ジャンプ！ からだが かるい！ つぎの サイコロは 2ばいだよ", zero: "いんせきに つまずいた！ つぎの サイコロは 0に なるよ", home: "ブラックホールに すいこまれた！ ふりだしに もどる！",
     back10: "うちゅうじんの ユーフォーに さらわれた！ 10マス もどる！", bonus: "ほしの たからばこ！ たねを 3こ ゲット！", allf: "すいせいが とおった！ みんな 2マス すすむよ", allb: "うちゅうの かぜだ！ みんな 2マス もどるよ",
     janken: "うちゅう じゃんけん しょうぶ！ いちばん まえの ひとと じゃんけん！ かったら いれかわるよ", again: "ながれぼしに おねがい！ もう いっかい サイコロを ふれるよ",
-    nebou: "むじゅうりょくで ふわふわ ねちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "うちゅうせんが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを ビームで よびよせるよ" },
+    nebou: "むじゅうりょくで ふわふわ ねちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "うちゅうせんが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを ビームで よびよせるよ", atsumare: "うちゅうせんの しゅうごう！ みんな ここに あつまれ！", kumikae: "うちゅうの じしんだ！ マスが いれかわるよ" },
 };
-const SL_ICON = { dice2: "🎲", warp: "🌀", bigwarp: "🚀", fake: "🤪", rand: "❓", rest: "💤", x2: "✖️", zero: "0️⃣", home: "↩", back10: "⏪", bonus: "🎁", allf: "⏩", allb: "🌊", janken: "✊", again: "🔁", nebou: "😴", trolley: "🚃", call: "🧲", tsukkomi: "🤣" };
-const SL_EVC = { warp: "#D9C2F0", bigwarp: "#D9C2F0", rand: "#D9C2F0", home: "#FFC2D1", back10: "#FFC2D1", fake: "#FFE27A", tsukkomi: "#FFE27A", bonus: "#C9EBB5" };
+const SL_ICON = { dice2: "🎲", warp: "🌀", bigwarp: "🚀", fake: "🤪", rand: "❓", rest: "💤", x2: "✖️", zero: "0️⃣", home: "↩", back10: "⏪", bonus: "🎁", allf: "⏩", allb: "🌊", janken: "✊", again: "🔁", nebou: "😴", trolley: "🚃", call: "🧲", tsukkomi: "🤣", atsumare: "📣", kumikae: "🔀" };
+const SL_EVC = { warp: "#D9C2F0", bigwarp: "#D9C2F0", rand: "#D9C2F0", home: "#FFC2D1", back10: "#FFC2D1", fake: "#FFE27A", tsukkomi: "#FFE27A", bonus: "#C9EBB5", atsumare: "#FFE27A", kumikae: "#FFE27A" };
 
-/* ---------- 盤（7だんの ぐねぐね道） ---------- */
+/* ---------- 盤：コースごとに ちがう 形 ----------
+   うみ＝おおきな なみの へび道、おかし＝たてに ジグザグ、うちゅう＝うずまき（まんなかが ゴール） */
+const SL_SHAPE = {
+  sumi() { const P = [], ROWS = [940, 838, 736, 634, 532, 430, 328]; ROWS.forEach((y, r) => { const cnt = r < 6 ? 10 : 5;
+      for (let j = 0; j < cnt; j++) { const col = r % 2 ? 9 - j : j; P.push([175 + col * 140, y + Math.sin(col * .9 + r) * 26]); } }); P.push([1060, 300]); return P; },
+  sokashi() { const P = [], COLS = 10, ys = [930, 832, 734, 636, 538, 440, 342]; for (let c = 0; c < COLS && P.length < 65; c++) { const down = c % 2;
+      for (let r = 0; r < 7 && P.length < 65; r++) { const y = ys[down ? 6 - r : r]; P.push([170 + c * 134 + (r % 2 ? 26 : -26), y]); } }
+    P.push([1400, 300]); return P; },
+  suchu() { const C = 10, R = 7, seen = new Set(), P = []; let x = 0, y = R - 1, dx = 1, dy = 0; // そとがわから うちがわへ
+    const xy = (i, j) => [175 + i * 140, 330 + j * 102];
+    for (let k = 0; k < C * R; k++) { P.push(xy(x, y)); seen.add(x + "," + y); const nx = x + dx, ny = y + dy;
+      if (nx < 0 || nx >= C || ny < 0 || ny >= R || seen.has(nx + "," + ny)) { [dx, dy] = [dy, -dx]; } x += dx; y += dy; }
+    return P.slice(0, 66); },
+};
 const SL_ORDER = {};
 SL.forEach(sid => {
   const T = SL_TH[sid], n = {}, pl = {}, nx = {}, ids = [];
-  const ROWS = [940, 838, 736, 634, 532, 430, 328], X = i => 175 + i * 140;
-  let k = 0;
-  ROWS.forEach((y, r) => { const cnt = r < 6 ? 10 : 5;
-    for (let j = 0; j < cnt; j++) { const col = r % 2 ? 9 - j : j; const id = k === 0 ? "0" : k === 21 ? "4" : "q" + k; n[id] = [X(col), y + Math.round(Math.sin(k * 1.3) * 8)]; pl[id] = T.areas[Math.min(3, Math.floor(r / 2))]; ids.push(id); k++; } });
-  n["15"] = [X(6) + 30, 300]; pl["15"] = T.areas[3]; ids.push("15");
+  const pts = SL_SHAPE[sid](); // 65マス＋ゴール の ざひょう（コースごとに ちがう 形）
+  pts.forEach(([x, y], k) => { const id = k === 0 ? "0" : k === 21 ? "4" : k === pts.length - 1 ? "15" : "q" + k; n[id] = [Math.round(x), Math.round(y)]; pl[id] = T.areas[Math.min(3, Math.floor(k / pts.length * 4))]; ids.push(id); });
   n["0"].push("start"); n["4"].push("block");
   linkLine(nx, ids); SL_ORDER[sid] = ids;
   BOARD[sid] = { nodes: n, place: pl, next: nx, away: [1560, 560], style: () => "park", labels: [] };
   STAGE_DEF[sid] = { ground: T.ground, sky: "#CFEAFB", names: STAGE_DEF.undou.names, fills: Object.fromEntries(T.areas.map((a, i) => [a, T.fills[i]])) };
   RIVAL_OF[sid] = "gao"; SLEEPER_OF[sid] = T.blk.who; BLOCK_DEF[sid] = { ...T.blk, sleep: false };
   // しかけ と 課題の ならび
-  const EVS = ["dice2", "fake", "warp", "rest", "tsukkomi", "x2", "rand", "bonus", "allf", "janken", "zero", "home", "nebou", "tsukkomi", "warp", "back10", "dice2", "allb", "again", "rand", "trolley", "fake", "tsukkomi", "bigwarp", "call", "back10"];
+  const EVS = ["dice2", "fake", "warp", "rest", "kumikae", "x2", "rand", "bonus", "allf", "janken", "zero", "home", "nebou", "atsumare", "warp", "back10", "dice2", "allb", "again", "rand", "trolley", "fake", "kumikae", "bigwarp", "call", "back10"];
   const WORD = ["kaiwa", "scene", "gag", "yasashiku", "monomane", "tsunagu", "haya", "scene", "oogoe", "kaiwa", "sakasa", "sagasu", "scene", "yasashiku", "gag", "tsunagu", "monomane", "kaiwa", "scene"];
-  const FUN = ["stop", "catch", "balloon", "more", "cups", "shadow", "jump", "battle", "stop", "balloon", "catch", "cups", "jump", "more", "shadow", "battle", "balloon", "stop", "catch"];
+  const FUN = ["stop", "catch", "balloon", "more", "cups", "shadow", "battle", "stop", "balloon", "catch", "cups", "more", "shadow", "battle", "balloon", "stop", "catch", "cups", "more"];
   const ev = {}, task = {}; let e = 0, w = 0, f = 0;
   ids.forEach((id, i) => { if (i === 0 || id === "4" || id === "15") return;
     const slot = i % 5; // 5マスに 2つ しかけ、ことば・おもしろ が 1〜2つずつ
@@ -116,6 +126,7 @@ const SL_TSK = [ // つっこみ：ぽにーが へんな ことを いう →�
 const slFlag = (pc, k) => { if (pc.player) pc.player[k] = 1; };
 { const be = boardEvent; boardEvent = async function (pc) {
     if (!isSL()) return be(pc);
+    if (pc.player && pc.player.stay) return; // 0マス（うごいて いない）ときは、もう いちど おきない
     const ev = EVENTS[curStage][pc.node]; if (!ev) return;
     const [type, , key, text] = ev; const O = SL_ORDER[curStage];
     await sleep(300); markAbove(pc, "ex"); chime();
@@ -136,6 +147,8 @@ const slFlag = (pc, k) => { if (pc.player) pc.player[k] = 1; };
     else if (type === "trolley") { const d0 = distToGoal(pc.node); const near = others(pc).filter(o => Math.abs(distToGoal(o.node) - d0) <= 3); for (const o of [pc, ...near]) { jump(o, .6); await slGo(o, 3); if (winner) break; } }
     else if (type === "call") { const last = others(pc).filter(o => slIdx(o.node) < slIdx(pc.node)).sort((a, b) => slIdx(a.node) - slIdx(b.node))[0]; if (last) await warpTo(last, pc.node); else await speak(C.pony, "lk_ev_call_none", "うしろに だれも いないね"); }
     else if (type === "janken") await slJanken(pc);
+    else if (type === "atsumare") { for (const o of others(pc)) { jump(o, .6); await warpTo(o, pc.node); } confetti(40); }
+    else if (type === "kumikae") await slKumikae(pc);
     else if (type === "nebou") await slNebou(pc);
     await sleep(300); }; }
 async function slTsukkomi(pc) {
@@ -174,7 +187,7 @@ async function slNebou(pc) {
 Object.assign(NUMS, { 0: "ゼロ！", 7: "なな！", 8: "はち！", 9: "きゅう！", 10: "じゅう！", 11: "じゅういち！", 12: "じゅうに！" });
 { const rd = rollDice; rollDice = async function (forced) {
     const pl = CUR_PL; if (!isSL() || !pl || forced) return rd(forced);
-    if (pl.zero) { pl.zero = 0; await rd(); noise(.3, 300, .5); await speak(C.pony, "sl_zero_now", "0に なっちゃった！ うごけない！"); popNumber(0); return 0; }
+    if (pl.zero) { pl.zero = 0; pl.stay = 1; await rd(); noise(.3, 300, .5); await speak(C.pony, "sl_zero_now", "0に なっちゃった！ うごけない！"); popNumber(0); return 0; }
     let v = await rd();
     if (pl.dice2) { pl.dice2 = 0; await speak(C.pony, "sl_d2_more", "もう ひとつ ふってね"); await waitDice(); const w = await rd(); v += w; popNumber(v); await sleep(400); }
     if (pl.x2) { pl.x2 = 0; await speak(C.pony, "sl_x2_now", "2ばいに なるよ！"); v *= 2; popNumber(v); await sleep(400); }
@@ -229,16 +242,17 @@ async function slCatch(pc) {
   const cnt = txt(g, 800, 180, "0", 70, { "text-anchor": "middle" }); const bar = el("rect", { x: 300, y: 860, width: 1000, height: 26, rx: 13, fill: "#7BD389", ...S6(4) }, g);
   await speak(C.pony, `sl_catch_${curStage}`, `${T.item}を タッチして つかまえよう！`);
   let n = 0; const its = [];
-  for (let i = 0; i < 7; i++) { const e = txt(g, 0, 0, SL_ITEM[curStage], 90, { "text-anchor": "middle", style: "cursor:pointer" }); const o = { e, x: 200 + rnd(1200), y: 300 + rnd(450), vx: (rnd(2) ? 1 : -1) * (220 + rnd(200)), vy: (rnd(2) ? 1 : -1) * (160 + rnd(160)) }; its.push(o);
-    e.onclick = () => { if (o.got) return; o.got = 1; n++; cnt.textContent = n; blip(800 + n * 80, 1400, .08, "square"); for (let k = 0; k < 6; k++) mark("sparkle", o.x, o.y - 30, { vx: Math.cos(k) * 220, vy: Math.sin(k) * 220, life: .5, s: .5 });
+  for (let i = 0; i < 6; i++) { const e = el("g", { style: "cursor:pointer" }, g); el("circle", { r: 105, fill: "#FFFFFF01" }, e); txt(e, 0, 34, SL_ITEM[curStage], 100, { "text-anchor": "middle" }); // あたりは 大きめの まる
+    const o = { e, x: 200 + rnd(1200), y: 330 + rnd(420), vx: (rnd(2) ? 1 : -1) * (80 + rnd(80)), vy: (rnd(2) ? 1 : -1) * (60 + rnd(60)) }; its.push(o);
+    e.onpointerdown = () => { if (o.got) return; o.got = 1; n++; cnt.textContent = n; blip(800 + n * 80, 1400, .08, "square"); for (let k = 0; k < 6; k++) mark("sparkle", o.x, o.y - 30, { vx: Math.cos(k) * 220, vy: Math.sin(k) * 220, life: .5, s: .5 });
       later(600, () => { o.got = 0; o.x = 200 + rnd(1200); o.y = 300 + rnd(450); }); }; }
-  const T0 = 9; let t = 0;
+  const T0 = 10; let t = 0;
   await new Promise(res => addTick(dt => { if (!g.isConnected) return false; t += dt; bar.setAttribute("width", Math.max(0, 1000 * (1 - t / T0)).toFixed(0));
-    its.forEach(o => { o.x += o.vx * dt; o.y += o.vy * dt; if (o.x < 160 || o.x > 1440) o.vx *= -1; if (o.y < 280 || o.y > 820) o.vy *= -1; o.e.setAttribute("x", o.x.toFixed(0)); o.e.setAttribute("y", o.y.toFixed(0)); o.e.setAttribute("opacity", o.got ? .15 : 1); });
+    its.forEach(o => { o.x += o.vx * dt; o.y += o.vy * dt; if (o.x < 160 || o.x > 1440) o.vx *= -1; if (o.y < 320 || o.y > 800) o.vy *= -1; o.e.setAttribute("transform", `translate(${o.x.toFixed(0)} ${o.y.toFixed(0)})`); o.e.setAttribute("opacity", o.got ? .15 : 1); });
     if (t >= T0) { res(); return false; } }));
   chime(); await sleep(400); g.remove();
   await speak(C.pony, `sl_got_${Math.min(n, 15)}`, `${n}こ つかまえた！`);
-  await delta(pc, n >= 8 ? 3 : n >= 5 ? 2 : n >= 2 ? 1 : 0); return false;
+  await delta(pc, n >= 7 ? 3 : n >= 4 ? 2 : n >= 2 ? 1 : 0); return false;
 }
 // 🎈 ふうせん わり
 async function slBalloon(pc) {
@@ -273,7 +287,7 @@ async function slMore(pc) {
 }
 // 🥤 どこに はいってる？（コップ シャッフル）
 async function slCups(pc) {
-  const g = panel("どこに はいってる？", "#FFF8E8"); const X = [400, 800, 1200], cups = [0, 1, 2].map(i => { const c = el("g", {}, g); el("path", { d: "M-110 -150 L110 -150 L80 90 L-80 90 Z", fill: ["#FF8FA3", "#7FCBF0", "#FFD25E"][i], ...S6(6) }, c); el("ellipse", { cx: 0, cy: -150, rx: 110, ry: 22, fill: "#FFFFFF", ...S6(5) }, c); c.pos = i; c.y = 0; c.setAttribute("style", "cursor:pointer"); return c; });
+  const g = panel("どこに はいってる？", "#FFF8E8"); const X = [400, 800, 1200], cups = [0, 1, 2].map(i => { const c = el("g", {}, g); el("path", { d: "M-80 -150 Q0 -170 80 -150 L112 88 Q0 108 -112 88 Z", fill: "#E8735A", ...S6(6) }, c); el("path", { d: "M-96 -40 Q0 -24 96 -40", fill: "none", stroke: "#FFFFFF", "stroke-width": 10, opacity: .6 }, c); el("ellipse", { cx: 0, cy: 90, rx: 112, ry: 16, fill: "#C9583F", ...S6(5) }, c); c.pos = i; c.y = 0; c.setAttribute("style", "cursor:pointer"); return c; });
   const ball = el("circle", { r: 46, fill: "#E8473C", ...S6(5) }, g); g.insertBefore(ball, cups[0]); let hasBall = rnd(3);
   const place = () => cups.forEach(c => c.setAttribute("transform", `translate(${X[c.pos]} ${700 + c.y})`));
   ball.setAttribute("cx", X[cups[hasBall].pos]); ball.setAttribute("cy", 744); place();
@@ -289,6 +303,8 @@ async function slCups(pc) {
   if (ok) { chime(); confetti(30); await speak(C.pony, "sl_good", "やったね！"); } else await speak(C.pony, "sl_miss", "ざんねん！");
   await sleep(800); g.remove(); await delta(pc, ok ? 2 : 0); return false;
 }
+// どうぶつの なまえ（はじめて あそぶ 人にも わかるように）
+const SL_DESC = { pyon: "うさぎの ", mii: "ねこの ", chu: "ねずみの ", gao: "ライオンの ", doshin: "ぞうの ", kamejii: "かめの ", nobbo: "きりんの ", kon: "きつねの ", meebaa: "ひつじの ", kuma: "くまの ", tora: "とらの ", shima: "しまうまの " };
 // 👤 かげ あて
 async function slShadow(pc) {
   const pool = ["pyon", "mii", "chu", "gao", "doshin", "kamejii", "nobbo", "kon", "meebaa", "kuma", "tora"];
@@ -297,7 +313,7 @@ async function slShadow(pc) {
   const f = el("filter", { id: "slsil" }, el("defs", {}, g)); el("feColorMatrix", { type: "matrix", values: "0 0 0 0 .17  0 0 0 0 .16  0 0 0 0 .2  0 0 0 1 0" }, f);
   const c = clone(ans, 800, 640, Math.min(.9, (KID_S[ans] || .8) * .9)); c.root.setAttribute("filter", "url(#slsil)"); hudLayer.appendChild(c.root);
   await speak(C.pony, "sl_shadow", "この かげは だれかな？");
-  const cards = opts.map((k, i) => card(g, 140 + i * 450, 760, 420, 130, NAMES[k], null, { fs: 54 }));
+  const cards = opts.map((k, i) => card(g, 140 + i * 450, 740, 420, 170, (SL_DESC[k] || "") + NAMES[k], null, { fs: 50 }));
   const i = await tapOnce(cards); const ok = opts[i] === ans; flashCard(cards[i], ok);
   c.root.removeAttribute("filter"); jump(c, .6); if (ok) { chime(); confetti(30); await speak(C.pony, "sl_good", "やったね！"); } else { flashCard(cards[opts.indexOf(ans)], true); await speak(C.pony, "sl_miss", "ざんねん！"); }
   await sleep(900); clearClones(); g.remove(); await delta(pc, ok ? 2 : 0); return false;
@@ -318,13 +334,18 @@ async function slJump(pc) {
   hit.onclick = null; await speak(C.pony, `sl_jok_${ok}`, `${ok}かい とべた！`); await sleep(300); clearClones(); g.remove();
   await delta(pc, ok === 3 ? 3 : ok === 2 ? 1 : 0); return false;
 }
-// 🎲 みんなで サイコロ バトル
+// 🎲 みんなで サイコロ バトル：ひとりずつ じぶんの サイコロを タッチ
 async function slBattle(pc) {
-  const g = panel("サイコロ バトル", "#FFF8E8"); await speak(C.pony, "sl_battle", "みんなで サイコロ バトル！ いちばん おおきい めの ひとが 3マス すすむよ");
-  const ps = PLAYERS, W = 1200 / ps.length; const vals = [];
-  for (let i = 0; i < ps.length; i++) { const x = 200 + W * (i + .5); txt(g, x, 330, NAMES[ps[i].kind], 44, { "text-anchor": "middle" }); const d = txt(g, x, 600, "🎲", 160, { "text-anchor": "middle" });
-    for (let k = 0; k < 8; k++) { d.textContent = String(1 + rnd(6)); blip(400 + k * 50, 500, .04, "square"); await sleep(70); } const v = 1 + rnd(6); vals.push(v); d.textContent = String(v); boom(.2); await sleep(300); }
-  const mx = Math.max(...vals), win = ps.filter((p, i) => vals[i] === mx); await sleep(500); g.remove();
+  const g = panel("サイコロ バトル", "#FFF8E8"); const ps = PLAYERS, W = 1300 / ps.length, vals = [];
+  const dice = ps.map((p, i) => { const x = 150 + W * (i + .5); txt(g, x, 300, NAMES[p.kind], 42, { "text-anchor": "middle" });
+    const d = el("g", { style: "cursor:pointer" }, g); const r = el("rect", { x: x - 90, y: 380, width: 180, height: 180, rx: 32, fill: "#FFFFFF", ...S6(7) }, d); const t = txt(d, x, 510, "？", 110, { "text-anchor": "middle" }); d.r = r; d.t = t; d.x = x; return d; });
+  await speak(C.pony, "sl_battle", "みんなで サイコロ バトル！ いちばん おおきい めの ひとが 3マス すすむよ");
+  await speak(C.pony, "sl_bt_tap", "じゅんばんに、じぶんの サイコロを タッチしてね");
+  for (let i = 0; i < ps.length; i++) { const d = dice[i]; const off = lampOn(d.r); markAbove(ps[i].pc, "ex");
+    await new Promise(res => { d.onpointerdown = () => { d.onpointerdown = null; res(); }; }); off();
+    for (let k = 0; k < 8; k++) { d.t.textContent = String(1 + rnd(6)); blip(400 + k * 50, 500, .04, "square"); await sleep(65); }
+    const v = 1 + rnd(6); vals.push(v); d.t.textContent = String(v); boom(.2); await sleep(350); }
+  const mx = Math.max(...vals); dice.forEach((d, i) => { if (vals[i] === mx) d.r.setAttribute("fill", "#FFE27A"); }); const win = ps.filter((p, i) => vals[i] === mx); await sleep(900); g.remove();
   if (win.length === ps.length) { await speak(C.pony, "sl_bt_all", "みんな おなじ！ みんなで 1マス すすもう"); for (const w of win) { await slGo(w.pc, 1); if (winner) break; } return false; }
   for (const w of win) { joy(w.pc); await speak(C.pony, `mw_${w.kind}`, `${NAMES[w.kind]}の かち！`); await slGo(w.pc, 3); if (winner) break; }
   return false;
@@ -387,4 +408,17 @@ Object.assign(LTASK_RUN, { stop: slStop, catch: slCatch, balloon: slBalloon, mor
 (function () { const s = document.createElement("style"); s.textContent = `.start.menu .mst.mslong{background:#E3F3FF;border-color:#3E7FD6}.start.menu .mmcard .mst{padding-top:3px!important;padding-bottom:3px!important}.start.menu .mmcard .mst .mico{font-size:clamp(18px,2.4vw,26px)!important}.start.menu .mmcard .mstages{gap:5px!important}.start.menu .mmcard h2{font-size:clamp(28px,4.4vw,48px)!important}`; document.head.appendChild(s); })();
 
 // 盤の 上の ぽにーは、マスの ない 右上へ
-{ const sv = setView; setView = function (v, ...a) { const r = sv(v, ...a); if (v === "board" && isSL()) place(C.pony, 1330, 392, .42); return r; }; }
+{ const sv = setView; setView = function (v, ...a) { const r = sv(v, ...a); if (v === "board" && isSL()) place(C.pony, 1545, 985, .32); return r; }; }
+
+// 0マスの ときは マスの 課題も しない（つぎの ばんで もとに もどす）
+{ const lc = landChild; landChild = async function (pc = P.shima) { if (isSL() && pc.player && pc.player.stay) { pc.player.stay = 0; return; } return lc(pc); }; }
+// 🔀 くみかえ：これから さきの マスの 中みが いれかわる（盤が ゆれて、マスが シャッフル）
+async function slKumikae(pc) {
+  const O = SL_ORDER[curStage], i0 = slIdx(pc.node), ahead = O.filter((id, i) => i > i0 && id !== "4" && id !== GOAL && !(EVENTS[curStage][id] && EVENTS[curStage][id][0] === "kumikae"));
+  const items = ahead.map(id => EVENTS[curStage][id] ? ["e", EVENTS[curStage][id]] : ["t", LONG_TASKS[curStage][id]]).filter(x => x[1]);
+  const mixed = shuffle(items);
+  noise(1.2, 120, .7); let t = 0; await new Promise(res => addTick(dt => { t += dt; boardLayer.setAttribute("transform", t < 1.3 ? `translate(${(Math.sin(t * 60) * 10 * (1.3 - t)).toFixed(1)} ${(Math.cos(t * 47) * 6 * (1.3 - t)).toFixed(1)})` : ""); if (t >= 1.3) { res(); return false; } }));
+  ahead.forEach(id => { delete EVENTS[curStage][id]; delete LONG_TASKS[curStage][id]; });
+  ahead.forEach((id, k) => { const m = mixed[k]; if (!m) return; if (m[0] === "e") EVENTS[curStage][id] = m[1]; else LONG_TASKS[curStage][id] = m[1]; });
+  drawBoard(); chime(); ahead.forEach((id, k) => later(k * 25, () => { const [x, y] = NODES[id]; mark("sparkle", x, y - 20, { vy: -160, life: .6, s: .5 }); })); await sleep(900);
+}

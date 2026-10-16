@@ -172,7 +172,8 @@ Object.assign(INTRO, {
     noise(1.2, 3000, .15); a.armL.t = -150; a.armR.t = 150; hold(a, "shiver", 3); const u = umbOver(h); window.__umb2 = u; enter(h); await sleep(1300); },
   async gkhit(h, a) { stay(h); hold(h, "run", 1.2); await sleep(800); const car = vehicle("car", 800); window.__car = car; await pass(car, 700, 800, 1700, world(h, 300, 0).x - 20); thud(); boom(.5); shake(400, 18); flop(h);
     { const st = slam("ドン！", 300, 110, "#FFD25E"); later(900, () => st.remove()); } await sleep(500); playMove(h, "crouch"); h.sadMouth = true; tears(h, 3); for (let i = 0; i < 3; i++) later(i * 300, () => markAbove(h, "drop", { dx: i % 2 ? 60 : -60 })); await sleep(700); hold(a, "run", 1); a.dx.t = 0; await sleep(1000); playMove(a, "crouch"); },
-  async gkphone(h, a) { stay(h); const car = vehicle("car", 800); car.setAttribute("transform", "translate(1300 800)"); h.sadMouth = true; const p = prop("phone", 0, 0, .45); hand(h, p, .45, 0);
+  async gkphone(h, a) { stay(h); hold(h, "run", 1.2); await sleep(600); const car = vehicle("car", 800); await pass(car, 700, 800, 1300, world(h, 300, 0).x - 20); thud(); boom(.4); shake(300, 14); flop(h); // くるまに はねられる → すわりこんで ママに でんわ
+    { const st = slam("ドン！", 300, 110, "#FFD25E"); later(900, () => st.remove()); } await sleep(700); playMove(h, "crouch"); h.sadMouth = true; tears(h, 2); await sleep(700); const p = prop("phone", 0, 0, .45); hand(h, p, .45, 0);
     await sleep(600); ring3(); a.dx.v = a.dx.t = 0; const ph = prop("phone", 0, 0, .45); hand(a, ph, .45, 0); markAbove(a, "ex"); await sleep(900); },
   async gkpolice(h, a) { stay(h); const car = vehicle("car", 800); car.setAttribute("transform", "translate(1250 800)"); const oj = xtra("ojisan", 930, .9); playMove(oj, "shy"); siren(); hold(a, "run", 1.2); a.dx.t = 0; await sleep(1300); playMove(a, "bow"); await sleep(400); },
   async gkdoctor(h, a) { stay(h); h.sadMouth = true; await sleep(700); playMove(a, "look"); await sleep(600); },

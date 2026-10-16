@@ -231,8 +231,8 @@ async function runSit(place, heroKind = "shima") {
   showTask(t.a, s.help ? "いって あげよう" : "こたえよう");
   let hh = E.h, ok = false, n = 0; const tries = [], L0 = E.L, t0 = performance.now();
   for (; n < 3; n++) {
-    if (hh < 3) await speak(C.pony, `sa_${s.id}_${ti}`, t.a);
-    else { playMove(h, "think"); await sleep(700); }
+    if (hh < 3 && n !== 1) await speak(C.pony, `sa_${s.id}_${ti}`, t.a);
+    else if (n !== 1) { playMove(h, "think"); await sleep(700); }
     unsay();
     setListen(h, true); const r = await listen(t.keys, 8000); setListen(h, false);
     tries.push(`${r.r === "ok" ? "○" : r.r === "part" ? "△" : "×"}${r.heard || ""}`);

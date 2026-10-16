@@ -495,7 +495,7 @@ async function runScene(place) {
   await sleep(500);
   let h = E.h, ok = false, a = 0;
   for (; a < 3; a++) {
-    await present(sc, h, a === 0);
+    if (a !== 1) await present(sc, h, a === 0); // 1かいめの いいなおしは すぐ 聞く
     setListen(C.shima, true); const res = await listen(KEYS[sc.no]); setListen(C.shima, false); unsay();
     if (res.r === "ok") { ok = true; break; }
     if (res.r === "part") { playMove(C.shima, "think"); await speak(C.pony, "p_close", "おしい！"); }

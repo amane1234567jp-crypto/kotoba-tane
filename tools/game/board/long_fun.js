@@ -195,7 +195,7 @@ async function lkGag(pc) {
     await speak(C.pony, "lk_g_ask", "なんて つっこむ？"); showTask(t.a, "つっこもう");
     let hh = E.h;
     for (; n < 3; n++) {
-      if (hh < 3) await speak(C.pony, `lk_g_${it.id}_a${ti}`, t.a); else { playMove(h, "think"); await sleep(700); }
+      if (hh < 3 && n !== 1) await speak(C.pony, `lk_g_${it.id}_a${ti}`, t.a); else if (n !== 1) { playMove(h, "think"); await sleep(700); }
       unsay(); setListen(h, true); const r = await listen(t.keys, 8000); setListen(h, false);
       tries.push(`${r.r === "ok" ? "○" : r.r === "part" ? "△" : "×"}${r.heard || ""}`);
       if (r.r === "ok") { ok = true; break; }
@@ -239,7 +239,7 @@ async function lkHaya(pc) {
     if (L <= 4) { await speak(C.pony, "lk_y_model", "ゆっくりで いいよ。おてほんを きいてね"); await speak(C.pony, `lk_y_${it.id}`, it.t); }
     await speak(C.pony, "lk_y_you", "こんどは きみの ばん！ いって みよう");
     for (let n = 0; n < 2 && !ok; n++) {
-      unsay(); setListen(h, true); const r = await listen(it.keys, 10000); setListen(h, false);
+      unsay(); setListen(h, true); const off = lampOn(sg.firstChild); const r = await listen(it.keys, 10000); off(); setListen(h, false);
       tries.push(`${r.r === "ok" ? "○" : r.r === "part" ? "△" : "×"}${r.heard || ""}`);
       if (r.r === "ok") ok = true; else if (n === 0) await speak(C.pony, "p_again", "もう いっかい いってみよう");
     }
@@ -276,7 +276,8 @@ async function lkSagasu(pc) {
   const sp = shuffle(spots).slice(0, L <= 2 ? 14 : 16).sort((a, b) => a.y - b.y || a.x - b.x);
   const others = Object.keys(SG_S).filter(k => k !== q.t && k !== q.A && !(FAMILY[q.t] || []).includes(k));
   const plan = sp.map(() => ({ kind: others[rnd(others.length)] }));
-  const cand = sp.map((p, i) => i).filter(i => q.type === "small" ? sp[i].k === 1 : sp[i].k >= .8); const ti = cand[rnd(cand.length)]; const target = plan[ti];
+  const cand = sp.map((p, i) => i).filter(i => q.type === "small" ? sp[i].k === 1 : sp[i].k === .8); // さがす 子は まんなかの れつ（まえの 子の うしろに かくれる）
+  const ti = cand[rnd(cand.length)]; const target = plan[ti];
   if (q.type === "name") target.kind = q.t;
   else { // おなじ どうぶつを たくさん まぜる
     const idxs = shuffle(plan.map((_, i) => i).filter(i => i !== ti)).slice(0, 6); idxs.forEach(i => plan[i].kind = q.A); target.kind = q.A;
@@ -292,8 +293,10 @@ async function lkSagasu(pc) {
   // しげみ（まえの れつの 足もとを かくす）
   const bush = el("g", {}, front()); [[420, 990], [880, 1000], [1320, 990]].forEach(([x, y]) => [[-70, 0, 70], [0, -30, 80], [70, 0, 70]].forEach(([dx, dy, r]) => el("circle", { cx: x + dx, cy: y + dy, r, fill: "#5DB86A", ...S6(5) }, bush)));
   const tc = crowd[ti]; let ok = false, wrong = 0;
-  tc.root.parentNode.appendChild(tc.root); // さがす 子は いちばん てまえに（かくれて 見えなく ならないように）
-  if (sp[ti].k === 1 && [420, 880, 1320].some(bx => Math.abs(sp[ti].x - bx) < 130)) place(tc, sp[ti].x + 170 > 1500 ? sp[ti].x - 170 : sp[ti].x + 170, sp[ti].y, tc.s);
+  // かくれんぼ：まえの れつの 子を さがす 子の まえに ずらして、すこしだけ 見える ように する（あたまと かたほうが 見える）
+  if (sp[ti].k !== 1) { const fr = crowd.filter((c, i) => sp[i].k === 1); if (fr.length) { const oc = fr.sort((a, b) => Math.abs(sp[a.idx].x - sp[ti].x) - Math.abs(sp[b.idx].x - sp[ti].x))[0];
+      const dir = sp[ti].x > 800 ? -1 : 1; place(oc, sp[ti].x + dir * 70, sp[oc.idx].y, oc.s); } }
+  else if ([420, 880, 1320].some(bx => Math.abs(sp[ti].x - bx) < 130)) place(tc, sp[ti].x + 170 > 1500 ? sp[ti].x - 170 : sp[ti].x + 170, sp[ti].y, tc.s);
   try {
     crowd.forEach((c, i) => later(i * 50, () => jump(c, .3))); await sleep(600);
     showTask(q.text, "さがして タッチ", 150);

@@ -30,7 +30,7 @@ const YOMI = [
   ["読んだら", "よんだら"], ["弱い", "よわい"], ["練習", "れんしゅう"], ["分からない", "わからない"], ["判らない", "わからない"], ["綿あめ", "わたあめ"], ["綿飴", "わたあめ"], ["笑う", "わらう"],
   ["悪い", "わるい"], ["又", "また"], ["良かった", "よかった"], ["良い", "いい"], ["嫌だ", "いやだ"], ["嫌", "いや"], ["猿", "さる"], ["下", "した"], ["来る", "くる"], ["来て", "きて"],
   ["生麦", "なまむぎ"], ["生米", "なまごめ"], ["生卵", "なまたまご"], ["是非", "ぜひ"], ["一人", "ひとり"], ["二人", "ふたり"], ["今日", "きょう"], ["昨日", "きのう"], ["友達", "ともだち"],
-  ["鳴った", "なった"], ["成った", "なった"], ["成るの", "なるの"], ["御", "お"],
+  ["多過ぎ", "おおすぎ"], ["多すぎ", "おおすぎ"], ["大杉", "おおすぎ"], ["大すぎ", "おおすぎ"], ["多杉", "おおすぎ"], ["鳴った", "なった"], ["成った", "なった"], ["成るの", "なるの"], ["御", "お"],
 ].sort((a, b) => b[0].length - a[0].length);
 const toYomi = t => { let s = t; for (const [k, v] of YOMI) if (s.includes(k)) s = s.split(k).join(v); return s; };
 // 1) 聞きとった 文に よみがな版を 足す
@@ -41,9 +41,10 @@ const toYomi = t => { let s = t; for (const [k, v] of YOMI) if (s.includes(k)) s
 //    聞きとりは ぽにーの 声が おわってからの ぶんだけ つかう。つぎに 聞きとりが はじまったら、その マイクを ひきつぐ。
 const HEAR1 = hear; // よみがな つき（ポンは ならさない）
 const EARLY = { h: null, until: 0, buf: [], sink: null, t: 0 };
-const EARLY_KEYS = /^(sa_|lk_ask$|lk_sayit|lt_tsuna_ask$|lt_yasa_say$|lk_y_you$|p_kuya$)/;
+const EARLY_KEYS = /^(p_again$|sa_|lk_g_.*_a\d$|lk_ask$|lk_sayit|lt_tsuna_ask$|lt_yasa_say$|lk_y_you$|p_kuya$)/;
 const pon = () => { if (!ctx) return; blip(1320, 1320, .08, "sine"); later(70, () => blip(1760, 1760, .1, "sine")); };
 { const pv = playVoice; playVoice = async function (c, key, text, frac = 1) {
+    if (EARLY.h && !EARLY.sink) { try { EARLY.h.stop(); } catch (e) { } EARLY.h = null; EARLY.buf = []; } // つぎの 声が はじまったら、まえの はやめの マイクは すてる（お手本を ひろわない）
     if (c === C.pony && frac === 1 && EARLY_KEYS.test(key) && srUsable && !HIDE.off && AUD[key]) {
       const b = await voiceBuf(key); const d = b ? b.duration : 0;
       if (d > 1) { EARLY.until = performance.now() + d * 1000 + 120;
@@ -66,3 +67,15 @@ const pon = () => { if (!ctx) return; blip(1320, 1320, .08, "sine"); later(70, (
       glow = el("rect", { x: x0, y: y0, width: x1 - x0, height: y1 - y0, rx: 34, fill: "none", stroke: "#FFC93C", "stroke-width": 14, opacity: 0 }, cards[0].parentNode);
       let t = 0; addTick(dt => { if (!glow.isConnected) return false; t += dt; glow.setAttribute("opacity", (srUsable ? .55 + .45 * Math.sin(t * 6) : 0).toFixed(2)); }); } catch (e) { }
     try { return await sc(pc, texts, cards, ms); } finally { if (glow) glow.remove(); } }; }
+
+/* 4) こどもは はやく 言いすぎて、はじめの 1〜2もじが マイクに 入らない ことが ある。
+      → いちばん はじめの キーは、あたまの 1〜2もじが なくても あう ことに する（のこりが 2もじ いじょうの とき）。 */
+{ const ls = listen; listen = function (groups, ms) {
+    if (groups && groups.length) { const g0 = groups[0], add = [];
+      g0.forEach(v => { const k = [...v]; if (!/^[ぁ-ゖァ-ヺー]+$/.test(v)) return; for (const cut of [1, 2]) if (k.length - cut >= 2) add.push(k.slice(cut).join("")); });
+      if (add.length) groups = [g0.concat(add), ...groups.slice(1)]; }
+    return ls(groups, ms); }; }
+// 聞いて いる あいだ、わくを ひからせる（はやくちの かんばん など、課題の わくが ない とき）
+function lampOn(r) { if (!r) return () => { }; const s0 = r.getAttribute("stroke"), w0 = r.getAttribute("stroke-width"); let on = true, t = 0;
+  addTick(dt => { if (!on || !r.isConnected) return false; t += dt; r.setAttribute("stroke", "#FFC93C"); r.setAttribute("stroke-width", (12 + 6 * Math.sin(t * 7)).toFixed(1)); });
+  return () => { on = false; if (s0) r.setAttribute("stroke", s0); if (w0) r.setAttribute("stroke-width", w0); }; }
