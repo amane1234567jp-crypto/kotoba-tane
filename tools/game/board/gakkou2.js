@@ -219,7 +219,7 @@ const ROOMS2 = {
 };
 const drawRoomG1 = drawRoom;
 drawRoom = function (place, noSign = false) {
-  if ((curStage !== "gakkou2" && curStage !== "long") || !ROOMS2[place]) return drawRoomG1(place, noSign);
+  if ((curStage !== "gakkou2" && !isLong()) || !ROOMS2[place]) return drawRoomG1(place, noSign);
   sceneLayer.innerHTML = ""; const L = sceneLayer;
   const wall = { きょうしつ: "#FFF6E0", おんがくしつ: "#F3ECFF", ずこうしつ: "#FFF0E3", きゅうしょく: "#FFF6E0", たいいくかん: "#F4EAD8", いえ: "#FDEBD3" }[place] || "#FDEBD3";
   el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: wall }, L);

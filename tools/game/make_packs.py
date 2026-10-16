@@ -50,5 +50,13 @@ for k in dict.fromkeys(lt):
     if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
     else: missing.append(k)
 (OUT / "ltomo.json").write_text(json.dumps(pack, separators=(",", ":"))); print("ltomo", len(pack), round((OUT / "ltomo.json").stat().st_size / 1e6, 2), "MB")
+# ちょうロング（sumi・sokashi・suchu）：ぽにーの 声（sit/pony_slong.json）＋ BGM 3きょく。ほかの 声は long・ltomo・kousha の パックを つかう
+pack = {}
+for k in [p[0] for p in json.loads((G / "sit/pony_slong.json").read_text())] + ["bgm_sumi", "bgm_sokashi", "bgm_suchu"]:
+    p = A / f"{k}.mp3"
+    if not p.exists(): p = G / "board/audio" / f"{k}.mp3"
+    if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
+    else: missing.append(k)
+(OUT / "slong.json").write_text(json.dumps(pack, separators=(",", ":"))); print("slong", len(pack), round((OUT / "slong.json").stat().st_size / 1e6, 2), "MB")
 print("missing", len(missing), missing[:20])
 if missing and "--strict" in sys.argv: sys.exit(1)

@@ -175,6 +175,18 @@ SONGS = {
  "gekou": dict(bpm=120, root=67, scale=MAJ, bars=8, lead=marimba, lead2=glock, drums=D_easy, comp="pluck", swing=.25, extra=X_birds,
    mel="3 - 2 - 1 - 5, - | 6, - 1 - 2 - - - | 3 - 5 - 6 - 5 3 | 2 - - - . . . . | 3 - 2 - 1 - 6, - | 5, - 6, - 1 - 3 - | 2 - 3 - 2 - 7, - | 1 - - - . . . .",
    chords=[1, 4, 1, 5, 1, 4, 5, 1]),
+ # ちょうロング うみ：カリブ風（マリンバ・スチールドラムっぽい グロッケン）
+ "sumi": dict(bpm=132, root=65, scale=MAJ, bars=8, lead=marimba, lead2=glock, drums=D_easy, comp="pluck", bass="sq", swing=.3, extra=X_birds,
+   mel="1 - 3 5 6 5 3 - | 4 - 6 1' 7 6 5 - | 3 - 5 6 5 3 1 - | 2 3 4 2 5 - . . | 1 - 3 5 6 5 3 - | 4 - 6 1' 2' 1' 6 - | 5 3 4 2 7, 2 5, - | 1 - - - . . . .",
+   chords=[1, 4, 1, 5, 1, 4, 5, 1]),
+ # ちょうロング おかし：かわいく はずむ ワルツ
+ "sokashi": dict(bpm=168, root=72, scale=MAJ, bars=8, lead=glock, lead2=marimba, drums=D_waltz, comp="pad", per_bar=6,
+   mel="5 - 3 1 3 5 | 1' - - 7 6 5 | 6 - 4 2 4 6 | 5 - - . . . | 5 - 3 1 3 5 | 1' - 2' 1' 7 6 | 5 - 4 3 2 7, | 1 - - . . .",
+   chords=[1, 1, 4, 5, 1, 1, 5, 1]),
+ # ちょうロング うちゅう：わくわく マーチ（ブラス）
+ "suchu": dict(bpm=150, root=67, scale=MAJ, bars=8, lead=brass, lead2=glock, drums=D_adv, comp="piano", bass="sq",
+   mel="1 - 5, - 1 - 3 - | 5 - - - 3 - 1 - | 6 - 4 - 6 - 1' - | 7 - - - 5 - . . | 1' - 7 - 6 - 5 - | 4 - 6 - 5 - 3 - | 2 - 3 - 4 - 7, - | 1 - - - 5, - 1 -",
+   chords=[1, 1, 4, 5, 4, 4, 5, 1]),
  # ともだちの だいぼうけん：みんなで わいわい。はずむ マリンバと グロッケン、てびょうし
  "ltomo": dict(bpm=140, root=67, scale=MAJ, bars=8, lead=marimba, lead2=glock, drums=D_shop, comp="pluck", bass="sq", swing=.25, extra=X_birds,
    mel="5 5 6 5 1' - 7 - | 6 6 5 3 5 - - - | 4 4 5 4 2 - 4 - | 3 2 1 2 3 - - - | 5 5 6 5 1' - 7 - | 6 6 5 3 1' - 6 - | 5 3 4 2 7, - 2 - | 1 - 3 - 1 - . .",
