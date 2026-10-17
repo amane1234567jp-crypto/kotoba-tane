@@ -220,6 +220,14 @@ SONGS = {
  "tokei": dict(bpm=120, root=67, scale=MAJ, bars=8, lead=glock, lead2=marimba, drums=D_class, comp="pluck", swing=0, extra=X_bell,
    mel="1 - 3 - 5 - 3 - | 1 - 3 - 5 - - - | 2 - 4 - 6 - 4 - | 2 - 4 - 5 - - - | 1 - 3 - 5 - 3 - | 6 - 5 - 3 - 1 - | 4 - 3 - 2 - 7, - | 1 - - - . . . .",
    chords=[1, 1, 4, 5, 1, 4, 5, 1]),
+ # あそびば：ぴょんぴょん はずむ。マリンバと グロッケン
+ "asobiba": dict(bpm=132, root=69, scale=MAJ, bars=8, lead=marimba, lead2=glock, drums=D_shop, comp="pluck", swing=.3,
+   mel="1 3 5 - 3 5 1' - | 6 - 5 - 3 - - - | 2 4 6 - 4 6 2' - | 7 - 5 - 2 - - - | 1 3 5 - 3 5 1' - | 6 5 6 1' 2' - 7 - | 6 - 4 - 5 - 7, - | 1 - - - . . . .",
+   chords=[1, 4, 2, 5, 1, 4, 5, 1]),
+ # ハンバーガーやさん：おみせの ゆかいな BGM。クラリネットと ピアノ
+ "burger": dict(bpm=124, root=65, scale=MAJ, bars=8, lead=clar, lead2=piano, drums=D_shop, comp="piano", swing=.35,
+   mel="5 - 5 6 5 3 1 - | 2 - 3 - 2 - - - | 4 - 4 5 4 2 7, - | 1 - 2 - 1 - - - | 5 - 5 6 5 3 1 - | 6 - 1' - 6 - 5 - | 4 - 3 - 2 - 5, - | 1 - - - . . . .",
+   chords=[1, 5, 4, 1, 1, 4, 5, 1]),
  "sensei1": dict(bpm=120, root=70, scale=MAJ, bars=8, lead=recorder, lead2=glock, drums=D_class, comp="piano", extra=X_bell,
    mel="3 - 3 - 4 - 5 - | 5 - 4 - 3 - 2 - | 1 - 1 - 2 - 3 - | 3 - - 2 2 - - - | 3 - 3 - 4 - 5 - | 5 - 4 - 3 - 2 - | 1 - 1 - 2 - 3 - | 2 - - 1 1 - - -",
    chords=[1, 5, 1, 5, 1, 5, 1, 5]),
