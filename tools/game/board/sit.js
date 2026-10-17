@@ -19,7 +19,7 @@ function pickSit(place, heroKind = "shima") {
   const s = pool[rnd(pool.length)]; sitUsed.add(s.id); return s;
 }
 const ASK_ON_STAGE = new Set(["door", "arrive", "stuck", "scared", "jumpdown", "loud", "borrow", "slow"]); // 最初から相手がその場にいる場面
-const ASK_AT = { onii: [1190, .98], tora: [1190, .92], kuma: [1220, 1.05], mama: [1200, 1.0], ookami: [1200, 1.0], ojisan: [1200, 1.0], omawari: [1240, 1.3], meebaa: [1190, .9], kamejii: [1180, .9], nobbo: [1220, 1.0], gao: [1190, .95], mii: [1190, .9], chu: [1220, .42], pyon: [1190, .9], doshin: [1260, 1.38], pyonmama: [1200, 1.0], gaojii: [1190, 1.0], miibaa: [1190, .98], doshinpapa: [1250, 1.48], kon: [1190, .88] };
+const ASK_AT = { onii: [1190, .98], tora: [1190, .92], kuma: [1220, 1.05], mama: [1200, 1.0], ookami: [1200, 1.0], ojisan: [1200, 1.0], omawari: [1240, 1.3], meebaa: [1190, .9], kamejii: [1180, .9], nobbo: [1220, 1.0], gao: [1190, .95], mii: [1190, .9], chu: [1220, .42], pyon: [1190, .9], doshin: [1260, 1.38], pyonmama: [1200, 1.0], gaojii: [1190, 1.0], miibaa: [1190, .98], doshinpapa: [1250, 1.48], kon: [1190, .88], panna: [1190, .9], pannamama: [1200, 1.0] };
 let propG = null;
 function resetChar(c) { c.dx.v = 0; c.dx.t = 0; c.lean.t = 0; c.lift.t = 0; c.armL.t = 0; c.armR.t = 0; c.headRot.t = 0; c.tm = {}; c.sadMouth = false; c.roundMouth = false; c.happyOn = false; c.eyeScale.t = 1; c.squash.t = 1; }
 function setSitView(s, heroKind) {

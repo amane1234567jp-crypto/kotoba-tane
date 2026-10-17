@@ -1,9 +1,9 @@
 /* ================= ステージ「ともだちの いえ」「こうえん2」「となりの せき」（2026-10-17） =================
-   台本は sit/sits_new4.py。ともだちの いえ＝ぴょんの いえ（ぴょん・ぴょんの ママ・くまた）、
+   台本は sit/sits_new4.py。ともだちの いえ＝ぱんなの いえ（ぱんな・ぱんなの ママ・くまた）、
    こうえん2＝ともだちどうしで あそぶ、となりの せき＝きょうしつの となり・うしろの 子。 */
 const S5 = ["ie1", "kouen2", "seki1"];
 Object.assign(RIVAL_OF, { ie1: "chu", kouen2: "mii", seki1: "gao" });
-Object.assign(KID_S, { pyonmama: 1.0, gaojii: 1.0 });
+Object.assign(KID_S, { pyonmama: 1.0, gaojii: 1.0, panna: .9, pannamama: 1.0 }); PIECE_S.panna = .22;
 
 /* ---------- 物の 絵 ---------- */
 Object.assign(ITEM2, {
@@ -24,7 +24,7 @@ const ROOMS5 = {
   げんかん(L) { homeRoom(L, "#FFF6E8", "#E3C59A"); el("rect", { x: 0, y: 760, width: 1600, height: 240, fill: "#D9D3C7" }, L); el("rect", { x: 760, y: 700, width: 840, height: 300, fill: "#E3C59A", ...S6(6) }, L); // たたき と あがりかまち
     el("rect", { x: 40, y: 200, width: 300, height: 560, rx: 10, fill: "#B97A4A", ...S6(6) }, L); el("rect", { x: 80, y: 260, width: 100, height: 140, rx: 8, fill: "#BDE3F2", ...S6(5) }, L); el("circle", { cx: 300, cy: 500, r: 12, fill: "#FFD25E", ...S6(4) }, L); // ドア
     el("rect", { x: 420, y: 480, width: 260, height: 280, rx: 10, fill: "#F2E3C2", ...S6(6) }, L); [540, 640].forEach(y => el("path", { d: `M420 ${y} H680`, ...S6(5) }, L)); [[450, 520, "#E8473C"], [560, 520, "#7FCBF0"], [450, 620, "#7BD389"], [560, 620, "#FFD25E"]].forEach(([x, y, c]) => el("ellipse", { cx: x + 40, cy: y + 10, rx: 36, ry: 12, fill: c, ...S6(3) }, L)); // げたばこ
-    el("rect", { x: 1300, y: 180, width: 220, height: 170, rx: 14, fill: "#FFFFFF", ...S6(5) }, L); el("path", { d: "M1330 260 Q1410 200 1490 260 Q1410 320 1330 260 Z", fill: "#FF9FB8", ...S6(4) }, L); txt(L, 1410, 230, "ぴょん", 30, { "text-anchor": "middle" });
+    el("rect", { x: 1300, y: 180, width: 220, height: 170, rx: 14, fill: "#FFFFFF", ...S6(5) }, L); el("path", { d: "M1330 260 Q1410 200 1490 260 Q1410 320 1330 260 Z", fill: "#FF9FB8", ...S6(4) }, L); txt(L, 1410, 230, "ぱんな", 30, { "text-anchor": "middle" });
     el("rect", { x: 1440, y: 560, width: 70, height: 140, rx: 10, fill: "#7FA7D9", ...S6(5) }, L); el("path", { d: "M1460 560 V470 M1495 560 V480", ...S6(6) }, L); },
   "ともだちの へや"(L) { homeRoom(L, "#FFEFF3", "#E9C893"); homeWin(L, 1180, 170, 280, 210);
     el("rect", { x: 120, y: 520, width: 460, height: 120, rx: 20, fill: "#FFFFFF", ...S6(6) }, L); el("rect", { x: 120, y: 580, width: 460, height: 140, rx: 10, fill: "#FF9FB8", ...S6(6) }, L); el("rect", { x: 100, y: 430, width: 40, height: 290, rx: 10, fill: "#C98A4B", ...S6(6) }, L); // ベッド
@@ -201,7 +201,7 @@ Object.assign(BOARD_BG, {
   seki1(L) { el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#FFF6E0" }, L); el("ellipse", { cx: 800, cy: 560, rx: 700, ry: 420, fill: "#F6E7C8", ...S6(6) }, L);
     el("rect", { x: 620, y: 470, width: 360, height: 180, rx: 10, fill: "#2F6B4F", ...S6(6) }, L); txt(L, 800, 580, "となりの せき", 46, { "text-anchor": "middle", fill: "#FFFFFF" }); },
 });
-BLOCK_DEF.ie1 = { who: "pyonmama", sleep: false, intro: ["p_blk_ie1", "ぴょんの ママが げんかんに いるよ。あいさつ しよう！"], say: ["blk_ie1", "こんにちは"], to: "ぴょんの ママに いおう",
+BLOCK_DEF.ie1 = { who: "pannamama", sleep: false, intro: ["p_blk_ie1", "ぱんなの ママが げんかんに いるよ。あいさつ しよう！"], say: ["blk_ie1", "こんにちは"], to: "ぱんなの ママに いおう",
   keys: [["こんにちは", "今日は", "こんにちわ"]], res: ["rs_ie1", "はい、どうぞ。ゆっくり あそんでいってね"] };
 BLOCK_DEF.kouen2 = { who: "tora", sleep: false, intro: ["p_blk_kouen2", "とらおが みちに ねころんで いるよ"], say: ["blk_kouen2", "とらおくん、とおして"], to: "とらおに いおう",
   keys: [["とおして", "通して"]], res: ["rs_kouen2", "おっ、いいぜ。とおりな"] };
