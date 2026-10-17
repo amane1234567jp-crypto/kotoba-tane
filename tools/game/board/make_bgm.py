@@ -204,6 +204,18 @@ SONGS = {
    mel="1 1 3 - 5 5 3 - | 6 6 5 - 3 - - - | 4 4 2 - 5 5 3 - | 2 - 3 - 2 - . . | 1 1 3 - 5 5 3 - | 6 6 1' - 6 5 3 - | 4 - 3 - 2 - 7, - | 1 - - - . . . .",
    chords=[1, 4, 2, 5, 1, 4, 5, 1]),
  # せんせい1：きちんと たのしい じゅぎょう。リコーダーと グロッケン
+ # ともだちの いえ：おじゃましまーす。ウクレレと グロッケン、ゆったり はずむ
+ "ie1": dict(bpm=124, root=65, scale=MAJ, bars=8, lead=glock, lead2=flute, drums=D_easy, comp="pluck", swing=.3,
+   mel="3 - 5 - 1' - 5 - | 6 - 5 - 3 - - - | 2 - 4 - 6 - 4 - | 5 - 3 - 2 - - - | 3 - 5 - 1' - 5 - | 6 - 1' - 2' - 7 - | 6 - 5 - 4 - 2 - | 1 - - - . . . .",
+   chords=[1, 4, 2, 5, 1, 4, 5, 1]),
+ # こうえん2：かけっこ！ はやくて げんき。マリンバと クラリネット
+ "kouen2": dict(bpm=144, root=67, scale=MAJ, bars=8, lead=marimba, lead2=clar, drums=D_shop, comp="pluck", bass="sq", swing=.2, extra=X_birds,
+   mel="1 3 5 3 1 3 5 - | 6 5 6 5 3 - - - | 4 6 1' 6 4 6 1' - | 7 5 7 5 2 - - - | 1 3 5 3 1 3 5 - | 6 5 6 1' 2' - 7 - | 6 - 4 - 5 - 7, - | 1 - 3 - 1 - . .",
+   chords=[1, 4, 4, 5, 1, 4, 5, 1]),
+ # となりの せき：きょうしつの こそこそ はなし。ピアノと リコーダー、かるく
+ "seki1": dict(bpm=112, root=69, scale=MAJ, bars=8, lead=recorder, lead2=piano, drums=D_class, comp="piano", swing=.1, extra=X_bell,
+   mel="5 - 5 - 6 - 5 - | 3 - - - 1 - - - | 4 - 4 - 5 - 4 - | 2 - - - 5, - - - | 5 - 5 - 6 - 5 - | 1' - - - 6 - - - | 5 - 4 - 3 - 2 - | 1 - - - . . . .",
+   chords=[1, 1, 4, 5, 1, 4, 5, 1]),
  "sensei1": dict(bpm=120, root=70, scale=MAJ, bars=8, lead=recorder, lead2=glock, drums=D_class, comp="piano", extra=X_bell,
    mel="3 - 3 - 4 - 5 - | 5 - 4 - 3 - 2 - | 1 - 1 - 2 - 3 - | 3 - - 2 2 - - - | 3 - 3 - 4 - 5 - | 5 - 4 - 3 - 2 - | 1 - 1 - 2 - 3 - | 2 - - 1 1 - - -",
    chords=[1, 5, 1, 5, 1, 5, 1, 5]),
