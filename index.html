@@ -34559,7 +34559,8 @@ Object.assign(EVENTS, {
 
 /* ================= ステージ「とけい」（2026-10-17）：課題は「とけいの よみかた」だけ =================
    盤は とけいの かたち（あさ → ひる → ゆうがた → よる）。マスに とまると おおきな アナログとけいが 出て、ぽにーが「いま なんじ？」。
-   むずかしさ（E.L）：1-2 ちょうど／3-4 はん／5-6 5ふんきざみ／7-8 1ふんきざみ／9-10 「〇ふんまえ」も。
+   むずかしさ（E.L）：1-2 ちょうど／3-4 さんじゅっぷん も／5-6 5ふんきざみ（そとに 分の 数字）／7-8 1ふんきざみ／9-10 1ふんきざみで 数字なし。
+   こたえは いつも「〇じ〇ふん」（「はん」「〇ふんまえ」は つかわない。「はん」と いっても せいかい）。
    レベル3から ときどき「ねる じかんは なんじ？」のように、くらしの じかんを きく。
    ライバル（がお）も よむ。ときどき よみまちがえるので、ただしい じかんを おしえて あげる。 */
 const TK = "tokei";
@@ -34576,7 +34577,7 @@ function tkMinRead(m) { // よみ（ひらがな）の くみあわせ
   if (m % 10 === 0) { const pre = TK_TEN[m / 10].replace(/じゅう$/, ""); return TK_M1[10].map(x => pre + x); }
   const t = m >= 10 ? TK_TEN[Math.floor(m / 10)] : ""; return TK_M1[m % 10].map(x => t + x);
 }
-const tkMinKeys = m => [...tkMinRead(m), `${m}分`, `${kanjiNum(m)}分`, `${m}ふん`, `${m}ぷん`];
+const tkMinKeys = m => [...tkMinRead(m), `${m}分`, `${kanjiNum(m)}分`, `${m}ふん`, `${m}ぷん`, ...(m === 30 ? ["はん", "半"] : [])];
 const tkMinText = m => tkMinRead(m)[0];
 const TK_MAE = { 5: ["ごふんまえ", "5分前", "五分前", "ごふん まえ"], 10: ["じゅっぷんまえ", "じっぷんまえ", "10分前", "十分前", "じゅっぷん まえ"] };
 /* くらしの じかん：盤の ばしょ（あさ・ひる・ゆうがた・よる）に あう しつもん */
@@ -34598,11 +34599,10 @@ function tkPick(place, lv, canLife = true) {
   if (life) { h = life.h; m = life.m; }
   else { h = hs[rnd(hs.length)];
     if (lv === 1) m = 0; else if (lv === 2) m = rnd(2) ? 30 : 0; else if (lv === 3) m = rnd(12) * 5; else if (lv === 4) m = rnd(60);
-    else { if (rnd(2)) { mae = rnd(2) ? 5 : 10; m = 60 - mae; } else m = rnd(2) ? rnd(12) * 5 : rnd(60); } }
+    else m = rnd(60); }
   const H = mae ? (h % 12) + 1 : h;
   const keys = [TK_H[H]], parts = [[`tk_h_${H}`, TK_HY[H]]]; let text = TK_HY[H];
   if (mae) { keys.push(TK_MAE[mae]); parts.push([`tk_mae_${mae}`, TK_MAE[mae][0]]); text += " " + TK_MAE[mae][0]; }
-  else if (m === 30) { keys.push(["はん", "半", "さんじゅっぷん", "30分", "三十分"]); parts.push(["tk_han", "はん"]); text += "はん"; }
   else if (m) { keys.push(tkMinKeys(m)); parts.push([`tk_m_${m}`, tkMinText(m)]); text += " " + tkMinText(m); }
   return { h, m, mae, text, keys, parts, life };
 }
@@ -34610,12 +34610,11 @@ function tkPick(place, lv, canLife = true) {
 function tkWrong(q) {
   const lv = tkLv(); let h = q.h, m = q.m, mae = q.mae;
   const r = rnd(3);
-  if (q.mae) { mae = 0; m = q.m; } // 「まえ」を つかわずに そのまま よむ（それも せいかいなので、じを ずらす）
-  if (q.mae || r === 0) h = (q.h % 12) + 1;
+  if (r === 0) h = (q.h % 12) + 1;
   else if (r === 1 && q.m) m = q.m === 30 ? 0 : (q.m + 5) % 60 || 5;
   else if (q.m === 0) m = 30; else h = q.h === 1 ? 12 : q.h - 1;
   const H = mae ? (h % 12) + 1 : h; const parts = [[`tk_h_${H}`, TK_HY[H]]]; let text = TK_HY[H];
-  if (mae) { parts.push([`tk_mae_${mae}`, TK_MAE[mae][0]]); text += " " + TK_MAE[mae][0]; } else if (m === 30) { parts.push(["tk_han", "はん"]); text += "はん"; } else if (m) { parts.push([`tk_m_${m}`, tkMinText(m)]); text += " " + tkMinText(m); }
+  if (m) { parts.push([`tk_m_${m}`, tkMinText(m)]); text += " " + tkMinText(m); }
   return { text, parts };
 }
 async function tkSay(c, parts, pre = "") { for (let i = 0; i < parts.length; i++) { const [k, t] = parts[i]; await speak(c, pre + k, t); } }
@@ -34651,7 +34650,7 @@ function tkView(heroKind, zone) {
   tkRoom(zone); propG = el("g", {}, sceneLayer); return hero;
 }
 async function tkShowClock(q, lv) {
-  const ck = drawClock(propG, 1140, 545, 215, { minNums: lv === 3 || lv === 4 });
+  const ck = drawClock(propG, 1140, 545, 215, { minNums: lv === 3 || lv === 4 }); // レベル5は そとの 数字なし
   const h0 = 12, m0 = 0, H = q.h, M = q.m; // 12じから はりが まわって とまる
   blip(900, 1400, .15, "sine");
   await tween(1300, k => { const e = 1 - Math.pow(1 - k, 3); ck.set(h0 + ((H - h0 + 12) % 12 || (M ? 0 : 12)) * e, (m0 + M * e) % 60); });
