@@ -7,7 +7,7 @@ from pathlib import Path
 G = Path(__file__).resolve().parent; R = G.parents[1]
 A = G / "stage_audio"; OUT = R / "packs"; OUT.mkdir(exist_ok=True)
 S = json.loads((G / "sit/sits.json").read_text())
-RIVAL_OF = {"kousha": "gao", "undou": "pyon", "kouen": "mii", "omise": "chu", "densha": "doshin", "gakkou2": "kon", "toukou": "gao", "gakkou3": "mii", "kyuushoku": "doshin", "gekou": "pyon", "ouchi1": "mii", "tomodachi1": "chu", "sensei1": "pyon", "ie1": "chu", "kouen2": "mii", "seki1": "gao", "tokei": "gao", "asobiba": "mii", "burger": "pyon"}
+RIVAL_OF = {"kousha": "gao", "undou": "pyon", "kouen": "mii", "omise": "chu", "densha": "doshin", "gakkou2": "kon", "toukou": "gao", "gakkou3": "mii", "kyuushoku": "doshin", "gekou": "pyon", "ouchi1": "mii", "tomodachi1": "chu", "sensei1": "pyon", "ie1": "chu", "kouen2": "mii", "seki1": "gao", "tokei": "gao", "asobiba": "mii", "burger": "pyon", "sansu": "chu"}
 def keys_of(s):
     new = s["stage"] != "kousha" or not (G / "sit/audio" / f"sq_{s['id']}.mp3").exists()  # こうしゃの はじめの 場面は 段1〜4が ページに 入っている
     ks = []
@@ -32,6 +32,11 @@ for st in ["kousha", "undou", "kouen", "omise", "densha", "gakkou2", "toukou", "
     if (A / f"bgm_{st}.mp3").exists(): pack[f"bgm_{st}"] = base64.b64encode((A / f"bgm_{st}.mp3").read_bytes()).decode()
     (OUT / f"{st}.json").write_text(json.dumps(pack, separators=(",", ":")))
     print(st, len(pack), round((OUT / f"{st}.json").stat().st_size / 1e6, 2), "MB")
+# さんすう：sn_*（ぽにー）と csn_*（ちゅう）
+pack = {}
+for p in sorted(A.glob("sn_*.mp3")) + sorted(A.glob("csn_*.mp3")): pack[p.stem] = base64.b64encode(p.read_bytes()).decode()
+if (A / "bgm_sansu.mp3").exists(): pack["bgm_sansu"] = base64.b64encode((A / "bgm_sansu.mp3").read_bytes()).decode()
+(OUT / "sansu.json").write_text(json.dumps(pack, separators=(",", ":"))); print("sansu", len(pack), round((OUT / "sansu.json").stat().st_size / 1e6, 2), "MB")
 # とけい：tk_*（ぽにー）と gtk_*（がお）
 pack = json.loads((OUT / "tokei.json").read_text()) if (OUT / "tokei.json").exists() else {}
 for p in sorted(A.glob("tk_*.mp3")) + sorted(A.glob("gtk_*.mp3")): pack[p.stem] = base64.b64encode(p.read_bytes()).decode()

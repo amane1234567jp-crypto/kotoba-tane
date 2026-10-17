@@ -967,6 +967,7 @@ const STAGES = [
   { id: "tokei", name: "とけい", icon: "🕒", ready: true },
   { id: "asobiba", name: "あそびば", icon: "🛝", ready: true },
   { id: "burger", name: "ハンバーガーやさん", icon: "🍔", ready: true },
+  { id: "sansu", name: "さんすう", icon: "➕", ready: true },
 ];
 const SAVE_KEY = "kotoba-tane-save";
 const SAVE = (() => { try { return JSON.parse(localStorage.getItem(SAVE_KEY)) || null; } catch (e) { return null; } })() || { v: 1, lap: 1, cleared: {}, E: null, play: null };

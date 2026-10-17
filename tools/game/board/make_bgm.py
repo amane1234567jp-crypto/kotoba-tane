@@ -228,6 +228,10 @@ SONGS = {
  "burger": dict(bpm=124, root=65, scale=MAJ, bars=8, lead=clar, lead2=piano, drums=D_shop, comp="piano", swing=.35,
    mel="5 - 5 6 5 3 1 - | 2 - 3 - 2 - - - | 4 - 4 5 4 2 7, - | 1 - 2 - 1 - - - | 5 - 5 6 5 3 1 - | 6 - 1' - 6 - 5 - | 4 - 3 - 2 - 5, - | 1 - - - . . . .",
    chords=[1, 5, 4, 1, 1, 4, 5, 1]),
+ # さんすう：1、2、3、4 と かぞえる ような リズム。グロッケンと ピアノ
+ "sansu": dict(bpm=116, root=67, scale=MAJ, bars=8, lead=glock, lead2=piano, drums=D_class, comp="piano", swing=.15, extra=X_bell,
+   mel="1 - 2 - 3 - 4 - | 5 - - - 5 - - - | 6 - 5 - 4 - 3 - | 2 - - - 5, - - - | 1 - 2 - 3 - 4 - | 5 - 6 - 7 - 1' - | 6 - 4 - 2 - 7, - | 1 - - - . . . .",
+   chords=[1, 5, 4, 5, 1, 4, 5, 1]),
  "sensei1": dict(bpm=120, root=70, scale=MAJ, bars=8, lead=recorder, lead2=glock, drums=D_class, comp="piano", extra=X_bell,
    mel="3 - 3 - 4 - 5 - | 5 - 4 - 3 - 2 - | 1 - 1 - 2 - 3 - | 3 - - 2 2 - - - | 3 - 3 - 4 - 5 - | 5 - 4 - 3 - 2 - | 1 - 1 - 2 - 3 - | 2 - - 1 1 - - -",
    chords=[1, 5, 1, 5, 1, 5, 1, 5]),
