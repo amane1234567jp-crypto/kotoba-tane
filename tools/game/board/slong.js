@@ -3,7 +3,7 @@
    約65マスの ぐねぐね道。サイコロ 1〜6。マスは「ことばの 課題」「おもしろ課題（こえなし）」「しかけ」が だいたい 3:3:4。
    ことばの 課題は だいぼうけん・ともだちの だいぼうけんの ものを つかう（声も その パックから）。
    あたらしい 声は ぽにーだけ（sl_*・n0・n7〜n12。packs/slong.json）。 */
-const SL = ["sumi", "sokashi", "suchu"];
+const SL = ["sumi", "sokashi", "suchu", "eki"];
 const isSL = () => SL.includes(curStage);
 SL.forEach(id => LONGS.add(id));
 const SL_TH = {
@@ -16,6 +16,9 @@ const SL_TH = {
   suchu: { name: "うちゅうの だいぼうけん", icon: "🚀", areas: ["ロケット", "つき", "ほしの めいろ", "うちゅうじんの ほし"], fills: ["#DCE4F5", "#F2F0E0", "#E2D4FF", "#D3F5E6"], ground: "#2E3A6E",
     blk: { who: "nobbo", intro: ["sl_suchu_blk", "のっぽせんせいが うちゅうふくで とおせんぼ！"], say: ["lk_blk_say", "せんせい、とおして ください"], to: "せんせいに いおう", keys: [["せんせい", "先生"], ["とおして", "通して", "とうして"], ["ください", "下さい"]], res: ["lk_blk_res", "おっと、すみません。どうぞ"] },
     item: "ほし", obs: "いんせき", call: "うちゅうじん", deco: [["🪐", 120, 990], ["⭐", 520, 990], ["🛸", 1500, 760], ["🌙", 140, 560], ["☄️", 1480, 450], ["👽", 760, 230], ["🌟", 1060, 990], ["🚀", 1500, 990], ["🌍", 640, 520]] },
+  eki: { name: "えきの だいぼうけん", icon: "🚉", areas: ["かいさつ", "ホーム", "でんしゃの なか", "しゅうてん"], fills: ["#E6EEF5", "#FFF1C2", "#D7F0D2", "#FFE0E6"], ground: "#DDE6EE",
+    blk: { who: "kamejii", intro: ["sl_eki_blk", "えきいんさんの かめじいが きっぷを しらべて いるよ"], say: ["blk_densha", "すみません、とおして ください"], to: "かめじいに いおう", keys: [["すみません", "済みません"], ["とおして", "通して", "とうして"], ["ください", "下さい"]], res: ["rs_densha", "おお、すまんのう。どうぞ"] },
+    item: "でんしゃ", obs: "でんしゃ", call: "えきいんさん", deco: [["🚉", 120, 990], ["🎫", 520, 990], ["🚦", 1500, 760], ["🕰️", 140, 470], ["🚃", 1480, 450], ["🍱", 760, 130], ["🛤️", 1060, 990], ["🚄", 1500, 990], ["🏙️", 1300, 130]] },
 };
 // しかけの せりふ（テーマごと）
 const SL_EVT = {
@@ -37,6 +40,13 @@ const SL_EVT = {
     back10: "うちゅうじんの ユーフォーに さらわれた！ 10マス もどる！", bonus: "ほしの たからばこ！ たねを 3こ ゲット！", allf: "すいせいが とおった！ みんな 2マス すすむよ", allb: "うちゅうの かぜだ！ みんな 2マス もどるよ",
     janken: "うちゅう じゃんけん しょうぶ！ いちばん まえの ひとと じゃんけん！ かったら いれかわるよ", again: "ながれぼしに おねがい！ もう いっかい サイコロを ふれるよ",
     nebou: "むじゅうりょくで ふわふわ ねちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "うちゅうせんが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを ビームで よびよせるよ", atsumare: "うちゅうせんの しゅうごう！ みんな ここに あつまれ！", kumikae: "うちゅうの じしんで、コースが ばらばらに！ コースが くみかわるよ" },
+  eki: { dice2: "きゅうこうに のった！ つぎは サイコロ 2こで ふれるよ", warp: "しんかんせんに のった！ ずっと さきまで いけるよ", bigwarp: "リニアモーターカーで びゅーん！ ゴールの ちかくまで とぶよ",
+    fake: "でんしゃで 3マス すすむ！ …と おもったら、はんたいの でんしゃだった！ 4マス もどる！", rand: "のりかえを まちがえた！ どこに いくかな？",
+    rest: "ドアが しまります！ のりおくれた。つぎは 1かい やすみ", x2: "かいそくに のった！ つぎの サイコロは 2ばいだよ", zero: "ふみきりが しまってる！ つぎの サイコロは 0に なるよ",
+    home: "きっぷを なくした！ かいさつに もどる！", back10: "でんしゃで ねすごした！ 10マス もどる！", bonus: "えきべんだ！ たねを 3こ ゲット！", allf: "でんしゃが はやく ついた！ みんな 2マス すすむよ",
+    allb: "でんしゃが おくれて いる！ みんな 2マス もどるよ", janken: "ホームで じゃんけん しょうぶ！ いちばん まえの ひとと じゃんけん！ かったら いれかわるよ", again: "ちょうど でんしゃが きた！ もう いっかい サイコロを ふれるよ",
+    nebou: "でんしゃで ねむっちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "ながい でんしゃが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを でんしゃで むかえに いくよ",
+    atsumare: "まもなく でんしゃが まいります！ みんな ここに あつまれ！", kumikae: "せんろの きりかえだ！ コースが くみかわるよ" }
 };
 const SL_ICON = { dice2: "🎲", warp: "🌀", bigwarp: "🚀", fake: "🤪", rand: "❓", rest: "💤", x2: "✖️", zero: "0️⃣", home: "↩", back10: "⏪", bonus: "🎁", allf: "⏩", allb: "🌊", janken: "✊", again: "🔁", nebou: "😴", trolley: "🚃", call: "🧲", tsukkomi: "🤣", atsumare: "📣", kumikae: "🔀" };
 const SL_EVC = { warp: "#D9C2F0", bigwarp: "#D9C2F0", rand: "#D9C2F0", home: "#FFC2D1", back10: "#FFC2D1", fake: "#FFE27A", tsukkomi: "#FFE27A", bonus: "#C9EBB5", atsumare: "#FFE27A", kumikae: "#FFE27A" };
@@ -54,6 +64,10 @@ const SL_SHAPE = { // 47マス＋ゴール（まえは 65＋1。ながすぎた�
     for (let k = 0; k < C * R; k++) { P.push(xy(x, y)); seen.add(x + "," + y); const nx = x + dx, ny = y + dy;
       if (nx < 0 || nx >= C || ny < 0 || ny >= R || seen.has(nx + "," + ny)) { [dx, dy] = [dy, -dx]; } x += dx; y += dy; }
     return P.slice(0, 48); },
+  eki() { const V = [[170, 930], [1320, 930], [1440, 840], [1320, 750], [280, 750], [170, 660], [280, 570], [1320, 570], [1440, 480], [1320, 390], [280, 390], [170, 300], [280, 225], [1180, 225]]; // ろせんずの ような ジグザグ
+    const seg = V.slice(1).map((p, i) => Math.hypot(p[0] - V[i][0], p[1] - V[i][1])), tot = seg.reduce((a, b) => a + b, 0), P = [];
+    for (let k = 0; k < 48; k++) { let d = tot * k / 47, i = 0; while (i < seg.length - 1 && d > seg[i]) { d -= seg[i]; i++; } const t = Math.min(1, d / seg[i]); P.push([V[i][0] + (V[i + 1][0] - V[i][0]) * t, V[i][1] + (V[i + 1][1] - V[i][1]) * t]); }
+    return P; },
 };
 const SL_ORDER = {}, SL_PTS = {}, SL_ORDER0 = {};
 SL.forEach(sid => {
@@ -62,7 +76,7 @@ SL.forEach(sid => {
   pts.forEach(([x, y], k) => { const id = k === 0 ? "0" : k === 21 ? "4" : k === pts.length - 1 ? "15" : "q" + k; n[id] = [Math.round(x), Math.round(y)]; pl[id] = T.areas[Math.min(3, Math.floor(k / pts.length * 4))]; ids.push(id); });
   n["0"].push("start"); n["4"].push("block");
   linkLine(nx, ids); SL_ORDER[sid] = ids; SL_PTS[sid] = pts.map(([x, y]) => [Math.round(x), Math.round(y)]); SL_ORDER0[sid] = ids.slice();
-  BOARD[sid] = { nodes: n, place: pl, next: nx, away: [1560, 560], style: () => "park", labels: [] };
+  BOARD[sid] = { nodes: n, place: pl, next: nx, away: [1560, 560], style: () => sid === "eki" ? "rail" : "park", labels: [] };
   STAGE_DEF[sid] = { ground: T.ground, sky: "#CFEAFB", names: STAGE_DEF.undou.names, fills: Object.fromEntries(T.areas.map((a, i) => [a, T.fills[i]])) };
   RIVAL_OF[sid] = "gao"; SLEEPER_OF[sid] = T.blk.who; BLOCK_DEF[sid] = { ...T.blk, sleep: false };
   // しかけ と 課題の ならび
@@ -84,9 +98,10 @@ Object.assign(LTASK, { stop: ["#FFE27A", "🎯"], catch: ["#FFE27A", "🖐"], ba
 function slBG(sid, L) {
   const T = SL_TH[sid];
   if (sid === "suchu") { el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#1E2550" }, L); for (let i = 0; i < 70; i++) el("circle", { cx: (i * 233) % 1600, cy: (i * 137) % 1000, r: 2 + (i % 3), fill: "#FFF6C8", opacity: .8 }, L); }
+  else if (sid === "eki") { el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#DDE6EE" }, L); [[60, 160, 120, 300], [240, 120, 90, 340], [1300, 100, 110, 360], [1440, 180, 130, 280], [600, 60, 80, 200]].forEach(([x, y, w, h]) => { el("rect", { x, y, width: w, height: h, fill: "#C3CFDA", ...S6(4) }, L); for (let yy = y + 20; yy < y + h - 20; yy += 40) for (let xx = x + 15; xx < x + w - 20; xx += 30) el("rect", { x: xx, y: yy, width: 16, height: 20, fill: "#FFF6C8" }, L); }); }
   else if (sid === "sokashi") { el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#FFE3EE" }, L); for (let i = 0; i < 30; i++) el("circle", { cx: (i * 211) % 1600, cy: (i * 157) % 1000, r: 10, fill: ["#FF8FA3", "#7FCBF0", "#FFD25E", "#7BD389"][i % 4], opacity: .35 }, L); }
   else { el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#8FD3F0" }, L); for (let y = 60; y < 1000; y += 90) el("path", { d: `M0 ${y} Q100 ${y - 14} 200 ${y} T400 ${y} T600 ${y} T800 ${y} T1000 ${y} T1200 ${y} T1400 ${y} T1600 ${y}`, fill: "none", stroke: "#FFFFFF", "stroke-width": 4, opacity: .35 }, L); }
-  el("path", { d: "M90 990 Q30 820 90 640 Q50 420 160 300 Q300 230 560 250 Q900 210 1240 250 Q1530 270 1560 430 Q1590 640 1545 830 Q1505 995 1300 995 Z", fill: T.fills[0], opacity: sid === "suchu" ? .22 : .55, ...S6(5) }, L);
+  if (sid !== "eki") el("path", { d: "M90 990 Q30 820 90 640 Q50 420 160 300 Q300 230 560 250 Q900 210 1240 250 Q1530 270 1560 430 Q1590 640 1545 830 Q1505 995 1300 995 Z", fill: T.fills[0], opacity: sid === "suchu" ? .22 : .55, ...S6(5) }, L);
   T.deco.forEach(([e, x, y]) => txt(L, x, y, e, 62, { "text-anchor": "middle", opacity: .85 }));
   Object.entries(EVENTS[sid]).forEach(([id, [type]]) => { const to = slWarpTo(sid, id, type); if (!to) return; const [x1, y1] = NODES[id], [x2, y2] = NODES[to];
     el("path", { d: `M${x1} ${y1} Q${(x1 + x2) / 2 + 120} ${(y1 + y2) / 2} ${x2} ${y2}`, fill: "none", stroke: "#8E5BD6", "stroke-width": 6, "stroke-dasharray": "16 14", opacity: .6 }, L); });
@@ -195,11 +210,11 @@ Object.assign(NUMS, { 0: "ゼロ！", 7: "なな！", 8: "はち！", 9: "きゅ
     return v; }; }
 // ばん：ひとやすみ・もういっかい（だいぼうけんの しくみを つかう）。ゴールを こえた ぶんは そのまま ゴール
 /* ---------- 場面（いってみよう）は こうしゃの 場面を つかう ---------- */
-{ const ps = pickSit; pickSit = function (place, heroKind = "shima") { if (!isSL()) return ps(place, heroKind); const st = curStage; curStage = "kousha"; try { return ps(place, heroKind); } finally { curStage = st; } }; }
+{ const ps = pickSit; pickSit = function (place, heroKind = "shima") { if (!isSL()) return ps(place, heroKind); const st = curStage; curStage = st === "eki" ? "densha" : "kousha"; try { return ps(place, heroKind); } finally { curStage = st; } }; }
 /* ---------- 声の パック：こうしゃ＋だいぼうけん＋ともだちの だいぼうけん＋ちょうロング（ぜんぶ その ときに ほどく） ---------- */
 { const lp = loadPack; loadPack = async function (id) {
     if (!SL.includes(id)) return lp(id);
-    await lp("kousha");
+    await lp("kousha"); if (id === "eki") await lp("densha");
     for (const p of ["long", "ltomo", "slong"]) if (!PACK.loaded[p]) { try { const r = await fetch(`packs/${p}.json`, { cache: "no-cache" }); if (r.ok) { const d = await r.json(); Object.keys(d).forEach(k => AUD[k] = "data:audio/mpeg;base64," + d[k]); PACK.loaded[p] = Object.keys(d); } } catch (e) { } }
     if (AUD["bgm_" + id]) await voiceBuf("bgm_" + id); return true; }; }
 /* ---------- 場面の はいけい（テーマの 4つの ばしょ） ---------- */
@@ -237,7 +252,7 @@ async function slStop(pc) {
   return false;
 }
 // 🖐 つかまえろ：とびまわる ものを タッチ
-const SL_ITEM = { sumi: "🐟", sokashi: "🍬", suchu: "⭐" };
+const SL_ITEM = { sumi: "🐟", sokashi: "🍬", suchu: "⭐", eki: "🚃" };
 async function slCatch(pc) {
   const g = panel("つかまえろ！", "#EAF6FF"); const T = SL_TH[curStage];
   const cnt = txt(g, 800, 180, "0", 70, { "text-anchor": "middle" }); const bar = el("rect", { x: 300, y: 860, width: 1000, height: 26, rx: 13, fill: "#7BD389", ...S6(4) }, g);
@@ -321,7 +336,7 @@ async function slShadow(pc) {
   await sleep(900); clearClones(); g.remove(); await delta(pc, ok ? 2 : 0); return false;
 }
 // 🦘 ジャンプ ゲーム
-const SL_OBS = { sumi: "🌊", sokashi: "🍩", suchu: "☄️" };
+const SL_OBS = { sumi: "🌊", sokashi: "🍩", suchu: "☄️", eki: "🚃" };
 async function slJump(pc) {
   const g = panel("ジャンプ ゲーム", "#EAF6FF"); el("rect", { x: 110, y: 760, width: 1380, height: 20, fill: SL_TH[curStage].fills[0], ...S6(4) }, g);
   const hero = clone(pc.kind, 400, 760, (KID_S[pc.kind] || .8) * .55); hudLayer.appendChild(hero.root); const by = hero.y;
@@ -356,7 +371,7 @@ async function slBattle(pc) {
 /* ================= こえの おもしろ課題 ================= */
 // 📣 おおきな こえで よぼう：マイクの 大きさ（または 聞きとり）で とおくの ものが ちかづく
 async function slOogoe(pc) {
-  const T = SL_TH[curStage]; const g = panel("おおきな こえで よぼう", "#EAF6FF"); const tgt = { sumi: "⛵", sokashi: "🐘", suchu: "👽" }[curStage];
+  const T = SL_TH[curStage]; const g = panel("おおきな こえで よぼう", "#EAF6FF"); const tgt = { sumi: "⛵", sokashi: "🐘", suchu: "👽", eki: "🧑‍✈️" }[curStage];
   const far = txt(g, 1300, 520, tgt, 60, { "text-anchor": "middle" }); const meter = el("rect", { x: 180, y: 820, width: 0, height: 40, rx: 20, fill: "#FF8FA3", ...S6(4) }, g); el("rect", { x: 180, y: 820, width: 1240, height: 40, rx: 20, fill: "none", ...S6(4) }, g);
   await speak(C.pony, `sl_oogoe_${curStage}`, `${T.call}を おおきな こえで よぼう！「おーい！」`);
   showTask("おーい！", "おおきな こえで", 260); setListen(pc, true);
@@ -418,7 +433,7 @@ Object.assign(LTASK_RUN, { stop: slStop, catch: slCatch, balloon: slBalloon, mor
 // 0マスの ときは マスの 課題も しない（つぎの ばんで もとに もどす）
 { const lc = landChild; landChild = async function (pc = P.shima) { if (isSL() && pc.player && pc.player.stay) { pc.player.stay = 0; return; } return lc(pc); }; }
 // 🐬 のりもの：イルカ・ジェットコースター・ロケットなどが コマを のせて はこぶ（盤の 上で うごく）
-const SL_VEH = { sumi: { warp: "🐬", bigwarp: "🚤", home: "🐳" }, sokashi: { warp: "🚃", bigwarp: "☁️", home: "🍫" }, suchu: { warp: "🌀", bigwarp: "🚀", home: "🌑" } };
+const SL_VEH = { sumi: { warp: "🐬", bigwarp: "🚤", home: "🐳" }, sokashi: { warp: "🚃", bigwarp: "☁️", home: "🍫" }, suchu: { warp: "🌀", bigwarp: "🚀", home: "🌑" }, eki: { warp: "🚅", bigwarp: "🚄", home: "🚃" } };
 const SL_SWALLOW = { sumi: "home", suchu: "home" }; // くじら・ブラックホールは のみこむ（コマが きえて、スタートで でてくる）
 function slEmoji(e, x, y, size = 120) { const g = el("g", {}, front()); const t = txt(g, 0, size * .36, e, size, { "text-anchor": "middle" }); g.setAttribute("transform", `translate(${x.toFixed(0)} ${y.toFixed(0)})`); g.__t = t; return g; }
 async function slRide(pc, toId, e, opt = {}) {
