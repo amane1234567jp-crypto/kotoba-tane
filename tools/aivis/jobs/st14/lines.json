@@ -1,0 +1,377 @@
+[
+{
+"key": "gtk_h_1",
+"who": "gao",
+"text": "いちじ"
+},
+{
+"key": "gtk_h_2",
+"who": "gao",
+"text": "にじ"
+},
+{
+"key": "gtk_h_3",
+"who": "gao",
+"text": "さんじ"
+},
+{
+"key": "gtk_h_4",
+"who": "gao",
+"text": "よじ"
+},
+{
+"key": "gtk_h_5",
+"who": "gao",
+"text": "ごじ"
+},
+{
+"key": "gtk_h_6",
+"who": "gao",
+"text": "ろくじ"
+},
+{
+"key": "gtk_h_7",
+"who": "gao",
+"text": "しちじ"
+},
+{
+"key": "gtk_h_8",
+"who": "gao",
+"text": "はちじ"
+},
+{
+"key": "gtk_h_9",
+"who": "gao",
+"text": "くじ"
+},
+{
+"key": "gtk_h_10",
+"who": "gao",
+"text": "じゅうじ"
+},
+{
+"key": "gtk_h_11",
+"who": "gao",
+"text": "じゅういちじ"
+},
+{
+"key": "gtk_h_12",
+"who": "gao",
+"text": "じゅうにじ"
+},
+{
+"key": "gtk_m_1",
+"who": "gao",
+"text": "いっぷん"
+},
+{
+"key": "gtk_m_2",
+"who": "gao",
+"text": "にふん"
+},
+{
+"key": "gtk_m_3",
+"who": "gao",
+"text": "さんぷん"
+},
+{
+"key": "gtk_m_4",
+"who": "gao",
+"text": "よんぷん"
+},
+{
+"key": "gtk_m_5",
+"who": "gao",
+"text": "ごふん"
+},
+{
+"key": "gtk_m_6",
+"who": "gao",
+"text": "ろっぷん"
+},
+{
+"key": "gtk_m_7",
+"who": "gao",
+"text": "ななふん"
+},
+{
+"key": "gtk_m_8",
+"who": "gao",
+"text": "はっぷん"
+},
+{
+"key": "gtk_m_9",
+"who": "gao",
+"text": "きゅうふん"
+},
+{
+"key": "gtk_m_10",
+"who": "gao",
+"text": "じゅっぷん"
+},
+{
+"key": "gtk_m_11",
+"who": "gao",
+"text": "じゅういっぷん"
+},
+{
+"key": "gtk_m_12",
+"who": "gao",
+"text": "じゅうにふん"
+},
+{
+"key": "gtk_m_13",
+"who": "gao",
+"text": "じゅうさんぷん"
+},
+{
+"key": "gtk_m_14",
+"who": "gao",
+"text": "じゅうよんぷん"
+},
+{
+"key": "gtk_m_15",
+"who": "gao",
+"text": "じゅうごふん"
+},
+{
+"key": "gtk_m_16",
+"who": "gao",
+"text": "じゅうろっぷん"
+},
+{
+"key": "gtk_m_17",
+"who": "gao",
+"text": "じゅうななふん"
+},
+{
+"key": "gtk_m_18",
+"who": "gao",
+"text": "じゅうはっぷん"
+},
+{
+"key": "gtk_m_19",
+"who": "gao",
+"text": "じゅうきゅうふん"
+},
+{
+"key": "gtk_m_20",
+"who": "gao",
+"text": "にじゅっぷん"
+},
+{
+"key": "gtk_m_21",
+"who": "gao",
+"text": "にじゅういっぷん"
+},
+{
+"key": "gtk_m_22",
+"who": "gao",
+"text": "にじゅうにふん"
+},
+{
+"key": "gtk_m_23",
+"who": "gao",
+"text": "にじゅうさんぷん"
+},
+{
+"key": "gtk_m_24",
+"who": "gao",
+"text": "にじゅうよんぷん"
+},
+{
+"key": "gtk_m_25",
+"who": "gao",
+"text": "にじゅうごふん"
+},
+{
+"key": "gtk_m_26",
+"who": "gao",
+"text": "にじゅうろっぷん"
+},
+{
+"key": "gtk_m_27",
+"who": "gao",
+"text": "にじゅうななふん"
+},
+{
+"key": "gtk_m_28",
+"who": "gao",
+"text": "にじゅうはっぷん"
+},
+{
+"key": "gtk_m_29",
+"who": "gao",
+"text": "にじゅうきゅうふん"
+},
+{
+"key": "gtk_m_30",
+"who": "gao",
+"text": "さんじゅっぷん"
+},
+{
+"key": "gtk_m_31",
+"who": "gao",
+"text": "さんじゅういっぷん"
+},
+{
+"key": "gtk_m_32",
+"who": "gao",
+"text": "さんじゅうにふん"
+},
+{
+"key": "gtk_m_33",
+"who": "gao",
+"text": "さんじゅうさんぷん"
+},
+{
+"key": "gtk_m_34",
+"who": "gao",
+"text": "さんじゅうよんぷん"
+},
+{
+"key": "gtk_m_35",
+"who": "gao",
+"text": "さんじゅうごふん"
+},
+{
+"key": "gtk_m_36",
+"who": "gao",
+"text": "さんじゅうろっぷん"
+},
+{
+"key": "gtk_m_37",
+"who": "gao",
+"text": "さんじゅうななふん"
+},
+{
+"key": "gtk_m_38",
+"who": "gao",
+"text": "さんじゅうはっぷん"
+},
+{
+"key": "gtk_m_39",
+"who": "gao",
+"text": "さんじゅうきゅうふん"
+},
+{
+"key": "gtk_m_40",
+"who": "gao",
+"text": "よんじゅっぷん"
+},
+{
+"key": "gtk_m_41",
+"who": "gao",
+"text": "よんじゅういっぷん"
+},
+{
+"key": "gtk_m_42",
+"who": "gao",
+"text": "よんじゅうにふん"
+},
+{
+"key": "gtk_m_43",
+"who": "gao",
+"text": "よんじゅうさんぷん"
+},
+{
+"key": "gtk_m_44",
+"who": "gao",
+"text": "よんじゅうよんぷん"
+},
+{
+"key": "gtk_m_45",
+"who": "gao",
+"text": "よんじゅうごふん"
+},
+{
+"key": "gtk_m_46",
+"who": "gao",
+"text": "よんじゅうろっぷん"
+},
+{
+"key": "gtk_m_47",
+"who": "gao",
+"text": "よんじゅうななふん"
+},
+{
+"key": "gtk_m_48",
+"who": "gao",
+"text": "よんじゅうはっぷん"
+},
+{
+"key": "gtk_m_49",
+"who": "gao",
+"text": "よんじゅうきゅうふん"
+},
+{
+"key": "gtk_m_50",
+"who": "gao",
+"text": "ごじゅっぷん"
+},
+{
+"key": "gtk_m_51",
+"who": "gao",
+"text": "ごじゅういっぷん"
+},
+{
+"key": "gtk_m_52",
+"who": "gao",
+"text": "ごじゅうにふん"
+},
+{
+"key": "gtk_m_53",
+"who": "gao",
+"text": "ごじゅうさんぷん"
+},
+{
+"key": "gtk_m_54",
+"who": "gao",
+"text": "ごじゅうよんぷん"
+},
+{
+"key": "gtk_m_55",
+"who": "gao",
+"text": "ごじゅうごふん"
+},
+{
+"key": "gtk_m_56",
+"who": "gao",
+"text": "ごじゅうろっぷん"
+},
+{
+"key": "gtk_m_57",
+"who": "gao",
+"text": "ごじゅうななふん"
+},
+{
+"key": "gtk_m_58",
+"who": "gao",
+"text": "ごじゅうはっぷん"
+},
+{
+"key": "gtk_m_59",
+"who": "gao",
+"text": "ごじゅうきゅうふん"
+},
+{
+"key": "gtk_han",
+"who": "gao",
+"text": "はん"
+},
+{
+"key": "gtk_mae_5",
+"who": "gao",
+"text": "ごふんまえ"
+},
+{
+"key": "gtk_mae_10",
+"who": "gao",
+"text": "じゅっぷんまえ"
+},
+{
+"key": "rs_tokei",
+"who": "nobbo",
+"text": "はい、どうぞ。とけいは なおりましたよ"
+}
+]
