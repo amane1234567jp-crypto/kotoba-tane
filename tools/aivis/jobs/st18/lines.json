@@ -1,0 +1,812 @@
+[
+{
+"key": "csn_n_0",
+"who": "chu",
+"text": "ぜろ！"
+},
+{
+"key": "csn_n_1",
+"who": "chu",
+"text": "いち！"
+},
+{
+"key": "csn_n_2",
+"who": "chu",
+"text": "に！"
+},
+{
+"key": "csn_n_3",
+"who": "chu",
+"text": "さん！"
+},
+{
+"key": "csn_n_4",
+"who": "chu",
+"text": "よん！"
+},
+{
+"key": "csn_n_5",
+"who": "chu",
+"text": "ご！"
+},
+{
+"key": "csn_n_6",
+"who": "chu",
+"text": "ろく！"
+},
+{
+"key": "csn_n_7",
+"who": "chu",
+"text": "なな！"
+},
+{
+"key": "csn_n_8",
+"who": "chu",
+"text": "はち！"
+},
+{
+"key": "csn_n_9",
+"who": "chu",
+"text": "きゅう！"
+},
+{
+"key": "csn_n_10",
+"who": "chu",
+"text": "じゅう！"
+},
+{
+"key": "csn_n_11",
+"who": "chu",
+"text": "じゅういち！"
+},
+{
+"key": "csn_n_12",
+"who": "chu",
+"text": "じゅうに！"
+},
+{
+"key": "csn_n_13",
+"who": "chu",
+"text": "じゅうさん！"
+},
+{
+"key": "csn_n_14",
+"who": "chu",
+"text": "じゅうよん！"
+},
+{
+"key": "csn_n_15",
+"who": "chu",
+"text": "じゅうご！"
+},
+{
+"key": "csn_n_16",
+"who": "chu",
+"text": "じゅうろく！"
+},
+{
+"key": "csn_n_17",
+"who": "chu",
+"text": "じゅうなな！"
+},
+{
+"key": "csn_n_18",
+"who": "chu",
+"text": "じゅうはち！"
+},
+{
+"key": "csn_n_19",
+"who": "chu",
+"text": "じゅうきゅう！"
+},
+{
+"key": "csn_n_20",
+"who": "chu",
+"text": "にじゅう！"
+},
+{
+"key": "csn_a_こ_1",
+"who": "chu",
+"text": "いっこ！"
+},
+{
+"key": "csn_a_こ_2",
+"who": "chu",
+"text": "にこ！"
+},
+{
+"key": "csn_a_こ_3",
+"who": "chu",
+"text": "さんこ！"
+},
+{
+"key": "csn_a_こ_4",
+"who": "chu",
+"text": "よんこ！"
+},
+{
+"key": "csn_a_こ_5",
+"who": "chu",
+"text": "ごこ！"
+},
+{
+"key": "csn_a_こ_6",
+"who": "chu",
+"text": "ろっこ！"
+},
+{
+"key": "csn_a_こ_7",
+"who": "chu",
+"text": "ななこ！"
+},
+{
+"key": "csn_a_こ_8",
+"who": "chu",
+"text": "はっこ！"
+},
+{
+"key": "csn_a_こ_9",
+"who": "chu",
+"text": "きゅうこ！"
+},
+{
+"key": "csn_a_こ_10",
+"who": "chu",
+"text": "じゅっこ！"
+},
+{
+"key": "csn_a_こ_11",
+"who": "chu",
+"text": "じゅういっこ！"
+},
+{
+"key": "csn_a_こ_12",
+"who": "chu",
+"text": "じゅうにこ！"
+},
+{
+"key": "csn_a_こ_13",
+"who": "chu",
+"text": "じゅうさんこ！"
+},
+{
+"key": "csn_a_こ_14",
+"who": "chu",
+"text": "じゅうよんこ！"
+},
+{
+"key": "csn_a_こ_15",
+"who": "chu",
+"text": "じゅうごこ！"
+},
+{
+"key": "csn_a_こ_16",
+"who": "chu",
+"text": "じゅうろっこ！"
+},
+{
+"key": "csn_a_こ_17",
+"who": "chu",
+"text": "じゅうななこ！"
+},
+{
+"key": "csn_a_こ_18",
+"who": "chu",
+"text": "じゅうはっこ！"
+},
+{
+"key": "csn_a_こ_19",
+"who": "chu",
+"text": "じゅうきゅうこ！"
+},
+{
+"key": "csn_a_こ_20",
+"who": "chu",
+"text": "にじゅっこ！"
+},
+{
+"key": "csn_a_ほん_1",
+"who": "chu",
+"text": "いっぽん！"
+},
+{
+"key": "csn_a_ほん_2",
+"who": "chu",
+"text": "にほん！"
+},
+{
+"key": "csn_a_ほん_3",
+"who": "chu",
+"text": "さんぼん！"
+},
+{
+"key": "csn_a_ほん_4",
+"who": "chu",
+"text": "よんほん！"
+},
+{
+"key": "csn_a_ほん_5",
+"who": "chu",
+"text": "ごほん！"
+},
+{
+"key": "csn_a_ほん_6",
+"who": "chu",
+"text": "ろっぽん！"
+},
+{
+"key": "csn_a_ほん_7",
+"who": "chu",
+"text": "ななほん！"
+},
+{
+"key": "csn_a_ほん_8",
+"who": "chu",
+"text": "はっぽん！"
+},
+{
+"key": "csn_a_ほん_9",
+"who": "chu",
+"text": "きゅうほん！"
+},
+{
+"key": "csn_a_ほん_10",
+"who": "chu",
+"text": "じゅっぽん！"
+},
+{
+"key": "csn_a_ほん_11",
+"who": "chu",
+"text": "じゅういっぽん！"
+},
+{
+"key": "csn_a_ほん_12",
+"who": "chu",
+"text": "じゅうにほん！"
+},
+{
+"key": "csn_a_ほん_13",
+"who": "chu",
+"text": "じゅうさんぼん！"
+},
+{
+"key": "csn_a_ほん_14",
+"who": "chu",
+"text": "じゅうよんほん！"
+},
+{
+"key": "csn_a_ほん_15",
+"who": "chu",
+"text": "じゅうごほん！"
+},
+{
+"key": "csn_a_ほん_16",
+"who": "chu",
+"text": "じゅうろっぽん！"
+},
+{
+"key": "csn_a_ほん_17",
+"who": "chu",
+"text": "じゅうななほん！"
+},
+{
+"key": "csn_a_ほん_18",
+"who": "chu",
+"text": "じゅうはっぽん！"
+},
+{
+"key": "csn_a_ほん_19",
+"who": "chu",
+"text": "じゅうきゅうほん！"
+},
+{
+"key": "csn_a_ほん_20",
+"who": "chu",
+"text": "にじゅっぽん！"
+},
+{
+"key": "csn_a_わ_1",
+"who": "chu",
+"text": "いちわ！"
+},
+{
+"key": "csn_a_わ_2",
+"who": "chu",
+"text": "にわ！"
+},
+{
+"key": "csn_a_わ_3",
+"who": "chu",
+"text": "さんわ！"
+},
+{
+"key": "csn_a_わ_4",
+"who": "chu",
+"text": "よんわ！"
+},
+{
+"key": "csn_a_わ_5",
+"who": "chu",
+"text": "ごわ！"
+},
+{
+"key": "csn_a_わ_6",
+"who": "chu",
+"text": "ろくわ！"
+},
+{
+"key": "csn_a_わ_7",
+"who": "chu",
+"text": "ななわ！"
+},
+{
+"key": "csn_a_わ_8",
+"who": "chu",
+"text": "はちわ！"
+},
+{
+"key": "csn_a_わ_9",
+"who": "chu",
+"text": "きゅうわ！"
+},
+{
+"key": "csn_a_わ_10",
+"who": "chu",
+"text": "じゅうわ！"
+},
+{
+"key": "csn_a_わ_11",
+"who": "chu",
+"text": "じゅういちわ！"
+},
+{
+"key": "csn_a_わ_12",
+"who": "chu",
+"text": "じゅうにわ！"
+},
+{
+"key": "csn_a_わ_13",
+"who": "chu",
+"text": "じゅうさんわ！"
+},
+{
+"key": "csn_a_わ_14",
+"who": "chu",
+"text": "じゅうよんわ！"
+},
+{
+"key": "csn_a_わ_15",
+"who": "chu",
+"text": "じゅうごわ！"
+},
+{
+"key": "csn_a_わ_16",
+"who": "chu",
+"text": "じゅうろくわ！"
+},
+{
+"key": "csn_a_わ_17",
+"who": "chu",
+"text": "じゅうななわ！"
+},
+{
+"key": "csn_a_わ_18",
+"who": "chu",
+"text": "じゅうはちわ！"
+},
+{
+"key": "csn_a_わ_19",
+"who": "chu",
+"text": "じゅうきゅうわ！"
+},
+{
+"key": "csn_a_わ_20",
+"who": "chu",
+"text": "にじゅうわ！"
+},
+{
+"key": "csn_a_ひき_1",
+"who": "chu",
+"text": "いっぴき！"
+},
+{
+"key": "csn_a_ひき_2",
+"who": "chu",
+"text": "にひき！"
+},
+{
+"key": "csn_a_ひき_3",
+"who": "chu",
+"text": "さんびき！"
+},
+{
+"key": "csn_a_ひき_4",
+"who": "chu",
+"text": "よんひき！"
+},
+{
+"key": "csn_a_ひき_5",
+"who": "chu",
+"text": "ごひき！"
+},
+{
+"key": "csn_a_ひき_6",
+"who": "chu",
+"text": "ろっぴき！"
+},
+{
+"key": "csn_a_ひき_7",
+"who": "chu",
+"text": "ななひき！"
+},
+{
+"key": "csn_a_ひき_8",
+"who": "chu",
+"text": "はっぴき！"
+},
+{
+"key": "csn_a_ひき_9",
+"who": "chu",
+"text": "きゅうひき！"
+},
+{
+"key": "csn_a_ひき_10",
+"who": "chu",
+"text": "じゅっぴき！"
+},
+{
+"key": "csn_a_ひき_11",
+"who": "chu",
+"text": "じゅういっぴき！"
+},
+{
+"key": "csn_a_ひき_12",
+"who": "chu",
+"text": "じゅうにひき！"
+},
+{
+"key": "csn_a_ひき_13",
+"who": "chu",
+"text": "じゅうさんびき！"
+},
+{
+"key": "csn_a_ひき_14",
+"who": "chu",
+"text": "じゅうよんひき！"
+},
+{
+"key": "csn_a_ひき_15",
+"who": "chu",
+"text": "じゅうごひき！"
+},
+{
+"key": "csn_a_ひき_16",
+"who": "chu",
+"text": "じゅうろっぴき！"
+},
+{
+"key": "csn_a_ひき_17",
+"who": "chu",
+"text": "じゅうななひき！"
+},
+{
+"key": "csn_a_ひき_18",
+"who": "chu",
+"text": "じゅうはっぴき！"
+},
+{
+"key": "csn_a_ひき_19",
+"who": "chu",
+"text": "じゅうきゅうひき！"
+},
+{
+"key": "csn_a_ひき_20",
+"who": "chu",
+"text": "にじゅっぴき！"
+},
+{
+"key": "csn_a_だい_1",
+"who": "chu",
+"text": "いちだい！"
+},
+{
+"key": "csn_a_だい_2",
+"who": "chu",
+"text": "にだい！"
+},
+{
+"key": "csn_a_だい_3",
+"who": "chu",
+"text": "さんだい！"
+},
+{
+"key": "csn_a_だい_4",
+"who": "chu",
+"text": "よんだい！"
+},
+{
+"key": "csn_a_だい_5",
+"who": "chu",
+"text": "ごだい！"
+},
+{
+"key": "csn_a_だい_6",
+"who": "chu",
+"text": "ろくだい！"
+},
+{
+"key": "csn_a_だい_7",
+"who": "chu",
+"text": "ななだい！"
+},
+{
+"key": "csn_a_だい_8",
+"who": "chu",
+"text": "はちだい！"
+},
+{
+"key": "csn_a_だい_9",
+"who": "chu",
+"text": "きゅうだい！"
+},
+{
+"key": "csn_a_だい_10",
+"who": "chu",
+"text": "じゅうだい！"
+},
+{
+"key": "csn_a_だい_11",
+"who": "chu",
+"text": "じゅういちだい！"
+},
+{
+"key": "csn_a_だい_12",
+"who": "chu",
+"text": "じゅうにだい！"
+},
+{
+"key": "csn_a_だい_13",
+"who": "chu",
+"text": "じゅうさんだい！"
+},
+{
+"key": "csn_a_だい_14",
+"who": "chu",
+"text": "じゅうよんだい！"
+},
+{
+"key": "csn_a_だい_15",
+"who": "chu",
+"text": "じゅうごだい！"
+},
+{
+"key": "csn_a_だい_16",
+"who": "chu",
+"text": "じゅうろくだい！"
+},
+{
+"key": "csn_a_だい_17",
+"who": "chu",
+"text": "じゅうななだい！"
+},
+{
+"key": "csn_a_だい_18",
+"who": "chu",
+"text": "じゅうはちだい！"
+},
+{
+"key": "csn_a_だい_19",
+"who": "chu",
+"text": "じゅうきゅうだい！"
+},
+{
+"key": "csn_a_だい_20",
+"who": "chu",
+"text": "にじゅうだい！"
+},
+{
+"key": "csn_a_まい_1",
+"who": "chu",
+"text": "いちまい！"
+},
+{
+"key": "csn_a_まい_2",
+"who": "chu",
+"text": "にまい！"
+},
+{
+"key": "csn_a_まい_3",
+"who": "chu",
+"text": "さんまい！"
+},
+{
+"key": "csn_a_まい_4",
+"who": "chu",
+"text": "よんまい！"
+},
+{
+"key": "csn_a_まい_5",
+"who": "chu",
+"text": "ごまい！"
+},
+{
+"key": "csn_a_まい_6",
+"who": "chu",
+"text": "ろくまい！"
+},
+{
+"key": "csn_a_まい_7",
+"who": "chu",
+"text": "ななまい！"
+},
+{
+"key": "csn_a_まい_8",
+"who": "chu",
+"text": "はちまい！"
+},
+{
+"key": "csn_a_まい_9",
+"who": "chu",
+"text": "きゅうまい！"
+},
+{
+"key": "csn_a_まい_10",
+"who": "chu",
+"text": "じゅうまい！"
+},
+{
+"key": "csn_a_まい_11",
+"who": "chu",
+"text": "じゅういちまい！"
+},
+{
+"key": "csn_a_まい_12",
+"who": "chu",
+"text": "じゅうにまい！"
+},
+{
+"key": "csn_a_まい_13",
+"who": "chu",
+"text": "じゅうさんまい！"
+},
+{
+"key": "csn_a_まい_14",
+"who": "chu",
+"text": "じゅうよんまい！"
+},
+{
+"key": "csn_a_まい_15",
+"who": "chu",
+"text": "じゅうごまい！"
+},
+{
+"key": "csn_a_まい_16",
+"who": "chu",
+"text": "じゅうろくまい！"
+},
+{
+"key": "csn_a_まい_17",
+"who": "chu",
+"text": "じゅうななまい！"
+},
+{
+"key": "csn_a_まい_18",
+"who": "chu",
+"text": "じゅうはちまい！"
+},
+{
+"key": "csn_a_まい_19",
+"who": "chu",
+"text": "じゅうきゅうまい！"
+},
+{
+"key": "csn_a_まい_20",
+"who": "chu",
+"text": "にじゅうまい！"
+},
+{
+"key": "csn_a_にん_1",
+"who": "chu",
+"text": "ひとり！"
+},
+{
+"key": "csn_a_にん_2",
+"who": "chu",
+"text": "ふたり！"
+},
+{
+"key": "csn_a_にん_3",
+"who": "chu",
+"text": "さんにん！"
+},
+{
+"key": "csn_a_にん_4",
+"who": "chu",
+"text": "よにん！"
+},
+{
+"key": "csn_a_にん_5",
+"who": "chu",
+"text": "ごにん！"
+},
+{
+"key": "csn_a_にん_6",
+"who": "chu",
+"text": "ろくにん！"
+},
+{
+"key": "csn_a_にん_7",
+"who": "chu",
+"text": "ななにん！"
+},
+{
+"key": "csn_a_にん_8",
+"who": "chu",
+"text": "はちにん！"
+},
+{
+"key": "csn_a_にん_9",
+"who": "chu",
+"text": "きゅうにん！"
+},
+{
+"key": "csn_a_にん_10",
+"who": "chu",
+"text": "じゅうにん！"
+},
+{
+"key": "csn_a_にん_11",
+"who": "chu",
+"text": "じゅういちにん！"
+},
+{
+"key": "csn_a_にん_12",
+"who": "chu",
+"text": "じゅうににん！"
+},
+{
+"key": "csn_a_にん_13",
+"who": "chu",
+"text": "じゅうさんにん！"
+},
+{
+"key": "csn_a_にん_14",
+"who": "chu",
+"text": "じゅうよにん！"
+},
+{
+"key": "csn_a_にん_15",
+"who": "chu",
+"text": "じゅうごにん！"
+},
+{
+"key": "csn_a_にん_16",
+"who": "chu",
+"text": "じゅうろくにん！"
+},
+{
+"key": "csn_a_にん_17",
+"who": "chu",
+"text": "じゅうななにん！"
+},
+{
+"key": "csn_a_にん_18",
+"who": "chu",
+"text": "じゅうはちにん！"
+},
+{
+"key": "csn_a_にん_19",
+"who": "chu",
+"text": "じゅうきゅうにん！"
+},
+{
+"key": "csn_a_にん_20",
+"who": "chu",
+"text": "にじゅうにん！"
+},
+{
+"key": "rs_sansu",
+"who": "nobbo",
+"text": "はい、どうぞ。けいさん、がんばってね"
+}
+]
