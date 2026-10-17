@@ -7,7 +7,7 @@ from pathlib import Path
 G = Path(__file__).resolve().parent; R = G.parents[1]
 A = G / "stage_audio"; OUT = R / "packs"; OUT.mkdir(exist_ok=True)
 S = json.loads((G / "sit/sits.json").read_text())
-RIVAL_OF = {"kousha": "gao", "undou": "pyon", "kouen": "mii", "omise": "chu", "densha": "doshin", "gakkou2": "kon", "toukou": "gao", "gakkou3": "mii", "kyuushoku": "doshin", "gekou": "pyon", "ouchi1": "mii", "tomodachi1": "chu", "sensei1": "pyon", "ie1": "chu", "kouen2": "mii", "seki1": "gao"}
+RIVAL_OF = {"kousha": "gao", "undou": "pyon", "kouen": "mii", "omise": "chu", "densha": "doshin", "gakkou2": "kon", "toukou": "gao", "gakkou3": "mii", "kyuushoku": "doshin", "gekou": "pyon", "ouchi1": "mii", "tomodachi1": "chu", "sensei1": "pyon", "ie1": "chu", "kouen2": "mii", "seki1": "gao", "tokei": "gao"}
 def keys_of(s):
     new = s["stage"] != "kousha" or not (G / "sit/audio" / f"sq_{s['id']}.mp3").exists()  # こうしゃの はじめの 場面は 段1〜4が ページに 入っている
     ks = []
@@ -21,7 +21,7 @@ def keys_of(s):
             if t.get("wrong"): ks.append(f"sx_{s['id']}_{i}")
     return ks
 missing = []
-for st in ["kousha", "undou", "kouen", "omise", "densha", "gakkou2", "toukou", "gakkou3", "kyuushoku", "gekou", "ouchi1", "tomodachi1", "sensei1", "ie1", "kouen2", "seki1"]:
+for st in ["kousha", "undou", "kouen", "omise", "densha", "gakkou2", "toukou", "gakkou3", "kyuushoku", "gekou", "ouchi1", "tomodachi1", "sensei1", "ie1", "kouen2", "seki1", "tokei"]:
     pack = {}
     for s in S:
         if s["stage"] != st: continue
@@ -32,6 +32,10 @@ for st in ["kousha", "undou", "kouen", "omise", "densha", "gakkou2", "toukou", "
     if (A / f"bgm_{st}.mp3").exists(): pack[f"bgm_{st}"] = base64.b64encode((A / f"bgm_{st}.mp3").read_bytes()).decode()
     (OUT / f"{st}.json").write_text(json.dumps(pack, separators=(",", ":")))
     print(st, len(pack), round((OUT / f"{st}.json").stat().st_size / 1e6, 2), "MB")
+# とけい：tk_*（ぽにー）と gtk_*（がお）
+pack = json.loads((OUT / "tokei.json").read_text()) if (OUT / "tokei.json").exists() else {}
+for p in sorted(A.glob("tk_*.mp3")) + sorted(A.glob("gtk_*.mp3")): pack[p.stem] = base64.b64encode(p.read_bytes()).decode()
+(OUT / "tokei.json").write_text(json.dumps(pack, separators=(",", ":"))); print("tokei", len(pack), round((OUT / "tokei.json").stat().st_size / 1e6, 2), "MB")
 # だいぼうけん（ロングコース）：lk_*（かけあい＝Aivis／ぽにー＝VOICEVOX）。ぽにーの リストは sit/pony_long.json、かけあいは aivis/jobs/long
 lk = [p[0] for p in json.loads((G / "sit/pony_long.json").read_text())] + [l["key"] for j in ["long", "long2"] for l in json.loads((R / f"tools/aivis/jobs/{j}/lines.json").read_text())]
 pack = {}
