@@ -228,6 +228,16 @@
    "model": "baaae3c0-7b22-4605-8ba5-80c959b41a48",
    "style": "ノーマル",
    "speed": 0.9
+  },
+  "panna": {
+   "model": "22e8ed77-94fe-4ef2-871f-a86f94e9a579",
+   "style": "ノーマル",
+   "speed": 1.0
+  },
+  "pannamama": {
+   "model": "59f96896-64d2-4378-830a-4d5feb3d81aa",
+   "style": "hutuu_hutuu",
+   "speed": 0.95
   }
  },
  "lines": {

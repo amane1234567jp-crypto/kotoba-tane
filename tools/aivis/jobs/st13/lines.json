@@ -1,0 +1,167 @@
+[
+{
+"key": "sq_ieaisatsu",
+"who": "pannamama",
+"text": "はーい。あら、いらっしゃい"
+},
+{
+"key": "sr_ieaisatsu",
+"who": "pannamama",
+"text": "はい、こんにちは。ぱんなー、おともだちが きたわよー"
+},
+{
+"key": "sg_ieaisatsu_2",
+"who": "chu",
+"text": "こんにちは。ぱんなちゃん、いますか"
+},
+{
+"key": "sx_ieaisatsu_2",
+"who": "chu",
+"text": "こんにちは。ぱんなちゃんを いますか"
+},
+{
+"key": "sg_ieaisatsu_3",
+"who": "chu",
+"text": "こんにちは。ぱんなちゃんと あそびに きました"
+},
+{
+"key": "sg_ieaisatsu_4",
+"who": "chu",
+"text": "こんにちは。ぱんなちゃんと あそぶ やくそくを して、きました"
+},
+{
+"key": "sg_ieaisatsu_5",
+"who": "chu",
+"text": "こんにちは。きょう ぱんなちゃんと あそぶ やくそくを して いるので、きました"
+},
+{
+"key": "sq_ieojama",
+"who": "pannamama",
+"text": "どうぞ、あがって"
+},
+{
+"key": "sr_ieojama",
+"who": "pannamama",
+"text": "はい、どうぞ。ぱんなの へやは にかいよ"
+},
+{
+"key": "sg_ieojama_5",
+"who": "chu",
+"text": "おじゃまします。くつを そろえました。ぱんなちゃんの へやは どこですか"
+},
+{
+"key": "sq_ieheya",
+"who": "panna",
+"text": "はーい。だれ？"
+},
+{
+"key": "sr_ieheya",
+"who": "panna",
+"text": "どうぞ、はいって！"
+},
+{
+"key": "sq_iekashite",
+"who": "panna",
+"text": "これ、あたらしい くるまの おもちゃなの"
+},
+{
+"key": "sr_iekashite",
+"who": "panna",
+"text": "いいよ。はい、どうぞ！"
+},
+{
+"key": "sq_iekowashita",
+"who": "panna",
+"text": "あれ？ くるまの タイヤが……"
+},
+{
+"key": "sr_iekowashita",
+"who": "panna",
+"text": "だいじょうぶ。これ、はめれば なおるよ"
+},
+{
+"key": "sq_iejuice",
+"who": "pannamama",
+"text": "ジュースと おちゃ、どっちが いい？"
+},
+{
+"key": "sr_iejuice",
+"who": "pannamama",
+"text": "はい、ジュースね。どうぞ"
+},
+{
+"key": "sq_ieippai",
+"who": "pannamama",
+"text": "クッキー、もっと たべる？"
+},
+{
+"key": "sr_ieippai",
+"who": "pannamama",
+"text": "そう。じゃあ、のこりは あとでね"
+},
+{
+"key": "sq_ietoire",
+"who": "panna",
+"text": "……どうしたの？ もじもじ して"
+},
+{
+"key": "sr_ietoire",
+"who": "panna",
+"text": "ろうかの つきあたりだよ。いっしょに いこう"
+},
+{
+"key": "sq_iekoboshita",
+"who": "pannamama",
+"text": "あら、どうしたの？"
+},
+{
+"key": "sr_iekoboshita",
+"who": "pannamama",
+"text": "だいじょうぶよ。はい、ふきん。いっしょに ふきましょう"
+},
+{
+"key": "sq_iekumata",
+"who": "kuma",
+"text": "やあ！ ぼくも いれて！"
+},
+{
+"key": "sr_iekumata",
+"who": "kuma",
+"text": "やった！ ありがとう！"
+},
+{
+"key": "sq_iechigau",
+"who": "panna",
+"text": "ねえ、つぎは おえかき しようよ"
+},
+{
+"key": "sr_iechigau",
+"who": "panna",
+"text": "うん！ じゃあ、クレヨン だすね"
+},
+{
+"key": "sq_iekaeri",
+"who": "pannamama",
+"text": "もう かえるの？ きを つけてね"
+},
+{
+"key": "sr_iekaeri",
+"who": "pannamama",
+"text": "どういたしまして。また いらっしゃいね"
+},
+{
+"key": "sq_iematane",
+"who": "panna",
+"text": "きょうは たのしかったね！"
+},
+{
+"key": "sr_iematane",
+"who": "panna",
+"text": "うん！ ばいばーい！"
+},
+{
+"key": "rs_ie1",
+"who": "pannamama",
+"text": "はい、どうぞ。ゆっくり あそんでいってね"
+}
+]
