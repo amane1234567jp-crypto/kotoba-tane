@@ -59,7 +59,15 @@ const GAG_POS = { // [x, 大きさ]
   kakure: { mii: [700, .86], nobbo: [960, .95] }, henshin: { gao: [760, .9], kon: [1150, .88] }, megane: { chu: [760, .46], meebaa: [1150, .9] },
   jump: { pyon: [800, .86], gao: [1180, .9] }, cheese: { chu: [820, .46], doshinpapa: [1300, 1.4] }, mizu: { mii: [720, .86], doshin: [1260, 1.0] },
   densha: { chu: [700, .46], kamejii: [1000, .9] },
+  robo: { gao: [760, .9], nobbo: [1150, .95] }, mimi: { chu: [760, .46], kon: [1150, .88] }, gaokou: { pyon: [760, .86], gao: [1150, .9] }, nuigurumi: { mii: [720, .86], chu: [1220, .46] }, sakasa: { doshin: [760, 1.0], nobbo: [1180, .95] },
 };
+// にせもの せんせい：ほんにんを かくして、べつの キャラを おなじ ばしょに 出す（ドロンで もどす）
+function disguise(c, who, as, x, sc) { const real = c[who], fake = C[as]; resetChar(fake); place(fake, x, 975, sc); show(fake); real.root.style.display = "none"; { const i = visible.indexOf(real); if (i >= 0) visible.splice(i, 1); } c[who] = fake; window["__real_" + who] = real; return fake; }
+function undisguise(c, who, x, sc) { const fake = c[who], real = window["__real_" + who] || C[who];
+  for (let i = 0; i < 10; i++) { const p = world(fake, 200, 250); mark("puff", p.x + (Math.random() - .5) * 220, p.y + (Math.random() - .5) * 220, { vy: -60, life: 1, s: 1.2 }); } noise(.3, 600, .6);
+  fake.root.style.display = "none"; { const i = visible.indexOf(fake); if (i >= 0) visible.splice(i, 1); } (window.__addons || []).forEach(g => g.remove()); window.__addons = [];
+  place(real, x, 975, sc); real.root.style.display = ""; visible.push(real); c[who] = real; surprise(real); }
+const addon = g => { (window.__addons = window.__addons || []).push(g); return g; };
 const pop = (f = 900) => { if (!ctx) return; blip(f, f * 1.8, .12, "sine"); };
 const slurp = () => { if (!ctx) return; for (let i = 0; i < 6; i++) later(i * 110, () => blip(300 + i * 60, 200, .1, "sawtooth")); };
 const splash = () => { if (!ctx) return; noise(.6, 1200, .5); noise(.3, 3000, .3); };
@@ -118,6 +126,40 @@ const GAG_ANIM = {
     gao.eyeX.t = 14; markAbove(gao, "q"); await line(1); gao.eyeX.t = 0;
     wag = 14; for (let i = 0; i < 5; i++) later(i * 300, () => blip(900, 1300, .06, "triangle")); await line(2);
     markAbove(h, "ex"); wag = 22; await sleep(900); },
+  // 🤖 ロボせんせい：のっぽの かおに てつの プレート、アンテナ。カクカク うごく
+  async robo(c, line, h) { const { nobbo, gao } = c; const g = addon(el("g", {}, nobbo.head.g));
+    el("rect", { x: 96, y: 96, width: 208, height: 170, rx: 16, fill: "#B0B7C3", ...S6(6) }, g); [[150, 150], [250, 150]].forEach(([x, y]) => { el("rect", { x: x - 28, y: y - 24, width: 56, height: 48, rx: 6, fill: "#2B2A33" }, g); el("rect", { x: x - 16, y: y - 12, width: 32, height: 24, rx: 4, fill: "#7FCBF0" }, g); });
+    el("rect", { x: 140, y: 210, width: 120, height: 26, rx: 6, fill: "#2B2A33" }, g); [160, 185, 210, 235].forEach(x => el("rect", { x, y: 214, width: 10, height: 18, fill: "#FFFFFF" }, g));
+    el("path", { d: "M200 96 V40", ...S6(8), fill: "none" }, g); const ant = el("circle", { cx: 200, cy: 34, r: 16, fill: "#E8473C", ...S6(5) }, g); window.__ant = ant;
+    let t = 0; addTick(dt => { if (!g.isConnected) return false; t += dt; ant.setAttribute("fill", Math.floor(t * 4) % 2 ? "#E8473C" : "#FFD25E"); });
+    nobbo.tempo = .5; for (let i = 0; i < 4; i++) later(i * 420, () => { nobbo.armL.t = i % 2 ? -90 : 0; nobbo.armR.t = i % 2 ? 0 : -90; blip(600 + i * 80, 600 + i * 80, .06, "square"); });
+    await line(0); nobbo.armL.t = nobbo.armR.t = 0;
+    gao.eyeX.t = 14; markAbove(gao, "q"); await line(1); gao.eyeX.t = 0;
+    for (let i = 0; i < 4; i++) later(i * 300, () => { nobbo.headRot.t = i % 2 ? 10 : -10; blip(900, 900, .05, "square"); }); await line(2); nobbo.headRot.t = 0;
+    markAbove(h, "ex"); await sleep(600); },
+  // 🦊 みみが きつね：こんが めえばあせんせいに。しっぽは かくしたけど みみが きつね
+  async mimi(c, line, h) { const { chu } = c; const mb = disguise(c, "kon", "meebaa", 1150, .9);
+    const e = addon(el("g", {}, mb.head.g)); [["M98 150 L112 40 L182 104 Z", "M112 128 L118 70 L160 106 Z"], ["M302 150 L288 40 L218 104 Z", "M288 128 L282 70 L240 106 Z"]].forEach(([a, b]) => { el("path", { d: a, fill: "#F29F4C", ...S6(6) }, e); el("path", { d: b, fill: "#5A3A2A" }, e); });
+    let t = 0; addTick(dt => { if (!e.isConnected) return false; t += dt; e.setAttribute("transform", `rotate(${(Math.sin(t * 6) * 4).toFixed(1)} 200 120)`); });
+    await line(0); jump(chu, .6); joy(chu); await line(1);
+    mb.armL.t = 40; mb.armR.t = -40; await line(2); mb.armL.t = mb.armR.t = 0; markAbove(h, "ex"); await sleep(600); },
+  // 🦁 がお こうちょう：がおが かめじいに。たてがみが はみでて、がおーが まざる
+  async gaokou(c, line, h) { const { pyon } = c; const kj = disguise(c, "gao", "kamejii", 1150, .9);
+    const m = addon(el("g", {}, kj.head.g)); kj.head.g.insertBefore(m, kj.head.g.firstChild); for (let i = 0; i < 14; i++) { const a = i / 14 * Math.PI * 2; el("ellipse", { cx: 200 + Math.cos(a) * 128, cy: 176 + Math.sin(a) * 120, rx: 34, ry: 30, fill: "#C8662B", ...S6(5) }, m); }
+    await line(0); pyon.eyeX.t = 12; markAbove(pyon, "q"); await line(1); pyon.eyeX.t = 0;
+    hold(kj, "shake", 1.5); for (let i = 0; i < 3; i++) later(i * 500, () => markAbove(kj, "drop", { dx: i % 2 ? 50 : -50 })); await line(2); markAbove(h, "ex"); await sleep(600); },
+  // 🧸 ぬいぐるみ せんせい：くまたの ぬいぐるみが せんせいの せき。うしろに ちゅうが かくれて しゃべる
+  async nuigurumi(c, line, h) { const { mii } = c; const chu = c.chu; const km = C.kuma; resetChar(km); place(km, 1180, 975, 1.0); show(km); km.tm.closed = 1e6; km.tempo = 0; km.root.parentNode.appendChild(km.root);
+    const tie = addon(el("g", {}, km.root)); el("path", { d: "M186 300 L200 322 L214 300 L200 290 Z", fill: "#E8473C", ...S6(4) }, tie); el("rect", { x: 160, y: 276, width: 80, height: 14, rx: 7, fill: "#E8473C", ...S6(4) }, tie);
+    window.__kuma = km; place(chu, 1300, 975, .46); // ちゅうは くまたの うしろ（はしだけ みえる）
+    hold(chu, "shake", 2.5); await line(0);
+    mii.eyeX.t = 12; playMove(mii, "look"); await line(1); mii.eyeX.t = 0;
+    for (let i = 0; i < 3; i++) later(i * 400, () => jump(chu, .25)); await line(2); markAbove(h, "ex"); await sleep(600); },
+  // 🙃 さかさま せんせい：のっぽが さかだちで はいって くる
+  async sakasa(c, line, h) { const { nobbo, doshin } = c; const w = el("g", { transform: "rotate(180 200 298)" }); while (nobbo.root.firstChild) w.appendChild(nobbo.root.firstChild); nobbo.root.appendChild(w); window.__flip = w;
+    nobbo.dx.v = nobbo.dx.t = 900; hold(nobbo, "run", 1.2); nobbo.dx.t = 0; await sleep(1200);
+    await line(0); doshin.eyeX.t = -12; markAbove(doshin, "q"); await line(1); doshin.eyeX.t = 0;
+    for (let i = 0; i < 3; i++) later(i * 400, () => { nobbo.lean.t = i % 2 ? 8 : -8; }); await line(2); nobbo.lean.t = 0; markAbove(h, "ex"); await sleep(600); },
   async megane(c, line, h) { const { meebaa, chu } = c; const gl = putGlasses(meebaa, -110); window.__gl = gl; // めがねは あたまの うえ
     playMove(meebaa, "look"); await line(0);
     jump(chu, .5); await line(1);
@@ -165,6 +207,11 @@ const GAG_RES = { // つっこまれた あとの 動き（ボケた子の 返�
   cheese: c => { const p = window.__pile; if (p) tween(500, k => p.setAttribute("opacity", (1 - k * .8).toFixed(2))); jump(c.chu, .3); },
   mizu: c => playMove(c.doshin, "shy"),
   densha: c => surprise(c.kamejii),
+  robo: c => { const { nobbo } = c; for (let i = 0; i < 12; i++) later(i * 120, () => { const p = world(nobbo, 200, 120); mark("puff", p.x + (Math.random() - .5) * 160, p.y - 40, { vy: -90, life: 1.1, s: 1.1 }); if (i % 3 === 0) mark("sparkle", p.x + (Math.random() - .5) * 200, p.y + 40, { vy: 40, life: .5, s: .6 }); }); noise(.5, 2000, .5); hold(nobbo, "shiver", 1.6); if (window.__ant) window.__ant.setAttribute("fill", "#5E6A7A"); },
+  mimi: c => undisguise(c, "kon", 1150, .88),
+  gaokou: c => undisguise(c, "gao", 1150, .9),
+  nuigurumi: c => { const { chu } = c; walk(chu, 150, 600); later(300, () => playMove(chu, "shy")); const km = window.__kuma; if (km) { km.lean.t = 14; later(500, () => { km.lean.t = 0; }); } },
+  sakasa: c => { const { nobbo } = c; const w = window.__flip; if (w) { tween(700, k => w.setAttribute("transform", `rotate(${(180 - 180 * k).toFixed(0)} 200 298)`)).then(() => { while (w.firstChild) nobbo.root.appendChild(w.firstChild); w.remove(); window.__flip = null; }); } for (let i = 0; i < 4; i++) later(i * 250, () => markAbove(nobbo, "sparkle", { dx: (i - 1.5) * 50 })); },
 };
 const GAG_END = {
   tsumami: async c => { playMove(c.gaojii, "laugh"); await sleep(400); },
@@ -177,6 +224,11 @@ const GAG_END = {
   cheese: async c => { playMove(c.doshinpapa, "laugh"); await sleep(400); },
   mizu: async c => { c.mii.sadMouth = false; playMove(c.mii, "laugh"); await sleep(500); },
   densha: async c => { playMove(c.kamejii, "nod"); await sleep(400); },
+  robo: async c => { playMove(c.gao, "laugh"); c.nobbo.tempo = 1; (window.__addons || []).forEach(g => g.remove()); window.__addons = []; playMove(c.nobbo, "shy"); await sleep(600); },
+  mimi: async c => { playMove(c.chu, "laugh"); playMove(c.kon, "shy"); await sleep(600); },
+  gaokou: async c => { playMove(c.pyon, "laugh"); playMove(c.gao, "shy"); await sleep(600); },
+  nuigurumi: async c => { playMove(c.mii, "laugh"); const km = window.__kuma; if (km) { km.root.style.display = "none"; const i = visible.indexOf(km); if (i >= 0) visible.splice(i, 1); km.tempo = 1; delete km.tm.closed; } (window.__addons || []).forEach(g => g.remove()); window.__addons = []; await sleep(600); },
+  sakasa: async c => { playMove(c.doshin, "laugh"); playMove(c.nobbo, "nod"); await sleep(600); },
 };
 async function lkGag(pc) {
   const it = pickL("gag", x => !x.cast.includes(pc.kind)); const ti = tierOf(), t = it.tiers[ti];
@@ -293,30 +345,42 @@ async function lkSagasu(pc) {
   // しげみ（まえの れつの 足もとを かくす）
   const bush = el("g", {}, front()); [[420, 990], [880, 1000], [1320, 990]].forEach(([x, y]) => [[-70, 0, 70], [0, -30, 80], [70, 0, 70]].forEach(([dx, dy, r]) => el("circle", { cx: x + dx, cy: y + dy, r, fill: "#5DB86A", ...S6(5) }, bush)));
   const tc = crowd[ti]; let ok = false, wrong = 0;
-  // かくれんぼ：まえの れつの 子を さがす 子の まえに ずらして、すこしだけ 見える ように する（あたまと かたほうが 見える）
-  if (sp[ti].k !== 1) { const fr = crowd.filter((c, i) => sp[i].k === 1); if (fr.length) { const oc = fr.sort((a, b) => Math.abs(sp[a.idx].x - sp[ti].x) - Math.abs(sp[b.idx].x - sp[ti].x))[0];
-      const dir = sp[ti].x > 800 ? -1 : 1; place(oc, sp[ti].x + dir * 70, sp[oc.idx].y, oc.s); } }
-  else if ([420, 880, 1320].some(bx => Math.abs(sp[ti].x - bx) < 130)) place(tc, sp[ti].x + 170 > 1500 ? sp[ti].x - 170 : sp[ti].x + 170, sp[ti].y, tc.s);
+  // かくれんぼ：さがす 子は なにかの うしろに かくれて、あたましか 見えない。ほかの 子も いくつか おなじように かくす（それだけで わからない ように）
+  const hideBehind = (c, kind) => { const cx = c.x + 200 * c.s, top = c.y + c.top * c.s, feet = c.y + c.base * c.s, y0 = top + (feet - top) * .36, w = 470 * c.s, g = el("g", {}, front());
+    if (kind === 0) { [[-.3, .08, .34], [0, -.02, .4], [.3, .08, .34], [-.15, .25, .36], [.15, .25, .36]].forEach(([dx, dy, r]) => el("circle", { cx: cx + dx * w, cy: y0 + 30 + dy * (feet - y0), r: r * w, fill: "#5DB86A", ...S6(5) }, g)); el("rect", { x: cx - w / 2, y: y0 + (feet - y0) * .5, width: w, height: feet - y0, fill: "#5DB86A" }, g); }
+    else if (kind === 1) { el("rect", { x: cx - w / 2, y: y0, width: w, height: feet - y0 + 10, rx: 10, fill: "#D9A066", ...S6(6) }, g); el("path", { d: `M${cx - w / 2} ${y0 + 24} H${cx + w / 2} M${cx} ${y0 + 24} V${feet + 10}`, ...S6(5), fill: "none" }, g); }
+    else { el("rect", { x: cx - w / 2, y: y0, width: w, height: feet - y0 + 10, rx: w / 2 * .4, fill: "#7FA7D9", ...S6(6) }, g); [.25, .5, .75].forEach(k => el("path", { d: `M${cx - w / 2} ${y0 + (feet - y0) * k} H${cx + w / 2}`, stroke: "#5B8DEF", "stroke-width": 8 }, g)); }
+    return g; };
+  const hiders = shuffle(crowd.map((c, i) => i).filter(i => i !== ti)).slice(0, 3 + rnd(2)); hiders.push(ti);
+  hiders.forEach(i => hideBehind(crowd[i], rnd(3)));
+  // 10びょうの じかんせいげん
+  const tbar = el("rect", { x: 300, y: 960, width: 1000, height: 24, rx: 12, fill: "#7BD389", ...S6(4) }, front()); let tleft = 10, timeUp = false, stopT = false;
   try {
     crowd.forEach((c, i) => later(i * 50, () => jump(c, .3))); await sleep(600);
     showTask(q.text, "さがして タッチ", 150);
     await speak(C.pony, q.key, q.text + " タッチしてね");
     const pick = () => new Promise(res => crowd.forEach(c => c.root.onclick = () => res(c)));
+    const timer = new Promise(res => addTick(dt => { if (stopT) return false; tleft -= dt; tbar.setAttribute("width", Math.max(0, 100 * tleft).toFixed(0)); if (tleft <= 3 && tleft + dt > 3) tbar.setAttribute("fill", "#FF8FA3"); if (tleft <= 0) { timeUp = true; res(null); return false; } }));
     while (true) {
-      const c = await pick();
+      const c = await Promise.race([pick(), timer]);
+      if (!c) break; // じかんぎれ
       if (c === tc) break;
       wrong++; flop(c); noise(.1, 700, .35); speak(c, `lk_s_no_${c.kind}`, LONG.sagasu.no[c.kind]);
       if (wrong === 3) { const p = world(tc, 200, 200); const ring = el("circle", { cx: p.x, cy: p.y, r: 200 * tc.s + 60, fill: "none", stroke: "#FFD25E", "stroke-width": 14, opacity: .9 }, front());
         tween(2400, k => ring.setAttribute("stroke-width", (14 + Math.sin(k * 20) * 6).toFixed(1))); await speak(C.pony, "lk_s_hint", "ヒント！ ひかって いる ところを みてね"); }
     }
-    crowd.forEach(c => c.root.onclick = null); ok = wrong === 0;
-    unsay(); hideTask(); joy(tc); markAbove(tc, "sparkle"); chime(); confetti(40);
+    crowd.forEach(c => c.root.onclick = null); stopT = true; tbar.remove(); ok = wrong === 0 && !timeUp;
+    unsay(); hideTask();
+    if (timeUp) { const p = world(tc, 200, 200); const ring = el("circle", { cx: p.x, cy: p.y, r: 200 * tc.s + 60, fill: "none", stroke: "#FFD25E", "stroke-width": 14, opacity: .9 }, front()); tween(2400, k => ring.setAttribute("stroke-width", (14 + Math.sin(k * 20) * 6).toFixed(1)));
+      jump(tc, .5); noise(.3, 400, .4); await speak(C.pony, "lk_s_time", "じかんぎれ！ ここに いたよ"); playLog({ type: "sagasu", q: q.text, ok: false, wrong, timeUp: true, who: NAMES[pc.kind] }); grade(false); await sleep(600); }
+    else {
+    joy(tc); markAbove(tc, "sparkle"); chime(); confetti(40);
     await speak(tc, `lk_s_found_${tc.kind}`, LONG.sagasu.found[tc.kind]);
     crowd.forEach((c, i) => c !== tc && later(i * 40, () => jump(c, .4)));
     if (ok) await speak(C.pony, "lk_s_ok", "みつけた！ すごい！ 1マス よけいに すすむよ"); else await speak(C.pony, "lk_s_ok2", "みつけたね！");
     playLog({ type: "sagasu", q: q.text, ok, wrong, who: NAMES[pc.kind] }); grade(ok);
-    await sleep(500);
-  } finally { crowd.forEach(c => c.root.onclick = null); clearClones(); }
+    await sleep(500); }
+  } finally { stopT = true; tbar.remove(); crowd.forEach(c => c.root.onclick = null); clearClones(); }
   setView("board"); if (ok) { await sleep(300); await forceStep(pc, 1); } return ok;
 }
 Object.assign(LTASK_RUN, { gag: lkGag, haya: lkHaya, sagasu: lkSagasu });

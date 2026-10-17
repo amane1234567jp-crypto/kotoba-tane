@@ -41,7 +41,7 @@ const toYomi = t => { let s = t; for (const [k, v] of YOMI) if (s.includes(k)) s
 //    聞きとりは ぽにーの 声が おわってからの ぶんだけ つかう。つぎに 聞きとりが はじまったら、その マイクを ひきつぐ。
 const HEAR1 = hear; // よみがな つき（ポンは ならさない）
 const EARLY = { h: null, until: 0, buf: [], sink: null, t: 0 };
-const EARLY_KEYS = /^(p_again$|sa_|lk_g_.*_a\d$|lk_ask$|lk_sayit|lt_tsuna_ask$|lt_yasa_say$|lk_y_you$|p_kuya$)/;
+const EARLY_KEYS = /^(p_again$|sa_|lk_g_.*_a\d$|lk_ask$|lk_sayit|lt_tsuna_ask$|lt_yasa_say$|lk_y_you$|p_kuya$|sl_sk_\d+$)/;
 const pon = () => { if (!ctx) return; blip(1320, 1320, .08, "sine"); later(70, () => blip(1760, 1760, .1, "sine")); };
 { const pv = playVoice; playVoice = async function (c, key, text, frac = 1) {
     if (EARLY.h && !EARLY.sink) { try { EARLY.h.stop(); } catch (e) { } EARLY.h = null; EARLY.buf = []; } // つぎの 声が はじまったら、まえの はやめの マイクは すてる（お手本を ひろわない）
