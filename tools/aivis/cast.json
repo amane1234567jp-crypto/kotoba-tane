@@ -238,6 +238,13 @@
    "model": "59f96896-64d2-4378-830a-4d5feb3d81aa",
    "style": "hutuu_hutuu",
    "speed": 0.95
+  },
+  "robo": {
+   "model": "71e72188-2726-4739-9aa9-39567396fb2a",
+   "style": "ノーマル",
+   "speed": 0.9,
+   "pitch": -0.12,
+   "into": 0.35
   }
  },
  "lines": {
