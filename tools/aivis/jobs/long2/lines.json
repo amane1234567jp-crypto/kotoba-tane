@@ -127,22 +127,22 @@
 {
 "key": "lk_g_henshin_t0",
 "who": "kon",
-"text": "ほっほ。きょうは こうちょうせんせいが じゅぎょうを しますよ"
+"text": "ほっほ。こうちょうせんせいです。きょうは べんきょうを しないで、いちにちじゅう あそびましょう！"
 },
 {
 "key": "lk_g_henshin_t1",
 "who": "gao",
-"text": "へえ、こうちょうせんせいの じゅぎょうか……"
+"text": "えっ！？ こうちょうせんせい、ほんとに いいの？"
 },
 {
 "key": "lk_g_henshin_t2",
 "who": "kon",
-"text": "みなさん、きょうも おべんきょう しましょう"
+"text": "きゅうしょくは ぜんぶ おやつに します。しゅくだいも なしですよ。ほっほっほ"
 },
 {
 "key": "lk_g_henshin_q",
 "who": "kon",
-"text": "どうしましたか？ しつもんですか？"
+"text": "どうしましたか？ あそびたく ないのですか？"
 },
 {
 "key": "lk_g_henshin_r",
@@ -443,5 +443,155 @@
 "key": "lk_s_found_kon",
 "who": "kon",
 "text": "あちゃー、みつかった！"
+},
+{
+"key": "lk_g_robo_t0",
+"who": "robo",
+"text": "パピパピ ピピポー。ワタシハ、ノッポ センセイ、デス"
+},
+{
+"key": "lk_g_robo_t1",
+"who": "gao",
+"text": "せんせい、なんか へんじゃない？"
+},
+{
+"key": "lk_g_robo_t2",
+"who": "robo",
+"text": "キョウハ、サンスウ、デス。ピポ。イチ タス イチハ、ピピポー"
+},
+{
+"key": "lk_g_robo_q",
+"who": "robo",
+"text": "ドウ シマシタカ。シツモン デスカ。ピポ"
+},
+{
+"key": "lk_g_robo_r",
+"who": "robo",
+"text": "ピポ…… バレマシタ。ショート シマス。ピピピ……"
+},
+{
+"key": "lk_g_robo_e0",
+"who": "gao",
+"text": "うわっ、けむりが でた！"
+},
+{
+"key": "lk_g_mimi_t0",
+"who": "kon",
+"text": "はい、めえばあせんせいです。きょうは ずっと おひるね しましょう"
+},
+{
+"key": "lk_g_mimi_t1",
+"who": "chu",
+"text": "えっ、ひるね？ やったー！"
+},
+{
+"key": "lk_g_mimi_t2",
+"who": "kon",
+"text": "おひるねの あとは、おやつと おひるねです。べんきょうは ありません"
+},
+{
+"key": "lk_g_mimi_q",
+"who": "kon",
+"text": "どうしましたか？ ねむく ないのですか？"
+},
+{
+"key": "lk_g_mimi_r",
+"who": "kon",
+"text": "ぎくっ！ こんども ばれた！"
+},
+{
+"key": "lk_g_mimi_e0",
+"who": "chu",
+"text": "こんくん、また やってる！"
+},
+{
+"key": "lk_g_gaokou_t0",
+"who": "gao",
+"text": "ほっほ、がおー。こうちょうせんせいじゃ。きょうは きゅうしょくを じゅっかい たべましょう、がおー"
+},
+{
+"key": "lk_g_gaokou_t1",
+"who": "pyon",
+"text": "こうちょうせんせい、いま がおーって いった？"
+},
+{
+"key": "lk_g_gaokou_t2",
+"who": "gao",
+"text": "い、いって ないぞ、がおー。おやつも ひゃっこ たべて よいぞ、がおー"
+},
+{
+"key": "lk_g_gaokou_q",
+"who": "gao",
+"text": "ど、どうした？ なにか へんかな、がおー？"
+},
+{
+"key": "lk_g_gaokou_r",
+"who": "gao",
+"text": "ち、ちがうぞ……がおー……あ、いっちゃった"
+},
+{
+"key": "lk_g_gaokou_e0",
+"who": "pyon",
+"text": "やっぱり がおくんだ！"
+},
+{
+"key": "lk_g_nuigurumi_t0",
+"who": "chu",
+"text": "はい、みなさん。きょうの せんせいは、くまた せんせいです"
+},
+{
+"key": "lk_g_nuigurumi_t1",
+"who": "mii",
+"text": "くまたせんせい？ ぜんぜん うごかないわね"
+},
+{
+"key": "lk_g_nuigurumi_t2",
+"who": "chu",
+"text": "せんせいは、いま おなかが いっぱいで うごけません。べんきょうは やめて、おやつに しましょう"
+},
+{
+"key": "lk_g_nuigurumi_q",
+"who": "chu",
+"text": "な、なんですか？ せんせいに なにか ようですか？"
+},
+{
+"key": "lk_g_nuigurumi_r",
+"who": "chu",
+"text": "ちゅ、ちゅー…… ばれちゃった"
+},
+{
+"key": "lk_g_nuigurumi_e0",
+"who": "mii",
+"text": "もう、ちゅうくんったら"
+},
+{
+"key": "lk_g_sakasa_t0",
+"who": "nobbo",
+"text": "みなさん、おはようございます。きょうは てんじょうで じゅぎょうを します"
+},
+{
+"key": "lk_g_sakasa_t1",
+"who": "doshin",
+"text": "せんせい、あたまが したに なってるよ？"
+},
+{
+"key": "lk_g_sakasa_t2",
+"who": "nobbo",
+"text": "いいえ。せかいの ほうが さかさまに なったのです"
+},
+{
+"key": "lk_g_sakasa_q",
+"who": "nobbo",
+"text": "どうしましたか？ さかさまに みえますか？"
+},
+{
+"key": "lk_g_sakasa_r",
+"who": "nobbo",
+"text": "おや？ ほんとうだ。めが まわって きました"
+},
+{
+"key": "lk_g_sakasa_e0",
+"who": "doshin",
+"text": "せんせい、だいじょうぶ？"
 }
 ]
