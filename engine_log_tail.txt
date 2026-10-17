@@ -1,0 +1,40 @@
+[2026/10/17 10:10:58.816] INFO:     Speaker: らせつん / Style: 標準
+[2026/10/17 10:10:58.817] INFO:     Running inference...
+[2026/10/17 10:10:58.817] INFO:     Text: 18！
+[2026/10/17 10:10:58.817] INFO:              Speed: 0.95 (Input: 1.05)
+[2026/10/17 10:10:58.817] INFO:       Style Weight: 1.00 (Input: 1.00)
+[2026/10/17 10:10:58.817] INFO:     Tempo Dynamics: 0.20 (Input: 1.00)
+[2026/10/17 10:10:58.817] INFO:              Pitch: 1.00 (Input: 0.00)
+[2026/10/17 10:10:58.817] INFO:             Volume: 1.00
+[2026/10/17 10:10:58.817] INFO:        Pre-Silence: 0.05
+[2026/10/17 10:10:58.817] INFO:       Post-Silence: 0.10
+[2026/10/17 10:10:59.337] INFO:     Inference done. Elapsed time: 0.52 sec.
+[2026/10/17 10:10:59.338] INFO:     172.17.0.1:56176 - "POST /synthesis?speaker=893625024 HTTP/1.1" 200 OK
+[2026/10/17 10:10:59.575] INFO:     172.17.0.1:56186 - "POST /audio_query?text=19%EF%BC%81&speaker=893625024 HTTP/1.1" 200 OK
+[2026/10/17 10:10:59.577] INFO:     Model: らせつん / Version 1.0.0
+[2026/10/17 10:10:59.578] INFO:     Speaker: らせつん / Style: 標準
+[2026/10/17 10:10:59.578] INFO:     Running inference...
+[2026/10/17 10:10:59.578] INFO:     Text: 19！
+[2026/10/17 10:10:59.578] INFO:              Speed: 0.95 (Input: 1.05)
+[2026/10/17 10:10:59.578] INFO:       Style Weight: 1.00 (Input: 1.00)
+[2026/10/17 10:10:59.578] INFO:     Tempo Dynamics: 0.20 (Input: 1.00)
+[2026/10/17 10:10:59.578] INFO:              Pitch: 1.00 (Input: 0.00)
+[2026/10/17 10:10:59.578] INFO:             Volume: 1.00
+[2026/10/17 10:10:59.578] INFO:        Pre-Silence: 0.05
+[2026/10/17 10:10:59.578] INFO:       Post-Silence: 0.10
+[2026/10/17 10:11:00.100] INFO:     Inference done. Elapsed time: 0.52 sec.
+[2026/10/17 10:11:00.102] INFO:     172.17.0.1:56198 - "POST /synthesis?speaker=893625024 HTTP/1.1" 200 OK
+[2026/10/17 10:11:00.319] INFO:     172.17.0.1:56212 - "POST /audio_query?text=20%EF%BC%81&speaker=893625024 HTTP/1.1" 200 OK
+[2026/10/17 10:11:00.321] INFO:     Model: らせつん / Version 1.0.0
+[2026/10/17 10:11:00.321] INFO:     Speaker: らせつん / Style: 標準
+[2026/10/17 10:11:00.321] INFO:     Running inference...
+[2026/10/17 10:11:00.321] INFO:     Text: 20！
+[2026/10/17 10:11:00.321] INFO:              Speed: 0.95 (Input: 1.05)
+[2026/10/17 10:11:00.322] INFO:       Style Weight: 1.00 (Input: 1.00)
+[2026/10/17 10:11:00.322] INFO:     Tempo Dynamics: 0.20 (Input: 1.00)
+[2026/10/17 10:11:00.322] INFO:              Pitch: 1.00 (Input: 0.00)
+[2026/10/17 10:11:00.322] INFO:             Volume: 1.00
+[2026/10/17 10:11:00.322] INFO:        Pre-Silence: 0.05
+[2026/10/17 10:11:00.322] INFO:       Post-Silence: 0.10
+[2026/10/17 10:11:00.774] INFO:     Inference done. Elapsed time: 0.45 sec.
+[2026/10/17 10:11:00.776] INFO:     172.17.0.1:56222 - "POST /synthesis?speaker=893625024 HTTP/1.1" 200 OK

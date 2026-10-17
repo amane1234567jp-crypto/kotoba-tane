@@ -1,0 +1,3370 @@
+[
+ {
+  "uuid": "a59cb814-0083-4369-8542-f51a29e72af7",
+  "name": "まお",
+  "user": "ozchat",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [
+   "オズチャット"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "オズチャット -Oz Chat- <cs@tr1ppy.com> (https://0z.chat)",
+   "Trippy <cs@tr1ppy.com> (https://tr1ppy.com)",
+   "ねゆたろ (https://x.com/___neyu_zzz)"
+  ],
+  "dl": 61441,
+  "likes": 68,
+  "desc": "いたずらっ子な小悪魔ボイス。卯畑まお（©Oz Chat/Trippy）（CV: ねゆたろ / https://x.com/___neyu_zzz）\nクレジットして頂ける際は「AivisSpeech: まお」をご利用ください。",
+  "speakers": [
+   {
+    "name": "まお",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/fd0d9420-7eee-40de-826d-7fe16b562e84/speakers/f6c7343c-a7fd-4d42-b0dc-38fe18c6ab7f/styles/7d39a003-1f4b-4154-800d-bdf8d1e0cd7d/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "ふつー",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/fd0d9420-7eee-40de-826d-7fe16b562e84/speakers/f6c7343c-a7fd-4d42-b0dc-38fe18c6ab7f/styles/2c43b69d-3c14-4d2b-80ce-90e1fbbc7aab/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "あまあま",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/fd0d9420-7eee-40de-826d-7fe16b562e84/speakers/f6c7343c-a7fd-4d42-b0dc-38fe18c6ab7f/styles/60f3317d-c421-423a-9cf0-cc433d649704/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "おちつき",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/fd0d9420-7eee-40de-826d-7fe16b562e84/speakers/f6c7343c-a7fd-4d42-b0dc-38fe18c6ab7f/styles/0a60bcd6-36fa-4177-bcde-d52051704871/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "からかい",
+      4,
+      [
+       "https://assets.aivis-project.com/aivm-models/fd0d9420-7eee-40de-826d-7fe16b562e84/speakers/f6c7343c-a7fd-4d42-b0dc-38fe18c6ab7f/styles/c7a48ed2-583b-469d-97b5-60566cbe97de/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "せつなめ",
+      5,
+      [
+       "https://assets.aivis-project.com/aivm-models/fd0d9420-7eee-40de-826d-7fe16b562e84/speakers/f6c7343c-a7fd-4d42-b0dc-38fe18c6ab7f/styles/5119a2ba-3fb5-4736-8f5c-26915415334a/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "22e8ed77-94fe-4ef2-871f-a86f94e9a579",
+  "name": "コハク",
+  "user": "ozchat",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [
+   "オズチャット"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "オズチャット -Oz Chat- <cs@tr1ppy.com> (https://0z.chat)",
+   "Trippy <cs@tr1ppy.com> (https://tr1ppy.com) ",
+   "ねゆたろ (https://x.com/___neyu_zzz)"
+  ],
+  "dl": 49191,
+  "likes": 73,
+  "desc": "子猫のような甘い声。猫音コハク（©Oz Chat/Trippy）（CV: ねゆたろ / https://x.com/___neyu_zzz）\nクレジットして頂ける際は「AivisSpeech: コハク」をご利用ください。",
+  "speakers": [
+   {
+    "name": "コハク",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/a04de3ee-1440-4b55-8ba5-b8b6a452f7a4/speakers/84c9db01-ea0f-422a-abe1-9059d8e0efd2/styles/6299d1f8-db14-4fdf-bed2-8deb400a0c4b/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "あまあま",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/a04de3ee-1440-4b55-8ba5-b8b6a452f7a4/speakers/84c9db01-ea0f-422a-abe1-9059d8e0efd2/styles/fd7c0150-63ae-44a4-930f-99ba6816ed22/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "せつなめ",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/a04de3ee-1440-4b55-8ba5-b8b6a452f7a4/speakers/84c9db01-ea0f-422a-abe1-9059d8e0efd2/styles/7ed560d3-a4f2-4e75-ba4f-15ff2a9999c4/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "ねむたい",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/a04de3ee-1440-4b55-8ba5-b8b6a452f7a4/speakers/84c9db01-ea0f-422a-abe1-9059d8e0efd2/styles/8a5c6b6e-06b9-4c86-b1bd-308518dbcb27/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "47e53151-a378-46f3-abee-ce13aa07feb1",
+  "name": "阿井田 茂",
+  "user": "khirio",
+  "category": "OriginalCharacter",
+  "timbre": "MiddleAgedMale",
+  "tags": [
+   "文化系心臓部"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "古山キリヲ"
+  ],
+  "dl": 22064,
+  "likes": 157,
+  "desc": "阿井田 茂（あいだ しげる）　\nCV：古山キリヲ\n\n通称：モアイさん\nバリトンボイスの朗らかおじさん",
+  "speakers": [
+   {
+    "name": "阿井田 茂",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/d799f1c0-59f3-4b6b-9a65-56715776fc69/speakers/50880d3a-d63e-4a31-ae3f-ab14e0c0b3cb/styles/1d5aedb4-26c9-4412-b76a-80a4ff5f5b2d/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "Calm",
+      1,
+      []
+     ],
+     [
+      "Far",
+      2,
+      []
+     ],
+     [
+      "Heavy",
+      3,
+      []
+     ],
+     [
+      "Mid",
+      4,
+      []
+     ],
+     [
+      "Shout",
+      5,
+      []
+     ],
+     [
+      "Surprise",
+      6,
+      []
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "6d11c6c2-f4a4-4435-887e-23dd60f8b8dd",
+  "name": "にせ",
+  "user": "MAHOPROGRAM",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [
+   "大勢に叫ぶように"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "にせ"
+  ],
+  "dl": 20505,
+  "likes": 123,
+  "desc": "研究開発用の試作音声合成モデル。自由に使用可",
+  "speakers": [
+   {
+    "name": "にせ",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/976b1a0b-f767-443f-9e9b-b2f7c75e05dc/speakers/8ea9a1b7-bf3b-49f3-9e42-c6ab5cc1aa34/styles/d9e114af-77ba-4b74-b871-2b1f479eb6fa/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "e9339137-2ae3-4d41-9394-fb757a7e61e6",
+  "name": "まい",
+  "user": "MAHOPROGRAM",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [
+   "妖艶な女性"
+  ],
+  "license": "ACML 1.0",
+  "creators": [],
+  "dl": 16792,
+  "likes": 162,
+  "desc": "研究開発用の試作音声合成モデル。自由に使用可",
+  "speakers": [
+   {
+    "name": "まい",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/7ea5a561-0343-422c-a7d5-4cc95ef57b79/speakers/a1ba946c-4d95-41f9-ae0d-6565ce64a91e/styles/2b797521-0ed7-4640-a601-736b110a98cd/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "71e72188-2726-4739-9aa9-39567396fb2a",
+  "name": "fumifumi",
+  "user": "sagawafumiya",
+  "category": "OriginalCharacter",
+  "timbre": "AdultMale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [
+   "kokushin",
+   "sagawafumiya"
+  ],
+  "dl": 15371,
+  "likes": 84,
+  "desc": "落ち着いた青年をイメージして作成したボイスモデルです。\n\n制作 黒神(https://x.com/kokushing)\n声 サガワフミヤ(https://x.com/fumi_sagawa)",
+  "speakers": [
+   {
+    "name": "fumifumi",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/e56a5ff2-794c-4f16-a58f-3b57668065d6/speakers/7147eb7c-8564-48ed-8ba6-7eca40b18a15/styles/8d3c6879-3722-488a-8636-3c88395f36e6/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "baaae3c0-7b22-4605-8ba5-80c959b41a48",
+  "name": "morioki",
+  "user": "yuki",
+  "category": "LivingPerson",
+  "timbre": "AdultFemale",
+  "tags": [
+   "「え？これ、ピアスじゃないの！？」",
+   "実は…樹脂ノンホールピアスなんです。"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "yuki",
+   "morioki"
+  ],
+  "dl": 15276,
+  "likes": 92,
+  "desc": "一般的な女性の声として使用できるボイスモデルです。\n\nボイス提供：もりおき (X：@morioki_5)\nモデル作成：yuki (X：@ai_shirohana)",
+  "speakers": [
+   {
+    "name": "morioki",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/9a3f9768-9fec-423f-b825-9c5e1490cf69/speakers/63642a48-6ab5-4438-9ed6-2c3c254e9263/styles/34c41fb2-97e6-4b67-b3dc-8ecbb7e6dc04/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "a670e6b8-0852-45b2-8704-1bc9862f2fe6",
+  "name": "花音",
+  "user": "MAHOPROGRAM",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [
+   "Aivis",
+   "Cloud",
+   "API",
+   "は、高速かつ高品質な日本語音声合成をクラウドで利用できる音声合成",
+   "です。"
+  ],
+  "license": "ACML 1.0",
+  "creators": [],
+  "dl": 12827,
+  "likes": 152,
+  "desc": "研究開発用の試作音声合成モデル。自由に使用可",
+  "speakers": [
+   {
+    "name": "花音",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/1a7ae97c-d666-46b4-819a-c63f73dde6bf/speakers/9351a9e0-910e-47c8-a6f6-b506c2d5229d/styles/598c0357-1524-4b91-bcdc-3688062a5bfc/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "f5017410-fbb5-49e1-97cb-e785f42e15f5",
+  "name": "凛音エル",
+  "user": "kokuren",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [
+   "1日目",
+   "6月12日",
+   "台湾到着",
+   "📍牛老大涮牛肉",
+   "台湾で人気の牛肉火鍋を堪能"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "kokuren",
+   "電脳天使工業"
+  ],
+  "dl": 12588,
+  "likes": 76,
+  "desc": "電脳天使工業のAIキャラクター「凛音エル」のボイスモデルです。",
+  "speakers": [
+   {
+    "name": "凛音エル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/9fc6e37f-b8d4-4df5-93e3-30defd0f00ff/speakers/6b0a0fb6-283c-4b7e-928d-37fda7a639bb/styles/17203929-af8f-47cd-8faf-124a14786f8f/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "Angry",
+      1,
+      []
+     ],
+     [
+      "Fear",
+      2,
+      []
+     ],
+     [
+      "Happy",
+      3,
+      []
+     ],
+     [
+      "Sad",
+      4,
+      []
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "696c98a2-c0b7-4fe7-8cf2-c7e9b8a9bd82",
+  "name": "ろてじん（長老ボイス）",
+  "user": "Rotejin",
+  "category": "OriginalCharacter",
+  "timbre": "ElderlyMale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [
+   "ろてじん"
+  ],
+  "dl": 11183,
+  "likes": 80,
+  "desc": "老人の声を意識した演技でセリフ収録したボイスモデルです。",
+  "speakers": [
+   {
+    "name": "ろてじん（長老ボイス）",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/1ab8afa3-2a5e-4e9e-bc5c-09cbd6c4107e/speakers/973723ac-bac8-4bec-8cc8-6a581ee41d25/styles/b79c1120-65e8-4c01-ae01-b71118af71ea/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "4f281e78-eba6-495a-8e50-5c322d02b5b1",
+  "name": "るな",
+  "user": "MAHOPROGRAM",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [
+   "大好きだよ"
+  ],
+  "license": "ACML 1.0",
+  "creators": [],
+  "dl": 8141,
+  "likes": 90,
+  "desc": "研究開発用の試作音声合成モデル。自由に使用可",
+  "speakers": [
+   {
+    "name": "るな",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/47d21b9f-7543-4574-b16e-0863646b5bbf/speakers/4ed4bd8e-fb79-4c38-999a-3b6f283397a7/styles/fed939d3-2ac0-4190-a5c2-b22883d35279/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "9107b8b6-1ed1-43f5-bebe-0de4df4d229d",
+  "name": "中2",
+  "user": "MAHOPROGRAM",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [],
+  "dl": 6232,
+  "likes": 67,
+  "desc": "研究開発用の試作音声合成モデル。自由に使用可",
+  "speakers": [
+   {
+    "name": "中2",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/cf99cb7c-4c7b-4c43-a180-3f28df62ee02/speakers/d147c40b-5b00-46a4-a9ac-473a4372cc83/styles/e253fd21-5929-46e1-815a-002fca35a8c5/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "3328da9a-8124-4619-a853-f7fc2f37889f",
+  "name": "桜音",
+  "user": "MAHOPROGRAM",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [
+   "ウェクェq"
+  ],
+  "license": "ACML 1.0",
+  "creators": [],
+  "dl": 5922,
+  "likes": 83,
+  "desc": "研究開発用の試作音声合成モデル。自由に使用可",
+  "speakers": [
+   {
+    "name": "桜音",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/deda0e2f-3368-4604-ab98-5652a6971feb/speakers/44057ed0-e0d0-46ce-98be-f8cdc1d4150d/styles/1508f228-6534-4b32-83a4-057ca8bdcc8c/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "59f96896-64d2-4378-830a-4d5feb3d81aa",
+  "name": "ほのか(~現実20代女子AIボイチェン~リアボVC公式モデル)",
+  "user": "Dopoiro",
+  "category": "Other",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [
+   "ぽいロード(リアボVC公式)  x.com/dopoiro"
+  ],
+  "dl": 5698,
+  "likes": 61,
+  "desc": "🌸現実20代女子に声変わり無料最新AIボイチェンソフト「リアボVC」搭載モデルほのかです🌸\n入手→ poipoipoi.booth.pm\n[声は(x.com/dopoiro)のAI]等とクレジット表記お願いします\n声提供アルバイト一般女性から権利購入&マージ済み&顔画像はAI",
+  "speakers": [
+   {
+    "name": "ほのか(~現実20代女子AIボイチェン~リアボVC公式モデル)",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/30b0ab4c-893b-4c73-8c2a-29059656e3d8/speakers/b903b46a-4b54-4ff1-9ab9-eb009b179cac/styles/b66ac2c0-3834-4350-b7dd-2a79fee4677a/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "kanasimi_kanasimi",
+      1,
+      []
+     ],
+     [
+      "uresii_uresii",
+      2,
+      []
+     ],
+     [
+      "hutuu_hutuu",
+      3,
+      []
+     ],
+     [
+      "odoroki_odoroki",
+      4,
+      []
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "9f36ec0d-8dac-42dc-aff4-149c5f99faad",
+  "name": "らせつん",
+  "user": "kozukata_gakuen",
+  "category": "OriginalCharacter",
+  "timbre": "Neutral",
+  "tags": [
+   "はじめまして"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "こずかた学園プロジェクト",
+   "Aivis Project"
+  ],
+  "dl": 5386,
+  "likes": 52,
+  "desc": "こずかた学園プロジェクト「らせつん」の音声合成モデルです。\n親しみやすさのある中性ボイスです。\n\n声：上戸恵里（ https://x.com/agato_eri )",
+  "speakers": [
+   {
+    "name": "らせつん",
+    "styles": [
+     [
+      "標準",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/a162cbbf-638a-497e-beb3-d7526d899a2c/speakers/48069934-c576-4c0c-9b50-b2857bbaeed5/styles/4c320f04-c309-44d6-9705-7434863a2608/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "喜び",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/a162cbbf-638a-497e-beb3-d7526d899a2c/speakers/48069934-c576-4c0c-9b50-b2857bbaeed5/styles/dbfd574a-1a9d-47ce-92c3-c65e79132c37/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "嫌悪",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/a162cbbf-638a-497e-beb3-d7526d899a2c/speakers/48069934-c576-4c0c-9b50-b2857bbaeed5/styles/b382a977-e81b-4278-b979-92500c1cc063/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "怒り",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/a162cbbf-638a-497e-beb3-d7526d899a2c/speakers/48069934-c576-4c0c-9b50-b2857bbaeed5/styles/5c41e6b0-cdf5-4086-a05f-feafcfd711e1/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "恐怖",
+      4,
+      [
+       "https://assets.aivis-project.com/aivm-models/a162cbbf-638a-497e-beb3-d7526d899a2c/speakers/48069934-c576-4c0c-9b50-b2857bbaeed5/styles/444dca5d-1076-4d70-a878-5ad4d2b50c09/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "悲しみ",
+      5,
+      [
+       "https://assets.aivis-project.com/aivm-models/a162cbbf-638a-497e-beb3-d7526d899a2c/speakers/48069934-c576-4c0c-9b50-b2857bbaeed5/styles/0cc0c2d4-5e11-419b-84a4-268f0f4f2b1b/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "標準２",
+      6,
+      [
+       "https://assets.aivis-project.com/aivm-models/a162cbbf-638a-497e-beb3-d7526d899a2c/speakers/48069934-c576-4c0c-9b50-b2857bbaeed5/styles/21ec5a03-a9ab-4bcf-bcb3-ddf94fe72483/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "驚き",
+      7,
+      [
+       "https://assets.aivis-project.com/aivm-models/a162cbbf-638a-497e-beb3-d7526d899a2c/speakers/48069934-c576-4c0c-9b50-b2857bbaeed5/styles/b23a2c6b-b9a7-45e4-9640-b113bb5a6e05/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "1b2830f4-8cf1-4184-a0d9-3a1bace3a844",
+  "name": "みちのくあいり",
+  "user": "kozukata_gakuen",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [
+   "みちのくあいり"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "こずかた学園プロジェクト",
+   "Aivis Project"
+  ],
+  "dl": 5378,
+  "likes": 21,
+  "desc": "こずかた学園プロジェクト「みちのくあいり」の音声合成モデルです。\n落ち着きのあるかわいらしい女性ボイスです。\n\n声：上戸恵里（ https://x.com/agato_eri )",
+  "speakers": [
+   {
+    "name": "みちのくあいり",
+    "styles": [
+     [
+      "標準",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/569fa4b8-c161-4427-90a7-8b7340282500/speakers/5c49e0ab-997f-469c-801a-c7377d5de2aa/styles/f747f29b-b1ad-439e-93d8-e3400cdce177/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "悲しみ",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/569fa4b8-c161-4427-90a7-8b7340282500/speakers/5c49e0ab-997f-469c-801a-c7377d5de2aa/styles/0f1309e1-9603-4df3-a9e1-93b8b40f1036/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "怒り",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/569fa4b8-c161-4427-90a7-8b7340282500/speakers/5c49e0ab-997f-469c-801a-c7377d5de2aa/styles/5ed03eeb-d6d3-4e9c-8144-a30b38f5ef86/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "嫌悪",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/569fa4b8-c161-4427-90a7-8b7340282500/speakers/5c49e0ab-997f-469c-801a-c7377d5de2aa/styles/a76ade84-b467-427f-b168-c8da858d0a34/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "驚き",
+      4,
+      [
+       "https://assets.aivis-project.com/aivm-models/569fa4b8-c161-4427-90a7-8b7340282500/speakers/5c49e0ab-997f-469c-801a-c7377d5de2aa/styles/16cb6847-88f7-479b-adeb-ce835dec5c1d/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "恐怖",
+      5,
+      [
+       "https://assets.aivis-project.com/aivm-models/569fa4b8-c161-4427-90a7-8b7340282500/speakers/5c49e0ab-997f-469c-801a-c7377d5de2aa/styles/9200ffb4-b896-4712-b12a-cf1fffbf6cb1/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "喜び",
+      6,
+      [
+       "https://assets.aivis-project.com/aivm-models/569fa4b8-c161-4427-90a7-8b7340282500/speakers/5c49e0ab-997f-469c-801a-c7377d5de2aa/styles/0d12e78c-7bf7-4062-a864-abfbf21f313d/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "70a875a9-feae-41e6-a586-8cf9e47c6c0b",
+  "name": "猩々博士 (雑談ボイス)",
+  "user": "5vsNicPQdJX2e_C",
+  "category": "LivingPerson",
+  "timbre": "AdultMale",
+  "tags": [
+   "test"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "ろてじん",
+   "猩々博士"
+  ],
+  "dl": 4630,
+  "likes": 53,
+  "desc": "Vtuber 猩々博士の配信音声から作成したボイスモデルです",
+  "speakers": [
+   {
+    "name": "猩々博士 (雑談ボイス)",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/cfef0a38-9051-4fb1-b5e5-46687fa2840d/speakers/58a87b24-4570-4693-b7f5-b81be2481855/styles/d1e04fc9-9083-45af-9690-539d598059ba/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "ed47c952-c253-405e-adba-1172399816a1",
+  "name": "観測症",
+  "user": "hdae",
+  "category": "Other",
+  "timbre": "AdultMale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [
+   "観測症"
+  ],
+  "dl": 4492,
+  "likes": 30,
+  "desc": "滑舌がそんなに良くないので、頑張って出した声です。\n頑張った結果、少しマイクが近かったかもしれません。",
+  "speakers": [
+   {
+    "name": "観測症",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/0a75b855-5a9b-4424-be2a-cd7ec3cfac95/speakers/5c5ff59a-e79a-46e9-b979-7dfbe96cb800/styles/3ce6c847-53cd-40b0-b8a6-3607351aa8b1/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "2e1fdde8-d089-42d7-b64f-cf89952b1bdc",
+  "name": "澤原 玄二郎",
+  "user": "khirio",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [
+   "けものフレンズアブリッジ"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "古山キリヲ"
+  ],
+  "dl": 4259,
+  "likes": 48,
+  "desc": "澤原 玄二郎（さわばる げんじろう）\nCV：古山キリヲ\n\nせっかちでヤンチャな猫ヤロー\n好物はピッツァ\nノイズ強めなのは仕様です　\nちゃんと出力後にノイズ除去かけてあげてね",
+  "speakers": [
+   {
+    "name": "澤原 玄二郎",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/4185e106-ab0f-4037-9ca2-0b5e296bcccb/speakers/a2cbe680-67fb-4dba-90be-985a0a42985a/styles/f646e059-4a1a-462e-9b77-064eb3dc535a/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "close",
+      1,
+      []
+     ],
+     [
+      "close-shout",
+      2,
+      []
+     ],
+     [
+      "far",
+      3,
+      []
+     ],
+     [
+      "far-shout",
+      4,
+      []
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "098d4e66-2faf-4a00-889c-a1d2f05bde78",
+  "name": "Shinjou Tomoharu",
+  "user": "n2PkZNR860ATafv",
+  "category": "OriginalCharacter",
+  "timbre": "MiddleAgedMale",
+  "tags": [
+   "あああああ"
+  ],
+  "license": "ACML-NC 1.0",
+  "creators": [
+   "こよちゃんすこすこ侍"
+  ],
+  "dl": 3691,
+  "likes": 23,
+  "desc": "落ち着いた中年男性のモデルです。",
+  "speakers": [
+   {
+    "name": "Shinjou Tomoharu",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/7bca001b-99d2-49be-87d1-1cd109322d4d/speakers/cc98d87b-a04a-4ae5-807d-2f44e1cdfd84/styles/8c96d410-fd0b-4cf6-bbdd-f0cc7e8f7ce7/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "d1a7446f-230d-4077-afdf-923eddabe53c",
+  "name": "M2",
+  "user": "gpt",
+  "category": "FictionalPerson",
+  "timbre": "YouthfulMale",
+  "tags": [
+   "あなたの",
+   "血をください"
+  ],
+  "license": "Custom",
+  "creators": [
+   "litagin"
+  ],
+  "dl": 3475,
+  "likes": 44,
+  "desc": "Style-Bert-VITS2に付属のデフォルト男性２モデル\nボイスサンプル：スタイルの強さ2.0\n\nCC BY-SA 4.0のため再配布",
+  "speakers": [
+   {
+    "name": "M2",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/d134e4b0-a0f7-4ac5-a538-021925ee23a0/speakers/2718ad2d-6060-4fc0-aab9-cd083565c9e4/styles/66a996b1-c8a4-42bc-8b00-c41c01caee1c/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "怒り",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/d134e4b0-a0f7-4ac5-a538-021925ee23a0/speakers/2718ad2d-6060-4fc0-aab9-cd083565c9e4/styles/eb3df1a5-f78f-4fc6-ab39-8ee397758bc0/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "嫌悪",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/d134e4b0-a0f7-4ac5-a538-021925ee23a0/speakers/2718ad2d-6060-4fc0-aab9-cd083565c9e4/styles/00c2a5b3-7cbc-4f85-9abd-5171e26a8746/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "恐れ",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/d134e4b0-a0f7-4ac5-a538-021925ee23a0/speakers/2718ad2d-6060-4fc0-aab9-cd083565c9e4/styles/f6724d1f-d6f8-4d26-8cb3-029fc41e5208/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "幸せ",
+      4,
+      [
+       "https://assets.aivis-project.com/aivm-models/d134e4b0-a0f7-4ac5-a538-021925ee23a0/speakers/2718ad2d-6060-4fc0-aab9-cd083565c9e4/styles/1c203457-8a63-49b6-a82a-bb7c416082fc/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "悲しみ",
+      5,
+      [
+       "https://assets.aivis-project.com/aivm-models/d134e4b0-a0f7-4ac5-a538-021925ee23a0/speakers/2718ad2d-6060-4fc0-aab9-cd083565c9e4/styles/36bae268-96f0-48f9-b2ac-3bf1957903e7/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "驚き",
+      6,
+      [
+       "https://assets.aivis-project.com/aivm-models/d134e4b0-a0f7-4ac5-a538-021925ee23a0/speakers/2718ad2d-6060-4fc0-aab9-cd083565c9e4/styles/2fcd930f-ef9d-4b6a-8333-4d5303b48ede/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "0f6821f4-9f86-4da1-a41a-fbe6fff9ca88",
+  "name": "天深シノ",
+  "user": "shinomao",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "ACML-NC 1.0",
+  "creators": [],
+  "dl": 3285,
+  "likes": 45,
+  "desc": "人の世界で生活をするために人の格好をしている天使。\n優しい声で話します。",
+  "speakers": [
+   {
+    "name": "天深シノ",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/c3264210-975f-4e3b-8357-54700f8886a8/speakers/15ee749b-2c46-434b-b300-11df369238e9/styles/6bbc98fe-8f19-4674-91a4-da1232f4750d/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "じょうきげん",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/c3264210-975f-4e3b-8357-54700f8886a8/speakers/15ee749b-2c46-434b-b300-11df369238e9/styles/d242897b-4c50-4cd2-beba-7ee721241416/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "ふきげん",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/c3264210-975f-4e3b-8357-54700f8886a8/speakers/15ee749b-2c46-434b-b300-11df369238e9/styles/dd72f7a7-d3fb-4048-9b51-31c3ed0579ba/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "ささやき",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/c3264210-975f-4e3b-8357-54700f8886a8/speakers/15ee749b-2c46-434b-b300-11df369238e9/styles/a2ec1315-969e-4e0b-a312-03d06caf5bb2/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "7fc08a41-b64d-456d-8b22-8e1284674775",
+  "name": "zonoko",
+  "user": "zgock999",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "CC0",
+  "creators": [
+   "zgock"
+  ],
+  "dl": 3198,
+  "likes": 57,
+  "desc": "OpenGameArtのCC0英語ボイスから音声クローンツールZonosを使用して生成した日本語ボイスを学習させたものです。\n元ボイスのライセンスを継承してcc0とします\n",
+  "speakers": [
+   {
+    "name": "zonoko",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/21c2d181-9e7f-4ab5-80c5-ec8e2e70bd91/speakers/27dceb02-55f5-46dc-9960-d77dae24028d/styles/cd8843c2-1458-45cc-8429-cd2c1b8d7f4a/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "A",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/21c2d181-9e7f-4ab5-80c5-ec8e2e70bd91/speakers/27dceb02-55f5-46dc-9960-d77dae24028d/styles/6c5c61f5-6433-4341-a762-f1958058ea02/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "B",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/21c2d181-9e7f-4ab5-80c5-ec8e2e70bd91/speakers/27dceb02-55f5-46dc-9960-d77dae24028d/styles/71cb2e38-4dac-4385-a9a4-dde1c1fa974f/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "C",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/21c2d181-9e7f-4ab5-80c5-ec8e2e70bd91/speakers/27dceb02-55f5-46dc-9960-d77dae24028d/styles/c919f3ad-31d1-45da-90bb-a288d387eb6b/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "D",
+      4,
+      [
+       "https://assets.aivis-project.com/aivm-models/21c2d181-9e7f-4ab5-80c5-ec8e2e70bd91/speakers/27dceb02-55f5-46dc-9960-d77dae24028d/styles/fee6a565-acac-4be0-af30-741379ea3ea1/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "470a41e2-863f-4bf2-8a20-bf7cde0d8f7b",
+  "name": "TANAKA",
+  "user": "TANAKA",
+  "category": "OriginalCharacter",
+  "timbre": "ElderlyMale",
+  "tags": [
+   "はい、どーもー。おとんです"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "田中"
+  ],
+  "dl": 3194,
+  "likes": 25,
+  "desc": "YouTubeの自動字幕読上げナレーション用に自作してみました。\nまだ未完成なところは、少しずつ改善していきたいと思います。",
+  "speakers": [
+   {
+    "name": "TANAKA",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/18b4de85-ea1a-41c4-9e07-c02be1b86a8d/speakers/bc0bde8e-8e43-4b5c-9c1a-d8c54d88289e/styles/8c1d2513-8729-4647-bd16-47887768ca01/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "Anger",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/18b4de85-ea1a-41c4-9e07-c02be1b86a8d/speakers/bc0bde8e-8e43-4b5c-9c1a-d8c54d88289e/styles/ee03454a-f3ab-4073-885c-459ed0fbb71c/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "Happy",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/18b4de85-ea1a-41c4-9e07-c02be1b86a8d/speakers/bc0bde8e-8e43-4b5c-9c1a-d8c54d88289e/styles/be69b40a-1c9d-494d-93a1-550192b907da/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "Silly",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/18b4de85-ea1a-41c4-9e07-c02be1b86a8d/speakers/bc0bde8e-8e43-4b5c-9c1a-d8c54d88289e/styles/08347a65-19ea-45af-a13e-c901ccb9a687/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "surprise",
+      4,
+      [
+       "https://assets.aivis-project.com/aivm-models/18b4de85-ea1a-41c4-9e07-c02be1b86a8d/speakers/bc0bde8e-8e43-4b5c-9c1a-d8c54d88289e/styles/e6f139ef-0058-40c2-8271-81156eeebc0a/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "18972473-ca36-4e06-a33a-5cc14adba0c4",
+  "name": "かりん(現実20代女子AIボイチェン@リアボVC公式モデル)",
+  "user": "Dopoiro",
+  "category": "Other",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [
+   "ぽいロード(リアボVC公式)  x.com/dopoiro"
+  ],
+  "dl": 3153,
+  "likes": 35,
+  "desc": "🌸現実20代女子に声変わり無料最新AIボイチェンソフト「リアボVC」搭載モデルかりんです🌸\n入手→ poipoipoi.booth.pm\n[声は(x.com/dopoiro)のAI]等とクレジット表記お願いします\n声提供アルバイト一般女性から権利購入&マージ済み&顔画像はAI",
+  "speakers": [
+   {
+    "name": "かりん(現実20代女子AIボイチェン@リアボVC公式モデル)",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/01aa0eef-a4d4-4160-9e76-4f1925790e3f/speakers/1437bd38-572d-4ef9-a8ba-4bcd51c69b88/styles/4ce5adcd-bc0c-4c4a-b81b-9ca676846e57/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "kanasimi_kanasimi",
+      1,
+      []
+     ],
+     [
+      "uresii_uresii",
+      2,
+      []
+     ],
+     [
+      "hutuu_hutuu",
+      3,
+      []
+     ],
+     [
+      "odoroki_odoroki",
+      4,
+      []
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "f83c385c-829b-40c4-8c11-639027e61636",
+  "name": "わかな(現実20代女子AIボイチェン@リアボVC公式モデル)",
+  "user": "Dopoiro",
+  "category": "Other",
+  "timbre": "YouthfulFemale",
+  "tags": [
+   "来月の食堂、お菓子を焼いて持っていこうかな"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "ぽいロード(リアボVC公式)  x.com/dopoiro"
+  ],
+  "dl": 2664,
+  "likes": 31,
+  "desc": "🌸現実20代女子に声変わり無料最新AIボイチェンソフト「リアボVC」搭載モデルわかなです🌸\n入手→ poipoipoi.booth.pm\n[声は(x.com/dopoiro)のAI]等とクレジット表記お願いします\n声提供アルバイト一般女性から権利購入&マージ済み&顔画像はAI",
+  "speakers": [
+   {
+    "name": "わかな(現実20代女子AIボイチェン@リアボVC公式モデル)",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/cd1bb860-2853-4f75-958d-5717429afd56/speakers/b557abce-3e16-4bd8-a3b7-9fc4f0c990a2/styles/7f625d17-694c-42c2-9e0d-cf65201fecfd/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "悲しい",
+      1,
+      []
+     ],
+     [
+      "嬉しい",
+      2,
+      []
+     ],
+     [
+      "普通",
+      3,
+      []
+     ],
+     [
+      "驚き",
+      4,
+      []
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "3dabea2b-cc10-41da-955b-4618ce84e716",
+  "name": "Lux",
+  "user": "Lami",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [
+   "Lami <info@lami.zip> (https://lami.zip/)"
+  ],
+  "dl": 2641,
+  "likes": 25,
+  "desc": "Lux（ルクス）はStyle-Bert-VITS2 JP-Extra対応TTSモデル。96kHz/16bit録音のプロ音声（ノイズ・反響除去済）とITAコーパス424文で学習済み。",
+  "speakers": [
+   {
+    "name": "Lux",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/fd9c14ce-f92c-4ece-89f0-d44aa70a039c/speakers/7d5d61cc-f937-48f6-af4b-087b52bcedb5/styles/a6baed99-da82-441a-b993-d75f8e0df31a/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "55696911-05cb-4cd2-bdb9-dbc8bfe6e5c7",
+  "name": "水巻咲_T2モデル",
+  "user": "TakoeProject",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [
+   "朝の電車で、",
+   "ため息を飲み込んでいるお前,,,,オウは",
+   "よく知っている。"
+  ],
+  "license": "Custom",
+  "creators": [
+   "Yumehaki Project V / VSMB Project"
+  ],
+  "dl": 2594,
+  "likes": 34,
+  "desc": "水巻咲　みずまきさき　Mizumaki Saki　(CodeName:MIZUMAKI_SAKI)",
+  "speakers": [
+   {
+    "name": "水巻咲_T2モデル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/cb5b69c6-1183-4249-8fc5-6ff3c6acc8ef/speakers/c1adf89a-5073-440a-a90a-4ea55c3eebae/styles/db7c89d3-ad75-46d1-abc7-f4fafaaae12c/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "Negative",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/cb5b69c6-1183-4249-8fc5-6ff3c6acc8ef/speakers/c1adf89a-5073-440a-a90a-4ea55c3eebae/styles/bb906004-2f11-4e7d-8f46-bcb00cb3aed9/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "Positive",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/cb5b69c6-1183-4249-8fc5-6ff3c6acc8ef/speakers/c1adf89a-5073-440a-a90a-4ea55c3eebae/styles/2931477e-99d2-46f0-a16a-20d40f162132/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "1f04a608-916c-4d9e-bf6e-b9da5c176f85",
+  "name": "yukyu",
+  "user": "yukyu",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [
+   "yukyu"
+  ],
+  "dl": 2516,
+  "likes": 15,
+  "desc": "男声の音声モデルです\n\n作成者 : yukyu \n連絡先\nx: @yukyu30",
+  "speakers": [
+   {
+    "name": "yukyu",
+    "styles": [
+     [
+      "デフォルト",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/81b17e6f-672c-4e50-848c-8ee863f4742d/speakers/08852022-d17f-44e4-a2a8-afa81c2ee786/styles/20852eef-b573-4c27-a761-919982774712/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "e5bd2b5e-90a8-4fb3-a69f-2fbd2d3a8a43",
+  "name": "hinakoyuhara",
+  "user": "HinakoYuhara",
+  "category": "OriginalCharacter",
+  "timbre": "MiddleAgedMale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [
+   "柚原比奈子"
+  ],
+  "dl": 2453,
+  "likes": 14,
+  "desc": "試しに作った物です\n中年男性の声となってます\n\nhttps://x.com/hinako_yuhara",
+  "speakers": [
+   {
+    "name": "hinakoyuhara",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/0753de72-daae-43a2-a611-acbf59d609de/speakers/9f25559b-1608-4768-8468-fb2d6388576c/styles/9935e606-d58c-43d1-803b-0706a70118b8/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "普通",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/0753de72-daae-43a2-a611-acbf59d609de/speakers/9f25559b-1608-4768-8468-fb2d6388576c/styles/ca9095ee-5642-44a6-b23f-1bc8c0a20fe2/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "落ち着き",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/0753de72-daae-43a2-a611-acbf59d609de/speakers/9f25559b-1608-4768-8468-fb2d6388576c/styles/c7438dd2-8da6-46e7-8db5-e45b2a1ee142/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "怒り",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/0753de72-daae-43a2-a611-acbf59d609de/speakers/9f25559b-1608-4768-8468-fb2d6388576c/styles/4e51333d-cb7c-4d54-b36b-32d54e987e2c/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "b1b8072f-809f-4c6d-9ba1-2ca94d9c3663",
+  "name": "れな(現実20代女子AIボイチェン@リアボVC公式モデル)",
+  "user": "Dopoiro",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [
+   "ぽいロード(リアボVC公式)  x.com/dopoiro"
+  ],
+  "dl": 2386,
+  "likes": 29,
+  "desc": "🌸現実20代女子に声変わり無料最新AIボイチェンソフト「リアボVC」搭載モデルれなです🌸\n入手→ poipoipoi.booth.pm\n[声は(x.com/dopoiro)のAI]等とクレジット表記お願いします\n声提供アルバイト一般女性から権利購入&マージ済み&顔画像はAI",
+  "speakers": [
+   {
+    "name": "れな(現実20代女子AIボイチェン@リアボVC公式モデル)",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/0fe4fc50-e4c8-43af-8043-884b5fa6fa18/speakers/6732185f-1662-4e85-bbc9-2c53d7969240/styles/7b244600-2070-4732-a28e-1164f69a5a2c/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "kanasimi_kanasimi",
+      1,
+      []
+     ],
+     [
+      "uresii_uresii",
+      2,
+      []
+     ],
+     [
+      "hutuu_hutuu",
+      3,
+      []
+     ],
+     [
+      "odoroki_odoroki",
+      4,
+      []
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "baa6d55a-d751-49b8-bafb-b3a6555a100c",
+  "name": "七日週_T2モデル",
+  "user": "TakoeProject",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "Yumehaki Project V / VSMB Project"
+  ],
+  "dl": 2178,
+  "likes": 27,
+  "desc": "七日週　なのかめぐる　Nanoka Meguru　(CodeName:NANOKA_MEGURU)",
+  "speakers": [
+   {
+    "name": "七日週_T2モデル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/894c6952-40d9-432d-aa01-2f3aef23e6b3/speakers/88204c94-504c-4427-b9a6-7dea377eadec/styles/aff76713-9f6a-4cde-b230-938fb9b0c396/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "Negative",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/894c6952-40d9-432d-aa01-2f3aef23e6b3/speakers/88204c94-504c-4427-b9a6-7dea377eadec/styles/f83b49b0-682a-4370-956a-c55fa87dd8d8/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "Positive",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/894c6952-40d9-432d-aa01-2f3aef23e6b3/speakers/88204c94-504c-4427-b9a6-7dea377eadec/styles/eef754e4-237c-4290-9931-b631d4a203c1/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "21d8d535-f206-462d-a3bb-05f8252dede7",
+  "name": "さつき(現実20代女子AIボイチェン@リアボVC公式モデル)",
+  "user": "Dopoiro",
+  "category": "Other",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [
+   "ぽいロード(リアボVC公式)  x.com/dopoiro"
+  ],
+  "dl": 2153,
+  "likes": 27,
+  "desc": "🌸現実20代女子に声変わり無料最新AIボイチェンソフト「リアボVC」搭載モデルさつきです🌸\n入手→ poipoipoi.booth.pm\n[声は(x.com/dopoiro)のAI]等とクレジット表記お願いします\n声提供アルバイト一般女性から権利購入&マージ済み&顔画像はAI",
+  "speakers": [
+   {
+    "name": "さつき(現実20代女子AIボイチェン@リアボVC公式モデル)",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/cde72c76-47ef-45c5-b439-6ecb92dbe61d/speakers/3f5bf1bd-07ca-4aa2-8ac5-8ea1f970d7d6/styles/282bf1e6-52e4-4b2f-9ca8-c0a1350570ac/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "kanasimi_kanasimi",
+      1,
+      []
+     ],
+     [
+      "uresii_uresii",
+      2,
+      []
+     ],
+     [
+      "hutuu_hutuu",
+      3,
+      []
+     ],
+     [
+      "odoroki_odoroki",
+      4,
+      []
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "9a7feb22-b6f3-4f79-92d9-26849e063fa1",
+  "name": "もえ(現実20代女子AIボイチェン@リアボVC公式モデル)",
+  "user": "Dopoiro",
+  "category": "Other",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [
+   "ぽいロード(リアボVC公式)  x.com/dopoiro"
+  ],
+  "dl": 2121,
+  "likes": 27,
+  "desc": "🌸現実20代女子に声変わり無料最新AIボイチェンソフト「リアボVC」搭載モデルもえです🌸\n入手→ poipoipoi.booth.pm\n[声は(x.com/dopoiro)のAI]等とクレジット表記お願いします\n声提供アルバイト一般女性から権利購入&マージ済み&顔画像はAI",
+  "speakers": [
+   {
+    "name": "もえ(現実20代女子AIボイチェン@リアボVC公式モデル)",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/fe470261-b167-4419-89a0-e92d6a7554ca/speakers/24ae9992-cc02-42e5-8748-b8191c031b13/styles/78293315-61f7-4a32-b842-72c27b1fc078/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "kanasimi_kanasimi",
+      1,
+      []
+     ],
+     [
+      "uresii_uresii",
+      2,
+      []
+     ],
+     [
+      "hutuu_hutuu",
+      3,
+      []
+     ],
+     [
+      "odoroki_odoroki",
+      4,
+      []
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "d6bfe943-6903-491f-8d01-454ad8f88c14",
+  "name": "様子ヶ丘シイナ",
+  "user": "Nickel570",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "ACML-NC 1.0",
+  "creators": [
+   "ニッケル",
+   "海月ニケ",
+   "およそ水素"
+  ],
+  "dl": 1944,
+  "likes": 18,
+  "desc": "およそ水素の声から生まれた合成音声です。\nちょっと低めで鼻声気味な一般女性声でしゃべるよ\n\n各種連絡先:\nメール:umiduki.nike@gmail.com\nX(Twitter):@umiduki_nike",
+  "speakers": [
+   {
+    "name": "様子ヶ丘シイナ",
+    "styles": [
+     [
+      "!選択しないでください",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/6c1de931-2298-4994-b493-2029dafd4f56/speakers/3d8028d9-29d0-4497-bac8-e2b29d1f754a/styles/c96ded37-5a20-4ad5-aba6-c3f2458e4f0a/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "のーまる",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/6c1de931-2298-4994-b493-2029dafd4f56/speakers/3d8028d9-29d0-4497-bac8-e2b29d1f754a/styles/d364c632-7bcb-47f9-b912-83939d965b6b/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "キュートアグレッション",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/6c1de931-2298-4994-b493-2029dafd4f56/speakers/3d8028d9-29d0-4497-bac8-e2b29d1f754a/styles/eaf85ffe-f1ae-4288-89ff-c9c85731966f/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "fb04b883-13cb-40ef-b0ea-fad060a408e8",
+  "name": "大日椛_T2モデル",
+  "user": "TakoeProject",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "Yumehaki Project V / VSMB Project"
+  ],
+  "dl": 1903,
+  "likes": 32,
+  "desc": "大日椛　だいにちもみじ　Dainichi Momiji　(CodeName:DAINIC^I_MOMIZ^I)",
+  "speakers": [
+   {
+    "name": "大日椛_T2モデル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/e177d5da-9b27-4aa3-9420-0685bc033c95/speakers/4c35d908-4f55-46d0-a112-aa0d2b889050/styles/ac61c859-b1a1-4ecb-9c05-f2d5ee0d85b2/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "Negative",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/e177d5da-9b27-4aa3-9420-0685bc033c95/speakers/4c35d908-4f55-46d0-a112-aa0d2b889050/styles/ec09a11a-a7ca-4c89-997c-b88bc34ac699/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "Positive",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/e177d5da-9b27-4aa3-9420-0685bc033c95/speakers/4c35d908-4f55-46d0-a112-aa0d2b889050/styles/5b2a5503-ad00-4867-83a5-3c76b4d06f0b/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "d7255c2c-ddd0-425a-808c-662cd94c7f41",
+  "name": "M1",
+  "user": "gpt",
+  "category": "FictionalPerson",
+  "timbre": "YouthfulMale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "litagin"
+  ],
+  "dl": 1867,
+  "likes": 12,
+  "desc": "Style-Bert-VITS2に付属のデフォルト男性１モデル\nボイスサンプル：スタイルの強さ2.0\n\nCC BY-SA 4.0のため再配布",
+  "speakers": [
+   {
+    "name": "M1",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/37df5622-8f2c-4129-a961-2a34ecca8820/speakers/8392062b-e0d1-4c60-b13c-29aac2ebf321/styles/8bcd0731-d7e9-4df4-97b3-b57e274c9834/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "怒り",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/37df5622-8f2c-4129-a961-2a34ecca8820/speakers/8392062b-e0d1-4c60-b13c-29aac2ebf321/styles/01b96b9e-221e-4cbb-974d-81fea718880e/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "嫌悪",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/37df5622-8f2c-4129-a961-2a34ecca8820/speakers/8392062b-e0d1-4c60-b13c-29aac2ebf321/styles/ecfd55d8-6fe2-4f80-b043-f537de50b604/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "恐れ",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/37df5622-8f2c-4129-a961-2a34ecca8820/speakers/8392062b-e0d1-4c60-b13c-29aac2ebf321/styles/7d6aa611-852b-4f74-b427-7e3a442075eb/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "幸せ",
+      4,
+      [
+       "https://assets.aivis-project.com/aivm-models/37df5622-8f2c-4129-a961-2a34ecca8820/speakers/8392062b-e0d1-4c60-b13c-29aac2ebf321/styles/69722057-dcc3-427c-9d5a-576b750817d0/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "悲しみ",
+      5,
+      [
+       "https://assets.aivis-project.com/aivm-models/37df5622-8f2c-4129-a961-2a34ecca8820/speakers/8392062b-e0d1-4c60-b13c-29aac2ebf321/styles/fe02b441-2216-4b7d-a828-d5d329100bd5/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "驚き",
+      6,
+      [
+       "https://assets.aivis-project.com/aivm-models/37df5622-8f2c-4129-a961-2a34ecca8820/speakers/8392062b-e0d1-4c60-b13c-29aac2ebf321/styles/6560026e-5a41-4d4f-909f-d1113725d863/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "d0471c7d-3adc-4c99-b7b7-0e91c4d9d96f",
+  "name": "木角空_T2モデル",
+  "user": "TakoeProject",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "Yumehaki Project V / VSMB Project"
+  ],
+  "dl": 1770,
+  "likes": 23,
+  "desc": "木角空　きずみそら　Kizumi Sora　(CodeName:KIZUMI_SORA)",
+  "speakers": [
+   {
+    "name": "木角空_T2モデル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/848a2deb-3b36-458a-837d-a56579f76d12/speakers/0305fce4-f2af-4c1c-81a9-978dbf276216/styles/1105c132-333f-47c5-bf1f-22b3d606e03e/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "Negative",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/848a2deb-3b36-458a-837d-a56579f76d12/speakers/0305fce4-f2af-4c1c-81a9-978dbf276216/styles/228eaaac-dfb8-4db2-864f-c89f185213b8/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "Positive",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/848a2deb-3b36-458a-837d-a56579f76d12/speakers/0305fce4-f2af-4c1c-81a9-978dbf276216/styles/cfb68e1b-0d1d-40f2-b9ea-2eb6321eccc0/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "25b39db7-5757-47ef-9fe4-2b7aff328a18",
+  "name": "F2",
+  "user": "gpt",
+  "category": "FictionalPerson",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "litagin"
+  ],
+  "dl": 1594,
+  "likes": 13,
+  "desc": "Style-Bert-VITS2に付属のデフォルト女性２モデル\nボイスサンプル：スタイルの強さ1.3\n\nCC BY-SA 4.0のため再配布",
+  "speakers": [
+   {
+    "name": "F2",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/09fde66f-582e-4ec1-a61e-a9c6d6fcbf19/speakers/495a6c08-a598-462a-af69-f1c3327bd099/styles/310f7b2f-c552-4663-8bf7-ada6dcb6809f/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "怒り",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/09fde66f-582e-4ec1-a61e-a9c6d6fcbf19/speakers/495a6c08-a598-462a-af69-f1c3327bd099/styles/df6b45ee-ffa2-46e3-aaf1-6d8a8048b27f/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "嫌悪",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/09fde66f-582e-4ec1-a61e-a9c6d6fcbf19/speakers/495a6c08-a598-462a-af69-f1c3327bd099/styles/881164f8-c5df-4dd8-a18e-f664994c85d7/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "恐れ",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/09fde66f-582e-4ec1-a61e-a9c6d6fcbf19/speakers/495a6c08-a598-462a-af69-f1c3327bd099/styles/8ba3ed7b-7bc6-41b7-a2d6-c39c7031c6db/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "幸せ",
+      4,
+      [
+       "https://assets.aivis-project.com/aivm-models/09fde66f-582e-4ec1-a61e-a9c6d6fcbf19/speakers/495a6c08-a598-462a-af69-f1c3327bd099/styles/6d533f21-6f23-4ace-a77b-1e0e1687d051/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "悲しみ",
+      5,
+      [
+       "https://assets.aivis-project.com/aivm-models/09fde66f-582e-4ec1-a61e-a9c6d6fcbf19/speakers/495a6c08-a598-462a-af69-f1c3327bd099/styles/0c59046d-81f1-436c-8f5c-842963befd44/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "驚き",
+      6,
+      [
+       "https://assets.aivis-project.com/aivm-models/09fde66f-582e-4ec1-a61e-a9c6d6fcbf19/speakers/495a6c08-a598-462a-af69-f1c3327bd099/styles/48d044e5-a429-4305-94d2-2c73e021deec/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "80fe2db4-5891-4550-a3f3-dff9a91c0946",
+  "name": "ろてじん（匿名インタビュー風）",
+  "user": "Rotejin",
+  "category": "OriginalCharacter",
+  "timbre": "MiddleAgedMale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [
+   "ろてじん"
+  ],
+  "dl": 1570,
+  "likes": 26,
+  "desc": "匿名インタビュー風の演技でセリフ収録したボイスモデルです。\nピッチシフターで声を加工しています。",
+  "speakers": [
+   {
+    "name": "ろてじん（匿名インタビュー風）",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/84f2049b-dc11-482d-98e6-a9f18943f935/speakers/44fc9368-987e-4b3e-8129-bf4c9849df3a/styles/7abc0f25-e975-46a1-95eb-bf99ffcad3c8/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "6acf95e8-11a9-414e-aa9c-6dbebf9113ca",
+  "name": "F1",
+  "user": "gpt",
+  "category": "FictionalPerson",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "litagin"
+  ],
+  "dl": 1512,
+  "likes": 11,
+  "desc": "Style-Bert-VITS2に付属のデフォルト女性１モデル\nボイスサンプル：スタイルの強さ2.0\n\nCC BY-SA 4.0のため再配布",
+  "speakers": [
+   {
+    "name": "F1",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/b539a121-ee77-40b6-8504-6f0aa8be32ea/speakers/c11ed70f-4500-4c3c-a79c-4d6cdd4bcaf2/styles/64b18c00-c56f-4df6-a245-bd7258fa9908/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "怒り",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/b539a121-ee77-40b6-8504-6f0aa8be32ea/speakers/c11ed70f-4500-4c3c-a79c-4d6cdd4bcaf2/styles/f3c6d9d5-7f26-4fc3-84a7-c570ffeb935f/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "嫌悪",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/b539a121-ee77-40b6-8504-6f0aa8be32ea/speakers/c11ed70f-4500-4c3c-a79c-4d6cdd4bcaf2/styles/73b4ce7c-471c-4d43-85af-e18f460e198e/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "恐れ",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/b539a121-ee77-40b6-8504-6f0aa8be32ea/speakers/c11ed70f-4500-4c3c-a79c-4d6cdd4bcaf2/styles/ff96a2bb-2739-4316-aee9-0aeff8fd34e4/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "幸せ",
+      4,
+      [
+       "https://assets.aivis-project.com/aivm-models/b539a121-ee77-40b6-8504-6f0aa8be32ea/speakers/c11ed70f-4500-4c3c-a79c-4d6cdd4bcaf2/styles/a6bebc28-3a61-4bb5-8a6a-28723fe8c745/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "悲しみ",
+      5,
+      [
+       "https://assets.aivis-project.com/aivm-models/b539a121-ee77-40b6-8504-6f0aa8be32ea/speakers/c11ed70f-4500-4c3c-a79c-4d6cdd4bcaf2/styles/59eb8678-20f7-4578-a030-ad687d7b2855/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "驚き",
+      6,
+      [
+       "https://assets.aivis-project.com/aivm-models/b539a121-ee77-40b6-8504-6f0aa8be32ea/speakers/c11ed70f-4500-4c3c-a79c-4d6cdd4bcaf2/styles/7b92cd1b-c94c-43ff-bc9f-df70c1288b10/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "9e9f84bd-05cd-4476-b47e-ad34264b2a03",
+  "name": "亜空マオ",
+  "user": "shinomao",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [
+   "お疲れ様です"
+  ],
+  "license": "ACML-NC 1.0",
+  "creators": [],
+  "dl": 1420,
+  "likes": 21,
+  "desc": "人の世界で生活をするために人の格好をしている堕天使。\n優しい声で話します。",
+  "speakers": [
+   {
+    "name": "亜空マオ",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/28fd1b4a-750a-4d50-9acf-4dd0e5270578/speakers/346d2dad-316f-4539-a892-aa2bce502d1b/styles/7bd8ca85-9769-4862-8800-0f801e4daf56/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "ふきげん",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/28fd1b4a-750a-4d50-9acf-4dd0e5270578/speakers/346d2dad-316f-4539-a892-aa2bce502d1b/styles/1d80ed6f-af9c-4ea5-b0a8-f4b5fc56bcb4/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "じょうきげん",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/28fd1b4a-750a-4d50-9acf-4dd0e5270578/speakers/346d2dad-316f-4539-a892-aa2bce502d1b/styles/e8531999-8c81-4912-b1a3-ae42c74041ae/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "b2bee8fc-3f65-4c99-9607-a1075a10066b",
+  "name": "立神ケイ",
+  "user": "Nickel570",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [
+   "ぼくは・丈ちゃん、です"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "ニッケル",
+   "海月ニケ"
+  ],
+  "dl": 1379,
+  "likes": 12,
+  "desc": "中の人が頑張って出した低い声から生まれました、ちょっとボソついた声で喋ります\nスタイル追加予定(へにょへにょスタイル)\n\n各種連絡先:\nメール:umiduki.nike@gmail.com\nX(Twitter):@umiduki_nike",
+  "speakers": [
+   {
+    "name": "立神ケイ",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/a902ccf4-d5a4-4366-a6c4-7283c89f1e14/speakers/79d7f941-da7e-4b7c-bcc2-6bac684b1ee5/styles/1bb9ea17-7fe0-47d0-b143-4cf12312e6ad/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "2ff1c526-27d4-4eeb-b069-4207ae5fe259",
+  "name": "すみれ(現実20代女子AIボイチェン@リアボVC公式モデル)",
+  "user": "Dopoiro",
+  "category": "Other",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [
+   "ぽいロード(リアボVC公式)  x.com/dopoiro"
+  ],
+  "dl": 1328,
+  "likes": 7,
+  "desc": "🌸現実20代女子に声変わり無料最新AIボイチェンソフト「リアボVC」搭載モデルすみれです🌸\n入手→ poipoipoi.booth.pm\n[声は(x.com/dopoiro)のAI]等とクレジット表記お願いします\n声提供アルバイト一般女性から権利購入&マージ済み&顔画像はAI",
+  "speakers": [
+   {
+    "name": "すみれ(現実20代女子AIボイチェン@リアボVC公式モデル)",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/6d1986f2-58e8-40ca-b8f8-1f6f847883d4/speakers/6792a5c8-7afc-4746-9241-88d0b9197baf/styles/7a8d5967-cec3-48ef-9b54-7672dc4b4e2d/voice-samples/0.wav"
+      ]
+     ],
+     [
+      "kanasimi_kanasimi",
+      1,
+      []
+     ],
+     [
+      "uresii_uresii",
+      2,
+      []
+     ],
+     [
+      "hutuu_hutuu",
+      3,
+      []
+     ],
+     [
+      "odoroki_odoroki",
+      4,
+      []
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "00f29eb2-e12b-4f64-a5e8-4188be62de33",
+  "name": "宗周定昌",
+  "user": "uUMwsnIgbonmIXc",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [
+   "だる気",
+   "やる気のない"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "SS"
+  ],
+  "dl": 1315,
+  "likes": 13,
+  "desc": "なんとなくアニメのだれかっぽい声",
+  "speakers": [
+   {
+    "name": "宗周定昌",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/f7892990-fe0b-47a0-9e5a-9f3627cbc526/speakers/2623012b-d995-4514-9297-a21856e986ee/styles/f3e17fad-64f7-4d07-a6a0-022c99545b6f/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "e40d5b99-8cde-4442-a45b-0ebec9167506",
+  "name": "kokuren_voice",
+  "user": "kokuren",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [
+   "サンプル"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "kokuren"
+  ],
+  "dl": 1278,
+  "likes": 1,
+  "desc": "kokuren(@wangoroge333)のボイスモデルです。",
+  "speakers": [
+   {
+    "name": "kokuren_voice",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      []
+     ],
+     [
+      "Disgust",
+      1,
+      []
+     ],
+     [
+      "Fear",
+      2,
+      []
+     ],
+     [
+      "Surprised",
+      3,
+      []
+     ],
+     [
+      "Happy",
+      4,
+      []
+     ],
+     [
+      "Sad",
+      5,
+      []
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "446d2053-14ca-4b68-897c-380faf555b59",
+  "name": "リダ / Lida（感情表現モデル）",
+  "user": "Lida",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "リダ"
+  ],
+  "dl": 1180,
+  "likes": 12,
+  "desc": "※このモデルはカスタムライセンスが適応されます。必ずご確認下さい。\nVTuberリダの公式音声合成モデルです。\n\n利用の際は「リダ」と以下のURLを明記して下さい。\nhttps://youtube.com/channel/UC2tX473Zo09ZCnhAUNdAvjA/join",
+  "speakers": [
+   {
+    "name": "リダ / Lida（感情表現モデル）",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/8dfe9777-c113-458f-8380-87c77835934c/speakers/c54e5fa5-29fd-4fc4-a3a2-3ef19084c005/styles/2cf18cf9-9123-48b9-97a6-17e1019801dc/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "落ち着き",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/8dfe9777-c113-458f-8380-87c77835934c/speakers/c54e5fa5-29fd-4fc4-a3a2-3ef19084c005/styles/6e3cdb50-e2c0-472e-811f-856aeb721ac7/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "クール",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/8dfe9777-c113-458f-8380-87c77835934c/speakers/c54e5fa5-29fd-4fc4-a3a2-3ef19084c005/styles/98a3231b-4b8f-4b2f-9b43-58268f236e41/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "デフォルト",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/8dfe9777-c113-458f-8380-87c77835934c/speakers/c54e5fa5-29fd-4fc4-a3a2-3ef19084c005/styles/ca8d4c6d-6a80-461b-a153-7cba11cffe27/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "元気",
+      4,
+      [
+       "https://assets.aivis-project.com/aivm-models/8dfe9777-c113-458f-8380-87c77835934c/speakers/c54e5fa5-29fd-4fc4-a3a2-3ef19084c005/styles/b37332ff-aa63-45aa-8b38-f86ea588364e/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "落ち着き２",
+      5,
+      [
+       "https://assets.aivis-project.com/aivm-models/8dfe9777-c113-458f-8380-87c77835934c/speakers/c54e5fa5-29fd-4fc4-a3a2-3ef19084c005/styles/525facc8-26bc-47b4-9c30-9b8457b26413/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "元気２",
+      6,
+      [
+       "https://assets.aivis-project.com/aivm-models/8dfe9777-c113-458f-8380-87c77835934c/speakers/c54e5fa5-29fd-4fc4-a3a2-3ef19084c005/styles/460536af-3668-441e-8bbb-e16af0f77551/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "悲しみ",
+      7,
+      [
+       "https://assets.aivis-project.com/aivm-models/8dfe9777-c113-458f-8380-87c77835934c/speakers/c54e5fa5-29fd-4fc4-a3a2-3ef19084c005/styles/a9a07fbf-bcfb-4dc1-9d90-62a2a7b1e722/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "キュート",
+      8,
+      [
+       "https://assets.aivis-project.com/aivm-models/8dfe9777-c113-458f-8380-87c77835934c/speakers/c54e5fa5-29fd-4fc4-a3a2-3ef19084c005/styles/3fd787ac-f2d5-4e2d-ad97-1baa67df7385/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "キュート2",
+      9,
+      [
+       "https://assets.aivis-project.com/aivm-models/8dfe9777-c113-458f-8380-87c77835934c/speakers/c54e5fa5-29fd-4fc4-a3a2-3ef19084c005/styles/92ee3d56-5227-4242-9a4b-8dc843e77297/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "734c12b6-eaf2-4dbd-8596-8663c72d2afa",
+  "name": "黄金笑_T2モデル",
+  "user": "TakoeProject",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "Yumehaki Project V / VSMB Project"
+  ],
+  "dl": 1173,
+  "likes": 20,
+  "desc": "黄金笑　こがねえみ　Kogane Emi　(CodeName:KOGANE_EMI)",
+  "speakers": [
+   {
+    "name": "黄金笑_T2モデル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/77083dbd-fb32-471c-ac75-aa19b4bf00e7/speakers/90e8296f-bb1e-497a-a2da-d56361b1ad71/styles/4bd28c67-761f-4acb-b2d5-3b2c1a72c44e/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "Negative",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/77083dbd-fb32-471c-ac75-aa19b4bf00e7/speakers/90e8296f-bb1e-497a-a2da-d56361b1ad71/styles/f440b667-e996-4f24-9fb2-216ff5e035fe/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "Positive",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/77083dbd-fb32-471c-ac75-aa19b4bf00e7/speakers/90e8296f-bb1e-497a-a2da-d56361b1ad71/styles/c9d95d8c-a060-41e9-b598-7bdf609a07e8/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "eefe1fbd-d15a-49ae-bc83-fc4aaad680e1",
+  "name": "蒼月ハヤテ",
+  "user": "sald_ra",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "ろてじん/Saldra"
+  ],
+  "dl": 1032,
+  "likes": 22,
+  "desc": "キャラクター「蒼月ハヤテ」のボイスモデルです。\n",
+  "speakers": [
+   {
+    "name": "蒼月ハヤテ",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/0acbf91c-88a2-4c76-bf8e-e6a88ea8b4a1/speakers/40b5754d-51f7-4643-9548-18f11cf856a2/styles/e5146cab-c151-4eec-81cb-401725dee291/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "f13c2ec8-1069-403f-a23e-503b3a270c57",
+  "name": "矢月舞_T2モデル",
+  "user": "TakoeProject",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "Yumehaki Project V / VSMB Project"
+  ],
+  "dl": 984,
+  "likes": 17,
+  "desc": "矢月舞　やつきまい　Yatsuki Mai　(CodeName:YACUKI_MAI)",
+  "speakers": [
+   {
+    "name": "矢月舞_T2モデル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/12edb6d9-2660-4256-8a83-80389d0e0962/speakers/4496bdf3-2f6d-449c-a7c3-ada18da2a439/styles/9dddcfae-022a-417e-a5fc-cde8c9e478ea/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "Negative",
+      1,
+      []
+     ],
+     [
+      "Positive",
+      2,
+      []
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "d200a39c-7c0f-4e03-a947-b3f0cb8d3d6b",
+  "name": "葉土此_T2モデル",
+  "user": "TakoeProject",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "Yumehaki Project V / VSMB Project"
+  ],
+  "dl": 830,
+  "likes": 11,
+  "desc": "葉土此　はつちこの　Hatsuchi Kono　(CodeName:HACUC^I_KONO)",
+  "speakers": [
+   {
+    "name": "葉土此_T2モデル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/3a5e29e8-2169-4351-8b0e-e1d9c9a1c186/speakers/8c7f8042-ed0b-4c7a-83ca-9fc49805aa6e/styles/47483db7-9a07-4552-8eb8-412927b5fea8/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "Negative",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/3a5e29e8-2169-4351-8b0e-e1d9c9a1c186/speakers/8c7f8042-ed0b-4c7a-83ca-9fc49805aa6e/styles/591e733b-2aa2-4882-8bea-0c0bb2a27ebf/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "Positive",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/3a5e29e8-2169-4351-8b0e-e1d9c9a1c186/speakers/8c7f8042-ed0b-4c7a-83ca-9fc49805aa6e/styles/a03e1460-f55f-4af4-b205-ba2378daf3e8/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "e4ee047d-3af4-4936-90eb-29a3c9104709",
+  "name": "火山夢_T2モデル",
+  "user": "TakoeProject",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "Yumehaki Project V / VSMB Project"
+  ],
+  "dl": 802,
+  "likes": 11,
+  "desc": "火山夢　ひやまゆめ　Hiyama Yume　(CodeName:F^IYAMA_YUME)",
+  "speakers": [
+   {
+    "name": "火山夢_T2モデル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/8b948689-39e9-4558-8d31-cf6042a7f727/speakers/c0cbdc5f-7b36-4827-8a1c-5596d5f2482d/styles/273b3230-4135-4154-8a47-ae13f289934b/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "Negative",
+      1,
+      []
+     ],
+     [
+      "Positive",
+      2,
+      []
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "70ad7e84-6a10-48d6-8f9a-8dac4bba3c0b",
+  "name": "はきみて れく(瞭魅推 れく)",
+  "user": "hackimitelec",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [
+   "VTuber",
+   "技術属性",
+   "モンスター"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "はきみて れく(瞭魅推 れく)"
+  ],
+  "dl": 708,
+  "likes": 5,
+  "desc": "技術属性モンスター(偽)VTuberの\nはきみて れく(瞭魅推 れく)です\n\n公序良俗に反しなければ、ライセンス通り自由に使っていいよ",
+  "speakers": [
+   {
+    "name": "はきみて れく(瞭魅推 れく)",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/62f0255c-c995-419c-95ea-df7229dd1a87/speakers/bca556ec-e048-4258-a297-30fb1471f747/styles/fd50bb76-ad65-4f0c-b176-cc606618267d/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "6e60c40a-6d0f-4d86-9d97-61c11402058a",
+  "name": "オレンジ",
+  "user": "orange",
+  "category": "LivingPerson",
+  "timbre": "YouthfulMale",
+  "tags": [],
+  "license": "ACML-NC 1.0",
+  "creators": [
+   "orange (https://x.com/orange_3134)"
+  ],
+  "dl": 704,
+  "likes": 9,
+  "desc": "ResoniteやVRChatで活動しているクリエイター「オレンジ」のボイスモデルです。",
+  "speakers": [
+   {
+    "name": "オレンジ",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/b780fb21-0efe-434b-8b4c-8a67b5dbb818/speakers/b12ee276-e4ce-47fb-8545-015061abc44e/styles/0527efe6-6068-4f8f-bd1c-e1a6f39c294f/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "052bb693-112b-45be-b498-8e05aa9d6e5e",
+  "name": "銀芽(ぎんが)",
+  "user": "aiseiyu",
+  "category": "ExistingCharacter",
+  "timbre": "AdultMale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "AI声優シリーズ"
+  ],
+  "dl": 693,
+  "likes": 7,
+  "desc": "https://aoto002.booth.pm/items/4373936\nこちらで配布されているITAコーパス音声を元に\n作られたモデルです。スタイル分けされています。\n「AI声優-銀芽ITAコーパス」\n音声提供　バッハ a.k.a Mao　@bach_Channel　",
+  "speakers": [
+   {
+    "name": "銀芽(ぎんが)",
+    "styles": [
+     [
+      "ニュートラル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/45141a77-54db-47df-bb77-012cef2befc1/speakers/686909f0-0884-4ae1-b37d-da96bff4794f/styles/f6589d08-0b75-4e4c-b16e-ccc561aa4412/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "通常",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/45141a77-54db-47df-bb77-012cef2befc1/speakers/686909f0-0884-4ae1-b37d-da96bff4794f/styles/54f11449-12c7-4d99-8332-edb9e96e55a4/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "呆れ",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/45141a77-54db-47df-bb77-012cef2befc1/speakers/686909f0-0884-4ae1-b37d-da96bff4794f/styles/1ffe874e-0c08-46de-a0f4-92d833f40849/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "感情的",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/45141a77-54db-47df-bb77-012cef2befc1/speakers/686909f0-0884-4ae1-b37d-da96bff4794f/styles/8da79464-3204-4c96-a0f9-24711fbe8039/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "1a322ad9-6b7e-4a6d-8d0b-c4cd264538dc",
+  "name": "金苗(かなえ)",
+  "user": "aiseiyu",
+  "category": "ExistingCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [
+   "鹿児島の旅行割、終わったと思ったら…次の旅行割がある？"
+  ],
+  "license": "Custom",
+  "creators": [],
+  "dl": 657,
+  "likes": 8,
+  "desc": "https://aoto002.booth.pm/items/4373936\nこちらで配布されているITAコーパス音声を元に\n作られたモデルです。スタイル分けされています。\n「AI声優-金苗ITAコーパス」\n音声提供　琴香　@kotoka_11_28",
+  "speakers": [
+   {
+    "name": "金苗(かなえ)",
+    "styles": [
+     [
+      "ニュートラル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/af119344-3a5f-401a-a6fd-fdad1caee732/speakers/15a1df58-1b29-4422-80b5-a92e708f2a3f/styles/f2843a25-a3b0-43e2-8afb-235f1baef5e6/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "ノーマル",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/af119344-3a5f-401a-a6fd-fdad1caee732/speakers/15a1df58-1b29-4422-80b5-a92e708f2a3f/styles/85d58982-27ad-4c8e-9204-8bdcfb9d82a2/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "うきうき",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/af119344-3a5f-401a-a6fd-fdad1caee732/speakers/15a1df58-1b29-4422-80b5-a92e708f2a3f/styles/2a1aae68-41ff-4903-b7ec-23d5bc09c78d/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "ほのぼの",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/af119344-3a5f-401a-a6fd-fdad1caee732/speakers/15a1df58-1b29-4422-80b5-a92e708f2a3f/styles/18de2d99-f551-424b-b94a-9a149db2bfb2/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "ぷんぷん",
+      4,
+      [
+       "https://assets.aivis-project.com/aivm-models/af119344-3a5f-401a-a6fd-fdad1caee732/speakers/15a1df58-1b29-4422-80b5-a92e708f2a3f/styles/675a0391-94a7-41f3-9036-4fb2193d85a5/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "愉悦",
+      5,
+      [
+       "https://assets.aivis-project.com/aivm-models/af119344-3a5f-401a-a6fd-fdad1caee732/speakers/15a1df58-1b29-4422-80b5-a92e708f2a3f/styles/071e5844-86c6-4c0b-9edb-62b2519b09ad/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "76a774e4-cc4d-4d8c-879e-8d2be3d30dad",
+  "name": "Flow",
+  "user": "Flow",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "Flow"
+  ],
+  "dl": 475,
+  "likes": 7,
+  "desc": "フロウの声をStyle-Bert-VITS2(JP-Extra)によって学習させた音声合成モデルです。\n\nスタイルの強さ: 0.95~1.30がおすすめ。ささやき・気だるげは滑舌が悪くなりやすい。\nテンポの緩急: 0.90~1.60がおすすめ。好みによると思う。",
+  "speakers": [
+   {
+    "name": "Flow",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/1f1b75f7-d8f2-4fda-b5b9-60f45e451985/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "01_JOY",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/2b57c336-b5eb-46b7-b194-f74e5f7650e9/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "02_ANGRY",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/87e98b26-1895-4cdf-a37f-ae91636428a4/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "03_SAD",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/5071a062-558f-400d-a32f-7df7f695441b/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "04_FUN",
+      4,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/a9893765-9ad8-4ab4-b1d0-106734879ece/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "05_SURPRISE",
+      5,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/7e4f63f8-3065-4a2e-bb48-b4d36ceced59/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "06_CONTEMPT",
+      6,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/a7e9744d-c694-45d9-b40b-5c3132480f0b/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "07_FEAR",
+      7,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/2f84a354-2e6b-4326-99c5-260e96ae0755/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "08_CONFUSE",
+      8,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/365a31e5-32a9-4055-ac07-773b9235c01c/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "09_NORMAL",
+      9,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/7cb5fbae-3da6-4c51-b7b6-f998ef8efd97/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "10_EXPLAIN",
+      10,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/a8e23197-7cce-4a11-8f48-8f4f894e2337/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "11_ANNOUNCE",
+      11,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/b1ad7d7a-9e2a-417a-9799-956ec5f0af6b/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "12_WHISPER_ANGRY",
+      12,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/b59bacce-b61c-45d4-9795-9529eee794b4/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "12_WHISPER_CONTEMPT",
+      13,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/598e2777-1d3b-450c-ab64-c86efaa9a509/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "12_WHISPER_FEAR",
+      14,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/782630dc-5937-4411-b5ac-7125e748c806/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "12_WHISPER_FUN",
+      15,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/0bb9702d-1ba9-4a63-859e-417d21f92f1d/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "12_WHISPER_JOY",
+      16,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/2aba176a-d01c-4adb-92a1-df723000a3d0/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "12_WHISPER_SAD",
+      17,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/85c507a1-011b-4677-8608-0164b8e42866/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "13_LAZY_ANGRY",
+      18,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/1d5ccd1f-fcf6-42f9-9c10-16f2e700b8d8/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "13_LAZY_NORMAL",
+      19,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/d5b37dae-9d69-47e1-8bcc-16c8f2153e5a/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "13_LAZY_SAD",
+      20,
+      [
+       "https://assets.aivis-project.com/aivm-models/600f7990-6936-4ba7-8ad2-4763807758a3/speakers/a49b1c71-83e7-4fe2-847b-23b48847c039/styles/14a0bf06-6f42-4dcc-9621-de091abd9d53/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "83f2930e-4697-4265-822c-04d7337b3047",
+  "name": "G59",
+  "user": "orange",
+  "category": "LivingPerson",
+  "timbre": "YouthfulMale",
+  "tags": [],
+  "license": "ACML-NC 1.0",
+  "creators": [
+   "orange (https://x.com/orange_3134)"
+  ],
+  "dl": 470,
+  "likes": 7,
+  "desc": "VRの住人「G59」のボイスモデルです。",
+  "speakers": [
+   {
+    "name": "G59",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/343d7484-6e79-42cf-9730-6e8887d2c045/speakers/1e2e125c-8e3c-4bf9-bfde-21cfd583c37c/styles/4dac993b-f7e9-45c8-b799-9aed79f5213a/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "0e8ea44c-d904-467d-a0e6-81d52b1db098",
+  "name": "楽町音穏_T3モデル",
+  "user": "TakoeProject",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "Yumehaki Project V / VSMB Project",
+   "TαkoeProject"
+  ],
+  "dl": 455,
+  "likes": 7,
+  "desc": "楽町音穏　らくまちねおん　Rakumachi Neon　(CodeName:RAKUMAC^I_NEON)",
+  "speakers": [
+   {
+    "name": "楽町音穏_T3モデル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/98267474-d876-475b-aa4e-3ad044d2fd05/speakers/dd3e9e10-7caf-4f07-9bf4-1fb1f4f1e88b/styles/2bf3212c-9ada-441f-aa38-818cafd8e3e9/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "b79c40e4-8a5e-4f20-802c-2c0eba2f0983",
+  "name": "結亜ナル",
+  "user": "yuusyaasisutanto",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [],
+  "license": "CC0",
+  "creators": [
+   "yuusyaasisutanto"
+  ],
+  "dl": 441,
+  "likes": 5,
+  "desc": "オナラとケツを叩く音から産まれた合成音声です。\nWTFPLライセンス、及びにそれに類するパブリックドメインの下に配布されております。\n同ライセンスの下、著作権放棄された立ち絵も配布中です。\n興味がございましたら検索して頂ければ幸いです。",
+  "speakers": [
+   {
+    "name": "結亜ナル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/24b3c859-458b-4bfd-8d5f-737404761b19/speakers/1a3ff035-ed7d-4d92-9dcd-5ff241257473/styles/4ea3ce9f-eb47-4175-95d8-e7156f50ecce/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "ebd755af-392e-44ac-a523-53a1b1fa1377",
+  "name": "kuroike ai",
+  "user": "KOKOROHQ_YUU",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "kuroikeai"
+  ],
+  "dl": 397,
+  "likes": 2,
+  "desc": "",
+  "speakers": [
+   {
+    "name": "kuroike ai",
+    "styles": [
+     [
+      "Neutral",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/b30f02e4-0cc6-4cff-be0d-c4275a456f08/speakers/4ed3d32c-a81b-435a-881c-ece6f7585230/styles/9b6caa89-3c17-465f-a0c5-ec909b6cc3f0/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "セクシー",
+      1,
+      []
+     ],
+     [
+      "あまあま",
+      2,
+      []
+     ],
+     [
+      "ツンツン",
+      3,
+      []
+     ],
+     [
+      "ノーマル",
+      4,
+      []
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "ddbea2e2-e51f-48da-ace1-197b2c6a77bb",
+  "name": "Amene Lila",
+  "user": "yQIPIAYSW3R6v3y",
+  "category": "OriginalCharacter",
+  "timbre": "YoungFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "tyvy"
+  ],
+  "dl": 357,
+  "likes": 4,
+  "desc": "ライラは親切で遊び心のある若い女性で、歌うことに加えて、従弟のタイヴィと一緒に時間を過ごすのが大好きです。",
+  "speakers": [
+   {
+    "name": "Amene Lila",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/7bc5e003-0af0-42d4-99a3-59715af21525/speakers/2899dcc1-c715-4b68-8ffe-e716c98be352/styles/d7fe4b28-162c-4513-8cef-fb0c01aafe3a/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "ed0f793d-786c-4fde-8561-e8bbac7bfe1d",
+  "name": "六弦エレキ",
+  "user": "len_sakaki",
+  "category": "OriginalCharacter",
+  "timbre": "Mechanical",
+  "tags": [
+   "無生物"
+  ],
+  "license": "ACML 1.0",
+  "creators": [
+   "Len＿Sakaki"
+  ],
+  "dl": 315,
+  "likes": 3,
+  "desc": "六弦エレキのAivisSpeech用合成音声モデルです。\nHP: https://lenskkpb.wixsite.com/len-sakaki-official\nX(旧Twitter): https://x.com/len_sakaki",
+  "speakers": [
+   {
+    "name": "六弦エレキ",
+    "styles": [
+     [
+      "のーまる",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/e6d3c272-6d0b-44a8-86ff-d47de44ad939/speakers/c4a58b92-06b0-4c8a-aefd-d857df6548f7/styles/0794b794-04ad-4092-bdda-a0394ab13af3/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "はきはき",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/e6d3c272-6d0b-44a8-86ff-d47de44ad939/speakers/c4a58b92-06b0-4c8a-aefd-d857df6548f7/styles/15efa86e-cc59-45ca-adf0-b0178e47db2c/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "るんるん",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/e6d3c272-6d0b-44a8-86ff-d47de44ad939/speakers/c4a58b92-06b0-4c8a-aefd-d857df6548f7/styles/bdabb32e-dee3-493a-9429-f38427a7b886/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "しんけん",
+      3,
+      [
+       "https://assets.aivis-project.com/aivm-models/e6d3c272-6d0b-44a8-86ff-d47de44ad939/speakers/c4a58b92-06b0-4c8a-aefd-d857df6548f7/styles/2ac36788-876a-451c-b858-6f6f8ee77ba8/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "f493ab6c-1ffa-4534-9bbd-2ba398f17cd5",
+  "name": "すきやき馬太郎",
+  "user": "sukiyaki_umataro88",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [],
+  "license": "CC0",
+  "creators": [
+   "すきやき馬太郎"
+  ],
+  "dl": 313,
+  "likes": 1,
+  "desc": "すきやき馬太郎は、落ち着いた話し方が特徴のAI音声合成モデルです。学習量が少ないため、発音にはところどころ粗さがありますが、陰キャ風の少しぼそぼそとした控えめな話し方も含めて、このモデルならではの味わいがあります。",
+  "speakers": [
+   {
+    "name": "すきやき馬太郎",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/3aeb4eb9-2cf1-4f76-9888-14e0bc45231d/speakers/099e6da2-a55f-4d64-8f01-6db822108af9/styles/6c7c12bf-9492-4d39-9357-9dbd048a8d10/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "9badaf1f-f664-47de-9754-51ad6936d693",
+  "name": "地良谷詩_T3モデル",
+  "user": "TakoeProject",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "Yumehaki Project V / VSMB Project",
+   "TαkoeProject"
+  ],
+  "dl": 282,
+  "likes": 2,
+  "desc": "地良谷詩　ちらたにうたい　Chiratani Utai　(CodeName:C^IRATANI_UTAI)",
+  "speakers": [
+   {
+    "name": "地良谷詩_T3モデル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/3087932b-69d0-4eea-acb5-e49a354ff9de/speakers/8e3c037f-16b9-41a8-954a-b6277ded0a5d/styles/ccc3ce6d-1488-4d00-9e45-24703a20f723/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "33090ea6-7696-491b-afb9-86fdbc4c2e51",
+  "name": "鰻川叶恵_T3モデル",
+  "user": "TakoeProject",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "Yumehaki Project V / VSMB Project",
+   "TαkoeProject"
+  ],
+  "dl": 273,
+  "likes": 4,
+  "desc": "鰻川叶恵　うなかわかなえ　Unakawa Kanae　(CodeName:UNAKAWA_KANAE)",
+  "speakers": [
+   {
+    "name": "鰻川叶恵_T3モデル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/440e76a6-3b47-423d-a9a1-84acc41d3903/speakers/17752d2d-6db7-40ec-8e73-548927d90983/styles/68076e5e-964b-4490-9c30-66e19f70ac54/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "657f4f16-3cf5-4048-9a98-00987038ebf0",
+  "name": "RakumaYue",
+  "user": "RakushinNoSagashibasyo",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [
+   "楽間勇笑"
+  ],
+  "license": "Custom",
+  "creators": [
+   "ワライト/凱旋勇進",
+   "ニッケル",
+   "黄鏡博人"
+  ],
+  "dl": 257,
+  "likes": 8,
+  "desc": "音声合成キャラクター「楽間勇笑」のモデルです。\n\nCV：ワライト/凱旋勇進\n学習：ニッケル\n絵：黄鏡博人",
+  "speakers": [
+   {
+    "name": "RakumaYue",
+    "styles": [
+     [
+      "Standard",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/b145000b-1799-452b-9b6d-763e47a1b550/speakers/51d73ed0-f8a9-4708-ae7e-8dc9e80fe68e/styles/c03870a0-707a-4682-8ae7-1f30d1cb2e29/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "f79e73ab-3320-473b-8e3f-713c30c39ed1",
+  "name": "MarkN",
+  "user": "MarkN",
+  "category": "LivingPerson",
+  "timbre": "YouthfulMale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [
+   "MarkN"
+  ],
+  "dl": 231,
+  "likes": 2,
+  "desc": "VRプラットフォームResoniteで活動するクリエイター「MarkN」のボイスモデル\nクレジット（任意）を載せる場合は AivisSpeech:MarkN\n作者のリンク（任意）を載せる場合は https://markn2000.com",
+  "speakers": [
+   {
+    "name": "MarkN",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/b420a801-3672-4458-b43c-a0bad1b57e37/speakers/2e8ef98d-eefc-4d5e-9b97-fe63c78e0a12/styles/9e00310c-af9d-4a05-b2ba-06a25922f845/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "1112959e-bb11-4a61-8c07-ebea8ea568cc",
+  "name": "akiRAM",
+  "user": "orange",
+  "category": "LivingPerson",
+  "timbre": "YouthfulMale",
+  "tags": [],
+  "license": "ACML-NC 1.0",
+  "creators": [
+   "orange (https://x.com/orange_3134)"
+  ],
+  "dl": 218,
+  "likes": 2,
+  "desc": "VRの住人「akiRAM」のボイスモデルです。\nアキラム・ザ・マッチメイカーの異名を持ち、VRの世界で孤独な人々同士をマッチングさせる活動を行っているらしい。",
+  "speakers": [
+   {
+    "name": "akiRAM",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/86fe55dd-cc09-4fc3-8c0b-bf2ee4d86751/speakers/158737c4-f516-42da-a96d-7e628a17d059/styles/1728ffee-847e-4a98-8886-dbd3126c09dc/voice-samples/0.wav"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "37e49039-522f-4608-b8d6-fc6716ada80e",
+  "name": "雪降白華_T3モデル",
+  "user": "TakoeProject",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "Yumehaki Project V / VSMB Project",
+   "TαkoeProject"
+  ],
+  "dl": 198,
+  "likes": 2,
+  "desc": "雪降白華　ゆきふりしろか　Yukifuri Shiroka　(CodeName:YUKIP^URI_S^IROKA)",
+  "speakers": [
+   {
+    "name": "雪降白華_T3モデル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/fe174977-926b-47e1-b90e-f6a385157598/speakers/d4534e5a-ea6f-46cd-aa86-6f6d270854ad/styles/fc36932e-43f4-4ddf-bcb7-f0c0ac913352/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "7ac45cff-1e2f-4545-91bb-e7b2cc67649b",
+  "name": "蝶舞和香_T3モデル",
+  "user": "TakoeProject",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "Yumehaki Project V / VSMB Project",
+   "TαkoeProject"
+  ],
+  "dl": 197,
+  "likes": 0,
+  "desc": "蝶舞和香　ちょうぶのどか　Choubu Nodoka　(CodeName:C^O^BU_NODOKA)",
+  "speakers": [
+   {
+    "name": "蝶舞和香_T3モデル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/90e91195-cdb6-4f9b-b35b-37ca85a27d5b/speakers/85005ae0-b315-4a1f-99ba-b6e8489f0984/styles/19eb52aa-a9fc-4178-b93c-a6ddce5acaa1/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "不機嫌",
+      1,
+      [
+       "https://assets.aivis-project.com/aivm-models/90e91195-cdb6-4f9b-b35b-37ca85a27d5b/speakers/85005ae0-b315-4a1f-99ba-b6e8489f0984/styles/f6cbfbed-450a-46b8-b74d-d031b6c5af00/voice-samples/0.m4a"
+      ]
+     ],
+     [
+      "落ち着き",
+      2,
+      [
+       "https://assets.aivis-project.com/aivm-models/90e91195-cdb6-4f9b-b35b-37ca85a27d5b/speakers/85005ae0-b315-4a1f-99ba-b6e8489f0984/styles/19364ceb-4a0e-4dd5-a242-1bb1fdbdbda7/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "3bef4d35-124e-4ddd-93d3-75f292732195",
+  "name": "kokuren_3rd",
+  "user": "kokuren",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [],
+  "dl": 153,
+  "likes": 0,
+  "desc": "",
+  "speakers": [
+   {
+    "name": "kokuren_3rd",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/c795b6b3-fb29-4ae7-a5fb-58857939a101/speakers/60a5f6a1-8650-476a-b497-d27354a4762c/styles/59d826f1-6b24-44cf-9674-b2efae00d156/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "9f0d1fba-3acd-439a-8446-ea94e8ca6985",
+  "name": "騾馬原杏_T3モデル",
+  "user": "TakoeProject",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "Yumehaki Project V / VSMB Project",
+   "TαkoeProject"
+  ],
+  "dl": 112,
+  "likes": 3,
+  "desc": "騾馬原杏　らばはらあんず　Rabahara Anzu　(CodeName:RABAHARA_ANZU)",
+  "speakers": [
+   {
+    "name": "騾馬原杏_T3モデル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/57e184c8-53b9-462b-ae20-98f332586b08/speakers/f2bf38a9-6b26-4655-80df-88f88585dc08/styles/0897c03f-7210-466f-97d9-3dbbe34684de/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "1f677b65-741e-4ba4-b029-d5525deb82b8",
+  "name": "梅𡵅弓哥_T3モデル",
+  "user": "TakoeProject",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "Yumehaki Project V / VSMB Project",
+   "TαkoeProject"
+  ],
+  "dl": 111,
+  "likes": 1,
+  "desc": "梅𡵅弓哥　うめほきゆみか　Umehoki Yumika　(CodeName:UMEHOKI_YUMIKA)",
+  "speakers": [
+   {
+    "name": "梅𡵅弓哥_T3モデル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/84fc99e1-62fd-4cb2-9c73-afa37d6b42fe/speakers/48744f9f-0c6e-4800-a07b-66d8fdb90620/styles/78e5e13d-51c9-4a47-9fbf-4c8d5757e042/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "53c4bdca-992e-4289-8cf7-1338b11eb567",
+  "name": "夢咲舞空_T3モデル",
+  "user": "TakoeProject",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulFemale",
+  "tags": [],
+  "license": "Custom",
+  "creators": [
+   "Yumehaki Project V / VSMB Project",
+   "TαkoeProject"
+  ],
+  "dl": 98,
+  "likes": 1,
+  "desc": "夢咲舞空　ゆめさきまそら　Yumesaki Masora　(CodeName:YUMESAKI_MASORA)",
+  "speakers": [
+   {
+    "name": "夢咲舞空_T3モデル",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/75209165-ed67-49ab-9247-ee05f33e731a/speakers/4e412db8-f761-47aa-89af-77ff66d04ca1/styles/9bf7df2f-9a32-42fe-b9b2-ced554379308/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "uuid": "0c032c2d-272a-4030-a75c-74dc6f7662ad",
+  "name": "natto-z",
+  "user": "kokuren",
+  "category": "OriginalCharacter",
+  "timbre": "YouthfulMale",
+  "tags": [],
+  "license": "ACML 1.0",
+  "creators": [],
+  "dl": 65,
+  "likes": 0,
+  "desc": "",
+  "speakers": [
+   {
+    "name": "natto-z",
+    "styles": [
+     [
+      "ノーマル",
+      0,
+      [
+       "https://assets.aivis-project.com/aivm-models/4fcf7eca-d2e1-4d5c-87ef-10b4d9a16217/speakers/a9223b5e-56ee-4fc9-a375-431486b93aae/styles/13d2c36b-2fac-4321-96d7-e8d9e7281346/voice-samples/0.m4a"
+      ]
+     ]
+    ]
+   }
+  ]
+ }
+]

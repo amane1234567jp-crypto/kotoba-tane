@@ -1,0 +1,134 @@
+++ dirname tools/aivis/run.sh
++ cd tools/aivis
++ python3 survey.py /tmp/out
+openapi from https://api.aivis-project.com/v1/openapi.json
+SEARCH /v1/aivm-models/search ['keyword', 'tags', 'tiers', 'categories', 'voice_timbres', 'license_types', 'sort', 'page', 'limit']
+page 1 30 76
+page 2 30 76
+page 3 16 76
+page 4 0 76
+models 76
++ '[' -f cast.json ']'
++ bash synth.sh /tmp/out
++ sudo apt-get -qq update
++ sudo apt-get -qq install -y ffmpeg
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
++ pip install -q numpy
++ mkdir -p /home/runner/.local/share/AivisSpeech-Engine
++ sudo chown -R 1000:1000 /home/runner/.local/share/AivisSpeech-Engine
++ docker pull -q ghcr.io/aivis-project/aivisspeech-engine:cpu-latest
+ghcr.io/aivis-project/aivisspeech-engine:cpu-latest
++ docker run -d --name aivis -p 10101:10101 -v /home/runner/.local/share/AivisSpeech-Engine:/home/user/.local/share/AivisSpeech-Engine-Dev ghcr.io/aivis-project/aivisspeech-engine:cpu-latest
+c000cf182ea808d2fa296c0209a7679fe5a5a649c330ad7afe86e404e42c1f8b
+++ seq 1 120
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
++ sleep 10
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
++ sleep 10
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
++ sleep 10
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
++ sleep 10
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
+"latest"+ break
++ echo
+
++ docker logs aivis
++ tail -20
+[2026/10/17 10:07:07.394] INFO:     Downloaded AIVMX file.
+[2026/10/17 10:07:07.453] INFO:     Installing AIVMX file ...
+[2026/10/17 10:07:07.513] INFO:     Installed AIVMX file to /home/user/.local/share/AivisSpeech-Engine-Dev/Models/a59cb814-0083-4369-8542-f51a29e72af7.aivmx.
+[2026/10/17 10:07:08.242] INFO:     Updated latest version information.
+[2026/10/17 10:07:08.384] INFO:     Installed models:
+[2026/10/17 10:07:08.384] INFO:     - コハク (22e8ed77-94fe-4ef2-871f-a86f94e9a579) (default)
+[2026/10/17 10:07:08.384] INFO:     - まお (a59cb814-0083-4369-8542-f51a29e72af7) (default)
+[2026/10/17 10:07:09.599] INFO:     Using CPU for inference.
+[2026/10/17 10:07:09.599] INFO:     Loading BERT model and tokenizer...
+[2026/10/17 10:07:16.302] INFO:     BERT model and tokenizer loaded. (6.70s)
+[2026/10/17 10:07:16.338] INFO:     Current user dictionary (CSV format):
+[2026/10/17 10:07:16.338] INFO:     - 担々麺,1348,1348,8609,名詞,固有名詞,一般,*,*,*,担々麺,タンタンメン,タンタンメン,3/6,*
+reading /home/user/.local/share/AivisSpeech-Engine-Dev/user.dict_csv-7d8033ca-1601-4e14-ace1-c891e1d175d1.tmp ... 1
+emitting double-array: 100% |###########################################| 
+[2026/10/17 10:07:16.341] INFO:     User dictionary applied. (0.00s)
+[2026/10/17 10:07:17.258] INFO:     Started server process [1]
+[2026/10/17 10:07:17.259] INFO:     Waiting for application startup.
+[2026/10/17 10:07:17.259] INFO:     Application startup complete.
+[2026/10/17 10:07:17.259] INFO:     Uvicorn running on http://0.0.0.0:10101 (Press CTRL+C to quit)
+[2026/10/17 10:07:26.308] INFO:     172.17.0.1:33720 - "GET /version HTTP/1.1" 200 OK
+++ cat RUN
++ JOBS='jobs/st17b jobs/st18b'
++ for j in $JOBS
++ j=jobs/st17b
++ '[' jobs/st17b = check ']'
++ '[' jobs/st17b = listen ']'
++ '[' -f jobs/st17b/lines.json ']'
++ python3 synth.py /tmp/out jobs/st17b
+installed metan 1b2830f4-8cf1-4184-a0d9-3a1bace3a844
+installed meebaa baaae3c0-7b22-4605-8ba5-80c959b41a48
+installed kamejii 696c98a2-c0b7-4fe7-8cf2-c7e9b8a9bd82
+installed gao 2e1fdde8-d089-42d7-b64f-cf89952b1bdc
+installed chu 9f36ec0d-8dac-42dc-aff4-149c5f99faad
+installed doshin 47e53151-a378-46f3-abee-ce13aa07feb1
+installed pyon f5017410-fbb5-49e1-97cb-e785f42e15f5
+installed nobbo 71e72188-2726-4739-9aa9-39567396fb2a
+installed pyonmama f83c385c-829b-40c4-8c11-639027e61636
+installed gaojii 470a41e2-863f-4bf2-8a20-bf7cde0d8f7b
+installed miibaa 2ff1c526-27d4-4eeb-b069-4207ae5fe259
+installed doshinpapa e5bd2b5e-90a8-4fb3-a69f-2fbd2d3a8a43
+installed kon a670e6b8-0852-45b2-8704-1bc9862f2fe6
+installed mama 21d8d535-f206-462d-a3bb-05f8252dede7
+installed ookami b2bee8fc-3f65-4c99-9607-a1075a10066b
+installed ojisan 70a875a9-feae-41e6-a586-8cf9e47c6c0b
+installed omawari 3dabea2b-cc10-41da-955b-4618ce84e716
+installed tora e40d5b99-8cde-4442-a45b-0ebec9167506
+installed kuma 1f04a608-916c-4d9e-bf6e-b9da5c176f85
+installed onii 6d11c6c2-f4a4-4435-887e-23dd60f8b8dd
+installed pannamama 59f96896-64d2-4378-830a-4d5feb3d81aa
+{'key': 'sr_bgseki', 'who': 'mama', 'style': 'hutuu_hutuu', 'sec': 4.1, 'text': 'そうね。あくまで待ちましょう', 'acc': 'ソオネ.[3] / アクマデ[3] / マチマショオ[3]'}
+{'key': 'sq_abosanai', 'who': 'kon', 'style': 'ノーマル', 'sec': 4.3, 'text': '早く早く〜！いけいけ〜！', 'acc': 'ハヤク[1] / ハヤクウ![1] / イケイケエ![4]'}
+ACC MISMATCH sq_abchiisai ボオルプウルデアバレヨウゼエ! [['ボオルプウルデ', 4], ['アバレヨオゼエ!', 3]]
+{'key': 'sq_abchiisai', 'who': 'doshin', 'style': 'Calm', 'sec': 4.0, 'text': 'ボールプールで暴れようぜー！', 'acc': 'ボオルプウルデ[4] / アバレヨ[4] / ウゼエ![2]'}
+{'key': 'sr_abosanai', 'who': 'kon', 'style': 'ノーマル', 'sec': 1.8, 'text': 'あ、ごめん〜。待ってるね', 'acc': 'ア,[2] / ゴメンン.[3] / マッテルネ[1]'}
++ for j in $JOBS
++ j=jobs/st18b
++ '[' jobs/st18b = check ']'
++ '[' jobs/st18b = listen ']'
++ '[' -f jobs/st18b/lines.json ']'
++ python3 synth.py /tmp/out jobs/st18b
+{'key': 'csn_n_0', 'who': 'chu', 'style': '標準', 'sec': 3.5, 'text': '0！', 'acc': 'ゼロ![1]'}
+{'key': 'csn_n_1', 'who': 'chu', 'style': '標準', 'sec': 0.7, 'text': '1！', 'acc': 'イチ![1]'}
+{'key': 'csn_n_2', 'who': 'chu', 'style': '標準', 'sec': 0.6, 'text': '2！', 'acc': 'ニ![1]'}
+{'key': 'csn_n_3', 'who': 'chu', 'style': '標準', 'sec': 0.7, 'text': '3！', 'acc': 'サン![1]'}
+{'key': 'csn_n_4', 'who': 'chu', 'style': '標準', 'sec': 0.6, 'text': '4！', 'acc': 'ヨン![1]'}
+{'key': 'csn_n_5', 'who': 'chu', 'style': '標準', 'sec': 0.6, 'text': '5！', 'acc': 'ゴ![1]'}
+{'key': 'csn_n_6', 'who': 'chu', 'style': '標準', 'sec': 0.7, 'text': '6！', 'acc': 'ロク![1]'}
+{'key': 'csn_n_7', 'who': 'chu', 'style': '標準', 'sec': 0.9, 'text': '7！', 'acc': 'ナナ![1]'}
+{'key': 'csn_n_8', 'who': 'chu', 'style': '標準', 'sec': 0.7, 'text': '8！', 'acc': 'ハチ![1]'}
+{'key': 'csn_n_9', 'who': 'chu', 'style': '標準', 'sec': 0.6, 'text': '9！', 'acc': 'キュウ![1]'}
+{'key': 'csn_n_10', 'who': 'chu', 'style': '標準', 'sec': 0.8, 'text': '10！', 'acc': 'ジュウ![1]'}
+{'key': 'csn_n_11', 'who': 'chu', 'style': '標準', 'sec': 0.7, 'text': '11！', 'acc': 'ジュウイチ![3]'}
+{'key': 'csn_n_12', 'who': 'chu', 'style': '標準', 'sec': 0.7, 'text': '12！', 'acc': 'ジュウニ![3]'}
+{'key': 'csn_n_13', 'who': 'chu', 'style': '標準', 'sec': 0.7, 'text': '13！', 'acc': 'ジュウサン![3]'}
+{'key': 'csn_n_14', 'who': 'chu', 'style': '標準', 'sec': 0.7, 'text': '14！', 'acc': 'ジュウヨン![3]'}
+{'key': 'csn_n_15', 'who': 'chu', 'style': '標準', 'sec': 0.7, 'text': '15！', 'acc': 'ジュウゴ![3]'}
+{'key': 'csn_n_16', 'who': 'chu', 'style': '標準', 'sec': 0.7, 'text': '16！', 'acc': 'ジュウロク![3]'}
+{'key': 'csn_n_17', 'who': 'chu', 'style': '標準', 'sec': 0.8, 'text': '17！', 'acc': 'ジュウナナ![3]'}
+{'key': 'csn_n_18', 'who': 'chu', 'style': '標準', 'sec': 0.8, 'text': '18！', 'acc': 'ジュウハチ![3]'}
+{'key': 'csn_n_19', 'who': 'chu', 'style': '標準', 'sec': 0.7, 'text': '19！', 'acc': 'ジュウキュウ![3]'}
+{'key': 'csn_n_20', 'who': 'chu', 'style': '標準', 'sec': 0.7, 'text': '20！', 'acc': 'ニジュウ![1]'}
++ docker logs aivis
++ tail -40

@@ -1,0 +1,170 @@
+[
+ {
+  "key": "csn_n_0",
+  "who": "chu",
+  "style": "標準",
+  "sec": 3.5,
+  "text": "0！",
+  "acc": "ゼロ![1]"
+ },
+ {
+  "key": "csn_n_1",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.7,
+  "text": "1！",
+  "acc": "イチ![1]"
+ },
+ {
+  "key": "csn_n_2",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.6,
+  "text": "2！",
+  "acc": "ニ![1]"
+ },
+ {
+  "key": "csn_n_3",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.7,
+  "text": "3！",
+  "acc": "サン![1]"
+ },
+ {
+  "key": "csn_n_4",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.6,
+  "text": "4！",
+  "acc": "ヨン![1]"
+ },
+ {
+  "key": "csn_n_5",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.6,
+  "text": "5！",
+  "acc": "ゴ![1]"
+ },
+ {
+  "key": "csn_n_6",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.7,
+  "text": "6！",
+  "acc": "ロク![1]"
+ },
+ {
+  "key": "csn_n_7",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.9,
+  "text": "7！",
+  "acc": "ナナ![1]"
+ },
+ {
+  "key": "csn_n_8",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.7,
+  "text": "8！",
+  "acc": "ハチ![1]"
+ },
+ {
+  "key": "csn_n_9",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.6,
+  "text": "9！",
+  "acc": "キュウ![1]"
+ },
+ {
+  "key": "csn_n_10",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.8,
+  "text": "10！",
+  "acc": "ジュウ![1]"
+ },
+ {
+  "key": "csn_n_11",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.7,
+  "text": "11！",
+  "acc": "ジュウイチ![3]"
+ },
+ {
+  "key": "csn_n_12",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.7,
+  "text": "12！",
+  "acc": "ジュウニ![3]"
+ },
+ {
+  "key": "csn_n_13",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.7,
+  "text": "13！",
+  "acc": "ジュウサン![3]"
+ },
+ {
+  "key": "csn_n_14",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.7,
+  "text": "14！",
+  "acc": "ジュウヨン![3]"
+ },
+ {
+  "key": "csn_n_15",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.7,
+  "text": "15！",
+  "acc": "ジュウゴ![3]"
+ },
+ {
+  "key": "csn_n_16",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.7,
+  "text": "16！",
+  "acc": "ジュウロク![3]"
+ },
+ {
+  "key": "csn_n_17",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.8,
+  "text": "17！",
+  "acc": "ジュウナナ![3]"
+ },
+ {
+  "key": "csn_n_18",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.8,
+  "text": "18！",
+  "acc": "ジュウハチ![3]"
+ },
+ {
+  "key": "csn_n_19",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.7,
+  "text": "19！",
+  "acc": "ジュウキュウ![3]"
+ },
+ {
+  "key": "csn_n_20",
+  "who": "chu",
+  "style": "標準",
+  "sec": 0.7,
+  "text": "20！",
+  "acc": "ニジュウ![1]"
+ }
+]
