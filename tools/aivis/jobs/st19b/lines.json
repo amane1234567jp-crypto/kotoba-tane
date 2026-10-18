@@ -1,0 +1,137 @@
+[
+{
+"key": "sx_ocgame2_2",
+"who": "mii",
+"text": "おにいちゃん、つぎ ぼくが やらせて"
+},
+{
+"key": "sx_snjunban_2",
+"who": "pyon",
+"text": "せんせい、つぎが ぼくですか"
+},
+{
+"key": "sg_iechigau_2",
+"who": "chu",
+"text": "さきに おえかき、つぎは ブロックね"
+},
+{
+"key": "sx_iechigau_2",
+"who": "chu",
+"text": "さきを おえかき、つぎは ブロックね"
+},
+{
+"key": "sg_iechigau_3",
+"who": "chu",
+"text": "いいよ。さきに おえかきして、つぎは ブロックに しよう"
+},
+{
+"key": "sx_snochitsuku_2",
+"who": "pyon",
+"text": "おちつかないので、やすみたいを"
+},
+{
+"key": "lk_fkaeri_t0",
+"who": "doshinpapa",
+"text": "もう ごじだね。おうちの ひとが しんぱい するよ"
+},
+{
+"key": "lk_nneko_t",
+"who": "doshin",
+"text": "うちで ねこを かいはじめたんだ"
+},
+{
+"key": "sg_iechigau_5",
+"who": "chu",
+"text": "おえかきも たのしそうだね。さきに おえかきして、そのあと ブロックで あそぼう"
+},
+{
+"key": "gtk_m_10",
+"who": "gao",
+"text": "じゅっぷん"
+},
+{
+"key": "gtk_mae_10",
+"who": "gao",
+"text": "じゅっぷんまえ"
+},
+{
+"key": "sg_abkutsu_5",
+"who": "mii",
+"text": "わかりました。くつを ぬいで そろえてから、あそびに いきますね"
+},
+{
+"key": "sg_aboogoe_4",
+"who": "mii",
+"text": "ほかの ひとも いるから、ちいさい こえで はなそう"
+},
+{
+"key": "sg_abnagenai_5",
+"who": "mii",
+"text": "ボールは なげないで。ほかの こに あたったら けがを するよ"
+},
+{
+"key": "sg_bgseki_4",
+"who": "pyon",
+"text": "せきが あいてないから、あくまで ここで まとう"
+},
+{
+"key": "sg_bgseki_5",
+"who": "pyon",
+"text": "いまは せきが ぜんぶ うまってるから、あくまで たって まってよう"
+},
+{
+"key": "csn_a_にん_7",
+"who": "chu",
+"text": "ななにん！"
+},
+{
+"key": "csn_a_にん_17",
+"who": "chu",
+"text": "じゅうななにん！"
+},
+{
+"key": "sq_gkisshoni",
+"who": "mii",
+"text": "……きょうは ひとりで かえるの、さみしいわ"
+},
+{
+"key": "sg_gkisshoni_3",
+"who": "pyon",
+"text": "ひとりは さみしいね。いっしょに かえろうよ"
+},
+{
+"key": "sg_gkisshoni_5",
+"who": "pyon",
+"text": "ひとりで かえるのは さみしいから、いっしょに かえろう"
+},
+{
+"key": "lk_nonaka_r",
+"who": "doshin",
+"text": "ほんと？ こんど いっしょに たべようね"
+},
+{
+"key": "lt_blk_res",
+"who": "tora",
+"text": "あ、わりい！ どうぞ"
+},
+{
+"key": "lk_fitai_t0",
+"who": "doshin",
+"text": "いてっ！ ころんじゃった"
+},
+{
+"key": "lk_fbutsukaru_t0",
+"who": "tora",
+"text": "いてっ！"
+},
+{
+"key": "sg_gktadaima_3",
+"who": "pyon",
+"text": "ただいま。おなか すいた"
+},
+{
+"key": "sg_tdbokuno_3",
+"who": "chu",
+"text": "まって。まだ いいよって いってないよ"
+}
+]
