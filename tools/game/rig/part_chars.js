@@ -388,6 +388,24 @@ const BUILD = {
     const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M134 296 Q200 280 266 296 L272 384 Q200 400 128 384 Z", fill: "#7FA7D9", ...ST(5) }, bd); el("path", { d: "M184 290 L200 318 L216 290", fill: "none", ...ST(4) }, bd);
     el("path", { d: "M112 112 Q200 40 288 112 L288 124 L112 124 Z", fill: "#5BA34D", ...ST(6) }, p.head.g); el("path", { d: "M200 124 Q260 120 314 136 L310 146 Q256 134 196 136 Z", fill: "#4A8A3E", ...ST(5) }, p.head.g);
     p.tempo = .95; return p; },
+  // ゆうごはん（2026-10-19）：まるシマの パパ・がおの パパ・がおの おにいちゃん
+  papa(root) { // まるシマの パパ（しまうま）：みどりの シャツ・ネクタイ・ふとい まゆ・くちひげ
+    const p = BUILD.shima(root);
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M134 288 Q200 272 266 288 L274 386 Q200 402 126 386 Z", fill: "#7BC4A0", ...ST(5) }, bd);
+    el("path", { d: "M180 288 L200 306 L220 288", fill: "#FFFFFF", ...ST(4) }, bd); el("path", { d: "M192 306 L208 306 L214 360 L200 374 L186 360 Z", fill: "#3E6FD6", ...ST(4) }, bd);
+    [[160, 1], [240, -1]].forEach(([x, k]) => el("path", { d: `M${x - 26 * k} ${128} Q${x} ${114} ${x + 26 * k} ${130}`, fill: "none", stroke: INK, "stroke-width": 11, "stroke-linecap": "round" }, p.head.g));
+    el("path", { d: "M170 212 Q186 202 200 210 Q214 202 230 212 Q214 220 200 214 Q186 220 170 212 Z", fill: INK }, p.head.g);
+    p.tempo = .92; return p; },
+  gaopapa(root) { // がおの パパ（らいおん）：こい たてがみ・あかい シャツ・ひげ
+    const p = BUILD.gao(root); recolor(root, { "#C8662B": "#9C4A1E" });
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M134 296 Q200 280 266 296 L272 388 Q200 402 128 388 Z", fill: "#E8735A", ...ST(5) }, bd); el("path", { d: "M182 292 L200 318 L218 292", fill: "none", ...ST(4) }, bd);
+    el("path", { d: "M176 214 Q200 204 224 214 Q212 226 200 220 Q188 226 176 214 Z", fill: "#9C4A1E", ...ST(3) }, p.head.g);
+    p.tempo = .9; return p; },
+  gaonii(root) { // がおの おにいちゃん（らいおん）：みじかい たてがみ・ぼうしを うしろむき・きいろの シャツ
+    const p = BUILD.gao(root); recolor(root, { "#C8662B": "#E08A3A" });
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M138 292 Q200 276 262 292 L270 384 Q200 400 130 384 Z", fill: "#5BA34D", ...ST(5) }, bd); el("text", { x: 200, y: 360, "text-anchor": "middle", "font-family": "Zen Maru Gothic, sans-serif", "font-weight": 700, "font-size": 34, fill: "#FFFFFF" }, bd).textContent = "7";
+    el("path", { d: "M120 104 Q200 40 280 104 L280 116 L120 116 Z", fill: "#3E6FD6", ...ST(6) }, p.head.g); el("path", { d: "M120 116 Q90 110 66 124 L70 134 Q96 124 124 128 Z", fill: "#2E57AE", ...ST(5) }, p.head.g);
+    p.tempo = 1.0; return p; },
   onii(root) { // まるシマの おにいちゃん（おうち1）：あおい シャツ・めがね。すこし せが たかい
     const p = BUILD.shima(root);
     const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M138 290 Q200 274 262 290 L270 384 Q200 400 130 384 Z", fill: "#5B8DEF", ...ST(5) }, bd); el("path", { d: "M180 292 Q200 310 220 292", fill: "none", ...ST(4) }, bd);
@@ -428,7 +446,7 @@ const BUILD = {
 };
 
 const NAMES = { pony: "ぽにー", shima: "まるシマ", doshin: "どしん", nobbo: "のっぽ", gao: "がお", chu: "ちゅう", pyon: "ぴょん", mii: "みい", kamejii: "かめじい", meebaa: "めえばあ",
-  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "ぴよこさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くまた", onii: "おにいちゃん" };
+  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", papa: "パパ", gaopapa: "がおの パパ", gaonii: "がおの おにいちゃん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "ぴよこさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くまた", onii: "おにいちゃん" };
 const LINES = { pony: "きょねん、うみに いったね", shima: "やったー！ いえたね！", doshin: "どいて、あげるよ", nobbo: "それは、ずかんに のって いますよ", gao: "つぎは、まけないぞ",
   chu: "こ、こわかったよう", pyon: "いっしょに あそぼう！", mii: "ふーん。まあまあ じゃない", kamejii: "よく いえましたね", meebaa: "いらっしゃいませ" };
 
@@ -571,6 +589,9 @@ const SPECIAL = {
   piyoko: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
   ookami: c => { c.tm.shiver = 1; },
   ojisan: c => { c.tm.nod = 1.2; },
+  papa: c => { c.tm.nod = 1.2; c.happyOn = true; later(1300, () => c.happyOn = false); },
+  gaopapa: c => { c.tm.clap = 1.4; c.mouthOpen.t = .5; later(1400, () => c.mouthOpen.t = 0); },
+  gaonii: c => { c.tm.nod = 1.2; c.happyOn = true; later(1300, () => c.happyOn = false); },
   onii: c => { c.tm.nod = 1.2; c.happyOn = true; later(1300, () => c.happyOn = false); },
   tora: c => { jump(c, .6); c.happyOn = true; later(1200, () => c.happyOn = false); },
   kuma: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },

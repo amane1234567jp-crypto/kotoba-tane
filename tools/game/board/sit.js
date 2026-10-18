@@ -16,23 +16,27 @@ function pickSit(place, heroKind = "shima") {
   const okFor = s => (s.stage || "kousha") === curStage && s.asker !== heroKind
     && (heroKind === "shima" || (MODE === "solo" ? s.gaoOk : (heroKind !== "gao" || s.gaoOk)))
     && !(heroKind === "chu" && s.intro === "tag") && !(s.cast && s.cast.includes(heroKind)) && !(s.noHero && s.noHero.includes(heroKind)) && !(s.late && GS.tasks < 4)
-    && !(s.asker === "mama" && heroKind !== "shima" && !MOM_OF[heroKind]); // ママの 場面は、じぶんの ママが いる 子だけ // やりとりに 出ている キャラは、その場面の 主人公に しない
+    && famOk(s, heroKind); // ママの 場面は、じぶんの ママが いる 子だけ // やりとりに 出ている キャラは、その場面の 主人公に しない
   if (MODE === "solo" && heroKind !== "shima") { // ひとりで あそぶ ときの ライバルは、こどもが もう やった 場面から えらぶ（こどもの ぶんの あたらしい 場面を へらさない）
     let rp = SITS.filter(s => okFor(s) && sitUsed.has(s.id)); if (!rp.length) rp = SITS.filter(okFor);
     const m = Math.min(...rp.map(x => SIT_N.get(x.id) || 0)); rp = rp.filter(x => (SIT_N.get(x.id) || 0) === m); const s = rp[rnd(rp.length)];
-    return s.asker === "mama" && MOM_OF[heroKind] ? { ...s, asker: MOM_OF[heroKind], vk: "_" + MOM_OF[heroKind] } : s; }
+    return famSwap(s, heroKind); }
   let pool = SITS.filter(s => okFor(s) && s.place === place && !sitUsed.has(s.id));
   if (!pool.length) pool = SITS.filter(s => okFor(s) && !sitUsed.has(s.id));
   if (!pool.length) { [...sitUsed].forEach(id => { const x = SITS.find(s => s.id === id); if (x && (x.stage || "kousha") === curStage && okFor(x)) sitUsed.delete(id); }); /* この 子が つかえる 場面だけ もどす（ライバルの ぶんで ぜんぶ もどすと、こどもの 場面が くりかえす） */ pool = SITS.filter(s => okFor(s) && s.place === place && !sitUsed.has(s.id)); if (!pool.length) pool = SITS.filter(s => okFor(s) && !sitUsed.has(s.id)); if (!pool.length) pool = SITS.filter(okFor); }
   const m = Math.min(...pool.map(x => SIT_N.get(x.id) || 0)); pool = pool.filter(x => (SIT_N.get(x.id) || 0) === m); // つかった かずが すくない ものから
   const s = pool[rnd(pool.length)]; sitUsed.add(s.id);
   // ママは こたえる 子の ママに する（ぴょんなら ぴょんの おかあさん）。声は sq_<id>_<ママ>
-  if (s.asker === "mama" && MOM_OF[heroKind]) return { ...s, asker: MOM_OF[heroKind], vk: "_" + MOM_OF[heroKind] };
-  return s;
+  return famSwap(s, heroKind);
 }
 const MOM_OF = { pyon: "pyonmama", gao: "gaomama", mii: "miimama", chu: "chumama" };
+// かぞくの 場面は、こたえる 子の かぞくに する（2026-10-19：パパ・おにいちゃんも）。パパ・おにいちゃんは ゆうごはん・じてんしゃ だけ
+const FAM_OF = { mama: () => MOM_OF, papa: () => ["yuushoku", "jitensha"].includes(curStage) ? { gao: "gaopapa", doshin: "doshinpapa" } : null, onii: () => curStage === "yuushoku" ? { gao: "gaonii" } : null };
+const famMap = s => FAM_OF[s.asker] && FAM_OF[s.asker]();
+const famOk = (s, heroKind) => { const m = famMap(s); return !m || heroKind === "shima" || !!m[heroKind]; }; // じぶんの かぞくが いない 子には ださない
+const famSwap = (s, heroKind) => { const m = famMap(s), k = m && m[heroKind]; return k ? { ...s, asker: k, vk: "_" + k } : s; };
 const ASK_ON_STAGE = new Set(["door", "arrive", "stuck", "scared", "jumpdown", "loud", "borrow", "slow"]); // 最初から相手がその場にいる場面
-const ASK_AT = { onii: [1190, .98], tora: [1190, .92], kuma: [1220, 1.05], mama: [1200, 1.0], ookami: [1200, 1.0], ojisan: [1200, 1.0], omawari: [1240, 1.3], meebaa: [1190, .9], kamejii: [1180, .9], nobbo: [1220, 1.0], gao: [1190, .95], mii: [1190, .9], chu: [1220, .42], pyon: [1190, .9], doshin: [1260, 1.38], pyonmama: [1200, 1.0], gaojii: [1190, 1.0], miibaa: [1190, .98], doshinpapa: [1250, 1.48], kon: [1190, .88], panna: [1190, .9], pannamama: [1200, 1.0], gaomama: [1190, .98], miimama: [1190, .96], chumama: [1210, .62], wanko: [1190, 1.0], biba: [1190, .98], piyoko: [1220, .6] };
+const ASK_AT = { onii: [1190, .98], tora: [1190, .92], kuma: [1220, 1.05], mama: [1200, 1.0], ookami: [1200, 1.0], ojisan: [1200, 1.0], omawari: [1240, 1.3], meebaa: [1190, .9], kamejii: [1180, .9], nobbo: [1220, 1.0], gao: [1190, .95], mii: [1190, .9], chu: [1220, .42], pyon: [1190, .9], doshin: [1260, 1.38], pyonmama: [1200, 1.0], gaojii: [1190, 1.0], miibaa: [1190, .98], doshinpapa: [1250, 1.48], kon: [1190, .88], panna: [1190, .9], pannamama: [1200, 1.0], gaomama: [1190, .98], miimama: [1190, .96], chumama: [1210, .62], wanko: [1190, 1.0], biba: [1190, .98], piyoko: [1220, .6], papa: [1200, 1.04], gaopapa: [1200, 1.04], gaonii: [1190, .98] };
 let propG = null;
 function resetChar(c) { c.dx.v = 0; c.dx.t = 0; c.lean.t = 0; c.lift.t = 0; c.armL.t = 0; c.armR.t = 0; c.headRot.t = 0; c.tm = {}; c.sadMouth = false; c.roundMouth = false; c.happyOn = false; c.eyeScale.t = 1; c.squash.t = 1; }
 function setSitView(s, heroKind) {

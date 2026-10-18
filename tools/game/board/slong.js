@@ -3,7 +3,7 @@
    約65マスの ぐねぐね道。サイコロ 1〜6。マスは「ことばの 課題」「おもしろ課題（こえなし）」「しかけ」が だいたい 3:3:4。
    ことばの 課題は だいぼうけん・ともだちの だいぼうけんの ものを つかう（声も その パックから）。
    あたらしい 声は ぽにーだけ（sl_*・n0・n7〜n12。packs/slong.json）。 */
-const SL = ["sumi", "sokashi", "suchu", "eki"];
+const SL = ["sumi", "sokashi", "suchu", "eki", "odekake"];
 const isSL = () => SL.includes(curStage);
 SL.forEach(id => LONGS.add(id));
 const SL_TH = {
@@ -19,6 +19,10 @@ const SL_TH = {
   eki: { name: "えきの だいぼうけん", icon: "🚉", areas: ["かいさつ", "ホーム", "でんしゃの なか", "しゅうてん"], fills: ["#E6EEF5", "#FFF1C2", "#D7F0D2", "#FFE0E6"], ground: "#DDE6EE",
     blk: { who: "kamejii", intro: ["sl_eki_blk", "えきいんさんの かめじいが きっぷを しらべて いるよ"], say: ["blk_densha", "すみません、とおして ください"], to: "かめじいに いおう", keys: [["すみません", "済みません"], ["とおして", "通して", "とうして"], ["ください", "下さい"]], res: ["rs_densha", "おお、すまんのう。どうぞ"] },
     item: "でんしゃ", obs: "でんしゃ", call: "えきいんさん", deco: [["🚉", 120, 990], ["🎫", 520, 990], ["🚦", 1500, 760], ["🕰️", 140, 470], ["🚃", 1480, 450], ["🍱", 760, 130], ["🛤️", 1060, 990], ["🚄", 1500, 990], ["🏙️", 1300, 130]] },
+  // おでかけ だいぼうけん（2026-10-19）：まえはんぶんは あるいて、うしろはんぶんは じてんしゃ。こうつう ルールの マスが いっぱい（odekake.js）
+  odekake: { name: "おでかけ だいぼうけん", icon: "🚲", areas: ["いえの まわり", "しょうてんがい", "こうえん", "かわぞいの みち"], fills: ["#FFF1D6", "#FFE0E6", "#D9F0C8", "#D7ECFF"], ground: "#CFE8C0",
+    blk: { who: "kamejii", intro: ["sl_odekake_blk", "かめじいが ほどうを ゆっくり あるいて いるよ。こえを かけて とおして もらおう"], say: ["blk_jitensha", "すみません、とおります"], to: "かめじいに いおう", keys: [["すみません", "済みません"]], res: ["rs_jitensha", "ほっほ、ていねいに ありがとう"] },
+    item: "ちょうちょ", obs: "みずたまり", call: "おまわりさん", deco: [["🏠", 120, 990], ["🌷", 520, 990], ["🚦", 1500, 760], ["🏪", 140, 560], ["🌳", 1480, 450], ["🦆", 760, 230], ["🍦", 1060, 990], ["🚲", 1500, 990], ["🐕", 640, 520]] },
 };
 // しかけの せりふ（テーマごと）
 const SL_EVT = {
@@ -46,7 +50,14 @@ const SL_EVT = {
     home: "きっぷを なくした！ かいさつに もどる！", back10: "でんしゃで ねすごした！ 10マス もどる！", bonus: "えきべんだ！ たねを 3こ ゲット！", allf: "でんしゃが はやく ついた！ みんな 2マス すすむよ",
     allb: "でんしゃが おくれて いる！ みんな 2マス もどるよ", janken: "ホームで じゃんけん しょうぶ！ いちばん まえの ひとと じゃんけん！ かったら いれかわるよ", again: "ちょうど でんしゃが きた！ もう いっかい サイコロを ふれるよ",
     nebou: "でんしゃで ねむっちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "ながい でんしゃが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを でんしゃで むかえに いくよ",
-    atsumare: "まもなく でんしゃが まいります！ みんな ここに あつまれ！", kumikae: "せんろの きりかえだ！ コースが くみかわるよ" }
+    atsumare: "まもなく でんしゃが まいります！ みんな ここに あつまれ！", kumikae: "せんろの きりかえだ！ コースが くみかわるよ" },
+  odekake: { dice2: "おべんとうを たべて げんき いっぱい！ つぎは サイコロ 2こで ふれるよ", warp: "バスに のった！ ずっと さきまで いけるよ", bigwarp: "タクシーに のせて もらった！ ゴールの ちかくまで いくよ",
+    fake: "くだりざかで 3マス すすむ！ …と おもったら、わすれものに きづいて 4マス もどる！", rand: "みちに まよっちゃった！ どこに いくかな？", rest: "あめが ふって きた！ あまやどりで 1かい やすみ",
+    x2: "おいかぜだ！ つぎの サイコロは 2ばいだよ", zero: "ふみきりが しまってる！ つぎの サイコロは 0に なるよ", home: "わすれものを した！ いえに もどる！",
+    back10: "みちを まちがえた！ 10マス もどる！", bonus: "アイスクリームやさんだ！ たねを 3こ ゲット！", allf: "あおしんごうが つづいた！ みんな 2マス すすむよ", allb: "いぬの おさんぽの ぎょうれつだ！ みんな まって 2マス もどるよ",
+    janken: "こうえんで じゃんけん しょうぶ！ いちばん まえの ひとと じゃんけん！ かったら いれかわるよ", again: "おまわりさんに あいさつ できた！ もう いっかい サイコロを ふれるよ",
+    nebou: "ベンチで ねちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "サイクリングの なかまが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを むかえに いくよ",
+    atsumare: "こうえんで ひとやすみ！ みんな ここに あつまれ！", kumikae: "みちが こうじちゅう！ コースが くみかわるよ" },
 };
 const SL_ICON = { dice2: "🎲", warp: "🌀", bigwarp: "🚀", fake: "🤪", rand: "❓", rest: "💤", x2: "✖️", zero: "0️⃣", home: "↩", back10: "⏪", bonus: "🎁", allf: "⏩", allb: "🌊", janken: "✊", again: "🔁", nebou: "😴", trolley: "🚃", call: "🧲", tsukkomi: "🤣", atsumare: "📣", kumikae: "🔀" };
 const SL_EVC = { warp: "#D9C2F0", bigwarp: "#D9C2F0", rand: "#D9C2F0", home: "#FFC2D1", back10: "#FFC2D1", fake: "#FFE27A", tsukkomi: "#FFE27A", bonus: "#C9EBB5", atsumare: "#FFE27A", kumikae: "#FFE27A" };
@@ -68,6 +79,7 @@ const SL_SHAPE = { // 47マス＋ゴール（まえは 65＋1。ながすぎた�
     const seg = V.slice(1).map((p, i) => Math.hypot(p[0] - V[i][0], p[1] - V[i][1])), tot = seg.reduce((a, b) => a + b, 0), P = [];
     for (let k = 0; k < 48; k++) { let d = tot * k / 47, i = 0; while (i < seg.length - 1 && d > seg[i]) { d -= seg[i]; i++; } const t = Math.min(1, d / seg[i]); P.push([V[i][0] + (V[i + 1][0] - V[i][0]) * t, V[i][1] + (V[i + 1][1] - V[i][1]) * t]); }
     return P; },
+  odekake() { const P = [], ROWS = [930, 770, 610, 450]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([170 + col * 115, y]); } }); return P; }, // まちの みちの ような 4だん（したの 2だんは あるき、うえの 2だんは じてんしゃ）
 };
 const SL_ORDER = {}, SL_PTS = {}, SL_ORDER0 = {};
 SL.forEach(sid => {
@@ -263,7 +275,7 @@ async function slStop(pc) {
   return false;
 }
 // 🖐 つかまえろ：とびまわる ものを タッチ
-const SL_ITEM = { sumi: "🐟", sokashi: "🍬", suchu: "⭐", eki: "🚃" };
+const SL_ITEM = { sumi: "🐟", sokashi: "🍬", suchu: "⭐", eki: "🚃", odekake: "🦋" };
 async function slCatch(pc) {
   const g = panel("つかまえろ！", "#EAF6FF"); const T = SL_TH[curStage];
   const cnt = txt(g, 800, 180, "0", 70, { "text-anchor": "middle" }); const bar = el("rect", { x: 300, y: 860, width: 1000, height: 26, rx: 13, fill: "#7BD389", ...S6(4) }, g);
@@ -347,7 +359,7 @@ async function slShadow(pc) {
   await sleep(900); clearClones(); g.remove(); await delta(pc, ok ? 2 : 0); return false;
 }
 // 🦘 ジャンプ ゲーム
-const SL_OBS = { sumi: "🌊", sokashi: "🍩", suchu: "☄️", eki: "🚃" };
+const SL_OBS = { sumi: "🌊", sokashi: "🍩", suchu: "☄️", eki: "🚃", odekake: "💧" };
 async function slJump(pc) {
   const g = panel("ジャンプ ゲーム", "#EAF6FF"); el("rect", { x: 110, y: 760, width: 1380, height: 20, fill: SL_TH[curStage].fills[0], ...S6(4) }, g);
   const hero = clone(pc.kind, 400, 760, (KID_S[pc.kind] || .8) * .55); hudLayer.appendChild(hero.root); const by = hero.y;
@@ -382,7 +394,7 @@ async function slBattle(pc) {
 /* ================= こえの おもしろ課題 ================= */
 // 📣 おおきな こえで よぼう：マイクの 大きさ（または 聞きとり）で とおくの ものが ちかづく
 async function slOogoe(pc) {
-  const T = SL_TH[curStage]; const g = panel("おおきな こえで よぼう", "#EAF6FF"); const tgt = { sumi: "⛵", sokashi: "🐘", suchu: "👽", eki: "🧑‍✈️" }[curStage];
+  const T = SL_TH[curStage]; const g = panel("おおきな こえで よぼう", "#EAF6FF"); const tgt = { sumi: "⛵", sokashi: "🐘", suchu: "👽", eki: "🧑‍✈️", odekake: "👮" }[curStage];
   const far = txt(g, 1300, 520, tgt, 60, { "text-anchor": "middle" }); const meter = el("rect", { x: 180, y: 820, width: 0, height: 40, rx: 20, fill: "#FF8FA3", ...S6(4) }, g); el("rect", { x: 180, y: 820, width: 1240, height: 40, rx: 20, fill: "none", ...S6(4) }, g);
   await speak(C.pony, `sl_oogoe_${curStage}`, `${T.call}を おおきな こえで よぼう！「おーい！」`);
   showTask("おーい！", "おおきな こえで", 260); setListen(pc, true);
@@ -433,10 +445,10 @@ Object.assign(LTASK_RUN, { stop: slStop, catch: slCatch, balloon: slBalloon, mor
 { const smm = showMultiMenu; showMultiMenu = function () {
     smm(); const st = document.querySelector(".mstages"); if (!st) return; let after = st.querySelector(".mtomo") || st.querySelector(".mlong");
     SL.forEach(sid => { const T = SL_TH[sid]; const b = document.createElement("button"); b.type = "button"; b.className = "mst mlong mslong";
-      b.innerHTML = `<span class="mno">★★</span><span class="mico">${T.icon}</span><span class="mname">${T.name.replace(" の ", "の<br>").replace("の だいぼうけん", "の<br>だいぼうけん")}</span><span class="mstat">ちょうロング</span>`;
+      b.innerHTML = `<span class="mno">★★</span><span class="mico">${T.icon}</span><span class="mname">${T.name.replace(" の ", "の<br>").replace("の だいぼうけん", "の<br>だいぼうけん").replace("おでかけ だいぼうけん", "おでかけ<br>だいぼうけん")}</span><span class="mstat">ちょうロング</span>`;
       b.onclick = () => { const on = document.querySelector(".mnum.on"); if (!on) return; const n = parseInt(on.textContent, 10); boot(); document.getElementById("startBox").remove(); newGame({ stage: sid, multi: n }); };
       if (after) { after.after(b); after = b; } else st.prepend(b); }); }; }
-(function () { const s = document.createElement("style"); s.textContent = `.start.menu .mst.mslong{background:#E3F3FF;border-color:#3E7FD6}.start.menu .mmcard .mst{padding-top:3px!important;padding-bottom:3px!important}.start.menu .mmcard .mst .mico{font-size:clamp(18px,2.4vw,26px)!important}.start.menu .mmcard .mstages{gap:5px!important}.start.menu .mmcard h2{font-size:clamp(28px,4.4vw,48px)!important}`; document.head.appendChild(s); })();
+(function () { const s = document.createElement("style"); s.textContent = `.start.menu .mst.mslong{background:#E3F3FF;border-color:#3E7FD6}.start.menu .mmcard .mst{padding-top:3px!important;padding-bottom:3px!important}.start.menu .mmcard .mst .mico{font-size:clamp(18px,2.4vw,26px)!important}.start.menu .mmcard .mstages{gap:5px!important;grid-template-columns:repeat(10,minmax(0,1fr))!important}.start.menu .mmcard{width:min(95%,1060px)!important}.start.menu .mmcard h2{font-size:clamp(28px,4.4vw,48px)!important}`; document.head.appendChild(s); })();
 
 // 盤の 上の ぽにーは、マスの ない 右上へ
 { const sv = setView; setView = function (v, ...a) { const r = sv(v, ...a); if (v === "board" && isSL()) place(C.pony, 1545, 985, .32); return r; }; }
@@ -444,7 +456,7 @@ Object.assign(LTASK_RUN, { stop: slStop, catch: slCatch, balloon: slBalloon, mor
 // 0マスの ときは マスの 課題も しない（つぎの ばんで もとに もどす）
 { const lc = landChild; landChild = async function (pc = P.shima) { if (isSL() && pc.player && pc.player.stay) { pc.player.stay = 0; return; } return lc(pc); }; }
 // 🐬 のりもの：イルカ・ジェットコースター・ロケットなどが コマを のせて はこぶ（盤の 上で うごく）
-const SL_VEH = { sumi: { warp: "🐬", bigwarp: "🚤", home: "🐳" }, sokashi: { warp: "🚃", bigwarp: "☁️", home: "🍫" }, suchu: { warp: "🌀", bigwarp: "🚀", home: "🌑" }, eki: { warp: "🚅", bigwarp: "LIN", home: "🚃" } };
+const SL_VEH = { sumi: { warp: "🐬", bigwarp: "🚤", home: "🐳" }, sokashi: { warp: "🚃", bigwarp: "☁️", home: "🍫" }, suchu: { warp: "🌀", bigwarp: "🚀", home: "🌑" }, eki: { warp: "🚅", bigwarp: "LIN", home: "🚃" }, odekake: { warp: "🚌", bigwarp: "🚕", home: "🚌" } };
 const SL_SWALLOW = { sumi: "home", suchu: "home" }; // くじら・ブラックホールは のみこむ（コマが きえて、スタートで でてくる）
 // リニアモーターカー（えもじが ないので 絵で）：ひだりむき、ながい はなさき、しゃりん なしで ういて いる
 function linearG(g, size) { const k = size / 130, o = el("g", {}, g), t = el("g", { transform: `scale(${k.toFixed(3)})` }, o);
@@ -456,7 +468,7 @@ function linearG(g, size) { const k = size / 130, o = el("g", {}, g), t = el("g"
 function slEmoji(e, x, y, size = 120) { const g = el("g", {}, front()); const t = e === "LIN" ? linearG(g, size) : txt(g, 0, size * .36, e, size, { "text-anchor": "middle" }); g.setAttribute("transform", `translate(${x.toFixed(0)} ${y.toFixed(0)})`); g.__t = t; return g; }
 async function slRide(pc, toId, e, opt = {}) {
   const [tx, ty] = nodeXY(pc, toId), x0 = pc.px, y0 = pc.py, dir = tx >= x0 ? 1 : -1, sz = opt.size || 130;
-  const v = slEmoji(e, x0 - dir * 900, y0 + 10, sz); const faceL = ["🚅", "🚄", "🚃", "LIN"].includes(e); // でんしゃの えもじは ひだりむき → すすむ ほうに むける（2026-10-18 ぎゃくそう なおし）
+  const v = slEmoji(e, x0 - dir * 900, y0 + 10, sz); const faceL = ["🚅", "🚄", "🚃", "LIN", "🚌", "🚕"].includes(e); // でんしゃの えもじは ひだりむき → すすむ ほうに むける（2026-10-18 ぎゃくそう なおし）
   if (faceL ? dir > 0 : (dir < 0 && !opt.noflip)) v.__t.setAttribute("transform", "scale(-1 1)");
   const at = (x, y) => v.setAttribute("transform", `translate(${x.toFixed(0)} ${y.toFixed(0)})`);
   noise(.4, 600, .3); await tween(700, k => at(x0 - dir * 900 * (1 - k), y0 + 10 + Math.sin(k * 12) * 6)); // やってくる

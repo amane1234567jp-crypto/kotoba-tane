@@ -72,11 +72,12 @@ function menuTitle() {
 .mword span{font:400 clamp(40px,7.2vw,82px) var(--display);color:var(--c);-webkit-text-stroke:clamp(5px,.8vw,9px) #2B2A33;paint-order:stroke fill;text-shadow:0 6px 0 #2B2A33,0 10px 14px #2B2A3333;display:inline-block;animation:mbob 2.2s ease-in-out infinite;animation-delay:var(--d);line-height:1.1;letter-spacing:.02em}
 @keyframes mbob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(2deg)}}
 .msay{text-align:center;font:400 clamp(14px,2vw,20px) var(--display);color:#2B2A33;background:#FFFFFFd9;border:4px solid #2B2A33;border-radius:999px;padding:3px 18px;width:max-content;margin:4px auto 0;box-shadow:0 4px 0 #2B2A33}
-.start.menu .mcard{background:#FFFFFFe8;backdrop-filter:blur(2px);width:min(88%,940px);max-height:88%;overflow-y:auto;padding:12px 18px 10px;gap:8px}
-.start.menu .mcard .mstages{grid-template-columns:repeat(8,minmax(0,1fr))}.start.menu .mcard .mhead{display:none}.start.menu .mcard{gap:4px}.mcard .mst .mstat{padding:0 6px;border-width:2px;line-height:1.3}.start.menu .mcard .mst{box-shadow:0 4px 0 #2B2A33}.start.menu .mmcard h2{margin:0}.start.menu .mcard .mstages{gap:6px}.start.menu .mcard .mst{padding:3px 2px 4px;gap:0;border-radius:16px}.mcard .mst .mico{font-size:clamp(16px,2.1vw,24px);line-height:1.1}.mcard .mst .mname{font-size:clamp(10px,1.2vw,14px);overflow-wrap:anywhere;white-space:normal;line-height:1.15}.mcard .mst .mstat{font-size:clamp(9px,1.1vw,12px)}
+.start.menu .mcard{background:#FFFFFFe8;backdrop-filter:blur(2px);width:min(95%,1060px);max-height:88%;overflow-y:auto;padding:12px 18px 10px;gap:8px}
+.start.menu .mcard .mstages{grid-template-columns:repeat(10,minmax(0,1fr))}.start.menu .mcard .mhead{display:none}.start.menu .mcard{gap:4px}.mcard .mst .mstat{padding:0 6px;border-width:2px;line-height:1.3}.start.menu .mcard .mst{box-shadow:0 4px 0 #2B2A33}.start.menu .mmcard h2{margin:0}.start.menu .mcard .mstages{gap:6px}.start.menu .mcard .mst{padding:3px 2px 4px;gap:0;border-radius:16px}.mcard .mst .mico{font-size:clamp(16px,2.1vw,24px);line-height:1.1}.mcard .mst .mname{font-size:clamp(10px,1.2vw,14px);overflow-wrap:anywhere;white-space:normal;line-height:1.15}.mcard .mst .mstat{font-size:clamp(9px,1.1vw,12px)}
 .start.menu .mmulti{padding:6px 26px}
 .mmcard .mtitle{color:#7FCBF0;-webkit-text-stroke:6px #2B2A33;paint-order:stroke fill;text-shadow:0 5px 0 #2B2A33}
-@media (prefers-reduced-motion: reduce){.mword span,.mseed{animation:none}}`;
+@media (prefers-reduced-motion: reduce){.mword span,.mseed{animation:none}}
+@media (max-aspect-ratio: 1/1){.start.menu .mcard .mstages .mst .mstat{display:none}.start.menu .mcard .mst{padding:4px 2px 6px}}`;
   document.head.appendChild(st);
 })();
 

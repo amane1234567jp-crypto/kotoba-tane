@@ -23,3 +23,5 @@
 - kokuren_voice、kokuren_3rd（kokuren）
 - yukyu（yukyu）
 - にせ、るな（MAHOPROGRAM）
+- 観測症（観測症 / hdae）
+- はきみて れく(瞭魅推 れく)（はきみて れく）

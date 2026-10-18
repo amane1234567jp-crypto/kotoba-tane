@@ -248,6 +248,38 @@ SONGS = {
  "haisha": dict(bpm=132, root=69, scale=MAJ, bars=8, lead=recorder, lead2=glock, drums=D_class, comp="pluck", bass="sq", swing=.3, extra=X_bell,
    mel="5 5 6 5 3 - 1 - | 2 2 3 2 1 - - - | 5 5 6 5 3 - 1' - | 7 - 6 - 5 - - - | 4 4 5 4 2 - 7, - | 1 1 2 1 6, - - - | 5 - 3 - 4 - 2 - | 1 - - - . . . .",
    chords=[1, 5, 1, 5, 4, 1, 5, 1]),
+ # ゆうごはん：あたたかい おうちの ワルツ。グロッケンと ピアノ（あかるく）
+ "yuushoku": dict(bpm=132, root=65, scale=MAJ, bars=8, lead=glock, lead2=piano, drums=D_easy, comp="pluck", swing=.25, extra=X_bell,
+   mel="1 - 3 - 5 - 6 5 | 4 - 6 - 5 - - - | 3 - 5 - 1' - 7 6 | 5 - - - 2 - - - | 1 - 3 - 5 - 6 5 | 4 - 6 - 1' - 2' - | 1' - 7 - 6 - 5 - | 1' - - - . . . .",
+   chords=[1, 4, 1, 5, 1, 4, 5, 1]),
+ # こくご：ことばを よむ リズム。リコーダーと マリンバ
+ "kokugo": dict(bpm=120, root=67, scale=MAJ, bars=8, lead=recorder, lead2=marimba, drums=D_class, comp="piano", swing=.15, extra=X_bell,
+   mel="5 - 3 - 5 - 6 - | 5 - 3 - 2 - - - | 3 - 4 - 5 - 1' - | 7 - 6 - 5 - - - | 5 - 3 - 5 - 6 - | 1' - 6 - 5 - 3 - | 2 - 3 - 4 - 7, - | 1 - - - . . . .",
+   chords=[1, 5, 1, 5, 1, 4, 5, 1]),
+ # たいいく：はしれ はしれ！ げんきな マーチ。ブラスと クラリネット
+ "taiiku": dict(bpm=150, root=67, scale=MAJ, bars=8, lead=brass, lead2=clar, drums=D_march, comp="pad", bass="sq",
+   mel="1 1 3 3 5 - 5 - | 6 6 5 3 2 - - - | 4 4 6 6 5 - 3 - | 2 - 3 - 5 - - - | 1 1 3 3 5 - 5 - | 6 6 1' 6 5 - 3 - | 4 - 2 - 7, - 2 - | 1 - - - . . . .",
+   chords=[1, 4, 4, 5, 1, 4, 5, 1]),
+ # おんがく：たのしい がっそう。フルートと グロッケン、はずむ
+ "ongaku": dict(bpm=126, root=69, scale=MAJ, bars=8, lead=flute, lead2=glock, drums=D_shop, comp="piano", swing=.3, extra=X_bell,
+   mel="3 4 5 - 5 - 1' - | 7 6 5 - 3 - - - | 4 5 6 - 6 - 2' - | 1' 7 6 - 5 - - - | 3 4 5 - 5 - 1' - | 2' 1' 7 - 6 - 5 - | 4 - 3 - 2 - 5, - | 1 - - - . . . .",
+   chords=[1, 1, 4, 5, 1, 5, 4, 1]),
+ # ずこう：いろいろな いろ。マリンバと ピチカート、ころころ
+ "zukou": dict(bpm=128, root=65, scale=MAJ, bars=8, lead=marimba, lead2=glock, drums=D_easy, comp="pluck", bass="sq", swing=.35,
+   mel="5 3 1 3 5 - 6 - | 5 3 1 3 2 - - - | 4 2 7, 2 4 - 5 - | 4 2 7, 2 1 - - - | 5 3 1 3 5 - 1' - | 6 4 2 4 6 - 1' - | 7 - 5 - 6 - 7 - | 1' - - - . . . .",
+   chords=[1, 1, 5, 5, 1, 4, 5, 1]),
+ # じてんしゃ：かぜを きって すいすい。クラリネットと グロッケン、かるやかに
+ "jitensha": dict(bpm=144, root=67, scale=MAJ, bars=8, lead=clar, lead2=glock, drums=D_walk, comp="pluck", bass="sq", swing=.2, extra=X_bell,
+   mel="1 2 3 5 - 3 5 - | 6 5 3 2 - - - - | 2 3 4 6 - 4 6 - | 7 6 5 3 - - - - | 1 2 3 5 - 3 5 - | 1' 7 6 5 - 3 - - | 4 3 2 5, - 7, 2 - | 1 - - - . . . .",
+   chords=[1, 4, 2, 5, 1, 4, 5, 1]),
+ # やすみじかん：ほんを ひらく のんびり ソング。フルートと ピアノ（あかるく）
+ "yasumi": dict(bpm=116, root=70, scale=MAJ, bars=8, lead=flute, lead2=piano, drums=D_easy, comp="piano", swing=.25, extra=X_birds,
+   mel="3 - 2 - 3 - 5 - | 6 - 5 - 3 - - - | 2 - 1 - 2 - 3 - | 5 - - - 3 - - - | 3 - 2 - 3 - 5 - | 1' - 6 - 5 - 3 - | 2 - 3 - 2 - 5, - | 1 - - - . . . .",
+   chords=[1, 4, 5, 1, 1, 4, 5, 1]),
+ # おでかけ だいぼうけん：あるいて じてんしゃで まちを ぐるっと！ マリンバと クラリネット、げんきに
+ "odekake": dict(bpm=146, root=67, scale=MAJ, bars=8, lead=marimba, lead2=clar, drums=D_walk, comp="pluck", bass="sq", swing=.2, extra=X_bell,
+   mel="5 - 1' - 7 6 5 - | 3 - 4 5 3 - - - | 4 - 6 - 5 4 3 - | 2 - 3 4 5 - - - | 5 - 1' - 7 6 5 - | 6 - 1' 2' 1' - 5 - | 4 3 2 - 5, - 7, - | 1 - - - . . . .",
+   chords=[1, 1, 4, 5, 1, 4, 5, 1]),
  "sensei1": dict(bpm=120, root=70, scale=MAJ, bars=8, lead=recorder, lead2=glock, drums=D_class, comp="piano", extra=X_bell,
    mel="3 - 3 - 4 - 5 - | 5 - 4 - 3 - 2 - | 1 - 1 - 2 - 3 - | 3 - - 2 2 - - - | 3 - 3 - 4 - 5 - | 5 - 4 - 3 - 2 - | 1 - 1 - 2 - 3 - | 2 - - 1 1 - - -",
    chords=[1, 5, 1, 5, 1, 5, 1, 5]),

@@ -11,7 +11,7 @@ const rnd = n => Math.floor(Math.random() * n);
 const pad = n => String(n).padStart(2, "0");
 
 /* ---------- キャラ ---------- */
-const KINDS = ["doshin", "nobbo", "kamejii", "meebaa", "pyonmama", "gaojii", "miibaa", "doshinpapa", "kon", "panna", "pannamama", "mama", "gaomama", "miimama", "chumama", "wanko", "biba", "piyoko", "ookami", "ojisan", "omawari", "tora", "kuma", "onii", "pony", "shima", "pyon", "mii", "gao", "chu"];
+const KINDS = ["doshin", "nobbo", "kamejii", "meebaa", "pyonmama", "gaojii", "miibaa", "doshinpapa", "kon", "panna", "pannamama", "mama", "gaomama", "miimama", "chumama", "papa", "gaopapa", "gaonii", "wanko", "biba", "piyoko", "ookami", "ojisan", "omawari", "tora", "kuma", "onii", "pony", "shima", "pyon", "mii", "gao", "chu"];
 const C = {}; KINDS.forEach(k => C[k] = makeChar(k));
 const P = { doshin: makeChar("doshin"), shima: makeChar("shima"), gao: makeChar("gao") };
 Object.values(P).forEach(p => p.isPiece = true);
@@ -980,6 +980,13 @@ const STAGES = [
   { id: "hoken2", name: "ほけんしつ", icon: "🩹", ready: true },
   { id: "byouin", name: "びょういん", icon: "🏥", ready: true },
   { id: "haisha", name: "はいしゃさん", icon: "🦷", ready: true },
+  { id: "yuushoku", name: "ゆうごはん", icon: "🍽️", ready: true },
+  { id: "kokugo", name: "こくご", icon: "📖", ready: true },
+  { id: "taiiku", name: "たいいく", icon: "🏃", ready: true },
+  { id: "ongaku", name: "おんがく", icon: "🎵", ready: true },
+  { id: "zukou", name: "ずこう", icon: "🎨", ready: true },
+  { id: "jitensha", name: "じてんしゃ", icon: "🚲", ready: true },
+  { id: "yasumi", name: "やすみじかん", icon: "📚", ready: true },
 ];
 const SAVE_KEY = "kotoba-tane-save";
 const SAVE = (() => { try { return JSON.parse(localStorage.getItem(SAVE_KEY)) || null; } catch (e) { return null; } })() || { v: 1, lap: 1, cleared: {}, E: null, play: null };
