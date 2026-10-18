@@ -611,6 +611,15 @@
   },
   "lk_y_y9_b": {
    "speed": 1.15
+  },
+  "rv_mii_rivalg": {
+   "style": "からかい"
+  },
+  "rv_chu_rivalg": {
+   "style": "喜び"
+  },
+  "rv_doshin_rivalg": {
+   "style": "Mid"
   }
  }
 }
