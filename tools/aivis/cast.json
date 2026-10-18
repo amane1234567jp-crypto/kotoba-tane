@@ -276,6 +276,22 @@
    "model": "4f281e78-eba6-495a-8e50-5c322d02b5b1",
    "style": "ノーマル",
    "speed": 1.0
+  },
+  "papa": {
+   "model": "ed47c952-c253-405e-adba-1172399816a1",
+   "style": "ノーマル",
+   "speed": 0.97
+  },
+  "gaopapa": {
+   "model": "70a875a9-feae-41e6-a586-8cf9e47c6c0b",
+   "style": "ノーマル",
+   "speed": 0.97,
+   "pitch": -0.04
+  },
+  "gaonii": {
+   "model": "70ad7e84-6a10-48d6-8f9a-8dac4bba3c0b",
+   "style": "ノーマル",
+   "speed": 1.0
   }
  },
  "lines": {
