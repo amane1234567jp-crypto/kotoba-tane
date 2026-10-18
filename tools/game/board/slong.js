@@ -422,7 +422,7 @@ async function slSakasa(pc) {
   await speak(C.pony, `sl_sk_${i}`, `「${it.w}」を さかさまに いうと？`);
   await sleep(300); for (let s = 0; s < 3; s++) blip(600 + s * 100, 700, .06, "square");
   await tween(900, e => tiles.forEach(t => { const to = ch.length - 1 - t.k; t.setAttribute("transform", `translate(${((to - t.k) * W * e).toFixed(0)} ${(-120 * Math.sin(e * Math.PI)).toFixed(0)})`); }));
-  showTask("？", "よんでみよう", 260); setListen(pc, true); const r = await listen(it.keys, 9000); setListen(pc, false); hideTask();
+  showTask("？", "よんでみよう", 260); setListen(pc, true); it.keys.noCut = true; const r = await listen(it.keys, 10000); /* さかさことばは あたまの もじを けずった こうほを つかわない（「つき」「やけた」で せいかいに ならない） */ setListen(pc, false); hideTask();
   const ok = r.r === "ok"; if (ok) { chime(); confetti(40); await speak(C.pony, it.w === it.r ? "sl_sk_same" : "sl_good", it.w === it.r ? "せいかい！ さかさまでも おなじだね！" : "やったね！"); }
   else await speak(C.pony, `sl_ska_${i}`, it.w === it.r ? `こたえは「${it.r}」。さかさまでも おなじなんだよ` : `こたえは「${it.r}」`);
   playLog({ type: "sakasa", w: it.w, ok, who: NAMES[pc.kind] }); grade(ok); await sleep(400); g.remove(); await delta(pc, ok ? 1 : 0); return ok;
@@ -444,12 +444,19 @@ Object.assign(LTASK_RUN, { stop: slStop, catch: slCatch, balloon: slBalloon, mor
 // 0マスの ときは マスの 課題も しない（つぎの ばんで もとに もどす）
 { const lc = landChild; landChild = async function (pc = P.shima) { if (isSL() && pc.player && pc.player.stay) { pc.player.stay = 0; return; } return lc(pc); }; }
 // 🐬 のりもの：イルカ・ジェットコースター・ロケットなどが コマを のせて はこぶ（盤の 上で うごく）
-const SL_VEH = { sumi: { warp: "🐬", bigwarp: "🚤", home: "🐳" }, sokashi: { warp: "🚃", bigwarp: "☁️", home: "🍫" }, suchu: { warp: "🌀", bigwarp: "🚀", home: "🌑" }, eki: { warp: "🚅", bigwarp: "🚄", home: "🚃" } };
+const SL_VEH = { sumi: { warp: "🐬", bigwarp: "🚤", home: "🐳" }, sokashi: { warp: "🚃", bigwarp: "☁️", home: "🍫" }, suchu: { warp: "🌀", bigwarp: "🚀", home: "🌑" }, eki: { warp: "🚅", bigwarp: "LIN", home: "🚃" } };
 const SL_SWALLOW = { sumi: "home", suchu: "home" }; // くじら・ブラックホールは のみこむ（コマが きえて、スタートで でてくる）
-function slEmoji(e, x, y, size = 120) { const g = el("g", {}, front()); const t = txt(g, 0, size * .36, e, size, { "text-anchor": "middle" }); g.setAttribute("transform", `translate(${x.toFixed(0)} ${y.toFixed(0)})`); g.__t = t; return g; }
+// リニアモーターカー（えもじが ないので 絵で）：ひだりむき、ながい はなさき、しゃりん なしで ういて いる
+function linearG(g, size) { const k = size / 130, o = el("g", {}, g), t = el("g", { transform: `scale(${k.toFixed(3)})` }, o);
+  el("ellipse", { cx: -20, cy: 40, rx: 150, ry: 9, fill: "#9FE8FF", opacity: .8 }, t); el("rect", { x: -170, y: 46, width: 320, height: 10, rx: 5, fill: "#C9D3DE", stroke: INK, "stroke-width": 3 }, t);
+  el("path", { d: "M-190 18 Q-150 -4 -40 -30 L130 -30 Q140 -30 140 -18 L140 18 Q140 24 130 24 L-110 24 Q-180 26 -190 18 Z", fill: "#F4F7FA", stroke: INK, "stroke-width": 6, "stroke-linejoin": "round" }, t);
+  el("path", { d: "M-150 8 L130 6 L130 14 L-170 16 Z", fill: "#3E5BD6" }, t); el("path", { d: "M-96 -12 Q-80 -24 -50 -24 L-50 -6 L-100 -6 Z", fill: "#2B2A33" }, t);
+  [-20, 20, 60, 100].forEach(x => el("rect", { x, y: -20, width: 26, height: 16, rx: 4, fill: "#BDE3F2", stroke: INK, "stroke-width": 3 }, t));
+  [0, 1, 2].forEach(i => el("path", { d: `M${150 + i * 18} ${-14 + i * 12} h${24 + i * 6}`, stroke: "#7FCBF0", "stroke-width": 5, "stroke-linecap": "round" }, t)); return o; }
+function slEmoji(e, x, y, size = 120) { const g = el("g", {}, front()); const t = e === "LIN" ? linearG(g, size) : txt(g, 0, size * .36, e, size, { "text-anchor": "middle" }); g.setAttribute("transform", `translate(${x.toFixed(0)} ${y.toFixed(0)})`); g.__t = t; return g; }
 async function slRide(pc, toId, e, opt = {}) {
   const [tx, ty] = nodeXY(pc, toId), x0 = pc.px, y0 = pc.py, dir = tx >= x0 ? 1 : -1, sz = opt.size || 130;
-  const v = slEmoji(e, x0 - dir * 900, y0 + 10, sz); const faceL = ["🚅", "🚄", "🚃"].includes(e); // でんしゃの えもじは ひだりむき → すすむ ほうに むける（2026-10-18 ぎゃくそう なおし）
+  const v = slEmoji(e, x0 - dir * 900, y0 + 10, sz); const faceL = ["🚅", "🚄", "🚃", "LIN"].includes(e); // でんしゃの えもじは ひだりむき → すすむ ほうに むける（2026-10-18 ぎゃくそう なおし）
   if (faceL ? dir > 0 : (dir < 0 && !opt.noflip)) v.__t.setAttribute("transform", "scale(-1 1)");
   const at = (x, y) => v.setAttribute("transform", `translate(${x.toFixed(0)} ${y.toFixed(0)})`);
   noise(.4, 600, .3); await tween(700, k => at(x0 - dir * 900 * (1 - k), y0 + 10 + Math.sin(k * 12) * 6)); // やってくる

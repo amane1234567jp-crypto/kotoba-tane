@@ -20,7 +20,7 @@ setSitView = function (s, heroKind) {
   STORY_CAST = {};
   const xs = (STORY_POS[s.id] || CAST_X[s.cast.length]);
   s.cast.forEach((k, i) => { const c = C[k]; place(c, xs[i], 975, KID_S[k] || .78); show(c); STORY_CAST[k] = c; });
-  const [, as] = ASK_AT[s.asker]; place(ask, 1440, 975, as * .95); show(ask); ask.dx.v = ask.dx.t = 600; // 先生は あとで 来る
+  const [, as] = ASK_AT[s.asker]; place(ask, 120, 975, as * .95); show(ask); ask.dx.v = ask.dx.t = -1000; // 先生は あとで 左から 来る（ほかの 子を 追いこさない 2026-10-18）
   return { hero, ask };
 };
 const STORY_POS = { happyou: [740, 1000, 1220], taiko: [640, 930, 1210], soup: [640, 1080, 1290], oogoe: [660, 920, 1180], dodge: [720, 1020, 1240], nawatobi: [700, 960, 1190], enogu: [740, 1270], ninjin: [760, 1130], honsagashi: [800, 1180] };
@@ -32,8 +32,9 @@ playIntro = async function (s, h, a) {
   if (STORY[s.id]) await STORY[s.id](cast, line, h); else for (let i = 0; i < s.talk.length; i++) await line(i);
   await sleep(400);
   // 先生が 来て、主人公の ほうを 向く
-  const tx = h.x + 200 * h.s + 230 + 60 * (a.s - .8), dist = Math.abs(a.x + a.dx.v + 200 * a.s - tx);
-  a.dx.t = tx - (a.x + 200 * a.s); hold(a, "run", .4 + dist / 900); await sleep(400 + dist / 0.9); playMove(a, "nod"); await sleep(400);
+  // 主人公は すこし 右へ、ぽにーは はしへ よけて、先生が 左から 来て 主人公の となりに 立つ
+  if (h !== C.shima && visible.includes(C.shima)) walk(C.shima, 170, 600); walk(h, 170, 600); tween(500, k => place(C.pony, 100 - 90 * k, 975, .42 - .1 * k));
+  a.dx.t = 0; hold(a, "run", 1.2); await sleep(1300); playMove(a, "nod"); await sleep(400);
 };
 // 先生の 返事の あとの やりとり（あやまる・なかなおり など）
 const resolveBase = resolve;
@@ -163,10 +164,17 @@ const STORY = {
     hold(mii, "run", .9); await walk(mii, -170, 700); playMove(mii, "crouch"); await line(2);
     await line(3); playMove(mii, "nod"); await line(4); },
   async nawatobi(c, line) { const { chu, gao, doshin } = c;
-    const rp = prop("rope", 0, 0, 1); let ang = 0, on = true; follow(rp, () => { const p = at(chu, 200, 380); return [p.x, p.y, ang, chu.s * 1.6]; });
-    const spin = ms => new Promise(res => { const t0 = performance.now(); addTick(() => { const k = (performance.now() - t0) / ms; ang = -k * 360; if (k >= 1) { ang = 0; res(); return false; } }); });
-    await line(0); await spin(500); jump(chu, .5); await sleep(150); thud(); flop(chu); await sleep(700);
-    await line(1); await spin(500); jump(chu, .5); await sleep(150); thud(); flop(chu); await sleep(700);
+    // なわとび：なわの りょうはしは ちゅうの て。なわは あたまの うえ → まえ → あしの した と まわる（よこから 見た まわしかた）
+    const rp = el("path", { fill: "none", stroke: "#E8473C", "stroke-width": 9, "stroke-linecap": "round" }, front()); let ph = 0;
+    addTick(() => { if (!rp.isConnected) return false; const L = world(chu, 70, 340), R = world(chu, 330, 340), top = world(chu, 200, (chu.top || 30) - 50).y, feet = world(chu, 200, (chu.base || 416) + 18).y;
+      const hy = (L.y + R.y) / 2, mid = (top + feet) / 2 - (feet - top) / 2 * Math.cos(ph), cy = 2 * mid - hy;
+      rp.setAttribute("d", `M${L.x.toFixed(1)} ${L.y.toFixed(1)} Q${((L.x + R.x) / 2).toFixed(1)} ${cy.toFixed(1)} ${R.x.toFixed(1)} ${R.y.toFixed(1)}`);
+      chu.armL.t = 30 + 25 * Math.sin(ph); chu.armR.t = -30 - 25 * Math.sin(ph); });
+    // 1かい まわして、あしの したに きた ところで ひっかかる
+    const spin = ms => tween(ms, k => { ph = k * Math.PI; }).then(() => { ph = Math.PI; });
+    const turn = async () => { ph = 0; await sleep(200); await spin(600); jump(chu, .5); await sleep(150); thud(); flop(chu); await sleep(500); await tween(400, k => { ph = Math.PI * (1 + k); }); };
+    await line(0); await turn(); await sleep(200);
+    await line(1); await turn(); await sleep(200);
     playMove(gao, "laugh"); markAbove(gao, "note"); await line(2);
     chu.headRot.t = 0; chu.headY.t = 30; chu.sadMouth = true; chu.eyeY.t = 12; await sleep(1500);
     playMove(doshin, "no"); await line(4);

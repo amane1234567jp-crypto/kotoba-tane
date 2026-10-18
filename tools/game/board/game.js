@@ -449,7 +449,7 @@ function listen(groups, ms = 7000) {
       best = got.size;
       heardEl.textContent = heard; if (best === groups.length) end("ok");
       else if (best >= need) { clearTimeout(soon); soon = setTimeout(() => end("ok"), 700); } // ほぼ言えたら、少し待って「言えた」
-      else if (heard) { clearTimeout(idle); idle = setTimeout(() => end(verdict()), 2200); } // なにか きこえて、そのあと しずかに なったら きめる（まちすぎない）
+      else if (heard && !/^[えあうんーっとまそのおぇぁ]*$/.test(norm(heard))) { clearTimeout(idle); idle = setTimeout(() => end(verdict()), 2800); } // なにか きこえて、そのあと しずかに なったら きめる（まちすぎない）
     }, ms);
     h.done.then(() => { if (srUsable) end(verdict()); });
     const tmr = setTimeout(() => { if (srUsable) end(verdict()); }, ms + 400);

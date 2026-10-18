@@ -37956,7 +37956,7 @@ function listen(groups, ms = 7000) {
       best = got.size;
       heardEl.textContent = heard; if (best === groups.length) end("ok");
       else if (best >= need) { clearTimeout(soon); soon = setTimeout(() => end("ok"), 700); } // ほぼ言えたら、少し待って「言えた」
-      else if (heard) { clearTimeout(idle); idle = setTimeout(() => end(verdict()), 2200); } // なにか きこえて、そのあと しずかに なったら きめる（まちすぎない）
+      else if (heard && !/^[えあうんーっとまそのおぇぁ]*$/.test(norm(heard))) { clearTimeout(idle); idle = setTimeout(() => end(verdict()), 2800); } // なにか きこえて、そのあと しずかに なったら きめる（まちすぎない）
     }, ms);
     h.done.then(() => { if (srUsable) end(verdict()); });
     const tmr = setTimeout(() => { if (srUsable) end(verdict()); }, ms + 400);
@@ -40028,7 +40028,7 @@ setSitView = function (s, heroKind) {
   STORY_CAST = {};
   const xs = (STORY_POS[s.id] || CAST_X[s.cast.length]);
   s.cast.forEach((k, i) => { const c = C[k]; place(c, xs[i], 975, KID_S[k] || .78); show(c); STORY_CAST[k] = c; });
-  const [, as] = ASK_AT[s.asker]; place(ask, 1440, 975, as * .95); show(ask); ask.dx.v = ask.dx.t = 600; // 先生は あとで 来る
+  const [, as] = ASK_AT[s.asker]; place(ask, 120, 975, as * .95); show(ask); ask.dx.v = ask.dx.t = -1000; // 先生は あとで 左から 来る（ほかの 子を 追いこさない 2026-10-18）
   return { hero, ask };
 };
 const STORY_POS = { happyou: [740, 1000, 1220], taiko: [640, 930, 1210], soup: [640, 1080, 1290], oogoe: [660, 920, 1180], dodge: [720, 1020, 1240], nawatobi: [700, 960, 1190], enogu: [740, 1270], ninjin: [760, 1130], honsagashi: [800, 1180] };
@@ -40040,8 +40040,9 @@ playIntro = async function (s, h, a) {
   if (STORY[s.id]) await STORY[s.id](cast, line, h); else for (let i = 0; i < s.talk.length; i++) await line(i);
   await sleep(400);
   // 先生が 来て、主人公の ほうを 向く
-  const tx = h.x + 200 * h.s + 230 + 60 * (a.s - .8), dist = Math.abs(a.x + a.dx.v + 200 * a.s - tx);
-  a.dx.t = tx - (a.x + 200 * a.s); hold(a, "run", .4 + dist / 900); await sleep(400 + dist / 0.9); playMove(a, "nod"); await sleep(400);
+  // 主人公は すこし 右へ、ぽにーは はしへ よけて、先生が 左から 来て 主人公の となりに 立つ
+  if (h !== C.shima && visible.includes(C.shima)) walk(C.shima, 170, 600); walk(h, 170, 600); tween(500, k => place(C.pony, 100 - 90 * k, 975, .42 - .1 * k));
+  a.dx.t = 0; hold(a, "run", 1.2); await sleep(1300); playMove(a, "nod"); await sleep(400);
 };
 // 先生の 返事の あとの やりとり（あやまる・なかなおり など）
 const resolveBase = resolve;
@@ -40171,10 +40172,17 @@ const STORY = {
     hold(mii, "run", .9); await walk(mii, -170, 700); playMove(mii, "crouch"); await line(2);
     await line(3); playMove(mii, "nod"); await line(4); },
   async nawatobi(c, line) { const { chu, gao, doshin } = c;
-    const rp = prop("rope", 0, 0, 1); let ang = 0, on = true; follow(rp, () => { const p = at(chu, 200, 380); return [p.x, p.y, ang, chu.s * 1.6]; });
-    const spin = ms => new Promise(res => { const t0 = performance.now(); addTick(() => { const k = (performance.now() - t0) / ms; ang = -k * 360; if (k >= 1) { ang = 0; res(); return false; } }); });
-    await line(0); await spin(500); jump(chu, .5); await sleep(150); thud(); flop(chu); await sleep(700);
-    await line(1); await spin(500); jump(chu, .5); await sleep(150); thud(); flop(chu); await sleep(700);
+    // なわとび：なわの りょうはしは ちゅうの て。なわは あたまの うえ → まえ → あしの した と まわる（よこから 見た まわしかた）
+    const rp = el("path", { fill: "none", stroke: "#E8473C", "stroke-width": 9, "stroke-linecap": "round" }, front()); let ph = 0;
+    addTick(() => { if (!rp.isConnected) return false; const L = world(chu, 70, 340), R = world(chu, 330, 340), top = world(chu, 200, (chu.top || 30) - 50).y, feet = world(chu, 200, (chu.base || 416) + 18).y;
+      const hy = (L.y + R.y) / 2, mid = (top + feet) / 2 - (feet - top) / 2 * Math.cos(ph), cy = 2 * mid - hy;
+      rp.setAttribute("d", `M${L.x.toFixed(1)} ${L.y.toFixed(1)} Q${((L.x + R.x) / 2).toFixed(1)} ${cy.toFixed(1)} ${R.x.toFixed(1)} ${R.y.toFixed(1)}`);
+      chu.armL.t = 30 + 25 * Math.sin(ph); chu.armR.t = -30 - 25 * Math.sin(ph); });
+    // 1かい まわして、あしの したに きた ところで ひっかかる
+    const spin = ms => tween(ms, k => { ph = k * Math.PI; }).then(() => { ph = Math.PI; });
+    const turn = async () => { ph = 0; await sleep(200); await spin(600); jump(chu, .5); await sleep(150); thud(); flop(chu); await sleep(500); await tween(400, k => { ph = Math.PI * (1 + k); }); };
+    await line(0); await turn(); await sleep(200);
+    await line(1); await turn(); await sleep(200);
     playMove(gao, "laugh"); markAbove(gao, "note"); await line(2);
     chu.headRot.t = 0; chu.headY.t = 30; chu.sadMouth = true; chu.eyeY.t = 12; await sleep(1500);
     playMove(doshin, "no"); await line(4);
@@ -40888,7 +40896,13 @@ async function lkSagasu(pc) {
     crowd.forEach((c, i) => later(i * 50, () => jump(c, .3))); await sleep(600);
     showTask(q.text, "さがして タッチ", 150);
     await speak(C.pony, q.key, q.text + " タッチしてね");
-    const pick = () => new Promise(res => crowd.forEach(c => c.root.onclick = () => res(c)));
+    // タッチは「いちばん ちかい あたま」で きめる（まえの 子の からだに かさなって いても、うしろの 子の あたまを えらべる 2026-10-18）
+    let pickH = null; const unpick = () => { if (pickH) { svg.removeEventListener("pointerdown", pickH, true); pickH = null; } };
+    const pick = () => new Promise(res => { unpick(); pickH = ev => { const m = svg.getScreenCTM(); if (!m) return; const p = new DOMPoint(ev.clientX, ev.clientY).matrixTransform(m.inverse());
+        let best = null, bd = 1e9;
+        crowd.forEach(c => { const hc = world(c, 200, ((c.eyes && c.eyes[0] && c.eyes[0].cy) || 170)), r = 130 * c.s, d = Math.hypot(p.x - hc.x, p.y - hc.y) / r; if (d < 1.2 && d < bd) { bd = d; best = c; } });
+        if (!best) crowd.forEach(c => { const a0 = world(c, 50, c.top || 0), b0 = world(c, 350, c.base || 400); if (p.x > a0.x && p.x < b0.x && p.y > a0.y && p.y < b0.y) { const d = Math.abs(p.x - (a0.x + b0.x) / 2); if (d < bd) { bd = d; best = c; } } });
+        if (best) { ev.stopPropagation(); unpick(); res(best); } }; svg.addEventListener("pointerdown", pickH, true); });
     const timer = new Promise(res => addTick(dt => { if (stopT) return false; tleft -= dt; tbar.setAttribute("width", Math.max(0, 100 * tleft).toFixed(0)); if (tleft <= 3 && tleft + dt > 3) tbar.setAttribute("fill", "#FF8FA3"); if (tleft <= 0) { timeUp = true; res(null); return false; } }));
     while (true) {
       const c = await Promise.race([pick(), timer]);
@@ -40898,7 +40912,7 @@ async function lkSagasu(pc) {
       if (wrong === 3) { const p = world(tc, 200, 200); const ring = el("circle", { cx: p.x, cy: p.y, r: 200 * tc.s + 60, fill: "none", stroke: "#FFD25E", "stroke-width": 14, opacity: .9 }, front());
         tween(2400, k => ring.setAttribute("stroke-width", (14 + Math.sin(k * 20) * 6).toFixed(1))); await speak(C.pony, "lk_s_hint", "ヒント！ ひかって いる ところを みてね"); }
     }
-    crowd.forEach(c => c.root.onclick = null); stopT = true; tbar.remove(); ok = wrong === 0 && !timeUp;
+    unpick(); crowd.forEach(c => c.root.onclick = null); stopT = true; tbar.remove(); ok = wrong === 0 && !timeUp;
     unsay(); hideTask();
     if (timeUp) { const p = world(tc, 200, 200); const ring = el("circle", { cx: p.x, cy: p.y, r: 200 * tc.s + 60, fill: "none", stroke: "#FFD25E", "stroke-width": 14, opacity: .9 }, front()); tween(2400, k => ring.setAttribute("stroke-width", (14 + Math.sin(k * 20) * 6).toFixed(1)));
       jump(tc, .5); noise(.3, 400, .4); await speak(C.pony, "lk_s_time", "じかんぎれ！ ここに いたよ"); playLog({ type: "sagasu", q: q.text, ok: false, wrong, timeUp: true, who: NAMES[pc.kind] }); grade(false); await sleep(600); }
@@ -43239,7 +43253,7 @@ async function slSakasa(pc) {
   await speak(C.pony, `sl_sk_${i}`, `「${it.w}」を さかさまに いうと？`);
   await sleep(300); for (let s = 0; s < 3; s++) blip(600 + s * 100, 700, .06, "square");
   await tween(900, e => tiles.forEach(t => { const to = ch.length - 1 - t.k; t.setAttribute("transform", `translate(${((to - t.k) * W * e).toFixed(0)} ${(-120 * Math.sin(e * Math.PI)).toFixed(0)})`); }));
-  showTask("？", "よんでみよう", 260); setListen(pc, true); const r = await listen(it.keys, 9000); setListen(pc, false); hideTask();
+  showTask("？", "よんでみよう", 260); setListen(pc, true); it.keys.noCut = true; const r = await listen(it.keys, 10000); /* さかさことばは あたまの もじを けずった こうほを つかわない（「つき」「やけた」で せいかいに ならない） */ setListen(pc, false); hideTask();
   const ok = r.r === "ok"; if (ok) { chime(); confetti(40); await speak(C.pony, it.w === it.r ? "sl_sk_same" : "sl_good", it.w === it.r ? "せいかい！ さかさまでも おなじだね！" : "やったね！"); }
   else await speak(C.pony, `sl_ska_${i}`, it.w === it.r ? `こたえは「${it.r}」。さかさまでも おなじなんだよ` : `こたえは「${it.r}」`);
   playLog({ type: "sakasa", w: it.w, ok, who: NAMES[pc.kind] }); grade(ok); await sleep(400); g.remove(); await delta(pc, ok ? 1 : 0); return ok;
@@ -43261,12 +43275,19 @@ Object.assign(LTASK_RUN, { stop: slStop, catch: slCatch, balloon: slBalloon, mor
 // 0マスの ときは マスの 課題も しない（つぎの ばんで もとに もどす）
 { const lc = landChild; landChild = async function (pc = P.shima) { if (isSL() && pc.player && pc.player.stay) { pc.player.stay = 0; return; } return lc(pc); }; }
 // 🐬 のりもの：イルカ・ジェットコースター・ロケットなどが コマを のせて はこぶ（盤の 上で うごく）
-const SL_VEH = { sumi: { warp: "🐬", bigwarp: "🚤", home: "🐳" }, sokashi: { warp: "🚃", bigwarp: "☁️", home: "🍫" }, suchu: { warp: "🌀", bigwarp: "🚀", home: "🌑" }, eki: { warp: "🚅", bigwarp: "🚄", home: "🚃" } };
+const SL_VEH = { sumi: { warp: "🐬", bigwarp: "🚤", home: "🐳" }, sokashi: { warp: "🚃", bigwarp: "☁️", home: "🍫" }, suchu: { warp: "🌀", bigwarp: "🚀", home: "🌑" }, eki: { warp: "🚅", bigwarp: "LIN", home: "🚃" } };
 const SL_SWALLOW = { sumi: "home", suchu: "home" }; // くじら・ブラックホールは のみこむ（コマが きえて、スタートで でてくる）
-function slEmoji(e, x, y, size = 120) { const g = el("g", {}, front()); const t = txt(g, 0, size * .36, e, size, { "text-anchor": "middle" }); g.setAttribute("transform", `translate(${x.toFixed(0)} ${y.toFixed(0)})`); g.__t = t; return g; }
+// リニアモーターカー（えもじが ないので 絵で）：ひだりむき、ながい はなさき、しゃりん なしで ういて いる
+function linearG(g, size) { const k = size / 130, o = el("g", {}, g), t = el("g", { transform: `scale(${k.toFixed(3)})` }, o);
+  el("ellipse", { cx: -20, cy: 40, rx: 150, ry: 9, fill: "#9FE8FF", opacity: .8 }, t); el("rect", { x: -170, y: 46, width: 320, height: 10, rx: 5, fill: "#C9D3DE", stroke: INK, "stroke-width": 3 }, t);
+  el("path", { d: "M-190 18 Q-150 -4 -40 -30 L130 -30 Q140 -30 140 -18 L140 18 Q140 24 130 24 L-110 24 Q-180 26 -190 18 Z", fill: "#F4F7FA", stroke: INK, "stroke-width": 6, "stroke-linejoin": "round" }, t);
+  el("path", { d: "M-150 8 L130 6 L130 14 L-170 16 Z", fill: "#3E5BD6" }, t); el("path", { d: "M-96 -12 Q-80 -24 -50 -24 L-50 -6 L-100 -6 Z", fill: "#2B2A33" }, t);
+  [-20, 20, 60, 100].forEach(x => el("rect", { x, y: -20, width: 26, height: 16, rx: 4, fill: "#BDE3F2", stroke: INK, "stroke-width": 3 }, t));
+  [0, 1, 2].forEach(i => el("path", { d: `M${150 + i * 18} ${-14 + i * 12} h${24 + i * 6}`, stroke: "#7FCBF0", "stroke-width": 5, "stroke-linecap": "round" }, t)); return o; }
+function slEmoji(e, x, y, size = 120) { const g = el("g", {}, front()); const t = e === "LIN" ? linearG(g, size) : txt(g, 0, size * .36, e, size, { "text-anchor": "middle" }); g.setAttribute("transform", `translate(${x.toFixed(0)} ${y.toFixed(0)})`); g.__t = t; return g; }
 async function slRide(pc, toId, e, opt = {}) {
   const [tx, ty] = nodeXY(pc, toId), x0 = pc.px, y0 = pc.py, dir = tx >= x0 ? 1 : -1, sz = opt.size || 130;
-  const v = slEmoji(e, x0 - dir * 900, y0 + 10, sz); const faceL = ["🚅", "🚄", "🚃"].includes(e); // でんしゃの えもじは ひだりむき → すすむ ほうに むける（2026-10-18 ぎゃくそう なおし）
+  const v = slEmoji(e, x0 - dir * 900, y0 + 10, sz); const faceL = ["🚅", "🚄", "🚃", "LIN"].includes(e); // でんしゃの えもじは ひだりむき → すすむ ほうに むける（2026-10-18 ぎゃくそう なおし）
   if (faceL ? dir > 0 : (dir < 0 && !opt.noflip)) v.__t.setAttribute("transform", "scale(-1 1)");
   const at = (x, y) => v.setAttribute("transform", `translate(${x.toFixed(0)} ${y.toFixed(0)})`);
   noise(.4, 600, .3); await tween(700, k => at(x0 - dir * 900 * (1 - k), y0 + 10 + Math.sin(k * 12) * 6)); // やってくる
@@ -43756,7 +43777,7 @@ const YOMI = [
   ["読んだら", "よんだら"], ["弱い", "よわい"], ["練習", "れんしゅう"], ["分からない", "わからない"], ["判らない", "わからない"], ["綿あめ", "わたあめ"], ["綿飴", "わたあめ"], ["笑う", "わらう"],
   ["悪い", "わるい"], ["又", "また"], ["良かった", "よかった"], ["良い", "いい"], ["嫌だ", "いやだ"], ["嫌", "いや"], ["猿", "さる"], ["下", "した"], ["来る", "くる"], ["来て", "きて"],
   ["生麦", "なまむぎ"], ["生米", "なまごめ"], ["生卵", "なまたまご"], ["是非", "ぜひ"], ["一人", "ひとり"], ["二人", "ふたり"], ["今日", "きょう"], ["昨日", "きのう"], ["友達", "ともだち"],
-  ["多過ぎ", "おおすぎ"], ["多すぎ", "おおすぎ"], ["大杉", "おおすぎ"], ["大すぎ", "おおすぎ"], ["多杉", "おおすぎ"], ["鳴った", "なった"], ["成った", "なった"], ["成るの", "なるの"], ["御", "お"],
+  ["溢した", "こぼした"], ["零した", "こぼした"], ["溢し", "こぼし"], ["零し", "こぼし"], ["絵の具", "えのぐ"], ["絵具", "えのぐ"], ["絵の", "えの"], ["絵に", "えに"], ["絵を", "えを"], ["汚した", "よごした"], ["中くん", "ちゅうくん"], ["中君", "ちゅうくん"], ["顔くん", "がおくん"], ["君", "くん"], ["謝った", "あやまった"], ["多過ぎ", "おおすぎ"], ["多すぎ", "おおすぎ"], ["大杉", "おおすぎ"], ["大すぎ", "おおすぎ"], ["多杉", "おおすぎ"], ["鳴った", "なった"], ["成った", "なった"], ["成るの", "なるの"], ["御", "お"],
 ].sort((a, b) => b[0].length - a[0].length);
 const toYomi = t => { let s = t; for (const [k, v] of YOMI) if (s.includes(k)) s = s.split(k).join(v); return s; };
 // 1) 聞きとった 文に よみがな版を 足す
@@ -43797,7 +43818,7 @@ const pon = () => { if (!ctx) return; blip(1320, 1320, .08, "sine"); later(70, (
 /* 4) こどもは はやく 言いすぎて、はじめの 1〜2もじが マイクに 入らない ことが ある。
       → いちばん はじめの キーは、あたまの 1〜2もじが なくても あう ことに する（のこりが 2もじ いじょうの とき）。 */
 { const ls = listen; listen = function (groups, ms) {
-    if (groups && groups.length) { const g0 = groups[0], add = [];
+    if (groups && groups.length && !groups.noCut) { const g0 = groups[0], add = [];
       g0.forEach(v => { const k = [...v]; if (!/^[ぁ-ゖァ-ヺー]+$/.test(v)) return; for (const cut of [1, 2]) if (k.length - cut >= 2) add.push(k.slice(cut).join("")); });
       if (add.length) groups = [g0.concat(add), ...groups.slice(1)]; }
     return ls(groups, ms); }; }

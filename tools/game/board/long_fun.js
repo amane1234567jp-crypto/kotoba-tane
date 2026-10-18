@@ -360,7 +360,13 @@ async function lkSagasu(pc) {
     crowd.forEach((c, i) => later(i * 50, () => jump(c, .3))); await sleep(600);
     showTask(q.text, "さがして タッチ", 150);
     await speak(C.pony, q.key, q.text + " タッチしてね");
-    const pick = () => new Promise(res => crowd.forEach(c => c.root.onclick = () => res(c)));
+    // タッチは「いちばん ちかい あたま」で きめる（まえの 子の からだに かさなって いても、うしろの 子の あたまを えらべる 2026-10-18）
+    let pickH = null; const unpick = () => { if (pickH) { svg.removeEventListener("pointerdown", pickH, true); pickH = null; } };
+    const pick = () => new Promise(res => { unpick(); pickH = ev => { const m = svg.getScreenCTM(); if (!m) return; const p = new DOMPoint(ev.clientX, ev.clientY).matrixTransform(m.inverse());
+        let best = null, bd = 1e9;
+        crowd.forEach(c => { const hc = world(c, 200, ((c.eyes && c.eyes[0] && c.eyes[0].cy) || 170)), r = 130 * c.s, d = Math.hypot(p.x - hc.x, p.y - hc.y) / r; if (d < 1.2 && d < bd) { bd = d; best = c; } });
+        if (!best) crowd.forEach(c => { const a0 = world(c, 50, c.top || 0), b0 = world(c, 350, c.base || 400); if (p.x > a0.x && p.x < b0.x && p.y > a0.y && p.y < b0.y) { const d = Math.abs(p.x - (a0.x + b0.x) / 2); if (d < bd) { bd = d; best = c; } } });
+        if (best) { ev.stopPropagation(); unpick(); res(best); } }; svg.addEventListener("pointerdown", pickH, true); });
     const timer = new Promise(res => addTick(dt => { if (stopT) return false; tleft -= dt; tbar.setAttribute("width", Math.max(0, 100 * tleft).toFixed(0)); if (tleft <= 3 && tleft + dt > 3) tbar.setAttribute("fill", "#FF8FA3"); if (tleft <= 0) { timeUp = true; res(null); return false; } }));
     while (true) {
       const c = await Promise.race([pick(), timer]);
@@ -370,7 +376,7 @@ async function lkSagasu(pc) {
       if (wrong === 3) { const p = world(tc, 200, 200); const ring = el("circle", { cx: p.x, cy: p.y, r: 200 * tc.s + 60, fill: "none", stroke: "#FFD25E", "stroke-width": 14, opacity: .9 }, front());
         tween(2400, k => ring.setAttribute("stroke-width", (14 + Math.sin(k * 20) * 6).toFixed(1))); await speak(C.pony, "lk_s_hint", "ヒント！ ひかって いる ところを みてね"); }
     }
-    crowd.forEach(c => c.root.onclick = null); stopT = true; tbar.remove(); ok = wrong === 0 && !timeUp;
+    unpick(); crowd.forEach(c => c.root.onclick = null); stopT = true; tbar.remove(); ok = wrong === 0 && !timeUp;
     unsay(); hideTask();
     if (timeUp) { const p = world(tc, 200, 200); const ring = el("circle", { cx: p.x, cy: p.y, r: 200 * tc.s + 60, fill: "none", stroke: "#FFD25E", "stroke-width": 14, opacity: .9 }, front()); tween(2400, k => ring.setAttribute("stroke-width", (14 + Math.sin(k * 20) * 6).toFixed(1)));
       jump(tc, .5); noise(.3, 400, .4); await speak(C.pony, "lk_s_time", "じかんぎれ！ ここに いたよ"); playLog({ type: "sagasu", q: q.text, ok: false, wrong, timeUp: true, who: NAMES[pc.kind] }); grade(false); await sleep(600); }
