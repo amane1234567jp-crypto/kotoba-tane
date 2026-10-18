@@ -245,6 +245,22 @@
    "speed": 0.9,
    "pitch": -0.12,
    "into": 0.35
+  },
+  "gaomama": {
+   "model": "18972473-ca36-4e06-a33a-5cc14adba0c4",
+   "style": "hutuu_hutuu",
+   "speed": 0.97
+  },
+  "miimama": {
+   "model": "b1b8072f-809f-4c6d-9ba1-2ca94d9c3663",
+   "style": "hutuu_hutuu",
+   "speed": 0.95
+  },
+  "chumama": {
+   "model": "9a7feb22-b6f3-4f79-92d9-26849e063fa1",
+   "style": "hutuu_hutuu",
+   "speed": 1.0,
+   "pitch": 0.03
   }
  },
  "lines": {

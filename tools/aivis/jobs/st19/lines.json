@@ -1,0 +1,877 @@
+[
+{
+"key": "sq_tkittekimasu_pyonmama",
+"who": "pyonmama",
+"text": "わすれもの ない？ きを つけてね"
+},
+{
+"key": "sr_tkittekimasu_pyonmama",
+"who": "pyonmama",
+"text": "いってらっしゃい！"
+},
+{
+"key": "sq_tkittekimasu_gaomama",
+"who": "gaomama",
+"text": "わすれもの ない？ きを つけてね"
+},
+{
+"key": "sr_tkittekimasu_gaomama",
+"who": "gaomama",
+"text": "いってらっしゃい！"
+},
+{
+"key": "sq_tkittekimasu_miimama",
+"who": "miimama",
+"text": "わすれもの ない？ きを つけてね"
+},
+{
+"key": "sr_tkittekimasu_miimama",
+"who": "miimama",
+"text": "いってらっしゃい！"
+},
+{
+"key": "sq_tkittekimasu_chumama",
+"who": "chumama",
+"text": "わすれもの ない？ きを つけてね"
+},
+{
+"key": "sr_tkittekimasu_chumama",
+"who": "chumama",
+"text": "いってらっしゃい！"
+},
+{
+"key": "sq_tksuitou_pyonmama",
+"who": "pyonmama",
+"text": "まって！ すいとう わすれてるわよ！"
+},
+{
+"key": "sr_tksuitou_pyonmama",
+"who": "pyonmama",
+"text": "どういたしまして。いってらっしゃい"
+},
+{
+"key": "sq_tksuitou_gaomama",
+"who": "gaomama",
+"text": "まって！ すいとう わすれてるわよ！"
+},
+{
+"key": "sr_tksuitou_gaomama",
+"who": "gaomama",
+"text": "どういたしまして。いってらっしゃい"
+},
+{
+"key": "sq_tksuitou_miimama",
+"who": "miimama",
+"text": "まって！ すいとう わすれてるわよ！"
+},
+{
+"key": "sr_tksuitou_miimama",
+"who": "miimama",
+"text": "どういたしまして。いってらっしゃい"
+},
+{
+"key": "sq_tksuitou_chumama",
+"who": "chumama",
+"text": "まって！ すいとう わすれてるわよ！"
+},
+{
+"key": "sr_tksuitou_chumama",
+"who": "chumama",
+"text": "どういたしまして。いってらっしゃい"
+},
+{
+"key": "sq_gkdenwa_pyonmama",
+"who": "pyonmama",
+"text": "もしもし？ どうしたの？"
+},
+{
+"key": "sr_gkdenwa_pyonmama",
+"who": "pyonmama",
+"text": "えっ！ すぐ いくから、そこで まってて！"
+},
+{
+"key": "sq_gkdenwa_gaomama",
+"who": "gaomama",
+"text": "もしもし？ どうしたの？"
+},
+{
+"key": "sr_gkdenwa_gaomama",
+"who": "gaomama",
+"text": "えっ！ すぐ いくから、そこで まってて！"
+},
+{
+"key": "sq_gkdenwa_miimama",
+"who": "miimama",
+"text": "もしもし？ どうしたの？"
+},
+{
+"key": "sr_gkdenwa_miimama",
+"who": "miimama",
+"text": "えっ！ すぐ いくから、そこで まってて！"
+},
+{
+"key": "sq_gkdenwa_chumama",
+"who": "chumama",
+"text": "もしもし？ どうしたの？"
+},
+{
+"key": "sr_gkdenwa_chumama",
+"who": "chumama",
+"text": "えっ！ すぐ いくから、そこで まってて！"
+},
+{
+"key": "sq_gktadaima_pyonmama",
+"who": "pyonmama",
+"text": "あ、おかえりなさい！"
+},
+{
+"key": "sr_gktadaima_pyonmama",
+"who": "pyonmama",
+"text": "おかえり。てを あらって、うがいも してね"
+},
+{
+"key": "sq_gktadaima_gaomama",
+"who": "gaomama",
+"text": "あ、おかえりなさい！"
+},
+{
+"key": "sr_gktadaima_gaomama",
+"who": "gaomama",
+"text": "おかえり。てを あらって、うがいも してね"
+},
+{
+"key": "sq_gktadaima_miimama",
+"who": "miimama",
+"text": "あ、おかえりなさい！"
+},
+{
+"key": "sr_gktadaima_miimama",
+"who": "miimama",
+"text": "おかえり。てを あらって、うがいも してね"
+},
+{
+"key": "sq_gktadaima_chumama",
+"who": "chumama",
+"text": "あ、おかえりなさい！"
+},
+{
+"key": "sr_gktadaima_chumama",
+"who": "chumama",
+"text": "おかえり。てを あらって、うがいも してね"
+},
+{
+"key": "sq_gkkyounohanashi_pyonmama",
+"who": "pyonmama",
+"text": "きょうは がっこうで なにを したの？"
+},
+{
+"key": "sr_gkkyounohanashi_pyonmama",
+"who": "pyonmama",
+"text": "へえ、すごいね。おしえて くれて ありがとう"
+},
+{
+"key": "sq_gkkyounohanashi_gaomama",
+"who": "gaomama",
+"text": "きょうは がっこうで なにを したの？"
+},
+{
+"key": "sr_gkkyounohanashi_gaomama",
+"who": "gaomama",
+"text": "へえ、すごいね。おしえて くれて ありがとう"
+},
+{
+"key": "sq_gkkyounohanashi_miimama",
+"who": "miimama",
+"text": "きょうは がっこうで なにを したの？"
+},
+{
+"key": "sr_gkkyounohanashi_miimama",
+"who": "miimama",
+"text": "へえ、すごいね。おしえて くれて ありがとう"
+},
+{
+"key": "sq_gkkyounohanashi_chumama",
+"who": "chumama",
+"text": "きょうは がっこうで なにを したの？"
+},
+{
+"key": "sr_gkkyounohanashi_chumama",
+"who": "chumama",
+"text": "へえ、すごいね。おしえて くれて ありがとう"
+},
+{
+"key": "sq_ocbotan_pyonmama",
+"who": "pyonmama",
+"text": "あら、まだ きがえて いないの？"
+},
+{
+"key": "sr_ocbotan_pyonmama",
+"who": "pyonmama",
+"text": "いいわよ。いっしょに やって みようね"
+},
+{
+"key": "sq_ocbotan_gaomama",
+"who": "gaomama",
+"text": "あら、まだ きがえて いないの？"
+},
+{
+"key": "sr_ocbotan_gaomama",
+"who": "gaomama",
+"text": "いいわよ。いっしょに やって みようね"
+},
+{
+"key": "sq_ocbotan_miimama",
+"who": "miimama",
+"text": "あら、まだ きがえて いないの？"
+},
+{
+"key": "sr_ocbotan_miimama",
+"who": "miimama",
+"text": "いいわよ。いっしょに やって みようね"
+},
+{
+"key": "sq_ocbotan_chumama",
+"who": "chumama",
+"text": "あら、まだ きがえて いないの？"
+},
+{
+"key": "sr_ocbotan_chumama",
+"who": "chumama",
+"text": "いいわよ。いっしょに やって みようね"
+},
+{
+"key": "sq_ocofuro_pyonmama",
+"who": "pyonmama",
+"text": "ごはんの まえに、おふろに はいりなさーい"
+},
+{
+"key": "sr_ocofuro_pyonmama",
+"who": "pyonmama",
+"text": "わかったわ。ごふん たったら、おふろね"
+},
+{
+"key": "sq_ocofuro_gaomama",
+"who": "gaomama",
+"text": "ごはんの まえに、おふろに はいりなさーい"
+},
+{
+"key": "sr_ocofuro_gaomama",
+"who": "gaomama",
+"text": "わかったわ。ごふん たったら、おふろね"
+},
+{
+"key": "sq_ocofuro_miimama",
+"who": "miimama",
+"text": "ごはんの まえに、おふろに はいりなさーい"
+},
+{
+"key": "sr_ocofuro_miimama",
+"who": "miimama",
+"text": "わかったわ。ごふん たったら、おふろね"
+},
+{
+"key": "sq_ocofuro_chumama",
+"who": "chumama",
+"text": "ごはんの まえに、おふろに はいりなさーい"
+},
+{
+"key": "sr_ocofuro_chumama",
+"who": "chumama",
+"text": "わかったわ。ごふん たったら、おふろね"
+},
+{
+"key": "sq_ocsouji_pyonmama",
+"who": "pyonmama",
+"text": "あら、みみを ふさいで どうしたの？"
+},
+{
+"key": "sr_ocsouji_pyonmama",
+"who": "pyonmama",
+"text": "いいわよ。おわったら よぶからね"
+},
+{
+"key": "sq_ocsouji_gaomama",
+"who": "gaomama",
+"text": "あら、みみを ふさいで どうしたの？"
+},
+{
+"key": "sr_ocsouji_gaomama",
+"who": "gaomama",
+"text": "いいわよ。おわったら よぶからね"
+},
+{
+"key": "sq_ocsouji_miimama",
+"who": "miimama",
+"text": "あら、みみを ふさいで どうしたの？"
+},
+{
+"key": "sr_ocsouji_miimama",
+"who": "miimama",
+"text": "いいわよ。おわったら よぶからね"
+},
+{
+"key": "sq_ocsouji_chumama",
+"who": "chumama",
+"text": "あら、みみを ふさいで どうしたの？"
+},
+{
+"key": "sr_ocsouji_chumama",
+"who": "chumama",
+"text": "いいわよ。おわったら よぶからね"
+},
+{
+"key": "sq_ociyana_pyonmama",
+"who": "pyonmama",
+"text": "げんきが ないわね。なにか あったの？"
+},
+{
+"key": "sr_ociyana_pyonmama",
+"who": "pyonmama",
+"text": "そうだったの。ママに ゆっくり きかせてね"
+},
+{
+"key": "sq_ociyana_gaomama",
+"who": "gaomama",
+"text": "げんきが ないわね。なにか あったの？"
+},
+{
+"key": "sr_ociyana_gaomama",
+"who": "gaomama",
+"text": "そうだったの。ママに ゆっくり きかせてね"
+},
+{
+"key": "sq_ociyana_miimama",
+"who": "miimama",
+"text": "げんきが ないわね。なにか あったの？"
+},
+{
+"key": "sr_ociyana_miimama",
+"who": "miimama",
+"text": "そうだったの。ママに ゆっくり きかせてね"
+},
+{
+"key": "sq_ociyana_chumama",
+"who": "chumama",
+"text": "げんきが ないわね。なにか あったの？"
+},
+{
+"key": "sr_ociyana_chumama",
+"who": "chumama",
+"text": "そうだったの。ママに ゆっくり きかせてね"
+},
+{
+"key": "sq_ochitori_pyonmama",
+"who": "pyonmama",
+"text": "まだ おこってるの？ だいじょうぶ？"
+},
+{
+"key": "sr_ochitori_pyonmama",
+"who": "pyonmama",
+"text": "わかった。おちついたら、おいでね"
+},
+{
+"key": "sq_ochitori_gaomama",
+"who": "gaomama",
+"text": "まだ おこってるの？ だいじょうぶ？"
+},
+{
+"key": "sr_ochitori_gaomama",
+"who": "gaomama",
+"text": "わかった。おちついたら、おいでね"
+},
+{
+"key": "sq_ochitori_miimama",
+"who": "miimama",
+"text": "まだ おこってるの？ だいじょうぶ？"
+},
+{
+"key": "sr_ochitori_miimama",
+"who": "miimama",
+"text": "わかった。おちついたら、おいでね"
+},
+{
+"key": "sq_ochitori_chumama",
+"who": "chumama",
+"text": "まだ おこってるの？ だいじょうぶ？"
+},
+{
+"key": "sr_ochitori_chumama",
+"who": "chumama",
+"text": "わかった。おちついたら、おいでね"
+},
+{
+"key": "sq_ockoppu_pyonmama",
+"who": "pyonmama",
+"text": "あら、いまの おとは なあに？"
+},
+{
+"key": "sr_ockoppu_pyonmama",
+"who": "pyonmama",
+"text": "おしえて くれて ありがとう。けがが なくて よかったわ"
+},
+{
+"key": "sq_ockoppu_gaomama",
+"who": "gaomama",
+"text": "あら、いまの おとは なあに？"
+},
+{
+"key": "sr_ockoppu_gaomama",
+"who": "gaomama",
+"text": "おしえて くれて ありがとう。けがが なくて よかったわ"
+},
+{
+"key": "sq_ockoppu_miimama",
+"who": "miimama",
+"text": "あら、いまの おとは なあに？"
+},
+{
+"key": "sr_ockoppu_miimama",
+"who": "miimama",
+"text": "おしえて くれて ありがとう。けがが なくて よかったわ"
+},
+{
+"key": "sq_ockoppu_chumama",
+"who": "chumama",
+"text": "あら、いまの おとは なあに？"
+},
+{
+"key": "sr_ockoppu_chumama",
+"who": "chumama",
+"text": "おしえて くれて ありがとう。けがが なくて よかったわ"
+},
+{
+"key": "sq_octerebi_pyonmama",
+"who": "pyonmama",
+"text": "あら、テレビの まえで どうしたの？"
+},
+{
+"key": "sr_octerebi_pyonmama",
+"who": "pyonmama",
+"text": "いいわよ。ごはんに なったら けしてね"
+},
+{
+"key": "sq_octerebi_gaomama",
+"who": "gaomama",
+"text": "あら、テレビの まえで どうしたの？"
+},
+{
+"key": "sr_octerebi_gaomama",
+"who": "gaomama",
+"text": "いいわよ。ごはんに なったら けしてね"
+},
+{
+"key": "sq_octerebi_miimama",
+"who": "miimama",
+"text": "あら、テレビの まえで どうしたの？"
+},
+{
+"key": "sr_octerebi_miimama",
+"who": "miimama",
+"text": "いいわよ。ごはんに なったら けしてね"
+},
+{
+"key": "sq_octerebi_chumama",
+"who": "chumama",
+"text": "あら、テレビの まえで どうしたの？"
+},
+{
+"key": "sr_octerebi_chumama",
+"who": "chumama",
+"text": "いいわよ。ごはんに なったら けしてね"
+},
+{
+"key": "sq_ocfuku_pyonmama",
+"who": "pyonmama",
+"text": "きょうは この ふくを きてね"
+},
+{
+"key": "sr_ocfuku_pyonmama",
+"who": "pyonmama",
+"text": "そうだったのね。じゃあ、あおい ふくに しようね"
+},
+{
+"key": "sq_ocfuku_gaomama",
+"who": "gaomama",
+"text": "きょうは この ふくを きてね"
+},
+{
+"key": "sr_ocfuku_gaomama",
+"who": "gaomama",
+"text": "そうだったのね。じゃあ、あおい ふくに しようね"
+},
+{
+"key": "sq_ocfuku_miimama",
+"who": "miimama",
+"text": "きょうは この ふくを きてね"
+},
+{
+"key": "sr_ocfuku_miimama",
+"who": "miimama",
+"text": "そうだったのね。じゃあ、あおい ふくに しようね"
+},
+{
+"key": "sq_ocfuku_chumama",
+"who": "chumama",
+"text": "きょうは この ふくを きてね"
+},
+{
+"key": "sr_ocfuku_chumama",
+"who": "chumama",
+"text": "そうだったのね。じゃあ、あおい ふくに しようね"
+},
+{
+"key": "sq_ocyume_pyonmama",
+"who": "pyonmama",
+"text": "どうしたの？ めが さめちゃったの？"
+},
+{
+"key": "sr_ocyume_pyonmama",
+"who": "pyonmama",
+"text": "だいじょうぶよ。ママが そばに いるからね"
+},
+{
+"key": "sq_ocyume_gaomama",
+"who": "gaomama",
+"text": "どうしたの？ めが さめちゃったの？"
+},
+{
+"key": "sr_ocyume_gaomama",
+"who": "gaomama",
+"text": "だいじょうぶよ。ママが そばに いるからね"
+},
+{
+"key": "sq_ocyume_miimama",
+"who": "miimama",
+"text": "どうしたの？ めが さめちゃったの？"
+},
+{
+"key": "sr_ocyume_miimama",
+"who": "miimama",
+"text": "だいじょうぶよ。ママが そばに いるからね"
+},
+{
+"key": "sq_ocyume_chumama",
+"who": "chumama",
+"text": "どうしたの？ めが さめちゃったの？"
+},
+{
+"key": "sr_ocyume_chumama",
+"who": "chumama",
+"text": "だいじょうぶよ。ママが そばに いるからね"
+},
+{
+"key": "sq_octetsudai_pyonmama",
+"who": "pyonmama",
+"text": "ふう、いそがしい いそがしい……"
+},
+{
+"key": "sr_octetsudai_pyonmama",
+"who": "pyonmama",
+"text": "ありがとう！ じゃあ、おはしを ならべて くれる？"
+},
+{
+"key": "sq_octetsudai_gaomama",
+"who": "gaomama",
+"text": "ふう、いそがしい いそがしい……"
+},
+{
+"key": "sr_octetsudai_gaomama",
+"who": "gaomama",
+"text": "ありがとう！ じゃあ、おはしを ならべて くれる？"
+},
+{
+"key": "sq_octetsudai_miimama",
+"who": "miimama",
+"text": "ふう、いそがしい いそがしい……"
+},
+{
+"key": "sr_octetsudai_miimama",
+"who": "miimama",
+"text": "ありがとう！ じゃあ、おはしを ならべて くれる？"
+},
+{
+"key": "sq_octetsudai_chumama",
+"who": "chumama",
+"text": "ふう、いそがしい いそがしい……"
+},
+{
+"key": "sr_octetsudai_chumama",
+"who": "chumama",
+"text": "ありがとう！ じゃあ、おはしを ならべて くれる？"
+},
+{
+"key": "sq_ockayui_pyonmama",
+"who": "pyonmama",
+"text": "さっきから もぞもぞ して、どうしたの？"
+},
+{
+"key": "sr_ockayui_pyonmama",
+"who": "pyonmama",
+"text": "あらあら。おくすりを ぬって あげるわね"
+},
+{
+"key": "sq_ockayui_gaomama",
+"who": "gaomama",
+"text": "さっきから もぞもぞ して、どうしたの？"
+},
+{
+"key": "sr_ockayui_gaomama",
+"who": "gaomama",
+"text": "あらあら。おくすりを ぬって あげるわね"
+},
+{
+"key": "sq_ockayui_miimama",
+"who": "miimama",
+"text": "さっきから もぞもぞ して、どうしたの？"
+},
+{
+"key": "sr_ockayui_miimama",
+"who": "miimama",
+"text": "あらあら。おくすりを ぬって あげるわね"
+},
+{
+"key": "sq_ockayui_chumama",
+"who": "chumama",
+"text": "さっきから もぞもぞ して、どうしたの？"
+},
+{
+"key": "sr_ockayui_chumama",
+"who": "chumama",
+"text": "あらあら。おくすりを ぬって あげるわね"
+},
+{
+"key": "sq_abkaeru_pyonmama",
+"who": "pyonmama",
+"text": "そろそろ かえるよー"
+},
+{
+"key": "sr_abkaeru_pyonmama",
+"who": "pyonmama",
+"text": "いいわよ。いっかい すべったら おいでね"
+},
+{
+"key": "sq_abkaeru_gaomama",
+"who": "gaomama",
+"text": "そろそろ かえるよー"
+},
+{
+"key": "sr_abkaeru_gaomama",
+"who": "gaomama",
+"text": "いいわよ。いっかい すべったら おいでね"
+},
+{
+"key": "sq_abkaeru_miimama",
+"who": "miimama",
+"text": "そろそろ かえるよー"
+},
+{
+"key": "sr_abkaeru_miimama",
+"who": "miimama",
+"text": "いいわよ。いっかい すべったら おいでね"
+},
+{
+"key": "sq_abkaeru_chumama",
+"who": "chumama",
+"text": "そろそろ かえるよー"
+},
+{
+"key": "sr_abkaeru_chumama",
+"who": "chumama",
+"text": "いいわよ。いっかい すべったら おいでね"
+},
+{
+"key": "sq_bgseki_pyonmama",
+"who": "pyonmama",
+"text": "どこに すわろうか？"
+},
+{
+"key": "sr_bgseki_pyonmama",
+"who": "pyonmama",
+"text": "そうね。あくまで まちましょう"
+},
+{
+"key": "sq_bgseki_gaomama",
+"who": "gaomama",
+"text": "どこに すわろうか？"
+},
+{
+"key": "sr_bgseki_gaomama",
+"who": "gaomama",
+"text": "そうね。あくまで まちましょう"
+},
+{
+"key": "sq_bgseki_miimama",
+"who": "miimama",
+"text": "どこに すわろうか？"
+},
+{
+"key": "sr_bgseki_miimama",
+"who": "miimama",
+"text": "そうね。あくまで まちましょう"
+},
+{
+"key": "sq_bgseki_chumama",
+"who": "chumama",
+"text": "どこに すわろうか？"
+},
+{
+"key": "sr_bgseki_chumama",
+"who": "chumama",
+"text": "そうね。あくまで まちましょう"
+},
+{
+"key": "sq_bgitadaki_pyonmama",
+"who": "pyonmama",
+"text": "さあ、たべましょう"
+},
+{
+"key": "sr_bgitadaki_pyonmama",
+"who": "pyonmama",
+"text": "はい、めしあがれ"
+},
+{
+"key": "sq_bgitadaki_gaomama",
+"who": "gaomama",
+"text": "さあ、たべましょう"
+},
+{
+"key": "sr_bgitadaki_gaomama",
+"who": "gaomama",
+"text": "はい、めしあがれ"
+},
+{
+"key": "sq_bgitadaki_miimama",
+"who": "miimama",
+"text": "さあ、たべましょう"
+},
+{
+"key": "sr_bgitadaki_miimama",
+"who": "miimama",
+"text": "はい、めしあがれ"
+},
+{
+"key": "sq_bgitadaki_chumama",
+"who": "chumama",
+"text": "さあ、たべましょう"
+},
+{
+"key": "sr_bgitadaki_chumama",
+"who": "chumama",
+"text": "はい、めしあがれ"
+},
+{
+"key": "sq_bgbetabeta_pyonmama",
+"who": "pyonmama",
+"text": "あら、どうしたの？"
+},
+{
+"key": "sr_bgbetabeta_pyonmama",
+"who": "pyonmama",
+"text": "はい、ティッシュ。きれいに ふいてね"
+},
+{
+"key": "sq_bgbetabeta_gaomama",
+"who": "gaomama",
+"text": "あら、どうしたの？"
+},
+{
+"key": "sr_bgbetabeta_gaomama",
+"who": "gaomama",
+"text": "はい、ティッシュ。きれいに ふいてね"
+},
+{
+"key": "sq_bgbetabeta_miimama",
+"who": "miimama",
+"text": "あら、どうしたの？"
+},
+{
+"key": "sr_bgbetabeta_miimama",
+"who": "miimama",
+"text": "はい、ティッシュ。きれいに ふいてね"
+},
+{
+"key": "sq_bgbetabeta_chumama",
+"who": "chumama",
+"text": "あら、どうしたの？"
+},
+{
+"key": "sr_bgbetabeta_chumama",
+"who": "chumama",
+"text": "はい、ティッシュ。きれいに ふいてね"
+},
+{
+"key": "sq_bgtoire_pyonmama",
+"who": "pyonmama",
+"text": "あら、もじもじ して、どうしたの？"
+},
+{
+"key": "sr_bgtoire_pyonmama",
+"who": "pyonmama",
+"text": "いってらっしゃい。てを よく あらってね"
+},
+{
+"key": "sq_bgtoire_gaomama",
+"who": "gaomama",
+"text": "あら、もじもじ して、どうしたの？"
+},
+{
+"key": "sr_bgtoire_gaomama",
+"who": "gaomama",
+"text": "いってらっしゃい。てを よく あらってね"
+},
+{
+"key": "sq_bgtoire_miimama",
+"who": "miimama",
+"text": "あら、もじもじ して、どうしたの？"
+},
+{
+"key": "sr_bgtoire_miimama",
+"who": "miimama",
+"text": "いってらっしゃい。てを よく あらってね"
+},
+{
+"key": "sq_bgtoire_chumama",
+"who": "chumama",
+"text": "あら、もじもじ して、どうしたの？"
+},
+{
+"key": "sr_bgtoire_chumama",
+"who": "chumama",
+"text": "いってらっしゃい。てを よく あらってね"
+},
+{
+"key": "sr_ociyana",
+"who": "mama",
+"text": "そうだったの。ママに ゆっくり きかせてね"
+},
+{
+"key": "sq_bgtoire",
+"who": "mama",
+"text": "あら、もじもじ して、どうしたの？"
+},
+{
+"key": "sg_tdbokuno_3",
+"who": "chu",
+"text": "まって。まだ いいよって いってないよ"
+},
+{
+"key": "sg_tdbokuno_4",
+"who": "chu",
+"text": "それ、ぼくの だよ。かして いいか きいてね"
+},
+{
+"key": "sg_tdbokuno_5",
+"who": "chu",
+"text": "こんくん、それ ぼくの スコップだよ。かしてって きいて くれたら かすよ"
+},
+{
+"key": "sg_bguketori_3",
+"who": "pyon",
+"text": "ありがとうございます。こぼさないように はこびます"
+},
+{
+"key": "sg_bgtoire_5",
+"who": "pyon",
+"text": "ちょっと トイレに いって くるね。てを あらってから もどるね"
+}
+]
