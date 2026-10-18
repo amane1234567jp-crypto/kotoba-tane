@@ -79,3 +79,6 @@ const pon = () => { if (!ctx) return; blip(1320, 1320, .08, "sine"); later(70, (
 function lampOn(r) { if (!r) return () => { }; const s0 = r.getAttribute("stroke"), w0 = r.getAttribute("stroke-width"); let on = true, t = 0;
   addTick(dt => { if (!on || !r.isConnected) return false; t += dt; r.setAttribute("stroke", "#FFC93C"); r.setAttribute("stroke-width", (12 + 6 * Math.sin(t * 7)).toFixed(1)); });
   return () => { on = false; if (s0) r.setAttribute("stroke", s0); if (w0) r.setAttribute("stroke-width", w0); }; }
+
+// ゴール てまえ（d の マス）の「スタートに もどる」は いきすぎ → 4マス もどる（2026-10-18）
+for (const st in EVENTS) { const E0 = EVENTS[st]; if (!E0) continue; for (const id in E0) { const e = E0[id]; if (e && e[0] === "home" && /^d/.test(id)) E0[id] = ["back", 4, e[2] + "_b4", e[3].replace("スタートに もどるよ", "4マス もどるよ")]; } }

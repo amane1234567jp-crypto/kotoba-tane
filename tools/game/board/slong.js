@@ -87,10 +87,11 @@ SL.forEach(sid => {
   ids.forEach((id, i) => { if (i === 0 || id === "4" || id === "15") return;
     const slot = i % 5; // 5マスに 2つ しかけ、ことば・おもしろ が 1〜2つずつ
     if ((slot === 1 || slot === 3) && e < EVS.length && i < ids.length - 3) { const t = EVS[e++]; ev[id] = [t, 0, `sl_${sid}_${t}`, t === "tsukkomi" ? "つっこみマス！" : SL_EVT[sid][t]]; }
-    else if (slot === 0 || slot === 4 ? w <= f : w < f) task[id] = WORD[w++ % WORD.length]; else task[id] = FUN[f++ % FUN.length]; });
+    else if (slot === 0 || slot === 4 ? w <= f : w < f) { const t = WORD[w++ % WORD.length]; task[id] = sid === "eki" && t === "gag" ? "scene" : t; } /* えきに がっこうの にせもの せんせいは ださない */ else task[id] = FUN[f++ % FUN.length]; });
   EVENTS[sid] = ev; LONG_TASKS[sid] = task;
   LEGENDS[sid] = [["kaiwa", "ことば"], ["scene", "いってみよう"], ["stop", "おもしろ"], ["oogoe", "こえ"]];
-  LDATA[sid] = { kaiwa: LONG.kaiwa, gag: LONG.gag, haya: LONG.haya, sagasu: LONG.sagasu, hantai: LONG.hantai, yasashiku: LONG_T.yasashiku, tsunagu: LONG_T.tsunagu };
+  const SCHOOL = ["げんかん", "きゅうしょく", "きょうしつ", "ほけんしつ", "しょくいんしつ", "としょしつ", "トラック"]; // えきの コースでは がっこうの 会話を ださない
+  LDATA[sid] = { kaiwa: sid === "eki" ? LONG.kaiwa.filter(k => !SCHOOL.includes(k.place)) : LONG.kaiwa, gag: LONG.gag, haya: LONG.haya, sagasu: LONG.sagasu, hantai: LONG.hantai, yasashiku: LONG_T.yasashiku, tsunagu: LONG_T.tsunagu };
   BOARD_BG[sid] = L => slBG(sid, L);
 });
 Object.assign(LTASK, { stop: ["#FFE27A", "🎯"], catch: ["#FFE27A", "🖐"], balloon: ["#FFE27A", "🎈"], more: ["#FFE27A", "🔢"], cups: ["#FFE27A", "🥤"], shadow: ["#FFE27A", "👤"], jump: ["#FFE27A", "🦘"], battle: ["#FFE27A", "🎲"],
@@ -143,7 +144,9 @@ const slFlag = (pc, k) => { if (pc.player) pc.player[k] = 1; };
     if (!isSL()) return be(pc);
     if (pc.player && pc.player.stay) return; // 0マス（うごいて いない）ときは、もう いちど おきない
     const ev = EVENTS[curStage][pc.node]; if (!ev) return;
-    const [type, , key, text] = ev; const O = SL_ORDER[curStage];
+    let [type, , key, text] = ev; const O = SL_ORDER[curStage];
+    // ゴールに ちかい ところ（くみかえで うしろに きた とき）では、ふりだしでは なく 10マス もどる
+    if (type === "home" && slIdx(pc.node) >= 30) { const b = Object.values(EVENTS[curStage]).find(e => e[0] === "back10"); if (b) [type, , key, text] = b; }
     await sleep(300); markAbove(pc, "ex"); chime();
     if (type === "tsukkomi") return slTsukkomi(pc);
     await slSay(key, text);
@@ -185,8 +188,16 @@ async function slJanken(pc) {
   for (let n = 0; n < 4; n++) {
     const g = panel("じゃんけん", "#FFF8E8"); txt(g, 420, 300, NAMES[pc.kind], 50, { "text-anchor": "middle" }); txt(g, 1180, 300, NAMES[lead.kind], 50, { "text-anchor": "middle" });
     const a = txt(g, 420, 620, "✊", 220, { "text-anchor": "middle" }), b = txt(g, 1180, 620, "✊", 220, { "text-anchor": "middle" }); txt(g, 800, 560, "VS", 80, { "text-anchor": "middle", fill: "#E8735A" });
+    // ひとが あそんで いる ときは、じぶんで てを えらぶ（タッチ）。あいては かくして おく
+    const pick = (o, cx, txtEl) => { if (!o.player) return Promise.resolve(rnd(3));
+      txtEl.textContent = "？"; const bs = el("g", {}, g);
+      return new Promise(res => { let done = false; const fin = v => { if (done) return; done = true; bs.remove(); txtEl.textContent = "？"; txt(g, cx, 760, "きめた！", 44, { "text-anchor": "middle", fill: "#3F9150" }); blip(900, 1300, .08, "square"); res(v); };
+        H.forEach((h, i) => { const b0 = el("g", { style: "cursor:pointer" }, bs), bx = cx - 210 + i * 140; el("rect", { x: bx, y: 690, width: 140 - 16, height: 130, rx: 24, fill: "#FFFFFF", ...S6(6) }, b0); txt(b0, bx + 62, 785, h, 80, { "text-anchor": "middle" }); b0.onpointerdown = () => fin(i); });
+        later(20000, () => fin(rnd(3))); }); };
+    if (pc.player || lead.player) await speak(C.pony, "sl_jk_pick", "じぶんの てを タッチしてね");
+    const [x, y] = await Promise.all([pick(pc, 420, a), pick(lead, 1180, b)]);
     await speak(C.pony, "sl_jk_say", "じゃんけん……"); for (let i = 0; i < 6; i++) { a.textContent = H[i % 3]; b.textContent = H[(i + 1) % 3]; blip(500 + i * 60, 600, .05, "square"); await sleep(110); }
-    const x = rnd(3), y = rnd(3); a.textContent = H[x]; b.textContent = H[y]; boom(.3); await speak(C.pony, "sl_jk_pon", "ぽん！");
+    a.textContent = H[x]; b.textContent = H[y]; boom(.3); await speak(C.pony, "sl_jk_pon", "ぽん！");
     await sleep(500); g.remove();
     if (x === y) { await speak(C.pony, "sl_jk_aiko", "あいこ！ もう いっかい"); continue; }
     if ((x + 1) % 3 === y) { confetti(40); await speak(C.pony, "sl_jk_win", "かった！ いれかわるよ"); const p1 = pc.node, p2 = lead.node; await Promise.all([warpTo(pc, p2), warpTo(lead, p1)]); return; }
@@ -438,7 +449,8 @@ const SL_SWALLOW = { sumi: "home", suchu: "home" }; // くじら・ブラック�
 function slEmoji(e, x, y, size = 120) { const g = el("g", {}, front()); const t = txt(g, 0, size * .36, e, size, { "text-anchor": "middle" }); g.setAttribute("transform", `translate(${x.toFixed(0)} ${y.toFixed(0)})`); g.__t = t; return g; }
 async function slRide(pc, toId, e, opt = {}) {
   const [tx, ty] = nodeXY(pc, toId), x0 = pc.px, y0 = pc.py, dir = tx >= x0 ? 1 : -1, sz = opt.size || 130;
-  const v = slEmoji(e, x0 - dir * 900, y0 + 10, sz); if (dir < 0 && !opt.noflip) v.__t.setAttribute("transform", "scale(-1 1)");
+  const v = slEmoji(e, x0 - dir * 900, y0 + 10, sz); const faceL = ["🚅", "🚄", "🚃"].includes(e); // でんしゃの えもじは ひだりむき → すすむ ほうに むける（2026-10-18 ぎゃくそう なおし）
+  if (faceL ? dir > 0 : (dir < 0 && !opt.noflip)) v.__t.setAttribute("transform", "scale(-1 1)");
   const at = (x, y) => v.setAttribute("transform", `translate(${x.toFixed(0)} ${y.toFixed(0)})`);
   noise(.4, 600, .3); await tween(700, k => at(x0 - dir * 900 * (1 - k), y0 + 10 + Math.sin(k * 12) * 6)); // やってくる
   jump(pc, .6); blip(500, 900, .15, "sine"); await sleep(350); // のる

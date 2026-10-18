@@ -2,15 +2,20 @@
    生活で ひつような ことばを おぼえる 場面。台本は sit/sits_new.py（extras＝いっしょに 出る 子）。 */
 const S3 = ["toukou", "gakkou3", "kyuushoku", "gekou"];
 Object.assign(RIVAL_OF, { toukou: "gao", gakkou3: "mii", kyuushoku: "doshin", gekou: "pyon" });
-Object.assign(KID_S, { ookami: 1.0, ojisan: 1.0, omawari: 1.3, mama: 1.0, tora: .9, kuma: 1.05 });
+Object.assign(KID_S, { ookami: 1.0, ojisan: 1.0, omawari: 1.3, mama: 1.0, tora: .9, kuma: 1.05, gaomama: 1.0, miimama: .98, chumama: .62 });
 PIECE_S.omawari = .27; PIECE_S.mama = .22;
 
 /* ---------- 場面：いま えらばれた 場面を おぼえる（extras のため） ---------- */
 let CUR_S = null;
-{ const ssv = setSitView; setSitView = function (s, k) { CUR_S = s; return ssv(s, k); }; }
+// extras（いっしょに 出る 子）が 主人公や 相手と かさなったら、べつの 子に かえる（「ふたりで あそぶから」の ふたりめが きえないように）
+const EX_SUB = ["chu", "pyon", "doshin", "mii", "kon", "gao", "kuma", "tora"];
+{ const ssv = setSitView; setSitView = function (s, k) {
+    if (s && s.extras && s.extras.some(x => x === k || x === s.asker)) { const used = new Set([k, s.asker, ...s.extras]); s = { ...s, extras: s.extras.map(x => { if (x !== k && x !== s.asker) return x; const y = EX_SUB.find(z => !used.has(z) && C[z]); used.add(y); return y || x; }) }; }
+    CUR_S = s; return ssv(s, k); }; }
 { const ps = pickSit; pickSit = function (place, heroKind = "shima") {
     if (curStage === "long") return ps(place, heroKind);
     // extras に 主人公が いる 場面は えらばない（なんども ためして だめなら そのまま）
+    if (MODE === "solo" && heroKind !== "shima") return ps(place, heroKind); // ライバルは つかった 場面から（sit.js）。かさなる extras は setSitView で べつの 子に
     for (let i = 0; i < 12; i++) { const s = ps(place, heroKind); if (!(s.extras || []).includes(heroKind)) return s; sitUsed.delete(s.id); }
     return ps(place, heroKind); }; }
 const kidS = k => KID_S[k] || .82;

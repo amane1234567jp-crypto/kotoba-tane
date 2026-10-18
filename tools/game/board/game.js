@@ -11,7 +11,7 @@ const rnd = n => Math.floor(Math.random() * n);
 const pad = n => String(n).padStart(2, "0");
 
 /* ---------- キャラ ---------- */
-const KINDS = ["doshin", "nobbo", "kamejii", "meebaa", "pyonmama", "gaojii", "miibaa", "doshinpapa", "kon", "panna", "pannamama", "mama", "ookami", "ojisan", "omawari", "tora", "kuma", "onii", "pony", "shima", "pyon", "mii", "gao", "chu"];
+const KINDS = ["doshin", "nobbo", "kamejii", "meebaa", "pyonmama", "gaojii", "miibaa", "doshinpapa", "kon", "panna", "pannamama", "mama", "gaomama", "miimama", "chumama", "ookami", "ojisan", "omawari", "tora", "kuma", "onii", "pony", "shima", "pyon", "mii", "gao", "chu"];
 const C = {}; KINDS.forEach(k => C[k] = makeChar(k));
 const P = { doshin: makeChar("doshin"), shima: makeChar("shima"), gao: makeChar("gao") };
 Object.values(P).forEach(p => p.isPiece = true);
@@ -407,6 +407,10 @@ srStatus(SRC ? "ready" : "off");
 const kata2hira = s => s.replace(/[ァ-ヶ]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60));
 const norm = s => kata2hira(s).replace(/[\s、。！？!?,.・「」]/g, "");
 const countMatch = (t, groups) => groups.filter(g => g.some(v => norm(t).includes(norm(v)) || t.includes(v))).length;
+// 1もじ ちがいまで あう（5もじ いじょうの ことば。みじかい ことばは いみが かわるので しない）。t の どこかに v に ちかい ぶぶんが あるか
+function fuzzyIn(t, v) { const m = v.length; if (m < 5 || !t) return false; let prev = new Array(m + 1).fill(0).map((_, j) => j);
+  for (let i = 1; i <= t.length; i++) { const cur = [0]; for (let j = 1; j <= m; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (t[i - 1] === v[j - 1] ? 0 : 1)); if (cur[m] <= 1) return true; prev = cur; }
+  return prev[m] <= 1; }
 function hear(onText, ms) {
   let stopped = false, rec = null, resolveDone; const endAt = performance.now() + ms;
   const done = new Promise(r => resolveDone = r);
@@ -430,17 +434,20 @@ function listen(groups, ms = 7000) {
   return new Promise(resolve => {
     // 判定をゆるく：聞きとれた言葉は 言い直し・とちゅうで切れた分も 合わせて数える。
     // キーが3つ以上ある長い答えは、1つ欠けても「言えた」。2つまでの短い答えは 全部。
-    let best = 0, heard = "", fin = false, soon = null; const got = new Set();
-    const need = groups.length >= 3 ? groups.length - 1 : groups.length;
+    // 2026-10-18 もっと ゆるく（はやくちの 子も いる）：2つの キーは 1つ、3つは 2つ、4つ いじょうは 2つ すくなくて いい。
+    //   ことばの 1もじ ちがい（ききまちがい）も あう ことに する。はなしおわって しずかに なったら すぐ きめる。
+    let best = 0, heard = "", fin = false, soon = null, idle = null; const got = new Set();
+    const need = groups.length >= 4 ? groups.length - 2 : groups.length >= 2 ? groups.length - 1 : 1;
     const verdict = () => best >= need ? "ok" : best > 0 ? "part" : "none";
-    const end = (r, why) => { if (fin) return; fin = true; clearTimeout(soon); taskListen(false); h.stop(); devOff(); clearTimeout(tmr); if (why) heard = why; heardEl.textContent = heard || "（きこえなかった）"; setTimeout(() => resolve({ r, heard }), MIC.stream ? 700 : 3000); }; // マイクずっとオンなら短く。そうでなければ端末の音が戻るまで待つ
+    const end = (r, why) => { if (fin) return; fin = true; clearTimeout(soon); clearTimeout(idle); taskListen(false); h.stop(); devOff(); clearTimeout(tmr); if (why) heard = why; heardEl.textContent = heard || "（きこえなかった）"; setTimeout(() => resolve({ r, heard }), MIC.stream ? 450 : 3000); }; // マイクずっとオンなら短く。そうでなければ端末の音が戻るまで待つ
     heardEl.textContent = "…"; taskListen(true);
     devOn(end);
     const h = hear(texts => {
-      for (const t of texts) { groups.forEach((g, i) => { if (g.some(v => norm(t).includes(norm(v)) || t.includes(v))) got.add(i); }); const n = countMatch(t, groups); if (n >= best || !heard) heard = t; }
+      for (const t of texts) { groups.forEach((g, i) => { if (g.some(v => norm(t).includes(norm(v)) || t.includes(v) || fuzzyIn(norm(t), norm(v)))) got.add(i); }); const n = countMatch(t, groups); if (n >= best || !heard) heard = t; }
       best = got.size;
       heardEl.textContent = heard; if (best === groups.length) end("ok");
-      else if (best >= need) { clearTimeout(soon); soon = setTimeout(() => end("ok"), 1300); } // ほぼ言えたら、少し待って「言えた」
+      else if (best >= need) { clearTimeout(soon); soon = setTimeout(() => end("ok"), 700); } // ほぼ言えたら、少し待って「言えた」
+      else if (heard) { clearTimeout(idle); idle = setTimeout(() => end(verdict()), 2200); } // なにか きこえて、そのあと しずかに なったら きめる（まちすぎない）
     }, ms);
     h.done.then(() => { if (srUsable) end(verdict()); });
     const tmr = setTimeout(() => { if (srUsable) end(verdict()); }, ms + 400);

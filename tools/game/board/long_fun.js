@@ -318,7 +318,7 @@ function sgQuestion(L) {
   return { type: ty, A, key: `lk_s_x_${ty}_${A}`, text: { nohat: `ぼうしを かぶって いない ${nm}は どこ？`, big: `いちばん おおきい ${nm}は どこ？`, small: `いちばん ちいさい ${nm}は どこ？` }[ty] };
 }
 async function lkSagasu(pc) {
-  const L = E.L, q = sgQuestion(L); const places = ["すなば", "ベンチ", "いけ", "トラック", "ブランコ"];
+  const L = E.L, q = sgQuestion(L); const places = curStage === "eki" ? ["えき", "バスてい"] : ["すなば", "ベンチ", "いけ", "トラック", "ブランコ"]; // えきの コースは えきで
   const s = { id: "lks", place: places[rnd(places.length)], asker: "kon", cast: [], intro: "sagasu", talk: [] };
   const { hero: h } = setSitView(s, pc.kind); h.root.style.display = "none"; { const i = visible.indexOf(h); if (i >= 0) visible.splice(i, 1); }
   place(C.pony, 90, 985, .36);
@@ -346,8 +346,9 @@ async function lkSagasu(pc) {
   const bush = el("g", {}, front()); [[420, 990], [880, 1000], [1320, 990]].forEach(([x, y]) => [[-70, 0, 70], [0, -30, 80], [70, 0, 70]].forEach(([dx, dy, r]) => el("circle", { cx: x + dx, cy: y + dy, r, fill: "#5DB86A", ...S6(5) }, bush)));
   const tc = crowd[ti]; let ok = false, wrong = 0;
   // かくれんぼ：さがす 子は なにかの うしろに かくれて、あたましか 見えない。ほかの 子も いくつか おなじように かくす（それだけで わからない ように）
-  const hideBehind = (c, kind) => { const cx = c.x + 200 * c.s, top = c.y + c.top * c.s, feet = c.y + c.base * c.s, y0 = top + (feet - top) * .36, w = 470 * c.s, g = el("g", {}, front());
-    if (kind === 0) { [[-.3, .08, .34], [0, -.02, .4], [.3, .08, .34], [-.15, .25, .36], [.15, .25, .36]].forEach(([dx, dy, r]) => el("circle", { cx: cx + dx * w, cy: y0 + 30 + dy * (feet - y0), r: r * w, fill: "#5DB86A", ...S6(5) }, g)); el("rect", { x: cx - w / 2, y: y0 + (feet - y0) * .5, width: w, height: feet - y0, fill: "#5DB86A" }, g); }
+  const hideBehind = (c, kind) => { const cx = c.x + 200 * c.s, top = c.y + c.top * c.s, feet = c.y + c.base * c.s, eyeY = c.y + ((c.eyes && c.eyes[0] && c.eyes[0].cy) || 170) * c.s,
+      y0 = Math.max(top + (feet - top) * .36, eyeY + 34 * c.s), w = 470 * c.s, g = el("g", {}, front()); // めより したを かくす（ぼうしや かおは かならず 見える）
+    if (kind === 0) { const r = w * .2; [-.3, 0, .3].forEach(dx => el("circle", { cx: cx + dx * w, cy: y0 + r * (dx ? 1.15 : .9), r, fill: "#5DB86A", ...S6(5) }, g)); el("rect", { x: cx - w / 2, y: y0 + r, width: w, height: feet - y0, fill: "#5DB86A" }, g); }
     else if (kind === 1) { el("rect", { x: cx - w / 2, y: y0, width: w, height: feet - y0 + 10, rx: 10, fill: "#D9A066", ...S6(6) }, g); el("path", { d: `M${cx - w / 2} ${y0 + 24} H${cx + w / 2} M${cx} ${y0 + 24} V${feet + 10}`, ...S6(5), fill: "none" }, g); }
     else { el("rect", { x: cx - w / 2, y: y0, width: w, height: feet - y0 + 10, rx: w / 2 * .4, fill: "#7FA7D9", ...S6(6) }, g); [.25, .5, .75].forEach(k => el("path", { d: `M${cx - w / 2} ${y0 + (feet - y0) * k} H${cx + w / 2}`, stroke: "#5B8DEF", "stroke-width": 8 }, g)); }
     return g; };

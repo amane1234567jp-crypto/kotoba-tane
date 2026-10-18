@@ -6,23 +6,37 @@ function clearMarks() { marks.forEach(k => k.g.remove()); marks.length = 0; if (
    → 4) 相手がこたえ、出てきた物の名前（ばんそうこう など）を絵と声で見せる。
    こたえの長さ・文法はレベルで4段（tier）に変わる。 */
 const sitUsed = new Set();
+// おなじ 場面が また でたら、こたえの 段を 1つずつ あげる（みんなで あそぶ ときも）。はじめから に もどると リセット
+const SIT_N = new Map(); { const c0 = sitUsed.clear.bind(sitUsed); sitUsed.clear = () => { SIT_N.clear(); c0(); }; }
+const tierFor = s => Math.min(5, tierOf() + Math.max(0, (SIT_N.get(s.id) || 1) - 1));
 // レベルで 4段（0〜3）。2しゅうめは 1段、3しゅうめ からは 2段 ずらして もっと むずかしく（最大 6段め）
 const tierOf = () => Math.min(5, (E.L <= 2 ? 0 : E.L <= 4 ? 1 : E.L <= 7 ? 2 : 3) + (MODE === "multi" ? 0 : Math.min(2, Math.max(0, (SAVE.lap || 1) - 1))));
 // heroKind: こたえる キャラ（まるシマ・ライバル・みんなモードの人）。相手が じぶんと 同じ場面や、がお・ちゅうが 出てくる場面を よける
 function pickSit(place, heroKind = "shima") {
   const okFor = s => (s.stage || "kousha") === curStage && s.asker !== heroKind
     && (heroKind === "shima" || (MODE === "solo" ? s.gaoOk : (heroKind !== "gao" || s.gaoOk)))
-    && !(heroKind === "chu" && s.intro === "tag") && !(s.cast && s.cast.includes(heroKind)); // やりとりに 出ている キャラは、その場面の 主人公に しない
+    && !(heroKind === "chu" && s.intro === "tag") && !(s.cast && s.cast.includes(heroKind))
+    && !(s.asker === "mama" && heroKind !== "shima" && !MOM_OF[heroKind]); // ママの 場面は、じぶんの ママが いる 子だけ // やりとりに 出ている キャラは、その場面の 主人公に しない
+  if (MODE === "solo" && heroKind !== "shima") { // ひとりで あそぶ ときの ライバルは、こどもが もう やった 場面から えらぶ（こどもの ぶんの あたらしい 場面を へらさない）
+    let rp = SITS.filter(s => okFor(s) && sitUsed.has(s.id)); if (!rp.length) rp = SITS.filter(okFor);
+    const m = Math.min(...rp.map(x => SIT_N.get(x.id) || 0)); rp = rp.filter(x => (SIT_N.get(x.id) || 0) === m); const s = rp[rnd(rp.length)];
+    return s.asker === "mama" && MOM_OF[heroKind] ? { ...s, asker: MOM_OF[heroKind], vk: "_" + MOM_OF[heroKind] } : s; }
   let pool = SITS.filter(s => okFor(s) && s.place === place && !sitUsed.has(s.id));
   if (!pool.length) pool = SITS.filter(s => okFor(s) && !sitUsed.has(s.id));
-  if (!pool.length) { [...sitUsed].forEach(id => { const x = SITS.find(s => s.id === id); if (x && (x.stage || "kousha") === curStage) sitUsed.delete(id); }); pool = SITS.filter(s => okFor(s) && s.place === place && !sitUsed.has(s.id)); if (!pool.length) pool = SITS.filter(s => okFor(s) && !sitUsed.has(s.id)); if (!pool.length) pool = SITS.filter(okFor); }
-  const s = pool[rnd(pool.length)]; sitUsed.add(s.id); return s;
+  if (!pool.length) { [...sitUsed].forEach(id => { const x = SITS.find(s => s.id === id); if (x && (x.stage || "kousha") === curStage && okFor(x)) sitUsed.delete(id); }); /* この 子が つかえる 場面だけ もどす（ライバルの ぶんで ぜんぶ もどすと、こどもの 場面が くりかえす） */ pool = SITS.filter(s => okFor(s) && s.place === place && !sitUsed.has(s.id)); if (!pool.length) pool = SITS.filter(s => okFor(s) && !sitUsed.has(s.id)); if (!pool.length) pool = SITS.filter(okFor); }
+  const m = Math.min(...pool.map(x => SIT_N.get(x.id) || 0)); pool = pool.filter(x => (SIT_N.get(x.id) || 0) === m); // つかった かずが すくない ものから
+  const s = pool[rnd(pool.length)]; sitUsed.add(s.id);
+  // ママは こたえる 子の ママに する（ぴょんなら ぴょんの おかあさん）。声は sq_<id>_<ママ>
+  if (s.asker === "mama" && MOM_OF[heroKind]) return { ...s, asker: MOM_OF[heroKind], vk: "_" + MOM_OF[heroKind] };
+  return s;
 }
+const MOM_OF = { pyon: "pyonmama", gao: "gaomama", mii: "miimama", chu: "chumama" };
 const ASK_ON_STAGE = new Set(["door", "arrive", "stuck", "scared", "jumpdown", "loud", "borrow", "slow"]); // 最初から相手がその場にいる場面
-const ASK_AT = { onii: [1190, .98], tora: [1190, .92], kuma: [1220, 1.05], mama: [1200, 1.0], ookami: [1200, 1.0], ojisan: [1200, 1.0], omawari: [1240, 1.3], meebaa: [1190, .9], kamejii: [1180, .9], nobbo: [1220, 1.0], gao: [1190, .95], mii: [1190, .9], chu: [1220, .42], pyon: [1190, .9], doshin: [1260, 1.38], pyonmama: [1200, 1.0], gaojii: [1190, 1.0], miibaa: [1190, .98], doshinpapa: [1250, 1.48], kon: [1190, .88], panna: [1190, .9], pannamama: [1200, 1.0] };
+const ASK_AT = { onii: [1190, .98], tora: [1190, .92], kuma: [1220, 1.05], mama: [1200, 1.0], ookami: [1200, 1.0], ojisan: [1200, 1.0], omawari: [1240, 1.3], meebaa: [1190, .9], kamejii: [1180, .9], nobbo: [1220, 1.0], gao: [1190, .95], mii: [1190, .9], chu: [1220, .42], pyon: [1190, .9], doshin: [1260, 1.38], pyonmama: [1200, 1.0], gaojii: [1190, 1.0], miibaa: [1190, .98], doshinpapa: [1250, 1.48], kon: [1190, .88], panna: [1190, .9], pannamama: [1200, 1.0], gaomama: [1190, .98], miimama: [1190, .96], chumama: [1210, .62] };
 let propG = null;
 function resetChar(c) { c.dx.v = 0; c.dx.t = 0; c.lean.t = 0; c.lift.t = 0; c.armL.t = 0; c.armR.t = 0; c.headRot.t = 0; c.tm = {}; c.sadMouth = false; c.roundMouth = false; c.happyOn = false; c.eyeScale.t = 1; c.squash.t = 1; }
 function setSitView(s, heroKind) {
+  if (s && s.id && s.tiers) SIT_N.set(s.id, (SIT_N.get(s.id) || 0) + 1);
   clearMarks(); view = "scene"; chars.forEach(c => c.root.style.display = "none"); visible.length = 0; unsay(); showEar(null, false); hideTask();
   boardLayer.style.display = "none"; sceneLayer.style.display = ""; hud.style.display = "none"; diceBtn.style.visibility = "hidden";
   const atDoor = s.intro === "door";
@@ -208,7 +222,7 @@ const RESOLVE = {
 /* ---------- 子どもの番の場面 ---------- */
 async function playIntro(s, h, a) { await (INTRO[s.intro] || INTRO.arrive)(h, a); }
 async function askQ(s, h, a) {
-  await speak(a, "sq_" + s.id, s.q); unsay();
+  await speak(a, "sq_" + s.id + (s.vk || ""), s.q); unsay();
   if (AFTER_Q[s.intro]) await AFTER_Q[s.intro](h);
 }
 // けが・びょうき・こわい・あぶない場面：せいかいでも くるっと回らず、やさしく うなずく
@@ -216,14 +230,14 @@ const SOFT_INTRO = new Set(["fall", "push", "fever", "bee", "belly", "sandeye", 
 async function resolve(s, h, a, ok) {
   if (ok) { playMove(h, SOFT_INTRO.has(s.intro) ? "nod" : JOY[rnd(JOY.length)]); confetti(50); }
   if (PRE[s.id]) await PRE[s.id](h, a);
-  await speak(a, "sr_" + s.id, s.res);
+  await speak(a, "sr_" + s.id + (s.vk || ""), s.res);
   if (POST[s.id]) await POST[s.id](h, a);
   else if (RESOLVE[s.item]) await RESOLVE[s.item](h, a); else if (ok) (a.kind === "kamejii" ? playMove(a, "nod") : SPECIAL[a.kind](a));
   await sleep(500); // 最後の「おぼえる物カード」は出さない（ややこしいので）
 }
 async function runSit(place, heroKind = "shima") {
-  const s = pickSit(place, heroKind), ti = tierOf(), t = s.tiers[ti];
-  const { hero: h, ask: a } = setSitView(s, heroKind);
+  const s = pickSit(place, heroKind);
+  const { hero: h, ask: a } = setSitView(s, heroKind); const ti = tierFor(s), t = s.tiers[ti];
   showEngine({ no: s.id, main: t.a }, `場面「${s.id}」こたえの段 ${ti + 1}/4`);
   await playIntro(s, h, a);
   await askQ(s, h, a);
@@ -254,9 +268,9 @@ async function runSit(place, heroKind = "shima") {
 
 /* ---------- がおの番の場面（ときどき言いまちがえる） ---------- */
 async function gaoSit(before) {
-  const s = pickSit(zoneOf(P.gao.node), RIVAL), ti = tierOf(), t = s.tiers[ti];
+  const s = pickSit(zoneOf(P.gao.node), RIVAL);
+  const { hero: h, ask: a } = setSitView(s, RIVAL); const ti = tierFor(s), t = s.tiers[ti];
   const mistake = !!t.wrong && E.L >= 2 && Math.random() < .35;
-  const { hero: h, ask: a } = setSitView(s, RIVAL);
   showEngine({ no: s.id, main: t.a }, `${NAMES[RIVAL]}の場面${mistake ? "（まちがえる回）" : ""}`);
   await playIntro(s, h, a);
   await askQ(s, h, a);

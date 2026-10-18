@@ -12,6 +12,7 @@ def keys_of(s):
     new = s["stage"] != "kousha" or not (G / "sit/audio" / f"sq_{s['id']}.mp3").exists()  # こうしゃの はじめの 場面は 段1〜4が ページに 入っている
     ks = []
     if new: ks += [f"sq_{s['id']}", f"sr_{s['id']}"]
+    if s["asker"] == "mama": ks += [f"{q}_{s['id']}_{m}" for m in ("pyonmama", "gaomama", "miimama", "chumama") for q in ("sq", "sr")]  # じぶんの ママ（2026-10-18）
     ks += [f"st_{s['id']}_{i}" for i, r in enumerate(s.get("talk", [])) if r[2]] + [f"se_{s['id']}_{i}" for i, r in enumerate(s.get("after", [])) if r[2]]
     for i, t in enumerate(s["tiers"]):
         if not new and i < 4: continue

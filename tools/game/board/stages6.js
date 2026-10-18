@@ -85,7 +85,18 @@ Object.assign(INTRO, {
   async bgseki(h, a) { const ks = exKids([880, 1060]); ks.forEach(c => { place(c, c.x + 200 * c.s, 975, c.s * .85); sit3(c); }); hp6(h, "tray", .4); enter(h); await sleep(1100); playMove(h, "look"); hold(h, "shake", 1.4); await sleep(1300); markAbove(h, "drop"); await sleep(300); },
   async bgitadaki(h, a) { sit3(h); onDesk(h, "tray", .5); enter(a); await sleep(1000); playMove(a, "nod"); await sleep(400); markAbove(h, "sparkle"); },
   async bgbetabeta(h, a) { sit3(h); onDesk(h, "burger", .5); await sleep(500); h.armR.t = -80; await sleep(400); h.armR.t = 0; const k = el("g", {}, front()); follow(k, () => { const p = world(h, 330, 300); return [p.x, p.y, 0, .5]; }); ITEM2.ketchup(k); window.__kc = k; h.armR.t = -60; markAbove(h, "drop"); await sleep(900); playMove(a, "look"); },
-  async bgkoboshita(h, a) { sit3(h); const c = onDesk(h, "cupdrink", .45, 80); await sleep(700); h.armR.t = -70; await sleep(300); noise(.3, 900, .4); c.remove(); const d = h.__desk.firstChild, y = +d.getAttribute("y"), x = +d.getAttribute("x") + +d.getAttribute("width"); const pd = el("g", { transform: `translate(${(x + 20).toFixed(0)} ${(y + 230).toFixed(0)}) scale(.6)` }, front()); ITEM2.puddle(pd); window.__pd = pd; h.armR.t = 0; surprise(h); markAbove(h, "ex"); await sleep(700); h.sadMouth = true; enter(a); await sleep(1000); },
+  async bgkoboshita(h, a) { sit3(h); const c = onDesk(h, "cupdrink", .45, 80); await sleep(700); h.armR.t = -70; await sleep(300); const d = h.__desk.firstChild, y = +d.getAttribute("y"), x = +d.getAttribute("x") + +d.getAttribute("width"); const cx = world(h, 200, 0).x + 80, ty = y - 8;
+    // コップが たおれて、ジュースが テーブルから したへ ながれる
+    noise(.3, 900, .4); await tween(380, k => c.setAttribute("transform", `rotate(${(88 * easeBack(k)).toFixed(1)} ${(cx + 30).toFixed(0)} ${ty})`));
+    const J = "#FFA62B", fy = h.y + h.base * h.s - 6, ex = Math.max(x, cx + 60); // ジュースが テーブルに ひろがり、はしから ゆかへ ながれおちて、ゆかに たまる
+    const sp = el("ellipse", { cx: cx + 40, cy: ty + 2, rx: 4, ry: 6, fill: J, stroke: INK, "stroke-width": 4 }, front());
+    await tween(450, k => { sp.setAttribute("cx", (cx + 40 + (ex - cx - 40) * k * .5).toFixed(0)); sp.setAttribute("rx", (4 + (ex - cx - 40) * .5 * k + 10).toFixed(0)); });
+    const st = el("rect", { x: ex - 6, y: ty, width: 14, height: 0, rx: 7, fill: J, stroke: INK, "stroke-width": 3 }, front());
+    const pd = el("ellipse", { cx: ex + 20, cy: fy, rx: 0, ry: 0, fill: J, stroke: INK, "stroke-width": 4 }, front());
+    for (let i = 0; i < 5; i++) later(i * 110, () => blip(520 - i * 40, 300, .05, "sine"));
+    await tween(500, k => st.setAttribute("height", ((fy - ty) * k).toFixed(0)));
+    await tween(700, k => { pd.setAttribute("rx", (90 * k).toFixed(0)); pd.setAttribute("ry", (22 * k).toFixed(0)); st.setAttribute("width", (14 * (1 - k * .6)).toFixed(1)); });
+    st.remove(); window.__sp = [sp, pd]; await sleep(300); h.armR.t = 0; surprise(h); markAbove(h, "ex"); await sleep(700); h.sadMouth = true; enter(a); await sleep(1000); },
   async bgtoire(h, a) { sit3(h); onDesk(h, "fries", .45); await sleep(600); hold(h, "shiver", 1.8); h.armL.t = 40; h.armR.t = -40; markAbove(h, "drop"); await sleep(1300); playMove(a, "look"); await sleep(300); },
   async bgbokuno(h, a) { sit3(h); onDesk(h, "fries", .45, 60); place(a, 1050, 975, .42); sit3(a); await sleep(600); a.armL.t = 100; a.dx.t = -60; await sleep(800); surprise(h); markAbove(h, "ex"); await sleep(400); },
   async bggochisou(h, a) { window.__tr = hp6(h, "tray", .4); enter(h); await sleep(1100); playMove(a, "bow"); await sleep(500); },
@@ -111,7 +122,7 @@ Object.assign(POST, {
   async bgseki(h, a) { playMove(a, "nod"); await sleep(500); ((CUR_S && CUR_S.extras) || []).forEach(k => { const c = C[k]; if (c.__desk) c.__desk.remove(); walk(c, 900, 1400); }); await sleep(1500); joy(h); await sleep(300); },
   async bgitadaki(h, a) { playMove(a, "nod"); h.happyOn = true; h.armL.t = h.armR.t = 0; await sleep(700); },
   async bgbetabeta(h, a) { hp6(a, "tissue", .4); await walk(a, -330, 800); if (window.__kc) window.__kc.remove(); hold(h, "shake", 1.2); await sleep(1200); joy(h); await sleep(300); },
-  async bgkoboshita(h, a) { hp6(a, "rag", .35); await walk(a, -330, 800); playMove(a, "crouch"); await sleep(400); if (window.__pd) window.__pd.remove(); h.sadMouth = false; playMove(h, "bow"); await sleep(500); },
+  async bgkoboshita(h, a) { hp6(a, "rag", .35); await walk(a, -330, 800); playMove(a, "crouch"); await sleep(400); if (window.__pd) window.__pd.remove(); (window.__sp || []).forEach(e => e.remove()); h.sadMouth = false; playMove(h, "bow"); await sleep(500); },
   async bgtoire(h, a) { playMove(a, "nod"); if (h.__desk) h.__desk.remove(); h.armL.t = h.armR.t = 0; await walk(h, 900, 1200); },
   async bgbokuno(h, a) { a.armL.t = 0; a.dx.t = 0; playMove(a, "shy"); await sleep(500); h.armR.t = -70; await sleep(500); h.armR.t = 0; joy(a); joy(h); await sleep(400); },
   async bggochisou(h, a) { if (window.__tr) window.__tr.remove(); hp6(a, "tray", .4); playMove(h, "bow"); await sleep(600); playMove(a, "bow"); await sleep(400); },

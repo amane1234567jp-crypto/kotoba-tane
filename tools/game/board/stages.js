@@ -201,11 +201,23 @@ function waterArc(x, y) { const g = el("path", { d: `M${x} ${y} q40 -30 70 40`, 
   let t = 0; addTick(dt => { if (!g.isConnected) return false; t += dt; g.setAttribute("stroke-dasharray", `${20 + Math.sin(t * 20) * 6} 8`); }); return g; }
 function vehicle(kind, y = 650) { // でんしゃ・バス・くるま（横に通りすぎる）
   const g = el("g", {}, propG); const w = kind === "car" ? 260 : 900, h = kind === "car" ? 120 : 260, c = { train: "#7FCBF0", bus: "#7CC36A", car: "#E8473C" }[kind];
+  if (kind === "train") { // でんしゃ：3りょう つながった ながい しゃたい・おびの せん・パンタグラフ・ドア・ちいさな しゃりん（バスに 見えない ように）
+    const CW = 560, H = 230; g.__w = CW * 3 + 40;
+    for (let k = 0; k < 3; k++) { const x0 = k * (CW + 20), first = k === 0;
+      el("path", { d: first ? `M${x0 + 90} ${-H} H${x0 + CW} V-20 H${x0} V${-H + 110} Q${x0} ${-H} ${x0 + 90} ${-H} Z` : `M${x0} ${-H} H${x0 + CW} V-20 H${x0} Z`, fill: "#F4F7FA", ...S6p(7) }, g);
+      el("rect", { x: x0 + 2, y: -78, width: CW - 4, height: 22, fill: "#3E9BD6" }, g); el("rect", { x: x0 + 2, y: -54, width: CW - 4, height: 10, fill: "#7CC36A" }, g);
+      [0, 1].forEach(j => { const dx = x0 + 150 + j * 250; el("rect", { x: dx, y: -H + 40, width: 70, height: H - 62, rx: 6, fill: "#DCE3EA", ...S6p(5) }, g); el("path", { d: `M${dx + 35} ${-H + 40} V-22`, stroke: INK, "stroke-width": 4 }, g); });
+      for (let wx = x0 + (first ? 120 : 40); wx < x0 + CW - 60; wx += 250) if (wx + 90 < x0 + 150 || wx > x0 + 220) el("rect", { x: wx, y: -H + 46, width: 90, height: 70, rx: 10, fill: "#BDE3F2", ...S6p(5) }, g);
+      el("path", { d: `M${x0 + CW / 2 - 50} ${-H} L${x0 + CW / 2 - 20} ${-H - 40} L${x0 + CW / 2 + 20} ${-H - 40} M${x0 + CW / 2 - 40} ${-H - 40} H${x0 + CW / 2 + 40}`, fill: "none", stroke: INK, "stroke-width": 5 }, g);
+      [60, 120, CW - 120, CW - 60].forEach(wx => el("circle", { cx: x0 + wx, cy: -10, r: 20, fill: "#555", ...S6p(5) }, g));
+      if (k < 2) el("rect", { x: x0 + CW, y: -H + 60, width: 20, height: 110, fill: "#888", ...S6p(4) }, g); }
+    el("rect", { x: 30, y: -H + 50, width: 80, height: 60, rx: 18, fill: "#2B2A33", ...S6p(5) }, g); el("circle", { cx: 26, cy: -60, r: 12, fill: "#FFE27A", ...S6p(4) }, g);
+    g.setAttribute("transform", `translate(1700 ${y})`); return g; }
   el("rect", { x: 0, y: -h, width: w, height: h, rx: 30, fill: c, ...S6p(7) }, g);
   for (let x = 40; x < w - 80; x += 150) el("rect", { x, y: -h + 30, width: 110, height: h * .4, rx: 10, fill: "#E8F7FF", ...S6p(5) }, g);
   [80, w - 80].forEach(x => el("circle", { cx: x, cy: 0, r: 34, fill: "#444", ...S6p(6) }, g));
   g.setAttribute("transform", `translate(1700 ${y})`); return g; }
-function pass(g, ms = 1600, y = 650, from = 1700, to = -1200) { blip(200, 120, ms / 1000, "sawtooth"); return tween(ms, k => g.setAttribute("transform", `translate(${(from + (to - from) * k).toFixed(0)} ${y})`)); }
+function pass(g, ms = 1600, y = 650, from = 1700, to = -1200) { if (g.__w && to === -1200) to = -g.__w - 300; blip(200, 120, ms / 1000, "sawtooth"); return tween(ms, k => g.setAttribute("transform", `translate(${(from + (to - from) * k).toFixed(0)} ${y})`)); }
 const horn = () => { if (!ctx) return; blip(440, 440, .35, "square"); later(420, () => blip(440, 440, .5, "square")); };
 const ding = () => { if (!ctx) return; blip(1320, 1320, .25, "sine"); later(260, () => blip(990, 990, .4, "sine")); };
 const whoosh2 = () => noise(.5, 1200, .3);
@@ -388,9 +400,9 @@ Object.assign(POST, {
   async otsuri(h, a) { const c = window.__coin; if (c) c.remove(); const q = world(h, 330, 300), g = prop("coin", q.x, q.y, .35); await moveProp(g, q.x, q.y, 1180, 600, 600, .35, 120, 0); g.remove(); SPECIAL.doshin(a); joy(h); await sleep(400); },
   tarinai(h, a) { playMove(a, "nod"); joy(h); return sleep(700); },
   kippu(h) { hand(h, prop("ticket", 0, 0, .3), .3, 0); joy(h); return sleep(700); },
-  async hoomu(h, a) { hold(a, "tiptoe", 2); const t = vehicle("train", 760); await pass(t, 1500, 760); },
+  async hoomu(h, a) { hold(a, "tiptoe", 2); const t = vehicle("train", 760); await pass(t, 2400, 760); },
   async kiiro(h, a) { a.lean.t = 0; const y0 = a.y, y1 = window.__y0 || y0 + 175; hold(a, "run", .7); await tween(700, k => { a.y = y0 + (y1 - y0) * k; a.dx.v = a.dx.t = -120 * k; }); // きいろい せんの うちがわへ
-    const t = vehicle("train", 760); await pass(t, 1400, 760); joy(a); },
+    const t = vehicle("train", 760); await pass(t, 2200, 760); joy(a); },
   async yuzuru(h, a) { const hy = window.__y0 || h.y + 70; jump(h, .5); h.y = hy; await walk(h, 960 + Math.max(0, h.s - .88) * 220 - (h.x + h.dx.v + h.s * 200), 800); // たちあがって せきを あける
     await walk(a, 605 - (a.x + a.dx.v + a.s * 200), 1100); a.y -= 70; thud(); playMove(a, "nod"); await sleep(300); playMove(h, "nod"); await sleep(500); },
   shizukani(h, a) { playMove(a, "shy"); return sleep(600); },

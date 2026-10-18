@@ -14,7 +14,7 @@ const snLabel = (n, c) => c ? `${n}${c}` : String(n);
 /* ---------- もんだいを つくる ---------- */
 function snMake(lv) {
   const IT = Object.keys(SANSU.items), it = IT[rnd(IT.length)], [emo, , c] = SANSU.items[it];
-  if (lv >= 5 && rnd(3)) { const ws = SANSU.words.filter(w => w.lv === lv); const w = ws[rnd(ws.length)]; return { type: "word", w, x: w.x, c: w.c }; }
+  if (lv >= 5 && rnd(3)) { const ws = SANSU.words.filter(w => w.lv === lv && !/_line_/.test(w.key)); /* ならびの もんだい（なんばんめ・ぜんぶで なんにん）は ださない 2026-10-18 */ const w = ws[rnd(ws.length)]; return { type: "word", w, x: w.x, c: w.c }; }
   if (lv >= 5) lv = 4;
   if (lv === 1) { const n = 2 + rnd(9); return { type: "count", it, emo, c, n, x: n }; }
   if (lv === 2) { const a = 1 + rnd(8), b = 1 + rnd(10 - a); return { type: "add", it, emo, c, a, b, x: a + b, pic: E.L <= 2 || rnd(2) }; }
