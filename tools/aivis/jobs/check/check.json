@@ -11461,9 +11461,9 @@
 "key": "sq_gkisshoni",
 "who": "mii",
 "text": "……きょうは ひとりで かえるの、さみしいわ",
-"yomi": "……今日は一人で帰るの、寂しいわ",
+"yomi": "……今日は一人で帰るの、さみしいわ",
 "acc": null,
-"job": "st4"
+"job": "st19b"
 },
 {
 "key": "sr_gkisshoni",
@@ -11501,9 +11501,9 @@
 "key": "sg_gkisshoni_3",
 "who": "pyon",
 "text": "ひとりは さみしいね。いっしょに かえろうよ",
-"yomi": "一人は寂しいね。一緒に帰ろうよ",
+"yomi": "一人はさみしいね。一緒に帰ろうよ",
 "acc": null,
-"job": "st4"
+"job": "st19b"
 },
 {
 "key": "sg_gkisshoni_4",
@@ -11517,9 +11517,9 @@
 "key": "sg_gkisshoni_5",
 "who": "pyon",
 "text": "ひとりで かえるのは さみしいから、いっしょに かえろう",
-"yomi": "一人で帰るのは寂しいから、一緒に帰ろう",
+"yomi": "一人で帰るのはさみしいから、一緒に帰ろう",
 "acc": null,
-"job": "st4"
+"job": "st19b"
 },
 {
 "key": "sq_gkyorimichi",
@@ -12077,9 +12077,9 @@
 "key": "sg_gktadaima_3",
 "who": "pyon",
 "text": "ただいま。おなか すいた",
-"yomi": "ただいま。お腹空いた",
+"yomi": "ただいま。お腹すいた",
 "acc": null,
-"job": "st4"
+"job": "st19b"
 },
 {
 "key": "sg_gktadaima_4",
@@ -15239,9 +15239,9 @@
 "key": "sx_ocgame2_2",
 "who": "mii",
 "text": "おにいちゃん、つぎ ぼくが やらせて",
-"yomi": "お兄ちゃん、次僕がやらせて",
+"yomi": "お兄ちゃん、つぎ、僕がやらせて",
 "acc": null,
-"job": "st9"
+"job": "st19b"
 },
 {
 "key": "sg_ocgame2_3",
@@ -15679,9 +15679,9 @@
 "key": "sg_tdbokuno_3",
 "who": "chu",
 "text": "まって。まだ いいよって いってないよ",
-"yomi": "待って。まだいいよって言ってないよ",
+"yomi": "待って。まだ、いいよって言ってないよ",
 "acc": null,
-"job": "st19"
+"job": "st19b"
 },
 {
 "key": "sg_tdbokuno_4",
@@ -16488,9 +16488,9 @@
 "key": "sx_snochitsuku_2",
 "who": "pyon",
 "text": "おちつかないので、やすみたいを",
-"yomi": "落ち着かないので、休みたいを",
+"yomi": "落ち着かないので、やすみたいを",
 "acc": null,
-"job": "st9"
+"job": "st19b"
 },
 {
 "key": "sg_snochitsuku_3",
@@ -16992,9 +16992,9 @@
 "key": "sx_snjunban_2",
 "who": "pyon",
 "text": "せんせい、つぎが ぼくですか",
-"yomi": "先生、次が僕ですか",
+"yomi": "先生、つぎが僕ですか",
 "acc": null,
-"job": "st9"
+"job": "st19b"
 },
 {
 "key": "sg_snjunban_3",
@@ -17856,9 +17856,9 @@
 "key": "lk_fitai_t0",
 "who": "doshin",
 "text": "いてっ！ ころんじゃった",
-"yomi": "痛っ！転んじゃった",
+"yomi": "いてっ！転んじゃった",
 "acc": null,
-"job": "st10"
+"job": "st19b"
 },
 {
 "key": "lk_fitai_t1",
@@ -17928,30 +17928,9 @@
 "key": "lk_fkaeri_t0",
 "who": "doshinpapa",
 "text": "もう ごじだね。おうちの ひとが しんぱい するよ",
-"yomi": "もう五時だね。お家の人が心配するよ",
-"acc": [
-[
-"モオ",
-1
-],
-[
-"ゴジダネ.",
-1
-],
-[
-"オイエノ",
-4
-],
-[
-"ヒトガ",
-2
-],
-[
-"シンパイスルヨ",
-6
-]
-],
-"job": "st10c"
+"yomi": "もう五時だね。おうちの人が心配するよ",
+"acc": null,
+"job": "st19b"
 },
 {
 "key": "lk_fkaeri_t1",
@@ -18110,9 +18089,9 @@
 "key": "lk_fbutsukaru_t0",
 "who": "tora",
 "text": "いてっ！",
-"yomi": "痛っ！",
+"yomi": "いてっ！",
 "acc": null,
-"job": "st10"
+"job": "st19b"
 },
 {
 "key": "lk_fbutsukaru_t1",
@@ -18413,9 +18392,9 @@
 "key": "lk_nonaka_r",
 "who": "doshin",
 "text": "ほんと？ こんど いっしょに たべようね",
-"yomi": "本当？今度一緒に食べようね",
+"yomi": "ほんと？今度一緒に食べようね",
 "acc": null,
-"job": "st10"
+"job": "st19b"
 },
 {
 "key": "lk_ntanjou_t",
@@ -18469,9 +18448,9 @@
 "key": "lk_nneko_t",
 "who": "doshin",
 "text": "うちで ねこを かいはじめたんだ",
-"yomi": "家で猫を飼い始めたんだ",
+"yomi": "うちで猫を飼い始めたんだ",
 "acc": null,
-"job": "st10"
+"job": "st19b"
 },
 {
 "key": "lk_nneko_r",
@@ -18501,9 +18480,9 @@
 "key": "lt_blk_res",
 "who": "tora",
 "text": "あ、わりい！ どうぞ",
-"yomi": "あ、悪い！どうぞ",
+"yomi": "あ、わりい！どうぞ",
 "acc": null,
-"job": "st10"
+"job": "st19b"
 },
 {
 "key": "sq_ieaisatsu",
@@ -19341,25 +19320,25 @@
 "key": "sg_iechigau_2",
 "who": "chu",
 "text": "さきに おえかき、つぎは ブロックね",
-"yomi": "先にお絵かき、次はブロックね",
+"yomi": "先にお絵かき、つぎはブロックね",
 "acc": null,
-"job": "st12"
+"job": "st19b"
 },
 {
 "key": "sx_iechigau_2",
 "who": "chu",
 "text": "さきを おえかき、つぎは ブロックね",
-"yomi": "先をお絵かき、次はブロックね",
+"yomi": "先をお絵かき、つぎはブロックね",
 "acc": null,
-"job": "st12"
+"job": "st19b"
 },
 {
 "key": "sg_iechigau_3",
 "who": "chu",
 "text": "いいよ。さきに おえかきして、つぎは ブロックに しよう",
-"yomi": "いいよ。先にお絵かきして、次はブロックにしよう",
+"yomi": "いいよ。先にお絵かきして、つぎはブロックにしよう",
 "acc": null,
-"job": "st12"
+"job": "st19b"
 },
 {
 "key": "sg_iechigau_4",
@@ -19373,9 +19352,9 @@
 "key": "sg_iechigau_5",
 "who": "chu",
 "text": "おえかきも たのしそうだね。さきに おえかきして、そのあと ブロックで あそぼう",
-"yomi": "お絵かきも楽しそうだね。先にお絵かきして、その後ブロックで遊ぼう",
+"yomi": "お絵かきも楽しそうだね。先にお絵かきして、そのあとブロックで遊ぼう",
 "acc": null,
-"job": "st12"
+"job": "st19b"
 },
 {
 "key": "sq_iekaeri",
@@ -21518,9 +21497,9 @@
 "key": "gtk_m_10",
 "who": "gao",
 "text": "じゅっぷん",
-"yomi": "10分",
+"yomi": "じゅっぷん",
 "acc": null,
-"job": "st14"
+"job": "st19b"
 },
 {
 "key": "gtk_m_11",
@@ -21934,9 +21913,9 @@
 "key": "gtk_mae_10",
 "who": "gao",
 "text": "じゅっぷんまえ",
-"yomi": "10分前",
+"yomi": "じゅっぷんまえ",
 "acc": null,
-"job": "st14"
+"job": "st19b"
 },
 {
 "key": "rs_tokei",
@@ -22014,9 +21993,9 @@
 "key": "sg_abkutsu_5",
 "who": "mii",
 "text": "わかりました。くつを ぬいで そろえてから、あそびに いきますね",
-"yomi": "分かりました。靴を脱いで揃えてから、遊びに行きますね",
+"yomi": "分かりました。靴を脱いで、そろえてから、遊びに行きますね",
 "acc": null,
-"job": "st17"
+"job": "st19b"
 },
 {
 "key": "sq_abgyaku",
@@ -22222,9 +22201,9 @@
 "key": "sg_aboogoe_4",
 "who": "mii",
 "text": "ほかの ひとも いるから、ちいさい こえで はなそう",
-"yomi": "他の人もいるから、小さい声で話そう",
+"yomi": "ほかの人もいるから、小さい声で話そう",
 "acc": null,
-"job": "st17"
+"job": "st19b"
 },
 {
 "key": "sg_aboogoe_5",
@@ -22684,9 +22663,9 @@
 "key": "sg_abnagenai_5",
 "who": "mii",
 "text": "ボールは なげないで。ほかの こに あたったら けがを するよ",
-"yomi": "ボールは投げないで。他の子に当たったら怪我をするよ",
+"yomi": "ボールは投げないで。ほかの子に当たったら怪我をするよ",
 "acc": null,
-"job": "st17"
+"job": "st19b"
 },
 {
 "key": "sq_abpoteto",
@@ -23252,17 +23231,17 @@
 "key": "sg_bgseki_4",
 "who": "pyon",
 "text": "せきが あいてないから、あくまで ここで まとう",
-"yomi": "席が空いてないから、空くまでここで待とう",
+"yomi": "席があいてないから、あくまでここで待とう",
 "acc": null,
-"job": "st17"
+"job": "st19b"
 },
 {
 "key": "sg_bgseki_5",
 "who": "pyon",
 "text": "いまは せきが ぜんぶ うまってるから、あくまで たって まってよう",
-"yomi": "今は席が全部埋まってるから、空くまで立って待ってよう",
+"yomi": "今は席が全部埋まってるから、あくまで立って待ってよう",
 "acc": null,
-"job": "st17"
+"job": "st19b"
 },
 {
 "key": "sq_bgitadaki",
@@ -25627,14 +25606,9 @@
 "key": "csn_a_にん_7",
 "who": "chu",
 "text": "ななにん！",
-"yomi": "7人！",
-"acc": [
-[
-"ナナニン!",
-2
-]
-],
-"job": "st18"
+"yomi": "ななにん！",
+"acc": null,
+"job": "st19b"
 },
 {
 "key": "csn_a_にん_8",
@@ -25757,14 +25731,9 @@
 "key": "csn_a_にん_17",
 "who": "chu",
 "text": "じゅうななにん！",
-"yomi": "17人！",
-"acc": [
-[
-"ジュウナナニン!",
-4
-]
-],
-"job": "st18"
+"yomi": "じゅうななにん！",
+"acc": null,
+"job": "st19b"
 },
 {
 "key": "csn_a_にん_18",
@@ -27156,5 +27125,9645 @@
 "yomi": "いってらっしゃい。手をよく洗ってね",
 "acc": null,
 "job": "st19"
+},
+{
+"key": "sq_hkknock",
+"who": "meebaa",
+"text": "はーい、どうぞ",
+"yomi": "はーい、どうぞ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hkknock",
+"who": "meebaa",
+"text": "どうぞ、はいって。そこに すわってね",
+"yomi": "どうぞ、入って。そこに座ってね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkknock_0",
+"who": "doshin",
+"text": "しつれいします",
+"yomi": "失礼します",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkknock_1",
+"who": "doshin",
+"text": "しつれいします。おねがいします",
+"yomi": "失礼します。お願いします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkknock_2",
+"who": "doshin",
+"text": "しつれいします。ぐあいが わるいです",
+"yomi": "失礼します。具合が悪いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hkknock_2",
+"who": "doshin",
+"text": "しつれいします。ぐあいを わるいです",
+"yomi": "失礼します。具合を悪いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkknock_3",
+"who": "doshin",
+"text": "しつれいします。1ねん2くみです。ぐあいが わるいです",
+"yomi": "失礼します。一年二組です。具合が悪いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkknock_4",
+"who": "doshin",
+"text": "しつれいします。1ねん2くみです。ちょっと ぐあいが わるくて きました",
+"yomi": "失礼します。一年二組です。ちょっと具合が悪くて来ました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkknock_5",
+"who": "doshin",
+"text": "しつれいします。1ねん2くみです。ぐあいが わるいので、すこし やすませて ください",
+"yomi": "失礼します。一年二組です。具合が悪いので、少し休ませてください",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hkatama",
+"who": "meebaa",
+"text": "あら、どうしたの？",
+"yomi": "あら、どうしたの？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hkatama",
+"who": "meebaa",
+"text": "そう。おねつを はかって みましょうね",
+"yomi": "そう。お熱を測ってみましょうね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkatama_0",
+"who": "doshin",
+"text": "あたま",
+"yomi": "頭",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkatama_1",
+"who": "doshin",
+"text": "あたまが いたいです",
+"yomi": "頭が痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkatama_2",
+"who": "doshin",
+"text": "あたまが ずきずき いたいです",
+"yomi": "頭がずきずき痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hkatama_2",
+"who": "doshin",
+"text": "あたまを ずきずき いたいです",
+"yomi": "頭をずきずき痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkatama_3",
+"who": "doshin",
+"text": "3じかんめから あたまが いたいです",
+"yomi": "三時間目から頭が痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkatama_4",
+"who": "doshin",
+"text": "3じかんめから、あたまが ずきずき いたいです",
+"yomi": "三時間目から、頭がずきずき痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkatama_5",
+"who": "doshin",
+"text": "3じかんめの さんすうの ときから、あたまが ずきずき いたいです",
+"yomi": "三時間目の算数の時から、頭がずきずき痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hkmuka",
+"who": "meebaa",
+"text": "かおいろが わるいわね。どうしたの？",
+"yomi": "顔色が悪いわね。どうしたの？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hkmuka",
+"who": "meebaa",
+"text": "それは つらいわね。ベッドで よこに なって いてね",
+"yomi": "それはつらいわね。ベッドで横になっていてね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkmuka_0",
+"who": "doshin",
+"text": "きもちが わるい",
+"yomi": "気持ちが悪い",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkmuka_1",
+"who": "doshin",
+"text": "きもちが わるいです",
+"yomi": "気持ちが悪いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkmuka_2",
+"who": "doshin",
+"text": "むかむか して、きもちが わるいです",
+"yomi": "むかむかして、気持ちが悪いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hkmuka_2",
+"who": "doshin",
+"text": "むかむか して、きもちを わるいです",
+"yomi": "むかむかして、気持ちを悪いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkmuka_3",
+"who": "doshin",
+"text": "きゅうしょくの あとから、きもちが わるいです",
+"yomi": "給食の後から、気持ちが悪いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkmuka_4",
+"who": "doshin",
+"text": "きゅうしょくの あとから、むかむか して きもちが わるいです",
+"yomi": "給食の後から、むかむかして気持ちが悪いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkmuka_5",
+"who": "doshin",
+"text": "きゅうしょくの あとから むかむか して、はきそうです",
+"yomi": "給食の後からむかむかして、吐きそうです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hkhanaji",
+"who": "meebaa",
+"text": "まあ、はなぢ！ どうしたの？",
+"yomi": "まあ、鼻血！どうしたの？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hkhanaji",
+"who": "meebaa",
+"text": "したを むいて、はなを つまんで いてね。すぐ とまるからね",
+"yomi": "下を向いて、鼻をつまんでいてね。すぐ止まるからね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkhanaji_0",
+"who": "doshin",
+"text": "はなぢ",
+"yomi": "鼻血",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkhanaji_1",
+"who": "doshin",
+"text": "はなぢが でました",
+"yomi": "鼻血が出ました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkhanaji_2",
+"who": "doshin",
+"text": "ぶつかって、はなぢが でました",
+"yomi": "ぶつかって、鼻血が出ました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hkhanaji_2",
+"who": "doshin",
+"text": "ぶつかって、はなぢを でました",
+"yomi": "ぶつかって、鼻血を出ました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkhanaji_3",
+"who": "doshin",
+"text": "やすみじかんに ぶつかって、はなぢが でました",
+"yomi": "休み時間にぶつかって、鼻血が出ました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkhanaji_4",
+"who": "doshin",
+"text": "はなぢが でて、なかなか とまりません",
+"yomi": "鼻血が出て、なかなか止まりません",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkhanaji_5",
+"who": "doshin",
+"text": "やすみじかんに ともだちと ぶつかって、はなぢが とまりません",
+"yomi": "休み時間に友達とぶつかって、鼻血が止まりません",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hktetsubou",
+"who": "meebaa",
+"text": "あら、ひじを おさえて、どうしたの？",
+"yomi": "あら、肘を押さえて、どうしたの？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hktetsubou",
+"who": "meebaa",
+"text": "ちょっと みせてね。ひやして おきましょう",
+"yomi": "ちょっと見せてね。冷やしておきましょう",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktetsubou_0",
+"who": "doshin",
+"text": "てつぼう",
+"yomi": "鉄棒",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktetsubou_1",
+"who": "doshin",
+"text": "てつぼうから おちました",
+"yomi": "鉄棒から落ちました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktetsubou_2",
+"who": "doshin",
+"text": "てつぼうから おちて、ひじを うちました",
+"yomi": "鉄棒から落ちて、肘を打ちました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hktetsubou_2",
+"who": "doshin",
+"text": "てつぼうから おちて、ひじが うちました",
+"yomi": "鉄棒から落ちて、肘が打ちました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktetsubou_3",
+"who": "doshin",
+"text": "やすみじかんに てつぼうから おちました",
+"yomi": "休み時間に鉄棒から落ちました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktetsubou_4",
+"who": "doshin",
+"text": "やすみじかんに てつぼうから おちて、ひじを うちました",
+"yomi": "休み時間に鉄棒から落ちて、肘を打ちました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktetsubou_5",
+"who": "doshin",
+"text": "やすみじかんに てつぼうで まわって いたら、てが すべって ひじを うちました",
+"yomi": "休み時間に鉄棒で回っていたら、手が滑って肘を打ちました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hktaion",
+"who": "meebaa",
+"text": "ピピッ。なんど だった？",
+"yomi": "ピピッ。何度だった？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hktaion",
+"who": "meebaa",
+"text": "おねつが あるわね。おうちの ひとに れんらく しましょう",
+"yomi": "お熱があるわね。おうちの人に連絡しましょう",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktaion_0",
+"who": "doshin",
+"text": "37ど5ぶ",
+"yomi": "さんじゅうななど、ごぶ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktaion_1",
+"who": "doshin",
+"text": "37ど5ぶです",
+"yomi": "さんじゅうななど、ごぶです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktaion_2",
+"who": "doshin",
+"text": "37ど5ぶ ありました",
+"yomi": "さんじゅうななど、ごぶ ありました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hktaion_2",
+"who": "doshin",
+"text": "37ど5ぶを ありました",
+"yomi": "さんじゅうななど、ごぶを ありました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktaion_3",
+"who": "doshin",
+"text": "せんせい、37ど5ぶ ありました",
+"yomi": "先生、さんじゅうななど、ごぶ ありました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktaion_4",
+"who": "doshin",
+"text": "37ど5ぶ ありました。すこし ねつが あります",
+"yomi": "さんじゅうななど、ごぶ ありました。少し熱があります",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktaion_5",
+"who": "doshin",
+"text": "37ど5ぶ ありました。からだが あつくて、すこし だるいです",
+"yomi": "さんじゅうななど、ごぶ ありました。体が熱くて、少しだるいです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hkyoku",
+"who": "meebaa",
+"text": "ねむって いたわね。ぐあいは どう？",
+"yomi": "眠っていたわね。具合はどう？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hkyoku",
+"who": "meebaa",
+"text": "よかった。むりを しないでね",
+"yomi": "良かった。無理をしないでね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkyoku_0",
+"who": "doshin",
+"text": "よく なりました",
+"yomi": "良くなりました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkyoku_1",
+"who": "doshin",
+"text": "すこし よく なりました",
+"yomi": "少し良くなりました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkyoku_2",
+"who": "doshin",
+"text": "すこし よく なりました。もどります",
+"yomi": "少し良くなりました。戻ります",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hkyoku_2",
+"who": "doshin",
+"text": "すこし よく なりました。きょうしつを もどります",
+"yomi": "少し良くなりました。教室を戻ります",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkyoku_3",
+"who": "doshin",
+"text": "すこし よく なったので、きょうしつに もどります",
+"yomi": "少し良くなったので、教室に戻ります",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkyoku_4",
+"who": "doshin",
+"text": "やすんだら よく なりました。きょうしつに もどります",
+"yomi": "休んだら良くなりました。教室に戻ります",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkyoku_5",
+"who": "doshin",
+"text": "やすませて くれて ありがとうございました。よく なったので、きょうしつに もどります",
+"yomi": "休ませてくれてありがとうございました。良くなったので、教室に戻ります",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hksoutai",
+"who": "meebaa",
+"text": "まだ ぐあいが わるいかしら？",
+"yomi": "まだ具合が悪いかしら？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hksoutai",
+"who": "meebaa",
+"text": "わかったわ。おうちに でんわして みるわね",
+"yomi": "わかったわ。おうちに電話してみるわね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hksoutai_0",
+"who": "doshin",
+"text": "かえりたい",
+"yomi": "帰りたい",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hksoutai_1",
+"who": "doshin",
+"text": "おうちに かえりたいです",
+"yomi": "おうちに帰りたいです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hksoutai_2",
+"who": "doshin",
+"text": "まだ いたいから、おうちに かえりたいです",
+"yomi": "まだ痛いから、おうちに帰りたいです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hksoutai_2",
+"who": "doshin",
+"text": "まだ いたいから、おうちを かえりたいです",
+"yomi": "まだ痛いから、おうちを帰りたいです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hksoutai_3",
+"who": "doshin",
+"text": "おかあさんに むかえに きて ほしいです",
+"yomi": "お母さんに迎えに来てほしいです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hksoutai_4",
+"who": "doshin",
+"text": "まだ ぐあいが わるいので、おかあさんに むかえに きて ほしいです",
+"yomi": "まだ具合が悪いので、お母さんに迎えに来てほしいです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hksoutai_5",
+"who": "doshin",
+"text": "まだ あたまが いたいので、おうちの ひとに むかえに きて もらいたいです",
+"yomi": "まだ頭が痛いので、おうちの人に迎えに来てもらいたいです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hktomo",
+"who": "meebaa",
+"text": "あら、ちゅうくん、どうしたの？",
+"yomi": "あら、ちゅうくん、どうしたの？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hktomo",
+"who": "meebaa",
+"text": "つれて きて くれて ありがとう。ちゅうくん、ここに すわってね",
+"yomi": "連れて来てくれてありがとう。ちゅうくん、ここに座ってね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktomo_0",
+"who": "doshin",
+"text": "ころびました",
+"yomi": "転びました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktomo_1",
+"who": "doshin",
+"text": "ちゅうくんが ころびました",
+"yomi": "ちゅうくんが転びました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktomo_2",
+"who": "doshin",
+"text": "ちゅうくんが ころんで、あしを いたがって います",
+"yomi": "ちゅうくんが転んで、足を痛がっています",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hktomo_2",
+"who": "doshin",
+"text": "ちゅうくんを ころんで、あしを いたがって います",
+"yomi": "ちゅうくんを転んで、足を痛がっています",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktomo_3",
+"who": "doshin",
+"text": "ちゅうくんが かいだんで ころびました",
+"yomi": "ちゅうくんが階段で転びました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktomo_4",
+"who": "doshin",
+"text": "ちゅうくんが かいだんで ころんで、あしを いたがって います",
+"yomi": "ちゅうくんが階段で転んで、足を痛がっています",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hktomo_5",
+"who": "doshin",
+"text": "せんせい、ちゅうくんが かいだんで ころんで、あしが いたくて あるけません",
+"yomi": "先生、ちゅうくんが階段で転んで、足が痛くて歩けません",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hkshizuka",
+"who": "kon",
+"text": "ねえねえ、ベッドで トランポリン しようよ〜！",
+"yomi": "ねえねえ、ベッドでトランポリンしようよ〜！",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hkshizuka",
+"who": "kon",
+"text": "あ……そっか。ごめん〜",
+"yomi": "あ……そっか。ごめん〜",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkshizuka_0",
+"who": "doshin",
+"text": "しずかに",
+"yomi": "静かに",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkshizuka_1",
+"who": "doshin",
+"text": "しずかに してね",
+"yomi": "静かにしてね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkshizuka_2",
+"who": "doshin",
+"text": "ねて いる ひとが いるよ",
+"yomi": "寝ている人がいるよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hkshizuka_2",
+"who": "doshin",
+"text": "ねて いる ひとを いるよ",
+"yomi": "寝ている人をいるよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkshizuka_3",
+"who": "doshin",
+"text": "ねて いる ひとが いるから、しずかに してね",
+"yomi": "寝ている人がいるから、静かにしてね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkshizuka_4",
+"who": "doshin",
+"text": "ほけんしつでは しずかに しようね。ねて いる ひとが いるよ",
+"yomi": "保健室では静かにしようね。寝ている人がいるよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkshizuka_5",
+"who": "doshin",
+"text": "ここは ほけんしつだから、ベッドで あそんだら だめだよ。しずかに しようね",
+"yomi": "ここは保健室だから、ベッドで遊んだら駄目だよ。静かにしようね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hkhaneru",
+"who": "meebaa",
+"text": "あらあら、ベッドの うえで はねたら あぶないわよ",
+"yomi": "あらあら、ベッドの上で跳ねたら危ないわよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hkhaneru",
+"who": "meebaa",
+"text": "わかれば いいのよ。ゆっくり やすんでね",
+"yomi": "わかればいいのよ。ゆっくり休んでね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkhaneru_0",
+"who": "doshin",
+"text": "ごめんなさい",
+"yomi": "ごめんなさい",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkhaneru_1",
+"who": "doshin",
+"text": "はい、ごめんなさい",
+"yomi": "はい、ごめんなさい",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkhaneru_2",
+"who": "doshin",
+"text": "ごめんなさい。ベッドで しずかに します",
+"yomi": "ごめんなさい。ベッドで静かにします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hkhaneru_2",
+"who": "doshin",
+"text": "ごめんなさい。ベッドを しずかに します",
+"yomi": "ごめんなさい。ベッドを静かにします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkhaneru_3",
+"who": "doshin",
+"text": "ごめんなさい。しずかに やすみます",
+"yomi": "ごめんなさい。静かに休みます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkhaneru_4",
+"who": "doshin",
+"text": "ごめんなさい。もう はねません。しずかに やすみます",
+"yomi": "ごめんなさい。もう跳ねません。静かに休みます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkhaneru_5",
+"who": "doshin",
+"text": "ごめんなさい。ベッドで はねると あぶないから、しずかに よこに なります",
+"yomi": "ごめんなさい。ベッドで跳ねると危ないから、静かに横になります",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hkshitsureishita",
+"who": "meebaa",
+"text": "もう だいじょうぶね。きを つけて もどってね",
+"yomi": "もう大丈夫ね。気をつけて戻ってね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hkshitsureishita",
+"who": "meebaa",
+"text": "はい、おだいじにね",
+"yomi": "はい、お大事にね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkshitsureishita_0",
+"who": "doshin",
+"text": "しつれいしました",
+"yomi": "失礼しました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkshitsureishita_1",
+"who": "doshin",
+"text": "ありがとうございました",
+"yomi": "ありがとうございました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkshitsureishita_2",
+"who": "doshin",
+"text": "せんせい、ありがとうございました",
+"yomi": "先生、ありがとうございました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hkshitsureishita_2",
+"who": "doshin",
+"text": "せんせいが、ありがとうございました",
+"yomi": "先生が、ありがとうございました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkshitsureishita_3",
+"who": "doshin",
+"text": "ありがとうございました。しつれいしました",
+"yomi": "ありがとうございました。失礼しました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkshitsureishita_4",
+"who": "doshin",
+"text": "ありがとうございました。きょうしつに もどります。しつれいしました",
+"yomi": "ありがとうございました。教室に戻ります。失礼しました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hkshitsureishita_5",
+"who": "doshin",
+"text": "たすけて くれて ありがとうございました。もう だいじょうぶです。しつれいしました",
+"yomi": "助けてくれてありがとうございました。もう大丈夫です。失礼しました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_byuketsuke",
+"who": "piyoko",
+"text": "こんにちは。しんさつけんを だして くださいね",
+"yomi": "こんにちは。診察券を出してくださいね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_byuketsuke",
+"who": "piyoko",
+"text": "はい、おあずかり しますね。まちあいで まって いてね",
+"yomi": "はい、お預かりしますね。待合で待っていてね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byuketsuke_0",
+"who": "chu",
+"text": "はい",
+"yomi": "はい",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byuketsuke_1",
+"who": "chu",
+"text": "はい、どうぞ",
+"yomi": "はい、どうぞ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byuketsuke_2",
+"who": "chu",
+"text": "はい。これを おねがいします",
+"yomi": "はい。これをお願いします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_byuketsuke_2",
+"who": "chu",
+"text": "はい。これが おねがいします",
+"yomi": "はい。これガオ願いします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byuketsuke_3",
+"who": "chu",
+"text": "こんにちは。しんさつけんです。おねがいします",
+"yomi": "こんにちは。診察券です。お願いします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byuketsuke_4",
+"who": "chu",
+"text": "こんにちは。しんさつけんです。きょうは のどが いたくて きました",
+"yomi": "こんにちは。診察券です。今日は喉が痛くて来ました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byuketsuke_5",
+"who": "chu",
+"text": "こんにちは。しんさつけんです。のどが いたいので、みて もらいたいです",
+"yomi": "こんにちは。診察券です。喉が痛いので、診てもらいたいです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_bymachi",
+"who": "kon",
+"text": "わーい、ひろーい！ はしっちゃお〜",
+"yomi": "わーい、広ーい！走っちゃお〜",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_bymachi",
+"who": "kon",
+"text": "あ、そっか……。しずかに すわってる",
+"yomi": "あ、そっか……。静かに座ってる",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bymachi_0",
+"who": "chu",
+"text": "はしらないで",
+"yomi": "走らないで",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bymachi_1",
+"who": "chu",
+"text": "ここでは はしらないで",
+"yomi": "ここでは走らないで",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bymachi_2",
+"who": "chu",
+"text": "びょういんでは しずかに してね",
+"yomi": "病院では静かにしてね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_bymachi_2",
+"who": "chu",
+"text": "びょういんを しずかに してね",
+"yomi": "病院を静かにしてね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bymachi_3",
+"who": "chu",
+"text": "びょうきの ひとが いるから、はしらないでね",
+"yomi": "病気の人がいるから、走らないでね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bymachi_4",
+"who": "chu",
+"text": "びょうきの ひとが いるから、すわって しずかに まってようね",
+"yomi": "病気の人がいるから、座って静かに待ってようね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bymachi_5",
+"who": "chu",
+"text": "ここは びょういんだよ。ぐあいの わるい ひとが いるから、しずかに まってようね",
+"yomi": "ここは病院だよ。具合の悪い人がいるから、静かに待ってようね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_byyobareru",
+"who": "piyoko",
+"text": "おまたせしました。しんさつしつに どうぞ〜",
+"yomi": "お待たせしました。診察室にどうぞ〜",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_byyobareru",
+"who": "piyoko",
+"text": "はーい、こちらですよ",
+"yomi": "はーい、こちらですよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byyobareru_0",
+"who": "chu",
+"text": "はい",
+"yomi": "はい",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byyobareru_1",
+"who": "chu",
+"text": "はい、いま いきます",
+"yomi": "はい、今行きます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byyobareru_2",
+"who": "chu",
+"text": "はい、おねがいします",
+"yomi": "はい、お願いします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_byyobareru_2",
+"who": "chu",
+"text": "はい、おねがいしますが",
+"yomi": "はい、お願いしますが",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byyobareru_3",
+"who": "chu",
+"text": "はい！ いま いきます。おねがいします",
+"yomi": "はい！今行きます。お願いします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byyobareru_4",
+"who": "chu",
+"text": "はい。ママと いっしょに いきます",
+"yomi": "はい。ママと一緒に行きます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byyobareru_5",
+"who": "chu",
+"text": "はい、いま いきます。ママ、いっしょに きてね",
+"yomi": "はい、今行きます。ママ、一緒に来てね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_bydou",
+"who": "wanko",
+"text": "こんにちは。きょうは どうしましたか？",
+"yomi": "こんにちは。今日はどうしましたか？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_bydou",
+"who": "wanko",
+"text": "そうですか。のどを みて みましょうね",
+"yomi": "そうですか。喉を見てみましょうね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bydou_0",
+"who": "chu",
+"text": "のど",
+"yomi": "喉",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bydou_1",
+"who": "chu",
+"text": "のどが いたいです",
+"yomi": "喉が痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bydou_2",
+"who": "chu",
+"text": "のどが ひりひり いたいです",
+"yomi": "喉がひりひり痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_bydou_2",
+"who": "chu",
+"text": "のどを ひりひり いたいです",
+"yomi": "喉をひりひり痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bydou_3",
+"who": "chu",
+"text": "きのうの よるから のどが いたいです",
+"yomi": "昨日の夜から喉が痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bydou_4",
+"who": "chu",
+"text": "きのうの よるから、のどが ひりひり いたいです",
+"yomi": "昨日の夜から、喉がひりひり痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bydou_5",
+"who": "chu",
+"text": "きのうの よるから のどが いたくて、つばを のむと いたいです",
+"yomi": "昨日の夜から喉が痛くて、つばを飲むと痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_byitsu",
+"who": "wanko",
+"text": "おなかが いたいのは、いつからですか？",
+"yomi": "お腹が痛いのは、いつからですか？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_byitsu",
+"who": "wanko",
+"text": "けさからですね。わかりました",
+"yomi": "今朝からですね。わかりました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byitsu_0",
+"who": "chu",
+"text": "けさ",
+"yomi": "今朝",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byitsu_1",
+"who": "chu",
+"text": "けさからです",
+"yomi": "今朝からです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byitsu_2",
+"who": "chu",
+"text": "けさ おきた ときからです",
+"yomi": "今朝起きた時からです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_byitsu_2",
+"who": "chu",
+"text": "けさを おきた ときからです",
+"yomi": "今朝を起きた時からです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byitsu_3",
+"who": "chu",
+"text": "けさ おきた ときから いたいです",
+"yomi": "今朝起きた時から痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byitsu_4",
+"who": "chu",
+"text": "けさ おきた ときから、ずっと いたいです",
+"yomi": "今朝起きた時から、ずっと痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byitsu_5",
+"who": "chu",
+"text": "けさ おきた ときは すこしでしたが、だんだん いたく なりました",
+"yomi": "今朝起きた時は少しでしたが、だんだん痛くなりました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_bydoko",
+"who": "wanko",
+"text": "どこが いたいか、ゆびで さして おしえて ください",
+"yomi": "どこが痛いか、指で指して教えてください",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_bydoko",
+"who": "wanko",
+"text": "そこですね。ちょっと さわって みますよ",
+"yomi": "そこですね。ちょっと触ってみますよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bydoko_0",
+"who": "chu",
+"text": "ここです",
+"yomi": "ここです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bydoko_1",
+"who": "chu",
+"text": "おなかです",
+"yomi": "お腹です",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bydoko_2",
+"who": "chu",
+"text": "おなかの ここが いたいです",
+"yomi": "お腹のここが痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_bydoko_2",
+"who": "chu",
+"text": "おなかの ここを いたいです",
+"yomi": "お腹のここを痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bydoko_3",
+"who": "chu",
+"text": "おへその よこが いたいです",
+"yomi": "おへその横が痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bydoko_4",
+"who": "chu",
+"text": "おへその みぎの ほうが いたいです",
+"yomi": "おへその右の方が痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bydoko_5",
+"who": "chu",
+"text": "おへその みぎの ほうが いたくて、おすと もっと いたいです",
+"yomi": "おへその右の方が痛くて、押すともっと痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_byhowa",
+"who": "wanko",
+"text": "あたまは、どんなふうに いたいですか？",
+"yomi": "頭は、どんなふうに痛いですか？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_byhowa",
+"who": "wanko",
+"text": "ずきずきですね。よく わかりましたよ",
+"yomi": "ずきずきですね。よくわかりましたよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byhowa_0",
+"who": "chu",
+"text": "ずきずき",
+"yomi": "ずきずき",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byhowa_1",
+"who": "chu",
+"text": "ずきずき します",
+"yomi": "ずきずきします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byhowa_2",
+"who": "chu",
+"text": "あたまが ずきずき します",
+"yomi": "頭がずきずきします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_byhowa_2",
+"who": "chu",
+"text": "あたまを ずきずき します",
+"yomi": "頭をずきずきします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byhowa_3",
+"who": "chu",
+"text": "あたまが ずきずき いたいです",
+"yomi": "頭がずきずき痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byhowa_4",
+"who": "chu",
+"text": "あたまの ここが、ずきずき いたいです",
+"yomi": "頭のここが、ずきずき痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byhowa_5",
+"who": "chu",
+"text": "ちくちく じゃなくて、ずきずき ひびく かんじで いたいです",
+"yomi": "ちくちくじゃなくて、ずきずき響く感じで痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_bynetsu",
+"who": "wanko",
+"text": "おねつは はかりましたか？",
+"yomi": "お熱は測りましたか？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_bynetsu",
+"who": "wanko",
+"text": "38どですか。すこし たかいですね",
+"yomi": "38度、ですか。少し高いですね",
+"acc": null,
+"job": "st20b"
+},
+{
+"key": "sg_bynetsu_0",
+"who": "chu",
+"text": "38ど",
+"yomi": "38度",
+"acc": null,
+"job": "st20b"
+},
+{
+"key": "sg_bynetsu_1",
+"who": "chu",
+"text": "38どです",
+"yomi": "38度です",
+"acc": null,
+"job": "st20b"
+},
+{
+"key": "sg_bynetsu_2",
+"who": "chu",
+"text": "38ど ありました",
+"yomi": "38度、ありました",
+"acc": null,
+"job": "st20b"
+},
+{
+"key": "sx_bynetsu_2",
+"who": "chu",
+"text": "38どを ありました",
+"yomi": "38度を、ありました",
+"acc": null,
+"job": "st20b"
+},
+{
+"key": "sg_bynetsu_3",
+"who": "chu",
+"text": "けさ はかったら、38ど ありました",
+"yomi": "今朝測ったら、38度、ありました",
+"acc": null,
+"job": "st20b"
+},
+{
+"key": "sg_bynetsu_4",
+"who": "chu",
+"text": "けさ はかったら 38ど ありました。からだが あついです",
+"yomi": "今朝測ったら、38度、ありました。体が熱いです",
+"acc": null,
+"job": "st20b"
+},
+{
+"key": "sg_bynetsu_5",
+"who": "chu",
+"text": "けさ はかったら 38ど あって、さむくて ふるえて いました",
+"yomi": "今朝測ったら、38度、あって、寒くて震えていました",
+"acc": null,
+"job": "st20b"
+},
+{
+"key": "sq_bygohan",
+"who": "wanko",
+"text": "ごはんは たべられましたか？",
+"yomi": "ご飯は食べられましたか？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_bygohan",
+"who": "wanko",
+"text": "すこしでも たべられたなら だいじょうぶ。おみずも のんでね",
+"yomi": "少しでも食べられたなら大丈夫。お水も飲んでね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bygohan_0",
+"who": "chu",
+"text": "すこし",
+"yomi": "少し",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bygohan_1",
+"who": "chu",
+"text": "すこし たべました",
+"yomi": "少し食べました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bygohan_2",
+"who": "chu",
+"text": "パンを すこし たべました",
+"yomi": "パンを少し食べました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_bygohan_2",
+"who": "chu",
+"text": "パンが すこし たべました",
+"yomi": "パンが少し食べました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bygohan_3",
+"who": "chu",
+"text": "あさごはんは すこしだけ たべました",
+"yomi": "朝ごはんは少しだけ食べました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bygohan_4",
+"who": "chu",
+"text": "あさごはんは パンを はんぶんだけ たべました",
+"yomi": "朝ごはんはパンを半分だけ食べました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bygohan_5",
+"who": "chu",
+"text": "あさごはんは パンを はんぶん たべたけど、それより たくさんは たべられませんでした",
+"yomi": "朝ごはんはパンを半分食べたけど、それよりたくさんは食べられませんでした",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_byhoka",
+"who": "wanko",
+"text": "ほかに、へんな ところは ありますか？",
+"yomi": "ほかに、変なところはありますか？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_byhoka",
+"who": "wanko",
+"text": "せきも でるんですね。おしえて くれて ありがとう",
+"yomi": "咳も出るんですね。教えてくれてありがとう",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byhoka_0",
+"who": "chu",
+"text": "せき",
+"yomi": "咳",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byhoka_1",
+"who": "chu",
+"text": "せきが でます",
+"yomi": "咳が出ます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byhoka_2",
+"who": "chu",
+"text": "せきと はなみずが でます",
+"yomi": "咳と鼻水が出ます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_byhoka_2",
+"who": "chu",
+"text": "せきと はなみずを でます",
+"yomi": "咳と鼻水を出ます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byhoka_3",
+"who": "chu",
+"text": "せきも でるし、はなみずも でます",
+"yomi": "咳も出るし、鼻水も出ます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byhoka_4",
+"who": "chu",
+"text": "せきと はなみずが でます。よるは せきで おきちゃいました",
+"yomi": "咳と鼻水が出ます。夜は咳で起きちゃいました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byhoka_5",
+"who": "chu",
+"text": "せきと はなみずが でます。よる ねて いる ときに、せきが とまらなく なりました",
+"yomi": "咳と鼻水が出ます。夜寝ている時に、咳が止まらなくなりました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_bychusha",
+"who": "wanko",
+"text": "それでは、ちゅうしゃを しますね",
+"yomi": "それでは、注射をしますね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_bychusha",
+"who": "wanko",
+"text": "もちろん。がんばりやさんですね。はい、おわり！",
+"yomi": "もちろん。頑張り屋さんですね。はい、終わり！",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bychusha_0",
+"who": "chu",
+"text": "こわい",
+"yomi": "怖い",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bychusha_1",
+"who": "chu",
+"text": "ちょっと こわいです",
+"yomi": "ちょっと怖いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bychusha_2",
+"who": "chu",
+"text": "ちょっと こわいけど、がんばります",
+"yomi": "ちょっと怖いけど、頑張ります",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_bychusha_2",
+"who": "chu",
+"text": "ちょっと こわいを、がんばります",
+"yomi": "ちょっと怖いを、頑張ります",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bychusha_3",
+"who": "chu",
+"text": "こわいけど がんばります。おねがいします",
+"yomi": "怖いけど頑張ります。お願いします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bychusha_4",
+"who": "chu",
+"text": "こわいので、いち、に、さんって かぞえて ください",
+"yomi": "怖いので、いち、に、さんって数えてください",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bychusha_5",
+"who": "chu",
+"text": "ちょっと こわいけど がんばります。いたかったら いたいって いっても いいですか",
+"yomi": "ちょっと怖いけど頑張ります。痛かったら痛いって言ってもいいですか",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_bykusuri",
+"who": "wanko",
+"text": "おくすりを だしますね。こなの おくすり、のめるかな？",
+"yomi": "お薬を出しますね。粉のお薬、飲めるかな？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_bykusuri",
+"who": "wanko",
+"text": "わかりました。あまい シロップに しましょうね",
+"yomi": "わかりました。甘いシロップにしましょうね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bykusuri_0",
+"who": "chu",
+"text": "にがて",
+"yomi": "苦手",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bykusuri_1",
+"who": "chu",
+"text": "こなは にがてです",
+"yomi": "粉は苦手です",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bykusuri_2",
+"who": "chu",
+"text": "こなの くすりは にがてです",
+"yomi": "粉の薬は苦手です",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_bykusuri_2",
+"who": "chu",
+"text": "こなの くすりを にがてです",
+"yomi": "粉の薬を苦手です",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bykusuri_3",
+"who": "chu",
+"text": "こなの くすりは にがてです。シロップが いいです",
+"yomi": "粉の薬は苦手です。シロップがいいです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bykusuri_4",
+"who": "chu",
+"text": "こなの くすりは にがてなので、シロップに できますか",
+"yomi": "粉の薬は苦手なので、シロップにできますか",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_bykusuri_5",
+"who": "chu",
+"text": "こなの くすりは にがてで、のめないかも しれません。シロップに して もらえますか",
+"yomi": "粉の薬は苦手で、飲めないかもしれません。シロップにしてもらえますか",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_byarigatou",
+"who": "wanko",
+"text": "おだいじにね。あたたかく して ねてね",
+"yomi": "お大事にね。温かくして寝てね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_byarigatou",
+"who": "wanko",
+"text": "えらいね。はやく よく なってね",
+"yomi": "偉いね。早く良くなってね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byarigatou_0",
+"who": "chu",
+"text": "ありがとうございました",
+"yomi": "ありがとうございました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byarigatou_1",
+"who": "chu",
+"text": "はい。ありがとうございました",
+"yomi": "はい。ありがとうございました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byarigatou_2",
+"who": "chu",
+"text": "せんせい、ありがとうございました",
+"yomi": "先生、ありがとうございました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_byarigatou_2",
+"who": "chu",
+"text": "せんせいが、ありがとうございました",
+"yomi": "先生が、ありがとうございました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byarigatou_3",
+"who": "chu",
+"text": "ありがとうございました。ちゃんと ねます",
+"yomi": "ありがとうございました。ちゃんと寝ます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byarigatou_4",
+"who": "chu",
+"text": "ありがとうございました。おくすりを のんで、ちゃんと ねます",
+"yomi": "ありがとうございました。お薬を飲んで、ちゃんと寝ます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_byarigatou_5",
+"who": "chu",
+"text": "みて くれて ありがとうございました。はやく なおるように、ちゃんと やすみます",
+"yomi": "診てくれてありがとうございました。早く治るように、ちゃんと休みます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hsaan",
+"who": "biba",
+"text": "こんにちは。おくちを あーんと あけてね",
+"yomi": "こんにちは。お口をあーんとあけてね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hsaan",
+"who": "biba",
+"text": "いい おくちですね。よく みえますよ",
+"yomi": "いいお口ですね。よく見えますよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsaan_0",
+"who": "gao",
+"text": "あーん",
+"yomi": "あーん",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsaan_1",
+"who": "gao",
+"text": "はい、あーん",
+"yomi": "はい、あーん",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsaan_2",
+"who": "gao",
+"text": "はい、おくちを あけます",
+"yomi": "はい、お口を開けます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hsaan_2",
+"who": "gao",
+"text": "はい、おくちが あけます",
+"yomi": "はい、お口が開けます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsaan_3",
+"who": "gao",
+"text": "こんにちは。おねがいします。あーん",
+"yomi": "こんにちは。お願いします。あーん",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsaan_4",
+"who": "gao",
+"text": "こんにちは。よろしく おねがいします。あーん",
+"yomi": "こんにちは。よろしくお願いします。あーん",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsaan_5",
+"who": "gao",
+"text": "こんにちは。ちょっと どきどき するけど、よろしく おねがいします",
+"yomi": "こんにちは。ちょっとどきどきするけど、よろしくお願いします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hsdoko",
+"who": "biba",
+"text": "どの はが いたいのかな？",
+"yomi": "どの歯が痛いのかな？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hsdoko",
+"who": "biba",
+"text": "みぎの したですね。みて みましょう",
+"yomi": "右の下ですね。見てみましょう",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsdoko_0",
+"who": "gao",
+"text": "おくば",
+"yomi": "奥歯",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsdoko_1",
+"who": "gao",
+"text": "おくばが いたいです",
+"yomi": "奥歯が痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsdoko_2",
+"who": "gao",
+"text": "みぎの おくばが いたいです",
+"yomi": "右の奥歯が痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hsdoko_2",
+"who": "gao",
+"text": "みぎの おくばを いたいです",
+"yomi": "右の奥歯を痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsdoko_3",
+"who": "gao",
+"text": "みぎの したの おくばが いたいです",
+"yomi": "右の下の奥歯が痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsdoko_4",
+"who": "gao",
+"text": "みぎの したの おくばが、ずきずき いたいです",
+"yomi": "右の下の奥歯が、ずきずき痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsdoko_5",
+"who": "gao",
+"text": "みぎの したの いちばん おくの はが、ずきずき いたいです",
+"yomi": "右の下の一番奥の歯が、ずきずき痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hsshimiru",
+"who": "biba",
+"text": "どんな ときに いたく なりますか？",
+"yomi": "どんな時に痛くなりますか？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hsshimiru",
+"who": "biba",
+"text": "しみるんですね。むしばかも しれませんよ",
+"yomi": "しみるんですね。虫歯かもしれませんよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsshimiru_0",
+"who": "gao",
+"text": "つめたい とき",
+"yomi": "冷たい時",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsshimiru_1",
+"who": "gao",
+"text": "つめたいと しみます",
+"yomi": "冷たいとしみます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsshimiru_2",
+"who": "gao",
+"text": "アイスを たべると しみます",
+"yomi": "アイスを食べるとしみます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hsshimiru_2",
+"who": "gao",
+"text": "アイスが たべると しみます",
+"yomi": "アイスが食べるとしみます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsshimiru_3",
+"who": "gao",
+"text": "つめたい ものを たべると、しみて いたいです",
+"yomi": "冷たいものを食べると、しみて痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsshimiru_4",
+"who": "gao",
+"text": "アイスや つめたい みずを のむと、しみて いたいです",
+"yomi": "アイスや冷たい水を飲むと、しみて痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsshimiru_5",
+"who": "gao",
+"text": "アイスを たべたり、つめたい みずを のんだり すると、きーんと しみます",
+"yomi": "アイスを食べたり、冷たい水を飲んだりすると、きーんとしみます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hsgura",
+"who": "biba",
+"text": "あれ？ まえばが うごいてるかな？",
+"yomi": "あれ？前歯が動いてるかな？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hsgura",
+"who": "biba",
+"text": "あたらしい はが はえて くるんですね。もうすぐ ぬけますよ",
+"yomi": "新しい歯が生えて来るんですね。もうすぐ抜けますよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsgura_0",
+"who": "gao",
+"text": "ぐらぐら",
+"yomi": "ぐらぐら",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsgura_1",
+"who": "gao",
+"text": "はが ぐらぐら します",
+"yomi": "歯がぐらぐらします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsgura_2",
+"who": "gao",
+"text": "まえばが ぐらぐら します",
+"yomi": "前歯がぐらぐらします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hsgura_2",
+"who": "gao",
+"text": "まえばを ぐらぐら します",
+"yomi": "前歯をぐらぐらします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsgura_3",
+"who": "gao",
+"text": "まえばが ぐらぐらして、ぬけそうです",
+"yomi": "前歯がぐらぐらして、抜けそうです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsgura_4",
+"who": "gao",
+"text": "まえばが ぐらぐらして、ごはんが かみにくいです",
+"yomi": "前歯がぐらぐらして、ご飯が噛みにくいです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsgura_5",
+"who": "gao",
+"text": "まえばが ぐらぐらして、かむと すこし いたいです。ぬけますか",
+"yomi": "前歯がぐらぐらして、噛むと少し痛いです。抜けますか",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hsteage",
+"who": "biba",
+"text": "いたかったら、てを あげてね。ちょっと けずりますよ",
+"yomi": "痛かったら、手を上げてね。ちょっと削りますよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hsteage",
+"who": "biba",
+"text": "わかりました。いったん とめますね。よく いえました",
+"yomi": "わかりました。いったん止めますね。よく言えました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsteage_0",
+"who": "gao",
+"text": "いたい",
+"yomi": "痛い",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsteage_1",
+"who": "gao",
+"text": "いたいです",
+"yomi": "痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsteage_2",
+"who": "gao",
+"text": "せんせい、いたいです",
+"yomi": "先生、痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hsteage_2",
+"who": "gao",
+"text": "せんせいを、いたいです",
+"yomi": "先生を、痛いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsteage_3",
+"who": "gao",
+"text": "すこし いたいです。ちょっと まって ください",
+"yomi": "少し痛いです。ちょっと待ってください",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsteage_4",
+"who": "gao",
+"text": "せんせい、すこし いたいです。いちど とめて ください",
+"yomi": "先生、少し痛いです。一度止めてください",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsteage_5",
+"who": "gao",
+"text": "せんせい、ちょっと いたいです。すこし やすんでからに しても いいですか",
+"yomi": "先生、ちょっと痛いです。少し休んでからにしてもいいですか",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hsyusugu",
+"who": "biba",
+"text": "おくちの なか、だいじょうぶ？",
+"yomi": "お口の中、大丈夫？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hsyusugu",
+"who": "biba",
+"text": "どうぞ。ぶくぶく ぺっ してね",
+"yomi": "どうぞ。ぶくぶくぺっしてね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsyusugu_0",
+"who": "gao",
+"text": "ゆすぎたい",
+"yomi": "ゆすぎたい",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsyusugu_1",
+"who": "gao",
+"text": "くちを ゆすぎたいです",
+"yomi": "口をゆすぎたいです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsyusugu_2",
+"who": "gao",
+"text": "くちを ゆすいでも いいですか",
+"yomi": "口をゆすいでもいいですか",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hsyusugu_2",
+"who": "gao",
+"text": "くちが ゆすいでも いいですか",
+"yomi": "口がゆすいでもいいですか",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsyusugu_3",
+"who": "gao",
+"text": "おくちに みずが たまったので、ゆすいでも いいですか",
+"yomi": "お口に水がたまったので、ゆすいでもいいですか",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsyusugu_4",
+"who": "gao",
+"text": "おくちに みずが たまって くるしいです。ゆすいでも いいですか",
+"yomi": "お口に水がたまって苦しいです。ゆすいでもいいですか",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsyusugu_5",
+"who": "gao",
+"text": "おくちに みずが いっぱいで くるしいです。いちど ゆすいでも いいですか",
+"yomi": "お口に水がいっぱいで苦しいです。一度ゆすいでもいいですか",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hsbuku",
+"who": "biba",
+"text": "おみずで ぶくぶく ぺっ して みてね",
+"yomi": "お水でぶくぶくぺっしてみてね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hsbuku",
+"who": "biba",
+"text": "じょうずに できましたね",
+"yomi": "上手にできましたね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsbuku_0",
+"who": "gao",
+"text": "はい",
+"yomi": "はい",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsbuku_1",
+"who": "gao",
+"text": "はい、ぶくぶく ぺっ",
+"yomi": "はい、ぶくぶくぺっ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsbuku_2",
+"who": "gao",
+"text": "はい、ぶくぶく します",
+"yomi": "はい、ぶくぶくします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hsbuku_2",
+"who": "gao",
+"text": "はい、ぶくぶくが します",
+"yomi": "はい、ぶくぶくがします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsbuku_3",
+"who": "gao",
+"text": "はい。ぶくぶく ぺっ。すっきり しました",
+"yomi": "はい。ぶくぶくぺっ。すっきりしました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsbuku_4",
+"who": "gao",
+"text": "はい。ぶくぶく して、ぺっ。おくちが すっきり しました",
+"yomi": "はい。ぶくぶくして、ぺっ。お口がすっきりしました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsbuku_5",
+"who": "gao",
+"text": "ぶくぶく ぺっ。おくちが すっきり しました。ありがとうございます",
+"yomi": "ぶくぶくぺっ。お口がすっきりしました。ありがとうございます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hshamigaki",
+"who": "biba",
+"text": "はみがきは、いつ して いますか？",
+"yomi": "歯磨きは、いつしていますか？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hshamigaki",
+"who": "biba",
+"text": "えらいですね。これからも つづけてね",
+"yomi": "偉いですね。これからも続けてね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hshamigaki_0",
+"who": "gao",
+"text": "あさと よる",
+"yomi": "朝と夜",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hshamigaki_1",
+"who": "gao",
+"text": "あさと よるに します",
+"yomi": "朝と夜にします",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hshamigaki_2",
+"who": "gao",
+"text": "あさと よるに みがいて います",
+"yomi": "朝と夜に磨いています",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hshamigaki_2",
+"who": "gao",
+"text": "あさと よるを みがいて います",
+"yomi": "朝と夜を磨いています",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hshamigaki_3",
+"who": "gao",
+"text": "あさごはんの あとと、ねる まえに みがいて います",
+"yomi": "朝ごはんのあとと、寝る前に磨いています",
+"acc": null,
+"job": "st20b"
+},
+{
+"key": "sg_hshamigaki_4",
+"who": "gao",
+"text": "あさごはんの あとと ねる まえに、ママと いっしょに みがいて います",
+"yomi": "朝ごはんのあとと寝る前に、ママと一緒に磨いています",
+"acc": null,
+"job": "st20b"
+},
+{
+"key": "sg_hshamigaki_5",
+"who": "gao",
+"text": "あさごはんの あとと ねる まえに みがいて、よるは ママに しあげみがきを して もらいます",
+"yomi": "朝ごはんのあとと寝る前に磨いて、夜はママに仕上げ磨きをしてもらいます",
+"acc": null,
+"job": "st20b"
+},
+{
+"key": "sq_hskowai",
+"who": "biba",
+"text": "あれ、てに ちからが はいってるね。どうしたの？",
+"yomi": "あれ、手に力が入ってるね。どうしたの？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hskowai",
+"who": "biba",
+"text": "だいじょうぶ。まずは、はを かぞえるだけですよ",
+"yomi": "大丈夫。まずは、歯を数えるだけですよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hskowai_0",
+"who": "gao",
+"text": "こわい",
+"yomi": "怖い",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hskowai_1",
+"who": "gao",
+"text": "こわいです",
+"yomi": "怖いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hskowai_2",
+"who": "gao",
+"text": "はいしゃさんが こわいです",
+"yomi": "歯医者さんが怖いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hskowai_2",
+"who": "gao",
+"text": "はいしゃさんを こわいです",
+"yomi": "歯医者さんを怖いです",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hskowai_3",
+"who": "gao",
+"text": "こわいので、なにを するか おしえて ください",
+"yomi": "怖いので、何をするか教えてください",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hskowai_4",
+"who": "gao",
+"text": "こわいので、なにを するか さきに おしえて ください",
+"yomi": "怖いので、何をするか先に教えてください",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hskowai_5",
+"who": "gao",
+"text": "ちょっと こわいです。なにを するか おしえて くれたら、がんばれます",
+"yomi": "ちょっと怖いです。何をするか教えてくれたら、頑張れます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hsnaku",
+"who": "chu",
+"text": "うえーん、はいしゃさん こわいよう……",
+"yomi": "うえーん、歯医者さん怖いよう……",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hsnaku",
+"who": "chu",
+"text": "ほんと……？ じゃあ、がんばって みる",
+"yomi": "ほんと……？じゃあ、頑張ってみる",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsnaku_0",
+"who": "gao",
+"text": "だいじょうぶ",
+"yomi": "大丈夫",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsnaku_1",
+"who": "gao",
+"text": "だいじょうぶだよ",
+"yomi": "大丈夫だよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsnaku_2",
+"who": "gao",
+"text": "だいじょうぶだよ。いたく ないよ",
+"yomi": "大丈夫だよ。痛くないよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hsnaku_2",
+"who": "gao",
+"text": "だいじょうぶだよ。いたくを ないよ",
+"yomi": "大丈夫だよ。痛くをないよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsnaku_3",
+"who": "gao",
+"text": "だいじょうぶだよ。ぼくも いたく なかったよ",
+"yomi": "大丈夫だよ。僕も痛くなかったよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsnaku_4",
+"who": "gao",
+"text": "だいじょうぶだよ。ぼくも さっき やったけど、いたく なかったよ",
+"yomi": "大丈夫だよ。僕もさっきやったけど、痛くなかったよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsnaku_5",
+"who": "gao",
+"text": "だいじょうぶだよ。せんせいは やさしいし、いたかったら てを あげれば とめて くれるよ",
+"yomi": "大丈夫だよ。先生は優しいし、痛かったら手を上げれば止めてくれるよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hssabori",
+"who": "kon",
+"text": "はみがき めんどくさい〜。きょうは しなくて いいや",
+"yomi": "歯磨き面倒くさい〜。今日はしなくていいや",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hssabori",
+"who": "kon",
+"text": "う……それは いやだ。ちゃんと みがく！",
+"yomi": "う……それは嫌だ。ちゃんと磨く！",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hssabori_0",
+"who": "gao",
+"text": "だめだよ",
+"yomi": "駄目だよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hssabori_1",
+"who": "gao",
+"text": "はみがき しようね",
+"yomi": "歯磨きしようね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hssabori_2",
+"who": "gao",
+"text": "はみがき しないと、むしばに なるよ",
+"yomi": "歯磨きしないと、虫歯になるよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hssabori_2",
+"who": "gao",
+"text": "はみがき しないと、むしばを なるよ",
+"yomi": "歯磨きしないと、虫歯をなるよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hssabori_3",
+"who": "gao",
+"text": "はみがき しないと、むしばに なっちゃうよ",
+"yomi": "歯磨きしないと、虫歯になっちゃうよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hssabori_4",
+"who": "gao",
+"text": "はみがき しないと、むしばに なって いたく なっちゃうよ",
+"yomi": "歯磨きしないと、虫歯になって痛くなっちゃうよ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hssabori_5",
+"who": "gao",
+"text": "はみがき しないと むしばに なって、はいしゃさんで けずる ことに なるよ。いっしょに みがこう",
+"yomi": "歯磨きしないと虫歯になって、歯医者さんで削ることになるよ。一緒に磨こう",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sq_hsowari",
+"who": "biba",
+"text": "はい、きょうは おしまいです。よく がんばりましたね",
+"yomi": "はい、今日はおしまいです。よく頑張りましたね",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sr_hsowari",
+"who": "biba",
+"text": "どういたしまして。おやつは 1じかん たってからに してね。おだいじに",
+"yomi": "どういたしまして。おやつは一時間経ってからにしてね。お大事に",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsowari_0",
+"who": "gao",
+"text": "ありがとうございました",
+"yomi": "ありがとうございました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsowari_1",
+"who": "gao",
+"text": "ありがとうございました。また きます",
+"yomi": "ありがとうございました。また来ます",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsowari_2",
+"who": "gao",
+"text": "せんせい、ありがとうございました",
+"yomi": "先生、ありがとうございました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sx_hsowari_2",
+"who": "gao",
+"text": "せんせいが、ありがとうございました",
+"yomi": "先生が、ありがとうございました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsowari_3",
+"who": "gao",
+"text": "ありがとうございました。あまい ものは いつから たべて いいですか",
+"yomi": "ありがとうございました。甘いものはいつから食べていいですか",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsowari_4",
+"who": "gao",
+"text": "ありがとうございました。おかしは なんじかん たったら たべて いいですか",
+"yomi": "ありがとうございました。お菓子はなんじ間経ったら食べていいですか",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "sg_hsowari_5",
+"who": "gao",
+"text": "ありがとうございました。これからは、はみがきを もっと がんばります",
+"yomi": "ありがとうございました。これからは、歯磨きをもっと頑張ります",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "rs_hoken2",
+"who": "chu",
+"text": "ありがとう。ほけんしつに いく ところなんだ",
+"yomi": "ありがとう。保健室に行くところなんだ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "rs_byouin",
+"who": "kamejii",
+"text": "ほっほ、どうぞ どうぞ",
+"yomi": "ほっほ、どうぞどうぞ",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "rs_haisha",
+"who": "doshin",
+"text": "うん……いっしょなら がんばる",
+"yomi": "うん……一緒なら頑張る",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "mq_dou",
+"who": "wanko",
+"text": "きょうは どうしましたか？",
+"yomi": "今日はどうしましたか？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "mq_itsu",
+"who": "wanko",
+"text": "それは、いつからですか？",
+"yomi": "それは、いつからですか？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "mq_hoka",
+"who": "wanko",
+"text": "ほかに、へんな ところは ありますか？",
+"yomi": "ほかに、変なところはありますか？",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "mq_res",
+"who": "wanko",
+"text": "よく おしえて くれましたね。これで よく わかりました",
+"yomi": "よく教えてくれましたね。これでよく分かりました",
+"acc": null,
+"job": "st20"
+},
+{
+"key": "rv_chu_rivalg",
+"who": "chu",
+"text": "ぼく、ちゅう。ゴールまで きょうそうだよ！",
+"yomi": "僕、ちゅう。ゴールまで競争だよ！",
+"acc": null,
+"job": "st20b"
+},
+{
+"key": "rv_mii_rivalg",
+"who": "mii",
+"text": "みいよ。ここでも まけないわ",
+"yomi": "みいよ。ここでも負けないわ",
+"acc": null,
+"job": "st20b"
+},
+{
+"key": "rv_doshin_rivalg",
+"who": "doshin",
+"text": "ぼく、どしん。ゴールまで きょうそうしよう",
+"yomi": "僕、どしん。ゴールまで競争しよう",
+"acc": null,
+"job": "st20b"
+},
+{
+"key": "sq_ysdekita",
+"who": "mama",
+"text": "ごはん できたわよー",
+"yomi": "ご飯できたわよー",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysdekita",
+"who": "mama",
+"text": "えらいわね。まってるわよ",
+"yomi": "偉いわね。待ってるわよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysdekita_pyonmama",
+"who": "pyonmama",
+"text": "ごはん できたわよー",
+"yomi": "ご飯できたわよー",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysdekita_pyonmama",
+"who": "pyonmama",
+"text": "えらいわね。まってるわよ",
+"yomi": "偉いわね。待ってるわよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysdekita_gaomama",
+"who": "gaomama",
+"text": "ごはん できたわよー",
+"yomi": "ご飯できたわよー",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysdekita_gaomama",
+"who": "gaomama",
+"text": "えらいわね。まってるわよ",
+"yomi": "偉いわね。待ってるわよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysdekita_miimama",
+"who": "miimama",
+"text": "ごはん できたわよー",
+"yomi": "ご飯できたわよー",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysdekita_miimama",
+"who": "miimama",
+"text": "えらいわね。まってるわよ",
+"yomi": "偉いわね。待ってるわよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysdekita_chumama",
+"who": "chumama",
+"text": "ごはん できたわよー",
+"yomi": "ご飯できたわよー",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysdekita_chumama",
+"who": "chumama",
+"text": "えらいわね。まってるわよ",
+"yomi": "偉いわね。待ってるわよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysdekita_0",
+"who": "gao",
+"text": "はーい",
+"yomi": "はーい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysdekita_1",
+"who": "gao",
+"text": "はーい、いま いく",
+"yomi": "はーい、今行く",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysdekita_2",
+"who": "gao",
+"text": "はーい。てを あらって いくね",
+"yomi": "はーい。手を洗って行くね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ysdekita_2",
+"who": "gao",
+"text": "はーい。てが あらって いくね",
+"yomi": "はーい。手が洗って行くね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysdekita_3",
+"who": "gao",
+"text": "はーい。いま いくね",
+"yomi": "はーい。今行くね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysdekita_4",
+"who": "gao",
+"text": "はーい。てを あらってから いくね",
+"yomi": "はーい。手を洗ってから行くね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysdekita_5",
+"who": "gao",
+"text": "はーい。おもちゃを かたづけて、てを あらってから いくね",
+"yomi": "はーい。おもちゃを片付けて、手を洗ってから行くね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysitadaki",
+"who": "papa",
+"text": "さあ、みんな そろったね",
+"yomi": "さあ、みんな揃ったね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysitadaki",
+"who": "papa",
+"text": "はい、めしあがれ",
+"yomi": "はい、召し上がれ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysitadaki_gaopapa",
+"who": "gaopapa",
+"text": "さあ、みんな そろったね",
+"yomi": "さあ、みんな揃ったね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysitadaki_gaopapa",
+"who": "gaopapa",
+"text": "はい、めしあがれ",
+"yomi": "はい、召し上がれ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysitadaki_doshinpapa",
+"who": "doshinpapa",
+"text": "さあ、みんな そろったね",
+"yomi": "さあ、みんな揃ったね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysitadaki_doshinpapa",
+"who": "doshinpapa",
+"text": "はい、めしあがれ",
+"yomi": "はい、召し上がれ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysitadaki_0",
+"who": "gao",
+"text": "いただきます",
+"yomi": "いただきます",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysitadaki_1",
+"who": "gao",
+"text": "いただきまーす",
+"yomi": "いただきまーす",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysitadaki_2",
+"who": "gao",
+"text": "おいしそう。いただきます",
+"yomi": "美味しそう。いただきます",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ysitadaki_2",
+"who": "gao",
+"text": "おいしそうを。いただきます",
+"yomi": "美味しそうを。いただきます",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysitadaki_3",
+"who": "gao",
+"text": "わあ、おいしそう！ いただきます",
+"yomi": "わあ、美味しそう！いただきます",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysitadaki_4",
+"who": "gao",
+"text": "ママ、つくって くれて ありがとう。いただきます",
+"yomi": "ママ、作ってくれてありがとう。いただきます",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysitadaki_5",
+"who": "gao",
+"text": "きょうは ハンバーグだ！ おいしそう。いただきます",
+"yomi": "今日はハンバーグだ！美味しそう。いただきます",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysshouyu",
+"who": "papa",
+"text": "ん？ なにか ほしいの？",
+"yomi": "ん？何か欲しいの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysshouyu",
+"who": "papa",
+"text": "はい、どうぞ。かけすぎないでね",
+"yomi": "はい、どうぞ。かけすぎないでね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysshouyu_gaopapa",
+"who": "gaopapa",
+"text": "ん？ なにか ほしいの？",
+"yomi": "ん？何か欲しいの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysshouyu_gaopapa",
+"who": "gaopapa",
+"text": "はい、どうぞ。かけすぎないでね",
+"yomi": "はい、どうぞ。かけすぎないでね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysshouyu_doshinpapa",
+"who": "doshinpapa",
+"text": "ん？ なにか ほしいの？",
+"yomi": "ん？何か欲しいの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysshouyu_doshinpapa",
+"who": "doshinpapa",
+"text": "はい、どうぞ。かけすぎないでね",
+"yomi": "はい、どうぞ。かけすぎないでね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysshouyu_0",
+"who": "gao",
+"text": "おしょうゆ",
+"yomi": "お醤油",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysshouyu_1",
+"who": "gao",
+"text": "おしょうゆ とって",
+"yomi": "お醤油取って",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysshouyu_2",
+"who": "gao",
+"text": "パパ、おしょうゆ とって",
+"yomi": "パパ、お醤油取って",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ysshouyu_2",
+"who": "gao",
+"text": "パパ、おしょうゆが とって",
+"yomi": "パパ、お醤油が取って",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysshouyu_3",
+"who": "gao",
+"text": "パパ、おしょうゆ とって くれる？",
+"yomi": "パパ、お醤油取ってくれる？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysshouyu_4",
+"who": "gao",
+"text": "パパ、おしょうゆを とって ください",
+"yomi": "パパ、お醤油を取ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysshouyu_5",
+"who": "gao",
+"text": "パパ、とどかないから、おしょうゆを とって くれる？",
+"yomi": "パパ、届かないから、お醤油を取ってくれる？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_yspiman",
+"who": "mama",
+"text": "あら、ピーマンだけ のこってるわよ",
+"yomi": "あら、ピーマンだけ残ってるわよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_yspiman",
+"who": "mama",
+"text": "えらい！ ひとくち たべられたら じゅうぶんよ",
+"yomi": "偉い！一口食べられたら十分よ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_yspiman_pyonmama",
+"who": "pyonmama",
+"text": "あら、ピーマンだけ のこってるわよ",
+"yomi": "あら、ピーマンだけ残ってるわよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_yspiman_pyonmama",
+"who": "pyonmama",
+"text": "えらい！ ひとくち たべられたら じゅうぶんよ",
+"yomi": "偉い！一口食べられたら十分よ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_yspiman_gaomama",
+"who": "gaomama",
+"text": "あら、ピーマンだけ のこってるわよ",
+"yomi": "あら、ピーマンだけ残ってるわよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_yspiman_gaomama",
+"who": "gaomama",
+"text": "えらい！ ひとくち たべられたら じゅうぶんよ",
+"yomi": "偉い！一口食べられたら十分よ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_yspiman_miimama",
+"who": "miimama",
+"text": "あら、ピーマンだけ のこってるわよ",
+"yomi": "あら、ピーマンだけ残ってるわよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_yspiman_miimama",
+"who": "miimama",
+"text": "えらい！ ひとくち たべられたら じゅうぶんよ",
+"yomi": "偉い！一口食べられたら十分よ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_yspiman_chumama",
+"who": "chumama",
+"text": "あら、ピーマンだけ のこってるわよ",
+"yomi": "あら、ピーマンだけ残ってるわよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_yspiman_chumama",
+"who": "chumama",
+"text": "えらい！ ひとくち たべられたら じゅうぶんよ",
+"yomi": "偉い！一口食べられたら十分よ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yspiman_0",
+"who": "gao",
+"text": "にがて",
+"yomi": "苦手",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yspiman_1",
+"who": "gao",
+"text": "ピーマン にがて",
+"yomi": "ピーマン苦手",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yspiman_2",
+"who": "gao",
+"text": "ピーマンは にがてなんだ",
+"yomi": "ピーマンは苦手なんだ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_yspiman_2",
+"who": "gao",
+"text": "ピーマンが にがてなんだ",
+"yomi": "ピーマンが苦手なんだ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yspiman_3",
+"who": "gao",
+"text": "ピーマンは にがてだけど、ひとくち たべて みる",
+"yomi": "ピーマンは苦手だけど、一口食べてみる",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yspiman_4",
+"who": "gao",
+"text": "にがてだけど、ひとくちだけ がんばって たべて みるね",
+"yomi": "苦手だけど、一口だけ頑張って食べてみるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yspiman_5",
+"who": "gao",
+"text": "ピーマンは にがいから にがてだけど、ひとくちだけ たべて みるね",
+"yomi": "ピーマンは苦いから苦手だけど、一口だけ食べてみるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysokawari",
+"who": "mama",
+"text": "まだ ごはん あるわよ",
+"yomi": "まだご飯あるわよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysokawari",
+"who": "mama",
+"text": "はい、どうぞ。いっぱい たべてね",
+"yomi": "はい、どうぞ。いっぱい食べてね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysokawari_pyonmama",
+"who": "pyonmama",
+"text": "まだ ごはん あるわよ",
+"yomi": "まだご飯あるわよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysokawari_pyonmama",
+"who": "pyonmama",
+"text": "はい、どうぞ。いっぱい たべてね",
+"yomi": "はい、どうぞ。いっぱい食べてね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysokawari_gaomama",
+"who": "gaomama",
+"text": "まだ ごはん あるわよ",
+"yomi": "まだご飯あるわよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysokawari_gaomama",
+"who": "gaomama",
+"text": "はい、どうぞ。いっぱい たべてね",
+"yomi": "はい、どうぞ。いっぱい食べてね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysokawari_miimama",
+"who": "miimama",
+"text": "まだ ごはん あるわよ",
+"yomi": "まだご飯あるわよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysokawari_miimama",
+"who": "miimama",
+"text": "はい、どうぞ。いっぱい たべてね",
+"yomi": "はい、どうぞ。いっぱい食べてね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysokawari_chumama",
+"who": "chumama",
+"text": "まだ ごはん あるわよ",
+"yomi": "まだご飯あるわよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysokawari_chumama",
+"who": "chumama",
+"text": "はい、どうぞ。いっぱい たべてね",
+"yomi": "はい、どうぞ。いっぱい食べてね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysokawari_0",
+"who": "gao",
+"text": "おかわり",
+"yomi": "お代わり",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysokawari_1",
+"who": "gao",
+"text": "おかわり ください",
+"yomi": "お代わりください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysokawari_2",
+"who": "gao",
+"text": "ママ、おかわり ください",
+"yomi": "ママ、お代わりください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ysokawari_2",
+"who": "gao",
+"text": "ママ、おかわりを ください",
+"yomi": "ママ、お代わりをください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysokawari_3",
+"who": "gao",
+"text": "おいしいから、おかわり ください",
+"yomi": "美味しいから、お代わりください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysokawari_4",
+"who": "gao",
+"text": "おいしいから、はんぶんだけ おかわり ください",
+"yomi": "美味しいから、半分だけお代わりください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysokawari_5",
+"who": "gao",
+"text": "とっても おいしいから、ごはんを はんぶんだけ おかわり ください",
+"yomi": "とっても美味しいから、ご飯を半分だけお代わりください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_yskoboshi",
+"who": "mama",
+"text": "あらっ、いまの おとは？",
+"yomi": "あらっ、今の音は？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_yskoboshi",
+"who": "mama",
+"text": "だいじょうぶよ。やけどは しなかった？ いっしょに ふこうね",
+"yomi": "大丈夫よ。やけどはしなかった？一緒に拭こうね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_yskoboshi_pyonmama",
+"who": "pyonmama",
+"text": "あらっ、いまの おとは？",
+"yomi": "あらっ、今の音は？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_yskoboshi_pyonmama",
+"who": "pyonmama",
+"text": "だいじょうぶよ。やけどは しなかった？ いっしょに ふこうね",
+"yomi": "大丈夫よ。やけどはしなかった？一緒に拭こうね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_yskoboshi_gaomama",
+"who": "gaomama",
+"text": "あらっ、いまの おとは？",
+"yomi": "あらっ、今の音は？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_yskoboshi_gaomama",
+"who": "gaomama",
+"text": "だいじょうぶよ。やけどは しなかった？ いっしょに ふこうね",
+"yomi": "大丈夫よ。やけどはしなかった？一緒に拭こうね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_yskoboshi_miimama",
+"who": "miimama",
+"text": "あらっ、いまの おとは？",
+"yomi": "あらっ、今の音は？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_yskoboshi_miimama",
+"who": "miimama",
+"text": "だいじょうぶよ。やけどは しなかった？ いっしょに ふこうね",
+"yomi": "大丈夫よ。やけどはしなかった？一緒に拭こうね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_yskoboshi_chumama",
+"who": "chumama",
+"text": "あらっ、いまの おとは？",
+"yomi": "あらっ、今の音は？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_yskoboshi_chumama",
+"who": "chumama",
+"text": "だいじょうぶよ。やけどは しなかった？ いっしょに ふこうね",
+"yomi": "大丈夫よ。やけどはしなかった？一緒に拭こうね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yskoboshi_0",
+"who": "gao",
+"text": "ごめんなさい",
+"yomi": "ごめんなさい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yskoboshi_1",
+"who": "gao",
+"text": "こぼしちゃった。ごめんなさい",
+"yomi": "こぼしちゃった。ごめんなさい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yskoboshi_2",
+"who": "gao",
+"text": "おみそしるを こぼしちゃった",
+"yomi": "お味噌汁をこぼしちゃった",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_yskoboshi_2",
+"who": "gao",
+"text": "おみそしるが こぼしちゃった",
+"yomi": "お味噌汁がこぼしちゃった",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yskoboshi_3",
+"who": "gao",
+"text": "ごめんなさい。おみそしるを こぼしちゃった",
+"yomi": "ごめんなさい。お味噌汁をこぼしちゃった",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yskoboshi_4",
+"who": "gao",
+"text": "おみそしるを こぼしちゃった。ふきんを とって くるね",
+"yomi": "お味噌汁をこぼしちゃった。布巾を取って来るね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yskoboshi_5",
+"who": "gao",
+"text": "ごめんなさい、おみそしるを こぼしちゃった。ふきんで ふくのを てつだって",
+"yomi": "ごめんなさい、お味噌汁をこぼしちゃった。布巾で拭くのを手伝って",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysterebi",
+"who": "papa",
+"text": "テレビばっかり みてると、ごはんが さめちゃうぞ",
+"yomi": "テレビばっかり見てると、ご飯が冷めちゃうぞ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysterebi",
+"who": "papa",
+"text": "よし。みんなで おはなし しながら たべよう",
+"yomi": "よし。みんなでお話ししながら食べよう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysterebi_gaopapa",
+"who": "gaopapa",
+"text": "テレビばっかり みてると、ごはんが さめちゃうぞ",
+"yomi": "テレビばっかり見てると、ご飯が冷めちゃうぞ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysterebi_gaopapa",
+"who": "gaopapa",
+"text": "よし。みんなで おはなし しながら たべよう",
+"yomi": "よし。みんなでお話ししながら食べよう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysterebi_doshinpapa",
+"who": "doshinpapa",
+"text": "テレビばっかり みてると、ごはんが さめちゃうぞ",
+"yomi": "テレビばっかり見てると、ご飯が冷めちゃうぞ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysterebi_doshinpapa",
+"who": "doshinpapa",
+"text": "よし。みんなで おはなし しながら たべよう",
+"yomi": "よし。みんなでお話ししながら食べよう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysterebi_0",
+"who": "gao",
+"text": "ごめんなさい",
+"yomi": "ごめんなさい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysterebi_1",
+"who": "gao",
+"text": "ごめんなさい。テレビ けすね",
+"yomi": "ごめんなさい。テレビ消すね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysterebi_2",
+"who": "gao",
+"text": "ごめんなさい。テレビを けすね",
+"yomi": "ごめんなさい。テレビを消すね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ysterebi_2",
+"who": "gao",
+"text": "ごめんなさい。テレビが けすね",
+"yomi": "ごめんなさい。テレビが消すね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysterebi_3",
+"who": "gao",
+"text": "ごめんなさい。テレビを けして たべるね",
+"yomi": "ごめんなさい。テレビを消して食べるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysterebi_4",
+"who": "gao",
+"text": "ごめんなさい。ごはんの あいだは テレビを けすね",
+"yomi": "ごめんなさい。ご飯の間はテレビを消すね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysterebi_5",
+"who": "gao",
+"text": "ごめんなさい。ごはんを たべおわってから、つづきを みるね",
+"yomi": "ごめんなさい。ご飯を食べ終わってから、続きを見るね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ystoranaide",
+"who": "onii",
+"text": "その からあげ、もーらいっ！",
+"yomi": "その唐揚げ、もーらいっ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ystoranaide",
+"who": "onii",
+"text": "わるい わるい。ひとつ ちょうだい？",
+"yomi": "悪い悪い。一つちょうだい？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ystoranaide_gaonii",
+"who": "gaonii",
+"text": "その からあげ、もーらいっ！",
+"yomi": "その唐揚げ、もーらいっ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ystoranaide_gaonii",
+"who": "gaonii",
+"text": "わるい わるい。ひとつ ちょうだい？",
+"yomi": "悪い悪い。一つちょうだい？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ystoranaide_0",
+"who": "gao",
+"text": "だめ",
+"yomi": "だめ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ystoranaide_1",
+"who": "gao",
+"text": "それ、ぼくのだよ",
+"yomi": "それ、僕のだよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ystoranaide_2",
+"who": "gao",
+"text": "おにいちゃん、それ ぼくのだよ",
+"yomi": "お兄ちゃん、それ僕のだよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ystoranaide_2",
+"who": "gao",
+"text": "おにいちゃん、それ ぼくがだよ",
+"yomi": "お兄ちゃん、それ僕がだよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ystoranaide_3",
+"who": "gao",
+"text": "それ ぼくのだよ。たべたいなら ちょうだいって いってね",
+"yomi": "それ僕のだよ。食べたいなら、ちょうだいって言ってね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ystoranaide_4",
+"who": "gao",
+"text": "だまって とらないで。ちょうだいって いって くれたら、ひとつ あげるよ",
+"yomi": "黙って取らないで。ちょうだいって言ってくれたら、一つあげるよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ystoranaide_5",
+"who": "gao",
+"text": "おにいちゃん、それは ぼくの からあげだよ。ほしい ときは、ちょうだいって いってね",
+"yomi": "お兄ちゃん、それは僕の唐揚げだよ。欲しい時は、ちょうだいって言ってね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysippai",
+"who": "mama",
+"text": "あら、もう たべないの？",
+"yomi": "あら、もう食べないの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysippai",
+"who": "mama",
+"text": "いいわよ。ラップして おくわね",
+"yomi": "いいわよ。ラップしておくわね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysippai_pyonmama",
+"who": "pyonmama",
+"text": "あら、もう たべないの？",
+"yomi": "あら、もう食べないの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysippai_pyonmama",
+"who": "pyonmama",
+"text": "いいわよ。ラップして おくわね",
+"yomi": "いいわよ。ラップしておくわね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysippai_gaomama",
+"who": "gaomama",
+"text": "あら、もう たべないの？",
+"yomi": "あら、もう食べないの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysippai_gaomama",
+"who": "gaomama",
+"text": "いいわよ。ラップして おくわね",
+"yomi": "いいわよ。ラップしておくわね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysippai_miimama",
+"who": "miimama",
+"text": "あら、もう たべないの？",
+"yomi": "あら、もう食べないの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysippai_miimama",
+"who": "miimama",
+"text": "いいわよ。ラップして おくわね",
+"yomi": "いいわよ。ラップしておくわね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysippai_chumama",
+"who": "chumama",
+"text": "あら、もう たべないの？",
+"yomi": "あら、もう食べないの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysippai_chumama",
+"who": "chumama",
+"text": "いいわよ。ラップして おくわね",
+"yomi": "いいわよ。ラップしておくわね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysippai_0",
+"who": "gao",
+"text": "おなか いっぱい",
+"yomi": "お腹いっぱい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysippai_1",
+"who": "gao",
+"text": "もう おなか いっぱい",
+"yomi": "もうお腹いっぱい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysippai_2",
+"who": "gao",
+"text": "おなか いっぱいで たべられない",
+"yomi": "お腹いっぱいで食べられない",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ysippai_2",
+"who": "gao",
+"text": "おなか いっぱいを たべられない",
+"yomi": "お腹いっぱいを食べられない",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysippai_3",
+"who": "gao",
+"text": "おなか いっぱいだから、のこして いい？",
+"yomi": "お腹いっぱいだから、残していい？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysippai_4",
+"who": "gao",
+"text": "おなか いっぱいだから、のこりは あした たべても いい？",
+"yomi": "お腹いっぱいだから、残りはあした食べてもいい？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysippai_5",
+"who": "gao",
+"text": "おいしかったけど、おなか いっぱいなんだ。のこりは あしたの あさ たべても いい？",
+"yomi": "美味しかったけど、お腹いっぱいなんだ。残りはあしたの朝食べてもいい？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysgochi",
+"who": "papa",
+"text": "ぜんぶ たべたね",
+"yomi": "全部食べたね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysgochi",
+"who": "papa",
+"text": "よく たべたね。えらいぞ",
+"yomi": "よく食べたね。偉いぞ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysgochi_gaopapa",
+"who": "gaopapa",
+"text": "ぜんぶ たべたね",
+"yomi": "全部食べたね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysgochi_gaopapa",
+"who": "gaopapa",
+"text": "よく たべたね。えらいぞ",
+"yomi": "よく食べたね。偉いぞ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ysgochi_doshinpapa",
+"who": "doshinpapa",
+"text": "ぜんぶ たべたね",
+"yomi": "全部食べたね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ysgochi_doshinpapa",
+"who": "doshinpapa",
+"text": "よく たべたね。えらいぞ",
+"yomi": "よく食べたね。偉いぞ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysgochi_0",
+"who": "gao",
+"text": "ごちそうさま",
+"yomi": "ごちそうさま",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysgochi_1",
+"who": "gao",
+"text": "ごちそうさまでした",
+"yomi": "ごちそうさまでした",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysgochi_2",
+"who": "gao",
+"text": "ごちそうさまでした。おいしかった",
+"yomi": "ごちそうさまでした。美味しかった",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ysgochi_2",
+"who": "gao",
+"text": "ごちそうさまでした。おいしかったを",
+"yomi": "ごちそうさまでした。美味しかったを",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysgochi_3",
+"who": "gao",
+"text": "ごちそうさまでした。おいしかったよ",
+"yomi": "ごちそうさまでした。美味しかったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysgochi_4",
+"who": "gao",
+"text": "ごちそうさまでした。ハンバーグ、とっても おいしかったよ",
+"yomi": "ごちそうさまでした。ハンバーグ、とっても美味しかったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ysgochi_5",
+"who": "gao",
+"text": "ごちそうさまでした。ママ、また ハンバーグ つくってね",
+"yomi": "ごちそうさまでした。ママ、また、ハンバーグ、つくってね",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sq_yskatazuke",
+"who": "mama",
+"text": "たべおわった おさら、どうする？",
+"yomi": "食べ終わったお皿、どうする？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_yskatazuke",
+"who": "mama",
+"text": "ありがとう。たすかるわ",
+"yomi": "ありがとう。助かるわ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_yskatazuke_pyonmama",
+"who": "pyonmama",
+"text": "たべおわった おさら、どうする？",
+"yomi": "食べ終わったお皿、どうする？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_yskatazuke_pyonmama",
+"who": "pyonmama",
+"text": "ありがとう。たすかるわ",
+"yomi": "ありがとう。助かるわ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_yskatazuke_gaomama",
+"who": "gaomama",
+"text": "たべおわった おさら、どうする？",
+"yomi": "食べ終わったお皿、どうする？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_yskatazuke_gaomama",
+"who": "gaomama",
+"text": "ありがとう。たすかるわ",
+"yomi": "ありがとう。助かるわ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_yskatazuke_miimama",
+"who": "miimama",
+"text": "たべおわった おさら、どうする？",
+"yomi": "食べ終わったお皿、どうする？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_yskatazuke_miimama",
+"who": "miimama",
+"text": "ありがとう。たすかるわ",
+"yomi": "ありがとう。助かるわ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_yskatazuke_chumama",
+"who": "chumama",
+"text": "たべおわった おさら、どうする？",
+"yomi": "食べ終わったお皿、どうする？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_yskatazuke_chumama",
+"who": "chumama",
+"text": "ありがとう。たすかるわ",
+"yomi": "ありがとう。助かるわ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yskatazuke_0",
+"who": "gao",
+"text": "はこぶ",
+"yomi": "運ぶ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yskatazuke_1",
+"who": "gao",
+"text": "おさら はこぶね",
+"yomi": "お皿運ぶね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yskatazuke_2",
+"who": "gao",
+"text": "おさらを ながしに はこぶね",
+"yomi": "お皿を流しに運ぶね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_yskatazuke_2",
+"who": "gao",
+"text": "おさらが ながしに はこぶね",
+"yomi": "お皿が流しに運ぶね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yskatazuke_3",
+"who": "gao",
+"text": "じぶんの おさらは、ながしに もって いくね",
+"yomi": "自分のお皿は、流しに持って行くね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yskatazuke_4",
+"who": "gao",
+"text": "じぶんの おさらを ながしに もって いくね。おちゃわんも はこぶよ",
+"yomi": "自分のお皿を流しに持って行くね。お茶碗も運ぶよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_yskatazuke_5",
+"who": "gao",
+"text": "おさらを ながしに もって いくね。おとさない ように、ゆっくり はこぶよ",
+"yomi": "お皿を流しに持って行くね。落とさないように、ゆっくり運ぶよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ystetsudai",
+"who": "mama",
+"text": "ふう、ごはんの よういが まだ あるのよね",
+"yomi": "ふう、ご飯の用意がまだあるのよね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ystetsudai",
+"who": "mama",
+"text": "ありがとう！ たすかるわ",
+"yomi": "ありがとう！助かるわ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ystetsudai_pyonmama",
+"who": "pyonmama",
+"text": "ふう、ごはんの よういが まだ あるのよね",
+"yomi": "ふう、ご飯の用意がまだあるのよね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ystetsudai_pyonmama",
+"who": "pyonmama",
+"text": "ありがとう！ たすかるわ",
+"yomi": "ありがとう！助かるわ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ystetsudai_gaomama",
+"who": "gaomama",
+"text": "ふう、ごはんの よういが まだ あるのよね",
+"yomi": "ふう、ご飯の用意がまだあるのよね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ystetsudai_gaomama",
+"who": "gaomama",
+"text": "ありがとう！ たすかるわ",
+"yomi": "ありがとう！助かるわ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ystetsudai_miimama",
+"who": "miimama",
+"text": "ふう、ごはんの よういが まだ あるのよね",
+"yomi": "ふう、ご飯の用意がまだあるのよね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ystetsudai_miimama",
+"who": "miimama",
+"text": "ありがとう！ たすかるわ",
+"yomi": "ありがとう！助かるわ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ystetsudai_chumama",
+"who": "chumama",
+"text": "ふう、ごはんの よういが まだ あるのよね",
+"yomi": "ふう、ご飯の用意がまだあるのよね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ystetsudai_chumama",
+"who": "chumama",
+"text": "ありがとう！ たすかるわ",
+"yomi": "ありがとう！助かるわ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ystetsudai_0",
+"who": "gao",
+"text": "てつだう",
+"yomi": "手伝う",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ystetsudai_1",
+"who": "gao",
+"text": "なにか てつだう？",
+"yomi": "何か手伝う？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ystetsudai_2",
+"who": "gao",
+"text": "ママ、おはし ならべるね",
+"yomi": "ママ、お箸並べるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ystetsudai_2",
+"who": "gao",
+"text": "ママ、おはしが ならべるね",
+"yomi": "ママ、お箸が並べるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ystetsudai_3",
+"who": "gao",
+"text": "ママ、おはしを ならべて おくね",
+"yomi": "ママ、お箸を並べておくね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ystetsudai_4",
+"who": "gao",
+"text": "なにか てつだう ことある？ おはしを ならべようか",
+"yomi": "何か手伝うことある？お箸を並べようか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ystetsudai_5",
+"who": "gao",
+"text": "ママ、てつだうよ。みんなの おはしと コップを ならべて おくね",
+"yomi": "ママ、手伝うよ。みんなのお箸とコップを並べておくね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_kgyomu",
+"who": "nobbo",
+"text": "では、つぎを よんで ください",
+"yomi": "では、つぎを読んでください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_kgyomu",
+"who": "nobbo",
+"text": "ここからですよ。ゆびで おさえて よみましょう",
+"yomi": "ここからですよ。指で押さえて読みましょう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgyomu_0",
+"who": "kon",
+"text": "はい",
+"yomi": "はい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgyomu_1",
+"who": "kon",
+"text": "どこですか",
+"yomi": "どこですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgyomu_2",
+"who": "kon",
+"text": "どこから よめば いいですか",
+"yomi": "どこから読めばいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_kgyomu_2",
+"who": "kon",
+"text": "どこを よめば いいですか",
+"yomi": "どこを読めばいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgyomu_3",
+"who": "kon",
+"text": "せんせい、どこから よめば いいですか",
+"yomi": "先生、どこから読めばいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgyomu_4",
+"who": "kon",
+"text": "ごめんなさい。どこから よめば いいか、おしえて ください",
+"yomi": "ごめんなさい。どこから読めばいいか、教えてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgyomu_5",
+"who": "kon",
+"text": "せんせい、どこを よんで いるか わからなく なりました。おしえて ください",
+"yomi": "先生、どこを読んでいるか分からなくなりました。教えてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_kgkanji",
+"who": "nobbo",
+"text": "あれ、とまって しまいましたね",
+"yomi": "あれ、止まってしまいましたね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_kgkanji",
+"who": "nobbo",
+"text": "これは「やま」と よみますよ。きいて くれて ありがとう",
+"yomi": "これは山と読みますよ。聞いてくれてありがとう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgkanji_0",
+"who": "kon",
+"text": "よめません",
+"yomi": "読めません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgkanji_1",
+"who": "kon",
+"text": "この じが よめません",
+"yomi": "この字が読めません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgkanji_2",
+"who": "kon",
+"text": "せんせい、この じが よめません",
+"yomi": "先生、この字が読めません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_kgkanji_2",
+"who": "kon",
+"text": "せんせい、この じを よめません",
+"yomi": "先生、この字を読めません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgkanji_3",
+"who": "kon",
+"text": "この じは なんて よみますか",
+"yomi": "この字は何て読みますか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgkanji_4",
+"who": "kon",
+"text": "せんせい、この じは なんて よむんですか",
+"yomi": "先生、この字は何て読むんですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgkanji_5",
+"who": "kon",
+"text": "せんせい、この じの よみかたを おしえて ください",
+"yomi": "先生、この字の読み方を教えてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_kghayai",
+"who": "nobbo",
+"text": "では、ノートを ひらいて、きょうの めあてを かいて、それから……",
+"yomi": "では、ノートを開いて、今日のめあてを書いて、それから……",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_kghayai",
+"who": "nobbo",
+"text": "ごめんね。ゆっくり いいますね",
+"yomi": "ごめんね。ゆっくり言いますね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kghayai_0",
+"who": "kon",
+"text": "まって ください",
+"yomi": "待ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kghayai_1",
+"who": "kon",
+"text": "もう いちど いって ください",
+"yomi": "もう一度言ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kghayai_2",
+"who": "kon",
+"text": "せんせい、もう いちど いって ください",
+"yomi": "先生、もう一度言ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_kghayai_2",
+"who": "kon",
+"text": "せんせいが、もう いちど いって ください",
+"yomi": "先生が、もう一度言ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kghayai_3",
+"who": "kon",
+"text": "もう いちど、ゆっくり いって ください",
+"yomi": "もう一度、ゆっくり言ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kghayai_4",
+"who": "kon",
+"text": "せんせい、はやくて わかりませんでした。もう いちど いって ください",
+"yomi": "先生、早くて分かりませんでした。もう一度言ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kghayai_5",
+"who": "kon",
+"text": "せんせい、ききとれませんでした。ゆっくり、もう いちど いって ください",
+"yomi": "先生、聞き取れませんでした。ゆっくり、もう一度言ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_kgiken",
+"who": "nobbo",
+"text": "この おはなしの くまさんは、どんな きもちだと おもいますか？",
+"yomi": "このお話のくまさんは、どんな気持ちだと思いますか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_kgiken",
+"who": "nobbo",
+"text": "ありがとう。かんがえて くれましたね",
+"yomi": "ありがとう。考えてくれましたね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgiken_0",
+"who": "kon",
+"text": "わかりません",
+"yomi": "分かりません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgiken_1",
+"who": "kon",
+"text": "かなしいと おもいます",
+"yomi": "悲しいと思います",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgiken_2",
+"who": "kon",
+"text": "ちょっと かんがえさせて ください",
+"yomi": "ちょっと考えさせてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_kgiken_2",
+"who": "kon",
+"text": "ちょっと かんがえさせてを ください",
+"yomi": "ちょっと考えさせてをください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgiken_3",
+"who": "kon",
+"text": "わかりません。かんがえる じかんを ください",
+"yomi": "分かりません。考える時間をください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgiken_4",
+"who": "kon",
+"text": "ひとりぼっちで、さみしいと おもいます",
+"yomi": "一人ぼっちで、さみしいと思います",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgiken_5",
+"who": "kon",
+"text": "ともだちが いなくて、さみしい きもちだと おもいます",
+"yomi": "友達がいなくて、さみしい気持ちだと思います",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_kgwaraware",
+"who": "kon",
+"text": "あはは！ いま よみまちがえた〜",
+"yomi": "あはは！今読み間違えた〜",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_kgwaraware",
+"who": "kon",
+"text": "あ……ごめん。もう わらわないよ",
+"yomi": "あ……ごめん。もう笑わないよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_kgnote",
+"who": "nobbo",
+"text": "では、こくばんを けしますよ",
+"yomi": "では、黒板を消しますよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_kgnote",
+"who": "nobbo",
+"text": "わかりました。かきおわったら おしえてね",
+"yomi": "分かりました。書き終わったら教えてね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgnote_0",
+"who": "kon",
+"text": "まって ください",
+"yomi": "待ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgnote_1",
+"who": "kon",
+"text": "まだ かいて います",
+"yomi": "まだ書いています",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgnote_2",
+"who": "kon",
+"text": "まだ かいて います。まって ください",
+"yomi": "まだ書いています。待ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_kgnote_2",
+"who": "kon",
+"text": "まだ かいて います。まってを ください",
+"yomi": "まだ書いています。待ってをください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgnote_3",
+"who": "kon",
+"text": "せんせい、まだ ノートに かいて います",
+"yomi": "先生、まだノートに書いています",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgnote_4",
+"who": "kon",
+"text": "せんせい、まだ かきおわって いません。もう すこし まって ください",
+"yomi": "先生、まだ書き終わっていません。もう少し待ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgnote_5",
+"who": "kon",
+"text": "せんせい、ノートに うつすのが おそいので、けすのを まって ください",
+"yomi": "先生、ノートに写すのが遅いので、消すのを待ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_kgenpitsu",
+"who": "pyon",
+"text": "どうしたの？ こまった かお してるよ",
+"yomi": "どうしたの？困った顔してるよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_kgenpitsu",
+"who": "pyon",
+"text": "いいよ。はい、どうぞ",
+"yomi": "いいよ。はい、どうぞ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgenpitsu_0",
+"who": "kon",
+"text": "えんぴつ おれた",
+"yomi": "鉛筆折れた",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgenpitsu_1",
+"who": "kon",
+"text": "えんぴつが おれちゃった",
+"yomi": "鉛筆が折れちゃった",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgenpitsu_2",
+"who": "kon",
+"text": "えんぴつ、かして くれる？",
+"yomi": "鉛筆、貸してくれる？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_kgenpitsu_2",
+"who": "kon",
+"text": "えんぴつを、かして くれるを？",
+"yomi": "鉛筆を、貸してくれるを？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgenpitsu_3",
+"who": "kon",
+"text": "えんぴつが おれちゃった。かして くれる？",
+"yomi": "鉛筆が折れちゃった。貸してくれる？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgenpitsu_4",
+"who": "kon",
+"text": "えんぴつが ぜんぶ おれちゃったんだ。1ぽん かして くれる？",
+"yomi": "鉛筆が全部折れちゃったんだ。一本貸してくれる？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgenpitsu_5",
+"who": "kon",
+"text": "ぴょんちゃん、えんぴつが おれちゃったから、1ぽん かして くれる？ あとで かえすね",
+"yomi": "ぴょんちゃん、鉛筆が折れちゃったから、一本貸してくれる？後で返すね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_kghappyou",
+"who": "nobbo",
+"text": "では、すきな ことばを はっぴょう して ください",
+"yomi": "では、好きな言葉を発表してください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_kghappyou",
+"who": "nobbo",
+"text": "すてきな ことばですね。おおきな こえで いえました",
+"yomi": "素敵な言葉ですね。大きな声で言えました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kghappyou_0",
+"who": "kon",
+"text": "はい",
+"yomi": "はい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kghappyou_1",
+"who": "kon",
+"text": "はい。ありがとう です",
+"yomi": "はい。ありがとう、です",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kghappyou_2",
+"who": "kon",
+"text": "ぼくの すきな ことばは、ありがとう です",
+"yomi": "僕の好きな言葉は、ありがとう、です",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_kghappyou_2",
+"who": "kon",
+"text": "ぼくの すきな ことばを、ありがとう です",
+"yomi": "僕の好きな言葉を、ありがとう、です",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kghappyou_3",
+"who": "kon",
+"text": "ぼくの すきな ことばは「ありがとう」です。いうと うれしく なるからです",
+"yomi": "僕の好きな言葉は、ありがとう、です。言うと嬉しくなるからです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kghappyou_4",
+"who": "kon",
+"text": "ぼくの すきな ことばは「ありがとう」です。いわれると、こころが あたたかく なるからです",
+"yomi": "僕の好きな言葉は、ありがとう、です。言われると、心が温かくなるからです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kghappyou_5",
+"who": "kon",
+"text": "ぼくの すきな ことばは「ありがとう」です。いっても いわれても、うれしく なるからです",
+"yomi": "僕の好きな言葉は、ありがとう、です。言っても言われても、嬉しくなるからです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_kgtsukareta",
+"who": "nobbo",
+"text": "あれ、つくえに ふせて、どうしましたか？",
+"yomi": "あれ、机に伏せて、どうしましたか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_kgtsukareta",
+"who": "nobbo",
+"text": "おしえて くれて ありがとう。すこし やすんだら、また やりましょう",
+"yomi": "教えてくれてありがとう。少し休んだら、またやりましょう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgtsukareta_0",
+"who": "kon",
+"text": "つかれました",
+"yomi": "疲れました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgtsukareta_1",
+"who": "kon",
+"text": "ちょっと つかれました",
+"yomi": "ちょっと疲れました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgtsukareta_2",
+"who": "kon",
+"text": "あたまが つかれて しまいました",
+"yomi": "頭が疲れてしまいました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_kgtsukareta_2",
+"who": "kon",
+"text": "あたまを つかれて しまいました",
+"yomi": "頭を疲れてしまいました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgtsukareta_3",
+"who": "kon",
+"text": "つかれたので、すこし やすんでも いいですか",
+"yomi": "疲れたので、少し休んでもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgtsukareta_4",
+"who": "kon",
+"text": "せんせい、ちょっと つかれました。すこしだけ やすんでも いいですか",
+"yomi": "先生、ちょっと疲れました。少しだけ休んでもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgtsukareta_5",
+"who": "kon",
+"text": "せんせい、あたまが いっぱいに なりました。いっぷんだけ やすんで、また がんばります",
+"yomi": "先生、頭がいっぱいになりました。一分だけ休んで、また頑張ります",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_kgkeshigomu",
+"who": "nobbo",
+"text": "あれ、つくえの したを のぞいて どうしましたか？",
+"yomi": "あれ、机の下を覗いてどうしましたか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_kgkeshigomu",
+"who": "nobbo",
+"text": "どうぞ。あ、ここに ありましたよ",
+"yomi": "どうぞ。あ、ここにありましたよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgkeshigomu_0",
+"who": "kon",
+"text": "けしごむ",
+"yomi": "消しゴム",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgkeshigomu_1",
+"who": "kon",
+"text": "けしごむが おちました",
+"yomi": "消しゴムが落ちました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgkeshigomu_2",
+"who": "kon",
+"text": "けしごむを おとしました",
+"yomi": "消しゴムを落としました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_kgkeshigomu_2",
+"who": "kon",
+"text": "けしごむが おとしました",
+"yomi": "消しゴムが落としました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgkeshigomu_3",
+"who": "kon",
+"text": "けしごむを おとしました。ひろっても いいですか",
+"yomi": "消しゴムを落としました。拾ってもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgkeshigomu_4",
+"who": "kon",
+"text": "せんせい、けしごむが ころがって いきました。ひろいに いっても いいですか",
+"yomi": "先生、消しゴムが転がって行きました。拾いに行ってもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgkeshigomu_5",
+"who": "kon",
+"text": "せんせい、けしごむを おとして、どこに いったか わかりません。いっしょに さがして ください",
+"yomi": "先生、消しゴムを落として、どこに行ったか分かりません。一緒に探してください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_kgwakaranai",
+"who": "nobbo",
+"text": "プリントは できましたか？",
+"yomi": "プリントはできましたか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_kgwakaranai",
+"who": "nobbo",
+"text": "いっしょに やって みましょう。いえて えらいですよ",
+"yomi": "一緒にやってみましょう。言えて偉いですよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgwakaranai_0",
+"who": "kon",
+"text": "わかりません",
+"yomi": "分かりません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgwakaranai_1",
+"who": "kon",
+"text": "ここが わかりません",
+"yomi": "ここが分かりません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgwakaranai_2",
+"who": "kon",
+"text": "せんせい、ここが わかりません",
+"yomi": "先生、ここが分かりません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_kgwakaranai_2",
+"who": "kon",
+"text": "せんせい、ここを わかりません",
+"yomi": "先生、ここを分かりません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgwakaranai_3",
+"who": "kon",
+"text": "ここが わかりません。おしえて ください",
+"yomi": "ここが分かりません。教えてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgwakaranai_4",
+"who": "kon",
+"text": "せんせい、さんばんの もんだいが わかりません。おしえて ください",
+"yomi": "先生、三番の問題が分かりません。教えてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgwakaranai_5",
+"who": "kon",
+"text": "せんせい、さんばんが わかりません。ヒントを もらっても いいですか",
+"yomi": "先生、三番が分かりません。ヒントをもらってもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_kgowari",
+"who": "nobbo",
+"text": "きょうの こくごは おしまいです。どうでしたか？",
+"yomi": "今日の国語はおしまいです。どうでしたか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_kgowari",
+"who": "nobbo",
+"text": "よく がんばりましたね。また あした",
+"yomi": "よく頑張りましたね。またあした",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgowari_0",
+"who": "kon",
+"text": "たのしかった",
+"yomi": "楽しかった",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgowari_1",
+"who": "kon",
+"text": "たのしかったです",
+"yomi": "楽しかったです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgowari_2",
+"who": "kon",
+"text": "むずかしかったけど、がんばりました",
+"yomi": "難しかったけど、頑張りました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_kgowari_2",
+"who": "kon",
+"text": "むずかしかったを、がんばりました",
+"yomi": "難しかったを、頑張りました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgowari_3",
+"who": "kon",
+"text": "むずかしかったけど、さいごまで がんばりました",
+"yomi": "難しかったけど、最後まで頑張りました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgowari_4",
+"who": "kon",
+"text": "むずかしかったけど、わからない ことを きけたので よかったです",
+"yomi": "難しかったけど、分からないことを聞けたので良かったです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_kgowari_5",
+"who": "kon",
+"text": "さいしょは わからなかったけど、せんせいに きいたら わかりました。ありがとうございました",
+"yomi": "最初は分からなかったけど、先生に聞いたら分かりました。ありがとうございました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_tishindoi",
+"who": "nobbo",
+"text": "はあ、はあ……だいじょうぶですか？",
+"yomi": "はあ、はあ……大丈夫ですか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_tishindoi",
+"who": "nobbo",
+"text": "いって くれて ありがとう。ひかげで やすみましょう",
+"yomi": "言ってくれてありがとう。日陰で休みましょう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tishindoi_0",
+"who": "pyon",
+"text": "しんどい",
+"yomi": "しんどい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tishindoi_1",
+"who": "pyon",
+"text": "ちょっと しんどいです",
+"yomi": "ちょっとしんどいです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tishindoi_2",
+"who": "pyon",
+"text": "ちょっと やすみたいです",
+"yomi": "ちょっと休みたいです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_tishindoi_2",
+"who": "pyon",
+"text": "ちょっと やすみたいを です",
+"yomi": "ちょっと休みたいをです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tishindoi_3",
+"who": "pyon",
+"text": "くるしいので、ちょっと やすみたいです",
+"yomi": "苦しいので、ちょっと休みたいです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tishindoi_4",
+"who": "pyon",
+"text": "いきが くるしいです。ひかげで やすんでも いいですか",
+"yomi": "息が苦しいです。日陰で休んでもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tishindoi_5",
+"who": "pyon",
+"text": "せんせい、はしったら くるしく なりました。すこし やすんで、みずを のんでも いいですか",
+"yomi": "先生、走ったら苦しくなりました。少し休んで、水を飲んでもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_tinarabu",
+"who": "nobbo",
+"text": "では、しゅっせきばんごうじゅんに ならびましょう",
+"yomi": "では、出席番号順に並びましょう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_tinarabu",
+"who": "nobbo",
+"text": "ちゅうくんの うしろですよ",
+"yomi": "ちゅうくんの後ろですよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tinarabu_0",
+"who": "pyon",
+"text": "どこ？",
+"yomi": "どこ？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tinarabu_1",
+"who": "pyon",
+"text": "どこに ならぶの？",
+"yomi": "どこに並ぶの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tinarabu_2",
+"who": "pyon",
+"text": "どこに ならべば いいですか",
+"yomi": "どこに並べばいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_tinarabu_2",
+"who": "pyon",
+"text": "どこを ならべば いいですか",
+"yomi": "どこを並べばいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tinarabu_3",
+"who": "pyon",
+"text": "せんせい、ぼくは どこに ならべば いいですか",
+"yomi": "先生、僕はどこに並べばいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tinarabu_4",
+"who": "pyon",
+"text": "せんせい、ぼくの まえは だれですか。どこに ならべば いいか わかりません",
+"yomi": "先生、僕の前は誰ですか。どこに並べばいいか分かりません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tinarabu_5",
+"who": "pyon",
+"text": "せんせい、じゅんばんが わからなく なりました。ぼくの ばしょを おしえて ください",
+"yomi": "先生、順番が分からなくなりました。僕の場所を教えてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_tinawatobi",
+"who": "nobbo",
+"text": "なわとび、むずかしいですか？",
+"yomi": "縄跳び、難しいですか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_tinawatobi",
+"who": "nobbo",
+"text": "いいですよ。まずは なわを まわさずに とんで みましょう",
+"yomi": "いいですよ。まずは縄を回さずに跳んでみましょう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tinawatobi_0",
+"who": "pyon",
+"text": "できない",
+"yomi": "できない",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tinawatobi_1",
+"who": "pyon",
+"text": "うまく とべません",
+"yomi": "うまく跳べません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tinawatobi_2",
+"who": "pyon",
+"text": "やりかたを おしえて ください",
+"yomi": "やり方を教えてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_tinawatobi_2",
+"who": "pyon",
+"text": "やりかたが おしえて ください",
+"yomi": "やり方が教えてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tinawatobi_3",
+"who": "pyon",
+"text": "うまく とべないので、やりかたを おしえて ください",
+"yomi": "うまく跳べないので、やり方を教えてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tinawatobi_4",
+"who": "pyon",
+"text": "なわが あしに ひっかかります。どう したら いいですか",
+"yomi": "縄が足に引っかかります。どうしたらいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tinawatobi_5",
+"who": "pyon",
+"text": "せんせい、なわが あしに ひっかかって しまいます。ゆっくり おてほんを みせて ください",
+"yomi": "先生、縄が足に引っかかってしまいます。ゆっくりお手本を見せてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_tiataru",
+"who": "gao",
+"text": "やったー！ あてたぜ！",
+"yomi": "やったー！当てたぜ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_tiataru",
+"who": "gao",
+"text": "へへっ。そとからも がんばれよ！",
+"yomi": "へへっ。外からも頑張れよ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiataru_0",
+"who": "pyon",
+"text": "あたった",
+"yomi": "当たった",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiataru_1",
+"who": "pyon",
+"text": "あたったから そとに でるね",
+"yomi": "当たったから外に出るね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiataru_2",
+"who": "pyon",
+"text": "あたっちゃった。そとに でるね",
+"yomi": "当たっちゃった。外に出るね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_tiataru_2",
+"who": "pyon",
+"text": "あたっちゃった。そとを でるね",
+"yomi": "当たっちゃった。外を出るね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiataru_3",
+"who": "pyon",
+"text": "あたっちゃった。くやしいけど、そとに でるね",
+"yomi": "当たっちゃった。悔しいけど、外に出るね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiataru_4",
+"who": "pyon",
+"text": "がおくん、ナイスボール！ そとから がんばるね",
+"yomi": "ガオくん、ナイスボール！外から頑張るね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiataru_5",
+"who": "pyon",
+"text": "くやしいけど、ルールだから そとに でるね。そとから ボールを なげて もどるぞ",
+"yomi": "悔しいけど、ルールだから外に出るね。外からボールを投げて戻るぞ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_tikuyashii",
+"who": "pyon",
+"text": "わーい、あかぐみの かち！",
+"yomi": "わーい、赤組の勝ち！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_tikuyashii",
+"who": "pyon",
+"text": "ありがとう！ つぎも いっしょに がんばろうね",
+"yomi": "ありがとう！つぎも一緒に頑張ろうね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_tiouen",
+"who": "nobbo",
+"text": "つぎは ちゅうくんの ばんですよ",
+"yomi": "つぎはちゅうくんの番ですよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_tiouen",
+"who": "nobbo",
+"text": "おうえん ありがとう！ ちからが でたよ",
+"yomi": "応援ありがとう！力が出たよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiouen_0",
+"who": "pyon",
+"text": "がんばれ！",
+"yomi": "頑張れ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiouen_1",
+"who": "pyon",
+"text": "がんばれー！",
+"yomi": "頑張れー！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiouen_2",
+"who": "pyon",
+"text": "ちゅうくん、がんばれー！",
+"yomi": "ちゅうくん、頑張れー！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_tiouen_2",
+"who": "pyon",
+"text": "ちゅうくんを、がんばれー！",
+"yomi": "ちゅうくんを、頑張れー！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiouen_3",
+"who": "pyon",
+"text": "ちゅうくん、ファイト！ がんばれー！",
+"yomi": "ちゅうくん、ファイト！頑張れー！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiouen_4",
+"who": "pyon",
+"text": "ちゅうくん、いけー！ ナイス！ その ちょうし！",
+"yomi": "ちゅうくん、いけー！ナイス！その調子！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiouen_5",
+"who": "pyon",
+"text": "ちゅうくん、さいごまで がんばれー！ もう すこしだよ！",
+"yomi": "ちゅうくん、最後まで頑張れー！もう少しだよ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_tisuitou",
+"who": "nobbo",
+"text": "みずを のむ じかんですよ",
+"yomi": "水を飲む時間ですよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_tisuitou",
+"who": "nobbo",
+"text": "いって くれて よかった。みずのみばで のんで きてね",
+"yomi": "言ってくれて良かった。水飲み場で飲んで来てね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tisuitou_0",
+"who": "pyon",
+"text": "すいとう ない",
+"yomi": "水筒ない",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tisuitou_1",
+"who": "pyon",
+"text": "すいとうを わすれました",
+"yomi": "水筒を忘れました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tisuitou_2",
+"who": "pyon",
+"text": "せんせい、すいとうを わすれました",
+"yomi": "先生、水筒を忘れました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_tisuitou_2",
+"who": "pyon",
+"text": "せんせい、すいとうが わすれました",
+"yomi": "先生、水筒が忘れました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tisuitou_3",
+"who": "pyon",
+"text": "すいとうを わすれました。みずを のんでも いいですか",
+"yomi": "水筒を忘れました。水を飲んでもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tisuitou_4",
+"who": "pyon",
+"text": "せんせい、すいとうを わすれました。みずのみばで のんで きても いいですか",
+"yomi": "先生、水筒を忘れました。水飲み場で飲んで来てもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tisuitou_5",
+"who": "pyon",
+"text": "せんせい、すいとうを いえに わすれました。みずのみばに いって、のんで きても いいですか",
+"yomi": "先生、水筒を家に忘れました。水飲み場に行って、飲んで来てもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_tikigae",
+"who": "nobbo",
+"text": "あれ、まだ きがえて いないの？",
+"yomi": "あれ、まだ着替えていないの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_tikigae",
+"who": "nobbo",
+"text": "いいですよ。いっしょに やりましょう",
+"yomi": "いいですよ。一緒にやりましょう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikigae_0",
+"who": "pyon",
+"text": "ぼたんが できない",
+"yomi": "ボタンができない",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikigae_1",
+"who": "pyon",
+"text": "きがえが おそいです",
+"yomi": "着替えが遅いです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikigae_2",
+"who": "pyon",
+"text": "ボタンが はめられません",
+"yomi": "ボタンがはめられません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_tikigae_2",
+"who": "pyon",
+"text": "ボタンを はめられません",
+"yomi": "ボタンをはめられません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikigae_3",
+"who": "pyon",
+"text": "ボタンが はめられません。てつだって ください",
+"yomi": "ボタンがはめられません。手伝ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikigae_4",
+"who": "pyon",
+"text": "せんせい、ボタンが うまく とめられません。てつだって もらえますか",
+"yomi": "先生、ボタンがうまく留められません。手伝ってもらえますか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikigae_5",
+"who": "pyon",
+"text": "せんせい、きがえに じかんが かかって います。うえの ボタンだけ てつだって ください",
+"yomi": "先生、着替えに時間がかかっています。上のボタンだけ手伝ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_tikoronda",
+"who": "nobbo",
+"text": "あら、ころびましたね。だいじょうぶ？",
+"yomi": "あら、転びましたね。大丈夫？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_tikoronda",
+"who": "nobbo",
+"text": "みずで あらって、ほけんしつに いきましょう",
+"yomi": "水で洗って、保健室に行きましょう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikoronda_0",
+"who": "pyon",
+"text": "いたい",
+"yomi": "痛い",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikoronda_1",
+"who": "pyon",
+"text": "ひざが いたいです",
+"yomi": "膝が痛いです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikoronda_2",
+"who": "pyon",
+"text": "ころんで、ひざが いたいです",
+"yomi": "転んで、膝が痛いです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_tikoronda_2",
+"who": "pyon",
+"text": "ころんで、ひざを いたいです",
+"yomi": "転んで、膝を痛いです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikoronda_3",
+"who": "pyon",
+"text": "ころんで ひざを すりむきました",
+"yomi": "転んで膝を擦りむきました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikoronda_4",
+"who": "pyon",
+"text": "はしって いたら ころんで、ひざを すりむきました。ちが でて います",
+"yomi": "走っていたら転んで、膝を擦りむきました。血が出ています",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikoronda_5",
+"who": "pyon",
+"text": "ころんで ひざを すりむきました。いたいので、ほけんしつに いっても いいですか",
+"yomi": "転んで膝を擦りむきました。痛いので、保健室に行ってもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_tikowai",
+"who": "nobbo",
+"text": "つぎは とびばこですよ。どうしましたか？",
+"yomi": "つぎは跳び箱ですよ。どうしましたか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_tikowai",
+"who": "nobbo",
+"text": "もちろん。ひくい ところから やって みましょう",
+"yomi": "もちろん。低いところからやってみましょう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikowai_0",
+"who": "pyon",
+"text": "こわい",
+"yomi": "怖い",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikowai_1",
+"who": "pyon",
+"text": "とびばこが こわいです",
+"yomi": "跳び箱が怖いです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikowai_2",
+"who": "pyon",
+"text": "こわいので、みて いて ください",
+"yomi": "怖いので、見ていてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_tikowai_2",
+"who": "pyon",
+"text": "こわいを、みて いて ください",
+"yomi": "怖いを、見ていてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikowai_3",
+"who": "pyon",
+"text": "こわいので、ひくい だんから やっても いいですか",
+"yomi": "怖いので、低い段からやってもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikowai_4",
+"who": "pyon",
+"text": "とびばこが こわいです。ひくい だんから れんしゅう しても いいですか",
+"yomi": "跳び箱が怖いです。低い段から練習してもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tikowai_5",
+"who": "pyon",
+"text": "せんせい、たかいのが こわいです。ひくい だんで、てを もって いて くれますか",
+"yomi": "先生、高いのが怖いです。低い段で、手を持っていてくれますか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_tiowari",
+"who": "nobbo",
+"text": "たいいくは おしまいです。どうでしたか？",
+"yomi": "体育はおしまいです。どうでしたか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_tiowari",
+"who": "nobbo",
+"text": "よく がんばりましたね",
+"yomi": "よく頑張りましたね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiowari_0",
+"who": "pyon",
+"text": "たのしかった",
+"yomi": "楽しかった",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiowari_1",
+"who": "pyon",
+"text": "たのしかったです",
+"yomi": "楽しかったです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiowari_2",
+"who": "pyon",
+"text": "つかれたけど、たのしかったです",
+"yomi": "疲れたけど、楽しかったです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_tiowari_2",
+"who": "pyon",
+"text": "つかれたを、たのしかったです",
+"yomi": "疲れたを、楽しかったです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiowari_3",
+"who": "pyon",
+"text": "つかれたけど、さいごまで がんばりました",
+"yomi": "疲れたけど、最後まで頑張りました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiowari_4",
+"who": "pyon",
+"text": "なわとびは むずかしかったけど、ドッジボールが たのしかったです",
+"yomi": "縄跳びは難しかったけど、ドッジボールが楽しかったです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_tiowari_5",
+"who": "pyon",
+"text": "とびばこは こわかったけど、ひくい だんで とべて うれしかったです",
+"yomi": "跳び箱は怖かったけど、低い段で跳べて嬉しかったです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ogutau",
+"who": "nobbo",
+"text": "では、みんなで うたいましょう",
+"yomi": "では、みんなで歌いましょう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ogutau",
+"who": "nobbo",
+"text": "ちいさい こえでも だいじょうぶですよ",
+"yomi": "小さい声でも大丈夫ですよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogutau_0",
+"who": "mii",
+"text": "はずかしい",
+"yomi": "恥ずかしい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogutau_1",
+"who": "mii",
+"text": "ちいさい こえでも いいですか",
+"yomi": "小さい声でもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogutau_2",
+"who": "mii",
+"text": "はずかしいので、ちいさい こえで うたいます",
+"yomi": "恥ずかしいので、小さい声で歌います",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ogutau_2",
+"who": "mii",
+"text": "はずかしいので、ちいさい こえを うたいます",
+"yomi": "恥ずかしいので、小さい声を歌います",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogutau_3",
+"who": "mii",
+"text": "はずかしいけど、ちいさい こえで うたって みます",
+"yomi": "恥ずかしいけど、小さい声で歌ってみます",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogutau_4",
+"who": "mii",
+"text": "うたは はずかしいけど、みんなと いっしょなら がんばって うたいます",
+"yomi": "歌は恥ずかしいけど、みんなと一緒なら頑張って歌います",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogutau_5",
+"who": "mii",
+"text": "せんせい、うたは にがてですが、ちいさい こえから がんばって みます",
+"yomi": "先生、歌は苦手ですが、小さい声から頑張ってみます",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ogkenban",
+"who": "nobbo",
+"text": "けんばんハーモニカで「ド」を ひいて みましょう",
+"yomi": "鍵盤ハーモニカで、ドを弾いてみましょう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ogkenban",
+"who": "nobbo",
+"text": "ここが ドですよ。おやゆびで ひきましょう",
+"yomi": "ここがドですよ。親指で弾きましょう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogkenban_0",
+"who": "mii",
+"text": "どこ？",
+"yomi": "どこ？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogkenban_1",
+"who": "mii",
+"text": "ドは どこですか",
+"yomi": "ドはどこですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogkenban_2",
+"who": "mii",
+"text": "どの ゆびで ひけば いいですか",
+"yomi": "どの指で弾けばいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ogkenban_2",
+"who": "mii",
+"text": "どの ゆびを ひけば いいですか",
+"yomi": "どの指を弾けばいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogkenban_3",
+"who": "mii",
+"text": "せんせい、ドの ばしょが わかりません",
+"yomi": "先生、ドの場所が分かりません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogkenban_4",
+"who": "mii",
+"text": "せんせい、ドは どこですか。どの ゆびで ひけば いいか おしえて ください",
+"yomi": "先生、ドはどこですか。どの指で弾けばいいか教えてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogkenban_5",
+"who": "mii",
+"text": "せんせい、けんばんの どこが ドなのか わかりません。シールを はっても いいですか",
+"yomi": "先生、鍵盤のどこがドなのか分かりません。シールを貼ってもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ogoto",
+"who": "nobbo",
+"text": "つぎは たいこを おおきく たたきますよ",
+"yomi": "つぎは太鼓を大きく、たたきますよ",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sr_ogoto",
+"who": "nobbo",
+"text": "おしえて くれて ありがとう。みみを ふさいで いいですよ",
+"yomi": "教えてくれてありがとう。耳を塞いでいいですよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogoto_0",
+"who": "mii",
+"text": "みみが いたい",
+"yomi": "耳が痛い",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogoto_1",
+"who": "mii",
+"text": "おおきい おとが にがてです",
+"yomi": "大きい音が苦手です",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogoto_2",
+"who": "mii",
+"text": "おおきい おとは にがてです",
+"yomi": "大きい音は苦手です",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ogoto_2",
+"who": "mii",
+"text": "おおきい おとを にがてです",
+"yomi": "大きい音を苦手です",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogoto_3",
+"who": "mii",
+"text": "おおきい おとが にがてなので、みみを ふさいでも いいですか",
+"yomi": "大きい音が苦手なので、耳を塞いでもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogoto_4",
+"who": "mii",
+"text": "せんせい、おおきい おとが にがてです。すこし はなれた ところで きいても いいですか",
+"yomi": "先生、大きい音が苦手です。少し離れたところで聞いてもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogoto_5",
+"who": "mii",
+"text": "せんせい、たいこの おとが こわいです。みみあてを しても いいですか",
+"yomi": "先生、太鼓の音が怖いです。耳あてをしてもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ogrhythm",
+"who": "nobbo",
+"text": "せんせいの まねを して、てを たたいて ください。タン、タン、タタタン",
+"yomi": "先生の真似をして、手を叩いてください。タン、タン、タタタン",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ogrhythm",
+"who": "nobbo",
+"text": "いいですよ。タン、タン、タタタン",
+"yomi": "いいですよ。タン、タン、タタタン",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogrhythm_0",
+"who": "mii",
+"text": "タン",
+"yomi": "タン",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogrhythm_1",
+"who": "mii",
+"text": "タン、タン",
+"yomi": "タン、タン",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogrhythm_2",
+"who": "mii",
+"text": "タン、タン、タタタン",
+"yomi": "タン、タン、タタタン",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ogrhythm_2",
+"who": "mii",
+"text": "タン、タタ、タン",
+"yomi": "タン、タタ、タン",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogrhythm_3",
+"who": "mii",
+"text": "もう いちど やって ください",
+"yomi": "もう一度やってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogrhythm_4",
+"who": "mii",
+"text": "はやくて わかりませんでした。もう いちど ゆっくり やって ください",
+"yomi": "早くて分かりませんでした。もう一度ゆっくりやってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogrhythm_5",
+"who": "mii",
+"text": "せんせい、さいごの ところを もう いちど、ゆっくり たたいて ください",
+"yomi": "先生、最後のところをもう一度、ゆっくり叩いてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_oghomeru",
+"who": "pyon",
+"text": "わたしの ピアニカ、どうだった？",
+"yomi": "私のピアニカ、どうだった？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_oghomeru",
+"who": "pyon",
+"text": "えへへ、ありがとう！ うれしい！",
+"yomi": "えへへ、ありがとう！嬉しい！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_oghomeru_0",
+"who": "mii",
+"text": "じょうず",
+"yomi": "上手",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_oghomeru_1",
+"who": "mii",
+"text": "じょうずだったよ",
+"yomi": "上手だったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_oghomeru_2",
+"who": "mii",
+"text": "ぴょんちゃん、じょうずだったよ",
+"yomi": "ぴょんちゃん、上手だったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_oghomeru_2",
+"who": "mii",
+"text": "ぴょんちゃんを、じょうずだったよ",
+"yomi": "ぴょんちゃんを、上手だったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_oghomeru_3",
+"who": "mii",
+"text": "すごく じょうずだったよ。きれいな おとだね",
+"yomi": "すごく上手だったよ。綺麗な音だね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_oghomeru_4",
+"who": "mii",
+"text": "さいごまで まちがえなくて、すごかったよ",
+"yomi": "最後まで間違えなくて、すごかったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_oghomeru_5",
+"who": "mii",
+"text": "ぴょんちゃん、すごく じょうずだったよ。こんど ひきかたを おしえてね",
+"yomi": "ぴょんちゃん、すごく上手だったよ。今度弾き方を教えてね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ogwasureta",
+"who": "nobbo",
+"text": "あれ、けんばんハーモニカは どうしましたか？",
+"yomi": "あれ、鍵盤ハーモニカはどうしましたか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ogwasureta",
+"who": "nobbo",
+"text": "いって くれて ありがとう。あしたは もって きてね",
+"yomi": "言ってくれてありがとう。あしたは持って来てね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogwasureta_0",
+"who": "mii",
+"text": "わすれました",
+"yomi": "忘れました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogwasureta_1",
+"who": "mii",
+"text": "いえに わすれました",
+"yomi": "家に忘れました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogwasureta_2",
+"who": "mii",
+"text": "けんばんハーモニカを わすれました",
+"yomi": "鍵盤ハーモニカを忘れました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ogwasureta_2",
+"who": "mii",
+"text": "けんばんハーモニカが わすれました",
+"yomi": "鍵盤ハーモニカが忘れました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogwasureta_3",
+"who": "mii",
+"text": "ごめんなさい。いえに わすれて きました",
+"yomi": "ごめんなさい。家に忘れて来ました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogwasureta_4",
+"who": "mii",
+"text": "ごめんなさい、わすれました。となりの ひとと いっしょに みても いいですか",
+"yomi": "ごめんなさい、忘れました。隣の人と一緒に見てもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogwasureta_5",
+"who": "mii",
+"text": "ごめんなさい、けんばんハーモニカを わすれました。きょうは うたで さんか しても いいですか",
+"yomi": "ごめんなさい、鍵盤ハーモニカを忘れました。今日は歌で参加してもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_oghappyou",
+"who": "nobbo",
+"text": "ひとりずつ うたって みましょう。だれから いきますか？",
+"yomi": "一人ずつ歌ってみましょう。誰から行きますか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_oghappyou",
+"who": "nobbo",
+"text": "いいですよ。じゅんびが できたら おしえてね",
+"yomi": "いいですよ。準備ができたら教えてね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_oghappyou_0",
+"who": "mii",
+"text": "あとが いい",
+"yomi": "後がいい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_oghappyou_1",
+"who": "mii",
+"text": "さいごが いいです",
+"yomi": "最後がいいです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_oghappyou_2",
+"who": "mii",
+"text": "さいごに して ください",
+"yomi": "最後にしてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_oghappyou_2",
+"who": "mii",
+"text": "さいごを して ください",
+"yomi": "最後をしてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_oghappyou_3",
+"who": "mii",
+"text": "きんちょう するので、さいごに して ください",
+"yomi": "緊張するので、最後にしてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_oghappyou_4",
+"who": "mii",
+"text": "どきどき するので、ほかの ひとを みてから うたっても いいですか",
+"yomi": "どきどきするので、ほかの人を見てから歌ってもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_oghappyou_5",
+"who": "mii",
+"text": "きんちょう するので、さいごに して ください。みんなを みたら できそうです",
+"yomi": "緊張するので、最後にしてください。みんなを見たらできそうです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ogurusai",
+"who": "kon",
+"text": "ピーピー！ ピーピピー！ たのしー！",
+"yomi": "ピーピー！ピーピピー！楽しー！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ogurusai",
+"who": "kon",
+"text": "あっ、ごめん。しずかに まってる",
+"yomi": "あっ、ごめん。静かに待ってる",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogurusai_0",
+"who": "mii",
+"text": "しずかに",
+"yomi": "静かに",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogurusai_1",
+"who": "mii",
+"text": "いまは ふかないで",
+"yomi": "今は吹かないで",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogurusai_2",
+"who": "mii",
+"text": "せんせいが はなして いるよ",
+"yomi": "先生が話しているよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ogurusai_2",
+"who": "mii",
+"text": "せんせいを はなして いるよ",
+"yomi": "先生を話しているよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogurusai_3",
+"who": "mii",
+"text": "いまは せんせいの おはなしを きく じかんだよ",
+"yomi": "今は先生のお話を聞く時間だよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogurusai_4",
+"who": "mii",
+"text": "こんくん、ふくのは あとでね。いまは せんせいの はなしを きこう",
+"yomi": "こんくん、吹くのは後でね。今は先生の話を聞こう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogurusai_5",
+"who": "mii",
+"text": "こんくん、おおきい おとで きこえないよ。せんせいが いいって いったら ふこうね",
+"yomi": "こんくん、大きい音で聞こえないよ。先生がいいって言ったら吹こうね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ogkashi",
+"who": "nobbo",
+"text": "では、2ばんを うたいますよ",
+"yomi": "では、二番を歌いますよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ogkashi",
+"who": "nobbo",
+"text": "ここですよ。いっしょに ゆびで おいかけようね",
+"yomi": "ここですよ。一緒に指で追いかけようね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogkashi_0",
+"who": "mii",
+"text": "わからない",
+"yomi": "分からない",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogkashi_1",
+"who": "mii",
+"text": "かしが わかりません",
+"yomi": "歌詞が分かりません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogkashi_2",
+"who": "mii",
+"text": "2ばんの かしが わかりません",
+"yomi": "二番の歌詞が分かりません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ogkashi_2",
+"who": "mii",
+"text": "2ばんの かしを わかりません",
+"yomi": "二番の歌詞を分かりません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogkashi_3",
+"who": "mii",
+"text": "どこを うたって いるか わかりません",
+"yomi": "どこを歌っているか分かりません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogkashi_4",
+"who": "mii",
+"text": "せんせい、いま どこを うたって いますか。ゆびで さして ください",
+"yomi": "先生、今どこを歌っていますか。指で指してください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogkashi_5",
+"who": "mii",
+"text": "せんせい、かしが はやくて わからなく なりました。いま どこか おしえて ください",
+"yomi": "先生、歌詞が早くて分からなくなりました。今どこか教えてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ogtanoshii",
+"who": "nobbo",
+"text": "すきな きょくは ありますか？",
+"yomi": "好きな曲はありますか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ogtanoshii",
+"who": "nobbo",
+"text": "いいですね。あとで みんなで うたいましょう",
+"yomi": "いいですね。後でみんなで歌いましょう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogtanoshii_0",
+"who": "mii",
+"text": "あります",
+"yomi": "あります",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogtanoshii_1",
+"who": "mii",
+"text": "どんぐりころころが すき",
+"yomi": "どんぐりころころが好き",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogtanoshii_2",
+"who": "mii",
+"text": "どんぐりころころが すきです",
+"yomi": "どんぐりころころが好きです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ogtanoshii_2",
+"who": "mii",
+"text": "どんぐりころころを すきです",
+"yomi": "どんぐりころころを好きです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogtanoshii_3",
+"who": "mii",
+"text": "どんぐりころころが すきです。たのしいからです",
+"yomi": "どんぐりころころが好きです。楽しいからです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogtanoshii_4",
+"who": "mii",
+"text": "どんぐりころころが すきです。どじょうが でて くる ところが すきです",
+"yomi": "どんぐりころころが好きです。どじょうが出て来るところが好きです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogtanoshii_5",
+"who": "mii",
+"text": "ぼくは どんぐりころころが すきです。うたうと、たのしい きもちに なるからです",
+"yomi": "僕はどんぐりころころが好きです。歌うと、楽しい気持ちになるからです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ogowari",
+"who": "nobbo",
+"text": "おんがくは おしまいです。どうでしたか？",
+"yomi": "音楽はおしまいです。どうでしたか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ogowari",
+"who": "nobbo",
+"text": "よく がんばりましたね",
+"yomi": "よく頑張りましたね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogowari_0",
+"who": "mii",
+"text": "たのしかった",
+"yomi": "楽しかった",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogowari_1",
+"who": "mii",
+"text": "たのしかったです",
+"yomi": "楽しかったです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogowari_2",
+"who": "mii",
+"text": "うたが たのしかったです",
+"yomi": "歌が楽しかったです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ogowari_2",
+"who": "mii",
+"text": "うたを たのしかったです",
+"yomi": "歌を楽しかったです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogowari_3",
+"who": "mii",
+"text": "はずかしかったけど、うたえて よかったです",
+"yomi": "恥ずかしかったけど、歌えて良かったです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogowari_4",
+"who": "mii",
+"text": "ドの ばしょが わかって、けんばんハーモニカが ひけました",
+"yomi": "ドの場所が分かって、鍵盤ハーモニカが弾けました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ogowari_5",
+"who": "mii",
+"text": "さいしょは こわかったけど、みんなと うたったら たのしかったです",
+"yomi": "最初は怖かったけど、みんなと歌ったら楽しかったです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_zknanio",
+"who": "nobbo",
+"text": "きょうは すきな ものを かきましょう",
+"yomi": "今日は好きなものをかきましょう",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sr_zknanio",
+"who": "nobbo",
+"text": "すきな たべものや どうぶつは どうかな？",
+"yomi": "好きな食べ物や動物はどうかな？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zknanio_0",
+"who": "chu",
+"text": "なにを かくの？",
+"yomi": "何をかくの？",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sg_zknanio_1",
+"who": "chu",
+"text": "なにを かいても いいですか",
+"yomi": "何をかいてもいいですか",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sg_zknanio_2",
+"who": "chu",
+"text": "なにを かけば いいか わかりません",
+"yomi": "何を、かけば、いいか分かりません",
+"acc": null,
+"job": "st21c"
+},
+{
+"key": "sx_zknanio_2",
+"who": "chu",
+"text": "なにを かけば いいか わかりませんを",
+"yomi": "何を、かけば、いいか分かりませんを",
+"acc": null,
+"job": "st21c"
+},
+{
+"key": "sg_zknanio_3",
+"who": "chu",
+"text": "せんせい、なにを かけば いいか わかりません",
+"yomi": "先生、何を、かけば、いいか分かりません",
+"acc": null,
+"job": "st21c"
+},
+{
+"key": "sg_zknanio_4",
+"who": "chu",
+"text": "なにを かけば いいか わかりません。ヒントを ください",
+"yomi": "何を、かけば、いいか分かりません。ヒントをください",
+"acc": null,
+"job": "st21c"
+},
+{
+"key": "sg_zknanio_5",
+"who": "chu",
+"text": "せんせい、かきたい ものが うかびません。れいを みせて もらえますか",
+"yomi": "先生、かきたいものが浮かびません。例を見せてもらえますか",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sq_zkhasami",
+"who": "chu",
+"text": "う〜ん、のりが ないなあ",
+"yomi": "う〜ん、のりがないなあ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_zkhasami",
+"who": "chu",
+"text": "ありがとう！ すぐ かえすね",
+"yomi": "ありがとう！すぐ返すね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_zkkariru",
+"who": "mii",
+"text": "あら、なにか さがしてるの？",
+"yomi": "あら、何か探してるの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_zkkariru",
+"who": "mii",
+"text": "いいわよ。ゆびを きらないでね",
+"yomi": "いいわよ。指を切らないでね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkkariru_0",
+"who": "chu",
+"text": "はさみ",
+"yomi": "はさみ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkkariru_1",
+"who": "chu",
+"text": "はさみ かして",
+"yomi": "はさみ貸して",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkkariru_2",
+"who": "chu",
+"text": "はさみを かして くれる？",
+"yomi": "はさみを貸してくれる？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_zkkariru_2",
+"who": "chu",
+"text": "はさみが かして くれる？",
+"yomi": "はさみが貸してくれる？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkkariru_3",
+"who": "chu",
+"text": "はさみを わすれたの。かして くれる？",
+"yomi": "はさみを忘れたの。貸してくれる？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkkariru_4",
+"who": "chu",
+"text": "はさみを わすれちゃった。つかい おわったら すぐ かえすから、かして くれる？",
+"yomi": "はさみを忘れちゃった。使い終わったらすぐ返すから、貸してくれる？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkkariru_5",
+"who": "chu",
+"text": "みいちゃん、はさみを かして くれる？ きる ところが すこしだけ なんだ",
+"yomi": "みいちゃん、はさみを貸してくれる？切るところが少しだけなんだ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_zkenogu",
+"who": "nobbo",
+"text": "あら、みずいれが たおれましたね",
+"yomi": "あら、水入れが倒れましたね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_zkenogu",
+"who": "nobbo",
+"text": "だいじょうぶ。ぞうきんは あそこですよ",
+"yomi": "大丈夫。雑巾はあそこですよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkenogu_0",
+"who": "chu",
+"text": "ごめんなさい",
+"yomi": "ごめんなさい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkenogu_1",
+"who": "chu",
+"text": "こぼしちゃいました",
+"yomi": "こぼしちゃいました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkenogu_2",
+"who": "chu",
+"text": "みずを こぼしちゃいました",
+"yomi": "水をこぼしちゃいました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_zkenogu_2",
+"who": "chu",
+"text": "みずが こぼしちゃいました",
+"yomi": "水がこぼしちゃいました",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkenogu_3",
+"who": "chu",
+"text": "ごめんなさい。ぞうきんは ありますか",
+"yomi": "ごめんなさい。雑巾はありますか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkenogu_4",
+"who": "chu",
+"text": "みずを こぼしちゃいました。ぞうきんを かして ください",
+"yomi": "水をこぼしちゃいました。雑巾を貸してください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkenogu_5",
+"who": "chu",
+"text": "ごめんなさい、みずを こぼしました。ぞうきんで ふくので、ばしょを おしえて ください",
+"yomi": "ごめんなさい、水をこぼしました。雑巾で拭くので、場所を教えてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_zksetsumei",
+"who": "nobbo",
+"text": "すてきな えですね。なにを かいたのですか？",
+"yomi": "素敵な絵ですね。何をかいたのですか？",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sr_zksetsumei",
+"who": "nobbo",
+"text": "たのしそうな えですね",
+"yomi": "楽しそうな絵ですね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zksetsumei_0",
+"who": "chu",
+"text": "いえです",
+"yomi": "家です",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zksetsumei_1",
+"who": "chu",
+"text": "ぼくの いえです",
+"yomi": "僕の家です",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zksetsumei_2",
+"who": "chu",
+"text": "かぞくを かきました",
+"yomi": "家族をかきました",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sx_zksetsumei_2",
+"who": "chu",
+"text": "かぞくが かきました",
+"yomi": "家族がかきました",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sg_zksetsumei_3",
+"who": "chu",
+"text": "これは ぼくの いえと かぞくです",
+"yomi": "これは僕の家と家族です",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zksetsumei_4",
+"who": "chu",
+"text": "これは ぼくの かぞくです。みんなで ごはんを たべて います",
+"yomi": "これは僕の家族です。みんなでご飯を食べています",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zksetsumei_5",
+"who": "chu",
+"text": "これは ぼくの かぞくです。パパと ママと おにいちゃんと、ゆうごはんを たべて います",
+"yomi": "これは僕の家族です。パパとママとお兄ちゃんと、夕ご飯を食べています",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_zkhomeru",
+"who": "doshin",
+"text": "ぼくの えも みて！ ぞうさん かいたんだ",
+"yomi": "僕の絵も見て！象さん、かいたんだ",
+"acc": null,
+"job": "st21c"
+},
+{
+"key": "sr_zkhomeru",
+"who": "doshin",
+"text": "えへへ、ありがとう。うれしいな",
+"yomi": "えへへ、ありがとう。嬉しいな",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkhomeru_0",
+"who": "chu",
+"text": "じょうず",
+"yomi": "上手",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkhomeru_1",
+"who": "chu",
+"text": "じょうずだね",
+"yomi": "上手だね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkhomeru_2",
+"who": "chu",
+"text": "ぞうさん、じょうずだね",
+"yomi": "象さん、上手だね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_zkhomeru_2",
+"who": "chu",
+"text": "ぞうさんを、じょうずだね",
+"yomi": "象さんを、上手だね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkhomeru_3",
+"who": "chu",
+"text": "どしんくん、ぞうさん じょうずだね",
+"yomi": "どしんくん、象さん上手だね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkhomeru_4",
+"who": "chu",
+"text": "おおきな ぞうさんだね。はなが ながくて すてきだよ",
+"yomi": "大きな象さんだね。鼻が長くて素敵だよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkhomeru_5",
+"who": "chu",
+"text": "どしんくん、いろが きれいだね。ぞうさんが わらって いて たのしそう",
+"yomi": "どしんくん、色が綺麗だね。象さんが笑っていて楽しそう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_zkjikan",
+"who": "nobbo",
+"text": "あと 5ふんで おしまいですよ",
+"yomi": "あとごふんでおしまいですよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_zkjikan",
+"who": "nobbo",
+"text": "わかりました。つづきは あした やりましょう",
+"yomi": "分かりました。続きはあしたやりましょう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkjikan_0",
+"who": "chu",
+"text": "まだです",
+"yomi": "まだです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkjikan_1",
+"who": "chu",
+"text": "まだ おわりません",
+"yomi": "まだ終わりません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkjikan_2",
+"who": "chu",
+"text": "もう すこし じかんが ほしいです",
+"yomi": "もう少し時間が欲しいです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_zkjikan_2",
+"who": "chu",
+"text": "もう すこし じかんを ほしいです",
+"yomi": "もう少し時間を欲しいです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkjikan_3",
+"who": "chu",
+"text": "せんせい、まだ おわりません。もう すこし じかんを ください",
+"yomi": "先生、まだ終わりません。もう少し時間をください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkjikan_4",
+"who": "chu",
+"text": "いろを ぬって いる ところです。もう すこし まって ください",
+"yomi": "色を塗っているところです。もう少し待ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkjikan_5",
+"who": "chu",
+"text": "せんせい、まだ おわらないので、つづきは やすみじかんに やっても いいですか",
+"yomi": "先生、まだ終わらないので、続きは休み時間にやってもいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_zkhasamitsukau",
+"who": "nobbo",
+"text": "はさみを もって あるいたら、あぶないですよ",
+"yomi": "はさみを持って歩いたら、危ないですよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_zkhasamitsukau",
+"who": "nobbo",
+"text": "わかって くれて ありがとう",
+"yomi": "分かってくれてありがとう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkhasamitsukau_0",
+"who": "chu",
+"text": "ごめんなさい",
+"yomi": "ごめんなさい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkhasamitsukau_1",
+"who": "chu",
+"text": "ごめんなさい。すわります",
+"yomi": "ごめんなさい。座ります",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkhasamitsukau_2",
+"who": "chu",
+"text": "ごめんなさい。はさみを おきます",
+"yomi": "ごめんなさい。はさみを置きます",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_zkhasamitsukau_2",
+"who": "chu",
+"text": "ごめんなさい。はさみが おきます",
+"yomi": "ごめんなさい。はさみが置きます",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkhasamitsukau_3",
+"who": "chu",
+"text": "ごめんなさい。はさみは すわって つかいます",
+"yomi": "ごめんなさい。はさみは座って使います",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkhasamitsukau_4",
+"who": "chu",
+"text": "ごめんなさい。はさみを もつ ときは、はを したに むけます",
+"yomi": "ごめんなさい。はさみを持つ時は、刃を下に向けます",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkhasamitsukau_5",
+"who": "chu",
+"text": "ごめんなさい。あぶないので、はさみは すわって つかって、もって あるきません",
+"yomi": "ごめんなさい。危ないので、はさみは座って使って、持って歩きません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_zktetsudai",
+"who": "nobbo",
+"text": "かみが うまく おれないのですか？",
+"yomi": "紙がうまく折れないのですか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_zktetsudai",
+"who": "nobbo",
+"text": "いいですよ。いっしょに おって みましょう",
+"yomi": "いいですよ。一緒に折ってみましょう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zktetsudai_0",
+"who": "chu",
+"text": "できない",
+"yomi": "できない",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zktetsudai_1",
+"who": "chu",
+"text": "うまく おれません",
+"yomi": "うまく折れません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zktetsudai_2",
+"who": "chu",
+"text": "てつだって ください",
+"yomi": "手伝ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_zktetsudai_2",
+"who": "chu",
+"text": "てつだってを ください",
+"yomi": "手伝ってをください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zktetsudai_3",
+"who": "chu",
+"text": "うまく おれないので、てつだって ください",
+"yomi": "うまく折れないので、手伝ってください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zktetsudai_4",
+"who": "chu",
+"text": "せんせい、かどが そろいません。いっしょに やって もらえますか",
+"yomi": "先生、角が揃いません。一緒にやってもらえますか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zktetsudai_5",
+"who": "chu",
+"text": "せんせい、つぎの おりかたが わかりません。ゆっくり みせて ください",
+"yomi": "先生、つぎの折り方が分かりません。ゆっくり見せてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_zkkataduke",
+"who": "nobbo",
+"text": "おかたづけの じかんですよ",
+"yomi": "お片付けの時間ですよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_zkkataduke",
+"who": "nobbo",
+"text": "うしろの たなに しまってね",
+"yomi": "後ろの棚にしまってね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkkataduke_0",
+"who": "chu",
+"text": "はーい",
+"yomi": "はーい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkkataduke_1",
+"who": "chu",
+"text": "はい、かたづけます",
+"yomi": "はい、片付けます",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkkataduke_2",
+"who": "chu",
+"text": "どこに しまえば いいですか",
+"yomi": "どこにしまえばいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_zkkataduke_2",
+"who": "chu",
+"text": "どこを しまえば いいですか",
+"yomi": "どこをしまえばいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkkataduke_3",
+"who": "chu",
+"text": "せんせい、えのぐは どこに しまえば いいですか",
+"yomi": "先生、絵の具はどこにしまえばいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkkataduke_4",
+"who": "chu",
+"text": "ふでを あらいました。えのぐは どこに しまえば いいですか",
+"yomi": "筆を洗いました。絵の具はどこにしまえばいいですか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkkataduke_5",
+"who": "chu",
+"text": "ふでと パレットを あらいました。どこに おけば いいか おしえて ください",
+"yomi": "筆とパレットを洗いました。どこに置けばいいか教えてください",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_zkowari",
+"who": "nobbo",
+"text": "ずこうは おしまいです。どうでしたか？",
+"yomi": "図工はおしまいです。どうでしたか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_zkowari",
+"who": "nobbo",
+"text": "よく がんばりましたね",
+"yomi": "よく頑張りましたね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkowari_0",
+"who": "chu",
+"text": "たのしかった",
+"yomi": "楽しかった",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkowari_1",
+"who": "chu",
+"text": "たのしかったです",
+"yomi": "楽しかったです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_zkowari_2",
+"who": "chu",
+"text": "えを かくのが たのしかったです",
+"yomi": "絵をかくのが楽しかったです",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sx_zkowari_2",
+"who": "chu",
+"text": "えを かくのを たのしかったです",
+"yomi": "絵をかくのを楽しかったです",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sg_zkowari_3",
+"who": "chu",
+"text": "かぞくの えが かけて うれしかったです",
+"yomi": "家族の絵がかけて嬉しかったです",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sg_zkowari_4",
+"who": "chu",
+"text": "さいしょは なにを かくか わからなかったけど、さいごまで かけました",
+"yomi": "最初は何をかくか分からなかったけど、最後までかけました",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sg_zkowari_5",
+"who": "chu",
+"text": "こまった ときに せんせいに きいたら、じょうずに かけました。ありがとうございました",
+"yomi": "困った時に先生に聞いたら、上手にかけました。ありがとうございました",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sq_jthelmet",
+"who": "papa",
+"text": "さあ、サイクリングに いこう！ じゅんびは いいかな？",
+"yomi": "さあ、サイクリングに行こう！準備はいいかな？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jthelmet",
+"who": "papa",
+"text": "よし、しゅっぱつだ！",
+"yomi": "よし、出発だ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jthelmet_gaopapa",
+"who": "gaopapa",
+"text": "さあ、サイクリングに いこう！ じゅんびは いいかな？",
+"yomi": "さあ、サイクリングに行こう！準備はいいかな？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jthelmet_gaopapa",
+"who": "gaopapa",
+"text": "よし、しゅっぱつだ！",
+"yomi": "よし、出発だ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jthelmet_doshinpapa",
+"who": "doshinpapa",
+"text": "さあ、サイクリングに いこう！ じゅんびは いいかな？",
+"yomi": "さあ、サイクリングに行こう！準備はいいかな？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jthelmet_doshinpapa",
+"who": "doshinpapa",
+"text": "よし、しゅっぱつだ！",
+"yomi": "よし、出発だ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthelmet_0",
+"who": "doshin",
+"text": "ヘルメット",
+"yomi": "ヘルメット",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthelmet_1",
+"who": "doshin",
+"text": "ヘルメット かぶったよ",
+"yomi": "ヘルメットかぶったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthelmet_2",
+"who": "doshin",
+"text": "ヘルメットを かぶったよ",
+"yomi": "ヘルメットをかぶったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_jthelmet_2",
+"who": "doshin",
+"text": "ヘルメットが かぶったよ",
+"yomi": "ヘルメットがかぶったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthelmet_3",
+"who": "doshin",
+"text": "ヘルメット よし！ ブレーキ よし！",
+"yomi": "ヘルメットよし！ブレーキよし！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthelmet_4",
+"who": "doshin",
+"text": "ヘルメットを かぶって、ブレーキが きくか たしかめたよ",
+"yomi": "ヘルメットをかぶって、ブレーキが効くか確かめたよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthelmet_5",
+"who": "doshin",
+"text": "ヘルメットの ひもを しめたよ。ブレーキも タイヤも だいじょうぶ！",
+"yomi": "ヘルメットの紐を締めたよ。ブレーキもタイヤも大丈夫！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtkuruma",
+"who": "papa",
+"text": "あっ、むこうから くるまが くるぞ！",
+"yomi": "あっ、向こうから車が来るぞ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtkuruma",
+"who": "papa",
+"text": "そうだね。あんぜん だいいちだ",
+"yomi": "そうだね。安全第一だ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtkuruma_gaopapa",
+"who": "gaopapa",
+"text": "あっ、むこうから くるまが くるぞ！",
+"yomi": "あっ、向こうから車が来るぞ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtkuruma_gaopapa",
+"who": "gaopapa",
+"text": "そうだね。あんぜん だいいちだ",
+"yomi": "そうだね。安全第一だ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtkuruma_doshinpapa",
+"who": "doshinpapa",
+"text": "あっ、むこうから くるまが くるぞ！",
+"yomi": "あっ、向こうから車が来るぞ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtkuruma_doshinpapa",
+"who": "doshinpapa",
+"text": "そうだね。あんぜん だいいちだ",
+"yomi": "そうだね。安全第一だ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkuruma_0",
+"who": "doshin",
+"text": "とまる",
+"yomi": "止まる",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkuruma_1",
+"who": "doshin",
+"text": "くるまが きたから とまるね",
+"yomi": "車が来たから止まるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkuruma_2",
+"who": "doshin",
+"text": "くるまが きたから、はしに よって とまるね",
+"yomi": "車が来たから、端に寄って止まるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_jtkuruma_2",
+"who": "doshin",
+"text": "くるまを きたから、はしに よって とまるね",
+"yomi": "車を来たから、端に寄って止まるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkuruma_3",
+"who": "doshin",
+"text": "くるまが きたから、ひだりの はしに よって とまるね",
+"yomi": "車が来たから、左の端に寄って止まるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkuruma_4",
+"who": "doshin",
+"text": "くるまが いったら、うしろを みてから また はしるね",
+"yomi": "車が行ったら、後ろを見てからまた走るね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkuruma_5",
+"who": "doshin",
+"text": "くるまが きたから、ひだりの はしに とまって、くるまが いってから はしるね",
+"yomi": "車が来たから、左の端に止まって、車が行ってから走るね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jthidari",
+"who": "omawari",
+"text": "じてんしゃは、みちの どっちがわを はしるか しってる？",
+"yomi": "自転車は、道のどっち側を走るか知ってる？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jthidari",
+"who": "omawari",
+"text": "せいかい！ よく しってるね",
+"yomi": "正解！よく知ってるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthidari_0",
+"who": "doshin",
+"text": "ひだり",
+"yomi": "左",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthidari_1",
+"who": "doshin",
+"text": "ひだりがわ",
+"yomi": "左側",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthidari_2",
+"who": "doshin",
+"text": "ひだりがわを はしります",
+"yomi": "左側を走ります",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_jthidari_2",
+"who": "doshin",
+"text": "ひだりがわが はしります",
+"yomi": "左側が走ります",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthidari_3",
+"who": "doshin",
+"text": "じてんしゃは、ひだりがわを はしります",
+"yomi": "自転車は、左側を走ります",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthidari_4",
+"who": "doshin",
+"text": "じてんしゃは くるまと おなじで、ひだりがわを はしります",
+"yomi": "自転車は車と同じで、左側を走ります",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthidari_5",
+"who": "doshin",
+"text": "じてんしゃは くるまの なかまだから、みちの ひだりがわを はしります",
+"yomi": "自転車は車の仲間だから、道の左側を走ります",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtshingou",
+"who": "papa",
+"text": "しんごうが あかに なったよ",
+"yomi": "信号が赤になったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtshingou",
+"who": "papa",
+"text": "えらい！ ルールを まもれるね",
+"yomi": "偉い！ルールを守れるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtshingou_gaopapa",
+"who": "gaopapa",
+"text": "しんごうが あかに なったよ",
+"yomi": "信号が赤になったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtshingou_gaopapa",
+"who": "gaopapa",
+"text": "えらい！ ルールを まもれるね",
+"yomi": "偉い！ルールを守れるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtshingou_doshinpapa",
+"who": "doshinpapa",
+"text": "しんごうが あかに なったよ",
+"yomi": "信号が赤になったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtshingou_doshinpapa",
+"who": "doshinpapa",
+"text": "えらい！ ルールを まもれるね",
+"yomi": "偉い！ルールを守れるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtshingou_0",
+"who": "doshin",
+"text": "とまる",
+"yomi": "止まる",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtshingou_1",
+"who": "doshin",
+"text": "あかだから とまるね",
+"yomi": "赤だから止まるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtshingou_2",
+"who": "doshin",
+"text": "しんごうが あかだから とまるね",
+"yomi": "信号が赤だから止まるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_jtshingou_2",
+"who": "doshin",
+"text": "しんごうを あかだから とまるね",
+"yomi": "信号を赤だから止まるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtshingou_3",
+"who": "doshin",
+"text": "あかだから とまって、あおに なるまで まつね",
+"yomi": "赤だから止まって、青になるまで待つね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtshingou_4",
+"who": "doshin",
+"text": "あかは とまれ だよ。あおに なったら、みぎと ひだりを みて わたるね",
+"yomi": "赤は、とまれだよ。青になったら、右と左を見て渡るね",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sg_jtshingou_5",
+"who": "doshin",
+"text": "しんごうが あかだから とまるね。くるまが こなくても、あおに なるまで まつよ",
+"yomi": "信号が赤だから止まるね。車が来なくても、青になるまで待つよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jttomare",
+"who": "omawari",
+"text": "あの あかい さんかくの マーク、なんて かいて あるかな？",
+"yomi": "あの赤い三角のマーク、何て書いてあるかな？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jttomare",
+"who": "omawari",
+"text": "そのとおり！ じょうずに いえたね",
+"yomi": "その通り！上手に言えたね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jttomare_0",
+"who": "doshin",
+"text": "とまれ",
+"yomi": "止まれ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jttomare_1",
+"who": "doshin",
+"text": "とまれ です",
+"yomi": "止まれです",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jttomare_2",
+"who": "doshin",
+"text": "とまれ だから、とまります",
+"yomi": "止まれだから、止まります",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_jttomare_2",
+"who": "doshin",
+"text": "とまれ だから、とまりますを",
+"yomi": "止まれだから、止まりますを",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jttomare_3",
+"who": "doshin",
+"text": "とまれ だから、いちど とまります",
+"yomi": "止まれだから、一度止まります",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jttomare_4",
+"who": "doshin",
+"text": "とまれ だから、いちど とまって、みぎと ひだりを みます",
+"yomi": "止まれだから、一度止まって、右と左を見ます",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jttomare_5",
+"who": "doshin",
+"text": "とまれ の マークでは、いちど とまって、みぎ・ひだり・みぎを みてから すすみます",
+"yomi": "止まれのマークでは、一度止まって、右、左、右を見てから進みます",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jthodou",
+"who": "papa",
+"text": "ほどうに ひとが たくさん いるね。どうしようか？",
+"yomi": "歩道に人がたくさんいるね。どうしようか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jthodou",
+"who": "papa",
+"text": "そうそう。やさしいね",
+"yomi": "そうそう。優しいね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jthodou_gaopapa",
+"who": "gaopapa",
+"text": "ほどうに ひとが たくさん いるね。どうしようか？",
+"yomi": "歩道に人がたくさんいるね。どうしようか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jthodou_gaopapa",
+"who": "gaopapa",
+"text": "そうそう。やさしいね",
+"yomi": "そうそう。優しいね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jthodou_doshinpapa",
+"who": "doshinpapa",
+"text": "ほどうに ひとが たくさん いるね。どうしようか？",
+"yomi": "歩道に人がたくさんいるね。どうしようか？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jthodou_doshinpapa",
+"who": "doshinpapa",
+"text": "そうそう。やさしいね",
+"yomi": "そうそう。優しいね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthodou_0",
+"who": "doshin",
+"text": "おりる",
+"yomi": "降りる",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthodou_1",
+"who": "doshin",
+"text": "おりて おす",
+"yomi": "降りて押す",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthodou_2",
+"who": "doshin",
+"text": "じてんしゃから おりて おすね",
+"yomi": "自転車から降りて押すね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_jthodou_2",
+"who": "doshin",
+"text": "じてんしゃを おりて おすね",
+"yomi": "自転車を降りて押すね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthodou_3",
+"who": "doshin",
+"text": "ひとが いるから、おりて おして あるくね",
+"yomi": "人がいるから、降りて押して歩くね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthodou_4",
+"who": "doshin",
+"text": "ほどうは ひとが さき だから、おりて おして あるくね",
+"yomi": "歩道は人が先だから、降りて押して歩くね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jthodou_5",
+"who": "doshin",
+"text": "ほどうでは あるく ひとが いちばんだから、じてんしゃを おりて、ゆっくり おすね",
+"yomi": "歩道では歩く人が一番だから、自転車を降りて、ゆっくり押すね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtnarabu",
+"who": "pyon",
+"text": "ねえねえ、よこに ならんで はしろうよ！",
+"yomi": "ねえねえ、横に並んで走ろうよ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtnarabu",
+"who": "pyon",
+"text": "そっか。じゃあ わたしが さきに いくね",
+"yomi": "そっか。じゃあ私が先に行くね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtnarabu_0",
+"who": "doshin",
+"text": "だめだよ",
+"yomi": "だめだよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtnarabu_1",
+"who": "doshin",
+"text": "ならんで はしらないよ",
+"yomi": "並んで走らないよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtnarabu_2",
+"who": "doshin",
+"text": "ならんで はしると あぶないよ",
+"yomi": "並んで走ると危ないよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_jtnarabu_2",
+"who": "doshin",
+"text": "ならんで はしるを あぶないよ",
+"yomi": "並んで走るを危ないよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtnarabu_3",
+"who": "doshin",
+"text": "ならんで はしると あぶないから、じゅんばんに はしろう",
+"yomi": "並んで走ると危ないから、順番に走ろう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtnarabu_4",
+"who": "doshin",
+"text": "よこに ならぶと、ほかの ひとが とおれないよ。いちれつで はしろう",
+"yomi": "横に並ぶと、ほかの人が通れないよ。一列で走ろう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtnarabu_5",
+"who": "doshin",
+"text": "ならんで はしるのは ルールで だめなんだよ。ぼくが うしろから ついて いくね",
+"yomi": "並んで走るのはルールで駄目なんだよ。僕が後ろからついて行くね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtkasa",
+"who": "papa",
+"text": "あれ、あめが ふって きたぞ",
+"yomi": "あれ、雨が降って来たぞ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtkasa",
+"who": "papa",
+"text": "そのとおり。カッパを きて いこうか",
+"yomi": "その通り。カッパを着て行こうか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtkasa_gaopapa",
+"who": "gaopapa",
+"text": "あれ、あめが ふって きたぞ",
+"yomi": "あれ、雨が降って来たぞ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtkasa_gaopapa",
+"who": "gaopapa",
+"text": "そのとおり。カッパを きて いこうか",
+"yomi": "その通り。カッパを着て行こうか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtkasa_doshinpapa",
+"who": "doshinpapa",
+"text": "あれ、あめが ふって きたぞ",
+"yomi": "あれ、雨が降って来たぞ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtkasa_doshinpapa",
+"who": "doshinpapa",
+"text": "そのとおり。カッパを きて いこうか",
+"yomi": "その通り。カッパを着て行こうか",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkasa_0",
+"who": "doshin",
+"text": "かさ？",
+"yomi": "傘？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkasa_1",
+"who": "doshin",
+"text": "かさを さして のらないよ",
+"yomi": "傘を差して乗らないよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkasa_2",
+"who": "doshin",
+"text": "かさを さして のると あぶないよ",
+"yomi": "傘を差して乗ると危ないよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_jtkasa_2",
+"who": "doshin",
+"text": "かさが さして のると あぶないよ",
+"yomi": "傘が差して乗ると危ないよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkasa_3",
+"who": "doshin",
+"text": "かさを さして のるのは だめだよね。あまやどり しよう",
+"yomi": "傘を差して乗るのは駄目だよね。雨宿りしよう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkasa_4",
+"who": "doshin",
+"text": "かさを もつと かたてに なって あぶないよ。カッパを きよう",
+"yomi": "傘を持つと片手になって危ないよ。カッパを着よう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkasa_5",
+"who": "doshin",
+"text": "かさを さしながら のると、まえが みえなくて あぶないよ。やむまで まとう",
+"yomi": "傘を差しながら乗ると、前が見えなくて危ないよ。止むまで待とう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtmatte",
+"who": "papa",
+"text": "おーい、だいじょうぶか？",
+"yomi": "おーい、大丈夫か？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtmatte",
+"who": "papa",
+"text": "よし、みずを のんで ひとやすみ しよう",
+"yomi": "よし、水を飲んで一休みしよう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtmatte_gaopapa",
+"who": "gaopapa",
+"text": "おーい、だいじょうぶか？",
+"yomi": "おーい、大丈夫か？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtmatte_gaopapa",
+"who": "gaopapa",
+"text": "よし、みずを のんで ひとやすみ しよう",
+"yomi": "よし、水を飲んで一休みしよう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtmatte_doshinpapa",
+"who": "doshinpapa",
+"text": "おーい、だいじょうぶか？",
+"yomi": "おーい、大丈夫か？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtmatte_doshinpapa",
+"who": "doshinpapa",
+"text": "よし、みずを のんで ひとやすみ しよう",
+"yomi": "よし、水を飲んで一休みしよう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtmatte_0",
+"who": "doshin",
+"text": "まって",
+"yomi": "待って",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtmatte_1",
+"who": "doshin",
+"text": "パパ、まって！",
+"yomi": "パパ、待って！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtmatte_2",
+"who": "doshin",
+"text": "つかれたから、ちょっと まって",
+"yomi": "疲れたから、ちょっと待って",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_jtmatte_2",
+"who": "doshin",
+"text": "つかれたを、ちょっと まって",
+"yomi": "疲れたを、ちょっと待って",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtmatte_3",
+"who": "doshin",
+"text": "パパ、つかれたから ちょっと やすみたい",
+"yomi": "パパ、疲れたからちょっと休みたい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtmatte_4",
+"who": "doshin",
+"text": "パパ、はやくて おいつけないよ。もう すこし ゆっくり はしって",
+"yomi": "パパ、早くて追いつけないよ。もう少しゆっくり走って",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtmatte_5",
+"who": "doshin",
+"text": "パパ、あしが つかれちゃった。あの ベンチで すこし やすんでも いい？",
+"yomi": "パパ、足が疲れちゃった。あのベンチで少し休んでもいい？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtbell",
+"who": "papa",
+"text": "まえに あるいてる ひとが いるね",
+"yomi": "前に歩いてる人がいるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtbell",
+"who": "papa",
+"text": "やさしい こえかけだね",
+"yomi": "優しい声かけだね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtbell_gaopapa",
+"who": "gaopapa",
+"text": "まえに あるいてる ひとが いるね",
+"yomi": "前に歩いてる人がいるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtbell_gaopapa",
+"who": "gaopapa",
+"text": "やさしい こえかけだね",
+"yomi": "優しい声かけだね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtbell_doshinpapa",
+"who": "doshinpapa",
+"text": "まえに あるいてる ひとが いるね",
+"yomi": "前に歩いてる人がいるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtbell_doshinpapa",
+"who": "doshinpapa",
+"text": "やさしい こえかけだね",
+"yomi": "優しい声かけだね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtbell_0",
+"who": "doshin",
+"text": "すみません",
+"yomi": "すみません",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtbell_1",
+"who": "doshin",
+"text": "すみません、とおります",
+"yomi": "すみません、通ります",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtbell_2",
+"who": "doshin",
+"text": "ベルは ならさないで、こえを かけるよ",
+"yomi": "ベルは鳴らさないで、声をかけるよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_jtbell_2",
+"who": "doshin",
+"text": "ベルが ならさないで、こえを かけるよ",
+"yomi": "ベルが鳴らさないで、声をかけるよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtbell_3",
+"who": "doshin",
+"text": "すみません、うしろを とおります",
+"yomi": "すみません、後ろを通ります",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtbell_4",
+"who": "doshin",
+"text": "ベルを ならすと びっくり するから、「すみません」って こえを かけるね",
+"yomi": "ベルを鳴らすとびっくりするから、すみませんって声をかけるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtbell_5",
+"who": "doshin",
+"text": "すみません、よこを とおっても いいですか。ありがとうございます",
+"yomi": "すみません、横を通ってもいいですか。ありがとうございます",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtkoronda",
+"who": "papa",
+"text": "あっ、ころんだ！ だいじょうぶか？",
+"yomi": "あっ、転んだ！大丈夫か？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtkoronda",
+"who": "papa",
+"text": "よく いえたね。ばんそうこうを はろう",
+"yomi": "よく言えたね。ばんそうこうを貼ろう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtkoronda_gaopapa",
+"who": "gaopapa",
+"text": "あっ、ころんだ！ だいじょうぶか？",
+"yomi": "あっ、転んだ！大丈夫か？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtkoronda_gaopapa",
+"who": "gaopapa",
+"text": "よく いえたね。ばんそうこうを はろう",
+"yomi": "よく言えたね。ばんそうこうを貼ろう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jtkoronda_doshinpapa",
+"who": "doshinpapa",
+"text": "あっ、ころんだ！ だいじょうぶか？",
+"yomi": "あっ、転んだ！大丈夫か？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_jtkoronda_doshinpapa",
+"who": "doshinpapa",
+"text": "よく いえたね。ばんそうこうを はろう",
+"yomi": "よく言えたね。ばんそうこうを貼ろう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkoronda_0",
+"who": "doshin",
+"text": "だいじょうぶ",
+"yomi": "大丈夫",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkoronda_1",
+"who": "doshin",
+"text": "ひざが いたい",
+"yomi": "膝が痛い",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkoronda_2",
+"who": "doshin",
+"text": "ころんだけど、だいじょうぶ",
+"yomi": "転んだけど、大丈夫",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_jtkoronda_2",
+"who": "doshin",
+"text": "ころんだを、だいじょうぶ",
+"yomi": "転んだを、大丈夫",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkoronda_3",
+"who": "doshin",
+"text": "ころんで ひざを すりむいちゃった",
+"yomi": "転んでひざを擦りむいちゃった",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkoronda_4",
+"who": "doshin",
+"text": "ころんだけど、ヘルメットを かぶってたから あたまは だいじょうぶ",
+"yomi": "転んだけど、ヘルメットをかぶってたから頭は大丈夫",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jtkoronda_5",
+"who": "doshin",
+"text": "ころんで ひざを すりむいたよ。いたいけど、ばんそうこうを はったら また のれる",
+"yomi": "転んで膝を擦りむいたよ。痛いけど、ばんそうこうを貼ったらまた乗れる",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_jttomodachi",
+"who": "kon",
+"text": "ぼく、ヘルメット きらーい。かぶらなくて いいよね？",
+"yomi": "僕、ヘルメット、きらーい。かぶらなくていいよね？",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sr_jttomodachi",
+"who": "kon",
+"text": "そっか……。じゃあ かぶって いくよ",
+"yomi": "そっか……。じゃあかぶって行くよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jttomodachi_0",
+"who": "doshin",
+"text": "だめだよ",
+"yomi": "だめだよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jttomodachi_1",
+"who": "doshin",
+"text": "かぶらないと あぶないよ",
+"yomi": "かぶらないと危ないよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jttomodachi_2",
+"who": "doshin",
+"text": "ヘルメットは かぶろうよ",
+"yomi": "ヘルメットはかぶろうよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_jttomodachi_2",
+"who": "doshin",
+"text": "ヘルメットを かぶろうよを",
+"yomi": "ヘルメットをかぶろうよを",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jttomodachi_3",
+"who": "doshin",
+"text": "ころんだら あたまを うつから、ヘルメットは かぶろう",
+"yomi": "転んだら頭を打つから、ヘルメットはかぶろう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jttomodachi_4",
+"who": "doshin",
+"text": "ヘルメットを かぶると、ころんでも あたまを まもって くれるんだよ",
+"yomi": "ヘルメットをかぶると、転んでも頭を守ってくれるんだよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_jttomodachi_5",
+"who": "doshin",
+"text": "こんくん、ヘルメットは じぶんの あたまを まもる ためだよ。いっしょに かぶって いこう",
+"yomi": "こんくん、ヘルメットは自分の頭を守るためだよ。一緒にかぶって行こう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ymnaniyomu",
+"who": "pyon",
+"text": "ねえねえ、なに よんでるの？",
+"yomi": "ねえねえ、何読んでるの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ymnaniyomu",
+"who": "pyon",
+"text": "わあ、みせて みせて！",
+"yomi": "わあ、見せて見せて！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymnaniyomu_0",
+"who": "kon",
+"text": "ほん",
+"yomi": "本",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymnaniyomu_1",
+"who": "kon",
+"text": "きょうりゅうの ほん",
+"yomi": "恐竜の本",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymnaniyomu_2",
+"who": "kon",
+"text": "きょうりゅうの ほんを よんでるよ",
+"yomi": "恐竜の本を読んでるよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ymnaniyomu_2",
+"who": "kon",
+"text": "きょうりゅうの ほんが よんでるよ",
+"yomi": "恐竜の本が読んでるよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymnaniyomu_3",
+"who": "kon",
+"text": "きょうりゅうの ほんだよ。いっしょに みる？",
+"yomi": "恐竜の本だよ。一緒に見る？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymnaniyomu_4",
+"who": "kon",
+"text": "きょうりゅうの ほんだよ。ティラノサウルスが かっこいいんだ。いっしょに みる？",
+"yomi": "恐竜の本だよ。ティラノサウルスがかっこいいんだ。一緒に見る？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymnaniyomu_5",
+"who": "kon",
+"text": "きょうりゅうの ほんだよ。ぴょんちゃんは どの きょうりゅうが すき？",
+"yomi": "恐竜の本だよ。ぴょんちゃんはどの恐竜が好き？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ymsasoi",
+"who": "gao",
+"text": "おい、ドッジボール しようぜ！",
+"yomi": "おい、ドッジボールしようぜ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ymsasoi",
+"who": "gao",
+"text": "おう、まってるぜ！",
+"yomi": "おう、待ってるぜ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymsasoi_0",
+"who": "kon",
+"text": "いいよ",
+"yomi": "いいよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymsasoi_1",
+"who": "kon",
+"text": "いいよ。あとで いく",
+"yomi": "いいよ。後で行く",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymsasoi_2",
+"who": "kon",
+"text": "この ページ よんだら いくね",
+"yomi": "このページ読んだら行くね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ymsasoi_2",
+"who": "kon",
+"text": "この ページを よんだらを いくね",
+"yomi": "このページを読んだらを行くね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymsasoi_3",
+"who": "kon",
+"text": "いいよ。この ページ よんだら いくね",
+"yomi": "いいよ。このページ読んだら行くね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymsasoi_4",
+"who": "kon",
+"text": "さそって くれて ありがとう。この ページを よんだら いくね",
+"yomi": "誘ってくれてありがとう。このページを読んだら行くね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymsasoi_5",
+"who": "kon",
+"text": "さそって くれて ありがとう。ほんに しおりを はさんだら、すぐ いくね",
+"yomi": "誘ってくれてありがとう。本にしおりを挟んだら、すぐ行くね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ymkotowaru",
+"who": "mii",
+"text": "おにごっこ するけど、くる？",
+"yomi": "鬼ごっこするけど、来る？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ymkotowaru",
+"who": "mii",
+"text": "わかったわ。また こんどね",
+"yomi": "分かったわ。また今度ね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkotowaru_0",
+"who": "kon",
+"text": "きょうは いい",
+"yomi": "今日はいい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkotowaru_1",
+"who": "kon",
+"text": "きょうは ほんを よみたい",
+"yomi": "今日は本を読みたい",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkotowaru_2",
+"who": "kon",
+"text": "きょうは ほんを よみたいから、また こんどね",
+"yomi": "今日は本を読みたいから、また今度ね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ymkotowaru_2",
+"who": "kon",
+"text": "きょうは ほんが よみたいから、また こんどね",
+"yomi": "今日は本が読みたいから、また今度ね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkotowaru_3",
+"who": "kon",
+"text": "さそって くれて ありがとう。きょうは ほんを よみたいんだ",
+"yomi": "誘ってくれてありがとう。今日は本を読みたいんだ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkotowaru_4",
+"who": "kon",
+"text": "ありがとう。きょうは ほんを よみたいから、また こんど さそってね",
+"yomi": "ありがとう。今日は本を読みたいから、また今度誘ってね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkotowaru_5",
+"who": "kon",
+"text": "さそって くれて うれしい。でも きょうは ほんを よみたいんだ。あしたは いっしょに あそぼう",
+"yomi": "誘ってくれて嬉しい。でも今日は本を読みたいんだ。あしたは一緒に遊ぼう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ymanime",
+"who": "pyon",
+"text": "ねえ、きのうの アニメ、みた？ すっごく おもしろかったよ！",
+"yomi": "ねえ、昨日のアニメ、見た？すっごく面白かったよ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ymanime",
+"who": "pyon",
+"text": "えっとね、まほうの つかえる ねこが でて くるの！",
+"yomi": "えっとね、魔法の使える猫が出て来るの！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymanime_0",
+"who": "kon",
+"text": "みてない",
+"yomi": "見てない",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymanime_1",
+"who": "kon",
+"text": "みてないんだ",
+"yomi": "見てないんだ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymanime_2",
+"who": "kon",
+"text": "みてないんだ。どんな おはなし？",
+"yomi": "見てないんだ。どんなお話？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ymanime_2",
+"who": "kon",
+"text": "みてないんだ。どんな おはなしを？",
+"yomi": "見てないんだ。どんなお話を？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymanime_3",
+"who": "kon",
+"text": "ぼくは みてないんだ。どんな おはなしなの？",
+"yomi": "僕は見てないんだ。どんなお話なの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymanime_4",
+"who": "kon",
+"text": "みてないけど、おもしろそうだね。どんな おはなしか おしえて",
+"yomi": "見てないけど、面白そうだね。どんなお話か教えて",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymanime_5",
+"who": "kon",
+"text": "ぼくは みてないんだ。でも ぴょんちゃんが すきなら きに なる。どこが おもしろいの？",
+"yomi": "僕は見てないんだ。でもぴょんちゃんが好きなら気になる。どこが面白いの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ymkyara",
+"who": "gao",
+"text": "おまえ、あの アニメ しってる？ おれ、ぜんぶ みてるぜ",
+"yomi": "お前、あのアニメ知ってる？俺、全部見てるぜ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ymkyara",
+"who": "gao",
+"text": "へへっ、ライオンの せんしが さいこうなんだ！",
+"yomi": "へへっ、ライオンの戦士が最高なんだ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkyara_0",
+"who": "kon",
+"text": "しらない",
+"yomi": "知らない",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkyara_1",
+"who": "kon",
+"text": "しらないんだ",
+"yomi": "知らないんだ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkyara_2",
+"who": "kon",
+"text": "しらないけど、おもしろそうだね",
+"yomi": "知らないけど、面白そうだね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ymkyara_2",
+"who": "kon",
+"text": "しらないけど、おもしろそうだを",
+"yomi": "知らないけど、面白そうだを",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkyara_3",
+"who": "kon",
+"text": "しらないんだ。がおくんの いちばん すきな キャラは だれ？",
+"yomi": "知らないんだ。ガオくんの、いちばん、好きなキャラは誰？",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sg_ymkyara_4",
+"who": "kon",
+"text": "ぼくは みて ないけど、きに なる。いちばん すきな キャラは だれ？",
+"yomi": "僕は見てないけど、気になる。いちばん、好きなキャラは誰？",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sg_ymkyara_5",
+"who": "kon",
+"text": "みてないけど、がおくんが そんなに すきなら、こんど みて みようかな",
+"yomi": "見てないけど、ガオくんがそんなに好きなら、今度見てみようかな",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ymkiminona",
+"who": "pyon",
+"text": "ねえ、すきな えいがって ある？",
+"yomi": "ねえ、好きな映画ってある？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ymkiminona",
+"who": "pyon",
+"text": "へえ！ いれかわるの？ おもしろそう！",
+"yomi": "へえ！入れ替わるの？面白そう！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkiminona_0",
+"who": "kon",
+"text": "きみのなは",
+"yomi": "君の名は",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkiminona_1",
+"who": "kon",
+"text": "きみのなはが すき",
+"yomi": "君の名はが好き",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkiminona_2",
+"who": "kon",
+"text": "ぼくは きみのなはが すきだよ",
+"yomi": "僕は君の名はが好きだよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ymkiminona_2",
+"who": "kon",
+"text": "ぼくは きみのなはを すきだよ",
+"yomi": "僕は君の名はを好きだよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkiminona_3",
+"who": "kon",
+"text": "ぼくは「きみのなは」が すきなんだ。しってる？",
+"yomi": "僕は、君の名はが好きなんだ。知ってる？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkiminona_4",
+"who": "kon",
+"text": "「きみのなは」が すきなんだ。おとこのこと おんなのこが いれかわる おはなしだよ",
+"yomi": "君の名はが好きなんだ。男の子と女の子が入れ替わるお話だよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkiminona_5",
+"who": "kon",
+"text": "「きみのなは」が すきだよ。いれかわる おはなしで、そらから ほしが ふって くるのが きれいなんだ",
+"yomi": "君の名はが好きだよ。入れ替わるお話で、空から星が降って来るのが綺麗なんだ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ymlupin",
+"who": "doshin",
+"text": "どしんの すきな えいがはね、ぞうが でて くる やつ。きみは？",
+"yomi": "どしんの好きな映画はね、象が出て来るやつ。君は？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ymlupin",
+"who": "doshin",
+"text": "ルパン！ しってるよ！ こんど いっしょに みたいなあ",
+"yomi": "ルパン！知ってるよ！今度一緒に見たいなあ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymlupin_0",
+"who": "kon",
+"text": "ルパン",
+"yomi": "ルパン",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymlupin_1",
+"who": "kon",
+"text": "ルパンが すき",
+"yomi": "ルパンが好き",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymlupin_2",
+"who": "kon",
+"text": "ぼくは ルパンの えいがが すき",
+"yomi": "僕はルパンの映画が好き",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ymlupin_2",
+"who": "kon",
+"text": "ぼくは ルパンの えいがを すき",
+"yomi": "僕はルパンの映画を好き",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymlupin_3",
+"who": "kon",
+"text": "ルパンの「カリオストロの しろ」が すきなんだ",
+"yomi": "ルパンの、カリオストロの城が好きなんだ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymlupin_4",
+"who": "kon",
+"text": "「カリオストロの しろ」が すきだよ。ルパンが おしろに しのびこむ おはなしなんだ",
+"yomi": "カリオストロの城が好きだよ。ルパンが、おしろに忍び込むお話なんだ",
+"acc": null,
+"job": "st21c"
+},
+{
+"key": "sg_ymlupin_5",
+"who": "kon",
+"text": "ぼくは「カリオストロの しろ」が すき。ルパンが くるまで がけを はしる ところが かっこいいんだ",
+"yomi": "僕はカリオストロの城が好き。ルパンが車で崖を走るところがかっこいいんだ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ymshiranai",
+"who": "chu",
+"text": "ねえ、「きみのなは」って なあに？ ぼく、しらない",
+"yomi": "ねえ、君の名はって、なあに？僕、知らない",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ymshiranai",
+"who": "chu",
+"text": "へえ〜。みて みたいなあ",
+"yomi": "へえ〜。見てみたいなあ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymshiranai_0",
+"who": "kon",
+"text": "えいがだよ",
+"yomi": "映画だよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymshiranai_1",
+"who": "kon",
+"text": "ぼくの すきな えいがだよ",
+"yomi": "僕の好きな映画だよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymshiranai_2",
+"who": "kon",
+"text": "いれかわる おはなしの えいがだよ",
+"yomi": "入れ替わるお話の映画だよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ymshiranai_2",
+"who": "kon",
+"text": "いれかわる おはなしを えいがだよ",
+"yomi": "入れ替わるお話を映画だよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymshiranai_3",
+"who": "kon",
+"text": "ぼくの すきな えいがだよ。おもしろいよ",
+"yomi": "僕の好きな映画だよ。面白いよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymshiranai_4",
+"who": "kon",
+"text": "えいがだよ。ふたりが ゆめの なかで いれかわる おはなしなんだ",
+"yomi": "映画だよ。二人が夢の中で入れ替わるお話なんだ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymshiranai_5",
+"who": "kon",
+"text": "えいがの なまえだよ。こんど いっしょに みようよ。さいごが すごく いいんだ",
+"yomi": "映画の名前だよ。今度一緒に見ようよ。最後がすごくいいんだ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ymhanashikake",
+"who": "chu",
+"text": "ふんふーん。すなに えを かくの、たのしいな",
+"yomi": "ふんふーん。砂に絵をかくの、楽しいな",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sr_ymhanashikake",
+"who": "chu",
+"text": "いいよ！ いっしょに かこう",
+"yomi": "いいよ！一緒にかこう",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sg_ymhanashikake_0",
+"who": "kon",
+"text": "なに してるの？",
+"yomi": "何してるの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymhanashikake_1",
+"who": "kon",
+"text": "ちゅうくん、なに してるの？",
+"yomi": "ちゅうくん、何してるの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymhanashikake_2",
+"who": "kon",
+"text": "なに かいてるの？",
+"yomi": "何かいてるの？",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sx_ymhanashikake_2",
+"who": "kon",
+"text": "なにを かいてるのを？",
+"yomi": "何をかいてるのを？",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sg_ymhanashikake_3",
+"who": "kon",
+"text": "ちゅうくん、なに かいてるの？ いっしょに やっても いい？",
+"yomi": "ちゅうくん、何かいてるの？一緒にやってもいい？",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sg_ymhanashikake_4",
+"who": "kon",
+"text": "すなの え、すてきだね。ぼくも いっしょに かいても いい？",
+"yomi": "砂の絵、素敵だね。僕も一緒にかいてもいい？",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sg_ymhanashikake_5",
+"who": "kon",
+"text": "ちゅうくん、それ きょうりゅう？ ぼくも きょうりゅうが すきなんだ。いっしょに かこう",
+"yomi": "ちゅうくん、それ恐竜？僕も恐竜が好きなんだ。一緒にかこう",
+"acc": null,
+"job": "st21b"
+},
+{
+"key": "sq_ymkaritai",
+"who": "panna",
+"text": "その ほん、おもしろそう！ かして くれる？",
+"yomi": "その本、面白そう！貸してくれる？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ymkaritai",
+"who": "panna",
+"text": "ありがとう！ たのしみに してるね",
+"yomi": "ありがとう！楽しみにしてるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkaritai_0",
+"who": "kon",
+"text": "いいよ",
+"yomi": "いいよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkaritai_1",
+"who": "kon",
+"text": "いいよ。はい、どうぞ",
+"yomi": "いいよ。はい、どうぞ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkaritai_2",
+"who": "kon",
+"text": "いま よんでるから、あとでね",
+"yomi": "今読んでるから、後でね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ymkaritai_2",
+"who": "kon",
+"text": "いま よんでるを、あとでね",
+"yomi": "今読んでるを、後でね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkaritai_3",
+"who": "kon",
+"text": "いま よんでるから、よみおわったら かすね",
+"yomi": "今読んでるから、読み終わったら貸すね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkaritai_4",
+"who": "kon",
+"text": "いいよ。でも いま よんでる とちゅうだから、あした かしても いい？",
+"yomi": "いいよ。でも今読んでる途中だから、あした貸してもいい？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymkaritai_5",
+"who": "kon",
+"text": "いいよ。ぼくが よみおわったら かすね。おもしろい ところを あとで おしえるね",
+"yomi": "いいよ。僕が読み終わったら貸すね。面白いところを後で教えるね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ymhitori",
+"who": "kon",
+"text": "ずっと ほん よんでて、つまんなくない？",
+"yomi": "ずっと本読んでて、つまんなくない？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ymhitori",
+"who": "kon",
+"text": "ふうん。じゃあ、おすすめ おしえて！",
+"yomi": "ふうん。じゃあ、おすすめ教えて！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sq_ymchime",
+"who": "pyon",
+"text": "キーンコーン カーンコーン……",
+"yomi": "キーンコーンカーンコーン……",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sr_ymchime",
+"who": "pyon",
+"text": "うん！ また あとでね",
+"yomi": "うん！また後でね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymchime_0",
+"who": "kon",
+"text": "チャイムだ",
+"yomi": "チャイムだ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymchime_1",
+"who": "kon",
+"text": "チャイムが なったね",
+"yomi": "チャイムが鳴ったね",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymchime_2",
+"who": "kon",
+"text": "チャイムが なったから、もどろう",
+"yomi": "チャイムが鳴ったから、戻ろう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sx_ymchime_2",
+"who": "kon",
+"text": "チャイムを なったから、もどろう",
+"yomi": "チャイムを鳴ったから、戻ろう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymchime_3",
+"who": "kon",
+"text": "チャイムが なったね。きょうしつに もどろう",
+"yomi": "チャイムが鳴ったね。教室に戻ろう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymchime_4",
+"who": "kon",
+"text": "チャイムが なったから、ほんを しまって せきに もどろう",
+"yomi": "チャイムが鳴ったから、本をしまって席に戻ろう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "sg_ymchime_5",
+"who": "kon",
+"text": "チャイムが なったね。ぴょんちゃん、つづきは つぎの やすみじかんに はなそう",
+"yomi": "チャイムが鳴ったね。ぴょんちゃん、続きはつぎの休み時間に話そう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rs_yuushoku",
+"who": "onii",
+"text": "おっ、いま いく！",
+"yomi": "おっ、いま いく！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rs_kokugo",
+"who": "pyon",
+"text": "あ、ごめんね。どうぞ",
+"yomi": "あ、ごめんね。どうぞ",
+"acc": null,
+"job": "st21c"
+},
+{
+"key": "rs_taiiku",
+"who": "doshin",
+"text": "ありがとう！ たすかったよ",
+"yomi": "ありがとう！ たすかったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rs_ongaku",
+"who": "panna",
+"text": "ありがとう！ たすかる",
+"yomi": "ありがとう！ たすかる",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rs_zukou",
+"who": "doshin",
+"text": "ありがとう。たすかったよ",
+"yomi": "ありがとう。たすかったよ",
+"acc": null,
+"job": "st21c"
+},
+{
+"key": "rs_jitensha",
+"who": "kamejii",
+"text": "ほっほ、ていねいに ありがとう",
+"yomi": "ほっほ、ていねいに ありがとう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rs_yasumi",
+"who": "mii",
+"text": "……うん、いいわよ！",
+"yomi": "……うん、いいわよ！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dou_chumama",
+"who": "chumama",
+"text": "ねえ、きょう がっこうは どうだった？",
+"yomi": "ねえ、きょう がっこうは どうだった？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_nani_chumama",
+"who": "chumama",
+"text": "へえ。なにが あったの？",
+"yomi": "へえ。なにが あったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dare_chumama",
+"who": "chumama",
+"text": "だれと いっしょだったの？",
+"yomi": "だれと いっしょだったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dounatta_chumama",
+"who": "chumama",
+"text": "それで、どう なったの？",
+"yomi": "それで、どう なったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_kimochi_chumama",
+"who": "chumama",
+"text": "そのとき、どんな きもちだった？",
+"yomi": "そのとき、どんな きもちだった？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_res_chumama",
+"who": "chumama",
+"text": "たくさん おはなし して くれて ありがとう。よく わかったよ",
+"yomi": "たくさん おはなし して くれて ありがとう。よく わかったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dou_doshinpapa",
+"who": "doshinpapa",
+"text": "ねえ、きょう がっこうは どうだった？",
+"yomi": "ねえ、きょう がっこうは どうだった？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_nani_doshinpapa",
+"who": "doshinpapa",
+"text": "へえ。なにが あったの？",
+"yomi": "へえ。なにが あったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dare_doshinpapa",
+"who": "doshinpapa",
+"text": "だれと いっしょだったの？",
+"yomi": "だれと いっしょだったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dounatta_doshinpapa",
+"who": "doshinpapa",
+"text": "それで、どう なったの？",
+"yomi": "それで、どう なったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_kimochi_doshinpapa",
+"who": "doshinpapa",
+"text": "そのとき、どんな きもちだった？",
+"yomi": "そのとき、どんな きもちだった？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_res_doshinpapa",
+"who": "doshinpapa",
+"text": "たくさん おはなし して くれて ありがとう。よく わかったよ",
+"yomi": "たくさん おはなし して くれて ありがとう。よく わかったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dou_gaomama",
+"who": "gaomama",
+"text": "ねえ、きょう がっこうは どうだった？",
+"yomi": "ねえ、きょう がっこうは どうだった？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_nani_gaomama",
+"who": "gaomama",
+"text": "へえ。なにが あったの？",
+"yomi": "へえ。なにが あったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dare_gaomama",
+"who": "gaomama",
+"text": "だれと いっしょだったの？",
+"yomi": "だれと いっしょだったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dounatta_gaomama",
+"who": "gaomama",
+"text": "それで、どう なったの？",
+"yomi": "それで、どう なったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_kimochi_gaomama",
+"who": "gaomama",
+"text": "そのとき、どんな きもちだった？",
+"yomi": "そのとき、どんな きもちだった？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_res_gaomama",
+"who": "gaomama",
+"text": "たくさん おはなし して くれて ありがとう。よく わかったよ",
+"yomi": "たくさん おはなし して くれて ありがとう。よく わかったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dou_mama",
+"who": "mama",
+"text": "ねえ、きょう がっこうは どうだった？",
+"yomi": "ねえ、きょう がっこうは どうだった？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_nani_mama",
+"who": "mama",
+"text": "へえ。なにが あったの？",
+"yomi": "へえ。なにが あったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dare_mama",
+"who": "mama",
+"text": "だれと いっしょだったの？",
+"yomi": "だれと いっしょだったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dounatta_mama",
+"who": "mama",
+"text": "それで、どう なったの？",
+"yomi": "それで、どう なったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_kimochi_mama",
+"who": "mama",
+"text": "そのとき、どんな きもちだった？",
+"yomi": "そのとき、どんな きもちだった？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_res_mama",
+"who": "mama",
+"text": "たくさん おはなし して くれて ありがとう。よく わかったよ",
+"yomi": "たくさん おはなし して くれて ありがとう。よく わかったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dou_miimama",
+"who": "miimama",
+"text": "ねえ、きょう がっこうは どうだった？",
+"yomi": "ねえ、きょう がっこうは どうだった？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_nani_miimama",
+"who": "miimama",
+"text": "へえ。なにが あったの？",
+"yomi": "へえ。なにが あったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dare_miimama",
+"who": "miimama",
+"text": "だれと いっしょだったの？",
+"yomi": "だれと いっしょだったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dounatta_miimama",
+"who": "miimama",
+"text": "それで、どう なったの？",
+"yomi": "それで、どう なったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_kimochi_miimama",
+"who": "miimama",
+"text": "そのとき、どんな きもちだった？",
+"yomi": "そのとき、どんな きもちだった？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_res_miimama",
+"who": "miimama",
+"text": "たくさん おはなし して くれて ありがとう。よく わかったよ",
+"yomi": "たくさん おはなし して くれて ありがとう。よく わかったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dou_pyonmama",
+"who": "pyonmama",
+"text": "ねえ、きょう がっこうは どうだった？",
+"yomi": "ねえ、きょう がっこうは どうだった？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_nani_pyonmama",
+"who": "pyonmama",
+"text": "へえ。なにが あったの？",
+"yomi": "へえ。なにが あったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dare_pyonmama",
+"who": "pyonmama",
+"text": "だれと いっしょだったの？",
+"yomi": "だれと いっしょだったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_dounatta_pyonmama",
+"who": "pyonmama",
+"text": "それで、どう なったの？",
+"yomi": "それで、どう なったの？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_kimochi_pyonmama",
+"who": "pyonmama",
+"text": "そのとき、どんな きもちだった？",
+"yomi": "そのとき、どんな きもちだった？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "kq_res_pyonmama",
+"who": "pyonmama",
+"text": "たくさん おはなし して くれて ありがとう。よく わかったよ",
+"yomi": "たくさん おはなし して くれて ありがとう。よく わかったよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rq_aka",
+"who": "omawari",
+"text": "しんごうが あかだよ。どうする？",
+"yomi": "しんごうが あかだよ。どうする？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rq_helmet",
+"who": "omawari",
+"text": "じてんしゃに のる まえに、あたまに なにを する？",
+"yomi": "じてんしゃに のる まえに、あたまに なにを する？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rq_hidari",
+"who": "omawari",
+"text": "じてんしゃは、みちの どっちがわを はしる？",
+"yomi": "じてんしゃは、みちの どっちがわを はしる？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rq_kasa",
+"who": "omawari",
+"text": "あめの ひに じてんしゃに のる ときは？",
+"yomi": "あめの ひに じてんしゃに のる ときは？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rq_narabi",
+"who": "omawari",
+"text": "ともだちと いっしょに はしる ときは？",
+"yomi": "ともだちと いっしょに はしる ときは？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rq_tomare",
+"who": "omawari",
+"text": "「とまれ」の マークが あったら？",
+"yomi": "とまれの マークが あったら？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rq_hodou",
+"who": "omawari",
+"text": "ほどうに ひとが たくさん いるよ。どうする？",
+"yomi": "ほどうに ひとが たくさん いるよ。どうする？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rq_light",
+"who": "omawari",
+"text": "くらく なって きたよ。どうする？",
+"yomi": "くらく なって きたよ。どうする？",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rq_ok",
+"who": "omawari",
+"text": "せいかい！",
+"yomi": "せいかい！",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rq_ng",
+"who": "omawari",
+"text": "ざんねん。もう いっぽうが ただしいよ",
+"yomi": "ざんねん。もう いっぽうが ただしいよ",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rq_say",
+"who": "omawari",
+"text": "じゃあ、ルールを いって みよう",
+"yomi": "じゃあ、ルールを いって みよう",
+"acc": null,
+"job": "st21"
+},
+{
+"key": "rq_res",
+"who": "omawari",
+"text": "ルールを まもって、あんぜんに のろうね",
+"yomi": "ルールを まもって、あんぜんに のろうね",
+"acc": null,
+"job": "st21"
 }
 ]
