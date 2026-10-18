@@ -1,0 +1,1601 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="apple-mobile-web-app-title" content="まるシマリバーシ">
+<style>body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
+</head><body>
+<title>まるシマリバーシ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
+<style>
+/* 配置：盤を主役に中央、両わきに二人の席（縦持ちでは盤の下に二人が並ぶ）。
+   色：ことばのたねの絵柄（太い墨の線・明るい色）＋ 緑の盤と黒い枠（REVERSI REAL を参考） ＋ 障子の壁（おばあちゃんの家） */
+:root {
+  --ink: #2B2A33;
+  --wall: #F5F0E4;
+  --wall-2: #E9E0CC;
+  --lattice: #DCCFB4;
+  --felt-hi: #63C392;
+  --felt: #3E9F6B;
+  --felt-lo: #2C8257;
+  --line: #13201A;
+  --frame: #2F363D;
+  --frame-hi: #4A535C;
+  --mint: #8CF2D6;
+  --halo: 255, 92, 112;
+  --seat: #FFFDF6;
+  --glow: #FFD25E;
+  --hint: #FFE27A;
+  --pink: #FF6F91;
+  --disc-k: #2B2A33;
+  --disc-k-hi: #5B5A68;
+  --disc-w: #FFFDF7;
+  --disc-w-lo: #E6DECD;
+  --muted: #6E6A75;
+  --display: "Mochiy Pop One", "Zen Maru Gothic", "Hiragino Maru Gothic ProN", sans-serif;
+  --body: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", sans-serif;
+  color-scheme: light;
+}
+html, body { height: 100%; }
+body {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 118px, var(--lattice) 118px 121px),
+    repeating-linear-gradient(0deg, transparent 0 158px, var(--lattice) 158px 161px),
+    linear-gradient(var(--wall), var(--wall-2));
+  color: var(--ink); font-family: var(--body); overflow: hidden;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; touch-action: manipulation;
+}
+#app {
+  height: 100%; box-sizing: border-box; display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 16px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 12px;
+}
+.boardWrap { display: flex; align-items: center; justify-content: center; min-width: 0; }
+#board {
+  width: var(--bs, 600px); height: var(--bs, 600px); box-sizing: border-box; position: relative;
+  display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, 1fr); gap: 0;
+  background: radial-gradient(ellipse at 50% 46%, var(--felt-hi) 0%, var(--felt) 52%, var(--felt-lo) 100%);
+  border: calc(var(--bs, 600px) * .036) solid var(--frame); border-top-color: var(--frame-hi); border-radius: 12px;
+  outline: 5px solid var(--ink); box-shadow: inset 0 0 0 2px var(--line), 0 10px 0 rgba(43, 42, 51, .2);
+}
+#board::after { content: ""; position: absolute; inset: 0; background: rgba(255, 253, 246, .5); opacity: 0; transition: opacity .3s; pointer-events: none; border-radius: 4px; }
+#board.dim::after { opacity: 1; }
+.cell { position: relative; background: transparent; box-shadow: inset 0 0 0 1.5px var(--line); border: 0; padding: 0; margin: 0; perspective: 420px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.star { position: absolute; width: calc(var(--bs, 600px) * .017); height: calc(var(--bs, 600px) * .017); border-radius: 50%; background: var(--line); transform: translate(-50%, -50%); pointer-events: none; z-index: 1; }
+#halo { position: absolute; width: 22%; height: 22%; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; display: none;
+  background: radial-gradient(circle, rgba(var(--halo), .72) 0, rgba(var(--halo), .4) 42%, rgba(var(--halo), 0) 70%); }
+#halo.on { display: block; animation: halo .35s ease-out; }
+@keyframes halo { from { opacity: 0; transform: translate(-50%, -50%) scale(.5); } }
+.cell:focus-visible { outline: 4px solid var(--pink); outline-offset: -4px; z-index: 2; }
+.cell.shake { animation: shake .3s; }
+@keyframes shake { 20% { transform: translateX(-6%); } 50% { transform: translateX(6%); } 80% { transform: translateX(-3%); } }
+.hint { position: absolute; inset: 0; display: none; place-items: center; pointer-events: none; }
+.cell.can .hint { display: grid; }
+.hint i { position: absolute; width: 30%; height: 30%; border-radius: 50%; box-sizing: border-box; border: max(3px, calc(var(--bs, 600px) * .007)) solid var(--mint);
+  box-shadow: 0 0 calc(var(--bs, 600px) * .02) rgba(140, 242, 214, .7); animation: glow 1.6s ease-in-out infinite; }
+.hint::before { content: ""; position: absolute; width: 9%; height: 9%; border-radius: 50%; background: var(--mint); animation: glow 1.6s ease-in-out infinite; }
+@keyframes glow { 0%, 100% { opacity: .65; transform: scale(.9); } 50% { opacity: 1; transform: scale(1.1); } }
+.disc { position: absolute; inset: 7%; z-index: 2; transform-style: preserve-3d; }
+.disc[data-c="0"] { visibility: hidden; }
+.f { position: absolute; inset: 0; border-radius: 50%; backface-visibility: hidden; -webkit-backface-visibility: hidden; box-sizing: border-box; }
+.f.b { transform: rotateY(180deg); }
+/* 止まっている石は真上から見た平たい円。下に見える細い帯が厚み（黒の石の下は白、白の石の下は黒） */
+.f[data-c="1"] { background: radial-gradient(circle at 42% 36%, #3A3A40 0, #232326 52%, #18181A 100%);
+  box-shadow: inset 0 0 0 max(1px, calc(var(--bs, 600px) * .0025)) rgba(255, 255, 255, .07), 0 calc(var(--bs, 600px) * .0035) 0 #0E0E10, 0 calc(var(--bs, 600px) * .0075) 0 #D2D2CC, 0 calc(var(--bs, 600px) * .011) calc(var(--bs, 600px) * .01) rgba(0, 0, 0, .38); }
+.f[data-c="2"] { background: radial-gradient(circle at 42% 36%, #FFFFFF 0, #F3F3EF 55%, #E3E3DD 100%);
+  box-shadow: inset 0 0 0 max(1px, calc(var(--bs, 600px) * .0025)) rgba(0, 0, 0, .06), 0 calc(var(--bs, 600px) * .0035) 0 #BEBEB8, 0 calc(var(--bs, 600px) * .0075) 0 #1C1C1F, 0 calc(var(--bs, 600px) * .011) calc(var(--bs, 600px) * .01) rgba(0, 0, 0, .34); }
+.cyl { position: absolute; inset: 7%; transform-style: preserve-3d; z-index: 3; pointer-events: none; }
+.cyl .f { box-shadow: none; }
+.cyl .f[data-c="1"] { background: radial-gradient(circle at 42% 36%, #3A3A40 0, #232326 52%, #18181A 100%); }
+.edge { position: absolute; left: 50%; top: 50%; backface-visibility: visible; }
+
+.side {
+  display: flex; flex-direction: column; align-items: stretch; gap: 10px; min-width: 0;
+  background: var(--seat); border: 5px solid var(--ink); border-radius: 26px; padding: 12px; box-sizing: border-box;
+  transition: box-shadow .3s;
+}
+.side.active { animation: seat 1.6s ease-in-out infinite; }
+@keyframes seat { 0%, 100% { box-shadow: 0 0 0 6px var(--glow); } 50% { box-shadow: 0 0 0 10px var(--glow); } }
+.chip { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-size: clamp(18px, 2.4vmin, 28px); line-height: 1.2; min-width: 0; }
+.chip .nm { min-width: 0; overflow-wrap: anywhere; }
+.stone { flex: none; width: 1.3em; height: 1.3em; border-radius: 50%; border: 3px solid var(--ink); box-sizing: border-box; }
+.stone[data-c="1"] { background: radial-gradient(circle at 34% 30%, var(--disc-k-hi), var(--disc-k) 58%); }
+.stone[data-c="2"] { background: radial-gradient(circle at 34% 30%, #FFFFFF, var(--disc-w) 45%, var(--disc-w-lo)); }
+.slot { flex: 1; min-height: 80px; }
+.score { display: flex; align-items: center; justify-content: center; gap: 12px; font-family: var(--display); font-size: clamp(34px, 6vmin, 64px); line-height: 1; font-variant-numeric: tabular-nums; }
+.score small { font-size: .42em; align-self: flex-end; margin-bottom: .25em; margin-left: -.35em; }
+.score .stone { width: .8em; height: .8em; border-width: 4px; }
+.matta {
+  font: 900 clamp(18px, 2.6vmin, 30px) var(--body); color: var(--ink); background: #FFFFFF; border: 4px solid var(--ink); border-radius: 999px;
+  padding: .45em .8em; display: flex; align-items: center; justify-content: center; gap: .4em; cursor: pointer; box-shadow: 0 5px 0 var(--ink);
+}
+.matta svg { width: 1.3em; height: 1.3em; }
+.matta:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 1px 0 var(--ink); }
+.matta:disabled { opacity: .35; cursor: default; }
+.matta:focus-visible, .big:focus-visible, .seg button:focus-visible { outline: 4px solid var(--pink); outline-offset: 3px; }
+
+#stage { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; overflow: visible; }
+#bubble {
+  position: fixed; z-index: 6; max-width: min(78vw, 640px); transform: translate(-50%, -100%);
+  background: #FFFFFF; border: 5px solid var(--ink); border-radius: 28px; padding: .55em .9em; box-sizing: border-box;
+  font: 900 clamp(20px, 3.4vmin, 38px)/1.35 var(--body); text-align: center; text-wrap: balance; word-break: keep-all; overflow-wrap: anywhere; pointer-events: none;
+  opacity: 0; transition: opacity .2s;
+}
+#bubble.on { opacity: 1; }
+#bubble::after { content: ""; position: absolute; left: 50%; bottom: -17px; width: 26px; height: 26px; background: #FFFFFF; border: 5px solid var(--ink); border-top: 0; border-left: 0; transform: translateX(-50%) rotate(45deg); }
+
+.cover { position: fixed; inset: 0; z-index: 8; display: grid; place-items: center; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.cover[hidden] { display: none !important; }
+#startOv { background: rgba(231, 242, 236, .72); }
+.startCard { display: grid; justify-items: center; gap: 22px; text-align: center; }
+.logo { font-family: var(--display); font-size: clamp(36px, 8vmin, 84px); line-height: 1.1; margin: 0; letter-spacing: .02em; text-wrap: balance;
+  -webkit-text-stroke: 3px var(--ink); paint-order: stroke fill; color: #FFFFFF; text-shadow: 0 6px 0 var(--ink); }
+.logo span { color: var(--glow); }
+.big {
+  font: 900 clamp(26px, 5vmin, 50px) var(--display); color: var(--ink); background: var(--glow); border: 5px solid var(--ink); border-radius: 999px;
+  padding: .4em 1.6em; cursor: pointer; box-shadow: 0 8px 0 var(--ink);
+}
+.big:active { transform: translateY(6px); box-shadow: 0 2px 0 var(--ink); }
+.note { font-size: 15px; color: var(--muted); margin: 0; }
+#againOv { place-items: end center; padding-block: 0 8vh; pointer-events: none; }
+#againOv .big { pointer-events: auto; }
+
+#settings { background: rgba(43, 42, 51, .45); }
+.panel { background: var(--seat); border: 5px solid var(--ink); border-radius: 24px; padding: 20px 22px; width: min(520px, 100%); box-sizing: border-box; max-height: 90%; overflow: auto; display: grid; gap: 16px; }
+.panel h2 { margin: 0; font: 400 24px var(--display); }
+.row { display: grid; gap: 6px; }
+.row > span { font-weight: 700; font-size: 15px; letter-spacing: .04em; color: var(--muted); }
+.seg { display: flex; gap: 6px; flex-wrap: wrap; }
+.seg button { flex: 1; min-width: 70px; font: 700 17px var(--body); padding: 10px 8px; border: 3px solid var(--ink); border-radius: 14px; background: #FFFFFF; color: var(--ink); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--glow); }
+.panelBtns { display: flex; gap: 10px; flex-wrap: wrap; }
+.panelBtns button { flex: 1; font: 700 17px var(--body); padding: 12px; border: 3px solid var(--ink); border-radius: 14px; background: #FFFFFF; color: var(--ink); cursor: pointer; }
+.panelBtns .primary { background: var(--glow); }
+.panelBtns .confirm { background: var(--pink); color: #FFFFFF; }
+
+@media (orientation: portrait), (max-aspect-ratio: 11/10) {
+  #app { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  .boardWrap { grid-column: 1 / -1; grid-row: 1; }
+  #sideA { grid-column: 1; grid-row: 2; } #sideB { grid-column: 2; grid-row: 2; }
+  .side { display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr auto; gap: 8px; }
+  .chip { grid-column: 1 / -1; }
+  .slot { grid-column: 1; grid-row: 2 / 4; min-height: 0; }
+  .score { grid-column: 2; grid-row: 2; }
+  .matta { grid-column: 2; grid-row: 3; }
+}
+@media (prefers-reduced-motion: reduce) { .hint i, .side.active { animation-duration: 4s; } }
+</style>
+
+<div id="app">
+  <section class="side" id="sideA" aria-label="こどもの せき">
+    <div class="chip"><span class="stone" data-c="1"></span><span class="nm" id="nameA">くろ</span></div>
+    <div class="slot" id="slotA"></div>
+    <div class="score"><span class="stone" data-c="1"></span><b id="cntA">2</b><small>まい</small></div>
+    <button class="matta" id="mattaA" type="button" disabled><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 26V12a3 3 0 0 1 6 0v10V8a3 3 0 0 1 6 0v14V10a3 3 0 0 1 6 0v14v-8a3 3 0 0 1 6 0v14c0 9-6 14-13 14s-11-3-15-9l-5-8a3 3 0 0 1 5-3l4 5z" fill="#FFE9CF" stroke="#2B2A33" stroke-width="3.5" stroke-linejoin="round"/></svg>まった</button>
+  </section>
+  <div class="boardWrap"><div id="board" role="grid" aria-label="リバーシの ばん"></div></div>
+  <section class="side" id="sideB" aria-label="おばあちゃんの せき">
+    <div class="chip"><span class="stone" data-c="2"></span><span class="nm" id="nameB">しろ</span></div>
+    <div class="slot" id="slotB"></div>
+    <div class="score"><span class="stone" data-c="2"></span><b id="cntB">2</b><small>まい</small></div>
+    <button class="matta" id="mattaB" type="button" disabled><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 26V12a3 3 0 0 1 6 0v10V8a3 3 0 0 1 6 0v14V10a3 3 0 0 1 6 0v14v-8a3 3 0 0 1 6 0v14c0 9-6 14-13 14s-11-3-15-9l-5-8a3 3 0 0 1 5-3l4 5z" fill="#FFE9CF" stroke="#2B2A33" stroke-width="3.5" stroke-linejoin="round"/></svg>まった</button>
+  </section>
+</div>
+<svg id="stage" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+<div id="bubble" role="status" aria-live="polite"></div>
+
+<div class="cover" id="startOv">
+  <div class="startCard">
+    <h1 class="logo">まるシマ<span>リバーシ</span></h1>
+    <button class="big" id="startBtn" type="button">はじめる</button>
+    <p class="note">おとなの せってい：ばんの そとを 3びょう ながおし</p>
+  </div>
+</div>
+<div class="cover" id="againOv" hidden><button class="big" id="againBtn" type="button">もういっかい</button></div>
+
+<div class="cover" id="settings" hidden>
+  <div class="panel" role="dialog" aria-label="せってい">
+    <h2>せってい</h2>
+    <div class="row"><span>テンポ</span><div class="seg" data-key="slow"><button type="button" id="slow0" data-v="0">ふつう</button><button type="button" id="slow1" data-v="1">ゆっくり</button></div></div>
+    <div class="row"><span>おける ばしょの ひかり</span><div class="seg" data-key="hints"><button type="button" id="hints1" data-v="1">みせる</button><button type="button" id="hints0" data-v="0">みせない</button></div></div>
+    <div class="row"><span>こうかおん</span><div class="seg" data-key="sfx"><button type="button" id="sfx0" data-v="0">なし</button><button type="button" id="sfx1" data-v="1">小</button><button type="button" id="sfx2" data-v="2">中</button><button type="button" id="sfx3" data-v="3">大</button></div></div>
+    <div class="row"><span>キャラの こえ</span><div class="seg" data-key="voice"><button type="button" id="voice0" data-v="0">なし</button><button type="button" id="voice1" data-v="1">小</button><button type="button" id="voice2" data-v="2">中</button><button type="button" id="voice3" data-v="3">大</button></div></div>
+    <div class="panelBtns"><button type="button" id="resetBtn">さいしょから</button><button type="button" id="closeBtn" class="primary">とじる</button></div>
+  </div>
+</div>
+
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const INK = "#2B2A33";
+const svg = document.getElementById("stage");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let motion = reduce ? 0.35 : 1;
+class Spring {
+  constructor(v = 0, k = 170, d = 13) { this.v = v; this.t = v; this.vel = 0; this.k = k; this.d = d; }
+  step(dt) { const f = -this.k * (this.v - this.t) - this.d * this.vel; this.vel += f * dt; this.v += this.vel * dt; return this.v; }
+}
+const el = (tag, attrs = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+const lerp = (a, b, t) => a + (b - a) * t;
+const rot = (deg, x, y) => `rotate(${deg.toFixed(2)} ${x} ${y})`;
+const defs = el("defs", {}, svg);
+const charLayer = el("g", {}, svg);
+const fxLayer = el("g", {}, svg);
+function showEar() {}
+/* ---------- キャラクター 10体（共通の骨組み） ----------
+   どのキャラも同じ形の「部品表」を返す。動かし方は共通のコードが受け持つ。
+   座標は原画（キャラクター原画案）のものをそのまま使う。 */
+const ST = (sw = 6) => ({ stroke: INK, "stroke-width": sw, "stroke-linejoin": "round", "stroke-linecap": "round" });
+function leg(root, x, top, w, len, fill, hoof, sw = 6) {
+  const g = el("g", {}, root);
+  el("rect", { x: x - w / 2, y: top, width: w, height: hoof ? len - 12 : len, rx: w * 0.44, fill, ...ST(sw) }, g);
+  if (hoof) el("rect", { x: x - w / 2, y: top + len - 26, width: w, height: 26, rx: 11, fill: hoof, ...ST(sw) }, g);
+  return { g, px: x, py: top + 2 };
+}
+function arm(root, px, py, rx, ry, fill, paw, rest, sw = 6) {
+  const g = el("g", {}, root);
+  el("ellipse", { cx: px, cy: py + ry * 0.9, rx, ry, fill, ...ST(sw) }, g);
+  if (paw) el("ellipse", { cx: px, cy: py + ry * 1.6, rx: rx * 0.74, ry: ry * 0.25, fill: paw }, g);
+  return { g, px, py, rest };
+}
+function eyesAt(head, list, sw = 0) {
+  return list.map(([cx, cy, rx, ry]) => {
+    const g = el("g", {}, head);
+    el("ellipse", { cx, cy, rx, ry, fill: INK }, g);
+    el("circle", { cx: cx - rx * 0.33, cy: cy - ry * 0.37, r: rx * 0.4, fill: "#FFFFFF" }, g);
+    el("circle", { cx: cx + rx * 0.33, cy: cy + ry * 0.37, r: rx * 0.2, fill: "#FFFFFF" }, g);
+    return { g, cx, cy };
+  });
+}
+function happyAt(head, xs, y, half = 16, sw = 7) {
+  const g = el("g", { opacity: 0, fill: "none", stroke: INK, "stroke-width": sw, "stroke-linecap": "round" }, head);
+  xs.forEach(x => el("path", { d: `M${x - half} ${y + 6} Q${x} ${y - half} ${x + half} ${y + 6}` }, g));
+  return g;
+}
+function mouthAt(head, x, top, w, sw = 5, closed) {
+  const path = el("path", { fill: "#FF6F91", ...ST(sw) }, head);
+  const tongue = el("ellipse", { cx: x, fill: "#FFB3C1" }, head);
+  return { type: "smile", path, tongue, x, top, w, sw, closed };
+}
+function clipEllipse(id, cx, cy, rx, ry) { const cp = el("clipPath", { id }, defs); el("ellipse", { cx, cy, rx, ry }, cp); return `url(#${id})`; }
+function ring(g, cx, cy, R, r, fill, sw = 6) {
+  for (let i = 0; i < 10; i++) { const a = i / 10 * Math.PI * 2; el("circle", { cx: cx + Math.cos(a) * R, cy: cy + Math.sin(a) * R, r, fill, ...ST(sw) }, g); }
+  el("circle", { cx, cy, r: R + 2, fill }, g);
+}
+
+function recolor(root, map) { root.querySelectorAll("*").forEach(e => { ["fill", "stroke"].forEach(a => { const v = e.getAttribute(a); if (v && map[v]) e.setAttribute(a, map[v]); }); }); }
+function hideFill(root, colors) { root.querySelectorAll("*").forEach(e => { if (colors.includes(e.getAttribute("fill"))) e.setAttribute("display", "none"); }); }
+// たてがみの ない がお型（くま・とら）は、あたまと からだの あいだが あいて 見えるので、くびを うめる
+// くび（たてがみを けした キャラ用）：からだの うしろに おく。からだの ふちどりを かくさない（2026-10-18 ぼやけ なおし）
+function neckFill(root, p, col) { const n = el("g", {}); root.insertBefore(n, root.firstChild); el("path", { d: "M156 300 Q156 236 200 232 Q244 236 244 300 Z", fill: col, stroke: INK, "stroke-width": 6, "stroke-linejoin": "round" }, n); }
+// ママに する：エプロン・まつげ・リボン
+function momize(root, p, col, rib, at = [262, 70]) { const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g);
+  el("path", { d: "M150 288 Q200 276 250 288 L268 380 Q200 396 132 380 Z", fill: col, ...ST(5) }, bd); el("path", { d: "M160 330 Q200 344 240 330", fill: "none", ...ST(4) }, bd); el("circle", { cx: 200, cy: 356, r: 9, fill: "#FFFFFF", ...ST(3) }, bd);
+  (p.eyes || []).forEach(e => { const sx = e.cx < 200 ? -1 : 1; el("path", { d: `M${e.cx + sx * 16} ${e.cy - 14} l${sx * 9} -8 M${e.cx + sx * 4} ${e.cy - 20} l${sx * 4} -10`, fill: "none", ...ST(4) }, p.head.g); });
+  const rb = el("g", { transform: `translate(${at[0]} ${at[1]}) rotate(20)` }, p.head.g); el("path", { d: "M0 0 L-30 -16 L-30 16 Z M0 0 L30 -16 L30 16 Z", fill: rib, ...ST(4) }, rb); el("circle", { r: 8, fill: rib, ...ST(4) }, rb); }
+// はくい（おいしゃさん・はいしゃさん）
+function coatOn(root, p, col) { const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g);
+  el("path", { d: "M134 286 Q200 270 266 286 L280 392 Q200 408 120 392 Z", fill: col, ...ST(5) }, bd); el("path", { d: "M176 282 L200 330 L224 282 M200 330 V404", fill: "none", ...ST(4) }, bd);
+  el("rect", { x: 222, y: 340, width: 32, height: 26, rx: 4, fill: "none", ...ST(3) }, bd); }
+const BUILD = {
+  pony(root) {
+    const s = ST(), B = "#D98A4E", H = "#6B4A36", T = "#FFD36E";
+    const tail = el("g", {}, root); el("path", { d: "M262 338 Q322 318 324 372 Q302 394 286 368 Q292 352 262 356 Z", fill: T, ...s }, tail);
+    const legs = [168, 232].map(x => leg(root, x, 360, 36, 54, "#FFF6E9", H));
+    el("ellipse", { cx: 200, cy: 325, rx: 72, ry: 62, fill: B, ...s }, root);
+    el("ellipse", { cx: 200, cy: 338, rx: 40, ry: 38, fill: "#FFE9CF" }, root);
+    const arms = [arm(root, 132, 290, 19, 40, B, H, 20), arm(root, 268, 290, 19, 40, B, H, -20)];
+    const head = el("g", {}, root);
+    el("path", { d: "M92 118 Q58 170 76 242 Q100 266 114 238 Q96 180 122 118 Z", fill: T, ...s }, head);
+    const ears = [[-1, 122, 124], [1, 278, 276]].map(([d, ex, px]) => { const g = el("g", {}, head); const e = el("g", { transform: `translate(${ex} 72) rotate(${d * 24})` }, g);
+      el("path", { d: "M-24 34 Q-22 -30 0 -42 Q22 -30 24 34 Z", fill: B, ...s }, e); el("path", { d: "M-11 26 Q-10 -12 0 -22 Q10 -12 11 26 Z", fill: "#FFB3C1" }, e); return { g, px, py: 112 }; });
+    el("ellipse", { cx: 200, cy: 172, rx: 112, ry: 108, fill: B, ...s }, head);
+    el("path", { d: "M184 60 Q200 52 216 60 Q226 140 214 196 L186 196 Q174 140 184 60 Z", fill: "#FFF6E9", "clip-path": clipEllipse("c-pony", 200, 172, 112, 108) }, head);
+    el("ellipse", { cx: 200, cy: 172, rx: 112, ry: 108, fill: "none", ...s }, head);
+    el("ellipse", { cx: 200, cy: 236, rx: 78, ry: 52, fill: "#FFE9CF", ...s }, head);
+    [172, 228].forEach(x => el("ellipse", { cx: x, cy: 214, rx: 7, ry: 5, fill: INK }, head));
+    const mouth = mouthAt(head, 200, 238, 22);
+    const eyes = eyesAt(head, [[156, 162, 15, 19], [244, 162, 15, 19]]);
+    const happy = happyAt(head, [156, 244], 162);
+    [116, 284].forEach(x => el("ellipse", { cx: x, cy: 210, rx: 14, ry: 9, fill: "#FF9FB0" }, head));
+    el("path", { d: "M150 74 Q170 30 214 34 Q250 40 250 72 Q232 62 226 96 Q206 70 196 112 Q182 80 168 104 Q164 84 150 74 Z", fill: T, ...s }, head);
+    return { base: 414, top: 30, tail: { g: tail, px: 262, py: 345 }, legs, arms, head: { g: head, px: 200, py: 262 }, ears, eyes, happy, mouth };
+  },
+  shima(root) {
+    const s = ST(), H = "#4A4754";
+    const tail = el("g", {}, root); el("path", { d: "M262 345 Q310 340 312 300", fill: "none", ...s, "stroke-width": 8 }, tail); el("ellipse", { cx: 314, cy: 292, rx: 14, ry: 20, fill: INK, ...s }, tail);
+    const legs = [168, 232].map(x => leg(root, x, 360, 36, 54, "#FFFFFF", H));
+    el("ellipse", { cx: 200, cy: 325, rx: 72, ry: 62, fill: "#FFFFFF", ...s }, root);
+    const st = el("g", { "clip-path": clipEllipse("c-shima-b", 200, 325, 72, 62), fill: "none", stroke: INK, "stroke-width": 11, "stroke-linecap": "round" }, root);
+    ["M120 300 q30 10 50 0", "M122 328 q30 10 48 0", "M130 356 q26 8 40 0", "M280 300 q-30 10 -50 0", "M278 328 q-30 10 -48 0", "M270 356 q-26 8 -40 0"].forEach(d => el("path", { d }, st));
+    el("ellipse", { cx: 200, cy: 325, rx: 72, ry: 62, fill: "none", ...s }, root);
+    const arms = [arm(root, 132, 290, 19, 40, "#FFFFFF", H, 20), arm(root, 268, 290, 19, 40, "#FFFFFF", H, -20)];
+    const head = el("g", {}, root);
+    const ears = [[-1, 108, 124], [1, 292, 276]].map(([d, ex, px]) => { const g = el("g", {}, head); const e = el("g", { transform: `translate(${ex} 78) rotate(${d * 28})` }, g);
+      el("ellipse", { rx: 26, ry: 44, fill: "#FFFFFF", ...s }, e); el("ellipse", { cy: 4, rx: 13, ry: 28, fill: "#FFB3C1" }, e); return { g, px, py: 112 }; });
+    el("path", { d: "M168 78 Q174 28 200 26 Q226 28 232 78 Z", fill: INK, ...s }, head);
+    el("ellipse", { cx: 200, cy: 170, rx: 122, ry: 104, fill: "#FFFFFF", ...s }, head);
+    const hs = el("g", { "clip-path": clipEllipse("c-shima-h", 200, 170, 122, 104), fill: INK }, head);
+    ["M60 118 Q104 122 130 138 Q100 142 62 150 Z", "M64 176 Q98 172 122 184 Q98 192 70 204 Z", "M96 80 Q130 96 150 118 Q122 112 84 104 Z", "M340 118 Q296 122 270 138 Q300 142 338 150 Z", "M336 176 Q302 172 278 184 Q302 192 330 204 Z", "M304 80 Q270 96 250 118 Q278 112 316 104 Z"].forEach(d => el("path", { d }, hs));
+    el("ellipse", { cx: 200, cy: 170, rx: 122, ry: 104, fill: "none", ...s }, head);
+    el("ellipse", { cx: 200, cy: 232, rx: 80, ry: 50, fill: H, ...s }, head);
+    [172, 228].forEach(x => el("ellipse", { cx: x, cy: 212, rx: 7, ry: 5, fill: INK }, head));
+    const mouth = mouthAt(head, 200, 236, 22);
+    const eyes = eyesAt(head, [[158, 165, 15, 19], [242, 165, 15, 19]]);
+    const happy = happyAt(head, [158, 242], 165);
+    [112, 288].forEach(x => el("ellipse", { cx: x, cy: 224, rx: 13, ry: 8, fill: "#FFB3C1" }, head));
+    el("path", { d: "M178 72 Q200 52 222 72 Q216 100 200 110 Q184 100 178 72 Z", fill: INK, ...s }, head);
+    return { base: 414, top: 26, tail: { g: tail, px: 262, py: 345 }, legs, arms, head: { g: head, px: 200, py: 262 }, ears, eyes, happy, mouth };
+  },
+  doshin(root) {
+    const s = ST(), B = "#A9BEDD";
+    const legs = [159, 241].map(x => leg(root, x, 352, 50, 62, B, null));
+    el("ellipse", { cx: 200, cy: 328, rx: 92, ry: 66, fill: B, ...s }, root);
+    el("ellipse", { cx: 200, cy: 342, rx: 52, ry: 40, fill: "#D3DEF0" }, root);
+    const arms = [arm(root, 106, 290, 21, 42, B, null, 18), arm(root, 294, 290, 21, 42, B, null, -18)];
+    const head = el("g", {}, root);
+    const ears = [[66, 72, 132], [334, 328, 268]].map(([ex, ix, px]) => { const g = el("g", {}, head);
+      el("ellipse", { cx: ex, cy: 168, rx: 82, ry: 102, fill: B, ...s }, g); el("ellipse", { cx: ix, cy: 172, rx: 52, ry: 72, fill: "#FFB3C1" }, g); return { g, px, py: 150 }; });
+    el("ellipse", { cx: 200, cy: 170, rx: 120, ry: 108, fill: B, ...s }, head);
+    const eyes = eyesAt(head, [[150, 160, 15, 19], [250, 160, 15, 19]]);
+    [[132, 168], [232, 268]].forEach(([a, b]) => el("path", { d: `M${a} 160 A18 22 0 0 1 ${b} 160 Z`, fill: "#8FA6C9", ...ST(4) }, head));
+    el("path", { d: "M138 184 q12 6 24 0 M238 184 q12 6 24 0", fill: "none", ...ST(3) }, head);
+    [112, 288].forEach(x => el("ellipse", { cx: x, cy: 204, rx: 14, ry: 9, fill: "#FF9FB0" }, head));
+    [[158, 24], [242, -24]].forEach(([x, r]) => el("ellipse", { rx: 10, ry: 22, fill: "#FFFFFF", ...ST(5), transform: `translate(${x} 240) rotate(${r})` }, head));
+    const trunk = el("g", {}, head);
+    el("path", { d: "M200 196 Q200 292 238 302 Q266 306 266 274", fill: "none", ...s, "stroke-width": 48 }, trunk);
+    el("path", { d: "M200 196 Q200 292 238 302 Q266 306 266 274", fill: "none", stroke: B, "stroke-width": 36, "stroke-linecap": "round" }, trunk);
+    el("path", { d: "M186 226 h28 M187 250 h27 M192 274 h26", fill: "none", ...ST(4) }, trunk);
+    return { base: 414, top: 62, tail: null, legs, arms, head: { g: head, px: 200, py: 270 }, ears, eyes, happy: null,
+      mouth: { type: "trunk", g: trunk, px: 200, py: 205 }, tempo: 0.7 };
+  },
+  nobbo(root) {
+    const s = ST(), Y = "#FFD25E", Br = "#B9713A";
+    const tail = el("g", {}, root); el("path", { d: "M262 490 Q306 486 308 452", fill: "none", ...s, "stroke-width": 8 }, tail); el("ellipse", { cx: 310, cy: 442, rx: 12, ry: 18, fill: Br, ...s }, tail);
+    const legs = [170, 230].map(x => leg(root, x, 510, 36, 72, Y, "#6B4A36"));
+    el("ellipse", { cx: 200, cy: 470, rx: 72, ry: 60, fill: Y, ...s }, root);
+    [[156, 456, 14, 11], [246, 462, 13, 12], [200, 500, 15, 11], [164, 496, 9, 8]].forEach(([cx, cy, rx, ry]) => el("ellipse", { cx, cy, rx, ry, fill: Br }, root));
+    const neck = el("g", {}, root);
+    el("rect", { x: 170, y: 140, width: 60, height: 300, rx: 26, fill: Y, ...s }, neck);
+    [[190, 212, 11, 13], [212, 252, 10, 12], [188, 292, 11, 12], [212, 334, 10, 13], [190, 376, 11, 12], [212, 412, 9, 10]].forEach(([cx, cy, rx, ry]) => el("ellipse", { cx, cy, rx, ry, fill: Br }, neck));
+    const arms = [arm(root, 128, 436, 18, 38, Y, "#6B4A36", 18), arm(root, 272, 436, 18, 38, Y, "#6B4A36", -18)];
+    const head = el("g", {}, root);
+    const ears = [[118, -62, 140], [282, 62, 260]].map(([ex, r, px]) => { const g = el("g", {}, head); const e = el("g", { transform: `translate(${ex} 92) rotate(${r})` }, g);
+      el("ellipse", { rx: 15, ry: 30, fill: Y, ...s }, e); el("ellipse", { cy: 2, rx: 7, ry: 18, fill: "#FFB3C1" }, e); return { g, px, py: 100 }; });
+    el("path", { d: "M176 60 L172 28 M224 60 L228 28", fill: "none", ...s, "stroke-width": 12 }, head);
+    [172, 228].forEach(x => el("circle", { cx: x, cy: 24, r: 11, fill: Br, ...s }, head));
+    el("ellipse", { cx: 200, cy: 112, rx: 74, ry: 64, fill: Y, ...s }, head);
+    el("ellipse", { cx: 200, cy: 146, rx: 50, ry: 34, fill: "#FFF1D6", ...s }, head);
+    [184, 216].forEach(x => el("ellipse", { cx: x, cy: 134, rx: 5, ry: 4, fill: INK }, head));
+    const mouth = mouthAt(head, 200, 150, 16, 4);
+    const eyes = eyesAt(head, [[170, 98, 12, 16], [230, 98, 12, 16]]);
+    const happy = happyAt(head, [170, 230], 98, 12, 6);
+    [140, 260].forEach(x => el("ellipse", { cx: x, cy: 124, rx: 10, ry: 7, fill: "#FF9FB0" }, head));
+    const glasses = el("g", {}, head);
+    [170, 230].forEach(x => el("circle", { cx: x, cy: 98, r: 25, fill: "#FFFFFF", "fill-opacity": 0.35, ...ST(5) }, glasses));
+    el("path", { d: "M195 96 Q200 92 205 96 M145 96 L128 90 M255 96 L272 90", fill: "none", ...ST(5) }, glasses);
+    const glint = el("path", { d: "M156 84 L164 76 M216 84 L224 76", stroke: "#FFFFFF", "stroke-width": 5, "stroke-linecap": "round", opacity: 0 }, glasses);
+    return { base: 582, top: 14, tail: { g: tail, px: 262, py: 490 }, legs, arms, head: { g: head, px: 200, py: 160 }, ears, eyes, happy, mouth,
+      neck: { g: neck, bottom: 440, len: 300 }, glint };
+  },
+  gao(root) {
+    const s = ST(), Y = "#FFC94D", M = "#C8662B";
+    const tail = el("g", {}, root); el("path", { d: "M262 350 Q312 346 314 308", fill: "none", ...s, "stroke-width": 8 }, tail); el("ellipse", { cx: 316, cy: 298, rx: 14, ry: 20, fill: M, ...s }, tail);
+    const legs = [168, 232].map(x => leg(root, x, 360, 36, 48, Y, null));
+    el("ellipse", { cx: 200, cy: 330, rx: 72, ry: 60, fill: Y, ...s }, root);
+    el("ellipse", { cx: 200, cy: 344, rx: 40, ry: 36, fill: "#FFF1D6" }, root);
+    const arms = [arm(root, 118, 300, 19, 38, Y, null, 18), arm(root, 282, 300, 19, 38, Y, null, -18)];
+    const head = el("g", {}, root);
+    ring(head, 200, 170, 112, 34, M);
+    const ears = [132, 268].map(x => { const g = el("g", {}, head); el("circle", { cx: x, cy: 102, r: 22, fill: Y, ...s }, g); el("circle", { cx: x, cy: 102, r: 10, fill: "#FFB3C1" }, g); return { g, px: x, py: 120 }; });
+    el("ellipse", { cx: 200, cy: 172, rx: 92, ry: 86, fill: Y, ...s }, head);
+    el("ellipse", { cx: 200, cy: 214, rx: 50, ry: 38, fill: "#FFF1D6", ...s }, head);
+    el("path", { d: "M186 194 Q200 188 214 194 Q200 212 186 194 Z", fill: INK, ...s }, head);
+    const mouth = mouthAt(head, 200, 218, 20, 4);
+    const eyes = [[160, 165], [240, 235]].map(([cx, px]) => { const g = el("g", {}, head);
+      el("ellipse", { cx, cy: 162, rx: 17, ry: 14, fill: "#FFFFFF", ...ST(4) }, g); el("circle", { cx: px === 165 ? 165 : px, cy: 165, r: 6, fill: INK }, g); return { g, cx, cy: 162 }; });
+    eyes[0].g.lastChild.setAttribute("cx", 165);
+    const brows = el("g", {}, head);
+    el("path", { d: "M138 146 L184 161 L184 142 L138 130 Z M262 146 L216 161 L216 142 L262 130 Z", fill: Y }, brows);
+    el("path", { d: "M138 146 L184 161 M262 146 L216 161", fill: "none", ...s, "stroke-width": 9 }, brows);
+    const happy = happyAt(head, [160, 240], 164, 15, 7);
+    [132, 268].forEach(x => el("ellipse", { cx: x, cy: 198, rx: 12, ry: 8, fill: "#FF9FB0" }, head));
+    const blush = el("g", { opacity: 0 }, head);
+    [128, 272].forEach(x => el("ellipse", { cx: x, cy: 196, rx: 26, ry: 14, fill: "#FF6F91", "fill-opacity": .55 }, blush));
+    return { base: 408, top: 30, tail: { g: tail, px: 262, py: 350 }, legs, arms, head: { g: head, px: 200, py: 270 }, ears, eyes, happy, mouth, brows, blush };
+  },
+  chu(root) {
+    const sw = 12, s = ST(sw), G = "#C9C5D6";
+    const tail = el("g", {}, root);
+    el("path", { d: "M256 356 Q340 376 372 320 Q396 276 430 300", fill: "none", ...s, "stroke-width": 26 }, tail);
+    el("path", { d: "M256 356 Q340 376 372 320 Q396 276 430 300", fill: "none", stroke: "#FFB3C1", "stroke-width": 10, "stroke-linecap": "round" }, tail);
+    const legs = [170, 230].map(x => { const g = el("g", {}, root); el("ellipse", { cx: x, cy: 400, rx: 26, ry: 16, fill: "#FFB3C1", ...s }, g); return { g, px: x, py: 392 }; });
+    el("ellipse", { cx: 200, cy: 336, rx: 64, ry: 58, fill: G, ...s }, root);
+    el("ellipse", { cx: 200, cy: 346, rx: 34, ry: 32, fill: "#F1EFF6" }, root);
+    const arms = [arm(root, 146, 300, 14, 28, G, null, 30, sw), arm(root, 254, 300, 14, 28, G, null, -30, sw)];
+    const head = el("g", {}, root);
+    const ears = [98, 302].map(x => { const g = el("g", {}, head); el("circle", { cx: x, cy: 92, r: 62, fill: G, ...s }, g); el("circle", { cx: x, cy: 92, r: 36, fill: "#FFB3C1" }, g); return { g, px: x < 200 ? 130 : 270, py: 132 }; });
+    el("ellipse", { cx: 200, cy: 184, rx: 112, ry: 98, fill: G, ...s }, head);
+    el("path", { d: "M118 214 L70 204 M120 232 L74 240 M282 214 L330 204 M280 232 L326 240", fill: "none", ...s, "stroke-width": 7 }, head);
+    el("ellipse", { cx: 200, cy: 212, rx: 14, ry: 10, fill: "#FF6F91" }, head);
+    const mouth = mouthAt(head, 200, 234, 18, 8);
+    const eyes = [[154, 158], [246, 242]].map(([cx, px]) => { const g = el("g", {}, head);
+      el("circle", { cx, cy: 174, r: 25, fill: "#FFFFFF", ...ST(8) }, g); el("circle", { cx: px, cy: 178, r: 8, fill: INK }, g); return { g, cx, cy: 174 }; });
+    el("path", { d: "M126 140 L166 126 M274 140 L234 126", fill: "none", ...s, "stroke-width": 9 }, head);
+    const happy = happyAt(head, [154, 246], 174, 20, 9);
+    return { base: 416, top: 30, tail: { g: tail, px: 256, py: 356 }, legs, arms, head: { g: head, px: 200, py: 282 }, ears, eyes, happy, mouth, sw };
+  },
+  pyon(root) {
+    const s = ST(), P = "#FFE3EA";
+    const legs = [171, 229].map(x => leg(root, x, 362, 34, 44, P, null));
+    el("path", { d: "M152 286 Q200 268 248 286 L278 370 Q200 392 122 370 Z", fill: "#FF7FA0", ...s }, root);
+    el("path", { d: "M176 284 Q200 304 224 284", fill: "#FFFFFF", ...ST(5) }, root);
+    const arms = [arm(root, 134, 292, 18, 38, P, null, 22), arm(root, 266, 292, 18, 38, P, null, -22)];
+    const head = el("g", {}, root);
+    const ears = [[156, -8, 160], [244, 8, 240]].map(([ex, r, px]) => { const g = el("g", {}, head); const e = el("g", { transform: `translate(${ex} 44) rotate(${r})` }, g);
+      el("ellipse", { rx: 24, ry: 66, fill: P, ...s }, e); el("ellipse", { cy: 4, rx: 11, ry: 46, fill: "#FFB3C1" }, e); return { g, px, py: 104 }; });
+    el("ellipse", { cx: 200, cy: 182, rx: 110, ry: 96, fill: P, ...s }, head);
+    const eyes = eyesAt(head, [[156, 172, 15, 19], [244, 172, 15, 19]]);
+    el("path", { d: "M142 158 L128 148 M146 152 L136 138 M258 158 L272 148 M254 152 L264 138", fill: "none", ...ST(4) }, head);
+    el("path", { d: "M190 202 Q200 196 210 202 Q200 214 190 202 Z", fill: "#FF6F91", ...ST(4) }, head);
+    const mouth = mouthAt(head, 200, 222, 22, 4);
+    const happy = happyAt(head, [156, 244], 172);
+    [118, 282].forEach(x => el("ellipse", { cx: x, cy: 212, rx: 15, ry: 10, fill: "#FF9FB0" }, head));
+    el("path", { d: "M262 96 L226 76 L230 118 Z M262 96 L298 76 L294 118 Z", fill: "#FF4F7B", ...s }, head);
+    el("circle", { cx: 262, cy: 96, r: 10, fill: "#FFD36E", ...s }, head);
+    return { base: 406, top: -24, tail: null, legs, arms, head: { g: head, px: 200, py: 270 }, ears, eyes, happy, mouth };
+  },
+  mii(root) {
+    const s = ST(), L = "#B9A8D9";
+    const tail = el("g", {}, root);
+    el("path", { d: "M264 356 Q330 352 326 296 Q324 270 304 276", fill: "none", ...s, "stroke-width": 26 }, tail);
+    el("path", { d: "M264 356 Q330 352 326 296 Q324 270 304 276", fill: "none", stroke: L, "stroke-width": 14, "stroke-linecap": "round" }, tail);
+    const legs = [170, 230].map(x => leg(root, x, 362, 36, 44, L, null));
+    el("ellipse", { cx: 200, cy: 328, rx: 70, ry: 60, fill: L, ...s }, root);
+    el("ellipse", { cx: 200, cy: 342, rx: 38, ry: 36, fill: "#EDE6F8" }, root);
+    const arms = [arm(root, 128, 296, 18, 38, L, null, 16), arm(root, 272, 296, 18, 38, L, null, -16)];
+    el("path", { d: "M150 276 Q200 296 250 276 L250 290 Q200 310 150 290 Z", fill: "#FF4F7B", ...ST(5) }, root);
+    el("circle", { cx: 200, cy: 304, r: 11, fill: "#FFD36E", ...ST(5) }, root);
+    const head = el("g", {}, root);
+    const ears = [["M92 132 L104 44 L176 86 Z", "M112 112 L116 68 L152 90 Z", 130], ["M308 132 L296 44 L224 86 Z", "M288 112 L284 68 L248 90 Z", 270]].map(([a, b, px]) => {
+      const g = el("g", {}, head); el("path", { d: a, fill: L, ...s }, g); el("path", { d: b, fill: "#FFB3C1" }, g); return { g, px, py: 112 }; });
+    el("ellipse", { cx: 200, cy: 176, rx: 116, ry: 98, fill: L, ...s }, head);
+    const eyes = [[157, "M134 172 Q156 150 180 172 Q156 190 134 172 Z", 168], [243, "M220 172 Q244 150 266 172 Q244 190 220 172 Z", 254]].map(([cx, d, px]) => {
+      const g = el("g", {}, head); el("path", { d, fill: "#FFFFFF", ...ST(4) }, g); const p = el("ellipse", { cx: px, cy: 173, rx: 8, ry: 10, fill: INK }, g); return { g, cx, cy: 172, pupil: p, px }; });
+    el("path", { d: "M132 164 L182 164 M218 164 L268 164 M132 164 L118 154 M268 164 L282 154", fill: "none", ...s, "stroke-width": 6 }, head);
+    el("path", { d: "M192 204 Q200 200 208 204 Q200 214 192 204 Z", fill: "#FF6F91", ...ST(4) }, head);
+    const mouth = mouthAt(head, 200, 222, 18, 5, "M180 222 Q190 232 200 222 Q210 232 220 222");
+    el("path", { d: "M112 206 L72 198 M112 220 L74 226 M288 206 L328 198 M288 220 L326 226", fill: "none", ...ST(4) }, head);
+    el("path", { d: "M130 92 L137 108 L154 110 L141 121 L145 138 L130 129 L115 138 L119 121 L106 110 L123 108 Z", fill: "#FFD36E", ...ST(5) }, head);
+    const happy = happyAt(head, [157, 243], 172, 18, 7);
+    return { base: 406, top: 44, tail: { g: tail, px: 264, py: 356 }, legs, arms, head: { g: head, px: 200, py: 272 }, ears, eyes, happy, mouth };
+  },
+  kamejii(root) {
+    const s = ST(), G = "#8CC27A";
+    el("path", { d: "M306 250 Q306 230 322 230 Q338 230 338 250 M306 250 L306 410", fill: "none", ...s, "stroke-width": 16 }, root);
+    el("path", { d: "M306 250 Q306 230 322 230 Q338 230 338 250 M306 250 L306 410", fill: "none", stroke: "#B9824A", "stroke-width": 7, "stroke-linecap": "round" }, root);
+    const legs = [169, 231].map(x => leg(root, x, 366, 38, 40, G, null));
+    el("ellipse", { cx: 200, cy: 326, rx: 90, ry: 70, fill: "#8A6A3C", ...s }, root);
+    el("ellipse", { cx: 200, cy: 330, rx: 64, ry: 54, fill: "#F3E3B3", ...s }, root);
+    el("path", { d: "M200 278 V382 M140 318 H260 M148 350 H252", fill: "none", ...ST(4) }, root);
+    const arms = [arm(root, 116, 292, 18, 36, G, null, 18), arm(root, 288, 290, 18, 36, G, null, -14)];
+    const head = el("g", {}, root);
+    el("ellipse", { cx: 200, cy: 168, rx: 100, ry: 92, fill: G, ...s }, head);
+    el("path", { d: "M172 104 Q200 96 228 104 M180 120 Q200 114 220 120", fill: "none", ...ST(4) }, head);
+    const eyes = [160, 240].map(cx => { const g = el("g", {}, head); el("circle", { cx, cy: 170, r: 7, fill: INK }, g); return { g, cx, cy: 170 }; });
+    const brows = el("g", {}, head);
+    el("path", { d: "M184 150 Q160 132 130 150 Q116 162 124 178 Q150 160 186 164 Z M216 150 Q240 132 270 150 Q284 162 276 178 Q250 160 214 164 Z", fill: "#FFFFFF", ...ST(5) }, brows);
+    el("path", { d: "M158 222 Q200 206 242 222 Q238 292 200 322 Q162 292 158 222 Z", fill: "#FFFFFF", ...s }, head);
+    const jaw = el("ellipse", { cx: 200, cy: 238, rx: 16, ry: 2, fill: "#5A3D2A" }, head);
+    el("path", { d: "M200 214 Q170 198 140 214 Q150 236 178 232 Q192 230 200 220 Q208 230 222 232 Q250 236 260 214 Q230 198 200 214 Z", fill: "#FFFFFF", ...ST(5) }, head);
+    [192, 208].forEach(x => el("ellipse", { cx: x, cy: 198, rx: 4, ry: 3, fill: INK }, head));
+    el("path", { d: "M186 262 Q200 270 214 262 M190 286 Q200 292 210 286", fill: "none", ...ST(3) }, head);
+    return { base: 406, top: 76, tail: null, legs, arms, head: { g: head, px: 200, py: 262 }, ears: [], eyes, happy: null,
+      mouth: { type: "jaw", el: jaw }, brows, tempo: 0.65 };
+  },
+  meebaa(root) {
+    const s = ST(), W = "#FFF6E9", F = "#F2D2B6";
+    const legs = [172, 228].map(x => leg(root, x, 366, 28, 42, "#6B4A36", null));
+    el("ellipse", { cx: 200, cy: 330, rx: 76, ry: 60, fill: W, ...s }, root);
+    const arms = [arm(root, 124, 306, 17, 34, F, null, 16), arm(root, 276, 306, 17, 34, F, null, -16)];
+    el("path", { d: "M118 304 Q200 262 282 304 L270 356 Q200 326 130 356 Z", fill: "#9B7FD1", ...s }, root);
+    el("circle", { cx: 200, cy: 306, r: 11, fill: "#FFD36E", ...ST(5) }, root);
+    const head = el("g", {}, root);
+    el("circle", { cx: 200, cy: 40, r: 30, fill: W, ...s }, head);
+    ring(head, 200, 170, 112, 34, W);
+    const ears = [[104, 62, 124], [296, -62, 276]].map(([ex, r, px]) => { const g = el("g", {}, head);
+      el("ellipse", { rx: 14, ry: 30, fill: F, ...s, transform: `translate(${ex} 178) rotate(${r})` }, g); return { g, px, py: 176 }; });
+    el("ellipse", { cx: 200, cy: 184, rx: 74, ry: 72, fill: F, ...s }, head);
+    const closedEyes = el("path", { d: "M148 172 Q163 154 178 172 M222 172 Q237 154 252 172", fill: "none", ...s }, head);
+    const eyes = [163, 237].map(cx => { const g = el("g", { opacity: 0 }, head); el("circle", { cx, cy: 168, r: 8, fill: INK }, g); return { g, cx, cy: 168 }; });
+    el("path", { d: "M140 180 L132 186 M260 180 L268 186", fill: "none", ...ST(3) }, head);
+    el("path", { d: "M192 196 Q200 192 208 196 Q200 206 192 196 Z", fill: INK, ...ST(3) }, head);
+    const mouth = mouthAt(head, 200, 218, 16, 4);
+    [152, 248].forEach(x => el("ellipse", { cx: x, cy: 204, rx: 13, ry: 9, fill: "#FF9FB0" }, head));
+    return { base: 408, top: 10, tail: null, legs, arms, head: { g: head, px: 200, py: 272 }, ears, eyes, happy: null, mouth, closedEyes, noBlink: true };
+  },  // ---------- おみせの 店員さん（学校の友だちの 家族）と、てんこうせい こん ----------
+  pyonmama(root) { // ぴょんの おかあさん（パンや）：エプロンと 三角きん
+    const p = BUILD.pyon(root); recolor(root, { "#FFE3EA": "#FFF2E8", "#FF7FA0": "#8FB8E8" }); hideFill(p.head.g, ["#FF4F7B", "#FFD36E"]);
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M160 300 Q200 290 240 300 L262 372 Q200 388 138 372 Z", fill: "#FFFFFF", ...ST(5) }, bd); el("path", { d: "M176 330 h48", fill: "none", ...ST(4) }, bd);
+    el("path", { d: "M104 128 Q200 52 296 128 Q250 112 200 112 Q150 112 104 128 Z", fill: "#FFFFFF", ...ST(6) }, p.head.g);
+    el("path", { d: "M138 160 l-10 -8 M262 160 l10 -8", fill: "none", ...ST(4) }, p.head.g);
+    return p; },
+  gaojii(root) { // がおの おじいちゃん（やおや）：白い たてがみ・めがね・ひげ・はちまき・前かけ
+    const p = BUILD.gao(root); recolor(root, { "#C8662B": "#C9C1B6", "#FFC94D": "#F0C978" }); p.brows.innerHTML = ""; el("path", { d: "M134 136 Q160 122 186 138 M214 138 Q240 122 266 136", fill: "none", stroke: "#FFFFFF", "stroke-width": 12, "stroke-linecap": "round" }, p.brows); el("path", { d: "M134 136 Q160 122 186 138 M214 138 Q240 122 266 136", fill: "none", ...ST(3) }, p.brows);
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M138 330 Q200 316 262 330 L268 394 Q200 408 132 394 Z", fill: "#5BA34D", ...ST(5) }, bd); el("text", { x: 200, y: 376, "text-anchor": "middle", "font-family": "Zen Maru Gothic, sans-serif", "font-weight": 700, "font-size": 30, fill: "#FFFFFF" }, bd).textContent = "やおや";
+    el("path", { d: "M120 118 Q200 92 280 118 L276 136 Q200 112 124 136 Z", fill: "#FFFFFF", ...ST(5) }, p.head.g); el("path", { d: "M276 124 l22 -12 l4 20 Z", fill: "#FFFFFF", ...ST(4) }, p.head.g);
+    [160, 240].forEach(x => el("circle", { cx: x, cy: 163, r: 26, fill: "#FFFFFF", "fill-opacity": .3, ...ST(5) }, p.head.g)); el("path", { d: "M186 160 Q200 154 214 160", fill: "none", ...ST(5) }, p.head.g);
+    el("path", { d: "M200 208 Q182 212 170 226 Q186 224 200 216 Q214 224 230 226 Q218 212 200 208 Z", fill: "#FFFFFF", ...ST(4) }, p.head.g);
+    p.tempo = .8; return p; },
+  miibaa(root) { // みいの おばあちゃん（おかしや）：めがね・ショール
+    const p = BUILD.mii(root); recolor(root, { "#B9A8D9": "#CFC6D8", "#EDE6F8": "#F4F0F8", "#FF4F7B": "#E89BB8" }); hideFill(p.head.g, ["#FFD36E"]);
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M126 286 Q200 318 274 286 L282 318 Q200 352 118 318 Z", fill: "#F7A8C4", ...ST(5) }, bd); el("path", { d: "M150 300 l6 12 M176 308 l4 12 M224 308 l-4 12 M250 300 l-6 12", fill: "none", ...ST(3) }, bd);
+    [157, 243].forEach(x => el("circle", { cx: x, cy: 172, r: 30, fill: "#FFFFFF", "fill-opacity": .3, ...ST(5) }, p.head.g)); el("path", { d: "M187 170 Q200 162 213 170", fill: "none", ...ST(5) }, p.head.g);
+    el("circle", { cx: 200, cy: 72, r: 26, fill: "#CFC6D8", ...ST(5) }, p.head.g);
+    p.tempo = .8; return p; },
+  doshinpapa(root) { // どしんの おとうさん（レジ）：ぼうしと 前かけ
+    const p = BUILD.doshin(root); recolor(root, { "#A9BEDD": "#93A8C8", "#D3DEF0": "#C4D1E6" });
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M126 300 Q200 280 274 300 L280 380 Q200 400 120 380 Z", fill: "#3E9BD6", ...ST(5) }, bd); el("rect", { x: 216, y: 318, width: 48, height: 26, rx: 5, fill: "#FFFFFF", ...ST(4) }, bd);
+    el("path", { d: "M110 96 Q200 30 290 96 L290 108 L110 108 Z", fill: "#3E9BD6", ...ST(6) }, p.head.g); el("path", { d: "M180 108 Q230 104 300 122 L296 132 Q232 118 176 120 Z", fill: "#2E7DB5", ...ST(5) }, p.head.g);
+    return p; },
+  kon(root) { // きつねの こん（がっこう2の てんこうせい）
+    const s = ST(), O = "#F29F4C", W = "#FFF6E9";
+    const tail = el("g", {}, root);
+    el("path", { d: "M258 360 Q340 380 352 300 Q358 250 322 238 Q300 280 300 312 Q290 340 258 344 Z", fill: O, ...s }, tail);
+    el("path", { d: "M322 238 Q358 250 352 300 Q336 288 318 272 Q314 254 322 238 Z", fill: W, ...ST(4) }, tail);
+    const legs = [170, 230].map(x => leg(root, x, 362, 34, 44, "#7A4A2A", null));
+    el("ellipse", { cx: 200, cy: 328, rx: 68, ry: 58, fill: O, ...s }, root);
+    el("ellipse", { cx: 200, cy: 342, rx: 36, ry: 34, fill: W }, root);
+    const arms = [arm(root, 130, 296, 18, 36, O, "#7A4A2A", 16), arm(root, 270, 296, 18, 36, O, "#7A4A2A", -16)];
+    el("path", { d: "M150 278 Q200 300 250 278 L240 300 Q200 318 160 300 Z", fill: "#7CC36A", ...ST(5) }, root); el("path", { d: "M214 300 l16 30 l-26 -8 Z", fill: "#7CC36A", ...ST(4) }, root);
+    const head = el("g", {}, root);
+    const ears = [["M98 150 L112 40 L182 104 Z", "M112 128 L118 70 L160 106 Z", 132], ["M302 150 L288 40 L218 104 Z", "M288 128 L282 70 L240 106 Z", 268]].map(([a, b, px]) => {
+      const g = el("g", {}, head); el("path", { d: a, fill: O, ...s }, g); el("path", { d: b, fill: "#5A3A2A" }, g); return { g, px, py: 118 }; });
+    el("ellipse", { cx: 200, cy: 178, rx: 114, ry: 96, fill: O, ...s }, head);
+    el("path", { d: "M92 190 Q140 196 168 176 Q200 196 232 176 Q260 196 308 190 Q290 266 200 274 Q110 266 92 190 Z", fill: W, "clip-path": clipEllipse("c-kon", 200, 178, 114, 96) }, head);
+    el("ellipse", { cx: 200, cy: 178, rx: 114, ry: 96, fill: "none", ...s }, head);
+    const eyes = eyesAt(head, [[156, 166, 13, 18], [244, 166, 13, 18]]);
+    el("path", { d: "M188 204 Q200 196 212 204 Q200 216 188 204 Z", fill: INK, ...ST(4) }, head);
+    const mouth = mouthAt(head, 200, 224, 18, 4, "M182 222 Q191 232 200 222 Q209 232 218 222");
+    const happy = happyAt(head, [156, 244], 166);
+    [122, 278].forEach(x => el("ellipse", { cx: x, cy: 206, rx: 13, ry: 8, fill: "#FF9FB0" }, head));
+    el("path", { d: "M176 96 Q190 80 200 96 Q210 80 224 96", fill: "none", ...ST(5) }, head);
+    return { base: 406, top: 40, tail: { g: tail, px: 258, py: 350 }, legs, arms, head: { g: head, px: 200, py: 272 }, ears, eyes, happy, mouth };
+  },
+  mama(root) { // しまの ママ（とうこう）：エプロン・リボン・まつげ
+    const p = BUILD.shima(root);
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M150 288 Q200 276 250 288 L268 380 Q200 396 132 380 Z", fill: "#FF9FB8", ...ST(5) }, bd);
+    el("path", { d: "M160 330 Q200 344 240 330", fill: "none", ...ST(4) }, bd); el("circle", { cx: 200, cy: 356, r: 9, fill: "#FFFFFF", ...ST(3) }, bd);
+    const rb = el("g", { transform: "translate(250 64) rotate(20)" }, p.head.g); el("path", { d: "M0 0 L-34 -18 L-34 18 Z M0 0 L34 -18 L34 18 Z", fill: "#FF6F91", ...ST(4) }, rb); el("circle", { r: 9, fill: "#FF6F91", ...ST(4) }, rb);
+    [[140, 150], [126, 156], [260, 150], [274, 156]].forEach(([x, y]) => el("path", { d: `M${x} ${y} l${x < 200 ? -8 : 8} -8`, fill: "none", ...ST(4) }, p.head.g));
+    return p; },
+  // みんなで あそぶ ときの 「じぶんの ママ」（2026-10-18）：がお・みい・ちゅうの おかあさん
+  gaomama(root) { // がおの ママ（らいおん）：たてがみ なし・オレンジの エプロン・まつげ
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); if (p.brows) p.brows.innerHTML = ""; neckFill(root, p, "#FFC94D"); momize(root, p, "#FFB36B", "#FF6F91"); p.tempo = .95; return p; },
+  miimama(root) { // みいの ママ（ねこ）：すこし こい むらさき・みずいろの エプロン・しんじゅの くびかざり
+    const p = BUILD.mii(root); recolor(root, { "#B9A8D9": "#A897CF", "#FF4F7B": "#FFFFFF" }); hideFill(p.head.g, ["#FFD36E"]); momize(root, p, "#9FC8F0", "#B98AE0");
+    [160, 180, 200, 220, 240].forEach((x, i) => el("circle", { cx: x, cy: 286 + Math.abs(i - 2) * -4 + 8, r: 7, fill: "#FFFFFF", ...ST(3) }, root)); p.tempo = .95; return p; },
+  chumama(root) { // ちゅうの ママ（ねずみ）：きいろの エプロン・みみに リボン
+    const p = BUILD.chu(root); momize(root, p, "#FFE07A", "#FF6F91", [98, 40]); p.tempo = .95; return p; },
+  // びょういん・はいしゃさん（2026-10-18）：いぬの わんこせんせい（おいしゃさん）・ビーバーの ビバせんせい（はいしゃさん）・ひよこの ぴよこさん（かんごしさん）
+  wanko(root) { const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); if (p.brows) p.brows.innerHTML = ""; recolor(root, { "#FFC94D": "#E3B47C", "#FFF1D6": "#FFF6E9" });
+    neckFill(root, p, "#E3B47C"); p.ears.forEach(e => e.g.setAttribute("display", "none"));
+    [[104, 20], [296, -20]].forEach(([x, r]) => el("ellipse", { cx: x, cy: 176, rx: 28, ry: 60, fill: "#8B5A3C", ...ST(6), transform: `rotate(${r} ${x} 150)` }, p.head.g));
+    coatOn(root, p, "#FFFFFF"); const st = el("g", {}); root.insertBefore(st, p.arms[0].g);
+    el("path", { d: "M170 288 Q158 334 188 350 M230 288 Q242 334 212 350", fill: "none", stroke: "#4A4A58", "stroke-width": 7, "stroke-linecap": "round" }, st); el("circle", { cx: 200, cy: 356, r: 13, fill: "#C9D3DE", ...ST(4) }, st);
+    p.tempo = .9; return p; },
+  biba(root) { const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); if (p.brows) p.brows.innerHTML = ""; recolor(root, { "#FFC94D": "#A0693F", "#FFF1D6": "#E9C9A0", "#FFB3C1": "#D9A07A" });
+    neckFill(root, p, "#A0693F"); p.tail.g.setAttribute("display", "none");
+    const tl = el("g", {}); root.insertBefore(tl, root.firstChild); el("ellipse", { cx: 300, cy: 380, rx: 46, ry: 22, fill: "#5E3B22", ...ST(6), transform: "rotate(-20 300 380)" }, tl);
+    [0, 1].forEach(i => el("rect", { x: 189 + i * 12, y: 222, width: 11, height: 18, rx: 3, fill: "#FFFFFF", ...ST(3) }, p.head.g));
+    coatOn(root, p, "#BFE3F5");
+    el("path", { d: "M108 124 Q200 74 292 124", fill: "none", stroke: "#4A4A58", "stroke-width": 8 }, p.head.g); el("circle", { cx: 200, cy: 98, r: 22, fill: "#E8EEF4", ...ST(5) }, p.head.g); el("circle", { cx: 200, cy: 98, r: 8, fill: "#4A4A58" }, p.head.g);
+    p.tempo = .95; return p; },
+  piyoko(root) { const p = BUILD.chu(root); recolor(root, { "#C9C5D6": "#FFE066", "#F1EFF6": "#FFF6C2", "#FFB3C1": "#FFA94D" });
+    p.ears.forEach(e => e.g.setAttribute("display", "none")); if (p.tail) p.tail.g.setAttribute("display", "none");
+    p.head.g.querySelectorAll("path").forEach(e => { const d = e.getAttribute("d") || ""; if (d.startsWith("M118 214") || d.startsWith("M126 140")) e.setAttribute("display", "none"); });
+    p.head.g.querySelectorAll("ellipse").forEach(e => { if (e.getAttribute("fill") === "#FF6F91") e.setAttribute("display", "none"); });
+    el("path", { d: "M182 200 L218 200 L200 226 Z", fill: "#FF9F1C", ...ST(5) }, p.head.g);
+    el("path", { d: "M194 88 Q186 60 202 66 Q214 54 210 86", fill: "#FFE066", ...ST(5) }, p.head.g);
+    const cap = el("g", {}, p.head.g); el("path", { d: "M146 98 L254 98 L240 62 L160 62 Z", fill: "#FFFFFF", ...ST(6) }, cap); el("path", { d: "M200 68 V92 M188 80 H212", stroke: "#E8473C", "stroke-width": 7 }, cap);
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M160 296 Q200 286 240 296 L252 380 Q200 394 148 380 Z", fill: "#FFC2D1", ...ST(5) }, bd);
+    p.tempo = 1.05; return p; },
+  ookami(root) { // あやしい おおかみ（とうこう）：サングラス・ぼうし・コート
+    const p = BUILD.kon(root); recolor(root, { "#F29F4C": "#8E8E9E", "#FFF6E9": "#E6E6EE", "#7CC36A": "#4A4A58", "#7A4A2A": "#4A4A58" });
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M134 290 Q200 270 266 290 L276 392 Q200 404 124 392 Z", fill: "#5E5A50", ...ST(5) }, bd); el("path", { d: "M200 282 V398", fill: "none", ...ST(4) }, bd);
+    [156, 244].forEach(x => el("ellipse", { cx: x, cy: 166, rx: 36, ry: 26, fill: "#2B2A33", ...ST(5) }, p.head.g)); el("path", { d: "M192 162 H208", fill: "none", ...ST(6) }, p.head.g);
+    el("path", { d: "M96 108 Q200 70 304 108 L300 122 Q200 96 100 122 Z", fill: "#3A3A46", ...ST(6) }, p.head.g); el("path", { d: "M130 106 Q140 30 200 30 Q260 30 270 106 Z", fill: "#3A3A46", ...ST(6) }, p.head.g);
+    el("path", { d: "M136 92 Q200 74 264 92", fill: "none", stroke: "#B0303A", "stroke-width": 12 }, p.head.g);
+    p.tempo = .9; return p; },
+  ojisan(root) { // くるまの うんてんしゅさん（げこう）：ちゃいろの たてがみ・ぼうし・シャツ
+    const p = BUILD.gao(root); recolor(root, { "#C8662B": "#7A5236", "#FFC94D": "#E9C08A" }); if (p.brows) p.brows.innerHTML = "";
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M134 296 Q200 280 266 296 L272 384 Q200 400 128 384 Z", fill: "#7FA7D9", ...ST(5) }, bd); el("path", { d: "M184 290 L200 318 L216 290", fill: "none", ...ST(4) }, bd);
+    el("path", { d: "M112 112 Q200 40 288 112 L288 124 L112 124 Z", fill: "#5BA34D", ...ST(6) }, p.head.g); el("path", { d: "M200 124 Q260 120 314 136 L310 146 Q256 134 196 136 Z", fill: "#4A8A3E", ...ST(5) }, p.head.g);
+    p.tempo = .95; return p; },
+  onii(root) { // まるシマの おにいちゃん（おうち1）：あおい シャツ・めがね。すこし せが たかい
+    const p = BUILD.shima(root);
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M138 290 Q200 274 262 290 L270 384 Q200 400 130 384 Z", fill: "#5B8DEF", ...ST(5) }, bd); el("path", { d: "M180 292 Q200 310 220 292", fill: "none", ...ST(4) }, bd);
+    const gl = el("g", {}, p.head.g); const [a, b] = p.eyes;
+    [a, b].forEach(e => el("rect", { x: e.cx - 30, y: e.cy - 24, width: 60, height: 48, rx: 14, fill: "#FFFFFF33", ...ST(6) }, gl)); el("path", { d: `M${a.cx + 30} ${a.cy - 4} Q${(a.cx + b.cx) / 2} ${a.cy - 16} ${b.cx - 30} ${b.cy - 4}`, fill: "none", ...ST(5) }, gl);
+    p.tempo = .95; return p; },
+  tora(root) { // とらの とらお（ステージの 場面で ライバルの かわりに 出る）：オレンジに くろい しま
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); const tip = p.tail.g.lastChild; tip.removeAttribute("display"); tip.setAttribute("fill", "#F7A23B");
+    recolor(root, { "#FFC94D": "#F7A23B" }); const K = { fill: "none", stroke: INK, "stroke-width": 9, "stroke-linecap": "round" };
+    const sh = el("g", {}, p.head.g); ["M184 90 L190 118", "M200 86 V120", "M216 90 L210 118", "M110 170 L134 176", "M112 192 L134 192", "M290 170 L266 176", "M288 192 L266 192"].forEach(d => el("path", { d, ...K }, sh));
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); ["M136 312 Q150 318 154 330", "M134 340 Q148 344 152 354", "M264 312 Q250 318 246 330", "M266 340 Q252 344 248 354"].forEach(d => el("path", { d, ...K, "stroke-width": 8 }, bd));
+    el("path", { d: "M306 300 L326 306", ...K, "stroke-width": 6 }, p.tail.g); neckFill(root, p, "#F7A23B");
+    return p; },
+  kuma(root) { // くまの くまた（ステージの 場面で ライバルの かわりに 出る）：ちゃいろ・まるい みみ
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); recolor(root, { "#FFC94D": "#A9744A", "#FFF1D6": "#EBCFA8", "#FFB3C1": "#E3A982" }); if (p.brows) p.brows.innerHTML = "";
+    const tip = p.tail.g; tip.setAttribute("display", "none"); neckFill(root, p, "#A9744A");
+    p.tempo = .92; return p; },
+  panna(root) { // ぱんだの ぱんな（ともだちの いえ）：しろい からだ・くろい みみと てあし・めの まわりが くろい・あかい リボン
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); if (p.brows) p.brows.innerHTML = ""; p.tail.g.setAttribute("display", "none");
+    recolor(root, { "#FFC94D": "#FFFFFF", "#FFF1D6": "#FFFFFF" }); const K = "#2B2A33";
+    p.arms.forEach(a => a.g.firstChild.setAttribute("fill", K)); p.legs.forEach(l => l.g.firstChild.setAttribute("fill", K));
+    p.ears.forEach(e => { e.g.firstChild.setAttribute("fill", K); e.g.lastChild.setAttribute("display", "none"); });
+    p.eyes.forEach(e => { const pt = el("ellipse", { cx: e.cx + (e.cx < 200 ? -4 : 4), cy: 160, rx: 28, ry: 24, fill: K, transform: `rotate(${e.cx < 200 ? -18 : 18} ${e.cx} 160)` }); p.head.g.insertBefore(pt, e.g); });
+    const rb = el("g", { transform: "translate(262 96) rotate(24)" }, p.head.g); el("path", { d: "M0 0 L-30 -16 L-30 16 Z M0 0 L30 -16 L30 16 Z", fill: "#FF6F91", ...ST(4) }, rb); el("circle", { r: 8, fill: "#FF6F91", ...ST(4) }, rb);
+    neckFill(root, p, "#FFFFFF"); p.tempo = .95; return p; },
+  pannamama(root) { // ぱんなの おかあさん：みどりの エプロン
+    const p = BUILD.panna(root); const rb = p.head.g.lastChild; rb.setAttribute("display", "none");
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M146 290 Q200 276 254 290 L270 384 Q200 400 130 384 Z", fill: "#9FD68A", ...ST(5) }, bd); el("path", { d: "M160 332 Q200 346 240 332", fill: "none", ...ST(4) }, bd);
+    [[140, 150], [126, 156], [260, 150], [274, 156]].forEach(([x, y]) => el("path", { d: `M${x} ${y} l${x < 200 ? -8 : 8} -8`, fill: "none", ...ST(4) }, p.head.g));
+    p.tempo = .9; return p; },
+  omawari(root) { // おまわりさん（げこう）：こんの せいふく・ぼうし
+    const p = BUILD.doshin(root); recolor(root, { "#A9BEDD": "#B8C2CE", "#D3DEF0": "#DCE2EA" });
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M118 296 Q200 270 282 296 L288 390 Q200 410 112 390 Z", fill: "#2E4A7A", ...ST(5) }, bd);
+    el("path", { d: "M200 280 V400", fill: "none", stroke: "#FFD25E", "stroke-width": 4 }, bd); [312, 346, 380].forEach(y => el("circle", { cx: 200, cy: y, r: 6, fill: "#FFD25E", ...ST(3) }, bd));
+    el("path", { d: "M104 100 Q200 20 296 100 L296 116 L104 116 Z", fill: "#2E4A7A", ...ST(6) }, p.head.g); el("path", { d: "M100 116 Q200 104 300 116 L300 132 Q200 120 100 132 Z", fill: "#1E2E50", ...ST(5) }, p.head.g);
+    el("circle", { cx: 200, cy: 84, r: 16, fill: "#FFD25E", ...ST(4) }, p.head.g);
+    return p; },
+};
+
+const NAMES = { pony: "ぽにー", shima: "まるシマ", doshin: "どしん", nobbo: "のっぽ", gao: "がお", chu: "ちゅう", pyon: "ぴょん", mii: "みい", kamejii: "かめじい", meebaa: "めえばあ",
+  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "ぴよこさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くまた", onii: "おにいちゃん" };
+const LINES = { pony: "きょねん、うみに いったね", shima: "やったー！ いえたね！", doshin: "どいて、あげるよ", nobbo: "それは、ずかんに のって いますよ", gao: "つぎは、まけないぞ",
+  chu: "こ、こわかったよう", pyon: "いっしょに あそぼう！", mii: "ふーん。まあまあ じゃない", kamejii: "よく いえましたね", meebaa: "いらっしゃいませ" };
+
+function makeChar(kind) {
+  const root = el("g", {}, charLayer);
+  const p = BUILD[kind](root);
+  const tempo = p.tempo || 1;
+  const sp = (v, k, d) => new Spring(v, k * tempo * tempo, d * tempo);
+  return Object.assign(p, {
+    kind, root, x: 0, y: 0, s: 1, tempo,
+    jumpY: 0, jumpV: 0, squash: sp(1, 260, 12), lean: sp(0, 90, 9), headRot: sp(0, 120, 11), earL: sp(0, 200, 10), earR: sp(0, 200, 10),
+    armL: sp(0, 140, 11), armR: sp(0, 140, 11), eyeScale: sp(1, 300, 18), mouthOpen: sp(0, 400, 24), dx: new Spring(0, 40, 9), lift: sp(0, 120, 12),
+    headY: sp(0, 160, 13), eyeX: sp(0, 220, 18), eyeY: sp(0, 220, 18),
+    blink: 1, nextBlink: 1 + Math.random() * 3, happyOn: false, roundMouth: false, listening: false, speakingLevel: 0, wave: 0,
+    tm: {}, spinDur: 0.8, idleAt: 6 + Math.random() * 6, t: Math.random() * 10,
+  });
+}
+function place(c, cx, base, s) { c.s = s; c.x = cx - 200 * s; c.y = base - c.base * s; }
+
+function drawChar(c, dt, walking) {
+  c.t += dt;
+  const m = motion, T = c.tempo, tm = c.tm;
+  for (const k in tm) { tm[k] -= dt; if (tm[k] <= 0) delete tm[k]; }
+  if (c.jumpY < 0 || c.jumpV < 0) {
+    c.jumpV += 3200 * dt; c.jumpY += c.jumpV * dt;
+    if (c.jumpY >= 0) { c.jumpY = 0; c.squash.vel -= 2.2 * Math.min(1, Math.abs(c.jumpV) / 900); c.jumpV = 0; blip(180 / Math.sqrt(c.s), 90 / Math.sqrt(c.s), .05); }
+  }
+  [c.squash, c.lean, c.headRot, c.earL, c.earR, c.armL, c.armR, c.eyeScale, c.mouthOpen, c.dx, c.lift, c.headY, c.eyeX, c.eyeY].forEach(s => s.step(dt));
+  if (!c.noBlink) {
+    c.nextBlink -= dt;
+    if (c.nextBlink < 0) { c.blink = 0; c.nextBlink = 2 + Math.random() * 3.5; if (Math.random() < .2) c.nextBlink = .18; }
+    c.blink = Math.min(1, c.blink + dt * 7 * T);
+  }
+  let blinkS = c.blink < .5 ? 1 - c.blink * 1.8 : (c.blink - .5) * 2 * .9 + .1;
+  if (tm.closed) blinkS = 0.08;
+  if (tm.squint) blinkS = Math.min(blinkS, 0.35);
+  const run = !!tm.run || walking;
+  const walkPhase = run ? Math.sin(c.t * (tm.run ? 17 : 9) * T) : 0;
+  let bob = run ? -Math.abs(walkPhase) * (tm.run ? 22 : 14) * m : 0;
+  let headX = (c.listening ? Math.sin(c.t * 3) * 3 : 0) + c.speakingLevel * 3 * Math.sin(c.t * 18);
+  let headYx = 0, leanX = 0, sqX = 0, dxX = 0, armLx = 0, armRx = 0, mouthX = 0;
+  if (tm.shake) headX += Math.sin(c.t * 16) * 15;
+  if (tm.nod) headYx += Math.abs(Math.sin(c.t * 7)) * 18;
+  if (tm.shiver) dxX += Math.sin(c.t * 70) * 5;
+  if (tm.dance) { const b = Math.sin(c.t * 7.3); leanX += b * 12; armLx += 70 + b * 50; armRx += -70 + b * 50; sqX += Math.abs(b) * 0.06; }
+  if (tm.laugh) { sqX += Math.sin(c.t * 22) * 0.05; mouthX = 0.45 + 0.3 * Math.sin(c.t * 22); }
+  if (tm.look) headX += Math.sin(c.t * 2.6) * 7;
+  if (tm.pump) armRx += Math.sin(c.t * 14) * 28;
+  if (tm.shy) leanX += Math.sin(c.t * 4) * 5;
+  if (tm.tiptoe) bob += -Math.abs(Math.sin(c.t * 6)) * 10 * m;
+  if (tm.clap) { const a = -40 + Math.sin(c.t * 7) * 18; armLx += a; armRx -= a; }
+  let spinA = 0;
+  if (tm.spin) { const p = Math.max(0, Math.min(1, 1 - tm.spin / c.spinDur)); spinA = 360 * p * p * (3 - 2 * p) * (c.spinTurns || 1); }
+  const breathe = Math.sin(c.t * 2.2 * T) * 0.014 * m;
+  const sq = 1 + (c.squash.v - 1 + sqX) * m, sx = 1 / Math.sqrt(sq), sy = sq + breathe;
+  const jy = c.jumpY * m + bob;
+  c.root.setAttribute("transform", `translate(${(c.x + (c.dx.v + dxX) * m).toFixed(1)} ${c.y}) scale(${c.s}) translate(0 ${jy.toFixed(1)}) ${rot(spinA, 200, c.base - 180)} ${rot((c.lean.v + leanX) * m, 200, c.base)} translate(200 ${c.base}) scale(${sx.toFixed(4)} ${sy.toFixed(4)}) translate(-200 ${-c.base})`);
+  let headUp = 0;
+  if (c.neck) { const L = c.neck.len, k = (L + c.lift.v * m) / L; c.neck.g.setAttribute("transform", `translate(200 ${c.neck.bottom}) scale(1 ${k.toFixed(3)}) translate(-200 ${-c.neck.bottom})`); headUp = c.lift.v * m; }
+  c.head.g.setAttribute("transform", `translate(0 ${(-headUp + (c.headY.v + headYx) * m).toFixed(1)}) ${rot((c.headRot.v + headX) * m, c.head.px, c.head.py)}`);
+  if (c.tail) { const amp = tm.wag ? 28 : 10, spd = tm.wag ? 12 : 2.6; c.tail.g.setAttribute("transform", rot(Math.sin(c.t * spd) * amp * m, c.tail.px, c.tail.py)); }
+  c.legs.forEach((l, i) => l.g.setAttribute("transform", rot((i ? -1 : 1) * walkPhase * 12 * m, l.px, l.py)));
+  const waveA = c.wave > 0 ? Math.sin(c.t * 14) * 22 : 0;
+  c.arms.forEach((a, i) => { const off = i ? c.armR.v + waveA + armRx : c.armL.v + armLx; a.g.setAttribute("transform", rot(a.rest + off * m, a.px, a.py)); });
+  const flap = tm.clap && c.kind === "doshin" ? Math.sin(c.t * 7) * 14 : 0;
+  c.ears.forEach((e, i) => e.g.setAttribute("transform", rot((i ? c.earR.v - flap : c.earL.v + flap) * m, e.px, e.py)));
+  const es = c.eyeScale.v, ex = c.eyeX.v, ey = c.eyeY.v;
+  c.eyes.forEach(e => {
+    e.g.setAttribute("transform", `translate(${ex.toFixed(1)} ${ey.toFixed(1)}) translate(${e.cx} ${e.cy}) scale(${es.toFixed(3)} ${(es * blinkS).toFixed(3)}) translate(${-e.cx} ${-e.cy})`);
+    if (c.happy) e.g.setAttribute("opacity", c.happyOn ? 0 : 1);
+  });
+  if (c.happy) c.happy.setAttribute("opacity", c.happyOn ? 1 : 0);
+  if (c.closedEyes) { const open = es > 1.1; c.closedEyes.setAttribute("opacity", open ? 0 : 1); c.eyes.forEach(e => e.g.setAttribute("opacity", open ? 1 : 0)); }
+  if (c.brows) c.brows.setAttribute("transform", `translate(0 ${(-(es - 1) * 40 - (c.kind === "gao" ? c.lift.v * .2 : 0)).toFixed(1)})`);
+  if (c.blush) c.blush.setAttribute("opacity", c.headRot.t > 10 || tm.shy ? 1 : 0);
+  if (c.glint) c.glint.setAttribute("opacity", c.lift.v > 40 ? 1 : 0);
+  const o = Math.max(0, Math.min(1, Math.max(c.mouthOpen.v, c.speakingLevel, mouthX)));
+  const M = c.mouth;
+  if (M.type === "trunk") { M.g.setAttribute("transform", rot((Math.sin(c.t * 10) * Math.max(c.speakingLevel, mouthX) * 10 + c.mouthOpen.v * 12) * m, M.px, M.py)); return; }
+  if (M.type === "jaw") { M.el.setAttribute("ry", (2 + o * 14).toFixed(1)); M.el.setAttribute("cy", (238 + o * 8).toFixed(1)); return; }
+  const top = M.top, k = M.w / 22;
+  if (c.roundMouth) {
+    const r = (8 + o * 8) * k; M.path.setAttribute("fill", "#FF6F91");
+    M.path.setAttribute("d", `M${M.x} ${top} m${-r} 0 a${r} ${r * 1.2} 0 1 0 ${r * 2} 0 a${r} ${r * 1.2} 0 1 0 ${-r * 2} 0`);
+    M.tongue.setAttribute("rx", 0); M.tongue.setAttribute("ry", 0);
+  } else if (o < 0.06) {
+    M.path.setAttribute("d", c.sadMouth ? `M${M.x - 18 * k} ${top + 12} Q${M.x} ${top} ${M.x + 18 * k} ${top + 12}` : (M.closed || `M${M.x - 22 * k} ${top + 2} Q${M.x} ${top + 14 * k} ${M.x + 22 * k} ${top + 2}`));
+    M.path.setAttribute("fill", "none"); M.tongue.setAttribute("rx", 0); M.tongue.setAttribute("ry", 0);
+  } else {
+    const w = (22 + 6 * o) * k, depth = (8 + 30 * o) * k;
+    M.path.setAttribute("fill", "#FF6F91");
+    M.path.setAttribute("d", `M${M.x - w} ${top} Q${M.x} ${top + 5 * k} ${M.x + w} ${top} Q${M.x} ${top + depth * 2} ${M.x - w} ${top} Z`);
+    M.tongue.setAttribute("cy", top + depth * 0.68); M.tongue.setAttribute("rx", w * 0.45); M.tongue.setAttribute("ry", depth * 0.22);
+  }
+}
+
+/* ---------- 演技（共通） ---------- */
+const later = (ms, f) => setTimeout(f, ms);
+function jump(c, power = 1) { c.jumpV = -1100 * power * Math.sqrt(c.tempo); c.jumpY = -0.01; c.squash.vel += 1.6; }
+function joy(c) {
+  if (c.mouth.type !== "smile") { c.mouthOpen.t = .8; later(800, () => c.mouthOpen.t = 0); }
+  jump(c, 1); c.happyOn = true; c.armL.t = 130; c.armR.t = -130; c.mouthOpen.t = .7; c.earL.t = 12; c.earR.t = -12;
+  later(900, () => { c.armL.t = 0; c.armR.t = 0; c.mouthOpen.t = 0; c.earL.t = 0; c.earR.t = 0; });
+  later(1300, () => { c.happyOn = false; });
+}
+function surprise(c) {
+  jump(c, .55); c.eyeScale.t = 1.3; c.roundMouth = true; c.mouthOpen.t = .6; c.earL.t = 18; c.earR.t = -18; c.armL.t = 40; c.armR.t = -40;
+  later(900, () => { c.eyeScale.t = 1; c.roundMouth = false; c.mouthOpen.t = 0; c.earL.t = 0; c.earR.t = 0; c.armL.t = 0; c.armR.t = 0; });
+}
+function flop(c) {
+  c.lean.t = 38; c.squash.t = .82; c.headRot.t = 14; c.blink = 0; c.nextBlink = 1.2; c.armL.t = 50; c.armR.t = -50;
+  blip(300, 120, .12, "sawtooth");
+  later(750 / c.tempo, () => { c.lean.t = 0; c.squash.t = 1; c.headRot.t = 0; c.armL.t = 0; c.armR.t = 0; c.squash.vel += 1.2; blip(420, 700, .1); });
+}
+function wave(c) { c.armR.t = -130; c.wave = 1; c.headRot.t = -6; later(1600, () => { c.wave = 0; c.armR.t = 0; c.headRot.t = 0; }); }
+function setListen(c, on) { c.listening = on; c.headRot.t = on ? -10 : 0; c.earL.t = on ? -14 : 0; c.earR.t = on ? 14 : 0; showEar(c, on); }
+
+/* ---------- その子らしい喜び方 ---------- */
+const SPECIAL = {
+  pony: c => joy(c),
+  shima: c => joy(c),
+  doshin: c => { c.tm.clap = 2.2; c.mouthOpen.t = .6; later(2200, () => c.mouthOpen.t = 0); blip(90, 70, .25, "triangle"); later(500, () => blip(90, 70, .25, "triangle")); },
+  nobbo: c => { c.lift.t = 110; c.happyOn = true; blip(400, 1200, .35, "triangle"); later(1200, () => { c.lift.t = 0; c.happyOn = false; }); },
+  gao: c => { jump(c, .5); c.headRot.t = 20; c.lean.t = -8; c.lift.t = 40; later(1500, () => { c.headRot.t = 0; c.lean.t = 0; c.lift.t = 0; }); },
+  chu: c => { jump(c, 1.3); c.eyeScale.t = 1.4; blip(900, 1600, .12, "square"); later(500, () => { c.eyeScale.t = 1; c.happyOn = true; }); later(1400, () => c.happyOn = false); },
+  pyon: c => { jump(c, .75); c.happyOn = true; c.earL.t = -25; c.earR.t = 25; later(480, () => jump(c, .75)); later(1300, () => { c.happyOn = false; c.earL.t = 0; c.earR.t = 0; }); },
+  mii: c => { c.headRot.t = -18; c.blink = 0; c.nextBlink = 1.4; c.tm.wag = 1.6; later(1600, () => c.headRot.t = 0); },
+  kamejii: c => { c.dx.t = 2200; c.lean.t = -20; blip(200, 900, .4, "sawtooth"); later(900, () => { c.dx.t = 0; c.lean.t = 0; }); },
+  pyonmama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
+  gaojii: c => { c.tm.nod = 1.2; c.happyOn = true; later(1300, () => c.happyOn = false); },
+  miibaa: c => { c.tm.nod = 1.2; c.happyOn = true; c.tm.wag = 1.4; later(1300, () => c.happyOn = false); },
+  doshinpapa: c => { c.tm.clap = 1.6; c.mouthOpen.t = .5; later(1600, () => c.mouthOpen.t = 0); },
+  kon: c => { jump(c, .8); c.happyOn = true; c.tm.wag = 1.6; later(1300, () => c.happyOn = false); },
+  mama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
+  gaomama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
+  miimama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
+  chumama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
+  wanko: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
+  biba: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
+  piyoko: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
+  ookami: c => { c.tm.shiver = 1; },
+  ojisan: c => { c.tm.nod = 1.2; },
+  onii: c => { c.tm.nod = 1.2; c.happyOn = true; later(1300, () => c.happyOn = false); },
+  tora: c => { jump(c, .6); c.happyOn = true; later(1200, () => c.happyOn = false); },
+  kuma: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
+  panna: c => { jump(c, .5); c.happyOn = true; later(1200, () => c.happyOn = false); },
+  pannamama: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
+  omawari: c => { c.tm.nod = 1.2; c.armR.t = -140; later(1000, () => c.armR.t = 0); },
+  meebaa: c => { c.armL.t = -55; c.armR.t = 55; c.happyOn = true; c.lean.t = 6; later(500, () => c.lean.t = -6); later(1000, () => c.lean.t = 0); later(1400, () => { c.armL.t = 0; c.armR.t = 0; c.happyOn = false; }); },
+};
+
+/* ---------- 音 ---------- */
+let ctx = null, analyser = null, buf = null;
+function audio() {
+  if (!ctx) {
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = ctx.createAnalyser(); analyser.fftSize = 1024; analyser.connect(ctx.destination);
+    buf = new Float32Array(analyser.fftSize);
+  }
+  if (ctx.state === "suspended") ctx.resume();
+  return ctx;
+}
+function blip(f0, f1, dur, type = "sine") {
+  if (!ctx || motion === 0) return;
+  const t = ctx.currentTime, o = ctx.createOscillator(), g = ctx.createGain();
+  o.type = type; o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f1, t + dur);
+  g.gain.setValueAtTime(.12, t); g.gain.exponentialRampToValueAtTime(.001, t + dur);
+  o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + dur + .02);
+}
+function chime() {
+  if (!ctx) return;
+  [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => {
+    const t = ctx.currentTime + i * .09, o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = "triangle"; o.frequency.value = f;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.14, t + .01); g.gain.exponentialRampToValueAtTime(.001, t + .5);
+    o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + .55);
+  });
+}
+let speaker = null;
+function speak(c, key, text) {
+  return new Promise(res => {
+    audio();
+    const a = new Audio(AUD[key]);
+    const src = ctx.createMediaElementSource(a); src.connect(analyser);
+    speaker = c; say(c, text);
+    a.onended = () => { speaker = null; c.speakingLevel = 0; unsay(c); res(); };
+    a.play().catch(() => { speaker = null; unsay(c); res(); });
+  });
+}
+function level() {
+  if (!analyser) return 0;
+  analyser.getFloatTimeDomainData(buf);
+  let s = 0; for (let i = 0; i < buf.length; i++) s += buf[i] * buf[i];
+  const rms = Math.sqrt(s / buf.length);
+  return Math.max(0, Math.min(1, (rms - 0.015) * 9));
+}
+
+/* ---------- 紙吹雪 ---------- */
+const bits = [];
+function confetti(n = 70) {
+  const cols = ["#FF6F91", "#FFD25E", "#7FCBF0", "#7CC36A", "#B9A8D9"];
+  n = Math.round(n * Math.max(.15, motion));
+  for (let i = 0; i < n; i++) {
+    const r = el("rect", { width: 18, height: 10, rx: 3, fill: cols[i % cols.length], stroke: INK, "stroke-width": 2 }, fxLayer);
+    bits.push({ r, x: 800 + (Math.random() - .5) * 300, y: 520, vx: (Math.random() - .5) * 900, vy: -700 - Math.random() * 600, a: Math.random() * 360, va: (Math.random() - .5) * 720, life: 2.4 });
+  }
+}
+function stepBits(dt) {
+  for (let i = bits.length - 1; i >= 0; i--) {
+    const b = bits[i]; b.vy += 1400 * dt; b.vx *= .99; b.x += b.vx * dt; b.y += b.vy * dt; b.a += b.va * dt; b.life -= dt;
+    b.r.setAttribute("transform", `translate(${b.x.toFixed(1)} ${b.y.toFixed(1)}) rotate(${b.a.toFixed(0)})`);
+    if (b.life < 0 || b.y > 1050) { b.r.remove(); bits.splice(i, 1); }
+  }
+}
+
+
+/* ---------- 感情マーク（♪・！・？・Z・ハート・涙など） ---------- */
+const marks = [];
+function world(c, lx, ly) { return { x: c.x + c.dx.v * motion + lx * c.s, y: c.y + (ly + c.jumpY * motion - (c.neck ? c.lift.v * motion : 0)) * c.s }; }
+function headTop(c) { return world(c, 200, c.top); }
+const MARK_DRAW = {
+  note(g) { el("text", { "font-family": "Mochiy Pop One, sans-serif", "font-size": 64, fill: "#FF6F91", stroke: INK, "stroke-width": 3, "text-anchor": "middle" }, g).textContent = "♪"; },
+  z(g, i) { el("text", { "font-family": "Mochiy Pop One, sans-serif", "font-size": 44 + i * 12, fill: "#7FCBF0", stroke: INK, "stroke-width": 3, "text-anchor": "middle" }, g).textContent = "Z"; },
+  q(g) { el("text", { "font-family": "Mochiy Pop One, sans-serif", "font-size": 84, fill: "#B9A8D9", stroke: INK, "stroke-width": 4, "text-anchor": "middle" }, g).textContent = "?"; },
+  ex(g) { el("circle", { cy: -30, r: 40, fill: "#FFD25E", stroke: INK, "stroke-width": 5 }, g); el("text", { y: -8, "font-family": "Mochiy Pop One, sans-serif", "font-size": 64, fill: INK, "text-anchor": "middle" }, g).textContent = "!"; },
+  heart(g) { el("path", { d: "M0 18 C-40 -10 -28 -44 0 -26 C28 -44 40 -10 0 18 Z", fill: "#FF6F91", stroke: INK, "stroke-width": 4, "stroke-linejoin": "round" }, g); },
+  sparkle(g) { el("path", { d: "M0 -32 Q6 -6 32 0 Q6 6 0 32 Q-6 6 -32 0 Q-6 -6 0 -32 Z", fill: "#FFE27A", stroke: INK, "stroke-width": 4, "stroke-linejoin": "round" }, g); },
+  drop(g) { el("path", { d: "M0 -22 Q16 2 10 12 Q0 22 -10 12 Q-16 2 0 -22 Z", fill: "#9FD6F5", stroke: INK, "stroke-width": 4, "stroke-linejoin": "round" }, g); },
+  anger(g) { el("path", { d: "M-24 -8 Q-8 -8 -8 -24 M8 -24 Q8 -8 24 -8 M24 8 Q8 8 8 24 M-8 24 Q-8 8 -24 8", fill: "none", stroke: "#E2456F", "stroke-width": 8, "stroke-linecap": "round" }, g); },
+  shy(g) { el("path", { d: "M-30 10 L-18 -10 M-8 10 L4 -10 M14 10 L26 -10", fill: "none", stroke: "#E2456F", "stroke-width": 6, "stroke-linecap": "round" }, g); },
+  puff(g) { el("circle", { r: 18, fill: "#FFFFFF", stroke: INK, "stroke-width": 4 }, g); },
+};
+function mark(type, x, y, o = {}) {
+  if (motion === 0 && type !== "ex" && type !== "q") return;
+  const g = el("g", {}, fxLayer); MARK_DRAW[type](g, o.i || 0);
+  marks.push({ g, x, y, vx: o.vx || 0, vy: o.vy ?? -60, grav: o.grav || 0, life: o.life || 1.4, max: o.life || 1.4, sway: o.sway || 0, s: o.s || 1, t: 0 });
+}
+function stepMarks(dt) {
+  for (let i = marks.length - 1; i >= 0; i--) {
+    const k = marks[i]; k.t += dt; k.life -= dt; k.vy += k.grav * dt; k.x += k.vx * dt; k.y += k.vy * dt;
+    const pop = Math.min(1, k.t * 6), fade = Math.min(1, k.life * 2.5);
+    k.g.setAttribute("transform", `translate(${(k.x + Math.sin(k.t * 5) * k.sway).toFixed(1)} ${k.y.toFixed(1)}) scale(${(k.s * pop).toFixed(3)})`);
+    k.g.setAttribute("opacity", fade.toFixed(2));
+    if (k.life <= 0) { k.g.remove(); marks.splice(i, 1); }
+  }
+}
+const markAbove = (c, type, o = {}) => { const p = headTop(c); mark(type, p.x + (o.dx || 0) * c.s, p.y - 20 + (o.dy || 0) * c.s, { s: Math.max(.9, Math.min(1.5, c.s * 1.3)), ...o }); };
+function tears(c, dur = 2) {
+  const n = Math.round(dur * 5);
+  for (let i = 0; i < n; i++) later(i * 200, () => c.eyes.forEach((e, j) => { const p = world(c, e.cx + (j ? 10 : -10), e.cy + 14); mark("drop", p.x, p.y, { vy: 40, vx: (j ? 70 : -70) * c.s, grav: 900, life: .9, s: .7 * Math.max(.6, c.s) }); }));
+}
+
+/* ---------- 効果音（追加分） ---------- */
+function noise(dur = .15, f = 2500, gain = .25) {
+  if (!ctx) return;
+  const b = ctx.createBuffer(1, Math.max(1, ctx.sampleRate * dur), ctx.sampleRate), d = b.getChannelData(0);
+  for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
+  const s = ctx.createBufferSource(), fl = ctx.createBiquadFilter(), g = ctx.createGain();
+  s.buffer = b; fl.type = "bandpass"; fl.frequency.value = f; g.gain.value = gain;
+  s.connect(fl).connect(g).connect(ctx.destination); s.start();
+}
+function tune(notes, bpm = 150, type = "triangle", vol = .12) {
+  if (!ctx) return; const beat = 60 / bpm; let t = ctx.currentTime + .02;
+  notes.forEach(([f, len]) => { if (f) { const o = ctx.createOscillator(), g = ctx.createGain(); o.type = type; o.frequency.value = f;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .01); g.gain.exponentialRampToValueAtTime(.001, t + beat * len * .95);
+    o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + beat * len); } t += beat * len; });
+}
+const N = { C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99, A5: 880, B5: 987.77, C6: 1046.5, G4: 392, A4: 440, E4: 329.63, C4: 261.63 };
+
+/* ---------- 動きのカタログ ----------
+   cat: よろこぶ / きもち / あいさつ・へんじ / ようす / ちんじ / ふたりで
+   play(c, partner) を呼ぶ。partner は「ふたりで」の相手（いなければ null）。 */
+const hold = (c, key, sec) => { c.tm[key] = sec; };
+const MOVES = [
+  // よろこぶ（正解したときの反応。毎回ちがうものを選べるように多めに用意）
+  { id: "banzai", cat: "よろこぶ", label: "ばんざい", play: c => { joy(c); chime(); } },
+  { id: "dance", cat: "よろこぶ", label: "おどる", play: c => { hold(c, "dance", 2.6); c.happyOn = true; later(2600, () => c.happyOn = false);
+      tune([[N.C5, .5], [N.E5, .5], [N.G5, .5], [N.E5, .5], [N.F5, .5], [N.A5, .5], [N.G5, 1]], 160);
+      for (let i = 0; i < 4; i++) later(i * 600, () => markAbove(c, "note", { dx: i % 2 ? 90 : -90, vy: -90, sway: 18 })); } },
+  { id: "spin", cat: "よろこぶ", label: "くるりん", play: c => { jump(c, .8); c.spinDur = .8; c.spinTurns = 1; hold(c, "spin", .8); c.happyOn = true; later(1100, () => c.happyOn = false);
+      blip(500, 1400, .5, "triangle"); later(700, () => [-1, 1].forEach(d => markAbove(c, "sparkle", { dx: d * 120, dy: 60, vy: -40 }))); } },
+  { id: "laugh", cat: "よろこぶ", label: "けらけら", play: c => { hold(c, "laugh", 1.8); c.happyOn = true; later(1800, () => c.happyOn = false);
+      for (let i = 0; i < 6; i++) later(i * 140, () => blip(700 + (i % 2) * 180, 600, .07, "square")); markAbove(c, "note", { dx: 80 }); } },
+  { id: "clap", cat: "よろこぶ", label: "はくしゅ", play: c => { hold(c, "clap", 2.2); c.happyOn = true; c.mouthOpen.t = .4; later(2200, () => { c.happyOn = false; c.mouthOpen.t = 0; });
+      for (let i = 0; i < 8; i++) later(150 + i * 270, () => noise(.06, 1800, .3)); } },
+  { id: "pump", cat: "よろこぶ", label: "ガッツポーズ", play: c => { c.armR.t = -150; hold(c, "pump", 1.4); jump(c, .45); c.mouthOpen.t = .5; c.eyeScale.t = 1.12;
+      blip(300, 900, .2, "square"); later(300, () => markAbove(c, "sparkle", { dx: 130, dy: 40 })); later(1400, () => { c.armR.t = 0; c.mouthOpen.t = 0; c.eyeScale.t = 1; }); } },
+  { id: "heart", cat: "よろこぶ", label: "だいすき", play: c => { c.armL.t = -40; c.armR.t = 40; c.happyOn = true; c.headRot.t = 8; jump(c, .3);
+      for (let i = 0; i < 3; i++) later(i * 300, () => markAbove(c, "heart", { dx: (i - 1) * 80, vy: -110, sway: 14 })); tune([[N.E5, .5], [N.C6, 1]], 140, "sine");
+      later(1500, () => { c.armL.t = 0; c.armR.t = 0; c.happyOn = false; c.headRot.t = 0; }); } },
+  // きもち
+  { id: "shy", cat: "きもち", label: "てれる", play: c => { hold(c, "shy", 2.2); c.headRot.t = 12; c.armL.t = -45; c.armR.t = 45; c.eyeY.t = 5;
+      markAbove(c, "shy", { dy: 150, vy: -10, life: 2 }); later(2200, () => { c.headRot.t = 0; c.armL.t = 0; c.armR.t = 0; c.eyeY.t = 0; }); } },
+  { id: "sad", cat: "きもち", label: "かなしい", play: c => { hold(c, "squint", 2.4); c.sadMouth = true; c.headY.t = 16; c.headRot.t = -6; c.squash.t = .94; c.armL.t = -10; c.armR.t = 10;
+      tears(c, 2); tune([[N.E5, 1], [N.C5, 1], [N.A4, 2]], 110, "sine", .08);
+      later(2400, () => { c.sadMouth = false; c.headY.t = 0; c.headRot.t = 0; c.squash.t = 1; c.armL.t = 0; c.armR.t = 0; }); } },
+  { id: "frustrated", cat: "きもち", label: "くやしい", play: c => { c.roundMouth = false; c.armL.t = -30; c.armR.t = 30; hold(c, "shake", .9);
+      [0, 380].forEach(ms => later(ms, () => { jump(c, .35); noise(.08, 300, .4); })); later(100, () => markAbove(c, "anger", { dx: 110, dy: 30, vy: -20 }));
+      later(1300, () => { c.armL.t = 0; c.armR.t = 0; }); } },
+  { id: "scared", cat: "きもち", label: "こわい", play: c => { hold(c, "shiver", 1.8); c.eyeScale.t = 1.25; c.armL.t = -70; c.armR.t = 70; c.squash.t = .92; c.roundMouth = true; c.mouthOpen.t = .3;
+      later(200, () => markAbove(c, "drop", { dx: 130, dy: 90, vy: 30, grav: 200 })); later(700, () => markAbove(c, "drop", { dx: -130, dy: 90, vy: 30, grav: 200 }));
+      later(1800, () => { c.eyeScale.t = 1; c.armL.t = 0; c.armR.t = 0; c.squash.t = 1; c.roundMouth = false; c.mouthOpen.t = 0; }); } },
+  { id: "surprise", cat: "きもち", label: "びっくり", play: c => { surprise(c); markAbove(c, "ex", { vy: -40 }); blip(500, 1100, .15, "square"); } },
+  { id: "think", cat: "きもち", label: "かんがえる", play: c => { c.armR.t = -125; c.headRot.t = 10; c.eyeX.t = 6; c.eyeY.t = -6;
+      later(300, () => markAbove(c, "q", { dx: 110, vy: -30, life: 1.8 })); blip(400, 300, .2, "sine");
+      later(2000, () => { c.armR.t = 0; c.headRot.t = 0; c.eyeX.t = 0; c.eyeY.t = 0; }); } },
+  { id: "sleepy", cat: "きもち", label: "ねむい", play: c => { hold(c, "closed", 1.6); c.mouthOpen.t = .9; c.armL.t = 150; c.armR.t = -150; c.squash.t = 1.08;
+      tune([[N.G4, 2], [N.E4, 2]], 90, "sine", .06); later(1300, () => { c.mouthOpen.t = 0; c.armL.t = 0; c.armR.t = 0; c.squash.t = 1; }); } },
+  // あいさつ・へんじ
+  { id: "bow", cat: "あいさつ・へんじ", label: "おじぎ", play: c => { hold(c, "closed", 1.3); c.squash.t = .9; c.headY.t = 48; c.armL.t = -15; c.armR.t = 15;
+      later(1100, () => { c.squash.t = 1; c.headY.t = 0; c.armL.t = 0; c.armR.t = 0; }); } },
+  { id: "nod", cat: "あいさつ・へんじ", label: "うなずく", play: c => { hold(c, "nod", 1.2); c.happyOn = !!c.happy; later(1200, () => c.happyOn = false); } },
+  { id: "no", cat: "あいさつ・へんじ", label: "くびを ふる", play: c => { hold(c, "shake", 1.2); c.roundMouth = false; c.armL.t = 10; c.armR.t = -10; later(1200, () => { c.armL.t = 0; c.armR.t = 0; }); } },
+  { id: "wave", cat: "あいさつ・へんじ", label: "てを ふる", play: c => wave(c) },
+  { id: "point", cat: "あいさつ・へんじ", label: "ゆびさす", play: c => { c.armR.t = -78; c.eyeX.t = 7; c.headRot.t = -5; later(200, () => markAbove(c, "ex", { dx: 150, vy: -20 }));
+      later(1800, () => { c.armR.t = 0; c.eyeX.t = 0; c.headRot.t = 0; }); } },
+  { id: "cheer", cat: "あいさつ・へんじ", label: "はげます", play: c => { c.armL.t = 60; c.armR.t = -150; hold(c, "pump", 1.2); hold(c, "nod", 1.2); c.mouthOpen.t = .4;
+      later(1300, () => { c.armL.t = 0; c.armR.t = 0; c.mouthOpen.t = 0; }); } },
+  // ようす
+  { id: "look", cat: "ようす", label: "きょろきょろ", play: c => { hold(c, "look", 2.4); const f = () => { if (!c.tm.look) { c.eyeX.t = 0; return; } c.eyeX.t = c.eyeX.t > 0 ? -7 : 7; later(500, f); }; f(); } },
+  { id: "crouch", cat: "ようす", label: "かくれて ばあ", play: c => { c.squash.t = .7; c.headY.t = 26; c.armL.t = -60; c.armR.t = 60; hold(c, "closed", 1);
+      later(1100, () => { c.squash.t = 1; c.headY.t = 0; c.armL.t = 120; c.armR.t = -120; jump(c, .7); c.eyeScale.t = 1.2; c.mouthOpen.t = .8; blip(300, 1200, .2, "square"); });
+      later(1900, () => { c.armL.t = 0; c.armR.t = 0; c.eyeScale.t = 1; c.mouthOpen.t = 0; }); } },
+  { id: "sneak", cat: "ようす", label: "しのびあし", play: c => { hold(c, "tiptoe", 3); c.lean.t = 8; c.armL.t = 50; c.armR.t = -50; c.dx.t = 160; c.eyeX.t = 6;
+      for (let i = 0; i < 6; i++) later(i * 480, () => blip(220, 180, .05, "sine"));
+      later(1500, () => { c.dx.t = 0; c.lean.t = -8; c.eyeX.t = -6; }); later(3000, () => { c.lean.t = 0; c.armL.t = 0; c.armR.t = 0; c.eyeX.t = 0; }); } },
+  { id: "sleep", cat: "ようす", label: "いねむり", play: c => { hold(c, "closed", 3.2); c.headY.t = 18; c.headRot.t = 12; c.squash.t = .96;
+      for (let i = 0; i < 4; i++) later(300 + i * 650, () => markAbove(c, "z", { dx: 110, vy: -50, sway: 10, i: i % 3, life: 1.6 }));
+      later(3200, () => { c.headY.t = 0; c.headRot.t = 0; c.squash.t = 1; surprise(c); markAbove(c, "ex"); }); } },
+  { id: "run", cat: "ようす", label: "その場ダッシュ", play: c => { hold(c, "run", 2); c.lean.t = -10; c.armL.t = 40; c.armR.t = -40;
+      for (let i = 0; i < 6; i++) later(i * 300, () => { const p = world(c, 200, c.base); mark("puff", p.x + 60 * c.s, p.y - 10, { vx: 160, vy: -30, life: .6, s: c.s }); });
+      later(2000, () => { c.lean.t = 0; c.armL.t = 0; c.armR.t = 0; }); } },
+  { id: "flop", cat: "ようす", label: "ずっこける", play: c => flop(c) },
+  // ちんじ（10回に1回くらい予告なしに起こす）
+  { id: "sneeze", cat: "ちんじ", label: "くしゃみ", play: c => { c.headY.t = -14; c.headRot.t = -8; hold(c, "closed", 1.2); c.mouthOpen.t = .35;
+      later(900, () => { c.headY.t = 14; c.headRot.t = 8; jump(c, .5); c.mouthOpen.t = .9; noise(.35, 1200, .35);
+        for (let i = 0; i < 6; i++) { const p = headTop(c); mark("puff", p.x, p.y + 180 * c.s, { vx: (Math.random() - .5) * 500, vy: -200 - Math.random() * 200, grav: 600, life: .9, s: c.s * .8 }); } });
+      later(1500, () => { c.headY.t = 0; c.headRot.t = 0; c.mouthOpen.t = 0; }); } },
+  { id: "hiccup", cat: "ちんじ", label: "しゃっくり", play: c => { for (let i = 0; i < 4; i++) later(i * 650, () => { jump(c, .32); c.eyeScale.vel += 4; blip(650, 1300, .07, "square"); markAbove(c, "q", { dx: 100, vy: -60, life: .7, s: .6 }); }); } },
+  { id: "roll", cat: "ちんじ", label: "ころころ", play: c => { c.spinDur = 1.6; c.spinTurns = 2; hold(c, "spin", 1.6); c.dx.t = 260; hold(c, "closed", 1.6);
+      blip(300, 900, .8, "triangle"); later(1600, () => { c.dx.t = 0; c.squash.vel += 2; markAbove(c, "sparkle", { dx: 90 }); }); } },
+  { id: "special", cat: "ちんじ", label: "その子らしく", play: c => { SPECIAL[c.kind](c); chime(); } },
+];
+// ふたりで（相手がいるときだけ）
+const DUO = [
+  { id: "highfive", label: "ハイタッチ", play: (a, b) => {
+      const ca = a.x + 200 * a.s, cb = b.x + 200 * b.s, gap = Math.max(0, (cb - ca) / 2 - 105 * (a.s + b.s));
+      a.dx.t = gap; b.dx.t = -gap; a.armR.t = -150; b.armL.t = 150; a.lean.t = -6; b.lean.t = 6;
+      later(650, () => { noise(.09, 2200, .5); const p = world(a, 200, 140); [0, 1, 2, 3, 4, 5].forEach(i => { const an = i / 6 * Math.PI * 2; mark("sparkle", ca + gap + 40, p.y, { vx: Math.cos(an) * 260, vy: Math.sin(an) * 260, life: .7, s: .7 }); });
+        a.happyOn = b.happyOn = true; jump(a, .4); jump(b, .4); });
+      later(1300, () => { a.dx.t = 0; b.dx.t = 0; a.armR.t = 0; b.armL.t = 0; a.lean.t = 0; b.lean.t = 0; a.happyOn = b.happyOn = false; }); } },
+  { id: "bow2", label: "いっしょに おじぎ", play: (a, b) => { MOVES.find(m => m.id === "bow").play(a); later(150, () => MOVES.find(m => m.id === "bow").play(b)); } },
+  { id: "dance2", label: "いっしょに おどる", play: (a, b) => { MOVES.find(m => m.id === "dance").play(a); hold(b, "dance", 2.6); b.happyOn = true; later(2600, () => b.happyOn = false); } },
+  { id: "cheer2", label: "はげまして もらう", play: (a, b) => { MOVES.find(m => m.id === "sad").play(a); later(900, () => MOVES.find(m => m.id === "cheer").play(b)); later(2600, () => MOVES.find(m => m.id === "pump").play(a)); } },
+];
+
+/* ---------- ひまなときの小さな動き ---------- */
+const IDLE = ["look", "nod", "think", "sleepy"];
+function idleTick(c, dt, busy) {
+  if (busy || c === speaker || Object.keys(c.tm).length) { c.idleAt = Math.max(c.idleAt, 4); return; }
+  c.idleAt -= dt;
+  if (c.idleAt < 0) {
+    c.idleAt = 7 + Math.random() * 7;
+    const r = Math.random();
+    const pick = id => MOVES.find(m => m.id === id).play(c);
+    if (r < .08) pick(Math.random() < .5 ? "sneeze" : "hiccup");
+    else if (r < .5) { c.earL.vel += 120; c.earR.vel -= 120; c.headRot.vel += (Math.random() - .5) * 60; }
+    else pick(IDLE[Math.floor(Math.random() * IDLE.length)]);
+  }
+}
+
+/* ---------- リバーシのルール（画面にも通信にも依存しない） ----------
+   盤は 64 マスの配列。0 = 空き、1 = くろ、2 = しろ。くろが先手。
+   対局は「手の履歴」（[行, 列] の列）だけで表す。パスは履歴に入れず、
+   再計算のときに自動で入る。両方の端末が同じ履歴を持てば、同じ盤になる。 */
+const EMPTY = 0, BLACK = 1, WHITE = 2;
+const DIRS = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]];
+const opp = p => 3 - p;
+const at = (r, c) => r * 8 + c;
+const inside = (r, c) => r >= 0 && r < 8 && c >= 0 && c < 8;
+
+function initBoard() {
+  const b = new Array(64).fill(EMPTY);
+  b[at(3, 3)] = WHITE; b[at(3, 4)] = BLACK; b[at(4, 3)] = BLACK; b[at(4, 4)] = WHITE;
+  return b;
+}
+
+/* 置いたときに返る石を、方向ごとに「置いた石に近い順」で返す */
+function flipsFor(b, p, r, c) {
+  if (!inside(r, c) || b[at(r, c)] !== EMPTY) return [];
+  const out = [];
+  for (const [dr, dc] of DIRS) {
+    const cells = [];
+    let y = r + dr, x = c + dc;
+    while (inside(y, x) && b[at(y, x)] === opp(p)) { cells.push([y, x]); y += dr; x += dc; }
+    if (cells.length && inside(y, x) && b[at(y, x)] === p) out.push({ dir: [dr, dc], cells });
+  }
+  return out;
+}
+const flipCount = f => f.reduce((n, d) => n + d.cells.length, 0);
+
+function legalMoves(b, p) {
+  const list = [];
+  for (let r = 0; r < 8; r++) for (let c = 0; c < 8; c++) {
+    const f = flipsFor(b, p, r, c);
+    if (f.length) list.push({ r, c, n: flipCount(f) });
+  }
+  return list;
+}
+
+function applyMove(b, p, r, c) {
+  const flips = flipsFor(b, p, r, c);
+  if (!flips.length) throw new Error(`置けない手: ${r},${c}`);
+  const nb = b.slice();
+  nb[at(r, c)] = p;
+  flips.forEach(d => d.cells.forEach(([y, x]) => { nb[at(y, x)] = p; }));
+  return { board: nb, flips };
+}
+
+function count(b) {
+  let black = 0, white = 0;
+  b.forEach(v => { if (v === BLACK) black++; else if (v === WHITE) white++; });
+  return { black, white };
+}
+
+/* 履歴から盤を作り直す。turn = 次に打つ側（パスは解決済み）、
+   passed = 直前にパスが起きた側（なければ 0）、over = 終局 */
+function replay(history) {
+  let b = initBoard(), turn = BLACK, passed = 0;
+  const steps = [];
+  for (const [r, c] of history) {
+    if (!legalMoves(b, turn).length) turn = opp(turn);
+    const { board, flips } = applyMove(b, turn, r, c);
+    steps.push({ player: turn, r, c, flips });
+    b = board; turn = opp(turn);
+  }
+  let over = false;
+  if (!legalMoves(b, turn).length) {
+    if (legalMoves(b, opp(turn)).length) { passed = turn; turn = opp(turn); }
+    else over = true;
+  }
+  return { board: b, turn, passed, over, steps };
+}
+
+/* その側の最後の手を取り消すには、末尾から何手もどすか（0 = もどせない） */
+function undoDepth(history, player) {
+  const { steps } = replay(history);
+  for (let i = steps.length - 1; i >= 0; i--) if (steps[i].player === player) return steps.length - i;
+  return 0;
+}
+
+
+/* 確認用の局面（rules.test.js が自動生成） */
+const FIX = {"pass":[[2,3],[2,2],[2,1],[1,1],[0,1],[1,3],[2,4],[1,4],[0,3],[0,0],[2,5],[2,0],[4,5],[2,6],[3,5],[1,5],[0,5],[4,6],[2,7],[4,2],[3,2],[1,2],[3,6],[0,6],[0,7],[0,2],[5,3],[0,4],[5,1],[5,2],[3,1],[5,4],[6,2],[4,7],[1,6],[6,0],[5,7],[6,4],[1,0],[7,2],[7,4],[6,7],[6,1],[4,1],[3,0],[7,5],[7,6],[1,7],[5,6],[3,7],[5,0],[6,5],[7,3],[7,1],[4,0],[5,5],[6,3],[7,7]],"end":[[2,3],[2,2],[2,1],[1,1],[0,1],[1,3],[2,4],[1,4],[0,3],[0,0],[2,5],[2,0],[4,5],[2,6],[3,5],[1,5],[0,5],[4,6],[2,7],[4,2],[3,2],[1,2],[3,6],[0,6],[0,7],[0,2],[5,3],[0,4],[5,1],[5,2],[3,1],[5,4],[6,2],[4,7],[1,6],[6,0],[5,7],[6,4],[1,0],[7,2],[7,4],[6,7],[6,1],[4,1],[3,0],[7,5],[7,6],[1,7],[5,6],[3,7],[5,0],[6,5],[7,3],[7,1],[4,0],[5,5],[6,3]]};
+
+/* ---------- 効果音（すべてその場で合成。素材ファイルなし） ----------
+   ctx / audio() は ことばのたね の part_sound.js のものを使う。
+   音量は master を通す（キャラの演技の小さな音は part_moves.js が直接鳴らす）。 */
+const SFX = (() => {
+  let master = null;
+  const LV = [0, .45, .8, 1.15];
+  function out() {
+    audio();
+    if (!master) { master = ctx.createGain(); master.connect(ctx.destination); }
+    master.gain.value = LV[CFG.sfx] ?? .8;
+    return master;
+  }
+  function tone(f, t0, dur, type = "sine", vol = .2, attack = .005) {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = type; o.frequency.value = f;
+    g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(vol, t0 + attack);
+    g.gain.exponentialRampToValueAtTime(.0008, t0 + dur);
+    o.connect(g).connect(out()); o.start(t0); o.stop(t0 + dur + .05);
+  }
+  function hiss(t0, dur, f, q, vol, sweepTo) {
+    const n = Math.max(1, Math.floor(ctx.sampleRate * dur)), b = ctx.createBuffer(1, n, ctx.sampleRate), d = b.getChannelData(0);
+    for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 2);
+    const s = ctx.createBufferSource(), fl = ctx.createBiquadFilter(), g = ctx.createGain();
+    s.buffer = b; fl.type = "bandpass"; fl.Q.value = q; fl.frequency.setValueAtTime(f, t0);
+    if (sweepTo) fl.frequency.exponentialRampToValueAtTime(sweepTo, t0 + dur);
+    g.gain.value = vol; s.connect(fl).connect(g).connect(out()); s.start(t0);
+  }
+  // 木琴の音階（ド→レ→ミ…、最大8段）
+  const XYLO = [523.25, 587.33, 659.25, 698.46, 783.99, 880, 987.77, 1046.5];
+  const now = () => (out(), ctx.currentTime + .01);
+  return {
+    place() { const t = now(); hiss(t, .09, 900, 2.5, .9); tone(190, t, .12, "sine", .35, .002); tone(380, t, .06, "triangle", .08, .002); },
+    flip(k) { const t = now(), f = XYLO[Math.min(k, 7)]; tone(f, t, .15 * 1.6, "sine", .22); tone(f * 4, t, .06, "sine", .05); tone(f * 2, t, .1, "triangle", .05); },
+    sparkle() { const t = now(); [1046.5, 1318.5, 1568, 2093, 2637].forEach((f, i) => tone(f, t + i * .07, .35, "sine", .12)); },
+    turn() { const t = now(); tone(659.25, t, .3 * 1.4, "sine", .16, .01); tone(1318.5, t, .2, "sine", .04, .01); },
+    swoosh() { const t = now(); hiss(t, .2, 3200, 1.2, .5, 600); },
+    ok() { const t = now(); tone(1318.5, t, .2, "sine", .18); },
+    ng() { const t = now(); tone(392, t, .2, "triangle", .14); },
+    gather(sec) { const t = now(); for (let i = 0; i < sec * 22; i++) { const tt = t + i / 22 + Math.random() * .02; hiss(tt, .03, 1800 + Math.random() * 1600, 4, .5); } },
+    fanfare(gentle) {
+      const t = now(), seq = gentle ? [[523.25, 0, .3], [659.25, .3, .3], [783.99, .6, .7]] : [[523.25, 0, .16], [659.25, .16, .16], [783.99, .32, .16], [1046.5, .48, .5], [783.99, .98, .14], [1046.5, 1.12, .6]];
+      seq.forEach(([f, d, l]) => { tone(f, t + d, l + .2, gentle ? "sine" : "triangle", gentle ? .14 : .16, .01); if (!gentle) tone(f / 2, t + d, l, "sine", .08, .01); });
+    },
+  };
+})();
+
+/* ---------- まるシマリバーシ 段階1（1台で交互に打つ） ----------
+   秒数は仕様書 第4章・第5章の「ふつう」の値。ゆっくり は 1.5 倍。 */
+const T = {
+  drop: 250, flipStart: 400, flip: 350, flipGap: 120, afterFlip: 300, countStep: 80, toTurn: 400,
+  undoFlip: 250, undoGap: 80, ring: 1000, passMin: 3000, gather: 2000,
+};
+const K = () => (CFG.slow ? 1.5 : 1);
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+/* ---------- 設定と保存（この端末だけ） ---------- */
+const CFG_KEY = "marushima-reversi-cfg", GAME_KEY = "marushima-reversi-game";
+const load = k => { try { return JSON.parse(localStorage.getItem(k)) || null; } catch (e) { return null; } };
+const keep = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* 保存できなくても遊べる */ } };
+const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2 }, load(CFG_KEY) || {});
+const saveCfg = () => keep(CFG_KEY, CFG);
+
+/* ---------- 対局の状態 ---------- */
+// A = こども（左）、B = おばあちゃん（右）。blackSide が くろ（先手）の側。対局ごとに交代する。
+const G = { hist: [], blackSide: "A", busy: true, started: false, ended: false };
+const colorOf = side => (side === G.blackSide ? BLACK : WHITE);
+const sideOf = color => (color === BLACK ? G.blackSide : (G.blackSide === "A" ? "B" : "A"));
+const other = side => (side === "A" ? "B" : "A");
+// 呼び名は使わず、石の色で呼ぶ（くろ／しろ）
+const nameOf = side => (colorOf(side) === BLACK ? "くろ" : "しろ");
+const saveGame = () => keep(GAME_KEY, { hist: G.hist, blackSide: G.blackSide });
+
+/* ---------- 盤 ---------- */
+const $ = id => document.getElementById(id);
+const boardEl = $("board");
+const cells = [];
+for (let r = 0; r < 8; r++) for (let c = 0; c < 8; c++) {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "cell"; b.setAttribute("role", "gridcell");
+  b.setAttribute("aria-label", `${r + 1}ぎょう ${c + 1}れつ`);
+  b.innerHTML = '<span class="hint"><i></i></span><span class="disc" data-c="0"><span class="f a" data-c="0"></span><span class="f b" data-c="0"></span></span>';
+  b.addEventListener("click", () => tap(r, c));
+  boardEl.appendChild(b);
+  cells.push({ b, disc: b.querySelector(".disc"), fa: b.querySelector(".f.a"), fb: b.querySelector(".f.b") });
+}
+function setDisc(i, v) { const x = cells[i]; x.disc.dataset.c = v; x.fa.dataset.c = v; x.fb.dataset.c = v; x.disc.style.opacity = ""; x.disc.style.visibility = ""; }
+function paint(board) { board.forEach((v, i) => setDisc(i, v)); }
+
+function showHints(list) {
+  clearHints();
+  if (!CFG.hints) return;
+  list.forEach(m => cells[at(m.r, m.c)].b.classList.add("can"));
+}
+function clearHints() { cells.forEach(x => x.b.classList.remove("can")); }
+
+function dropDisc(i, v) {
+  setDisc(i, v);
+  cells[i].disc.animate([
+    { transform: "translateY(-38%) scale(1.35)", opacity: 0 },
+    { transform: "translateY(0) scale(.9)", opacity: 1, offset: .78 },
+    { transform: "none", opacity: 1 },
+  ], { duration: T.drop * K(), easing: "cubic-bezier(.5,0,.7,1)" });
+}
+// 方向に合わせた軸でくるっと返す（横に並ぶ石はたて軸、たてに並ぶ石はよこ軸）
+/* 返すときだけ、厚みのある円柱（表の面・裏の面・側面24枚）を組み立てて回す。
+   側面は本物の石と同じく半分ずつ黒と白。光の向きに合わせて明暗をつける。 */
+const FACE = { 1: "#1E1E21", 2: "#F2F2EE" }, EDGE = { 1: [42, 42, 46], 2: [214, 214, 208] };
+const SEG = 24, THICK = .2;
+const shade = (rgb, k) => `rgb(${rgb.map(v => Math.round(Math.min(255, v * k))).join(",")})`;
+function makeCylinder(from, to, D) {
+  const H = D * THICK, w = Math.PI * D / SEG * 1.12;
+  const cy = document.createElement("span"); cy.className = "cyl";
+  const front = document.createElement("span"); front.className = "f"; front.dataset.c = from; front.style.transform = `translateZ(${H / 2}px)`;
+  const back = document.createElement("span"); back.className = "f"; back.dataset.c = to; back.style.transform = `rotateY(180deg) translateZ(${H / 2}px)`;
+  for (let k = 0; k < SEG; k++) {
+    const ang = k * 360 / SEG, light = .62 + .5 * Math.max(0, Math.cos((ang - 200) * Math.PI / 180));
+    const e = document.createElement("span"); e.className = "edge";
+    e.style.cssText = `width:${w}px;height:${H}px;margin:${-H / 2}px 0 0 ${-w / 2}px;transform:rotateZ(${ang}deg) translateY(${D / 2 - .6}px) rotateX(90deg);` +
+      `background:linear-gradient(to bottom, ${shade(EDGE[to], light)} 0 50%, ${shade(EDGE[from], light)} 50% 100%)`;
+    cy.appendChild(e);
+  }
+  cy.append(back, front);
+  return cy;
+}
+function flipDisc(i, to, dir, dur) {
+  const x = cells[i], ax = -dir[0], ay = dir[1], from = +x.disc.dataset.c || (to === BLACK ? WHITE : BLACK);
+  const D = x.disc.offsetWidth, cy = makeCylinder(from, to, D);
+  x.b.appendChild(cy); x.disc.style.visibility = "hidden";
+  const a = cy.animate([
+    { transform: `rotate3d(${ax}, ${ay}, 0, 0deg) scale(1)` },
+    { transform: `rotate3d(${ax}, ${ay}, 0, 90deg) scale(1.22)` },
+    { transform: `rotate3d(${ax}, ${ay}, 0, 180deg) scale(1)` },
+  ], { duration: dur, easing: "ease-in-out", fill: "forwards" });
+  a.onfinish = () => { x.fa.dataset.c = to; x.fb.dataset.c = to; x.disc.dataset.c = to; x.disc.style.visibility = ""; cy.remove(); };
+}
+// 最後に置いた石を赤い光で示す（次の手まで残す）
+const halo = document.createElement("div"); halo.id = "halo"; boardEl.prepend(halo);
+[[2, 2], [2, 6], [6, 2], [6, 6]].forEach(([y, x]) => { const s = document.createElement("div"); s.className = "star"; s.style.left = x * 12.5 + "%"; s.style.top = y * 12.5 + "%"; boardEl.appendChild(s); });
+function ringAt(i) {
+  halo.classList.remove("on"); void halo.offsetWidth;
+  halo.style.left = ((i % 8) + .5) * 12.5 + "%"; halo.style.top = (Math.floor(i / 8) + .5) * 12.5 + "%"; halo.classList.add("on");
+}
+function clearHalo() { halo.classList.remove("on"); }
+function haloFor(hist) { const s = replay(hist).steps.at(-1); s ? ringAt(at(s.r, s.c)) : clearHalo(); }
+
+/* ---------- 石の数（数えあがる） ---------- */
+const shown = { A: 2, B: 2 };
+function setCounts(board, animate) {
+  const c = count(board), target = { [G.blackSide]: c.black, [other(G.blackSide)]: c.white };
+  if (!animate) { ["A", "B"].forEach(s => { shown[s] = target[s]; $("cnt" + s).textContent = target[s]; }); return Promise.resolve(); }
+  const steps = Math.max(...["A", "B"].map(s => Math.abs(target[s] - shown[s])));
+  return new Promise(res => {
+    let k = 0;
+    const tick = () => {
+      if (k++ >= steps) return res();
+      ["A", "B"].forEach(s => { if (shown[s] !== target[s]) { shown[s] += Math.sign(target[s] - shown[s]); $("cnt" + s).textContent = shown[s]; } });
+      setTimeout(tick, T.countStep * K());
+    };
+    tick();
+  });
+}
+function paintSides() {
+  ["A", "B"].forEach(s => {
+    $("side" + s).querySelectorAll(".stone").forEach(e => { e.dataset.c = colorOf(s); });
+    $("name" + s).textContent = nameOf(s);
+  });
+}
+
+/* ---------- キャラクター（ことばのたね の原画をそのまま使う） ---------- */
+const seat = { A: makeChar("shima"), B: makeChar("meebaa") };
+const host = { pony: makeChar("pony"), kame: makeChar("kamejii") };
+const all = [seat.A, seat.B, host.pony, host.kame];
+// 進行役は下から顔を出す。wrap の位置と透明度だけを別に動かす。
+Object.values(host).forEach(c => {
+  const w = el("g", { opacity: 0 }, charLayer); w.appendChild(c.root);
+  c.wrap = w; c.enter = new Spring(1, 90, 13); c.hidden = true;
+});
+const VOICE = { shima: { pitch: 1.45, rate: 1.05 }, meebaa: { pitch: 1.05, rate: .9 }, pony: { pitch: 1.3, rate: 1 }, kamejii: { pitch: .7, rate: .88 } };
+
+function layout() {
+  const W = innerWidth, H = innerHeight;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const app = $("app").getBoundingClientRect(), portrait = matchMedia("(orientation: portrait), (max-aspect-ratio: 11/10)").matches;
+  const bs = portrait ? Math.min(app.width - 32, (app.height - 24) * .64) : Math.min(app.height - 30, app.width - 2 * Math.max(230, app.width * .2) - 40);
+  document.documentElement.style.setProperty("--bs", Math.max(240, Math.floor(bs)) + "px");
+}
+addEventListener("resize", layout);
+function placeAll() {
+  ["A", "B"].forEach(s => {
+    const c = seat[s], r = $("slot" + s).getBoundingClientRect();
+    const sc = Math.min(r.height / (c.base - c.top + 24), r.width / 285) * .98;
+    place(c, r.left + r.width / 2, r.bottom - 2, Math.max(.12, sc));
+  });
+  const br = boardEl.getBoundingClientRect();
+  Object.values(host).forEach(c => {
+    const sc = br.height * .56 / (c.base - c.top);
+    place(c, br.left + br.width / 2, br.bottom - br.height * .07, sc);
+    const off = c.enter.v * br.height * .7;
+    c.wrap.setAttribute("transform", `translate(0 ${off.toFixed(1)})`);
+    c.wrap.setAttribute("opacity", Math.max(0, Math.min(1, 1 - c.enter.v * 1.3)).toFixed(3));
+  });
+}
+async function showHost(c) { c.hidden = false; c.enter.t = 0; boardEl.classList.add("dim"); await wait(450); }
+async function hideHost(c) { c.enter.t = 1; await wait(350); c.hidden = true; if (Object.values(host).every(h => h.hidden)) boardEl.classList.remove("dim"); }
+
+/* ---------- 演技（同じものが続かないよう順送り） ---------- */
+const mv = (c, id) => MOVES.find(m => m.id === id).play(c);
+function shrug(c) { c.armL.t = -75; c.armR.t = 75; c.headRot.t = 10; c.mouthOpen.t = .15; later(1200, () => { c.armL.t = 0; c.armR.t = 0; c.headRot.t = 0; c.mouthOpen.t = 0; }); }
+function upset(c) { c.headRot.t = -14; c.headY.t = -10; c.eyeY.t = -7; c.sadMouth = true; c.armL.t = 30; c.armR.t = -30; later(1300, () => { c.headRot.t = 0; c.headY.t = 0; c.eyeY.t = 0; c.sadMouth = false; c.armL.t = 0; c.armR.t = 0; }); }
+function relieved(c) { c.happyOn = true; c.squash.t = .95; mv(c, "nod"); later(1200, () => { c.happyOn = false; c.squash.t = 1; }); }
+const ACTS = {
+  shima: {
+    turn: [c => mv(c, "point"), c => jump(c, .55), c => mv(c, "look")],
+    place: [c => joy(c), c => mv(c, "spin")],
+    big: [c => mv(c, "dance"), c => mv(c, "laugh")],
+    taken: [c => mv(c, "frustrated"), c => upset(c), c => mv(c, "frustrated")],
+    invalid: [c => mv(c, "no")], pass: [shrug], undoMine: [relieved], undoOther: [c => surprise(c)],
+    win: [c => mv(c, "pump")], lose: [c => mv(c, "cheer")],
+  },
+  meebaa: {
+    turn: [c => mv(c, "nod"), c => mv(c, "look")],
+    place: [c => mv(c, "nod"), c => mv(c, "clap")],
+    big: [c => { surprise(c); later(700, () => mv(c, "clap")); }],
+    taken: [shrug, c => mv(c, "laugh")],
+    invalid: [c => mv(c, "no")], pass: [shrug], undoMine: [relieved], undoOther: [c => { mv(c, "nod"); }],
+    win: [c => { mv(c, "clap"); later(800, () => mv(c, "heart")); }], lose: [c => mv(c, "cheer")],
+  },
+};
+const actIdx = {};
+function act(side, ev) {
+  const c = seat[side], list = ACTS[c.kind][ev]; if (!list) return;
+  const k = c.kind + ev, i = actIdx[k] || 0; actIdx[k] = i + 1;
+  list[i % list.length](c);
+}
+
+/* ---------- 読み上げ（段階1は端末の音声合成。段階3で AivisSpeech／VOICEVOX の合成音声に差し替える） ---------- */
+const bubble = $("bubble");
+let jaVoice = null, talking = null;
+function pickVoice() { const v = speechSynthesis?.getVoices?.() || []; jaVoice = v.find(x => /ja[-_]JP/i.test(x.lang) && /Kyoko|O-ren|Otoya/i.test(x.name)) || v.find(x => /^ja/i.test(x.lang)) || null; }
+if ("speechSynthesis" in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+function bubbleAt(c) {
+  const p = headTop(c); bubble.style.left = Math.max(140, Math.min(innerWidth - 140, p.x)) + "px"; bubble.style.top = Math.max(90, p.y - 6) + "px";
+}
+function say(c, text, min = 0) {
+  bubble.textContent = text; bubble.classList.add("on"); talking = c; bubbleAt(c);
+  const fallback = 900 + text.length * 170;
+  const t0 = performance.now();
+  return new Promise(res => {
+    let done = false;
+    const end = () => { if (done) return; done = true; const left = Math.max(0, min - (performance.now() - t0)); setTimeout(() => { talking = null; c.speakingLevel = 0; bubble.classList.remove("on"); res(); }, left + 250); };
+    if (CFG.voice && "speechSynthesis" in window) {
+      try {
+        speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text), v = VOICE[c.kind] || {};
+        u.lang = "ja-JP"; if (jaVoice) u.voice = jaVoice; u.pitch = v.pitch || 1; u.rate = v.rate || 1; u.volume = [0, .45, .8, 1][CFG.voice];
+        u.onend = end; u.onerror = end; speechSynthesis.speak(u);
+        setTimeout(end, fallback + 2500);
+      } catch (e) { setTimeout(end, fallback); }
+    } else setTimeout(end, fallback);
+  });
+}
+
+/* ---------- 紙吹雪 ---------- */
+const paper = [];
+function confettiAt(x, y, n = 60) {
+  const cols = ["#FF6F91", "#FFD25E", "#7FCBF0", "#7CC36A", "#B9A8D9"]; n = Math.round(n * Math.max(.2, motion));
+  for (let i = 0; i < n; i++) {
+    const r = el("rect", { width: 14, height: 8, rx: 2, fill: cols[i % cols.length], stroke: INK, "stroke-width": 1.5 }, fxLayer);
+    paper.push({ r, x, y, vx: (Math.random() - .5) * 700, vy: -500 - Math.random() * 500, a: Math.random() * 360, va: (Math.random() - .5) * 720, life: 2.2 });
+  }
+}
+function stepConfetti(dt) {
+  for (let i = paper.length - 1; i >= 0; i--) {
+    const b = paper[i]; b.vy += 1300 * dt; b.vx *= .99; b.x += b.vx * dt; b.y += b.vy * dt; b.a += b.va * dt; b.life -= dt;
+    b.r.setAttribute("transform", `translate(${b.x.toFixed(1)} ${b.y.toFixed(1)}) rotate(${b.a.toFixed(0)})`);
+    if (b.life < 0 || b.y > innerHeight + 40) { b.r.remove(); paper.splice(i, 1); }
+  }
+}
+function centerOf(e) { const r = e.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height * .35]; }
+
+/* ---------- 手番 ---------- */
+let cur = replay([]);
+function updateButtons() {
+  ["A", "B"].forEach(s => { $("matta" + s).disabled = G.busy || G.ended || !undoDepth(G.hist, colorOf(s)); });
+}
+function setTurn(state, quiet) {
+  cur = state;
+  const side = sideOf(state.turn);
+  ["A", "B"].forEach(s => $("side" + s).classList.toggle("active", s === side && !state.over));
+  showHints(legalMoves(state.board, state.turn));
+  G.busy = false; updateButtons();
+  if (!quiet) { SFX.turn(); act(side, "turn"); }
+}
+async function afterMove(state) {
+  if (state.over) return endGame(state);
+  if (state.passed) {
+    const ps = sideOf(state.passed);
+    ["A", "B"].forEach(s => $("side" + s).classList.remove("active"));
+    act(ps, "pass");
+    await showHost(host.pony);
+    await say(host.pony, `${nameOf(ps)}は おけるところが ないから パス！ ${nameOf(other(ps))}の ばん！`, T.passMin);
+    await hideHost(host.pony);
+  }
+  setTurn(state);
+}
+
+async function tap(r, c) {
+  if (G.busy || !G.started || G.ended) return;
+  const moves = legalMoves(cur.board, cur.turn), side = sideOf(cur.turn);
+  if (!moves.some(m => m.r === r && m.c === c)) { const b = cells[at(r, c)].b; b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); act(side, "invalid"); return; }
+  G.busy = true; clearHints(); updateButtons();
+  const p = cur.turn;
+  G.hist.push([r, c]); saveGame();
+  const next = replay(G.hist), step = next.steps.at(-1), k = K();
+  SFX.place(); dropDisc(at(r, c), p); act(side, "place"); ringAt(at(r, c));
+  await wait(T.flipStart * k);
+  let longest = 0;
+  step.flips.forEach(d => {
+    longest = Math.max(longest, d.cells.length);
+    d.cells.forEach(([y, x], j) => setTimeout(() => flipDisc(at(y, x), p, d.dir, T.flip * k), j * T.flipGap * k));
+  });
+  for (let j = 0; j < longest; j++) setTimeout(() => SFX.flip(j), j * T.flipGap * k + T.flip * k * .45);
+  const n = flipCount(step.flips);
+  setTimeout(() => act(other(side), "taken"), T.flip * k);
+  await wait(((longest - 1) * T.flipGap + T.flip) * k);
+  if (n >= 4) { SFX.sparkle(); act(side, "big"); confettiAt(...centerOf($("slot" + side)), 40); }
+  await wait(T.afterFlip * k);
+  await setCounts(next.board, true);
+  await wait(T.toTurn * k);
+  paint(next.board);
+  afterMove(next);
+}
+
+async function undo(side) {
+  if (G.busy || G.ended) return;
+  const depth = undoDepth(G.hist, colorOf(side)); if (!depth) return;
+  G.busy = true; clearHints(); updateButtons();
+  ["A", "B"].forEach(s => $("side" + s).classList.remove("active"));
+  act(side, "undoMine"); act(other(side), "undoOther");
+  const k = K();
+  for (let d = 0; d < depth; d++) {
+    const step = replay(G.hist).steps.at(-1);
+    SFX.swoosh();
+    // 返したときと逆順に、逆回転でもどす
+    const order = [];
+    step.flips.forEach(f => f.cells.forEach(([y, x], j) => order.push({ i: at(y, x), j, dir: f.dir })));
+    order.sort((a, b) => b.j - a.j);
+    const back = step.player === BLACK ? WHITE : BLACK;
+    const maxJ = order.length ? order[0].j : 0;
+    order.forEach(o => setTimeout(() => flipDisc(o.i, back, [-o.dir[0], -o.dir[1]], T.undoFlip * k), (maxJ - o.j) * T.undoGap * k));
+    await wait((maxJ * T.undoGap + T.undoFlip) * k);
+    const pi = at(step.r, step.c);
+    await cells[pi].disc.animate([{ transform: "none", opacity: 1 }, { transform: "translateY(-30%) scale(1.25)", opacity: 0 }], { duration: 250 * k, easing: "ease-in" }).finished;
+    setDisc(pi, EMPTY);
+    G.hist.pop(); haloFor(G.hist);
+    await setCounts(replay(G.hist).board, true);
+  }
+  saveGame();
+  const s = replay(G.hist); paint(s.board);
+  await wait(250 * k);
+  setTurn(s);
+}
+$("mattaA").addEventListener("click", () => undo("A"));
+$("mattaB").addEventListener("click", () => undo("B"));
+
+/* ---------- 終局 ---------- */
+async function endGame(state) {
+  G.ended = true; G.busy = true; updateButtons(); clearHints();
+  ["A", "B"].forEach(s => $("side" + s).classList.remove("active"));
+  const c = count(state.board);
+  await showHost(host.kame);
+  // 色ごとに集めて並べなおす（くろは左上から、しろは右下から）
+  const sorted = new Array(64).fill(EMPTY);
+  for (let i = 0; i < c.black; i++) sorted[i] = BLACK;
+  for (let i = 0; i < c.white; i++) sorted[63 - i] = WHITE;
+  SFX.gather(T.gather / 1000);
+  cells.forEach(x => x.disc.animate([{ opacity: 1, transform: "none" }, { opacity: 0, transform: "scale(.6)" }], { duration: 400, fill: "forwards" }));
+  await wait(450);
+  cells.forEach((x, i) => { x.disc.getAnimations().forEach(a => a.cancel()); setDisc(i, sorted[i]); x.disc.style.opacity = 0; });
+  sorted.forEach((v, i) => { if (!v) return; const d = (v === BLACK ? i : 63 - i) * (T.gather - 600) / 64; setTimeout(() => { const x = cells[i]; x.disc.style.opacity = ""; x.disc.animate([{ opacity: 0, transform: "scale(.5)" }, { opacity: 1, transform: "none" }], { duration: 220 }); }, d); });
+  await wait(T.gather - 300);
+  await say(host.kame, `くろが ${c.black}こ、しろが ${c.white}こ`);
+  const win = c.black === c.white ? null : sideOf(c.black > c.white ? BLACK : WHITE);
+  if (win) {
+    SFX.fanfare(false); act(win, "win"); act(other(win), "lose"); confettiAt(...centerOf($("slot" + win)), 80);
+    await say(host.kame, `${nameOf(win)}の かち！`);
+  } else {
+    SFX.fanfare(true); act("A", "win"); act("B", "win");
+    await say(host.kame, "おなじ かず！ ひきわけ！");
+  }
+  await hideHost(host.kame);
+  await showHost(host.pony);
+  say(host.pony, "もういっかい やる？", 1500);
+  $("againOv").hidden = false;
+}
+$("againBtn").addEventListener("click", async () => {
+  $("againOv").hidden = true; await hideHost(host.pony);
+  G.blackSide = other(G.blackSide);
+  newGame();
+});
+
+async function newGame(announce = true) {
+  G.hist = []; G.ended = false; G.busy = true; saveGame(); clearHalo();
+  cur = replay([]); paintSides(); paint(cur.board); setCounts(cur.board, false); updateButtons();
+  if (announce) {
+    await showHost(host.kame);
+    act("A", "turn"); act("B", "turn");
+    await say(host.kame, "はじめ！ さきは くろ からだよ");
+    await hideHost(host.kame);
+  }
+  setTurn(cur);
+}
+
+/* ---------- 設定（盤の外を3秒ながおし） ---------- */
+const setPanel = $("settings");
+function syncPanel() {
+  setPanel.querySelectorAll(".seg").forEach(seg => seg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === +CFG[seg.dataset.key]))));
+  $("resetBtn").textContent = "さいしょから"; $("resetBtn").classList.remove("confirm");
+}
+setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  CFG[seg.dataset.key] = +b.dataset.v; saveCfg(); syncPanel();
+  if (seg.dataset.key === "hints" && !G.busy && G.started && !G.ended) showHints(legalMoves(cur.board, cur.turn));
+  if (seg.dataset.key === "sfx") SFX.turn();
+}));
+$("closeBtn").addEventListener("click", () => { setPanel.hidden = true; });
+$("resetBtn").addEventListener("click", () => {
+  const b = $("resetBtn");
+  if (!b.classList.contains("confirm")) { b.textContent = "もういちど おすと さいしょから"; b.classList.add("confirm"); return; }
+  setPanel.hidden = true; $("againOv").hidden = true; host.pony.enter.t = 1; host.pony.hidden = true; boardEl.classList.remove("dim");
+  if (G.started) newGame();
+});
+let pressT = null;
+document.addEventListener("pointerdown", e => {
+  if (e.target.closest("button, input, .panel, #board")) return;
+  clearTimeout(pressT); pressT = setTimeout(() => { syncPanel(); setPanel.hidden = false; }, 3000);
+});
+["pointerup", "pointercancel", "pointerleave"].forEach(t => document.addEventListener(t, () => clearTimeout(pressT)));
+
+/* ---------- 画面を消さない ---------- */
+let lock = null;
+async function keepAwake() { try { lock = await navigator.wakeLock?.request("screen"); } catch (e) { lock = null; } }
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && G.started) keepAwake(); });
+
+/* ---------- はじめる ---------- */
+$("startBtn").addEventListener("click", async () => {
+  audio(); SFX.turn();
+  try { if ("speechSynthesis" in window) { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); } } catch (e) { /* 読み上げなしでも遊べる */ }
+  $("startOv").hidden = true; G.started = true; keepAwake();
+  const saved = G.hist.length > 0;
+  if (saved) { const s = replay(G.hist); paint(s.board); setCounts(s.board, false); s.over ? endGame(s) : setTurn(s); }
+  else newGame();
+});
+
+/* ---------- 起動：前回の続き、または確認用の局面（#pass / #end） ---------- */
+(function boot() {
+  const saved = load(GAME_KEY), tag = location.hash.slice(1);
+  if (FIX[tag]) { G.hist = FIX[tag].slice(); G.blackSide = "A"; }
+  else if (saved && Array.isArray(saved.hist)) {
+    try { replay(saved.hist); G.hist = saved.hist; G.blackSide = saved.blackSide === "B" ? "B" : "A"; } catch (e) { G.hist = []; }
+  }
+  window.claude?.hot?.snapshot?.(() => ({ hist: G.hist, blackSide: G.blackSide }));
+  const hd = window.claude?.hot?.data;
+  if (hd && Array.isArray(hd.hist)) { try { replay(hd.hist); G.hist = hd.hist; G.blackSide = hd.blackSide; } catch (e) { /* 保存がこわれていたら最初から */ } }
+  const s = replay(G.hist); cur = s;
+  paintSides(); paint(s.board); setCounts(s.board, false); haloFor(G.hist);
+  layout(); placeAll();
+})();
+
+/* ---------- 毎フレーム ---------- */
+let last = performance.now();
+function frame(now) {
+  const dt = Math.min(.05, (now - last) / 1000); last = now;
+  placeAll();
+  all.forEach(c => {
+    if (talking === c) c.speakingLevel = .3 + .4 * Math.abs(Math.sin(now / 70));
+    if (c.enter) c.enter.step(dt);
+    drawChar(c, dt, false);
+  });
+  idleTick(seat.A, dt, G.busy); idleTick(seat.B, dt, G.busy);
+  if (talking) bubbleAt(talking);
+  stepMarks(dt); stepConfetti(dt);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+</script>
+
+</body></html>

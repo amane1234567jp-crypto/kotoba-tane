@@ -1,0 +1,225 @@
+<title>まるシマリバーシ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
+<style>
+/* 配置：盤を主役に中央、両わきに二人の席（縦持ちでは盤の下に二人が並ぶ）。
+   色：ことばのたねの絵柄（太い墨の線・明るい色）＋ 緑の盤と黒い枠（REVERSI REAL を参考） ＋ 障子の壁（おばあちゃんの家） */
+:root {
+  --ink: #2B2A33;
+  --wall: #F5F0E4;
+  --wall-2: #E9E0CC;
+  --lattice: #DCCFB4;
+  --felt-hi: #63C392;
+  --felt: #3E9F6B;
+  --felt-lo: #2C8257;
+  --line: #13201A;
+  --frame: #2F363D;
+  --frame-hi: #4A535C;
+  --mint: #8CF2D6;
+  --halo: 255, 92, 112;
+  --seat: #FFFDF6;
+  --glow: #FFD25E;
+  --hint: #FFE27A;
+  --pink: #FF6F91;
+  --disc-k: #2B2A33;
+  --disc-k-hi: #5B5A68;
+  --disc-w: #FFFDF7;
+  --disc-w-lo: #E6DECD;
+  --muted: #6E6A75;
+  --display: "Mochiy Pop One", "Zen Maru Gothic", "Hiragino Maru Gothic ProN", sans-serif;
+  --body: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", sans-serif;
+  color-scheme: light;
+}
+html, body { height: 100%; }
+body {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 118px, var(--lattice) 118px 121px),
+    repeating-linear-gradient(0deg, transparent 0 158px, var(--lattice) 158px 161px),
+    linear-gradient(var(--wall), var(--wall-2));
+  color: var(--ink); font-family: var(--body); overflow: hidden;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; touch-action: manipulation;
+}
+#app {
+  height: 100%; box-sizing: border-box; display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 16px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 12px;
+}
+.boardWrap { display: flex; align-items: center; justify-content: center; min-width: 0; }
+#board {
+  width: var(--bs, 600px); height: var(--bs, 600px); box-sizing: border-box; position: relative;
+  display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, 1fr); gap: 0;
+  background: radial-gradient(ellipse at 50% 46%, var(--felt-hi) 0%, var(--felt) 52%, var(--felt-lo) 100%);
+  border: calc(var(--bs, 600px) * .036) solid var(--frame); border-top-color: var(--frame-hi); border-radius: 12px;
+  outline: 5px solid var(--ink); box-shadow: inset 0 0 0 2px var(--line), 0 10px 0 rgba(43, 42, 51, .2);
+}
+#board::after { content: ""; position: absolute; inset: 0; background: rgba(255, 253, 246, .5); opacity: 0; transition: opacity .3s; pointer-events: none; border-radius: 4px; }
+#board.dim::after { opacity: 1; }
+.cell { position: relative; background: transparent; box-shadow: inset 0 0 0 1.5px var(--line); border: 0; padding: 0; margin: 0; perspective: 420px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.star { position: absolute; width: calc(var(--bs, 600px) * .017); height: calc(var(--bs, 600px) * .017); border-radius: 50%; background: var(--line); transform: translate(-50%, -50%); pointer-events: none; z-index: 1; }
+#halo { position: absolute; width: 22%; height: 22%; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; display: none;
+  background: radial-gradient(circle, rgba(var(--halo), .72) 0, rgba(var(--halo), .4) 42%, rgba(var(--halo), 0) 70%); }
+#halo.on { display: block; animation: halo .35s ease-out; }
+@keyframes halo { from { opacity: 0; transform: translate(-50%, -50%) scale(.5); } }
+.cell:focus-visible { outline: 4px solid var(--pink); outline-offset: -4px; z-index: 2; }
+.cell.shake { animation: shake .3s; }
+@keyframes shake { 20% { transform: translateX(-6%); } 50% { transform: translateX(6%); } 80% { transform: translateX(-3%); } }
+.hint { position: absolute; inset: 0; display: none; place-items: center; pointer-events: none; }
+.cell.can .hint { display: grid; }
+.hint i { position: absolute; width: 30%; height: 30%; border-radius: 50%; box-sizing: border-box; border: max(3px, calc(var(--bs, 600px) * .007)) solid var(--mint);
+  box-shadow: 0 0 calc(var(--bs, 600px) * .02) rgba(140, 242, 214, .7); animation: glow 1.6s ease-in-out infinite; }
+.hint::before { content: ""; position: absolute; width: 9%; height: 9%; border-radius: 50%; background: var(--mint); animation: glow 1.6s ease-in-out infinite; }
+@keyframes glow { 0%, 100% { opacity: .65; transform: scale(.9); } 50% { opacity: 1; transform: scale(1.1); } }
+.disc { position: absolute; inset: 7%; z-index: 2; transform-style: preserve-3d; }
+.disc[data-c="0"] { visibility: hidden; }
+.f { position: absolute; inset: 0; border-radius: 50%; backface-visibility: hidden; -webkit-backface-visibility: hidden; box-sizing: border-box; }
+.f.b { transform: rotateY(180deg); }
+/* 止まっている石は真上から見た平たい円。下に見える細い帯が厚み（黒の石の下は白、白の石の下は黒） */
+.f[data-c="1"] { background: radial-gradient(circle at 42% 36%, #3A3A40 0, #232326 52%, #18181A 100%);
+  box-shadow: inset 0 0 0 max(1px, calc(var(--bs, 600px) * .0025)) rgba(255, 255, 255, .07), 0 calc(var(--bs, 600px) * .0035) 0 #0E0E10, 0 calc(var(--bs, 600px) * .0075) 0 #D2D2CC, 0 calc(var(--bs, 600px) * .011) calc(var(--bs, 600px) * .01) rgba(0, 0, 0, .38); }
+.f[data-c="2"] { background: radial-gradient(circle at 42% 36%, #FFFFFF 0, #F3F3EF 55%, #E3E3DD 100%);
+  box-shadow: inset 0 0 0 max(1px, calc(var(--bs, 600px) * .0025)) rgba(0, 0, 0, .06), 0 calc(var(--bs, 600px) * .0035) 0 #BEBEB8, 0 calc(var(--bs, 600px) * .0075) 0 #1C1C1F, 0 calc(var(--bs, 600px) * .011) calc(var(--bs, 600px) * .01) rgba(0, 0, 0, .34); }
+.cyl { position: absolute; inset: 7%; transform-style: preserve-3d; z-index: 3; pointer-events: none; }
+.cyl .f { box-shadow: none; }
+.cyl .f[data-c="1"] { background: radial-gradient(circle at 42% 36%, #3A3A40 0, #232326 52%, #18181A 100%); }
+.edge { position: absolute; left: 50%; top: 50%; backface-visibility: visible; }
+
+.side {
+  display: flex; flex-direction: column; align-items: stretch; gap: 10px; min-width: 0;
+  background: var(--seat); border: 5px solid var(--ink); border-radius: 26px; padding: 12px; box-sizing: border-box;
+  transition: box-shadow .3s;
+}
+.side.active { animation: seat 1.6s ease-in-out infinite; }
+@keyframes seat { 0%, 100% { box-shadow: 0 0 0 6px var(--glow); } 50% { box-shadow: 0 0 0 10px var(--glow); } }
+.chip { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-size: clamp(18px, 2.4vmin, 28px); line-height: 1.2; min-width: 0; }
+.chip .nm { min-width: 0; overflow-wrap: anywhere; }
+.stone { flex: none; width: 1.3em; height: 1.3em; border-radius: 50%; border: 3px solid var(--ink); box-sizing: border-box; }
+.stone[data-c="1"] { background: radial-gradient(circle at 34% 30%, var(--disc-k-hi), var(--disc-k) 58%); }
+.stone[data-c="2"] { background: radial-gradient(circle at 34% 30%, #FFFFFF, var(--disc-w) 45%, var(--disc-w-lo)); }
+.slot { flex: 1; min-height: 80px; }
+.score { display: flex; align-items: center; justify-content: center; gap: 12px; font-family: var(--display); font-size: clamp(34px, 6vmin, 64px); line-height: 1; font-variant-numeric: tabular-nums; }
+.score small { font-size: .42em; align-self: flex-end; margin-bottom: .25em; margin-left: -.35em; }
+.score .stone { width: .8em; height: .8em; border-width: 4px; }
+.matta {
+  font: 900 clamp(18px, 2.6vmin, 30px) var(--body); color: var(--ink); background: #FFFFFF; border: 4px solid var(--ink); border-radius: 999px;
+  padding: .45em .8em; display: flex; align-items: center; justify-content: center; gap: .4em; cursor: pointer; box-shadow: 0 5px 0 var(--ink);
+}
+.matta svg { width: 1.3em; height: 1.3em; }
+.matta:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 1px 0 var(--ink); }
+.matta:disabled { opacity: .35; cursor: default; }
+.matta:focus-visible, .big:focus-visible, .seg button:focus-visible { outline: 4px solid var(--pink); outline-offset: 3px; }
+
+#stage { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; overflow: visible; }
+#bubble {
+  position: fixed; z-index: 6; max-width: min(78vw, 640px); transform: translate(-50%, -100%);
+  background: #FFFFFF; border: 5px solid var(--ink); border-radius: 28px; padding: .55em .9em; box-sizing: border-box;
+  font: 900 clamp(20px, 3.4vmin, 38px)/1.35 var(--body); text-align: center; text-wrap: balance; word-break: keep-all; overflow-wrap: anywhere; pointer-events: none;
+  opacity: 0; transition: opacity .2s;
+}
+#bubble.on { opacity: 1; }
+#bubble::after { content: ""; position: absolute; left: 50%; bottom: -17px; width: 26px; height: 26px; background: #FFFFFF; border: 5px solid var(--ink); border-top: 0; border-left: 0; transform: translateX(-50%) rotate(45deg); }
+
+.cover { position: fixed; inset: 0; z-index: 8; display: grid; place-items: center; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.cover[hidden] { display: none !important; }
+#startOv { background: rgba(231, 242, 236, .72); }
+.startCard { display: grid; justify-items: center; gap: 22px; text-align: center; }
+.logo { font-family: var(--display); font-size: clamp(36px, 8vmin, 84px); line-height: 1.1; margin: 0; letter-spacing: .02em; text-wrap: balance;
+  -webkit-text-stroke: 3px var(--ink); paint-order: stroke fill; color: #FFFFFF; text-shadow: 0 6px 0 var(--ink); }
+.logo span { color: var(--glow); }
+.big {
+  font: 900 clamp(26px, 5vmin, 50px) var(--display); color: var(--ink); background: var(--glow); border: 5px solid var(--ink); border-radius: 999px;
+  padding: .4em 1.6em; cursor: pointer; box-shadow: 0 8px 0 var(--ink);
+}
+.big:active { transform: translateY(6px); box-shadow: 0 2px 0 var(--ink); }
+.note { font-size: 15px; color: var(--muted); margin: 0; }
+#againOv { place-items: end center; padding-block: 0 8vh; pointer-events: none; }
+#againOv .big { pointer-events: auto; }
+
+#settings { background: rgba(43, 42, 51, .45); }
+.panel { background: var(--seat); border: 5px solid var(--ink); border-radius: 24px; padding: 20px 22px; width: min(520px, 100%); box-sizing: border-box; max-height: 90%; overflow: auto; display: grid; gap: 16px; }
+.panel h2 { margin: 0; font: 400 24px var(--display); }
+.row { display: grid; gap: 6px; }
+.row > span { font-weight: 700; font-size: 15px; letter-spacing: .04em; color: var(--muted); }
+.seg { display: flex; gap: 6px; flex-wrap: wrap; }
+.seg button { flex: 1; min-width: 70px; font: 700 17px var(--body); padding: 10px 8px; border: 3px solid var(--ink); border-radius: 14px; background: #FFFFFF; color: var(--ink); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--glow); }
+.panelBtns { display: flex; gap: 10px; flex-wrap: wrap; }
+.panelBtns button { flex: 1; font: 700 17px var(--body); padding: 12px; border: 3px solid var(--ink); border-radius: 14px; background: #FFFFFF; color: var(--ink); cursor: pointer; }
+.panelBtns .primary { background: var(--glow); }
+.panelBtns .confirm { background: var(--pink); color: #FFFFFF; }
+
+@media (orientation: portrait), (max-aspect-ratio: 11/10) {
+  #app { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  .boardWrap { grid-column: 1 / -1; grid-row: 1; }
+  #sideA { grid-column: 1; grid-row: 2; } #sideB { grid-column: 2; grid-row: 2; }
+  .side { display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr auto; gap: 8px; }
+  .chip { grid-column: 1 / -1; }
+  .slot { grid-column: 1; grid-row: 2 / 4; min-height: 0; }
+  .score { grid-column: 2; grid-row: 2; }
+  .matta { grid-column: 2; grid-row: 3; }
+}
+@media (prefers-reduced-motion: reduce) { .hint i, .side.active { animation-duration: 4s; } }
+</style>
+
+<div id="app">
+  <section class="side" id="sideA" aria-label="こどもの せき">
+    <div class="chip"><span class="stone" data-c="1"></span><span class="nm" id="nameA">くろ</span></div>
+    <div class="slot" id="slotA"></div>
+    <div class="score"><span class="stone" data-c="1"></span><b id="cntA">2</b><small>まい</small></div>
+    <button class="matta" id="mattaA" type="button" disabled>__HAND__まった</button>
+  </section>
+  <div class="boardWrap"><div id="board" role="grid" aria-label="リバーシの ばん"></div></div>
+  <section class="side" id="sideB" aria-label="おばあちゃんの せき">
+    <div class="chip"><span class="stone" data-c="2"></span><span class="nm" id="nameB">しろ</span></div>
+    <div class="slot" id="slotB"></div>
+    <div class="score"><span class="stone" data-c="2"></span><b id="cntB">2</b><small>まい</small></div>
+    <button class="matta" id="mattaB" type="button" disabled>__HAND__まった</button>
+  </section>
+</div>
+<svg id="stage" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+<div id="bubble" role="status" aria-live="polite"></div>
+
+<div class="cover" id="startOv">
+  <div class="startCard">
+    <h1 class="logo">まるシマ<span>リバーシ</span></h1>
+    <button class="big" id="startBtn" type="button">はじめる</button>
+    <p class="note">おとなの せってい：ばんの そとを 3びょう ながおし</p>
+  </div>
+</div>
+<div class="cover" id="againOv" hidden><button class="big" id="againBtn" type="button">もういっかい</button></div>
+
+<div class="cover" id="settings" hidden>
+  <div class="panel" role="dialog" aria-label="せってい">
+    <h2>せってい</h2>
+    <div class="row"><span>テンポ</span><div class="seg" data-key="slow"><button type="button" id="slow0" data-v="0">ふつう</button><button type="button" id="slow1" data-v="1">ゆっくり</button></div></div>
+    <div class="row"><span>おける ばしょの ひかり</span><div class="seg" data-key="hints"><button type="button" id="hints1" data-v="1">みせる</button><button type="button" id="hints0" data-v="0">みせない</button></div></div>
+    <div class="row"><span>こうかおん</span><div class="seg" data-key="sfx"><button type="button" id="sfx0" data-v="0">なし</button><button type="button" id="sfx1" data-v="1">小</button><button type="button" id="sfx2" data-v="2">中</button><button type="button" id="sfx3" data-v="3">大</button></div></div>
+    <div class="row"><span>キャラの こえ</span><div class="seg" data-key="voice"><button type="button" id="voice0" data-v="0">なし</button><button type="button" id="voice1" data-v="1">小</button><button type="button" id="voice2" data-v="2">中</button><button type="button" id="voice3" data-v="3">大</button></div></div>
+    <div class="panelBtns"><button type="button" id="resetBtn">さいしょから</button><button type="button" id="closeBtn" class="primary">とじる</button></div>
+  </div>
+</div>
+
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const INK = "#2B2A33";
+const svg = document.getElementById("stage");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let motion = reduce ? 0.35 : 1;
+class Spring {
+  constructor(v = 0, k = 170, d = 13) { this.v = v; this.t = v; this.vel = 0; this.k = k; this.d = d; }
+  step(dt) { const f = -this.k * (this.v - this.t) - this.d * this.vel; this.vel += f * dt; this.v += this.vel * dt; return this.v; }
+}
+const el = (tag, attrs = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+const lerp = (a, b, t) => a + (b - a) * t;
+const rot = (deg, x, y) => `rotate(${deg.toFixed(2)} ${x} ${y})`;
+const defs = el("defs", {}, svg);
+const charLayer = el("g", {}, svg);
+const fxLayer = el("g", {}, svg);
+function showEar() {}
+__VENDOR__
+__RULES__
+__FIXTURES__
+__SFX__
+__APP__
+</script>
