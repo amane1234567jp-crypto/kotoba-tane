@@ -1,0 +1,42 @@
+[
+{
+"key": "rs_kokugo",
+"who": "pyon",
+"text": "あ、ごめんね。どうぞ"
+},
+{
+"key": "rs_zukou",
+"who": "doshin",
+"text": "ありがとう。たすかったよ"
+},
+{
+"key": "sg_zknanio_2",
+"who": "chu",
+"text": "なにを かけば いいか わかりません"
+},
+{
+"key": "sx_zknanio_2",
+"who": "chu",
+"text": "なにを かけば いいか わかりませんを"
+},
+{
+"key": "sg_zknanio_3",
+"who": "chu",
+"text": "せんせい、なにを かけば いいか わかりません"
+},
+{
+"key": "sg_zknanio_4",
+"who": "chu",
+"text": "なにを かけば いいか わかりません。ヒントを ください"
+},
+{
+"key": "sq_zkhomeru",
+"who": "doshin",
+"text": "ぼくの えも みて！ ぞうさん かいたんだ"
+},
+{
+"key": "sg_ymlupin_4",
+"who": "kon",
+"text": "「カリオストロの しろ」が すきだよ。ルパンが おしろに しのびこむ おはなしなんだ"
+}
+]

@@ -5,7 +5,7 @@ RIVAL = {"yuushoku": "gao", "kokugo": "kon", "taiiku": "pyon", "ongaku": "mii", 
 # かぞくの いれかえ（board/sit.js の FAM_OF と おなじ）
 FAM = {"mama": ["pyonmama", "gaomama", "miimama", "chumama"], "papa": ["gaopapa", "doshinpapa"], "onii": ["gaonii"]}
 lines, yomi = [], {}
-def Y(y): return y.replace("「", "").replace("」", "").replace("次", "つぎ").replace("他の", "ほかの").replace("寂しい", "さみしい").replace("描", "か")
+def Y(y): return y.replace("「", "").replace("」", "").replace("次", "つぎ").replace("他の", "ほかの").replace("寂しい", "さみしい").replace("描", "か").replace("をかけばいいか", "を、かけば、いいか")
 def add(key, who, text, y): lines.append({"key": key, "who": who, "text": text}); yomi[key] = Y(y)
 for s in S:
     if s['stage'] not in RIVAL: continue
