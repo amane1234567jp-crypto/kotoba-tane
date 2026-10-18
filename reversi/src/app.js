@@ -11,12 +11,15 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const CFG_KEY = "marushima-reversi-cfg", GAME_KEY = "marushima-reversi-game";
 const load = k => { try { return JSON.parse(localStorage.getItem(k)) || null; } catch (e) { return null; } };
 const keep = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* 保存できなくても遊べる */ } };
-const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2 }, load(CFG_KEY) || {});
+const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2, autoOk: 1 }, load(CFG_KEY) || {});
 const saveCfg = () => keep(CFG_KEY, CFG);
 
 /* ---------- 対局の状態 ---------- */
 // A = こども（左）、B = おばあちゃん（右）。blackSide が くろ（先手）の側。対局ごとに交代する。
-const G = { hist: [], blackSide: "A", busy: true, started: false, ended: false };
+const G = { hist: [], blackSide: "A", busy: true, started: false, ended: false, paused: false, animating: false, readyMe: false, readyThem: false };
+// 遠隔対戦では、この端末が受け持つ側だけを操作できる（ホスト＝こども A、ゲスト＝おばあちゃん B）
+const SOLO = () => !NET.role;
+const mySide = () => (NET.role === "guest" ? "B" : "A");
 const colorOf = side => (side === G.blackSide ? BLACK : WHITE);
 const sideOf = color => (color === BLACK ? G.blackSide : (G.blackSide === "A" ? "B" : "A"));
 const other = side => (side === "A" ? "B" : "A");
@@ -192,16 +195,18 @@ const bubble = $("bubble");
 let jaVoice = null, talking = null;
 function pickVoice() { const v = speechSynthesis?.getVoices?.() || []; jaVoice = v.find(x => /ja[-_]JP/i.test(x.lang) && /Kyoko|O-ren|Otoya/i.test(x.name)) || v.find(x => /^ja/i.test(x.lang)) || null; }
 if ("speechSynthesis" in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+let keepBubble = null;
+function hideBubble() { keepBubble = null; bubble.classList.remove("on"); }
 function bubbleAt(c) {
   const p = headTop(c); bubble.style.left = Math.max(140, Math.min(innerWidth - 140, p.x)) + "px"; bubble.style.top = Math.max(90, p.y - 6) + "px";
 }
-function say(c, text, min = 0) {
+function say(c, text, min = 0, keep = false) {
   bubble.textContent = text; bubble.classList.add("on"); talking = c; bubbleAt(c);
   const fallback = 900 + text.length * 170;
   const t0 = performance.now();
   return new Promise(res => {
     let done = false;
-    const end = () => { if (done) return; done = true; const left = Math.max(0, min - (performance.now() - t0)); setTimeout(() => { talking = null; c.speakingLevel = 0; bubble.classList.remove("on"); res(); }, left + 250); };
+    const end = () => { if (done) return; done = true; const left = Math.max(0, min - (performance.now() - t0)); setTimeout(() => { talking = null; c.speakingLevel = 0; if (!keep) bubble.classList.remove("on"); else keepBubble = c; res(); }, left + 250); };
     if (CFG.voice && "speechSynthesis" in window) {
       try {
         speechSynthesis.cancel();
@@ -235,14 +240,18 @@ function centerOf(e) { const r = e.getBoundingClientRect(); return [r.left + r.w
 /* ---------- 手番 ---------- */
 let cur = replay([]);
 function updateButtons() {
-  ["A", "B"].forEach(s => { $("matta" + s).disabled = G.busy || G.ended || !undoDepth(G.hist, colorOf(s)); });
+  ["A", "B"].forEach(s => {
+    const b = $("matta" + s);
+    b.hidden = !SOLO() && s !== mySide();
+    b.disabled = G.busy || G.ended || G.paused || !undoDepth(G.hist, colorOf(s));
+  });
 }
 function setTurn(state, quiet) {
   cur = state;
   const side = sideOf(state.turn);
   ["A", "B"].forEach(s => $("side" + s).classList.toggle("active", s === side && !state.over));
-  showHints(legalMoves(state.board, state.turn));
-  G.busy = false; updateButtons();
+  if (SOLO() || side === mySide()) showHints(legalMoves(state.board, state.turn)); else clearHints();
+  G.busy = false; G.animating = false; updateButtons();
   if (!quiet) { SFX.turn(); act(side, "turn"); }
 }
 async function afterMove(state) {
@@ -258,11 +267,18 @@ async function afterMove(state) {
   setTurn(state);
 }
 
+function shakeCell(r, c) { const b = cells[at(r, c)].b; b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); }
 async function tap(r, c) {
-  if (G.busy || !G.started || G.ended) return;
+  if (G.busy || !G.started || G.ended || G.paused) return;
   const moves = legalMoves(cur.board, cur.turn), side = sideOf(cur.turn);
-  if (!moves.some(m => m.r === r && m.c === c)) { const b = cells[at(r, c)].b; b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); act(side, "invalid"); return; }
-  G.busy = true; clearHints(); updateButtons();
+  if (!SOLO() && side !== mySide()) { shakeCell(r, c); return; }   // 相手の番
+  if (!moves.some(m => m.r === r && m.c === c)) { shakeCell(r, c); act(side, "invalid"); return; }
+  NET.send({ t: "move", r, c, n: G.hist.length });
+  playMove(r, c);
+}
+async function playMove(r, c) {
+  const side = sideOf(cur.turn);
+  G.busy = true; G.animating = true; clearHints(); updateButtons();
   const p = cur.turn;
   G.hist.push([r, c]); saveGame();
   const next = replay(G.hist), step = next.steps.at(-1), k = K();
@@ -282,13 +298,12 @@ async function tap(r, c) {
   await setCounts(next.board, true);
   await wait(T.toTurn * k);
   paint(next.board);
-  afterMove(next);
+  await afterMove(next);
+  G.animating = false;
 }
 
-async function undo(side) {
-  if (G.busy || G.ended) return;
-  const depth = undoDepth(G.hist, colorOf(side)); if (!depth) return;
-  G.busy = true; clearHints(); updateButtons();
+async function animUndo(side, depth) {
+  G.busy = true; G.animating = true; clearHints(); updateButtons(); hideBubble();
   ["A", "B"].forEach(s => $("side" + s).classList.remove("active"));
   act(side, "undoMine"); act(other(side), "undoOther");
   const k = K();
@@ -314,8 +329,45 @@ async function undo(side) {
   await wait(250 * k);
   setTurn(s);
 }
-$("mattaA").addEventListener("click", () => undo("A"));
-$("mattaB").addEventListener("click", () => undo("B"));
+/* まった：自分の手の直後なら すぐもどす。相手が打ったあとなら、相手の「いいよ」で2手もどす。
+   こどもからの まったは、設定「おばあちゃんは じどうで いいよ」なら きかずに もどす。 */
+let undoTimer = null;
+function requestUndo(side) {
+  if (G.busy || G.ended || G.paused) return;
+  const depth = undoDepth(G.hist, colorOf(side)); if (!depth) return;
+  if (SOLO() || depth === 1 || (side === "A" && CFG.autoOk)) { NET.send({ t: "undo", side, depth, n: G.hist.length }); animUndo(side, depth); return; }
+  G.busy = true; updateButtons(); clearHints();
+  NET.send({ t: "undoReq", side, n: G.hist.length });
+  showHost(host.pony).then(() => say(host.pony, "おへんじを まってるよ", 0, true));
+  undoTimer = setTimeout(() => { NET.send({ t: "undoCancel" }); undoRefused(side); }, 10000);
+}
+async function undoRefused(side) {
+  clearTimeout(undoTimer); act(side, "pass");
+  if (host.pony.hidden) await showHost(host.pony);
+  await say(host.pony, "こんどは そのまま つづけよう");
+  await hideHost(host.pony); setTurn(cur, true);
+}
+let askTimer = null, askFor = null;
+async function askUndo(m) {
+  G.busy = true; askFor = m; updateButtons(); clearHints();
+  await showHost(host.pony);
+  say(host.pony, `${nameOf(m.side)}が まったって！ いいかな？`, 0, true);
+  $("askOv").hidden = false;
+  askTimer = setTimeout(() => answerUndo(false), 10000);
+}
+async function answerUndo(ok) {
+  if (!askFor) return;
+  const m = askFor; askFor = null; clearTimeout(askTimer); $("askOv").hidden = true; hideBubble();
+  NET.send({ t: "undoAns", ok, n: m.n });
+  ok ? SFX.ok() : SFX.ng();
+  await hideHost(host.pony);
+  if (ok && m.n === G.hist.length) animUndo(m.side, undoDepth(G.hist, colorOf(m.side)));
+  else setTurn(cur, true);
+}
+$("okBtn").addEventListener("click", () => answerUndo(true));
+$("ngBtn").addEventListener("click", () => answerUndo(false));
+$("mattaA").addEventListener("click", () => requestUndo("A"));
+$("mattaB").addEventListener("click", () => requestUndo("B"));
 
 /* ---------- 終局 ---------- */
 async function endGame(state) {
@@ -347,14 +399,21 @@ async function endGame(state) {
   say(host.pony, "もういっかい やる？", 1500);
   $("againOv").hidden = false;
 }
-$("againBtn").addEventListener("click", async () => {
+async function rematch() {
+  G.readyMe = G.readyThem = false; $("againBtn").disabled = false; $("againBtn").textContent = "もういっかい";
   $("againOv").hidden = true; await hideHost(host.pony);
   G.blackSide = other(G.blackSide);
   newGame();
+}
+$("againBtn").addEventListener("click", () => {
+  if (SOLO()) return rematch();
+  G.readyMe = true; NET.send({ t: "again" });
+  if (G.readyThem) return rematch();
+  $("againBtn").disabled = true; $("againBtn").textContent = "あいてを まってるよ";
 });
 
 async function newGame(announce = true) {
-  G.hist = []; G.ended = false; G.busy = true; saveGame(); clearHalo();
+  G.hist = []; G.ended = false; G.busy = true; G.animating = true; saveGame(); clearHalo();
   cur = replay([]); paintSides(); paint(cur.board); setCounts(cur.board, false); updateButtons();
   if (announce) {
     await showHost(host.kame);
@@ -397,14 +456,129 @@ async function keepAwake() { try { lock = await navigator.wakeLock?.request("scr
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && G.started) keepAwake(); });
 
 /* ---------- はじめる ---------- */
-$("startBtn").addEventListener("click", async () => {
+function unlock() {
   audio(); SFX.turn();
   try { if ("speechSynthesis" in window) { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); } } catch (e) { /* 読み上げなしでも遊べる */ }
   $("startOv").hidden = true; G.started = true; keepAwake();
+}
+$("startBtn").addEventListener("click", async () => {
+  unlock();
+  if (NET.role === "guest") return startOnline();
   const saved = G.hist.length > 0;
   if (saved) { const s = replay(G.hist); paint(s.board); setCounts(s.board, false); s.over ? endGame(s) : setTurn(s); }
   else newGame();
 });
+
+/* ---------- 遠隔対戦（段階2） ---------- */
+const otherSide = () => other(mySide());
+function camOf(side) { return { box: $("cam" + side), v: $("vid" + side), msg: $("msg" + side) }; }
+function camMsg(side, text) { const m = camOf(side).msg; m.textContent = text || ""; m.hidden = !text; }
+function playVideo(v) { const p = v.play(); if (p) p.catch(() => camMsg(v === camOf(mySide()).v ? mySide() : otherSide(), "がめんを タップしてね")); }
+document.addEventListener("click", () => ["A", "B"].forEach(s => { const v = $("vid" + s); if (v.srcObject && v.paused) v.play().catch(() => {}); }), true);
+["A", "B"].forEach(s => { $("vid" + s).addEventListener("playing", () => camMsg(s, "")); });
+function showCams() {
+  document.body.classList.add("online");
+  ["A", "B"].forEach(s => { $("cam" + s).hidden = false; $("cam" + s).classList.toggle("mine", s === mySide()); });
+  updateButtons(); layout();
+}
+NET.on("local", s => {
+  const c = camOf(mySide());
+  if (!s) return camMsg(mySide(), "カメラが つかえません");
+  c.v.muted = true; c.v.srcObject = s; playVideo(c.v); camMsg(mySide(), "");
+});
+NET.on("remote", s => { const c = camOf(otherSide()); c.v.muted = false; c.v.srcObject = s; playVideo(c.v); camMsg(otherSide(), ""); });
+
+// 受け取った知らせは順番に処理する。盤が動いている間は待つ。
+const inbox = [];
+function pump() {
+  if (!inbox.length) return;
+  const m = inbox[0], waitAnim = ["move", "undo", "undoReq", "state", "new"].includes(m.t);
+  if (waitAnim && G.animating) return setTimeout(pump, 120);
+  inbox.shift(); handle(m); pump();
+}
+NET.on("msg", m => { inbox.push(m); pump(); });
+function sendState() { NET.send({ t: "state", hist: G.hist, blackSide: G.blackSide }); }
+function handle(m) {
+  switch (m.t) {
+    case "move": {
+      const ok = m.n === G.hist.length && !G.ended && legalMoves(cur.board, cur.turn).some(x => x.r === m.r && x.c === m.c) && sideOf(cur.turn) === otherSide();
+      if (ok) playMove(m.r, m.c); else resync(); break;
+    }
+    case "undo": if (m.n === G.hist.length && undoDepth(G.hist, colorOf(m.side))) animUndo(m.side, m.depth); else resync(); break;
+    case "undoReq": if (m.n === G.hist.length) askUndo(m); else NET.send({ t: "undoAns", ok: false, n: m.n }); break;
+    case "undoAns":
+      clearTimeout(undoTimer); hideBubble();
+      if (m.ok && m.n === G.hist.length) hideHost(host.pony).then(() => animUndo(mySide(), undoDepth(G.hist, colorOf(mySide()))));
+      else undoRefused(mySide());
+      break;
+    case "undoCancel": if (askFor) { askFor = null; clearTimeout(askTimer); $("askOv").hidden = true; hideBubble(); hideHost(host.pony).then(() => setTurn(cur, true)); } break;
+    case "again": G.readyThem = true; if (G.readyMe) rematch(); break;
+    case "sync": if (NET.role === "host") sendState(); break;
+    case "state": applyState(m); break;
+    case "new": newGame(); break;
+  }
+}
+function resync() { NET.role === "host" ? sendState() : NET.send({ t: "sync" }); }
+// ホストの状態に合わせる（ゲスト側）
+function applyState(m) {
+  let s; try { s = replay(m.hist); } catch (e) { return; }
+  const same = m.hist.length === G.hist.length && m.hist.every((x, i) => x[0] === G.hist[i][0] && x[1] === G.hist[i][1]) && m.blackSide === G.blackSide;
+  G.paused = false; camMsg(otherSide(), "");
+  if (same && G.started && !G.busy) { updateButtons(); return; }
+  G.hist = m.hist.slice(); G.blackSide = m.blackSide; G.ended = false; saveGame();
+  $("againOv").hidden = true; $("askOv").hidden = true; askFor = null; hideBubble();
+  paintSides(); paint(s.board); setCounts(s.board, false); haloFor(G.hist);
+  if (!m.hist.length) { G.busy = true; return; }   // ホストの「はじめ」を待つ
+  if (s.over) endGame(s); else setTurn(s, true);
+}
+let lostSaid = false;
+NET.on("open", () => {
+  G.paused = false; lostSaid = false; $("inviteOv").hidden = true; camMsg(otherSide(), "");
+  if (NET.role !== "host") return;
+  sendState();
+  if (G.begun) return updateButtons();
+  G.begun = true;
+  const s = replay(G.hist);
+  if (!G.hist.length) { NET.send({ t: "new" }); newGame(); }
+  else s.over ? endGame(s) : setTurn(s, true);
+});
+NET.on("lost", () => {
+  G.paused = true; updateButtons();
+  camMsg(otherSide(), "つなぎなおしています…");
+  if (!lostSaid && !G.animating) { lostSaid = true; say(host.pony, "ちょっと まってね"); }
+});
+NET.on("ready", () => camMsg(otherSide(), "まっています…"));
+NET.on("error", type => camMsg(otherSide(), type === "network" || type === "server-error" ? "インターネットを たしかめてね" : "つなぎなおしています…"));
+
+function startOnline() {
+  showCams();
+  G.busy = true;
+  if (NET.role === "guest") { camMsg(otherSide(), "つないでいます…"); NET.guest(); }
+}
+// おばあちゃんを よぶ（ホスト）
+async function callGrandma(fresh) {
+  unlock(); NET.role = "host"; startOnline();
+  const s = replay(G.hist); paint(s.board); setCounts(s.board, false);
+  await NET.host(fresh);
+  showInvite();
+}
+function showInvite() {
+  const url = NET.inviteURL();
+  try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("qr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("qr").textContent = ""; }
+  $("inviteLink").textContent = url;
+  $("lineBtn").href = "https://line.me/R/share?text=" + encodeURIComponent("まるシマリバーシで あそぼう！ ここを タップしてね\n" + url);
+  $("shareBtn").hidden = !navigator.share;
+  $("inviteOv").hidden = false;
+}
+$("callBtn").addEventListener("click", () => callGrandma(false));
+$("copyBtn").addEventListener("click", () => {
+  const url = NET.inviteURL(), done = () => { $("copyBtn").textContent = "コピーしました"; setTimeout(() => $("copyBtn").textContent = "リンクを コピー", 2000); };
+  const pick = () => { const r = document.createRange(); r.selectNodeContents($("inviteLink")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+  try { navigator.clipboard.writeText(url).then(done, pick); } catch (e) { pick(); }
+});
+$("shareBtn").addEventListener("click", () => { navigator.share?.({ title: "まるシマリバーシ", text: "まるシマリバーシで あそぼう！", url: NET.inviteURL() }).catch(() => {}); });
+$("inviteClose").addEventListener("click", () => { $("inviteOv").hidden = true; });
+$("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (NET.role === "host") showInvite(); else callGrandma(false); });
 
 /* ---------- 起動：前回の続き、または確認用の局面（#pass / #end） ---------- */
 (function boot() {
@@ -418,6 +592,8 @@ $("startBtn").addEventListener("click", async () => {
   if (hd && Array.isArray(hd.hist)) { try { replay(hd.hist); G.hist = hd.hist; G.blackSide = hd.blackSide; } catch (e) { /* 保存がこわれていたら最初から */ } }
   const s = replay(G.hist); cur = s;
   paintSides(); paint(s.board); setCounts(s.board, false); haloFor(G.hist);
+  if (NET.role === "guest") { $("startBtn").textContent = "はじめる"; $("callBtn").hidden = true; $("startNote").textContent = "カメラと マイクを つかいます。「きょか」を おしてね"; }
+  else if (!NET.available) $("callBtn").hidden = true;
   layout(); placeAll();
 })();
 
@@ -432,7 +608,7 @@ function frame(now) {
     drawChar(c, dt, false);
   });
   idleTick(seat.A, dt, G.busy); idleTick(seat.B, dt, G.busy);
-  if (talking) bubbleAt(talking);
+  if (talking || keepBubble) bubbleAt(talking || keepBubble);
   stepMarks(dt); stepConfetti(dt);
   requestAnimationFrame(frame);
 }

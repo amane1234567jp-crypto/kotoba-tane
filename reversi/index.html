@@ -156,6 +156,25 @@ body {
 .panelBtns .primary { background: var(--glow); }
 .panelBtns .confirm { background: var(--pink); color: #FFFFFF; }
 
+/* ビデオ：自分の顔は小さく、相手の顔は大きく。それぞれの席の上に出す */
+.cam { position: relative; flex: none; width: 100%; aspect-ratio: 4 / 3; max-width: 100%; border: 4px solid var(--ink); border-radius: 18px; overflow: hidden; background: #3A4048; box-sizing: border-box; }
+.cam.mine { width: 58%; align-self: center; }
+.cam video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cam.mine video { transform: scaleX(-1); }
+.camMsg { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 8px; color: #FFFFFF; font: 700 clamp(13px, 1.9vmin, 18px)/1.4 var(--body); background: rgba(43, 42, 51, .55); }
+.big.sub { font-size: clamp(18px, 3.4vmin, 32px); background: #FFFFFF; padding: .35em 1.2em; box-shadow: 0 6px 0 var(--ink); }
+.invite { text-align: center; justify-items: center; }
+.invite .lead { margin: 0; font-size: 16px; line-height: 1.6; text-wrap: balance; }
+.qr { width: min(240px, 60vw); aspect-ratio: 1; background: #FFFFFF; border: 3px solid var(--ink); border-radius: 12px; padding: 6px; box-sizing: border-box; }
+.qr svg { width: 100%; height: 100%; display: block; }
+.link { margin: 0; font-size: 13px; color: var(--muted); overflow-wrap: anywhere; -webkit-user-select: text; user-select: text; }
+.invite .panelBtns { width: 100%; }
+.lineBtn { flex: 1; font: 900 19px var(--body); padding: 14px; border: 3px solid var(--ink); border-radius: 14px; background: #06C755; color: #FFFFFF; text-decoration: none; text-align: center; }
+.lineBtn:focus-visible { outline: 4px solid var(--pink); outline-offset: 3px; }
+#askOv { place-items: end center; padding-block: 0 8vh; pointer-events: none; }
+.askBtns { display: flex; align-items: center; gap: 24px; pointer-events: auto; }
+.small { font: 700 clamp(16px, 2.4vmin, 22px) var(--body); padding: .5em 1.1em; border: 3px solid var(--ink); border-radius: 999px; background: #FFFFFF; color: var(--ink); cursor: pointer; }
+
 @media (orientation: portrait), (max-aspect-ratio: 11/10) {
   #app { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
   .boardWrap { grid-column: 1 / -1; grid-row: 1; }
@@ -163,6 +182,9 @@ body {
   .side { display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr auto; gap: 8px; }
   .chip { grid-column: 1 / -1; }
   .slot { grid-column: 1; grid-row: 2 / 4; min-height: 0; }
+  body.online .side { grid-template-rows: auto auto 1fr auto; }
+  body.online .cam { grid-column: 1 / -1; grid-row: 2; width: auto; height: min(19vh, 100%); justify-self: center; }
+  body.online .slot { grid-row: 3 / 5; } body.online .score { grid-row: 3; } body.online .matta { grid-row: 4; }
   .score { grid-column: 2; grid-row: 2; }
   .matta { grid-column: 2; grid-row: 3; }
 }
@@ -172,6 +194,7 @@ body {
 <div id="app">
   <section class="side" id="sideA" aria-label="こどもの せき">
     <div class="chip"><span class="stone" data-c="1"></span><span class="nm" id="nameA">くろ</span></div>
+    <div class="cam" id="camA" hidden><video id="vidA" playsinline autoplay muted></video><span class="camMsg" id="msgA" hidden></span></div>
     <div class="slot" id="slotA"></div>
     <div class="score"><span class="stone" data-c="1"></span><b id="cntA">2</b><small>まい</small></div>
     <button class="matta" id="mattaA" type="button" disabled><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 26V12a3 3 0 0 1 6 0v10V8a3 3 0 0 1 6 0v14V10a3 3 0 0 1 6 0v14v-8a3 3 0 0 1 6 0v14c0 9-6 14-13 14s-11-3-15-9l-5-8a3 3 0 0 1 5-3l4 5z" fill="#FFE9CF" stroke="#2B2A33" stroke-width="3.5" stroke-linejoin="round"/></svg>まった</button>
@@ -179,6 +202,7 @@ body {
   <div class="boardWrap"><div id="board" role="grid" aria-label="リバーシの ばん"></div></div>
   <section class="side" id="sideB" aria-label="おばあちゃんの せき">
     <div class="chip"><span class="stone" data-c="2"></span><span class="nm" id="nameB">しろ</span></div>
+    <div class="cam" id="camB" hidden><video id="vidB" playsinline autoplay muted></video><span class="camMsg" id="msgB" hidden></span></div>
     <div class="slot" id="slotB"></div>
     <div class="score"><span class="stone" data-c="2"></span><b id="cntB">2</b><small>まい</small></div>
     <button class="matta" id="mattaB" type="button" disabled><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 26V12a3 3 0 0 1 6 0v10V8a3 3 0 0 1 6 0v14V10a3 3 0 0 1 6 0v14v-8a3 3 0 0 1 6 0v14c0 9-6 14-13 14s-11-3-15-9l-5-8a3 3 0 0 1 5-3l4 5z" fill="#FFE9CF" stroke="#2B2A33" stroke-width="3.5" stroke-linejoin="round"/></svg>まった</button>
@@ -190,10 +214,25 @@ body {
 <div class="cover" id="startOv">
   <div class="startCard">
     <h1 class="logo">まるシマ<span>リバーシ</span></h1>
-    <button class="big" id="startBtn" type="button">はじめる</button>
-    <p class="note">おとなの せってい：ばんの そとを 3びょう ながおし</p>
+    <button class="big" id="callBtn" type="button">おばあちゃんを よぶ</button>
+    <button class="big sub" id="startBtn" type="button">1だいで あそぶ</button>
+    <p class="note" id="startNote">おとなの せってい：ばんの そとを 3びょう ながおし</p>
   </div>
 </div>
+<div class="cover" id="inviteOv" hidden>
+  <div class="panel invite" role="dialog" aria-label="おばあちゃんを よぶ">
+    <h2>おばあちゃんに リンクを おくる</h2>
+    <p class="lead">おばあちゃんが リンクを タップして「はじめる」を おすと、つながります。</p>
+    <div class="qr" id="qr" aria-label="リンクの QRコード"></div>
+    <div class="panelBtns">
+      <a class="lineBtn" id="lineBtn" href="#" target="_blank" rel="noopener">LINEで おくる</a>
+      <button type="button" id="shareBtn" hidden>ほかの アプリで おくる</button>
+    </div>
+    <p class="link" id="inviteLink"></p>
+    <div class="panelBtns"><button type="button" id="copyBtn">リンクを コピー</button><button type="button" id="inviteClose" class="primary">とじる（まつ）</button></div>
+  </div>
+</div>
+<div class="cover" id="askOv" hidden><div class="askBtns"><button class="big" id="okBtn" type="button">いいよ</button><button class="small" id="ngBtn" type="button">だめ</button></div></div>
 <div class="cover" id="againOv" hidden><button class="big" id="againBtn" type="button">もういっかい</button></div>
 
 <div class="cover" id="settings" hidden>
@@ -203,10 +242,14 @@ body {
     <div class="row"><span>おける ばしょの ひかり</span><div class="seg" data-key="hints"><button type="button" id="hints1" data-v="1">みせる</button><button type="button" id="hints0" data-v="0">みせない</button></div></div>
     <div class="row"><span>こうかおん</span><div class="seg" data-key="sfx"><button type="button" id="sfx0" data-v="0">なし</button><button type="button" id="sfx1" data-v="1">小</button><button type="button" id="sfx2" data-v="2">中</button><button type="button" id="sfx3" data-v="3">大</button></div></div>
     <div class="row"><span>キャラの こえ</span><div class="seg" data-key="voice"><button type="button" id="voice0" data-v="0">なし</button><button type="button" id="voice1" data-v="1">小</button><button type="button" id="voice2" data-v="2">中</button><button type="button" id="voice3" data-v="3">大</button></div></div>
+    <div class="row"><span>こどもの まったに おばあちゃんは じどうで いいよ</span><div class="seg" data-key="autoOk"><button type="button" id="autoOk1" data-v="1">じどうで いいよ</button><button type="button" id="autoOk0" data-v="0">きいてから</button></div></div>
+    <div class="panelBtns"><button type="button" id="reinviteBtn">おばあちゃんを よぶ（リンク）</button></div>
     <div class="panelBtns"><button type="button" id="resetBtn">さいしょから</button><button type="button" id="closeBtn" class="primary">とじる</button></div>
   </div>
 </div>
 
+<script src="lib/peerjs.min.js"></script>
+<script src="lib/qrcode.js"></script>
 <script>
 const NS = "http://www.w3.org/2000/svg";
 const INK = "#2B2A33";
@@ -1156,6 +1199,117 @@ const SFX = (() => {
   };
 })();
 
+/* ---------- 遠隔対戦（段階2）：ビデオ通話と手の同期 ----------
+   PeerJS（WebRTC）で、映像・音声・手の情報を端末どうしで直接やりとりする。
+   親機（こども側、A）が部屋を作って「ホスト」になり、おばあちゃん（B）はリンクを開くだけで「ゲスト」としてつながる。
+   つなぐ前の紹介役は PeerJS の公開サーバー（段階3で自前の紹介役と中継サーバーに切り替える）。
+   盤面は「手の履歴」だけで同期する。ホストの履歴を正とする。 */
+const NET = (() => {
+  const q = new URLSearchParams(location.search);
+  const ROOM_KEY = "marushima-reversi-room";
+  // 確認用：?ps=localhost:9000 で手元の紹介役サーバーを使う
+  const ps = q.get("ps");
+  const OPT = ps ? { host: ps.split(":")[0], port: +ps.split(":")[1], path: "/", secure: false } : {};
+  OPT.config = { iceServers: [{ urls: "stun:stun.l.google.com:19302" }, { urls: "stun:stun1.l.google.com:19302" }] };
+  const idOf = room => "marushima-rv-" + room;
+
+  const N = {
+    role: q.get("r") ? "guest" : null,   // null = 1台で遊ぶ
+    room: q.get("r") || null,
+    peer: null, conn: null, call: null, local: null, remote: null,
+    open: false, lastHeard: 0, handlers: {},
+    on(type, fn) { this.handlers[type] = fn; },
+    send(msg) { if (this.conn && this.open) try { this.conn.send(msg); } catch (e) { /* 切れていたら再接続で送り直す */ } },
+    get available() { return typeof Peer !== "undefined" && !!navigator.mediaDevices; },
+  };
+  const emit = (type, ...a) => N.handlers[type]?.(...a);
+
+  async function camera() {
+    try {
+      N.local = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "user", width: { ideal: 320 }, height: { ideal: 240 }, frameRate: { ideal: 15 } },
+        audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
+      });
+    } catch (e) { N.local = null; }
+    emit("local", N.local);
+    return N.local;
+  }
+
+  function adopt(conn) {
+    if (N.conn && N.conn !== conn) try { N.conn.close(); } catch (e) { /* 古い接続 */ }
+    N.conn = conn;
+    conn.on("open", () => {
+      N.open = true; N.lastHeard = Date.now(); emit("open");
+      if (N.role === "host" && N.local) callGuest(conn.peer);
+    });
+    conn.on("data", m => { N.lastHeard = Date.now(); if (m && m.t !== "ping") emit("msg", m); });
+    conn.on("close", () => lost(conn));
+    conn.on("error", () => lost(conn));
+  }
+  function watchCall(call) {
+    if (N.call && N.call !== call) try { N.call.close(); } catch (e) { /* 古い通話 */ }
+    N.call = call;
+    call.on("stream", s => { N.remote = s; emit("remote", s); });
+  }
+  function callGuest(id) { try { watchCall(N.peer.call(id, N.local)); } catch (e) { /* 映像なしでも対局は続ける */ } }
+
+  function lost(conn) {
+    if (conn && conn !== N.conn) return;
+    if (!N.open) return;
+    N.open = false; emit("lost");
+    if (N.role === "guest") setTimeout(dialHost, 1500);
+  }
+
+  function makePeer(id) {
+    const p = id ? new Peer(id, OPT) : new Peer(OPT);
+    p.on("disconnected", () => setTimeout(() => { try { if (!p.destroyed) p.reconnect(); } catch (e) { /* 次の再試行で */ } }, 1500));
+    return p;
+  }
+
+  // ホスト：部屋を作る（3時間以内なら同じ部屋をつかいなおす）
+  async function host(fresh) {
+    N.role = "host";
+    let saved = null; try { saved = JSON.parse(localStorage.getItem(ROOM_KEY)); } catch (e) { saved = null; }
+    if (!fresh && saved && Date.now() - saved.at < 3 * 3600e3) N.room = saved.room;
+    else N.room = Math.random().toString(36).slice(2, 10);
+    try { localStorage.setItem(ROOM_KEY, JSON.stringify({ room: N.room, at: Date.now() })); } catch (e) { /* 保存できなくても続ける */ }
+    await camera();
+    const start = () => {
+      N.peer = makePeer(idOf(N.room));
+      N.peer.on("open", () => emit("ready"));
+      N.peer.on("connection", adopt);
+      N.peer.on("call", c => { c.answer(N.local || undefined); watchCall(c); });
+      N.peer.on("error", e => { if (e.type === "unavailable-id") { N.peer.destroy(); setTimeout(start, 3000); } else emit("error", e.type); });
+    };
+    start();
+  }
+  // ゲスト：リンクの部屋につなぐ
+  async function guest() {
+    await camera();
+    N.peer = makePeer(null);
+    N.peer.on("open", dialHost);
+    N.peer.on("call", c => { c.answer(N.local || undefined); watchCall(c); });
+    N.peer.on("error", e => { if (e.type === "peer-unavailable") setTimeout(dialHost, 3000); else emit("error", e.type); });
+  }
+  function dialHost() {
+    if (N.open || !N.peer || N.peer.destroyed) return;
+    if (N.peer.disconnected) { try { N.peer.reconnect(); } catch (e) { /* 再試行 */ } setTimeout(dialHost, 3000); return; }
+    adopt(N.peer.connect(idOf(N.room), { serialization: "json", reliable: true }));
+    setTimeout(() => { if (!N.open) dialHost(); }, 6000);
+  }
+
+  // 生きているかの合図。12秒なにも届かなければ切れたとみなす（iPad が眠ったときなど）
+  setInterval(() => {
+    if (!N.open) return;
+    N.send({ t: "ping" });
+    if (Date.now() - N.lastHeard > 12000) { const c = N.conn; lost(c); try { c.close(); } catch (e) { /* もう切れている */ } }
+  }, 4000);
+
+  N.host = host; N.guest = guest;
+  N.inviteURL = () => location.origin + location.pathname + "?r=" + N.room + (ps ? "&ps=" + ps : "");
+  return N;
+})();
+
 /* ---------- まるシマリバーシ 段階1（1台で交互に打つ） ----------
    秒数は仕様書 第4章・第5章の「ふつう」の値。ゆっくり は 1.5 倍。 */
 const T = {
@@ -1169,12 +1323,15 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const CFG_KEY = "marushima-reversi-cfg", GAME_KEY = "marushima-reversi-game";
 const load = k => { try { return JSON.parse(localStorage.getItem(k)) || null; } catch (e) { return null; } };
 const keep = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* 保存できなくても遊べる */ } };
-const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2 }, load(CFG_KEY) || {});
+const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2, autoOk: 1 }, load(CFG_KEY) || {});
 const saveCfg = () => keep(CFG_KEY, CFG);
 
 /* ---------- 対局の状態 ---------- */
 // A = こども（左）、B = おばあちゃん（右）。blackSide が くろ（先手）の側。対局ごとに交代する。
-const G = { hist: [], blackSide: "A", busy: true, started: false, ended: false };
+const G = { hist: [], blackSide: "A", busy: true, started: false, ended: false, paused: false, animating: false, readyMe: false, readyThem: false };
+// 遠隔対戦では、この端末が受け持つ側だけを操作できる（ホスト＝こども A、ゲスト＝おばあちゃん B）
+const SOLO = () => !NET.role;
+const mySide = () => (NET.role === "guest" ? "B" : "A");
 const colorOf = side => (side === G.blackSide ? BLACK : WHITE);
 const sideOf = color => (color === BLACK ? G.blackSide : (G.blackSide === "A" ? "B" : "A"));
 const other = side => (side === "A" ? "B" : "A");
@@ -1350,16 +1507,18 @@ const bubble = $("bubble");
 let jaVoice = null, talking = null;
 function pickVoice() { const v = speechSynthesis?.getVoices?.() || []; jaVoice = v.find(x => /ja[-_]JP/i.test(x.lang) && /Kyoko|O-ren|Otoya/i.test(x.name)) || v.find(x => /^ja/i.test(x.lang)) || null; }
 if ("speechSynthesis" in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+let keepBubble = null;
+function hideBubble() { keepBubble = null; bubble.classList.remove("on"); }
 function bubbleAt(c) {
   const p = headTop(c); bubble.style.left = Math.max(140, Math.min(innerWidth - 140, p.x)) + "px"; bubble.style.top = Math.max(90, p.y - 6) + "px";
 }
-function say(c, text, min = 0) {
+function say(c, text, min = 0, keep = false) {
   bubble.textContent = text; bubble.classList.add("on"); talking = c; bubbleAt(c);
   const fallback = 900 + text.length * 170;
   const t0 = performance.now();
   return new Promise(res => {
     let done = false;
-    const end = () => { if (done) return; done = true; const left = Math.max(0, min - (performance.now() - t0)); setTimeout(() => { talking = null; c.speakingLevel = 0; bubble.classList.remove("on"); res(); }, left + 250); };
+    const end = () => { if (done) return; done = true; const left = Math.max(0, min - (performance.now() - t0)); setTimeout(() => { talking = null; c.speakingLevel = 0; if (!keep) bubble.classList.remove("on"); else keepBubble = c; res(); }, left + 250); };
     if (CFG.voice && "speechSynthesis" in window) {
       try {
         speechSynthesis.cancel();
@@ -1393,14 +1552,18 @@ function centerOf(e) { const r = e.getBoundingClientRect(); return [r.left + r.w
 /* ---------- 手番 ---------- */
 let cur = replay([]);
 function updateButtons() {
-  ["A", "B"].forEach(s => { $("matta" + s).disabled = G.busy || G.ended || !undoDepth(G.hist, colorOf(s)); });
+  ["A", "B"].forEach(s => {
+    const b = $("matta" + s);
+    b.hidden = !SOLO() && s !== mySide();
+    b.disabled = G.busy || G.ended || G.paused || !undoDepth(G.hist, colorOf(s));
+  });
 }
 function setTurn(state, quiet) {
   cur = state;
   const side = sideOf(state.turn);
   ["A", "B"].forEach(s => $("side" + s).classList.toggle("active", s === side && !state.over));
-  showHints(legalMoves(state.board, state.turn));
-  G.busy = false; updateButtons();
+  if (SOLO() || side === mySide()) showHints(legalMoves(state.board, state.turn)); else clearHints();
+  G.busy = false; G.animating = false; updateButtons();
   if (!quiet) { SFX.turn(); act(side, "turn"); }
 }
 async function afterMove(state) {
@@ -1416,11 +1579,18 @@ async function afterMove(state) {
   setTurn(state);
 }
 
+function shakeCell(r, c) { const b = cells[at(r, c)].b; b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); }
 async function tap(r, c) {
-  if (G.busy || !G.started || G.ended) return;
+  if (G.busy || !G.started || G.ended || G.paused) return;
   const moves = legalMoves(cur.board, cur.turn), side = sideOf(cur.turn);
-  if (!moves.some(m => m.r === r && m.c === c)) { const b = cells[at(r, c)].b; b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); act(side, "invalid"); return; }
-  G.busy = true; clearHints(); updateButtons();
+  if (!SOLO() && side !== mySide()) { shakeCell(r, c); return; }   // 相手の番
+  if (!moves.some(m => m.r === r && m.c === c)) { shakeCell(r, c); act(side, "invalid"); return; }
+  NET.send({ t: "move", r, c, n: G.hist.length });
+  playMove(r, c);
+}
+async function playMove(r, c) {
+  const side = sideOf(cur.turn);
+  G.busy = true; G.animating = true; clearHints(); updateButtons();
   const p = cur.turn;
   G.hist.push([r, c]); saveGame();
   const next = replay(G.hist), step = next.steps.at(-1), k = K();
@@ -1440,13 +1610,12 @@ async function tap(r, c) {
   await setCounts(next.board, true);
   await wait(T.toTurn * k);
   paint(next.board);
-  afterMove(next);
+  await afterMove(next);
+  G.animating = false;
 }
 
-async function undo(side) {
-  if (G.busy || G.ended) return;
-  const depth = undoDepth(G.hist, colorOf(side)); if (!depth) return;
-  G.busy = true; clearHints(); updateButtons();
+async function animUndo(side, depth) {
+  G.busy = true; G.animating = true; clearHints(); updateButtons(); hideBubble();
   ["A", "B"].forEach(s => $("side" + s).classList.remove("active"));
   act(side, "undoMine"); act(other(side), "undoOther");
   const k = K();
@@ -1472,8 +1641,45 @@ async function undo(side) {
   await wait(250 * k);
   setTurn(s);
 }
-$("mattaA").addEventListener("click", () => undo("A"));
-$("mattaB").addEventListener("click", () => undo("B"));
+/* まった：自分の手の直後なら すぐもどす。相手が打ったあとなら、相手の「いいよ」で2手もどす。
+   こどもからの まったは、設定「おばあちゃんは じどうで いいよ」なら きかずに もどす。 */
+let undoTimer = null;
+function requestUndo(side) {
+  if (G.busy || G.ended || G.paused) return;
+  const depth = undoDepth(G.hist, colorOf(side)); if (!depth) return;
+  if (SOLO() || depth === 1 || (side === "A" && CFG.autoOk)) { NET.send({ t: "undo", side, depth, n: G.hist.length }); animUndo(side, depth); return; }
+  G.busy = true; updateButtons(); clearHints();
+  NET.send({ t: "undoReq", side, n: G.hist.length });
+  showHost(host.pony).then(() => say(host.pony, "おへんじを まってるよ", 0, true));
+  undoTimer = setTimeout(() => { NET.send({ t: "undoCancel" }); undoRefused(side); }, 10000);
+}
+async function undoRefused(side) {
+  clearTimeout(undoTimer); act(side, "pass");
+  if (host.pony.hidden) await showHost(host.pony);
+  await say(host.pony, "こんどは そのまま つづけよう");
+  await hideHost(host.pony); setTurn(cur, true);
+}
+let askTimer = null, askFor = null;
+async function askUndo(m) {
+  G.busy = true; askFor = m; updateButtons(); clearHints();
+  await showHost(host.pony);
+  say(host.pony, `${nameOf(m.side)}が まったって！ いいかな？`, 0, true);
+  $("askOv").hidden = false;
+  askTimer = setTimeout(() => answerUndo(false), 10000);
+}
+async function answerUndo(ok) {
+  if (!askFor) return;
+  const m = askFor; askFor = null; clearTimeout(askTimer); $("askOv").hidden = true; hideBubble();
+  NET.send({ t: "undoAns", ok, n: m.n });
+  ok ? SFX.ok() : SFX.ng();
+  await hideHost(host.pony);
+  if (ok && m.n === G.hist.length) animUndo(m.side, undoDepth(G.hist, colorOf(m.side)));
+  else setTurn(cur, true);
+}
+$("okBtn").addEventListener("click", () => answerUndo(true));
+$("ngBtn").addEventListener("click", () => answerUndo(false));
+$("mattaA").addEventListener("click", () => requestUndo("A"));
+$("mattaB").addEventListener("click", () => requestUndo("B"));
 
 /* ---------- 終局 ---------- */
 async function endGame(state) {
@@ -1505,14 +1711,21 @@ async function endGame(state) {
   say(host.pony, "もういっかい やる？", 1500);
   $("againOv").hidden = false;
 }
-$("againBtn").addEventListener("click", async () => {
+async function rematch() {
+  G.readyMe = G.readyThem = false; $("againBtn").disabled = false; $("againBtn").textContent = "もういっかい";
   $("againOv").hidden = true; await hideHost(host.pony);
   G.blackSide = other(G.blackSide);
   newGame();
+}
+$("againBtn").addEventListener("click", () => {
+  if (SOLO()) return rematch();
+  G.readyMe = true; NET.send({ t: "again" });
+  if (G.readyThem) return rematch();
+  $("againBtn").disabled = true; $("againBtn").textContent = "あいてを まってるよ";
 });
 
 async function newGame(announce = true) {
-  G.hist = []; G.ended = false; G.busy = true; saveGame(); clearHalo();
+  G.hist = []; G.ended = false; G.busy = true; G.animating = true; saveGame(); clearHalo();
   cur = replay([]); paintSides(); paint(cur.board); setCounts(cur.board, false); updateButtons();
   if (announce) {
     await showHost(host.kame);
@@ -1555,14 +1768,129 @@ async function keepAwake() { try { lock = await navigator.wakeLock?.request("scr
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && G.started) keepAwake(); });
 
 /* ---------- はじめる ---------- */
-$("startBtn").addEventListener("click", async () => {
+function unlock() {
   audio(); SFX.turn();
   try { if ("speechSynthesis" in window) { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); } } catch (e) { /* 読み上げなしでも遊べる */ }
   $("startOv").hidden = true; G.started = true; keepAwake();
+}
+$("startBtn").addEventListener("click", async () => {
+  unlock();
+  if (NET.role === "guest") return startOnline();
   const saved = G.hist.length > 0;
   if (saved) { const s = replay(G.hist); paint(s.board); setCounts(s.board, false); s.over ? endGame(s) : setTurn(s); }
   else newGame();
 });
+
+/* ---------- 遠隔対戦（段階2） ---------- */
+const otherSide = () => other(mySide());
+function camOf(side) { return { box: $("cam" + side), v: $("vid" + side), msg: $("msg" + side) }; }
+function camMsg(side, text) { const m = camOf(side).msg; m.textContent = text || ""; m.hidden = !text; }
+function playVideo(v) { const p = v.play(); if (p) p.catch(() => camMsg(v === camOf(mySide()).v ? mySide() : otherSide(), "がめんを タップしてね")); }
+document.addEventListener("click", () => ["A", "B"].forEach(s => { const v = $("vid" + s); if (v.srcObject && v.paused) v.play().catch(() => {}); }), true);
+["A", "B"].forEach(s => { $("vid" + s).addEventListener("playing", () => camMsg(s, "")); });
+function showCams() {
+  document.body.classList.add("online");
+  ["A", "B"].forEach(s => { $("cam" + s).hidden = false; $("cam" + s).classList.toggle("mine", s === mySide()); });
+  updateButtons(); layout();
+}
+NET.on("local", s => {
+  const c = camOf(mySide());
+  if (!s) return camMsg(mySide(), "カメラが つかえません");
+  c.v.muted = true; c.v.srcObject = s; playVideo(c.v); camMsg(mySide(), "");
+});
+NET.on("remote", s => { const c = camOf(otherSide()); c.v.muted = false; c.v.srcObject = s; playVideo(c.v); camMsg(otherSide(), ""); });
+
+// 受け取った知らせは順番に処理する。盤が動いている間は待つ。
+const inbox = [];
+function pump() {
+  if (!inbox.length) return;
+  const m = inbox[0], waitAnim = ["move", "undo", "undoReq", "state", "new"].includes(m.t);
+  if (waitAnim && G.animating) return setTimeout(pump, 120);
+  inbox.shift(); handle(m); pump();
+}
+NET.on("msg", m => { inbox.push(m); pump(); });
+function sendState() { NET.send({ t: "state", hist: G.hist, blackSide: G.blackSide }); }
+function handle(m) {
+  switch (m.t) {
+    case "move": {
+      const ok = m.n === G.hist.length && !G.ended && legalMoves(cur.board, cur.turn).some(x => x.r === m.r && x.c === m.c) && sideOf(cur.turn) === otherSide();
+      if (ok) playMove(m.r, m.c); else resync(); break;
+    }
+    case "undo": if (m.n === G.hist.length && undoDepth(G.hist, colorOf(m.side))) animUndo(m.side, m.depth); else resync(); break;
+    case "undoReq": if (m.n === G.hist.length) askUndo(m); else NET.send({ t: "undoAns", ok: false, n: m.n }); break;
+    case "undoAns":
+      clearTimeout(undoTimer); hideBubble();
+      if (m.ok && m.n === G.hist.length) hideHost(host.pony).then(() => animUndo(mySide(), undoDepth(G.hist, colorOf(mySide()))));
+      else undoRefused(mySide());
+      break;
+    case "undoCancel": if (askFor) { askFor = null; clearTimeout(askTimer); $("askOv").hidden = true; hideBubble(); hideHost(host.pony).then(() => setTurn(cur, true)); } break;
+    case "again": G.readyThem = true; if (G.readyMe) rematch(); break;
+    case "sync": if (NET.role === "host") sendState(); break;
+    case "state": applyState(m); break;
+    case "new": newGame(); break;
+  }
+}
+function resync() { NET.role === "host" ? sendState() : NET.send({ t: "sync" }); }
+// ホストの状態に合わせる（ゲスト側）
+function applyState(m) {
+  let s; try { s = replay(m.hist); } catch (e) { return; }
+  const same = m.hist.length === G.hist.length && m.hist.every((x, i) => x[0] === G.hist[i][0] && x[1] === G.hist[i][1]) && m.blackSide === G.blackSide;
+  G.paused = false; camMsg(otherSide(), "");
+  if (same && G.started && !G.busy) { updateButtons(); return; }
+  G.hist = m.hist.slice(); G.blackSide = m.blackSide; G.ended = false; saveGame();
+  $("againOv").hidden = true; $("askOv").hidden = true; askFor = null; hideBubble();
+  paintSides(); paint(s.board); setCounts(s.board, false); haloFor(G.hist);
+  if (!m.hist.length) { G.busy = true; return; }   // ホストの「はじめ」を待つ
+  if (s.over) endGame(s); else setTurn(s, true);
+}
+let lostSaid = false;
+NET.on("open", () => {
+  G.paused = false; lostSaid = false; $("inviteOv").hidden = true; camMsg(otherSide(), "");
+  if (NET.role !== "host") return;
+  sendState();
+  if (G.begun) return updateButtons();
+  G.begun = true;
+  const s = replay(G.hist);
+  if (!G.hist.length) { NET.send({ t: "new" }); newGame(); }
+  else s.over ? endGame(s) : setTurn(s, true);
+});
+NET.on("lost", () => {
+  G.paused = true; updateButtons();
+  camMsg(otherSide(), "つなぎなおしています…");
+  if (!lostSaid && !G.animating) { lostSaid = true; say(host.pony, "ちょっと まってね"); }
+});
+NET.on("ready", () => camMsg(otherSide(), "まっています…"));
+NET.on("error", type => camMsg(otherSide(), type === "network" || type === "server-error" ? "インターネットを たしかめてね" : "つなぎなおしています…"));
+
+function startOnline() {
+  showCams();
+  G.busy = true;
+  if (NET.role === "guest") { camMsg(otherSide(), "つないでいます…"); NET.guest(); }
+}
+// おばあちゃんを よぶ（ホスト）
+async function callGrandma(fresh) {
+  unlock(); NET.role = "host"; startOnline();
+  const s = replay(G.hist); paint(s.board); setCounts(s.board, false);
+  await NET.host(fresh);
+  showInvite();
+}
+function showInvite() {
+  const url = NET.inviteURL();
+  try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("qr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("qr").textContent = ""; }
+  $("inviteLink").textContent = url;
+  $("lineBtn").href = "https://line.me/R/share?text=" + encodeURIComponent("まるシマリバーシで あそぼう！ ここを タップしてね\n" + url);
+  $("shareBtn").hidden = !navigator.share;
+  $("inviteOv").hidden = false;
+}
+$("callBtn").addEventListener("click", () => callGrandma(false));
+$("copyBtn").addEventListener("click", () => {
+  const url = NET.inviteURL(), done = () => { $("copyBtn").textContent = "コピーしました"; setTimeout(() => $("copyBtn").textContent = "リンクを コピー", 2000); };
+  const pick = () => { const r = document.createRange(); r.selectNodeContents($("inviteLink")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+  try { navigator.clipboard.writeText(url).then(done, pick); } catch (e) { pick(); }
+});
+$("shareBtn").addEventListener("click", () => { navigator.share?.({ title: "まるシマリバーシ", text: "まるシマリバーシで あそぼう！", url: NET.inviteURL() }).catch(() => {}); });
+$("inviteClose").addEventListener("click", () => { $("inviteOv").hidden = true; });
+$("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (NET.role === "host") showInvite(); else callGrandma(false); });
 
 /* ---------- 起動：前回の続き、または確認用の局面（#pass / #end） ---------- */
 (function boot() {
@@ -1576,6 +1904,8 @@ $("startBtn").addEventListener("click", async () => {
   if (hd && Array.isArray(hd.hist)) { try { replay(hd.hist); G.hist = hd.hist; G.blackSide = hd.blackSide; } catch (e) { /* 保存がこわれていたら最初から */ } }
   const s = replay(G.hist); cur = s;
   paintSides(); paint(s.board); setCounts(s.board, false); haloFor(G.hist);
+  if (NET.role === "guest") { $("startBtn").textContent = "はじめる"; $("callBtn").hidden = true; $("startNote").textContent = "カメラと マイクを つかいます。「きょか」を おしてね"; }
+  else if (!NET.available) $("callBtn").hidden = true;
   layout(); placeAll();
 })();
 
@@ -1590,7 +1920,7 @@ function frame(now) {
     drawChar(c, dt, false);
   });
   idleTick(seat.A, dt, G.busy); idleTick(seat.B, dt, G.busy);
-  if (talking) bubbleAt(talking);
+  if (talking || keepBubble) bubbleAt(talking || keepBubble);
   stepMarks(dt); stepConfetti(dt);
   requestAnimationFrame(frame);
 }
