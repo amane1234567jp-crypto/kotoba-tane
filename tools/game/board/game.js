@@ -11,7 +11,7 @@ const rnd = n => Math.floor(Math.random() * n);
 const pad = n => String(n).padStart(2, "0");
 
 /* ---------- キャラ ---------- */
-const KINDS = ["doshin", "nobbo", "kamejii", "meebaa", "pyonmama", "gaojii", "miibaa", "doshinpapa", "kon", "panna", "pannamama", "mama", "gaomama", "miimama", "chumama", "ookami", "ojisan", "omawari", "tora", "kuma", "onii", "pony", "shima", "pyon", "mii", "gao", "chu"];
+const KINDS = ["doshin", "nobbo", "kamejii", "meebaa", "pyonmama", "gaojii", "miibaa", "doshinpapa", "kon", "panna", "pannamama", "mama", "gaomama", "miimama", "chumama", "wanko", "biba", "piyoko", "ookami", "ojisan", "omawari", "tora", "kuma", "onii", "pony", "shima", "pyon", "mii", "gao", "chu"];
 const C = {}; KINDS.forEach(k => C[k] = makeChar(k));
 const P = { doshin: makeChar("doshin"), shima: makeChar("shima"), gao: makeChar("gao") };
 Object.values(P).forEach(p => p.isPiece = true);
@@ -32,7 +32,9 @@ const RIVAL_TEXT = {
 };
 const GAO_KEYS = { go: "g_go", huh: "g_huh", thanks: "g_thanks", rival: "g_rival", rival2: "g_rival2", win: "g_win", good: "g_good", next: "gao" };
 const RK = name => RIVAL === "gao" ? GAO_KEYS[name] : `rv_${RIVAL}_${name}`;
-const rivalSay = (c, name) => speak(c, RK(name), RIVAL_TEXT[RIVAL][name]);
+// みい・ちゅう・どしんの はじめの あいさつは、もとの ステージ（こうえん・おみせ・でんしゃ）いがいでは「ゴールまで」に（2026-10-18）
+const RIVAL_HOME = { mii: "kouen", chu: "omise", doshin: "densha" }, RIVAL_GEN = { mii: "みいよ。ここでも まけないわ", chu: "ぼく、ちゅう。ゴールまで きょうそうだよ！", doshin: "ぼく、どしん。ゴールまで きょうそうしよう" };
+const rivalSay = (c, name) => name === "rival" && RIVAL_HOME[RIVAL] && curStage !== RIVAL_HOME[RIVAL] ? speak(c, `rv_${RIVAL}_rivalg`, RIVAL_GEN[RIVAL]) : speak(c, RK(name), RIVAL_TEXT[RIVAL][name]);
 const visible = [];
 
 /* ---------- 吹き出しと耳の印 ---------- */
@@ -975,6 +977,9 @@ const STAGES = [
   { id: "asobiba", name: "あそびば", icon: "🛝", ready: true },
   { id: "burger", name: "ハンバーガーやさん", icon: "🍔", ready: true },
   { id: "sansu", name: "さんすう", icon: "➕", ready: true },
+  { id: "hoken2", name: "ほけんしつ", icon: "🩹", ready: true },
+  { id: "byouin", name: "びょういん", icon: "🏥", ready: true },
+  { id: "haisha", name: "はいしゃさん", icon: "🦷", ready: true },
 ];
 const SAVE_KEY = "kotoba-tane-save";
 const SAVE = (() => { try { return JSON.parse(localStorage.getItem(SAVE_KEY)) || null; } catch (e) { return null; } })() || { v: 1, lap: 1, cleared: {}, E: null, play: null };

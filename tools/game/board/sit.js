@@ -15,7 +15,7 @@ const tierOf = () => Math.min(5, (E.L <= 2 ? 0 : E.L <= 4 ? 1 : E.L <= 7 ? 2 : 3
 function pickSit(place, heroKind = "shima") {
   const okFor = s => (s.stage || "kousha") === curStage && s.asker !== heroKind
     && (heroKind === "shima" || (MODE === "solo" ? s.gaoOk : (heroKind !== "gao" || s.gaoOk)))
-    && !(heroKind === "chu" && s.intro === "tag") && !(s.cast && s.cast.includes(heroKind))
+    && !(heroKind === "chu" && s.intro === "tag") && !(s.cast && s.cast.includes(heroKind)) && !(s.noHero && s.noHero.includes(heroKind)) && !(s.late && GS.tasks < 4)
     && !(s.asker === "mama" && heroKind !== "shima" && !MOM_OF[heroKind]); // ママの 場面は、じぶんの ママが いる 子だけ // やりとりに 出ている キャラは、その場面の 主人公に しない
   if (MODE === "solo" && heroKind !== "shima") { // ひとりで あそぶ ときの ライバルは、こどもが もう やった 場面から えらぶ（こどもの ぶんの あたらしい 場面を へらさない）
     let rp = SITS.filter(s => okFor(s) && sitUsed.has(s.id)); if (!rp.length) rp = SITS.filter(okFor);
@@ -32,7 +32,7 @@ function pickSit(place, heroKind = "shima") {
 }
 const MOM_OF = { pyon: "pyonmama", gao: "gaomama", mii: "miimama", chu: "chumama" };
 const ASK_ON_STAGE = new Set(["door", "arrive", "stuck", "scared", "jumpdown", "loud", "borrow", "slow"]); // 最初から相手がその場にいる場面
-const ASK_AT = { onii: [1190, .98], tora: [1190, .92], kuma: [1220, 1.05], mama: [1200, 1.0], ookami: [1200, 1.0], ojisan: [1200, 1.0], omawari: [1240, 1.3], meebaa: [1190, .9], kamejii: [1180, .9], nobbo: [1220, 1.0], gao: [1190, .95], mii: [1190, .9], chu: [1220, .42], pyon: [1190, .9], doshin: [1260, 1.38], pyonmama: [1200, 1.0], gaojii: [1190, 1.0], miibaa: [1190, .98], doshinpapa: [1250, 1.48], kon: [1190, .88], panna: [1190, .9], pannamama: [1200, 1.0], gaomama: [1190, .98], miimama: [1190, .96], chumama: [1210, .62] };
+const ASK_AT = { onii: [1190, .98], tora: [1190, .92], kuma: [1220, 1.05], mama: [1200, 1.0], ookami: [1200, 1.0], ojisan: [1200, 1.0], omawari: [1240, 1.3], meebaa: [1190, .9], kamejii: [1180, .9], nobbo: [1220, 1.0], gao: [1190, .95], mii: [1190, .9], chu: [1220, .42], pyon: [1190, .9], doshin: [1260, 1.38], pyonmama: [1200, 1.0], gaojii: [1190, 1.0], miibaa: [1190, .98], doshinpapa: [1250, 1.48], kon: [1190, .88], panna: [1190, .9], pannamama: [1200, 1.0], gaomama: [1190, .98], miimama: [1190, .96], chumama: [1210, .62], wanko: [1190, 1.0], biba: [1190, .98], piyoko: [1220, .6] };
 let propG = null;
 function resetChar(c) { c.dx.v = 0; c.dx.t = 0; c.lean.t = 0; c.lift.t = 0; c.armL.t = 0; c.armR.t = 0; c.headRot.t = 0; c.tm = {}; c.sadMouth = false; c.roundMouth = false; c.happyOn = false; c.eyeScale.t = 1; c.squash.t = 1; }
 function setSitView(s, heroKind) {

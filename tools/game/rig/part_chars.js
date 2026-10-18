@@ -49,6 +49,10 @@ function momize(root, p, col, rib, at = [262, 70]) { const bd = el("g", {}); roo
   el("path", { d: "M150 288 Q200 276 250 288 L268 380 Q200 396 132 380 Z", fill: col, ...ST(5) }, bd); el("path", { d: "M160 330 Q200 344 240 330", fill: "none", ...ST(4) }, bd); el("circle", { cx: 200, cy: 356, r: 9, fill: "#FFFFFF", ...ST(3) }, bd);
   (p.eyes || []).forEach(e => { const sx = e.cx < 200 ? -1 : 1; el("path", { d: `M${e.cx + sx * 16} ${e.cy - 14} l${sx * 9} -8 M${e.cx + sx * 4} ${e.cy - 20} l${sx * 4} -10`, fill: "none", ...ST(4) }, p.head.g); });
   const rb = el("g", { transform: `translate(${at[0]} ${at[1]}) rotate(20)` }, p.head.g); el("path", { d: "M0 0 L-30 -16 L-30 16 Z M0 0 L30 -16 L30 16 Z", fill: rib, ...ST(4) }, rb); el("circle", { r: 8, fill: rib, ...ST(4) }, rb); }
+// はくい（おいしゃさん・はいしゃさん）
+function coatOn(root, p, col) { const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g);
+  el("path", { d: "M134 286 Q200 270 266 286 L280 392 Q200 408 120 392 Z", fill: col, ...ST(5) }, bd); el("path", { d: "M176 282 L200 330 L224 282 M200 330 V404", fill: "none", ...ST(4) }, bd);
+  el("rect", { x: 222, y: 340, width: 32, height: 26, rx: 4, fill: "none", ...ST(3) }, bd); }
 const BUILD = {
   pony(root) {
     const s = ST(), B = "#D98A4E", H = "#6B4A36", T = "#FFD36E";
@@ -349,6 +353,29 @@ const BUILD = {
     [160, 180, 200, 220, 240].forEach((x, i) => el("circle", { cx: x, cy: 286 + Math.abs(i - 2) * -4 + 8, r: 7, fill: "#FFFFFF", ...ST(3) }, root)); p.tempo = .95; return p; },
   chumama(root) { // ちゅうの ママ（ねずみ）：きいろの エプロン・みみに リボン
     const p = BUILD.chu(root); momize(root, p, "#FFE07A", "#FF6F91", [98, 40]); p.tempo = .95; return p; },
+  // びょういん・はいしゃさん（2026-10-18）：いぬの わんこせんせい（おいしゃさん）・ビーバーの ビバせんせい（はいしゃさん）・ひよこの ぴよこさん（かんごしさん）
+  wanko(root) { const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); if (p.brows) p.brows.innerHTML = ""; recolor(root, { "#FFC94D": "#E3B47C", "#FFF1D6": "#FFF6E9" });
+    neckFill(root, p, "#E3B47C"); p.ears.forEach(e => e.g.setAttribute("display", "none"));
+    [[104, 20], [296, -20]].forEach(([x, r]) => el("ellipse", { cx: x, cy: 176, rx: 28, ry: 60, fill: "#8B5A3C", ...ST(6), transform: `rotate(${r} ${x} 150)` }, p.head.g));
+    coatOn(root, p, "#FFFFFF"); const st = el("g", {}); root.insertBefore(st, p.arms[0].g);
+    el("path", { d: "M170 288 Q158 334 188 350 M230 288 Q242 334 212 350", fill: "none", stroke: "#4A4A58", "stroke-width": 7, "stroke-linecap": "round" }, st); el("circle", { cx: 200, cy: 356, r: 13, fill: "#C9D3DE", ...ST(4) }, st);
+    p.tempo = .9; return p; },
+  biba(root) { const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); if (p.brows) p.brows.innerHTML = ""; recolor(root, { "#FFC94D": "#A0693F", "#FFF1D6": "#E9C9A0", "#FFB3C1": "#D9A07A" });
+    neckFill(root, p, "#A0693F"); p.tail.g.setAttribute("display", "none");
+    const tl = el("g", {}); root.insertBefore(tl, root.firstChild); el("ellipse", { cx: 300, cy: 380, rx: 46, ry: 22, fill: "#5E3B22", ...ST(6), transform: "rotate(-20 300 380)" }, tl);
+    [0, 1].forEach(i => el("rect", { x: 189 + i * 12, y: 222, width: 11, height: 18, rx: 3, fill: "#FFFFFF", ...ST(3) }, p.head.g));
+    coatOn(root, p, "#BFE3F5");
+    el("path", { d: "M108 124 Q200 74 292 124", fill: "none", stroke: "#4A4A58", "stroke-width": 8 }, p.head.g); el("circle", { cx: 200, cy: 98, r: 22, fill: "#E8EEF4", ...ST(5) }, p.head.g); el("circle", { cx: 200, cy: 98, r: 8, fill: "#4A4A58" }, p.head.g);
+    p.tempo = .95; return p; },
+  piyoko(root) { const p = BUILD.chu(root); recolor(root, { "#C9C5D6": "#FFE066", "#F1EFF6": "#FFF6C2", "#FFB3C1": "#FFA94D" });
+    p.ears.forEach(e => e.g.setAttribute("display", "none")); if (p.tail) p.tail.g.setAttribute("display", "none");
+    p.head.g.querySelectorAll("path").forEach(e => { const d = e.getAttribute("d") || ""; if (d.startsWith("M118 214") || d.startsWith("M126 140")) e.setAttribute("display", "none"); });
+    p.head.g.querySelectorAll("ellipse").forEach(e => { if (e.getAttribute("fill") === "#FF6F91") e.setAttribute("display", "none"); });
+    el("path", { d: "M182 200 L218 200 L200 226 Z", fill: "#FF9F1C", ...ST(5) }, p.head.g);
+    el("path", { d: "M194 88 Q186 60 202 66 Q214 54 210 86", fill: "#FFE066", ...ST(5) }, p.head.g);
+    const cap = el("g", {}, p.head.g); el("path", { d: "M146 98 L254 98 L240 62 L160 62 Z", fill: "#FFFFFF", ...ST(6) }, cap); el("path", { d: "M200 68 V92 M188 80 H212", stroke: "#E8473C", "stroke-width": 7 }, cap);
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M160 296 Q200 286 240 296 L252 380 Q200 394 148 380 Z", fill: "#FFC2D1", ...ST(5) }, bd);
+    p.tempo = 1.05; return p; },
   ookami(root) { // あやしい おおかみ（とうこう）：サングラス・ぼうし・コート
     const p = BUILD.kon(root); recolor(root, { "#F29F4C": "#8E8E9E", "#FFF6E9": "#E6E6EE", "#7CC36A": "#4A4A58", "#7A4A2A": "#4A4A58" });
     const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M134 290 Q200 270 266 290 L276 392 Q200 404 124 392 Z", fill: "#5E5A50", ...ST(5) }, bd); el("path", { d: "M200 282 V398", fill: "none", ...ST(4) }, bd);
@@ -401,7 +428,7 @@ const BUILD = {
 };
 
 const NAMES = { pony: "ぽにー", shima: "まるシマ", doshin: "どしん", nobbo: "のっぽ", gao: "がお", chu: "ちゅう", pyon: "ぴょん", mii: "みい", kamejii: "かめじい", meebaa: "めえばあ",
-  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くまた", onii: "おにいちゃん" };
+  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "ぴよこさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くまた", onii: "おにいちゃん" };
 const LINES = { pony: "きょねん、うみに いったね", shima: "やったー！ いえたね！", doshin: "どいて、あげるよ", nobbo: "それは、ずかんに のって いますよ", gao: "つぎは、まけないぞ",
   chu: "こ、こわかったよう", pyon: "いっしょに あそぼう！", mii: "ふーん。まあまあ じゃない", kamejii: "よく いえましたね", meebaa: "いらっしゃいませ" };
 
@@ -539,6 +566,9 @@ const SPECIAL = {
   gaomama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
   miimama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
   chumama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
+  wanko: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
+  biba: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
+  piyoko: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
   ookami: c => { c.tm.shiver = 1; },
   ojisan: c => { c.tm.nod = 1.2; },
   onii: c => { c.tm.nod = 1.2; c.happyOn = true; later(1300, () => c.happyOn = false); },
