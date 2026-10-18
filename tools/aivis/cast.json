@@ -261,6 +261,21 @@
    "style": "hutuu_hutuu",
    "speed": 1.0,
    "pitch": 0.03
+  },
+  "wanko": {
+   "model": "80fe2db4-5891-4550-a3f3-dff9a91c0946",
+   "style": "ノーマル",
+   "speed": 0.95
+  },
+  "biba": {
+   "model": "3bef4d35-124e-4ddd-93d3-75f292732195",
+   "style": "ノーマル",
+   "speed": 1.0
+  },
+  "piyoko": {
+   "model": "4f281e78-eba6-495a-8e50-5c322d02b5b1",
+   "style": "ノーマル",
+   "speed": 1.0
   }
  },
  "lines": {
