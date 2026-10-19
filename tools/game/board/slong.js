@@ -3,7 +3,7 @@
    約65マスの ぐねぐね道。サイコロ 1〜6。マスは「ことばの 課題」「おもしろ課題（こえなし）」「しかけ」が だいたい 3:3:4。
    ことばの 課題は だいぼうけん・ともだちの だいぼうけんの ものを つかう（声も その パックから）。
    あたらしい 声は ぽにーだけ（sl_*・n0・n7〜n12。packs/slong.json）。 */
-const SL = ["sumi", "sokashi", "suchu", "eki", "odekake"];
+const SL = ["sumi", "sokashi", "suchu", "eki", "odekake", "kimochi"];
 const isSL = () => SL.includes(curStage);
 SL.forEach(id => LONGS.add(id));
 const SL_TH = {
@@ -23,6 +23,10 @@ const SL_TH = {
   odekake: { name: "おでかけ だいぼうけん", icon: "🚲", areas: ["いえの まわり", "しょうてんがい", "こうえん", "かわぞいの みち"], fills: ["#FFF1D6", "#FFE0E6", "#D9F0C8", "#D7ECFF"], ground: "#CFE8C0",
     blk: { who: "kamejii", intro: ["sl_odekake_blk", "かめじいが ほどうを ゆっくり あるいて いるよ。こえを かけて とおして もらおう"], say: ["blk_jitensha", "すみません、とおります"], to: "かめじいに いおう", keys: [["すみません", "済みません"]], res: ["rs_jitensha", "ほっほ、ていねいに ありがとう"] },
     item: "ちょうちょ", obs: "みずたまり", call: "おまわりさん", deco: [["🏠", 120, 990], ["🌷", 520, 990], ["🚦", 1500, 760], ["🏪", 140, 560], ["🌳", 1480, 450], ["🦆", 760, 230], ["🍦", 1060, 990], ["🚲", 1500, 990], ["🐕", 640, 520]] },
+  // きもちの だいぼうけん（2026-10-19）：あそびは すくなめ。きもちの ことばの マスが ほとんど（kimochi.js）
+  kimochi: { name: "きもちの だいぼうけん", icon: "💗", areas: ["いえ", "がっこう", "こうえん", "おでかけ"], fills: ["#FFE9D6", "#E3F0FF", "#DDF2D0", "#FFE0EE"], ground: "#FFF4F7",
+    blk: { who: "kon", intro: ["p_blk_kimochi", "こんくんが、みちで ないて いるよ。どうしたのって きいて あげよう"], say: ["blk_kimochi", "どうしたの？"], to: "こんくんに きこう", keys: [["どうしたの", "どうした", "どうしたん"]], res: ["rs_kimochi", "ころんで いたかったの。きいて くれて ありがとう"] },
+    item: "ハート", obs: "あめ", call: "ともだち", deco: [] },
 };
 // しかけの せりふ（テーマごと）
 const SL_EVT = {
@@ -58,6 +62,7 @@ const SL_EVT = {
     janken: "こうえんで じゃんけん しょうぶ！ いちばん まえの ひとと じゃんけん！ かったら いれかわるよ", again: "おまわりさんに あいさつ できた！ もう いっかい サイコロを ふれるよ",
     nebou: "ベンチで ねちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "サイクリングの なかまが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを むかえに いくよ",
     atsumare: "こうえんで ひとやすみ！ みんな ここに あつまれ！", kumikae: "みちが こうじちゅう！ コースが くみかわるよ" },
+  kimochi: {}, /* しかけは kimochi.js で きめる */
 };
 const SL_ICON = { dice2: "🎲", warp: "🌀", bigwarp: "🚀", fake: "🤪", rand: "❓", rest: "💤", x2: "✖️", zero: "0️⃣", home: "↩", back10: "⏪", bonus: "🎁", allf: "⏩", allb: "🌊", janken: "✊", again: "🔁", nebou: "😴", trolley: "🚃", call: "🧲", tsukkomi: "🤣", atsumare: "📣", kumikae: "🔀" };
 const SL_EVC = { warp: "#D9C2F0", bigwarp: "#D9C2F0", rand: "#D9C2F0", home: "#FFC2D1", back10: "#FFC2D1", fake: "#FFE27A", tsukkomi: "#FFE27A", bonus: "#C9EBB5", atsumare: "#FFE27A", kumikae: "#FFE27A" };
@@ -79,6 +84,7 @@ const SL_SHAPE = { // 47マス＋ゴール（まえは 65＋1。ながすぎた�
     const seg = V.slice(1).map((p, i) => Math.hypot(p[0] - V[i][0], p[1] - V[i][1])), tot = seg.reduce((a, b) => a + b, 0), P = [];
     for (let k = 0; k < 48; k++) { let d = tot * k / 47, i = 0; while (i < seg.length - 1 && d > seg[i]) { d -= seg[i]; i++; } const t = Math.min(1, d / seg[i]); P.push([V[i][0] + (V[i + 1][0] - V[i][0]) * t, V[i][1] + (V[i + 1][1] - V[i][1]) * t]); }
     return P; },
+  kimochi() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + Math.sin(col * .8 + r * 1.3) * 22]); } }); return P; }, // 4だん＝4つの ばしょ（いえ・がっこう・こうえん・おでかけ）
   odekake() { const P = [], ROWS = [930, 770, 610, 450]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([170 + col * 115, y]); } }); return P; }, // まちの みちの ような 4だん（したの 2だんは あるき、うえの 2だんは じてんしゃ）
 };
 const SL_ORDER = {}, SL_PTS = {}, SL_ORDER0 = {};

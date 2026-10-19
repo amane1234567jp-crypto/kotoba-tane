@@ -90,5 +90,13 @@ for k in [p[0] for p in json.loads((G / "sit/pony_odekake.json").read_text())] +
     if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
     else: missing.append(k)
 (OUT / "odekake.json").write_text(json.dumps(pack, separators=(",", ":"))); print("odekake", len(pack), round((OUT / "odekake.json").stat().st_size / 1e6, 2), "MB")
+# きもちの だいぼうけん（ロングコース）：ぽにー（sit/pony_kimochi.json）・きく人／こん（aivis/jobs/kc1）・BGM
+pack = {}
+for k in [p[0] for p in json.loads((G / "sit/pony_kimochi.json").read_text())] + [l["key"] for l in json.loads((R / "tools/aivis/jobs/kc1/lines.json").read_text())] + ["bgm_kimochi"]:
+    p = A / f"{k}.mp3"
+    if not p.exists(): p = G / "board/audio" / f"{k}.mp3"
+    if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
+    else: missing.append(k)
+(OUT / "kimochi.json").write_text(json.dumps(pack, separators=(",", ":"))); print("kimochi", len(pack), round((OUT / "kimochi.json").stat().st_size / 1e6, 2), "MB")
 print("missing", len(missing), missing[:20])
 if missing and "--strict" in sys.argv: sys.exit(1)

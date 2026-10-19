@@ -1130,7 +1130,7 @@ function logText() {
     : x.type === "teach" ? `${d(x.t)} がおに教える ${x.id} ${x.ok ? "○" : "×"} 聞きとり: ${x.tries.join(" / ")}`
     : x.type === "doite" ? `${d(x.t)} どしん「どいてください」 ${x.ok ? "○" : "×"} 聞きとり: ${x.tries.join(" / ")}`
     : x.type === "goal" ? `${d(x.t)} ゴール ${x.winner === "child" ? "かち" : "まけ"}（${x.lap}しゅうめ、レベル${x.L}）`
-    : x.type === "start" ? `${d(x.t)} ── ${x.resume ? "つづきから" : "はじめから"}（${x.lap}しゅうめ、レベル${x.L}）`
+    : x.type === "start" ? (x.multi ? `${d(x.t)} ── ${x.stage}（${x.multi}にん）` : `${d(x.t)} ── ${x.resume ? "つづきから" : "はじめから"}（${x.lap}しゅうめ、レベル${x.L}）`)
     : x.type === "srerr" ? `${d(x.t)} ⚠ 音声認識が使えない（${x.error}）→ 判定ボタンに切りかえ`
     : `${d(x.t)} ${JSON.stringify(x)}`);
   return { sum, text: "ことばのたね あそんだきろく\n" + sum + "\n\n" + lines.join("\n") };

@@ -30,6 +30,11 @@ FEEL = {
  "hotto": ("ほっと した", "😌", ["ほっと", "ホッと", "安心", "あんしん"], "からだの ちからが ふっと ぬけて、らくに なるね", "ほっと したは、しんぱいが なくなった ときの きもちだよ"),
  "dokidoki": ("どきどき", "💓", ["どきどき", "ドキドキ", "緊張", "きんちょう"], "むねが どきどき して、てに あせが でるね", "どきどきは、はじめての ことの まえで、きんちょう する ときの きもちだよ"),
 }
+# インタビューで きもちが きこえた ときの あいづち
+ECHO = {"kuyashii": "くやしかったんだね", "kanashii": "かなしかったんだね", "gakkari": "がっかり したんだね", "samishii": "さみしかったんだね", "hazukashii": "はずかしかったんだね",
+        "mukamuka": "むかむか したんだね", "zurui": "ずるいって おもったんだね", "urayamashii": "うらやましかったんだね", "kowai": "こわかったんだね", "shinpai": "しんぱいだったんだね",
+        "komatta": "こまったんだね", "tsumaranai": "つまらなかったんだね", "iraira": "いらいら したんだね", "moyamoya": "もやもや したんだね", "ureshii": "うれしかったんだね",
+        "tanoshii": "たのしかったんだね", "wakuwaku": "わくわく したんだね", "bikkuri": "びっくり したんだね", "hotto": "ほっと したんだね", "dokidoki": "どきどき したんだね"}
 NEG = ["kuyashii", "kanashii", "gakkari", "samishii", "hazukashii", "mukamuka", "zurui", "urayamashii", "kowai", "shinpai", "komatta", "tsumaranai", "iraira", "moyamoya"]
 
 # 場面：(id, エリア, ばしょ, きく人 fam/sensei, ともだちが 出るか, ヒント絵文字, ヒント, きもち, ほかの カード×2, ほかに あって いる きもち, はなし（ぽにー）,
@@ -79,28 +84,28 @@ SC = [
  ("g_gomen", 2, "こうもん", "sensei", 0, "😶", "ごめんねが いえない", "moyamoya", ["kuyashii", "ureshii"], ["kanashii"], "ともだちと けんかして、ごめんねが いえないまま、かえる じかんに なったよ",
   ("ごめんねが いえなかったから", k(["ごめん", "いえなかった", "言えなかった", "けんか", "喧嘩"])), ("あした、ごめんねって いいたい", k(["ごめん", "あした", "明日"])), None),
  # ③ こうえん（くわしく いう）
- ("k_hikkoshi", 3, "ひろば", "fam", 1, "🎁", "おわかれの プレゼント", "ureshii", ["kowai", "tsumaranai"], ["samishii"], "ひっこす ともだちから、おわかれの プレゼントを もらったよ",
+ ("k_hikkoshi", 3, "ベンチ", "fam", 1, "🎁", "おわかれの プレゼント", "ureshii", ["kowai", "tsumaranai"], ["samishii"], "ひっこす ともだちから、おわかれの プレゼントを もらったよ",
   None, None, ("mix", "samishii", "うれしいけど、さみしい")),
  ("k_tachikogi", 3, "ブランコ", "fam", 0, "🛝", "はじめての たちこぎ", "tanoshii", ["kanashii", "tsumaranai"], ["ureshii"], "はじめて ブランコの たちこぎに ちょうせん したよ。さいごには じょうずに こげたよ",
   None, None, ("chg", "kowai", "はじめは こわかったけど、たのしく なった")),
  ("k_aisu", 3, "ベンチ", "fam", 0, "🍦", "アイスが おちた", "kanashii", ["ureshii", "wakuwaku"], ["gakkari"], "たべようと した アイスを、じめんに おとしちゃったよ",
   None, None, ("deg", "すごく かなしい")),
- ("k_ball", 3, "ひろば", "fam", 1, "⚽", "ボールを かして くれない", "iraira", ["ureshii", "bikkuri"], ["mukamuka", "zurui"], "ともだちが、ボールを ずっと ひとりで つかって いて、かして くれないよ",
+ ("k_ball", 3, "すべりだい", "fam", 1, "⚽", "ボールを かして くれない", "iraira", ["ureshii", "bikkuri"], ["mukamuka", "zurui"], "ともだちが、ボールを ずっと ひとりで つかって いて、かして くれないよ",
   None, None, ("req", "じゅんばんに かして ほしい", k(["かして", "貸して"], ["ほしい", "欲しい"]))),
  ("k_sunaba", 3, "すなば", "fam", 1, "🏰", "おしろが こわれた", "kanashii", ["wakuwaku", "tanoshii"], ["mukamuka", "gakkari"], "すなばで つくった おしろを、ともだちが ふんで こわしちゃったよ",
   None, None, ("req", "つぎは きを つけて ほしい", k(["きをつけ", "気をつけ", "気を付け", "きを つけ"], ["ほしい", "欲しい"]))),
- ("k_kenka", 3, "ひろば", "fam", 1, "🤝", "ごめんねって いわれた", "hotto", ["kowai", "tsumaranai"], ["ureshii"], "けんかした ともだちが、ごめんねって あやまって くれたよ",
+ ("k_kenka", 3, "いけ", "fam", 1, "🤝", "ごめんねって いわれた", "hotto", ["kowai", "tsumaranai"], ["ureshii"], "けんかした ともだちが、ごめんねって あやまって くれたよ",
   None, None, ("chg", "mukamuka", "はじめは むかむか したけど、ほっと した")),
  ("k_sakaagari", 3, "てつぼう", "fam", 0, "🙌", "みんなに ほめられた", "ureshii", ["kanashii", "kowai"], ["tanoshii"], "さかあがりが できて、みんなの まえで ほめられたよ",
   None, None, ("mix", "hazukashii", "うれしいけど、ちょっと はずかしい")),
- ("k_inu", 3, "ひろば", "fam", 0, "🐕", "おおきな いぬ", "kowai", ["tanoshii", "ureshii"], ["bikkuri", "dokidoki"], "こうえんで、おおきな いぬが ワンワン ほえて いるよ",
+ ("k_inu", 3, "いけ", "fam", 0, "🐕", "おおきな いぬ", "kowai", ["tanoshii", "ureshii"], ["bikkuri", "dokidoki"], "こうえんで、おおきな いぬが ワンワン ほえて いるよ",
   None, None, ("deg", "すごく こわい")),
  # ④ おでかけ（ひとの きもち）
  ("o_aisu", 4, "おかしや", "fam", 1, "🍦", "アイスを おとした", "kanashii", ["ureshii", "wakuwaku"], ["gakkari"], "ともだちが、かったばかりの アイスを おとしちゃったよ",
   None, None, ("say", "だいじょうぶ？", k(["だいじょうぶ", "大丈夫"]))),
- ("o_maigo", 4, "いりぐち", "fam", 1, "🔍", "おかあさんが いない", "shinpai", ["tanoshii", "ureshii"], ["kowai", "komatta"], "ともだちが、おみせで おかあさんと はぐれて、きょろきょろ して いるよ",
+ ("o_maigo", 4, "やおや", "fam", 1, "🔍", "おかあさんが いない", "shinpai", ["tanoshii", "ureshii"], ["kowai", "komatta"], "ともだちが、おみせで おかあさんと はぐれて、きょろきょろ して いるよ",
   None, None, ("say", "いっしょに おみせの ひとに いおう", k(["いっしょ", "一緒", "おみせ", "お店"]))),
- ("o_fuusen", 4, "ひろば", "fam", 1, "🎈", "ふうせんが とんだ", "gakkari", ["ureshii", "kowai"], ["kanashii"], "ともだちの ふうせんが、そらに とんで いっちゃったよ",
+ ("o_fuusen", 4, "パンや", "fam", 1, "🎈", "ふうせんが とんだ", "gakkari", ["ureshii", "kowai"], ["kanashii"], "ともだちの ふうせんが、そらに とんで いっちゃったよ",
   None, None, ("say", "ざんねんだったね", k(["ざんねん", "残念"]))),
  ("o_kuji", 4, "おかしや", "fam", 1, "🎫", "いっとうしょう！", "ureshii", ["kanashii", "kowai"], ["wakuwaku", "bikkuri"], "ともだちが、くじびきで いっとうしょうを あてたよ",
   None, None, ("say", "よかったね！ おめでとう", k(["よかった", "おめでとう"]))),
@@ -110,7 +115,7 @@ SC = [
   None, None, ("say", "もうすぐ くるよ。しりとり しよう", k(["もうすぐ", "しりとり", "くるよ", "来るよ"]))),
  ("o_hajimete", 4, "いりぐち", "fam", 1, "🎹", "はじめての ならいごと", "dokidoki", ["tsumaranai", "mukamuka"], ["shinpai", "kowai"], "ともだちが、はじめての ならいごとの まえで、もじもじ して いるよ",
   None, None, ("say", "だいじょうぶだよ。がんばってね", k(["だいじょうぶ", "大丈夫", "がんばって", "頑張って"]))),
- ("o_hitori", 4, "ひろば", "fam", 1, "🪑", "ひとりで すわって いる", "samishii", ["wakuwaku", "bikkuri"], ["tsumaranai", "kanashii"], "ともだちが、ひろばの ベンチで ひとりで ぽつんと すわって いるよ",
+ ("o_hitori", 4, "えき", "fam", 1, "🪑", "ひとりで すわって いる", "samishii", ["wakuwaku", "bikkuri"], ["tsumaranai", "kanashii"], "ともだちが、えきの ベンチで ひとりで ぽつんと すわって いるよ",
   None, None, ("say", "いっしょに あそぼう", k(["いっしょ", "一緒", "あそぼう", "遊ぼう"]))),
 ]
 # 🎭 きもち ぴったり：(id, 絵, はなし, こたえ, ほかの カード×2, わけの お手本, keys)
@@ -144,7 +149,7 @@ Y = {"なにか あったの？": "何かあったの？", "どんな きもち�
      "ころんで いたかったの。きいて くれて ありがとう": "転んで、痛かったの。聞いてくれて、ありがとう"}
 PONY = {
  "kp_intro": "どんな きもちかな？ きもちの ことばで いって みよう", "kp_tap": "カードを みても いいよ", "kp_ok": "ぴったりの ことばだね！", "kp_ok2": "そう！ よく わかったね",
- "kp_mix": "ふたつの きもちが いっしょに ある ことも あるよ。けど、で つないで いって みよう", "kp_chg": "きもちは かわる ことも あるね。はじめは、から いって みよう",
+ "kp_mix": "ふたつの きもちが いっしょに ある ことも あるよ。ふたつ つなげて いって みよう", "kp_chg": "きもちは かわる ことも あるね。はじめと いまの きもちを、つなげて いって みよう",
  "kp_deg": "きもちの おおきさも いえると、よく つたわるよ", "kp_req": "して ほしい ことを ことばで いうと、あいてに つたわるよ",
  "kp_other": "ともだちの きもちを かんがえて みよう", "kp_say_ok": "やさしい ことばだね！ ともだちも げんきに なったよ", "kp_end": "きもちを ことばで いえたね！",
  "kp_pitta": "きもち ぴったり！ この とき、どの きもちが いちばん ぴったりかな？", "kp_pitta_why": "どうして その きもちに なるのかな？",
@@ -165,9 +170,9 @@ if __name__ == "__main__":
     pony, aiv = [], []
     feel = {f: {"w": v[0], "e": v[1], "keys": v[2]} for f, v in FEEL.items()}
     for f, v in FEEL.items():
-        pony += [[f"kp_w_{f}", v[0]], [f"kp_body_{f}", v[3]], [f"kp_def_{f}", v[4]], [f"kp_echo_{f}", f"{v[0]}{'だったんだね' if f != 'hotto' else 'んだね'}"],
-                 [f"kp_pt_{f}", f"この ときは、{v[0]}が ぴったりだよ"]]
-        if f != "kuyashii": pony.append([f"kp_ii_{f}", f"くやしい、も にて いるね。でも、この ときは、{v[0]}が ぴったりだよ"])
+        pony += [[f"kp_w_{f}", v[0]], [f"kp_body_{f}", v[3]], [f"kp_def_{f}", v[4]], [f"kp_echo_{f}", ECHO[f]],
+                 [f"kp_pt_{f}", f"この ときは、{v[0]}って いうと、ぴったりだよ"]]
+        if f != "kuyashii": pony.append([f"kp_ii_{f}", f"くやしいも、にて いるね。でも、この ときは、{v[0]}って いうと、ぴったりだよ"])
     data = []
     for (sid, area, place, ask, ex, emo, hint, F, opts, also, n, why, want, sp) in SC:
         assert F in FEEL and all(o in FEEL for o in opts + also), sid
