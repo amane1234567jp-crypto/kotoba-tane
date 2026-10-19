@@ -102,7 +102,7 @@ if __name__ == "__main__":
             A(f"sks_{sid}{sfx}", w, say); A(f"skr_{sid}{sfx}", w, res)
         A(f"skg_{sid}", "gao", gao)
     pony += [[k_, t] for k_, t in PONY.items()]
-    (G / "board/sakiyomi_data.js").write_text("/* 「さきよみ」コースの データ（sit/sakiyomi_gen.py が かく） */\nconst SK = " + json.dumps(data, ensure_ascii=False) + ";\n")
+    (G / "board/sakiyomi_data.js").write_text("/* 「さきよみ」コースの データ（sit/sakiyomi_gen.py が かく） */\nconst SK = " + json.dumps(data, ensure_ascii=False) + ";\nvar S11_TXT = Object.assign(window.S11_TXT || {}, " + json.dumps(dict((p[0], p[1]) for p in pony), ensure_ascii=False) + ");\n")
     PJ = G / "sit/pony_sakiyomi.json"; old = {j[0]: j for j in json.loads(PJ.read_text())} if PJ.exists() else {}
     PJ.write_text(json.dumps([[k_, t, {}, old[k_][3] if k_ in old and old[k_][1] == t else None] for k_, t in pony], ensure_ascii=False, indent=0))
     J = R / "tools/aivis/jobs/sk1"; J.mkdir(parents=True, exist_ok=True)

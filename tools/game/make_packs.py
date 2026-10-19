@@ -110,5 +110,14 @@ for k in [p[0] for p in json.loads((G / "sit/pony_kimochi.json").read_text())] +
     if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
     else: missing.append(k)
 (OUT / "kimochi.json").write_text(json.dumps(pack, separators=(",", ":"))); print("kimochi", len(pack), round((OUT / "kimochi.json").stat().st_size / 1e6, 2), "MB")
+# そうぞう たんてい・じぶんの たちば・さきよみ（ショート、2026-10-19）：ぽにー（sit/pony_<st>.json）・あいて／がお（aivis/jobs/<job>）・BGM
+for st, job in [("souzou", "sz1"), ("tachiba", "tb1"), ("sakiyomi", "sk1")]:
+    if not (G / f"sit/pony_{st}.json").exists(): continue
+    pack = {}
+    for k in [p[0] for p in json.loads((G / f"sit/pony_{st}.json").read_text())] + [l["key"] for l in json.loads((R / f"tools/aivis/jobs/{job}/lines.json").read_text())] + [f"bgm_{st}"]:
+        p = A / f"{k}.mp3"
+        if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
+        else: missing.append(k)
+    (OUT / f"{st}.json").write_text(json.dumps(pack, separators=(",", ":"))); print(st, len(pack), round((OUT / f"{st}.json").stat().st_size / 1e6, 2), "MB")
 print("missing", len(missing), missing[:20])
 if missing and "--strict" in sys.argv: sys.exit(1)
