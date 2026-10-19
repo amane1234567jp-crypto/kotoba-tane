@@ -1,0 +1,267 @@
+[
+{
+"key": "cmr_omocha",
+"who": "chu",
+"text": "いいよ。そっと さわってね"
+},
+{
+"key": "cmg_omocha",
+"who": "gao",
+"text": "わーい、さわっちゃえ！"
+},
+{
+"key": "cmr_ball",
+"who": "mama",
+"text": "とまれて えらいわ。いっしょに とりに いこうね"
+},
+{
+"key": "cmr_ball_pyonmama",
+"who": "pyonmama",
+"text": "とまれて えらいわ。いっしょに とりに いこうね"
+},
+{
+"key": "cmr_ball_gaomama",
+"who": "gaomama",
+"text": "とまれて えらいわ。いっしょに とりに いこうね"
+},
+{
+"key": "cmr_ball_miimama",
+"who": "miimama",
+"text": "とまれて えらいわ。いっしょに とりに いこうね"
+},
+{
+"key": "cmr_ball_chumama",
+"who": "chumama",
+"text": "とまれて えらいわ。いっしょに とりに いこうね"
+},
+{
+"key": "cmg_ball",
+"who": "gao",
+"text": "ボール まてー！ ダッシュ！"
+},
+{
+"key": "cmr_button",
+"who": "mama",
+"text": "それは こまった ときの ボタンよ。きいて くれて よかった"
+},
+{
+"key": "cmr_button_pyonmama",
+"who": "pyonmama",
+"text": "それは こまった ときの ボタンよ。きいて くれて よかった"
+},
+{
+"key": "cmr_button_gaomama",
+"who": "gaomama",
+"text": "それは こまった ときの ボタンよ。きいて くれて よかった"
+},
+{
+"key": "cmr_button_miimama",
+"who": "miimama",
+"text": "それは こまった ときの ボタンよ。きいて くれて よかった"
+},
+{
+"key": "cmr_button_chumama",
+"who": "chumama",
+"text": "それは こまった ときの ボタンよ。きいて くれて よかった"
+},
+{
+"key": "cmg_button",
+"who": "gao",
+"text": "ポチッと おしちゃえ！"
+},
+{
+"key": "cmr_kotae",
+"who": "nobbo",
+"text": "はい、どうぞ。てを あげて えらいですね"
+},
+{
+"key": "cmg_kotae",
+"who": "gao",
+"text": "こたえは、3！ おれが いちばん！"
+},
+{
+"key": "cmr_cake",
+"who": "mama",
+"text": "おやつの じかんに たべようね。きいて くれて ありがとう"
+},
+{
+"key": "cmr_cake_pyonmama",
+"who": "pyonmama",
+"text": "おやつの じかんに たべようね。きいて くれて ありがとう"
+},
+{
+"key": "cmr_cake_gaomama",
+"who": "gaomama",
+"text": "おやつの じかんに たべようね。きいて くれて ありがとう"
+},
+{
+"key": "cmr_cake_miimama",
+"who": "miimama",
+"text": "おやつの じかんに たべようね。きいて くれて ありがとう"
+},
+{
+"key": "cmr_cake_chumama",
+"who": "chumama",
+"text": "おやつの じかんに たべようね。きいて くれて ありがとう"
+},
+{
+"key": "cmg_cake",
+"who": "gao",
+"text": "いただき！ ぱくっ！"
+},
+{
+"key": "cmr_inu",
+"who": "meebaa",
+"text": "きいて くれて ありがとう。そっと なでてね"
+},
+{
+"key": "cmg_inu",
+"who": "gao",
+"text": "わんわん！ だっこー！"
+},
+{
+"key": "cmr_nimotsu",
+"who": "mama",
+"text": "それは パパの にもつよ。きいて くれて ありがとう"
+},
+{
+"key": "cmr_nimotsu_pyonmama",
+"who": "pyonmama",
+"text": "それは パパの にもつよ。きいて くれて ありがとう"
+},
+{
+"key": "cmr_nimotsu_gaomama",
+"who": "gaomama",
+"text": "それは パパの にもつよ。きいて くれて ありがとう"
+},
+{
+"key": "cmr_nimotsu_miimama",
+"who": "miimama",
+"text": "それは パパの にもつよ。きいて くれて ありがとう"
+},
+{
+"key": "cmr_nimotsu_chumama",
+"who": "chumama",
+"text": "それは パパの にもつよ。きいて くれて ありがとう"
+},
+{
+"key": "cmg_nimotsu",
+"who": "gao",
+"text": "びりびりー！ あけちゃえ！"
+},
+{
+"key": "cmr_takai",
+"who": "mama",
+"text": "たかすぎるわ。かいだんで おりようね"
+},
+{
+"key": "cmr_takai_pyonmama",
+"who": "pyonmama",
+"text": "たかすぎるわ。かいだんで おりようね"
+},
+{
+"key": "cmr_takai_gaomama",
+"who": "gaomama",
+"text": "たかすぎるわ。かいだんで おりようね"
+},
+{
+"key": "cmr_takai_miimama",
+"who": "miimama",
+"text": "たかすぎるわ。かいだんで おりようね"
+},
+{
+"key": "cmr_takai_chumama",
+"who": "chumama",
+"text": "たかすぎるわ。かいだんで おりようね"
+},
+{
+"key": "cmg_takai",
+"who": "gao",
+"text": "とおっ！ ジャンプ！"
+},
+{
+"key": "cmr_game",
+"who": "mii",
+"text": "いいよ！ いっしょに やろう"
+},
+{
+"key": "cmg_game",
+"who": "gao",
+"text": "ゲーム はっけん！ スイッチ オン！"
+},
+{
+"key": "cmr_otoshimono",
+"who": "mama",
+"text": "こうばんに とどけようね。おしえて くれて ありがとう"
+},
+{
+"key": "cmr_otoshimono_pyonmama",
+"who": "pyonmama",
+"text": "こうばんに とどけようね。おしえて くれて ありがとう"
+},
+{
+"key": "cmr_otoshimono_gaomama",
+"who": "gaomama",
+"text": "こうばんに とどけようね。おしえて くれて ありがとう"
+},
+{
+"key": "cmr_otoshimono_miimama",
+"who": "miimama",
+"text": "こうばんに とどけようね。おしえて くれて ありがとう"
+},
+{
+"key": "cmr_otoshimono_chumama",
+"who": "chumama",
+"text": "こうばんに とどけようね。おしえて くれて ありがとう"
+},
+{
+"key": "cmg_otoshimono",
+"who": "gao",
+"text": "おかね はいってるかな？ あけちゃえ！"
+},
+{
+"key": "cmr_fry",
+"who": "mama",
+"text": "あついから さわらないでね。きいて くれて よかった"
+},
+{
+"key": "cmr_fry_pyonmama",
+"who": "pyonmama",
+"text": "あついから さわらないでね。きいて くれて よかった"
+},
+{
+"key": "cmr_fry_gaomama",
+"who": "gaomama",
+"text": "あついから さわらないでね。きいて くれて よかった"
+},
+{
+"key": "cmr_fry_miimama",
+"who": "miimama",
+"text": "あついから さわらないでね。きいて くれて よかった"
+},
+{
+"key": "cmr_fry_chumama",
+"who": "chumama",
+"text": "あついから さわらないでね。きいて くれて よかった"
+},
+{
+"key": "cmg_fry",
+"who": "gao",
+"text": "おいしそう！ つまみぐい！"
+},
+{
+"key": "cmr_doa",
+"who": "nobbo",
+"text": "そこは はいれません。きいて くれて ありがとう"
+},
+{
+"key": "cmg_doa",
+"who": "gao",
+"text": "たんけんだー！ ガラガラー！"
+},
+{
+"key": "rs_chotto",
+"who": "tora",
+"text": "あっ、ほんとだ。とまって よかった。ありがとう"
+}
+]
