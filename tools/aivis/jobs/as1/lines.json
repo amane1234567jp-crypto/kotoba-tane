@@ -1,0 +1,257 @@
+[
+{
+"key": "ass_omocha",
+"who": "chu",
+"text": "わあ、ありがとう！"
+},
+{
+"key": "asr_omocha",
+"who": "chu",
+"text": "うん！ あそぼう"
+},
+{
+"key": "ass_doa",
+"who": "meebaa",
+"text": "まあ、ありがとうね"
+},
+{
+"key": "asr_doa",
+"who": "meebaa",
+"text": "やさしい こだねえ"
+},
+{
+"key": "ass_hanashi",
+"who": "mii",
+"text": "それでね、それでね！"
+},
+{
+"key": "asr_hanashi",
+"who": "mii",
+"text": "えっとね、ねこが にゃあって ないたの！"
+},
+{
+"key": "ass_tetsudai",
+"who": "mama",
+"text": "たすかったわ。ありがとう"
+},
+{
+"key": "asr_tetsudai",
+"who": "mama",
+"text": "うれしいわ。また おねがいね"
+},
+{
+"key": "ass_tetsudai_pyonmama",
+"who": "pyonmama",
+"text": "たすかったわ。ありがとう"
+},
+{
+"key": "asr_tetsudai_pyonmama",
+"who": "pyonmama",
+"text": "うれしいわ。また おねがいね"
+},
+{
+"key": "ass_tetsudai_gaomama",
+"who": "gaomama",
+"text": "たすかったわ。ありがとう"
+},
+{
+"key": "asr_tetsudai_gaomama",
+"who": "gaomama",
+"text": "うれしいわ。また おねがいね"
+},
+{
+"key": "ass_tetsudai_miimama",
+"who": "miimama",
+"text": "たすかったわ。ありがとう"
+},
+{
+"key": "asr_tetsudai_miimama",
+"who": "miimama",
+"text": "うれしいわ。また おねがいね"
+},
+{
+"key": "ass_tetsudai_chumama",
+"who": "chumama",
+"text": "たすかったわ。ありがとう"
+},
+{
+"key": "asr_tetsudai_chumama",
+"who": "chumama",
+"text": "うれしいわ。また おねがいね"
+},
+{
+"key": "ass_sasou",
+"who": "kuma",
+"text": "やったー！ いく いく！"
+},
+{
+"key": "asr_sasou",
+"who": "kuma",
+"text": "うん！ たのしみ！"
+},
+{
+"key": "ass_korobu",
+"who": "piyoko",
+"text": "……うん。もう へいき"
+},
+{
+"key": "asr_korobu",
+"who": "piyoko",
+"text": "うん。ありがとう"
+},
+{
+"key": "ass_yuzuru",
+"who": "pyon",
+"text": "ありがとう！ ハイタッチ！"
+},
+{
+"key": "asr_yuzuru",
+"who": "pyon",
+"text": "うん！ 10かい こいだら かわるね"
+},
+{
+"key": "ass_haizen",
+"who": "nobbo",
+"text": "よく がんばりましたね"
+},
+{
+"key": "asr_haizen",
+"who": "nobbo",
+"text": "たのしみに して いますよ"
+},
+{
+"key": "ass_jibun",
+"who": "chu",
+"text": "ふわぁ……"
+},
+{
+"key": "asr_jibun",
+"who": "chu",
+"text": "ぼくは きょうりゅうが すき！"
+},
+{
+"key": "asg_jibun",
+"who": "gao",
+"text": "でね、でんしゃがね、でね、でね！"
+},
+{
+"key": "ass_chikai",
+"who": "mii",
+"text": "ちょっと ちかいよ……"
+},
+{
+"key": "asr_chikai",
+"who": "mii",
+"text": "ありがとう。これで はなしやすいよ"
+},
+{
+"key": "asg_chikai",
+"who": "gao",
+"text": "ねえねえ、きいて きいて！"
+},
+{
+"key": "ass_karakau",
+"who": "kuma",
+"text": "……むっ"
+},
+{
+"key": "asr_karakau",
+"who": "kuma",
+"text": "……うん。いいよ"
+},
+{
+"key": "asg_karakau",
+"who": "gao",
+"text": "あはは！ へんな えー！"
+},
+{
+"key": "ass_koe",
+"who": "mama",
+"text": "ちょっと、みみが いたいわ……"
+},
+{
+"key": "asr_koe",
+"who": "mama",
+"text": "ありがとう。ちょうど いいわ"
+},
+{
+"key": "ass_koe_pyonmama",
+"who": "pyonmama",
+"text": "ちょっと、みみが いたいわ……"
+},
+{
+"key": "asr_koe_pyonmama",
+"who": "pyonmama",
+"text": "ありがとう。ちょうど いいわ"
+},
+{
+"key": "ass_koe_gaomama",
+"who": "gaomama",
+"text": "ちょっと、みみが いたいわ……"
+},
+{
+"key": "asr_koe_gaomama",
+"who": "gaomama",
+"text": "ありがとう。ちょうど いいわ"
+},
+{
+"key": "ass_koe_miimama",
+"who": "miimama",
+"text": "ちょっと、みみが いたいわ……"
+},
+{
+"key": "asr_koe_miimama",
+"who": "miimama",
+"text": "ありがとう。ちょうど いいわ"
+},
+{
+"key": "ass_koe_chumama",
+"who": "chumama",
+"text": "ちょっと、みみが いたいわ……"
+},
+{
+"key": "asr_koe_chumama",
+"who": "chumama",
+"text": "ありがとう。ちょうど いいわ"
+},
+{
+"key": "asg_koe",
+"who": "gao",
+"text": "ねえねえ！ きょうね！ すごいんだよー！"
+},
+{
+"key": "ass_toru",
+"who": "pyon",
+"text": "あっ、それ つかってたのに"
+},
+{
+"key": "asr_toru",
+"who": "pyon",
+"text": "いいよ。つかいおわったら かえしてね"
+},
+{
+"key": "asg_toru",
+"who": "gao",
+"text": "この あか、もーらいっ！"
+},
+{
+"key": "ass_rule",
+"who": "kon",
+"text": "はあ……"
+},
+{
+"key": "asr_rule",
+"who": "kon",
+"text": "うん！ やろう！"
+},
+{
+"key": "asg_rule",
+"who": "gao",
+"text": "おれが さき！ えいっ、ころころー！"
+},
+{
+"key": "rs_aite",
+"who": "kamejii",
+"text": "おお、ありがとう。やさしいのう"
+}
+]
