@@ -3,7 +3,8 @@
    約65マスの ぐねぐね道。サイコロ 1〜6。マスは「ことばの 課題」「おもしろ課題（こえなし）」「しかけ」が だいたい 3:3:4。
    ことばの 課題は だいぼうけん・ともだちの だいぼうけんの ものを つかう（声も その パックから）。
    あたらしい 声は ぽにーだけ（sl_*・n0・n7〜n12。packs/slong.json）。 */
-const SL = ["sumi", "sokashi", "suchu", "eki", "odekake", "kimochi"];
+const SL = ["sumi", "sokashi", "suchu", "eki", "odekake", "kimochi", "makete", "dekigoto"];
+const SL_HIDE = new Set(["makete", "dekigoto"]); /* 声が そろうまで メニューに ださない */
 const isSL = () => SL.includes(curStage);
 SL.forEach(id => LONGS.add(id));
 const SL_TH = {
@@ -27,6 +28,13 @@ const SL_TH = {
   kimochi: { name: "きもちの だいぼうけん", icon: "💗", areas: ["いえ", "がっこう", "こうえん", "おでかけ"], fills: ["#FFE9D6", "#E3F0FF", "#DDF2D0", "#FFE0EE"], ground: "#FFF4F7",
     blk: { who: "kon", intro: ["p_blk_kimochi", "こんくんが、みちで ないて いるよ。どうしたのって きいて あげよう"], say: ["blk_kimochi", "どうしたの？"], to: "こんくんに きこう", keys: [["どうしたの", "どうした", "どうしたん"]], res: ["rs_kimochi", "ころんで いたかったの。きいて くれて ありがとう"] },
     item: "ハート", obs: "あめ", call: "ともだち", deco: [] },
+  // まけても だいじょうぶ・きょうの できごと（2026-10-19、makete.js）
+  makete: { name: "まけても だいじょうぶ", icon: "💪", areas: ["いえ", "がっこう", "こうえん", "おまつり"], fills: ["#FFE9D6", "#E3F0FF", "#DDF2D0", "#FFE0C2"], ground: "#FFF6EC",
+    blk: { who: "pyon", intro: ["p_blk_makete", "ぴょんちゃんが、かけっこで まけて ないて いるよ。こえを かけよう"], say: ["blk_makete", "まけても だいじょうぶだよ"], to: "ぴょんちゃんに いおう", keys: [["だいじょうぶ", "大丈夫"]], res: ["rs_makete", "……うん。ありがとう。つぎ がんばる！"] },
+    item: "メダル", obs: "あめ", call: "ともだち", deco: [] },
+  dekigoto: { name: "きょうの できごと", icon: "📖", areas: ["がっこう", "こうえん", "いえ", "おでかけ"], fills: ["#E3F0FF", "#DDF2D0", "#FFE9D6", "#FFE0EE"], ground: "#F2F7FF",
+    blk: { who: "chu", intro: ["p_blk_dekigoto", "ちゅうくんが、きょうの ことを はなしたそうに して いるよ。きいて あげよう"], say: ["blk_dekigoto", "きょう、なにが あったの？"], to: "ちゅうくんに きこう", keys: [["なにが", "何が", "あったの", "どうしたの"]], res: ["rs_dekigoto", "きいて！ さかあがりが できたんだ！"] },
+    item: "ほん", obs: "あめ", call: "ともだち", deco: [] },
 };
 // しかけの せりふ（テーマごと）
 const SL_EVT = {
@@ -63,6 +71,7 @@ const SL_EVT = {
     nebou: "ベンチで ねちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "サイクリングの なかまが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを むかえに いくよ",
     atsumare: "こうえんで ひとやすみ！ みんな ここに あつまれ！", kumikae: "みちが こうじちゅう！ コースが くみかわるよ" },
   kimochi: {}, /* しかけは kimochi.js で きめる */
+  makete: {}, dekigoto: {},
 };
 const SL_ICON = { dice2: "🎲", warp: "🌀", bigwarp: "🚀", fake: "🤪", rand: "❓", rest: "💤", x2: "✖️", zero: "0️⃣", home: "↩", back10: "⏪", bonus: "🎁", allf: "⏩", allb: "🌊", janken: "✊", again: "🔁", nebou: "😴", trolley: "🚃", call: "🧲", tsukkomi: "🤣", atsumare: "📣", kumikae: "🔀" };
 const SL_EVC = { warp: "#D9C2F0", bigwarp: "#D9C2F0", rand: "#D9C2F0", home: "#FFC2D1", back10: "#FFC2D1", fake: "#FFE27A", tsukkomi: "#FFE27A", bonus: "#C9EBB5", atsumare: "#FFE27A", kumikae: "#FFE27A" };
@@ -85,6 +94,7 @@ const SL_SHAPE = { // 47マス＋ゴール（まえは 65＋1。ながすぎた�
     for (let k = 0; k < 48; k++) { let d = tot * k / 47, i = 0; while (i < seg.length - 1 && d > seg[i]) { d -= seg[i]; i++; } const t = Math.min(1, d / seg[i]); P.push([V[i][0] + (V[i + 1][0] - V[i][0]) * t, V[i][1] + (V[i + 1][1] - V[i][1]) * t]); }
     return P; },
   kimochi() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + Math.sin(col * .8 + r * 1.3) * 22]); } }); return P; }, // 4だん＝4つの ばしょ（いえ・がっこう・こうえん・おでかけ）
+  makete() { return SL_SHAPE.kimochi(); }, dekigoto() { return SL_SHAPE.kimochi(); },
   odekake() { const P = [], ROWS = [930, 770, 610, 450]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([170 + col * 115, y]); } }); return P; }, // まちの みちの ような 4だん（したの 2だんは あるき、うえの 2だんは じてんしゃ）
 };
 const SL_ORDER = {}, SL_PTS = {}, SL_ORDER0 = {};
@@ -450,7 +460,7 @@ Object.assign(LTASK_RUN, { stop: slStop, catch: slCatch, balloon: slBalloon, mor
 /* ---------- メニュー：みんなで あそぶ に 3つ ---------- */
 { const smm = showMultiMenu; showMultiMenu = function () {
     smm(); const st = document.querySelector(".mstages"); if (!st) return; let after = st.querySelector(".mtomo") || st.querySelector(".mlong");
-    SL.forEach(sid => { const T = SL_TH[sid]; const b = document.createElement("button"); b.type = "button"; b.className = "mst mlong mslong";
+    SL.filter(sid => !SL_HIDE.has(sid)).forEach(sid => { const T = SL_TH[sid]; const b = document.createElement("button"); b.type = "button"; b.className = "mst mlong mslong";
       b.innerHTML = `<span class="mno">★★</span><span class="mico">${T.icon}</span><span class="mname">${T.name.replace(" の ", "の<br>").replace("の だいぼうけん", "の<br>だいぼうけん").replace("おでかけ だいぼうけん", "おでかけ<br>だいぼうけん")}</span><span class="mstat">ちょうロング</span>`;
       b.onclick = () => { const on = document.querySelector(".mnum.on"); if (!on) return; const n = parseInt(on.textContent, 10); boot(); document.getElementById("startBox").remove(); newGame({ stage: sid, multi: n }); };
       if (after) { after.after(b); after = b; } else st.prepend(b); }); }; }

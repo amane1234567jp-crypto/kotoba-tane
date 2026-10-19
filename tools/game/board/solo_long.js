@@ -3,7 +3,7 @@
    ライバルは サイコロを じぶんで ふり、マスの 課題は みじかく「できた／ざんねん」で おわる（こどもの 時間を とらない）。
    レベルは ひとりで あそぶ ときの レベルを つかい、おわったら もどす。 */
 let SOLO_LONG_ON = null;
-const SOLO_LONGS = () => ["long", "ltomo", ...SL];
+const SOLO_LONGS = () => ["long", "ltomo", ...SL.filter(sid => !SL_HIDE.has(sid))];
 function soloRival() {
   const bad = new Set([SLEEPER, (BLOCK_DEF[curStage] || {}).who, "shima"]);
   const pool = MULTI_KINDS.filter(k => !bad.has(k)); return pool[rnd(pool.length)] || "pyon";
