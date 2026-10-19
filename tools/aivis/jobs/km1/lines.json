@@ -1,0 +1,357 @@
+[
+{
+"key": "kmg_kutsu",
+"who": "gao",
+"text": "もう いいや。はだしで いっちゃえ！"
+},
+{
+"key": "kmg_kobosu",
+"who": "gao",
+"text": "しらんぷり しちゃえ！"
+},
+{
+"key": "kmg_game",
+"who": "gao",
+"text": "まだ やる！ ぜったい やめない！"
+},
+{
+"key": "kmg_purint",
+"who": "gao",
+"text": "なくしたって いわなきゃ、ばれないよ！"
+},
+{
+"key": "kmg_keshigomu",
+"who": "gao",
+"text": "となりの けしごむ、だまって つかっちゃえ！"
+},
+{
+"key": "kmg_wakaranai",
+"who": "gao",
+"text": "わかんないけど、てきとうに やっちゃえ！"
+},
+{
+"key": "kmg_toire",
+"who": "gao",
+"text": "だまって でて いっちゃえ！"
+},
+{
+"key": "kmg_nigate",
+"who": "gao",
+"text": "ピーマン、となりの おさらに いれちゃえ！"
+},
+{
+"key": "kmg_buranko",
+"who": "gao",
+"text": "ひっぱって、おろしちゃえ！"
+},
+{
+"key": "kmg_kasa",
+"who": "gao",
+"text": "ぬれても へいき！ はしって かえっちゃえ！"
+},
+{
+"key": "kmg_suitou",
+"who": "gao",
+"text": "いけの みず、のんじゃえ！"
+},
+{
+"key": "kmg_kega",
+"who": "gao",
+"text": "こんなの へいき！ ほうって おけば いいよ！"
+},
+{
+"key": "kmg_maigo",
+"who": "gao",
+"text": "ひとりで、おみせの そとまで さがしに いっちゃえ！"
+},
+{
+"key": "kmg_toriai",
+"who": "gao",
+"text": "ひっぱって、とっちゃえ！"
+},
+{
+"key": "kmg_naiteru",
+"who": "gao",
+"text": "ないてる なんて、へんなの！ ほうって おこう！"
+},
+{
+"key": "kmq_open_mama",
+"who": "mama",
+"text": "どうしたの？ こまった かおを して いるね"
+},
+{
+"key": "kmq_q1_mama",
+"who": "mama",
+"text": "なにが こまって いるの？"
+},
+{
+"key": "kmq_q2_mama",
+"who": "mama",
+"text": "どうして、そう なったのかな？"
+},
+{
+"key": "kmq_q3_mama",
+"who": "mama",
+"text": "どんな やりかたが あるかな？"
+},
+{
+"key": "kmq_q4_mama",
+"who": "mama",
+"text": "どれに する？ どうして？"
+},
+{
+"key": "kmq_q5_mama",
+"who": "mama",
+"text": "つぎからは、どう する？"
+},
+{
+"key": "kmq_res_mama",
+"who": "mama",
+"text": "じぶんで かんがえられたね。すごいよ"
+},
+{
+"key": "kmq_open_pyonmama",
+"who": "pyonmama",
+"text": "どうしたの？ こまった かおを して いるね"
+},
+{
+"key": "kmq_q1_pyonmama",
+"who": "pyonmama",
+"text": "なにが こまって いるの？"
+},
+{
+"key": "kmq_q2_pyonmama",
+"who": "pyonmama",
+"text": "どうして、そう なったのかな？"
+},
+{
+"key": "kmq_q3_pyonmama",
+"who": "pyonmama",
+"text": "どんな やりかたが あるかな？"
+},
+{
+"key": "kmq_q4_pyonmama",
+"who": "pyonmama",
+"text": "どれに する？ どうして？"
+},
+{
+"key": "kmq_q5_pyonmama",
+"who": "pyonmama",
+"text": "つぎからは、どう する？"
+},
+{
+"key": "kmq_res_pyonmama",
+"who": "pyonmama",
+"text": "じぶんで かんがえられたね。すごいよ"
+},
+{
+"key": "kmq_open_gaomama",
+"who": "gaomama",
+"text": "どうしたの？ こまった かおを して いるね"
+},
+{
+"key": "kmq_q1_gaomama",
+"who": "gaomama",
+"text": "なにが こまって いるの？"
+},
+{
+"key": "kmq_q2_gaomama",
+"who": "gaomama",
+"text": "どうして、そう なったのかな？"
+},
+{
+"key": "kmq_q3_gaomama",
+"who": "gaomama",
+"text": "どんな やりかたが あるかな？"
+},
+{
+"key": "kmq_q4_gaomama",
+"who": "gaomama",
+"text": "どれに する？ どうして？"
+},
+{
+"key": "kmq_q5_gaomama",
+"who": "gaomama",
+"text": "つぎからは、どう する？"
+},
+{
+"key": "kmq_res_gaomama",
+"who": "gaomama",
+"text": "じぶんで かんがえられたね。すごいよ"
+},
+{
+"key": "kmq_open_miimama",
+"who": "miimama",
+"text": "どうしたの？ こまった かおを して いるね"
+},
+{
+"key": "kmq_q1_miimama",
+"who": "miimama",
+"text": "なにが こまって いるの？"
+},
+{
+"key": "kmq_q2_miimama",
+"who": "miimama",
+"text": "どうして、そう なったのかな？"
+},
+{
+"key": "kmq_q3_miimama",
+"who": "miimama",
+"text": "どんな やりかたが あるかな？"
+},
+{
+"key": "kmq_q4_miimama",
+"who": "miimama",
+"text": "どれに する？ どうして？"
+},
+{
+"key": "kmq_q5_miimama",
+"who": "miimama",
+"text": "つぎからは、どう する？"
+},
+{
+"key": "kmq_res_miimama",
+"who": "miimama",
+"text": "じぶんで かんがえられたね。すごいよ"
+},
+{
+"key": "kmq_open_chumama",
+"who": "chumama",
+"text": "どうしたの？ こまった かおを して いるね"
+},
+{
+"key": "kmq_q1_chumama",
+"who": "chumama",
+"text": "なにが こまって いるの？"
+},
+{
+"key": "kmq_q2_chumama",
+"who": "chumama",
+"text": "どうして、そう なったのかな？"
+},
+{
+"key": "kmq_q3_chumama",
+"who": "chumama",
+"text": "どんな やりかたが あるかな？"
+},
+{
+"key": "kmq_q4_chumama",
+"who": "chumama",
+"text": "どれに する？ どうして？"
+},
+{
+"key": "kmq_q5_chumama",
+"who": "chumama",
+"text": "つぎからは、どう する？"
+},
+{
+"key": "kmq_res_chumama",
+"who": "chumama",
+"text": "じぶんで かんがえられたね。すごいよ"
+},
+{
+"key": "kmq_open_doshinpapa",
+"who": "doshinpapa",
+"text": "どうしたの？ こまった かおを して いるね"
+},
+{
+"key": "kmq_q1_doshinpapa",
+"who": "doshinpapa",
+"text": "なにが こまって いるの？"
+},
+{
+"key": "kmq_q2_doshinpapa",
+"who": "doshinpapa",
+"text": "どうして、そう なったのかな？"
+},
+{
+"key": "kmq_q3_doshinpapa",
+"who": "doshinpapa",
+"text": "どんな やりかたが あるかな？"
+},
+{
+"key": "kmq_q4_doshinpapa",
+"who": "doshinpapa",
+"text": "どれに する？ どうして？"
+},
+{
+"key": "kmq_q5_doshinpapa",
+"who": "doshinpapa",
+"text": "つぎからは、どう する？"
+},
+{
+"key": "kmq_res_doshinpapa",
+"who": "doshinpapa",
+"text": "じぶんで かんがえられたね。すごいよ"
+},
+{
+"key": "kmq_open_meebaa",
+"who": "meebaa",
+"text": "どうしたの？ こまった かおを して いるね"
+},
+{
+"key": "kmq_q1_meebaa",
+"who": "meebaa",
+"text": "なにが こまって いるの？"
+},
+{
+"key": "kmq_q2_meebaa",
+"who": "meebaa",
+"text": "どうして、そう なったのかな？"
+},
+{
+"key": "kmq_q3_meebaa",
+"who": "meebaa",
+"text": "どんな やりかたが あるかな？"
+},
+{
+"key": "kmq_q4_meebaa",
+"who": "meebaa",
+"text": "どれに する？ どうして？"
+},
+{
+"key": "kmq_q5_meebaa",
+"who": "meebaa",
+"text": "つぎからは、どう する？"
+},
+{
+"key": "kmq_res_meebaa",
+"who": "meebaa",
+"text": "じぶんで かんがえられたね。すごいよ"
+},
+{
+"key": "kmq_open_nobbo",
+"who": "nobbo",
+"text": "どうしましたか？ こまって いるようですね"
+},
+{
+"key": "kmq_q1_nobbo",
+"who": "nobbo",
+"text": "なにが こまって いますか？"
+},
+{
+"key": "kmq_q2_nobbo",
+"who": "nobbo",
+"text": "どうして、そう なったと おもいますか？"
+},
+{
+"key": "kmq_q3_nobbo",
+"who": "nobbo",
+"text": "どんな やりかたが ありますか？"
+},
+{
+"key": "kmq_q4_nobbo",
+"who": "nobbo",
+"text": "どれに しますか？ どうしてですか？"
+},
+{
+"key": "kmq_q5_nobbo",
+"who": "nobbo",
+"text": "つぎからは、どう しますか？"
+},
+{
+"key": "kmq_res_nobbo",
+"who": "nobbo",
+"text": "じぶんで かんがえられましたね。すばらしいです"
+}
+]
