@@ -27,7 +27,7 @@
 {
 "key": "asr_hanashi",
 "who": "mii",
-"text": "えっとね、ねこが にゃあって ないたの！"
+"text": "えっとね、ねこが、ニャーって ないたの！"
 },
 {
 "key": "ass_tetsudai",
@@ -82,7 +82,7 @@
 {
 "key": "ass_sasou",
 "who": "kuma",
-"text": "やったー！ いく いく！"
+"text": "やったー！ いく、いく！"
 },
 {
 "key": "asr_sasou",
@@ -232,7 +232,7 @@
 {
 "key": "asg_toru",
 "who": "gao",
-"text": "この あか、もーらいっ！"
+"text": "この あか、もらった！"
 },
 {
 "key": "ass_rule",
@@ -247,7 +247,7 @@
 {
 "key": "asg_rule",
 "who": "gao",
-"text": "おれが さき！ えいっ、ころころー！"
+"text": "おれが さき！ それー、ころころー！"
 },
 {
 "key": "rs_aite",

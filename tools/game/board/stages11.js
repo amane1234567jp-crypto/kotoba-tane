@@ -2,13 +2,14 @@
    そうぞう たんてい：🔍 てがかりを タッチ → 💭 あいての あたまの なかを そうぞう（おもいの ふきだし）→ 🗣 どう する？ →（段4〜）どうして そう おもった？
    じぶんの たちば ：🎩 いまの じぶんは なに？（ぼうし）→ 💭 あいては どう おもってる？ → 🗣 だから どう する？ →（段4〜）どうして？
    データ・声：sit/souzou_gen.py・sit/tachiba_gen.py（souzou_data.js・tachiba_data.js）。ママは こたえる 子の ママ。ライバル がおは くうき・たちばを わすれる 係。 */
-const S11L = ["souzou", "tachiba", "sakiyomi", "chotto"];
-const S11_READY = true; /* 声が そろうまで「じゅんびちゅう」 */
-Object.assign(RIVAL_OF, { souzou: "gao", tachiba: "gao", sakiyomi: "gao", chotto: "gao" });
-STAGES.push({ id: "souzou", name: "そうぞう たんてい", icon: "🔍", ready: S11_READY }, { id: "tachiba", name: "じぶんの たちば", icon: "🎩", ready: S11_READY }, { id: "sakiyomi", name: "さきよみ", icon: "🔮", ready: S11_READY }, { id: "chotto", name: "ちょっと まって", icon: "🛑", ready: S11_READY });
-["sz", "tb", "sk", "cm"].forEach(k => ASK_ON_STAGE.add(k));
-const S11_N = new Map(), S11_R = new Set();
-{ const ap = applyStage; applyStage = function (id, ...a) { if (S11L.includes(id)) { S11_N.clear(); S11_R.clear(); } return ap(id, ...a); }; }
+const S11L = ["souzou", "tachiba", "sakiyomi", "chotto", "aite"];
+const S11_READY = true;
+const AS_READY = false; /* あいての サイン：声が そろうまで false */
+Object.assign(RIVAL_OF, { souzou: "gao", tachiba: "gao", sakiyomi: "gao", chotto: "gao", aite: "gao" });
+STAGES.push({ id: "souzou", name: "そうぞう たんてい", icon: "🔍", ready: S11_READY }, { id: "tachiba", name: "じぶんの たちば", icon: "🎩", ready: S11_READY }, { id: "sakiyomi", name: "さきよみ", icon: "🔮", ready: S11_READY }, { id: "chotto", name: "ちょっと まって", icon: "🛑", ready: S11_READY }, { id: "aite", name: "あいての サイン", icon: "🤝", ready: AS_READY });
+["sz", "tb", "sk", "cm", "as"].forEach(k => ASK_ON_STAGE.add(k));
+const S11_N = new Map(), S11_R = new Set(), AS_GOT = [];
+{ const ap = applyStage; applyStage = function (id, ...a) { if (S11L.includes(id)) { S11_N.clear(); S11_R.clear(); AS_GOT.length = 0; } return ap(id, ...a); }; }
 const subjOf = (sc, hero) => sc.subj !== "mama" ? sc.subj : hero === "shima" ? "mama" : MOM_OF[hero] || null;
 const vkOf = (sc, subj) => sc.subj === "mama" && subj !== "mama" ? "_" + subj : "";
 function s11Pick(list, hero, t, rival) {
@@ -45,8 +46,8 @@ function thinkBubble(c, text) { const p = headTop(c), w = Math.max(320, Math.min
   g.open = () => { t.textContent = text; t.setAttribute("font-size", text.length > 14 ? 30 : 38); t.setAttribute("fill", INK); t.setAttribute("y", y + 14); for (let i = 0; i < 6; i++) mark("sparkle", x - w / 2 + rnd(w), y - 60 + rnd(40), { vy: -80, life: .7, s: .5 }); chime(); };
   return g; }
 // カードを えらぶ（タッチ。こえでも いい）。ちがう カードは うすく する
-function s11Choose(opts, onWrong, y = 140) {
-  const g = el("g", {}, hudLayer), W = 360, x0 = 800 - opts.length * (W + 24) / 2 + 12; el("rect", { x: x0 - 30, y: y - 16, width: opts.length * (W + 24) + 36, height: 214, rx: 30, fill: "#FFFFFFE8", ...S6(5) }, g);
+function s11Choose(opts, onWrong, y = 140, W = 360) {
+  const g = el("g", {}, hudLayer), x0 = 800 - opts.length * (W + 24) / 2 + 12; el("rect", { x: x0 - 30, y: y - 16, width: opts.length * (W + 24) + 36, height: 214, rx: 30, fill: "#FFFFFFE8", ...S6(5) }, g);
   const cs = opts.map((o, i) => { const c = card(g, x0 + i * (W + 24), y, W, 182, o[1], o[0], { es: 84, fs: 40 }); c.good = o[2]; c.lab = o[1]; return c; });
   const done = new Promise(res => { let busy = false, live = true;
     cs.forEach(c => c.onclick = async () => { if (busy || c.dim || !live) return; if (c.good) { live = false; cs.forEach(x => x.onclick = null); c.rect.setAttribute("fill", "#FFE27A"); chime(); res(true); return; }
@@ -115,6 +116,7 @@ async function tbRun(hero, first) {
 const KTX = k => (S11_TXT[k] || "");
 // ライバル（がお）の ばん：くうき・たちばを わすれて ふるまう → こどもが おしえる
 async function s11Rival() {
+  if (curStage === "aite") return asRival();
   const sz = curStage === "souzou", sk = curStage === "sakiyomi", cm = curStage === "chotto", list = sz ? SZ : sk ? SK : cm ? CM : TB, sc = s11Pick(list, RIVAL, 5, true), subj = subjOf(sc, RIVAL) || "kuma", vk = vkOf(sc, subj), P = sz ? "sz" : sk ? "sk" : cm ? "cm" : "tb";
   showEngine(null, `${NAMES[RIVAL]}の ばん（${sc.id}）`);
   const { hero: h, ask: a } = setSitView({ id: `${P}_${sc.id}`, place: sc.place, asker: subj, intro: P }, RIVAL); a.dx.v = a.dx.t = 0; const pr = sz ? s11Prop(sc, a) : null; if (sk) a.dx.v = a.dx.t = 0;
@@ -134,7 +136,7 @@ let S11_FIRST = true; { const ap = applyStage; applyStage = function (id, ...a) 
 { const lc = landChild; landChild = async function (pc = P.shima) {
     if (!S11L.includes(curStage) || winner) return lc(pc);
     const k = kindOf(pc.node); if (k === "start" || k === "treasure") return lc(pc);
-    const f = S11_FIRST; S11_FIRST = false; const ok = await (curStage === "souzou" ? szRun : curStage === "sakiyomi" ? skRun : curStage === "chotto" ? cmRun : tbRun)(pc.kind, f); if (ok && pc.player) pc.player.ok++; }; }
+    const f = S11_FIRST; S11_FIRST = false; const ok = await (curStage === "souzou" ? szRun : curStage === "sakiyomi" ? skRun : curStage === "chotto" ? cmRun : curStage === "aite" ? asRun : tbRun)(pc.kind, f); if (ok && pc.player) pc.player.ok++; }; }
 /* ---------- 盤 ---------- */
 STAGE_DEF.souzou = { ground: "#F2F7FF", sky: "#CFEAFB", names: ["いえ", "いえ", "がっこう", "がっこう", "こうえん", "こうえん", "まち", "まち", "いえ"], fills: { いえ: "#FFE3B3", がっこう: "#D7ECFF", こうえん: "#D7F0D2", まち: "#FFD1D9" } };
 STAGE_DEF.tachiba = { ground: "#FFF6EC", sky: "#CFEAFB", names: ["いえ", "いえ", "がっこう", "がっこう", "こうえん", "こうえん", "まち", "まち", "いえ"], fills: { いえ: "#FFE3B3", がっこう: "#D7ECFF", こうえん: "#D7F0D2", まち: "#FFD1D9" } };
@@ -278,3 +280,78 @@ BLOCK_DEF.chotto = { who: "tora", sleep: false, intro: ["p_blk_chotto", "とら�
 SLEEPER_OF.chotto = "tora";
 EVENTS.chotto = { a2: ["fwd", 2, "ev_chottof", "ちょっと まって できた！ 2マス すすむよ"], m2: ["back", 2, "ev_chottob", "あわてて ころんだ！ 2マス もどるよ"], d1: ["back", 4, "ev_chottoh", "いそいで わすれものを した！ 4マス もどるよ"],
   a3: ["stopgame", 0, "", ""], c2: ["yoidon", 0, "", ""] };
+/* ---------- 🤝 あいての サイン（2026-10-19） ----------
+   👀 あいての ようす → 📡 どんな サイン？ → 🪞 いまの じぶんは？（よろこばれた→バッジ「やさしいね」など／きづいて なおす→「〇〇を たいくつに させちゃったね」）
+   → 🗣 なんて いう？ →（段4〜）どうして わかったの？。ゴールで もらった バッジを ならべる。せめない ことばで。 */
+function asAnim(c, mv) {
+  if (mv === "back") { c.dx.t = (c.dx.t || 0) + 150; surprise(c); c.lean.t = 10; later(1600, () => c.lean.t = 0); return; }
+  if (mv === "ears") { const g = el("g", {}, front()); txt(g, 0, 0, "🙉", 96, { "text-anchor": "middle" }); follow(g, () => { const p = headTop(c); return [p.x + 120, p.y + 70, 0, 1]; }); c.eyeScale.t = .6; c.squash.vel -= 1; later(2600, () => { g.remove(); c.eyeScale.t = 1; }); return; }
+  if (mv === "no") { playMove(c, "no"); c.sadMouth = true; markAbove(c, "anger", { dx: 90 }); return; }
+  if (mv === "sleepy") { playMove(c, "sleepy"); later(1200, () => playMove(c, "look")); return; }
+  playMove(c, mv); }
+async function asRun(hero, first) {
+  const t = tierOf(), sc = s11Pick(AS, hero, t), subj = subjOf(sc, hero), vk = vkOf(sc, subj); S11_N.set(sc.id, (S11_N.get(sc.id) || 0) + 1);
+  const lv = t >= 2 ? 1 : 0; showEngine(null, `あいての サイン（${sc.id}・段${t + 1}）`);
+  const { hero: h, ask: a } = setSitView({ id: "as_" + sc.id, place: sc.place, asker: subj, intro: "as" }, hero); a.dx.v = a.dx.t = 0;
+  enter(h); await sleep(900); if (first) await speak(C.pony, "asp_intro", "あいての サイン！ あいての かおや からだを よく みて、きもちを うけとろう");
+  await speak(C.pony, `as_${sc.id}_n`, KTX(`as_${sc.id}_n`)); playMove(h, sc.pos ? "nod" : "point");
+  asAnim(a, sc.mv); await speak(a, `ass_${sc.id}${vk}`, sc.look); const loop = setInterval(() => { if (sc.mv !== "back") asAnim(a, sc.mv); }, 3500);
+  let okN = 0, nSay = 0, wrong = 0; const log = [];
+  // 1) 📡 どんな サイン？
+  await speak(C.pony, "asp_sign", "どんな サイン かな？ タッチしてね");
+  const ch = s11Choose(Object.entries(AS_SIGN).map(([k_, [e, l]]) => [e, l, k_ === sc.sign ? 1 : 0, null]), async () => { wrong++; await speak(C.pony, "asp_nope", "よく みて みよう。かおや からだは どう なってる？"); });
+  await ch.done; clearInterval(loop); ch.g.remove(); markAbove(C.pony, "sparkle"); await speak(C.pony, `as_${sc.id}_c`, KTX(`as_${sc.id}_c`));
+  // 2) 🪞 いまの じぶんは？
+  await speak(C.pony, "asp_me", "いまの きみは、どう だったかな？");
+  const ch2 = s11Choose(shuffle([[sc.pos ? "🌟" : "💡", sc.me, 1, null], [sc.pos ? "💧" : "🌟", sc.meNg, 0]]), async () => { wrong++; await speak(C.pony, "asp_nope", "よく みて みよう。かおや からだは どう なってる？"); }, 120, 680);
+  await ch2.done; ch2.g.remove();
+  if (t >= 2) { nSay++; const r = await kmSay(h, `as_${sc.id}_m`, sc.me, [[sc.pos ? sc.me.replace(/ね$/, "").split(" ").pop() : sc.me.split(" ")[1].replace(/[にが]$/, "")]], "いって みよう"); if (r.ok) okN++; log.push(`🪞${r.ok ? "○" : "×"}${r.heard}`); }
+  else await speak(C.pony, `as_${sc.id}_m`, sc.me);
+  if (sc.pos) { const b = asBadge(sc.me); if (!AS_GOT.includes(sc.id)) AS_GOT.push(sc.id); await speak(C.pony, "asp_badge", "ことばの バッジを もらったよ"); b.remove(); }
+  else await speak(C.pony, "asp_fix", "きづけたね。なおせば だいじょうぶ");
+  // 3) 🗣 なんて いう？
+  await speak(C.pony, "asp_say", "なんて いう？");
+  nSay++; { const r = await kmSay(h, `as_${sc.id}_a${lv}`, sc.say[lv], sc.say[2], "いって みよう"); if (r.ok) okN++; log.push(`🗣${r.ok ? "○" : "×"}${r.heard}`); }
+  if (sc.mv === "back") { a.dx.t = 0; } a.sadMouth = false; joy(a); await speak(a, `asr_${sc.id}${vk}`, sc.res);
+  // 4) どうして わかったの？（段4から）
+  if (t >= 3) { await speak(C.pony, "asp_why", "どうして わかったの？"); nSay++; const r = await kmSay(h, `as_${sc.id}_w`, sc.why[0], sc.why[1], "サインを いおう"); if (r.ok) okN++; log.push(`📡${r.ok ? "○" : "×"}${r.heard}`); }
+  const ok = okN * 2 >= nSay; grade(ok && !wrong && okN === nSay); GS.tasks++; if (ok) GS.ok++;
+  playLog({ type: "aite", id: sc.id, tier: t, okN, nSay, wrong, tries: log, ...(MODE === "multi" ? { who: NAMES[hero] } : {}) });
+  if (ok) { joy(h); confetti(50); joy(C.pony); await speak(C.pony, "asp_ok", "サイン キャッチ！"); await seedGet(h); }
+  await sleep(400); setView("board"); return ok;
+}
+// バッジ（メダル）
+function asBadge(text, x = 800, y = 300, s = 1) { const g = el("g", {}, hudLayer);
+  el("circle", { cx: x, cy: y, r: 120 * s, fill: "#FFD25E", ...S6(8) }, g); el("circle", { cx: x, cy: y, r: 96 * s, fill: "#FFE9A8", ...S6(4) }, g); txt(g, x, y + 30 * s, "🌟", 84 * s, { "text-anchor": "middle" });
+  let ls = [text]; if (text.length > 9) { const sp = [...text].map((c, i) => c === " " ? i : -1).filter(i => i > 0).sort((p, q) => Math.abs(p - text.length / 2) - Math.abs(q - text.length / 2))[0]; if (sp) ls = [text.slice(0, sp), text.slice(sp + 1)]; }
+  const fs = 38 * s, w = Math.max(240 * s, Math.max(...ls.map(l => l.length)) * fs + 50 * s), hh = (ls.length * 1.25 * fs + 26 * s);
+  el("rect", { x: x - w / 2, y: y + 110 * s, width: w, height: hh, rx: 30 * s, fill: "#FFFFFF", ...S6(5) }, g); ls.forEach((l, i) => txt(g, x, y + 110 * s + 13 * s + fs * (1.05 + i * 1.25), l, fs, { "text-anchor": "middle" }));
+  if (s === 1) { for (let i = 0; i < 8; i++) mark("sparkle", x - 150 + rnd(300), y - 100 + rnd(160), { vy: -80, life: .7, s: .5 }); chime(); }
+  return g; }
+// ライバル：がおが きづかずに やっちゃう → あいての サイン → こどもが おしえる
+async function asRival() {
+  const pool = AS.filter(s => !s.pos && subjOf(s, RIVAL) && subjOf(s, RIVAL) !== RIVAL), fresh = pool.filter(s => !S11_R.has(s.id)), sc = (fresh.length ? fresh : pool)[rnd((fresh.length ? fresh : pool).length)]; S11_R.add(sc.id);
+  const subj = subjOf(sc, RIVAL), vk = vkOf(sc, subj); showEngine(null, `${NAMES[RIVAL]}の ばん（${sc.id}）`);
+  const { hero: h, ask: a } = setSitView({ id: `as_${sc.id}`, place: sc.place, asker: subj, intro: "as" }, RIVAL); a.dx.v = a.dx.t = 0;
+  enter(h); await sleep(900); playMove(h, "pump"); await speak(h, `asg_${sc.id}`, sc.gao);
+  asAnim(a, sc.mv); await speak(a, `ass_${sc.id}${vk}`, sc.look); markAbove(C.pony, "q"); await sleep(400);
+  await speak(C.pony, "asp_teach", "がおくんに おしえて あげよう"); playMove(h, "think"); await rivalSay(h, "huh");
+  const r = await kmSay(C.shima, `as_${sc.id}_t`, sc.teach, sc.say[2], `${NAMES[RIVAL]}に おしえよう`);
+  playLog({ type: "teach", id: `as_${sc.id}`, ok: r.ok, tries: [r.heard] }); if (r.ok) GS.ok++;
+  a.dx.t = 0; a.sadMouth = false; if (r.ok) { joy(C.shima); confetti(40); } await rivalSay(h, "thanks"); joy(a); await sleep(600); setView("board"); }
+// ゴールで もらった バッジを ならべる
+async function asGoal() { if (curStage !== "aite" || !AS_GOT.length) return;
+  const dice = document.getElementById("dice"); if (dice) dice.style.visibility = "hidden";
+  const g = panel("もらった ことばの バッジ", "#FFF6DC"); await speak(C.pony, "asp_goal", "きょう もらった ことばの バッジだよ");
+  const n = AS_GOT.length, cols = Math.min(4, n);
+  for (let i = 0; i < n; i++) { const sc = AS.find(s => s.id === AS_GOT[i]), x = 800 + ((i % cols) - (cols - 1) / 2) * 360, y = 260 + Math.floor(i / cols) * 330;
+    const b = asBadge(sc.me, x, y, .72); g.appendChild(b); chime(); await speak(C.pony, `as_${sc.id}_m`, sc.me); }
+  confetti(60); await sleep(1200); g.remove(); }
+{ const en = ending; ending = async function (...a) { try { await asGoal(); } catch (e) {} return en(...a); }; }
+{ const em = endingMulti; endingMulti = async function (...a) { try { await asGoal(); } catch (e) {} return em(...a); }; }
+STAGE_DEF.aite = { ground: "#FFF4E6", sky: "#CFEAFB", names: ["いえ", "いえ", "がっこう", "がっこう", "こうえん", "こうえん", "まち", "まち", "いえ"], fills: { いえ: "#FFE3B3", がっこう: "#D7ECFF", こうえん: "#D7F0D2", まち: "#FFD1D9" } };
+board7("aite", ["いえ", "いえ", "がっこう", "こうえん", "まち", "いえ"], "hall");
+BOARD_BG.aite = L => { bg7(L, "#FFF4E6", ["#FFE3B3", "#D7ECFF", "#D7F0D2"], "🤝 あいての サイン", "#F08A3C"); txt(L, 1460, 180, "📡", 110, { "text-anchor": "middle" }); };
+BLOCK_DEF.aite = { who: "kamejii", sleep: false, intro: ["p_blk_aite", "かめじいが、おもい にもつを もって、こまって いるみたい。こえを かけよう"], say: ["blk_aite", "にもつ、もとうか？"], to: "かめじいに いおう", keys: [["もとう", "持とう", "もつ", "持つ", "てつだ", "手伝"]], res: ["rs_aite", "おお、ありがとう。やさしいのう"] };
+SLEEPER_OF.aite = "kamejii";
+EVENTS.aite = { a2: ["fwd", 2, "ev_aitef", "にっこり サインを もらった！ 2マス すすむよ"], m2: ["back", 2, "ev_aiteb", "よそみを して ころんだ！ 2マス もどるよ"], d1: ["back", 4, "ev_aiteh", "サインに きづかず、まいごに なった！ 4マス もどるよ"] };
