@@ -1,0 +1,207 @@
+[
+{
+"key": "dgq_start_mama",
+"who": "mama",
+"text": "おかえり。きょう、なにが あったの？"
+},
+{
+"key": "dgq_doko_mama",
+"who": "mama",
+"text": "どこで？"
+},
+{
+"key": "dgq_dare_mama",
+"who": "mama",
+"text": "だれと いっしょだったの？"
+},
+{
+"key": "dgq_nani_mama",
+"who": "mama",
+"text": "なにを したの？"
+},
+{
+"key": "dgq_kimo_mama",
+"who": "mama",
+"text": "どんな きもちだった？"
+},
+{
+"key": "dgq_all_mama",
+"who": "mama",
+"text": "じゃあ、はじめから ぜんぶ おしえて"
+},
+{
+"key": "dgq_sore_mama",
+"who": "mama",
+"text": "それから？"
+},
+{
+"key": "dgq_res_mama",
+"who": "mama",
+"text": "そうだったの。おしえて くれて ありがとう"
+},
+{
+"key": "dgq_start_pyonmama",
+"who": "pyonmama",
+"text": "おかえり。きょう、なにが あったの？"
+},
+{
+"key": "dgq_doko_pyonmama",
+"who": "pyonmama",
+"text": "どこで？"
+},
+{
+"key": "dgq_dare_pyonmama",
+"who": "pyonmama",
+"text": "だれと いっしょだったの？"
+},
+{
+"key": "dgq_nani_pyonmama",
+"who": "pyonmama",
+"text": "なにを したの？"
+},
+{
+"key": "dgq_kimo_pyonmama",
+"who": "pyonmama",
+"text": "どんな きもちだった？"
+},
+{
+"key": "dgq_all_pyonmama",
+"who": "pyonmama",
+"text": "じゃあ、はじめから ぜんぶ おしえて"
+},
+{
+"key": "dgq_sore_pyonmama",
+"who": "pyonmama",
+"text": "それから？"
+},
+{
+"key": "dgq_res_pyonmama",
+"who": "pyonmama",
+"text": "そうだったの。おしえて くれて ありがとう"
+},
+{
+"key": "dgq_start_gaomama",
+"who": "gaomama",
+"text": "おかえり。きょう、なにが あったの？"
+},
+{
+"key": "dgq_doko_gaomama",
+"who": "gaomama",
+"text": "どこで？"
+},
+{
+"key": "dgq_dare_gaomama",
+"who": "gaomama",
+"text": "だれと いっしょだったの？"
+},
+{
+"key": "dgq_nani_gaomama",
+"who": "gaomama",
+"text": "なにを したの？"
+},
+{
+"key": "dgq_kimo_gaomama",
+"who": "gaomama",
+"text": "どんな きもちだった？"
+},
+{
+"key": "dgq_all_gaomama",
+"who": "gaomama",
+"text": "じゃあ、はじめから ぜんぶ おしえて"
+},
+{
+"key": "dgq_sore_gaomama",
+"who": "gaomama",
+"text": "それから？"
+},
+{
+"key": "dgq_res_gaomama",
+"who": "gaomama",
+"text": "そうだったの。おしえて くれて ありがとう"
+},
+{
+"key": "dgq_start_miimama",
+"who": "miimama",
+"text": "おかえり。きょう、なにが あったの？"
+},
+{
+"key": "dgq_doko_miimama",
+"who": "miimama",
+"text": "どこで？"
+},
+{
+"key": "dgq_dare_miimama",
+"who": "miimama",
+"text": "だれと いっしょだったの？"
+},
+{
+"key": "dgq_nani_miimama",
+"who": "miimama",
+"text": "なにを したの？"
+},
+{
+"key": "dgq_kimo_miimama",
+"who": "miimama",
+"text": "どんな きもちだった？"
+},
+{
+"key": "dgq_all_miimama",
+"who": "miimama",
+"text": "じゃあ、はじめから ぜんぶ おしえて"
+},
+{
+"key": "dgq_sore_miimama",
+"who": "miimama",
+"text": "それから？"
+},
+{
+"key": "dgq_res_miimama",
+"who": "miimama",
+"text": "そうだったの。おしえて くれて ありがとう"
+},
+{
+"key": "dgq_start_chumama",
+"who": "chumama",
+"text": "おかえり。きょう、なにが あったの？"
+},
+{
+"key": "dgq_doko_chumama",
+"who": "chumama",
+"text": "どこで？"
+},
+{
+"key": "dgq_dare_chumama",
+"who": "chumama",
+"text": "だれと いっしょだったの？"
+},
+{
+"key": "dgq_nani_chumama",
+"who": "chumama",
+"text": "なにを したの？"
+},
+{
+"key": "dgq_kimo_chumama",
+"who": "chumama",
+"text": "どんな きもちだった？"
+},
+{
+"key": "dgq_all_chumama",
+"who": "chumama",
+"text": "じゃあ、はじめから ぜんぶ おしえて"
+},
+{
+"key": "dgq_sore_chumama",
+"who": "chumama",
+"text": "それから？"
+},
+{
+"key": "dgq_res_chumama",
+"who": "chumama",
+"text": "そうだったの。おしえて くれて ありがとう"
+},
+{
+"key": "rs_dekigoto",
+"who": "chu",
+"text": "きいて！ さかあがりが できたんだ！"
+}
+]

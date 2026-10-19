@@ -1,0 +1,272 @@
+[
+{
+"key": "mkw_sugoroku",
+"who": "chu",
+"text": "やったー！ ぼくの かち！"
+},
+{
+"key": "mkw_trump",
+"who": "mii",
+"text": "あがり！ やったあ"
+},
+{
+"key": "mkw_tsumiki",
+"who": "mama",
+"text": "あらあら。たかく つめたわね"
+},
+{
+"key": "mkw_tsumiki_pyonmama",
+"who": "pyonmama",
+"text": "あらあら。たかく つめたわね"
+},
+{
+"key": "mkw_tsumiki_gaomama",
+"who": "gaomama",
+"text": "あらあら。たかく つめたわね"
+},
+{
+"key": "mkw_tsumiki_miimama",
+"who": "miimama",
+"text": "あらあら。たかく つめたわね"
+},
+{
+"key": "mkw_tsumiki_chumama",
+"who": "chumama",
+"text": "あらあら。たかく つめたわね"
+},
+{
+"key": "mkw_game",
+"who": "kuma",
+"text": "よっしゃー！ かったー！"
+},
+{
+"key": "mkw_osero",
+"who": "pyon",
+"text": "わーい、しろの かち！"
+},
+{
+"key": "mkw_oekaki",
+"who": "mama",
+"text": "あら、はみだしちゃったのね"
+},
+{
+"key": "mkw_oekaki_pyonmama",
+"who": "pyonmama",
+"text": "あら、はみだしちゃったのね"
+},
+{
+"key": "mkw_oekaki_gaomama",
+"who": "gaomama",
+"text": "あら、はみだしちゃったのね"
+},
+{
+"key": "mkw_oekaki_miimama",
+"who": "miimama",
+"text": "あら、はみだしちゃったのね"
+},
+{
+"key": "mkw_oekaki_chumama",
+"who": "chumama",
+"text": "あら、はみだしちゃったのね"
+},
+{
+"key": "mkw_kakekko",
+"who": "tora",
+"text": "やったー！ 1ばんだ！"
+},
+{
+"key": "mkw_test",
+"who": "nobbo",
+"text": "おしかったですね。ここだけですよ"
+},
+{
+"key": "mkw_happyou",
+"who": "nobbo",
+"text": "だいじょうぶ。おちついて、もう いちど どうぞ"
+},
+{
+"key": "mkw_touban",
+"who": "pyon",
+"text": "やったー！ かかりに なれた！"
+},
+{
+"key": "mkw_dodge",
+"who": "kuma",
+"text": "あてたー！"
+},
+{
+"key": "mkw_konkuru",
+"who": "mii",
+"text": "わあ、きんしょうだ！"
+},
+{
+"key": "mkw_oni",
+"who": "tora",
+"text": "タッチ！ つぎ おにね！"
+},
+{
+"key": "mkw_suna",
+"who": "mama",
+"text": "あら。また つくれば いいわよ"
+},
+{
+"key": "mkw_suna_pyonmama",
+"who": "pyonmama",
+"text": "あら。また つくれば いいわよ"
+},
+{
+"key": "mkw_suna_gaomama",
+"who": "gaomama",
+"text": "あら。また つくれば いいわよ"
+},
+{
+"key": "mkw_suna_miimama",
+"who": "miimama",
+"text": "あら。また つくれば いいわよ"
+},
+{
+"key": "mkw_suna_chumama",
+"who": "chumama",
+"text": "あら。また つくれば いいわよ"
+},
+{
+"key": "mkw_kakurenbo",
+"who": "pyon",
+"text": "みーつけた！"
+},
+{
+"key": "mkw_nawatobi",
+"who": "chu",
+"text": "やった、20かい とべた！"
+},
+{
+"key": "mkw_pk",
+"who": "kuma",
+"text": "とめたー！"
+},
+{
+"key": "mkw_tako",
+"who": "mama",
+"text": "かぜが よわかったのね"
+},
+{
+"key": "mkw_tako_pyonmama",
+"who": "pyonmama",
+"text": "かぜが よわかったのね"
+},
+{
+"key": "mkw_tako_gaomama",
+"who": "gaomama",
+"text": "かぜが よわかったのね"
+},
+{
+"key": "mkw_tako_miimama",
+"who": "miimama",
+"text": "かぜが よわかったのね"
+},
+{
+"key": "mkw_tako_chumama",
+"who": "chumama",
+"text": "かぜが よわかったのね"
+},
+{
+"key": "mkw_kingyo",
+"who": "mama",
+"text": "ざんねん。でも、おしかったわね"
+},
+{
+"key": "mkw_kingyo_pyonmama",
+"who": "pyonmama",
+"text": "ざんねん。でも、おしかったわね"
+},
+{
+"key": "mkw_kingyo_gaomama",
+"who": "gaomama",
+"text": "ざんねん。でも、おしかったわね"
+},
+{
+"key": "mkw_kingyo_miimama",
+"who": "miimama",
+"text": "ざんねん。でも、おしかったわね"
+},
+{
+"key": "mkw_kingyo_chumama",
+"who": "chumama",
+"text": "ざんねん。でも、おしかったわね"
+},
+{
+"key": "mkw_kuji",
+"who": "mama",
+"text": "あら、はずれね"
+},
+{
+"key": "mkw_kuji_pyonmama",
+"who": "pyonmama",
+"text": "あら、はずれね"
+},
+{
+"key": "mkw_kuji_gaomama",
+"who": "gaomama",
+"text": "あら、はずれね"
+},
+{
+"key": "mkw_kuji_miimama",
+"who": "miimama",
+"text": "あら、はずれね"
+},
+{
+"key": "mkw_kuji_chumama",
+"who": "chumama",
+"text": "あら、はずれね"
+},
+{
+"key": "mkw_shateki",
+"who": "kuma",
+"text": "あたったー！"
+},
+{
+"key": "mkw_janken",
+"who": "mii",
+"text": "かったー！"
+},
+{
+"key": "mkw_bingo",
+"who": "chu",
+"text": "ビンゴ！ やったー！"
+},
+{
+"key": "mkw_wanage",
+"who": "pyon",
+"text": "はいったー！"
+},
+{
+"key": "mkr_kuma",
+"who": "kuma",
+"text": "ありがとう！ また やろうね"
+},
+{
+"key": "mkr_tora",
+"who": "tora",
+"text": "ありがとう！ また やろうね"
+},
+{
+"key": "mkr_pyon",
+"who": "pyon",
+"text": "ありがとう！ また やろうね"
+},
+{
+"key": "mkr_mii",
+"who": "mii",
+"text": "ありがとう！ また やろうね"
+},
+{
+"key": "mkr_chu",
+"who": "chu",
+"text": "ありがとう！ また やろうね"
+},
+{
+"key": "rs_makete",
+"who": "pyon",
+"text": "……うん。ありがとう。つぎ がんばる！"
+}
+]
