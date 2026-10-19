@@ -1,0 +1,612 @@
+[
+{
+"key": "sks_kasa",
+"who": "mama",
+"text": "テレビで、ごごから あめって いってたわよ"
+},
+{
+"key": "skr_kasa",
+"who": "mama",
+"text": "えらいわね。いってらっしゃい"
+},
+{
+"key": "sks_kasa_pyonmama",
+"who": "pyonmama",
+"text": "テレビで、ごごから あめって いってたわよ"
+},
+{
+"key": "skr_kasa_pyonmama",
+"who": "pyonmama",
+"text": "えらいわね。いってらっしゃい"
+},
+{
+"key": "sks_kasa_gaomama",
+"who": "gaomama",
+"text": "テレビで、ごごから あめって いってたわよ"
+},
+{
+"key": "skr_kasa_gaomama",
+"who": "gaomama",
+"text": "えらいわね。いってらっしゃい"
+},
+{
+"key": "sks_kasa_miimama",
+"who": "miimama",
+"text": "テレビで、ごごから あめって いってたわよ"
+},
+{
+"key": "skr_kasa_miimama",
+"who": "miimama",
+"text": "えらいわね。いってらっしゃい"
+},
+{
+"key": "sks_kasa_chumama",
+"who": "chumama",
+"text": "テレビで、ごごから あめって いってたわよ"
+},
+{
+"key": "skr_kasa_chumama",
+"who": "chumama",
+"text": "えらいわね。いってらっしゃい"
+},
+{
+"key": "skg_kasa",
+"who": "gao",
+"text": "はれてるから、かさ なんて いらねー！"
+},
+{
+"key": "sks_oyatsu",
+"who": "mama",
+"text": "おやつ、ここに おいて おくね"
+},
+{
+"key": "skr_oyatsu",
+"who": "mama",
+"text": "さすがね。のこりは あしたね"
+},
+{
+"key": "sks_oyatsu_pyonmama",
+"who": "pyonmama",
+"text": "おやつ、ここに おいて おくね"
+},
+{
+"key": "skr_oyatsu_pyonmama",
+"who": "pyonmama",
+"text": "さすがね。のこりは あしたね"
+},
+{
+"key": "sks_oyatsu_gaomama",
+"who": "gaomama",
+"text": "おやつ、ここに おいて おくね"
+},
+{
+"key": "skr_oyatsu_gaomama",
+"who": "gaomama",
+"text": "さすがね。のこりは あしたね"
+},
+{
+"key": "sks_oyatsu_miimama",
+"who": "miimama",
+"text": "おやつ、ここに おいて おくね"
+},
+{
+"key": "skr_oyatsu_miimama",
+"who": "miimama",
+"text": "さすがね。のこりは あしたね"
+},
+{
+"key": "sks_oyatsu_chumama",
+"who": "chumama",
+"text": "おやつ、ここに おいて おくね"
+},
+{
+"key": "skr_oyatsu_chumama",
+"who": "chumama",
+"text": "さすがね。のこりは あしたね"
+},
+{
+"key": "skg_oyatsu",
+"who": "gao",
+"text": "ぜんぶ たべちゃえ！ むしゃむしゃ！"
+},
+{
+"key": "sks_shukudai",
+"who": "mama",
+"text": "しゅくだいと ゲーム、どっちから する？"
+},
+{
+"key": "skr_shukudai",
+"who": "mama",
+"text": "かしこいわね。おわったら ゲームね"
+},
+{
+"key": "sks_shukudai_pyonmama",
+"who": "pyonmama",
+"text": "しゅくだいと ゲーム、どっちから する？"
+},
+{
+"key": "skr_shukudai_pyonmama",
+"who": "pyonmama",
+"text": "かしこいわね。おわったら ゲームね"
+},
+{
+"key": "sks_shukudai_gaomama",
+"who": "gaomama",
+"text": "しゅくだいと ゲーム、どっちから する？"
+},
+{
+"key": "skr_shukudai_gaomama",
+"who": "gaomama",
+"text": "かしこいわね。おわったら ゲームね"
+},
+{
+"key": "sks_shukudai_miimama",
+"who": "miimama",
+"text": "しゅくだいと ゲーム、どっちから する？"
+},
+{
+"key": "skr_shukudai_miimama",
+"who": "miimama",
+"text": "かしこいわね。おわったら ゲームね"
+},
+{
+"key": "sks_shukudai_chumama",
+"who": "chumama",
+"text": "しゅくだいと ゲーム、どっちから する？"
+},
+{
+"key": "skr_shukudai_chumama",
+"who": "chumama",
+"text": "かしこいわね。おわったら ゲームね"
+},
+{
+"key": "skg_shukudai",
+"who": "gao",
+"text": "ゲームから！ しゅくだいは あとで いいや！"
+},
+{
+"key": "sks_ensoku",
+"who": "mama",
+"text": "あしたは えんそくね"
+},
+{
+"key": "skr_ensoku",
+"who": "mama",
+"text": "ばっちりね。あしたが たのしみね"
+},
+{
+"key": "sks_ensoku_pyonmama",
+"who": "pyonmama",
+"text": "あしたは えんそくね"
+},
+{
+"key": "skr_ensoku_pyonmama",
+"who": "pyonmama",
+"text": "ばっちりね。あしたが たのしみね"
+},
+{
+"key": "sks_ensoku_gaomama",
+"who": "gaomama",
+"text": "あしたは えんそくね"
+},
+{
+"key": "skr_ensoku_gaomama",
+"who": "gaomama",
+"text": "ばっちりね。あしたが たのしみね"
+},
+{
+"key": "sks_ensoku_miimama",
+"who": "miimama",
+"text": "あしたは えんそくね"
+},
+{
+"key": "skr_ensoku_miimama",
+"who": "miimama",
+"text": "ばっちりね。あしたが たのしみね"
+},
+{
+"key": "sks_ensoku_chumama",
+"who": "chumama",
+"text": "あしたは えんそくね"
+},
+{
+"key": "skr_ensoku_chumama",
+"who": "chumama",
+"text": "ばっちりね。あしたが たのしみね"
+},
+{
+"key": "skg_ensoku",
+"who": "gao",
+"text": "あさ やれば いいって！ ねよう、ねよう"
+},
+{
+"key": "sks_toire",
+"who": "mama",
+"text": "これから ながく バスに のるよ"
+},
+{
+"key": "skr_toire",
+"who": "mama",
+"text": "それが いいわね。まってるわ"
+},
+{
+"key": "sks_toire_pyonmama",
+"who": "pyonmama",
+"text": "これから ながく バスに のるよ"
+},
+{
+"key": "skr_toire_pyonmama",
+"who": "pyonmama",
+"text": "それが いいわね。まってるわ"
+},
+{
+"key": "sks_toire_gaomama",
+"who": "gaomama",
+"text": "これから ながく バスに のるよ"
+},
+{
+"key": "skr_toire_gaomama",
+"who": "gaomama",
+"text": "それが いいわね。まってるわ"
+},
+{
+"key": "sks_toire_miimama",
+"who": "miimama",
+"text": "これから ながく バスに のるよ"
+},
+{
+"key": "skr_toire_miimama",
+"who": "miimama",
+"text": "それが いいわね。まってるわ"
+},
+{
+"key": "sks_toire_chumama",
+"who": "chumama",
+"text": "これから ながく バスに のるよ"
+},
+{
+"key": "skr_toire_chumama",
+"who": "chumama",
+"text": "それが いいわね。まってるわ"
+},
+{
+"key": "skg_toire",
+"who": "gao",
+"text": "いまは いきたく ないから、いかない！"
+},
+{
+"key": "sks_yofukashi",
+"who": "mama",
+"text": "もう ねる じかんよ"
+},
+{
+"key": "skr_yofukashi",
+"who": "mama",
+"text": "えらいわ。おやすみなさい"
+},
+{
+"key": "sks_yofukashi_pyonmama",
+"who": "pyonmama",
+"text": "もう ねる じかんよ"
+},
+{
+"key": "skr_yofukashi_pyonmama",
+"who": "pyonmama",
+"text": "えらいわ。おやすみなさい"
+},
+{
+"key": "sks_yofukashi_gaomama",
+"who": "gaomama",
+"text": "もう ねる じかんよ"
+},
+{
+"key": "skr_yofukashi_gaomama",
+"who": "gaomama",
+"text": "えらいわ。おやすみなさい"
+},
+{
+"key": "sks_yofukashi_miimama",
+"who": "miimama",
+"text": "もう ねる じかんよ"
+},
+{
+"key": "skr_yofukashi_miimama",
+"who": "miimama",
+"text": "えらいわ。おやすみなさい"
+},
+{
+"key": "sks_yofukashi_chumama",
+"who": "chumama",
+"text": "もう ねる じかんよ"
+},
+{
+"key": "skr_yofukashi_chumama",
+"who": "chumama",
+"text": "えらいわ。おやすみなさい"
+},
+{
+"key": "skg_yofukashi",
+"who": "gao",
+"text": "あと すこし！ あと ちょっとだけ！"
+},
+{
+"key": "sks_mizutamari",
+"who": "mama",
+"text": "あら、おおきな みずたまりね"
+},
+{
+"key": "skr_mizutamari",
+"who": "mama",
+"text": "あら、じょうずに よけたわね"
+},
+{
+"key": "sks_mizutamari_pyonmama",
+"who": "pyonmama",
+"text": "あら、おおきな みずたまりね"
+},
+{
+"key": "skr_mizutamari_pyonmama",
+"who": "pyonmama",
+"text": "あら、じょうずに よけたわね"
+},
+{
+"key": "sks_mizutamari_gaomama",
+"who": "gaomama",
+"text": "あら、おおきな みずたまりね"
+},
+{
+"key": "skr_mizutamari_gaomama",
+"who": "gaomama",
+"text": "あら、じょうずに よけたわね"
+},
+{
+"key": "sks_mizutamari_miimama",
+"who": "miimama",
+"text": "あら、おおきな みずたまりね"
+},
+{
+"key": "skr_mizutamari_miimama",
+"who": "miimama",
+"text": "あら、じょうずに よけたわね"
+},
+{
+"key": "sks_mizutamari_chumama",
+"who": "chumama",
+"text": "あら、おおきな みずたまりね"
+},
+{
+"key": "skr_mizutamari_chumama",
+"who": "chumama",
+"text": "あら、じょうずに よけたわね"
+},
+{
+"key": "skg_mizutamari",
+"who": "gao",
+"text": "じゃぶじゃぶ わたっちゃえ！"
+},
+{
+"key": "sks_koppu",
+"who": "mama",
+"text": "ジュース、どこに おく？"
+},
+{
+"key": "skr_koppu",
+"who": "mama",
+"text": "そうね。そこなら あんしんね"
+},
+{
+"key": "sks_koppu_pyonmama",
+"who": "pyonmama",
+"text": "ジュース、どこに おく？"
+},
+{
+"key": "skr_koppu_pyonmama",
+"who": "pyonmama",
+"text": "そうね。そこなら あんしんね"
+},
+{
+"key": "sks_koppu_gaomama",
+"who": "gaomama",
+"text": "ジュース、どこに おく？"
+},
+{
+"key": "skr_koppu_gaomama",
+"who": "gaomama",
+"text": "そうね。そこなら あんしんね"
+},
+{
+"key": "sks_koppu_miimama",
+"who": "miimama",
+"text": "ジュース、どこに おく？"
+},
+{
+"key": "skr_koppu_miimama",
+"who": "miimama",
+"text": "そうね。そこなら あんしんね"
+},
+{
+"key": "sks_koppu_chumama",
+"who": "chumama",
+"text": "ジュース、どこに おく？"
+},
+{
+"key": "skr_koppu_chumama",
+"who": "chumama",
+"text": "そうね。そこなら あんしんね"
+},
+{
+"key": "skg_koppu",
+"who": "gao",
+"text": "はしっこで いいや。ポン！"
+},
+{
+"key": "sks_okozukai",
+"who": "meebaa",
+"text": "いらっしゃい。なにに する？"
+},
+{
+"key": "skr_okozukai",
+"who": "meebaa",
+"text": "まあ、しっかり してるのね"
+},
+{
+"key": "skg_okozukai",
+"who": "gao",
+"text": "ぜんぶ ください！ おかし だいすき！"
+},
+{
+"key": "sks_atsui",
+"who": "mama",
+"text": "きょうは とても あついって"
+},
+{
+"key": "skr_atsui",
+"who": "mama",
+"text": "ばっちり。きを つけて いってらっしゃい"
+},
+{
+"key": "sks_atsui_pyonmama",
+"who": "pyonmama",
+"text": "きょうは とても あついって"
+},
+{
+"key": "skr_atsui_pyonmama",
+"who": "pyonmama",
+"text": "ばっちり。きを つけて いってらっしゃい"
+},
+{
+"key": "sks_atsui_gaomama",
+"who": "gaomama",
+"text": "きょうは とても あついって"
+},
+{
+"key": "skr_atsui_gaomama",
+"who": "gaomama",
+"text": "ばっちり。きを つけて いってらっしゃい"
+},
+{
+"key": "sks_atsui_miimama",
+"who": "miimama",
+"text": "きょうは とても あついって"
+},
+{
+"key": "skr_atsui_miimama",
+"who": "miimama",
+"text": "ばっちり。きを つけて いってらっしゃい"
+},
+{
+"key": "sks_atsui_chumama",
+"who": "chumama",
+"text": "きょうは とても あついって"
+},
+{
+"key": "skr_atsui_chumama",
+"who": "chumama",
+"text": "ばっちり。きを つけて いってらっしゃい"
+},
+{
+"key": "skg_atsui",
+"who": "gao",
+"text": "あつくても へいき！ このまま いこうぜ！"
+},
+{
+"key": "sks_wasure",
+"who": "mama",
+"text": "そろそろ でかけるわよ"
+},
+{
+"key": "skr_wasure",
+"who": "mama",
+"text": "わすれもの なし！ いってらっしゃい"
+},
+{
+"key": "sks_wasure_pyonmama",
+"who": "pyonmama",
+"text": "そろそろ でかけるわよ"
+},
+{
+"key": "skr_wasure_pyonmama",
+"who": "pyonmama",
+"text": "わすれもの なし！ いってらっしゃい"
+},
+{
+"key": "sks_wasure_gaomama",
+"who": "gaomama",
+"text": "そろそろ でかけるわよ"
+},
+{
+"key": "skr_wasure_gaomama",
+"who": "gaomama",
+"text": "わすれもの なし！ いってらっしゃい"
+},
+{
+"key": "sks_wasure_miimama",
+"who": "miimama",
+"text": "そろそろ でかけるわよ"
+},
+{
+"key": "skr_wasure_miimama",
+"who": "miimama",
+"text": "わすれもの なし！ いってらっしゃい"
+},
+{
+"key": "sks_wasure_chumama",
+"who": "chumama",
+"text": "そろそろ でかけるわよ"
+},
+{
+"key": "skr_wasure_chumama",
+"who": "chumama",
+"text": "わすれもの なし！ いってらっしゃい"
+},
+{
+"key": "skg_wasure",
+"who": "gao",
+"text": "いってきまーす！ ダッシュ！"
+},
+{
+"key": "sks_buranko",
+"who": "pyon",
+"text": "ブランコ、いっしょに あそぼう！"
+},
+{
+"key": "skr_buranko",
+"who": "pyon",
+"text": "いいね！ じゃんけん ぽん！"
+},
+{
+"key": "skg_buranko",
+"who": "gao",
+"text": "おれが さき！ はやいもん がち！"
+},
+{
+"key": "sks_iikaesu",
+"who": "chu",
+"text": "へーんだ、へたくそ"
+},
+{
+"key": "skr_iikaesu",
+"who": "chu",
+"text": "……ごめん。いいすぎた"
+},
+{
+"key": "skg_iikaesu",
+"who": "gao",
+"text": "なにをー！ おまえの ほうが へたくそ！"
+},
+{
+"key": "sks_test",
+"who": "nobbo",
+"text": "あしたは テストですよ"
+},
+{
+"key": "skr_test",
+"who": "nobbo",
+"text": "じゅんびが できる ひとは つよいですよ"
+},
+{
+"key": "skg_test",
+"who": "gao",
+"text": "あしたの ことは あした かんがえよーっと"
+}
+]
