@@ -76,6 +76,13 @@ for k in [p[0] for p in json.loads((G / "sit/pony_slong.json").read_text())] + [
     if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
     else: missing.append(k)
 (OUT / "slong.json").write_text(json.dumps(pack, separators=(",", ":"))); print("slong", len(pack), round((OUT / "slong.json").stat().st_size / 1e6, 2), "MB")
+# かんがえて みよう（komatta）：ぽにー km_*・kmp_*（sit/pony_komatta.json）、きく人 kmq_*、がお kmg_*、とおせんぼ、BGM
+pack = {}
+for k in [p[0] for p in json.loads((G / "sit/pony_komatta.json").read_text())] + [l["key"] for l in json.loads((R / "tools/aivis/jobs/km1/lines.json").read_text())] + ["bgm_komatta"]:
+    p = A / f"{k}.mp3"
+    if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
+    else: missing.append(k)
+(OUT / "komatta.json").write_text(json.dumps(pack, separators=(",", ":"))); print("komatta", len(pack), round((OUT / "komatta.json").stat().st_size / 1e6, 2), "MB")
 # おでかけ だいぼうけん（ちょうロング）：ぽにーの 声（sit/pony_odekake.json）＋ BGM。場面の 声は jitensha・toukou・gekou の パックを つかう
 pack = {}
 for k in [p[0] for p in json.loads((G / "sit/pony_odekake.json").read_text())] + ["bgm_odekake"]:

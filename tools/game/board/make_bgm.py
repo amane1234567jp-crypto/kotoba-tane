@@ -280,6 +280,10 @@ SONGS = {
  "odekake": dict(bpm=146, root=67, scale=MAJ, bars=8, lead=marimba, lead2=clar, drums=D_walk, comp="pluck", bass="sq", swing=.2, extra=X_bell,
    mel="5 - 1' - 7 6 5 - | 3 - 4 5 3 - - - | 4 - 6 - 5 4 3 - | 2 - 3 4 5 - - - | 5 - 1' - 7 6 5 - | 6 - 1' 2' 1' - 5 - | 4 3 2 - 5, - 7, - | 1 - - - . . . .",
    chords=[1, 1, 4, 5, 1, 4, 5, 1]),
+ # かんがえて みよう：なぞときの わくわく。マリンバと ピチカート、はずむ（あかるく）
+ "komatta": dict(bpm=128, root=67, scale=MAJ, bars=8, lead=marimba, lead2=glock, drums=D_shop, comp="pluck", bass="sq", swing=.3, extra=X_bell,
+   mel="1 - 3 5 - 3 1 - | 2 - 4 6 - 4 2 - | 3 - 5 1' - 7 6 5 | 4 - 2 - 5 - - - | 1 - 3 5 - 3 1 - | 6 - 5 4 3 - 2 - | 7, - 2 - 5 - 4 - | 1 - - - . . . .",
+   chords=[1, 2, 1, 5, 1, 4, 5, 1]),
  "sensei1": dict(bpm=120, root=70, scale=MAJ, bars=8, lead=recorder, lead2=glock, drums=D_class, comp="piano", extra=X_bell,
    mel="3 - 3 - 4 - 5 - | 5 - 4 - 3 - 2 - | 1 - 1 - 2 - 3 - | 3 - - 2 2 - - - | 3 - 3 - 4 - 5 - | 5 - 4 - 3 - 2 - | 1 - 1 - 2 - 3 - | 2 - - 1 1 - - -",
    chords=[1, 5, 1, 5, 1, 5, 1, 5]),
