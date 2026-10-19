@@ -33,7 +33,7 @@ def style_id(model, style):
 def reshape(aps, spec, key):
     moras = [m for ap in aps for m in ap["moras"]]
     flat = "".join(m["text"] for m in moras)
-    if flat != "".join(t.rstrip("?") for t, _ in spec):
+    if flat != "".join(t for t, _ in spec):
         print("ACC MISMATCH", key, flat, spec, flush=True); return aps
     ends = {}; n = 0
     for ap in aps:
@@ -41,7 +41,7 @@ def reshape(aps, spec, key):
     out, i = [], 0
     for t, a in spec:
         grp, acc = [], ""
-        while acc != t.rstrip("?"): grp.append(moras[i]); acc += moras[i]["text"]; i += 1
+        while acc != t: grp.append(moras[i]); acc += moras[i]["text"]; i += 1
         out.append({"moras": grp, "accent": a, "pause_mora": ends.get(i), "is_interrogative": t.endswith("?")})
     return out
 def room_ir(sr, sec=.35):

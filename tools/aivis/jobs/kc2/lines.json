@@ -1,0 +1,112 @@
+[
+{
+"key": "kcq_feel_mama",
+"who": "mama",
+"text": "どんな きもち？"
+},
+{
+"key": "kcq_req_mama",
+"who": "mama",
+"text": "どう して ほしい？"
+},
+{
+"key": "kcq_other_mama",
+"who": "mama",
+"text": "あの こは、どんな きもちかな？"
+},
+{
+"key": "kcq_res_mama",
+"who": "mama",
+"text": "そうだったんだね。きもちを おしえて くれて ありがとう"
+},
+{
+"key": "kcq_feel_pyonmama",
+"who": "pyonmama",
+"text": "どんな きもち？"
+},
+{
+"key": "kcq_req_pyonmama",
+"who": "pyonmama",
+"text": "どう して ほしい？"
+},
+{
+"key": "kcq_other_pyonmama",
+"who": "pyonmama",
+"text": "あの こは、どんな きもちかな？"
+},
+{
+"key": "kcq_res_pyonmama",
+"who": "pyonmama",
+"text": "そうだったんだね。きもちを おしえて くれて ありがとう"
+},
+{
+"key": "kcq_feel_gaomama",
+"who": "gaomama",
+"text": "どんな きもち？"
+},
+{
+"key": "kcq_req_gaomama",
+"who": "gaomama",
+"text": "どう して ほしい？"
+},
+{
+"key": "kcq_other_gaomama",
+"who": "gaomama",
+"text": "あの こは、どんな きもちかな？"
+},
+{
+"key": "kcq_res_gaomama",
+"who": "gaomama",
+"text": "そうだったんだね。きもちを おしえて くれて ありがとう"
+},
+{
+"key": "kcq_feel_miimama",
+"who": "miimama",
+"text": "どんな きもち？"
+},
+{
+"key": "kcq_req_miimama",
+"who": "miimama",
+"text": "どう して ほしい？"
+},
+{
+"key": "kcq_other_miimama",
+"who": "miimama",
+"text": "あの こは、どんな きもちかな？"
+},
+{
+"key": "kcq_res_miimama",
+"who": "miimama",
+"text": "そうだったんだね。きもちを おしえて くれて ありがとう"
+},
+{
+"key": "kcq_feel_chumama",
+"who": "chumama",
+"text": "どんな きもち？"
+},
+{
+"key": "kcq_req_chumama",
+"who": "chumama",
+"text": "どう して ほしい？"
+},
+{
+"key": "kcq_other_chumama",
+"who": "chumama",
+"text": "あの こは、どんな きもちかな？"
+},
+{
+"key": "kcq_res_chumama",
+"who": "chumama",
+"text": "そうだったんだね。きもちを おしえて くれて ありがとう"
+},
+{
+"key": "kcq_res_nobbo",
+"who": "nobbo",
+"text": "そうだったんですね。きもちを おしえて くれて ありがとう"
+},
+{
+"key": "rs_kimochi",
+"who": "kon",
+"text": "ころんで いたかったの。きいて くれて ありがとう"
+}
+]
