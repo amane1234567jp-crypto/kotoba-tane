@@ -4,7 +4,7 @@
    ことばの 課題は だいぼうけん・ともだちの だいぼうけんの ものを つかう（声も その パックから）。
    あたらしい 声は ぽにーだけ（sl_*・n0・n7〜n12。packs/slong.json）。 */
 const SL = ["sumi", "sokashi", "suchu", "eki", "odekake", "kimochi", "makete", "dekigoto"];
-const SL_HIDE = new Set(["makete", "dekigoto"]); /* 声が そろうまで メニューに ださない */
+const SL_HIDE = new Set([]); /* 声が そろうまで メニューに ださない コースを ここに */
 const isSL = () => SL.includes(curStage);
 SL.forEach(id => LONGS.add(id));
 const SL_TH = {
