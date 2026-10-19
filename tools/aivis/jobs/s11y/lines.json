@@ -1,0 +1,92 @@
+[
+{
+"key": "szt_akubi",
+"who": "pyon",
+"text": "ちょっと つかれちゃったな。ほかの ことも したいな"
+},
+{
+"key": "szr_samui",
+"who": "mama",
+"text": "ありがとう。よく きが ついたわね"
+},
+{
+"key": "szr_samui_pyonmama",
+"who": "pyonmama",
+"text": "ありがとう。よく きが ついたわね"
+},
+{
+"key": "szr_samui_gaomama",
+"who": "gaomama",
+"text": "ありがとう。よく きが ついたわね"
+},
+{
+"key": "szr_samui_miimama",
+"who": "miimama",
+"text": "ありがとう。よく きが ついたわね"
+},
+{
+"key": "szr_samui_chumama",
+"who": "chumama",
+"text": "ありがとう。よく きが ついたわね"
+},
+{
+"key": "tbg_ojama",
+"who": "gao",
+"text": "やっほー！ くつは そのへんで いいや"
+},
+{
+"key": "tbt_erande",
+"who": "pyon",
+"text": "なにで あそべるかな。たのしみ"
+},
+{
+"key": "tbr_yukkuri",
+"who": "piyoko",
+"text": "わーい！ まてまてー！"
+},
+{
+"key": "tbg_enpitsu",
+"who": "gao",
+"text": "しらなーい。おれじゃ ないよー"
+},
+{
+"key": "skr_mizutamari",
+"who": "mama",
+"text": "あら、じょうずに よけたわね"
+},
+{
+"key": "skr_mizutamari_pyonmama",
+"who": "pyonmama",
+"text": "あら、じょうずに よけたわね"
+},
+{
+"key": "skr_mizutamari_gaomama",
+"who": "gaomama",
+"text": "あら、じょうずに よけたわね"
+},
+{
+"key": "skr_mizutamari_miimama",
+"who": "miimama",
+"text": "あら、じょうずに よけたわね"
+},
+{
+"key": "skr_mizutamari_chumama",
+"who": "chumama",
+"text": "あら、じょうずに よけたわね"
+},
+{
+"key": "skg_koppu",
+"who": "gao",
+"text": "はしっこで いいや。ポン！"
+},
+{
+"key": "skg_buranko",
+"who": "gao",
+"text": "おれが さき！ はやいもん がち！"
+},
+{
+"key": "sks_iikaesu",
+"who": "chu",
+"text": "やーい、へたくそ"
+}
+]
