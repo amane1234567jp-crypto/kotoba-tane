@@ -1,0 +1,307 @@
+[
+{
+"key": "kcq_open_mama",
+"who": "mama",
+"text": "なにか あったの？"
+},
+{
+"key": "kcq_feel_mama",
+"who": "mama",
+"text": "どんな きもち？"
+},
+{
+"key": "kcq_why_mama",
+"who": "mama",
+"text": "どうして そんな きもちに なったの？"
+},
+{
+"key": "kcq_want_mama",
+"who": "mama",
+"text": "これから どう したい？"
+},
+{
+"key": "kcq_mix_mama",
+"who": "mama",
+"text": "きもちは ひとつ だけかな？"
+},
+{
+"key": "kcq_before_mama",
+"who": "mama",
+"text": "はじめは どんな きもち だった？"
+},
+{
+"key": "kcq_deg_mama",
+"who": "mama",
+"text": "どのくらい？ ちょっと？ すごく？"
+},
+{
+"key": "kcq_req_mama",
+"who": "mama",
+"text": "どう して ほしい？"
+},
+{
+"key": "kcq_other_mama",
+"who": "mama",
+"text": "あの こは、どんな きもちかな？"
+},
+{
+"key": "kcq_otherSay_mama",
+"who": "mama",
+"text": "なんて こえを かけたら いいかな？"
+},
+{
+"key": "kcq_res_mama",
+"who": "mama",
+"text": "そうだったんだね。きもちを おしえて くれて ありがとう"
+},
+{
+"key": "kcq_open_pyonmama",
+"who": "pyonmama",
+"text": "なにか あったの？"
+},
+{
+"key": "kcq_feel_pyonmama",
+"who": "pyonmama",
+"text": "どんな きもち？"
+},
+{
+"key": "kcq_why_pyonmama",
+"who": "pyonmama",
+"text": "どうして そんな きもちに なったの？"
+},
+{
+"key": "kcq_want_pyonmama",
+"who": "pyonmama",
+"text": "これから どう したい？"
+},
+{
+"key": "kcq_mix_pyonmama",
+"who": "pyonmama",
+"text": "きもちは ひとつ だけかな？"
+},
+{
+"key": "kcq_before_pyonmama",
+"who": "pyonmama",
+"text": "はじめは どんな きもち だった？"
+},
+{
+"key": "kcq_deg_pyonmama",
+"who": "pyonmama",
+"text": "どのくらい？ ちょっと？ すごく？"
+},
+{
+"key": "kcq_req_pyonmama",
+"who": "pyonmama",
+"text": "どう して ほしい？"
+},
+{
+"key": "kcq_other_pyonmama",
+"who": "pyonmama",
+"text": "あの こは、どんな きもちかな？"
+},
+{
+"key": "kcq_otherSay_pyonmama",
+"who": "pyonmama",
+"text": "なんて こえを かけたら いいかな？"
+},
+{
+"key": "kcq_res_pyonmama",
+"who": "pyonmama",
+"text": "そうだったんだね。きもちを おしえて くれて ありがとう"
+},
+{
+"key": "kcq_open_gaomama",
+"who": "gaomama",
+"text": "なにか あったの？"
+},
+{
+"key": "kcq_feel_gaomama",
+"who": "gaomama",
+"text": "どんな きもち？"
+},
+{
+"key": "kcq_why_gaomama",
+"who": "gaomama",
+"text": "どうして そんな きもちに なったの？"
+},
+{
+"key": "kcq_want_gaomama",
+"who": "gaomama",
+"text": "これから どう したい？"
+},
+{
+"key": "kcq_mix_gaomama",
+"who": "gaomama",
+"text": "きもちは ひとつ だけかな？"
+},
+{
+"key": "kcq_before_gaomama",
+"who": "gaomama",
+"text": "はじめは どんな きもち だった？"
+},
+{
+"key": "kcq_deg_gaomama",
+"who": "gaomama",
+"text": "どのくらい？ ちょっと？ すごく？"
+},
+{
+"key": "kcq_req_gaomama",
+"who": "gaomama",
+"text": "どう して ほしい？"
+},
+{
+"key": "kcq_other_gaomama",
+"who": "gaomama",
+"text": "あの こは、どんな きもちかな？"
+},
+{
+"key": "kcq_otherSay_gaomama",
+"who": "gaomama",
+"text": "なんて こえを かけたら いいかな？"
+},
+{
+"key": "kcq_res_gaomama",
+"who": "gaomama",
+"text": "そうだったんだね。きもちを おしえて くれて ありがとう"
+},
+{
+"key": "kcq_open_miimama",
+"who": "miimama",
+"text": "なにか あったの？"
+},
+{
+"key": "kcq_feel_miimama",
+"who": "miimama",
+"text": "どんな きもち？"
+},
+{
+"key": "kcq_why_miimama",
+"who": "miimama",
+"text": "どうして そんな きもちに なったの？"
+},
+{
+"key": "kcq_want_miimama",
+"who": "miimama",
+"text": "これから どう したい？"
+},
+{
+"key": "kcq_mix_miimama",
+"who": "miimama",
+"text": "きもちは ひとつ だけかな？"
+},
+{
+"key": "kcq_before_miimama",
+"who": "miimama",
+"text": "はじめは どんな きもち だった？"
+},
+{
+"key": "kcq_deg_miimama",
+"who": "miimama",
+"text": "どのくらい？ ちょっと？ すごく？"
+},
+{
+"key": "kcq_req_miimama",
+"who": "miimama",
+"text": "どう して ほしい？"
+},
+{
+"key": "kcq_other_miimama",
+"who": "miimama",
+"text": "あの こは、どんな きもちかな？"
+},
+{
+"key": "kcq_otherSay_miimama",
+"who": "miimama",
+"text": "なんて こえを かけたら いいかな？"
+},
+{
+"key": "kcq_res_miimama",
+"who": "miimama",
+"text": "そうだったんだね。きもちを おしえて くれて ありがとう"
+},
+{
+"key": "kcq_open_chumama",
+"who": "chumama",
+"text": "なにか あったの？"
+},
+{
+"key": "kcq_feel_chumama",
+"who": "chumama",
+"text": "どんな きもち？"
+},
+{
+"key": "kcq_why_chumama",
+"who": "chumama",
+"text": "どうして そんな きもちに なったの？"
+},
+{
+"key": "kcq_want_chumama",
+"who": "chumama",
+"text": "これから どう したい？"
+},
+{
+"key": "kcq_mix_chumama",
+"who": "chumama",
+"text": "きもちは ひとつ だけかな？"
+},
+{
+"key": "kcq_before_chumama",
+"who": "chumama",
+"text": "はじめは どんな きもち だった？"
+},
+{
+"key": "kcq_deg_chumama",
+"who": "chumama",
+"text": "どのくらい？ ちょっと？ すごく？"
+},
+{
+"key": "kcq_req_chumama",
+"who": "chumama",
+"text": "どう して ほしい？"
+},
+{
+"key": "kcq_other_chumama",
+"who": "chumama",
+"text": "あの こは、どんな きもちかな？"
+},
+{
+"key": "kcq_otherSay_chumama",
+"who": "chumama",
+"text": "なんて こえを かけたら いいかな？"
+},
+{
+"key": "kcq_res_chumama",
+"who": "chumama",
+"text": "そうだったんだね。きもちを おしえて くれて ありがとう"
+},
+{
+"key": "kcq_open_nobbo",
+"who": "nobbo",
+"text": "なにか ありましたか？"
+},
+{
+"key": "kcq_feel_nobbo",
+"who": "nobbo",
+"text": "どんな きもちですか？"
+},
+{
+"key": "kcq_why_nobbo",
+"who": "nobbo",
+"text": "どうして そんな きもちに なりましたか？"
+},
+{
+"key": "kcq_want_nobbo",
+"who": "nobbo",
+"text": "これから どう したいですか？"
+},
+{
+"key": "kcq_res_nobbo",
+"who": "nobbo",
+"text": "そうだったんですね。きもちを おしえて くれて ありがとう"
+},
+{
+"key": "rs_kimochi",
+"who": "kon",
+"text": "ころんで いたかったの。きいて くれて ありがとう"
+}
+]
