@@ -1,0 +1,477 @@
+[
+{
+"key": "szt_tokei",
+"who": "mama",
+"text": "いそがなきゃ。おくれちゃう"
+},
+{
+"key": "szr_tokei",
+"who": "mama",
+"text": "ありがとう。かえったら ゆっくり きくね"
+},
+{
+"key": "szt_tokei_pyonmama",
+"who": "pyonmama",
+"text": "いそがなきゃ。おくれちゃう"
+},
+{
+"key": "szr_tokei_pyonmama",
+"who": "pyonmama",
+"text": "ありがとう。かえったら ゆっくり きくね"
+},
+{
+"key": "szt_tokei_gaomama",
+"who": "gaomama",
+"text": "いそがなきゃ。おくれちゃう"
+},
+{
+"key": "szr_tokei_gaomama",
+"who": "gaomama",
+"text": "ありがとう。かえったら ゆっくり きくね"
+},
+{
+"key": "szt_tokei_miimama",
+"who": "miimama",
+"text": "いそがなきゃ。おくれちゃう"
+},
+{
+"key": "szr_tokei_miimama",
+"who": "miimama",
+"text": "ありがとう。かえったら ゆっくり きくね"
+},
+{
+"key": "szt_tokei_chumama",
+"who": "chumama",
+"text": "いそがなきゃ。おくれちゃう"
+},
+{
+"key": "szr_tokei_chumama",
+"who": "chumama",
+"text": "ありがとう。かえったら ゆっくり きくね"
+},
+{
+"key": "szg_tokei",
+"who": "gao",
+"text": "ねえねえ、きいて きいて！ きょうね、がっこうでね……"
+},
+{
+"key": "szt_akubi",
+"who": "pyon",
+"text": "ちょっと つかれちゃったな。ほかの ことも したいな"
+},
+{
+"key": "szr_akubi",
+"who": "pyon",
+"text": "えへへ。じゃあ、おえかき しよう"
+},
+{
+"key": "szg_akubi",
+"who": "gao",
+"text": "それでね、ティラノサウルスがね、それでね……"
+},
+{
+"key": "szt_tameiki",
+"who": "chu",
+"text": "テストが だめだったな……"
+},
+{
+"key": "szr_tameiki",
+"who": "chu",
+"text": "……テスト、まちがえちゃったんだ。きいて くれて ありがとう"
+},
+{
+"key": "szg_tameiki",
+"who": "gao",
+"text": "おーい、ちゅう！ そとで あそぼうぜ！ はやく！"
+},
+{
+"key": "szt_shii",
+"who": "nobbo",
+"text": "しずかに して ほしいですね"
+},
+{
+"key": "szr_shii",
+"who": "nobbo",
+"text": "ありがとう。じょうずに きづけましたね"
+},
+{
+"key": "szg_shii",
+"who": "gao",
+"text": "ねえねえ、きのうの テレビ みた？ あはは！"
+},
+{
+"key": "szt_ashi",
+"who": "mii",
+"text": "おそいなあ。ずっと まってたのに"
+},
+{
+"key": "szr_ashi",
+"who": "mii",
+"text": "……もう。つぎは じかんを まもってね"
+},
+{
+"key": "szg_ashi",
+"who": "gao",
+"text": "よっ！ なに して あそぶ？"
+},
+{
+"key": "szs_samui",
+"who": "mama",
+"text": "この へや、ちょっと さむいね"
+},
+{
+"key": "szt_samui",
+"who": "mama",
+"text": "まどを しめて くれると うれしいな"
+},
+{
+"key": "szr_samui",
+"who": "mama",
+"text": "ありがとう。よく きが ついたわね"
+},
+{
+"key": "szs_samui_pyonmama",
+"who": "pyonmama",
+"text": "この へや、ちょっと さむいね"
+},
+{
+"key": "szt_samui_pyonmama",
+"who": "pyonmama",
+"text": "まどを しめて くれると うれしいな"
+},
+{
+"key": "szr_samui_pyonmama",
+"who": "pyonmama",
+"text": "ありがとう。よく きが ついたわね"
+},
+{
+"key": "szs_samui_gaomama",
+"who": "gaomama",
+"text": "この へや、ちょっと さむいね"
+},
+{
+"key": "szt_samui_gaomama",
+"who": "gaomama",
+"text": "まどを しめて くれると うれしいな"
+},
+{
+"key": "szr_samui_gaomama",
+"who": "gaomama",
+"text": "ありがとう。よく きが ついたわね"
+},
+{
+"key": "szs_samui_miimama",
+"who": "miimama",
+"text": "この へや、ちょっと さむいね"
+},
+{
+"key": "szt_samui_miimama",
+"who": "miimama",
+"text": "まどを しめて くれると うれしいな"
+},
+{
+"key": "szr_samui_miimama",
+"who": "miimama",
+"text": "ありがとう。よく きが ついたわね"
+},
+{
+"key": "szs_samui_chumama",
+"who": "chumama",
+"text": "この へや、ちょっと さむいね"
+},
+{
+"key": "szt_samui_chumama",
+"who": "chumama",
+"text": "まどを しめて くれると うれしいな"
+},
+{
+"key": "szr_samui_chumama",
+"who": "chumama",
+"text": "ありがとう。よく きが ついたわね"
+},
+{
+"key": "szg_samui",
+"who": "gao",
+"text": "ふーん、さむいんだ。おれは へいき！"
+},
+{
+"key": "szs_minicar",
+"who": "chu",
+"text": "その ミニカー、かっこいいね〜"
+},
+{
+"key": "szt_minicar",
+"who": "chu",
+"text": "ぼくも ちょっと あそんで みたいな"
+},
+{
+"key": "szr_minicar",
+"who": "chu",
+"text": "いいの？ やったあ！ ありがとう"
+},
+{
+"key": "szg_minicar",
+"who": "gao",
+"text": "だろ？ いいだろー！ ぜったい かさないけどな！"
+},
+{
+"key": "szs_hanashi",
+"who": "nobbo",
+"text": "まだ はなして いる ひとが いますね"
+},
+{
+"key": "szt_hanashi",
+"who": "nobbo",
+"text": "しずかに なるのを まって いますよ"
+},
+{
+"key": "szr_hanashi",
+"who": "nobbo",
+"text": "ありがとう。では はじめますね"
+},
+{
+"key": "szg_hanashi",
+"who": "gao",
+"text": "え？ だれだろう？ ぼくじゃ ないよ。それでさ……"
+},
+{
+"key": "szs_jikan",
+"who": "mama",
+"text": "あら、もう こんな じかん！"
+},
+{
+"key": "szt_jikan",
+"who": "mama",
+"text": "はやく したくして くれないかな"
+},
+{
+"key": "szr_jikan",
+"who": "mama",
+"text": "たすかるわ。いそごうね"
+},
+{
+"key": "szs_jikan_pyonmama",
+"who": "pyonmama",
+"text": "あら、もう こんな じかん！"
+},
+{
+"key": "szt_jikan_pyonmama",
+"who": "pyonmama",
+"text": "はやく したくして くれないかな"
+},
+{
+"key": "szr_jikan_pyonmama",
+"who": "pyonmama",
+"text": "たすかるわ。いそごうね"
+},
+{
+"key": "szs_jikan_gaomama",
+"who": "gaomama",
+"text": "あら、もう こんな じかん！"
+},
+{
+"key": "szt_jikan_gaomama",
+"who": "gaomama",
+"text": "はやく したくして くれないかな"
+},
+{
+"key": "szr_jikan_gaomama",
+"who": "gaomama",
+"text": "たすかるわ。いそごうね"
+},
+{
+"key": "szs_jikan_miimama",
+"who": "miimama",
+"text": "あら、もう こんな じかん！"
+},
+{
+"key": "szt_jikan_miimama",
+"who": "miimama",
+"text": "はやく したくして くれないかな"
+},
+{
+"key": "szr_jikan_miimama",
+"who": "miimama",
+"text": "たすかるわ。いそごうね"
+},
+{
+"key": "szs_jikan_chumama",
+"who": "chumama",
+"text": "あら、もう こんな じかん！"
+},
+{
+"key": "szt_jikan_chumama",
+"who": "chumama",
+"text": "はやく したくして くれないかな"
+},
+{
+"key": "szr_jikan_chumama",
+"who": "chumama",
+"text": "たすかるわ。いそごうね"
+},
+{
+"key": "szg_jikan",
+"who": "gao",
+"text": "ほんとだ、もう こんな じかん。……さて、つづき あそぼうっと"
+},
+{
+"key": "szt_akachan",
+"who": "mama",
+"text": "おきないで ほしいな"
+},
+{
+"key": "szr_akachan",
+"who": "mama",
+"text": "ありがとう。やさしいのね"
+},
+{
+"key": "szt_akachan_pyonmama",
+"who": "pyonmama",
+"text": "おきないで ほしいな"
+},
+{
+"key": "szr_akachan_pyonmama",
+"who": "pyonmama",
+"text": "ありがとう。やさしいのね"
+},
+{
+"key": "szt_akachan_gaomama",
+"who": "gaomama",
+"text": "おきないで ほしいな"
+},
+{
+"key": "szr_akachan_gaomama",
+"who": "gaomama",
+"text": "ありがとう。やさしいのね"
+},
+{
+"key": "szt_akachan_miimama",
+"who": "miimama",
+"text": "おきないで ほしいな"
+},
+{
+"key": "szr_akachan_miimama",
+"who": "miimama",
+"text": "ありがとう。やさしいのね"
+},
+{
+"key": "szt_akachan_chumama",
+"who": "chumama",
+"text": "おきないで ほしいな"
+},
+{
+"key": "szr_akachan_chumama",
+"who": "chumama",
+"text": "ありがとう。やさしいのね"
+},
+{
+"key": "szg_akachan",
+"who": "gao",
+"text": "よーし、かいじゅうごっこだ！ ガオーッ！"
+},
+{
+"key": "szt_makete",
+"who": "kuma",
+"text": "いっしょうけんめい はしったのに……くやしいな"
+},
+{
+"key": "szr_makete",
+"who": "kuma",
+"text": "……ありがとう。つぎは もっと はやく なるぞ"
+},
+{
+"key": "szg_makete",
+"who": "gao",
+"text": "やったー！ おれの かちー！ くまくん おそーい！"
+},
+{
+"key": "szs_present",
+"who": "kon",
+"text": "プレゼント、きに いって くれるかな……"
+},
+{
+"key": "szt_present",
+"who": "kon",
+"text": "よろこんで くれるかな。どきどき"
+},
+{
+"key": "szr_present",
+"who": "kon",
+"text": "えへへ、よかった！"
+},
+{
+"key": "szg_present",
+"who": "gao",
+"text": "えー、これ いらなーい"
+},
+{
+"key": "szs_shiranai",
+"who": "pyon",
+"text": "あれ？ みんな どこ？"
+},
+{
+"key": "szt_shiranai",
+"who": "pyon",
+"text": "どこに いけば いいか しらないよ"
+},
+{
+"key": "szr_shiranai",
+"who": "pyon",
+"text": "そうだったの！ おしえて くれて ありがとう"
+},
+{
+"key": "szg_shiranai",
+"who": "gao",
+"text": "こうていに いれば？ しらなーい"
+},
+{
+"key": "szs_sakasa",
+"who": "mii",
+"text": "え？ なんの え？ よく わからないよ"
+},
+{
+"key": "szt_sakasa",
+"who": "mii",
+"text": "さかさまで、よく みえないわ"
+},
+{
+"key": "szr_sakasa",
+"who": "mii",
+"text": "あ、ねこの えね！ じょうず！"
+},
+{
+"key": "szg_sakasa",
+"who": "gao",
+"text": "みれば わかるでしょ！ ねこだよ、ねこ！"
+},
+{
+"key": "szt_rouka",
+"who": "kuma",
+"text": "ぶつかって、ころんで しまう"
+},
+{
+"key": "szr_rouka",
+"who": "kuma",
+"text": "わっ！ あぶなかった。ありがとう"
+},
+{
+"key": "szg_rouka",
+"who": "gao",
+"text": "いけいけー！ もっと はやく はしれー！"
+},
+{
+"key": "szt_tsumiki",
+"who": "chu",
+"text": "くずれて しまう"
+},
+{
+"key": "szr_tsumiki",
+"who": "chu",
+"text": "ほんとだ。そっと そっと……できた！"
+},
+{
+"key": "szg_tsumiki",
+"who": "gao",
+"text": "もっと もっと！ てんじょうまで つんじゃえ！"
+}
+]

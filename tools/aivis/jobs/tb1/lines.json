@@ -1,0 +1,362 @@
+[
+{
+"key": "tbs_reizouko",
+"who": "kuma",
+"text": "ゆっくり して いってね"
+},
+{
+"key": "tbt_reizouko",
+"who": "kuma",
+"text": "かってに あけられたら、こまっちゃうな"
+},
+{
+"key": "tbr_reizouko",
+"who": "kuma",
+"text": "いいよ！ はい、どうぞ"
+},
+{
+"key": "tbg_reizouko",
+"who": "gao",
+"text": "のど かわいた！ れいぞうこ あけちゃおう！"
+},
+{
+"key": "tbs_ojama",
+"who": "kuma",
+"text": "いらっしゃい！"
+},
+{
+"key": "tbt_ojama",
+"who": "kuma",
+"text": "ちゃんと あいさつ して くれると うれしいな"
+},
+{
+"key": "tbr_ojama",
+"who": "kuma",
+"text": "どうぞ、あがって！"
+},
+{
+"key": "tbg_ojama",
+"who": "gao",
+"text": "やっほー！ くつは そのへんで いいや"
+},
+{
+"key": "tbs_katazuke",
+"who": "kuma",
+"text": "そろそろ かえる じかんだね"
+},
+{
+"key": "tbt_katazuke",
+"who": "kuma",
+"text": "ちらかった まま だと、ひとりで かたづけるの たいへんだな"
+},
+{
+"key": "tbr_katazuke",
+"who": "kuma",
+"text": "ありがとう！ また あそぼうね"
+},
+{
+"key": "tbg_katazuke",
+"who": "gao",
+"text": "じゃあね、バイバーイ！"
+},
+{
+"key": "tbs_irasshai",
+"who": "pyon",
+"text": "おじゃまします"
+},
+{
+"key": "tbt_irasshai",
+"who": "pyon",
+"text": "はじめて くる いえ、ちょっと どきどき するな"
+},
+{
+"key": "tbr_irasshai",
+"who": "pyon",
+"text": "ありがとう。おじゃまします！"
+},
+{
+"key": "tbg_irasshai",
+"who": "gao",
+"text": "あ、きたの。いま ゲーム してるから まってて"
+},
+{
+"key": "tbs_erande",
+"who": "pyon",
+"text": "なに して あそぶ？"
+},
+{
+"key": "tbt_erande",
+"who": "pyon",
+"text": "なにで あそべるかな。たのしみ"
+},
+{
+"key": "tbr_erande",
+"who": "pyon",
+"text": "いいの？ じゃあ、ブロックに する！"
+},
+{
+"key": "tbg_erande",
+"who": "gao",
+"text": "おれが きめる！ ぜんぶ おれの おもちゃ だからな！"
+},
+{
+"key": "tbs_yukkuri",
+"who": "piyoko",
+"text": "まってー！ おいつけないよー"
+},
+{
+"key": "tbt_yukkuri",
+"who": "piyoko",
+"text": "みんな はやくて、つまらないな"
+},
+{
+"key": "tbr_yukkuri",
+"who": "piyoko",
+"text": "わーい！ まてまてー！"
+},
+{
+"key": "tbg_yukkuri",
+"who": "gao",
+"text": "へへーん、つかまらないよーだ！ びゅーん！"
+},
+{
+"key": "tbs_rule",
+"who": "piyoko",
+"text": "ドッジボールの ルール、わかんない……"
+},
+{
+"key": "tbt_rule",
+"who": "piyoko",
+"text": "いっしょに やりたいけど、こわいな"
+},
+{
+"key": "tbr_rule",
+"who": "piyoko",
+"text": "そっか！ やって みる！"
+},
+{
+"key": "tbg_rule",
+"who": "gao",
+"text": "ルールも しらないの？ じゃあ だめー"
+},
+{
+"key": "tbs_ichinen",
+"who": "tora",
+"text": "はい、これ、おとしたよ"
+},
+{
+"key": "tbt_ichinen",
+"who": "tora",
+"text": "ちゃんと おれいを いえるかな"
+},
+{
+"key": "tbr_ichinen",
+"who": "tora",
+"text": "どういたしまして。きを つけてね"
+},
+{
+"key": "tbg_ichinen",
+"who": "gao",
+"text": "おう、サンキュー！"
+},
+{
+"key": "tbs_gourei",
+"who": "nobbo",
+"text": "では、とうばんさん、おねがいします"
+},
+{
+"key": "tbt_gourei",
+"who": "nobbo",
+"text": "とうばんさんが ごうれいを かけて くれるのを、まって いますよ"
+},
+{
+"key": "tbr_gourei",
+"who": "nobbo",
+"text": "はい、いただきます。じょうずでしたよ"
+},
+{
+"key": "tbg_gourei",
+"who": "gao",
+"text": "えー、だれか やってよー"
+},
+{
+"key": "tbs_kubaru",
+"who": "chu",
+"text": "ぼく、からあげ おおめに ちょうだい"
+},
+{
+"key": "tbt_kubaru",
+"who": "chu",
+"text": "おおく もらえたら いいな"
+},
+{
+"key": "tbr_kubaru",
+"who": "chu",
+"text": "そっか。おかわり、まってるね"
+},
+{
+"key": "tbg_kubaru",
+"who": "gao",
+"text": "いいよ、ともだちだから おまけ！ ……あれ、たりない"
+},
+{
+"key": "tbs_pass",
+"who": "pyon",
+"text": "パス、パス！ こっち あいてるよ！"
+},
+{
+"key": "tbt_pass",
+"who": "pyon",
+"text": "わたしにも ボールを まわして ほしいな"
+},
+{
+"key": "tbr_pass",
+"who": "pyon",
+"text": "ナイスパス！ いくよー！"
+},
+{
+"key": "tbg_pass",
+"who": "gao",
+"text": "おれが ひとりで シュートする！ どけどけー！"
+},
+{
+"key": "tbs_enpitsu",
+"who": "mii",
+"text": "あれ？ わたしの えんぴつ、おれてる……"
+},
+{
+"key": "tbt_enpitsu",
+"who": "mii",
+"text": "だれが やったのかな。かなしいな"
+},
+{
+"key": "tbr_enpitsu",
+"who": "mii",
+"text": "……いって くれて ありがとう。いいよ"
+},
+{
+"key": "tbg_enpitsu",
+"who": "gao",
+"text": "しーらない。おれじゃ ないよー"
+},
+{
+"key": "tbs_kiku",
+"who": "kuma",
+"text": "えっと……すきな ものは……"
+},
+{
+"key": "tbt_kiku",
+"who": "kuma",
+"text": "みんな きいて くれるかな。どきどき"
+},
+{
+"key": "tbr_kiku",
+"who": "kuma",
+"text": "……ありがとう。がんばって よかった"
+},
+{
+"key": "tbg_kiku",
+"who": "gao",
+"text": "はやく おわってよー。つまんなーい"
+},
+{
+"key": "tbs_seki",
+"who": "kamejii",
+"text": "よっこらしょ……"
+},
+{
+"key": "tbt_seki",
+"who": "kamejii",
+"text": "すわれたら たすかるのう"
+},
+{
+"key": "tbr_seki",
+"who": "kamejii",
+"text": "ほっほ、ありがとう。やさしい こだねえ"
+},
+{
+"key": "tbg_seki",
+"who": "gao",
+"text": "ラッキー、まどの そば あいてる！ すわっちゃえ"
+},
+{
+"key": "tbs_tetsudai",
+"who": "mama",
+"text": "ふう、いそがしい いそがしい"
+},
+{
+"key": "tbt_tetsudai",
+"who": "mama",
+"text": "てつだって くれたら、たすかるな"
+},
+{
+"key": "tbr_tetsudai",
+"who": "mama",
+"text": "ありがとう！ たすかるわ"
+},
+{
+"key": "tbs_tetsudai_pyonmama",
+"who": "pyonmama",
+"text": "ふう、いそがしい いそがしい"
+},
+{
+"key": "tbt_tetsudai_pyonmama",
+"who": "pyonmama",
+"text": "てつだって くれたら、たすかるな"
+},
+{
+"key": "tbr_tetsudai_pyonmama",
+"who": "pyonmama",
+"text": "ありがとう！ たすかるわ"
+},
+{
+"key": "tbs_tetsudai_gaomama",
+"who": "gaomama",
+"text": "ふう、いそがしい いそがしい"
+},
+{
+"key": "tbt_tetsudai_gaomama",
+"who": "gaomama",
+"text": "てつだって くれたら、たすかるな"
+},
+{
+"key": "tbr_tetsudai_gaomama",
+"who": "gaomama",
+"text": "ありがとう！ たすかるわ"
+},
+{
+"key": "tbs_tetsudai_miimama",
+"who": "miimama",
+"text": "ふう、いそがしい いそがしい"
+},
+{
+"key": "tbt_tetsudai_miimama",
+"who": "miimama",
+"text": "てつだって くれたら、たすかるな"
+},
+{
+"key": "tbr_tetsudai_miimama",
+"who": "miimama",
+"text": "ありがとう！ たすかるわ"
+},
+{
+"key": "tbs_tetsudai_chumama",
+"who": "chumama",
+"text": "ふう、いそがしい いそがしい"
+},
+{
+"key": "tbt_tetsudai_chumama",
+"who": "chumama",
+"text": "てつだって くれたら、たすかるな"
+},
+{
+"key": "tbr_tetsudai_chumama",
+"who": "chumama",
+"text": "ありがとう！ たすかるわ"
+},
+{
+"key": "tbg_tetsudai",
+"who": "gao",
+"text": "ママー、あそんで あそんでー！"
+}
+]
