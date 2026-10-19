@@ -201,12 +201,12 @@ async function slJanken(pc) {
     const g = panel("じゃんけん", "#FFF8E8"); txt(g, 420, 300, NAMES[pc.kind], 50, { "text-anchor": "middle" }); txt(g, 1180, 300, NAMES[lead.kind], 50, { "text-anchor": "middle" });
     const a = txt(g, 420, 620, "✊", 220, { "text-anchor": "middle" }), b = txt(g, 1180, 620, "✊", 220, { "text-anchor": "middle" }); txt(g, 800, 560, "VS", 80, { "text-anchor": "middle", fill: "#E8735A" });
     // ひとが あそんで いる ときは、じぶんで てを えらぶ（タッチ）。あいては かくして おく
-    const pick = (o, cx, txtEl) => { if (!o.player) return Promise.resolve(rnd(3));
+    const pick = (o, cx, txtEl) => { if (!o.player || o.player.cpu) return Promise.resolve(rnd(3));
       txtEl.textContent = "？"; const bs = el("g", {}, g);
       return new Promise(res => { let done = false; const fin = v => { if (done) return; done = true; bs.remove(); txtEl.textContent = "？"; txt(g, cx, 760, "きめた！", 44, { "text-anchor": "middle", fill: "#3F9150" }); blip(900, 1300, .08, "square"); res(v); };
         H.forEach((h, i) => { const b0 = el("g", { style: "cursor:pointer" }, bs), bx = cx - 210 + i * 140; el("rect", { x: bx, y: 690, width: 140 - 16, height: 130, rx: 24, fill: "#FFFFFF", ...S6(6) }, b0); txt(b0, bx + 62, 785, h, 80, { "text-anchor": "middle" }); b0.onpointerdown = () => fin(i); });
         later(20000, () => fin(rnd(3))); }); };
-    if (pc.player || lead.player) await speak(C.pony, "sl_jk_pick", "じぶんの てを タッチしてね");
+    if ((pc.player && !pc.player.cpu) || (lead.player && !lead.player.cpu)) await speak(C.pony, "sl_jk_pick", "じぶんの てを タッチしてね");
     const [x, y] = await Promise.all([pick(pc, 420, a), pick(lead, 1180, b)]);
     await speak(C.pony, "sl_jk_say", "じゃんけん……"); for (let i = 0; i < 6; i++) { a.textContent = H[i % 3]; b.textContent = H[(i + 1) % 3]; blip(500 + i * 60, 600, .05, "square"); await sleep(110); }
     a.textContent = H[x]; b.textContent = H[y]; boom(.3); await speak(C.pony, "sl_jk_pon", "ぽん！");
@@ -382,7 +382,7 @@ async function slBattle(pc) {
   await speak(C.pony, "sl_battle", "みんなで サイコロ バトル！ いちばん おおきい めの ひとが 3マス すすむよ");
   await speak(C.pony, "sl_bt_tap", "じゅんばんに、じぶんの サイコロを タッチしてね");
   for (let i = 0; i < ps.length; i++) { const d = dice[i]; const off = lampOn(d.r); markAbove(ps[i].pc, "ex");
-    await new Promise(res => { d.onpointerdown = () => { d.onpointerdown = null; res(); }; }); off();
+    if (ps[i].cpu) await sleep(800); else await new Promise(res => { d.onpointerdown = () => { d.onpointerdown = null; res(); }; }); off();
     for (let k = 0; k < 8; k++) { d.t.textContent = String(1 + rnd(6)); blip(400 + k * 50, 500, .04, "square"); await sleep(65); }
     const v = 1 + rnd(6); vals.push(v); d.t.textContent = String(v); boom(.2); await sleep(350); }
   const mx = Math.max(...vals); dice.forEach((d, i) => { if (vals[i] === mx) d.r.setAttribute("fill", "#FFE27A"); }); const win = ps.filter((p, i) => vals[i] === mx); await sleep(900); g.remove();

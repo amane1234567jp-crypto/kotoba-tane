@@ -466,7 +466,7 @@ let speakPart = function (c, key, text, frac) {
     a.onended = fin; setTimeout(fin, 4000); a.play().catch(fin);
   });
 }
-const playMove = (c, id) => MOVES.find(m => m.id === id).play(c);
+const playMove = (c, id) => (MOVES.find(m => m.id === id) || MOVES.find(m => m.id === "nod")).play(c); // ない うごきは うなずく（とまらない ように）
 const JOY = ["banzai", "dance", "spin", "laugh", "clap", "pump", "heart"];
 
 /* ---------- 難しさの調整 ---------- */
