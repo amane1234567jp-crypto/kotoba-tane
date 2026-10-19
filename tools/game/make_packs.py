@@ -7,7 +7,7 @@ from pathlib import Path
 G = Path(__file__).resolve().parent; R = G.parents[1]
 A = G / "stage_audio"; OUT = R / "packs"; OUT.mkdir(exist_ok=True)
 S = json.loads((G / "sit/sits.json").read_text())
-RIVAL_OF = {"kousha": "gao", "undou": "pyon", "kouen": "mii", "omise": "chu", "densha": "doshin", "gakkou2": "kon", "toukou": "gao", "gakkou3": "mii", "kyuushoku": "doshin", "gekou": "pyon", "ouchi1": "mii", "tomodachi1": "chu", "sensei1": "pyon", "ie1": "chu", "kouen2": "mii", "seki1": "gao", "tokei": "gao", "asobiba": "mii", "burger": "pyon", "sansu": "chu", "hoken2": "doshin", "byouin": "chu", "yuushoku": "gao", "kokugo": "kon", "taiiku": "pyon", "ongaku": "mii", "zukou": "chu", "jitensha": "doshin", "yasumi": "kon", "haisha": "gao"}
+RIVAL_OF = {"kousha": "gao", "undou": "pyon", "kouen": "mii", "omise": "chu", "densha": "doshin", "gakkou2": "kon", "toukou": "gao", "gakkou3": "mii", "kyuushoku": "doshin", "gekou": "pyon", "ouchi1": "mii", "tomodachi1": "chu", "sensei1": "pyon", "ie1": "chu", "kouen2": "mii", "seki1": "gao", "tokei": "gao", "asobiba": "mii", "burger": "pyon", "sansu": "chu", "hoken2": "doshin", "byouin": "chu", "yuushoku": "gao", "kokugo": "kon", "taiiku": "pyon", "ongaku": "mii", "zukou": "chu", "jitensha": "doshin", "yasumi": "kon", "haisha": "gao", "kirikae": "mii", "kikikaesu": "kon", "matsu": "gao", "sos": "pyon", "junban": "kon", "kotowaru": "mii", "bousai": "gao", "denwa": "mii"}
 def keys_of(s):
     new = s["stage"] != "kousha" or not (G / "sit/audio" / f"sq_{s['id']}.mp3").exists()  # こうしゃの はじめの 場面は 段1〜4が ページに 入っている
     ks = []
@@ -24,7 +24,7 @@ def keys_of(s):
             if t.get("wrong"): ks.append(f"sx_{s['id']}_{i}")
     return ks
 missing = []
-for st in ["kousha", "undou", "kouen", "omise", "densha", "gakkou2", "toukou", "gakkou3", "kyuushoku", "gekou", "ouchi1", "tomodachi1", "sensei1", "ie1", "kouen2", "seki1", "tokei", "asobiba", "burger", "hoken2", "byouin", "haisha", "yuushoku", "kokugo", "taiiku", "ongaku", "zukou", "jitensha", "yasumi"]:
+for st in ["kousha", "undou", "kouen", "omise", "densha", "gakkou2", "toukou", "gakkou3", "kyuushoku", "gekou", "ouchi1", "tomodachi1", "sensei1", "ie1", "kouen2", "seki1", "tokei", "asobiba", "burger", "hoken2", "byouin", "haisha", "yuushoku", "kokugo", "taiiku", "ongaku", "zukou", "jitensha", "yasumi", "kirikae", "kikikaesu", "matsu", "sos", "junban", "kotowaru", "bousai", "denwa"]:
     pack = {}
     for s in S:
         if s["stage"] != st: continue
@@ -32,6 +32,18 @@ for st in ["kousha", "undou", "kouen", "omise", "densha", "gakkou2", "toukou", "
             p = A / f"{k}.mp3"
             if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
             else: missing.append(k)
+    for s in S:  # でんわ：なのる なまえ（〇〇）の お手本は キャラごと
+        if s["stage"] == st and s.get("nm"):
+            for i, t in enumerate(s["tiers"]):
+                if "〇〇" not in t["a"]: continue
+                for kd in ("shima", "pyon", "mii", "chu", "gao", "meebaa"):
+                    p = A / f"sa_{s['id']}_{i}_{kd}.mp3"
+                    if p.exists(): pack[p.stem] = base64.b64encode(p.read_bytes()).decode()
+                    else: missing.append(p.stem)
+    if st == "matsu":  # こえの ものさし（ぽにー mz_*）
+        for p in sorted(A.glob("mz_*.mp3")): pack[p.stem] = base64.b64encode(p.read_bytes()).decode()
+    if st == "junban":  # カードならべ（ぽにー jbk_*）
+        for p in sorted(A.glob("jbk_*.mp3")): pack[p.stem] = base64.b64encode(p.read_bytes()).decode()
     if st == "byouin":  # つづけて もんしん（ぽにー mn_*・わんこせんせい mq_*）
         for p in sorted(A.glob("mn_*.mp3")) + sorted(A.glob("mq_*.mp3")): pack[p.stem] = base64.b64encode(p.read_bytes()).decode()
     if st == "yuushoku":  # つづけて おはなし（ぽにー kn_*・ママ kq_*）

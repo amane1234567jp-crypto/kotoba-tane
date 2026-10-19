@@ -911,14 +911,19 @@ function voiceBuf(key) {
   return VBUF[key];
 }
 function preloadVoices(keys) { keys.forEach(k => AUD[k] && voiceBuf(k)); }
+const VFX = {};
 async function playVoice(c, key, text, frac = 1) {
   audio(); const buf = AUD[key] ? await voiceBuf(key) : null;
   speaker = c; say(c, text);
   if (!AUD[key]) { await sleep(700 + (text || "").length * 110); speaker = null; return; } // 声が ないときは 文字だけ しばらく 見せる
   if (!buf) { speaker = null; await speakEl(c, key, text); return; } // 予備：前のやり方で鳴らす
   const s = ctx.createBufferSource(); s.buffer = buf;
-  const dur = buf.duration * frac;
-  if (frac < 1) { // 「はじめだけ」は、ぶつっと切らずに すっと小さくして消す
+  const fx = VFX[key]; // 声の かこう（ききかえす・でんわ）：quiet＝ちいさく、fast＝はやく、noise＝まわりの おと
+  if (fx === "fast") s.playbackRate.value = 1.55;
+  const dur = buf.duration * frac / (fx === "fast" ? 1.55 : 1);
+  if (fx === "noise") { const n = Math.ceil(dur / .25); for (let i = 0; i < n; i++) later(i * 250, () => noise(.3, 300 + rnd(500), .5)); }
+  if (fx === "quiet") { const g = ctx.createGain(); g.gain.value = .16; s.connect(g).connect(analyser); }
+  else if (frac < 1) { // 「はじめだけ」は、ぶつっと切らずに すっと小さくして消す
     const g = ctx.createGain(), t = ctx.currentTime, fade = Math.min(.35, dur * .4);
     g.gain.setValueAtTime(1, t + dur - fade); g.gain.linearRampToValueAtTime(0, t + dur);
     s.connect(g).connect(analyser);
