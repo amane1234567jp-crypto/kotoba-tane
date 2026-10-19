@@ -4,7 +4,7 @@
    データ・声：sit/souzou_gen.py・sit/tachiba_gen.py（souzou_data.js・tachiba_data.js）。ママは こたえる 子の ママ。ライバル がおは くうき・たちばを わすれる 係。 */
 const S11L = ["souzou", "tachiba", "sakiyomi", "chotto", "aite"];
 const S11_READY = true;
-const AS_READY = false; /* あいての サイン：声が そろうまで false */
+const AS_READY = true; /* あいての サイン：声が そろうまで false */
 Object.assign(RIVAL_OF, { souzou: "gao", tachiba: "gao", sakiyomi: "gao", chotto: "gao", aite: "gao" });
 STAGES.push({ id: "souzou", name: "そうぞう たんてい", icon: "🔍", ready: S11_READY }, { id: "tachiba", name: "じぶんの たちば", icon: "🎩", ready: S11_READY }, { id: "sakiyomi", name: "さきよみ", icon: "🔮", ready: S11_READY }, { id: "chotto", name: "ちょっと まって", icon: "🛑", ready: S11_READY }, { id: "aite", name: "あいての サイン", icon: "🤝", ready: AS_READY });
 ["sz", "tb", "sk", "cm", "as"].forEach(k => ASK_ON_STAGE.add(k));
