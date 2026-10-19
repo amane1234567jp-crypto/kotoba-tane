@@ -114,7 +114,7 @@ for k in [p[0] for p in json.loads((G / "sit/pony_kimochi.json").read_text())] +
 for st, job in [("souzou", "sz1"), ("tachiba", "tb1"), ("sakiyomi", "sk1"), ("chotto", "cm1")]:
     if not (G / f"sit/pony_{st}.json").exists(): continue
     pack = {}
-    for k in [p[0] for p in json.loads((G / f"sit/pony_{st}.json").read_text())] + [l["key"] for l in json.loads((R / f"tools/aivis/jobs/{job}/lines.json").read_text())] + [f"bgm_{st}"]:
+    for k in [p[0] for p in json.loads((G / f"sit/pony_{st}.json").read_text())] + [l["key"] for l in json.loads((R / f"tools/aivis/jobs/{job}/lines.json").read_text()) if not l["key"].startswith("rs_")] + [f"bgm_{st}"]:
         p = A / f"{k}.mp3"
         if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
         else: missing.append(k)
