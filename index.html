@@ -76017,7 +76017,7 @@ function room8(place) {
   const al = (R8_ALIAS[curStage] || {})[place]; if (al) return ROOMS3[al[1]];
   if (ROOMS8[place]) return ROOMS8[place];
   if (typeof ROOMS2 !== "undefined" && ROOMS2[place] && place !== "いえ") return L => room2(L, place);
-  return (typeof ROOMS4 !== "undefined" && ROOMS4[place]) || (typeof ROOMS5 !== "undefined" && ROOMS5[place]) || (typeof ROOMS3 !== "undefined" && ROOMS3[place]) || (typeof ROOMS6 !== "undefined" && ROOMS6[place]) || null; }
+  return (typeof ROOMS4 !== "undefined" && ROOMS4[place]) || (typeof ROOMS5 !== "undefined" && ROOMS5[place]) || (typeof ROOMS3 !== "undefined" && ROOMS3[place]) || (typeof ROOMS6 !== "undefined" && ROOMS6[place]) || (typeof ROOMS7 !== "undefined" && ROOMS7[place]) || null; }
 { const dr = drawRoom; drawRoom = function (place, noSign = false) {
     const R = (S8L.includes(curStage) || curStage === "odekake" || curStage === "komatta" || curStage === "kimochi" || S10L.includes(curStage)) && room8(place); /* おでかけ だいぼうけんの 場面（じてんしゃ・とうこう・げこう）も */ if (!R) return dr(place, noSign);
     sceneLayer.innerHTML = ""; R(sceneLayer);
@@ -78166,7 +78166,7 @@ Object.assign(LTASK_RUN, { ks: kcScene, kp: kcPitta, kv: kcInterview });
     const sum = o.sum + add; return { sum, text: out.join("\n").replace(o.sum, sum) }; }; }
 
 /* ステージごとの BGM の ループの ながさ（びょう）。make_bgm.py が かく */
-const BGM_LEN = {"undou": 27.82609, "kouen": 32.0, "omise": 30.0, "densha": 25.94595, "gakkou2": 20.0, "long": 26.66667, "toukou": 30.0, "gakkou3": 30.96774, "kyuushoku": 29.09091, "gekou": 32.0, "ouchi1": 33.10345, "tomodachi1": 28.23529, "sensei1": 32.0, "ltomo": 27.42857, "sumi": 29.09091, "sokashi": 17.14286, "suchu": 25.6, "goal": 24.0, "ie1": 30.96774, "kouen2": 26.66667, "seki1": 34.28571, "tokei": 32.0, "asobiba": 29.09091, "burger": 30.96774, "sansu": 33.10345, "eki": 25.6, "hoken2": 35.55556, "byouin": 30.47619, "haisha": 29.09091, "yuushoku": 29.09091, "kokugo": 32.0, "taiiku": 25.6, "ongaku": 30.47619, "zukou": 30.0, "jitensha": 26.66667, "yasumi": 33.10345, "odekake": 26.30137, "komatta": 30.0, "kimochi": 30.96774};
+const BGM_LEN = {"undou": 27.82609, "kouen": 32.0, "omise": 30.0, "densha": 25.94595, "gakkou2": 20.0, "long": 26.66667, "toukou": 30.0, "gakkou3": 30.96774, "kyuushoku": 29.09091, "gekou": 32.0, "ouchi1": 33.10345, "tomodachi1": 28.23529, "sensei1": 32.0, "ltomo": 27.42857, "sumi": 29.09091, "sokashi": 17.14286, "suchu": 25.6, "goal": 24.0, "ie1": 30.96774, "kouen2": 26.66667, "seki1": 34.28571, "tokei": 32.0, "asobiba": 29.09091, "burger": 30.96774, "sansu": 33.10345, "eki": 25.6, "hoken2": 35.55556, "byouin": 30.47619, "haisha": 29.09091, "yuushoku": 29.09091, "kokugo": 32.0, "taiiku": 25.6, "ongaku": 30.47619, "zukou": 30.0, "jitensha": 26.66667, "yasumi": 33.10345, "odekake": 26.30137, "komatta": 30.0, "kimochi": 30.96774, "kirikae": 29.09091, "kikikaesu": 30.47619, "matsu": 34.28571, "sos": 32.0, "junban": 27.82609, "kotowaru": 30.0, "bousai": 30.96774, "denwa": 28.65672};
 
 /* ================= ステージごとの BGM =================
    こうしゃは いままでの 曲（sfx_bgm）。ほかの ステージは packs/<ステージ>.json の bgm_<ステージ>（mp3）。

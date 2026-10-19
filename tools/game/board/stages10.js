@@ -4,7 +4,7 @@
    でんわで なのる 名前は、こたえる 子の キャラの なまえ（答えの「〇〇」を おきかえ、ぽにーの お手本は sa_<id>_<段>_<キャラ>）。 */
 const S10L = ["kirikae", "kikikaesu", "matsu", "sos", "junban", "kotowaru", "bousai", "denwa"];
 Object.assign(RIVAL_OF, { kirikae: "mii", kikikaesu: "kon", matsu: "gao", sos: "pyon", junban: "kon", kotowaru: "mii", bousai: "gao", denwa: "mii" });
-const S10_READY = true; /* 声が そろうまで「じゅんびちゅう」 */
+const S10_READY = false; /* 声が そろうまで「じゅんびちゅう」 */
 STAGES.push(
   { id: "kirikae", name: "きりかえ", icon: "🔄", ready: S10_READY }, { id: "kikikaesu", name: "ききかえす", icon: "👂", ready: S10_READY },
   { id: "matsu", name: "まつ・こえの ものさし", icon: "🤫", ready: S10_READY }, { id: "sos", name: "からだの SOS", icon: "🙉", ready: S10_READY },
