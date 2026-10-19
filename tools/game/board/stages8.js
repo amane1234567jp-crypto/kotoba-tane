@@ -52,6 +52,20 @@ const ROOMS8 = {
     el("rect", { x: 0, y: 640, width: 1600, height: 360, fill: "#B9DE9F" }, L); el("rect", { x: 0, y: 720, width: 1600, height: 120, fill: "#E6A86A", ...S6(5) }, L); el("path", { d: "M0 780 H1600", stroke: "#FFFFFF", "stroke-width": 6, "stroke-dasharray": "40 30" }, L);
     [200, 700, 1250].forEach(x => tree8(L, x, 700, .8)); el("rect", { x: 980, y: 660, width: 180, height: 26, rx: 8, fill: "#C98A4B", ...S6(5) }, L); el("path", { d: "M1000 686 V716 M1140 686 V716", ...S6(6) }, L); },
 };
+// こうえん・おまつり（2026-10-19：ショートコース・ロングコースで つかう）
+ROOMS8.こうえん = L => { outBase(L, "#CFEAFB", "#E3CFA5"); el("rect", { x: 0, y: 600, width: 1600, height: 160, fill: "#B9DE9F" }, L); el("path", { d: "M0 600 H1600", ...S6(4) }, L);
+  tree8(L, 140, 640, 1); tree8(L, 1460, 640, 1); // すべりだい
+  el("path", { d: "M1050 760 V430 M1150 760 V430", ...S6(10), fill: "none" }, L); el("rect", { x: 1030, y: 410, width: 140, height: 30, rx: 8, fill: "#FF8FA3", ...S6(5) }, L);
+  el("path", { d: "M1170 430 Q1300 520 1340 760", stroke: "#FFD25E", "stroke-width": 34, fill: "none" }, L); el("path", { d: "M1170 430 Q1300 520 1340 760", ...S6(4), fill: "none" }, L);
+  for (let i = 0; i < 5; i++) el("path", { d: `M${1060} ${470 + i * 60} H1140`, ...S6(6) }, L);
+  el("rect", { x: 330, y: 650, width: 260, height: 28, rx: 10, fill: "#C98A4B", ...S6(5) }, L); el("path", { d: "M350 678 V720 M570 678 V720", ...S6(7) }, L); // ベンチ
+  for (let x = 0; x < 1600; x += 60) el("path", { d: `M${x} 600 V560`, stroke: "#FFFFFF", "stroke-width": 8 }, L); el("path", { d: "M0 572 H1600", stroke: "#FFFFFF", "stroke-width": 6 }, L); };
+ROOMS8.おまつり = L => { outBase(L, "#FFD7B0", "#E9C893");
+  el("path", { d: "M0 140 Q400 210 800 140 T1600 140", fill: "none", ...S6(4) }, L); for (let i = 0; i < 9; i++) { const x = 90 + i * 180, y = 158 + Math.sin(i * .9) * 26;
+    el("ellipse", { cx: x, cy: y + 40, rx: 34, ry: 44, fill: i % 2 ? "#FFFFFF" : "#F25C54", ...S6(4) }, L); el("rect", { x: x - 18, y: y - 8, width: 36, height: 12, fill: INK }, L); }
+  [[120, "#F25C54", "きんぎょ"], [620, "#3E7FD6", "わなげ"], [1120, "#2FA36B", "わたあめ"]].forEach(([x, c, t]) => { el("rect", { x, y: 360, width: 380, height: 300, fill: "#FFF4E0", ...S6(6) }, L);
+    for (let k = 0; k < 6; k++) el("rect", { x: x + k * 63.3, y: 330, width: 63.3, height: 60, fill: k % 2 ? "#FFFFFF" : c }, L); el("rect", { x, y: 330, width: 380, height: 60, fill: "none", ...S6(5) }, L);
+    el("rect", { x: x + 60, y: 410, width: 260, height: 70, rx: 12, fill: "#FFFFFF", ...S6(4) }, L); txt(L, x + 190, 462, t, 40, { "text-anchor": "middle" }); el("rect", { x: x - 10, y: 600, width: 400, height: 60, fill: "#C98A4B", ...S6(5) }, L); }); };
 // へやの えらびかた：じぶんの へや → がっこう2・とうこう・おうち の へやを つかう
 const R8_ALIAS = { kokugo: { きょうしつ: ["3", "こくご"] }, yasumi: { きょうしつ: ["3", "やすみじかん"] }, jitensha: { みち: ["3", "つうがくろ"] }, odekake: { みち: ["3", "つうがくろ"] } };
 function room8(place) {
@@ -60,7 +74,7 @@ function room8(place) {
   if (typeof ROOMS2 !== "undefined" && ROOMS2[place] && place !== "いえ") return L => room2(L, place);
   return (typeof ROOMS4 !== "undefined" && ROOMS4[place]) || (typeof ROOMS5 !== "undefined" && ROOMS5[place]) || (typeof ROOMS3 !== "undefined" && ROOMS3[place]) || (typeof ROOMS6 !== "undefined" && ROOMS6[place]) || (typeof ROOMS7 !== "undefined" && ROOMS7[place]) || null; }
 { const dr = drawRoom; drawRoom = function (place, noSign = false) {
-    const R = (S8L.includes(curStage) || curStage === "odekake" || curStage === "komatta" || curStage === "kimochi" || S10L.includes(curStage)) && room8(place); /* おでかけ だいぼうけんの 場面（じてんしゃ・とうこう・げこう）も */ if (!R) return dr(place, noSign);
+    const R = (S8L.includes(curStage) || curStage === "odekake" || curStage === "komatta" || curStage === "kimochi" || S10L.includes(curStage) || (typeof S11L !== "undefined" && S11L.includes(curStage)) || curStage === "makete" || curStage === "dekigoto") && room8(place); /* おでかけ だいぼうけんの 場面（じてんしゃ・とうこう・げこう）も */ if (!R) return dr(place, noSign);
     sceneLayer.innerHTML = ""; R(sceneLayer);
     if (!noSign) { const g = el("g", {}, sceneLayer); el("rect", { x: 620, y: 24, width: 360, height: 92, rx: 20, fill: "#FFFFFF", ...S6(6) }, g); txt(g, 800, 88, place, place.length > 6 ? 38 : 46, { "text-anchor": "middle" }); }
   }; }
