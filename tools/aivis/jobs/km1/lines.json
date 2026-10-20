@@ -320,6 +320,41 @@
 "text": "じぶんで かんがえられたね。すごいよ"
 },
 {
+"key": "kmq_open_tenin",
+"who": "tenin",
+"text": "どうしたの？ こまった かおを して いるね"
+},
+{
+"key": "kmq_q1_tenin",
+"who": "tenin",
+"text": "なにが こまって いるの？"
+},
+{
+"key": "kmq_q2_tenin",
+"who": "tenin",
+"text": "どうして、そう なったのかな？"
+},
+{
+"key": "kmq_q3_tenin",
+"who": "tenin",
+"text": "どんな やりかたが あるかな？"
+},
+{
+"key": "kmq_q4_tenin",
+"who": "tenin",
+"text": "どれに する？ どうして？"
+},
+{
+"key": "kmq_q5_tenin",
+"who": "tenin",
+"text": "つぎからは、どう する？"
+},
+{
+"key": "kmq_res_tenin",
+"who": "tenin",
+"text": "じぶんで かんがえられたね。すごいよ"
+},
+{
 "key": "kmq_open_nobbo",
 "who": "nobbo",
 "text": "どうしましたか？ こまって いるようですね"

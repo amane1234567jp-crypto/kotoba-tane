@@ -1,0 +1,142 @@
+[
+{
+"key": "sq_abkutsu",
+"who": "tenin",
+"text": "あそびばは、くつを ぬいでね"
+},
+{
+"key": "sr_abkutsu",
+"who": "tenin",
+"text": "ありがとう。たのしく あそんでね"
+},
+{
+"key": "sq_abshizuka",
+"who": "tenin",
+"text": "もう すこし しずかにね"
+},
+{
+"key": "sr_abshizuka",
+"who": "tenin",
+"text": "ありがとう。それなら みんな たのしく あそべるね"
+},
+{
+"key": "sq_bgchumon",
+"who": "tenin",
+"text": "いらっしゃいませ。ごちゅうもんは？"
+},
+{
+"key": "sr_bgchumon",
+"who": "tenin",
+"text": "はい、かしこまりました"
+},
+{
+"key": "sq_bgnomimono",
+"who": "tenin",
+"text": "おのみものは なにに しますか？"
+},
+{
+"key": "sr_bgnomimono",
+"who": "tenin",
+"text": "はい、オレンジジュースの エスですね"
+},
+{
+"key": "sq_bgkochira",
+"who": "tenin",
+"text": "こちらで おめしあがりですか？"
+},
+{
+"key": "sr_bgkochira",
+"who": "tenin",
+"text": "かしこまりました。ばんごうふだを どうぞ"
+},
+{
+"key": "sq_bgbangou",
+"who": "tenin",
+"text": "じゅうにばんで おまちの おきゃくさまー"
+},
+{
+"key": "sr_bgbangou",
+"who": "tenin",
+"text": "はい、おまたせしました"
+},
+{
+"key": "sq_bguketori",
+"who": "tenin",
+"text": "おまたせしました。ハンバーガーセットです"
+},
+{
+"key": "sr_bguketori",
+"who": "tenin",
+"text": "たべおわったら、あちらの へんきゃくぐちに おねがいしますね"
+},
+{
+"key": "sq_bgkoboshita",
+"who": "tenin",
+"text": "だいじょうぶですか？"
+},
+{
+"key": "sr_bgkoboshita",
+"who": "tenin",
+"text": "だいじょうぶですよ。いま ふきますね"
+},
+{
+"key": "sq_bggochisou",
+"who": "tenin",
+"text": "おさげしますね"
+},
+{
+"key": "sr_bggochisou",
+"who": "tenin",
+"text": "ありがとうございました。また おこしくださいね"
+},
+{
+"key": "sq_khpoint",
+"who": "tenin",
+"text": "ポイントカードは おもちですか？"
+},
+{
+"key": "sr_khpoint",
+"who": "tenin",
+"text": "あら、ごめんなさいね。ポイントカードは、もって いますか？"
+},
+{
+"key": "kmq_open_tenin",
+"who": "tenin",
+"text": "どうしたの？ こまった かおを して いるね"
+},
+{
+"key": "kmq_q1_tenin",
+"who": "tenin",
+"text": "なにが こまって いるの？"
+},
+{
+"key": "kmq_q2_tenin",
+"who": "tenin",
+"text": "どうして、そう なったのかな？"
+},
+{
+"key": "kmq_q3_tenin",
+"who": "tenin",
+"text": "どんな やりかたが あるかな？"
+},
+{
+"key": "kmq_q4_tenin",
+"who": "tenin",
+"text": "どれに する？ どうして？"
+},
+{
+"key": "kmq_q5_tenin",
+"who": "tenin",
+"text": "つぎからは、どう する？"
+},
+{
+"key": "kmq_res_tenin",
+"who": "tenin",
+"text": "じぶんで かんがえられたね。すごいよ"
+},
+{
+"key": "rs_asobiba",
+"who": "tenin",
+"text": "はい、どうぞ。きを つけてね"
+}
+]

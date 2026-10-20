@@ -287,6 +287,11 @@
    "style": "ノーマル",
    "speed": 1.05
   },
+  "tenin": {
+   "model": "59f96896-64d2-4378-830a-4d5feb3d81aa",
+   "style": "ノーマル",
+   "speed": 1.0
+  },
   "ekiin": {
    "model": "70a875a9-feae-41e6-a586-8cf9e47c6c0b",
    "style": "ノーマル",
