@@ -1,0 +1,82 @@
+[
+{
+"key": "sg_krkouen_2",
+"who": "mii",
+"text": "ざんねん。おうちで あそぶ"
+},
+{
+"key": "sx_krkouen_2",
+"who": "mii",
+"text": "ざんねん。おうちを あそぶ"
+},
+{
+"key": "sg_krkouen_3",
+"who": "mii",
+"text": "わかった。じゃあ、おうちで ブロックを する"
+},
+{
+"key": "sg_krkouen_4",
+"who": "mii",
+"text": "ざんねんだけど、わかった。おうちで ブロックで あそぶね"
+},
+{
+"key": "sg_krkouen_5",
+"who": "mii",
+"text": "ざんねんだけど、しかたないね。おうちで ブロックを して、はれたら こうえんに いこう"
+},
+{
+"key": "sq_kromukae",
+"who": "nobbo",
+"text": "おうちの ひとの おむかえが、すこし おそく なるそうですよ"
+},
+{
+"key": "sg_bsjishin_1",
+"who": "gao",
+"text": "つくえの したに もぐる"
+},
+{
+"key": "sg_bsjishin_2",
+"who": "gao",
+"text": "つくえの したで あたまを まもる"
+},
+{
+"key": "sg_bsie_2",
+"who": "gao",
+"text": "テーブルの したに もぐる"
+},
+{
+"key": "sx_bsie_2",
+"who": "gao",
+"text": "テーブルを したに もぐる"
+},
+{
+"key": "sg_bsie_3",
+"who": "gao",
+"text": "ママ、じしんだ！ テーブルの したに もぐろう"
+},
+{
+"key": "sg_szfuku_4",
+"who": "pyon",
+"text": "かわいいけど、くびの ところが チクチクして いやなんだ"
+},
+{
+"key": "sg_szhitogomi_2",
+"who": "pyon",
+"text": "ひとが おおくて つかれた"
+},
+{
+"key": "sx_szhitogomi_2",
+"who": "pyon",
+"text": "ひとを おおくて つかれた"
+},
+{
+"key": "sg_szhitogomi_4",
+"who": "pyon",
+"text": "ひとが おおくて つかれたから、すこし すわって やすみたい"
+},
+{
+"key": "sg_khhayai_5",
+"who": "kon",
+"text": "すみません、はやくて ききとれませんでした。なんページを ひらけば いいですか？"
+}
+]
