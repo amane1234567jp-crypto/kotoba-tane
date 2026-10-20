@@ -1,0 +1,37 @@
+[
+{
+"key": "sg_enpitsu_4",
+"who": "gao",
+"text": "えんぴつを いえに わすれたので、いっぽん かして ください"
+},
+{
+"key": "sx_enpitsu_4",
+"who": "gao",
+"text": "えんぴつが いえに わすれたので、いっぽん かして ください"
+},
+{
+"key": "sg_nozoku_4",
+"who": "mii",
+"text": "いけに おちたら たいへんだから、すこし はなれて みよう"
+},
+{
+"key": "sx_bggochisou_2",
+"who": "pyon",
+"text": "ごちそうさまでした。おいしいかったです"
+},
+{
+"key": "sx_ysgochi_2",
+"who": "gao",
+"text": "ごちそうさまでした。おいしいかった"
+},
+{
+"key": "sx_ymhanashikake_2",
+"who": "kon",
+"text": "なにが かいてるの？"
+},
+{
+"key": "sx_kwasobi_2",
+"who": "mii",
+"text": "ごめんね、いまを えを かきたいんだ"
+}
+]
