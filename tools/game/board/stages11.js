@@ -299,7 +299,7 @@ async function asRun(hero, first) {
   let okN = 0, nSay = 0, wrong = 0; const log = [];
   // 1) 📡 どんな サイン？
   await speak(C.pony, "asp_sign", "どんな サイン かな？ タッチしてね");
-  const ch = s11Choose(Object.entries(AS_SIGN).map(([k_, [e, l]]) => [e, l, k_ === sc.sign ? 1 : 0, null]), async () => { wrong++; await speak(C.pony, "asp_nope", "よく みて みよう。かおや からだは どう なってる？"); });
+  const ch = s11Choose(shuffle((sc.signs || Object.keys(AS_SIGN)).map(k_ => [k_, AS_SIGN[k_]]).map(([k_, [e, l]]) => [e, l, k_ === sc.sign ? 1 : 0, null])), async () => { wrong++; await speak(C.pony, "asp_nope", "よく みて みよう。かおや からだは どう なってる？"); });
   await ch.done; clearInterval(loop); ch.g.remove(); markAbove(C.pony, "sparkle"); await speak(C.pony, `as_${sc.id}_c`, KTX(`as_${sc.id}_c`));
   // 2) 🪞 いまの じぶんは？
   await speak(C.pony, "asp_me", "いまの きみは、どう だったかな？");

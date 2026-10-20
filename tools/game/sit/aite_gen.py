@@ -7,7 +7,10 @@ import json
 from pathlib import Path
 G = Path(__file__).resolve().parents[1]; R = G.parents[1]
 def k(*a): return [x if isinstance(x, list) else [x] for x in a]
-SIGN = {"happy": ("😊", "うれしい"), "iya": ("😣", "いやだ"), "komaru": ("😥", "こまってる"), "taikutsu": ("🥱", "たいくつ")}
+SIGN = {"happy": ("😊", "うれしい"), "iya": ("😣", "いやだ"), "komaru": ("😥", "こまってる"), "taikutsu": ("🥱", "たいくつ"), "gakkari": ("😞", "がっかり"), "kowai": ("😨", "こわい")}
+# 場面ごとの カード（せいかい ＋ はっきり ちがう 2まい）
+SIGNS = {"jibun": ["taikutsu", "happy", "kowai"], "chikai": ["komaru", "happy", "taikutsu"], "karakau": ["iya", "happy", "taikutsu"],
+         "koe": ["komaru", "happy", "taikutsu"], "toru": ["iya", "happy", "taikutsu"], "rule": ["gakkari", "happy", "kowai"]}
 # (id, ばしょ, あいて, うごき, サイン, はなし（ぽにー）, あいての ようす[かな,よみ], サインの せつめい（ぽにー）, いまの じぶん（バッジ／きづき）,
 #  なんて いう((みじかい, ながい), keys), へんじ[かな,よみ], どうして((お手本), keys), がお[かな,よみ]|None, おしえる（ぽにー）|None)
 SC = [
@@ -56,8 +59,8 @@ SC = [
   "むっと して、くびを ふって いるね。いやだった サインだよ", "ぴょんちゃんを いやな きもちに させちゃったね", (("ごめんね", "ごめんね。かして くれる？"), k(["ごめん", "かして", "貸して"])),
   ["いいよ。つかいおわったら かえしてね", "いいよ。使い終わったら返してね"], ("つかってたのにって いって いたから", k(["つかって", "使って", "むっ", "くび", "首"])), ["この あか、もらった！", "この赤、もらった！"],
   "がおくん、ぴょんちゃん いやそうだよ。かしてって きこう"),
- ("rule", "こうえん", "kon", "sad", "komaru", "すごろくで、じゅんばんを まもらないで さいころを ふっちゃったよ", ["はあ……", "はあ……"],
-  "ためいきを ついて いるね。こまって いる サインだよ", "こんくんを がっかり させちゃったね", (("ごめんね", "ごめんね。じゅんばんを まもって、もう いっかい やろう"), k(["ごめん", "じゅんばん", "順番"])),
+ ("rule", "こうえん", "kon", "sad", "gakkari", "すごろくで、じゅんばんを まもらないで さいころを ふっちゃったよ", ["はあ……", "はあ……"],
+  "ためいきを ついて いるね。がっかり した サインだよ", "こんくんを がっかり させちゃったね", (("ごめんね", "ごめんね。じゅんばんを まもって、もう いっかい やろう"), k(["ごめん", "じゅんばん", "順番"])),
   ["うん！ やろう！", "うん！やろう！"], ("ためいきを ついて いたから", k(["ためいき", "溜め息", "溜息"])), ["おれが さき！ それー、ころころー！", "俺が先！それー、ころころー！"],
   "がおくん、じゅんばんを まもろう。こんくん こまってるよ"),
 ]
@@ -71,7 +74,7 @@ if __name__ == "__main__":
     data, pony, aiv, Y = [], [], [], {}
     def A(key, who, t): aiv.append({"key": key, "who": who, "text": t[0]}); Y[key] = t[1]
     for (sid, place, subj, mv, sign, narr, look, cexp, me, say, res, why, gao, teach) in SC:
-        data.append({"id": sid, "place": place, "subj": subj, "mv": mv, "sign": sign, "pos": sign == "happy", "look": look[0], "me": me,
+        data.append({"id": sid, "place": place, "subj": subj, "mv": mv, "sign": sign, "signs": SIGNS.get(sid, ["happy", "iya", "taikutsu"]), "pos": sign == "happy", "look": look[0], "me": me,
                      "meNg": WRONG["happy" if sign == "happy" else "neg"], "say": [say[0][0], say[0][1], say[1]], "why": [why[0], why[1]], "res": res[0],
                      "gao": gao[0] if gao else None, "teach": teach})
         pony += [[f"as_{sid}_n", narr], [f"as_{sid}_c", cexp], [f"as_{sid}_m", me], [f"as_{sid}_a0", say[0][0]], [f"as_{sid}_a1", say[0][1]], [f"as_{sid}_w", why[0]]]

@@ -158,3 +158,17 @@ const EV10 = { kirikae: ["きりかえ じょうず！", "よていが かわっ
 S10L.forEach(st => { const [f, b, h] = EV10[st]; EVENTS[st] = { a2: ["fwd", 2, `ev_${st}f`, f + " 2マス すすむよ"], m2: ["back", 2, `ev_${st}b`, b + " 2マス もどるよ"], d1: ["back", 4, `ev_${st}h`, h + " 4マス もどるよ"] };
   if (st === "matsu") Object.assign(EVENTS[st], { a3: ["monosashi", 0, "", ""], c2: ["monosashi", 0, "", ""] });
   if (st === "junban") Object.assign(EVENTS[st], { a3: ["cardorder", 0, "", ""], c2: ["cardorder", 0, "", ""] }); });
+
+/* ---------- 📞 でんわの むこうの 人は わくの なかに（2026-10-20） ---------- */
+{ const sv = setSitView; setSitView = function (s, heroKind) { const r = sv(s, heroKind);
+    if (s && s.stage === "denwa") { const [ax] = ASK_AT[s.asker] || [1200], vid = s.id === "dwvideo", x0 = ax - 260, W = 520, y0 = 330, H = 680;
+      const g = el("g", {}, propG);
+      if (vid) { el("rect", { x: x0 - 26, y: y0 - 26, width: W + 52, height: H + 52, rx: 46, fill: "#3A3F4A", stroke: INK, "stroke-width": 8 }, g);
+        el("rect", { x: x0, y: y0, width: W, height: H, rx: 20, fill: "#DDF1FF" }, g); el("circle", { cx: x0 + W / 2, cy: y0 - 13, r: 7, fill: "#7A8496" }, g);
+        el("rect", { x: x0, y: y0 + H - 70, width: W, height: 70, fill: "#BFE3FA" }, g);
+        txt(g, x0 + W / 2, y0 + H - 22, "📱 テレビでんわ", 40, { "text-anchor": "middle" }); }
+      else { el("rect", { x: x0, y: y0, width: W, height: H, rx: 60, fill: "#FFFDF2", stroke: "#3EB489", "stroke-width": 12, "stroke-dasharray": "34 18" }, g);
+        el("rect", { x: x0 + 90, y: y0 - 38, width: W - 180, height: 70, rx: 35, fill: "#3EB489", stroke: INK, "stroke-width": 6 }, g);
+        txt(g, x0 + W / 2, y0 + 12, "📞 でんわの むこう", 40, { "text-anchor": "middle", fill: "#FFFFFF" }); }
+      [0, 1, 2].forEach(i => el("path", { d: `M${x0 - 150 + i * 42} ${640 - i * 26} q30 ${40 + i * 24} 0 ${80 + i * 52}`, fill: "none", stroke: "#3EB489", "stroke-width": 10, "stroke-linecap": "round", opacity: .8 }, g)); }
+    return r; }; }
