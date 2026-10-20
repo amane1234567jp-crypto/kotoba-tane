@@ -9,10 +9,10 @@ const KC_N = new Map(); let KC_GOT = [];
 { const ap = applyStage; applyStage = function (id, ...a) { if (id === KCS) { KC_N.clear(); KC_GOT = []; } return ap(id, ...a); }; }
 /* ---------- マスの ならび ---------- */
 { const O = SL_ORDER[KCS];
-  const PLAN = [null, "ks", "ks", "e:kf1", "kp", "ks", "ks", "kv", "ks", "ks", "e:kb1", "ks",
-    "ks", "kp", "ks", "ks", "ks", "e:rest", "ks", "kp", "ks", null, "ks", "ks",
-    "ks", "ks", "kp", "e:again", "ks", "kv", "ks", "ks", "e:kb2", "kv", "ks", "ks",
-    "ks", "ks", "kp", "ks", "e:kf2", "ks", "kv", "ks", "kp", "ks", "ks", null];
+  const PLAN = [null, "ks", "ks", "e:kf1", "kp", "ks", "e:dice2", "kv", "ks", "e:warp", "ks", "kp",
+    "ks", "e:kb1", "ks", "kp", "ks", "e:rest", "ks", "kv", "e:x2", null, "ks", "e:fake",
+    "ks", "kp", "ks", "e:rand", "ks", "kv", "e:bonus", "ks", "e:kb2", "kp", "ks", "e:janken",
+    "ks", "e:again", "ks", "kp", "e:allf", "ks", "kv", "ks", "e:kf2", "ks", "e:trolley", null]; // しかけを ふやした（2026-10-20）
   const ev = {}, task = {};
   O.forEach((id, i) => { const p = PLAN[i]; if (!p || id === "0" || id === "4" || id === "15") return;
     if (p.startsWith("e:")) { const t = p.slice(2); ev[id] = [t, 0, `sl_${KCS}_${t}`, KC.evt[t]]; } else task[id] = p; });
@@ -119,6 +119,52 @@ async function kcFeel(h, sc, t, ask, qKey, qText, tag) {
   if (cg) cg.remove();
   return st;
 }
+/* ---------- なにが あったか を アニメで みせる（2026-10-20） ---------- */
+async function kcAct(sc, h, a, ex) {
+  const G = el("g", {}, front()), P = (e, x, y, z = 100) => txt(G, x, y, e, z, { "text-anchor": "middle" }), hx = headTop(h).x, fx = ex ? headTop(ex).x : 1150, gy = 905;
+  const mv = (n, x0, y0, x1, y1, ms, rot = 0) => tween(ms, k => n.setAttribute("transform", `translate(${((x1 - x0) * k).toFixed(0)} ${((y1 - y0) * k).toFixed(0)}) rotate(${(rot * k).toFixed(0)} ${x0} ${y0 - 30})`));
+  const rain = n => { for (let i = 0; i < n; i++) later(i * 60, () => { const d = P("💧", 100 + rnd(1400), 120, 44); tween(900, k => d.setAttribute("transform", `translate(0 ${(700 * k).toFixed(0)})`)).then(() => d.remove()); }); };
+  const A = {
+    a_present: async () => { const g = P("🎁", 1350, gy, 110); await mv(g, 1350, gy, hx + 130, gy, 900); markAbove(h, "sparkle"); chime(); },
+    a_kowareta: async () => { const g = P("🧸", hx + 150, 640, 110); await mv(g, hx + 150, 640, hx + 150, gy, 600, 90); noise(.2, 500, .4); P("💥", hx + 150, gy - 60, 90); },
+    a_kaminari: async () => { const f = el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#FFFFFF" }, G); P("⚡", 1250, 300, 200); await tween(500, k => f.setAttribute("opacity", (1 - k).toFixed(2))); noise(.6, 120, .5); },
+    a_fuusen: async () => { const b = P("🎈", hx + 120, 520, 110); await sleep(700); b.remove(); noise(.15, 1200, .5); P("💥", hx + 120, 520, 110); surprise(h); },
+    a_tsumiki: async () => { const t = el("g", {}, G); for (let i = 0; i < 5; i++) el("rect", { x: hx + 110, y: gy - 60 - i * 58, width: 70, height: 56, rx: 6, fill: ["#FF8FA3", "#FFD25E", "#7FCBF0", "#7BD389", "#C9A0F0"][i], ...S6(4) }, t);
+      await sleep(600); if (ex) { ex.dx.t -= 140; } await sleep(500); noise(.3, 300, .4); await tween(500, k => t.setAttribute("transform", `rotate(${(70 * k).toFixed(0)} ${hx + 145} ${gy})`)); if (ex) ex.dx.t += 140; },
+    a_orusuban: async () => { P("🚪", 1350, gy - 40, 220); const m = P("👋", 1350, 520, 100); await sleep(900); await tween(600, k => m.setAttribute("opacity", (1 - k).toFixed(2))); P("🕰", 220, 330, 100); },
+    a_doubutsuen: async () => { const b = thinkBubble(h, "🦁 あした！"); b.open(); await sleep(1600); b.remove(); },
+    a_boushi: async () => { P("🛏", 1250, gy - 30, 220); const c = P("🧢", 1250, gy, 80); await mv(c, 1250, gy, hx + 120, gy - 120, 900); markAbove(h, "sparkle"); },
+    g_kakekko: async () => { const r = P("🏃", 120, gy - 20, 140); hold(h, "run", 1.2); await mv(r, 120, gy - 20, 1500, gy - 20, 1300); },
+    g_ensoku: async () => { rain(26); P("🎒", hx + 140, gy, 90); await sleep(1500); },
+    g_asobanai: async () => { if (ex) { playMove(ex, "no"); markAbove(ex, "anger"); await sleep(800); ex.dx.t += 520; } P("💔", hx + 140, 560, 90); await sleep(800); },
+    g_oyasumi: async () => { P("🪑", hx + 220, gy - 20, 150); P("❓", hx + 220, gy - 200, 80); await sleep(1300); },
+    g_happyou: async () => { P("🎤", hx + 110, 640, 80); await sleep(400); for (let i = 0; i < 5; i++) later(i * 150, () => P("😆", 900 + i * 130, gy, 90)); await sleep(1200); },
+    g_junban: async () => { P("🚰", 230, gy - 120, 130); if (ex) { ex.dx.t -= Math.max(0, fx - hx) + 150; } await sleep(1300); },
+    g_fudebako: async () => { const f = P("✏️", fx, 560, 100); for (let i = 0; i < 4; i++) later(i * 300, () => mark("sparkle", fx - 60 + rnd(120), 520 + rnd(60), { vy: -60, life: .6, s: .5 })); await sleep(1300); },
+    g_kega: async () => { const c = P("🧒", 1250, gy - 30, 140); await mv(c, 1250, gy - 30, 1250, gy - 30, 500, 80); P("🩹", 1250, gy - 140, 80); await sleep(700); },
+    g_purint: async () => { const b = thinkBubble(h, "📄 いえに おいて きた！"); b.open(); await sleep(1600); b.remove(); },
+    g_ame: async () => { rain(30); await sleep(1500); },
+    g_chokkai: async () => { if (ex) for (let i = 0; i < 3; i++) { ex.dx.t -= 60; await sleep(260); markAbove(h, "anger", { dx: 80 }); ex.dx.t += 60; await sleep(260); } },
+    g_gomen: async () => { const o = el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#FF9E4A", opacity: 0 }, G); await tween(700, k => o.setAttribute("opacity", (.22 * k).toFixed(2))); if (ex) ex.dx.t += 520; await sleep(700); },
+    k_hikkoshi: async () => { const g = P("🎁", fx - 80, gy - 40, 90); await mv(g, fx - 80, gy - 40, hx + 130, gy - 40, 700); const t = P("🚚", 1300, gy - 40, 160); await mv(t, 1300, gy - 40, 1800, gy - 40, 1200); },
+    k_tachikogi: async () => { P("🛝", hx + 200, gy - 60, 160); for (let i = 0; i < 3; i++) { jump(h, .4); await sleep(450); } },
+    k_aisu: async () => { const c = P("🍦", hx + 110, 640, 90); await mv(c, hx + 110, 640, hx + 140, gy, 600, 120); noise(.15, 400, .3); },
+    k_ball: async () => { const b = P("⚽", fx, gy, 80); for (let i = 0; i < 4; i++) { await tween(250, k => b.setAttribute("transform", `translate(0 ${(-90 * Math.sin(k * Math.PI)).toFixed(0)})`)); } },
+    k_sunaba: async () => { const c = P("🏰", hx + 160, gy, 110); await sleep(500); if (ex) { ex.dx.t -= 120; } await sleep(400); c.textContent = "💥"; noise(.2, 300, .4); if (ex) ex.dx.t += 120; await sleep(500); },
+    k_kenka: async () => { if (ex) playMove(ex, "bow"); P("🤝", (hx + fx) / 2, 500, 90); await sleep(1200); },
+    k_sakaagari: async () => { jump(h, .8); h.spinDur = .8; h.spinTurns = 1; hold(h, "spin", .8); await sleep(600); for (let i = 0; i < 4; i++) later(i * 200, () => P("👏", 900 + i * 140, gy - 40, 80)); await sleep(1000); },
+    k_inu: async () => { const d = P("🐕", 1300, gy - 20, 170), w = P("ワン！", 1300, gy - 200, 70); for (let i = 0; i < 3; i++) { noise(.08, 500, .3); await tween(250, k => d.setAttribute("transform", `translate(0 ${(-30 * Math.sin(k * Math.PI)).toFixed(0)})`)); } },
+    o_aisu: async () => { const c = P("🍦", fx - 100, 640, 90); await mv(c, fx - 100, 640, fx - 70, gy, 600, 120); noise(.15, 400, .3); },
+    o_maigo: async () => { P("❓", fx, 420, 90); await sleep(1200); },
+    o_fuusen: async () => { const b = P("🎈", fx - 90, 560, 110); await mv(b, fx - 90, 560, fx + 60, -120, 1600); },
+    o_kuji: async () => { P("🎫", fx - 100, 640, 80); await sleep(400); P("🎉 1とう！", fx, 460, 70); confetti(30); await sleep(800); },
+    o_koronda: async () => { if (ex) { const r0 = ex.lean.t; ex.lean.t = 40; noise(.2, 400, .4); await sleep(900); ex.lean.t = r0; } },
+    o_bus: async () => { P("🚏", 1430, gy - 80, 180); P("🕒", 1430, 470, 70); await sleep(1200); },
+    o_hajimete: async () => { P("🎹", fx + 170, gy - 30, 130); await sleep(1200); },
+    o_hitori: async () => { P("🪑", fx, gy + 10, 120); await sleep(1200); },
+  };
+  try { if (A[sc.id]) await A[sc.id](); } catch (e) { }
+  const keep = G; later(4500, () => keep.remove()); }
 /* ---------- 💗 きもちの 場面 ---------- */
 function kcAsker(sc, hero) { if (sc.ask === "sensei") return "nobbo"; return hero === "shima" ? "mama" : MOM_OF[hero] || null; }
 function kcPick(area, hero) {
@@ -133,27 +179,27 @@ async function kcScene(pc) {
   const fk = sc.ex ? kcFriend(hero, asker) : null; const ex = fk ? xtra(fk, 990) : null; if (ex) { ex.dx.v = ex.dx.t = 0; }
   const who = other ? ex : h; // きもちを かんじて いる 子
   enter(h); await sleep(1000);
+  await kcAct(sc, h, a, ex); /* なにが あったか を アニメで みせる（2026-10-20） */
   const hb = hint7(other && ex ? ex : h, sc.emo, sc.hint); feelAnim(who, sc.f); if (other) playMove(h, "look");
   let loop = null; if (other && ex) loop = setInterval(() => feelAnim(ex, sc.f), 3200);
   await speak(C.pony, `kc_${sc.id}_n`, KC.txt[`kc_${sc.id}_n`]);
   enter(a); await sleep(1000);
   const log = [], said = []; let okN = 0, nSay = 1, iikae = false, wrong = false;
   // 1) どんな きもち？
-  const st = await kcFeel(h, sc, t, a, `kcq_${other ? "other" : "feel"}_${asker}`, Q[other ? "other" : "feel"], other ? "ともだちの きもちは？" : "きもちの ことばで");
+  const st = await kcFeel(h, sc, t, null, `kpq_${other ? "other" : "feel"}`, KC.txt[`kpq_${other ? "other" : "feel"}`], other ? "ともだちの きもちは？" : "きもちの ことばで");
   if (loop) { clearInterval(loop); loop = null; }
   if (st.ok) okN++; iikae = st.iikae; wrong = st.wrong; said.push(st.said); log.push(`きもち:${st.said ? KF[st.said].w : "-"}${st.iikae ? "→" + KF[sc.f].w : ""}${st.ok ? "○" : "×"}`);
   feelAnim(who, sc.f); await speak(C.pony, `kp_body_${sc.f}`, KC.txt[`kp_body_${sc.f}`]); hb.remove();
   KC_GOT.push({ kind: hero, f: sc.f });
   // 2) くわしく
-  const step = async (qk, key, keys, tag) => { nSay++; if (qk) await speak(a, `kcq_${qk}_${asker}`, Q[qk]); const r = await kmSay(h, key, KC.txt[key], keys, tag); if (r.ok) { okN++; playMove(a, "nod"); } log.push(`${qk || "x"}${r.ok ? "○" : "×"}${r.heard}`); return r.ok; };
-  if (sc.area <= 2 && t >= 1 && sc.why) await step("why", `kc_${sc.id}_r`, sc.why, "わけを いおう");
-  if (sc.area <= 2 && t >= 2 && sc.want) await step("want", `kc_${sc.id}_h`, sc.want, "どう したい？");
+  const step = async (qk, key, keys, tag) => { nSay++; if (qk) await speak(C.pony, `kpq_${qk}`, KC.txt[`kpq_${qk}`]); const r = await kmSay(h, key, KC.txt[key], keys, tag); if (r.ok) { okN++; playMove(a, "nod"); } log.push(`${qk || "x"}${r.ok ? "○" : "×"}${r.heard}`); return r.ok; };
+  if (sc.area <= 2 && t >= 1 && sc.want) await step("want", `kc_${sc.id}_h`, sc.want, "どう したい？"); /* 「どうして？」は きかない（こたえが はなしの くりかえしに なるから） */
   if (sc.area === 3 && t >= 1) {
     const F2 = sc.f2;
-    if (sc.sp === "mix") { await speak(a, `kcq_mix_${asker}`, Q.mix); await speak(C.pony, "kp_mix", KC.txt.kp_mix); feelAnim(h, F2); KC_GOT.push({ kind: hero, f: F2 }); await step(null, `kc_${sc.id}_x`, [KF[sc.f].keys, KF[F2].keys], "ふたつの きもち"); }
-    else if (sc.sp === "chg") { await speak(a, `kcq_before_${asker}`, Q.before); feelAnim(h, F2); await speak(C.pony, "kp_chg", KC.txt.kp_chg); KC_GOT.push({ kind: hero, f: F2 }); await step(null, `kc_${sc.id}_x`, [KF[F2].keys, KF[sc.f].keys], "かわった きもち"); }
-    else if (sc.sp === "deg") { await speak(a, `kcq_deg_${asker}`, Q.deg); await speak(C.pony, "kp_deg", KC.txt.kp_deg); await step(null, `kc_${sc.id}_x`, [["すごく", "すっごく", "とても", "ちょっと", "すこし", "少し", "めっちゃ", "かなり"], KF[sc.f].keys], "どのくらい？"); }
-    else if (sc.sp === "req") { await speak(a, `kcq_req_${asker}`, Q.req); await speak(C.pony, "kp_req", KC.txt.kp_req); await step(null, `kc_${sc.id}_x`, sc.xkeys, "して ほしい こと"); }
+    if (sc.sp === "mix") { await speak(C.pony, "kpq_mix", KC.txt.kpq_mix); await speak(C.pony, "kp_mix", KC.txt.kp_mix); feelAnim(h, F2); KC_GOT.push({ kind: hero, f: F2 }); await step(null, `kc_${sc.id}_x`, [KF[sc.f].keys, KF[F2].keys], "ふたつの きもち"); }
+    else if (sc.sp === "chg") { await speak(C.pony, "kpq_before", KC.txt.kpq_before); feelAnim(h, F2); await speak(C.pony, "kp_chg", KC.txt.kp_chg); KC_GOT.push({ kind: hero, f: F2 }); await step(null, `kc_${sc.id}_x`, [KF[F2].keys, KF[sc.f].keys], "かわった きもち"); }
+    else if (sc.sp === "deg") { await speak(C.pony, "kpq_deg", KC.txt.kpq_deg); await speak(C.pony, "kp_deg", KC.txt.kp_deg); await step(null, `kc_${sc.id}_x`, [["すごく", "すっごく", "とても", "ちょっと", "すこし", "少し", "めっちゃ", "かなり"], KF[sc.f].keys], "どのくらい？"); }
+    else if (sc.sp === "req") { await speak(C.pony, "kpq_req", KC.txt.kpq_req); await speak(C.pony, "kp_req", KC.txt.kp_req); await step(null, `kc_${sc.id}_x`, sc.xkeys, "して ほしい こと"); }
   }
   if (other && t >= 1) { await speak(C.pony, "kp_other", KC.txt.kp_other); const ok = await step("otherSay", `kc_${sc.id}_x`, sc.xkeys, "ともだちに いおう");
     if (ex) { ex.sadMouth = false; ex.headY.t = 0; if (ok) { joy(ex); markAbove(ex, "heart"); await speak(C.pony, "kp_say_ok", KC.txt.kp_say_ok); } } }
@@ -184,7 +230,7 @@ async function kcPitta(pc) {
         await sleep(200); } })(); });
   chosen.rect.setAttribute("fill", "#FFE27A"); chime(); confetti(30); const big = chosen.childNodes[1]; if (big) tween(500, k => big.setAttribute("transform", `translate(0 ${(-30 * Math.sin(k * Math.PI)).toFixed(0)})`));
   await kcPraise(); await speak(C.pony, `kp_def_${it.f}`, KC.txt[`kp_def_${it.f}`]);
-  let okR = true; if (t >= 1) { await speak(C.pony, "kp_pitta_why", KC.txt.kp_pitta_why); const r = await kmSay(pc, `kpt_${it.id}_r`, KC.txt[`kpt_${it.id}_r`], it.keys, "わけを いおう"); okR = r.ok; }
+  let okR = true; if (t >= 1) { await speak(C.pony, "kp_pitta_say", KC.txt.kp_pitta_say); const r = await kmSay(pc, `kp_w_${it.f}`, KF[it.f].w, [KF[it.f].keys], "ことばで いおう"); okR = r.ok; }
   KC_GOT.push({ kind: pc.kind, f: it.f });
   const ok = first && okR; grade(ok); playLog({ type: "pitta", id: it.id, f: it.f, picks, iikae, ok, ...(MODE === "multi" ? { who: NAMES[pc.kind] } : {}) });
   await sleep(500); g.remove(); if (ok) await slGo(pc, 1); return ok;
@@ -211,7 +257,7 @@ async function kcInterview(pc) {
   playLog({ type: "interview", q: `kv_p${p}`, n, of: qs.length, ans, ...(MODE === "multi" ? { who: NAMES[pc.kind] } : {}) });
   grade(ok); clearClones(); g.remove(); return ok;
 }
-Object.assign(LTASK_RUN, { ks: kcScene, kp: kcPitta, kv: kcInterview });
+Object.assign(LTASK_RUN, { ks: kcScene, kp: kcPitta }); /* kv（つづけて おはなし）は makete.js の chainRun */
 /* ---------- ゴール：きもち ずかん ---------- */
 { const em = endingMulti; endingMulti = async function () {
     if (curStage === KCS && KC_GOT.length) {

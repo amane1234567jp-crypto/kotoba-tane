@@ -21,7 +21,7 @@ const nTxt = k => (NEWD[curStage] && NEWD[curStage].txt[k]) || (MK.txt[k] || DG.
       if (p.startsWith("e:")) { const t = p.slice(2); ev[id] = [t, 0, `sl_${sid}_${t}`, NEWD[sid].evt[t]]; } else task[id] = p; });
     EVENTS[sid] = ev; LONG_TASKS[sid] = task; });
   LEGENDS.makete = [["mg", "まけた とき"], ["mj", "じゃんけん"], ["mc", "きりかえ カード"]];
-  LEGENDS.dekigoto = [["ds", "できごと"], ["dj", "じゅんばん"], ["dv", "インタビュー"]]; }
+  }
 Object.assign(LTASK, { mg: ["#FFE0C2", "💪"], mj: ["#FFE27A", "✊"], mc: ["#D7F0D2", "🌈"], ds: ["#FFE9D6", "📖"], dj: ["#C9EBB5", "🔢"], dv: ["#C9E7FF", "🎤"] });
 const nArea = id => Math.min(4, Math.floor(SL_ORDER[curStage].indexOf(id) / 12) + 1);
 // すすむ・もどる しかけ
@@ -156,23 +156,33 @@ async function dgDay(pc) {
   grade(ok && !wrong); playLog({ type: "dgday", id: it.id, n, wrong, ok, ...(MODE === "multi" ? { who: NAMES[pc.kind] } : {}) });
   await sleep(400); g.remove(); return ok; }
 
-/* =============== 🎤 じぶんの きょう（インタビュー） =============== */
-async function dgInterview(pc) {
-  const t = tierOf(), g = panel("じぶんの きょう", "#EAF6FF");
-  const me = clone(pc.kind, 470, 920, (KID_S[pc.kind] || .8) * .78); hudLayer.appendChild(me.root);
-  const po = clone("pony", 1230, 920, .62); hudLayer.appendChild(po.root);
-  const mic = txt(g, 960, 700, "🎤", 130, { "text-anchor": "middle" }); el("rect", { x: 900, y: 170, width: 560, height: 130, rx: 30, fill: "#FFFFFF", ...S6(5) }, g); const qt = txt(g, 1180, 255, "", 44, { "text-anchor": "middle" });
-  await speak(C.pony, "dv_intro", nTxt("dv_intro"));
-  const qs = [["dvq_0", "dvq_2"], ["dvq_0", "dvq_1", "dvq_2"], ["dvq_0", "dvq_1", "dvq_2", "dvq_3"], ["dvq_0", "dvq_1", "dvq_2", "dvq_3", "dvq_4"]][Math.min(3, t)];
-  const short = { dvq_0: "なにを した？", dvq_1: "だれと？", dvq_2: "たのしかった ことは？", dvq_3: "どうして？", dvq_4: "あしたは？" };
-  const ans = []; let n = 0;
-  for (const q of qs) { qt.textContent = short[q]; tween(400, k => mic.setAttribute("transform", `translate(0 ${(-20 * Math.sin(k * Math.PI)).toFixed(0)})`));
-    playMove(po, "point"); await speak(C.pony, q, nTxt(q)); showTask("🎤", "じぶんの ことばで"); setListen(pc, true); const r = await freeListen(13000); setListen(pc, false); hideTask();
-    const heard = (r.heard || "").replace("（確認ボタン）", "○"); ans.push(`${short[q]}「${heard}」`);
-    if (r.r === "ok") { n++; playMove(po, "nod"); playMove(me, "nod"); const k = `dva_${rnd(4)}`; await speak(C.pony, k, nTxt(k)); } else await speak(C.pony, "dv_think", nTxt("dv_think")); }
-  const ok = n * 2 >= qs.length; if (ok) { confetti(40); joy(me); } await speak(C.pony, "dv_end", nTxt("dv_end"));
-  playLog({ type: "dginterview", n, of: qs.length, ans, ...(MODE === "multi" ? { who: NAMES[pc.kind] } : {}) });
+/* =============== 🎤 つづけて おはなし（インタビューの かわり、2026-10-20） ===============
+   ぽにーが つづけて きく → まるシマ（あそんで いる キャラ）に なって、カードと お手本の こえで こたえる。じぶんの ほんとうの ことは きかない。 */
+const CH_N = new Map();
+async function chainRun(pc, list, pre, title, color) {
+  let pool = list; const m = Math.min(...pool.map(x => CH_N.get(pre + x.id) || 0)); pool = pool.filter(x => (CH_N.get(pre + x.id) || 0) === m); const it = pool[rnd(pool.length)]; CH_N.set(pre + it.id, m + 1);
+  const t = tierOf(), lv = t >= 2 ? 1 : 0, g = panel(title, color), T = k => nTxt(k) || (KC.txt[k] || DG.txt[k] || "");
+  const me = clone(pc.kind, 430, 930, (KID_S[pc.kind] || .8) * .74); hudLayer.appendChild(me.root);
+  const po = clone("pony", 1260, 930, .6); hudLayer.appendChild(po.root);
+  el("rect", { x: 700, y: 400, width: 820, height: 110, rx: 30, fill: "#FFFFFF", ...S6(5) }, g); el("path", { d: "M1240 510 L1270 560 L1300 510", fill: "#FFFFFF", ...S6(5) }, g); const qt = txt(g, 1110, 472, "", 44, { "text-anchor": "middle" });
+  await speak(C.pony, `${pre}_intro`, T(`${pre}_intro`));
+  let okN = 0; const tries = [];
+  for (let i = 0; i < it.q.length; i++) { const [q, emo, short, long, keys] = it.q[i], ans = lv ? long : short;
+    qt.textContent = q; qt.setAttribute("font-size", q.length > 16 ? 36 : 44); playMove(po, "point"); await speak(C.pony, `${pre}_${it.id}_q${i}`, q);
+    const cd = card(g, 560, 560, 400, 190, short, emo, { es: 96, fs: 42 }); cd.style.cursor = "";
+    showTask(ans, `${NAMES[pc.kind] || "まるシマ"}に なって`, 260); await speak(C.pony, `${pre}_${it.id}_${i}_${lv}`, ans); unsay();
+    let ok = false; for (let n = 0; n < 2 && !ok; n++) { setListen(pc, true); const r = await listen(keys, 8000); setListen(pc, false); tries.push(`${i}${r.r === "ok" ? "○" : "×"}${r.heard || ""}`); ok = r.r === "ok";
+      if (!ok && n === 0) await speak(C.pony, "p_again", "もう いっかい いってみよう"); }
+    hideTask(); if (ok) { okN++; chime(); playMove(po, "nod"); playMove(me, "nod"); cd.rect.setAttribute("fill", "#E2F5D8"); const k = `${pre}_a${rnd(3)}`; await speak(C.pony, k, T(k)); }
+    else { await speak(C.pony, "p_together", "いっしょに いおうね"); await speak(C.pony, `${pre}_${it.id}_${i}_${lv}`, ans); }
+    await sleep(300); cd.remove(); }
+  const ok = okN >= it.q.length - 1; if (ok) { confetti(40); joy(me); } await speak(C.pony, `${pre}_end`, T(`${pre}_end`));
+  playLog({ type: "chain", id: pre + ":" + it.id, okN, of: it.q.length, tries, ...(MODE === "multi" ? { who: NAMES[pc.kind] } : {}) });
   grade(ok); clearClones(); g.remove(); return ok; }
+const dgInterview = pc => chainRun(pc, DG.chain, "dc", "きのうの こと", "#EAF6FF");
+LTASK_RUN.kv = pc => chainRun(pc, KC.chain, "kc", "つづけて おはなし", "#FFF4F7");
+LEGENDS.kimochi = [["ks", "きもち"], ["kp", "ぴったり"], ["kv", "つづけて おはなし"]];
+LEGENDS.dekigoto = [["ds", "できごと"], ["dj", "じゅんばん"], ["dv", "きのうの こと"]];
 Object.assign(LTASK_RUN, { mg: mkScene, mj: mkJanken, mc: mkCard, ds: dgStory, dj: dgDay, dv: dgInterview });
 
 /* ---------- ゴール：いえた ことば・おはなし できた できごと ---------- */
@@ -194,7 +204,7 @@ Object.assign(LTASK_RUN, { mg: mkScene, mj: mkJanken, mc: mkCard, ds: dgStory, d
     const o = lt(); let a = []; try { a = JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); } catch (e) { }
     const fmt = x => x.type === "makete" ? `まけても ${x.id} ${x.okN}/${x.nSay} ${(x.tries || []).join(" / ")}` : x.type === "mkjanken" ? `じゃんけん（${x.res}） ${x.ok ? "○" : "△"}`
       : x.type === "mkcard" ? `きりかえカード ${x.id} ${x.wrong ? "まちがい" + x.wrong : ""}${x.ok ? "○" : "△"}` : x.type === "dekigoto" ? `できごと ${x.id} ${x.okN}/${x.nSay} ${(x.tries || []).join(" / ")}`
-      : x.type === "dgday" ? `じゅんばん ${x.id}（${x.n}まい） ${x.ok ? "○" : "△"}` : x.type === "dginterview" ? `じぶんの きょう ${x.n}/${x.of} ${x.ans.join(" ")}` : null;
+      : x.type === "dgday" ? `じゅんばん ${x.id}（${x.n}まい） ${x.ok ? "○" : "△"}` : x.type === "chain" ? `つづけて おはなし ${x.id} ${x.okN}/${x.of} ${(x.tries || []).join(" / ")}` : null;
     const d = tt => { const x = new Date(tt); return `${x.getMonth() + 1}/${x.getDate()} ${String(x.getHours()).padStart(2, "0")}:${String(x.getMinutes()).padStart(2, "0")}`; };
     const lines = o.text.split("\n");
     a.forEach(x => { const f = fmt(x); if (!f) return; const raw = `${d(x.t)} ${JSON.stringify(x)}`; const k = lines.indexOf(raw); if (k >= 0) lines[k] = `${d(x.t)} ${f}${x.who ? `（${x.who}）` : ""}`; });

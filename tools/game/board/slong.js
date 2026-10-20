@@ -66,7 +66,7 @@ const SL_EVT = {
   odekake: { dice2: "おべんとうを たべて げんき いっぱい！ つぎは サイコロ 2こで ふれるよ", warp: "バスに のった！ ずっと さきまで いけるよ", bigwarp: "タクシーに のせて もらった！ ゴールの ちかくまで いくよ",
     fake: "くだりざかで 3マス すすむ！ …と おもったら、わすれものに きづいて 4マス もどる！", rand: "みちに まよっちゃった！ どこに いくかな？", rest: "あめが ふって きた！ あまやどりで 1かい やすみ",
     x2: "おいかぜだ！ つぎの サイコロは 2ばいだよ", zero: "ふみきりが しまってる！ つぎの サイコロは 0に なるよ", home: "わすれものを した！ いえに もどる！",
-    back10: "みちを まちがえた！ 10マス もどる！", bonus: "アイスクリームやさんだ！ たねを 3こ ゲット！", allf: "あおしんごうが つづいた！ みんな 2マス すすむよ", allb: "いぬの おさんぽの ぎょうれつだ！ みんな まって 2マス もどるよ",
+    back10: "みちを まちがえた！ 10マス もどる！", bonus: "アイスクリームやさんだ！ たねを 3こ ゲット！", allf: "あおしんごうが つづいた！ みんな 2マス すすむよ", allb: "かぜで ぼうしが とばされた！ みんなで おいかけて 2マス もどるよ",
     janken: "こうえんで じゃんけん しょうぶ！ いちばん まえの ひとと じゃんけん！ かったら いれかわるよ", again: "おまわりさんに あいさつ できた！ もう いっかい サイコロを ふれるよ",
     nebou: "ベンチで ねちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "サイクリングの なかまが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを むかえに いくよ",
     atsumare: "こうえんで ひとやすみ！ みんな ここに あつまれ！", kumikae: "みちが こうじちゅう！ コースが くみかわるよ" },
@@ -177,8 +177,9 @@ const slFlag = (pc, k) => { if (pc.player) pc.player[k] = 1; };
     if (type === "home" && slIdx(pc.node) >= 30) { const b = Object.values(EVENTS[curStage]).find(e => e[0] === "back10"); if (b) [type, , key, text] = b; }
     await sleep(300); markAbove(pc, "ex"); chime();
     if (type === "tsukkomi") return slTsukkomi(pc);
-    await slSay(key, text);
-    if (type === "dice2" || type === "x2" || type === "zero") { slFlag(pc, type); markAbove(pc, "sparkle"); }
+    if (type === "zero") { const ov = slZeroShow(curStage, text); await speak(C.pony, key, text); await sleep(1200); ov.remove(); slFlag(pc, "zero"); markAbove(pc, "sparkle"); }
+    else await slSay(key, text);
+    if (type === "dice2" || type === "x2") { slFlag(pc, type); markAbove(pc, "sparkle"); }
     else if (type === "warp" || type === "bigwarp") { const to = slWarpTo(curStage, pc.node, type), e = SL_VEH[curStage] && SL_VEH[curStage][type];
       if (e === "🌀") { await warpTo(pc, to); } else if (e) await slRide(pc, to, e, { arc: type === "bigwarp" ? 260 : 120, ms: type === "bigwarp" ? 1800 : 1500, noflip: e === "🚀" || e === "☁️" }); else await warpTo(pc, to); }
     else if (type === "fake") { await slGo(pc, 3); if (winner) return; await sleep(300); noise(.3, 400, .4); markAbove(pc, "drop"); await slGo(pc, -4); }
@@ -238,11 +239,28 @@ async function slNebou(pc) {
   if (r.r === "ok") { surprise(pc); jump(pc, .7); await speak(C.pony, "sl_nb_ok", "おきた！ やすまなくて いいよ"); }
   else { slFlag(pc, "rest"); await speak(C.pony, "sl_nb_ng", "ぐうぐう……おきなかった。つぎは 1かい やすみ"); }
 }
+// 「つぎは 0マス」を ゆっくり みせる（えきと おでかけは ふみきりの アニメ）
+function slZeroShow(sid, text) { const g = el("g", {}, hudLayer); el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#2B2A3366" }, g);
+  el("rect", { x: 300, y: 140, width: 1000, height: 640, rx: 40, fill: "#FFFFFF", ...S6(8) }, g);
+  if (sid === "eki" || sid === "odekake") { // ふみきり：カンカン ランプ・しゃだんき・でんしゃが とおる
+    el("rect", { x: 340, y: 520, width: 920, height: 120, fill: "#8C939C" }, g); for (let x = 360; x < 1260; x += 60) el("rect", { x, y: 560, width: 30, height: 8, fill: "#6B4A36" }, g);
+    el("path", { d: "M360 545 H1240 M360 615 H1240", stroke: "#B0B7C3", "stroke-width": 8 }, g);
+    const post = el("g", {}, g); el("rect", { x: 470, y: 300, width: 20, height: 360, fill: "#FFFFFF", ...S6(5) }, post);
+    el("path", { d: "M420 300 L540 360 M540 300 L420 360", stroke: "#F2C200", "stroke-width": 22 }, post); el("path", { d: "M420 300 L540 360 M540 300 L420 360", stroke: INK, "stroke-width": 4, fill: "none" }, post);
+    const L1 = el("circle", { cx: 440, cy: 400, r: 22, fill: "#E8473C", ...S6(4) }, g), L2 = el("circle", { cx: 520, cy: 400, r: 22, fill: "#5A3A3A", ...S6(4) }, g);
+    const bar = el("g", { transform: "translate(490 470)" }, g); for (let i = 0; i < 6; i++) el("rect", { x: i * 70, y: -8, width: 70, height: 16, fill: i % 2 ? "#FFFFFF" : "#F2C200", ...S6(3) }, bar);
+    const cp = el("clipPath", { id: "slzclip" }, g); el("rect", { x: 340, y: 420, width: 920, height: 240 }, cp); const vw = el("g", { "clip-path": "url(#slzclip)" }, g), tr = txt(vw, 1540, 610, "🚃🚃🚃", 140, { "text-anchor": "middle" }); txt(g, 360, 690, "🧒", 110, { "text-anchor": "middle" });
+    let t = 0; addTick(dt => { if (!g.isConnected) return false; t += dt; const on = Math.floor(t * 3) % 2; L1.setAttribute("fill", on ? "#E8473C" : "#5A3A3A"); L2.setAttribute("fill", on ? "#5A3A3A" : "#E8473C");
+      bar.setAttribute("transform", `translate(490 470) rotate(${(-80 + Math.min(1, t / .8) * 80).toFixed(0)})`); tr.setAttribute("x", (1540 - Math.max(0, t - .9) * 700).toFixed(0)); if (Math.floor(t * 3) !== Math.floor((t - dt) * 3)) blip(880, 860, .06, "square"); });
+    txt(g, 800, 230, "カンカン……でんしゃが とおるまで まとう", 46, { "text-anchor": "middle" }); }
+  else { const E = { sumi: "🏖", sokashi: "🍬", suchu: "☄️" }[sid] || "🛑"; txt(g, 800, 470, E, 200, { "text-anchor": "middle" }); }
+  el("rect", { x: 560, y: 690, width: 480, height: 72, rx: 36, fill: "#E8473C", ...S6(5) }, g); txt(g, 800, 742, text ? "つぎの サイコロは 0" : "こんかいは 0マス", 44, { "text-anchor": "middle", fill: "#FFFFFF" });
+  return g; }
 /* ---------- サイコロ：2こ・2ばい・0 ---------- */
 Object.assign(NUMS, { 0: "ゼロ！", 7: "なな！", 8: "はち！", 9: "きゅう！", 10: "じゅう！", 11: "じゅういち！", 12: "じゅうに！" });
 { const rd = rollDice; rollDice = async function (forced) {
     const pl = CUR_PL; if (!isSL() || !pl || forced) return rd(forced);
-    if (pl.zero) { pl.zero = 0; pl.stay = 1; await rd(); noise(.3, 300, .5); await speak(C.pony, "sl_zero_now", "0に なっちゃった！ うごけない！"); popNumber(0); return 0; }
+    if (pl.zero) { pl.zero = 0; pl.stay = 1; const ov = slZeroShow(curStage, null); noise(.3, 300, .5); await speak(C.pony, "sl_zero_turn", "さっきの しかけで、こんかいは 0マス。うごけないよ"); popNumber(0); await sleep(900); ov.remove(); return 0; }
     let v = await rd();
     if (pl.dice2) { pl.dice2 = 0; await speak(C.pony, "sl_d2_more", "もう ひとつ ふってね"); await waitDice(); const w = await rd(); v += w; popNumber(v); await sleep(400); }
     if (pl.x2) { pl.x2 = 0; await speak(C.pony, "sl_x2_now", "2ばいに なるよ！"); v *= 2; popNumber(v); await sleep(400); }

@@ -269,6 +269,13 @@ const BUILD = {
     return { base: 406, top: 76, tail: null, legs, arms, head: { g: head, px: 200, py: 262 }, ears: [], eyes, happy: null,
       mouth: { type: "jaw", el: jaw }, brows, tempo: 0.65 };
   },
+  // かめせんせい（びょういんの おいしゃさん、2026-10-20）：かめじい とは べつの ひと。はくい・めがね・ちょうしんき。つえは もたない
+  kamedr(root) { const p = BUILD.kamejii(root); root.querySelectorAll("path").forEach(e => { if ((e.getAttribute("d") || "").startsWith("M306 250")) e.setAttribute("display", "none"); });
+    coatOn(root, p, "#FFFFFF"); const st = el("g", {}); root.insertBefore(st, p.arms[0].g);
+    el("path", { d: "M172 290 Q160 334 190 350 M228 290 Q240 334 210 350", fill: "none", stroke: "#4A4A58", "stroke-width": 7, "stroke-linecap": "round" }, st); el("circle", { cx: 200, cy: 356, r: 13, fill: "#C9D3DE", ...ST(4) }, st);
+    const gl = el("g", {}, p.head.g); [160, 240].forEach(cx => el("circle", { cx, cy: 170, r: 30, fill: "#FFFFFF", "fill-opacity": .3, ...ST(6) }, gl));
+    el("path", { d: "M190 168 Q200 160 210 168 M130 166 L104 158 M270 166 L296 158", fill: "none", ...ST(5) }, gl);
+    p.tempo = .8; return p; },
   meebaa(root) {
     const s = ST(), W = "#FFF6E9", F = "#F2D2B6";
     const legs = [172, 228].map(x => leg(root, x, 366, 28, 42, "#6B4A36", null));
@@ -445,10 +452,10 @@ const BUILD = {
     return p; },
 };
 
-const NAMES = { pony: "ぽにー", shima: "まるシマ", doshin: "どしん", nobbo: "のっぽ", gao: "がお", chu: "ちゅう", pyon: "ぴょん", mii: "みい", kamejii: "かめじい", meebaa: "めえばあ",
+const NAMES = { pony: "ぽにー", shima: "まるシマ", doshin: "どしん", nobbo: "のっぽ", gao: "がお", chu: "ちゅう", pyon: "ぴょん", mii: "みい", kamejii: "かめじい", kamedr: "かめせんせい", meebaa: "めえばあ",
   pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", papa: "パパ", gaopapa: "がおの パパ", gaonii: "がおの おにいちゃん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "ぴよこさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くまた", onii: "おにいちゃん" };
 const LINES = { pony: "きょねん、うみに いったね", shima: "やったー！ いえたね！", doshin: "どいて、あげるよ", nobbo: "それは、ずかんに のって いますよ", gao: "つぎは、まけないぞ",
-  chu: "こ、こわかったよう", pyon: "いっしょに あそぼう！", mii: "ふーん。まあまあ じゃない", kamejii: "よく いえましたね", meebaa: "いらっしゃいませ" };
+  chu: "こ、こわかったよう", pyon: "いっしょに あそぼう！", mii: "ふーん。まあまあ じゃない", kamejii: "よく いえましたね", kamedr: "よく いえましたね", meebaa: "いらっしゃいませ" };
 
 function makeChar(kind) {
   const root = el("g", {}, charLayer);
@@ -584,6 +591,7 @@ const SPECIAL = {
   gaomama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
   miimama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
   chumama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
+  kamedr: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
   wanko: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
   biba: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
   piyoko: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },

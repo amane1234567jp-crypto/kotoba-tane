@@ -36,7 +36,7 @@ const famMap = s => FAM_OF[s.asker] && FAM_OF[s.asker]();
 const famOk = (s, heroKind) => { const m = famMap(s); return !m || heroKind === "shima" || !!m[heroKind]; }; // じぶんの かぞくが いない 子には ださない
 const famSwap = (s, heroKind) => { const m = famMap(s), k = m && m[heroKind]; return k ? { ...s, asker: k, vk: "_" + k } : s; };
 const ASK_ON_STAGE = new Set(["door", "arrive", "stuck", "scared", "jumpdown", "loud", "borrow", "slow"]); // 最初から相手がその場にいる場面
-const ASK_AT = { onii: [1190, .98], tora: [1190, .92], kuma: [1220, 1.05], mama: [1200, 1.0], ookami: [1200, 1.0], ojisan: [1200, 1.0], omawari: [1240, 1.3], meebaa: [1190, .9], kamejii: [1180, .9], nobbo: [1220, 1.0], gao: [1190, .95], mii: [1190, .9], chu: [1220, .42], pyon: [1190, .9], doshin: [1260, 1.38], pyonmama: [1200, 1.0], gaojii: [1190, 1.0], miibaa: [1190, .98], doshinpapa: [1250, 1.48], kon: [1190, .88], panna: [1190, .9], pannamama: [1200, 1.0], gaomama: [1190, .98], miimama: [1190, .96], chumama: [1210, .62], wanko: [1190, 1.0], biba: [1190, .98], piyoko: [1220, .6], papa: [1200, 1.04], gaopapa: [1200, 1.04], gaonii: [1190, .98] };
+const ASK_AT = { onii: [1190, .98], tora: [1190, .92], kuma: [1220, 1.05], mama: [1200, 1.0], ookami: [1200, 1.0], ojisan: [1200, 1.0], omawari: [1240, 1.3], meebaa: [1190, .9], kamejii: [1180, .9], kamedr: [1180, .9], nobbo: [1220, 1.0], gao: [1190, .95], mii: [1190, .9], chu: [1220, .42], pyon: [1190, .9], doshin: [1260, 1.38], pyonmama: [1200, 1.0], gaojii: [1190, 1.0], miibaa: [1190, .98], doshinpapa: [1250, 1.48], kon: [1190, .88], panna: [1190, .9], pannamama: [1200, 1.0], gaomama: [1190, .98], miimama: [1190, .96], chumama: [1210, .62], wanko: [1190, 1.0], biba: [1190, .98], piyoko: [1220, .6], papa: [1200, 1.04], gaopapa: [1200, 1.04], gaonii: [1190, .98] };
 let propG = null;
 function resetChar(c) { c.dx.v = 0; c.dx.t = 0; c.lean.t = 0; c.lift.t = 0; c.armL.t = 0; c.armR.t = 0; c.headRot.t = 0; c.tm = {}; c.sadMouth = false; c.roundMouth = false; c.happyOn = false; c.eyeScale.t = 1; c.squash.t = 1; }
 function setSitView(s, heroKind) {
@@ -48,7 +48,7 @@ function setSitView(s, heroKind) {
   const hero = C[heroKind], ask = C[s.asker];
   [C.pony, C.shima, hero, ask].forEach(resetChar);
   place(C.pony, 120, 975, .46); show(C.pony);
-  const HS = { shima: .88, gao: .9, pyon: .86, mii: .86, chu: .42, doshin: 1.15, meebaa: .86, kamejii: .86, kon: .88 };
+  const HS = { shima: .88, gao: .9, pyon: .86, mii: .86, chu: .42, doshin: 1.15, meebaa: .86, kamejii: .86, kamedr: .86, kon: .88 };
   if (MODE === "solo" && heroKind !== "shima") { place(C.shima, 320, 975, .55); show(C.shima); place(hero, 650, 975, HS[heroKind] || .9); }
   else place(hero, 600, 975, HS[heroKind] || .88);
   show(hero);

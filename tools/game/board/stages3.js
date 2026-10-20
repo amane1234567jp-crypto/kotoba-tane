@@ -61,9 +61,8 @@ function house(L, x, y, w, h, wall, roof) { el("rect", { x, y, width: w, height:
   el("rect", { x: x + w * .12, y: y + h * .2, width: w * .26, height: h * .26, rx: 6, fill: "#CFEAFB", ...S6(4) }, L); }
 function street(L) { el("rect", { x: 0, y: 640, width: 1600, height: 130, fill: "#7A7F88" }, L); el("path", { d: "M0 705 H1600", stroke: "#FFFFFF", "stroke-width": 8, "stroke-dasharray": "60 40" }, L);
   el("rect", { x: 0, y: 770, width: 1600, height: 18, fill: "#E3E3E3", ...S6(4) }, L); el("path", { d: "M0 800 H1600", stroke: "#FFFFFF", "stroke-width": 10 }, L); }
-function signal(L, x) { el("path", { d: `M${x} 760 V360`, ...S6(10) }, L); const box = el("rect", { x: x - 50, y: 260, width: 100, height: 180, rx: 14, fill: "#3A3A46", ...S6(6) }, L);
-  const r = el("circle", { cx: x, cy: 305, r: 30, fill: "#E8473C", ...S6(4) }, L), g = el("circle", { cx: x, cy: 395, r: 30, fill: "#4A5A4A", ...S6(4) }, L);
-  window.__sig = col => { r.setAttribute("fill", col === "red" ? "#E8473C" : "#5A3A3A"); g.setAttribute("fill", col === "red" ? "#4A5A4A" : "#5CD66A"); if (col !== "red") chime(); }; window.__sig("red"); }
+function signal(L, x) { const hold = el("g", {}, L); // ほこうしゃようの しんごう（えは odekake.js の sigG）
+  window.__sig = col => { hold.innerHTML = ""; sigG(hold, x, 540, col, .74); if (col !== "red") chime(); }; window.__sig("red"); }
 function classroom(L, title, extra) { el("rect", { x: 0, y: 0, width: 1600, height: 760, fill: "#FFF6E0" }, L); el("rect", { x: 0, y: 760, width: 1600, height: 240, fill: "#E3C59A" }, L); el("path", { d: "M0 760 H1600", ...S6(6) }, L);
   for (let x = 0; x < 1600; x += 160) el("path", { d: `M${x} 760 L${x - 80} 1000`, stroke: "#00000010", "stroke-width": 4 }, L);
   el("rect", { x: 300, y: 150, width: 820, height: 300, rx: 10, fill: "#2F6B4F", ...S6(8) }, L); el("rect", { x: 300, y: 450, width: 820, height: 18, fill: "#B9824A", ...S6(5) }, L);

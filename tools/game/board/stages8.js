@@ -100,7 +100,10 @@ const rm8 = (...ks) => ks.forEach(k => { if (window[k]) { window[k].remove(); wi
 Object.assign(INTRO, {
   // ---- ゆうごはん ----
   async ysdekita(h, a) { place(h, 520, 975, .88); stay(h); on8(380, 960, "blocks", .55); offR(a, 700); playMove(h, "crouch"); await sleep(600); a.dx.t = 300; hold(a, "run", .5); await sleep(500); markAbove(h, "ex"); playMove(h, "look"); await sleep(600); },
-  async ysitadaki(h, a) { tableAt(); T8("hamburg", -40, .5); T8("rice", 90, .3); await comeSit(h, 1000); markAbove(h, "sparkle"); await sleep(400); },
+  async ysitadaki(h, a) { tableAt(); T8("hamburg", -40, .5); T8("rice", 90, .3); // みんな そろった：ママと きょうだいも テーブルに（2026-10-20）
+    const mom = h.kind === "shima" ? "mama" : MOM_OF[h.kind], sib = { shima: "onii", gao: "gaonii" }[h.kind];
+    const fam = [mom && xtra(mom, 1470, .8), sib && xtra(sib, 330, .78)].filter(Boolean); fam.forEach(c => { stay(c); later(300, () => playMove(c, "wave")); });
+    await comeSit(h, 1000); markAbove(h, "sparkle"); await sleep(400); },
   async ysshouyu(h, a) { tableAt(); T8("hamburg", -60, .45); T8("shouyu", 110, .5); await comeSit(h, 900); h.armR.t = -70; h.lean.t = 12; hint7(h, "🙌", "とどかない"); await sleep(1200); h.lean.t = 0; h.armR.t = 0; },
   async yspiman(h, a) { tableAt(); T8("plate", 0, .5); window.__pm = T8("piman", 0, .4); await comeSit(h, 900); playMove(h, "no"); hint7(h, "🫑", "にがい"); await sleep(1200); },
   async ysokawari(h, a) { tableAt(); await comeSit(h, 900); window.__rc = hp7(h, "rice", .32); await sleep(400); h.armR.t = -60; hint7(h, "🍚", "からっぽ"); await sleep(1000); },
@@ -229,7 +232,7 @@ const KN = {
     nani: ["🍛", "カレー", ["カレーが でたよ", [["かれー", "カレー"]]], ["きゅうしょくに、カレーが でたよ", [["きゅうしょく", "給食"], ["かれー", "カレー"]]]],
     dare: ["🐼", "ぱんなちゃん", ["ぱんなちゃんと たべたよ", [["ぱんな"]]], ["となりの ぱんなちゃんと、いっしょに たべたよ", [["となり", "隣"], ["ぱんな"]]]],
     dounatta: ["🍚", "おかわり", ["おかわり したよ", [["おかわり", "お代わり"]]], ["カレーが おいしくて、おかわり したよ", [["かれー", "カレー"], ["おかわり", "お代わり"]]]],
-    kimochi: ["☺", "しあわせ", ["しあわせだった", [["しあわせ", "幸せ"]]], ["おなかが いっぱいで、しあわせだったよ", [["いっぱい"], ["しあわせ", "幸せ"]]]] },
+    kimochi: ["😋", "まんぷく", ["まんぷくだった", [["まんぷく", "満腹"]]], ["カレーを いっぱい たべて、まんぷくだったよ", [["まんぷく", "満腹"]]]] },
   koronda: { dou: ["😣", "いたかった", ["ちょっと いたかった", [["いたかった", "痛かった"]]], ["ちょっと いたい ことが あったよ", [["いたい", "痛い"], ["あった"]]]],
     nani: ["💥", "ころんだ", ["ころんだの", [["ころん", "転ん"]]], ["はしって いたら、ころんじゃったの", [["はしって", "走って"], ["ころん", "転ん"]]]],
     dare: ["🦊", "こんくん", ["こんくんと いたよ", [["こん"]]], ["こんくんと、おにごっこを して いたよ", [["こん"], ["おにごっこ", "鬼ごっこ"]]]],
@@ -286,6 +289,8 @@ const RQ = [
   { id: "narabi", q: "ともだちと いっしょに はしる ときは？", pic: "🚲🚲", cards: [["よこに ならぶ", "↔", 0], ["いちれつに なる", "⬇", 1]], rule: "ならんで はしらない", keys: [["ならんで", "並んで", "いちれつ", "一列"]] },
   { id: "tomare", q: "「とまれ」の マークが あったら？", pic: "🛑", cards: [["いちど とまる", "✋", 1], ["そのまま すすむ", "💨", 0]], rule: "とまれでは いちど とまる", keys: [["とまれ", "止まれ", "とまる", "止まる"], ["いちど", "一度", "とまる", "止まる"]] },
   { id: "hodou", q: "ほどうに ひとが たくさん いるよ。どうする？", pic: "🚶", cards: [["おりて おす", "🚶", 1], ["そのまま はしる", "🚲", 0]], rule: "ほどうは ひとが さき", keys: [["ほどう", "歩道"], ["さき", "先"]] },
+  { id: "kado", q: "まがりかどに きたよ。むこうが みえないね。どうする？", pic: "↱", cards: [["とまって たしかめる", "✋", 1], ["そのまま まがる", "💨", 0]], rule: "まがりかどは とまって たしかめる", keys: [["まがりかど", "曲がり角"], ["とまって", "止まって", "たしかめ", "確かめ"]] },
+  { id: "tobidashi", q: "みせの まえを はしるよ。ひとが でて きそう。どうする？", pic: "🏪", cards: [["ゆっくり はしる", "🐢", 1], ["スピードを だす", "💨", 0]], rule: "ひとの とびだしに きを つける", keys: [["とびだし", "飛び出し"], ["きを つけ", "気をつけ", "気を付け", "ちゅうい", "注意"]] },
   { id: "light", q: "くらく なって きたよ。どうする？", pic: "🌙", cards: [["ライトを つける", "💡", 1], ["そのまま はしる", "🌑", 0]], rule: "くらく なったら ライトを つける", keys: [["らいと", "ライト"], ["つける", "点ける"]] },
 ];
 const RQ_USED = new Set();
@@ -295,7 +300,7 @@ async function rqRun(heroKind) {
   const { hero: h, ask: a } = setSitView(s, heroKind); showEngine(null, `ルールクイズ（${it.id}）`);
   window.__bk8 = rideBike(h); await comeSit(h, 900); if (it.id === "aka" && window.__sig) window.__sig("red");
   await speak(C.pony, "rl_intro", "ルールクイズ！ ただしい ほうを タッチしてね");
-  const pic = el("g", {}, front()); el("rect", { x: 40, y: 150, width: 260, height: 200, rx: 30, fill: "#FFFFFF", ...S6(6) }, pic); txt(pic, 170, 290, it.pic, it.pic.length > 2 ? 90 : 130, { "text-anchor": "middle" });
+  const pic = el("g", {}, front()); el("rect", { x: 40, y: 150, width: 260, height: 200, rx: 30, fill: "#FFFFFF", ...S6(6) }, pic); if (it.id === "aka") sigG(pic, 170, 340, "red", .54, false); else txt(pic, 170, 290, it.pic, it.pic.length > 2 ? 90 : 130, { "text-anchor": "middle" });
   await speak(a, `rq_${it.id}`, it.q);
   const g = el("g", {}, front()); const order = rnd(2) ? [0, 1] : [1, 0];
   const cs = order.map((i, j) => { const [lab, emo, good] = it.cards[i]; const c = card(g, 340 + j * 520, 160, 480, 180, lab, emo, { es: 80 }); c.good = good; return c; });

@@ -11,7 +11,7 @@ const rnd = n => Math.floor(Math.random() * n);
 const pad = n => String(n).padStart(2, "0");
 
 /* ---------- キャラ ---------- */
-const KINDS = ["doshin", "nobbo", "kamejii", "meebaa", "pyonmama", "gaojii", "miibaa", "doshinpapa", "kon", "panna", "pannamama", "mama", "gaomama", "miimama", "chumama", "papa", "gaopapa", "gaonii", "wanko", "biba", "piyoko", "ookami", "ojisan", "omawari", "tora", "kuma", "onii", "pony", "shima", "pyon", "mii", "gao", "chu"];
+const KINDS = ["doshin", "nobbo", "kamejii", "kamedr", "meebaa", "pyonmama", "gaojii", "miibaa", "doshinpapa", "kon", "panna", "pannamama", "mama", "gaomama", "miimama", "chumama", "papa", "gaopapa", "gaonii", "wanko", "biba", "piyoko", "ookami", "ojisan", "omawari", "tora", "kuma", "onii", "pony", "shima", "pyon", "mii", "gao", "chu"];
 const C = {}; KINDS.forEach(k => C[k] = makeChar(k));
 const P = { doshin: makeChar("doshin"), shima: makeChar("shima"), gao: makeChar("gao") };
 Object.values(P).forEach(p => p.isPiece = true);
@@ -209,7 +209,7 @@ function wrapJa(text, max) {
   if (cur) lines.push(cur); return lines;
 }
 function showTask(text, tag = "いってみよう", cy = 230) {
-  taskText = text; taskLines.innerHTML = "";
+  taskText = text; taskLines.innerHTML = ""; if (task.parentNode) task.parentNode.appendChild(task); // パネルの うえに だす
   let size = 84, lines = wrapJa(text, 14);
   if (lines.length > 2 || Math.max(...lines.map(l => l.length)) > 12) { size = 64; lines = wrapJa(text, 18); }
   const w = Math.min(1500, Math.max(520, Math.max(...lines.map(l => l.length)) * size + 110)), h = lines.length * size * 1.22 + 70;
