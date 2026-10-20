@@ -168,7 +168,7 @@ Object.assign(BOARD_BG, {
     el("rect", { x: 60, y: 40, width: 460, height: 110, rx: 10, fill: "#E8473C", ...S6(6) }, L); txt(L, 290, 115, "🍔 ハンバーガーやさん", 40, { "text-anchor": "middle", fill: "#FFFFFF" });
     const t = el("g", { transform: "translate(1400 160) scale(.7)" }, L); ITEM2.burger(t); },
 });
-BLOCK_DEF.asobiba = { who: "meebaa", sleep: false, intro: ["p_blk_asobiba", "めえばあさんが くつを ならべて いるよ。とおして もらおう"], say: ["blk_asobiba", "すみません、とおして ください"], to: "めえばあさんに いおう",
+BLOCK_DEF.asobiba = { who: "tenin", sleep: false, intro: ["p_blk_asobiba", "かかりの ひとが くつを ならべて いるよ。とおして もらおう"], say: ["blk_asobiba", "すみません、とおして ください"], to: "かかりの ひとに いおう",
   keys: [["とおして", "通して"]], res: ["rs_asobiba", "はい、どうぞ。きを つけてね"] };
 BLOCK_DEF.burger = { who: "kamejii", sleep: false, intro: ["p_blk_burger", "かめじいが トレーを もって とおれないよ。みちを あけて あげよう"], say: ["blk_burger", "どうぞ、おさきに"], to: "かめじいに いおう",
   keys: [["どうぞ"], ["おさき", "お先"]], res: ["rs_burger", "ほっほ、どうぞ どうぞ"] };

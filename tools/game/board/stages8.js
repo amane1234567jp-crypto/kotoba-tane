@@ -123,7 +123,7 @@ Object.assign(INTRO, {
   async kgnote(h, a) { await desk8(h); window.__nb = on8(world(h, 200, 0).x, h.__desk ? +h.__desk.firstChild.getAttribute("y") - 10 : 820, "notebook", .5); h.armR.t = -30; for (let i = 0; i < 4; i++) later(i * 220, () => blip(1800, 1600, .03, "square")); await sleep(500); talkFast(a); hint7(h, "✏", "まだ かいてる"); await sleep(900); h.armR.t = 0; },
   async kgenpitsu(h, a) { await desk8(h); const p = hp7(h, "pencil", .35); await sleep(500); noise(.08, 1500, .5); p.remove(); window.__pb = hp7(h, "pencilbroken", .35); surprise(h); await sleep(700); playMove(h, "sad"); await sleep(500); },
   async kghappyou(h, a) { await comeSit(h, 1000); h.armR.t = -150; await sleep(500); h.armR.t = 0; },
-  async kgtsukareta(h, a) { await desk8(h); playMove(h, "sleepy"); await sleep(1300); },
+  async kgtsukareta(h, a) { await desk8(h); playMove(h, "sleepy"); await sleep(1300); h.lean.t = 24; h.tm.closed = 1e6; h.sadMouth = true; later(6000, () => { delete h.tm.closed; h.lean.t = 0; }); },
   async kgkeshigomu(h, a) { await desk8(h); const e = on8(world(h, 200, 0).x, 820, "eraser", .3); await sleep(300); tween(700, t => e.setAttribute("transform", `translate(${world(h, 200, 0).x + 200 * t} ${820 + 140 * t}) rotate(${t * 360}) scale(.3)`)); noise(.06, 900, .3); await sleep(700); playMove(h, "look"); h.lean.t = 14; await sleep(600); h.lean.t = 0; },
   async kgwakaranai(h, a) { await desk8(h); window.__pr = on8(world(h, 200, 0).x, 820, "prints", .4); await sleep(300); playMove(h, "think"); markAbove(h, "q"); hint7(h, "3", "❓"); await sleep(1100); },
   async kgowari(h, a) { await desk8(h); ring3(); await sleep(900); },

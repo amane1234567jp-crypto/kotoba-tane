@@ -392,6 +392,11 @@ const BUILD = {
     el("path", { d: "M96 108 Q200 70 304 108 L300 122 Q200 96 100 122 Z", fill: "#3A3A46", ...ST(6) }, p.head.g); el("path", { d: "M130 106 Q140 30 200 30 Q260 30 270 106 Z", fill: "#3A3A46", ...ST(6) }, p.head.g);
     el("path", { d: "M136 92 Q200 74 264 92", fill: "none", stroke: "#B0303A", "stroke-width": 12 }, p.head.g);
     p.tempo = .9; return p; },
+  tenin(root) { // おみせの てんいんさん（2026-10-20）：オレンジの ねこ・あかい ぼうしと エプロン（めえばあは ほけんしつの せんせい だけに）
+    const p = BUILD.mii(root); recolor(root, { "#B9A8D9": "#F2B36B", "#EDE6F8": "#FFF4E2" }); hideFill(p.head.g, ["#FFD36E"]);
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M150 292 Q200 280 250 292 L262 384 Q200 398 138 384 Z", fill: "#E8473C", ...ST(5) }, bd); el("rect", { x: 178, y: 330, width: 44, height: 30, rx: 6, fill: "#FFFFFF", ...ST(4) }, bd);
+    el("path", { d: "M118 104 Q200 40 282 104 L282 116 L118 116 Z", fill: "#E8473C", ...ST(6) }, p.head.g); el("path", { d: "M200 116 Q258 112 300 126 L296 136 Q252 126 196 128 Z", fill: "#B8322A", ...ST(5) }, p.head.g);
+    p.tempo = 1; return p; },
   ekiin(root) { // えきいんさん（2026-10-20）：うんてんしゅさんと おなじ かおで、こんいろの せいふく・ぼうし
     const p = BUILD.ojisan(root); recolor(root, { "#7FA7D9": "#2F4A7A", "#5BA34D": "#2F4A7A", "#4A8A3E": "#1F3358" });
     el("rect", { x: 186, y: 70, width: 28, height: 20, rx: 4, fill: "#FFD25E", ...ST(3) }, p.head.g); return p; },
@@ -458,7 +463,7 @@ const BUILD = {
 };
 
 const NAMES = { pony: "ぽにー", shima: "まるシマ", doshin: "どしん", nobbo: "のっぽ", gao: "がお", chu: "ちゅう", pyon: "ぴょん", mii: "みい", kamejii: "かめじい", kamedr: "かめせんせい", meebaa: "めえばあ",
-  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", papa: "パパ", gaopapa: "がおの パパ", gaonii: "がおの おにいちゃん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "かんごしさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くま", piyo: "ぴよこ", ekiin: "えきいんさん", onii: "おにいちゃん" };
+  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", papa: "パパ", gaopapa: "がおの パパ", gaonii: "がおの おにいちゃん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "かんごしさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くま", piyo: "ぴよこ", ekiin: "えきいんさん", tenin: "てんいんさん", onii: "おにいちゃん" };
 const LINES = { pony: "きょねん、うみに いったね", shima: "やったー！ いえたね！", doshin: "どいて、あげるよ", nobbo: "それは、ずかんに のって いますよ", gao: "つぎは、まけないぞ",
   chu: "こ、こわかったよう", pyon: "いっしょに あそぼう！", mii: "ふーん。まあまあ じゃない", kamejii: "よく いえましたね", kamedr: "よく いえましたね", meebaa: "いらっしゃいませ" };
 

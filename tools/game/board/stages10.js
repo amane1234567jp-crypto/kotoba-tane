@@ -160,7 +160,7 @@ S10L.forEach(st => { const [f, b, h] = EV10[st]; EVENTS[st] = { a2: ["fwd", 2, `
   if (st === "junban") Object.assign(EVENTS[st], { a3: ["cardorder", 0, "", ""], c2: ["cardorder", 0, "", ""] }); });
 
 /* ---------- 📞 でんわの むこうの 人は わくの なかに（2026-10-20） ---------- */
-{ const sv = setSitView; setSitView = function (s, heroKind) { chars.forEach(c => { c.root.style.filter = ""; }); const r = sv(s, heroKind);
+{ const sv = setSitView; setSitView = function (s, heroKind) { chars.forEach(c => { c.root.style.filter = ""; }); document.querySelectorAll(".blush10").forEach(e => e.remove()); const r = sv(s, heroKind);
     if (s && (s.stage === "denwa" || s.id === "gkdenwa")) { const [ax] = ASK_AT[s.asker] || [1200], vid = s.id === "dwvideo", x0 = ax - 260, W = 520, y0 = 330, H = 680;
       const g = el("g", {}, propG);
       if (vid) { el("rect", { x: x0 - 26, y: y0 - 26, width: W + 52, height: H + 52, rx: 46, fill: "#3A3F4A", stroke: INK, "stroke-width": 8 }, g);
@@ -212,5 +212,8 @@ function rain10() { const g = el("g", {}, propG), lb = c => { const m = /^#([0-9
   .forEach(r => { const b = r.getBBox(); r.setAttribute("fill", "#8FA7BC"); for (let i = 0; i < 5; i++) el("path", { d: `M${b.x + 16 + i * b.width / 5} ${b.y + 12} l-12 ${b.height - 24}`, stroke: "#E8F4FF", "stroke-width": 4, opacity: .9 }, g); }); }
 S10.forEach(s => { if (!PROP10[s.id]) return; const f = INTRO[s.intro]; INTRO[s.intro] = (h, a) => { PROP10[s.id](h, a); return f(h, a); }; });
 // ふきだしが うえの ほうの うごきを かくす 場面は、Q を すこし したに だす
-const TASK_Y = { abwarikomi: 640, abosanai: 640, abkutsu: 640 };
+const TASK_Y = { abwarikomi: 640, abosanai: 640 };
 { const st = showTask; showTask = function (text, tag, cy) { if (cy === undefined && view === "scene" && CUR_S && TASK_Y[CUR_S.id]) cy = TASK_Y[CUR_S.id]; return st(text, tag, cy); }; }
+
+// かおが まっか（ねつ・あつい）：ほっぺを あかく（つぎの 場面で けす）
+function blush(c) { const g = el("g", { class: "blush10" }, c.head.g); [[132, 214], [268, 214]].forEach(([x, y]) => el("ellipse", { cx: x, cy: y, rx: 36, ry: 22, fill: "#FF3B3B", opacity: .55 }, g)); return g; }

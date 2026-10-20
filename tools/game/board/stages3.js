@@ -337,7 +337,7 @@ EV_STYLE.rest = ["#B9E3FF", () => "やすみ"];
 ["rptired", "rpsplash", "rplosthat", "rpalone", "rpnewgame", "rpneedtoilet", "rphighshelf", "rplostwallet", "rpmissedstop", "rplostticket"].forEach(k => ASK_ON_STAGE.add(k));
 ["rptired", "rplostmama", "rplostwallet", "rplostticket", "rpmissedstop", "rpneedtoilet"].forEach(k => SOFT_INTRO.add(k));
 Object.assign(INTRO, {
-  async rptired(h, a) { stay(h); hold(h, "run", 1.6); await sleep(1600); h.lean.t = 14; h.sadMouth = true; for (let i = 0; i < 4; i++) later(i * 350, () => markAbove(h, "drop", { dx: i % 2 ? 60 : -60 })); await sleep(900); await walk(a, -150, 700); },
+  async rptired(h, a) { stay(h); hold(h, "run", 1.6); await sleep(1600); h.lean.t = 14; h.sadMouth = true; blush(h); for (let i = 0; i < 4; i++) later(i * 350, () => markAbove(h, "drop", { dx: i % 2 ? 60 : -60 })); await sleep(900); await walk(a, -150, 700); },
   async rpsplash(h, a) { enter(h); await sleep(1100); for (let i = 0; i < 30; i++) later(i * 40, () => { const t = world(a, 120, 260); mark("drop", t.x, t.y, { vx: -600 - rnd(300), vy: -200 + rnd(200), grav: 800, life: 1, s: .9 }); });
     noise(.8, 2000, .3); a.armR.t = -60; jump(a, .3); await sleep(700); surprise(h); h.armL.t = -150; h.armR.t = 150; h.sadMouth = true; drip(h, 6); await sleep(700); },
   async rpswingmine(h, a) { stay(h); place(h, 1105, 700, .62); sway(h, 3200, 14, 600); const s0 = h.dx.v; const t0 = performance.now(); addTick(() => { if (!window.__swingOn) return false; h.dx.v = h.dx.t = Math.sin((performance.now() - t0) / 600 * Math.PI) * 60; });

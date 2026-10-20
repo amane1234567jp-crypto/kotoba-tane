@@ -3,7 +3,7 @@
    おいしゃさん＝いぬの わんこせんせい、はいしゃさん＝ビーバーの ビバせんせい、かんごしさん＝ひよこの ぴよこさん。 */
 const S7L = ["hoken2", "byouin", "haisha"];
 Object.assign(RIVAL_OF, { hoken2: "doshin", byouin: "chu", haisha: "gao" });
-Object.assign(KID_S, { wanko: 1.0, biba: .98, piyoko: .6, piyo: .5, ekiin: 1.0 });
+Object.assign(KID_S, { wanko: 1.0, biba: .98, piyoko: .6, piyo: .5, ekiin: 1.0, tenin: .95 });
 
 /* ---------- 物の 絵 ---------- */
 function thermoG(g, val) { el("rect", { x: -26, y: -90, width: 52, height: 180, rx: 26, fill: "#FFFFFF", ...S6p(5) }, g); el("rect", { x: -16, y: -60, width: 32, height: 70, rx: 6, fill: "#BDE3F2", ...S6p(3) }, g);
