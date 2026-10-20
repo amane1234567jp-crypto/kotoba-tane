@@ -47,7 +47,7 @@ const mvk = (who, hero) => who === "mama" && momOf(hero) !== "mama" ? "_" + momO
 
 /* =============== 💪 まけた 場面 =============== */
 function mkPick(area, hero) {
-  let pool = MK.sc.filter(s => s.area === area && s.win !== hero); if (!pool.length) pool = MK.sc.filter(s => s.win !== hero);
+  const busy = new Set([hero, ...PLAYERS.map(p => p.kind)]); let pool = MK.sc.filter(s => s.area === area && !busy.has(s.win)); if (!pool.length) pool = MK.sc.filter(s => !busy.has(s.win));
   const m = Math.min(...pool.map(s => MK_N.get(s.id) || 0)); pool = pool.filter(s => (MK_N.get(s.id) || 0) === m); return pool[rnd(pool.length)]; }
 async function mkScene(pc) {
   const hero = pc.kind, sc = mkPick(nArea(pc.node), hero), t = tierOf(), lv = t >= 1 ? 1 : 0; MK_N.set(sc.id, (MK_N.get(sc.id) || 0) + 1);

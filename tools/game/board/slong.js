@@ -276,7 +276,7 @@ Object.assign(NUMS, { 0: "ゼロ！", 7: "なな！", 8: "はち！", 9: "きゅ
     if (AUD["bgm_" + id]) await voiceBuf("bgm_" + id); return true; }; }
 /* ---------- 場面の はいけい（テーマの 4つの ばしょ） ---------- */
 { const dr = drawRoom; drawRoom = function (place, noSign = false) {
-    if (!isSL() || !SL_TH[curStage].areas.includes(place)) return dr(place, noSign);
+    if (!isSL() || !SL_TH[curStage].areas.includes(place) || (typeof room8 === "function" && room8(place))) return dr(place, noSign); /* ほんものの へやが ある ばしょは そちら */
     sceneLayer.innerHTML = ""; const L = sceneLayer, T = SL_TH[curStage], i = T.areas.indexOf(place);
     const sky = curStage === "suchu" ? "#1E2550" : curStage === "sokashi" ? "#FFE3EE" : "#BDE3F2";
     el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: sky }, L);

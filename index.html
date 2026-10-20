@@ -45649,7 +45649,7 @@ const SITS = [
    },
    {
     "a": "ざんねん。おうちで あそぶ",
-    "y": "残念。オウチで遊ぶ",
+    "y": "残念。おうちで遊ぶ",
     "keys": [
      [
       "ざんねん",
@@ -45667,11 +45667,11 @@ const SITS = [
      ]
     ],
     "wrong": "ざんねん。おうちを あそぶ",
-    "wy": "残念。オウチを遊ぶ"
+    "wy": "残念。おうちを遊ぶ"
    },
    {
-    "a": "わかった。じゃあ、オウチで ブロックを する",
-    "y": "分かった。じゃあ、オウチでブロックをする",
+    "a": "わかった。じゃあ、おうちで ブロックを する",
+    "y": "分かった。じゃあ、おうちでブロックをする",
     "keys": [
      [
       "わかった",
@@ -45691,7 +45691,7 @@ const SITS = [
    },
    {
     "a": "ざんねんだけど、わかった。おうちで ブロックで あそぶね",
-    "y": "残念だけど、分かった。オウチでブロックで遊ぶね",
+    "y": "残念だけど、分かった。おうちでブロックで遊ぶね",
     "keys": [
      [
       "ざんねん",
@@ -45709,7 +45709,7 @@ const SITS = [
    },
    {
     "a": "ざんねんだけど、しかたないね。おうちで ブロックを して、はれたら こうえんに いこう",
-    "y": "残念だけど、仕方ないね。オウチでブロックをして、晴れたら公園に行こう",
+    "y": "残念だけど、仕方ないね。おうちでブロックをして、晴れたら公園に行こう",
     "keys": [
      [
       "ざんねん",
@@ -72437,7 +72437,7 @@ function pickSit(place, heroKind = "shima") {
   const okFor = s => (s.stage || "kousha") === curStage && s.asker !== heroKind
     && (heroKind === "shima" || (MODE === "solo" ? s.gaoOk : (heroKind !== "gao" || s.gaoOk)))
     && !(heroKind === "chu" && s.intro === "tag") && !(s.cast && s.cast.includes(heroKind)) && !(s.noHero && s.noHero.includes(heroKind)) && !(s.late && GS.tasks < 4)
-    && famOk(s, heroKind); // ママの 場面は、じぶんの ママが いる 子だけ // やりとりに 出ている キャラは、その場面の 主人公に しない
+    && famOk(s, heroKind) && !(typeof RIVAL !== "undefined" && RIVAL && s.asker === RIVAL && heroKind !== RIVAL); // ライバルは 場面に ださない // ママの 場面は、じぶんの ママが いる 子だけ // やりとりに 出ている キャラは、その場面の 主人公に しない
   if (MODE === "solo" && heroKind !== "shima") { // ひとりで あそぶ ときの ライバルは、こどもが もう やった 場面から えらぶ（こどもの ぶんの あたらしい 場面を へらさない）
     let rp = SITS.filter(s => okFor(s) && sitUsed.has(s.id)); if (!rp.length) rp = SITS.filter(okFor);
     const m = Math.min(...rp.map(x => SIT_N.get(x.id) || 0)); rp = rp.filter(x => (SIT_N.get(x.id) || 0) === m); const s = rp[rnd(rp.length)];
@@ -77487,7 +77487,7 @@ Object.assign(NUMS, { 0: "ゼロ！", 7: "なな！", 8: "はち！", 9: "きゅ
     if (AUD["bgm_" + id]) await voiceBuf("bgm_" + id); return true; }; }
 /* ---------- 場面の はいけい（テーマの 4つの ばしょ） ---------- */
 { const dr = drawRoom; drawRoom = function (place, noSign = false) {
-    if (!isSL() || !SL_TH[curStage].areas.includes(place)) return dr(place, noSign);
+    if (!isSL() || !SL_TH[curStage].areas.includes(place) || (typeof room8 === "function" && room8(place))) return dr(place, noSign); /* ほんものの へやが ある ばしょは そちら */
     sceneLayer.innerHTML = ""; const L = sceneLayer, T = SL_TH[curStage], i = T.areas.indexOf(place);
     const sky = curStage === "suchu" ? "#1E2550" : curStage === "sokashi" ? "#FFE3EE" : "#BDE3F2";
     el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: sky }, L);
@@ -78363,7 +78363,7 @@ const mvk = (who, hero) => who === "mama" && momOf(hero) !== "mama" ? "_" + momO
 
 /* =============== 💪 まけた 場面 =============== */
 function mkPick(area, hero) {
-  let pool = MK.sc.filter(s => s.area === area && s.win !== hero); if (!pool.length) pool = MK.sc.filter(s => s.win !== hero);
+  const busy = new Set([hero, ...PLAYERS.map(p => p.kind)]); let pool = MK.sc.filter(s => s.area === area && !busy.has(s.win)); if (!pool.length) pool = MK.sc.filter(s => !busy.has(s.win));
   const m = Math.min(...pool.map(s => MK_N.get(s.id) || 0)); pool = pool.filter(s => (MK_N.get(s.id) || 0) === m); return pool[rnd(pool.length)]; }
 async function mkScene(pc) {
   const hero = pc.kind, sc = mkPick(nArea(pc.node), hero), t = tierOf(), lv = t >= 1 ? 1 : 0; MK_N.set(sc.id, (MK_N.get(sc.id) || 0) + 1);

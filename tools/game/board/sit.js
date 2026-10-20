@@ -16,7 +16,7 @@ function pickSit(place, heroKind = "shima") {
   const okFor = s => (s.stage || "kousha") === curStage && s.asker !== heroKind
     && (heroKind === "shima" || (MODE === "solo" ? s.gaoOk : (heroKind !== "gao" || s.gaoOk)))
     && !(heroKind === "chu" && s.intro === "tag") && !(s.cast && s.cast.includes(heroKind)) && !(s.noHero && s.noHero.includes(heroKind)) && !(s.late && GS.tasks < 4)
-    && famOk(s, heroKind); // ママの 場面は、じぶんの ママが いる 子だけ // やりとりに 出ている キャラは、その場面の 主人公に しない
+    && famOk(s, heroKind) && !(typeof RIVAL !== "undefined" && RIVAL && s.asker === RIVAL && heroKind !== RIVAL); // ライバルは 場面に ださない // ママの 場面は、じぶんの ママが いる 子だけ // やりとりに 出ている キャラは、その場面の 主人公に しない
   if (MODE === "solo" && heroKind !== "shima") { // ひとりで あそぶ ときの ライバルは、こどもが もう やった 場面から えらぶ（こどもの ぶんの あたらしい 場面を へらさない）
     let rp = SITS.filter(s => okFor(s) && sitUsed.has(s.id)); if (!rp.length) rp = SITS.filter(okFor);
     const m = Math.min(...rp.map(x => SIT_N.get(x.id) || 0)); rp = rp.filter(x => (SIT_N.get(x.id) || 0) === m); const s = rp[rnd(rp.length)];
