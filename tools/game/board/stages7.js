@@ -3,7 +3,7 @@
    おいしゃさん＝いぬの わんこせんせい、はいしゃさん＝ビーバーの ビバせんせい、かんごしさん＝ひよこの ぴよこさん。 */
 const S7L = ["hoken2", "byouin", "haisha"];
 Object.assign(RIVAL_OF, { hoken2: "doshin", byouin: "chu", haisha: "gao" });
-Object.assign(KID_S, { wanko: 1.0, biba: .98, piyoko: .6 });
+Object.assign(KID_S, { wanko: 1.0, biba: .98, piyoko: .6, piyo: .5, ekiin: 1.0 });
 
 /* ---------- 物の 絵 ---------- */
 function thermoG(g, val) { el("rect", { x: -26, y: -90, width: 52, height: 180, rx: 26, fill: "#FFFFFF", ...S6p(5) }, g); el("rect", { x: -16, y: -60, width: 32, height: 70, rx: 6, fill: "#BDE3F2", ...S6p(3) }, g);
@@ -80,7 +80,7 @@ const sick = h => { h.sadMouth = true; h.eyeScale.t = .85; };
 const comeSit = async (h, ms = 1100) => { enter(h); await sleep(ms); };
 Object.assign(INTRO, {
   // ---- ほけんしつ ----
-  async hkknock(h, a) { await comeSit(h); h.armR.t = -90; knock(); await sleep(700); h.armR.t = 0; enter(a); await sleep(1000); },
+  async hkknock(h, a) { await comeSit(h); h.armR.t = -90; knock(); await sleep(700); h.armR.t = 0; const dr = [...sceneLayer.querySelectorAll("rect")].find(r => +r.getAttribute("width") > 150 && +r.getAttribute("width") < 260 && +r.getAttribute("height") > 380); const b = dr ? dr.getBBox() : { x: 820, y: 290, width: 210, height: 470 }; const op = el("rect", { x: b.x, y: b.y, width: b.width, height: b.height, fill: "#FFF6F8", stroke: INK, "stroke-width": 6 }, propG); window.__hkdoor = op; a.dx.v = a.dx.t = 0; place(a, b.x + b.width / 2, b.y + b.height + 30, .62); show(a); playMove(a, "nod"); await sleep(1000); },
   async hkatama(h, a) { await comeSit(h); sick(h); h.armR.t = -150; hint7(h, "🤕", "ずきずき"); hold(h, "shiver", 1); await sleep(1000); },
   async hkmuka(h, a) { await comeSit(h); sick(h); h.armL.t = 40; h.armR.t = -40; sway(h, 1600, 8, 400); hint7(h, "🤢", "むかむか"); await sleep(1200); },
   async hkhanaji(h, a) { await comeSit(h); sick(h); const d = el("g", {}, front()); el("path", { d: "M-6 0 Q-10 26 0 34 Q10 26 6 0 Z", fill: "#E8473C", ...S6p(3) }, d); follow(d, () => { const p = world(h, 200, 192); return [p.x, p.y, 0, h.s * 1.4]; }); window.__hj = d; markAbove(h, "ex"); await sleep(1100); },

@@ -107,7 +107,7 @@ Object.assign(INTRO, {
     await tween(800, k => o.firstChild && o.setAttribute("transform", o.getAttribute("transform").replace(/rotate\([^)]*\)/, `rotate(${(180 * k).toFixed(0)})`))); a.armR.t = 0; markAbove(h, "q"); await sleep(700); },
   async sntime(h, a) { desk3(h); onDesk(h, "memo", .4); hold(h, "shake", 2.6); await sleep(1000); ring3(); await sleep(700); a.armR.t = -120; markAbove(h, "ex"); h.sadMouth = true; await sleep(700); },
   async snletter(h, a) { window.__lt = handP(h, "letter", .38); enter(h); await sleep(1200); playMove(a, "look"); await sleep(400); },
-  async snoops(h, a) { desk3(h); const c = onDesk(h, "cup", .3, 60); await sleep(700); h.lean.t = 14; await sleep(250); h.lean.t = -6; c.remove(); noise(.3, 900, .4);
+  async snoops(h, a) { desk3(h); const c = onDesk(h, "cup", .3, 60); await sleep(700); h.lean.t = 14; await sleep(250); h.lean.t = -6; c.remove(); noise(.3, 900, .4); { const cx = h.x + 200 * h.s, pd = el("g", {}, front()); el("ellipse", { cx: cx + 170, cy: 1000, rx: 130, ry: 24, fill: "#9AD7FF", stroke: "#5BB0E0", "stroke-width": 4 }, pd); txt(pd, cx + 230, 990, "🥤", 60, { "text-anchor": "middle", transform: `rotate(80 ${cx + 230} 970)` }); }
     const d = h.__desk.firstChild, y = +d.getAttribute("y"), x = +d.getAttribute("x") + +d.getAttribute("width"); const pd = el("g", { transform: `translate(${(x + 30).toFixed(0)} ${(y + 230).toFixed(0)}) scale(.6)` }, front()); ITEM2.puddle(pd);
     h.lean.t = 0; surprise(h); await sleep(700); enter(a); await sleep(900); },
   async snbox(h, a) { await INTRO.heavy(h, a); },
@@ -212,7 +212,7 @@ Object.assign(BOARD_BG, {
 });
 BLOCK_DEF.ouchi1 = { who: "onii", sleep: false, intro: ["p_blk_ouchi1", "おにいちゃんが ろうかで まんがを よんで いるよ"], say: ["blk_ouchi1", "おにいちゃん、ちょっと とおして"], to: "おにいちゃんに いおう",
   keys: [["とおして", "通して"]], res: ["rs_ouchi1", "おっと、ごめん ごめん。どうぞ"] };
-BLOCK_DEF.tomodachi1 = { who: "kuma", sleep: false, intro: ["p_blk_tomodachi1", "くまたが みちに すわって いるよ"], say: ["blk_tomodachi1", "となりを とおっても いい？"], to: "くまたに いおう",
+BLOCK_DEF.tomodachi1 = { who: "kuma", sleep: false, intro: ["p_blk_tomodachi1", "くまくんが みちに すわって いるよ"], say: ["blk_tomodachi1", "となりを とおっても いい？"], to: "くまたに いおう",
   keys: [["とおって", "通って"], ["いい", "良い"]], res: ["rs_tomodachi1", "うん、どうぞ"] };
 BLOCK_DEF.sensei1 = { who: "meebaa", sleep: false, intro: ["p_blk_sensei1", "めえばあせんせいが いるよ。あいさつ しよう！"], say: ["blk_sensei1", "めえばあせんせい、こんにちは"], to: "めえばあせんせいに いおう",
   keys: [["こんにちは", "今日は"]], res: ["rs_sensei1", "はい、こんにちは。げんきね"] };

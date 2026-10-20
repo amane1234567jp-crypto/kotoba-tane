@@ -160,8 +160,8 @@ S10L.forEach(st => { const [f, b, h] = EV10[st]; EVENTS[st] = { a2: ["fwd", 2, `
   if (st === "junban") Object.assign(EVENTS[st], { a3: ["cardorder", 0, "", ""], c2: ["cardorder", 0, "", ""] }); });
 
 /* ---------- 📞 でんわの むこうの 人は わくの なかに（2026-10-20） ---------- */
-{ const sv = setSitView; setSitView = function (s, heroKind) { const r = sv(s, heroKind);
-    if (s && s.stage === "denwa") { const [ax] = ASK_AT[s.asker] || [1200], vid = s.id === "dwvideo", x0 = ax - 260, W = 520, y0 = 330, H = 680;
+{ const sv = setSitView; setSitView = function (s, heroKind) { chars.forEach(c => { c.root.style.filter = ""; }); const r = sv(s, heroKind);
+    if (s && (s.stage === "denwa" || s.id === "gkdenwa")) { const [ax] = ASK_AT[s.asker] || [1200], vid = s.id === "dwvideo", x0 = ax - 260, W = 520, y0 = 330, H = 680;
       const g = el("g", {}, propG);
       if (vid) { el("rect", { x: x0 - 26, y: y0 - 26, width: W + 52, height: H + 52, rx: 46, fill: "#3A3F4A", stroke: INK, "stroke-width": 8 }, g);
         el("rect", { x: x0, y: y0, width: W, height: H, rx: 20, fill: "#DDF1FF" }, g); el("circle", { cx: x0 + W / 2, cy: y0 - 13, r: 7, fill: "#7A8496" }, g);
@@ -170,5 +170,47 @@ S10L.forEach(st => { const [f, b, h] = EV10[st]; EVENTS[st] = { a2: ["fwd", 2, `
       else { el("rect", { x: x0, y: y0, width: W, height: H, rx: 60, fill: "#FFFDF2", stroke: "#3EB489", "stroke-width": 12, "stroke-dasharray": "34 18" }, g);
         el("rect", { x: x0 + 90, y: y0 - 38, width: W - 180, height: 70, rx: 35, fill: "#3EB489", stroke: INK, "stroke-width": 6 }, g);
         txt(g, x0 + W / 2, y0 + 12, "📞 でんわの むこう", 40, { "text-anchor": "middle", fill: "#FFFFFF" }); }
-      [0, 1, 2].forEach(i => el("path", { d: `M${x0 - 150 + i * 42} ${640 - i * 26} q30 ${40 + i * 24} 0 ${80 + i * 52}`, fill: "none", stroke: "#3EB489", "stroke-width": 10, "stroke-linecap": "round", opacity: .8 }, g)); }
+      [0, 1, 2].forEach(i => el("path", { d: `M${x0 - 150 + i * 42} ${640 - i * 26} q30 ${40 + i * 24} 0 ${80 + i * 52}`, fill: "none", stroke: "#3EB489", "stroke-width": 10, "stroke-linecap": "round", opacity: .8 }, g));
+      if (s.id === "dwdare") { r.ask.root.style.filter = "brightness(0) opacity(.45)"; txt(g, x0 + W / 2, y0 + 260, "？", 220, { "text-anchor": "middle", fill: "#3EB489" }); }
+      if (s.id === "dwvideo") { // カメラが てんじょうを うつして いて、かおが みえない
+        el("rect", { x: x0, y: y0, width: W, height: H - 70, fill: "#F4F1E8" }, g); el("path", { d: `M${x0 + W / 2} ${y0} V${y0 + 120}`, stroke: INK, "stroke-width": 6 }, g);
+        el("path", { d: `M${x0 + W / 2 - 90} ${y0 + 190} Q${x0 + W / 2} ${y0 + 90} ${x0 + W / 2 + 90} ${y0 + 190} Z`, fill: "#FFE58A", stroke: INK, "stroke-width": 6 }, g);
+        const [ax2, as2] = ASK_AT[s.asker]; place(r.ask, ax2, 975 + 165, as2);
+        const bz = el("g", {}, front()); el("rect", { x: x0 - 26, y: y0 + H - 70, width: W + 52, height: 160, fill: "#3A3F4A", stroke: INK, "stroke-width": 8 }, bz); txt(bz, x0 + W / 2, y0 + H - 18, "📱 テレビでんわ", 40, { "text-anchor": "middle", fill: "#FFFFFF" }); }
+    }
     return r; }; }
+
+/* ---------- 場面の こもの（2026-10-20 ぜんたい チェック：せりふに でる ものを えに だす） ---------- */
+const PROP10 = {
+  kwhei: () => { const g = el("g", {}, propG); el("rect", { x: 900, y: 760, width: 640, height: 120, fill: "#C9C2B6", stroke: INK, "stroke-width": 6 }, g);
+    for (let y = 790; y < 880; y += 30) el("path", { d: `M900 ${y} H1540`, stroke: "#9C9385", "stroke-width": 4 }, g);
+    for (let x = 960, r = 0; x < 1540; x += 80, r++) el("path", { d: `M${x + (r % 2) * 40} 760 V880`, stroke: "#9C9385", "stroke-width": 4 }, g); },
+  krkouji: () => { const g = el("g", {}, propG); el("rect", { x: 1330, y: 800, width: 260, height: 60, fill: "#FFD25E", stroke: INK, "stroke-width": 6 }, g);
+    for (let x = 1340; x < 1580; x += 50) el("path", { d: `M${x} 858 L${x + 30} 802`, stroke: INK, "stroke-width": 14 }, g);
+    [1350, 1570].forEach(x => el("path", { d: `M${x} 860 V930`, stroke: INK, "stroke-width": 8 }, g));
+    [1150, 1600].forEach(x => el("path", { d: `M${x - 30} 930 L${x} 850 L${x + 30} 930 Z`, fill: "#FF8A3D", stroke: INK, "stroke-width": 5 }, g));
+    txt(g, 1460, 785, "こうじちゅう", 40, { "text-anchor": "middle" }); },
+  kwminicar: h => { const g = el("g", {}, front()); g.setAttribute("transform", `translate(${h.x + 200 * h.s + 170} 950)`);
+    el("rect", { x: -60, y: -40, width: 120, height: 40, rx: 12, fill: "#E8473C", stroke: INK, "stroke-width": 5 }, g); el("path", { d: "M-34 -40 L-20 -64 H24 L38 -40 Z", fill: "#8FD3FF", stroke: INK, "stroke-width": 5 }, g);
+    [-32, 32].forEach(x => el("circle", { cx: x, cy: 2, r: 15, fill: "#3A3F4A", stroke: INK, "stroke-width": 4 }, g)); },
+  kwboushi: () => later(1300, () => { const t = C.tora; if (!t) return; t.armR.t = -160; const g = el("g", {}, front());
+    el("path", { d: "M-50 0 Q-50 -50 0 -50 Q50 -50 50 0 Z", fill: "#3E9BD6", stroke: INK, "stroke-width": 5 }, g); el("path", { d: "M40 0 H90", stroke: INK, "stroke-width": 10 }, g);
+    follow(g, () => [t.x + 200 * t.s + 150 * t.s, t.y + 60 * t.s, -20, .9]); }),
+  krnaka: () => rain10(), krtaiiku: () => rain10(),
+  jbkutsu: a => { const g = el("g", {}, front()); [0, 70].forEach(dx => { el("path", { d: `M${1020 + dx} 990 h60 q14 0 14 -14 v-6 h-30 l-10 -20 h-34 z`, fill: "#4FA35A", stroke: INK, "stroke-width": 5 }, g); });
+    txt(g, 1330, 780, "🧦", 70, { "text-anchor": "middle" }); },
+  mtyobu: () => { const c = xtra("chu", 1480, .2); c.dx.v = c.dx.t = 0; later(600, () => markAbove(c, "note")); },
+  mtwarikomi: () => { [["mii", 1360], ["kuma", 1500]].forEach(([k, x]) => { const c = xtra(k, x, (KID_S[k] || .9) * .62); c.dx.v = c.dx.t = 0; }); },
+  szhitogomi: () => { const g = el("g", {}, propG); [[900, .9], [1010, 1], [1330, .95], [1450, 1.05], [1560, .9]].forEach(([x, k]) => {
+      el("circle", { cx: x, cy: 975 - 300 * k, r: 46 * k, fill: "#9AA3B5" }, g); el("path", { d: `M${x - 70 * k} 975 Q${x - 70 * k} ${975 - 230 * k} ${x} ${975 - 240 * k} Q${x + 70 * k} ${975 - 230 * k} ${x + 70 * k} 975 Z`, fill: "#9AA3B5" }, g); }); },
+  szurusai: () => { [["mii", 900], ["kuma", 1020]].forEach(([k, x], i) => { const c = xtra(k, x, (KID_S[k] || .9) * .55); c.dx.v = c.dx.t = 0; c.happyOn = true; later(300 + i * 500, () => markAbove(c, "note")); }); },
+  szsamui: () => { const g = el("g", {}, front()); for (let i = 0; i < 14; i++) { const t = txt(g, 120 + i * 110, 120 + (i * 137) % 600, "❄", 46, { "text-anchor": "middle", fill: "#FFFFFF", stroke: "#8FB5D9", "stroke-width": 2 }); t.style.opacity = .9; }
+    [...sceneLayer.querySelectorAll("circle")].forEach(c => { if (c.getAttribute("fill") === "#FFD25E" && +c.getAttribute("r") > 40) c.setAttribute("fill", "#FFF3C4"); }); },
+};
+function rain10() { const g = el("g", {}, propG), lb = c => { const m = /^#([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})$/i.exec(c || ""); if (!m) return false; const [r, gg, bb] = m.slice(1).map(x => parseInt(x, 16)); return bb > 200 && bb > r + 15 && gg > 180; };
+  [...sceneLayer.querySelectorAll("rect")].filter(r => lb(r.getAttribute("fill")) && +r.getAttribute("width") > 50 && +r.getAttribute("width") < 320 && +r.getAttribute("height") > 50 && +r.getAttribute("height") < 420 && +r.getAttribute("y") < 700)
+  .forEach(r => { const b = r.getBBox(); r.setAttribute("fill", "#8FA7BC"); for (let i = 0; i < 5; i++) el("path", { d: `M${b.x + 16 + i * b.width / 5} ${b.y + 12} l-12 ${b.height - 24}`, stroke: "#E8F4FF", "stroke-width": 4, opacity: .9 }, g); }); }
+S10.forEach(s => { if (!PROP10[s.id]) return; const f = INTRO[s.intro]; INTRO[s.intro] = (h, a) => { PROP10[s.id](h, a); return f(h, a); }; });
+// ふきだしが うえの ほうの うごきを かくす 場面は、Q を すこし したに だす
+const TASK_Y = { abwarikomi: 640, abosanai: 640, abkutsu: 640 };
+{ const st = showTask; showTask = function (text, tag, cy) { if (cy === undefined && view === "scene" && CUR_S && TASK_Y[CUR_S.id]) cy = TASK_Y[CUR_S.id]; return st(text, tag, cy); }; }

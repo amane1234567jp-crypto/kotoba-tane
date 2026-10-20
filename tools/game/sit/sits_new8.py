@@ -26,7 +26,7 @@ def S(stage, id, place, asker, q, qy, tiers, res, ry, extras=(), noHero=(), help
 def k(*a): return [x if isinstance(x, list) else [x] for x in a]
 
 WAKATTA = ["わかった", "分かった"]; WAKARIMASHITA = ["わかりました", "分かりました"]; HAI = ["はい"]; ZANNEN = ["ざんねん", "残念"]; KONDO = ["こんど", "今度"]; ASOBU = ["あそ", "遊"]
-JAA = ["じゃあ"]; OUCHI = ["おうち", "おうち", "いえ", "家"]; IKKAI = ["いっかい", "一回", "1回"]; OWARI = ["おわ", "終わ"]; YAMERU = ["やめ", "止め"]; KATAZUKE = ["かたづけ", "片付け"]
+JAA = ["じゃあ"]; OUCHI = ["おうち", "お家", "いえ", "家"]; IKKAI = ["いっかい", "一回", "1回"]; OWARI = ["おわ", "終わ"]; YAMERU = ["やめ", "止め"]; KATAZUKE = ["かたづけ", "片付け"]
 TSUGI = ["つぎ", "次"]; SEKI = ["せき", "席"]; DOKIDOKI = ["どきどき", "ドキドキ"]; YOROSHIKU = ["よろしく"]; MICHI = ["みち", "道"]; CHIGAU = ["ちがう", "違う", "べつ", "別", "ほか", "他"]
 ARIGATOU = ["ありがとう", "有難う"]; HON = ["ほん", "本"]; YOMU = ["よむ", "読む", "よも", "読も", "よん", "読ん"]; RAISHUU = ["らいしゅう", "来週"]; SANSUU = ["さんすう", "算数"]; JUNBI = ["じゅんび", "準備"]
 KAERU = ["かえる", "帰る", "かえろ", "帰ろ"]; ASHITA = ["あした", "明日"]; NAKA = ["なか", "中"]; AME = ["あめ", "雨"]; SHIKATANAI = ["しかたない", "仕方ない", "しょうがない"]; ORIGAMI = ["おりがみ", "折り紙"]
@@ -51,7 +51,7 @@ HANKACHI = ["はんかち", "ハンカチ"]; KUCHI = ["くち", "口"]; HIKUKU =
 MOSHIMOSHI = ["もしもし"]; DESU = ["です"]; MIENAI = ["みえない", "見えない"]; MIERU = ["みえ", "見え"]; YONDE = ["よんで", "呼んで"]; TSUTAERU = ["つたえ", "伝え"]; BAIBAI = ["ばいばい", "バイバイ", "またね"]; TODOITA = ["とどい", "届い", "とどき", "届き"]
 DARE = ["だれ", "誰", "どちらさま", "どちら様"]; NAMAE = ["なまえ", "名前"]; GENKI = ["げんき", "元気"]; ODAIJINI = ["おだいじに", "お大事に"]
 
-KIRIKAE = [
+KIRIKAE_S = [
  S("kirikae", "kouen", "リビング", "mama", "ごめんね、あめが ふって きたから、こうえんは また こんどに しようね", "ごめんね、雨が降ってきたから、公園はまた今度にしようね", [
    T("わかった", "分かった", k(WAKATTA)),
    T("わかった。また こんどね", "分かった。また今度ね", k(WAKATTA, KONDO)),
@@ -142,7 +142,7 @@ KIRIKAE = [
    "えらいですね。せんせいも いっしょに まって いますよ", "偉いですね。先生も一緒に待っていますよ", an=["sit", "🕒", "おむかえ"]),
 ]
 
-KIKIKAESU = [
+KIKIKAESU_S = [
  S("kikikaesu", "chiisai", "きょうしつ", "nobbo", "あしたは、たいそうふくを もって きて くださいね", "明日は、体操服を持ってきてくださいね", [
    T("もう いちど", "もう一度", k(MOUICHIDO)),
    T("もう いちど いって ください", "もう一度言ってください", k(MOUICHIDO, ITTE)),
@@ -233,7 +233,7 @@ KIKIKAESU = [
    "そうだよ。まっすぐ いって、みぎだ。きを つけてね", "そうだよ。まっすぐ行って、右だ。気をつけてね", fx="fast", qs="（はやくちで）……まっすぐ……", an=["think", "🗺", "えきは？"]),
 ]
 
-MATSU = [
+MATSU_S = [
  S("matsu", "denwa", "リビング", "mama", "……はい、はい。あ、ちょっと まっててね", "……はい、はい。あ、ちょっと待っててね", [
    T("うん", "うん", k(["うん"])),
    T("わかった。まってる", "分かった。待ってる", k(WAKATTA, MATSU)),
@@ -324,7 +324,7 @@ MATSU = [
    "みんなに きこえる、ちょうど いい こえでしたね", "みんなに聞こえる、ちょうどいい声でしたね", an=["shy", "🎤", "はっぴょう"]),
 ]
 
-SOS = [
+SOS_S = [
  S("sos", "urusai", "きょうしつ", "nobbo", "どうしましたか？ みみを ふさいで いますね", "どうしましたか？耳をふさいでいますね", [
    T("うるさい", "うるさい", k(URUSAI)),
    T("うるさくて つらいです", "うるさくて辛いです", k(URUSAI, TSURAI)),
@@ -415,7 +415,7 @@ SOS = [
    "あらあら。すぐ だして あげるわね", "あらあら。すぐ出してあげるわね", an=["sad", "🧦", "びしょびしょ"]),
 ]
 
-JUNBAN = [
+JUNBAN_S = [
  S("junban", "tearai", "みずのみば", "nobbo", "てあらいの じゅんばんを、おしえて くれますか？", "手洗いの順番を、教えてくれますか？", [
    T("みず、せっけん", "水、石鹸", k(MIZU, SEKKEN)),
    T("まず みずで ぬらす", "まず水で濡らす", k(MAZU, MIZU)),
@@ -506,7 +506,7 @@ JUNBAN = [
    "わかった！ やって みよう", "分かった！やってみよう", noHero=("chu",), an=["think", "🏃", "おにごっこ"]),
 ]
 
-KOTOWARU = [
+KOTOWARU_S = [
  S("kotowaru", "asobi", "きょうしつ", "pyon", "ねえ、おにごっこ しよう！", "ねえ、鬼ごっこしよう！", [
    T("いまは いい", "今はいい", k(IMA, ["いい"])),
    T("いまは えを かきたい", "今は絵を描きたい", k(IMA, ["え", "絵"], KAKU)),
@@ -597,7 +597,7 @@ KOTOWARU = [
    "そっか。じゃあ、かわりばんこだね", "そっか。じゃあ、代わりばんこだね", noHero=("chu",), an=["look", "🏰", "みてて"]),
 ]
 
-BOUSAI = [
+BOUSAI_S = [
  S("bousai", "jishin", "きょうしつ", "nobbo", "じしんです！ つくえの したに もぐって ください！", "地震です！机の下に潜ってください！", [
    T("あたまを まもる", "頭を守る", k(ATAMA, MAMORU)),
    T("つくえの したに もぐる", "机の下にもぐる", k(TSUKUE, MOGURU)),
@@ -688,7 +688,7 @@ BOUSAI = [
    "ほっほ、りっぱでしたよ", "ほっほ、立派でしたよ", late=True, an=["clap", "🏅", "おわり"]),
 ]
 
-DENWA = [
+DENWA_S = [
  S("denwa", "moshimoshi", "リビング", "pyon", "もしもし？", "もしもし？", [
    T("もしもし", "もしもし", k(MOSHIMOSHI)),
    T("もしもし、〇〇です", "もしもし、〇〇です", k(MOSHIMOSHI, DESU)),
@@ -779,7 +779,7 @@ DENWA = [
    "ほっほ、よろこんで もらえて うれしいよ", "ほっほ、喜んでもらえて嬉しいよ", an=["phone", "📖", "えほん"]),
 ]
 
-ALL = KIRIKAE + KIKIKAESU + MATSU + SOS + JUNBAN + KOTOWARU + BOUSAI + DENWA
+ALL = KIRIKAE_S + KIKIKAESU_S + MATSU_S + SOS_S + JUNBAN_S + KOTOWARU_S + BOUSAI_S + DENWA_S
 if __name__ == "__main__":
     P = Path(__file__).resolve().parent / "sits.json"
     SITS = [s for s in json.loads(P.read_text()) if s.get("stage") not in STAGES]

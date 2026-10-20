@@ -11,7 +11,7 @@ const rnd = n => Math.floor(Math.random() * n);
 const pad = n => String(n).padStart(2, "0");
 
 /* ---------- キャラ ---------- */
-const KINDS = ["doshin", "nobbo", "kamejii", "kamedr", "meebaa", "pyonmama", "gaojii", "miibaa", "doshinpapa", "kon", "panna", "pannamama", "mama", "gaomama", "miimama", "chumama", "papa", "gaopapa", "gaonii", "wanko", "biba", "piyoko", "ookami", "ojisan", "omawari", "tora", "kuma", "onii", "pony", "shima", "pyon", "mii", "gao", "chu"];
+const KINDS = ["doshin", "nobbo", "kamejii", "kamedr", "meebaa", "pyonmama", "gaojii", "miibaa", "doshinpapa", "kon", "panna", "pannamama", "mama", "gaomama", "miimama", "chumama", "papa", "gaopapa", "gaonii", "wanko", "biba", "piyoko", "ookami", "ojisan", "ekiin", "piyo", "omawari", "tora", "kuma", "onii", "pony", "shima", "pyon", "mii", "gao", "chu"];
 const C = {}; KINDS.forEach(k => C[k] = makeChar(k));
 const P = { doshin: makeChar("doshin"), shima: makeChar("shima"), gao: makeChar("gao") };
 Object.values(P).forEach(p => p.isPiece = true);

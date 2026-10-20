@@ -62,7 +62,7 @@ Object.assign(INTRO, {
   // ---- あそびば ----
   async abkutsu(h, a) { enter(h); await sleep(1100); a.armR.t = -70; await sleep(700); a.armR.t = 0; playMove(h, "look"); await sleep(300); },
   async abgyaku(h, a) { place(a, 700, 760, .7); stay(a); a.lean.t = -30; hold(a, "run", 2.2); enter(h); await sleep(1000); // とらおが すべりだいを したから のぼる
-    await tween(1200, k => { place(a, 700 - 300 * k, 760 - 380 * k, .7); }); a.lean.t = 0; markAbove(h, "ex"); surprise(h); await sleep(600); },
+    await tween(1200, k => { place(a, 700 - 150 * k, 760 - 190 * k, .7); }); a.lean.t = 0; markAbove(h, "ex"); surprise(h); await sleep(600); },
   async abgyaku2(h, a) { enter(h); await sleep(900); h.lean.t = -24; hold(h, "run", 1); await tween(800, k => { h.dx.v = h.dx.t = 120 * k; }); h.lean.t = 0; // じぶんが したから のぼろうと する
     a.armR.t = -120; markAbove(a, "ex"); await sleep(800); a.armR.t = 0; h.dx.t = 0; await sleep(300); },
   async aboogoe(h, a) { enter(h); await sleep(900); a.armL.t = -160; a.armR.t = 160; jump(a, .6); shout(a, 5); await sleep(1500); a.armL.t = a.armR.t = 0; h.armL.t = -165; h.armR.t = 165; await sleep(500); h.armL.t = h.armR.t = 0; },
@@ -103,7 +103,7 @@ Object.assign(INTRO, {
 });
 Object.assign(POST, {
   async abkutsu(h, a) { playMove(h, "crouch"); await sleep(500); const p = world(h, 200, 0); prop("sneakers", p.x - 20, 985, .5); chime(); await sleep(500); playMove(a, "nod"); joy(h); await sleep(400); },
-  async abgyaku(h, a) { playMove(a, "nod"); await tween(900, k => { place(a, 400 + 300 * k, 380 + 380 * k, .7); }); a.lean.t = 0; await walk(a, -150, 600); joy(h); await sleep(300); },
+  async abgyaku(h, a) { playMove(a, "nod"); await tween(700, k => { place(a, 550 + 150 * k, 570 + 190 * k, .7); }); a.lean.t = 0; await walk(a, -150, 600); joy(h); await sleep(300); },
   async abgyaku2(h, a) { playMove(a, "nod"); joy(a); await walk(h, -300, 900); jump(h, .5); await sleep(400); },
   async aboogoe(h, a) { playMove(a, "shy"); await sleep(400); a.mouthOpen.t = .2; await sleep(400); joy(h); await sleep(300); },
   async abshizuka(h, a) { playMove(a, "nod"); playMove(h, "bow"); await sleep(600); h.happyOn = true; await sleep(400); },

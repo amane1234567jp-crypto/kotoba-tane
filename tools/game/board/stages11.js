@@ -145,7 +145,7 @@ BOARD_BG.souzou = L => { bg7(L, "#F2F7FF", ["#FFE3B3", "#D7ECFF", "#D7F0D2"], "�
 BOARD_BG.tachiba = L => { bg7(L, "#FFF6EC", ["#FFE3B3", "#D7ECFF", "#D7F0D2"], "🎩 じぶんの たちば", "#E8735A"); txt(L, 1460, 180, "🎩", 110, { "text-anchor": "middle" }); };
 Object.assign(BLOCK_DEF, {
   souzou: { who: "doshin", sleep: false, intro: ["p_blk_souzou", "どしんが、きょろきょろ して、なにか さがして いるみたい。こえを かけよう"], say: ["blk_souzou", "なにか さがしてるの？"], to: "どしんに きこう", keys: [["さがして", "探して", "どうしたの", "どうした"]], res: ["rs_souzou", "うん、ぼうしを さがしてたんだ。きいて くれて ありがとう"] },
-  tachiba: { who: "piyoko", sleep: false, intro: ["p_blk_tachiba", "ようちえんの ぴよこちゃんが ころんで ないて いるよ。おにいさん おねえさんとして、こえを かけよう"], say: ["blk_tachiba", "だいじょうぶ？"], to: "ぴよこちゃんに いおう", keys: [["だいじょうぶ", "大丈夫"]], res: ["rs_tachiba", "……うん。ありがとう"] },
+  tachiba: { who: "piyo", sleep: false, intro: ["p_blk_tachiba", "ようちえんの ぴよこちゃんが ころんで ないて いるよ。おにいさん おねえさんとして、こえを かけよう"], say: ["blk_tachiba", "だいじょうぶ？"], to: "ぴよこちゃんに いおう", keys: [["だいじょうぶ", "大丈夫"]], res: ["rs_tachiba", "……うん。ありがとう"] },
 });
 S11L.forEach(st => { if (BLOCK_DEF[st]) SLEEPER_OF[st] = BLOCK_DEF[st].who; });
 EVENTS.souzou = { a2: ["fwd", 2, "ev_souzouf", "てがかりを みつけた！ 2マス すすむよ"], m2: ["back", 2, "ev_souzoub", "むしめがねを おとした！ 2マス もどるよ"], d1: ["back", 4, "ev_souzouh", "たんていの ぼうしを わすれた！ 4マス もどるよ"] };
