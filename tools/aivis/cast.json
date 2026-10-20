@@ -15,6 +15,11 @@
    "style": "ノーマル",
    "speed": 0.92
   },
+  "kamedr": {
+   "model": "696c98a2-c0b7-4fe7-8cf2-c7e9b8a9bd82",
+   "style": "ノーマル",
+   "speed": 1.0
+  },
   "gao": {
    "model": "2e1fdde8-d089-42d7-b64f-cf89952b1bdc",
    "style": "ノーマル",

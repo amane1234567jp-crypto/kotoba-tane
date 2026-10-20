@@ -1,0 +1,32 @@
+[
+{
+"key": "sq_gkkyuukyuu",
+"who": "kamedr",
+"text": "はい、こんにちは。どこが いたいですか？"
+},
+{
+"key": "sr_gkkyuukyuu",
+"who": "kamedr",
+"text": "なるほど。おくすりを ぬって おきましょうね"
+},
+{
+"key": "sq_gkchiryou",
+"who": "kamedr",
+"text": "はい、これで おしまいです。よく がんばりましたね"
+},
+{
+"key": "sr_gkchiryou",
+"who": "kamedr",
+"text": "おだいじに。きを つけて かえって くださいね"
+},
+{
+"key": "rq_kado",
+"who": "omawari",
+"text": "まがりかどに きたよ。むこうが みえないね。どうする？"
+},
+{
+"key": "rq_tobidashi",
+"who": "omawari",
+"text": "みせの まえを はしるよ。ひとが でて きそう。どうする？"
+}
+]
