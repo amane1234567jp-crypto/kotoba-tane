@@ -74,7 +74,7 @@ function room8(place) {
   if (typeof ROOMS2 !== "undefined" && ROOMS2[place] && place !== "いえ") return L => room2(L, place);
   return (typeof ROOMS4 !== "undefined" && ROOMS4[place]) || (typeof ROOMS5 !== "undefined" && ROOMS5[place]) || (typeof ROOMS3 !== "undefined" && ROOMS3[place]) || (typeof ROOMS6 !== "undefined" && ROOMS6[place]) || (typeof ROOMS7 !== "undefined" && ROOMS7[place]) || null; }
 { const dr = drawRoom; drawRoom = function (place, noSign = false) {
-    const R = (S8L.includes(curStage) || curStage === "odekake" || curStage === "komatta" || curStage === "kimochi" || S10L.includes(curStage) || (typeof S11L !== "undefined" && S11L.includes(curStage)) || curStage === "makete" || curStage === "dekigoto") && room8(place); /* おでかけ だいぼうけんの 場面（じてんしゃ・とうこう・げこう）も */ if (!R) return dr(place, noSign);
+    const R = (S8L.includes(curStage) || curStage === "odekake" || curStage === "komatta" || curStage === "kimochi" || S10L.includes(curStage) || (typeof S11L !== "undefined" && S11L.includes(curStage)) || curStage === "makete" || curStage === "dekigoto" || curStage === "jugyou") && room8(place); /* おでかけ だいぼうけんの 場面（じてんしゃ・とうこう・げこう）も */ if (!R) return dr(place, noSign);
     sceneLayer.innerHTML = ""; R(sceneLayer);
     if (!noSign) { const g = el("g", {}, sceneLayer); el("rect", { x: 620, y: 24, width: 360, height: 92, rx: 20, fill: "#FFFFFF", ...S6(6) }, g); txt(g, 800, 88, place, place.length > 6 ? 38 : 46, { "text-anchor": "middle" }); }
   }; }

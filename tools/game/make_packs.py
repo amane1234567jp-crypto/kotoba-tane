@@ -119,6 +119,19 @@ for st, job in [("makete", "mk1"), ("dekigoto", "dg1")]:
         if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
         else: missing.append(k)
     (OUT / f"{st}.json").write_text(json.dumps(pack, separators=(",", ":"))); print(st, len(pack), round((OUT / f"{st}.json").stat().st_size / 1e6, 2), "MB")
+# じゅぎょうの いちにち（ロング、2026-10-21）：ぽにー（sit/pony_jugyou.json）＋ ちょうロングの きょうつうの 声（slong・long の lk_ の いちぶ）＋ BGM。
+# 場面の 声は ショートコースの パック（kokugo・sansu・ongaku・zukou・taiiku・tokei・gakkou2・sensei1・seki1）を その ときに よむ
+import re as _re
+pack = {}
+for k in [p[0] for p in json.loads((G / "sit/pony_jugyou.json").read_text())] + ["bgm_jugyou"]:
+    p = A / f"{k}.mp3"
+    if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
+    else: missing.append(k)
+for src, ok in [("slong", lambda k: not _re.match(r"sl_(sumi|sokashi|suchu|eki|odekake|kimochi|makete|dekigoto)_", k) and not k.startswith("bgm_")),
+                ("long", lambda k: _re.match(r"lk_(again_now|ask|ev_|minus|plus|rest_now|sayit|seikai|tap|blk_|f\d|b\d)", k))]:
+    d = json.loads((OUT / f"{src}.json").read_text())
+    pack.update({k: v for k, v in d.items() if ok(k)})
+(OUT / "jugyou.json").write_text(json.dumps(pack, separators=(",", ":"))); print("jugyou", len(pack), round((OUT / "jugyou.json").stat().st_size / 1e6, 2), "MB")
 # そうぞう たんてい・じぶんの たちば・さきよみ（ショート、2026-10-19）：ぽにー（sit/pony_<st>.json）・あいて／がお（aivis/jobs/<job>）・BGM
 for st, job in [("souzou", "sz1"), ("tachiba", "tb1"), ("sakiyomi", "sk1"), ("chotto", "cm1"), ("aite", "as1")]:
     if not (G / f"sit/pony_{st}.json").exists(): continue

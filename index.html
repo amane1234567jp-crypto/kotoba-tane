@@ -62228,7 +62228,7 @@ function room8(place) {
   if (typeof ROOMS2 !== "undefined" && ROOMS2[place] && place !== "いえ") return L => room2(L, place);
   return (typeof ROOMS4 !== "undefined" && ROOMS4[place]) || (typeof ROOMS5 !== "undefined" && ROOMS5[place]) || (typeof ROOMS3 !== "undefined" && ROOMS3[place]) || (typeof ROOMS6 !== "undefined" && ROOMS6[place]) || (typeof ROOMS7 !== "undefined" && ROOMS7[place]) || null; }
 { const dr = drawRoom; drawRoom = function (place, noSign = false) {
-    const R = (S8L.includes(curStage) || curStage === "odekake" || curStage === "komatta" || curStage === "kimochi" || S10L.includes(curStage) || (typeof S11L !== "undefined" && S11L.includes(curStage)) || curStage === "makete" || curStage === "dekigoto") && room8(place); /* おでかけ だいぼうけんの 場面（じてんしゃ・とうこう・げこう）も */ if (!R) return dr(place, noSign);
+    const R = (S8L.includes(curStage) || curStage === "odekake" || curStage === "komatta" || curStage === "kimochi" || S10L.includes(curStage) || (typeof S11L !== "undefined" && S11L.includes(curStage)) || curStage === "makete" || curStage === "dekigoto" || curStage === "jugyou") && room8(place); /* おでかけ だいぼうけんの 場面（じてんしゃ・とうこう・げこう）も */ if (!R) return dr(place, noSign);
     sceneLayer.innerHTML = ""; R(sceneLayer);
     if (!noSign) { const g = el("g", {}, sceneLayer); el("rect", { x: 620, y: 24, width: 360, height: 92, rx: 20, fill: "#FFFFFF", ...S6(6) }, g); txt(g, 800, 88, place, place.length > 6 ? 38 : 46, { "text-anchor": "middle" }); }
   }; }
@@ -63461,7 +63461,7 @@ Object.assign(POST, {
    約65マスの ぐねぐね道。サイコロ 1〜6。マスは「ことばの 課題」「おもしろ課題（こえなし）」「しかけ」が だいたい 3:3:4。
    ことばの 課題は だいぼうけん・ともだちの だいぼうけんの ものを つかう（声も その パックから）。
    あたらしい 声は ぽにーだけ（sl_*・n0・n7〜n12。packs/slong.json）。 */
-const SL = ["sumi", "sokashi", "suchu", "eki", "odekake", "kimochi", "makete", "dekigoto"];
+const SL = ["sumi", "sokashi", "suchu", "eki", "odekake", "kimochi", "makete", "dekigoto", "jugyou"];
 const SL_HIDE = new Set([]); /* 声が そろうまで メニューに ださない コースを ここに */
 const isSL = () => SL.includes(curStage);
 SL.forEach(id => LONGS.add(id));
@@ -63490,6 +63490,10 @@ const SL_TH = {
   makete: { name: "まけても だいじょうぶ", icon: "💪", areas: ["いえ", "がっこう", "こうえん", "おまつり"], fills: ["#FFE9D6", "#E3F0FF", "#DDF2D0", "#FFE0C2"], ground: "#FFF6EC",
     blk: { who: "pyon", intro: ["p_blk_makete", "ぴょんちゃんが、かけっこで まけて ないて いるよ。こえを かけよう"], say: ["blk_makete", "まけても だいじょうぶだよ"], to: "ぴょんちゃんに いおう", keys: [["だいじょうぶ", "大丈夫"]], res: ["rs_makete", "……うん。ありがとう。つぎ がんばる！"] },
     item: "メダル", obs: "あめ", call: "ともだち", deco: [] },
+  // じゅぎょうの いちにち（2026-10-21、jugyou.js）：こくご → さんすう → おんがく・ずこう → たいいく → きゅうしょく
+  jugyou: { name: "じゅぎょうの いちにち", icon: "🏫", areas: ["1じかんめ こくご", "2じかんめ さんすう", "3じかんめ おんがく・ずこう", "4じかんめ たいいく"], fills: ["#FFE9D6", "#E3F0FF", "#F3E6FF", "#DDF2D0"], ground: "#F7F1E3",
+    blk: { who: "nobbo", intro: ["sl_jugyou_blk", "のっぽせんせいが ろうかで プリントを くばって いるよ"], say: ["lk_blk_say", "せんせい、とおして ください"], to: "せんせいに いおう", keys: [["せんせい", "先生"], ["とおして", "通して", "とうして"], ["ください", "下さい"]], res: ["lk_blk_res", "おっと、すみません。どうぞ"] },
+    item: "はなまる", obs: "けしごむ", call: "ともだち", deco: [] },
   dekigoto: { name: "きょうの できごと", icon: "📖", areas: ["がっこう", "こうえん", "いえ", "おでかけ"], fills: ["#E3F0FF", "#DDF2D0", "#FFE9D6", "#FFE0EE"], ground: "#F2F7FF",
     blk: { who: "chu", intro: ["p_blk_dekigoto", "ちゅうくんが、きょうの ことを はなしたそうに して いるよ。きいて あげよう"], say: ["blk_dekigoto", "きょう、なにが あったの？"], to: "ちゅうくんに きこう", keys: [["なにが", "何が", "あったの", "どうしたの"]], res: ["rs_dekigoto", "きいて！ さかあがりが できたんだ！"] },
     item: "ほん", obs: "あめ", call: "ともだち", deco: [] },
@@ -63529,7 +63533,7 @@ const SL_EVT = {
     nebou: "ベンチで ねちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "サイクリングの なかまが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを むかえに いくよ",
     atsumare: "こうえんで ひとやすみ！ みんな ここに あつまれ！", kumikae: "みちが こうじちゅう！ コースが くみかわるよ" },
   kimochi: {}, /* しかけは kimochi.js で きめる */
-  makete: {}, dekigoto: {},
+  makete: {}, dekigoto: {}, jugyou: {},
 };
 const SL_ICON = { dice2: "🎲", warp: "🌀", bigwarp: "🚀", fake: "🤪", rand: "❓", rest: "💤", x2: "✖️", zero: "0️⃣", home: "↩", back10: "⏪", bonus: "🎁", allf: "⏩", allb: "🌊", janken: "✊", again: "🔁", nebou: "😴", trolley: "🚃", call: "🧲", tsukkomi: "🤣", atsumare: "📣", kumikae: "🔀" };
 const SL_EVC = { warp: "#D9C2F0", bigwarp: "#D9C2F0", rand: "#D9C2F0", home: "#FFC2D1", back10: "#FFC2D1", fake: "#FFE27A", tsukkomi: "#FFE27A", bonus: "#C9EBB5", atsumare: "#FFE27A", kumikae: "#FFE27A" };
@@ -63552,7 +63556,7 @@ const SL_SHAPE = { // 47マス＋ゴール（まえは 65＋1。ながすぎた�
     for (let k = 0; k < 48; k++) { let d = tot * k / 47, i = 0; while (i < seg.length - 1 && d > seg[i]) { d -= seg[i]; i++; } const t = Math.min(1, d / seg[i]); P.push([V[i][0] + (V[i + 1][0] - V[i][0]) * t, V[i][1] + (V[i + 1][1] - V[i][1]) * t]); }
     return P; },
   kimochi() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + Math.sin(col * .8 + r * 1.3) * 22]); } }); return P; }, // 4だん＝4つの ばしょ（いえ・がっこう・こうえん・おでかけ）
-  makete() { return SL_SHAPE.kimochi(); }, dekigoto() { return SL_SHAPE.kimochi(); },
+  makete() { return SL_SHAPE.kimochi(); }, dekigoto() { return SL_SHAPE.kimochi(); }, jugyou() { return SL_SHAPE.kimochi(); },
   odekake() { const P = [], ROWS = [930, 770, 610, 450]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([170 + col * 115, y]); } }); return P; }, // まちの みちの ような 4だん（したの 2だんは あるき、うえの 2だんは じてんしゃ）
 };
 const SL_ORDER = {}, SL_PTS = {}, SL_ORDER0 = {};
@@ -64773,6 +64777,153 @@ Object.assign(LTASK_RUN, { mg: mkScene, mj: mkJanken, mc: mkCard, ds: dgStory, d
     a.forEach(x => { const f = fmt(x); if (!f) return; const raw = `${d(x.t)} ${JSON.stringify(x)}`; const k = lines.indexOf(raw); if (k >= 0) lines[k] = `${d(x.t)} ${f}${x.who ? `（${x.who}）` : ""}`; });
     return { sum: o.sum, text: lines.join("\n") }; }; }
 
+/* 「じゅぎょうの いちにち」の ぽにーの ことば（sit/jugyou_gen.py が かく） */
+const JG = {"txt": {"sl_jugyou_blk": "のっぽせんせいが ろうかで プリントを くばって いるよ", "jg_area1": "キーンコーン カーンコーン。1じかんめは こくご！", "jg_area2": "キーンコーン カーンコーン。2じかんめは さんすう！", "jg_area3": "キーンコーン カーンコーン。3じかんめは おんがくと ずこう！", "jg_area4": "キーンコーン カーンコーン。4じかんめは たいいく！ もう すぐ きゅうしょくだよ", "jg_ev_sekigae": "せきがえ くじ！ くじを ひくと、みんなの ばしょが いれかわるよ", "jg_ev_kotai": "となりの せきと こうたい！ すぐ まえの ひとと ばしょを かえるよ", "jg_ev_test100": "テストで 100てん！ いちばん まえの ひとの すぐ うしろまで とんで いくよ", "jg_ev_dodge": "ドッジボール じゃんけん！ いちばん まえの ひとと じゃんけん！ かったら いれかわるよ", "jg_ev_toban": "きゅうしょく とうばん！ いちばん うしろの ひとを よんで くるよ", "jg_ev_chime": "チャイムが なった！ みんな ここに あつまれ！", "jg_ev_wasure": "わすれものを しちゃった！ 3マス もどるよ", "jg_ev_shukudai": "しゅくだいを わすれちゃった！ つぎは 1かい やすみ", "jg_sk_pick": "すきな くじを タッチしてね", "jg_sk_done": "せきがえ おしまい！ じゅんばんが かわったね", "jg_sk_same": "あれれ、おなじ せきに なったよ", "jg_kt_top": "きみが いちばん まえ！ そのままだよ", "jg_t100_top": "きみが いちばん まえ！ 3マス すすむよ", "jg_t100_near": "もう すぐ うしろに いるね！ 2マス すすむよ", "jg_rank": "じゅんいが いれかわった！", "jg_goal": "きゅうしょくの じかんだよ！"}};
+
+/* ================= ロングコース「じゅぎょうの いちにち」（jugyou、2026-10-21） =================
+   ちょうロングの しくみ（slong.js）の うえに のせる。48マス・4だん＝1じかんめ こくご → 2じかんめ さんすう → 3じかんめ おんがく・ずこう → 4じかんめ たいいく → ゴール（きゅうしょく）。
+   課題は ショートコースの 場面・声を そのまま つかう（こくご・さんすう・おんがく・ずこう・たいいく・とけい・がっこう2・せんせい1・となりの せき）。
+   順位が いれかわる しかけ：🪑せきがえくじ（みんなの ばしょを シャッフル）・🔄となりの せきと こうたい（すぐ まえの ひとと こうかん）・💯テスト100てん（1いの すぐ うしろへ）
+   ＋ ✊ドッジボールじゃんけん・🍛きゅうしょくとうばん・🔔チャイム（みんな あつまれ）・🎒わすれもの（3マス もどる）・📝しゅくだいわすれ（1かい やすみ）。
+   盤の みぎうえに 順位札（1い・2い…）。いれかわると 札が うごいて 入れ替わる。声：sit/jugyou_gen.py → sit/pony_jugyou.json → packs/jugyou.json */
+const JGS = "jugyou";
+const jgT = k => JG.txt[k] || "";
+/* ---------- マスの ならび（48マス・1だん 12マス） ---------- */
+{ const PL = [null, "jk", "jk", "e:wasure", "jk", "jj", "e:kotai", "jk", "jc", "jk", "e:sekigae", "jk",
+    "js", "js", "e:test100", "jj", "js", "e:shukudai", "js", "jc", "js", null, "e:dodge", "js",
+    "jo", "jz", "e:toban", "jo", "jc", "jz", "e:kotai", "jo", "jz", "e:chime", "jo", "jz",
+    "jt", "jt", "e:sekigae", "jt", "jc", "e:test100", "jt", "jj", "e:wasure", "jt", "jt", null];
+  const O = SL_ORDER[JGS], ev = {}, task = {};
+  O.forEach((id, i) => { const p = PL[i]; if (!p || id === "0" || id === "4" || id === "15") return;
+    if (p.startsWith("e:")) { const t = p.slice(2); ev[id] = [t, 0, `jg_ev_${t}`, jgT(`jg_ev_${t}`)]; } else task[id] = p; });
+  EVENTS[JGS] = ev; LONG_TASKS[JGS] = task;
+  LEGENDS[JGS] = [["jk", "こくご"], ["js", "さんすう"], ["jo", "おんがく"], ["jz", "ずこう"], ["jt", "たいいく"], ["jc", "とけい"], ["jj", "じゅぎょう"]]; }
+Object.assign(LTASK, { jk: ["#FFE9D6", "📖"], js: ["#D6E8FF", "🔢"], jo: ["#EBDDFF", "🎵"], jz: ["#FFE0EE", "🎨"], jt: ["#D7F0D2", "⚽"], jc: ["#FFF3B8", "🕐"], jj: ["#FFFFFF", "🙋"] });
+Object.assign(SL_ICON, { sekigae: "🪑", kotai: "🔄", test100: "💯", dodge: "✊", toban: "🍛", chime: "🔔", wasure: "🎒", shukudai: "📝" });
+Object.assign(SL_EVC, { sekigae: "#FFE27A", kotai: "#FFE27A", test100: "#C9EBB5", dodge: "#FFE27A", toban: "#FFE27A", chime: "#FFE27A", wasure: "#FFC2D1", shukudai: "#FFC2D1" });
+const jgArea = id => Math.min(4, Math.floor(SL_ORDER[JGS].indexOf(id) / 12) + 1);
+
+/* ---------- 課題：ショートコースの 場面を よぶ ---------- */
+// [ステージ, ばしょ（にている ばしょから えらぶ）, おもみ]
+const JG_SRC = {
+  jk: [["kokugo", "きょうしつ", 4], ["gakkou2", "きょうしつ", 1], ["gakkou2", "としょしつ", 1], ["seki1", "こくご", 1], ["sensei1", "こくご", 1]],
+  jo: [["ongaku", "おんがくしつ", 4], ["gakkou2", "おんがくしつ", 1]],
+  jz: [["zukou", "ずこうしつ", 4], ["gakkou2", "ずこうしつ", 1]],
+  jt: [["taiiku", "こうてい", 3], ["taiiku", "たいいくかん", 2], ["gakkou2", "たいいくかん", 1]],
+  jj: { 1: [["seki1", "こくご", 1], ["sensei1", "こくご", 1]], 2: [["seki1", "さんすう", 1], ["sensei1", "さんすう", 1]], 3: [["sensei1", "ずこうしつ", 1], ["seki1", "こくご", 1]], 4: [["seki1", "さんすう", 1], ["sensei1", "こくご", 1]] },
+};
+let JG_ST = null, JG_TKZ = null;
+function jgPick(list) { const tot = list.reduce((a, x) => a + x[2], 0); let r = Math.random() * tot; for (const x of list) { r -= x[2]; if (r < 0) return x; } return list[0]; }
+// 場面は その ステージの なかから えらぶ（えらぶ あいだだけ curStage を かえる）
+{ const ps = pickSit; pickSit = function (place, heroKind = "shima") { if (curStage !== JGS || !JG_ST) return ps(place, heroKind); curStage = JG_ST; try { return ps(place, heroKind); } finally { curStage = JGS; } }; }
+// とけいの へや：1〜2じかんめは あさ、3〜4じかんめは ひる
+{ const zo = zoneOf; zoneOf = function (id) { if (curStage === JGS && JG_TKZ) return JG_TKZ; return zo(id); }; }
+// 声の パック：コースの パック＋ その ステージの パックを はじめて つかう ときに よみこむ（ぜんぶ さきに よむと おもいので）
+async function jgNeed(st) { if (PACK.loaded[st]) return; try { const q = await fetch(`packs/${st}.json`, { cache: "no-cache" }); if (q.ok) { const d = await q.json(); Object.keys(d).filter(k => !k.startsWith("bgm_")).forEach(k => AUD[k] = "data:audio/mpeg;base64," + d[k]); PACK.loaded[st] = Object.keys(d); } } catch (e) { /* なくても あそべる */ } }
+{ const lp = loadPack; loadPack = async function (id) { if (id !== JGS) return lp(id);
+    Object.keys(PACK.loaded).forEach(s => { if (s !== id) { PACK.loaded[s].forEach(k => delete AUD[k]); delete PACK.loaded[s]; } });
+    await jgNeed(JGS); await jgNeed("kokugo"); if (AUD["bgm_" + JGS]) await voiceBuf("bgm_" + JGS); return true; }; }
+async function jgScene(pc, code) {
+  const src = Array.isArray(JG_SRC[code]) ? JG_SRC[code] : JG_SRC[code][jgArea(pc.node)];
+  let [st, place] = jgPick(src); // その ばしょの 場面が もう ない ときは、いちばん おおい ところ（さいしょの もの）から
+  if (!SITS.some(s => s.stage === st && s.place === place && !sitUsed.has(s.id))) [st, place] = src[0];
+  await jgNeed(st); JG_ST = st; let ok = false;
+  try { ok = await runSit(place, pc.kind); } finally { JG_ST = null; }
+  if (ok) GS.ok--; // runSit が もう かぞえて いる（そとで もう いちど たす ので）
+  return ok; }
+async function jgSansu(pc) { await jgNeed("sansu"); const ok = await runSansu(pc); if (ok) GS.ok--; return ok; }
+async function jgTokei(pc) { await jgNeed("tokei"); JG_TKZ = jgArea(pc.node) <= 2 ? "あさ" : "ひる"; let ok = false; try { ok = await runTokei(pc); } finally { JG_TKZ = null; } if (ok) GS.ok--; return ok; }
+Object.assign(LTASK_RUN, { jk: pc => jgScene(pc, "jk"), jo: pc => jgScene(pc, "jo"), jz: pc => jgScene(pc, "jz"), jt: pc => jgScene(pc, "jt"), jj: pc => jgScene(pc, "jj"), js: jgSansu, jc: jgTokei });
+
+/* ---------- じかんわりの アナウンス（だれかが はじめて その だんに はいった とき） ---------- */
+let JG_AREA = 0;
+{ const ap = applyStage; applyStage = function (id, ...a) { if (id === JGS) JG_AREA = 0; return ap(id, ...a); }; }
+async function jgBell() { for (const [f, t] of [[659, 0], [523, 350], [587, 700], [392, 1050], [392, 1600], [587, 1950], [659, 2300], [523, 2650]]) later(t, () => blip(f, f, .32, "sine")); }
+async function jgAreaCheck(pc) { const a = jgArea(pc.node); if (a <= JG_AREA) return; JG_AREA = a;
+  jgBell(); showBanner(SL_TH[JGS].areas[a - 1] + "！", 1800); await speak(C.pony, `jg_area${a}`, jgT(`jg_area${a}`)); }
+
+/* ---------- 順位が いれかわる しかけ ---------- */
+const jgRank = () => PLAYERS.map(p => p.pc).sort((a, b) => slIdx(b.node) - slIdx(a.node));
+async function jgSekigae(pc) {
+  const ps = PLAYERS.map(p => p.pc), n = ps.length, g = panel("🪑 せきがえ くじ", "#FFFBE6");
+  const W = 230, x0 = 800 - n * (W + 30) / 2 + 15, boxes = ps.map((o, i) => { const b = el("g", { style: "cursor:pointer" }, g), x = x0 + i * (W + 30);
+    el("rect", { x, y: 330, width: W, height: 300, rx: 30, fill: ["#FF8FA3", "#7FCBF0", "#FFD25E", "#7BD389"][i % 4], ...S6(6) }, b); txt(b, x + W / 2, 520, "？", 150, { "text-anchor": "middle", fill: "#FFFFFF" }); return b; });
+  if (pc.player && !pc.player.cpu) { await speak(C.pony, "jg_sk_pick", jgT("jg_sk_pick"));
+    await new Promise(res => { let done = false; const fin = () => { if (done) return; done = true; res(); }; boxes.forEach(b => b.onpointerdown = fin); later(12000, fin); }); }
+  else await sleep(900);
+  for (let i = 0; i < 10; i++) { boxes.forEach((b, j) => b.setAttribute("opacity", (i + j) % 2 ? .5 : 1)); blip(600 + i * 40, 700, .05, "square"); await sleep(110); }
+  boxes.forEach(b => b.setAttribute("opacity", 1));
+  // みんなの いまの ばしょを シャッフル（なるべく ぜんいん うごく）
+  const nodes = ps.map(o => o.node); let perm = ps.map((_, i) => i);
+  for (let t = 0; t < 20; t++) { perm = shuffle(perm.slice()); if (perm.every((j, i) => nodes[j] !== nodes[i] || n === 1)) break; }
+  ps.forEach((o, i) => { const to = nodes[perm[i]], k = slIdx(to) - slIdx(o.node); txt(g, x0 + i * (W + 30) + W / 2, 700, NAMES[o.kind], 40, { "text-anchor": "middle" });
+    txt(g, x0 + i * (W + 30) + W / 2, 780, k > 0 ? `⬆ ${k}マス` : k < 0 ? `⬇ ${-k}マス` : "そのまま", 44, { "text-anchor": "middle", fill: k > 0 ? "#2E9E4A" : k < 0 ? "#D9443A" : INK }); });
+  boom(.3); await sleep(1800); g.remove();
+  if (perm.every((j, i) => nodes[j] === nodes[i])) { await speak(C.pony, "jg_sk_same", jgT("jg_sk_same")); return; }
+  await Promise.all(ps.map((o, i) => nodes[perm[i]] !== o.node ? warpTo(o, nodes[perm[i]]) : null)); confetti(50);
+  await speak(C.pony, "jg_sk_done", jgT("jg_sk_done")); }
+async function jgKotai(pc) {
+  const ahead = others(pc).filter(o => slIdx(o.node) > slIdx(pc.node)).sort((a, b) => slIdx(a.node) - slIdx(b.node))[0];
+  if (!ahead) { await speak(C.pony, "jg_kt_top", jgT("jg_kt_top")); return; }
+  const p1 = pc.node, p2 = ahead.node; await Promise.all([warpTo(pc, p2), warpTo(ahead, p1)]); confetti(30); }
+async function jgTest100(pc) {
+  const lead = jgRank()[0];
+  if (lead === pc || slIdx(lead.node) === slIdx(pc.node)) { await speak(C.pony, "jg_t100_top", jgT("jg_t100_top")); await slGo(pc, 3); return; }
+  const to = SL_ORDER[JGS][slIdx(lead.node) - 1];
+  if (slIdx(to) <= slIdx(pc.node)) { await speak(C.pony, "jg_t100_near", jgT("jg_t100_near")); await slGo(pc, 2); return; }
+  const g = el("g", {}, hudLayer); const st = slam("💯 100てん！", 330, 160, "#E8473C"); later(1500, () => st.remove()); g.remove();
+  await warpTo(pc, to); confetti(50); }
+{ const be = boardEvent; boardEvent = async function (pc) {
+    if (curStage !== JGS) return be(pc);
+    if (pc.player && pc.player.stay) return;
+    await jgAreaCheck(pc);
+    const ev = EVENTS[JGS][pc.node]; if (!ev) return;
+    const [type, , key, text] = ev;
+    await sleep(300); markAbove(pc, "ex"); chime(); await slSay(key, text);
+    if (type === "sekigae") await jgSekigae(pc);
+    else if (type === "kotai") await jgKotai(pc);
+    else if (type === "test100") await jgTest100(pc);
+    else if (type === "dodge") await slJanken(pc);
+    else if (type === "toban") { const last = others(pc).filter(o => slIdx(o.node) < slIdx(pc.node)).sort((a, b) => slIdx(a.node) - slIdx(b.node))[0]; if (last) await warpTo(last, pc.node); else await speak(C.pony, "lk_ev_call_none", "うしろに だれも いないね"); }
+    else if (type === "chime") { jgBell(); for (const o of others(pc)) { jump(o, .6); await warpTo(o, pc.node); } confetti(40); }
+    else if (type === "wasure") { markAbove(pc, "drop"); await slGo(pc, -3); }
+    else if (type === "shukudai") { slFlag(pc, "rest"); markAbove(pc, "z", { i: 1 }); }
+    await sleep(300); }; }
+
+/* ---------- 順位札（盤の みぎうえ）：いれかわると 札が うごく ---------- */
+let JG_RK = null;
+function jgRankTick() {
+  const on = curStage === JGS && typeof PLAYERS !== "undefined" && PLAYERS.length > 1 && boardLayer.style.display !== "none" && view !== "scene";
+  if (!on) { if (JG_RK) { JG_RK.g.remove(); JG_RK = null; } return; }
+  if (!JG_RK || !JG_RK.g.isConnected) { const g = el("g", {}, hudLayer), items = {};
+    PLAYERS.forEach(p => { const it = el("g", {}, g); const r = el("rect", { x: 0, y: 0, width: 270, height: 42, rx: 21, fill: "#FFFFFF", ...S6(4) }, it);
+      const n = txt(it, 44, 31, "", 26, { "text-anchor": "middle" }), nm = txt(it, 170, 31, NAMES[p.kind], 24, { "text-anchor": "middle" }); items[p.kind] = { it, r, n, y: null }; });
+    JG_RK = { g, items, order: "" }; }
+  const rk = jgRank(), order = rk.map(o => o.kind).join(",");
+  if (order === JG_RK.order) return;
+  const first = JG_RK.order === ""; JG_RK.order = order;
+  const MED = ["#FFD25E", "#D9DEE6", "#E8B38A", "#FFFFFF"];
+  rk.forEach((o, i) => { const it = JG_RK.items[o.kind]; if (!it) return; const y1 = 176 + i * 46, y0 = it.y == null ? y1 : it.y; it.y = y1;
+    it.r.setAttribute("fill", MED[Math.min(3, i)]); it.n.textContent = `${i + 1}い`;
+    if (first || y0 === y1) it.it.setAttribute("transform", `translate(1170 ${y1})`);
+    else tween(600, k => it.it.setAttribute("transform", `translate(${1170 - Math.sin(k * Math.PI) * 60} ${(y0 + (y1 - y0) * k).toFixed(1)})`)); });
+  if (!first) { blip(700, 1100, .12, "square"); later(150, () => blip(1100, 1500, .12, "square")); }
+}
+setInterval(jgRankTick, 400);
+
+/* ---------- 盤の え：じかんわりの ような 4だん ---------- */
+BOARD_BG[JGS] = L => {
+  const T = SL_TH[JGS]; el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: T.ground }, L);
+  for (let x = 0; x < 1600; x += 80) el("path", { d: `M${x} 0 V1000`, stroke: "#00000008", "stroke-width": 2 }, L);
+  const Y = [930, 765, 600, 435], I4 = ["📖", "🔢", "🎵", "⚽"];
+  Y.forEach((y, r) => { el("rect", { x: 30, y: y - 70, width: 1540, height: 140, rx: 70, fill: T.fills[r], ...S6(4) }, L);
+    const x = r === 3 ? 1520 : 80; txt(L, x, y + 6, I4[r], 46, { "text-anchor": "middle" }); txt(L, x, y + 44, `${r + 1}じかんめ`, 18, { "text-anchor": "middle" }); });
+  // こくばん（コースの なまえ）と きゅうしょく（ゴール）
+  el("rect", { x: 470, y: 180, width: 660, height: 130, rx: 14, fill: "#2F6B4F", stroke: "#8B5A2B", "stroke-width": 14 }, L);
+  txt(L, 800, 262, `${T.icon} ${T.name}`, 46, { "text-anchor": "middle", fill: "#FFFFFF" });
+  [["✏️", 150, 300], ["📏", 330, 250], ["🎒", 1520, 200]].forEach(([e, x, y]) => txt(L, x, y, e, 54, { "text-anchor": "middle", opacity: .85 }));
+};
+
 /* 「そうぞう たんてい」コースの データ（sit/souzou_gen.py が かく） */
 const SZ = [{"id": "tokei", "cat": 1, "place": "げんかん", "subj": "mama", "say": null, "anim": "watch", "cue": ["⌚", "とけいを みてる"], "decoys": [["🌷", "はなが さいてる"], ["🐱", "ねこが いる"]], "think": "いそがなきゃ。おくれちゃう", "guess": ["いそいでる", "ママは いそいでるのかな", [["いそ", "急", "じかん", "時間", "おくれ", "遅れ"]]], "act": ["いってらっしゃい", "いってらっしゃい。はなしは かえって きてから するね", [["いってらっしゃい", "行ってらっしゃい", "あと", "後", "かえって", "帰って"]]], "why": ["なんども とけいを みて いたから", [["とけい", "時計"]]], "res": "ありがとう。かえったら ゆっくり きくね", "gao": "ねえねえ、きいて きいて！ きょうね、がっこうでね……"}, {"id": "akubi", "cat": 1, "place": "リビング", "subj": "pyon", "say": null, "anim": "yawn", "cue": ["🥱", "あくびを してる"], "decoys": [["📺", "テレビが ついてる"], ["🍪", "おかしが ある"]], "think": "ちょっと つかれちゃったな。ほかの ことも したいな", "guess": ["ねむい", "ぴょんちゃんは、つかれて きたのかな", [["ねむ", "眠", "つかれ", "疲れ", "あき", "飽き", "つまらな"]]], "act": ["ちょっと やすもう", "ずっと はなして ごめんね。ぴょんちゃんは なにが したい？", [["やすも", "休も", "なに", "何", "したい"]]], "why": ["あくびを して いたから", [["あくび", "欠伸"]]], "res": "えへへ。じゃあ、おえかき しよう", "gao": "それでね、ティラノサウルスがね、それでね……"}, {"id": "tameiki", "cat": 1, "place": "きょうしつ", "subj": "chu", "say": null, "anim": "sigh", "cue": ["😮‍💨", "ためいきを ついてる"], "decoys": [["📚", "ほんが ある"], ["🪟", "まどが ある"]], "think": "テストが だめだったな……", "guess": ["かなしい", "ちゅうくんは、なにか かなしい ことが あったのかな", [["かなし", "悲し", "おちこ", "落ち込", "げんき", "元気", "なにか", "何か", "いや", "嫌"]]], "act": ["どうしたの？", "ちゅうくん、どうしたの？ なにか あった？", [["どうしたの", "どうした", "なにか", "何か"]]], "why": ["ためいきを ついて、したを むいて いたから", [["ためいき", "溜め息", "した", "下"]]], "res": "……テスト、まちがえちゃったんだ。きいて くれて ありがとう", "gao": "おーい、ちゅう！ そとで あそぼうぜ！ はやく！"}, {"id": "shii", "cat": 1, "place": "きょうしつ", "subj": "nobbo", "say": null, "anim": "shush", "cue": ["🤫", "くちに ゆびを あててる"], "decoys": [["📖", "こくばんの じ"], ["🕒", "とけい"]], "think": "しずかに して ほしいですね", "guess": ["しずかに して ほしい", "せんせいは、しずかに して ほしいのかな", [["しずか", "静か"]]], "act": ["しずかに する", "はなすのを やめて、まえを むく", [["しずか", "静か", "やめ", "まえ", "前"]]], "why": ["くちに ゆびを あてて いたから", [["ゆび", "指", "くち", "口"]]], "res": "ありがとう。じょうずに きづけましたね", "gao": "ねえねえ、きのうの テレビ みた？ あはは！"}, {"id": "ashi", "cat": 1, "place": "こうてい", "subj": "mii", "say": null, "anim": "tap", "cue": ["🦶", "あしを とんとん してる"], "decoys": [["☁", "くもが ある"], ["🌳", "きが ある"]], "think": "おそいなあ。ずっと まってたのに", "guess": ["おこってる", "みいちゃんは、まって いて いらいら して いるのかな", [["おこ", "怒", "いらいら", "イライラ", "まって", "待って", "おそい", "遅い"]]], "act": ["ごめんね", "おそく なって ごめんね。まってて くれて ありがとう", [["ごめん", "おそく", "遅く"]]], "why": ["うでを くんで、あしを とんとん して いたから", [["あし", "足", "とんとん", "うで", "腕"]]], "res": "……もう。つぎは じかんを まもってね", "gao": "よっ！ なに して あそぶ？"}, {"id": "samui", "cat": 2, "place": "リビング", "subj": "mama", "say": "この へや、ちょっと さむいね", "anim": "cold", "cue": ["🪟", "まどが あいてる"], "decoys": [["🖼", "えが かざってある"], ["🧸", "ぬいぐるみ"]], "think": "まどを しめて くれると うれしいな", "guess": ["まどを しめて ほしい", "ママは、まどを しめて ほしいのかな", [["まど", "窓", "しめ", "閉め"]]], "act": ["まど しめるね", "まど、しめようか？", [["まど", "窓"], ["しめ", "閉め"]]], "why": ["まどが あいて いて、さむいって いったから", [["まど", "窓", "さむ", "寒"]]], "res": "ありがとう。よく きが ついたわね", "gao": "ふーん、さむいんだ。おれは へいき！"}, {"id": "minicar", "cat": 2, "place": "こどもべや", "subj": "chu", "say": "その ミニカー、かっこいいね〜", "anim": "stare", "cue": ["👀", "じっと みてる"], "decoys": [["🧱", "ブロックが ある"], ["🪟", "まど"]], "think": "ぼくも ちょっと あそんで みたいな", "guess": ["あそびたい", "ちゅうくんも、あそんで みたいのかな", [["あそびたい", "遊びたい", "かして", "貸して", "つかいたい", "使いたい", "ほしい"]]], "act": ["つかう？", "ちょっと つかって みる？ じゅんばんこ しよう", [["つかって", "使って", "かす", "貸す", "じゅんばん", "順番", "いっしょ", "一緒"]]], "why": ["ミニカーを じっと みて いたから", [["じっと", "みて", "見て"]]], "res": "いいの？ やったあ！ ありがとう", "gao": "だろ？ いいだろー！ ぜったい かさないけどな！"}, {"id": "hanashi", "cat": 2, "place": "きょうしつ", "subj": "nobbo", "say": "まだ はなして いる ひとが いますね", "anim": "wait", "cue": ["🗣", "はなしてる ひとが いる"], "decoys": [["🎒", "ランドセル"], ["✏", "えんぴつ"]], "think": "しずかに なるのを まって いますよ", "guess": ["しずかに して ほしい", "せんせいは、しずかに なるのを まって いるのかな", [["しずか", "静か", "まって", "待って"]]], "act": ["しずかに する", "おしゃべりを やめて、せんせいを みる", [["しずか", "静か", "やめ", "みる", "見る"]]], "why": ["まだ はなして いる ひとが いるって いったから", [["はなして", "話して", "いる"]]], "res": "ありがとう。では はじめますね", "gao": "え？ だれだろう？ ぼくじゃ ないよ。それでさ……"}, {"id": "jikan", "cat": 2, "place": "リビング", "subj": "mama", "say": "あら、もう こんな じかん！", "anim": "clock", "cue": ["🕗", "とけいの はり"], "decoys": [["🧸", "おもちゃ"], ["🍎", "りんご"]], "think": "はやく したくして くれないかな", "guess": ["いそいで ほしい", "ママは、はやく したくして ほしいのかな", [["はやく", "早く", "いそ", "急", "したく", "支度", "じゅんび", "準備"]]], "act": ["すぐ したくする", "ブロックを かたづけて、すぐ したく するね", [["したく", "支度", "じゅんび", "準備", "かたづけ", "片付け"]]], "why": ["もう こんな じかんって いったから", [["じかん", "時間"]]], "res": "たすかるわ。いそごうね", "gao": "ほんとだ、もう こんな じかん。……さて、つづき あそぼうっと"}, {"id": "akachan", "cat": 3, "place": "リビング", "subj": "mama", "say": null, "anim": "baby", "cue": ["👶", "あかちゃんが ねてる"], "decoys": [["🎈", "ふうせん"], ["📺", "テレビ"]], "think": "おきないで ほしいな", "guess": ["しずかに して ほしい", "あかちゃんが おきないように、しずかに して ほしいのかな", [["しずか", "静か", "おき", "起き"]]], "act": ["しーっ", "あかちゃんが ねて いるから、しずかに あそぶね", [["しずか", "静か", "しー", "ねて", "寝て"]]], "why": ["あかちゃんが ねて いたから", [["あかちゃん", "赤ちゃん", "ねて", "寝て"]]], "res": "ありがとう。やさしいのね", "gao": "よーし、かいじゅうごっこだ！ ガオーッ！"}, {"id": "makete", "cat": 3, "place": "こうてい", "subj": "kuma", "say": null, "anim": "cry", "cue": ["😢", "ないてる"], "decoys": [["🏁", "ゴールの はた"], ["☀", "おひさま"]], "think": "いっしょうけんめい はしったのに……くやしいな", "guess": ["くやしい", "くまくんは、まけて くやしいのかな", [["くやし", "悔し", "かなし", "悲し", "ざんねん", "残念"]]], "act": ["がんばったね", "くまくん、さいごまで はしって すごかったよ", [["がんばった", "頑張った", "すごかった", "さいご", "最後"]]], "why": ["ないて いたから", [["ない", "泣い"]]], "res": "……ありがとう。つぎは もっと はやく なるぞ", "gao": "やったー！ おれの かちー！ くまくん おそーい！"}, {"id": "present", "cat": 3, "place": "リビング", "subj": "kon", "say": "プレゼント、きに いって くれるかな……", "anim": "fidget", "cue": ["🎁", "もじもじ してる"], "decoys": [["🎂", "ケーキ"], ["🎈", "ふうせん"]], "think": "よろこんで くれるかな。どきどき", "guess": ["しんぱい", "こんくんは、よろこんで くれるか しんぱいなのかな", [["しんぱい", "心配", "よろこ", "喜", "どきどき", "ドキドキ"]]], "act": ["ありがとう", "ありがとう！ えらんで くれて うれしいよ", [["ありがとう", "有難う"]]], "why": ["もじもじ して こっちを みて いたから", [["もじもじ", "みて", "見て"]]], "res": "えへへ、よかった！", "gao": "えー、これ いらなーい"}, {"id": "shiranai", "cat": 4, "place": "こうてい", "subj": "pyon", "say": "あれ？ みんな どこ？", "anim": "lost", "cue": ["🚻", "トイレに いってた"], "decoys": [["⚽", "ボール"], ["🌳", "き"]], "think": "どこに いけば いいか しらないよ", "guess": ["しらない", "ぴょんちゃんは、しゅうごう ばしょが かわったのを しらないのかな", [["しらない", "知らない", "わからない", "分からない", "いなかった"]]], "act": ["たいいくかんだよ", "ぴょんちゃん、しゅうごうは たいいくかんに かわったんだよ。いっしょに いこう", [["たいいくかん", "体育館"]]], "why": ["ぴょんちゃんは トイレに いって いて、きいて いなかったから", [["といれ", "トイレ", "きいて", "聞いて", "いなかった"]]], "res": "そうだったの！ おしえて くれて ありがとう", "gao": "こうていに いれば？ しらなーい"}, {"id": "sakasa", "cat": 4, "place": "きょうしつ", "subj": "mii", "say": "え？ なんの え？ よく わからないよ", "anim": "tilt", "cue": ["🔄", "えが さかさま"], "decoys": [["✏", "えんぴつ"], ["📏", "じょうぎ"]], "think": "さかさまで、よく みえないわ", "guess": ["さかさまに みえてる", "みいちゃんからは、えが さかさまに みえて いるのかな", [["さかさ", "逆さ", "ぎゃく", "逆", "みえない", "見えない"]]], "act": ["くるって まわすね", "あ、ごめん。みいちゃんの ほうに むけるね", [["まわす", "回す", "むけ", "向け", "こっち", "そっち"]]], "why": ["みいちゃんは、むかいに すわって いたから", [["むかい", "向かい", "はんたい", "反対"]]], "res": "あ、ねこの えね！ じょうず！", "gao": "みれば わかるでしょ！ ねこだよ、ねこ！"}, {"id": "rouka", "cat": 5, "place": "ろうか", "subj": "kuma", "say": null, "anim": "run", "cue": ["🏃", "はしってる"], "decoys": [["🪟", "まど"], ["🖼", "けいじばん"]], "think": "ぶつかって、ころんで しまう", "guess": ["ぶつかる", "まえから くる ひとに ぶつかって、ころんで しまうかも", [["ぶつか", "ころ", "転", "あぶな", "危な", "けが", "怪我"]]], "act": ["あぶない！", "くまくん、あぶないよ！ とまって！", [["あぶな", "危な", "とまって", "止まって", "はしらない", "走らない"]]], "why": ["はしって いて、まえから ひとが きて いたから", [["はしって", "走って", "まえ", "前"]]], "res": "わっ！ あぶなかった。ありがとう", "gao": "いけいけー！ もっと はやく はしれー！"}, {"id": "tsumiki", "cat": 5, "place": "こどもべや", "subj": "chu", "say": null, "anim": "stack", "cue": ["🧱", "つみきが ぐらぐら"], "decoys": [["🧸", "くまの ぬいぐるみ"], ["📕", "えほん"]], "think": "くずれて しまう", "guess": ["くずれる", "たかく しすぎて、くずれて しまうかも", [["くずれ", "崩れ", "たおれ", "倒れ", "おちる", "落ちる"]]], "act": ["そっと おいてね", "ちゅうくん、ぐらぐら してるよ。そっと おこう", [["そっと", "ぐらぐら", "あぶな", "危な", "ゆっくり"]]], "why": ["たかくて ぐらぐら して いたから", [["ぐらぐら", "たかく", "高く"]]], "res": "ほんとだ。そっと そっと……できた！", "gao": "もっと もっと！ てんじょうまで つんじゃえ！"}];
 var S11_TXT = Object.assign(window.S11_TXT || {}, {"sz_tokei_n": "ママが くつを はいて いるよ。きょう あった ことを はなしたいな", "sz_tokei_c": "ママは、なんども とけいを みて いるね", "sz_tokei_g0": "いそいでる", "sz_tokei_g1": "ママは いそいでるのかな", "sz_tokei_a0": "いってらっしゃい", "sz_tokei_a1": "いってらっしゃい。はなしは かえって きてから するね", "sz_tokei_w": "なんども とけいを みて いたから", "sz_akubi_n": "きょうりゅうの はなしを、ずっと して いるよ", "sz_akubi_c": "ぴょんちゃんが、あくびを して いるね", "sz_akubi_g0": "ねむい", "sz_akubi_g1": "ぴょんちゃんは、つかれて きたのかな", "sz_akubi_a0": "ちょっと やすもう", "sz_akubi_a1": "ずっと はなして ごめんね。ぴょんちゃんは なにが したい？", "sz_akubi_w": "あくびを して いたから", "sz_tameiki_n": "やすみじかんに なったよ。ちゅうくんが せきに すわった まま だよ", "sz_tameiki_c": "ちゅうくんが、ためいきを ついて、したを むいて いるね", "sz_tameiki_g0": "かなしい", "sz_tameiki_g1": "ちゅうくんは、なにか かなしい ことが あったのかな", "sz_tameiki_a0": "どうしたの？", "sz_tameiki_a1": "ちゅうくん、どうしたの？ なにか あった？", "sz_tameiki_w": "ためいきを ついて、したを むいて いたから", "sz_shii_n": "みんなが がやがや はなして いるよ", "sz_shii_c": "せんせいが、くちに ゆびを あてて いるね", "sz_shii_g0": "しずかに して ほしい", "sz_shii_g1": "せんせいは、しずかに して ほしいのかな", "sz_shii_a0": "しずかに する", "sz_shii_a1": "はなすのを やめて、まえを むく", "sz_shii_w": "くちに ゆびを あてて いたから", "sz_ashi_n": "あそぶ やくそくの じかんに、おくれて きちゃった", "sz_ashi_c": "みいちゃんが、うでを くんで、あしを とんとん して いるね", "sz_ashi_g0": "おこってる", "sz_ashi_g1": "みいちゃんは、まって いて いらいら して いるのかな", "sz_ashi_a0": "ごめんね", "sz_ashi_a1": "おそく なって ごめんね。まってて くれて ありがとう", "sz_ashi_w": "うでを くんで、あしを とんとん して いたから", "sz_samui_n": "ママが、かたを すくめて いるよ", "sz_samui_c": "まどが あいて いて、かぜが はいって くるね", "sz_samui_g0": "まどを しめて ほしい", "sz_samui_g1": "ママは、まどを しめて ほしいのかな", "sz_samui_a0": "まど しめるね", "sz_samui_a1": "まど、しめようか？", "sz_samui_w": "まどが あいて いて、さむいって いったから", "sz_minicar_n": "ミニカーで あそんで いたら、ちゅうくんが きたよ", "sz_minicar_c": "ちゅうくんが、ミニカーを じっと みて いるね", "sz_minicar_g0": "あそびたい", "sz_minicar_g1": "ちゅうくんも、あそんで みたいのかな", "sz_minicar_a0": "つかう？", "sz_minicar_a1": "ちょっと つかって みる？ じゅんばんこ しよう", "sz_minicar_w": "ミニカーを じっと みて いたから", "sz_hanashi_n": "せんせいが まえに たって、みんなを みて いるよ", "sz_hanashi_c": "まだ、おしゃべりを して いる ひとが いるね", "sz_hanashi_g0": "しずかに して ほしい", "sz_hanashi_g1": "せんせいは、しずかに なるのを まって いるのかな", "sz_hanashi_a0": "しずかに する", "sz_hanashi_a1": "おしゃべりを やめて、せんせいを みる", "sz_hanashi_w": "まだ はなして いる ひとが いるって いったから", "sz_jikan_n": "あさ、ブロックで あそんで いるよ", "sz_jikan_c": "とけいを みると、もう でかける じかんだね", "sz_jikan_g0": "いそいで ほしい", "sz_jikan_g1": "ママは、はやく したくして ほしいのかな", "sz_jikan_a0": "すぐ したくする", "sz_jikan_a1": "ブロックを かたづけて、すぐ したく するね", "sz_jikan_w": "もう こんな じかんって いったから", "sz_akachan_n": "しんせきの あかちゃんが、うちに きて ねて いるよ。おおきな こえで あそびたいな", "sz_akachan_c": "あかちゃんが、すやすや ねて いるね", "sz_akachan_g0": "しずかに して ほしい", "sz_akachan_g1": "あかちゃんが おきないように、しずかに して ほしいのかな", "sz_akachan_a0": "しーっ", "sz_akachan_a1": "あかちゃんが ねて いるから、しずかに あそぶね", "sz_akachan_w": "あかちゃんが ねて いたから", "sz_makete_n": "かけっこで いちばんに なったよ！ くまくんは さいごだった", "sz_makete_c": "くまくんが、ないて いるね", "sz_makete_g0": "くやしい", "sz_makete_g1": "くまくんは、まけて くやしいのかな", "sz_makete_a0": "がんばったね", "sz_makete_a1": "くまくん、さいごまで はしって すごかったよ", "sz_makete_w": "ないて いたから", "sz_present_n": "たんじょうびに、こんくんから プレゼントを もらったよ。あけたら、あまり すきじゃない ものだった", "sz_present_c": "こんくんが、もじもじ して こっちを みて いるね", "sz_present_g0": "しんぱい", "sz_present_g1": "こんくんは、よろこんで くれるか しんぱいなのかな", "sz_present_a0": "ありがとう", "sz_present_a1": "ありがとう！ えらんで くれて うれしいよ", "sz_present_w": "もじもじ して こっちを みて いたから", "sz_shiranai_n": "せんせいが「しゅうごうは たいいくかんに かわりました」と いったよ。その とき、ぴょんちゃんは いなかった", "sz_shiranai_c": "ぴょんちゃんは、トイレに いって いたね", "sz_shiranai_g0": "しらない", "sz_shiranai_g1": "ぴょんちゃんは、しゅうごう ばしょが かわったのを しらないのかな", "sz_shiranai_a0": "たいいくかんだよ", "sz_shiranai_a1": "ぴょんちゃん、しゅうごうは たいいくかんに かわったんだよ。いっしょに いこう", "sz_shiranai_w": "ぴょんちゃんは トイレに いって いて、きいて いなかったから", "sz_sakasa_n": "かいた えを、むかいに すわって いる みいちゃんに みせたよ", "sz_sakasa_c": "むかいの みいちゃんからは、えが さかさまに みえて いるね", "sz_sakasa_g0": "さかさまに みえてる", "sz_sakasa_g1": "みいちゃんからは、えが さかさまに みえて いるのかな", "sz_sakasa_a0": "くるって まわすね", "sz_sakasa_a1": "あ、ごめん。みいちゃんの ほうに むけるね", "sz_sakasa_w": "みいちゃんは、むかいに すわって いたから", "sz_rouka_n": "ろうかで、くまくんが はしって いるよ", "sz_rouka_c": "くまくんが ろうかを はしって いて、まえから にもつを もった ひとが くるね", "sz_rouka_g0": "ぶつかる", "sz_rouka_g1": "まえから くる ひとに ぶつかって、ころんで しまうかも", "sz_rouka_a0": "あぶない！", "sz_rouka_a1": "くまくん、あぶないよ！ とまって！", "sz_rouka_w": "はしって いて、まえから ひとが きて いたから", "sz_tsumiki_n": "ちゅうくんが、つみきを どんどん たかく つんで いるよ", "sz_tsumiki_c": "ちゅうくんの つみきが、たかく なって ぐらぐら して いるね", "sz_tsumiki_g0": "くずれる", "sz_tsumiki_g1": "たかく しすぎて、くずれて しまうかも", "sz_tsumiki_a0": "そっと おいてね", "sz_tsumiki_a1": "ちゅうくん、ぐらぐら してるよ。そっと おこう", "sz_tsumiki_w": "たかくて ぐらぐら して いたから", "szp_intro": "そうぞう たんてい！ てがかりを さがして、あいての きもちを そうぞう しよう", "szp_find": "てがかりは どれかな？ タッチしてね", "szp_nope": "それも みえるね。でも、もっと だいじな てがかりが あるよ", "szp_think": "あたまの なかで、なにを おもって いるかな？", "szp_next": "このあと、どう なるかな？", "szp_open": "ふきだしを のぞいて みよう", "szp_do": "どう する？ なんて いう？", "szp_why": "どうして そう おもったの？", "szp_ok": "めいたんてい！", "szp_teach": "がおくんに、どう すれば いいか おしえて あげよう"});
@@ -65153,7 +65304,7 @@ SLEEPER_OF.aite = "kamejii";
 EVENTS.aite = { a2: ["fwd", 2, "ev_aitef", "にっこり サインを もらった！ 2マス すすむよ"], m2: ["back", 2, "ev_aiteb", "よそみを して ころんだ！ 2マス もどるよ"], d1: ["back", 4, "ev_aiteh", "サインに きづかず、まいごに なった！ 4マス もどるよ"] };
 
 /* ステージごとの BGM の ループの ながさ（びょう）。make_bgm.py が かく */
-const BGM_LEN = {"undou": 27.82609, "kouen": 32.0, "omise": 30.0, "densha": 25.94595, "gakkou2": 20.0, "long": 26.66667, "toukou": 30.0, "gakkou3": 30.96774, "kyuushoku": 29.09091, "gekou": 32.0, "ouchi1": 33.10345, "tomodachi1": 28.23529, "sensei1": 32.0, "ltomo": 27.42857, "sumi": 29.09091, "sokashi": 17.14286, "suchu": 25.6, "goal": 24.0, "ie1": 30.96774, "kouen2": 26.66667, "seki1": 34.28571, "tokei": 32.0, "asobiba": 29.09091, "burger": 30.96774, "sansu": 33.10345, "eki": 25.6, "hoken2": 35.55556, "byouin": 30.47619, "haisha": 29.09091, "yuushoku": 29.09091, "kokugo": 32.0, "taiiku": 25.6, "ongaku": 30.47619, "zukou": 30.0, "jitensha": 26.66667, "yasumi": 33.10345, "odekake": 26.30137, "komatta": 30.0, "kimochi": 30.96774, "kirikae": 29.09091, "kikikaesu": 30.47619, "matsu": 34.28571, "sos": 32.0, "junban": 27.82609, "kotowaru": 30.0, "bousai": 30.96774, "denwa": 28.65672, "souzou": 29.53846, "tachiba": 30.47619, "sakiyomi": 28.23529, "chotto": 30.0, "aite": 30.96774, "makete": 28.23529, "dekigoto": 31.47541};
+const BGM_LEN = {"undou": 27.82609, "kouen": 32.0, "omise": 30.0, "densha": 25.94595, "gakkou2": 20.0, "long": 26.66667, "toukou": 30.0, "gakkou3": 30.96774, "kyuushoku": 29.09091, "gekou": 32.0, "ouchi1": 33.10345, "tomodachi1": 28.23529, "sensei1": 32.0, "ltomo": 27.42857, "sumi": 29.09091, "sokashi": 17.14286, "suchu": 25.6, "goal": 24.0, "ie1": 30.96774, "kouen2": 26.66667, "seki1": 34.28571, "tokei": 32.0, "asobiba": 29.09091, "burger": 30.96774, "sansu": 33.10345, "eki": 25.6, "hoken2": 35.55556, "byouin": 30.47619, "haisha": 29.09091, "yuushoku": 29.09091, "kokugo": 32.0, "taiiku": 25.6, "ongaku": 30.47619, "zukou": 30.0, "jitensha": 26.66667, "yasumi": 33.10345, "odekake": 26.30137, "komatta": 30.0, "kimochi": 30.96774, "kirikae": 29.09091, "kikikaesu": 30.47619, "matsu": 34.28571, "sos": 32.0, "junban": 27.82609, "kotowaru": 30.0, "bousai": 30.96774, "denwa": 28.65672, "souzou": 29.53846, "tachiba": 30.47619, "sakiyomi": 28.23529, "chotto": 30.0, "aite": 30.96774, "makete": 28.23529, "dekigoto": 31.47541, "jugyou": 30.0};
 
 /* ================= ステージごとの BGM =================
    こうしゃは いままでの 曲（sfx_bgm）。ほかの ステージは packs/<ステージ>.json の bgm_<ステージ>（mp3）。
