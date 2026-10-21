@@ -54,10 +54,25 @@ const F_SLOTS = (() => { const r = rng32(7), out = [];
   return out; })();
 const F_STAGE = [0, .42, .62, .82, 1, 1.14, 1.24, 1.32, 1.39, 1.45, 1.5]; // 5かいめで 実が なる。そのあとも すこしずつ おおきく
 const F_SMAX = F_STAGE.length - 1;
+const fZ = s => s <= F_SMAX ? F_STAGE[s] : Math.min(2.6, F_STAGE[F_SMAX] + (s - F_SMAX) * .05); // 10かいめ からも ゆっくり そだつ（2026-10-21）
 // とおくの 巨木：たねが 30こ から あらわれ、たねの かずで ずっと おおきく なる（上限なし）
-const fGiant = n => n < 30 ? 0 : .55 + .006 * (n - 30);
-// 巨木が 画面に はいりきらなく なったら、ぜんたいを ひきの 絵に（キャラも ちいさく なる）
-const fCam = n => Math.min(1, 900 / (400 + 330 * fGiant(n)));
+const fGiant = n => n < 30 ? 0 : .55 + .01 * (n - 30);
+// 木の ばしょ：はじめの スロットが うまったら、おくの 3まいの 層を そとへ そとへ ひろげる（ひきの 絵で 見える）
+const F_MAXT = 2600;
+const F_OVER = []; { const cnt = { 0: [0, 0], 1: [0, 0], 2: [0, 0] }, seq = [2, 1, 0, 0, 1, 0, 2, 0, 1, 0], r = rng32(19);
+  for (let j = 0; j < F_MAXT; j++) { const L = seq[j % seq.length], D = F_LAY[L], w = (D.x1 - D.x0) / D.n, side = (j >> 1) % 2, c = cnt[L];
+    const x = side ? D.x1 + w * (c[1]++ + .5) : D.x0 - w * (c[0]++ + .5);
+    F_OVER.push({ L, x: x + (r() - .5) * w * .6, y: D.y + (r() - .5) * 14 * D.s / .3, t: (j * 3 + (r() * 5 | 0)) % 5, ph: r() * 6.28, over: 1 }); } }
+const fSlot = i => i < F_SLOTS.length ? F_SLOTS[i] : F_OVER[i - F_SLOTS.length];
+// カメラ（1＝ふつう。ちいさいほど ひきの 絵）。巨木の みかけの 高さは すこしずつ おおきく しながら はいるように ひく。ひろがった 森も はいるように ひく
+function fCam(n) {
+  const k = fGiant(n); let c = 1;
+  if (k) { const hs = Math.min(860, 300 + 2 * (n - 30)); c = Math.min(c, hs / (320 * k + 80)); }
+  const m = Math.min(n, F_SLOTS.length + F_MAXT) - F_SLOTS.length;
+  if (m > 0) { let dx = 0; for (let j = Math.max(0, m - 12); j < m; j++) dx = Math.max(dx, Math.abs(F_OVER[j].x - 800) * F_LAY[F_OVER[j].L].s / .55); c = Math.min(c, 820 / (dx + 120)); }
+  return Math.max(.035, c); }
+// とおくの ものほど うすく（くうきの いろに まぜる）
+function fMix(a, b, t) { const h = x => [1, 3, 5].map(i => parseInt(x.slice(i, i + 2), 16)); const [p, q] = [h(a), h(b)]; return "#" + p.map((v, i) => Math.round(v + (q[i] - v) * t).toString(16).padStart(2, "0")).join(""); }
 // 木（もとの 大きさ：高さ 320 くらい。ねもとが 0,0）
 function fTree(g, t, D) {
   const k = el("g", {}, g), [c0, c1, c2, pink] = D.col, sw = { stroke: INK, "stroke-width": 7, "stroke-linejoin": "round" };
@@ -86,11 +101,11 @@ function fFlower(g, x, y, s, col) { const f = el("g", { transform: `translate(${
 async function forestScene(newSeeds, kinds) {
   const hist = FOREST.get(), old = hist.reduce((a, b) => a + b, 0), sess = hist.length;
   if (newSeeds > 0) FOREST.add(newSeeds);
-  const total = old + newSeeds, nDraw = Math.min(total, F_SLOTS.length);
+  const total = old + newSeeds, nDraw = Math.min(total, F_SLOTS.length + F_MAXT);
   // だれが いつ まいた 木か（まいた 回の ばんごう）
   const born = []; hist.concat(newSeeds > 0 ? [newSeeds] : []).forEach((n, s) => { for (let i = 0; i < n; i++) born.push(s); });
   const sessAfter = sess + (newSeeds > 0 ? 1 : 0);
-  const stageOf = (i, sNow) => Math.min(F_SMAX, Math.max(1, sNow - born[i]));
+  const stageOf = (i, sNow) => Math.max(1, sNow - born[i]);
   // --- 画面を 作る ---
   setView("parade"); visible.slice().forEach(c => { if (!kinds.includes(c.kind) && c !== C.pony) { c.root.style.display = "none"; visible.splice(visible.indexOf(c), 1); } });
   sceneLayer.innerHTML = ""; const root = el("g", {}, sceneLayer);
@@ -105,12 +120,14 @@ async function forestScene(newSeeds, kinds) {
   for (let i = 0; i < 12; i++) el("path", { d: "M0 -92 L12 -70 L-12 -70 Z", fill: "#FFD25E", ...S6(4), transform: `rotate(${i * 30})` }, sunR);
   el("circle", { r: 58, fill: "#FFE27A", ...S6(6) }, sun); el("circle", { cx: -18, cy: -6, r: 5, fill: INK }, sun); el("circle", { cx: 18, cy: -6, r: 5, fill: INK }, sun); el("path", { d: "M-16 14 Q0 28 16 14", fill: "none", ...S6(5) }, sun);
   if (total >= 30) { const rb = el("g", { opacity: 0 }, sky0); ["#FF8FA3", "#FFC36E", "#FFE27A", "#9BD68A", "#8FC7F2", "#B9A8D9"].forEach((c, i) => el("path", { d: `M180 620 A${560 - i * 22} ${430 - i * 22} 0 0 1 ${1300 - i * 44 + 44 * 0} 620`, fill: "none", stroke: c, "stroke-width": 22, opacity: .75 }, rb)); later(2500, () => tween(1500, k => rb.setAttribute("opacity", k.toFixed(2)))); }
-  const clouds = [[200, 140, 1], [760, 90, .8], [1150, 230, .7]].map(([x, y, s]) => { const c = el("g", {}, sky); [[0, 0, 46], [44, -16, 52], [92, 0, 42]].forEach(([cx, cy, r]) => el("circle", { cx, cy, r, fill: "#FFFFFF", stroke: "#C9D9E6", "stroke-width": 4 }, c)); return { c, x, y, s }; }); clouds.forEach(c => sky0.appendChild(c.c));
-  [-3200, -1600, 0, 1600, 3200].forEach(ox => el("path", { d: "M-100 600 L120 430 L300 560 L520 400 L760 570 L980 440 L1200 560 L1420 420 L1700 600 Z", transform: `translate(${ox} 0)`, fill: "#B8D8E8", stroke: "#97BBD0", "stroke-width": 6, "stroke-linejoin": "round" }, sky));
+  const cloudHold = el("g", {}), camEnd = fCam(old + newSeeds), span = 2000 / camEnd, cr = rng32(5), nCl = Math.min(40, 3 + Math.round(3 / camEnd));
+  const clouds = Array.from({ length: nCl }, (_, i) => { const x = i < 3 ? [200, 760, 1150][i] : 800 - span / 2 + cr() * span, y = i < 3 ? [140, 90, 230][i] : 60 + cr() * 330 - (1 / camEnd - 1) * 40 * cr(), s = i < 3 ? [1, .8, .7][i] : .8 + cr() * Math.min(4, .6 / camEnd);
+    const c = el("g", {}, cloudHold); [[0, 0, 46], [44, -16, 52], [92, 0, 42]].forEach(([cx, cy, r]) => el("circle", { cx, cy, r, fill: "#FFFFFF", stroke: "#C9D9E6", "stroke-width": 4 }, c)); return { c, x, y, s }; });
+  for (let ox = -64000; ox <= 64000; ox += 1600) el("path", { d: "M-100 600 L120 430 L300 560 L520 400 L760 570 L980 440 L1200 560 L1420 420 L1700 600 Z", transform: `translate(${ox} 0)`, fill: "#B8D8E8", stroke: "#97BBD0", "stroke-width": 6, "stroke-linejoin": "round" }, sky);
   const layers = F_LAY.map((D, L) => {
     const g = el("g", {}, world);
-    if (L > 0) el("rect", { x: -4000, y: 300, width: 9600, height: 3000, fill: "url(#fhaze)" }, g); // かすみ（おくの 層を うすく 見せる）
-    let d = `M-4000 3000 L-4000 ${D.hill}`; for (let x = -4000; x <= 5600; x += 200) d += ` Q${x + 100} ${D.hill - 34 + ((x / 200 + L) % 2) * 22} ${x + 200} ${D.hill + (L % 2 ? 10 : -6)}`; d += " L5800 3000 Z";
+    if (L > 0) el("rect", { x: -66000, y: 300, width: 132000, height: 30000, fill: "url(#fhaze)" }, g); // かすみ（おくの 層を うすく 見せる）
+    let d = `M-66000 30000 L-66000 ${D.hill}`; for (let x = -66000; x <= 65800; x += 200) d += ` Q${x + 100} ${D.hill - 34 + ((x / 200 + L) % 2) * 22} ${x + 200} ${D.hill + (L % 2 ? 10 : -6)}`; d += " L66000 30000 Z";
     el("path", { d, fill: D.ground, ...S6(L === 3 ? 7 : 5) }, g);
     return { D, g, trees: el("g", {}, g), dx: 0, z: 1 + D.zoom };
   });
@@ -118,27 +135,33 @@ async function forestScene(newSeeds, kinds) {
   const front = layers[3].g, nFl = Math.min(140, total * 2), fr = rng32(11);
   for (let i = 0; i < nFl; i++) fFlower(front, -300 + fr() * 2200, 900 + fr() * 90, .7 + fr() * .5, ["#FF8FA3", "#FFD25E", "#B9A8D9", "#FFFFFF", "#8FC7F2"][i % 5]);
   let big = null; const bigG = el("g", {}); layers[0].g.insertBefore(bigG, layers[0].g.firstChild); // 巨木は いちばん おくの おかの うしろ
-  const bigS = n => { const k = fGiant(n); if (!k) return; if (!big) { big = fTree(bigG, 0, { ...F_LAY[1], col: ["#4E9A5C", "#72B86E", "#3F8A50", "#FFC2D1"] }); big.fruit.forEach(f => f.setAttribute("fill", "#FF5D6C")); } big.k.setAttribute("transform", `translate(800 ${F_LAY[0].hill + 40}) scale(${k.toFixed(4)})`); };
+  // くもは 巨木の まえを ながれる（巨木が くもを つきぬけて 見える）。ひきの 絵でも 空に くもが あるように ひろく まく
+  const cloudG = cloudHold; bigG.after(cloudG);
+  const bigS = n => { const k = fGiant(n); if (!k) return; if (!big) { big = fTree(bigG, 0, { ...F_LAY[1], col: ["#4E9A5C", "#72B86E", "#3F8A50", "#FFC2D1"] }); big.fruit.forEach(f => f.setAttribute("fill", "#FF5D6C"));
+      big.k.querySelectorAll("*").forEach(e => { e.dataset.f = e.getAttribute("fill") || ""; e.dataset.s = e.getAttribute("stroke") || ""; }); }
+    const fade = Math.min(.62, .28 + .035 * k); // おおきく なるほど とおくに ある → うすく
+    big.k.querySelectorAll("*").forEach(e => { if (/^#[0-9A-F]{6}$/i.test(e.dataset.f)) e.setAttribute("fill", fMix(e.dataset.f, "#D4EAF4", fade)); if (/^#[0-9A-F]{6}$/i.test(e.dataset.s)) e.setAttribute("stroke", fMix(e.dataset.s, "#D4EAF4", fade * .9)); });
+    big.k.setAttribute("transform", `translate(800 ${F_LAY[0].hill + 40}) scale(${k.toFixed(4)})`); };
   bigS(old);
   const flies = []; const nBf = total >= 5 ? Math.min(10, 1 + Math.floor(total / 12)) : 0;
   for (let i = 0; i < nBf; i++) { const b = el("g", {}, root); const w1 = el("ellipse", { cx: -10, cy: 0, rx: 12, ry: 16, fill: ["#FFD25E", "#FF8FA3", "#8FC7F2", "#B9A8D9", "#FFFFFF"][i % 5], stroke: INK, "stroke-width": 3 }, b), w2 = el("ellipse", { cx: 10, cy: 0, rx: 12, ry: 16, fill: ["#FFD25E", "#FF8FA3", "#8FC7F2", "#B9A8D9", "#FFFFFF"][i % 5], stroke: INK, "stroke-width": 3 }, b); el("ellipse", { cx: 0, cy: 0, rx: 3, ry: 12, fill: INK }, b); world.appendChild(b); flies.push({ b, w1, w2, x: 300 + (i % 5) * 220 + Math.floor(i / 5) * 110, y: 760 + (i % 2) * 70, ph: i * 1.7 }); }
   const birds = total >= 12 ? el("g", {}, world) : null; if (birds) [[0, 0], [50, 22], [-46, 26]].forEach(([x, y]) => el("path", { d: `M${x - 18} ${y} Q${x - 8} ${y - 12} ${x} ${y} Q${x + 8} ${y - 12} ${x + 18} ${y}`, fill: "none", ...S6(5) }, birds));
   // 木を ならべる（まえからの 木）
-  const T = []; const putTree = i => { const sl = F_SLOTS[i], D = F_LAY[sl.L], tr = fTree(layers[sl.L].trees, sl.t, D); T[i] = { ...tr, sl, D, z: 0 }; tr.fruit.concat(tr.bloom).forEach(e => e.style.display = "none"); return T[i]; };
-  for (let i = 0; i < Math.min(old, nDraw); i++) { const t = putTree(i); t.z = F_STAGE[stageOf(i, sess)]; if (stageOf(i, sess) >= 5) t.fruit.concat(t.bloom).forEach(e => e.style.display = ""); }
+  const T = []; const putTree = i => { const sl = fSlot(i), D = F_LAY[sl.L], tr = fTree(layers[sl.L].trees, sl.t, D); T[i] = { ...tr, sl, D, z: 0 }; tr.fruit.concat(tr.bloom).forEach(e => e.style.display = "none"); return T[i]; };
+  for (let i = 0; i < Math.min(old, nDraw); i++) { const t = putTree(i); t.z = fZ(stageOf(i, sess)); if (stageOf(i, sess) >= 5) t.fruit.concat(t.bloom).forEach(e => e.style.display = ""); }
   // 数の 札
   const tag = el("g", { transform: "translate(40 30)" }, root); el("rect", { width: 300, height: 92, rx: 46, fill: "#FFFFFF", ...S6(6) }, tag);
   const ti = fTree(tag, 0, F_LAY[3]); ti.k.setAttribute("transform", "translate(62 84) scale(.24)"); const tagT = txt(tag, 190, 64, `× ${old}`, 44, { "text-anchor": "middle" });
   // 動き（層ごとに ちがう 速さで ゆれる。はじめは ちかくから ひいていく）
-  const placeP = () => { kinds.forEach((k, i) => { const c = C[k], q = toScr(250 + i * 150, 985); place(c, q.x, q.y, (KID_S[k] || .8) * .62 * cam); c.dx.v = 0; c.dx.t = 0; }); const q = toScr(95, 985); place(C.pony, q.x, q.y, .4 * cam); };
+  const placeP = () => { kinds.forEach((k, i) => { const c = C[k], q = toScr(250 + i * 150, 985); place(c, q.x, q.y, (KID_S[k] || .8) * .62 * Math.max(.3, cam)); c.dx.v = 0; c.dx.t = 0; }); const q = toScr(95, 985); place(C.pony, q.x, q.y, .4 * Math.max(.3, cam)); };
   const people = kinds.map(k => C[k]); placeP();
   let tm = 0, drift = 1; const intro = 2600;
   addTick(dt => {
     if (!root.isConnected) return false; tm += dt; const m = Math.max(.2, motion), zk = Math.min(1, tm * 1000 / intro), ez = 1 - Math.pow(1 - zk, 3);
     layers.forEach(l => { const z = l.z + (1 - l.z) * ez; l.dx = Math.sin(tm * .33) * l.D.amp * m * drift; l.g.setAttribute("transform", `translate(${(l.dx + 800 * (1 - z)).toFixed(1)} ${(1000 * (1 - z)).toFixed(1)}) scale(${z.toFixed(4)})`); });
     sunR.setAttribute("transform", `rotate(${(tm * 12).toFixed(1)})`);
-    clouds.forEach((c, i) => { const x = ((c.x + tm * (14 + i * 6)) % 1900) - 150; c.c.setAttribute("transform", `translate(${x.toFixed(1)} ${c.y}) scale(${c.s})`); });
-    T.forEach(t => { if (!t) return; const a = Math.sin(tm * 1.4 + t.sl.ph) * 1.8 * m * (t.D.s + .4); t.k.setAttribute("transform", `translate(${t.sl.x.toFixed(1)} ${t.sl.y.toFixed(1)}) scale(${(t.D.s * t.z).toFixed(4)}) rotate(${a.toFixed(2)})`); });
+    clouds.forEach((c, i) => { const x = ((c.x - (800 - span / 2) + tm * (14 + (i % 4) * 6) / Math.max(.2, cam)) % span) + 800 - span / 2; c.c.setAttribute("transform", `translate(${x.toFixed(1)} ${c.y.toFixed(1)}) scale(${c.s.toFixed(2)})`); });
+    T.forEach(t => { if (!t) return; if (t.sl.over && t.zDone === t.z) return; t.zDone = t.sl.over ? t.z : null; const a = t.sl.over ? 0 : Math.sin(tm * 1.4 + t.sl.ph) * 1.8 * m * (t.D.s + .4); t.k.setAttribute("transform", `translate(${t.sl.x.toFixed(1)} ${t.sl.y.toFixed(1)}) scale(${(t.D.s * t.z).toFixed(4)}) rotate(${a.toFixed(2)})`); });
     flies.forEach(f => { f.x += Math.cos(tm * .7 + f.ph) * 60 * dt; const y = f.y + Math.sin(tm * 1.9 + f.ph) * 40; const w = .3 + .7 * Math.abs(Math.sin(tm * 14 + f.ph)); f.w1.setAttribute("rx", (12 * w).toFixed(1)); f.w2.setAttribute("rx", (12 * w).toFixed(1)); f.b.setAttribute("transform", `translate(${f.x.toFixed(1)} ${y.toFixed(1)})`); });
     if (birds) { const x = ((tm * 170) % 2600) - 300; birds.setAttribute("transform", `translate(${x.toFixed(1)} ${(250 + Math.sin(tm * 2) * 20).toFixed(1)})`); }
   });
@@ -151,7 +174,7 @@ async function forestScene(newSeeds, kinds) {
     for (let j = 0; j < newSeeds; j++) {
       const i = old + j, who = people[j % people.length]; if (j % 3 === 0) playMove(who, "pump");
       if (i >= nDraw) { blip(800, 1200, .08, "square"); await sleep(iv * .5); continue; }
-      const sl = F_SLOTS[i], l = layers[sl.L], p = headTop(who), q1 = toScr(sl.x + l.dx, sl.y - 10), x1 = q1.x, y1 = q1.y;
+      const sl = fSlot(i), l = layers[sl.L], p = headTop(who), q1 = toScr(sl.x + l.dx, sl.y - 10), x1 = q1.x, y1 = q1.y;
       const sd = el("g", {}, root); seedIcon(sd, 0, 0, .55); blip(500, 900, .1, "triangle");
       plants.push(tween(620, k => { const x = p.x + (x1 - p.x) * k, y = p.y + (y1 - p.y) * k - Math.sin(k * Math.PI) * 260; sd.setAttribute("transform", `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(k * 540).toFixed(0)}) scale(${(.55 * cam * (1 - .4 * k * (3 - sl.L) / 3)).toFixed(3)})`); }).then(() => {
         sd.remove(); for (let q = 0; q < 5; q++) mark("sparkle", x1, y1, { vx: (q - 2) * 120 * cam, vy: (-160 - q * 20) * cam, life: .5, s: (.35 + sl.L * .08) * cam });
@@ -164,11 +187,12 @@ async function forestScene(newSeeds, kinds) {
   // --- 前の 木が そだつ ---
   const grow = []; for (let i = 0; i < Math.min(old, nDraw); i++) { const s0 = stageOf(i, sess), s1 = stageOf(i, sessAfter); if (s1 > s0) grow.push([i, s0, s1]); }
   // 巨木が じわじわ おおきく なる。はいりきらなければ カメラを ひく
-  if (fGiant(total) > fGiant(old)) { const c0 = cam, c1 = fCam(total); if (!fGiant(old)) blip(300, 600, .4, "triangle");
-    await tween(1800, k => { const e = 1 - Math.pow(1 - k, 3); bigS(old + (total - old) * e); if (c1 < c0) { cam = c0 + (c1 - c0) * e; camT(); placeP(); } }); }
+  { const c0 = cam, c1 = fCam(total), gg = fGiant(total) > fGiant(old);
+    if (gg || c1 < c0) { if (gg && !fGiant(old)) blip(300, 600, .4, "triangle");
+      await tween(c1 < c0 * .9 ? 2600 : 1800, k => { const e = 1 - Math.pow(1 - k, 3); if (gg) bigS(old + (total - old) * e); if (c1 < c0) { cam = c0 + (c1 - c0) * e; camT(); placeP(); } }); } }
   if (grow.length) {
     tune([[N.C5, .25], [N.E5, .25], [N.G5, .25], [N.C6, .25], [N.E5 * 2, 1]], 200, "triangle", .1);
-    grow.forEach(([i, s0, s1], q) => later(Math.min(1400, q * 18), () => { const t = T[i]; tween(700, k => { t.z = F_STAGE[s0] + (F_STAGE[s1] - F_STAGE[s0]) * easeBack(k); }).then(() => { if (s1 >= 5) t.fruit.concat(t.bloom).forEach(e => { e.style.display = ""; }); }); }));
+    grow.forEach(([i, s0, s1], q) => later(Math.min(1400, q * 18), () => { const t = T[i]; tween(700, k => { t.z = fZ(s0) + (fZ(s1) - fZ(s0)) * easeBack(k); }).then(() => { if (s1 >= 5) t.fruit.concat(t.bloom).forEach(e => { e.style.display = ""; }); }); }));
     await sleep(Math.min(1400, grow.length * 18) + 800);
   }
   // --- かぞえる ---
