@@ -73,7 +73,9 @@ for l in lines:
     t0 = time.time()
     try:
         q = json.loads(call("POST", "/audio_query?" + urllib.parse.urlencode({"text": text, "speaker": sid})))
-        if l["key"] in ACC: q["accent_phrases"] = reshape(q["accent_phrases"], ACC[l["key"]], l["key"])
+        if ACC.get(l["key"]) == "Q":  # はい／いいえの しつもん：さいごの 句を 平板に して、しりあがりに（2026-10-21）
+            ap = q["accent_phrases"][-1]; ap["accent"] = len(ap["moras"]); ap["is_interrogative"] = True
+        elif l["key"] in ACC: q["accent_phrases"] = reshape(q["accent_phrases"], ACC[l["key"]], l["key"])
         q["speedScale"] = c.get("speed", 1.0); q["intonationScale"] = c.get("into", q.get("intonationScale", 1.0))
         if "pitch" in c: q["pitchScale"] = c["pitch"]
         q["prePhonemeLength"] = .05; q["postPhonemeLength"] = .1

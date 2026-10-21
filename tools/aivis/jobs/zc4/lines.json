@@ -1,0 +1,507 @@
+[
+{
+"key": "sg_khmichi_5",
+"who": "kon",
+"text": "ありがとう ございます。まっすぐ いって、みぎで あって いますか？"
+},
+{
+"key": "sg_tkkoronda_1",
+"who": "gao",
+"text": "ぴょんちゃん、大丈夫？"
+},
+{
+"key": "sg_tkkoronda_2",
+"who": "gao",
+"text": "だいじょうぶ？ たてる？"
+},
+{
+"key": "sr_kysukoshi",
+"who": "gao",
+"text": "お、おう。これくらいで いいか？"
+},
+{
+"key": "sg_szfue_5",
+"who": "pyon",
+"text": "おおきな おとが にがてです。ふえを ふく まえに、てを あげて おしえて くれますか？"
+},
+{
+"key": "sg_mtshitsumon_1",
+"who": "gao",
+"text": "せんせい、いいですか？"
+},
+{
+"key": "sq_jtkoronda_doshinpapa",
+"who": "doshinpapa",
+"text": "あっ、ころんだ！ だいじょうぶか？"
+},
+{
+"key": "sg_szsamui_3",
+"who": "pyon",
+"text": "せんせい、さむいので うわぎを きても いいですか？"
+},
+{
+"key": "sr_khpoint",
+"who": "tenin",
+"text": "あら、ごめんなさいね。ポイントカードは、もって いますか？"
+},
+{
+"key": "sg_mtshitsumon_3",
+"who": "gao",
+"text": "せんせい、いま しつもんしても いいですか？"
+},
+{
+"key": "sg_bssiren_4",
+"who": "gao",
+"text": "せんせい、おとが こわいです。そばに いても いいですか？"
+},
+{
+"key": "sq_khshamoji_pyonmama",
+"who": "pyonmama",
+"text": "しゃもじ、とって くれる？"
+},
+{
+"key": "sq_dwvideo",
+"who": "chu",
+"text": "おーい、みえる？"
+},
+{
+"key": "sq_kygochisousama",
+"who": "nobbo",
+"text": "みなさん、たべおわりましたか？"
+},
+{
+"key": "sg_sznioi_5",
+"who": "pyon",
+"text": "においが にがてで、すこし きもちわるいです。まどを あけて、すこし やすんでも いいですか？"
+},
+{
+"key": "sg_aisu_2",
+"who": "gao",
+"text": "かなしいね。だいじょうぶ？"
+},
+{
+"key": "sq_dwkakeru",
+"who": "kuma",
+"text": "はい、もしもし？"
+},
+{
+"key": "se_keshigomu_0",
+"who": "gao",
+"text": "……ごめん、ちゅう。かして くれる？"
+},
+{
+"key": "sg_bssiren_3",
+"who": "gao",
+"text": "おとが こわいので、せんせいの そばに いても いいですか？"
+},
+{
+"key": "sg_bssiren_5",
+"who": "gao",
+"text": "サイレンの おとが おおきくて こわいです。てを つないで くれますか？"
+},
+{
+"key": "sg_mtshitsumon_4",
+"who": "gao",
+"text": "せんせい、かきおわったら、しつもんしても いいですか？"
+},
+{
+"key": "sg_snjunban_0",
+"who": "pyon",
+"text": "ぼくですか？"
+},
+{
+"key": "sg_szsamui_5",
+"who": "pyon",
+"text": "そとは さむいので、うわぎを きてから あそびに いっても いいですか？"
+},
+{
+"key": "sx_koronda_2",
+"who": "pyon",
+"text": "てが かそうか？"
+},
+{
+"key": "sg_szsamui_4",
+"who": "pyon",
+"text": "せんせい、さむくて てが つめたいです。うわぎを とって きても いいですか？"
+},
+{
+"key": "sq_byhoka",
+"who": "wanko",
+"text": "ほかに、へんな ところは ありますか？"
+},
+{
+"key": "sg_szmabushii_5",
+"who": "pyon",
+"text": "ひかりが まぶしくて こくばんが みえません。カーテンを すこし しめて くれますか？"
+},
+{
+"key": "sq_hsyusugu",
+"who": "biba",
+"text": "おくちの なか、だいじょうぶ？"
+},
+{
+"key": "sg_koronda_2",
+"who": "pyon",
+"text": "てを かそうか？"
+},
+{
+"key": "sq_gsmisete",
+"who": "doshin",
+"text": "あれ？ きょうかしょ ないの？"
+},
+{
+"key": "sg_khshamoji_0",
+"who": "kon",
+"text": "しゃもじ？"
+},
+{
+"key": "sg_szmimi_3",
+"who": "pyon",
+"text": "ちゅうくん、だいじょうぶ？ おとが こわい？"
+},
+{
+"key": "sx_szmimi_2",
+"who": "pyon",
+"text": "だいじょうぶ？ せんせいを いおうか？"
+},
+{
+"key": "sq_jtmatte_gaopapa",
+"who": "gaopapa",
+"text": "おーい、だいじょうぶか？"
+},
+{
+"key": "sg_sktsukue_5",
+"who": "gao",
+"text": "つくえが こっちに きてて せまいから、ちょっと そっちに つめて くれる？"
+},
+{
+"key": "sg_mienai_5",
+"who": "gao",
+"text": "どしんくん、えほんが みえないから、すわって くれる？"
+},
+{
+"key": "sg_mtshitsumon_5",
+"who": "gao",
+"text": "せんせい、てを あげて まって いました。いま しつもんしても いいですか？"
+},
+{
+"key": "sq_szmabushii",
+"who": "nobbo",
+"text": "こくばん、みえにくいですか？"
+},
+{
+"key": "sg_szurusai_5",
+"who": "pyon",
+"text": "みんなの こえが おおきくて、あたまが いたく なりそうです。すこし ろうかで やすんでも いいですか？"
+},
+{
+"key": "sq_ymkiminona",
+"who": "pyon",
+"text": "ねえ、すきな えいがって ある？"
+},
+{
+"key": "sg_sznodo_4",
+"who": "pyon",
+"text": "のどが かわいたので、おみずを のんで きても いいですか？"
+},
+{
+"key": "sg_sznodo_5",
+"who": "pyon",
+"text": "のどが からからです。すいとうの おみずを のんでも いいですか？"
+},
+{
+"key": "sg_ysshouyu_5",
+"who": "gao",
+"text": "パパ、とどかないから、おしょうゆを とって くれる？"
+},
+{
+"key": "sq_dwdare",
+"who": "kuma",
+"text": "……もしもし？ ねえ、あそべる？"
+},
+{
+"key": "sq_kytabekirenai",
+"who": "nobbo",
+"text": "あと すこし ですね。がんばれそうですか？"
+},
+{
+"key": "sr_dwvideo",
+"who": "chu",
+"text": "あ、ほんとだ。これで みえる？"
+},
+{
+"key": "mq_hoka",
+"who": "wanko",
+"text": "ほかに、へんな ところは ありますか？"
+},
+{
+"key": "sq_kgwakaranai",
+"who": "nobbo",
+"text": "プリントは できましたか？"
+},
+{
+"key": "sq_khpoint",
+"who": "tenin",
+"text": "ポイントカードは おもちですか？"
+},
+{
+"key": "lk_g_sakasa_q",
+"who": "nobbo",
+"text": "どうしましたか？ さかさまに みえますか？"
+},
+{
+"key": "lk_oshiete_t0",
+"who": "chu",
+"text": "この もんだい、わかる？"
+},
+{
+"key": "sg_szmimi_4",
+"who": "pyon",
+"text": "ちゅうくん、だいじょうぶ？ いっしょに せんせいに いいに いこうか？"
+},
+{
+"key": "sg_szmimi_2",
+"who": "pyon",
+"text": "だいじょうぶ？ せんせいに いおうか？"
+},
+{
+"key": "sq_ftbikkuri",
+"who": "tora",
+"text": "わっ！！ へへへ、びっくりした？"
+},
+{
+"key": "kcq_deg_mama",
+"who": "mama",
+"text": "どのくらい？ ちょっと？ すごく？"
+},
+{
+"key": "sq_snateru",
+"who": "nobbo",
+"text": "3たす 2は いくつですか？ わかる ひと？"
+},
+{
+"key": "sq_mtyobu",
+"who": "nobbo",
+"text": "とおくに いる ちゅうくんを、よんで くれますか？"
+},
+{
+"key": "sq_ocbotan",
+"who": "mama",
+"text": "あら、まだ きがえて いないの？"
+},
+{
+"key": "sq_ocbotan_miimama",
+"who": "miimama",
+"text": "あら、まだ きがえて いないの？"
+},
+{
+"key": "sg_szmimi_1",
+"who": "pyon",
+"text": "だいじょうぶ？ うるさい？"
+},
+{
+"key": "sg_szurusai_4",
+"who": "pyon",
+"text": "うるさくて つらいので、すこし しずかな ところに いっても いいですか？"
+},
+{
+"key": "sq_ymhitori",
+"who": "kon",
+"text": "ずっと ほん よんでて、つまんなくない？"
+},
+{
+"key": "sg_ieheya_1",
+"who": "chu",
+"text": "ぼくだよ。はいっても いい？"
+},
+{
+"key": "sq_tinawatobi",
+"who": "nobbo",
+"text": "なわとび、むずかしいですか？"
+},
+{
+"key": "sx_zkkariru_2",
+"who": "chu",
+"text": "はさみが かして くれる？"
+},
+{
+"key": "sg_skhiji_3",
+"who": "gao",
+"text": "ごめんね。だいじょうぶ？ いたくない？"
+},
+{
+"key": "sq_bynetsu",
+"who": "wanko",
+"text": "おねつは はかりましたか？"
+},
+{
+"key": "sq_jtkoronda",
+"who": "papa",
+"text": "あっ、ころんだ！ だいじょうぶか？"
+},
+{
+"key": "sg_ieheya_4",
+"who": "chu",
+"text": "ぼくだよ。あそびに きたよ。へやに はいっても いい？"
+},
+{
+"key": "sq_ieippai",
+"who": "pannamama",
+"text": "クッキー、もっと たべる？"
+},
+{
+"key": "sq_kyamari",
+"who": "chu",
+"text": "ねえ、ピーマン、おいしい？"
+},
+{
+"key": "sq_ysippai_miimama",
+"who": "miimama",
+"text": "あら、もう たべないの？"
+},
+{
+"key": "sg_scoop_2",
+"who": "pyon",
+"text": "スコップを かして くれる？"
+},
+{
+"key": "sg_skenpitsu_4",
+"who": "gao",
+"text": "えんぴつを わすれちゃった。いっぽん かして くれる？"
+},
+{
+"key": "sq_bgchumon",
+"who": "tenin",
+"text": "いらっしゃいませ。ごちゅうもんは？"
+},
+{
+"key": "sq_bygohan",
+"who": "wanko",
+"text": "ごはんは たべられましたか？"
+},
+{
+"key": "sq_kyohashi",
+"who": "nobbo",
+"text": "おや、たべないのですか？"
+},
+{
+"key": "sq_ochitori_miimama",
+"who": "miimama",
+"text": "まだ おこってるの？ だいじょうぶ？"
+},
+{
+"key": "sr_sknani",
+"who": "chu",
+"text": "ひみつの めいろだよ。いっしょに やる？"
+},
+{
+"key": "sg_zkkariru_2",
+"who": "chu",
+"text": "はさみを かして くれる？"
+},
+{
+"key": "sq_jbtearai",
+"who": "nobbo",
+"text": "てあらいの じゅんばんを、おしえて くれますか？"
+},
+{
+"key": "sq_jtmatte",
+"who": "papa",
+"text": "おーい、だいじょうぶか？"
+},
+{
+"key": "sg_szfuku_5",
+"who": "pyon",
+"text": "かって くれて ありがとう。でも くびの ところが チクチク するから、タグを きって くれる？"
+},
+{
+"key": "sq_tikoronda",
+"who": "nobbo",
+"text": "おや、ころびましたね。だいじょうぶですか？"
+},
+{
+"key": "sr_ystoranaide_gaonii",
+"who": "gaonii",
+"text": "わるい わるい。ひとつ ちょうだい？"
+},
+{
+"key": "g_huh",
+"who": "gao",
+"text": "あれ？ ちがった？"
+},
+{
+"key": "sq_sznioi",
+"who": "nobbo",
+"text": "かおが くもって いますね。だいじょうぶですか？"
+},
+{
+"key": "sq_tikigae",
+"who": "nobbo",
+"text": "あれ、まだ きがえて いないの？"
+},
+{
+"key": "sg_iekashite_4",
+"who": "chu",
+"text": "あそび おわったら、その くるまを かして くれる？"
+},
+{
+"key": "sq_skmisete",
+"who": "pyon",
+"text": "きょうかしょ、わすれたの？"
+},
+{
+"key": "sx_scoop_2",
+"who": "pyon",
+"text": "スコップが かして くれる？"
+},
+{
+"key": "lk_g_sakasa_t1",
+"who": "doshin",
+"text": "せんせい、あたまが したに なってるよ？"
+},
+{
+"key": "sg_koronda_1",
+"who": "pyon",
+"text": "だいじょうぶ？ たてる？"
+},
+{
+"key": "sg_sknaiteru_1",
+"who": "gao",
+"text": "だいじょうぶ？"
+},
+{
+"key": "sq_bssiren",
+"who": "nobbo",
+"text": "サイレンが なって いますね。だいじょうぶですか？"
+},
+{
+"key": "sg_octetsudai_5",
+"who": "mii",
+"text": "ママ、いそがしそうだね。おさらを ならべるのを てつだおうか？"
+},
+{
+"key": "sq_ocbotan_gaomama",
+"who": "gaomama",
+"text": "あら、まだ きがえて いないの？"
+},
+{
+"key": "sq_snochitsuku",
+"who": "nobbo",
+"text": "そわそわ して いますね。だいじょうぶ？"
+},
+{
+"key": "lk_fwasure_t1",
+"who": "doshin",
+"text": "とりに もどる？"
+},
+{
+"key": "rv_chu_huh",
+"who": "chu",
+"text": "あれれ？ ちがった？"
+},
+{
+"key": "sg_ysippai_3",
+"who": "gao",
+"text": "おなか いっぱいだから、のこして いい？"
+}
+]
