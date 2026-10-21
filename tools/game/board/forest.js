@@ -56,7 +56,8 @@ const F_STAGE = [0, .42, .62, .82, 1, 1.14, 1.24, 1.32, 1.39, 1.45, 1.5]; // 5�
 const F_SMAX = F_STAGE.length - 1;
 const fZ = s => s <= F_SMAX ? F_STAGE[s] : Math.min(2.6, F_STAGE[F_SMAX] + (s - F_SMAX) * .05); // 10かいめ からも ゆっくり そだつ（2026-10-21）
 // とおくの 巨木：たねが 30こ から あらわれ、たねの かずで ずっと おおきく なる（上限なし）
-const fGiant = n => n < 30 ? 0 : .55 + .01 * (n - 30);
+const F_CAP = 1280; // この かずの ときの 絵が いちばん おおきい（それより おおくても おなじ 絵。かずの 札は ほんとうの かず）2026-10-21
+const fGiant = n => n < 30 ? 0 : .55 + .01 * (Math.min(n, F_CAP) - 30);
 // 木の ばしょ：はじめの スロットが うまったら、おくの 3まいの 層を そとへ そとへ ひろげる（ひきの 絵で 見える）
 const F_MAXT = 2600;
 const F_OVER = []; { const cnt = { 0: [0, 0], 1: [0, 0], 2: [0, 0] }, seq = [2, 1, 0, 0, 1, 0, 2, 0, 1, 0], r = rng32(19);
@@ -66,6 +67,7 @@ const F_OVER = []; { const cnt = { 0: [0, 0], 1: [0, 0], 2: [0, 0] }, seq = [2, 
 const fSlot = i => i < F_SLOTS.length ? F_SLOTS[i] : F_OVER[i - F_SLOTS.length];
 // カメラ（1＝ふつう。ちいさいほど ひきの 絵）。巨木の みかけの 高さは すこしずつ おおきく しながら はいるように ひく。ひろがった 森も はいるように ひく
 function fCam(n) {
+  n = Math.min(n, F_CAP);
   const k = fGiant(n); let c = 1;
   if (k) { const hs = Math.min(860, 300 + 2 * (n - 30)); c = Math.min(c, hs / (320 * k + 80)); }
   const m = Math.min(n, F_SLOTS.length + F_MAXT) - F_SLOTS.length;
@@ -101,7 +103,7 @@ function fFlower(g, x, y, s, col) { const f = el("g", { transform: `translate(${
 async function forestScene(newSeeds, kinds) {
   const hist = FOREST.get(), old = hist.reduce((a, b) => a + b, 0), sess = hist.length;
   if (newSeeds > 0) FOREST.add(newSeeds);
-  const total = old + newSeeds, nDraw = Math.min(total, F_SLOTS.length + F_MAXT);
+  const total = old + newSeeds, nDraw = Math.min(total, F_CAP);
   // だれが いつ まいた 木か（まいた 回の ばんごう）
   const born = []; hist.concat(newSeeds > 0 ? [newSeeds] : []).forEach((n, s) => { for (let i = 0; i < n; i++) born.push(s); });
   const sessAfter = sess + (newSeeds > 0 ? 1 : 0);
