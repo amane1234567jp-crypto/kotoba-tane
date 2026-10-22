@@ -1,0 +1,90 @@
+{
+"sg_ymkiminona_0": {
+"join": {
+"キミノナワ": 0
+}
+},
+"sg_ymkiminona_1": {
+"join": {
+"キミノナワ": 0
+}
+},
+"sg_ymkiminona_2": {
+"join": {
+"キミノナワ": 0
+}
+},
+"sg_ymkiminona_3": {
+"join": {
+"キミノナワ": 0
+}
+},
+"sg_ymkiminona_4": {
+"join": {
+"キミノナワ": 0
+}
+},
+"sg_ymkiminona_5": {
+"join": {
+"キミノナワ": 0
+}
+},
+"sx_ymkiminona_2": {
+"join": {
+"キミノナワ": 0
+}
+},
+"sq_ymshiranai": {
+"join": {
+"キミノナワ": 0
+}
+},
+"sg_ymnaniyomu_3": {
+"acc": {
+"イッショニ": 0,
+"ミル": 1
+},
+"iq": true
+},
+"sg_ymnaniyomu_4": {
+"acc": {
+"イッショニ": 0,
+"ミル": 1
+},
+"iq": true
+},
+"sg_irete_3": {
+"join": {
+"ヤッテモイイ": 1
+},
+"acc": {
+"イッショニ": 0
+},
+"iq": true
+},
+"sg_ymhanashikake_3": {
+"join": {
+"ヤッテモイイ": 1
+},
+"acc": {
+"イッショニ": 0
+},
+"iq": true
+},
+"sg_ymkaritai_3": {
+"join": {
+"ヨミオワッタラ": 4
+},
+"acc": {
+"カスネ": 0
+}
+},
+"sg_ymkaritai_5": {
+"join": {
+"ヨミオワッタラ": 4
+},
+"acc": {
+"カスネ": 0
+}
+}
+}

@@ -44,6 +44,30 @@ def reshape(aps, spec, key):
         while acc != t: grp.append(moras[i]); acc += moras[i]["text"]; i += 1
         out.append({"moras": grp, "accent": a, "pause_mora": ends.get(i), "is_interrogative": t.endswith("?")})
     return out
+# かんたんな しじ（2026-10-23）：{"join": {"キミノナワ": 0}} … その ことばが まとまる ように 句を つなげて アクセントを きめる（0＝平板）
+#   {"acc": {"ミル": 1}} … その ことばで はじまる 句の アクセント（0＝平板）。{"q": true} … さいごの 句を 平板の しつもんに
+import re as _re
+def direct(aps, D):
+    st = lambda ap: _re.sub(r"[、。？！?!,.…「」\s'ー]", "", "".join(m["text"] for m in ap["moras"]))
+    for T, a in D.get("join", {}).items():
+        T = T.replace("ー", "")
+        for i in range(len(aps)):
+            acc = ""
+            for j in range(i, len(aps)):
+                acc += st(aps[j])
+                if acc.startswith(T):
+                    mor = [m for ap in aps[i:j + 1] for m in ap["moras"]]
+                    aps = aps[:i] + [{"moras": mor, "accent": a or len(mor), "pause_mora": aps[j].get("pause_mora"), "is_interrogative": aps[j].get("is_interrogative", False)}] + aps[j + 1:]
+                    break
+                if not T.startswith(acc): break
+            else: continue
+            if acc.startswith(T): break
+    for T, a in D.get("acc", {}).items():
+        for ap in aps:
+            if st(ap).startswith(T.replace("ー", "")): ap["accent"] = a or len(ap["moras"])
+    if D.get("iq"): aps[-1]["is_interrogative"] = True
+    if D.get("q"): aps[-1]["accent"] = len(aps[-1]["moras"]); aps[-1]["is_interrogative"] = True
+    return aps
 def room_ir(sr, sec=.35):
     r = np.random.default_rng(1); n = int(sr * sec); t = np.arange(n) / sr
     ir = r.standard_normal(n) * np.exp(-t / .07)
@@ -73,7 +97,8 @@ for l in lines:
     t0 = time.time()
     try:
         q = json.loads(call("POST", "/audio_query?" + urllib.parse.urlencode({"text": text, "speaker": sid})))
-        if ACC.get(l["key"]) == "Q":  # はい／いいえの しつもん：さいごの 句を 平板に して、しりあがりに（2026-10-21）
+        if isinstance(ACC.get(l["key"]), dict): q["accent_phrases"] = direct(q["accent_phrases"], ACC[l["key"]])
+        elif ACC.get(l["key"]) == "Q":  # はい／いいえの しつもん：さいごの 句を 平板に して、しりあがりに（2026-10-21）
             ap = q["accent_phrases"][-1]; ap["accent"] = len(ap["moras"]); ap["is_interrogative"] = True
         elif l["key"] in ACC: q["accent_phrases"] = reshape(q["accent_phrases"], ACC[l["key"]], l["key"])
         q["speedScale"] = c.get("speed", 1.0); q["intonationScale"] = c.get("into", q.get("intonationScale", 1.0))
