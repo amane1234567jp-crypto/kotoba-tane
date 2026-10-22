@@ -3,7 +3,7 @@
    a3・c2 マスは「あだなじゃんけん」：グー・チョキ・パーを タッチ → かったら あいてに あだなを つけて いう／まけたら つけられた あだなに こたえる。
    ライバルは がお（場面には ださない）。とおりかかる ともだちは くま・ちゅう など。ママは こたえる 子の ママ。 */
 const S12L = ["kaerimichi"];
-const S12_READY = false; /* 声が そろうまで false */
+const S12_READY = true; /* 声が そろうまで false */
 Object.assign(RIVAL_OF, { kaerimichi: "gao" });
 STAGES.push({ id: "kaerimichi", name: "かえりみち なかま", icon: "🎒", ready: S12_READY });
 const ACT_ASK12 = ["kniyadatta", "knurayamashii"]; // あいての きもちの 場面：うごくのは あいて
