@@ -62,6 +62,11 @@ def direct(aps, D):
                 if not T.startswith(acc): break
             else: continue
             if acc.startswith(T): break
+    for T, n, a1, a2 in D.get("split", []):  # ["イッショニミル", 5, 0, 1] … 5モーラめの あとで 句を わける（0＝平板）
+        for i, ap in enumerate(aps):
+            if st(ap).startswith(T):
+                m = ap["moras"]; p1 = {"moras": m[:n], "accent": a1 or n, "pause_mora": None, "is_interrogative": False}
+                p2 = {**ap, "moras": m[n:], "accent": a2 or len(m) - n}; aps = aps[:i] + [p1, p2] + aps[i + 1:]; break
     for T, a in D.get("acc", {}).items():
         for ap in aps:
             if st(ap).startswith(T.replace("ー", "")): ap["accent"] = a or len(ap["moras"])

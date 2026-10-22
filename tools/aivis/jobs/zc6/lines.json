@@ -1,0 +1,952 @@
+[
+{
+"key": "sq_knsasou",
+"who": "tora",
+"text": "ねえ、あだなじゃんけん しよう！"
+},
+{
+"key": "sr_knsasou",
+"who": "tora",
+"text": "よーし！ じゃんけん ぽん！"
+},
+{
+"key": "sg_knsasou_0",
+"who": "gao",
+"text": "いいよ"
+},
+{
+"key": "sg_knsasou_1",
+"who": "gao",
+"text": "いいよ、やろう"
+},
+{
+"key": "sg_knsasou_2",
+"who": "gao",
+"text": "いいよ、いっしょに やろう"
+},
+{
+"key": "sx_knsasou_2",
+"who": "gao",
+"text": "いいよ、いっしょを やろう"
+},
+{
+"key": "sg_knsasou_3",
+"who": "gao",
+"text": "いいよ、やろう！ まけないよ"
+},
+{
+"key": "sg_knsasou_4",
+"who": "gao",
+"text": "いいよ、やろう！ まけた ひとに あだなを つけるんだよね"
+},
+{
+"key": "sg_knsasou_5",
+"who": "gao",
+"text": "いいよ、やろう！ まけた ひとに、たべものの あだなを つけようね。まけないよ"
+},
+{
+"key": "sq_kntsukerareta",
+"who": "kuma",
+"text": "かった！ きょうから きみは ゆでたけのこ！"
+},
+{
+"key": "sr_kntsukerareta",
+"who": "kuma",
+"text": "いいよ、もう いっかい！ じゃんけん ぽん！"
+},
+{
+"key": "sg_kntsukerareta_0",
+"who": "gao",
+"text": "もう いっかい"
+},
+{
+"key": "sg_kntsukerareta_1",
+"who": "gao",
+"text": "いいよ。もう いっかい！"
+},
+{
+"key": "sg_kntsukerareta_2",
+"who": "gao",
+"text": "ゆでたけのこ？ おもしろい"
+},
+{
+"key": "sx_kntsukerareta_2",
+"who": "gao",
+"text": "ゆでたけのこを？ おもしろい"
+},
+{
+"key": "sg_kntsukerareta_3",
+"who": "gao",
+"text": "ゆでたけのこ？ いいよ。もう いっかい！"
+},
+{
+"key": "sg_kntsukerareta_4",
+"who": "gao",
+"text": "えー、ゆでたけのこ？ おもしろい！ つぎは まけないぞ"
+},
+{
+"key": "sg_kntsukerareta_5",
+"who": "gao",
+"text": "えー、ゆでたけのこ？ おもしろい！ もう いっかい やろう。つぎは まけないぞ"
+},
+{
+"key": "sq_knadana",
+"who": "kuma",
+"text": "まけたー。ぼくの あだなは なに？"
+},
+{
+"key": "sr_knadana",
+"who": "kuma",
+"text": "やきおまんじゅう？ あはは、いいね！"
+},
+{
+"key": "sg_knadana_0",
+"who": "gao",
+"text": "やきおまんじゅう"
+},
+{
+"key": "sg_knadana_1",
+"who": "gao",
+"text": "くまくんは やきおまんじゅう！"
+},
+{
+"key": "sg_knadana_2",
+"who": "gao",
+"text": "きょうから やきおまんじゅう！"
+},
+{
+"key": "sx_knadana_2",
+"who": "gao",
+"text": "きょうからを やきおまんじゅう！"
+},
+{
+"key": "sg_knadana_3",
+"who": "gao",
+"text": "きょうから くまくんは やきおまんじゅう！"
+},
+{
+"key": "sg_knadana_4",
+"who": "gao",
+"text": "やった、かった！ きょうから くまくんは やきおまんじゅう！"
+},
+{
+"key": "sg_knadana_5",
+"who": "gao",
+"text": "やった、かった！ きょうから くまくんは やきおまんじゅうだよ。ほかほかで おいしそう！"
+},
+{
+"key": "sq_knoshieru",
+"who": "panna",
+"text": "ねえ、あだなじゃんけんって なあに？"
+},
+{
+"key": "sr_knoshieru",
+"who": "panna",
+"text": "おもしろそう！ わたしも やりたい"
+},
+{
+"key": "sg_knoshieru_0",
+"who": "gao",
+"text": "じゃんけん だよ"
+},
+{
+"key": "sg_knoshieru_1",
+"who": "gao",
+"text": "まけたら あだなが つくよ"
+},
+{
+"key": "sg_knoshieru_2",
+"who": "gao",
+"text": "まけた ひとに あだなを つけるんだよ"
+},
+{
+"key": "sx_knoshieru_2",
+"who": "gao",
+"text": "まけた ひとを あだなを つけるんだよ"
+},
+{
+"key": "sg_knoshieru_3",
+"who": "gao",
+"text": "じゃんけんを して、まけた ひとに あだなを つけるんだよ"
+},
+{
+"key": "sg_knoshieru_4",
+"who": "gao",
+"text": "じゃんけんを して、まけた ひとに、たべものの あだなを つけるんだよ"
+},
+{
+"key": "sg_knoshieru_5",
+"who": "gao",
+"text": "じゃんけんを して、まけた ひとに、たべものの あだなを つけるんだよ。やきおまんじゅう とか、ゆでたけのこ とか"
+},
+{
+"key": "sq_knwaruguchi",
+"who": "tora",
+"text": "くまくんが まけたから、あだなは「のろま」！"
+},
+{
+"key": "sr_knwaruguchi",
+"who": "tora",
+"text": "そうだね、ごめん。じゃあ、あげちくわ！"
+},
+{
+"key": "sg_knwaruguchi_0",
+"who": "gao",
+"text": "だめだよ"
+},
+{
+"key": "sg_knwaruguchi_1",
+"who": "gao",
+"text": "わるぐちは だめだよ"
+},
+{
+"key": "sg_knwaruguchi_2",
+"who": "gao",
+"text": "たべものの なまえに しよう"
+},
+{
+"key": "sx_knwaruguchi_2",
+"who": "gao",
+"text": "たべものの なまえが しよう"
+},
+{
+"key": "sg_knwaruguchi_3",
+"who": "gao",
+"text": "わるぐちは だめだよ。たべものの なまえに しよう"
+},
+{
+"key": "sg_knwaruguchi_4",
+"who": "gao",
+"text": "のろまは わるぐちだから だめだよ。たべものの なまえに しよう"
+},
+{
+"key": "sg_knwaruguchi_5",
+"who": "gao",
+"text": "わるぐちは、くまくんが かなしく なるから だめだよ。たべものの なまえに しよう。あげちくわは どう？"
+},
+{
+"key": "sq_kniyadatta",
+"who": "mii",
+"text": "……その あだな、ちょっと いやだな"
+},
+{
+"key": "sr_kniyadatta",
+"who": "mii",
+"text": "ありがとう。ひやおにぎりなら いいよ"
+},
+{
+"key": "sg_kniyadatta_0",
+"who": "gao",
+"text": "ごめんね"
+},
+{
+"key": "sg_kniyadatta_1",
+"who": "gao",
+"text": "いやだった？ ごめんね"
+},
+{
+"key": "sg_kniyadatta_2",
+"who": "gao",
+"text": "ごめんね。もう いわないね"
+},
+{
+"key": "sx_kniyadatta_2",
+"who": "gao",
+"text": "ごめんね。もう いわないを"
+},
+{
+"key": "sg_kniyadatta_3",
+"who": "gao",
+"text": "いやだった？ ごめんね。もう いわないね"
+},
+{
+"key": "sg_kniyadatta_4",
+"who": "gao",
+"text": "いやだった？ ごめんね。こげおにぎりは、もう いわないね"
+},
+{
+"key": "sg_kniyadatta_5",
+"who": "gao",
+"text": "いやだった？ ごめんね。こげおにぎりは、もう いわないね。どんな あだなが いい？"
+},
+{
+"key": "sq_kngakkou",
+"who": "tora",
+"text": "あっ、ゆでたけのこ！ おはよう！"
+},
+{
+"key": "sr_kngakkou",
+"who": "tora",
+"text": "そうだった！ おはよう！"
+},
+{
+"key": "sg_kngakkou_0",
+"who": "gao",
+"text": "おはよう"
+},
+{
+"key": "sg_kngakkou_1",
+"who": "gao",
+"text": "おはよう、とらおくん"
+},
+{
+"key": "sg_kngakkou_2",
+"who": "gao",
+"text": "がっこうでは なまえで よぼう"
+},
+{
+"key": "sx_kngakkou_2",
+"who": "gao",
+"text": "がっこうでは なまえを よぼうに"
+},
+{
+"key": "sg_kngakkou_3",
+"who": "gao",
+"text": "おはよう。がっこうでは なまえで よぼうね"
+},
+{
+"key": "sg_kngakkou_4",
+"who": "gao",
+"text": "おはよう、とらおくん。もう がっこうだから、なまえで よぶね"
+},
+{
+"key": "sg_kngakkou_5",
+"who": "gao",
+"text": "おはよう、とらおくん。あだなは かえりみちの あそびだよ。もう がっこうだから、なまえで よぼうね"
+},
+{
+"key": "sq_knmukae",
+"who": "mama",
+"text": "おかえり。このまま こうえんに よって いこうか"
+},
+{
+"key": "sr_knmukae",
+"who": "mama",
+"text": "そうよ。ママと いっしょなら だいじょうぶ"
+},
+{
+"key": "sq_knmukae_pyonmama",
+"who": "pyonmama",
+"text": "おかえり。このまま こうえんに よって いこうか"
+},
+{
+"key": "sr_knmukae_pyonmama",
+"who": "pyonmama",
+"text": "そうよ。ママと いっしょなら だいじょうぶ"
+},
+{
+"key": "sq_knmukae_gaomama",
+"who": "gaomama",
+"text": "おかえり。このまま こうえんに よって いこうか"
+},
+{
+"key": "sr_knmukae_gaomama",
+"who": "gaomama",
+"text": "そうよ。ママと いっしょなら だいじょうぶ"
+},
+{
+"key": "sq_knmukae_miimama",
+"who": "miimama",
+"text": "おかえり。このまま こうえんに よって いこうか"
+},
+{
+"key": "sr_knmukae_miimama",
+"who": "miimama",
+"text": "そうよ。ママと いっしょなら だいじょうぶ"
+},
+{
+"key": "sq_knmukae_chumama",
+"who": "chumama",
+"text": "おかえり。このまま こうえんに よって いこうか"
+},
+{
+"key": "sr_knmukae_chumama",
+"who": "chumama",
+"text": "そうよ。ママと いっしょなら だいじょうぶ"
+},
+{
+"key": "sg_knmukae_0",
+"who": "gao",
+"text": "うん"
+},
+{
+"key": "sg_knmukae_1",
+"who": "gao",
+"text": "うん、いく"
+},
+{
+"key": "sg_knmukae_2",
+"who": "gao",
+"text": "うん、こうえんに いきたい"
+},
+{
+"key": "sx_knmukae_2",
+"who": "gao",
+"text": "うん、こうえんを いきたい"
+},
+{
+"key": "sg_knmukae_3",
+"who": "gao",
+"text": "うん！ ママと いっしょなら いいんだよね"
+},
+{
+"key": "sg_knmukae_4",
+"who": "gao",
+"text": "うん、いく！ ママと いっしょなら、こうえんに よっても いいんだよね"
+},
+{
+"key": "sg_knmukae_5",
+"who": "gao",
+"text": "やった！ ママと いっしょなら、いちど いえに かえったのと おなじだから、いいんだよね"
+},
+{
+"key": "sq_kndameda",
+"who": "kuma",
+"text": "あっ！ よりみちは ダメなんだよ！"
+},
+{
+"key": "sr_kndameda",
+"who": "kuma",
+"text": "そっか、しらなかった！"
+},
+{
+"key": "sg_kndameda_0",
+"who": "gao",
+"text": "ママと いっしょだよ"
+},
+{
+"key": "sg_kndameda_1",
+"who": "gao",
+"text": "ママと いっしょだから いいんだよ"
+},
+{
+"key": "sg_kndameda_2",
+"who": "gao",
+"text": "ママと いっしょなら いいんだよ"
+},
+{
+"key": "sx_kndameda_2",
+"who": "gao",
+"text": "ママを いっしょなら いいんだよ"
+},
+{
+"key": "sg_kndameda_3",
+"who": "gao",
+"text": "ママと いっしょだから、だいじょうぶなんだよ"
+},
+{
+"key": "sg_kndameda_4",
+"who": "gao",
+"text": "ママと いっしょだから、だいじょうぶなんだよ。いちど いえに かえったのと おなじなんだって"
+},
+{
+"key": "sg_kndameda_5",
+"who": "gao",
+"text": "ママと いっしょだから、だいじょうぶなんだよ。ママと いっしょなら、いちど いえに かえったのと おなじなんだって"
+},
+{
+"key": "sq_knurayamashii",
+"who": "chu",
+"text": "いいなあ。ぼくも あそびたい"
+},
+{
+"key": "sr_knurayamashii",
+"who": "chu",
+"text": "うん！ ママに きいて みる"
+},
+{
+"key": "sg_knurayamashii_0",
+"who": "gao",
+"text": "あとで おいでよ"
+},
+{
+"key": "sg_knurayamashii_1",
+"who": "gao",
+"text": "いえに かえってから おいでよ"
+},
+{
+"key": "sg_knurayamashii_2",
+"who": "gao",
+"text": "いちど いえに かえってから おいでよ"
+},
+{
+"key": "sx_knurayamashii_2",
+"who": "gao",
+"text": "いちど いえを かえってから おいでよ"
+},
+{
+"key": "sg_knurayamashii_3",
+"who": "gao",
+"text": "いえに かえってから、おうちの ひとと おいでよ"
+},
+{
+"key": "sg_knurayamashii_4",
+"who": "gao",
+"text": "いちど いえに かえってから、おうちの ひとと いっしょに おいでよ"
+},
+{
+"key": "sg_knurayamashii_5",
+"who": "gao",
+"text": "ちゅうくんも、いちど いえに かえってから、おうちの ひとと いっしょに おいでよ。まってるね"
+},
+{
+"key": "sq_knsasoi",
+"who": "tora",
+"text": "ねえ、こうえん よって いこうぜ"
+},
+{
+"key": "sr_knsasoi",
+"who": "tora",
+"text": "そうだね。じゃあ、あとで こうえんで！"
+},
+{
+"key": "sg_knsasoi_0",
+"who": "gao",
+"text": "だめだよ"
+},
+{
+"key": "sg_knsasoi_1",
+"who": "gao",
+"text": "よりみちは だめだよ"
+},
+{
+"key": "sg_knsasoi_2",
+"who": "gao",
+"text": "いえに かえってから あそぼう"
+},
+{
+"key": "sx_knsasoi_2",
+"who": "gao",
+"text": "いえに かえってからを あそぼう"
+},
+{
+"key": "sg_knsasoi_3",
+"who": "gao",
+"text": "よりみちは だめだよ。いえに かえってから あそぼう"
+},
+{
+"key": "sg_knsasoi_4",
+"who": "gao",
+"text": "よりみちは だめだよ。いちど いえに かえってから、こうえんで あそぼう"
+},
+{
+"key": "sg_knsasoi_5",
+"who": "gao",
+"text": "よりみちは、がっこうの きまりで だめだよ。いちど いえに かえってから、おうちの ひとに いって あそぼう"
+},
+{
+"key": "jka_kuma_pon",
+"who": "kuma",
+"text": "じゃんけん ぽん！"
+},
+{
+"key": "jka_kuma_ask",
+"who": "kuma",
+"text": "まけたー。ぼくの あだなは なに？"
+},
+{
+"key": "jka_kuma_ok",
+"who": "kuma",
+"text": "あはは、おもしろい あだな！"
+},
+{
+"key": "jka_kuma_next",
+"who": "kuma",
+"text": "つぎも まけないよ！"
+},
+{
+"key": "jka_kuma_l_yaki_manju",
+"who": "kuma",
+"text": "かった！ きょうから きみは やきおまんじゅう！"
+},
+{
+"key": "jka_kuma_l_yaki_take",
+"who": "kuma",
+"text": "かった！ きょうから きみは やきたけのこ！"
+},
+{
+"key": "jka_kuma_l_yaki_onigiri",
+"who": "kuma",
+"text": "かった！ きょうから きみは やきおにぎり！"
+},
+{
+"key": "jka_kuma_l_yaki_chikuwa",
+"who": "kuma",
+"text": "かった！ きょうから きみは やきちくわ！"
+},
+{
+"key": "jka_kuma_l_yaki_gyoza",
+"who": "kuma",
+"text": "かった！ きょうから きみは やきぎょうざ！"
+},
+{
+"key": "jka_kuma_l_yaki_daikon",
+"who": "kuma",
+"text": "かった！ きょうから きみは やきだいこん！"
+},
+{
+"key": "jka_kuma_l_yude_manju",
+"who": "kuma",
+"text": "かった！ きょうから きみは ゆでおまんじゅう！"
+},
+{
+"key": "jka_kuma_l_yude_take",
+"who": "kuma",
+"text": "かった！ きょうから きみは ゆでたけのこ！"
+},
+{
+"key": "jka_kuma_l_yude_onigiri",
+"who": "kuma",
+"text": "かった！ きょうから きみは ゆでおにぎり！"
+},
+{
+"key": "jka_kuma_l_yude_chikuwa",
+"who": "kuma",
+"text": "かった！ きょうから きみは ゆでちくわ！"
+},
+{
+"key": "jka_kuma_l_yude_gyoza",
+"who": "kuma",
+"text": "かった！ きょうから きみは ゆでぎょうざ！"
+},
+{
+"key": "jka_kuma_l_yude_daikon",
+"who": "kuma",
+"text": "かった！ きょうから きみは ゆでだいこん！"
+},
+{
+"key": "jka_kuma_l_age_manju",
+"who": "kuma",
+"text": "かった！ きょうから きみは あげおまんじゅう！"
+},
+{
+"key": "jka_kuma_l_age_take",
+"who": "kuma",
+"text": "かった！ きょうから きみは あげたけのこ！"
+},
+{
+"key": "jka_kuma_l_age_onigiri",
+"who": "kuma",
+"text": "かった！ きょうから きみは あげおにぎり！"
+},
+{
+"key": "jka_kuma_l_age_chikuwa",
+"who": "kuma",
+"text": "かった！ きょうから きみは あげちくわ！"
+},
+{
+"key": "jka_kuma_l_age_gyoza",
+"who": "kuma",
+"text": "かった！ きょうから きみは あげぎょうざ！"
+},
+{
+"key": "jka_kuma_l_age_daikon",
+"who": "kuma",
+"text": "かった！ きょうから きみは あげだいこん！"
+},
+{
+"key": "jka_kuma_l_mushi_manju",
+"who": "kuma",
+"text": "かった！ きょうから きみは むしおまんじゅう！"
+},
+{
+"key": "jka_kuma_l_mushi_take",
+"who": "kuma",
+"text": "かった！ きょうから きみは むしたけのこ！"
+},
+{
+"key": "jka_kuma_l_mushi_onigiri",
+"who": "kuma",
+"text": "かった！ きょうから きみは むしおにぎり！"
+},
+{
+"key": "jka_kuma_l_mushi_chikuwa",
+"who": "kuma",
+"text": "かった！ きょうから きみは むしちくわ！"
+},
+{
+"key": "jka_kuma_l_mushi_gyoza",
+"who": "kuma",
+"text": "かった！ きょうから きみは むしぎょうざ！"
+},
+{
+"key": "jka_kuma_l_mushi_daikon",
+"who": "kuma",
+"text": "かった！ きょうから きみは むしだいこん！"
+},
+{
+"key": "jka_kuma_l_hiya_manju",
+"who": "kuma",
+"text": "かった！ きょうから きみは ひやおまんじゅう！"
+},
+{
+"key": "jka_kuma_l_hiya_take",
+"who": "kuma",
+"text": "かった！ きょうから きみは ひやたけのこ！"
+},
+{
+"key": "jka_kuma_l_hiya_onigiri",
+"who": "kuma",
+"text": "かった！ きょうから きみは ひやおにぎり！"
+},
+{
+"key": "jka_kuma_l_hiya_chikuwa",
+"who": "kuma",
+"text": "かった！ きょうから きみは ひやちくわ！"
+},
+{
+"key": "jka_kuma_l_hiya_gyoza",
+"who": "kuma",
+"text": "かった！ きょうから きみは ひやぎょうざ！"
+},
+{
+"key": "jka_kuma_l_hiya_daikon",
+"who": "kuma",
+"text": "かった！ きょうから きみは ひやだいこん！"
+},
+{
+"key": "jka_kuma_l_koge_manju",
+"who": "kuma",
+"text": "かった！ きょうから きみは こげおまんじゅう！"
+},
+{
+"key": "jka_kuma_l_koge_take",
+"who": "kuma",
+"text": "かった！ きょうから きみは こげたけのこ！"
+},
+{
+"key": "jka_kuma_l_koge_onigiri",
+"who": "kuma",
+"text": "かった！ きょうから きみは こげおにぎり！"
+},
+{
+"key": "jka_kuma_l_koge_chikuwa",
+"who": "kuma",
+"text": "かった！ きょうから きみは こげちくわ！"
+},
+{
+"key": "jka_kuma_l_koge_gyoza",
+"who": "kuma",
+"text": "かった！ きょうから きみは こげぎょうざ！"
+},
+{
+"key": "jka_kuma_l_koge_daikon",
+"who": "kuma",
+"text": "かった！ きょうから きみは こげだいこん！"
+},
+{
+"key": "jka_tora_pon",
+"who": "tora",
+"text": "じゃんけん ぽん！"
+},
+{
+"key": "jka_tora_ask",
+"who": "tora",
+"text": "まけたー。ぼくの あだなは なに？"
+},
+{
+"key": "jka_tora_ok",
+"who": "tora",
+"text": "あはは、おもしろい あだな！"
+},
+{
+"key": "jka_tora_next",
+"who": "tora",
+"text": "つぎも まけないよ！"
+},
+{
+"key": "jka_tora_l_yaki_manju",
+"who": "tora",
+"text": "かった！ きょうから きみは やきおまんじゅう！"
+},
+{
+"key": "jka_tora_l_yaki_take",
+"who": "tora",
+"text": "かった！ きょうから きみは やきたけのこ！"
+},
+{
+"key": "jka_tora_l_yaki_onigiri",
+"who": "tora",
+"text": "かった！ きょうから きみは やきおにぎり！"
+},
+{
+"key": "jka_tora_l_yaki_chikuwa",
+"who": "tora",
+"text": "かった！ きょうから きみは やきちくわ！"
+},
+{
+"key": "jka_tora_l_yaki_gyoza",
+"who": "tora",
+"text": "かった！ きょうから きみは やきぎょうざ！"
+},
+{
+"key": "jka_tora_l_yaki_daikon",
+"who": "tora",
+"text": "かった！ きょうから きみは やきだいこん！"
+},
+{
+"key": "jka_tora_l_yude_manju",
+"who": "tora",
+"text": "かった！ きょうから きみは ゆでおまんじゅう！"
+},
+{
+"key": "jka_tora_l_yude_take",
+"who": "tora",
+"text": "かった！ きょうから きみは ゆでたけのこ！"
+},
+{
+"key": "jka_tora_l_yude_onigiri",
+"who": "tora",
+"text": "かった！ きょうから きみは ゆでおにぎり！"
+},
+{
+"key": "jka_tora_l_yude_chikuwa",
+"who": "tora",
+"text": "かった！ きょうから きみは ゆでちくわ！"
+},
+{
+"key": "jka_tora_l_yude_gyoza",
+"who": "tora",
+"text": "かった！ きょうから きみは ゆでぎょうざ！"
+},
+{
+"key": "jka_tora_l_yude_daikon",
+"who": "tora",
+"text": "かった！ きょうから きみは ゆでだいこん！"
+},
+{
+"key": "jka_tora_l_age_manju",
+"who": "tora",
+"text": "かった！ きょうから きみは あげおまんじゅう！"
+},
+{
+"key": "jka_tora_l_age_take",
+"who": "tora",
+"text": "かった！ きょうから きみは あげたけのこ！"
+},
+{
+"key": "jka_tora_l_age_onigiri",
+"who": "tora",
+"text": "かった！ きょうから きみは あげおにぎり！"
+},
+{
+"key": "jka_tora_l_age_chikuwa",
+"who": "tora",
+"text": "かった！ きょうから きみは あげちくわ！"
+},
+{
+"key": "jka_tora_l_age_gyoza",
+"who": "tora",
+"text": "かった！ きょうから きみは あげぎょうざ！"
+},
+{
+"key": "jka_tora_l_age_daikon",
+"who": "tora",
+"text": "かった！ きょうから きみは あげだいこん！"
+},
+{
+"key": "jka_tora_l_mushi_manju",
+"who": "tora",
+"text": "かった！ きょうから きみは むしおまんじゅう！"
+},
+{
+"key": "jka_tora_l_mushi_take",
+"who": "tora",
+"text": "かった！ きょうから きみは むしたけのこ！"
+},
+{
+"key": "jka_tora_l_mushi_onigiri",
+"who": "tora",
+"text": "かった！ きょうから きみは むしおにぎり！"
+},
+{
+"key": "jka_tora_l_mushi_chikuwa",
+"who": "tora",
+"text": "かった！ きょうから きみは むしちくわ！"
+},
+{
+"key": "jka_tora_l_mushi_gyoza",
+"who": "tora",
+"text": "かった！ きょうから きみは むしぎょうざ！"
+},
+{
+"key": "jka_tora_l_mushi_daikon",
+"who": "tora",
+"text": "かった！ きょうから きみは むしだいこん！"
+},
+{
+"key": "jka_tora_l_hiya_manju",
+"who": "tora",
+"text": "かった！ きょうから きみは ひやおまんじゅう！"
+},
+{
+"key": "jka_tora_l_hiya_take",
+"who": "tora",
+"text": "かった！ きょうから きみは ひやたけのこ！"
+},
+{
+"key": "jka_tora_l_hiya_onigiri",
+"who": "tora",
+"text": "かった！ きょうから きみは ひやおにぎり！"
+},
+{
+"key": "jka_tora_l_hiya_chikuwa",
+"who": "tora",
+"text": "かった！ きょうから きみは ひやちくわ！"
+},
+{
+"key": "jka_tora_l_hiya_gyoza",
+"who": "tora",
+"text": "かった！ きょうから きみは ひやぎょうざ！"
+},
+{
+"key": "jka_tora_l_hiya_daikon",
+"who": "tora",
+"text": "かった！ きょうから きみは ひやだいこん！"
+},
+{
+"key": "jka_tora_l_koge_manju",
+"who": "tora",
+"text": "かった！ きょうから きみは こげおまんじゅう！"
+},
+{
+"key": "jka_tora_l_koge_take",
+"who": "tora",
+"text": "かった！ きょうから きみは こげたけのこ！"
+},
+{
+"key": "jka_tora_l_koge_onigiri",
+"who": "tora",
+"text": "かった！ きょうから きみは こげおにぎり！"
+},
+{
+"key": "jka_tora_l_koge_chikuwa",
+"who": "tora",
+"text": "かった！ きょうから きみは こげちくわ！"
+},
+{
+"key": "jka_tora_l_koge_gyoza",
+"who": "tora",
+"text": "かった！ きょうから きみは こげぎょうざ！"
+},
+{
+"key": "jka_tora_l_koge_daikon",
+"who": "tora",
+"text": "かった！ きょうから きみは こげだいこん！"
+},
+{
+"key": "rs_kaerimichi",
+"who": "doshin",
+"text": "そうだった！ いえに かえってから あそぶね"
+},
+{
+"key": "sg_ymnaniyomu_3",
+"who": "kon",
+"text": "きょうりゅうの ほんだよ。いっしょに みる？"
+},
+{
+"key": "sg_ymnaniyomu_4",
+"who": "kon",
+"text": "きょうりゅうの ほんだよ。ティラノサウルスが かっこいいんだ。いっしょに みる？"
+}
+]
