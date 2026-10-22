@@ -1,0 +1,203 @@
+++ dirname tools/aivis/run.sh
++ cd tools/aivis
++ python3 survey.py /tmp/out
+openapi from https://api.aivis-project.com/v1/openapi.json
+SEARCH /v1/aivm-models/search ['keyword', 'tags', 'tiers', 'categories', 'voice_timbres', 'license_types', 'sort', 'page', 'limit']
+page 1 30 76
+page 2 30 76
+page 3 16 76
+page 4 0 76
+models 76
++ '[' -f cast.json ']'
++ bash synth.sh /tmp/out
++ sudo apt-get -qq update
++ sudo apt-get -qq install -y ffmpeg
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
++ pip install -q numpy
++ mkdir -p /home/runner/.local/share/AivisSpeech-Engine
++ sudo chown -R 1000:1000 /home/runner/.local/share/AivisSpeech-Engine
++ docker pull -q ghcr.io/aivis-project/aivisspeech-engine:cpu-latest
+ghcr.io/aivis-project/aivisspeech-engine:cpu-latest
++ docker run -d --name aivis -p 10101:10101 -v /home/runner/.local/share/AivisSpeech-Engine:/home/user/.local/share/AivisSpeech-Engine-Dev ghcr.io/aivis-project/aivisspeech-engine:cpu-latest
+a532330291e993f2b9b1b0d8852c993a91f732977bb04495ce48820d3a35933b
+++ seq 1 120
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
++ sleep 10
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
++ sleep 10
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
++ sleep 10
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
++ sleep 10
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
++ sleep 10
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
+"latest"+ break
++ echo
+
++ docker logs aivis
++ tail -20
+[2026/10/22 16:50:08.162] INFO:     Downloaded AIVMX file.
+[2026/10/22 16:50:08.208] INFO:     Installing AIVMX file ...
+[2026/10/22 16:50:08.264] INFO:     Installed AIVMX file to /home/user/.local/share/AivisSpeech-Engine-Dev/Models/a59cb814-0083-4369-8542-f51a29e72af7.aivmx.
+[2026/10/22 16:50:08.877] INFO:     Updated latest version information.
+[2026/10/22 16:50:09.163] INFO:     Installed models:
+[2026/10/22 16:50:09.163] INFO:     - コハク (22e8ed77-94fe-4ef2-871f-a86f94e9a579) (default)
+[2026/10/22 16:50:09.163] INFO:     - まお (a59cb814-0083-4369-8542-f51a29e72af7) (default)
+[2026/10/22 16:50:10.011] INFO:     Using CPU for inference.
+[2026/10/22 16:50:10.011] INFO:     Loading BERT model and tokenizer...
+[2026/10/22 16:50:33.068] INFO:     BERT model and tokenizer loaded. (23.06s)
+[2026/10/22 16:50:33.095] INFO:     Current user dictionary (CSV format):
+[2026/10/22 16:50:33.095] INFO:     - 担々麺,1348,1348,8609,名詞,固有名詞,一般,*,*,*,担々麺,タンタンメン,タンタンメン,3/6,*
+reading /home/user/.local/share/AivisSpeech-Engine-Dev/user.dict_csv-67ba5b13-5fee-489f-956a-4449f466951c.tmp ... 1
+emitting double-array: 100% |###########################################| 
+[2026/10/22 16:50:33.098] INFO:     User dictionary applied. (0.00s)
+[2026/10/22 16:50:33.805] INFO:     Started server process [1]
+[2026/10/22 16:50:33.805] INFO:     Waiting for application startup.
+[2026/10/22 16:50:33.805] INFO:     Application startup complete.
+[2026/10/22 16:50:33.806] INFO:     Uvicorn running on http://0.0.0.0:10101 (Press CTRL+C to quit)
+[2026/10/22 16:50:40.716] INFO:     172.17.0.1:42330 - "GET /version HTTP/1.1" 200 OK
+++ cat RUN
++ JOBS=jobs/zc6b
++ for j in $JOBS
++ j=jobs/zc6b
++ '[' jobs/zc6b = check ']'
++ '[' jobs/zc6b = listen ']'
++ '[' -f jobs/zc6b/lines.json ']'
++ python3 synth.py /tmp/out jobs/zc6b
+installed metan 1b2830f4-8cf1-4184-a0d9-3a1bace3a844
+installed meebaa baaae3c0-7b22-4605-8ba5-80c959b41a48
+installed kamejii 696c98a2-c0b7-4fe7-8cf2-c7e9b8a9bd82
+installed gao 2e1fdde8-d089-42d7-b64f-cf89952b1bdc
+installed chu 9f36ec0d-8dac-42dc-aff4-149c5f99faad
+installed doshin 47e53151-a378-46f3-abee-ce13aa07feb1
+installed pyon f5017410-fbb5-49e1-97cb-e785f42e15f5
+installed nobbo 71e72188-2726-4739-9aa9-39567396fb2a
+installed pyonmama f83c385c-829b-40c4-8c11-639027e61636
+installed gaojii 470a41e2-863f-4bf2-8a20-bf7cde0d8f7b
+installed miibaa 2ff1c526-27d4-4eeb-b069-4207ae5fe259
+installed doshinpapa e5bd2b5e-90a8-4fb3-a69f-2fbd2d3a8a43
+installed kon a670e6b8-0852-45b2-8704-1bc9862f2fe6
+installed mama 21d8d535-f206-462d-a3bb-05f8252dede7
+installed ookami b2bee8fc-3f65-4c99-9607-a1075a10066b
+installed ojisan 70a875a9-feae-41e6-a586-8cf9e47c6c0b
+installed omawari 3dabea2b-cc10-41da-955b-4618ce84e716
+installed tora e40d5b99-8cde-4442-a45b-0ebec9167506
+installed kuma 1f04a608-916c-4d9e-bf6e-b9da5c176f85
+installed onii 6d11c6c2-f4a4-4435-887e-23dd60f8b8dd
+installed pannamama 59f96896-64d2-4378-830a-4d5feb3d81aa
+installed gaomama 18972473-ca36-4e06-a33a-5cc14adba0c4
+installed miimama b1b8072f-809f-4c6d-9ba1-2ca94d9c3663
+installed chumama 9a7feb22-b6f3-4f79-92d9-26849e063fa1
+installed wanko 80fe2db4-5891-4550-a3f3-dff9a91c0946
+installed biba 3bef4d35-124e-4ddd-93d3-75f292732195
+installed piyoko 4f281e78-eba6-495a-8e50-5c322d02b5b1
+installed papa ed47c952-c253-405e-adba-1172399816a1
+installed gaonii 70ad7e84-6a10-48d6-8f9a-8dac4bba3c0b
+{'key': 'jka_kuma_l_yaki_manju', 'who': 'kuma', 'style': 'デフォルト', 'sec': 3.0, 'text': '勝った！今日から君は、焼きおまんじゅう！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヤキオマンジュウ![4]'}
+{'key': 'jka_kuma_l_yaki_take', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.7, 'text': '勝った！今日から君は、焼きたけのこ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヤキタケノコ![3]'}
+{'key': 'jka_kuma_l_yaki_onigiri', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.7, 'text': '勝った！今日から君は、焼きおにぎり！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヤキオニギリ![3]'}
+{'key': 'jka_kuma_l_yaki_chikuwa', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.6, 'text': '勝った！今日から君は、焼きちくわ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヤキチクワ![3]'}
+{'key': 'jka_kuma_l_yaki_gyoza', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.6, 'text': '勝った！今日から君は、焼き餃子！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヤキギョオザ![3]'}
+{'key': 'jka_kuma_l_yaki_daikon', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.6, 'text': '勝った！今日から君は、焼き大根！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヤキダイコン![3]'}
+{'key': 'jka_kuma_l_yude_manju', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.6, 'text': '勝った！今日から君は、茹でおまんじゅう！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ユデオマンジュウ![4]'}
+{'key': 'jka_kuma_l_yude_take', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.6, 'text': '勝った！今日から君は、茹でたけのこ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ユデタケノコ![3]'}
+{'key': 'jka_kuma_l_yude_onigiri', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.6, 'text': '勝った！今日から君は、茹でおにぎり！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ユデオニギリ![3]'}
+{'key': 'jka_kuma_l_yude_chikuwa', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.5, 'text': '勝った！今日から君は、茹でちくわ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ユデチクワ![3]'}
+{'key': 'jka_kuma_l_yude_gyoza', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.2, 'text': '勝った！今日から君は、茹で餃子！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ユデギョオザ![3]'}
+{'key': 'jka_kuma_l_yude_daikon', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.1, 'text': '勝った！今日から君は、茹で大根！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ユデダイコン![3]'}
+{'key': 'jka_kuma_l_age_manju', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.2, 'text': '勝った！今日から君は、揚げおまんじゅう！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / アゲオマンジュウ![4]'}
+{'key': 'jka_kuma_l_age_take', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.1, 'text': '勝った！今日から君は、揚げたけのこ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / アゲタケノコ![3]'}
+{'key': 'jka_kuma_l_age_onigiri', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.1, 'text': '勝った！今日から君は、揚げおにぎり！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / アゲオニギリ![3]'}
+{'key': 'jka_kuma_l_age_chikuwa', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.2, 'text': '勝った！今日から君は、揚げちくわ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / アゲチクワ![3]'}
+{'key': 'jka_kuma_l_age_gyoza', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.2, 'text': '勝った！今日から君は、揚げ餃子！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / アゲギョオザ![3]'}
+{'key': 'jka_kuma_l_age_daikon', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.1, 'text': '勝った！今日から君は、揚げ大根！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / アゲダイコン![3]'}
+{'key': 'jka_kuma_l_mushi_manju', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.2, 'text': '勝った！今日から君は、蒸しおまんじゅう！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ムシオマンジュウ![4]'}
+{'key': 'jka_kuma_l_mushi_take', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.2, 'text': '勝った！今日から君は、蒸したけのこ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ムシタケノコ![3]'}
+{'key': 'jka_kuma_l_mushi_onigiri', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.2, 'text': '勝った！今日から君は、蒸しおにぎり！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ムシオニギリ![3]'}
+{'key': 'jka_kuma_l_mushi_chikuwa', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.1, 'text': '勝った！今日から君は、蒸しちくわ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ムシチクワ![3]'}
+{'key': 'jka_kuma_l_mushi_gyoza', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.2, 'text': '勝った！今日から君は、蒸し餃子！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ムシギョオザ![3]'}
+{'key': 'jka_kuma_l_mushi_daikon', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.1, 'text': '勝った！今日から君は、蒸し大根！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ムシダイコン![3]'}
+{'key': 'jka_kuma_l_hiya_manju', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.2, 'text': '勝った！今日から君は、冷やおまんじゅう！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヒヤヤ[1] / オマンジュウ![4]'}
+{'key': 'jka_kuma_l_hiya_take', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.1, 'text': '勝った！今日から君は、冷やたけのこ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヒヤタケノコ![3]'}
+{'key': 'jka_kuma_l_hiya_onigiri', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.1, 'text': '勝った！今日から君は、冷やおにぎり！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヒヤオニギリ![3]'}
+{'key': 'jka_kuma_l_hiya_chikuwa', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.1, 'text': '勝った！今日から君は、冷やちくわ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヒヤチクワ![3]'}
+{'key': 'jka_kuma_l_hiya_gyoza', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.1, 'text': '勝った！今日から君は、冷や餃子！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヒヤギョオザ![3]'}
+{'key': 'jka_kuma_l_hiya_daikon', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.1, 'text': '勝った！今日から君は、冷や大根！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヒヤダイコン![3]'}
+{'key': 'jka_kuma_l_koge_manju', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.2, 'text': '勝った！今日から君は、焦げおまんじゅう！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / コゲオマンジュウ![4]'}
+{'key': 'jka_kuma_l_koge_take', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.2, 'text': '勝った！今日から君は、焦げたけのこ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / コゲタケノコ![3]'}
+{'key': 'jka_kuma_l_koge_onigiri', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.1, 'text': '勝った！今日から君は、焦げおにぎり！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / コゲオニギリ![3]'}
+{'key': 'jka_kuma_l_koge_chikuwa', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.1, 'text': '勝った！今日から君は、焦げちくわ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / コゲチクワ![3]'}
+{'key': 'jka_kuma_l_koge_gyoza', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.1, 'text': '勝った！今日から君は、焦げ餃子！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / コゲギョオザ![3]'}
+{'key': 'jka_kuma_l_koge_daikon', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.1, 'text': '勝った！今日から君は、焦げ大根！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / コゲダイコン![3]'}
+{'key': 'jka_tora_l_yaki_manju', 'who': 'tora', 'style': 'ノーマル', 'sec': 2.6, 'text': '勝った！今日から君は、焼きおまんじゅう！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヤキオマンジュウ![4]'}
+{'key': 'jka_tora_l_yaki_take', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.1, 'text': '勝った！今日から君は、焼きたけのこ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヤキタケノコ![3]'}
+{'key': 'jka_tora_l_yaki_onigiri', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.2, 'text': '勝った！今日から君は、焼きおにぎり！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヤキオニギリ![3]'}
+{'key': 'jka_tora_l_yaki_chikuwa', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.1, 'text': '勝った！今日から君は、焼きちくわ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヤキチクワ![3]'}
+{'key': 'jka_tora_l_yaki_gyoza', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.2, 'text': '勝った！今日から君は、焼き餃子！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヤキギョオザ![3]'}
+{'key': 'jka_tora_l_yaki_daikon', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.5, 'text': '勝った！今日から君は、焼き大根！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヤキダイコン![3]'}
+{'key': 'jka_tora_l_yude_manju', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.5, 'text': '勝った！今日から君は、茹でおまんじゅう！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ユデオマンジュウ![4]'}
+{'key': 'jka_tora_l_yude_take', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.5, 'text': '勝った！今日から君は、茹でたけのこ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ユデタケノコ![3]'}
+{'key': 'jka_tora_l_yude_onigiri', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.5, 'text': '勝った！今日から君は、茹でおにぎり！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ユデオニギリ![3]'}
+{'key': 'jka_tora_l_yude_chikuwa', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.5, 'text': '勝った！今日から君は、茹でちくわ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ユデチクワ![3]'}
+{'key': 'jka_tora_l_yude_gyoza', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.5, 'text': '勝った！今日から君は、茹で餃子！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ユデギョオザ![3]'}
+{'key': 'jka_tora_l_yude_daikon', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.6, 'text': '勝った！今日から君は、茹で大根！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ユデダイコン![3]'}
+{'key': 'jka_tora_l_age_manju', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.6, 'text': '勝った！今日から君は、揚げおまんじゅう！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / アゲオマンジュウ![4]'}
+{'key': 'jka_tora_l_age_take', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.6, 'text': '勝った！今日から君は、揚げたけのこ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / アゲタケノコ![3]'}
+{'key': 'jka_tora_l_age_onigiri', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.6, 'text': '勝った！今日から君は、揚げおにぎり！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / アゲオニギリ![3]'}
+{'key': 'jka_tora_l_age_chikuwa', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.2, 'text': '勝った！今日から君は、揚げちくわ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / アゲチクワ![3]'}
+{'key': 'jka_tora_l_age_gyoza', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.1, 'text': '勝った！今日から君は、揚げ餃子！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / アゲギョオザ![3]'}
+{'key': 'jka_tora_l_age_daikon', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.1, 'text': '勝った！今日から君は、揚げ大根！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / アゲダイコン![3]'}
+{'key': 'jka_tora_l_mushi_manju', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.1, 'text': '勝った！今日から君は、蒸しおまんじゅう！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ムシオマンジュウ![4]'}
+{'key': 'jka_tora_l_mushi_take', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.1, 'text': '勝った！今日から君は、蒸したけのこ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ムシタケノコ![3]'}
+{'key': 'jka_tora_l_mushi_onigiri', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.1, 'text': '勝った！今日から君は、蒸しおにぎり！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ムシオニギリ![3]'}
+{'key': 'jka_tora_l_mushi_chikuwa', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.1, 'text': '勝った！今日から君は、蒸しちくわ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ムシチクワ![3]'}
+{'key': 'jka_tora_l_mushi_gyoza', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.1, 'text': '勝った！今日から君は、蒸し餃子！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ムシギョオザ![3]'}
+{'key': 'jka_tora_l_mushi_daikon', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.1, 'text': '勝った！今日から君は、蒸し大根！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ムシダイコン![3]'}
+{'key': 'jka_tora_l_hiya_manju', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.2, 'text': '勝った！今日から君は、冷やおまんじゅう！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヒヤヤ[1] / オマンジュウ![4]'}
+{'key': 'jka_tora_l_hiya_take', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.2, 'text': '勝った！今日から君は、冷やたけのこ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヒヤタケノコ![3]'}
+{'key': 'jka_tora_l_hiya_onigiri', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.1, 'text': '勝った！今日から君は、冷やおにぎり！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヒヤオニギリ![3]'}
+{'key': 'jka_tora_l_hiya_chikuwa', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.1, 'text': '勝った！今日から君は、冷やちくわ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヒヤチクワ![3]'}
+{'key': 'jka_tora_l_hiya_gyoza', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.0, 'text': '勝った！今日から君は、冷や餃子！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヒヤギョオザ![3]'}
+{'key': 'jka_tora_l_hiya_daikon', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.1, 'text': '勝った！今日から君は、冷や大根！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / ヒヤダイコン![3]'}
+{'key': 'jka_tora_l_koge_manju', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.1, 'text': '勝った！今日から君は、焦げおまんじゅう！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / コゲオマンジュウ![4]'}
+{'key': 'jka_tora_l_koge_take', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.1, 'text': '勝った！今日から君は、焦げたけのこ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / コゲタケノコ![3]'}
+{'key': 'jka_tora_l_koge_onigiri', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.1, 'text': '勝った！今日から君は、焦げおにぎり！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / コゲオニギリ![3]'}
+{'key': 'jka_tora_l_koge_chikuwa', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.6, 'text': '勝った！今日から君は、焦げちくわ！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / コゲチクワ![3]'}
+{'key': 'jka_tora_l_koge_gyoza', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.6, 'text': '勝った！今日から君は、焦げ餃子！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / コゲギョオザ![3]'}
+{'key': 'jka_tora_l_koge_daikon', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.6, 'text': '勝った！今日から君は、焦げ大根！', 'acc': 'カッタ![1] / キョオカラ[1] / キミワ,[3] / コゲダイコン![3]'}
+{'key': 'sr_knadana', 'who': 'kuma', 'style': 'デフォルト', 'sec': 1.5, 'text': '焼きおまんじゅう？あはは、いいね！', 'acc': 'ヤキオマンジュウ?[4] / アハハ,[3] / イイネ![1]'}
+{'key': 'sg_knoshieru_5', 'who': 'gao', 'style': 'ノーマル', 'sec': 4.3, 'text': 'じゃんけんをして、負けた人に、食べ物のあだ名を付けるんだよ。焼きおまんじゅう、とか、ゆでたけのこ、とか', 'acc': 'ジャンケンオシテ,[1] / マケタ[3] / ヒトニ,[3] / タベモノノ[3] / アダナオ[4] / ツケルンダヨ.[2] / ヤキオマンジュウ,[4] / トカ,[1] / ユデタケノコ,[3] / トカ[2]'}
+{'key': 'sr_knwaruguchi', 'who': 'tora', 'style': 'ノーマル', 'sec': 1.2, 'text': 'そうだね、ごめん。じゃあ、揚げちくわ！', 'acc': 'ソオダネ,[4] / ゴメン.[3] / ジャア,[1] / アゲチクワ![3]'}
+{'key': 'sg_knadana_0', 'who': 'gao', 'style': 'ノーマル', 'sec': 0.7, 'text': '焼きおまんじゅう', 'acc': 'ヤキオマンジュウ[4]'}
+{'key': 'sg_knadana_1', 'who': 'gao', 'style': 'ノーマル', 'sec': 0.9, 'text': 'くまくんは、焼きおまんじゅう！', 'acc': 'クマクンワ,[1] / ヤキオマンジュウ![4]'}
+{'key': 'sg_knadana_2', 'who': 'gao', 'style': 'ノーマル', 'sec': 0.8, 'text': '今日から、焼きおまんじゅう！', 'acc': 'キョオカラ,[1] / ヤキオマンジュウ![4]'}
+{'key': 'sg_knadana_3', 'who': 'gao', 'style': 'ノーマル', 'sec': 1.0, 'text': '今日から、くまくんは、焼きおまんじゅう！', 'acc': 'キョオカラ,[1] / クマクンワ,[1] / ヤキオマンジュウ![4]'}
+{'key': 'sg_knadana_4', 'who': 'gao', 'style': 'ノーマル', 'sec': 1.2, 'text': 'やった、勝った！今日から、くまくんは、焼きおまんじゅう！', 'acc': 'ヤッタ,[3] / カッタ![1] / キョオカラ,[1] / クマクンワ,[1] / ヤキオマンジュウ![4]'}
+{'key': 'sg_knadana_5', 'who': 'gao', 'style': 'ノーマル', 'sec': 1.6, 'text': 'やった、勝った！今日から、くまくんは、焼きおまんじゅうだよ。ほかほかで美味しそう！', 'acc': 'ヤッタ,[3] / カッタ![1] / キョオカラ,[1] / クマクンワ,[1] / ヤキオマンジュウダヨ.[4] / ホカホカデ[1] / オイシソオ![4]'}
+{'key': 'sx_knadana_2', 'who': 'gao', 'style': 'ノーマル', 'sec': 0.9, 'text': '今日からを、焼きおまんじゅう！', 'acc': 'キョオカラオ,[1] / ヤキオマンジュウ![4]'}
+{'key': 'sq_knsasou', 'who': 'tora', 'style': 'ノーマル', 'sec': 0.9, 'text': 'ねえ、あだなじゃんけんしよう！', 'acc': 'ネエ,[1] / アダナジャンケンシヨオ![4]'}
+{'key': 'sq_knoshieru', 'who': 'panna', 'style': 'ノーマル', 'sec': 3.1, 'text': 'ねえ、あだなじゃんけんって、なあに？', 'acc': 'ネエ,[1] / アダナジャンケンッテ,[4] / ナアニ?[1]'}
+{'key': 'sg_knurayamashii_3', 'who': 'gao', 'style': 'ノーマル', 'sec': 1.1, 'text': '家に帰ってから、おうちの人と、おいでよ', 'acc': 'イエニ[2] / カエッテカラ,[1] / オウチノヒトト,[7] / オイデヨ[4]'}
+{'key': 'sg_knurayamashii_4', 'who': 'gao', 'style': 'ノーマル', 'sec': 1.2, 'text': '一度、家に帰ってから、おうちの人と一緒に、おいでよ', 'acc': 'イチド,[3] / イエニ[2] / カエッテカラ,[1] / オウチノヒトト[7] / イッショニ,[4] / オイデヨ[4]'}
+{'key': 'sg_knurayamashii_5', 'who': 'gao', 'style': 'ノーマル', 'sec': 1.6, 'text': 'ちゅうくんも、一度、家に帰ってから、おうちの人と一緒に、おいでよ。待ってるね', 'acc': 'チュウクンモ,[5] / イチド,[3] / イエニ[2] / カエッテカラ,[1] / オウチノヒトト[7] / イッショニ,[4] / オイデヨ.[4] / マッテルネ[1]'}
+{'key': 'sg_knsasoi_5', 'who': 'gao', 'style': 'ノーマル', 'sec': 1.7, 'text': '寄り道は、学校の決まりで駄目だよ。一度、家に帰ってから、おうちの人に言って遊ぼう', 'acc': 'ヨリミチワ,[5] / ガッコオノ[5] / キマリデ[4] / ダメダヨ.[2] / イチド,[3] / イエニ[2] / カエッテカラ,[1] / オウチノヒトニ[7] / イッテ[3] / アソボオ[4]'}
+{'key': 'sg_ymnaniyomu_3', 'who': 'kon', 'style': 'ノーマル', 'sec': 2.6, 'text': '恐竜の本だよ。一緒に見る？', 'acc': 'キョオリュウノホンダヨ.[6] / イッショニ[4] / ミル?[1]'}
+{'key': 'sg_ymnaniyomu_4', 'who': 'kon', 'style': 'ノーマル', 'sec': 1.7, 'text': '恐竜の本だよ。ティラノサウルスがかっこいいんだ。一緒に見る？', 'acc': 'キョオリュウノホンダヨ.[6] / ティラノサウルスガ[4] / カッコイインダ.[4] / イッショニ[4] / ミル?[1]'}
++ docker logs aivis
++ tail -40

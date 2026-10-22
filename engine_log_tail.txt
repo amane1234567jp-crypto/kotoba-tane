@@ -1,0 +1,40 @@
+[2026/10/22 16:57:23.635] INFO:     Text: 寄り道は、学校の決まりで駄目だよ。一度、家に帰ってから、おうちの人に言って遊ぼう
+[2026/10/22 16:57:23.635] INFO:              Speed: 0.95 (Input: 1.05)
+[2026/10/22 16:57:23.635] INFO:       Style Weight: 1.00 (Input: 1.00)
+[2026/10/22 16:57:23.635] INFO:     Tempo Dynamics: 0.20 (Input: 1.00)
+[2026/10/22 16:57:23.635] INFO:              Pitch: 1.00 (Input: 0.00)
+[2026/10/22 16:57:23.636] INFO:             Volume: 1.00
+[2026/10/22 16:57:23.636] INFO:        Pre-Silence: 0.05
+[2026/10/22 16:57:23.636] INFO:       Post-Silence: 0.10
+[2026/10/22 16:57:24.926] INFO:     Inference done. Elapsed time: 1.29 sec.
+[2026/10/22 16:57:24.928] INFO:     172.17.0.1:45944 - "POST /synthesis?speaker=2029042368 HTTP/1.1" 200 OK
+[2026/10/22 16:57:25.319] INFO:     172.17.0.1:45948 - "POST /audio_query?text=%E6%81%90%E7%AB%9C%E3%81%AE%E6%9C%AC%E3%81%A0%E3%82%88%E3%80%82%E4%B8%80%E7%B7%92%E3%81%AB%E8%A6%8B%E3%82%8B%EF%BC%9F&speaker=1325133120 HTTP/1.1" 200 OK
+[2026/10/22 16:57:25.495] INFO:     Loading 花音 (a670e6b8-0852-45b2-8704-1bc9862f2fe6) ...
+[2026/10/22 16:57:26.867] INFO:     花音 (a670e6b8-0852-45b2-8704-1bc9862f2fe6) loaded. (1.37s)
+[2026/10/22 16:57:26.868] INFO:     Model: 花音 / Version 1.0.0
+[2026/10/22 16:57:26.868] INFO:     Speaker: 花音 / Style: ノーマル
+[2026/10/22 16:57:26.868] INFO:     Running inference...
+[2026/10/22 16:57:26.868] INFO:     Text: 恐竜の本だよ。一緒に見る？
+[2026/10/22 16:57:26.868] INFO:              Speed: 0.95 (Input: 1.05)
+[2026/10/22 16:57:26.868] INFO:       Style Weight: 1.00 (Input: 1.00)
+[2026/10/22 16:57:26.868] INFO:     Tempo Dynamics: 0.20 (Input: 1.00)
+[2026/10/22 16:57:26.868] INFO:              Pitch: 1.00 (Input: 0.00)
+[2026/10/22 16:57:26.868] INFO:             Volume: 1.00
+[2026/10/22 16:57:26.868] INFO:        Pre-Silence: 0.05
+[2026/10/22 16:57:26.868] INFO:       Post-Silence: 0.10
+[2026/10/22 16:57:27.709] INFO:     Inference done. Elapsed time: 0.84 sec.
+[2026/10/22 16:57:27.711] INFO:     172.17.0.1:45962 - "POST /synthesis?speaker=1325133120 HTTP/1.1" 200 OK
+[2026/10/22 16:57:27.940] INFO:     172.17.0.1:45966 - "POST /audio_query?text=%E6%81%90%E7%AB%9C%E3%81%AE%E6%9C%AC%E3%81%A0%E3%82%88%E3%80%82%E3%83%86%E3%82%A3%E3%83%A9%E3%83%8E%E3%82%B5%E3%82%A6%E3%83%AB%E3%82%B9%E3%81%8C%E3%81%8B%E3%81%A3%E3%81%93%E3%81%84%E3%81%84%E3%82%93%E3%81%A0%E3%80%82%E4%B8%80%E7%B7%92%E3%81%AB%E8%A6%8B%E3%82%8B%EF%BC%9F&speaker=1325133120 HTTP/1.1" 200 OK
+[2026/10/22 16:57:27.942] INFO:     Model: 花音 / Version 1.0.0
+[2026/10/22 16:57:27.942] INFO:     Speaker: 花音 / Style: ノーマル
+[2026/10/22 16:57:27.942] INFO:     Running inference...
+[2026/10/22 16:57:27.942] INFO:     Text: 恐竜の本だよ。ティラノサウルスがかっこいいんだ。一緒に見る？
+[2026/10/22 16:57:27.942] INFO:              Speed: 0.95 (Input: 1.05)
+[2026/10/22 16:57:27.942] INFO:       Style Weight: 1.00 (Input: 1.00)
+[2026/10/22 16:57:27.942] INFO:     Tempo Dynamics: 0.20 (Input: 1.00)
+[2026/10/22 16:57:27.942] INFO:              Pitch: 1.00 (Input: 0.00)
+[2026/10/22 16:57:27.942] INFO:             Volume: 1.00
+[2026/10/22 16:57:27.942] INFO:        Pre-Silence: 0.05
+[2026/10/22 16:57:27.942] INFO:       Post-Silence: 0.10
+[2026/10/22 16:57:29.273] INFO:     Inference done. Elapsed time: 1.33 sec.
+[2026/10/22 16:57:29.275] INFO:     172.17.0.1:45970 - "POST /synthesis?speaker=1325133120 HTTP/1.1" 200 OK

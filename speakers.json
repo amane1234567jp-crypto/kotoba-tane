@@ -1,0 +1,842 @@
+[
+ {
+  "name": "Lux",
+  "speaker_uuid": "d1597f96-c12c-4349-9c0e-2342559f30a7",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 2031733024,
+    "type": "talk"
+   }
+  ],
+  "version": "0.2.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "TANAKA",
+  "speaker_uuid": "e7b467ab-3947-4876-892f-fea9a75fd9e4",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 1628969216,
+    "type": "talk"
+   },
+   {
+    "name": "Anger",
+    "id": 1628969217,
+    "type": "talk"
+   },
+   {
+    "name": "Happy",
+    "id": 1628969218,
+    "type": "talk"
+   },
+   {
+    "name": "Silly",
+    "id": 1628969219,
+    "type": "talk"
+   },
+   {
+    "name": "surprise",
+    "id": 1628969220,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "fumifumi",
+  "speaker_uuid": "754d769b-7128-4172-964e-b10945d55e39",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 606865152,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "hinakoyuhara",
+  "speaker_uuid": "16e681b5-474d-4b7d-b58b-0fb45c6a3dec",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 2058221184,
+    "type": "talk"
+   },
+   {
+    "name": "普通",
+    "id": 2058221185,
+    "type": "talk"
+   },
+   {
+    "name": "落ち着き",
+    "id": 2058221186,
+    "type": "talk"
+   },
+   {
+    "name": "怒り",
+    "id": 2058221187,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "kokuren_3rd",
+  "speaker_uuid": "38d7216c-e595-4d8f-b06c-1fc376e47c0a",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 1069147200,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "kokuren_voice",
+  "speaker_uuid": "98ea47e4-8b72-4edb-bcae-1a068a47a00a",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 417974880,
+    "type": "talk"
+   },
+   {
+    "name": "Disgust",
+    "id": 417974881,
+    "type": "talk"
+   },
+   {
+    "name": "Fear",
+    "id": 417974882,
+    "type": "talk"
+   },
+   {
+    "name": "Surprised",
+    "id": 417974883,
+    "type": "talk"
+   },
+   {
+    "name": "Happy",
+    "id": 417974884,
+    "type": "talk"
+   },
+   {
+    "name": "Sad",
+    "id": 417974885,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "morioki",
+  "speaker_uuid": "396a746d-742f-4e43-b722-1182a7fab9af",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 497929760,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "yukyu",
+  "speaker_uuid": "0bdd27c6-4b80-4f0f-a8b3-7a603e317f45",
+  "styles": [
+   {
+    "name": "デフォルト",
+    "id": 1099751712,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "かりん(現実20代女子AIボイチェン@リアボVC公式モデル)",
+  "speaker_uuid": "cd579970-cee7-45cd-935e-7b7ee4f505e7",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 2110072448,
+    "type": "talk"
+   },
+   {
+    "name": "kanasimi_kanasimi",
+    "id": 2110072449,
+    "type": "talk"
+   },
+   {
+    "name": "uresii_uresii",
+    "id": 2110072450,
+    "type": "talk"
+   },
+   {
+    "name": "hutuu_hutuu",
+    "id": 2110072451,
+    "type": "talk"
+   },
+   {
+    "name": "odoroki_odoroki",
+    "id": 2110072452,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "さつき(現実20代女子AIボイチェン@リアボVC公式モデル)",
+  "speaker_uuid": "161ab385-07a5-4dd6-a045-5b0f21dfd9ec",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 1935723904,
+    "type": "talk"
+   },
+   {
+    "name": "kanasimi_kanasimi",
+    "id": 1935723905,
+    "type": "talk"
+   },
+   {
+    "name": "uresii_uresii",
+    "id": 1935723906,
+    "type": "talk"
+   },
+   {
+    "name": "hutuu_hutuu",
+    "id": 1935723907,
+    "type": "talk"
+   },
+   {
+    "name": "odoroki_odoroki",
+    "id": 1935723908,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "すみれ(現実20代女子AIボイチェン@リアボVC公式モデル)",
+  "speaker_uuid": "aff97ba9-4f94-46b4-b70a-363384e219ff",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 1038680256,
+    "type": "talk"
+   },
+   {
+    "name": "kanasimi_kanasimi",
+    "id": 1038680257,
+    "type": "talk"
+   },
+   {
+    "name": "uresii_uresii",
+    "id": 1038680258,
+    "type": "talk"
+   },
+   {
+    "name": "hutuu_hutuu",
+    "id": 1038680259,
+    "type": "talk"
+   },
+   {
+    "name": "odoroki_odoroki",
+    "id": 1038680260,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "にせ",
+  "speaker_uuid": "bf56410a-d8e6-430d-a477-f789e16206d3",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 1937616896,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "はきみて れく(瞭魅推 れく)",
+  "speaker_uuid": "7a078d70-4c5d-454f-8cf1-78a8242f3900",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 1440494656,
+    "type": "talk"
+   }
+  ],
+  "version": "1.1.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "ほのか(~現実20代女子AIボイチェン~リアボVC公式モデル)",
+  "speaker_uuid": "05df32d1-1c20-48d3-860d-83310004e046",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 808373280,
+    "type": "talk"
+   },
+   {
+    "name": "kanasimi_kanasimi",
+    "id": 808373281,
+    "type": "talk"
+   },
+   {
+    "name": "uresii_uresii",
+    "id": 808373282,
+    "type": "talk"
+   },
+   {
+    "name": "hutuu_hutuu",
+    "id": 808373283,
+    "type": "talk"
+   },
+   {
+    "name": "odoroki_odoroki",
+    "id": 808373284,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "まお",
+  "speaker_uuid": "e756b8e4-b606-4e15-99b1-3f9c6a1b2317",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 888753760,
+    "type": "talk"
+   },
+   {
+    "name": "ふつー",
+    "id": 888753761,
+    "type": "talk"
+   },
+   {
+    "name": "あまあま",
+    "id": 888753762,
+    "type": "talk"
+   },
+   {
+    "name": "おちつき",
+    "id": 888753763,
+    "type": "talk"
+   },
+   {
+    "name": "からかい",
+    "id": 888753764,
+    "type": "talk"
+   },
+   {
+    "name": "せつなめ",
+    "id": 888753765,
+    "type": "talk"
+   }
+  ],
+  "version": "1.2.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "みちのくあいり",
+  "speaker_uuid": "b01070b1-7243-4d5b-825f-a56ab2eb2bc2",
+  "styles": [
+   {
+    "name": "標準",
+    "id": 1717361472,
+    "type": "talk"
+   },
+   {
+    "name": "喜び",
+    "id": 1717361478,
+    "type": "talk"
+   },
+   {
+    "name": "悲しみ",
+    "id": 1717361473,
+    "type": "talk"
+   },
+   {
+    "name": "怒り",
+    "id": 1717361474,
+    "type": "talk"
+   },
+   {
+    "name": "驚き",
+    "id": 1717361476,
+    "type": "talk"
+   },
+   {
+    "name": "嫌悪",
+    "id": 1717361475,
+    "type": "talk"
+   },
+   {
+    "name": "恐怖",
+    "id": 1717361477,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "もえ(現実20代女子AIボイチェン@リアボVC公式モデル)",
+  "speaker_uuid": "47ddff3b-10b4-48e8-8d5d-692461fa7f96",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 113804960,
+    "type": "talk"
+   },
+   {
+    "name": "kanasimi_kanasimi",
+    "id": 113804961,
+    "type": "talk"
+   },
+   {
+    "name": "uresii_uresii",
+    "id": 113804962,
+    "type": "talk"
+   },
+   {
+    "name": "hutuu_hutuu",
+    "id": 113804963,
+    "type": "talk"
+   },
+   {
+    "name": "odoroki_odoroki",
+    "id": 113804964,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "らせつん",
+  "speaker_uuid": "917fd52e-3941-4fc8-a3d5-dcbe56b73453",
+  "styles": [
+   {
+    "name": "標準",
+    "id": 893625024,
+    "type": "talk"
+   },
+   {
+    "name": "標準２",
+    "id": 893625030,
+    "type": "talk"
+   },
+   {
+    "name": "喜び",
+    "id": 893625025,
+    "type": "talk"
+   },
+   {
+    "name": "悲しみ",
+    "id": 893625029,
+    "type": "talk"
+   },
+   {
+    "name": "怒り",
+    "id": 893625027,
+    "type": "talk"
+   },
+   {
+    "name": "驚き",
+    "id": 893625031,
+    "type": "talk"
+   },
+   {
+    "name": "嫌悪",
+    "id": 893625026,
+    "type": "talk"
+   },
+   {
+    "name": "恐怖",
+    "id": 893625028,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "るな",
+  "speaker_uuid": "aa63d66e-92fe-499e-9e0d-15dad4a61d0d",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 345585728,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "れな(現実20代女子AIボイチェン@リアボVC公式モデル)",
+  "speaker_uuid": "4a43610f-8ace-4fe2-9541-eb26255f1927",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 1929056672,
+    "type": "talk"
+   },
+   {
+    "name": "kanasimi_kanasimi",
+    "id": 1929056673,
+    "type": "talk"
+   },
+   {
+    "name": "uresii_uresii",
+    "id": 1929056674,
+    "type": "talk"
+   },
+   {
+    "name": "hutuu_hutuu",
+    "id": 1929056675,
+    "type": "talk"
+   },
+   {
+    "name": "odoroki_odoroki",
+    "id": 1929056676,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "ろてじん（匿名インタビュー風）",
+  "speaker_uuid": "82dbce8e-d0cf-49d0-8fd6-090b823fff2c",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 1805828384,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "ろてじん（長老ボイス）",
+  "speaker_uuid": "452fee2b-d102-4053-bccd-c0f8c265c147",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 391794336,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "わかな(現実20代女子AIボイチェン@リアボVC公式モデル)",
+  "speaker_uuid": "ef92118d-eda3-49d9-858d-1e9ae4dae714",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 1138003200,
+    "type": "talk"
+   },
+   {
+    "name": "悲しい",
+    "id": 1138003201,
+    "type": "talk"
+   },
+   {
+    "name": "嬉しい",
+    "id": 1138003202,
+    "type": "talk"
+   },
+   {
+    "name": "普通",
+    "id": 1138003203,
+    "type": "talk"
+   },
+   {
+    "name": "驚き",
+    "id": 1138003204,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "コハク",
+  "speaker_uuid": "5680ac39-43c9-487a-bc3e-018c0d29cc38",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 1878365376,
+    "type": "talk"
+   },
+   {
+    "name": "あまあま",
+    "id": 1878365377,
+    "type": "talk"
+   },
+   {
+    "name": "せつなめ",
+    "id": 1878365378,
+    "type": "talk"
+   },
+   {
+    "name": "ねむたい",
+    "id": 1878365379,
+    "type": "talk"
+   }
+  ],
+  "version": "1.1.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "凛音エル",
+  "speaker_uuid": "d2c99ca6-73e5-486c-994e-ee0ce2d74928",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 1388823424,
+    "type": "talk"
+   },
+   {
+    "name": "Angry",
+    "id": 1388823425,
+    "type": "talk"
+   },
+   {
+    "name": "Fear",
+    "id": 1388823426,
+    "type": "talk"
+   },
+   {
+    "name": "Happy",
+    "id": 1388823427,
+    "type": "talk"
+   },
+   {
+    "name": "Sad",
+    "id": 1388823428,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "澤原 玄二郎",
+  "speaker_uuid": "accf08c8-0237-485f-98af-20b71cf2121b",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 2029042368,
+    "type": "talk"
+   },
+   {
+    "name": "close",
+    "id": 2029042369,
+    "type": "talk"
+   },
+   {
+    "name": "close-shout",
+    "id": 2029042370,
+    "type": "talk"
+   },
+   {
+    "name": "far",
+    "id": 2029042371,
+    "type": "talk"
+   },
+   {
+    "name": "far-shout",
+    "id": 2029042372,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "猩々博士 (雑談ボイス)",
+  "speaker_uuid": "6dd8366d-b928-4d60-ac41-b3010c85c08e",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 5306848,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "立神ケイ",
+  "speaker_uuid": "ab46e64f-958a-486d-a853-997e14b9cb0a",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 87094656,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "花音",
+  "speaker_uuid": "b1ca560f-f212-4e67-ab7d-0a4f5afb75a8",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 1325133120,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "観測症",
+  "speaker_uuid": "156e8b6a-1d50-4d28-b257-4e331ec992fb",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 1275216064,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ },
+ {
+  "name": "阿井田 茂",
+  "speaker_uuid": "561e4e59-3bc9-4726-9028-44a3c12a6f1d",
+  "styles": [
+   {
+    "name": "ノーマル",
+    "id": 1310138976,
+    "type": "talk"
+   },
+   {
+    "name": "Calm",
+    "id": 1310138977,
+    "type": "talk"
+   },
+   {
+    "name": "Far",
+    "id": 1310138978,
+    "type": "talk"
+   },
+   {
+    "name": "Heavy",
+    "id": 1310138979,
+    "type": "talk"
+   },
+   {
+    "name": "Mid",
+    "id": 1310138980,
+    "type": "talk"
+   },
+   {
+    "name": "Shout",
+    "id": 1310138981,
+    "type": "talk"
+   },
+   {
+    "name": "Surprise",
+    "id": 1310138982,
+    "type": "talk"
+   }
+  ],
+  "version": "1.0.0",
+  "supported_features": {
+   "permitted_synthesis_morphing": "NOTHING"
+  }
+ }
+]
