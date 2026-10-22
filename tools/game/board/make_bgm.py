@@ -338,6 +338,10 @@ SONGS = {
  "jugyou": dict(bpm=128, root=67, scale=MAJ, bars=8, lead=recorder, lead2=glock, drums=D_class, comp="piano", bass="sq", swing=.15, extra=X_bell,
    mel="1 - 3 - 5 - 3 - | 4 - 6 - 5 - - - | 6 - 5 - 4 - 3 - | 2 - 3 - 5 - - - | 1 - 3 - 5 - 1' - | 7 - 6 - 5 - 6 - | 4 - 3 - 2 - 5, - | 1 - - - . . . .",
    chords=[1, 4, 4, 5, 1, 5, 4, 1]),
+ # 2026-10-23 かえりみち なかま：みんなで あるいて かえる、はずむ マーチ
+ "kaerimichi": dict(bpm=132, root=67, scale=MAJ, bars=8, lead=flute, lead2=marimba, drums=D_march, comp="pluck", bass="sq", swing=.2, extra=X_bell,
+   mel="1 - 2 - 3 - 5 - | 6 - 5 - 3 - - - | 4 - 5 - 6 - 1' - | 5 - - - . . . . | 1' - 7 - 6 - 5 - | 4 - 6 - 5 - 3 - | 2 - 3 - 4 - 7, - | 1 - - - . . . .",
+   chords=[1, 4, 4, 5, 1, 4, 5, 1]),
  "sensei1": dict(bpm=120, root=70, scale=MAJ, bars=8, lead=recorder, lead2=glock, drums=D_class, comp="piano", extra=X_bell,
    mel="3 - 3 - 4 - 5 - | 5 - 4 - 3 - 2 - | 1 - 1 - 2 - 3 - | 3 - - 2 2 - - - | 3 - 3 - 4 - 5 - | 5 - 4 - 3 - 2 - | 1 - 1 - 2 - 3 - | 2 - - 1 1 - - -",
    chords=[1, 5, 1, 5, 1, 5, 1, 5]),

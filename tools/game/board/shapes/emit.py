@@ -5,11 +5,11 @@ A = {
  "yuushoku":("diamond",""), "kokugo":("hook",""), "taiiku":("sun",""), "ongaku":("cshape",""), "zukou":("omega",""), "jitensha":("columns",""),
  "yasumi":("tear",""), "komatta":("bolt",""), "kirikae":("ring","y"), "kikikaesu":("heart","y"), "matsu":("wave2",""), "sos":("ushape","y"),
  "junban":("mshape","y"), "kotowaru":("triangle","y"), "bousai":("hook","y"), "denwa":("sun","y"), "souzou":("cshape","x"), "tachiba":("omega","y"),
- "sakiyomi":("columns","y"), "chotto":("tear","y"), "aite":("bolt","x"),
+ "sakiyomi":("columns","y"), "kaerimichi":("road",""), "chotto":("tear","y"), "aite":("bolt","x"),
  "tomodachi1":("spiral",""), "kouen2":("arch",""), "asobiba":("rect",""),
  "sensei1":("arch","y"), "seki1":("bean",""), "sansu":("rect","y"),
 }
-TP = {**{k:"kyu" for k in list(A)[:27]}, "tomodachi1":"tou","kouen2":"tou","asobiba":"tou","sensei1":"gak","seki1":"gak","sansu":"gak"}
+TP = {**{k:"kyu" for k in list(A)[:28]}, "tomodachi1":"tou","kouen2":"tou","asobiba":"tou","sensei1":"gak","seki1":"gak","sansu":"gak"}
 seen=set(); out={}
 for st,(f,tf) in A.items():
     assert (f,tf) not in seen or TP[st]!="kyu" or True; seen.add((f,tf,TP[st]))
