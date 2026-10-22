@@ -62880,7 +62880,7 @@ const TK_MAE = { 5: ["ごふんまえ", "5分前", "五分前", "ごふん ま�
 /* くらしの じかん：盤の ばしょ（あさ・ひる・ゆうがた・よる）に あう しつもん */
 const TK_LIFE = {
   あさ: [["okiru", "おきる じかんは なんじ？", [[6, 30], [7, 0], [6, 45], [7, 10]]], ["gakkou", "がっこうに いく じかんは なんじ？", [[7, 30], [8, 0], [7, 45], [8, 10]]]],
-  ひる: [["kyushoku", "きゅうしょくの じかんは なんじ？", [[12, 0], [12, 30], [12, 15], [12, 20]]], ["oyatsu", "おやつの じかんは なんじ？", [[3, 0], [3, 30], [3, 15], [3, 10]]]],
+  ひる: [["kyushoku", "きゅうしょくの じかんは なんじ？", [[12, 0], [12, 30], [12, 15], [12, 20]]], ["oyatsu", "おやつの じかんは なんじ？", [[3, 0]]]],
   ゆうがた: [["gohan", "ばんごはんの じかんは なんじ？", [[6, 0], [6, 30], [6, 45], [7, 0]]], ["ofuro", "おふろの じかんは なんじ？", [[7, 0], [7, 30], [7, 45], [7, 20]]]],
   よる: [["neru", "ねる じかんは なんじ？", [[8, 0], [8, 30], [9, 0], [8, 45]]], ["hamigaki", "はみがきの じかんは なんじ？", [[8, 0], [8, 30], [7, 50], [8, 15]]]],
 };
@@ -63125,7 +63125,11 @@ async function runSansu(pc) {
   chime(); joy(h); confetti(ok ? 50 : 20); await speak(C.pony, "sn_ok", "せいかい！"); await snSayAns(C.pony, q);
   playLog({ type: "sansu", id: q.type === "word" ? q.w.key : `${q.type}:${q.a ?? ""}${q.type === "add" ? "+" : q.type === "sub" ? "-" : ""}${q.b ?? q.n ?? ""}`, tier: lv, L: L0, ok, answer: q.x, wrong, how: r.how, sec: Math.round((performance.now() - t0) / 1000), ...(MODE === "multi" ? { who: NAMES[pc.kind] } : {}) });
   grade(ok); GS.tasks++; if (ok) { GS.ok++; await seedGet(h); }
-  await sleep(500); cards.g.remove(); setView("board"); return ok;
+  await sleep(500); cards.g.remove(); setView("board");
+  // まちがえて タッチしたら 1マス もどる（てきとうに タッチしないように 2026-10-23）
+  if (wrong > 0 && !winner) { await sleep(300); markAbove(pc, "drop"); await speak(C.pony, "sn_back", "まちがえたから、1マス もどるよ");
+    if (typeof isSL === "function" && isSL()) await slGo(pc, -1); else { pc.backing = true; const to = (pc.trail || []).pop(); if (to) await hop(pc, to, .3, 0); pc.backing = false; } }
+  return ok;
 }
 /* ---------- ちゅうの ばん ---------- */
 async function sansuRival(before) {
@@ -64909,7 +64913,8 @@ function jgRankTick() {
     else tween(600, k => it.it.setAttribute("transform", `translate(${1170 - Math.sin(k * Math.PI) * 60} ${(y0 + (y1 - y0) * k).toFixed(1)})`)); });
   if (!first) { blip(700, 1100, .12, "square"); later(150, () => blip(1100, 1500, .12, "square")); }
 }
-setInterval(jgRankTick, 400);
+// 順位札は つかわない（あまねさん 2026-10-23）
+// setInterval(jgRankTick, 400);
 
 /* ---------- 盤の え：じかんわりの ような 4だん ---------- */
 BOARD_BG[JGS] = L => {

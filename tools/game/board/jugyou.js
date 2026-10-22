@@ -127,7 +127,8 @@ function jgRankTick() {
     else tween(600, k => it.it.setAttribute("transform", `translate(${1170 - Math.sin(k * Math.PI) * 60} ${(y0 + (y1 - y0) * k).toFixed(1)})`)); });
   if (!first) { blip(700, 1100, .12, "square"); later(150, () => blip(1100, 1500, .12, "square")); }
 }
-setInterval(jgRankTick, 400);
+// 順位札は つかわない（あまねさん 2026-10-23）
+// setInterval(jgRankTick, 400);
 
 /* ---------- 盤の え：じかんわりの ような 4だん ---------- */
 BOARD_BG[JGS] = L => {

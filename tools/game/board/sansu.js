@@ -92,7 +92,11 @@ async function runSansu(pc) {
   chime(); joy(h); confetti(ok ? 50 : 20); await speak(C.pony, "sn_ok", "せいかい！"); await snSayAns(C.pony, q);
   playLog({ type: "sansu", id: q.type === "word" ? q.w.key : `${q.type}:${q.a ?? ""}${q.type === "add" ? "+" : q.type === "sub" ? "-" : ""}${q.b ?? q.n ?? ""}`, tier: lv, L: L0, ok, answer: q.x, wrong, how: r.how, sec: Math.round((performance.now() - t0) / 1000), ...(MODE === "multi" ? { who: NAMES[pc.kind] } : {}) });
   grade(ok); GS.tasks++; if (ok) { GS.ok++; await seedGet(h); }
-  await sleep(500); cards.g.remove(); setView("board"); return ok;
+  await sleep(500); cards.g.remove(); setView("board");
+  // まちがえて タッチしたら 1マス もどる（てきとうに タッチしないように 2026-10-23）
+  if (wrong > 0 && !winner) { await sleep(300); markAbove(pc, "drop"); await speak(C.pony, "sn_back", "まちがえたから、1マス もどるよ");
+    if (typeof isSL === "function" && isSL()) await slGo(pc, -1); else { pc.backing = true; const to = (pc.trail || []).pop(); if (to) await hop(pc, to, .3, 0); pc.backing = false; } }
+  return ok;
 }
 /* ---------- ちゅうの ばん ---------- */
 async function sansuRival(before) {
