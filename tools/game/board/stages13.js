@@ -44,8 +44,26 @@ function mnkAct(c, kind) { const L = (ms, f) => later(ms, f), H = () => world(c,
         addTick(dt => { if (!d.isConnected) return false; t += dt; d.setAttribute("cx", p.x + vx * t); d.setAttribute("cy", p.y - 40 + vy * t + 500 * t * t); if (t > 1.1) { d.remove(); return false; } }); } L(500, () => c.armR.t = 0); },
   }; (A[kind] || (() => playMove(c, "look")))(); later(2600, () => g.remove()); }
 // 場面ごとの こもの（れつ・すべりだい）
-function mnkSet(sc) { if (sc.anim === "cut") { const g = el("g", {}, propG); [[860, .9], [990, .95]].forEach(([x, k]) => { el("circle", { cx: x, cy: 975 - 300 * k, r: 46 * k, fill: "#B9C2D3" }, g);
-    el("path", { d: `M${x - 70 * k} 975 Q${x - 70 * k} ${975 - 230 * k} ${x} ${975 - 240 * k} Q${x + 70 * k} ${975 - 230 * k} ${x + 70 * k} 975 Z`, fill: "#B9C2D3" }, g); }); txt(g, 920, 640, "じゅんばん", 34, { "text-anchor": "middle" }); } }
+function mnkSet(sc) { }
+// 🍛 はいぜんの れつ：みんなが ならんで いる → とらおくんが わりこむ → こたえる 子も まねして わりこむ（2026-10-25）
+async function mnkLine(sc, h, a, heroKind, narr) {
+  const S = .78, cen = c => c.x + 200 * c.s, go = (c, cx, run = true) => { c.dx.t = cx - cen(c); if (run) hold(c, "run", 1); };
+  const ex = ["panna", "chu", "mii", "pyon", "kon"].filter(k => k !== heroKind && k !== sc.model && k !== sc.ptr && k !== RIVAL && C[k]).slice(0, 3);
+  place(h, cen(h), 975, h.s * .85); const D = 175;
+  const front = xtra(ex[0], 1520, (KID_S[ex[0]] || 1) * S); front.dx.v = front.dx.t = 0;
+  place(a, 1520 - D, 975, (ASK_AT[sc.ptr] || [0, 1])[1] * S); a.dx.v = a.dx.t = 0;
+  const back = ex.slice(1).map((k, i) => { const c = xtra(k, 1520 - D * (i + 2), (KID_S[k] || 1) * S); c.dx.v = c.dx.t = 0; return c; });
+  const lab = el("g", {}, propG); el("rect", { x: 1290, y: 380, width: 280, height: 70, rx: 35, fill: "#FFFFFF", ...S6(5) }, lab); txt(lab, 1430, 428, "🍛 ここから ならぶ", 30, { "text-anchor": "middle" });
+  await sleep(700);
+  const line = [a, ...back], shift = () => line.forEach((c, i) => go(c, 1520 - D * (i + 1 + (line.cut || 0)), false));
+  // とらおくんが わりこむ
+  const m = xtra(sc.model, 300, (KID_S[sc.model] || 1) * S); m.dx.v = -400; m.dx.t = 0; hold(m, "run", 1.4);
+  const sp = narr ? speak(C.pony, `mk_${sc.id}_n`, MNK.txt[`mk_${sc.id}_n`]) : sleep(3600);
+  await sleep(900); line.cut = 1; shift(); go(m, 1520 - D); await sleep(700); markAbove(a, "ex"); a.sadMouth = true; playMove(a, "look");
+  await sleep(1300);
+  // こたえる 子も まねして わりこむ（くまくんの まえ）
+  line.cut = 2; shift(); go(h, 1520 - 2 * D); await sleep(900); markAbove(a, "anger");
+  await sp; await sleep(300); lab.remove(); }
 /* ---------- カード（いい いいかた 1つ・まずい いいかた 2つ） ---------- */
 function mnkChoose(opts, onWrong) { const g = el("g", {}, hudLayer), W = 420, x0 = 800 - opts.length * (W + 24) / 2 + 12, y = 330;
   el("rect", { x: x0 - 30, y: y - 18, width: opts.length * (W + 24) + 36, height: 196, rx: 30, fill: "#FFFFFFE8", ...S6(5) }, g);
@@ -62,10 +80,11 @@ async function mnkRun(hero, first) {
   enter(h); await sleep(900);
   if (first) await speak(C.pony, "mk_intro", MNK.txt.mk_intro);
   // まねされた 子が やって みせる → （help でなければ）こどもが まねする／（help なら）あいてが まねする
+  if (sc.anim === "cut") await mnkLine(sc, h, a, hero, true); else {
   const m = xtra(sc.model, 900, (KID_S[sc.model] || 1) * .82); m.dx.v = m.dx.t = 0;
   if (sc.anim === "run") { m.dx.v = -700; m.dx.t = 0; hold(m, "run", 1.6); } else later(300, () => mnkAct(m, sc.anim)); await speak(C.pony, `mk_${sc.id}_n`, MNK.txt[`mk_${sc.id}_n`]);
   m.dx.t = 1400; hold(m, "run", 1.2); later(1300, () => { m.root.style.display = "none"; });
-  mnkAct(help ? a : h, sc.anim); await sleep(1500);
+  mnkAct(help ? a : h, sc.anim); await sleep(1500); }
   const mt = mnkMeter(sc.ptr); let mood = help ? 2 : sc.flow === "kitsui" ? 0 : 1; mt.set(mood);
   const face = (c, v) => { c.sadMouth = v <= 1; if (v === 0) markAbove(c, "anger"); if (v >= 3) joy(c); };
   face(a, mood); if (!help) { surprise(a); }
@@ -97,7 +116,7 @@ async function mnkRun(hero, first) {
 async function mnkRival() {
   const sc = mnkPick(true), tu = sc.turns[0]; showEngine(null, `${NAMES[RIVAL]}の ばん（まねっこ ${sc.id}）`);
   const { hero: h, ask: a } = setSitView({ id: "mk_" + sc.id, place: sc.place, asker: sc.ptr, intro: "mk" }, RIVAL); a.dx.v = a.dx.t = 0; mnkSet(sc);
-  enter(h); await sleep(900); mnkAct(h, sc.anim); await sleep(1600);
+  enter(h); await sleep(900); if (sc.anim === "cut") await mnkLine(sc, h, a, RIVAL, false); else { mnkAct(h, sc.anim); await sleep(1600); }
   const mt = mnkMeter(sc.ptr); mt.set(1); surprise(a); await speak(a, `mk_${sc.id}_t0`, tu.say);
   playMove(h, "pump"); await speak(h, "mk_gao_bad", "しらないもん！"); mt.set(0); a.sadMouth = true; markAbove(a, "anger"); await speak(a, `mk_${sc.id}_t0_b0`, tu.bad[0][1]);
   await speak(C.pony, "mk_teach", MNK.txt.mk_teach); playMove(h, "think");
