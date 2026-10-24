@@ -5,7 +5,7 @@ const GENRES = [
   ["jugyou", "✏️", "じゅぎょう", ["kokugo", "sansu", "tokei", "ongaku", "zukou", "taiiku"]],
   ["machi", "🚃", "まち・おでかけ", ["toukou", "gekou", "kaerimichi", "omise", "densha", "burger", "byouin", "haisha", "jitensha"]],
   ["ouchi", "🏡", "おうち・あそび", ["ouchi1", "ie1", "yuushoku", "kouen", "kouen2", "asobiba", "tomodachi1"]],
-  ["tsutaeru", "💬", "きもちを つたえる", ["kikikaesu", "sos", "junban", "kotowaru", "denwa", "aite", "tachiba"]],
+  ["tsutaeru", "💬", "きもちを つたえる", ["manekko", "kikikaesu", "sos", "junban", "kotowaru", "denwa", "aite", "tachiba"]],
   ["kangaeru", "🤔", "かんがえる", ["komatta", "kirikae", "matsu", "bousai", "souzou", "sakiyomi", "chotto"]],
   ["long", "⭐", "ロングコース", []],
 ];
@@ -14,7 +14,7 @@ function genreOf(id) { const g = GENRES.find(g => g[3].includes(id)); return g ?
 function groupStages(list, solo) {
   if (!list || list.classList.contains("mgrouped")) return;
   const bs = [...list.querySelectorAll(":scope > .mst")]; let i = 0;
-  bs.forEach(b => { if (b.classList.contains("mlong")) b.dataset.g = "long"; else { const s = STAGES[i++]; b.dataset.g = s ? genreOf(s.id) : "gakkou"; } });
+  bs.forEach(b => { if (b.classList.contains("mlong")) b.dataset.g = "long"; else { const s = STAGES[i++]; b.dataset.g = s ? genreOf(s.id) : "gakkou"; if (s) b.dataset.st = s.id; } });
   // まえの ずらりと ならぶ 形の まま、ショートコースを ジャンルの じゅんに ならべかえて、ジャンルごとに いろを かえる（2026-10-24）。ロングコースは さいご
   let n = 0; GENRES.forEach(([gid]) => bs.filter(b => b.dataset.g === gid).forEach(b => { b.classList.add("g-" + gid); list.append(b);
     if (gid !== "long") { const no = b.querySelector(".mno"); if (no) no.textContent = String(++n); } }));

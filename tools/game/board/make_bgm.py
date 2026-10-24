@@ -342,6 +342,10 @@ SONGS = {
  "kaerimichi": dict(bpm=132, root=67, scale=MAJ, bars=8, lead=flute, lead2=marimba, drums=D_march, comp="pluck", bass="sq", swing=.2, extra=X_bell,
    mel="1 - 2 - 3 - 5 - | 6 - 5 - 3 - - - | 4 - 5 - 6 - 1' - | 5 - - - . . . . | 1' - 7 - 6 - 5 - | 4 - 6 - 5 - 3 - | 2 - 3 - 4 - 7, - | 1 - - - . . . .",
    chords=[1, 4, 4, 5, 1, 4, 5, 1]),
+ # 2026-10-25 まねっこ しちゃった：はずむ、なかよしの うた
+ "manekko": dict(bpm=126, root=65, scale=MAJ, bars=8, lead=glock, lead2=flute, drums=D_easy, comp="pluck", bass="sq", swing=.25, extra=X_bell,
+   mel="5 - 3 - 5 - 6 - | 5 - 3 - 2 - - - | 3 - 2 - 3 - 5 - | 6 - - - . . . . | 5 - 6 - 1' - 6 - | 5 - 3 - 2 - 3 - | 4 - 3 - 2 - 7, - | 1 - - - . . . .",
+   chords=[1, 1, 4, 4, 1, 6, 5, 1]),
  "sensei1": dict(bpm=120, root=70, scale=MAJ, bars=8, lead=recorder, lead2=glock, drums=D_class, comp="piano", extra=X_bell,
    mel="3 - 3 - 4 - 5 - | 5 - 4 - 3 - 2 - | 1 - 1 - 2 - 3 - | 3 - - 2 2 - - - | 3 - 3 - 4 - 5 - | 5 - 4 - 3 - 2 - | 1 - 1 - 2 - 3 - | 2 - - 1 1 - - -",
    chords=[1, 5, 1, 5, 1, 5, 1, 5]),
