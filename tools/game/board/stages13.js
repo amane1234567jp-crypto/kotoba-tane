@@ -4,7 +4,7 @@
    さいごまで つながると、あいてが「いっしょに あそぼう」と さそって くれる（ごほうび）。きもちメーター（😠😟🙂😄）で あいての かおを みせる。
    ライバルは がお（場面には ださない。がおの ばんは、がおが まずい いいかたを して、こどもが おしえる）。 */
 const S13L = ["manekko"];
-const S13_READY = false; /* 声が そろうまで false */
+const S13_READY = true; /* 声が そろうまで false */
 Object.assign(RIVAL_OF, { manekko: "gao" });
 STAGES.push({ id: "manekko", name: "まねっこ しちゃった", icon: "🙊", ready: S13_READY });
 ASK_ON_STAGE.add("mk");
