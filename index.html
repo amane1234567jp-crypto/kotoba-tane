@@ -66919,7 +66919,7 @@ function mnkAct(c, kind) { const L = (ms, f) => later(ms, f), H = () => world(c,
       follow(e, () => { const p = H(); return [p.x, p.y, 0, Math.max(c.s, .6)]; }); for (let i = 0; i < 6; i++) L(i * 220, () => { c.armR.t = i % 2 ? -40 : -60; }); L(1500, () => { c.armR.t = 0; e.remove(); }); },
     climb: () => { markAbove(c, "ex"); for (let i = 0; i < 3; i++) L(i * 500, () => jump(c, .6)); const ar = txt(g, c.x + 200 * c.s, 600, "⬆", 90, { "text-anchor": "middle" }); L(1800, () => ar.remove()); },
     cut: () => { hold(c, "run", .8); c.dx.t = c.dx.v + 140; markAbove(c, "ex"); L(1600, () => { c.dx.t = c.dx.v - 140; }); },
-    milk: () => { const m = txt(g, 0, 0, "🥛", 70, { "text-anchor": "middle" }); follow(m, () => { const p = headTop(c); return [p.x + 60, p.y + 170 * c.s, 0, 1]; });
+    milk: () => { const m = txt(g, 0, 0, "🥛", 120, { "text-anchor": "middle" }); follow(m, () => { const p = headTop(c); return [p.x + 90, p.y + 260 * c.s, 0, 1]; });
       for (let i = 0; i < 6; i++) L(200 + i * 250, () => mark("sparkle", headTop(c).x + 60, headTop(c).y + 120 * c.s, { vy: -120, life: .7, s: .4 })); L(1900, () => m.remove()); },
     desk: () => { const b0 = c.y + c.base * c.s, cx = c.x + 200 * c.s, d = el("g", {}, propG); el("rect", { x: cx - 150, y: b0 - 145, width: 300, height: 40, rx: 8, fill: "#C98A4B", ...S6(5) }, d); [cx - 130, cx + 108].forEach(x => el("rect", { x, y: b0 - 105, width: 22, height: 105, fill: "#9A6B43", ...S6(4) }, d));
       jump(c, .8); L(400, () => place(c, cx, b0 - 140, c.s)); L(2600, () => { place(c, cx, b0, c.s); d.remove(); }); },
@@ -66948,7 +66948,7 @@ async function mnkRun(hero, first) {
   if (first) await speak(C.pony, "mk_intro", MNK.txt.mk_intro);
   // まねされた 子が やって みせる → （help でなければ）こどもが まねする／（help なら）あいてが まねする
   const m = xtra(sc.model, 900, (KID_S[sc.model] || 1) * .82); m.dx.v = m.dx.t = 0;
-  if (sc.anim === "run") { m.dx.v = -900; m.dx.t = 900; hold(m, "run", 2.2); } else later(300, () => mnkAct(m, sc.anim)); await speak(C.pony, `mk_${sc.id}_n`, MNK.txt[`mk_${sc.id}_n`]);
+  if (sc.anim === "run") { m.dx.v = -700; m.dx.t = 0; hold(m, "run", 1.6); } else later(300, () => mnkAct(m, sc.anim)); await speak(C.pony, `mk_${sc.id}_n`, MNK.txt[`mk_${sc.id}_n`]);
   m.dx.t = 1400; hold(m, "run", 1.2); later(1300, () => { m.root.style.display = "none"; });
   mnkAct(help ? a : h, sc.anim); await sleep(1500);
   const mt = mnkMeter(sc.ptr); let mood = help ? 2 : sc.flow === "kitsui" ? 0 : 1; mt.set(mood);
