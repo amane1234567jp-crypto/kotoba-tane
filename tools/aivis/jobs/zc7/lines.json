@@ -1,0 +1,667 @@
+[
+{
+"key": "mk_rouka_t0",
+"who": "kuma",
+"text": "あー！ ろうかは はしったら だめなんだよ！"
+},
+{
+"key": "mk_rouka_t0_b0",
+"who": "kuma",
+"text": "しらないって なに？ だめなんだよ！"
+},
+{
+"key": "mk_rouka_t0_b1",
+"who": "kuma",
+"text": "ねえ、なんで だまってるの？"
+},
+{
+"key": "mk_rouka_t1",
+"who": "kuma",
+"text": "しらなかったの？"
+},
+{
+"key": "mk_rouka_t1_b0",
+"who": "kuma",
+"text": "ひとの せいに しないでよ"
+},
+{
+"key": "mk_rouka_t1_b1",
+"who": "kuma",
+"text": "よくないよ！"
+},
+{
+"key": "mk_rouka_t2",
+"who": "kuma",
+"text": "ぶつかると あぶないからね"
+},
+{
+"key": "mk_rouka_t2_b0",
+"who": "kuma",
+"text": "えー、だめだってば"
+},
+{
+"key": "mk_rouka_t2_b1",
+"who": "kuma",
+"text": "……ちゃんと きいてる？"
+},
+{
+"key": "mk_rouka_t3",
+"who": "kuma",
+"text": "わかって くれて よかった"
+},
+{
+"key": "mk_rouka_t3_b0",
+"who": "kuma",
+"text": "えっ……そんな いいかた しなくても"
+},
+{
+"key": "mk_rouka_t3_b1",
+"who": "kuma",
+"text": "……あれ？ おこってる？"
+},
+{
+"key": "mk_rouka_end",
+"who": "kuma",
+"text": "うん！ ねえ、いっしょに あそぼう！"
+},
+{
+"key": "mk_kotoba_t0",
+"who": "panna",
+"text": "あー！「ばか」って いったら だめなんだよ！"
+},
+{
+"key": "mk_kotoba_t0_b0",
+"who": "panna",
+"text": "しらないって なに？ だめなんだよ！"
+},
+{
+"key": "mk_kotoba_t0_b1",
+"who": "panna",
+"text": "ねえ、なんで だまってるの？"
+},
+{
+"key": "mk_kotoba_t1",
+"who": "panna",
+"text": "しらなかったの？"
+},
+{
+"key": "mk_kotoba_t1_b0",
+"who": "panna",
+"text": "ひとの せいに しないでよ"
+},
+{
+"key": "mk_kotoba_t1_b1",
+"who": "panna",
+"text": "よくないよ！"
+},
+{
+"key": "mk_kotoba_t2",
+"who": "panna",
+"text": "いわれた ひとが かなしく なるからね"
+},
+{
+"key": "mk_kotoba_t2_b0",
+"who": "panna",
+"text": "えー、だめだってば"
+},
+{
+"key": "mk_kotoba_t2_b1",
+"who": "panna",
+"text": "……ちゃんと きいてる？"
+},
+{
+"key": "mk_kotoba_t3",
+"who": "panna",
+"text": "わかって くれて よかった"
+},
+{
+"key": "mk_kotoba_t3_b0",
+"who": "panna",
+"text": "えっ……そんな いいかた しなくても"
+},
+{
+"key": "mk_kotoba_t3_b1",
+"who": "panna",
+"text": "……あれ？ おこってる？"
+},
+{
+"key": "mk_kotoba_end",
+"who": "panna",
+"text": "うん！ ねえ、いっしょに あそぼう！"
+},
+{
+"key": "mk_ball_t0",
+"who": "kuma",
+"text": "あー！ きょうしつで ボールを なげたら だめなんだよ！"
+},
+{
+"key": "mk_ball_t0_b0",
+"who": "kuma",
+"text": "しらないって なに？ だめなんだよ！"
+},
+{
+"key": "mk_ball_t0_b1",
+"who": "kuma",
+"text": "ねえ、なんで だまってるの？"
+},
+{
+"key": "mk_ball_t1",
+"who": "kuma",
+"text": "しらなかったの？"
+},
+{
+"key": "mk_ball_t1_b0",
+"who": "kuma",
+"text": "ひとの せいに しないでよ"
+},
+{
+"key": "mk_ball_t1_b1",
+"who": "kuma",
+"text": "よくないよ！"
+},
+{
+"key": "mk_ball_t2",
+"who": "kuma",
+"text": "まどに あたったら われちゃうからね"
+},
+{
+"key": "mk_ball_t2_b0",
+"who": "kuma",
+"text": "えー、だめだってば"
+},
+{
+"key": "mk_ball_t2_b1",
+"who": "kuma",
+"text": "……ちゃんと きいてる？"
+},
+{
+"key": "mk_ball_t3",
+"who": "kuma",
+"text": "わかって くれて よかった"
+},
+{
+"key": "mk_ball_t3_b0",
+"who": "kuma",
+"text": "えっ……そんな いいかた しなくても"
+},
+{
+"key": "mk_ball_t3_b1",
+"who": "kuma",
+"text": "……あれ？ おこってる？"
+},
+{
+"key": "mk_ball_end",
+"who": "kuma",
+"text": "うん！ ねえ、いっしょに あそぼう！"
+},
+{
+"key": "mk_keshigomu_t0",
+"who": "panna",
+"text": "あー！ それ、わたしの けしゴムだよ！ かってに つかったら だめなんだよ！"
+},
+{
+"key": "mk_keshigomu_t0_b0",
+"who": "panna",
+"text": "しらないって なに？ だめなんだよ！"
+},
+{
+"key": "mk_keshigomu_t0_b1",
+"who": "panna",
+"text": "ねえ、なんで だまってるの？"
+},
+{
+"key": "mk_keshigomu_t1",
+"who": "panna",
+"text": "しらなかったの？"
+},
+{
+"key": "mk_keshigomu_t1_b0",
+"who": "panna",
+"text": "ひとの せいに しないでよ"
+},
+{
+"key": "mk_keshigomu_t1_b1",
+"who": "panna",
+"text": "よくないよ！"
+},
+{
+"key": "mk_keshigomu_t2",
+"who": "panna",
+"text": "つかう ときは、かしてって いってね"
+},
+{
+"key": "mk_keshigomu_t2_b0",
+"who": "panna",
+"text": "えー、だめだってば"
+},
+{
+"key": "mk_keshigomu_t2_b1",
+"who": "panna",
+"text": "……ちゃんと きいてる？"
+},
+{
+"key": "mk_keshigomu_t3",
+"who": "panna",
+"text": "わかって くれて よかった"
+},
+{
+"key": "mk_keshigomu_t3_b0",
+"who": "panna",
+"text": "えっ……そんな いいかた しなくても"
+},
+{
+"key": "mk_keshigomu_t3_b1",
+"who": "panna",
+"text": "……あれ？ おこってる？"
+},
+{
+"key": "mk_keshigomu_end",
+"who": "panna",
+"text": "うん！ ねえ、いっしょに あそぼう！"
+},
+{
+"key": "mk_suberi_t0",
+"who": "panna",
+"text": "あー！ いけないんだー！ せんせいに いっちゃお！"
+},
+{
+"key": "mk_suberi_t0_b0",
+"who": "panna",
+"text": "ほんとに いっちゃうよ！"
+},
+{
+"key": "mk_suberi_t0_b1",
+"who": "panna",
+"text": "だまってたら わかんないよ"
+},
+{
+"key": "mk_suberi_t1",
+"who": "panna",
+"text": "ほんとに しらなかったの？"
+},
+{
+"key": "mk_suberi_t1_b0",
+"who": "panna",
+"text": "ひとの せいに しないでよ"
+},
+{
+"key": "mk_suberi_t1_b1",
+"who": "panna",
+"text": "よくないよ！"
+},
+{
+"key": "mk_suberi_t2",
+"who": "panna",
+"text": "すべって くる ひとと ぶつかるからね"
+},
+{
+"key": "mk_suberi_t2_b0",
+"who": "panna",
+"text": "えー、だめだってば"
+},
+{
+"key": "mk_suberi_t2_b1",
+"who": "panna",
+"text": "……ちゃんと きいてる？"
+},
+{
+"key": "mk_suberi_t3",
+"who": "panna",
+"text": "じゃあ、せんせいには いわないで おくね"
+},
+{
+"key": "mk_suberi_t3_b0",
+"who": "panna",
+"text": "なに、その いいかた"
+},
+{
+"key": "mk_suberi_t3_b1",
+"who": "panna",
+"text": "……あれ？ おこってる？"
+},
+{
+"key": "mk_suberi_end",
+"who": "panna",
+"text": "うん！ ねえ、いっしょに あそぼう！"
+},
+{
+"key": "mk_retsu_t0",
+"who": "kuma",
+"text": "あー！ いけないんだー！ せんせいに いっちゃお！"
+},
+{
+"key": "mk_retsu_t0_b0",
+"who": "kuma",
+"text": "ほんとに いっちゃうよ！"
+},
+{
+"key": "mk_retsu_t0_b1",
+"who": "kuma",
+"text": "だまってたら わかんないよ"
+},
+{
+"key": "mk_retsu_t1",
+"who": "kuma",
+"text": "ほんとに しらなかったの？"
+},
+{
+"key": "mk_retsu_t1_b0",
+"who": "kuma",
+"text": "ひとの せいに しないでよ"
+},
+{
+"key": "mk_retsu_t1_b1",
+"who": "kuma",
+"text": "よくないよ！"
+},
+{
+"key": "mk_retsu_t2",
+"who": "kuma",
+"text": "ならんでる ひとが いやな きもちに なるからね"
+},
+{
+"key": "mk_retsu_t2_b0",
+"who": "kuma",
+"text": "えー、だめだってば"
+},
+{
+"key": "mk_retsu_t2_b1",
+"who": "kuma",
+"text": "……ちゃんと きいてる？"
+},
+{
+"key": "mk_retsu_t3",
+"who": "kuma",
+"text": "じゃあ、せんせいには いわないで おくね"
+},
+{
+"key": "mk_retsu_t3_b0",
+"who": "kuma",
+"text": "なに、その いいかた"
+},
+{
+"key": "mk_retsu_t3_b1",
+"who": "kuma",
+"text": "……あれ？ おこってる？"
+},
+{
+"key": "mk_retsu_end",
+"who": "kuma",
+"text": "うん！ ねえ、いっしょに あそぼう！"
+},
+{
+"key": "mk_gyunyu_t0",
+"who": "panna",
+"text": "あー！ ぎゅうにゅうで ぶくぶく したら だめなんだよ！"
+},
+{
+"key": "mk_gyunyu_t0_b0",
+"who": "panna",
+"text": "しらないって なに？ だめなんだよ！"
+},
+{
+"key": "mk_gyunyu_t0_b1",
+"who": "panna",
+"text": "ねえ、なんで だまってるの？"
+},
+{
+"key": "mk_gyunyu_t1",
+"who": "nobbo",
+"text": "どうしたの？"
+},
+{
+"key": "mk_gyunyu_t1_b0",
+"who": "nobbo",
+"text": "なんでもなく なさそうだよ？"
+},
+{
+"key": "mk_gyunyu_t1_b1",
+"who": "nobbo",
+"text": "ぱんなちゃんは、なんて いったの？"
+},
+{
+"key": "mk_gyunyu_t2",
+"who": "nobbo",
+"text": "そうだったのね。どうして だめなのか、わかる？"
+},
+{
+"key": "mk_gyunyu_t2_b0",
+"who": "nobbo",
+"text": "ぱんなちゃんは、なんて いってた？"
+},
+{
+"key": "mk_gyunyu_t2_b1",
+"who": "nobbo",
+"text": "ほんとうに そうかな？"
+},
+{
+"key": "mk_gyunyu_t3",
+"who": "nobbo",
+"text": "そうね。じゃあ、ぱんなちゃんに なんて いう？"
+},
+{
+"key": "mk_gyunyu_t3_b0",
+"who": "nobbo",
+"text": "きもちを つたえて みよう"
+},
+{
+"key": "mk_gyunyu_t3_b1",
+"who": "nobbo",
+"text": "ことばに して みよう"
+},
+{
+"key": "mk_gyunyu_end",
+"who": "panna",
+"text": "うん！ ねえ、いっしょに あそぼう！"
+},
+{
+"key": "mk_tsukue_t0",
+"who": "kuma",
+"text": "あー！ つくえの うえに たったら だめなんだよ！"
+},
+{
+"key": "mk_tsukue_t0_b0",
+"who": "kuma",
+"text": "しらないって なに？ だめなんだよ！"
+},
+{
+"key": "mk_tsukue_t0_b1",
+"who": "kuma",
+"text": "ねえ、なんで だまってるの？"
+},
+{
+"key": "mk_tsukue_t1",
+"who": "nobbo",
+"text": "どうしたの？"
+},
+{
+"key": "mk_tsukue_t1_b0",
+"who": "nobbo",
+"text": "なんでもなく なさそうだよ？"
+},
+{
+"key": "mk_tsukue_t1_b1",
+"who": "nobbo",
+"text": "くまくんは、なんて いったの？"
+},
+{
+"key": "mk_tsukue_t2",
+"who": "nobbo",
+"text": "そうだったのね。どうして だめなのか、わかる？"
+},
+{
+"key": "mk_tsukue_t2_b0",
+"who": "nobbo",
+"text": "くまくんは、なんて いってた？"
+},
+{
+"key": "mk_tsukue_t2_b1",
+"who": "nobbo",
+"text": "ほんとうに そうかな？"
+},
+{
+"key": "mk_tsukue_t3",
+"who": "nobbo",
+"text": "そうね。じゃあ、くまくんに なんて いう？"
+},
+{
+"key": "mk_tsukue_t3_b0",
+"who": "nobbo",
+"text": "きもちを つたえて みよう"
+},
+{
+"key": "mk_tsukue_t3_b1",
+"who": "nobbo",
+"text": "ことばに して みよう"
+},
+{
+"key": "mk_tsukue_end",
+"who": "kuma",
+"text": "うん！ ねえ、いっしょに あそぼう！"
+},
+{
+"key": "mk_kasa_t0",
+"who": "panna",
+"text": "みて みて！ かさ、ぐるぐる！"
+},
+{
+"key": "mk_kasa_t0_b0",
+"who": "panna",
+"text": "そんな いいかた しなくても……"
+},
+{
+"key": "mk_kasa_t0_b1",
+"who": "panna",
+"text": "ねえ、みてよー"
+},
+{
+"key": "mk_kasa_t1",
+"who": "panna",
+"text": "え、そうなの？ だって、とらおくんも やってたよ"
+},
+{
+"key": "mk_kasa_t1_b0",
+"who": "panna",
+"text": "えー……"
+},
+{
+"key": "mk_kasa_t1_b1",
+"who": "panna",
+"text": "ひどい……"
+},
+{
+"key": "mk_kasa_t2",
+"who": "panna",
+"text": "どうして だめなの？"
+},
+{
+"key": "mk_kasa_t2_b0",
+"who": "panna",
+"text": "わけを おしえてよ"
+},
+{
+"key": "mk_kasa_t2_b1",
+"who": "panna",
+"text": "えー、じゃあ わかんないよ"
+},
+{
+"key": "mk_kasa_t3",
+"who": "panna",
+"text": "そっか。おしえて くれて ありがとう"
+},
+{
+"key": "mk_kasa_t3_b0",
+"who": "panna",
+"text": "……わかったってば"
+},
+{
+"key": "mk_kasa_t3_b1",
+"who": "panna",
+"text": "……あれ？"
+},
+{
+"key": "mk_kasa_end",
+"who": "panna",
+"text": "うん！ いっしょに あそぼう！"
+},
+{
+"key": "mk_suna_t0",
+"who": "kuma",
+"text": "みて みて！ すな、ぱーって なげるの、おもしろいよ！"
+},
+{
+"key": "mk_suna_t0_b0",
+"who": "kuma",
+"text": "そんな いいかた しなくても……"
+},
+{
+"key": "mk_suna_t0_b1",
+"who": "kuma",
+"text": "ねえ、みてよー"
+},
+{
+"key": "mk_suna_t1",
+"who": "kuma",
+"text": "え、そうなの？ だって、とらおくんも やってたよ"
+},
+{
+"key": "mk_suna_t1_b0",
+"who": "kuma",
+"text": "えー……"
+},
+{
+"key": "mk_suna_t1_b1",
+"who": "kuma",
+"text": "ひどい……"
+},
+{
+"key": "mk_suna_t2",
+"who": "kuma",
+"text": "どうして だめなの？"
+},
+{
+"key": "mk_suna_t2_b0",
+"who": "kuma",
+"text": "わけを おしえてよ"
+},
+{
+"key": "mk_suna_t2_b1",
+"who": "kuma",
+"text": "えー、じゃあ わかんないよ"
+},
+{
+"key": "mk_suna_t3",
+"who": "kuma",
+"text": "そっか。おしえて くれて ありがとう"
+},
+{
+"key": "mk_suna_t3_b0",
+"who": "kuma",
+"text": "……わかったってば"
+},
+{
+"key": "mk_suna_t3_b1",
+"who": "kuma",
+"text": "……あれ？"
+},
+{
+"key": "mk_suna_end",
+"who": "kuma",
+"text": "うん！ いっしょに あそぼう！"
+},
+{
+"key": "rs_manekko",
+"who": "doshin",
+"text": "そうだった！ おしえて くれて ありがとう"
+},
+{
+"key": "mk_gao_bad",
+"who": "gao",
+"text": "しらないもん！"
+},
+{
+"key": "mk_gao_ok",
+"who": "gao",
+"text": "そっか。おしえて くれて ありがとう"
+}
+]
