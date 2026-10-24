@@ -1,0 +1,42 @@
+[
+{
+"key": "mk_kotoba_t0",
+"who": "panna",
+"text": "あー！「ばか」って いったら だめなんだよ！"
+},
+{
+"key": "mk_kotoba_t2",
+"who": "panna",
+"text": "いわれた ひとが かなしく なるからね"
+},
+{
+"key": "mk_suberi_t0",
+"who": "panna",
+"text": "あー！ いけないんだー！ せんせいに いっちゃお！"
+},
+{
+"key": "mk_suberi_t0_b1",
+"who": "panna",
+"text": "だまってたら わかんないよ"
+},
+{
+"key": "mk_retsu_t0",
+"who": "kuma",
+"text": "あー！ いけないんだー！ せんせいに いっちゃお！"
+},
+{
+"key": "mk_retsu_t0_b1",
+"who": "kuma",
+"text": "だまってたら わかんないよ"
+},
+{
+"key": "mk_kasa_t2_b1",
+"who": "panna",
+"text": "えー、じゃあ わかんないよ"
+},
+{
+"key": "mk_suna_t2_b1",
+"who": "kuma",
+"text": "えー、じゃあ わかんないよ"
+}
+]
