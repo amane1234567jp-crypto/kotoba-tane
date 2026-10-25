@@ -1,0 +1,252 @@
+[
+{
+"key": "dgq_start1_mama",
+"who": "mama",
+"text": "きょうは、どんな いちにち だった？"
+},
+{
+"key": "dgq_start2_mama",
+"who": "mama",
+"text": "なにか たのしい こと、あった？"
+},
+{
+"key": "dgq_doko1_mama",
+"who": "mama",
+"text": "それは、どこで？"
+},
+{
+"key": "dgq_doko2_mama",
+"who": "mama",
+"text": "どこに いたの？"
+},
+{
+"key": "dgq_dare1_mama",
+"who": "mama",
+"text": "だれと あそんだの？"
+},
+{
+"key": "dgq_dare2_mama",
+"who": "mama",
+"text": "ひとりで？ だれかと いっしょ？"
+},
+{
+"key": "dgq_nani1_mama",
+"who": "mama",
+"text": "そこで、なにを したの？"
+},
+{
+"key": "dgq_nani2_mama",
+"who": "mama",
+"text": "へえ、なに してたの？"
+},
+{
+"key": "dgq_kimo1_mama",
+"who": "mama",
+"text": "それで、どう だった？"
+},
+{
+"key": "dgq_kimo2_mama",
+"who": "mama",
+"text": "どんな きもちに なった？"
+},
+{
+"key": "dgq_start1_pyonmama",
+"who": "pyonmama",
+"text": "きょうは、どんな いちにち だった？"
+},
+{
+"key": "dgq_start2_pyonmama",
+"who": "pyonmama",
+"text": "なにか たのしい こと、あった？"
+},
+{
+"key": "dgq_doko1_pyonmama",
+"who": "pyonmama",
+"text": "それは、どこで？"
+},
+{
+"key": "dgq_doko2_pyonmama",
+"who": "pyonmama",
+"text": "どこに いたの？"
+},
+{
+"key": "dgq_dare1_pyonmama",
+"who": "pyonmama",
+"text": "だれと あそんだの？"
+},
+{
+"key": "dgq_dare2_pyonmama",
+"who": "pyonmama",
+"text": "ひとりで？ だれかと いっしょ？"
+},
+{
+"key": "dgq_nani1_pyonmama",
+"who": "pyonmama",
+"text": "そこで、なにを したの？"
+},
+{
+"key": "dgq_nani2_pyonmama",
+"who": "pyonmama",
+"text": "へえ、なに してたの？"
+},
+{
+"key": "dgq_kimo1_pyonmama",
+"who": "pyonmama",
+"text": "それで、どう だった？"
+},
+{
+"key": "dgq_kimo2_pyonmama",
+"who": "pyonmama",
+"text": "どんな きもちに なった？"
+},
+{
+"key": "dgq_start1_gaomama",
+"who": "gaomama",
+"text": "きょうは、どんな いちにち だった？"
+},
+{
+"key": "dgq_start2_gaomama",
+"who": "gaomama",
+"text": "なにか たのしい こと、あった？"
+},
+{
+"key": "dgq_doko1_gaomama",
+"who": "gaomama",
+"text": "それは、どこで？"
+},
+{
+"key": "dgq_doko2_gaomama",
+"who": "gaomama",
+"text": "どこに いたの？"
+},
+{
+"key": "dgq_dare1_gaomama",
+"who": "gaomama",
+"text": "だれと あそんだの？"
+},
+{
+"key": "dgq_dare2_gaomama",
+"who": "gaomama",
+"text": "ひとりで？ だれかと いっしょ？"
+},
+{
+"key": "dgq_nani1_gaomama",
+"who": "gaomama",
+"text": "そこで、なにを したの？"
+},
+{
+"key": "dgq_nani2_gaomama",
+"who": "gaomama",
+"text": "へえ、なに してたの？"
+},
+{
+"key": "dgq_kimo1_gaomama",
+"who": "gaomama",
+"text": "それで、どう だった？"
+},
+{
+"key": "dgq_kimo2_gaomama",
+"who": "gaomama",
+"text": "どんな きもちに なった？"
+},
+{
+"key": "dgq_start1_miimama",
+"who": "miimama",
+"text": "きょうは、どんな いちにち だった？"
+},
+{
+"key": "dgq_start2_miimama",
+"who": "miimama",
+"text": "なにか たのしい こと、あった？"
+},
+{
+"key": "dgq_doko1_miimama",
+"who": "miimama",
+"text": "それは、どこで？"
+},
+{
+"key": "dgq_doko2_miimama",
+"who": "miimama",
+"text": "どこに いたの？"
+},
+{
+"key": "dgq_dare1_miimama",
+"who": "miimama",
+"text": "だれと あそんだの？"
+},
+{
+"key": "dgq_dare2_miimama",
+"who": "miimama",
+"text": "ひとりで？ だれかと いっしょ？"
+},
+{
+"key": "dgq_nani1_miimama",
+"who": "miimama",
+"text": "そこで、なにを したの？"
+},
+{
+"key": "dgq_nani2_miimama",
+"who": "miimama",
+"text": "へえ、なに してたの？"
+},
+{
+"key": "dgq_kimo1_miimama",
+"who": "miimama",
+"text": "それで、どう だった？"
+},
+{
+"key": "dgq_kimo2_miimama",
+"who": "miimama",
+"text": "どんな きもちに なった？"
+},
+{
+"key": "dgq_start1_chumama",
+"who": "chumama",
+"text": "きょうは、どんな いちにち だった？"
+},
+{
+"key": "dgq_start2_chumama",
+"who": "chumama",
+"text": "なにか たのしい こと、あった？"
+},
+{
+"key": "dgq_doko1_chumama",
+"who": "chumama",
+"text": "それは、どこで？"
+},
+{
+"key": "dgq_doko2_chumama",
+"who": "chumama",
+"text": "どこに いたの？"
+},
+{
+"key": "dgq_dare1_chumama",
+"who": "chumama",
+"text": "だれと あそんだの？"
+},
+{
+"key": "dgq_dare2_chumama",
+"who": "chumama",
+"text": "ひとりで？ だれかと いっしょ？"
+},
+{
+"key": "dgq_nani1_chumama",
+"who": "chumama",
+"text": "そこで、なにを したの？"
+},
+{
+"key": "dgq_nani2_chumama",
+"who": "chumama",
+"text": "へえ、なに してたの？"
+},
+{
+"key": "dgq_kimo1_chumama",
+"who": "chumama",
+"text": "それで、どう だった？"
+},
+{
+"key": "dgq_kimo2_chumama",
+"who": "chumama",
+"text": "どんな きもちに なった？"
+}
+]
