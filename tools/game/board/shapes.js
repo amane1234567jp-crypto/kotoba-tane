@@ -3,7 +3,7 @@ function shapeLabels(B) { const N = B.nodes, ks = Object.keys(N), E = [];
   for (const a of ks) for (const b of B.next[a] || []) E.push([N[a], N[b]]);
   const segd = (o, p, q) => { const dx = q[0] - p[0], dy = q[1] - p[1], L = dx * dx + dy * dy, t = L ? Math.max(0, Math.min(1, ((o[0] - p[0]) * dx + (o[1] - p[1]) * dy) / L)) : 0; return Math.hypot(o[0] - p[0] - dx * t, o[1] - p[1] - dy * t); };
   const used = [];
-  return B.labels.map(([t]) => { const own = ks.filter(k => B.place[k] === t); if (!own.length) return null;
+  return B.labels.filter(([t], i, A) => A.findIndex(x => x[0] === t) === i).map(([t]) => { const own = ks.filter(k => B.place[k] === t); if (!own.length) return null;
     const cx = own.reduce((s, k) => s + N[k][0], 0) / own.length, cy = own.reduce((s, k) => s + N[k][1], 0) / own.length; let best = null;
     for (let r = 70; r <= 260; r += 30) for (let a = 0; a < 16; a++) { const x = cx + r * Math.cos(a * Math.PI / 8), y = cy + r * Math.sin(a * Math.PI / 8) * .8, w = t.length * 30 + 34;
       if (x - w / 2 < 20 || x + w / 2 > 1580 || y < 200 || y > 985 || (x < 560 && y < 190)) continue;

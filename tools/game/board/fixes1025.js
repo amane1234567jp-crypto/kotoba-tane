@@ -26,3 +26,11 @@ var OD_BIKE_SAY = false;
   const n0 = noise; noise = function (...a) { if (HIDE.off) return; return n0(...a); };
   if (typeof tune === "function") { const t0 = tune; tune = function (...a) { if (HIDE.off) return; return t0(...a); }; }
   const sp = speak; speak = async function (...a) { await whenShown(); return sp(...a); }; }
+
+/* ゴールの てまえの マイナスマスを ショートコース みんなに（さんすうの ゴール付近が たのしい、2026-10-25）
+   ゴールに つながる マスで しかけの ない ものを「2マス もどる」に する */
+{ const isLongSt = id => typeof SL_SHAPE !== "undefined" && SL_SHAPE[id];
+  for (const st of Object.keys(BOARD)) { if (isLongSt(st) || !EVENTS[st]) continue; const B = BOARD[st];
+    const goal = Object.keys(B.nodes).find(k => B.nodes[k].includes("goal")); if (!goal) continue;
+    for (const a of Object.keys(B.next)) if ((B.next[a] || []).includes(goal) && !EVENTS[st][a] && a !== "0" && !Object.keys(B.next).some(z => (B.next[z] || []).includes(a) && EVENTS[st][z] && ["back", "home"].includes(EVENTS[st][z][0])))
+      EVENTS[st][a] = ["back", 2, "ev_goalb", "ゴールの てまえで つまずいた！ 2マス もどるよ"]; } }
