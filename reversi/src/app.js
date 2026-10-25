@@ -11,7 +11,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const CFG_KEY = "marushima-reversi-cfg", GAME_KEY = "marushima-reversi-game";
 const load = k => { try { return JSON.parse(localStorage.getItem(k)) || null; } catch (e) { return null; } };
 const keep = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* 保存できなくても遊べる */ } };
-const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2, autoOk: 1 }, load(CFG_KEY) || {});
+const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2, autoOk: 1, relay: 0 }, load(CFG_KEY) || {});
 const saveCfg = () => keep(CFG_KEY, CFG);
 
 /* ---------- 対局の状態 ---------- */
@@ -200,14 +200,44 @@ function hideBubble() { keepBubble = null; bubble.classList.remove("on"); }
 function bubbleAt(c) {
   const p = headTop(c); bubble.style.left = Math.max(140, Math.min(innerWidth - 140, p.x)) + "px"; bubble.style.top = Math.max(90, p.y - 6) + "px";
 }
-function say(c, text, min = 0, keep = false) {
+/* 合成した声（voice/out/*.mp3）。ぽにー＝VOICEVOX 調整版、かめじい＝AivisSpeech。
+   ファイルがないとき（1枚だけの確認版など）は、端末の読み上げにまかせる。 */
+const VOICE_DIR = "voice/out/", vbuf = {};
+async function loadVoice(key) {
+  if (key in vbuf) return vbuf[key];
+  vbuf[key] = null;
+  try {
+    const r = await fetch(VOICE_DIR + key + ".mp3"); if (!r.ok) return null;
+    const data = await r.arrayBuffer();
+    vbuf[key] = await new Promise((ok, ng) => audio().decodeAudioData(data, ok, ng));
+  } catch (e) { vbuf[key] = null; }
+  return vbuf[key];
+}
+// 数の声（くろが Nこ…）は 終局のときに 2本だけ読む。ほかは はじめに読んでおく
+const preloadVoices = () => Object.keys(VOICE_TEXT).filter(k => !/^rv_[ks]\d+$/.test(k)).forEach(k => loadVoice(k));
+function playBuf(buf) {
+  return new Promise(res => {
+    const s = ctx.createBufferSource(), g = ctx.createGain();
+    s.buffer = buf; g.gain.value = [0, .5, .85, 1.2][CFG.voice]; s.connect(g).connect(ctx.destination);
+    s.onended = res; s.start(); setTimeout(res, buf.duration * 1000 + 400);
+  });
+}
+// key（または key の並び）で話す。文は VOICE_TEXT から
+function speak(c, keys, min = 0, keep = false) {
+  keys = [].concat(keys);
+  return say(c, keys.map(k => VOICE_TEXT[k] || "").join(" ").replace(/、 /g, "、"), min, keep, keys);
+}
+function say(c, text, min = 0, keep = false, keys = null) {
   bubble.textContent = text; bubble.classList.add("on"); talking = c; bubbleAt(c);
   const fallback = 900 + text.length * 170;
   const t0 = performance.now();
   return new Promise(res => {
     let done = false;
     const end = () => { if (done) return; done = true; const left = Math.max(0, min - (performance.now() - t0)); setTimeout(() => { talking = null; c.speakingLevel = 0; if (!keep) bubble.classList.remove("on"); else keepBubble = c; res(); }, left + 250); };
-    if (CFG.voice && "speechSynthesis" in window) {
+    const bufs = keys ? keys.map(k => vbuf[k]) : [];
+    if (CFG.voice && keys && bufs.every(Boolean)) {
+      (async () => { for (const b of bufs) await playBuf(b); end(); })();
+    } else if (CFG.voice && "speechSynthesis" in window) {
       try {
         speechSynthesis.cancel();
         const u = new SpeechSynthesisUtterance(text), v = VOICE[c.kind] || {};
@@ -261,7 +291,7 @@ async function afterMove(state) {
     ["A", "B"].forEach(s => $("side" + s).classList.remove("active"));
     act(ps, "pass");
     await showHost(host.pony);
-    await say(host.pony, `${nameOf(ps)}は おけるところが ないから パス！ ${nameOf(other(ps))}の ばん！`, T.passMin);
+    await speak(host.pony, "rv_pass_" + (colorOf(ps) === BLACK ? "k" : "s"), T.passMin);
     await hideHost(host.pony);
   }
   setTurn(state);
@@ -338,20 +368,20 @@ function requestUndo(side) {
   if (SOLO() || depth === 1 || (side === "A" && CFG.autoOk)) { NET.send({ t: "undo", side, depth, n: G.hist.length }); animUndo(side, depth); return; }
   G.busy = true; updateButtons(); clearHints();
   NET.send({ t: "undoReq", side, n: G.hist.length });
-  showHost(host.pony).then(() => say(host.pony, "おへんじを まってるよ", 0, true));
+  showHost(host.pony).then(() => speak(host.pony, "rv_wait", 0, true));
   undoTimer = setTimeout(() => { NET.send({ t: "undoCancel" }); undoRefused(side); }, 10000);
 }
 async function undoRefused(side) {
   clearTimeout(undoTimer); act(side, "pass");
   if (host.pony.hidden) await showHost(host.pony);
-  await say(host.pony, "こんどは そのまま つづけよう");
+  await speak(host.pony, "rv_refused");
   await hideHost(host.pony); setTurn(cur, true);
 }
 let askTimer = null, askFor = null;
 async function askUndo(m) {
   G.busy = true; askFor = m; updateButtons(); clearHints();
   await showHost(host.pony);
-  say(host.pony, `${nameOf(m.side)}が まったって！ いいかな？`, 0, true);
+  speak(host.pony, "rv_matta_" + (colorOf(m.side) === BLACK ? "k" : "s"), 0, true);
   $("askOv").hidden = false;
   askTimer = setTimeout(() => answerUndo(false), 10000);
 }
@@ -374,6 +404,7 @@ async function endGame(state) {
   G.ended = true; G.busy = true; updateButtons(); clearHints();
   ["A", "B"].forEach(s => $("side" + s).classList.remove("active"));
   const c = count(state.board);
+  const countVoice = Promise.all([loadVoice(`rv_k${c.black}`), loadVoice(`rv_s${c.white}`)]);
   await showHost(host.kame);
   // 色ごとに集めて並べなおす（くろは左上から、しろは右下から）
   const sorted = new Array(64).fill(EMPTY);
@@ -385,18 +416,19 @@ async function endGame(state) {
   cells.forEach((x, i) => { x.disc.getAnimations().forEach(a => a.cancel()); setDisc(i, sorted[i]); x.disc.style.opacity = 0; });
   sorted.forEach((v, i) => { if (!v) return; const d = (v === BLACK ? i : 63 - i) * (T.gather - 600) / 64; setTimeout(() => { const x = cells[i]; x.disc.style.opacity = ""; x.disc.animate([{ opacity: 0, transform: "scale(.5)" }, { opacity: 1, transform: "none" }], { duration: 220 }); }, d); });
   await wait(T.gather - 300);
-  await say(host.kame, `くろが ${c.black}こ、しろが ${c.white}こ`);
+  await Promise.race([countVoice, wait(3000)]);
+  await speak(host.kame, [`rv_k${c.black}`, `rv_s${c.white}`]);
   const win = c.black === c.white ? null : sideOf(c.black > c.white ? BLACK : WHITE);
   if (win) {
     SFX.fanfare(false); act(win, "win"); act(other(win), "lose"); confettiAt(...centerOf($("slot" + win)), 80);
-    await say(host.kame, `${nameOf(win)}の かち！`);
+    await speak(host.kame, "rv_win_" + (colorOf(win) === BLACK ? "k" : "s"));
   } else {
     SFX.fanfare(true); act("A", "win"); act("B", "win");
-    await say(host.kame, "おなじ かず！ ひきわけ！");
+    await speak(host.kame, "rv_draw");
   }
   await hideHost(host.kame);
   await showHost(host.pony);
-  say(host.pony, "もういっかい やる？", 1500);
+  speak(host.pony, "rv_again", 1500);
   $("againOv").hidden = false;
 }
 async function rematch() {
@@ -418,7 +450,7 @@ async function newGame(announce = true) {
   if (announce) {
     await showHost(host.kame);
     act("A", "turn"); act("B", "turn");
-    await say(host.kame, "はじめ！ さきは くろ からだよ");
+    await speak(host.kame, "rv_start");
     await hideHost(host.kame);
   }
   setTurn(cur);
@@ -429,6 +461,7 @@ const setPanel = $("settings");
 function syncPanel() {
   setPanel.querySelectorAll(".seg").forEach(seg => seg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === +CFG[seg.dataset.key]))));
   $("resetBtn").textContent = "さいしょから"; $("resetBtn").classList.remove("confirm");
+  $("routeInfo").textContent = NET.open && NET.via ? `いまのつながり：${NET.via}` : (CFG.relay ? "「中継だけ」は、つぎに「おばあちゃんを よぶ」を押したときから使います" : "");
 }
 setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
@@ -459,7 +492,7 @@ document.addEventListener("visibilitychange", () => { if (document.visibilitySta
 function unlock() {
   audio(); SFX.turn();
   try { if ("speechSynthesis" in window) { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); } } catch (e) { /* 読み上げなしでも遊べる */ }
-  $("startOv").hidden = true; G.started = true; keepAwake();
+  $("startOv").hidden = true; G.started = true; keepAwake(); preloadVoices();
 }
 $("startBtn").addEventListener("click", async () => {
   unlock();
@@ -483,7 +516,10 @@ function showCams() {
 }
 NET.on("local", s => {
   const c = camOf(mySide());
-  if (!s) return camMsg(mySide(), "カメラが つかえません");
+  if (!s) {
+    camMsg(mySide(), NET.role === "guest" ? "カメラが使えません。設定の「Safari」→「カメラ」「マイク」を「許可」にして、もう一度リンクを開いてください" : "カメラが つかえません");
+    return;
+  }
   c.v.muted = true; c.v.srcObject = s; playVideo(c.v); camMsg(mySide(), "");
 });
 NET.on("remote", s => { const c = camOf(otherSide()); c.v.muted = false; c.v.srcObject = s; playVideo(c.v); camMsg(otherSide(), ""); });
@@ -533,7 +569,8 @@ function applyState(m) {
 }
 let lostSaid = false;
 NET.on("open", () => {
-  G.paused = false; lostSaid = false; $("inviteOv").hidden = true; camMsg(otherSide(), "");
+  const back = lostSaid; G.paused = false; lostSaid = false; $("inviteOv").hidden = true; camMsg(otherSide(), "");
+  if (back && !G.animating) speak(host.pony, "rv_back");
   if (NET.role !== "host") return;
   sendState();
   if (G.begun) return updateButtons();
@@ -545,9 +582,10 @@ NET.on("open", () => {
 NET.on("lost", () => {
   G.paused = true; updateButtons();
   camMsg(otherSide(), "つなぎなおしています…");
-  if (!lostSaid && !G.animating) { lostSaid = true; say(host.pony, "ちょっと まってね"); }
+  if (!lostSaid && !G.animating) { lostSaid = true; speak(host.pony, "rv_hold"); }
 });
 NET.on("ready", () => camMsg(otherSide(), "まっています…"));
+NET.on("route", via => { $("routeInfo").textContent = via ? `いまのつながり：${via}` : ""; });
 NET.on("error", type => camMsg(otherSide(), type === "network" || type === "server-error" ? "インターネットを たしかめてね" : "つなぎなおしています…"));
 
 function startOnline() {
@@ -557,7 +595,7 @@ function startOnline() {
 }
 // おばあちゃんを よぶ（ホスト）
 async function callGrandma(fresh) {
-  unlock(); NET.role = "host"; startOnline();
+  unlock(); NET.role = "host"; NET.relayOnly = !!CFG.relay; startOnline();
   const s = replay(G.hist); paint(s.board); setCounts(s.board, false);
   await NET.host(fresh);
   showInvite();
@@ -592,7 +630,13 @@ $("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (N
   if (hd && Array.isArray(hd.hist)) { try { replay(hd.hist); G.hist = hd.hist; G.blackSide = hd.blackSide; } catch (e) { /* 保存がこわれていたら最初から */ } }
   const s = replay(G.hist); cur = s;
   paintSides(); paint(s.board); setCounts(s.board, false); haloFor(G.hist);
-  if (NET.role === "guest") { $("startBtn").textContent = "はじめる"; $("callBtn").hidden = true; $("startNote").textContent = "カメラと マイクを つかいます。「きょか」を おしてね"; }
+  if (NET.role === "guest") {
+    // おばあちゃん向け：大人なので漢字まじりで、大きく、手順を2つだけ
+    $("callBtn").hidden = true; $("startOv").classList.add("guest");
+    $("startBtn").textContent = "はじめる"; $("startBtn").classList.remove("sub");
+    $("guestLead").hidden = false; $("callBtn").before($("guestLead"));   // 説明を「はじめる」の上に
+    $("startNote").textContent = "";
+  }
   else if (!NET.available) $("callBtn").hidden = true;
   layout(); placeAll();
 })();

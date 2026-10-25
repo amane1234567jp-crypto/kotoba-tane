@@ -140,6 +140,12 @@ body {
 }
 .big:active { transform: translateY(6px); box-shadow: 0 2px 0 var(--ink); }
 .note { font-size: 15px; color: var(--muted); margin: 0; }
+.guestLead { max-width: 560px; background: var(--seat); border: 5px solid var(--ink); border-radius: 24px; padding: 18px 26px; text-align: left; }
+.guestLead .gTitle { margin: 0 0 8px; font: 900 clamp(24px, 4.4vmin, 38px)/1.3 var(--body); text-align: center; }
+.guestLead ol { margin: 0; padding-left: 1.4em; display: grid; gap: 6px; font: 700 clamp(20px, 3.4vmin, 30px)/1.45 var(--body); }
+.guestLead .gNote { margin: 10px 0 0; font: 500 clamp(16px, 2.6vmin, 22px)/1.6 var(--body); color: var(--muted); }
+#startOv.guest .big { font-size: clamp(34px, 7vmin, 64px); padding: .35em 1.8em; }
+#startOv.guest .logo { font-size: clamp(30px, 6vmin, 60px); }
 #againOv { place-items: end center; padding-block: 0 8vh; pointer-events: none; }
 #againOv .big { pointer-events: auto; }
 
@@ -151,6 +157,7 @@ body {
 .seg { display: flex; gap: 6px; flex-wrap: wrap; }
 .seg button { flex: 1; min-width: 70px; font: 700 17px var(--body); padding: 10px 8px; border: 3px solid var(--ink); border-radius: 14px; background: #FFFFFF; color: var(--ink); cursor: pointer; }
 .seg button[aria-pressed="true"] { background: var(--glow); }
+.route { font-weight: 500 !important; color: var(--ink) !important; letter-spacing: 0 !important; }
 .panelBtns { display: flex; gap: 10px; flex-wrap: wrap; }
 .panelBtns button { flex: 1; font: 700 17px var(--body); padding: 12px; border: 3px solid var(--ink); border-radius: 14px; background: #FFFFFF; color: var(--ink); cursor: pointer; }
 .panelBtns .primary { background: var(--glow); }
@@ -216,6 +223,14 @@ body {
     <h1 class="logo">まるシマ<span>リバーシ</span></h1>
     <button class="big" id="callBtn" type="button">おばあちゃんを よぶ</button>
     <button class="big sub" id="startBtn" type="button">1だいで あそぶ</button>
+    <div class="guestLead" id="guestLead" hidden>
+      <p class="gTitle">リバーシのお誘いです</p>
+      <ol>
+        <li>下の<b>「はじめる」</b>を押します</li>
+        <li>カメラとマイクの確認が出たら<b>「許可」</b>を押します</li>
+      </ol>
+      <p class="gNote">お孫さんの顔が映ったら、黒と白の石を交互に置いて遊びます。</p>
+    </div>
     <p class="note" id="startNote">おとなの せってい：ばんの そとを 3びょう ながおし</p>
   </div>
 </div>
@@ -243,6 +258,7 @@ body {
     <div class="row"><span>こうかおん</span><div class="seg" data-key="sfx"><button type="button" id="sfx0" data-v="0">なし</button><button type="button" id="sfx1" data-v="1">小</button><button type="button" id="sfx2" data-v="2">中</button><button type="button" id="sfx3" data-v="3">大</button></div></div>
     <div class="row"><span>キャラの こえ</span><div class="seg" data-key="voice"><button type="button" id="voice0" data-v="0">なし</button><button type="button" id="voice1" data-v="1">小</button><button type="button" id="voice2" data-v="2">中</button><button type="button" id="voice3" data-v="3">大</button></div></div>
     <div class="row"><span>こどもの まったに おばあちゃんは じどうで いいよ</span><div class="seg" data-key="autoOk"><button type="button" id="autoOk1" data-v="1">じどうで いいよ</button><button type="button" id="autoOk0" data-v="0">きいてから</button></div></div>
+    <div class="row"><span>つながり方（テスト用。「中継だけ」は、家の外でもつながるかを家の中で確かめるとき）</span><div class="seg" data-key="relay"><button type="button" id="relay0" data-v="0">ふつう</button><button type="button" id="relay1" data-v="1">中継だけ</button></div><span class="route" id="routeInfo"></span></div>
     <div class="panelBtns"><button type="button" id="reinviteBtn">おばあちゃんを よぶ（リンク）</button></div>
     <div class="panelBtns"><button type="button" id="resetBtn">さいしょから</button><button type="button" id="closeBtn" class="primary">とじる</button></div>
   </div>
@@ -538,6 +554,13 @@ const BUILD = {
     return { base: 406, top: 76, tail: null, legs, arms, head: { g: head, px: 200, py: 262 }, ears: [], eyes, happy: null,
       mouth: { type: "jaw", el: jaw }, brows, tempo: 0.65 };
   },
+  // かめせんせい（びょういんの おいしゃさん、2026-10-20）：かめじい とは べつの ひと。はくい・めがね・ちょうしんき。つえは もたない
+  kamedr(root) { const p = BUILD.kamejii(root); root.querySelectorAll("path").forEach(e => { if ((e.getAttribute("d") || "").startsWith("M306 250")) e.setAttribute("display", "none"); });
+    coatOn(root, p, "#FFFFFF"); const st = el("g", {}); root.insertBefore(st, p.arms[0].g);
+    el("path", { d: "M172 290 Q160 334 190 350 M228 290 Q240 334 210 350", fill: "none", stroke: "#4A4A58", "stroke-width": 7, "stroke-linecap": "round" }, st); el("circle", { cx: 200, cy: 356, r: 13, fill: "#C9D3DE", ...ST(4) }, st);
+    const gl = el("g", {}, p.head.g); [160, 240].forEach(cx => el("circle", { cx, cy: 170, r: 30, fill: "#FFFFFF", "fill-opacity": .3, ...ST(6) }, gl));
+    el("path", { d: "M190 168 Q200 160 210 168 M130 166 L104 158 M270 166 L296 158", fill: "none", ...ST(5) }, gl);
+    p.tempo = .8; return p; },
   meebaa(root) {
     const s = ST(), W = "#FFF6E9", F = "#F2D2B6";
     const legs = [172, 228].map(x => leg(root, x, 366, 28, 42, "#6B4A36", null));
@@ -636,14 +659,16 @@ const BUILD = {
     coatOn(root, p, "#BFE3F5");
     el("path", { d: "M108 124 Q200 74 292 124", fill: "none", stroke: "#4A4A58", "stroke-width": 8 }, p.head.g); el("circle", { cx: 200, cy: 98, r: 22, fill: "#E8EEF4", ...ST(5) }, p.head.g); el("circle", { cx: 200, cy: 98, r: 8, fill: "#4A4A58" }, p.head.g);
     p.tempo = .95; return p; },
-  piyoko(root) { const p = BUILD.chu(root); recolor(root, { "#C9C5D6": "#FFE066", "#F1EFF6": "#FFF6C2", "#FFB3C1": "#FFA94D" });
+  piyo(root) { return BUILD.piyoko(root, true); }, // ようちえんの ぴよこちゃん（かんごしさんの ぼうしは なし・みずいろの ふく・2026-10-20）
+  piyoko(root, kid) { const p = BUILD.chu(root); recolor(root, { "#C9C5D6": "#FFE066", "#F1EFF6": "#FFF6C2", "#FFB3C1": "#FFA94D" });
     p.ears.forEach(e => e.g.setAttribute("display", "none")); if (p.tail) p.tail.g.setAttribute("display", "none");
     p.head.g.querySelectorAll("path").forEach(e => { const d = e.getAttribute("d") || ""; if (d.startsWith("M118 214") || d.startsWith("M126 140")) e.setAttribute("display", "none"); });
     p.head.g.querySelectorAll("ellipse").forEach(e => { if (e.getAttribute("fill") === "#FF6F91") e.setAttribute("display", "none"); });
     el("path", { d: "M182 200 L218 200 L200 226 Z", fill: "#FF9F1C", ...ST(5) }, p.head.g);
     el("path", { d: "M194 88 Q186 60 202 66 Q214 54 210 86", fill: "#FFE066", ...ST(5) }, p.head.g);
-    const cap = el("g", {}, p.head.g); el("path", { d: "M146 98 L254 98 L240 62 L160 62 Z", fill: "#FFFFFF", ...ST(6) }, cap); el("path", { d: "M200 68 V92 M188 80 H212", stroke: "#E8473C", "stroke-width": 7 }, cap);
-    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M160 296 Q200 286 240 296 L252 380 Q200 394 148 380 Z", fill: "#FFC2D1", ...ST(5) }, bd);
+    if (!kid) { const cap = el("g", {}, p.head.g); el("path", { d: "M146 98 L254 98 L240 62 L160 62 Z", fill: "#FFFFFF", ...ST(6) }, cap); el("path", { d: "M200 68 V92 M188 80 H212", stroke: "#E8473C", "stroke-width": 7 }, cap); }
+    else { el("circle", { cx: 236, cy: 96, r: 16, fill: "#FF8FB1", ...ST(4) }, p.head.g); }
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M160 296 Q200 286 240 296 L252 380 Q200 394 148 380 Z", fill: kid ? "#9AD7FF" : "#FFC2D1", ...ST(5) }, bd);
     p.tempo = 1.05; return p; },
   ookami(root) { // あやしい おおかみ（とうこう）：サングラス・ぼうし・コート
     const p = BUILD.kon(root); recolor(root, { "#F29F4C": "#8E8E9E", "#FFF6E9": "#E6E6EE", "#7CC36A": "#4A4A58", "#7A4A2A": "#4A4A58" });
@@ -652,11 +677,37 @@ const BUILD = {
     el("path", { d: "M96 108 Q200 70 304 108 L300 122 Q200 96 100 122 Z", fill: "#3A3A46", ...ST(6) }, p.head.g); el("path", { d: "M130 106 Q140 30 200 30 Q260 30 270 106 Z", fill: "#3A3A46", ...ST(6) }, p.head.g);
     el("path", { d: "M136 92 Q200 74 264 92", fill: "none", stroke: "#B0303A", "stroke-width": 12 }, p.head.g);
     p.tempo = .9; return p; },
+  tenin(root) { // おみせの てんいんさん（2026-10-20）：オレンジの ねこ・あかい ぼうしと エプロン（めえばあは ほけんしつの せんせい だけに）
+    const p = BUILD.mii(root); recolor(root, { "#B9A8D9": "#F2B36B", "#EDE6F8": "#FFF4E2" }); hideFill(p.head.g, ["#FFD36E"]);
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M150 292 Q200 280 250 292 L262 384 Q200 398 138 384 Z", fill: "#E8473C", ...ST(5) }, bd); el("rect", { x: 178, y: 330, width: 44, height: 30, rx: 6, fill: "#FFFFFF", ...ST(4) }, bd);
+    el("path", { d: "M118 104 Q200 40 282 104 L282 116 L118 116 Z", fill: "#E8473C", ...ST(6) }, p.head.g); el("path", { d: "M200 116 Q258 112 300 126 L296 136 Q252 126 196 128 Z", fill: "#B8322A", ...ST(5) }, p.head.g);
+    p.tempo = 1; return p; },
+  ekiin(root) { // えきいんさん（2026-10-20）：うんてんしゅさんと おなじ かおで、こんいろの せいふく・ぼうし
+    const p = BUILD.ojisan(root); recolor(root, { "#7FA7D9": "#2F4A7A", "#5BA34D": "#2F4A7A", "#4A8A3E": "#1F3358" });
+    el("rect", { x: 186, y: 70, width: 28, height: 20, rx: 4, fill: "#FFD25E", ...ST(3) }, p.head.g); return p; },
   ojisan(root) { // くるまの うんてんしゅさん（げこう）：ちゃいろの たてがみ・ぼうし・シャツ
     const p = BUILD.gao(root); recolor(root, { "#C8662B": "#7A5236", "#FFC94D": "#E9C08A" }); if (p.brows) p.brows.innerHTML = "";
     const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M134 296 Q200 280 266 296 L272 384 Q200 400 128 384 Z", fill: "#7FA7D9", ...ST(5) }, bd); el("path", { d: "M184 290 L200 318 L216 290", fill: "none", ...ST(4) }, bd);
     el("path", { d: "M112 112 Q200 40 288 112 L288 124 L112 124 Z", fill: "#5BA34D", ...ST(6) }, p.head.g); el("path", { d: "M200 124 Q260 120 314 136 L310 146 Q256 134 196 136 Z", fill: "#4A8A3E", ...ST(5) }, p.head.g);
     p.tempo = .95; return p; },
+  // ゆうごはん（2026-10-19）：まるシマの パパ・がおの パパ・がおの おにいちゃん
+  papa(root) { // まるシマの パパ（しまうま）：みどりの シャツ・ネクタイ・ふとい まゆ・くちひげ
+    const p = BUILD.shima(root);
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M134 288 Q200 272 266 288 L274 386 Q200 402 126 386 Z", fill: "#7BC4A0", ...ST(5) }, bd);
+    el("path", { d: "M180 288 L200 306 L220 288", fill: "#FFFFFF", ...ST(4) }, bd); el("path", { d: "M192 306 L208 306 L214 360 L200 374 L186 360 Z", fill: "#3E6FD6", ...ST(4) }, bd);
+    [[160, 1], [240, -1]].forEach(([x, k]) => el("path", { d: `M${x - 26 * k} ${128} Q${x} ${114} ${x + 26 * k} ${130}`, fill: "none", stroke: INK, "stroke-width": 11, "stroke-linecap": "round" }, p.head.g));
+    el("path", { d: "M170 212 Q186 202 200 210 Q214 202 230 212 Q214 220 200 214 Q186 220 170 212 Z", fill: INK }, p.head.g);
+    p.tempo = .92; return p; },
+  gaopapa(root) { // がおの パパ（らいおん）：こい たてがみ・あかい シャツ・ひげ
+    const p = BUILD.gao(root); recolor(root, { "#C8662B": "#9C4A1E" });
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M134 296 Q200 280 266 296 L272 388 Q200 402 128 388 Z", fill: "#E8735A", ...ST(5) }, bd); el("path", { d: "M182 292 L200 318 L218 292", fill: "none", ...ST(4) }, bd);
+    el("path", { d: "M176 214 Q200 204 224 214 Q212 226 200 220 Q188 226 176 214 Z", fill: "#9C4A1E", ...ST(3) }, p.head.g);
+    p.tempo = .9; return p; },
+  gaonii(root) { // がおの おにいちゃん（らいおん）：みじかい たてがみ・ぼうしを うしろむき・きいろの シャツ
+    const p = BUILD.gao(root); recolor(root, { "#C8662B": "#E08A3A" });
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M138 292 Q200 276 262 292 L270 384 Q200 400 130 384 Z", fill: "#5BA34D", ...ST(5) }, bd); el("text", { x: 200, y: 360, "text-anchor": "middle", "font-family": "Zen Maru Gothic, sans-serif", "font-weight": 700, "font-size": 34, fill: "#FFFFFF" }, bd).textContent = "7";
+    el("path", { d: "M120 104 Q200 40 280 104 L280 116 L120 116 Z", fill: "#3E6FD6", ...ST(6) }, p.head.g); el("path", { d: "M120 116 Q90 110 66 124 L70 134 Q96 124 124 128 Z", fill: "#2E57AE", ...ST(5) }, p.head.g);
+    p.tempo = 1.0; return p; },
   onii(root) { // まるシマの おにいちゃん（おうち1）：あおい シャツ・めがね。すこし せが たかい
     const p = BUILD.shima(root);
     const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M138 290 Q200 274 262 290 L270 384 Q200 400 130 384 Z", fill: "#5B8DEF", ...ST(5) }, bd); el("path", { d: "M180 292 Q200 310 220 292", fill: "none", ...ST(4) }, bd);
@@ -696,10 +747,10 @@ const BUILD = {
     return p; },
 };
 
-const NAMES = { pony: "ぽにー", shima: "まるシマ", doshin: "どしん", nobbo: "のっぽ", gao: "がお", chu: "ちゅう", pyon: "ぴょん", mii: "みい", kamejii: "かめじい", meebaa: "めえばあ",
-  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "ぴよこさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くまた", onii: "おにいちゃん" };
+const NAMES = { pony: "ぽにー", shima: "まるシマ", doshin: "どしん", nobbo: "のっぽ", gao: "がお", chu: "ちゅう", pyon: "ぴょん", mii: "みい", kamejii: "かめじい", kamedr: "かめせんせい", meebaa: "めえばあ",
+  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", papa: "パパ", gaopapa: "がおの パパ", gaonii: "がおの おにいちゃん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "かんごしさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くま", piyo: "ぴよこ", ekiin: "えきいんさん", tenin: "てんいんさん", onii: "おにいちゃん" };
 const LINES = { pony: "きょねん、うみに いったね", shima: "やったー！ いえたね！", doshin: "どいて、あげるよ", nobbo: "それは、ずかんに のって いますよ", gao: "つぎは、まけないぞ",
-  chu: "こ、こわかったよう", pyon: "いっしょに あそぼう！", mii: "ふーん。まあまあ じゃない", kamejii: "よく いえましたね", meebaa: "いらっしゃいませ" };
+  chu: "こ、こわかったよう", pyon: "いっしょに あそぼう！", mii: "ふーん。まあまあ じゃない", kamejii: "よく いえましたね", kamedr: "よく いえましたね", meebaa: "いらっしゃいませ" };
 
 function makeChar(kind) {
   const root = el("g", {}, charLayer);
@@ -835,11 +886,15 @@ const SPECIAL = {
   gaomama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
   miimama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
   chumama: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
+  kamedr: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
   wanko: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
   biba: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
   piyoko: c => { c.happyOn = true; wave(c); later(1400, () => c.happyOn = false); },
   ookami: c => { c.tm.shiver = 1; },
   ojisan: c => { c.tm.nod = 1.2; },
+  papa: c => { c.tm.nod = 1.2; c.happyOn = true; later(1300, () => c.happyOn = false); },
+  gaopapa: c => { c.tm.clap = 1.4; c.mouthOpen.t = .5; later(1400, () => c.mouthOpen.t = 0); },
+  gaonii: c => { c.tm.nod = 1.2; c.happyOn = true; later(1300, () => c.happyOn = false); },
   onii: c => { c.tm.nod = 1.2; c.happyOn = true; later(1300, () => c.happyOn = false); },
   tora: c => { jump(c, .6); c.happyOn = true; later(1200, () => c.happyOn = false); },
   kuma: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
@@ -1150,6 +1205,9 @@ function undoDepth(history, player) {
 }
 
 
+/* 読み上げの文（voice/gen_lines.py が作る） */
+const VOICE_TEXT = {"rv_pass_k": "くろは おけるところが ないから パス！ しろの ばん！", "rv_pass_s": "しろは おけるところが ないから パス！ くろの ばん！", "rv_matta_k": "くろが まったって！ いいかな？", "rv_matta_s": "しろが まったって！ いいかな？", "rv_wait": "おへんじを まってるよ", "rv_refused": "こんどは そのまま つづけよう", "rv_again": "もういっかい やる？", "rv_hold": "ちょっと まってね", "rv_back": "つながったよ！ つづきから やろう", "rv_start": "はじめ！ さきは くろ からだよ", "rv_win_k": "くろの かち！", "rv_win_s": "しろの かち！", "rv_draw": "おなじ かず！ ひきわけ！", "rv_k0": "くろが ぜろこ、", "rv_s0": "しろが ぜろこ", "rv_k1": "くろが いっこ、", "rv_s1": "しろが いっこ", "rv_k2": "くろが にこ、", "rv_s2": "しろが にこ", "rv_k3": "くろが さんこ、", "rv_s3": "しろが さんこ", "rv_k4": "くろが よんこ、", "rv_s4": "しろが よんこ", "rv_k5": "くろが ごこ、", "rv_s5": "しろが ごこ", "rv_k6": "くろが ろっこ、", "rv_s6": "しろが ろっこ", "rv_k7": "くろが ななこ、", "rv_s7": "しろが ななこ", "rv_k8": "くろが はっこ、", "rv_s8": "しろが はっこ", "rv_k9": "くろが きゅうこ、", "rv_s9": "しろが きゅうこ", "rv_k10": "くろが じゅっこ、", "rv_s10": "しろが じゅっこ", "rv_k11": "くろが じゅういっこ、", "rv_s11": "しろが じゅういっこ", "rv_k12": "くろが じゅうにこ、", "rv_s12": "しろが じゅうにこ", "rv_k13": "くろが じゅうさんこ、", "rv_s13": "しろが じゅうさんこ", "rv_k14": "くろが じゅうよんこ、", "rv_s14": "しろが じゅうよんこ", "rv_k15": "くろが じゅうごこ、", "rv_s15": "しろが じゅうごこ", "rv_k16": "くろが じゅうろっこ、", "rv_s16": "しろが じゅうろっこ", "rv_k17": "くろが じゅうななこ、", "rv_s17": "しろが じゅうななこ", "rv_k18": "くろが じゅうはっこ、", "rv_s18": "しろが じゅうはっこ", "rv_k19": "くろが じゅうきゅうこ、", "rv_s19": "しろが じゅうきゅうこ", "rv_k20": "くろが にじゅっこ、", "rv_s20": "しろが にじゅっこ", "rv_k21": "くろが にじゅういっこ、", "rv_s21": "しろが にじゅういっこ", "rv_k22": "くろが にじゅうにこ、", "rv_s22": "しろが にじゅうにこ", "rv_k23": "くろが にじゅうさんこ、", "rv_s23": "しろが にじゅうさんこ", "rv_k24": "くろが にじゅうよんこ、", "rv_s24": "しろが にじゅうよんこ", "rv_k25": "くろが にじゅうごこ、", "rv_s25": "しろが にじゅうごこ", "rv_k26": "くろが にじゅうろっこ、", "rv_s26": "しろが にじゅうろっこ", "rv_k27": "くろが にじゅうななこ、", "rv_s27": "しろが にじゅうななこ", "rv_k28": "くろが にじゅうはっこ、", "rv_s28": "しろが にじゅうはっこ", "rv_k29": "くろが にじゅうきゅうこ、", "rv_s29": "しろが にじゅうきゅうこ", "rv_k30": "くろが さんじゅっこ、", "rv_s30": "しろが さんじゅっこ", "rv_k31": "くろが さんじゅういっこ、", "rv_s31": "しろが さんじゅういっこ", "rv_k32": "くろが さんじゅうにこ、", "rv_s32": "しろが さんじゅうにこ", "rv_k33": "くろが さんじゅうさんこ、", "rv_s33": "しろが さんじゅうさんこ", "rv_k34": "くろが さんじゅうよんこ、", "rv_s34": "しろが さんじゅうよんこ", "rv_k35": "くろが さんじゅうごこ、", "rv_s35": "しろが さんじゅうごこ", "rv_k36": "くろが さんじゅうろっこ、", "rv_s36": "しろが さんじゅうろっこ", "rv_k37": "くろが さんじゅうななこ、", "rv_s37": "しろが さんじゅうななこ", "rv_k38": "くろが さんじゅうはっこ、", "rv_s38": "しろが さんじゅうはっこ", "rv_k39": "くろが さんじゅうきゅうこ、", "rv_s39": "しろが さんじゅうきゅうこ", "rv_k40": "くろが よんじゅっこ、", "rv_s40": "しろが よんじゅっこ", "rv_k41": "くろが よんじゅういっこ、", "rv_s41": "しろが よんじゅういっこ", "rv_k42": "くろが よんじゅうにこ、", "rv_s42": "しろが よんじゅうにこ", "rv_k43": "くろが よんじゅうさんこ、", "rv_s43": "しろが よんじゅうさんこ", "rv_k44": "くろが よんじゅうよんこ、", "rv_s44": "しろが よんじゅうよんこ", "rv_k45": "くろが よんじゅうごこ、", "rv_s45": "しろが よんじゅうごこ", "rv_k46": "くろが よんじゅうろっこ、", "rv_s46": "しろが よんじゅうろっこ", "rv_k47": "くろが よんじゅうななこ、", "rv_s47": "しろが よんじゅうななこ", "rv_k48": "くろが よんじゅうはっこ、", "rv_s48": "しろが よんじゅうはっこ", "rv_k49": "くろが よんじゅうきゅうこ、", "rv_s49": "しろが よんじゅうきゅうこ", "rv_k50": "くろが ごじゅっこ、", "rv_s50": "しろが ごじゅっこ", "rv_k51": "くろが ごじゅういっこ、", "rv_s51": "しろが ごじゅういっこ", "rv_k52": "くろが ごじゅうにこ、", "rv_s52": "しろが ごじゅうにこ", "rv_k53": "くろが ごじゅうさんこ、", "rv_s53": "しろが ごじゅうさんこ", "rv_k54": "くろが ごじゅうよんこ、", "rv_s54": "しろが ごじゅうよんこ", "rv_k55": "くろが ごじゅうごこ、", "rv_s55": "しろが ごじゅうごこ", "rv_k56": "くろが ごじゅうろっこ、", "rv_s56": "しろが ごじゅうろっこ", "rv_k57": "くろが ごじゅうななこ、", "rv_s57": "しろが ごじゅうななこ", "rv_k58": "くろが ごじゅうはっこ、", "rv_s58": "しろが ごじゅうはっこ", "rv_k59": "くろが ごじゅうきゅうこ、", "rv_s59": "しろが ごじゅうきゅうこ", "rv_k60": "くろが ろくじゅっこ、", "rv_s60": "しろが ろくじゅっこ", "rv_k61": "くろが ろくじゅういっこ、", "rv_s61": "しろが ろくじゅういっこ", "rv_k62": "くろが ろくじゅうにこ、", "rv_s62": "しろが ろくじゅうにこ", "rv_k63": "くろが ろくじゅうさんこ、", "rv_s63": "しろが ろくじゅうさんこ", "rv_k64": "くろが ろくじゅうよんこ、", "rv_s64": "しろが ろくじゅうよんこ"};
+
 /* 確認用の局面（rules.test.js が自動生成） */
 const FIX = {"pass":[[2,3],[2,2],[2,1],[1,1],[0,1],[1,3],[2,4],[1,4],[0,3],[0,0],[2,5],[2,0],[4,5],[2,6],[3,5],[1,5],[0,5],[4,6],[2,7],[4,2],[3,2],[1,2],[3,6],[0,6],[0,7],[0,2],[5,3],[0,4],[5,1],[5,2],[3,1],[5,4],[6,2],[4,7],[1,6],[6,0],[5,7],[6,4],[1,0],[7,2],[7,4],[6,7],[6,1],[4,1],[3,0],[7,5],[7,6],[1,7],[5,6],[3,7],[5,0],[6,5],[7,3],[7,1],[4,0],[5,5],[6,3],[7,7]],"end":[[2,3],[2,2],[2,1],[1,1],[0,1],[1,3],[2,4],[1,4],[0,3],[0,0],[2,5],[2,0],[4,5],[2,6],[3,5],[1,5],[0,5],[4,6],[2,7],[4,2],[3,2],[1,2],[3,6],[0,6],[0,7],[0,2],[5,3],[0,4],[5,1],[5,2],[3,1],[5,4],[6,2],[4,7],[1,6],[6,0],[5,7],[6,4],[1,0],[7,2],[7,4],[6,7],[6,1],[4,1],[3,0],[7,5],[7,6],[1,7],[5,6],[3,7],[5,0],[6,5],[7,3],[7,1],[4,0],[5,5],[6,3]]};
 
@@ -1202,7 +1260,9 @@ const SFX = (() => {
 /* ---------- 遠隔対戦（段階2）：ビデオ通話と手の同期 ----------
    PeerJS（WebRTC）で、映像・音声・手の情報を端末どうしで直接やりとりする。
    親機（こども側、A）が部屋を作って「ホスト」になり、おばあちゃん（B）はリンクを開くだけで「ゲスト」としてつながる。
-   つなぐ前の紹介役は PeerJS の公開サーバー（段階3で自前の紹介役と中継サーバーに切り替える）。
+   つなぐ前の紹介役は PeerJS の公開サーバー。
+   直接つながらない回線（モバイル回線どうし など）のために、中継サーバー（TURN）も使う。
+   いまは Metered の無料「Open Relay」（月20GBまで、だれでも使える共有の鍵）。ストア版では自前のアカウントに切り替える。
    盤面は「手の履歴」だけで同期する。ホストの履歴を正とする。 */
 const NET = (() => {
   const q = new URLSearchParams(location.search);
@@ -1210,14 +1270,31 @@ const NET = (() => {
   // 確認用：?ps=localhost:9000 で手元の紹介役サーバーを使う
   const ps = q.get("ps");
   const OPT = ps ? { host: ps.split(":")[0], port: +ps.split(":")[1], path: "/", secure: false } : {};
-  OPT.config = { iceServers: [{ urls: "stun:stun.l.google.com:19302" }, { urls: "stun:stun1.l.google.com:19302" }] };
+  const STUN = [{ urls: "stun:stun.l.google.com:19302" }, { urls: "stun:stun1.l.google.com:19302" }];
+  OPT.config = { iceServers: STUN };
+  // TURN の合言葉：有効期限つきの名前と、その名前を共有の鍵で署名したもの（coturn の REST 方式）
+  const TURN_HOST = "staticauth.openrelay.metered.ca", TURN_SECRET = "openrelayprojectsecret";
+  async function turnServers() {
+    try {
+      const user = `${Math.floor(Date.now() / 1000) + 12 * 3600}:marushima`;
+      const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(TURN_SECRET), { name: "HMAC", hash: "SHA-1" }, false, ["sign"]);
+      const sig = new Uint8Array(await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(user)));
+      const credential = btoa(String.fromCharCode(...sig));
+      return [{ urls: [`turn:${TURN_HOST}:80`, `turn:${TURN_HOST}:80?transport=tcp`, `turn:${TURN_HOST}:443`, `turns:${TURN_HOST}:443?transport=tcp`], username: user, credential }];
+    } catch (e) { return []; }
+  }
+  async function prepareIce() {
+    OPT.config = { iceServers: [...STUN, ...(await turnServers())] };
+    // 確認用：中継サーバーだけでつなぐ（設定「中継の テスト」）。片方がこれなら、かならず中継を通る
+    if (N.relayOnly) OPT.config.iceTransportPolicy = "relay";
+  }
   const idOf = room => "marushima-rv-" + room;
 
   const N = {
     role: q.get("r") ? "guest" : null,   // null = 1台で遊ぶ
     room: q.get("r") || null,
     peer: null, conn: null, call: null, local: null, remote: null,
-    open: false, lastHeard: 0, handlers: {},
+    open: false, lastHeard: 0, handlers: {}, relayOnly: false, via: "",
     on(type, fn) { this.handlers[type] = fn; },
     send(msg) { if (this.conn && this.open) try { this.conn.send(msg); } catch (e) { /* 切れていたら再接続で送り直す */ } },
     get available() { return typeof Peer !== "undefined" && !!navigator.mediaDevices; },
@@ -1239,12 +1316,23 @@ const NET = (() => {
     if (N.conn && N.conn !== conn) try { N.conn.close(); } catch (e) { /* 古い接続 */ }
     N.conn = conn;
     conn.on("open", () => {
-      N.open = true; N.lastHeard = Date.now(); emit("open");
+      N.open = true; N.lastHeard = Date.now(); emit("open"); setTimeout(() => route(conn), 1500);
       if (N.role === "host" && N.local) callGuest(conn.peer);
     });
     conn.on("data", m => { N.lastHeard = Date.now(); if (m && m.t !== "ping") emit("msg", m); });
     conn.on("close", () => lost(conn));
     conn.on("error", () => lost(conn));
+  }
+  // いまの通り道が「中継」か「直接」かを調べる（設定画面に出す）
+  async function route(conn) {
+    try {
+      const stats = await conn.peerConnection.getStats();
+      let pair = null; const local = {};
+      stats.forEach(s => { if (s.type === "candidate-pair" && s.state === "succeeded" && (s.nominated || s.selected)) pair = s; if (s.type === "local-candidate") local[s.id] = s; });
+      const c = pair && local[pair.localCandidateId];
+      N.via = c ? (c.candidateType === "relay" ? "中継サーバー" : "直接") : "";
+      emit("route", N.via);
+    } catch (e) { /* 調べられなくても続ける */ }
   }
   function watchCall(call) {
     if (N.call && N.call !== call) try { N.call.close(); } catch (e) { /* 古い通話 */ }
@@ -1273,7 +1361,7 @@ const NET = (() => {
     if (!fresh && saved && Date.now() - saved.at < 3 * 3600e3) N.room = saved.room;
     else N.room = Math.random().toString(36).slice(2, 10);
     try { localStorage.setItem(ROOM_KEY, JSON.stringify({ room: N.room, at: Date.now() })); } catch (e) { /* 保存できなくても続ける */ }
-    await camera();
+    await camera(); await prepareIce();
     const start = () => {
       N.peer = makePeer(idOf(N.room));
       N.peer.on("open", () => emit("ready"));
@@ -1285,7 +1373,7 @@ const NET = (() => {
   }
   // ゲスト：リンクの部屋につなぐ
   async function guest() {
-    await camera();
+    await camera(); await prepareIce();
     N.peer = makePeer(null);
     N.peer.on("open", dialHost);
     N.peer.on("call", c => { c.answer(N.local || undefined); watchCall(c); });
@@ -1306,7 +1394,8 @@ const NET = (() => {
   }, 4000);
 
   N.host = host; N.guest = guest;
-  N.inviteURL = () => location.origin + location.pathname + "?r=" + N.room + (ps ? "&ps=" + ps : "");
+  // openExternalBrowser=1：LINE の中のブラウザではなく Safari／Chrome で開かせる（LINE の中ではカメラが使えないことがある）
+  N.inviteURL = () => location.origin + location.pathname + "?r=" + N.room + (ps ? "&ps=" + ps : "") + "&openExternalBrowser=1";
   return N;
 })();
 
@@ -1323,7 +1412,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const CFG_KEY = "marushima-reversi-cfg", GAME_KEY = "marushima-reversi-game";
 const load = k => { try { return JSON.parse(localStorage.getItem(k)) || null; } catch (e) { return null; } };
 const keep = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* 保存できなくても遊べる */ } };
-const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2, autoOk: 1 }, load(CFG_KEY) || {});
+const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2, autoOk: 1, relay: 0 }, load(CFG_KEY) || {});
 const saveCfg = () => keep(CFG_KEY, CFG);
 
 /* ---------- 対局の状態 ---------- */
@@ -1512,14 +1601,44 @@ function hideBubble() { keepBubble = null; bubble.classList.remove("on"); }
 function bubbleAt(c) {
   const p = headTop(c); bubble.style.left = Math.max(140, Math.min(innerWidth - 140, p.x)) + "px"; bubble.style.top = Math.max(90, p.y - 6) + "px";
 }
-function say(c, text, min = 0, keep = false) {
+/* 合成した声（voice/out/*.mp3）。ぽにー＝VOICEVOX 調整版、かめじい＝AivisSpeech。
+   ファイルがないとき（1枚だけの確認版など）は、端末の読み上げにまかせる。 */
+const VOICE_DIR = "voice/out/", vbuf = {};
+async function loadVoice(key) {
+  if (key in vbuf) return vbuf[key];
+  vbuf[key] = null;
+  try {
+    const r = await fetch(VOICE_DIR + key + ".mp3"); if (!r.ok) return null;
+    const data = await r.arrayBuffer();
+    vbuf[key] = await new Promise((ok, ng) => audio().decodeAudioData(data, ok, ng));
+  } catch (e) { vbuf[key] = null; }
+  return vbuf[key];
+}
+// 数の声（くろが Nこ…）は 終局のときに 2本だけ読む。ほかは はじめに読んでおく
+const preloadVoices = () => Object.keys(VOICE_TEXT).filter(k => !/^rv_[ks]\d+$/.test(k)).forEach(k => loadVoice(k));
+function playBuf(buf) {
+  return new Promise(res => {
+    const s = ctx.createBufferSource(), g = ctx.createGain();
+    s.buffer = buf; g.gain.value = [0, .5, .85, 1.2][CFG.voice]; s.connect(g).connect(ctx.destination);
+    s.onended = res; s.start(); setTimeout(res, buf.duration * 1000 + 400);
+  });
+}
+// key（または key の並び）で話す。文は VOICE_TEXT から
+function speak(c, keys, min = 0, keep = false) {
+  keys = [].concat(keys);
+  return say(c, keys.map(k => VOICE_TEXT[k] || "").join(" ").replace(/、 /g, "、"), min, keep, keys);
+}
+function say(c, text, min = 0, keep = false, keys = null) {
   bubble.textContent = text; bubble.classList.add("on"); talking = c; bubbleAt(c);
   const fallback = 900 + text.length * 170;
   const t0 = performance.now();
   return new Promise(res => {
     let done = false;
     const end = () => { if (done) return; done = true; const left = Math.max(0, min - (performance.now() - t0)); setTimeout(() => { talking = null; c.speakingLevel = 0; if (!keep) bubble.classList.remove("on"); else keepBubble = c; res(); }, left + 250); };
-    if (CFG.voice && "speechSynthesis" in window) {
+    const bufs = keys ? keys.map(k => vbuf[k]) : [];
+    if (CFG.voice && keys && bufs.every(Boolean)) {
+      (async () => { for (const b of bufs) await playBuf(b); end(); })();
+    } else if (CFG.voice && "speechSynthesis" in window) {
       try {
         speechSynthesis.cancel();
         const u = new SpeechSynthesisUtterance(text), v = VOICE[c.kind] || {};
@@ -1573,7 +1692,7 @@ async function afterMove(state) {
     ["A", "B"].forEach(s => $("side" + s).classList.remove("active"));
     act(ps, "pass");
     await showHost(host.pony);
-    await say(host.pony, `${nameOf(ps)}は おけるところが ないから パス！ ${nameOf(other(ps))}の ばん！`, T.passMin);
+    await speak(host.pony, "rv_pass_" + (colorOf(ps) === BLACK ? "k" : "s"), T.passMin);
     await hideHost(host.pony);
   }
   setTurn(state);
@@ -1650,20 +1769,20 @@ function requestUndo(side) {
   if (SOLO() || depth === 1 || (side === "A" && CFG.autoOk)) { NET.send({ t: "undo", side, depth, n: G.hist.length }); animUndo(side, depth); return; }
   G.busy = true; updateButtons(); clearHints();
   NET.send({ t: "undoReq", side, n: G.hist.length });
-  showHost(host.pony).then(() => say(host.pony, "おへんじを まってるよ", 0, true));
+  showHost(host.pony).then(() => speak(host.pony, "rv_wait", 0, true));
   undoTimer = setTimeout(() => { NET.send({ t: "undoCancel" }); undoRefused(side); }, 10000);
 }
 async function undoRefused(side) {
   clearTimeout(undoTimer); act(side, "pass");
   if (host.pony.hidden) await showHost(host.pony);
-  await say(host.pony, "こんどは そのまま つづけよう");
+  await speak(host.pony, "rv_refused");
   await hideHost(host.pony); setTurn(cur, true);
 }
 let askTimer = null, askFor = null;
 async function askUndo(m) {
   G.busy = true; askFor = m; updateButtons(); clearHints();
   await showHost(host.pony);
-  say(host.pony, `${nameOf(m.side)}が まったって！ いいかな？`, 0, true);
+  speak(host.pony, "rv_matta_" + (colorOf(m.side) === BLACK ? "k" : "s"), 0, true);
   $("askOv").hidden = false;
   askTimer = setTimeout(() => answerUndo(false), 10000);
 }
@@ -1686,6 +1805,7 @@ async function endGame(state) {
   G.ended = true; G.busy = true; updateButtons(); clearHints();
   ["A", "B"].forEach(s => $("side" + s).classList.remove("active"));
   const c = count(state.board);
+  const countVoice = Promise.all([loadVoice(`rv_k${c.black}`), loadVoice(`rv_s${c.white}`)]);
   await showHost(host.kame);
   // 色ごとに集めて並べなおす（くろは左上から、しろは右下から）
   const sorted = new Array(64).fill(EMPTY);
@@ -1697,18 +1817,19 @@ async function endGame(state) {
   cells.forEach((x, i) => { x.disc.getAnimations().forEach(a => a.cancel()); setDisc(i, sorted[i]); x.disc.style.opacity = 0; });
   sorted.forEach((v, i) => { if (!v) return; const d = (v === BLACK ? i : 63 - i) * (T.gather - 600) / 64; setTimeout(() => { const x = cells[i]; x.disc.style.opacity = ""; x.disc.animate([{ opacity: 0, transform: "scale(.5)" }, { opacity: 1, transform: "none" }], { duration: 220 }); }, d); });
   await wait(T.gather - 300);
-  await say(host.kame, `くろが ${c.black}こ、しろが ${c.white}こ`);
+  await Promise.race([countVoice, wait(3000)]);
+  await speak(host.kame, [`rv_k${c.black}`, `rv_s${c.white}`]);
   const win = c.black === c.white ? null : sideOf(c.black > c.white ? BLACK : WHITE);
   if (win) {
     SFX.fanfare(false); act(win, "win"); act(other(win), "lose"); confettiAt(...centerOf($("slot" + win)), 80);
-    await say(host.kame, `${nameOf(win)}の かち！`);
+    await speak(host.kame, "rv_win_" + (colorOf(win) === BLACK ? "k" : "s"));
   } else {
     SFX.fanfare(true); act("A", "win"); act("B", "win");
-    await say(host.kame, "おなじ かず！ ひきわけ！");
+    await speak(host.kame, "rv_draw");
   }
   await hideHost(host.kame);
   await showHost(host.pony);
-  say(host.pony, "もういっかい やる？", 1500);
+  speak(host.pony, "rv_again", 1500);
   $("againOv").hidden = false;
 }
 async function rematch() {
@@ -1730,7 +1851,7 @@ async function newGame(announce = true) {
   if (announce) {
     await showHost(host.kame);
     act("A", "turn"); act("B", "turn");
-    await say(host.kame, "はじめ！ さきは くろ からだよ");
+    await speak(host.kame, "rv_start");
     await hideHost(host.kame);
   }
   setTurn(cur);
@@ -1741,6 +1862,7 @@ const setPanel = $("settings");
 function syncPanel() {
   setPanel.querySelectorAll(".seg").forEach(seg => seg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === +CFG[seg.dataset.key]))));
   $("resetBtn").textContent = "さいしょから"; $("resetBtn").classList.remove("confirm");
+  $("routeInfo").textContent = NET.open && NET.via ? `いまのつながり：${NET.via}` : (CFG.relay ? "「中継だけ」は、つぎに「おばあちゃんを よぶ」を押したときから使います" : "");
 }
 setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
@@ -1771,7 +1893,7 @@ document.addEventListener("visibilitychange", () => { if (document.visibilitySta
 function unlock() {
   audio(); SFX.turn();
   try { if ("speechSynthesis" in window) { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); } } catch (e) { /* 読み上げなしでも遊べる */ }
-  $("startOv").hidden = true; G.started = true; keepAwake();
+  $("startOv").hidden = true; G.started = true; keepAwake(); preloadVoices();
 }
 $("startBtn").addEventListener("click", async () => {
   unlock();
@@ -1795,7 +1917,10 @@ function showCams() {
 }
 NET.on("local", s => {
   const c = camOf(mySide());
-  if (!s) return camMsg(mySide(), "カメラが つかえません");
+  if (!s) {
+    camMsg(mySide(), NET.role === "guest" ? "カメラが使えません。設定の「Safari」→「カメラ」「マイク」を「許可」にして、もう一度リンクを開いてください" : "カメラが つかえません");
+    return;
+  }
   c.v.muted = true; c.v.srcObject = s; playVideo(c.v); camMsg(mySide(), "");
 });
 NET.on("remote", s => { const c = camOf(otherSide()); c.v.muted = false; c.v.srcObject = s; playVideo(c.v); camMsg(otherSide(), ""); });
@@ -1845,7 +1970,8 @@ function applyState(m) {
 }
 let lostSaid = false;
 NET.on("open", () => {
-  G.paused = false; lostSaid = false; $("inviteOv").hidden = true; camMsg(otherSide(), "");
+  const back = lostSaid; G.paused = false; lostSaid = false; $("inviteOv").hidden = true; camMsg(otherSide(), "");
+  if (back && !G.animating) speak(host.pony, "rv_back");
   if (NET.role !== "host") return;
   sendState();
   if (G.begun) return updateButtons();
@@ -1857,9 +1983,10 @@ NET.on("open", () => {
 NET.on("lost", () => {
   G.paused = true; updateButtons();
   camMsg(otherSide(), "つなぎなおしています…");
-  if (!lostSaid && !G.animating) { lostSaid = true; say(host.pony, "ちょっと まってね"); }
+  if (!lostSaid && !G.animating) { lostSaid = true; speak(host.pony, "rv_hold"); }
 });
 NET.on("ready", () => camMsg(otherSide(), "まっています…"));
+NET.on("route", via => { $("routeInfo").textContent = via ? `いまのつながり：${via}` : ""; });
 NET.on("error", type => camMsg(otherSide(), type === "network" || type === "server-error" ? "インターネットを たしかめてね" : "つなぎなおしています…"));
 
 function startOnline() {
@@ -1869,7 +1996,7 @@ function startOnline() {
 }
 // おばあちゃんを よぶ（ホスト）
 async function callGrandma(fresh) {
-  unlock(); NET.role = "host"; startOnline();
+  unlock(); NET.role = "host"; NET.relayOnly = !!CFG.relay; startOnline();
   const s = replay(G.hist); paint(s.board); setCounts(s.board, false);
   await NET.host(fresh);
   showInvite();
@@ -1904,7 +2031,13 @@ $("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (N
   if (hd && Array.isArray(hd.hist)) { try { replay(hd.hist); G.hist = hd.hist; G.blackSide = hd.blackSide; } catch (e) { /* 保存がこわれていたら最初から */ } }
   const s = replay(G.hist); cur = s;
   paintSides(); paint(s.board); setCounts(s.board, false); haloFor(G.hist);
-  if (NET.role === "guest") { $("startBtn").textContent = "はじめる"; $("callBtn").hidden = true; $("startNote").textContent = "カメラと マイクを つかいます。「きょか」を おしてね"; }
+  if (NET.role === "guest") {
+    // おばあちゃん向け：大人なので漢字まじりで、大きく、手順を2つだけ
+    $("callBtn").hidden = true; $("startOv").classList.add("guest");
+    $("startBtn").textContent = "はじめる"; $("startBtn").classList.remove("sub");
+    $("guestLead").hidden = false; $("callBtn").before($("guestLead"));   // 説明を「はじめる」の上に
+    $("startNote").textContent = "";
+  }
   else if (!NET.available) $("callBtn").hidden = true;
   layout(); placeAll();
 })();
