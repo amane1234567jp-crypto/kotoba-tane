@@ -143,6 +143,13 @@ for src, ok in [("slong", lambda k: not _re.match(r"sl_(sumi|sokashi|suchu|eki|o
     d = json.loads((OUT / f"{src}.json").read_text())
     pack.update({k: v for k, v in d.items() if ok(k)})
 (OUT / "jugyou.json").write_text(json.dumps(pack, separators=(",", ":"))); print("jugyou", len(pack), round((OUT / "jugyou.json").stat().st_size / 1e6, 2), "MB")
+# でたらめ がっこう（ロング、2026-10-25）：ぽにー（sit/pony_detarame.json）＋ へんな こうちょう（aivis/jobs/dt1）＋ BGM
+pack = {}
+for k in [p[0] for p in json.loads((G / "sit/pony_detarame.json").read_text())] + [l["key"] for l in json.loads((R / "tools/aivis/jobs/dt1/lines.json").read_text())] + ["bgm_detarame"]:
+    p = A / f"{k}.mp3"
+    if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
+    else: missing.append(k)
+(OUT / "detarame.json").write_text(json.dumps(pack, separators=(",", ":"))); print("detarame", len(pack), round((OUT / "detarame.json").stat().st_size / 1e6, 2), "MB")
 # そうぞう たんてい・じぶんの たちば・さきよみ（ショート、2026-10-19）：ぽにー（sit/pony_<st>.json）・あいて／がお（aivis/jobs/<job>）・BGM
 for st, job in [("souzou", "sz1"), ("tachiba", "tb1"), ("sakiyomi", "sk1"), ("chotto", "cm1"), ("aite", "as1")]:
     if not (G / f"sit/pony_{st}.json").exists(): continue

@@ -923,6 +923,9 @@ async function playVoice(c, key, text, frac = 1) {
   const dur = buf.duration * frac / (fx === "fast" ? 1.55 : 1);
   if (fx === "noise") { const n = Math.ceil(dur / .25); for (let i = 0; i < n; i++) later(i * 250, () => noise(.3, 300 + rnd(500), .5)); }
   if (fx === "quiet") { const g = ctx.createGain(); g.gain.value = .16; s.connect(g).connect(analyser); }
+  else if (fx === "robo") { // ロボの こえ：ゆれる 金ぞくっぽい こえ（2026-10-25 でたらめ がっこう）
+    const g = ctx.createGain(), o = ctx.createOscillator(), og = ctx.createGain(), t0 = ctx.currentTime; g.gain.value = .55; o.type = "square"; o.frequency.value = 42; og.gain.value = .45;
+    o.connect(og).connect(g.gain); o.start(t0); o.stop(t0 + dur + .2); s.connect(g).connect(analyser); }
   else if (frac < 1) { // 「はじめだけ」は、ぶつっと切らずに すっと小さくして消す
     const g = ctx.createGain(), t = ctx.currentTime, fade = Math.min(.35, dur * .4);
     g.gain.setValueAtTime(1, t + dur - fade); g.gain.linearRampToValueAtTime(0, t + dur);

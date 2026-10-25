@@ -4,7 +4,7 @@
    ことばの 課題は だいぼうけん・ともだちの だいぼうけんの ものを つかう（声も その パックから）。
    あたらしい 声は ぽにーだけ（sl_*・n0・n7〜n12。packs/slong.json）。 */
 const JG_ROWS = [935, 730, 525, 320];
-const SL = ["sumi", "sokashi", "suchu", "eki", "odekake", "kimochi", "makete", "dekigoto", "jugyou"];
+const SL = ["sumi", "sokashi", "suchu", "eki", "odekake", "kimochi", "makete", "dekigoto", "jugyou", "detarame"];
 const SL_HIDE = new Set([]); /* 声が そろうまで メニューに ださない コースを ここに */
 const isSL = () => SL.includes(curStage);
 SL.forEach(id => LONGS.add(id));
@@ -37,6 +37,10 @@ const SL_TH = {
   jugyou: { name: "じゅぎょうの いちにち", icon: "🏫", areas: ["1じかんめ こくご", "2じかんめ さんすう", "3じかんめ おんがく・ずこう", "4じかんめ たいいく"], fills: ["#FFE9D6", "#E3F0FF", "#F3E6FF", "#DDF2D0"], ground: "#F7F1E3",
     blk: { who: "nobbo", intro: ["sl_jugyou_blk", "のっぽせんせいが ろうかで プリントを くばって いるよ"], say: ["lk_blk_say", "せんせい、とおして ください"], to: "せんせいに いおう", keys: [["せんせい", "先生"], ["とおして", "通して", "とうして"], ["ください", "下さい"]], res: ["lk_blk_res", "おっと、すみません。どうぞ"] },
     item: "はなまる", obs: "けしごむ", call: "ともだち", deco: [] },
+  // でたらめ がっこう（2026-10-25、detarame.js）：へんな こうちょうに つっこむ
+  detarame: { name: "でたらめ がっこう", icon: "🤪", areas: ["あさ", "じゅぎょう", "やすみじかん", "ほうかご"], fills: ["#FFE9C7", "#E3F0FF", "#FFE0EE", "#E6F6D8"], ground: "#FFF6E6",
+    blk: { who: "nobbo", intro: ["dtp_blk", "のっぽせんせいが、へんな こうちょうを さがして ろうかを ふさいで いるよ"], say: ["lk_blk_say", "せんせい、とおして ください"], to: "せんせいに いおう", keys: [["せんせい", "先生"], ["とおして", "通して", "とうして"], ["ください", "下さい"]], res: ["lk_blk_res", "おっと、すみません。どうぞ"] },
+    item: "ドーナツ", obs: "ボール", call: "こうちょうせんせい", deco: [] },
   dekigoto: { name: "きょうの できごと", icon: "📖", areas: ["がっこう", "こうえん", "いえ", "おでかけ"], fills: ["#E3F0FF", "#DDF2D0", "#FFE9D6", "#FFE0EE"], ground: "#F2F7FF",
     blk: { who: "chu", intro: ["p_blk_dekigoto", "ちゅうくんが、きょうの ことを はなしたそうに して いるよ。きいて あげよう"], say: ["blk_dekigoto", "きょう、なにが あったの？"], to: "ちゅうくんに きこう", keys: [["なにが", "何が", "あったの", "どうしたの"]], res: ["rs_dekigoto", "きいて！ さかあがりが できたんだ！"] },
     item: "ほん", obs: "あめ", call: "ともだち", deco: [] },
@@ -76,7 +80,7 @@ const SL_EVT = {
     nebou: "ベンチで ねちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "サイクリングの なかまが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを むかえに いくよ",
     atsumare: "こうえんで ひとやすみ！ みんな ここに あつまれ！", kumikae: "みちが こうじちゅう！ コースが くみかわるよ" },
   kimochi: {}, /* しかけは kimochi.js で きめる */
-  makete: {}, dekigoto: {}, jugyou: {},
+  makete: {}, dekigoto: {}, jugyou: {}, detarame: {},
 };
 const SL_ICON = { dice2: "🎲", warp: "🌀", bigwarp: "🚀", fake: "🤪", rand: "❓", rest: "💤", x2: "✖️", zero: "0️⃣", home: "↩", back10: "⏪", bonus: "🎁", allf: "⏩", allb: "🌊", janken: "✊", again: "🔁", nebou: "😴", trolley: "🚃", call: "🧲", tsukkomi: "🤣", atsumare: "📣", kumikae: "🔀" };
 const SL_EVC = { warp: "#D9C2F0", bigwarp: "#D9C2F0", rand: "#D9C2F0", home: "#FFC2D1", back10: "#FFC2D1", fake: "#FFE27A", tsukkomi: "#FFE27A", bonus: "#C9EBB5", atsumare: "#FFE27A", kumikae: "#FFE27A" };
@@ -101,6 +105,7 @@ const SL_SHAPE = { // 47マス＋ゴール（まえは 65＋1。ながすぎた�
   kimochi() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + Math.sin(col * .8 + r * 1.3) * 22]); } }); return P; }, // 4だん＝4つの ばしょ（いえ・がっこう・こうえん・おでかけ）
   makete() { return SL_SHAPE.kimochi(); },
   dekigoto() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 7; j++) { const col = r % 2 ? 6 - j : j; P.push([200 + col * 200, y + Math.sin(col * .9 + r * 1.3) * 22]); } }); return P; }, // ながすぎたので 4だん×7＝28マスに（2026-10-25）
+  detarame() { const P = []; JG_ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + (col % 2 ? -34 : 30) + (col % 3 === 2 ? 14 : 0)]); } }); return P; }, // でこぼこ（でたらめ）な 4だん
   jugyou() { const P = [], ROWS = JG_ROWS; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + Math.sin(col * .8 + r * 1.3) * 22]); } }); return P; }, // コース名を 上の バーに うつして 4だんを ひろげた（2026-10-25）
   odekake() { const P = [], ROWS = [930, 770, 610, 450]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([170 + col * 115, y]); } }); return P; }, // まちの みちの ような 4だん（したの 2だんは あるき、うえの 2だんは じてんしゃ）
 };
@@ -316,7 +321,7 @@ async function slStop(pc) {
   return false;
 }
 // 🖐 つかまえろ：とびまわる ものを タッチ
-const SL_ITEM = { sumi: "🐟", sokashi: "🍬", suchu: "⭐", eki: "🚃", odekake: "🦋" };
+const SL_ITEM = { sumi: "🐟", sokashi: "🍬", suchu: "⭐", eki: "🚃", odekake: "🦋", detarame: "🍩" };
 async function slCatch(pc) {
   const g = panel("つかまえろ！", "#EAF6FF"); const T = SL_TH[curStage];
   const cnt = txt(g, 800, 180, "0", 70, { "text-anchor": "middle" }); const bar = el("rect", { x: 300, y: 860, width: 1000, height: 26, rx: 13, fill: "#7BD389", ...S6(4) }, g);
