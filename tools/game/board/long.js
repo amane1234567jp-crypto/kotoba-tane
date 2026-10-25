@@ -50,6 +50,7 @@ Object.keys(EVENTS.long).forEach(id => delete LONG_TASK[id]);
 const EV_ICON = { warp: "🌀", push: "💨", home: "↩", rest: "💤", trolley: "🚃", fwd: "⏩", swap: "🌪", again: "🎲", call: "🧲", back: "⏪" };
 /* ゴールまでの のこりマス（「いちばん まえ」「いちばん うしろ」を きめる） */
 function distToGoal(id) { const seen = { [id]: 0 }, q = [id]; while (q.length) { const a = q.shift(); if (a === GOAL) return seen[a]; NEXT(a).forEach(b => { if (seen[b] == null) { seen[b] = seen[a] + 1; q.push(b); } }); } return 999; }
+function distFromStart(id) { const seen = { "0": 0 }, q = ["0"]; while (q.length) { const a = q.shift(); if (a === id) return seen[a]; NEXT(a).forEach(b => { if (seen[b] == null) { seen[b] = seen[a] + 1; q.push(b); } }); } return 0; }
 async function forceStep(pc, n) { // 自動で すすむ（分かれ道は 1つめ）。ゴールに ついたら かち
   for (let i = 0; i < n; i++) { const nx = NEXT(pc.node); if (!nx.length) return; const to = nx[0]; await hop(pc, to, .26, i);
     if (to === GOAL) { if (!winner) { winnerPc = pc; winner = pc.kind; } return; } } }
@@ -61,6 +62,8 @@ boardEvent = async function (pc) {
   if (!isLong()) return boardEventL(pc);
   const ev = EVENTS[curStage][pc.node]; if (!ev) return;
   const [type, arg, key, text] = ev;
+  if (type === "home" && distFromStart(pc.node) > 8) { // とおくまで きてからの「スタートに もどる」は きつすぎる → 5マス もどる（2026-10-25）
+    await sleep(300); markAbove(pc, "drop"); chime(); showBanner("わすれものに きづいた！", 1400); await speak(C.pony, "lk_ev_home_b", "わすれものに きづいた！ 5マス もどるよ"); await backStep(pc, 5); return; }
   if (["fwd", "back", "home"].includes(type)) return boardEventL(pc);
   await sleep(300); markAbove(pc, "ex"); chime(); showBanner(text.split("！")[0] + "！", 1400); await speak(C.pony, key, text);
   const others = PLAYERS.map(p => p.pc).filter(p => p !== pc);
@@ -223,7 +226,11 @@ async function lkMachi(pc) {
   const g = panel("まちがい さがし", "#FFFBE6"); txt(g, 800, 200, "まちがって いる じを みつけよう", 50, { "text-anchor": "middle" }); await speak(C.pony, "lk_machi_q", "まちがって いる じが あるよ。みつけて タッチしてね");
   const chars = [...it.s]; const w = Math.min(110, 1300 / chars.length), x0 = 800 - chars.length * w / 2; let ok = true;
   const tiles = chars.map((ch, i) => { const c = card(g, x0 + i * w, 300, w - 8, w * 1.3, ch === " " ? "" : ch, null, { fs: w * .7 }); c.i = i; if (ch === " ") c.setAttribute("opacity", .3); return c; });
-  for (const er of it.errs) {
+  // まちがいが 2こ ある ときは、のこりの かずを みせる（2026-10-25：2こめに きづきにくい）
+  const left = it.errs.length > 1 ? el("g", {}, g) : null; const drawLeft = n => { if (!left) return; left.innerHTML = ""; el("rect", { x: 1180, y: 228, width: 300, height: 62, rx: 31, fill: "#FF8FA3", ...S6(5) }, left); txt(left, 1330, 272, `のこり ${n}こ`, 40, { "text-anchor": "middle", fill: "#FFFFFF" }); };
+  drawLeft(it.errs.length);
+  for (const [ei, er] of it.errs.entries()) {
+    if (ei > 0) { drawLeft(it.errs.length - ei); if (left) tween(500, k => left.setAttribute("transform", `translate(1330 259) scale(${(1 + .25 * Math.sin(k * Math.PI)).toFixed(3)}) translate(-1330 -259)`)); await speak(C.pony, "lk_machi_more", "まだ もう ひとつ、まちがいが あるよ。さがして みよう"); }
     let misses = 0;
     while (true) { const i = await tapOnce(tiles); if (i === er.pos) { flashCard(tiles[i], false); break; } misses++; ok = false; flashCard(tiles[i], true); await sleep(300); tiles[i].rect.setAttribute("fill", "#FFF8E8");
       if (misses >= 2) { tiles[er.pos].rect.setAttribute("fill", "#FFE27A"); await speak(C.pony, "lk_machi_hint", "ひかって いる じを みて みよう"); } }
@@ -232,7 +239,7 @@ async function lkMachi(pc) {
     while (true) { const i = await tapOnce(cs); if (cands[i] === er.ok) { flashCard(cs[i], true); break; } ok = false; flashCard(cs[i], false); await sleep(300); cs[i].rect.setAttribute("fill", "#FFF8E8"); }
     await sleep(300); cs.forEach(c => c.remove()); const t = tiles[er.pos]; t.remove(); tiles[er.pos] = card(g, x0 + er.pos * w, 300, w - 8, w * 1.3, er.ok, null, { fs: w * .7, fill: "#C9EBB5" }); chime();
   }
-  confetti(30); await speak(C.pony, `lk_${it.id}`, it.fix); grade(ok); await sleep(400); g.remove(); return ok;
+  if (left) drawLeft(0); confetti(30); await speak(C.pony, `lk_${it.id}`, it.fix); grade(ok); await sleep(400); g.remove(); return ok;
 }
 /* 5) ていねいな ことば */
 async function lkTeinei(pc) {

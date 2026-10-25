@@ -432,6 +432,7 @@ function hear(onText, ms) {
 }
 function devOn(cb) { [devB, fbB].forEach(g => Object.entries(g).forEach(([k, b]) => { if (!b) return; b.disabled = false; b.onclick = () => cb(k, "（確認ボタン）"); })); }
 function devOff() { [devB, fbB].forEach(g => Object.values(g).forEach(b => { if (!b) return; b.disabled = true; b.onclick = null; })); }
+let LISTEN_TAIL = false; // true の あいだは、あって いても しゃべりおわるまで まつ（2026-10-25）
 function listen(groups, ms = 7000) {
   return new Promise(resolve => {
     // 判定をゆるく：聞きとれた言葉は 言い直し・とちゅうで切れた分も 合わせて数える。
@@ -447,8 +448,8 @@ function listen(groups, ms = 7000) {
     const h = hear(texts => {
       for (const t of texts) { groups.forEach((g, i) => { if (g.some(v => norm(t).includes(norm(v)) || t.includes(v) || fuzzyIn(norm(t), norm(v)))) got.add(i); }); const n = countMatch(t, groups); if (n >= best || !heard) heard = t; }
       best = got.size;
-      heardEl.textContent = heard; if (best === groups.length) end("ok");
-      else if (best >= need) { clearTimeout(soon); soon = setTimeout(() => end("ok"), 700); } // ほぼ言えたら、少し待って「言えた」
+      heardEl.textContent = heard; if (best === groups.length && !LISTEN_TAIL) end("ok");
+      else if (best >= need) { clearTimeout(soon); soon = setTimeout(() => end("ok"), LISTEN_TAIL ? 1200 : 700); } // LISTEN_TAIL：いいおわるまで まつ（つっこみ など） // ほぼ言えたら、少し待って「言えた」
       else if (heard && !/^[えあうんーっとまそのおぇぁ]*$/.test(norm(heard))) { clearTimeout(idle); idle = setTimeout(() => end(verdict()), 2800); } // なにか きこえて、そのあと しずかに なったら きめる（まちすぎない）
     }, ms);
     h.done.then(() => { if (srUsable) end(verdict()); });

@@ -248,7 +248,7 @@ async function lkGag(pc) {
     let hh = E.h;
     for (; n < 3; n++) {
       if (hh < 3 && n !== 1) await speak(C.pony, `lk_g_${it.id}_a${ti}`, t.a); else if (n !== 1) { playMove(h, "think"); await sleep(700); }
-      unsay(); setListen(h, true); const r = await listen(t.keys, 8000); setListen(h, false);
+      unsay(); setListen(h, true); LISTEN_TAIL = true; const r = await listen(t.keys, 10000).finally(() => LISTEN_TAIL = false); setListen(h, false);
       tries.push(`${r.r === "ok" ? "○" : r.r === "part" ? "△" : "×"}${r.heard || ""}`);
       if (r.r === "ok") { ok = true; break; }
       if (r.r === "part") { playMove(h, "think"); await speak(C.pony, "p_close", "おしい！"); } else { playMove(h, "think"); await sleep(600); }
@@ -288,7 +288,7 @@ async function lkHaya(pc) {
     jump(b, .5); await sleep(300);
     const bt = speak(b, `lk_y_${it.id}_b`, it.botch[1]); await sleep(1200); hold(b, "shiver", 1.2); await bt;
     markAbove(b, "drop"); flop(b); noise(.1, 600, .4); blip(500, 200, .3, "square"); playMove(h, "laugh"); joy(C.pony); await sleep(900);
-    if (L <= 4) { await speak(C.pony, "lk_y_model", "ゆっくりで いいよ。おてほんを きいてね"); await speak(C.pony, `lk_y_${it.id}`, it.t); }
+    { await speak(C.pony, "lk_y_model", "ゆっくりで いいよ。おてほんを きいてね"); await speak(C.pony, `lk_y_${it.id}`, it.t); }
     await speak(C.pony, "lk_y_you", "こんどは きみの ばん！ いって みよう");
     for (let n = 0; n < 2 && !ok; n++) {
       unsay(); setListen(h, true); const off = lampOn(sg.firstChild); const r = await listen(it.keys, 10000); off(); setListen(h, false);

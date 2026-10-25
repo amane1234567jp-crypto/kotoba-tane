@@ -70,7 +70,7 @@ BOARD_BG[DTS] = L => { const T = SL_TH[DTS];
   el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: T.ground }, L);
   for (let i = 0; i < 26; i++) txt(L, (i * 263) % 1600, 150 + (i * 173) % 850, ["？", "！", "♪", "★"][i % 4], 40 + (i % 3) * 12, { fill: ["#FF8FA3", "#7FCBF0", "#B9A8D9", "#FFD25E"][i % 4], opacity: .35, transform: `rotate(${(i * 37) % 60 - 30} ${(i * 263) % 1600} ${150 + (i * 173) % 850})` });
   const I4 = ["🏫", "📚", "⚽", "🌇"];
-  JG_ROWS.forEach((y, r) => { el("rect", { x: 30, y: y - 85, width: 1540, height: 170, rx: 85, fill: T.fills[r], ...S6(4) }, L);
+  DT_ROWS.forEach((y, r) => { el("rect", { x: 30, y: y - 88, width: 1540, height: 176, rx: 88, fill: T.fills[r], ...S6(4) }, L);
     const x = r === 3 ? 1520 : 80; txt(L, x, y + 6, I4[r], 46, { "text-anchor": "middle" }); txt(L, x, y + 44, T.areas[r], T.areas[r].length > 3 ? 17 : 20, { "text-anchor": "middle" }); });
   Object.entries(EVENTS[DTS] || {}).forEach(([id, [type]]) => { const to = slWarpTo(DTS, id, type); if (!to || !NODES[id] || !NODES[to]) return; const [x1, y1] = NODES[id], [x2, y2] = NODES[to];
     el("path", { d: `M${x1} ${y1} Q${(x1 + x2) / 2 + 160} ${(y1 + y2) / 2} ${x2} ${y2}`, fill: "none", stroke: "#8E5BD6", "stroke-width": 6, "stroke-dasharray": "16 14", opacity: .6 }, L); });
@@ -112,19 +112,23 @@ async function dtScene(pc) {
   if (!DT_N.get("_intro")) { DT_N.set("_intro", 1); await speak(C.pony, "dtp_intro", dtTxt("dtp_intro")); }
   const ap = headTop(a); dtPoof(ap.x, ap.y + 150, 18); await sleep(200); a.root.style.display = ""; jump(a, .8); await sleep(400);
   if (!DT_SEEN.has(it.v)) { DT_SEEN.add(it.v); playMove(a, DT_MOVE[it.v]); await speak(a, `dt_hi_${it.v}`, DT.v[it.v].hi); unsay(); }
-  dtActs(a, it.v); await speak(a, `dt_${it.id}_b`, it.boke); unsay();
+  let bike = null; if (it.id === "y1") { // じてんしゃで ろうかを はしりまくる（2026-10-25）
+    bike = el("g", {}); bikeG(bike); follow(bike, () => { const q = world(a, 200, a.base - 50); return [q.x, q.y, 0, a.s * .7]; });
+    hold(a, "run", 3.2); [[0, 260], [700, -320], [1400, 220], [2100, -180], [2800, 0]].forEach(([t, x]) => later(t, () => { a.dx.t = x; })); for (let i = 0; i < 5; i++) later(i * 500, () => noise(.25, 500, .35)); }
+  if (it.id !== "y1") dtActs(a, it.v); await speak(a, `dt_${it.id}_b`, it.boke); unsay();
   surprise(C.pony); markAbove(C.pony, "ex"); await speak(C.pony, "dtp_go", dtTxt("dtp_go"));
   showTask(line, "つっこもう！", 260);
   let ok = false; const tries = [];
   for (let n = 0; n < 2 && !ok; n++) {
-    if (n > 0 || lv < 2) { await speak(C.pony, `dtp_${it.id}_${lv}`, line); unsay(); }
-    setListen(h, true); const r = await listen(it.keys, 8000); setListen(h, false);
+    await speak(C.pony, `dtp_${it.id}_${lv}`, line); unsay(); // ぽにーの お手本は いつも（2026-10-25）
+    setListen(h, true); LISTEN_TAIL = true; const r = await listen(it.keys, 10000).finally(() => LISTEN_TAIL = false); setListen(h, false);
     tries.push(`${r.r === "ok" ? "○" : r.r === "part" ? "△" : "×"}${r.heard || ""}`); ok = r.r === "ok";
     if (!ok && n === 0) await speak(C.pony, "p_again", "もう いっかい いってみよう"); }
   hideTask(); grade(ok); GS.tasks++;
   playLog({ type: "detarame", id: it.id, v: it.v, tier: lv, ok, answer: line, tries, ...(MODE === "multi" ? { who: NAMES[pc.kind] } : {}) });
   if (ok) { await dtHarisen(h, a); const st = slam("ナイス つっこみ！", 330, 140, "#FF9E5E"); later(1400, () => st.remove()); confetti(40); playMove(h, "pump"); }
   else { await speak(C.pony, "dtp_ng", dtTxt("dtp_ng")); await speak(C.pony, `dtp_${it.id}_${lv}`, line); unsay(); }
+  if (bike) { await sleep(200); bike.remove(); a.dx.t = 0; jump(a, .4); }
   await speak(a, `dt_${it.id}_r`, it.res); unsay();
   // もとの かめじいこうちょうに もどる
   const q = headTop(a); dtPoof(q.x, q.y + 150, 18); await sleep(150); const kj = C.kamejii; resetChar(kj); kj.dx.v = kj.dx.t = 0; place(kj, ASK_AT.kamejii[0], 975, ASK_AT.kamejii[1]); a.root.style.display = "none"; show(kj); playMove(kj, "nod"); await sleep(900);
@@ -137,6 +141,6 @@ LTASK_RUN.dt = dtScene;
     if (curStage !== DTS) return be(pc); const ev = EVENTS[DTS][pc.node]; if (!ev || (pc.player && pc.player.stay)) return be(pc);
     const v = DT.ev[ev[0]].v, c = clone(DT_KIND[v], 1330, 990, .62); hudLayer.appendChild(c.root); dtPoof(1330, 800, 10); jump(c, .6); playMove(c, DT_MOVE[v]);
     showBanner(`${DT.v[v].name}の しわざ！`, 1500);
-    const sp = speak; let once = true; speak = function (ch, k, t) { if (once && k === ev[2]) { once = false; return sp(c, k, t); } return sp(ch, k, t); };
+    const sp = speak; let once = true; speak = function (ch, k, t) { if (once && k.startsWith("dt_ev_")) { once = false; return sp(c, k, t); } return sp(ch, k, t); };
     const ss = slSay; slSay = async (k, t) => speak(C.pony, k, t);
     try { await be(pc); } finally { speak = sp; slSay = ss; dtPoof(1330, 800, 8); c.root.remove(); const i = visible.indexOf(c); if (i >= 0) visible.splice(i, 1); } }; }

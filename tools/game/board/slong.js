@@ -4,6 +4,7 @@
    ことばの 課題は だいぼうけん・ともだちの だいぼうけんの ものを つかう（声も その パックから）。
    あたらしい 声は ぽにーだけ（sl_*・n0・n7〜n12。packs/slong.json）。 */
 const JG_ROWS = [935, 730, 525, 320];
+const DT_ROWS = [895, 698, 501, 304]; // でたらめ がっこう：でこぼこの ぶん うえに（いちばん したが きれない）
 const SL = ["sumi", "sokashi", "suchu", "eki", "odekake", "kimochi", "makete", "dekigoto", "jugyou", "detarame"];
 const SL_HIDE = new Set([]); /* 声が そろうまで メニューに ださない コースを ここに */
 const isSL = () => SL.includes(curStage);
@@ -105,7 +106,7 @@ const SL_SHAPE = { // 47マス＋ゴール（まえは 65＋1。ながすぎた�
   kimochi() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + Math.sin(col * .8 + r * 1.3) * 22]); } }); return P; }, // 4だん＝4つの ばしょ（いえ・がっこう・こうえん・おでかけ）
   makete() { return SL_SHAPE.kimochi(); },
   dekigoto() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 7; j++) { const col = r % 2 ? 6 - j : j; P.push([200 + col * 200, y + Math.sin(col * .9 + r * 1.3) * 22]); } }); return P; }, // ながすぎたので 4だん×7＝28マスに（2026-10-25）
-  detarame() { const P = []; JG_ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + (col % 2 ? -34 : 30) + (col % 3 === 2 ? 14 : 0)]); } }); return P; }, // でこぼこ（でたらめ）な 4だん
+  detarame() { const P = []; DT_ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + (col % 2 ? -28 : 24) + (col % 3 === 2 ? 10 : 0)]); } }); return P; }, // でこぼこ（でたらめ）な 4だん
   jugyou() { const P = [], ROWS = JG_ROWS; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + Math.sin(col * .8 + r * 1.3) * 22]); } }); return P; }, // コース名を 上の バーに うつして 4だんを ひろげた（2026-10-25）
   odekake() { const P = [], ROWS = [930, 770, 610, 450]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([170 + col * 115, y]); } }); return P; }, // まちの みちの ような 4だん（したの 2だんは あるき、うえの 2だんは じてんしゃ）
 };
@@ -186,7 +187,7 @@ const slFlag = (pc, k) => { if (pc.player) pc.player[k] = 1; };
     const ev = EVENTS[curStage][pc.node]; if (!ev) return;
     let [type, , key, text] = ev; const O = SL_ORDER[curStage];
     // ゴールに ちかい ところ（くみかえで うしろに きた とき）では、ふりだしでは なく 10マス もどる
-    if (type === "home" && slIdx(pc.node) >= 30) { const b = Object.values(EVENTS[curStage]).find(e => e[0] === "back10"); if (b) [type, , key, text] = b; }
+    if (type === "home" && slIdx(pc.node) >= 12) { const b = Object.values(EVENTS[curStage]).find(e => e[0] === "back10"); if (b) [type, , key, text] = b; }
     await sleep(300); markAbove(pc, "ex"); chime();
     if (type === "tsukkomi") return slTsukkomi(pc);
     if (type === "zero") { const ov = slZeroShow(curStage, text); await speak(C.pony, key, text); await sleep(1200); ov.remove(); slFlag(pc, "zero"); markAbove(pc, "sparkle"); }
@@ -216,7 +217,7 @@ async function slTsukkomi(pc) {
   await speak(C.pony, "sl_tsk_intro", "つっこみマス！ ぽにーが へんな ことを いうよ。「ちがうよ！」って つっこんでね");
   const g = panel("つっこみマス", "#FFFBE6"); txt(g, 800, 420, it.e, 170, { "text-anchor": "middle" }); txt(g, 800, 620, `「${it.t}」`, 60, { "text-anchor": "middle" });
   playMove(C.pony, "point"); await speak(C.pony, `sl_tsk_${it.id}`, it.t);
-  showTask("ちがうよ！", "つっこもう", 260); setListen(pc, true); const r = await listen(it.keys, 7000); setListen(pc, false); hideTask();
+  showTask("ちがうよ！", "つっこもう", 260); setListen(pc, true); LISTEN_TAIL = true; const r = await listen(it.keys, 9000).finally(() => LISTEN_TAIL = false); setListen(pc, false); hideTask();
   g.remove(); playLog({ type: "tsukkomi", id: it.id, ok: r.r === "ok", who: NAMES[pc.kind] });
   if (r.r === "ok") { noise(.06, 3000, .5); blip(1600, 600, .12, "square"); const st = slam("ナイス つっこみ！", 330, 140, "#FF9E5E"); later(1400, () => st.remove()); confetti(40); playMove(C.pony, "laugh");
     await speak(C.pony, "sl_tsk_ok", "ナイス つっこみ！ 2マス すすむよ"); await slGo(pc, 2); return true; }

@@ -10,7 +10,7 @@ Object.assign(ITEM2, {
     [[-40, -50], [0, -58], [40, -50]].forEach(([x, y]) => el("ellipse", { cx: x, cy: y, rx: 5, ry: 3, fill: "#FFF6E9" }, g)); },
   fries(g) { [-30, -15, 0, 15, 30].forEach((x, i) => el("rect", { x: x - 8, y: -90 + (i % 2) * 14, width: 16, height: 80, rx: 4, fill: "#FFD25E", ...S6p(3) }, g)); el("path", { d: "M-52 -20 L-40 50 H40 L52 -20 Z", fill: "#E8473C", ...S6p(5) }, g); el("path", { d: "M-20 8 L0 -4 L20 8", fill: "none", stroke: "#FFD25E", "stroke-width": 6 }, g); },
   cupdrink(g) { el("path", { d: "M-34 -60 H34 L26 50 H-26 Z", fill: "#FFFFFF", ...S6p(5) }, g); el("path", { d: "M-30 -20 H30", stroke: "#FF8A5B", "stroke-width": 16 }, g); el("rect", { x: -38, y: -70, width: 76, height: 14, rx: 5, fill: "#E8473C", ...S6p(4) }, g); el("path", { d: "M8 -70 L18 -110", ...S6p(5) }, g); },
-  tray(g) { el("rect", { x: -130, y: -14, width: 260, height: 28, rx: 10, fill: "#C98A4B", ...S6p(5) }, g); const b = el("g", { transform: "translate(-60 -40) scale(.55)" }, g); ITEM2.burger(b); const f = el("g", { transform: "translate(40 -20) scale(.5)" }, g); ITEM2.fries(f); const c = el("g", { transform: "translate(100 -24) scale(.55)" }, g); ITEM2.cupdrink(c); },
+  btray(g) { el("rect", { x: -130, y: -14, width: 260, height: 28, rx: 10, fill: "#C98A4B", ...S6p(5) }, g); const b = el("g", { transform: "translate(-60 -40) scale(.55)" }, g); ITEM2.burger(b); const f = el("g", { transform: "translate(40 -20) scale(.5)" }, g); ITEM2.fries(f); const c = el("g", { transform: "translate(100 -24) scale(.55)" }, g); ITEM2.cupdrink(c); },
   numtag(g) { el("rect", { x: -40, y: -50, width: 80, height: 100, rx: 10, fill: "#FFFFFF", ...S6p(5) }, g); txt(g, 0, 20, "12", 50, { "text-anchor": "middle" }); },
   ball2(g) { el("circle", { r: 36, fill: "#FF6F91", ...S6p(4) }, g); el("path", { d: "M-30 -20 Q0 -36 30 -20", fill: "none", stroke: "#FFFFFF", "stroke-width": 6, opacity: .7 }, g); },
   sneakers(g) { [-40, 20].forEach(x => { el("path", { d: `M${x} 0 Q${x - 10} -40 ${x + 20} -40 Q${x + 60} -40 ${x + 60} 0 Z`, fill: "#E8473C", ...S6p(4) }, g); el("path", { d: `M${x + 10} -30 H${x + 40}`, stroke: "#FFFFFF", "stroke-width": 5 }, g); }); },
@@ -81,9 +81,9 @@ Object.assign(INTRO, {
   async bgnomimono(h, a) { enter(h); await sleep(1000); a.armR.t = -60; await sleep(600); a.armR.t = 0; playMove(h, "think"); await sleep(300); },
   async bgkochira(h, a) { enter(h); await sleep(1000); playMove(a, "look"); await sleep(500); playMove(h, "think"); markAbove(h, "q"); await sleep(600); },
   async bgbangou(h, a) { window.__tag = hp6(h, "numtag", .4); enter(h); await sleep(1100); hold(h, "shake", 1); await sleep(700); a.dx.v = a.dx.t = 900; hold(a, "run", 1); a.dx.t = 0; await sleep(1000); a.armL.t = -120; await sleep(500); a.armL.t = 0; surprise(h); await sleep(300); },
-  async bguketori(h, a) { enter(h); await sleep(1000); window.__tr = hp6(a, "tray", .45); a.armR.t = -60; await sleep(600); a.armR.t = 0; markAbove(h, "sparkle"); },
-  async bgseki(h, a) { const ks = exKids([880, 1060]); ks.forEach(c => { place(c, c.x + 200 * c.s, 975, c.s * .85); sit3(c); }); hp6(h, "tray", .4); enter(h); await sleep(1100); playMove(h, "look"); hold(h, "shake", 1.4); await sleep(1300); markAbove(h, "drop"); await sleep(300); },
-  async bgitadaki(h, a) { sit3(h); onDesk(h, "tray", .5); enter(a); await sleep(1000); playMove(a, "nod"); await sleep(400); markAbove(h, "sparkle"); },
+  async bguketori(h, a) { enter(h); await sleep(1000); window.__tr = hp6(a, "btray", .45); a.armR.t = -60; await sleep(600); a.armR.t = 0; markAbove(h, "sparkle"); },
+  async bgseki(h, a) { const ks = exKids([880, 1060]); ks.forEach(c => { place(c, c.x + 200 * c.s, 975, c.s * .85); sit3(c); }); hp6(h, "btray", .4); enter(h); await sleep(1100); playMove(h, "look"); hold(h, "shake", 1.4); await sleep(1300); markAbove(h, "drop"); await sleep(300); },
+  async bgitadaki(h, a) { sit3(h); onDesk(h, "btray", .5); enter(a); await sleep(1000); playMove(a, "nod"); await sleep(400); markAbove(h, "sparkle"); },
   async bgbetabeta(h, a) { sit3(h); onDesk(h, "burger", .5); await sleep(500); h.armR.t = -80; await sleep(400); h.armR.t = 0; const k = el("g", {}, front()); follow(k, () => { const p = world(h, 330, 300); return [p.x, p.y, 0, .5]; }); ITEM2.ketchup(k); window.__kc = k; h.armR.t = -60; markAbove(h, "drop"); await sleep(900); playMove(a, "look"); },
   async bgkoboshita(h, a) { sit3(h); const c = onDesk(h, "cupdrink", .45, 80); await sleep(700); h.armR.t = -70; await sleep(300); const d = h.__desk.firstChild, y = +d.getAttribute("y"), x = +d.getAttribute("x") + +d.getAttribute("width"); const cx = world(h, 200, 0).x + 80, ty = y - 8;
     // コップが たおれて、ジュースが テーブルから したへ ながれる
@@ -99,7 +99,7 @@ Object.assign(INTRO, {
     st.remove(); window.__sp = [sp, pd]; await sleep(300); h.armR.t = 0; surprise(h); markAbove(h, "ex"); await sleep(700); h.sadMouth = true; enter(a); await sleep(1000); },
   async bgtoire(h, a) { sit3(h); onDesk(h, "fries", .45); await sleep(600); hold(h, "shiver", 1.8); h.armL.t = 40; h.armR.t = -40; markAbove(h, "drop"); await sleep(1300); playMove(a, "look"); await sleep(300); },
   async bgbokuno(h, a) { sit3(h); onDesk(h, "fries", .45, 60); place(a, 1050, 975, .42); sit3(a); await sleep(600); a.armL.t = 100; a.dx.t = -60; await sleep(800); surprise(h); markAbove(h, "ex"); await sleep(400); },
-  async bggochisou(h, a) { window.__tr = hp6(h, "tray", .4); enter(h); await sleep(1100); playMove(a, "bow"); await sleep(500); },
+  async bggochisou(h, a) { window.__tr = hp6(h, "btray", .4); enter(h); await sleep(1100); playMove(a, "bow"); await sleep(500); },
 });
 Object.assign(POST, {
   async abkutsu(h, a) { playMove(h, "crouch"); await sleep(500); const p = world(h, 200, 0); prop("sneakers", p.x - 20, 985, .5); chime(); await sleep(500); playMove(a, "nod"); joy(h); await sleep(400); },
@@ -117,15 +117,15 @@ Object.assign(POST, {
   async bgchumon(h, a) { playMove(a, "nod"); markAbove(a, "note"); await sleep(600); joy(h); await sleep(300); },
   async bgnomimono(h, a) { playMove(a, "nod"); const c = hp6(a, "cupdrink", .4); await sleep(600); joy(h); await sleep(300); },
   async bgkochira(h, a) { playMove(a, "bow"); const t = hp6(a, "numtag", .4); await sleep(500); t.remove(); hp6(h, "numtag", .4); joy(h); await sleep(400); },
-  async bgbangou(h, a) { if (window.__tag) window.__tag.remove(); playMove(h, "pump"); await walk(h, 300, 800); hp6(h, "tray", .4); playMove(a, "nod"); joy(h); await sleep(400); },
-  async bguketori(h, a) { if (window.__tr) window.__tr.remove(); hp6(h, "tray", .4); a.armR.t = -70; await sleep(500); a.armR.t = 0; playMove(h, "nod"); await sleep(400); },
+  async bgbangou(h, a) { if (window.__tag) window.__tag.remove(); playMove(h, "pump"); await walk(h, 300, 800); hp6(h, "btray", .4); playMove(a, "nod"); joy(h); await sleep(400); },
+  async bguketori(h, a) { if (window.__tr) window.__tr.remove(); hp6(h, "btray", .4); a.armR.t = -70; await sleep(500); a.armR.t = 0; playMove(h, "nod"); await sleep(400); },
   async bgseki(h, a) { playMove(a, "nod"); await sleep(500); ((CUR_S && CUR_S.extras) || []).forEach(k => { const c = C[k]; if (c.__desk) c.__desk.remove(); walk(c, 900, 1400); }); await sleep(1500); joy(h); await sleep(300); },
   async bgitadaki(h, a) { playMove(a, "nod"); h.happyOn = true; h.armL.t = h.armR.t = 0; await sleep(700); },
   async bgbetabeta(h, a) { hp6(a, "tissue", .4); await walk(a, -330, 800); if (window.__kc) window.__kc.remove(); hold(h, "shake", 1.2); await sleep(1200); joy(h); await sleep(300); },
   async bgkoboshita(h, a) { hp6(a, "rag", .35); await walk(a, -330, 800); playMove(a, "crouch"); await sleep(400); if (window.__pd) window.__pd.remove(); (window.__sp || []).forEach(e => e.remove()); h.sadMouth = false; playMove(h, "bow"); await sleep(500); },
   async bgtoire(h, a) { playMove(a, "nod"); if (h.__desk) h.__desk.remove(); h.armL.t = h.armR.t = 0; await walk(h, 900, 1200); },
   async bgbokuno(h, a) { a.armL.t = 0; a.dx.t = 0; playMove(a, "shy"); await sleep(500); h.armR.t = -70; await sleep(500); h.armR.t = 0; joy(a); joy(h); await sleep(400); },
-  async bggochisou(h, a) { if (window.__tr) window.__tr.remove(); hp6(a, "tray", .4); playMove(h, "bow"); await sleep(600); playMove(a, "bow"); await sleep(400); },
+  async bggochisou(h, a) { if (window.__tr) window.__tr.remove(); hp6(a, "btray", .4); playMove(h, "bow"); await sleep(600); playMove(a, "bow"); await sleep(400); },
 });
 
 /* ---------- 盤 ---------- */
