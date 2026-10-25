@@ -274,7 +274,7 @@ async function runSit(place, heroKind = "shima") {
 async function gaoSit(before) {
   const s = pickSit(zoneOf(P.gao.node), RIVAL);
   const { hero: h, ask: a } = setSitView(s, RIVAL); const ti = tierFor(s), t = s.tiers[ti];
-  const mistake = !!t.wrong && E.L >= 2 && Math.random() < .35;
+  const mistake = !!t.wrong && (!t.auto || !!AUD[`sx_${s.id}_${ti}`]) && E.L >= 2 && Math.random() < .35; // auto＝あとから ふやした いいまちがい（声が ある ときだけ）
   showEngine({ no: s.id, main: t.a }, `${NAMES[RIVAL]}の場面${mistake ? "（まちがえる回）" : ""}`);
   await playIntro(s, h, a);
   await askQ(s, h, a);
