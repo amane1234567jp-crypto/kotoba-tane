@@ -262,7 +262,8 @@ async function runSit(place, heroKind = "shima") {
   const up = grade(ok && n === 0); GS.tasks++; if (ok) GS.ok++;
   if (!ok) { await speak(C.pony, "p_together", "いっしょに いおうね"); await speak(C.pony, `sa_${s.id}_${ti}`, t.a); playMove(h, "nod"); await sleep(600); }
   hideTask();
-  await resolve(s, h, a, ok);
+  let s2 = s; if (ok && typeof MORE !== "undefined" && MORE[s.id] && AUD[`sq2_${s.id}_0${s.vk || ""}`]) s2 = await moreTurns(s, h, a);
+  await resolve(s2, h, a, ok);
   if (ok) { joy(C.pony); await speak(C.pony, "p_great", "すごい！ いえたね！"); }
   if (ok) await seedGet(h);
   showEngine(null, ok ? (n === 0 ? "1回目で言えた" : `${n + 1}回目で言えた`) : "3回とも言えなかった");
@@ -459,3 +460,21 @@ const POST = {
     if (bk) await tween(700, k => bk.setAttribute("transform", `translate(${(880 - 220 * k).toFixed(0)} ${(230 + 400 * k).toFixed(0)})`));
     a.lift.t = 0; if (bk) bk.remove(); joy(h); await sleep(600); },
 };
+
+/* ---------- 2〜3往復の かいわ（2026-10-25）：1かいめに いえたら、あいてが もう ひとこと きいて くる ---------- */
+async function moreTurns(s, h, a) {
+  const M = MORE[s.id], vk = s.vk || "";
+  playMove(h, "nod");
+  for (let i = 0; i < M.turns.length; i++) { const m = M.turns[i];
+    await sleep(300); await speak(a, `sq2_${s.id}_${i}${vk}`, m.q); unsay();
+    await speak(C.pony, "p_ask", "なんて こたえる？"); showTask(m.a, "こたえよう");
+    let ok = false; const tries = [], t0 = performance.now();
+    for (let n = 0; n < 2 && !ok; n++) {
+      await speak(C.pony, `sa2_${s.id}_${i}`, m.a); unsay();
+      setListen(h, true); const r = await listen(m.keys, 8000); setListen(h, false);
+      tries.push(`${r.r === "ok" ? "○" : r.r === "part" ? "△" : "×"}${r.heard || ""}`); ok = r.r === "ok";
+      if (!ok && n === 0) await speak(C.pony, "p_again", "もう いっかい いってみよう"); }
+    playLog({ type: "scene", id: `${s.id}+${i + 1}`, ok, answer: m.a, tries, sec: Math.round((performance.now() - t0) / 1000) });
+    if (ok) { GS.ok++; playMove(h, "nod"); } else { await speak(C.pony, "p_together", "いっしょに いおうね"); await speak(C.pony, `sa2_${s.id}_${i}`, m.a); }
+    hideTask(); }
+  return { ...s, res: M.res, vk: "_m" + vk }; }

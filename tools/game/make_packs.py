@@ -8,6 +8,7 @@ G = Path(__file__).resolve().parent; R = G.parents[1]
 A = G / "stage_audio"; OUT = R / "packs"; OUT.mkdir(exist_ok=True)
 S = json.loads((G / "sit/sits.json").read_text())
 RIVAL_OF = {"kousha": "gao", "undou": "pyon", "kouen": "mii", "omise": "chu", "densha": "doshin", "gakkou2": "kon", "toukou": "gao", "gakkou3": "mii", "kyuushoku": "doshin", "gekou": "pyon", "ouchi1": "mii", "tomodachi1": "chu", "sensei1": "pyon", "ie1": "chu", "kouen2": "mii", "seki1": "gao", "tokei": "gao", "asobiba": "mii", "burger": "pyon", "sansu": "chu", "hoken2": "doshin", "byouin": "chu", "yuushoku": "gao", "kokugo": "kon", "taiiku": "pyon", "ongaku": "mii", "zukou": "chu", "jitensha": "doshin", "yasumi": "kon", "haisha": "gao", "kirikae": "mii", "kikikaesu": "kon", "matsu": "gao", "sos": "pyon", "junban": "kon", "kotowaru": "mii", "bousai": "gao", "denwa": "mii", "kaerimichi": "gao", "manekko": "gao"}
+MORE = json.loads((G / "board/more_data.js").read_text().split("=", 1)[1].strip().rstrip(";"))
 def keys_of(s):
     new = s["stage"] != "kousha" or not (G / "sit/audio" / f"sq_{s['id']}.mp3").exists()  # こうしゃの はじめの 場面は 段1〜4が ページに 入っている
     ks = []
@@ -22,6 +23,10 @@ def keys_of(s):
         if s.get("gaoOk") and s["asker"] != RIVAL_OF[s["stage"]] and RIVAL_OF[s["stage"]] not in s.get("noHero", []):
             ks.append(f"sg_{s['id']}_{i}")
             if t.get("wrong"): ks.append(f"sx_{s['id']}_{i}")
+    if s["id"] in MORE:  # 2〜3往復の かいわ（2026-10-25）
+        vks = [""] + (["_" + m for m in ("pyonmama", "gaomama", "miimama", "chumama")] if s["asker"] == "mama" else [])
+        for i, _ in enumerate(MORE[s["id"]]["turns"]): ks += [f"sa2_{s['id']}_{i}"] + [f"sq2_{s['id']}_{i}{v}" for v in vks]
+        ks += [f"sr_{s['id']}_m{v}" for v in vks]
     return ks
 missing = []
 for st in ["kousha", "undou", "kouen", "omise", "densha", "gakkou2", "toukou", "gakkou3", "kyuushoku", "gekou", "ouchi1", "tomodachi1", "sensei1", "ie1", "kouen2", "seki1", "tokei", "asobiba", "burger", "hoken2", "byouin", "haisha", "yuushoku", "kokugo", "taiiku", "ongaku", "zukou", "jitensha", "yasumi", "kirikae", "kikikaesu", "matsu", "sos", "junban", "kotowaru", "bousai", "denwa", "kaerimichi", "manekko"]:

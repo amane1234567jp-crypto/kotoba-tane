@@ -1,0 +1,262 @@
+[
+ {
+  "key": "sq2_hoken_0",
+  "who": "meebaa",
+  "text": "どこで ころんだの？"
+ },
+ {
+  "key": "sr_hoken_m",
+  "who": "meebaa",
+  "text": "そう。ろうかは ゆっくり あるこうね。ばんそうこうを はりましょうね"
+ },
+ {
+  "key": "sq2_uwabaki_0",
+  "who": "kamejii",
+  "text": "スリッパを かそうかね？"
+ },
+ {
+  "key": "sr_uwabaki_m",
+  "who": "kamejii",
+  "text": "ほっほ。あしたは わすれずに もって くるんじゃよ"
+ },
+ {
+  "key": "sq2_zukan_0",
+  "who": "nobbo",
+  "text": "どんな どうぶつの ほんが いいですか？"
+ },
+ {
+  "key": "sr_zukan_m",
+  "who": "nobbo",
+  "text": "きょうりゅうの ずかんなら、いちばん うえの たなに ありますよ"
+ },
+ {
+  "key": "sq2_netsu_0",
+  "who": "meebaa",
+  "text": "いつから ぐあいが わるいの？"
+ },
+ {
+  "key": "sr_netsu_m",
+  "who": "meebaa",
+  "text": "そう。たいおんけいで、はかって みましょうね"
+ },
+ {
+  "key": "sq2_pan_0",
+  "who": "pyonmama",
+  "text": "あたためますか？"
+ },
+ {
+  "key": "sr_pan_m",
+  "who": "pyonmama",
+  "text": "はい、どうぞ。やきたてですよ"
+ },
+ {
+  "key": "sq2_otsukai_0",
+  "who": "gaojii",
+  "text": "ほかに なにか いるかね？"
+ },
+ {
+  "key": "sr_otsukai_m",
+  "who": "gaojii",
+  "text": "ほっほ、えらいのう。おまけに りんごも どうぞ"
+ },
+ {
+  "key": "sq2_kyoishii_0",
+  "who": "pyon",
+  "text": "なにが いちばん すき？"
+ },
+ {
+  "key": "sr_kyoishii_m",
+  "who": "pyon",
+  "text": "わたしも！ からあげ、さいこうだよね"
+ },
+ {
+  "key": "sq2_ociyana_0",
+  "who": "mama",
+  "text": "なにが あったの？"
+ },
+ {
+  "key": "sq2_ociyana_0_pyonmama",
+  "who": "pyonmama",
+  "text": "なにが あったの？"
+ },
+ {
+  "key": "sq2_ociyana_0_gaomama",
+  "who": "gaomama",
+  "text": "なにが あったの？"
+ },
+ {
+  "key": "sq2_ociyana_0_miimama",
+  "who": "miimama",
+  "text": "なにが あったの？"
+ },
+ {
+  "key": "sq2_ociyana_0_chumama",
+  "who": "chumama",
+  "text": "なにが あったの？"
+ },
+ {
+  "key": "sr_ociyana_m",
+  "who": "mama",
+  "text": "そうだったの。いやだったね。おしえて くれて ありがとう"
+ },
+ {
+  "key": "sr_ociyana_m_pyonmama",
+  "who": "pyonmama",
+  "text": "そうだったの。いやだったね。おしえて くれて ありがとう"
+ },
+ {
+  "key": "sr_ociyana_m_gaomama",
+  "who": "gaomama",
+  "text": "そうだったの。いやだったね。おしえて くれて ありがとう"
+ },
+ {
+  "key": "sr_ociyana_m_miimama",
+  "who": "miimama",
+  "text": "そうだったの。いやだったね。おしえて くれて ありがとう"
+ },
+ {
+  "key": "sr_ociyana_m_chumama",
+  "who": "chumama",
+  "text": "そうだったの。いやだったね。おしえて くれて ありがとう"
+ },
+ {
+  "key": "sq2_ocyume_0",
+  "who": "mama",
+  "text": "どんな ゆめ だったの？"
+ },
+ {
+  "key": "sq2_ocyume_0_pyonmama",
+  "who": "pyonmama",
+  "text": "どんな ゆめ だったの？"
+ },
+ {
+  "key": "sq2_ocyume_0_gaomama",
+  "who": "gaomama",
+  "text": "どんな ゆめ だったの？"
+ },
+ {
+  "key": "sq2_ocyume_0_miimama",
+  "who": "miimama",
+  "text": "どんな ゆめ だったの？"
+ },
+ {
+  "key": "sq2_ocyume_0_chumama",
+  "who": "chumama",
+  "text": "どんな ゆめ だったの？"
+ },
+ {
+  "key": "sr_ocyume_m",
+  "who": "mama",
+  "text": "こわかったね。ママが そばに いるから だいじょうぶよ"
+ },
+ {
+  "key": "sr_ocyume_m_pyonmama",
+  "who": "pyonmama",
+  "text": "こわかったね。ママが そばに いるから だいじょうぶよ"
+ },
+ {
+  "key": "sr_ocyume_m_gaomama",
+  "who": "gaomama",
+  "text": "こわかったね。ママが そばに いるから だいじょうぶよ"
+ },
+ {
+  "key": "sr_ocyume_m_miimama",
+  "who": "miimama",
+  "text": "こわかったね。ママが そばに いるから だいじょうぶよ"
+ },
+ {
+  "key": "sr_ocyume_m_chumama",
+  "who": "chumama",
+  "text": "こわかったね。ママが そばに いるから だいじょうぶよ"
+ },
+ {
+  "key": "sq2_tdhajime_0",
+  "who": "kuma",
+  "text": "いいよ。なにして あそぶ？"
+ },
+ {
+  "key": "sr_tdhajime_m",
+  "who": "kuma",
+  "text": "うん！ いっしょに おしろを つくろう"
+ },
+ {
+  "key": "sq2_tdomocha_0",
+  "who": "gao",
+  "text": "どこが かっこいいと おもう？"
+ },
+ {
+  "key": "sr_tdomocha_m",
+  "who": "gao",
+  "text": "だろ！ ビームも でるんだぜ。いっしょに あそぼうぜ"
+ },
+ {
+  "key": "sq2_octetsudai_0",
+  "who": "mama",
+  "text": "ありがとう！ じゃあ、おはしを ならべて くれる？"
+ },
+ {
+  "key": "sq2_octetsudai_0_pyonmama",
+  "who": "pyonmama",
+  "text": "ありがとう！ じゃあ、おはしを ならべて くれる？"
+ },
+ {
+  "key": "sq2_octetsudai_0_gaomama",
+  "who": "gaomama",
+  "text": "ありがとう！ じゃあ、おはしを ならべて くれる？"
+ },
+ {
+  "key": "sq2_octetsudai_0_miimama",
+  "who": "miimama",
+  "text": "ありがとう！ じゃあ、おはしを ならべて くれる？"
+ },
+ {
+  "key": "sq2_octetsudai_0_chumama",
+  "who": "chumama",
+  "text": "ありがとう！ じゃあ、おはしを ならべて くれる？"
+ },
+ {
+  "key": "sr_octetsudai_m",
+  "who": "mama",
+  "text": "たすかるわ。ありがとう"
+ },
+ {
+  "key": "sr_octetsudai_m_pyonmama",
+  "who": "pyonmama",
+  "text": "たすかるわ。ありがとう"
+ },
+ {
+  "key": "sr_octetsudai_m_gaomama",
+  "who": "gaomama",
+  "text": "たすかるわ。ありがとう"
+ },
+ {
+  "key": "sr_octetsudai_m_miimama",
+  "who": "miimama",
+  "text": "たすかるわ。ありがとう"
+ },
+ {
+  "key": "sr_octetsudai_m_chumama",
+  "who": "chumama",
+  "text": "たすかるわ。ありがとう"
+ },
+ {
+  "key": "sq2_kariru_0",
+  "who": "nobbo",
+  "text": "いつまでに かえせますか？"
+ },
+ {
+  "key": "sr_kariru_m",
+  "who": "nobbo",
+  "text": "はい。らいしゅう、まって いますよ"
+ },
+ {
+  "key": "sq2_ikura_0",
+  "who": "pyonmama",
+  "text": "おひとつ いかがですか？"
+ },
+ {
+  "key": "sr_ikura_m",
+  "who": "pyonmama",
+  "text": "はい、どうぞ。くまさんパン、にんきなんです"
+ }
+]
