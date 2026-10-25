@@ -41,7 +41,7 @@ addTick(() => {
   if (!odBikeG || !odBikeG.isConnected) { odBikeG = el("g", {}, fxLayer); odBikeG.__b = new Map(); }
   const onBoard = view === "board"; odBikeG.style.display = onBoard ? "" : "none"; if (!onBoard) return;
   PLAYERS.forEach(p => { const pc = p.pc; if (!pc || !pc.node) return; const on = odIdx(pc) >= OD_BIKE_AT && pc.node !== GOAL; let b = odBikeG.__b.get(pc);
-    if (on && !b) { b = bikeG(odBikeG); odBikeG.__b.set(pc, b); if (!odSaid) { odSaid = true; speak(C.pony, "od_bike", "ここからは じてんしゃに のるよ！ ヘルメットを かぶって しゅっぱつ！"); } }
+    if (on && !b) { b = bikeG(odBikeG); odBikeG.__b.set(pc, b); if (!odSaid) { odSaid = true; OD_BIKE_SAY = true; } }
     if (b) { b.style.display = on && pc.root.getAttribute("opacity") !== "0" ? "" : "none"; const q = world(pc, 200, pc.base - 50); b.setAttribute("transform", `translate(${q.x.toFixed(1)} ${q.y.toFixed(1)}) scale(${(pc.s * .7).toFixed(3)})`); } });
 });
 { const ap = applyStage; applyStage = function (id, ...a) { odSaid = false; if (odBikeG) { odBikeG.remove(); odBikeG = null; } return ap(id, ...a); }; }
