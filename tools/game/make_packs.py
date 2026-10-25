@@ -18,7 +18,9 @@ def keys_of(s):
     if s["asker"] == "onii" and s["stage"] == "yuushoku": ks += [f"{q}_{s['id']}_gaonii" for q in ("sq", "sr")]
     ks += [f"st_{s['id']}_{i}" for i, r in enumerate(s.get("talk", [])) if r[2]] + [f"se_{s['id']}_{i}" for i, r in enumerate(s.get("after", [])) if r[2]]
     for i, t in enumerate(s["tiers"]):
-        if not new and i < 4: continue
+        if not new and i < 4:
+            if t.get("auto") and s.get("gaoOk") and s["asker"] != RIVAL_OF[s["stage"]]: ks.append(f"sx_{s['id']}_{i}")  # あとから ふやした いいまちがい（2026-10-25）
+            continue
         ks.append(f"sa_{s['id']}_{i}")
         if s.get("gaoOk") and s["asker"] != RIVAL_OF[s["stage"]] and RIVAL_OF[s["stage"]] not in s.get("noHero", []):
             ks.append(f"sg_{s['id']}_{i}")
