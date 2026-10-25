@@ -40,5 +40,5 @@ const SHORT = { mk_pick: ["mk_pick_s", "どれに する？"], mk_retry: ["mk_re
   mk_help: ["mk_help_s", "なんて いう？"], mk_teach: ["mk_teach_s", "おしえて あげよう"], mkp_cardq: ["mkp_cardq_s", "どれが いいかな？"],
   mkp_card_ok: ["mk_say_s", "いって みよう"], kp_pitta: ["kp_pitta_s", "どの きもちが ぴったり？"], kp_pitta_say: ["mk_say_s", "いって みよう"] };
 const SAID = {};
-{ const sp = speak; speak = function (c, key, text) { if (SHORT[key]) { SAID[key] = (SAID[key] || 0) + 1; if (SAID[key] > 2 && AUD[SHORT[key][0]]) return sp(c, ...SHORT[key]); } return sp(c, key, text); };
+{ const sp = speak; speak = function (c, key, text) { if (SHORT[key]) { SAID[key] = (SAID[key] || 0) + 1; if (SAID[key] > 1 && AUD[SHORT[key][0]]) return sp(c, ...SHORT[key]); } return sp(c, key, text); };
   const ng = newGame; newGame = function (...a) { for (const k in SAID) delete SAID[k]; return ng(...a); }; }
