@@ -98,7 +98,9 @@ const SL_SHAPE = { // 47マス＋ゴール（まえは 65＋1。ながすぎた�
     for (let k = 0; k < 48; k++) { let d = tot * k / 47, i = 0; while (i < seg.length - 1 && d > seg[i]) { d -= seg[i]; i++; } const t = Math.min(1, d / seg[i]); P.push([V[i][0] + (V[i + 1][0] - V[i][0]) * t, V[i][1] + (V[i + 1][1] - V[i][1]) * t]); }
     return P; },
   kimochi() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + Math.sin(col * .8 + r * 1.3) * 22]); } }); return P; }, // 4だん＝4つの ばしょ（いえ・がっこう・こうえん・おでかけ）
-  makete() { return SL_SHAPE.kimochi(); }, dekigoto() { return SL_SHAPE.kimochi(); }, jugyou() { return SL_SHAPE.kimochi(); },
+  makete() { return SL_SHAPE.kimochi(); },
+  dekigoto() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 7; j++) { const col = r % 2 ? 6 - j : j; P.push([200 + col * 200, y + Math.sin(col * .9 + r * 1.3) * 22]); } }); return P; }, // ながすぎたので 4だん×7＝28マスに（2026-10-25）
+  jugyou() { return SL_SHAPE.kimochi(); },
   odekake() { const P = [], ROWS = [930, 770, 610, 450]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([170 + col * 115, y]); } }); return P; }, // まちの みちの ような 4だん（したの 2だんは あるき、うえの 2だんは じてんしゃ）
 };
 const SL_ORDER = {}, SL_PTS = {}, SL_ORDER0 = {};

@@ -1,5 +1,5 @@
 /* ================= ロングコース「まけても だいじょうぶ」（makete）・「きょうの できごと」（dekigoto）（2026-10-19） =================
-   どちらも ちょうロングの しくみ（slong.js）の うえに のせる。48マス・4だん。データと 声：sit/makete_gen.py・sit/dekigoto_gen.py
+   どちらも ちょうロングの しくみ（slong.js）の うえに のせる。48マス・4だん（きょうの できごとは 28マス）。データと 声：sit/makete_gen.py・sit/dekigoto_gen.py
    まけても：💪 まけた 場面 → きりかえの ことば →（段2〜）かった 子に「おめでとう」→（段3〜）つぎ どう する？／✊ ぽにーと じゃんけん（ほんとに まける ことも ある）／🌈 きりかえ カード
    できごと：📖 えを みて ママの しつもんに こたえる（どこで・だれと・なにを・どんな きもち）→（段3〜）ぜんぶ つなげて →（段4〜）それから？／🔢 1にちの じゅんばん／🎤 じぶんの きょう（インタビュー） */
 const NEWL = ["makete", "dekigoto"], NEWD = { makete: MK, dekigoto: DG };
@@ -12,10 +12,10 @@ const nTxt = k => (NEWD[curStage] && NEWD[curStage].txt[k]) || (MK.txt[k] || DG.
       "mg", "mj", "mg", "mg", "e:rest", "mg", "mc", "mg", "mg", null, "mj", "mg",
       "mg", "mc", "mg", "e:again", "mg", "mj", "mg", "e:kb2", "mg", "mc", "mg", "mg",
       "mg", "mj", "mg", "e:kf2", "mg", "mc", "mg", "mj", "mg", "mg", "mc", null],
-    dekigoto: [null, "ds", "ds", "e:kf1", "dj", "ds", "dv", "ds", "ds", "e:kb1", "ds", "dj",
-      "ds", "ds", "dv", "ds", "e:rest", "dj", "ds", "ds", "ds", null, "dj", "ds",
-      "ds", "dv", "ds", "e:again", "ds", "dj", "ds", "e:kb2", "ds", "ds", "dv", "ds",
-      "ds", "dj", "ds", "e:kf2", "ds", "ds", "dv", "ds", "dj", "ds", "ds", null] };
+    dekigoto: [null, "ds", "dj", "e:kf1", "ds", "dv", "ds", // 28マス（2026-10-25 みじかく。21＝どしん、さいご＝ゴール）
+      "ds", "dj", "e:kb1", "ds", "dv", "ds", "e:rest",
+      "dj", "ds", "ds", "dv", "e:kf2", "ds", "dj",
+      null, "ds", "dv", "e:kb2", "ds", "dj", null] };
   NEWL.forEach(sid => { const O = SL_ORDER[sid], ev = {}, task = {};
     O.forEach((id, i) => { const p = PL[sid][i]; if (!p || id === "0" || id === "4" || id === "15") return;
       if (p.startsWith("e:")) { const t = p.slice(2); ev[id] = [t, 0, `sl_${sid}_${t}`, NEWD[sid].evt[t]]; } else task[id] = p; });
@@ -23,7 +23,7 @@ const nTxt = k => (NEWD[curStage] && NEWD[curStage].txt[k]) || (MK.txt[k] || DG.
   LEGENDS.makete = [["mg", "まけた とき"], ["mj", "じゃんけん"], ["mc", "きりかえ カード"]];
   }
 Object.assign(LTASK, { mg: ["#FFE0C2", "💪"], mj: ["#FFE27A", "✊"], mc: ["#D7F0D2", "🌈"], ds: ["#FFE9D6", "📖"], dj: ["#C9EBB5", "🔢"], dv: ["#C9E7FF", "🎤"] });
-const nArea = id => Math.min(4, Math.floor(SL_ORDER[curStage].indexOf(id) / 12) + 1);
+const nArea = id => Math.min(4, Math.floor(SL_ORDER[curStage].indexOf(id) / (SL_ORDER[curStage].length / 4)) + 1);
 // すすむ・もどる しかけ
 { const be = boardEvent; boardEvent = async function (pc) {
     const ev = NEWL.includes(curStage) && EVENTS[curStage][pc.node];
