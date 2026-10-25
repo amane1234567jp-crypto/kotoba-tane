@@ -1,0 +1,342 @@
+[
+ {
+  "key": "dt_hi_robo",
+  "who": "kamejii",
+  "text": "ピピピ。わしは ロボこうちょう ゼット。ガシャーン、ガシャーン"
+ },
+ {
+  "key": "dt_hi_yan",
+  "who": "kamejii",
+  "text": "おう。きょうから わしが ヤンキーこうちょうだぜ！ よろしくな！"
+ },
+ {
+  "key": "dt_hi_kui",
+  "who": "kamejii",
+  "text": "もぐもぐ。わしは くいしんぼう こうちょうじゃよ。おなか すいたのう"
+ },
+ {
+  "key": "dt_hi_doro",
+  "who": "kamejii",
+  "text": "しっしっし。わしは どろぼう こうちょう。なんでも いただくぞい"
+ },
+ {
+  "key": "dt_hi_baby",
+  "who": "kamejii",
+  "text": "ばぶー。あかちゃん こうちょうでちゅ。よろしくでちゅ"
+ },
+ {
+  "key": "dt_hi_king",
+  "who": "kamejii",
+  "text": "わっはっは！ わしは おうさま こうちょうじゃ！ みな、ひれふすのじゃ"
+ },
+ {
+  "key": "dt_r1_b",
+  "who": "kamejii",
+  "text": "パパピスポポポピー。ピポパ、ピポパ"
+ },
+ {
+  "key": "dt_r2_b",
+  "who": "kamejii",
+  "text": "ピピッ。きょうの きゅうしょくは、でんちを たべましょう"
+ },
+ {
+  "key": "dt_r3_b",
+  "who": "kamejii",
+  "text": "ピコピコ。しゅくだいは、ぜんぶ ロボットが やって あげよう"
+ },
+ {
+  "key": "dt_r4_b",
+  "who": "kamejii",
+  "text": "ガガガ。ろうかは、ジェットで とびましょう"
+ },
+ {
+  "key": "dt_y1_b",
+  "who": "kamejii",
+  "text": "おらおら！ がっこうの なかを じてんしゃで はしりまくるぜ！"
+ },
+ {
+  "key": "dt_y2_b",
+  "who": "kamejii",
+  "text": "あいさつ？ そんなの いらねえよ！"
+ },
+ {
+  "key": "dt_y3_b",
+  "who": "kamejii",
+  "text": "テストは、となりの やつと こうかんして いいぜ！"
+ },
+ {
+  "key": "dt_y4_b",
+  "who": "kamejii",
+  "text": "そうじの じかんは、ほうきで チャンバラだぜ！ えいっ！"
+ },
+ {
+  "key": "dt_k1_b",
+  "who": "kamejii",
+  "text": "じゅぎょうちゅうは、おやつを たべましょう！ もぐもぐ"
+ },
+ {
+  "key": "dt_k2_b",
+  "who": "kamejii",
+  "text": "きゅうしょくは、ぜーんぶ こうちょうせんせいが たべちゃうよ"
+ },
+ {
+  "key": "dt_k3_b",
+  "who": "kamejii",
+  "text": "うんどうかいは、ねころんで ポテトチップスを たべる きょうそうだよ"
+ },
+ {
+  "key": "dt_k4_b",
+  "who": "kamejii",
+  "text": "きょうしつの つくえは、ぜんぶ ケーキで つくりました"
+ },
+ {
+  "key": "dt_d1_b",
+  "who": "kamejii",
+  "text": "えんぴつを わすれたら、となりの こから ぬすんじゃいましょう"
+ },
+ {
+  "key": "dt_d2_b",
+  "who": "kamejii",
+  "text": "おとしものは、ひろった ひとの ものに なりまーす"
+ },
+ {
+  "key": "dt_d3_b",
+  "who": "kamejii",
+  "text": "としょしつの ほんは、かえさなくて いいよ。ぜーんぶ もらっちゃえ"
+ },
+ {
+  "key": "dt_d4_b",
+  "who": "kamejii",
+  "text": "ともだちの デザート、こっそり たべちゃおう"
+ },
+ {
+  "key": "dt_b1_b",
+  "who": "kamejii",
+  "text": "ばぶー。きょうの じゅぎょうは、ぜんぶ おひるねでちゅ"
+ },
+ {
+  "key": "dt_b2_b",
+  "who": "kamejii",
+  "text": "ばぶばぶ。こくごの じかんは、ばぶばぶごで はなすでちゅ"
+ },
+ {
+  "key": "dt_b3_b",
+  "who": "kamejii",
+  "text": "ミルクが のみたいでちゅー。うえーん"
+ },
+ {
+  "key": "dt_o1_b",
+  "who": "kamejii",
+  "text": "わしは おうさまじゃ！ しゅくだいは まいにち ひゃくまいじゃ！"
+ },
+ {
+  "key": "dt_o2_b",
+  "who": "kamejii",
+  "text": "おうさまの めいれいじゃ！ たいいくは、ずっと すわって いるのじゃ"
+ },
+ {
+  "key": "dt_o3_b",
+  "who": "kamejii",
+  "text": "おうさまの いすが ほしいから、みんなの いすを あつめるのじゃ"
+ },
+ {
+  "key": "dt_r1_r",
+  "who": "kamejii",
+  "text": "ピピッ……ハッ！ わしと したことが。ちゃんと にほんごで はなすぞい"
+ },
+ {
+  "key": "dt_r2_r",
+  "who": "kamejii",
+  "text": "ピポ……そうじゃった。でんちは ロボットの ごはんじゃった"
+ },
+ {
+  "key": "dt_r3_r",
+  "who": "kamejii",
+  "text": "ガガッ……その とおりじゃ。えらいぞい"
+ },
+ {
+  "key": "dt_r4_r",
+  "who": "kamejii",
+  "text": "ピピ……ろうかは あるく。きおくしたぞい"
+ },
+ {
+  "key": "dt_y1_r",
+  "who": "kamejii",
+  "text": "……お、おう。わるかったな。おりて あるくぜ"
+ },
+ {
+  "key": "dt_y2_r",
+  "who": "kamejii",
+  "text": "……ちっ。おはよう ございます、だぜ"
+ },
+ {
+  "key": "dt_y3_r",
+  "who": "kamejii",
+  "text": "……お、おう。じぶんの ちからで やれよな"
+ },
+ {
+  "key": "dt_y4_r",
+  "who": "kamejii",
+  "text": "……わ、わかったよ。ピカピカに するぜ"
+ },
+ {
+  "key": "dt_k1_r",
+  "who": "kamejii",
+  "text": "もぐ……そ、そうだね。ポケットに しまうよ"
+ },
+ {
+  "key": "dt_k2_r",
+  "who": "kamejii",
+  "text": "えへへ……みんなで わけて たべようね"
+ },
+ {
+  "key": "dt_k3_r",
+  "who": "kamejii",
+  "text": "ふう、ふう……いっしょに はしるよ"
+ },
+ {
+  "key": "dt_k4_r",
+  "who": "kamejii",
+  "text": "そ、そっか……ふつうの つくえに もどすね"
+ },
+ {
+  "key": "dt_d1_r",
+  "who": "kamejii",
+  "text": "ギクッ……そ、そうじゃな。「かして」じゃな"
+ },
+ {
+  "key": "dt_d2_r",
+  "who": "kamejii",
+  "text": "ギクギク……ちゃんと とどけるぞい"
+ },
+ {
+  "key": "dt_d3_r",
+  "who": "kamejii",
+  "text": "う、うむ……ちゃんと かえすんじゃぞ"
+ },
+ {
+  "key": "dt_d4_r",
+  "who": "kamejii",
+  "text": "ギクッ。……ちょうだいって きいて みるかのう"
+ },
+ {
+  "key": "dt_b1_r",
+  "who": "kamejii",
+  "text": "ばぶ……おきるでちゅ。……ごほん、おきたぞい"
+ },
+ {
+  "key": "dt_b2_r",
+  "who": "kamejii",
+  "text": "ばぶ……ごほん。にほんごで はなすぞい"
+ },
+ {
+  "key": "dt_b3_r",
+  "who": "kamejii",
+  "text": "ぐすっ……そ、そうじゃった。もう なかないぞい"
+ },
+ {
+  "key": "dt_o1_r",
+  "who": "kamejii",
+  "text": "む、むむ……では いちまいに するかのう"
+ },
+ {
+  "key": "dt_o2_r",
+  "who": "kamejii",
+  "text": "むむ……では わしも いっしょに たいそうじゃ"
+ },
+ {
+  "key": "dt_o3_r",
+  "who": "kamejii",
+  "text": "う、うむ……いすは かえして おくぞい"
+ },
+ {
+  "key": "dt_ev_dice2",
+  "who": "kamejii",
+  "text": "もぐもぐ。ドーナツを ふたつ あげよう！ つぎは サイコロ ふたつで ふってね"
+ },
+ {
+  "key": "dt_ev_fake",
+  "who": "kamejii",
+  "text": "バイクで 3マス ぶっとばすぜ！ ……あ、ガソリンぎれだ。4マス もどるぜ"
+ },
+ {
+  "key": "dt_ev_warp",
+  "who": "kamejii",
+  "text": "ピピッ。ロケット はっしゃ！ さきの マスまで とばすぞい"
+ },
+ {
+  "key": "dt_ev_nebou",
+  "who": "kamejii",
+  "text": "ねんねん ころりよ〜。あれ、ねちゃったでちゅ。みんなで「おきて！」って いうでちゅ"
+ },
+ {
+  "key": "dt_ev_trolley",
+  "who": "kamejii",
+  "text": "バイクの うしろに のりな！ ちかくの やつも いっしょに 3マス すすむぜ"
+ },
+ {
+  "key": "dt_ev_rand",
+  "who": "kamejii",
+  "text": "おうさまの まほうじゃ！ どこかに とんで いけー！"
+ },
+ {
+  "key": "dt_ev_x2",
+  "who": "kamejii",
+  "text": "おうさまの めいれいじゃ！ つぎの サイコロは 2ばいじゃ"
+ },
+ {
+  "key": "dt_ev_home",
+  "who": "kamejii",
+  "text": "しっしっし、くつを いただいた！ ふりだしまで さがしに いくのじゃ"
+ },
+ {
+  "key": "dt_ev_again",
+  "who": "kamejii",
+  "text": "おう、いい かおだ！ もう いっかい ふって いいぜ"
+ },
+ {
+  "key": "dt_ev_zero",
+  "who": "kamejii",
+  "text": "おなかが つかえて、みちを ふさいじゃった。つぎの サイコロは 0だよ"
+ },
+ {
+  "key": "dt_ev_allb",
+  "who": "kamejii",
+  "text": "ピピー。ぎゃくかいてん モード！ みんな 2マス もどるぞい"
+ },
+ {
+  "key": "dt_ev_call",
+  "who": "kamejii",
+  "text": "ピピッ。じしゃく ビーム！ いちばん うしろの ひとを ひっぱるぞい"
+ },
+ {
+  "key": "dt_ev_back10",
+  "who": "kamejii",
+  "text": "ランドセルを いただき！ おいかけて 10マス もどるのじゃ"
+ },
+ {
+  "key": "dt_ev_bonus",
+  "who": "kamejii",
+  "text": "ほうびじゃ！ たねを 3こ やろう"
+ },
+ {
+  "key": "dt_ev_allf",
+  "who": "kamejii",
+  "text": "おなか いっぱいで ごきげん！ みんな 2マス すすんで いいよ"
+ },
+ {
+  "key": "dt_ev_atsumare",
+  "who": "kamejii",
+  "text": "ちょうれいじゃ！ みんな ここに あつまれー！"
+ },
+ {
+  "key": "dt_ev_janken",
+  "who": "kamejii",
+  "text": "いちばん まえの やつと じゃんけん しょうぶだ！ かったら いれかわるぜ"
+ },
+ {
+  "key": "dt_ev_rest",
+  "who": "kamejii",
+  "text": "いっしょに おひるね するでちゅ。つぎは 1かい やすみでちゅ"
+ }
+]
