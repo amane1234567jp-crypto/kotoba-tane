@@ -20,3 +20,9 @@ var OD_BIKE_SAY = false;
     const R = { 44: 56, 26: 33, 34: 44, 36: 45, 58: 66 };
     boardLayer.querySelectorAll("circle").forEach(c => { const r = +c.getAttribute("r"); if (R[r]) c.setAttribute("r", R[r]); });
     boardLayer.querySelectorAll("text").forEach(t => { const f = +t.getAttribute("font-size"); if (f >= 34 && f <= 38) { t.setAttribute("font-size", Math.round(f * 1.25)); t.setAttribute("y", +t.getAttribute("y") + 4); } }); }; }
+
+/* ⏸（ひとやすみ）中に こうかおんが たまって、もどった とき いっきに「ビビビ」と なるのを ふせぐ（2026-10-25） */
+{ const b0 = blip; blip = function (...a) { if (HIDE.off) return; return b0(...a); };
+  const n0 = noise; noise = function (...a) { if (HIDE.off) return; return n0(...a); };
+  if (typeof tune === "function") { const t0 = tune; tune = function (...a) { if (HIDE.off) return; return t0(...a); }; }
+  const sp = speak; speak = async function (...a) { await whenShown(); return sp(...a); }; }

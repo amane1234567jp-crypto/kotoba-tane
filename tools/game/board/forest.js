@@ -175,7 +175,7 @@ async function forestScene(newSeeds, kinds) {
     const plants = [];
     for (let j = 0; j < newSeeds; j++) {
       const i = old + j, who = people[j % people.length]; if (j % 3 === 0) playMove(who, "pump");
-      if (i >= nDraw) { blip(800, 1200, .08, "square"); await sleep(iv * .5); continue; }
+      if (i >= nDraw) continue; // 2026-10-25 上限を超えた分は 音を 鳴らさず とばす（ビビビ音の 原因）
       const sl = fSlot(i), l = layers[sl.L], p = headTop(who), q1 = toScr(sl.x + l.dx, sl.y - 10), x1 = q1.x, y1 = q1.y;
       const sd = el("g", {}, root); seedIcon(sd, 0, 0, .55); blip(500, 900, .1, "triangle");
       plants.push(tween(620, k => { const x = p.x + (x1 - p.x) * k, y = p.y + (y1 - p.y) * k - Math.sin(k * Math.PI) * 260; sd.setAttribute("transform", `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(k * 540).toFixed(0)}) scale(${(.55 * cam * (1 - .4 * k * (3 - sl.L) / 3)).toFixed(3)})`); }).then(() => {
@@ -198,7 +198,7 @@ async function forestScene(newSeeds, kinds) {
     await sleep(Math.min(1400, grow.length * 18) + 800);
   }
   // --- かぞえる ---
-  for (let v = old + 1; v <= total; v++) { tagT.textContent = `× ${v}`; if (total - old < 30 || v === total || v % 3 === 0) blip(700 + (v - old) * 18, 900 + (v - old) * 18, .06, "square"); await sleep(Math.max(40, 160 - (total - old) * 6)); }
+  for (let v = old + 1; v <= total; v++) { tagT.textContent = `× ${v}`; const nn = total - old, k = Math.max(1, Math.ceil(nn / 12)); if ((v - old) % k === 0 || v === total) { const f = 700 + Math.min(12, (v - old) / k) * 40; blip(f, f * 1.2, .06, "triangle"); } await sleep(Math.max(25, Math.min(160, 1800 / nn))); }
   chime(); people.forEach((c, i) => later(i * 120, () => joy(c))); confetti(40);
   if (newSeeds > 0) await speak(C.pony, "p_mori", "もりが おおきく なったね！"); else await speak(C.pony, "p_mori0", "つぎは たねを もらって、もりを そだてようね");
   later(300, () => people.forEach((c, i) => later(i * 100, () => playMove(c, "dance"))));
