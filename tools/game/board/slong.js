@@ -3,6 +3,7 @@
    約65マスの ぐねぐね道。サイコロ 1〜6。マスは「ことばの 課題」「おもしろ課題（こえなし）」「しかけ」が だいたい 3:3:4。
    ことばの 課題は だいぼうけん・ともだちの だいぼうけんの ものを つかう（声も その パックから）。
    あたらしい 声は ぽにーだけ（sl_*・n0・n7〜n12。packs/slong.json）。 */
+const JG_ROWS = [935, 730, 525, 320];
 const SL = ["sumi", "sokashi", "suchu", "eki", "odekake", "kimochi", "makete", "dekigoto", "jugyou"];
 const SL_HIDE = new Set([]); /* 声が そろうまで メニューに ださない コースを ここに */
 const isSL = () => SL.includes(curStage);
@@ -100,7 +101,7 @@ const SL_SHAPE = { // 47マス＋ゴール（まえは 65＋1。ながすぎた�
   kimochi() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + Math.sin(col * .8 + r * 1.3) * 22]); } }); return P; }, // 4だん＝4つの ばしょ（いえ・がっこう・こうえん・おでかけ）
   makete() { return SL_SHAPE.kimochi(); },
   dekigoto() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 7; j++) { const col = r % 2 ? 6 - j : j; P.push([200 + col * 200, y + Math.sin(col * .9 + r * 1.3) * 22]); } }); return P; }, // ながすぎたので 4だん×7＝28マスに（2026-10-25）
-  jugyou() { return SL_SHAPE.kimochi(); },
+  jugyou() { const P = [], ROWS = JG_ROWS; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + Math.sin(col * .8 + r * 1.3) * 22]); } }); return P; }, // コース名を 上の バーに うつして 4だんを ひろげた（2026-10-25）
   odekake() { const P = [], ROWS = [930, 770, 610, 450]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([170 + col * 115, y]); } }); return P; }, // まちの みちの ような 4だん（したの 2だんは あるき、うえの 2だんは じてんしゃ）
 };
 const SL_ORDER = {}, SL_PTS = {}, SL_ORDER0 = {};

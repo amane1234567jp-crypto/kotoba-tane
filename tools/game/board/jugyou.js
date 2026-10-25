@@ -134,11 +134,11 @@ function jgRankTick() {
 BOARD_BG[JGS] = L => {
   const T = SL_TH[JGS]; el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: T.ground }, L);
   for (let x = 0; x < 1600; x += 80) el("path", { d: `M${x} 0 V1000`, stroke: "#00000008", "stroke-width": 2 }, L);
-  const Y = [930, 765, 600, 435], I4 = ["📖", "🔢", "🎵", "⚽"];
-  Y.forEach((y, r) => { el("rect", { x: 30, y: y - 70, width: 1540, height: 140, rx: 70, fill: T.fills[r], ...S6(4) }, L);
+  const Y = JG_ROWS, I4 = ["📖", "🔢", "🎵", "⚽"];
+  Y.forEach((y, r) => { el("rect", { x: 30, y: y - 85, width: 1540, height: 170, rx: 85, fill: T.fills[r], ...S6(4) }, L);
     const x = r === 3 ? 1520 : 80; txt(L, x, y + 6, I4[r], 46, { "text-anchor": "middle" }); txt(L, x, y + 44, `${r + 1}じかんめ`, 18, { "text-anchor": "middle" }); });
   // こくばん（コースの なまえ）と きゅうしょく（ゴール）
-  el("rect", { x: 470, y: 180, width: 660, height: 130, rx: 14, fill: "#2F6B4F", stroke: "#8B5A2B", "stroke-width": 14 }, L);
-  txt(L, 800, 262, `${T.icon} ${T.name}`, 46, { "text-anchor": "middle", fill: "#FFFFFF" });
-  [["✏️", 150, 300], ["📏", 330, 250], ["🎒", 1520, 200]].forEach(([e, x, y]) => txt(L, x, y, e, 54, { "text-anchor": "middle", opacity: .85 }));
+  // コースの なまえは 上の バー（「〇〇の ばん」の みぎ）に ちいさな こくばんで（2026-10-25）
+  el("rect", { x: 960, y: 38, width: 400, height: 72, rx: 12, fill: "#2F6B4F", stroke: "#8B5A2B", "stroke-width": 8 }, L);
+  txt(L, 1160, 86, `${T.icon} ${T.name}`, 32, { "text-anchor": "middle", fill: "#FFFFFF" });
 };
