@@ -3,7 +3,7 @@ if (!/[?&]dev\b/.test(location.search)) document.body.classList.add("kid"); // ?
 /* 遊んだ記録（保護者が「おとなの かたへ」から見てコピーできる）。端末の中だけに保存 */
 const LOG_KEY = "kotoba-tane-log";
 function playLog(o) {
-  try { const a = JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); a.push({ t: Date.now(), ...o }); while (a.length > 800) a.shift(); localStorage.setItem(LOG_KEY, JSON.stringify(a)); } catch (e) { }
+  try { const a = JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); a.push({ t: Date.now(), ...o }); while (a.length > 4000) a.shift(); localStorage.setItem(LOG_KEY, JSON.stringify(a)); } catch (e) { }
 }
 const W_KEY = "kotoba-tane-board";
 const store = { get() { try { return JSON.parse(localStorage.getItem(W_KEY)) || {}; } catch (e) { return {}; } }, set(v) { try { localStorage.setItem(W_KEY, JSON.stringify(v)); } catch (e) { /* なくても動く */ } } };
