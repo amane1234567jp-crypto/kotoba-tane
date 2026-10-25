@@ -9,7 +9,8 @@ head = ('<!doctype html>\n<html lang="ja"><head><meta charset="utf-8">\n'
         '<meta name="robots" content="noindex">\n'
         '<meta name="apple-mobile-web-app-capable" content="yes">\n<meta name="mobile-web-app-capable" content="yes">\n'
         '<meta name="apple-mobile-web-app-title" content="ことばのたね">\n<meta name="apple-mobile-web-app-status-bar-style" content="default">\n'
-        '<link rel="apple-touch-icon" href="icon.png">\n<style>body{margin:0}</style>\n</head><body>\n')
+        '<link rel="apple-touch-icon" href="icon.png">\n<link rel="manifest" href="manifest.json">\n<style>body{margin:0}</style>\n'
+        '<script>if("serviceWorker" in navigator&&location.protocol==="https:")addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));</script>\n</head><body>\n')
 (R / "index.html").write_text(head + body + "\n</body></html>\n")
 (G / "board/board_demo.html").unlink(); (G / "board/check.js").unlink(missing_ok=True)
 print("index.html updated")
