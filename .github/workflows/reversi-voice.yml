@@ -1,0 +1,64 @@
+# まるシマリバーシの声を作る（reversi/voice を push すると動く）
+# ぽにー＝VOICEVOX 調整版（tools/listen/pony_gen.py）、かめじい＝AivisSpeech（tools/aivis/synth.py）
+# できた mp3 は reversi-voice-out ブランチに置く
+name: reversi-voice
+on:
+  push:
+    branches: [main]
+    paths: ["reversi/voice/**", ".github/workflows/reversi-voice.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: tools
+        run: |
+          sudo apt-get -qq update >/dev/null && sudo apt-get -qq install -y ffmpeg >/dev/null
+          pip install -q numpy
+          mkdir -p /tmp/out
+      - name: voicevox (ぽにー)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -x
+          mkdir -p tools/vv && cd tools/vv
+          TAG=$(gh release list -R VOICEVOX/voicevox_core -L 50 --json tagName -q '.[].tagName' | grep -E '^0\.1[67]\.' | head -1)
+          echo "core $TAG" | tee /tmp/out/vv_version.txt
+          gh release download "$TAG" -R VOICEVOX/voicevox_core -p 'download-linux-x64' -p 'voicevox_core-*x86_64.whl'
+          ls -la
+          pip install -q voicevox_core-*manylinux*x86_64.whl || pip install -q voicevox_core-*x86_64.whl
+          chmod +x download-linux-x64
+          echo y | ./download-linux-x64 --only onnxruntime dict models --models-pattern '[0-9]*.vvm' -o dl 2>&1 | tail -20
+          find dl -maxdepth 3 | head -40
+          # pony_gen.py（gen_listen.py）が待っている置き場所にそろえる
+          SO=$(find dl/onnxruntime -name 'libvoicevox_onnxruntime.so*' -type f | head -1)
+          mkdir -p voicevox_onnxruntime-linux-x64-1.17.3/lib && ln -sf "$PWD/$SO" voicevox_onnxruntime-linux-x64-1.17.3/lib/libvoicevox_onnxruntime.so.1.17.3
+          ln -sfn "$PWD/$(find dl/dict -maxdepth 1 -type d -name 'open_jtalk_dic*' | head -1)" open_jtalk_dic_utf_8-1.11
+          mkdir -p vvmrepo && ln -sfn "$PWD/$(dirname $(find dl/models -name '0.vvm' | head -1))" vvmrepo/vvms
+          ls -la . vvmrepo/vvms | head -30
+          cd ../listen && python3 pony_gen.py ../../reversi/voice/pony.json /tmp/out/pony 2>&1 | tee /tmp/out/pony_log.txt
+      - name: aivisspeech (かめじい)
+        run: |
+          set -x
+          mkdir -p ~/.local/share/AivisSpeech-Engine && sudo chown -R 1000:1000 ~/.local/share/AivisSpeech-Engine
+          docker pull -q ghcr.io/aivis-project/aivisspeech-engine:cpu-latest
+          docker run -d --name aivis -p 10101:10101 -v ~/.local/share/AivisSpeech-Engine:/home/user/.local/share/AivisSpeech-Engine-Dev ghcr.io/aivis-project/aivisspeech-engine:cpu-latest
+          for i in $(seq 1 120); do curl -sf 127.0.0.1:10101/version && break; sleep 10; done
+          # 使うキャラだけの cast.json で synth.py を動かす（全キャラのモデルを入れないため）
+          mkdir -p /tmp/rv && cp tools/aivis/synth.py tools/aivis/acc.json /tmp/rv/ 2>/dev/null; cp tools/aivis/synth.py /tmp/rv/
+          python3 -c "import json;c=json.load(open('tools/aivis/cast.json'));json.dump({'chars':{'kamejii':c['chars']['kamejii']},'lines':{}},open('/tmp/rv/cast.json','w'),ensure_ascii=False)"
+          cd /tmp/rv && python3 synth.py /tmp/out "$GITHUB_WORKSPACE/reversi/voice/rv1" 2>&1 | tail -150 > /tmp/out/aivis_log.txt
+          ls /tmp/out/rv1 | wc -l
+      - name: publish
+        if: always()
+        run: |
+          git config user.name "voice-bot"; git config user.email "voice-bot@users.noreply.github.com"
+          git checkout --orphan rv-tmp
+          git rm -rf -q . ; rm -rf ./* ./.github
+          cp -r /tmp/out/. .
+          git add -A; git commit -q -m "reversi voice ${GITHUB_SHA}"
+          git push -f origin HEAD:reversi-voice-out
