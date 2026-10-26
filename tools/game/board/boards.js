@@ -98,7 +98,7 @@ askFork = async function (pc = P.shima) {
   const sides = forkSides(pc.node);
   await speak(C.pony, forkKey(sides), `${sides[0][0]}と ${sides[1][0]}の、どっちに いく？`);
   const mk = ([label, id]) => { const b = document.createElement("button"); b.type = "button"; b.className = "arrow"; b.textContent = label;
-    const [x, y] = NODES[id]; b.style.left = `calc(${x / 16}% - 4.5%)`; b.style.top = `calc(${y / 10}% - 7.2%)`; stage.appendChild(b); return b; };
+    const [x, y] = NODES[id]; b.dataset.wx = x; b.dataset.wy = y; b.style.left = `calc(${x / 16}% - 4.5%)`; b.style.top = `calc(${y / 10}% - 7.2%)`; stage.appendChild(b); return b; };
   const bs = sides.map(mk);
   const pick = await new Promise(res => {
     let done = false; const fin = v => { if (done) return; done = true; h && h.stop(); bs.forEach(b => b.remove()); res(v); };
