@@ -69973,8 +69973,9 @@ requestAnimationFrame(phTick);
 { const css = document.createElement("style"); css.textContent = `
 body.phone { overflow: hidden; overscroll-behavior: none }
 body.phone .wrap { padding: 0; max-width: none; display: block }
+/* 下は ホームバーの 下まで 絵を のばす（ボタンは 下に ないので じゃまに ならない。2026-10-27） */
 body.phone .stage { position: fixed; inset: 0; width: 100vw; height: 100dvh; aspect-ratio: auto; border: 0; border-radius: 0; background: #FFF8E1;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); box-sizing: border-box }
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left); box-sizing: border-box }
 body.phone .dice { width: auto; height: 21%; right: calc(env(safe-area-inset-right) + 1.5%); top: 3% }
 body.phone .arrow { width: auto; height: 20% }
 body.phone #pauseBtn { left: calc(env(safe-area-inset-left) + 1%); top: 3%; width: 44px; height: 44px }
