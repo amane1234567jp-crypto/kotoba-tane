@@ -32,7 +32,7 @@ const phFeet = c => [c.x + 200 * c.s, c.y + (c.base || 0) * c.s];
 function phTick() {
   document.body.classList.toggle("inmenu", view === "menu");
   const board = boardLayer.style.display !== "none" && view !== "menu";
-  const cam = PH.on && board;
+  const cam = false; // カメラの おいかけは やめた（2026-10-28）。盤は board_wide.js で 横に 伸ばして ぜんぶ 見せる
   phViewBox(view === "menu" && (PH.on || document.body.classList.contains("phoneport")) ? "cover" : phSceneMode() ? "scene" : "wide");
   if (cam) {
     BOARD_PIECES.forEach(c => { if (c && c.root && c.root.parentNode !== camChars) camChars.appendChild(c.root); });
