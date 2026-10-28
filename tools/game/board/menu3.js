@@ -20,8 +20,8 @@ function m3Decorate() {
   // ジャンルの タイル：★ n / m → 棒
   box.querySelectorAll(".m2g").forEach(t => { const s = t.querySelector(".m2gs"); if (!s || t.querySelector(".m3bar")) return;
     const m = /(\d+)\s*\/\s*(\d+)/.exec(s.textContent);
-    if (m) { const bar = h("div", "m3bar"), f = h("div", "m3fill"); f.style.width = (100 * m[1] / m[2]).toFixed(0) + "%"; bar.append(f); const n = h("span", "m3n", `${m[1]}/${m[2]}`); s.replaceWith(bar); bar.append(n); }
-    else if (/コース$/.test(s.textContent)) { s.className = "m3n"; }
+    if (m) { s.remove(); } // すすみぐあいの 棒と 数は 出さない（2026-10-28：シンプルに）
+    else if (/コース$/.test(s.textContent)) { s.remove(); }
     else if (/にん/.test(s.textContent)) { s.className = "m3n"; } });
   // コースの タイル：札 → バッジ
   box.querySelectorAll(".mst").forEach(b => { const s = b.querySelector(".mstat"); if (!s || s.dataset.m3) return; s.dataset.m3 = 1;
@@ -43,7 +43,7 @@ if (document.getElementById("startBox")) m3Decorate();
 .start.menu.m3{gap:0!important;padding:0!important;background:transparent!important}
 .start.menu.m3::before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,#FFF8E100 0%,#FFF8E1CC 32%,#FFF8E1F2 100%)}
 body.inmenu .stage{border-color:transparent}
-body.phoneport.inmenu .wrap{padding:0}body.phoneport.inmenu .stage{border:0;border-radius:0}body.phoneport.inmenu .note,body.phoneport.inmenu .srfb,body.phoneport.inmenu .dev{visibility:hidden}
+body.phoneport.inmenu .wrap{padding:0}body.phoneport.inmenu .stage{position:fixed;inset:0;width:100vw;height:100dvh;aspect-ratio:auto;border:0;border-radius:0}body.phoneport.inmenu .note,body.phoneport.inmenu .srfb,body.phoneport.inmenu .dev{visibility:hidden}
 .start.menu.m3 .mcard[data-m2]{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0 max(12px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))!important;backdrop-filter:none!important;width:100%!important;gap:min(1.6vh,12px)!important}
 .start.menu.m3 .mmic{display:none!important}
 /* ---- ヘッダー ---- */
@@ -59,14 +59,14 @@ body.phoneport.inmenu .wrap{padding:0}body.phoneport.inmenu .stage{border:0;bord
 .start.menu.m3 .m3mic.on::after{background:#5FC46A}
 /* ---- ジャンルの タイル ---- */
 .start.menu.m3 .mcard[data-m2] .m2home{gap:min(2vh,14px)!important}
-.start.menu.m3 .mcard[data-m2] .m2g{position:relative;border:3px solid #2B2A33!important;border-radius:min(3.4vh,22px)!important;box-shadow:0 5px 0 #2B2A33!important;padding:calc(var(--cell,160px)*.06) calc(var(--cell,160px)*.08)!important;gap:0!important;justify-content:center!important;align-items:flex-start!important;text-align:left;font-size:calc(var(--cell,160px)*.12)!important;overflow:hidden;transition:transform .08s}
+.start.menu.m3 .mcard[data-m2] .m2g{position:relative;border:3px solid #2B2A33!important;border-radius:min(3.4vh,22px)!important;box-shadow:0 5px 0 #2B2A33!important;padding:calc(var(--cell,160px)*.06) calc(var(--cell,160px)*.08)!important;gap:.15em!important;justify-content:center!important;align-items:center!important;text-align:center;font-size:calc(var(--cell,160px)*.125)!important;overflow:hidden;transition:transform .08s}
 .start.menu.m3 .mcard[data-m2] .m2g:active{transform:translateY(3px);box-shadow:0 2px 0 #2B2A33!important}
-.start.menu.m3 .mcard[data-m2] .m2g .m2gi{font-size:2em!important;line-height:1.1!important;filter:drop-shadow(0 2px 0 #2B2A3322)}
-.start.menu.m3 .mcard[data-m2] .m2g .m2gn{font:400 1em var(--display)!important;line-height:1.15!important;text-align:left!important;margin-top:.2em;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.start.menu.m3 .mcard[data-m2] .m2g .m2gi{font-size:2.5em!important;line-height:1.1!important;filter:drop-shadow(0 3px 0 #2B2A3322)}
+.start.menu.m3 .mcard[data-m2] .m2g .m2gn{font:400 1em var(--display)!important;line-height:1.15!important;text-align:center!important;margin-top:.1em;white-space:normal;overflow-wrap:anywhere;max-width:100%}
 .start.menu.m3 .mcard[data-m2] .m2g .m3bar{position:relative;width:100%;height:.5em;margin-top:.45em;border-radius:999px;background:#2B2A3318;overflow:visible}
 .start.menu.m3 .mcard[data-m2] .m2g .m3fill{height:100%;border-radius:999px;background:#5FC46A;min-width:0}
 .start.menu.m3 .mcard[data-m2] .m2g .m3bar .m3n{position:absolute;right:0;bottom:.75em;font:700 .62em var(--body);color:#2B2A3399;line-height:1}
-.start.menu.m3 .mcard[data-m2] .m2g .m3n{font:700 .68em var(--body);color:#2B2A3399;background:none;padding:0;margin-top:.3em}
+.start.menu.m3 .mcard[data-m2] .m2g .m3n{font:700 .62em var(--body);color:#2B2A3399;background:none;padding:0;margin-top:0}
 .start.menu.m3 .mcard[data-m2] .m2g .m3badge{position:absolute;right:.5em;top:.5em}
 .start.menu.m3 .mcard[data-m2] .m2g.m3done .m2gi::after{content:"★";position:absolute;right:.5em;top:.4em;font-size:.9em;color:#F2B01E;-webkit-text-stroke:2px #2B2A33;paint-order:stroke fill}
 .start.menu.m3 .mcard[data-m2] .m2g.m2multi{background:#FFFFFF!important}

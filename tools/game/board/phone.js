@@ -17,9 +17,10 @@ function phDecide() {
   PH.a = a; PH.crop = PH.on ? Math.min(200, Math.max(0, 1000 - 1600 / a)) : 0; PH.vb = null;
 }
 const phSceneMode = () => PH.on && view !== "menu" && boardLayer.style.display === "none";
-function phViewBox(mode) { if (PH.vb === mode) return; PH.vb = mode;
+function phViewBox(mode) { if (PH.vb === mode && !(mode === "cover" && PH.vbW !== innerWidth)) return; PH.vb = mode; PH.vbW = innerWidth;
   if (mode === "scene") { const H = 1000 - PH.crop, W = H * PH.a; svg.setAttribute("viewBox", `${(-(W - 1600) / 2).toFixed(1)} ${PH.crop.toFixed(1)} ${W.toFixed(1)} ${H.toFixed(1)}`); }
-  else if (mode === "cover") { const H = 1600 / PH.a; svg.setAttribute("viewBox", `0 ${((1000 - H) / 2).toFixed(1)} 1600 ${H.toFixed(1)}`); }
+  else if (mode === "cover") { const r = svg.getBoundingClientRect(), a = r.width && r.height ? r.width / r.height : PH.a; // たて（スマホ）でも 画面いっぱいに（左右を きる）
+    if (a >= 1.6) { const H = 1600 / a; svg.setAttribute("viewBox", `0 ${((1000 - H) / 2).toFixed(1)} 1600 ${H.toFixed(1)}`); } else { const W = 1000 * a; svg.setAttribute("viewBox", `${((1600 - W) / 2).toFixed(1)} 0 ${W.toFixed(1)} 1000`); } }
   else svg.setAttribute("viewBox", `${(-PH.E).toFixed(1)} 0 ${(1600 + 2 * PH.E).toFixed(1)} 1000`); }
 addEventListener("resize", () => setTimeout(phDecide, 60)); addEventListener("orientationchange", () => setTimeout(phDecide, 300));
 phDecide(); setTimeout(phDecide, 500);
@@ -32,7 +33,7 @@ function phTick() {
   document.body.classList.toggle("inmenu", view === "menu");
   const board = boardLayer.style.display !== "none" && view !== "menu";
   const cam = PH.on && board;
-  phViewBox(PH.on && view === "menu" ? "cover" : phSceneMode() ? "scene" : "wide");
+  phViewBox(view === "menu" && (PH.on || document.body.classList.contains("phoneport")) ? "cover" : phSceneMode() ? "scene" : "wide");
   if (cam) {
     BOARD_PIECES.forEach(c => { if (c && c.root && c.root.parentNode !== camChars) camChars.appendChild(c.root); });
     // うごいた コマを おいかける（とまって いる ときは さいごに うごいた コマ。さいしょは こども）
