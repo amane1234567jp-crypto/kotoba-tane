@@ -70344,6 +70344,53 @@ if (document.getElementById("startBox")) m3Decorate();
 .start.menu.m3 .mcard[data-m2] .m2g .m3n{flex:none;margin:-.35em 0 .3em!important}
 `; document.head.appendChild(s); })();
 
+/* ---- コースの タイルの 絵（2026-10-28）：その コースの さいしょの 場面の へや（drawRoom）を ちいさく かき、まるシマと あいてを 立たせる ---- */
+const ART_COURSE = { // sits に ない コース：へや（どの ステージの かきかたで・どの 場所か）と あいて
+  tokei: ["gakkou2", "きょうしつ", "nobbo"], sansu: ["gakkou2", "きょうしつ", "nobbo"], komatta: ["ouchi1", "リビング", "mama"],
+  souzou: ["gakkou2", "きょうしつ", "nobbo"], tachiba: ["kouen", "すべりだい", "tora"], sakiyomi: ["ouchi1", "リビング", "mama"], chotto: ["gakkou2", "きょうしつ", "pyon"], aite: ["kouen", "ベンチ", "mii"],
+  manekko: ["gakkou2", "きょうしつ", "tora"], long: ["kousha", "げんかん", "gao"], ltomo: ["kouen", "すべりだい", "kuma"],
+  kokugo: ["kokugo", "きょうしつ", "nobbo"],
+};
+function artCourseSpec(sid) {
+  const s = (typeof SITS !== "undefined" ? SITS : []).find(x => x.stage === sid);
+  if (s) return [sid, s.place, s.asker];
+  if (ART_COURSE[sid]) return ART_COURSE[sid];
+  if (typeof SL_TH !== "undefined" && SL_TH[sid]) return [sid, SL_TH[sid].areas[0], (SL_TH[sid].blk && SL_TH[sid].blk.who) || "nobbo"];
+  return ["kousha", "ろうか", "nobbo"];
+}
+function artRoom(svg, stage, place) {
+  const keep = [...sceneLayer.childNodes], saveStage = curStage, saveDisp = sceneLayer.style.display;
+  curStage = stage;
+  try { drawRoom(place, true); } catch (e) { console.error("artRoom", stage, place, e); }
+  const g = el("g", { transform: "scale(0.3)" }, svg); [...sceneLayer.childNodes].forEach(n => g.appendChild(n));
+  curStage = saveStage; keep.forEach(n => sceneLayer.appendChild(n)); sceneLayer.style.display = saveDisp;
+  g.querySelectorAll("text").forEach(t => { if (/つぎは|の ばめん/.test(t.textContent)) t.remove(); });
+}
+function artCourse(svg, sid, aspect = 1.6) {
+  const [stage, place, asker] = artCourseSpec(sid);
+  artRoom(svg, stage, place);
+  const kind = (typeof BUILD !== "undefined" && BUILD[asker]) ? asker : asker === "piyoko" ? "piyo" : "nobbo";
+  const ak = (typeof ASK_AT !== "undefined" && ASK_AT[kind]) ? ASK_AT[kind][1] : 1;
+  // タイルが ほそい ときは 見える はばに あわせて 2人を よせる
+  const W = Math.max(200, Math.min(480, 300 * aspect)), cx = 240; svg.setAttribute("viewBox", `${(cx - W / 2).toFixed(0)} 0 ${W.toFixed(0)} 300`);
+  const hx = cx - W * .21, ax = cx + W * .23;
+  artChar(svg, "shima", hx, 292, .34, { happy: true, armR: -30 });
+  const TALL = { nobbo: .27, doshin: .26, omawari: .28, kuma: .3, tenin: .3, ekiin: .3 }; // せが 高い キャラは 上が きれない ように 小さく
+  artChar(svg, kind, ax, 292, TALL[kind] || Math.min(.36, .34 * ak), { happy: true, armL: 30 });
+}
+function artCourseTile(b) { if (b.querySelector(".m3art")) return; const sid = b.dataset.sid; const ic = b.querySelector(".mico"); if (!sid || !ic) return;
+  const svg = document.createElementNS(NS, "svg"); svg.setAttribute("viewBox", ART_VB.join(" ")); svg.setAttribute("class", "m3art"); svg.setAttribute("aria-hidden", "true"); svg.setAttribute("preserveAspectRatio", "xMidYMax slice");
+  const r = b.getBoundingClientRect(), nm = b.querySelector(".mname"), nh = nm ? nm.getBoundingClientRect().height : 0, aspect = r.width && r.height ? r.width / Math.max(40, r.height - nh) : 1.6;
+  try { artCourse(svg, sid, aspect); } catch (e) { console.error(e); return; } ic.replaceWith(svg); }
+{ const mo = m2Open; m2Open = function (gid) { mo(gid); if (!gid) return; requestAnimationFrame(() => requestAnimationFrame(() => { try { document.querySelectorAll("#startBox .mstages .mst:not(.m2off)").forEach(artCourseTile); } catch (e) { console.error(e); } })); }; }
+(function () { const s = document.createElement("style"); s.textContent = `
+.start.menu .mcard[data-m2] .mstages.mstages .mst{padding:0!important;gap:0!important;justify-content:flex-start!important;overflow:hidden}
+.start.menu .mcard[data-m2] .mstages.mstages .mst .m3art{display:block;width:100%;flex:1 1 auto;min-height:0;border-bottom:3px solid #2B2A33}
+.start.menu .mcard[data-m2] .mstages.mstages .mst .mname{flex:none;padding:.2em .3em .3em;margin:0!important}
+.start.menu .mcard[data-m2] .mstages.mstages .mst .mno{background:#FFFFFFCC;border-radius:999px;padding:0 .45em;color:#2B2A33!important;left:.4em!important;top:.3em!important}
+.start.menu .mcard[data-m2] .mstages.mstages .mst .m3tag{position:absolute;right:.4em;top:.3em}
+`; document.head.appendChild(s); })();
+
 </script>
 
 </body></html>
