@@ -70121,6 +70121,12 @@ if (document.querySelector("#startBox .mcard:not(.mmcard) .mstages")) m2Build();
 .mcard[data-m2] .madult{display:none!important}
 `; document.head.appendChild(s); })();
 
+/* ================= 小さな ふきだし（えもじ ＋ ひとこと）を 出さない（2026-10-28） =================
+   「📺 ぜんぶ みた」「🐘 ぞうの えいが」など。おだいカードと かさなって 画面が ごちゃつくだけ、との ことで ぜんぶ やめる。
+   よびだす がわが もどりちを つかう ことが あるので、からっぽの g を かえす。 */
+hint7 = function () { return el("g", {}, front()); };
+hint8 = function () { return el("g", {}, front()); };
+
 </script>
 
 </body></html>
