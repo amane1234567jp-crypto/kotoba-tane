@@ -70145,6 +70145,7 @@ function m3Decorate() {
     const ad = box.querySelector(".m2adult"); if (ad) { ad.classList.add("m3gear"); ad.textContent = "⚙"; ad.setAttribute("aria-label", "おとなの かたへ"); right.append(ad); }
   }
   m3Mic();
+  box.querySelectorAll(".madult .mreset").forEach(b => { if (/きろくを 見る/.test(b.textContent)) b.onclick = () => showLog(); }); // 最新の showLog を よぶ
   // ジャンルの タイル：★ n / m → 棒
   box.querySelectorAll(".m2g").forEach(t => { const s = t.querySelector(".m2gs"); if (!s || t.querySelector(".m3bar")) return;
     const m = /(\d+)\s*\/\s*(\d+)/.exec(s.textContent);
@@ -70225,6 +70226,19 @@ if (document.getElementById("startBox")) m3Decorate();
 /* ---- おとなの 窓 ---- */
 .start.menu.m3 .m2adpanel{right:max(12px,env(safe-area-inset-right));bottom:auto;top:calc(max(6px,env(safe-area-inset-top)) + min(15vh,76px));border-width:3px;border-radius:18px;box-shadow:0 4px 0 #2B2A33}
 .start.menu.m3 .m2adpanel .mreset{font:700 15px var(--body)!important;border:2px solid #2B2A33!important;border-radius:999px!important;padding:6px 14px!important;background:#FFF3D6!important}
+`; document.head.appendChild(s); })();
+/* ---- あそんだ きろく の 窓（2026-10-28）：きろくが 多いと 窓が 画面より 高くなり、「とじる」が 見えず もどれなかった。
+   → 窓は 画面に おさまる 高さに して 中だけ スクロール。右上に × も つける。 */
+{ const sl = showLog; showLog = function () { sl(); try { const lb = document.querySelector(".logbox"), c = lb && lb.querySelector(".logcard"); if (!c || c.querySelector(".logx")) return;
+    const x = document.createElement("button"); x.type = "button"; x.className = "logx"; x.textContent = "×"; x.setAttribute("aria-label", "とじる"); x.onclick = () => lb.remove(); c.prepend(x);
+    lb.addEventListener("click", e => { if (e.target === lb) lb.remove(); }); } catch (e) { console.error(e); } }; }
+(function () { const s = document.createElement("style"); s.textContent = `
+.logbox{position:fixed!important;inset:0!important;z-index:80!important;padding:max(10px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))!important;box-sizing:border-box}
+.logcard{position:relative;max-height:100%!important;box-sizing:border-box;display:flex!important;flex-direction:column;overflow:auto!important;-webkit-overflow-scrolling:touch;grid-template-rows:none!important}
+.logcard h3{padding-right:44px}
+.logcard .logpre{flex:none;max-height:none;overflow:visible}
+.logcard .logbtns{position:sticky;bottom:-16px;margin:0 -18px -16px;padding:10px 18px 16px;background:#fff;border-top:2px solid #2B2A3322}
+.logcard .logx{position:absolute;right:8px;top:6px;width:40px;height:40px;border-radius:50%!important;border:3px solid #2B2A33!important;background:#fff!important;font:700 22px var(--body)!important;color:#2B2A33!important;cursor:pointer;display:grid;place-items:center;padding:0!important;line-height:1;box-shadow:0 2px 0 #2B2A33!important}
 `; document.head.appendChild(s); })();
 
 </script>
