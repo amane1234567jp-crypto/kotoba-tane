@@ -62526,10 +62526,11 @@ const ROOMS = {
     [1060, 1300].forEach(x => { el("path", { d: `M${x} 280 V620 M${x + 90} 280 V620`, ...R6(5), fill: "none" }, L); el("rect", { x: x - 10, y: 616, width: 110, height: 20, rx: 6, fill: "#E8735A", ...R6(4) }, L); }); },
   ベンチ(L) { sceneTree(L, 1480, 120); el("rect", { x: 820, y: 640, width: 420, height: 30, rx: 8, fill: "#C98A4B", ...R6(5) }, L); el("rect", { x: 820, y: 580, width: 420, height: 26, rx: 8, fill: "#C98A4B", ...R6(5) }, L);
     el("path", { d: "M850 670 V760 M1210 670 V760", ...R6(8) }, L); el("rect", { x: 1290, y: 640, width: 90, height: 120, rx: 10, fill: "#7CC36A", ...R6(5) }, L); txt(L, 1335, 712, "ゴミ", 26, { "text-anchor": "middle" }); },
-  いけ(L) { // 2026-10-28：いけは さくの むこう（キャラが いけの 中に 立って 見えて いた）
-    el("ellipse", { cx: 900, cy: 660, rx: 600, ry: 72, fill: "#7FCBF0", ...R6(6) }, L); [[700, 650], [940, 680], [1180, 645]].forEach(([x, y]) => el("ellipse", { cx: x, cy: y, rx: 60, ry: 16, fill: "#7CC36A", ...R6(4) }, L));
-    el("path", { d: "M420 660 q10 -14 20 0 q10 14 20 0 M1240 672 q10 -14 20 0 q10 14 20 0", fill: "none", stroke: "#FFFFFF", "stroke-width": 5 }, L);
-    for (let x = 260; x < 1600; x += 80) el("path", { d: `M${x} 780 V700`, ...R6(6) }, L); el("path", { d: "M260 720 H1600", ...R6(6) }, L); },
+  いけ(L) { // 2026-10-29：いけは じめんの むこうがわ（柵の うしろ、地面に つながる）
+    el("path", { d: "M0 700 Q400 640 800 660 Q1200 680 1600 640 V760 H0 Z", fill: "#A9D98F" }, L);
+    el("ellipse", { cx: 820, cy: 730, rx: 620, ry: 46, fill: "#7FCBF0", stroke: INK, "stroke-width": 6 }, L); [[560, 726], [860, 738], [1120, 724]].forEach(([x, y]) => el("ellipse", { cx: x, cy: y, rx: 56, ry: 12, fill: "#7CC36A", ...R6(4) }, L));
+    el("path", { d: "M330 732 q10 -10 20 0 q10 10 20 0 M1250 736 q10 -10 20 0 q10 10 20 0", fill: "none", stroke: "#FFFFFF", "stroke-width": 5 }, L);
+    for (let x = 100; x < 1600; x += 80) el("path", { d: `M${x} 790 V720`, ...R6(6) }, L); el("path", { d: "M100 740 H1600", ...R6(6) }, L); },
   パンや(L) { awning(L, "#E8735A"); shelfOf(L, 880, 260, 620, 3, ["#E9B872", "#D99A4E", "#F2C38F"], "bread"); counter(L); },
   やおや(L) { awning(L, "#7CC36A"); for (let i = 0; i < 3; i++) { el("rect", { x: 860 + i * 230, y: 600, width: 200, height: 160, rx: 8, fill: "#C98A4B", ...R6(5) }, L);
       for (let j = 0; j < 5; j++) el("circle", { cx: 895 + i * 230 + j * 32, cy: 595, r: 18, fill: ["#E8473C", "#F29F38", "#7CC36A"][i], ...R6(4) }, L); } },
@@ -70791,7 +70792,10 @@ const PX_CLOCK = (x, y, hour = 5, r = 70) => PX_WALL(g => { el("circle", { cx: x
   const ah = (hour / 12) * Math.PI * 2 - Math.PI / 2; el("path", { d: `M${x} ${y} L${x + Math.cos(ah) * r * .5} ${y + Math.sin(ah) * r * .5}`, ...S6(8) }, g); el("path", { d: `M${x} ${y} V${y - r * .72}`, ...S6(6) }, g); });
 const PX_TV = (x, y, on = true, w = 260) => PX_WALL(g => { el("rect", { x: x - w / 2, y: y - w * .32, width: w, height: w * .64, rx: 14, fill: "#2B2A33", ...S6(6) }, g); el("rect", { x: x - w / 2 + 16, y: y - w * .32 + 16, width: w - 32, height: w * .64 - 32, rx: 6, fill: on ? "#7FCBF0" : "#555B66" }, g);
   if (on) { el("circle", { cx: x - 30, cy: y - 10, r: 26, fill: "#FFD25E" }, g); el("path", { d: `M${x - 60} ${y + 40} q30 -40 60 0 q30 -40 60 0`, fill: "none", stroke: "#7BD389", "stroke-width": 10 }, g); } el("rect", { x: x - 30, y: y + w * .32, width: 60, height: 18, fill: INK }, g); });
-const PX_RAIN_OUT = () => { const g = el("g", {}, front()); for (let i = 0; i < 40; i++) { const x = (i * 97) % 1600, y = 60 + (i * 211) % 700; el("path", { d: `M${x} ${y} l-10 40`, stroke: "#7FB4E0", "stroke-width": 5, "stroke-linecap": "round", opacity: .85 }, g); } return g; };
+const PX_RAIN_OUT = () => { // 雨は まどの そと（まどの 中だけに かく。そらも くもる）
+  const g = el("g", {}, propG); const wins = [...sceneLayer.querySelectorAll("rect")].filter(r => (r.getAttribute("fill") || "").toUpperCase() === "#BDE3F2" && +r.getAttribute("width") > 100 && +r.getAttribute("y") < 600);
+  wins.forEach(w => { const x = +w.getAttribute("x"), y = +w.getAttribute("y"), W = +w.getAttribute("width"), H = +w.getAttribute("height"); w.setAttribute("fill", "#9FB4C8");
+    for (let i = 0; i < 14; i++) { const rx = x + 12 + (i * 53) % (W - 24), ry = y + 10 + (i * 37) % (H - 50); el("path", { d: `M${rx} ${ry} l-8 32`, stroke: "#E8F4FF", "stroke-width": 4, "stroke-linecap": "round" }, g); } }); return g; };
 const PX_SINK = (x) => PX_WALL(g => { el("rect", { x: x - 130, y: 820, width: 260, height: 30, rx: 8, fill: "#DDE6EE", ...S6(6) }, g); el("rect", { x: x - 110, y: 850, width: 220, height: 125, fill: "#E9EEF3", ...S6(6) }, g); el("path", { d: `M${x} 820 V760 Q${x} 730 ${x + 30} 730 H${x + 50}`, fill: "none", ...S6(9) }, g); el("ellipse", { cx: x, cy: 835, rx: 70, ry: 10, fill: "#BFE3F2", ...S6(3) }, g); });
 const PX_COUNTER_TRAY = (x) => PX_WALL(g => { el("rect", { x: x - 200, y: 820, width: 400, height: 155, rx: 10, fill: "#C9B9A2", ...S6(6) }, g); el("rect", { x: x - 210, y: 806, width: 420, height: 20, rx: 6, fill: "#A88B6A", ...S6(5) }, g);
   [[-140, "#F2B01E"], [-50, "#FFFFFF"], [40, "#7BD389"], [130, "#E8735A"]].forEach(([dx, c]) => { el("path", { d: `M${x + dx - 36} 800 Q${x + dx} 840 ${x + dx + 36} 800 Z`, fill: "#FFFFFF", ...S6(4) }, g); el("ellipse", { cx: x + dx, cy: 800, rx: 36, ry: 12, fill: c, ...S6(4) }, g); }); });
