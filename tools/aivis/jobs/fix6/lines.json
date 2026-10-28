@@ -1,0 +1,392 @@
+[
+ {
+  "key": "sq_snochitsuku",
+  "who": "nobbo",
+  "text": "だいじょうぶですか？"
+ },
+ {
+  "key": "sq_snmisete",
+  "who": "nobbo",
+  "text": "では、おりがみを さんかくに おって ください"
+ },
+ {
+  "key": "sq_snwazato",
+  "who": "nobbo",
+  "text": "あっ、みずが こぼれましたね。ふざけて いたのですか？"
+ },
+ {
+  "key": "sq_tikigae",
+  "who": "nobbo",
+  "text": "あれ、まだ きがえて いないのですか？"
+ },
+ {
+  "key": "sq_taiko",
+  "who": "meebaa",
+  "text": "ちゅうくんが「みみが いたい」と いった とき、どしんくんは どんな きもちだったと おもいますか？"
+ },
+ {
+  "key": "sq_oshiro",
+  "who": "doshin",
+  "text": "あっ……ごめん。おしろ、ふんじゃった……"
+ },
+ {
+  "key": "sq_ogkashi",
+  "who": "nobbo",
+  "text": "にばんを うたって いますよ。さあ、いっしょに"
+ },
+ {
+  "key": "sq_zkenogu",
+  "who": "nobbo",
+  "text": "おや、みずいれが たおれましたね"
+ },
+ {
+  "key": "sq_ringo",
+  "who": "gaojii",
+  "text": "おっと、ぶつかって りんごが ころがって しまったのう"
+ },
+ {
+  "key": "sq_saifu",
+  "who": "miibaa",
+  "text": "あら、ポケットを ごそごそ して、どうしたの？"
+ },
+ {
+  "key": "sq_gskaeshite",
+  "who": "kon",
+  "text": "へへーん、えんぴつ とったよー！"
+ },
+ {
+  "key": "sq_tdzuru",
+  "who": "tora",
+  "text": "へへっ、ちょっと おそかったけど、じゃんけん おれの かち！"
+ },
+ {
+  "key": "sq_tdnakanaori",
+  "who": "gao",
+  "text": "……ふんっ。さっきの こと、まだ おこってるからな"
+ },
+ {
+  "key": "sq_hkhaneru",
+  "who": "meebaa",
+  "text": "あらあら、ふたりとも、ベッドの うえで はねたら あぶないわよ"
+ },
+ {
+  "key": "sr_zukan",
+  "who": "nobbo",
+  "text": "どうぶつの ほんなら、いちばん うえの たなに ありますよ"
+ },
+ {
+  "key": "sr_kabin",
+  "who": "kamejii",
+  "text": "ほっほ。けがは ないかね？ しょうじきに あやまれて、えらいのう"
+ },
+ {
+  "key": "sr_kippu",
+  "who": "ekiin",
+  "text": "はい、こどもの きっぷは ひゃくえんですよ。どうぞ"
+ },
+ {
+  "key": "sr_snenpitsu",
+  "who": "nobbo",
+  "text": "わかりました。けずりきは うしろの たなに ありますよ"
+ },
+ {
+  "key": "sr_snochitsuku",
+  "who": "nobbo",
+  "text": "わかりました。しずかな ところで やすんで、おちついたら もどって きて くださいね"
+ },
+ {
+  "key": "sr_bychusha",
+  "who": "wanko",
+  "text": "だいじょうぶですよ。いち、に、さん……はい、おわり！ がんばりやさんですね"
+ },
+ {
+  "key": "sr_tiouen",
+  "who": "nobbo",
+  "text": "いい おうえんですね。ちゅうくんに とどきましたよ"
+ },
+ {
+  "key": "sr_dwkakeru",
+  "who": "kuma",
+  "text": "うん、くまだよ。いいよ、どうしたの？"
+ },
+ {
+  "key": "sr_ogrhythm",
+  "who": "nobbo",
+  "text": "じょうずです。では、もう いちど いきますよ。タン、タン、タタタン"
+ },
+ {
+  "key": "sr_ftjunbi",
+  "who": "kon",
+  "text": "あ、ごめん。じゅんびが できたら いってね"
+ },
+ {
+  "key": "sr_gkkyounohanashi",
+  "who": "mama",
+  "text": "へえ、そうなんだ。おしえて くれて ありがとう"
+ },
+ {
+  "key": "sr_boushi",
+  "who": "nobbo",
+  "text": "わかりました。せんせいが とって あげましょう。きょうは かぜが つよいですね"
+ },
+ {
+  "key": "sr_hsowari",
+  "who": "biba",
+  "text": "どういたしまして。おやつは いちじかん たってからに してね。おだいじに"
+ },
+ {
+  "key": "sr_ocfuku",
+  "who": "mama",
+  "text": "そう。じゃあ、ほかの ふくに しようね"
+ },
+ {
+  "key": "sr_bguketori",
+  "who": "tenin",
+  "text": "たべおわったら、トレーは あちらに おねがいしますね"
+ },
+ {
+  "key": "sr_ysdekita",
+  "who": "mama",
+  "text": "はい。まってるわよ"
+ },
+ {
+  "key": "sr_kwhei",
+  "who": "pyon",
+  "text": "そうだね。やめとく。ほかで あそぼう"
+ },
+ {
+  "key": "sr_otsukai",
+  "who": "gaojii",
+  "text": "ほっほ、えらいのう。なんでも いって おくれ"
+ },
+ {
+  "key": "sr_kgiken",
+  "who": "nobbo",
+  "text": "はい。いっしょうけんめい かんがえて いますね"
+ },
+ {
+  "key": "sr_mtgame",
+  "who": "chu",
+  "text": "うん！ おわったら かわるね"
+ },
+ {
+  "key": "sg_kaminai_2",
+  "who": "gao",
+  "text": "トイレットペーパーが ないよ"
+ },
+ {
+  "key": "sg_kaminai_3",
+  "who": "gao",
+  "text": "トイレットペーパーが ないから、もって きて"
+ },
+ {
+  "key": "sg_kaminai_4",
+  "who": "gao",
+  "text": "トイレットペーパーが ないから、とって くれる？"
+ },
+ {
+  "key": "sg_kaminai_5",
+  "who": "gao",
+  "text": "トイレの かみが きれて いるから、あたらしいのを とって"
+ },
+ {
+  "key": "sg_kariru_5",
+  "who": "gao",
+  "text": "この えほんが おもしろそうなので、かして ください"
+ },
+ {
+  "key": "sg_kyoishii_2",
+  "who": "gao",
+  "text": "からあげ、おいしいね"
+ },
+ {
+  "key": "sg_kyoishii_5",
+  "who": "gao",
+  "text": "この からあげ、おにくが やわらかくて おいしいね。おかわり したいな"
+ },
+ {
+  "key": "sg_skpage_3",
+  "who": "gao",
+  "text": "せんせい、なんページか おしえて ください"
+ },
+ {
+  "key": "sg_skpage_4",
+  "who": "gao",
+  "text": "せんせい、なんページを ひらくのか、もう いちど いって ください"
+ },
+ {
+  "key": "sg_skpage_5",
+  "who": "gao",
+  "text": "せんせい、ページが わかりませんでした。もう いちど おしえて ください"
+ },
+ {
+  "key": "sg_ogtanoshii_0",
+  "who": "gao",
+  "text": "どんぐりころころ"
+ },
+ {
+  "key": "sg_abkaeru_0",
+  "who": "gao",
+  "text": "あと いっかい"
+ },
+ {
+  "key": "sg_ogwasureta_3",
+  "who": "gao",
+  "text": "となりの ひとに みせて もらっても いいですか"
+ },
+ {
+  "key": "sg_octetsudai_5",
+  "who": "gao",
+  "text": "ママ、いそがしそうだね。おはしを ならべるのを てつだおうか？"
+ },
+ {
+  "key": "sg_iekashite_4",
+  "who": "gao",
+  "text": "ぼくにも その くるま、すこし かして くれる？"
+ },
+ {
+  "key": "sg_ysgochi_5",
+  "who": "gao",
+  "text": "ごちそうさまでした。ハンバーグ、また たべたいな"
+ },
+ {
+  "key": "sg_zkhasami_0",
+  "who": "gao",
+  "text": "のり、どうぞ"
+ },
+ {
+  "key": "sg_tdonaji_5",
+  "who": "gao",
+  "text": "ほんとだ。さきに はなして いいよ。つぎは ぼくの ばんね"
+ },
+ {
+  "key": "sg_tdsasoi_5",
+  "who": "gao",
+  "text": "……きょうは ならいごとが あるんだ。また こんど あそぼうね"
+ },
+ {
+  "key": "sg_kpjunban_0",
+  "who": "gao",
+  "text": "だいじょうぶ？"
+ },
+ {
+  "key": "sg_kpjunban_1",
+  "who": "gao",
+  "text": "ゆっくりで いいよ。さきに いこうか？"
+ },
+ {
+  "key": "sg_hkknock_1",
+  "who": "gao",
+  "text": "しつれいします。ぐあいが わるいです"
+ },
+ {
+  "key": "sg_kgyomu_0",
+  "who": "gao",
+  "text": "どこ？"
+ },
+ {
+  "key": "sg_jtkasa_5",
+  "who": "gao",
+  "text": "かさを さしながら のると、まえが みえなくて あぶないよ。カッパを きて いこう"
+ },
+ {
+  "key": "sg_mttoshoshitsu_5",
+  "who": "gao",
+  "text": "はい。みんなが よんで いるから、ちいさな こえで はなします。ほんを えらんで きます"
+ },
+ {
+  "key": "sg_mthappyou_0",
+  "who": "gao",
+  "text": "こうえん"
+ },
+ {
+  "key": "sg_mthappyou_1",
+  "who": "gao",
+  "text": "こうえんに いきました"
+ },
+ {
+  "key": "sg_mtshitsumon_3",
+  "who": "gao",
+  "text": "せんせい、かきおわったら いいですか？"
+ },
+ {
+  "key": "st_enogu_1",
+  "who": "gao",
+  "text": "おーい、ちゅう！ みて みてー！ ……わっ、つくえに ぶつかっちゃった！"
+ },
+ {
+  "key": "st_taiko_6",
+  "who": "pyon",
+  "text": "そう！ いい おと！"
+ },
+ {
+  "key": "sg_gswarawanaide_3",
+  "who": "gao",
+  "text": "まちがえても、わらわないでよ"
+ },
+ {
+  "key": "sg_gswarawanaide_4",
+  "who": "gao",
+  "text": "わらわれると いやな きもちに なるよ"
+ },
+ {
+  "key": "sr_gkkyounohanashi_pyonmama",
+  "who": "pyonmama",
+  "text": "へえ、そうなんだ。おしえて くれて ありがとう"
+ },
+ {
+  "key": "sr_gkkyounohanashi_gaomama",
+  "who": "gaomama",
+  "text": "へえ、そうなんだ。おしえて くれて ありがとう"
+ },
+ {
+  "key": "sr_gkkyounohanashi_miimama",
+  "who": "miimama",
+  "text": "へえ、そうなんだ。おしえて くれて ありがとう"
+ },
+ {
+  "key": "sr_gkkyounohanashi_chumama",
+  "who": "chumama",
+  "text": "へえ、そうなんだ。おしえて くれて ありがとう"
+ },
+ {
+  "key": "sr_ocfuku_pyonmama",
+  "who": "pyonmama",
+  "text": "そう。じゃあ、ほかの ふくに しようね"
+ },
+ {
+  "key": "sr_ocfuku_gaomama",
+  "who": "gaomama",
+  "text": "そう。じゃあ、ほかの ふくに しようね"
+ },
+ {
+  "key": "sr_ocfuku_miimama",
+  "who": "miimama",
+  "text": "そう。じゃあ、ほかの ふくに しようね"
+ },
+ {
+  "key": "sr_ocfuku_chumama",
+  "who": "chumama",
+  "text": "そう。じゃあ、ほかの ふくに しようね"
+ },
+ {
+  "key": "sr_ysdekita_pyonmama",
+  "who": "pyonmama",
+  "text": "はい。まってるわよ"
+ },
+ {
+  "key": "sr_ysdekita_gaomama",
+  "who": "gaomama",
+  "text": "はい。まってるわよ"
+ },
+ {
+  "key": "sr_ysdekita_miimama",
+  "who": "miimama",
+  "text": "はい。まってるわよ"
+ },
+ {
+  "key": "sr_ysdekita_chumama",
+  "who": "chumama",
+  "text": "はい。まってるわよ"
+ }
+]
