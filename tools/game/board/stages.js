@@ -130,8 +130,10 @@ const ROOMS = {
     [1060, 1300].forEach(x => { el("path", { d: `M${x} 280 V620 M${x + 90} 280 V620`, ...R6(5), fill: "none" }, L); el("rect", { x: x - 10, y: 616, width: 110, height: 20, rx: 6, fill: "#E8735A", ...R6(4) }, L); }); },
   ベンチ(L) { sceneTree(L, 1480, 120); el("rect", { x: 820, y: 640, width: 420, height: 30, rx: 8, fill: "#C98A4B", ...R6(5) }, L); el("rect", { x: 820, y: 580, width: 420, height: 26, rx: 8, fill: "#C98A4B", ...R6(5) }, L);
     el("path", { d: "M850 670 V760 M1210 670 V760", ...R6(8) }, L); el("rect", { x: 1290, y: 640, width: 90, height: 120, rx: 10, fill: "#7CC36A", ...R6(5) }, L); txt(L, 1335, 712, "ゴミ", 26, { "text-anchor": "middle" }); },
-  いけ(L) { el("ellipse", { cx: 1100, cy: 850, rx: 520, ry: 110, fill: "#7FCBF0", ...R6(6) }, L); [[960, 840], [1180, 880], [1360, 830]].forEach(([x, y]) => el("ellipse", { cx: x, cy: y, rx: 60, ry: 18, fill: "#7CC36A", ...R6(4) }, L));
-    for (let x = 560; x < 1600; x += 80) el("path", { d: `M${x} 760 V690`, ...R6(6) }, L); el("path", { d: "M560 705 H1600", ...R6(6) }, L); },
+  いけ(L) { // 2026-10-28：いけは さくの むこう（キャラが いけの 中に 立って 見えて いた）
+    el("ellipse", { cx: 900, cy: 660, rx: 600, ry: 72, fill: "#7FCBF0", ...R6(6) }, L); [[700, 650], [940, 680], [1180, 645]].forEach(([x, y]) => el("ellipse", { cx: x, cy: y, rx: 60, ry: 16, fill: "#7CC36A", ...R6(4) }, L));
+    el("path", { d: "M420 660 q10 -14 20 0 q10 14 20 0 M1240 672 q10 -14 20 0 q10 14 20 0", fill: "none", stroke: "#FFFFFF", "stroke-width": 5 }, L);
+    for (let x = 260; x < 1600; x += 80) el("path", { d: `M${x} 780 V700`, ...R6(6) }, L); el("path", { d: "M260 720 H1600", ...R6(6) }, L); },
   パンや(L) { awning(L, "#E8735A"); shelfOf(L, 880, 260, 620, 3, ["#E9B872", "#D99A4E", "#F2C38F"], "bread"); counter(L); },
   やおや(L) { awning(L, "#7CC36A"); for (let i = 0; i < 3; i++) { el("rect", { x: 860 + i * 230, y: 600, width: 200, height: 160, rx: 8, fill: "#C98A4B", ...R6(5) }, L);
       for (let j = 0; j < 5; j++) el("circle", { cx: 895 + i * 230 + j * 32, cy: 595, r: 18, fill: ["#E8473C", "#F29F38", "#7CC36A"][i], ...R6(4) }, L); } },
