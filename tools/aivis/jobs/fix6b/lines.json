@@ -1,0 +1,37 @@
+[
+ {
+  "key": "sq_oshiro",
+  "who": "doshin",
+  "text": "あっ……ごめん。おしろ、ふんじゃった……"
+ },
+ {
+  "key": "sr_ftjunbi",
+  "who": "kon",
+  "text": "あ、ごめん。じゅんびが できたら いってね"
+ },
+ {
+  "key": "sr_ocfuku",
+  "who": "mama",
+  "text": "そう。じゃあ、ほかの ふくに しようね"
+ },
+ {
+  "key": "sr_ocfuku_pyonmama",
+  "who": "pyonmama",
+  "text": "そう。じゃあ、ほかの ふくに しようね"
+ },
+ {
+  "key": "sr_ocfuku_gaomama",
+  "who": "gaomama",
+  "text": "そう。じゃあ、ほかの ふくに しようね"
+ },
+ {
+  "key": "sr_ocfuku_miimama",
+  "who": "miimama",
+  "text": "そう。じゃあ、ほかの ふくに しようね"
+ },
+ {
+  "key": "sr_ocfuku_chumama",
+  "who": "chumama",
+  "text": "そう。じゃあ、ほかの ふくに しようね"
+ }
+]
