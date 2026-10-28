@@ -70241,6 +70241,38 @@ body.phoneport.inmenu .wrap{padding:0}body.phoneport.inmenu .stage{border:0;bord
 .logcard .logbtns{position:sticky;bottom:-16px;margin:0 -18px -16px;padding:10px 18px 16px;background:#fff;border-top:2px solid #2B2A3322}
 .logcard .logx{position:absolute;right:8px;top:6px;width:40px;height:40px;border-radius:50%!important;border:3px solid #2B2A33!important;background:#fff!important;font:700 22px var(--body)!important;color:#2B2A33!important;cursor:pointer;display:grid;place-items:center;padding:0!important;line-height:1;box-shadow:0 2px 0 #2B2A33!important}
 `; document.head.appendChild(s); })();
+/* ---- このアプリについて（2026-10-28）：音声の クレジットは 商用利用の 条件なので、おとなの ⚙ の 中に 置く。
+   VOICEVOX は「VOICEVOX:キャラ名」が 必須。AivisSpeech の モデルは ACML 1.0（モデル名・作者の 表記）。
+   ずんずんPJ の 規約は「アプリの紹介画面などに（少し探せばわかる場所に）」。 */
+const ABOUT_CREDITS = {
+  voicevox: ["四国めたん", "猫使アル", "玄野武宏（CV:ガロ）", "麒ヶ島宗麟", "剣崎雌雄", "白上虎太郎", "満別花丸", "九州そら", "ちび式じい", "東北イタコ"],
+  aivis: ["みちのくあいり、らせつん（こずかた学園プロジェクト / Aivis Project）", "morioki（yuki / morioki）", "ろてじん（長老ボイス）、ろてじん（匿名インタビュー風）（ろてじん）", "澤原 玄二郎、阿井田 茂（古山キリヲ）", "凛音エル（kokuren / 電脳天使工業）", "まお（オズチャット -Oz Chat- / Trippy、CV: ねゆたろ）", "コハク（オズチャット -Oz Chat-）", "fumifumi（kokushin / sagawafumiya）", "わかな、すみれ、さつき、ほのか、かりん、れな、もえ（声は x.com/dopoiro のAI / ぽいロード〈リアボVC公式〉）", "TANAKA（田中）", "hinakoyuhara（柚原比奈子）", "花音（MAHOPROGRAM）", "立神ケイ（ニッケル・海月ニケ）", "猩々博士（雑談ボイス）（ろてじん・猩々博士）", "Lux（Lami）", "kokuren_voice、kokuren_3rd（kokuren）", "yukyu（yukyu）", "にせ、るな（MAHOPROGRAM）", "観測症（観測症 / hdae）", "はきみて れく(瞭魅推 れく)（はきみて れく）"],
+};
+function showAbout() {
+  const h = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+  const lb = h("div", "logbox about"), c = h("div", "logcard");
+  const x = h("button", "logx", "×"); x.type = "button"; x.setAttribute("aria-label", "とじる"); x.onclick = () => lb.remove(); lb.onclick = e => { if (e.target === lb) lb.remove(); };
+  c.append(x, h("h3", "", "このアプリについて"));
+  const sec = (title, body) => { const s = h("section", "absec"); s.append(h("h4", "", title)); body.forEach(b => s.append(b)); c.append(s); };
+  sec("ことばのたね", [h("p", "", "小学1年生くらいの子が、場面に合う言葉を声に出して練習するすごろくです。"), h("p", "abmuted", "© UCHINOAJI")]);
+  const vv = h("ul", ""); ABOUT_CREDITS.voicevox.forEach(n => vv.append(h("li", "", "VOICEVOX:" + n)));
+  sec("声（音声合成）", [h("p", "", "この作品は、VOICEVOX と AivisSpeech で合成した音声を使用しています。"), h("p", "abhead", "VOICEVOX（https://voicevox.hiroshiba.jp/）"), vv]);
+  const av = h("ul", ""); ABOUT_CREDITS.aivis.forEach(n => av.append(h("li", "", n)));
+  sec("AivisSpeech の音声合成モデル（いずれも ACML 1.0）", [av]);
+  sec("そのほか", [h("p", "", "効果音・BGM はアプリの中で合成しています。文字は Mochiy Pop One・Zen Maru Gothic（SIL Open Font License）。")]);
+  const bt = h("div", "logbtns"); const cl = h("button", "", "とじる"); cl.type = "button"; cl.onclick = () => lb.remove(); bt.append(cl); c.append(bt);
+  lb.append(c); document.body.appendChild(lb);
+}
+{ const md = m3Decorate; m3Decorate = function () { md(); try { const ad = document.querySelector("#startBox .madult"); if (ad && !ad.querySelector(".mabout")) {
+      const b = document.createElement("button"); b.type = "button"; b.className = "mreset mabout"; b.textContent = "このアプリについて"; b.onclick = showAbout; const cl = [...ad.querySelectorAll(".mreset")].find(e => e.textContent === "とじる"); cl ? ad.insertBefore(b, cl) : ad.append(b); } } catch (e) { console.error(e); } }; }
+if (document.getElementById("startBox")) m3Decorate();
+(function () { const s = document.createElement("style"); s.textContent = `
+.logbox.about .logcard{width:min(94%,760px);font-size:14px;line-height:1.6}
+.logbox.about .absec{display:grid;gap:4px}
+.logbox.about h4{margin:6px 0 0;font:400 17px var(--display);color:#2B2A33}
+.logbox.about p{margin:0}.logbox.about .abmuted{color:#5E5A6B;font-size:13px}.logbox.about .abhead{font-weight:700;font-size:13px;margin-top:2px}
+.logbox.about ul{margin:0;padding-left:1.3em;font-size:13px;line-height:1.55;overflow-wrap:anywhere}
+`; document.head.appendChild(s); })();
 
 </script>
 
