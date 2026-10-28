@@ -70141,7 +70141,7 @@ function m3Decorate() {
   let head = box.querySelector(".m3head");
   if (!head) { head = h("div", "m3head"); const hero = box.querySelector(".mhero"); box.prepend(head); if (hero) head.append(hero);
     const right = h("div", "m3right"); head.append(right);
-    const mic = h("button", "m3mic"); mic.type = "button"; mic.id = "m3mic"; mic.setAttribute("aria-label", "マイク"); mic.innerHTML = "🎤"; mic.onclick = () => micAlwaysOn(); right.append(mic);
+    // マイクの ボタンは 出さない（2026-10-28）：マイクは コースを おした ときに 自動で 入るので、押す 必要が ない
     const ad = box.querySelector(".m2adult"); if (ad) { ad.classList.add("m3gear"); ad.textContent = "⚙"; ad.setAttribute("aria-label", "おとなの かたへ"); right.append(ad); }
   }
   m3Mic();
@@ -70149,14 +70149,13 @@ function m3Decorate() {
   // ジャンルの タイル：★ n / m → 棒
   box.querySelectorAll(".m2g").forEach(t => { const s = t.querySelector(".m2gs"); if (!s || t.querySelector(".m3bar")) return;
     const m = /(\d+)\s*\/\s*(\d+)/.exec(s.textContent);
-    if (m) { const bar = h("div", "m3bar"), f = h("div", "m3fill"); f.style.width = (100 * m[1] / m[2]).toFixed(0) + "%"; bar.append(f); const n = h("span", "m3n", `${m[1]}/${m[2]}`); const play = /▶/.test(s.textContent); s.replaceWith(bar); bar.append(n); if (+m[1] && +m[1] === +m[2]) t.classList.add("m3done"); if (play) t.append(h("span", "m3badge m3play", "▶")); }
-    else if (/とちゅう/.test(s.textContent)) { s.className = "m3badge m3play"; s.textContent = "▶"; }
+    if (m) { const bar = h("div", "m3bar"), f = h("div", "m3fill"); f.style.width = (100 * m[1] / m[2]).toFixed(0) + "%"; bar.append(f); const n = h("span", "m3n", `${m[1]}/${m[2]}`); s.replaceWith(bar); bar.append(n); }
     else if (/コース$/.test(s.textContent)) { s.className = "m3n"; }
     else if (/にん/.test(s.textContent)) { s.className = "m3n"; } });
   // コースの タイル：札 → バッジ
   box.querySelectorAll(".mst").forEach(b => { const s = b.querySelector(".mstat"); if (!s || s.dataset.m3) return; s.dataset.m3 = 1;
-    if (/クリア/.test(s.textContent)) { s.className = "mstat m3badge m3clear"; s.textContent = "★"; }
-    else if (/とちゅう/.test(s.textContent)) { s.className = "mstat m3badge m3play"; s.textContent = "▶"; }
+    // クリアの ★ や とちゅうの ▶ の バッジは 出さない（2026-10-28：シンプルに）
+    if (/クリア|とちゅう/.test(s.textContent)) { s.className = "mstat m3hide"; }
     else if (/ロング/.test(s.textContent)) { s.className = "mstat m3tag"; }
     else s.className = "mstat m3hide"; });
   // 「◀ もどる」→ 丸い ← ボタン
@@ -70172,6 +70171,8 @@ if (document.getElementById("startBox")) m3Decorate();
 /* ---- 土台 ---- */
 .start.menu.m3{gap:0!important;padding:0!important;background:transparent!important}
 .start.menu.m3::before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,#FFF8E100 0%,#FFF8E1CC 32%,#FFF8E1F2 100%)}
+body.inmenu .stage{border-color:transparent}
+body.phoneport.inmenu .wrap{padding:0}body.phoneport.inmenu .stage{border:0;border-radius:0}body.phoneport.inmenu .note,body.phoneport.inmenu .srfb,body.phoneport.inmenu .dev{visibility:hidden}
 .start.menu.m3 .mcard[data-m2]{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0 max(12px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))!important;backdrop-filter:none!important;width:100%!important;gap:min(1.6vh,12px)!important}
 .start.menu.m3 .mmic{display:none!important}
 /* ---- ヘッダー ---- */
