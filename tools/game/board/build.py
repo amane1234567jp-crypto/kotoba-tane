@@ -4,7 +4,7 @@ R = Path(".")
 fd = (R/"rig/friends_demo.html").read_text()
 i = fd.index("const AUD = ") + len("const AUD = "); j = fd.index(";\n", i)
 AUD = json.loads(fd[i:j])
-AUD = {k: AUD[k] for k in ["shima", "doshin", "kamejii", "gao"]}
+AUD = {}  # rig の 4本（旧 VOICEVOX の まるシマ・どしん・かめじい・がお）は 使わない（2026-10-28）。どしん・かめじい は board/audio の AivisSpeech 版
 b64 = lambda p: "data:audio/mpeg;base64," + base64.b64encode(p.read_bytes()).decode()
 for p in sorted((R/"board/audio").glob("*.mp3")): AUD[p.stem] = b64(p)
 for k in ["k13_main", "k16_main"]: AUD[k] = b64(R/"kousha/audio"/(k + ".mp3"))

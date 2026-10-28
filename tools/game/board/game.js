@@ -515,7 +515,7 @@ async function runScene(place) {
   const up = grade(ok && a === 0); GS.tasks++; if (ok) GS.ok++;
   if (ok) {
     playMove(C.shima, JOY[rnd(JOY.length)]); partners.forEach((p, i) => later(200 + i * 150, () => SPECIAL[p.kind](p))); confetti(60);
-    await sleep(500); await (rnd(2) ? speak(C.shima, "shima", "やったー！ いえたね！") : speak(C.pony, "p_great", "すごい！ いえたね！"));
+    await sleep(500); await speak(C.pony, "p_great", "すごい！ いえたね！"); // まるシマの「やったー！」は VOICEVOX:猫使アル だったので やめた（2026-10-28：連絡不要の声だけで そろえる）
     if (sc.partner === "かめじい" && rnd(2)) await speak(C.kamejii, "kamejii", "よく いえましたね");
   } else {
     await speak(C.pony, "p_together", "いっしょに いおうね"); await speak(C.pony, `k${pad(sc.no)}_main`, sc.main); playMove(C.shima, "nod");
