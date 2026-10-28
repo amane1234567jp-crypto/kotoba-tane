@@ -33,7 +33,7 @@ function m2Build() {
     const bs = [...list.querySelectorAll(`:scope > .mst[data-g="${gid}"]`)]; if (!bs.length) return;
     const clr = bs.filter(b => /クリア/.test(b.textContent)).length;
     const t = h("button", "m2g g-" + gid); t.type = "button";
-    t.append(h("span", "m2gi", ic), h("span", "m2gn", nm), h("span", "m2gs", bs.some(b => b.dataset.sid === playing) ? "▶ とちゅう" : `★ ${clr} / ${bs.length}`));
+    t.append(h("span", "m2gi", ic), h("span", "m2gn", nm), h("span", "m2gs", `★ ${clr} / ${bs.length}` + (bs.some(b => b.dataset.sid === playing) ? " ▶" : "")));
     t.onclick = () => m2Open(gid); home.append(t);
   });
   const mm = card.querySelector(".mmulti"); if (mm) { mm.classList.add("m2g", "m2multi"); mm.innerHTML = `<span class="m2gi">👥</span><span class="m2gn">みんなで</span><span class="m2gs">2〜6にん</span>`; home.append(mm); }
