@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="manifest" href="manifest.json">
 <style>body{margin:0}</style>
-<script>const PACK_VER="b5f9b44c61";{const f0=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&/(^|\/)packs\/[^?]+\.json$/.test(u))u+="?v="+PACK_VER;return f0.call(this,u,o);};}</script>
+<script>const PACK_VER="47f7b97919";{const f0=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&/(^|\/)packs\/[^?]+\.json$/.test(u))u+="?v="+PACK_VER;return f0.call(this,u,o);};}</script>
 <script>if("serviceWorker" in navigator&&location.protocol==="https:")addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));</script>
 </head><body>
 <title>ことばのたね すごろく試作</title>
@@ -70946,7 +70946,7 @@ const PROP_X = {
 { const pi = playIntro; playIntro = async function (s, h, a) { if (PROP_X[s.id]) { try { PROP_X[s.id](h, a); } catch (e) { console.error("PROP_X", s.id, e); } } return pi(s, h, a); }; }
 
 /* ---- 子どもの さきの ひとこと／うごき（PRE_X） ----
-   text: 主人公の ふきだし（声なし。1.3秒）。knock: ドアを ノックする 音と「コンコン」。raise: 手を あげて ！。 */
+   text: 主人公の ふきだし（声つき：pre_<id>／pre_<id>_<子>）。knock: ドアを ノックする 音と「コンコン」。raise: 手を あげて ！。 */
 const PRE_X = {
   mtdenwa: { raise: true, text: "ママ、あのね！" },
   irete: { text: "ねえ、いれて！" }, chime: { bell: true }, ocbenkyou: { text: "あそぼう！" },
@@ -70955,12 +70955,12 @@ const PRE_X = {
 };
 { const pi = playIntro; playIntro = async function (s, h, a) {
     const p = PRE_X[s.id]; if (!p) return pi(s, h, a);
-    if (p.busy) { const c = xtra("pyon", 1000, .5); c.dx.v = c.dx.t = 0; say(a, "……はい、では そういう ことで"); await sleep(1300); unsay(); c.dx.t = -1400; hold(c, "run", .8); await sleep(700); c.root.style.display = "none"; }
+    if (p.busy) { const c = xtra("pyon", 1000, .5); c.dx.v = c.dx.t = 0; await speak(a, "pre_snmachi_busy", "……はい、では そういう ことで"); c.dx.t = -1400; hold(c, "run", .8); await sleep(700); c.root.style.display = "none"; }
     const r = await pi(s, h, a);
     if (p.knock) { for (let i = 0; i < 2; i++) later(i * 260, () => noise(.08, 600, .4)); say(h, "コンコン"); await sleep(1100); unsay(); }
     if (p.bell) { for (let i = 0; i < 6; i++) later(i * 140, () => blip(1800, 1800, .08, "square")); say(h, "（チャイム）"); await sleep(1000); unsay(); }
     if (p.raise) { h.armR.t = -160; markAbove(h, "ex"); later(1500, () => h.armR.t = 0); }
-    if (p.text) { say(h, p.text); h.mouthOpen.t = .6; await sleep(1300); h.mouthOpen.t = 0; unsay(); await sleep(200); }
+    if (p.text) { const k = AUD[`pre_${s.id}_${h.kind}`] ? `pre_${s.id}_${h.kind}` : `pre_${s.id}`; await speak(h, k, p.text); await sleep(200); } // 声を つける（2026-10-29：ひらがなが 読めない 子にも わかるように）。まるシマは ぽにーの 声、ほかの 子は その 子の 声
     return r; }; }
 
 /* ================= 絵文字 → 手がきの アイコン（2026-10-29） =================

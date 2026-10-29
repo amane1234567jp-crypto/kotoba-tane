@@ -159,6 +159,15 @@ for st, job in [("souzou", "sz1"), ("tachiba", "tb1"), ("sakiyomi", "sk1"), ("ch
         if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
         else: missing.append(k)
     (OUT / f"{st}.json").write_text(json.dumps(pack, separators=(",", ":"))); print(st, len(pack), round((OUT / f"{st}.json").stat().st_size / 1e6, 2), "MB")
+# 子どもが 先に 話しかける 一言（fixes1028b.js の PRE_X）の 声：その 場面の ステージの パックに 入れる（2026-10-29）
+_S = {x["id"]: x.get("stage", "kousha") for x in json.loads((G / "sit/sits.json").read_text())}
+for p in sorted(A.glob("pre_*.mp3")):
+    sid = p.stem[4:]; sid = next((i for i in sorted(_S, key=len, reverse=True) if sid == i or sid.startswith(i + "_")), None)
+    if not sid: continue
+    for st in {_S[sid], "slong" if _S[sid] == "kousha" else None, "long" if _S[sid] == "kousha" else None} - {None}:
+        f = OUT / f"{st}.json"
+        if not f.exists(): continue
+        pk = json.loads(f.read_text()); pk[p.stem] = base64.b64encode(p.read_bytes()).decode(); f.write_text(json.dumps(pk, separators=(",", ":")))
 # ちょうロングの しかけ「rand」（ランダムに とぶ）の ぽにーの 声は、その しかけを つかう ほかの ロングにも 入れる（2026-10-29：でたらめ で 声が なかった）
 for st in ["detarame", "kimochi", "makete", "dekigoto", "jugyou"]:
     f = OUT / f"{st}.json"
