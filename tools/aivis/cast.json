@@ -312,6 +312,26 @@
    "model": "70ad7e84-6a10-48d6-8f9a-8dac4bba3c0b",
    "style": "ノーマル",
    "speed": 1.0
+  },
+  "shima_a": {
+   "model": "9107b8b6-1ed1-43f5-bebe-0de4df4d229d",
+   "style": "ノーマル",
+   "speed": 1.05
+  },
+  "shima_b": {
+   "model": "3328da9a-8124-4619-a853-f7fc2f37889f",
+   "style": "ノーマル",
+   "speed": 1.05
+  },
+  "shima_c": {
+   "model": "e9339137-2ae3-4d41-9394-fb757a7e61e6",
+   "style": "ノーマル",
+   "speed": 1.05
+  },
+  "shima_d": {
+   "model": "00f29eb2-e12b-4f64-a5e8-4188be62de33",
+   "style": "ノーマル",
+   "speed": 1.05
   }
  },
  "lines": {
