@@ -9,7 +9,7 @@ STAGES.push(
   { id: "kirikae", name: "きりかえ", icon: "🔄", ready: S10_READY }, { id: "kikikaesu", name: "ききかえす", icon: "👂", ready: S10_READY },
   { id: "matsu", name: "まつ・こえの ものさし", icon: "🤫", ready: S10_READY }, { id: "sos", name: "からだの SOS", icon: "🙉", ready: S10_READY },
   { id: "junban", name: "じゅんばんに いおう", icon: "🔢", ready: S10_READY }, { id: "kotowaru", name: "ことわる", icon: "✋", ready: S10_READY },
-  { id: "bousai", name: "じしん・かじ", icon: "🚨", ready: S10_READY }, { id: "denwa", name: "でんわ", icon: "📞", ready: S10_READY });
+  /* 2026-10-30：「じしん・かじ」は カット（メニューから はずす。中身は のこす） */ { id: "denwa", name: "でんわ", icon: "📞", ready: S10_READY });
 const S10 = SITS.filter(s => S10L.includes(s.stage));
 S10.forEach(s => ASK_ON_STAGE.add(s.intro));
 S10.filter(s => ["sad", "ears", "sick", "tired", "shiver", "quake", "siren", "itchy"].includes((s.an || [])[0]) || s.help).forEach(s => SOFT_INTRO.add(s.intro));

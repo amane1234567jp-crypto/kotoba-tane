@@ -66076,7 +66076,7 @@ STAGES.push(
   { id: "kirikae", name: "きりかえ", icon: "🔄", ready: S10_READY }, { id: "kikikaesu", name: "ききかえす", icon: "👂", ready: S10_READY },
   { id: "matsu", name: "まつ・こえの ものさし", icon: "🤫", ready: S10_READY }, { id: "sos", name: "からだの SOS", icon: "🙉", ready: S10_READY },
   { id: "junban", name: "じゅんばんに いおう", icon: "🔢", ready: S10_READY }, { id: "kotowaru", name: "ことわる", icon: "✋", ready: S10_READY },
-  { id: "bousai", name: "じしん・かじ", icon: "🚨", ready: S10_READY }, { id: "denwa", name: "でんわ", icon: "📞", ready: S10_READY });
+  /* 2026-10-30：「じしん・かじ」は カット（メニューから はずす。中身は のこす） */ { id: "denwa", name: "でんわ", icon: "📞", ready: S10_READY });
 const S10 = SITS.filter(s => S10L.includes(s.stage));
 S10.forEach(s => ASK_ON_STAGE.add(s.intro));
 S10.filter(s => ["sad", "ears", "sick", "tired", "shiver", "quake", "siren", "itchy"].includes((s.an || [])[0]) || s.help).forEach(s => SOFT_INTRO.add(s.intro));
@@ -69716,7 +69716,7 @@ const GENRES = [
   ["machi", "🚃", "まち・おでかけ", ["toukou", "gekou", "kaerimichi", "omise", "densha", "burger", "byouin", "haisha", "jitensha"]],
   ["ouchi", "🏡", "おうち・あそび", ["ouchi1", "ie1", "yuushoku", "kouen", "kouen2", "asobiba", "tomodachi1"]],
   ["tsutaeru", "💬", "きもちを つたえる", ["manekko", "kikikaesu", "sos", "junban", "kotowaru", "denwa", "aite", "tachiba"]],
-  ["kangaeru", "🤔", "かんがえる", ["komatta", "kirikae", "matsu", "bousai"]],
+  ["kangaeru", "🤔", "かんがえる", ["komatta", "kirikae", "matsu"]],
   ["long", "⭐", "ロングコース", []],
 ];
 const GENRE_KEY = "kotoba-tane-genre";
