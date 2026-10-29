@@ -117,7 +117,7 @@ body.phoneport.inmenu .wrap{padding:0}body.phoneport.inmenu .stage{position:fixe
    ずんずんPJ の 規約は「アプリの紹介画面などに（少し探せばわかる場所に）」。 */
 const ABOUT_CREDITS = {
   voicevox: ["四国めたん"], // 2026-10-28：ゲームの VOICEVOX は ぽにー（四国めたん）だけに そろえた（ほかは AivisSpeech）
-  aivis: ["みちのくあいり、らせつん（こずかた学園プロジェクト / Aivis Project）", "morioki（yuki / morioki）", "ろてじん（長老ボイス）、ろてじん（匿名インタビュー風）（ろてじん）", "澤原 玄二郎、阿井田 茂（古山キリヲ）", "凛音エル（kokuren / 電脳天使工業）", "まお（オズチャット -Oz Chat- / Trippy、CV: ねゆたろ）", "コハク（オズチャット -Oz Chat-）", "fumifumi（kokushin / sagawafumiya）", "わかな、すみれ、さつき、ほのか、かりん、れな、もえ（声は x.com/dopoiro のAI / ぽいロード〈リアボVC公式〉）", "TANAKA（田中）", "hinakoyuhara（柚原比奈子）", "花音（MAHOPROGRAM）", "立神ケイ（ニッケル・海月ニケ）", "猩々博士（雑談ボイス）（ろてじん・猩々博士）", "Lux（Lami）", "kokuren_voice、kokuren_3rd（kokuren）", "yukyu（yukyu）", "にせ、るな（MAHOPROGRAM）", "観測症（観測症 / hdae）", "はきみて れく(瞭魅推 れく)（はきみて れく）"],
+  aivis: ["みちのくあいり、らせつん（こずかた学園プロジェクト / Aivis Project）", "morioki（yuki / morioki）", "ろてじん（長老ボイス）、ろてじん（匿名インタビュー風）（ろてじん）", "澤原 玄二郎、阿井田 茂（古山キリヲ）", "凛音エル（kokuren / 電脳天使工業）", "まお（オズチャット -Oz Chat- / Trippy、CV: ねゆたろ）", "コハク（オズチャット -Oz Chat-）", "fumifumi（kokushin / sagawafumiya）", "わかな、すみれ、さつき、ほのか、かりん、れな、もえ（声は x.com/dopoiro のAI / ぽいロード〈リアボVC公式〉）", "TANAKA（田中）", "hinakoyuhara（柚原比奈子）", "花音（MAHOPROGRAM）", "立神ケイ（ニッケル・海月ニケ）", "猩々博士（雑談ボイス）（ろてじん・猩々博士）", "Lux（Lami）", "kokuren_voice、kokuren_3rd（kokuren）", "yukyu（yukyu）", "にせ、るな、まい（MAHOPROGRAM）", "観測症（観測症 / hdae）", "はきみて れく(瞭魅推 れく)（はきみて れく）"],
 };
 function showAbout() {
   const h = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };

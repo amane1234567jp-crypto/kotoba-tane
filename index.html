@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="manifest" href="manifest.json">
 <style>body{margin:0}</style>
-<script>const PACK_VER="47f7b97919";{const f0=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&/(^|\/)packs\/[^?]+\.json$/.test(u))u+="?v="+PACK_VER;return f0.call(this,u,o);};}</script>
+<script>const PACK_VER="8679a37c72";{const f0=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&/(^|\/)packs\/[^?]+\.json$/.test(u))u+="?v="+PACK_VER;return f0.call(this,u,o);};}</script>
 <script>if("serviceWorker" in navigator&&location.protocol==="https:")addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));</script>
 </head><body>
 <title>ことばのたね すごろく試作</title>
@@ -70403,7 +70403,7 @@ body.phoneport.inmenu .wrap{padding:0}body.phoneport.inmenu .stage{position:fixe
    ずんずんPJ の 規約は「アプリの紹介画面などに（少し探せばわかる場所に）」。 */
 const ABOUT_CREDITS = {
   voicevox: ["四国めたん"], // 2026-10-28：ゲームの VOICEVOX は ぽにー（四国めたん）だけに そろえた（ほかは AivisSpeech）
-  aivis: ["みちのくあいり、らせつん（こずかた学園プロジェクト / Aivis Project）", "morioki（yuki / morioki）", "ろてじん（長老ボイス）、ろてじん（匿名インタビュー風）（ろてじん）", "澤原 玄二郎、阿井田 茂（古山キリヲ）", "凛音エル（kokuren / 電脳天使工業）", "まお（オズチャット -Oz Chat- / Trippy、CV: ねゆたろ）", "コハク（オズチャット -Oz Chat-）", "fumifumi（kokushin / sagawafumiya）", "わかな、すみれ、さつき、ほのか、かりん、れな、もえ（声は x.com/dopoiro のAI / ぽいロード〈リアボVC公式〉）", "TANAKA（田中）", "hinakoyuhara（柚原比奈子）", "花音（MAHOPROGRAM）", "立神ケイ（ニッケル・海月ニケ）", "猩々博士（雑談ボイス）（ろてじん・猩々博士）", "Lux（Lami）", "kokuren_voice、kokuren_3rd（kokuren）", "yukyu（yukyu）", "にせ、るな（MAHOPROGRAM）", "観測症（観測症 / hdae）", "はきみて れく(瞭魅推 れく)（はきみて れく）"],
+  aivis: ["みちのくあいり、らせつん（こずかた学園プロジェクト / Aivis Project）", "morioki（yuki / morioki）", "ろてじん（長老ボイス）、ろてじん（匿名インタビュー風）（ろてじん）", "澤原 玄二郎、阿井田 茂（古山キリヲ）", "凛音エル（kokuren / 電脳天使工業）", "まお（オズチャット -Oz Chat- / Trippy、CV: ねゆたろ）", "コハク（オズチャット -Oz Chat-）", "fumifumi（kokushin / sagawafumiya）", "わかな、すみれ、さつき、ほのか、かりん、れな、もえ（声は x.com/dopoiro のAI / ぽいロード〈リアボVC公式〉）", "TANAKA（田中）", "hinakoyuhara（柚原比奈子）", "花音（MAHOPROGRAM）", "立神ケイ（ニッケル・海月ニケ）", "猩々博士（雑談ボイス）（ろてじん・猩々博士）", "Lux（Lami）", "kokuren_voice、kokuren_3rd（kokuren）", "yukyu（yukyu）", "にせ、るな、まい（MAHOPROGRAM）", "観測症（観測症 / hdae）", "はきみて れく(瞭魅推 れく)（はきみて れく）"],
 };
 function showAbout() {
   const h = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
@@ -70960,7 +70960,7 @@ const PRE_X = {
     if (p.knock) { for (let i = 0; i < 2; i++) later(i * 260, () => noise(.08, 600, .4)); say(h, "コンコン"); await sleep(1100); unsay(); }
     if (p.bell) { for (let i = 0; i < 6; i++) later(i * 140, () => blip(1800, 1800, .08, "square")); say(h, "（チャイム）"); await sleep(1000); unsay(); }
     if (p.raise) { h.armR.t = -160; markAbove(h, "ex"); later(1500, () => h.armR.t = 0); }
-    if (p.text) { const k = AUD[`pre_${s.id}_${h.kind}`] ? `pre_${s.id}_${h.kind}` : `pre_${s.id}`; await speak(h, k, p.text); await sleep(200); } // 声を つける（2026-10-29：ひらがなが 読めない 子にも わかるように）。まるシマは ぽにーの 声、ほかの 子は その 子の 声
+    if (p.text) { const k = AUD[`pre_${s.id}_${h.kind}`] ? `pre_${s.id}_${h.kind}` : `pre_${s.id}`; await speak(h, k, p.text); await sleep(200); } // 声を つける（2026-10-29：ひらがなが 読めない 子にも わかるように）。その 子の 声（まるシマは AivisSpeech「まい」）。ない ときは ぽにーの 声
     return r; }; }
 
 /* ================= 絵文字 → 手がきの アイコン（2026-10-29） =================
