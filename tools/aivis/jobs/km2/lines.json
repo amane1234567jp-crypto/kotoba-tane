@@ -1,22 +1,227 @@
 [
-{
-"key": "kmg_kega",
-"who": "gao",
-"text": "こんなの へいき！ ほうって おけば いいよ！"
-},
-{
-"key": "kmg_naiteru",
-"who": "gao",
-"text": "ないてる なんて、へんなの！ ほうって おこう！"
-},
-{
-"key": "kmq_q4_nobbo",
-"who": "nobbo",
-"text": "どれに しますか？ どうしてですか？"
-},
-{
-"key": "rs_komatta",
-"who": "doshin",
-"text": "ありがとう！ ふたりなら はこべるね"
-}
+ {
+  "key": "kmr_kutsu_mama",
+  "who": "mama",
+  "text": "あら、たいへん。いっしょに さがそう"
+ },
+ {
+  "key": "kmr_kutsu_pyonmama",
+  "who": "pyonmama",
+  "text": "あら、たいへん。いっしょに さがそう"
+ },
+ {
+  "key": "kmr_kutsu_gaomama",
+  "who": "gaomama",
+  "text": "あら、たいへん。いっしょに さがそう"
+ },
+ {
+  "key": "kmr_kutsu_miimama",
+  "who": "miimama",
+  "text": "あら、たいへん。いっしょに さがそう"
+ },
+ {
+  "key": "kmr_kutsu_chumama",
+  "who": "chumama",
+  "text": "あら、たいへん。いっしょに さがそう"
+ },
+ {
+  "key": "kmr_kutsu_doshinpapa",
+  "who": "doshinpapa",
+  "text": "あら、たいへん。いっしょに さがそう"
+ },
+ {
+  "key": "kmr_kobosu_mama",
+  "who": "mama",
+  "text": "はい、ふきん。いっしょに ふこうね"
+ },
+ {
+  "key": "kmr_kobosu_pyonmama",
+  "who": "pyonmama",
+  "text": "はい、ふきん。いっしょに ふこうね"
+ },
+ {
+  "key": "kmr_kobosu_gaomama",
+  "who": "gaomama",
+  "text": "はい、ふきん。いっしょに ふこうね"
+ },
+ {
+  "key": "kmr_kobosu_miimama",
+  "who": "miimama",
+  "text": "はい、ふきん。いっしょに ふこうね"
+ },
+ {
+  "key": "kmr_kobosu_chumama",
+  "who": "chumama",
+  "text": "はい、ふきん。いっしょに ふこうね"
+ },
+ {
+  "key": "kmr_kobosu_doshinpapa",
+  "who": "doshinpapa",
+  "text": "はい、ふきん。いっしょに ふこうね"
+ },
+ {
+  "key": "kmr_game_mama",
+  "who": "mama",
+  "text": "うん。やくそくを まもれて、えらいね"
+ },
+ {
+  "key": "kmr_game_pyonmama",
+  "who": "pyonmama",
+  "text": "うん。やくそくを まもれて、えらいね"
+ },
+ {
+  "key": "kmr_game_gaomama",
+  "who": "gaomama",
+  "text": "うん。やくそくを まもれて、えらいね"
+ },
+ {
+  "key": "kmr_game_miimama",
+  "who": "miimama",
+  "text": "うん。やくそくを まもれて、えらいね"
+ },
+ {
+  "key": "kmr_game_chumama",
+  "who": "chumama",
+  "text": "うん。やくそくを まもれて、えらいね"
+ },
+ {
+  "key": "kmr_game_doshinpapa",
+  "who": "doshinpapa",
+  "text": "うん。やくそくを まもれて、えらいね"
+ },
+ {
+  "key": "kmr_purint_mama",
+  "who": "mama",
+  "text": "いいよ。ランドセルの おくも みて みよう"
+ },
+ {
+  "key": "kmr_purint_pyonmama",
+  "who": "pyonmama",
+  "text": "いいよ。ランドセルの おくも みて みよう"
+ },
+ {
+  "key": "kmr_purint_gaomama",
+  "who": "gaomama",
+  "text": "いいよ。ランドセルの おくも みて みよう"
+ },
+ {
+  "key": "kmr_purint_miimama",
+  "who": "miimama",
+  "text": "いいよ。ランドセルの おくも みて みよう"
+ },
+ {
+  "key": "kmr_purint_chumama",
+  "who": "chumama",
+  "text": "いいよ。ランドセルの おくも みて みよう"
+ },
+ {
+  "key": "kmr_purint_doshinpapa",
+  "who": "doshinpapa",
+  "text": "いいよ。ランドセルの おくも みて みよう"
+ },
+ {
+  "key": "kmr_keshigomu_nobbo",
+  "who": "nobbo",
+  "text": "はい、どうぞ。つぎは わすれないでね"
+ },
+ {
+  "key": "kmr_wakaranai_nobbo",
+  "who": "nobbo",
+  "text": "はい。では、もう いちど いいますね"
+ },
+ {
+  "key": "kmr_toire_nobbo",
+  "who": "nobbo",
+  "text": "はい、いって きて いいですよ"
+ },
+ {
+  "key": "kmr_nigate_nobbo",
+  "who": "nobbo",
+  "text": "わかりました。ひとくちは がんばろうね"
+ },
+ {
+  "key": "kmr_buranko_mama",
+  "who": "mama",
+  "text": "いい かんがえね。いって ごらん"
+ },
+ {
+  "key": "kmr_buranko_pyonmama",
+  "who": "pyonmama",
+  "text": "いい かんがえね。いって ごらん"
+ },
+ {
+  "key": "kmr_buranko_gaomama",
+  "who": "gaomama",
+  "text": "いい かんがえね。いって ごらん"
+ },
+ {
+  "key": "kmr_buranko_miimama",
+  "who": "miimama",
+  "text": "いい かんがえね。いって ごらん"
+ },
+ {
+  "key": "kmr_buranko_chumama",
+  "who": "chumama",
+  "text": "いい かんがえね。いって ごらん"
+ },
+ {
+  "key": "kmr_buranko_doshinpapa",
+  "who": "doshinpapa",
+  "text": "いい かんがえね。いって ごらん"
+ },
+ {
+  "key": "kmr_kasa_nobbo",
+  "who": "nobbo",
+  "text": "はい、どうぞ。あした かえして くださいね"
+ },
+ {
+  "key": "kmr_suitou_mama",
+  "who": "mama",
+  "text": "そうね。ひかげで やすんで、みずを かいに いこう"
+ },
+ {
+  "key": "kmr_suitou_pyonmama",
+  "who": "pyonmama",
+  "text": "そうね。ひかげで やすんで、みずを かいに いこう"
+ },
+ {
+  "key": "kmr_suitou_gaomama",
+  "who": "gaomama",
+  "text": "そうね。ひかげで やすんで、みずを かいに いこう"
+ },
+ {
+  "key": "kmr_suitou_miimama",
+  "who": "miimama",
+  "text": "そうね。ひかげで やすんで、みずを かいに いこう"
+ },
+ {
+  "key": "kmr_suitou_chumama",
+  "who": "chumama",
+  "text": "そうね。ひかげで やすんで、みずを かいに いこう"
+ },
+ {
+  "key": "kmr_suitou_doshinpapa",
+  "who": "doshinpapa",
+  "text": "そうね。ひかげで やすんで、みずを かいに いこう"
+ },
+ {
+  "key": "kmr_kega_nobbo",
+  "who": "nobbo",
+  "text": "たいへん。みずで あらって、てあてを しましょう"
+ },
+ {
+  "key": "kmr_maigo_tenin",
+  "who": "tenin",
+  "text": "わかりました。ママを よんで あげるね"
+ },
+ {
+  "key": "kmr_toriai_kon",
+  "who": "kon",
+  "text": "うん、いいよ。じゅんばんこね"
+ },
+ {
+  "key": "kmr_naiteru_chu",
+  "who": "chu",
+  "text": "……うん。きいて くれて、ありがとう"
+ }
 ]
