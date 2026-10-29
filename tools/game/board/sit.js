@@ -10,7 +10,7 @@ const sitUsed = new Set();
 const SIT_N = new Map(); { const c0 = sitUsed.clear.bind(sitUsed); sitUsed.clear = () => { SIT_N.clear(); c0(); }; }
 const tierFor = s => { let t = Math.min(5, tierOf() + Math.max(0, (SIT_N.get(s.id) || 1) - 1), s.tiers.length - 1);
   // その 段の 声が 読みこまれて いない ときは（ロングで こうしゃの 場面を つかう ときなど）、声の ある 段まで さげる（2026-10-29）
-  const has = i => !!AUD[`sa_${s.id}_${i}`] && (!s.gaoOk || !!AUD[`sg_${s.id}_${i}`]);
+  const has = i => !!AUD[`sa_${s.id}_${i}`] && (!s.gaoOk || (typeof RIVAL !== "undefined" && s.asker === RIVAL) || !!AUD[`sg_${s.id}_${i}`]); // ライバルが きく 場面は ライバルの 声は いらない
   if (Object.keys(AUD).length) { let u = t; while (u > 0 && !has(u)) u--; if (has(u)) t = u; }
   return t; };
 // レベルで 4段（0〜3）。2しゅうめは 1段、3しゅうめ からは 2段 ずらして もっと むずかしく（最大 6段め）
