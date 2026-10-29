@@ -1,0 +1,42 @@
+[
+ {
+  "key": "sq_mtshitsumon",
+  "who": "nobbo",
+  "text": "あ、てを あげて いますね。いま こくばんに かいて いるので、ちょっと まって くださいね"
+ },
+ {
+  "key": "sr_mtshitsumon",
+  "who": "nobbo",
+  "text": "まって くれて ありがとう。……はい、かけました。では、しつもんを どうぞ"
+ },
+ {
+  "key": "sg_mtshitsumon_0",
+  "who": "gao",
+  "text": "はい"
+ },
+ {
+  "key": "sg_mtshitsumon_1",
+  "who": "gao",
+  "text": "はい、まちます"
+ },
+ {
+  "key": "sg_mtshitsumon_2",
+  "who": "gao",
+  "text": "はい、まって います"
+ },
+ {
+  "key": "sg_mtshitsumon_3",
+  "who": "gao",
+  "text": "はい。かきおわったら、しつもんしても いいですか？"
+ },
+ {
+  "key": "sg_mtshitsumon_4",
+  "who": "gao",
+  "text": "はい、まちます。かきおわったら、しつもんしても いいですか？"
+ },
+ {
+  "key": "sg_mtshitsumon_5",
+  "who": "gao",
+  "text": "わかりました。かきおわるまで まって、それから しつもんします"
+ }
+]
