@@ -12,13 +12,15 @@ const tierFor = s => Math.min(5, tierOf() + Math.max(0, (SIT_N.get(s.id) || 1) -
 // レベルで 4段（0〜3）。2しゅうめは 1段、3しゅうめ からは 2段 ずらして もっと むずかしく（最大 6段め）
 const tierOf = () => Math.min(5, (E.L <= 2 ? 0 : E.L <= 4 ? 1 : E.L <= 7 ? 2 : 3) + (MODE === "multi" ? 0 : Math.min(2, Math.max(0, (SAVE.lap || 1) - 1))));
 // heroKind: こたえる キャラ（まるシマ・ライバル・みんなモードの人）。相手が じぶんと 同じ場面や、がお・ちゅうが 出てくる場面を よける
+let PICK_NEED_AUDIO = false; // true の あいだは、声が 読みこまれて いる 場面だけ えらぶ（ロングの ライバルの 場面など。2026-10-29）
 function pickSit(place, heroKind = "shima") {
-  const okFor = s => (s.stage || "kousha") === curStage && s.asker !== heroKind
+  const okFor = s => (s.stage || "kousha") === curStage && s.asker !== heroKind && (!PICK_NEED_AUDIO || !!AUD["sq_" + s.id])
     && (heroKind === "shima" || (MODE === "solo" ? s.gaoOk : (heroKind !== "gao" || s.gaoOk)))
     && !(heroKind === "chu" && s.intro === "tag") && !(s.cast && s.cast.includes(heroKind)) && !(s.noHero && s.noHero.includes(heroKind)) && !(s.late && GS.tasks < 4)
     && famOk(s, heroKind) && !(typeof RIVAL !== "undefined" && RIVAL && s.asker === RIVAL && heroKind !== RIVAL); // ライバルは 場面に ださない // ママの 場面は、じぶんの ママが いる 子だけ // やりとりに 出ている キャラは、その場面の 主人公に しない
   if (MODE === "solo" && heroKind !== "shima") { // ひとりで あそぶ ときの ライバルは、こどもが もう やった 場面から えらぶ（こどもの ぶんの あたらしい 場面を へらさない）
     let rp = SITS.filter(s => okFor(s) && sitUsed.has(s.id)); if (!rp.length) rp = SITS.filter(okFor);
+    if (!rp.length) return null; // ライバルに あう 場面が ない（ともだち ロング など）→ 場面なし
     const m = Math.min(...rp.map(x => SIT_N.get(x.id) || 0)); rp = rp.filter(x => (SIT_N.get(x.id) || 0) === m); const s = rp[rnd(rp.length)];
     return famSwap(s, heroKind); }
   let pool = SITS.filter(s => okFor(s) && s.place === place && !sitUsed.has(s.id));
@@ -273,7 +275,7 @@ async function runSit(place, heroKind = "shima") {
 
 /* ---------- がおの番の場面（ときどき言いまちがえる） ---------- */
 async function gaoSit(before) {
-  const s = pickSit(zoneOf(P.gao.node), RIVAL);
+  const s = pickSit(zoneOf(P.gao.node), RIVAL); if (!s) return;
   const { hero: h, ask: a } = setSitView(s, RIVAL); const ti = tierFor(s), t = s.tiers[ti];
   const mistake = !!t.wrong && (!t.auto || !!AUD[`sx_${s.id}_${ti}`]) && E.L >= 2 && Math.random() < .35; // auto＝あとから ふやした いいまちがい（声が ある ときだけ）
   showEngine({ no: s.id, main: t.a }, `${NAMES[RIVAL]}の場面${mistake ? "（まちがえる回）" : ""}`);

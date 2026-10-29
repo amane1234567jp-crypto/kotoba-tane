@@ -159,5 +159,13 @@ for st, job in [("souzou", "sz1"), ("tachiba", "tb1"), ("sakiyomi", "sk1"), ("ch
         if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
         else: missing.append(k)
     (OUT / f"{st}.json").write_text(json.dumps(pack, separators=(",", ":"))); print(st, len(pack), round((OUT / f"{st}.json").stat().st_size / 1e6, 2), "MB")
+# ちょうロングの しかけ「rand」（ランダムに とぶ）の ぽにーの 声は、その しかけを つかう ほかの ロングにも 入れる（2026-10-29：でたらめ で 声が なかった）
+for st in ["detarame", "kimochi", "makete", "dekigoto", "jugyou"]:
+    f = OUT / f"{st}.json"
+    if not f.exists(): continue
+    pack = json.loads(f.read_text()); ch = False
+    for k in ["sl_rand_f", "sl_rand_b"]:
+        if k not in pack and (A / f"{k}.mp3").exists(): pack[k] = base64.b64encode((A / f"{k}.mp3").read_bytes()).decode(); ch = True
+    if ch: f.write_text(json.dumps(pack, separators=(",", ":")))
 print("missing", len(missing), missing[:20])
 if missing and "--strict" in sys.argv: sys.exit(1)

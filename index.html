@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="manifest" href="manifest.json">
 <style>body{margin:0}</style>
-<script>const PACK_VER="bd12b70231";{const f0=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&/(^|\/)packs\/[^?]+\.json$/.test(u))u+="?v="+PACK_VER;return f0.call(this,u,o);};}</script>
+<script>const PACK_VER="b5f9b44c61";{const f0=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&/(^|\/)packs\/[^?]+\.json$/.test(u))u+="?v="+PACK_VER;return f0.call(this,u,o);};}</script>
 <script>if("serviceWorker" in navigator&&location.protocol==="https:")addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));</script>
 </head><body>
 <title>ことばのたね すごろく試作</title>
@@ -61928,13 +61928,15 @@ const tierFor = s => Math.min(5, tierOf() + Math.max(0, (SIT_N.get(s.id) || 1) -
 // レベルで 4段（0〜3）。2しゅうめは 1段、3しゅうめ からは 2段 ずらして もっと むずかしく（最大 6段め）
 const tierOf = () => Math.min(5, (E.L <= 2 ? 0 : E.L <= 4 ? 1 : E.L <= 7 ? 2 : 3) + (MODE === "multi" ? 0 : Math.min(2, Math.max(0, (SAVE.lap || 1) - 1))));
 // heroKind: こたえる キャラ（まるシマ・ライバル・みんなモードの人）。相手が じぶんと 同じ場面や、がお・ちゅうが 出てくる場面を よける
+let PICK_NEED_AUDIO = false; // true の あいだは、声が 読みこまれて いる 場面だけ えらぶ（ロングの ライバルの 場面など。2026-10-29）
 function pickSit(place, heroKind = "shima") {
-  const okFor = s => (s.stage || "kousha") === curStage && s.asker !== heroKind
+  const okFor = s => (s.stage || "kousha") === curStage && s.asker !== heroKind && (!PICK_NEED_AUDIO || !!AUD["sq_" + s.id])
     && (heroKind === "shima" || (MODE === "solo" ? s.gaoOk : (heroKind !== "gao" || s.gaoOk)))
     && !(heroKind === "chu" && s.intro === "tag") && !(s.cast && s.cast.includes(heroKind)) && !(s.noHero && s.noHero.includes(heroKind)) && !(s.late && GS.tasks < 4)
     && famOk(s, heroKind) && !(typeof RIVAL !== "undefined" && RIVAL && s.asker === RIVAL && heroKind !== RIVAL); // ライバルは 場面に ださない // ママの 場面は、じぶんの ママが いる 子だけ // やりとりに 出ている キャラは、その場面の 主人公に しない
   if (MODE === "solo" && heroKind !== "shima") { // ひとりで あそぶ ときの ライバルは、こどもが もう やった 場面から えらぶ（こどもの ぶんの あたらしい 場面を へらさない）
     let rp = SITS.filter(s => okFor(s) && sitUsed.has(s.id)); if (!rp.length) rp = SITS.filter(okFor);
+    if (!rp.length) return null; // ライバルに あう 場面が ない（ともだち ロング など）→ 場面なし
     const m = Math.min(...rp.map(x => SIT_N.get(x.id) || 0)); rp = rp.filter(x => (SIT_N.get(x.id) || 0) === m); const s = rp[rnd(rp.length)];
     return famSwap(s, heroKind); }
   let pool = SITS.filter(s => okFor(s) && s.place === place && !sitUsed.has(s.id));
@@ -62189,7 +62191,7 @@ async function runSit(place, heroKind = "shima") {
 
 /* ---------- がおの番の場面（ときどき言いまちがえる） ---------- */
 async function gaoSit(before) {
-  const s = pickSit(zoneOf(P.gao.node), RIVAL);
+  const s = pickSit(zoneOf(P.gao.node), RIVAL); if (!s) return;
   const { hero: h, ask: a } = setSitView(s, RIVAL); const ti = tierFor(s), t = s.tiers[ti];
   const mistake = !!t.wrong && (!t.auto || !!AUD[`sx_${s.id}_${ti}`]) && E.L >= 2 && Math.random() < .35; // auto＝あとから ふやした いいまちがい（声が ある ときだけ）
   showEngine({ no: s.id, main: t.a }, `${NAMES[RIVAL]}の場面${mistake ? "（まちがえる回）" : ""}`);
@@ -71170,6 +71172,17 @@ function iconifyHtml(root) { if (!root) return; const walker = document.createTr
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
   const mo2 = new MutationObserver(() => { const b = document.getElementById("startBox"); if (b && !b.__ic) { b.__ic = true; mo.observe(b, { childList: true, subtree: true, characterData: true }); kick(); } }); mo2.observe(document.body || document.documentElement, { childList: true }); }
 { const st = document.createElement("style"); st.textContent = ".m2title{white-space:nowrap} .m2title svg.emo-ic{margin-right:.15em}"; document.head.appendChild(st); }
+
+/* ================= 2026-10-29 の 直し：ロングの ライバルの 場面 =================
+   ・ともだち ロング（ltomo）：ライバル（がお）に あう 場面が ltomo に なく、pickSit が undefined を かえして 止まって いた → こうしゃの 場面を つかう
+   ・じゅぎょう・ちょうロング など：こうしゃの 場面を つかうが、こうしゃの パックは 読んで いないので、ページに 入って いる 場面（声が ある もの）だけ えらぶ（PICK_NEED_AUDIO） */
+{ const ps = pickSit;
+  pickSit = function (place, heroKind = "shima") {
+    const sl = (typeof isSL === "function" && isSL()) || curStage === "ltomo" || curStage === "jugyou";
+    if (!sl) return ps(place, heroKind);
+    PICK_NEED_AUDIO = true;
+    try { if (curStage === "ltomo") { curStage = "kousha"; try { return ps(place, heroKind); } finally { curStage = "ltomo"; } } return ps(place, heroKind); }
+    finally { PICK_NEED_AUDIO = false; } }; }
 
 </script>
 
