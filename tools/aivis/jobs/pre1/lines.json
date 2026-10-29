@@ -1,0 +1,157 @@
+[
+ {
+  "key": "pre_mtdenwa_pyon",
+  "who": "pyon",
+  "text": "ママ、あのね！"
+ },
+ {
+  "key": "pre_mtdenwa_mii",
+  "who": "mii",
+  "text": "ママ、あのね！"
+ },
+ {
+  "key": "pre_mtdenwa_chu",
+  "who": "chu",
+  "text": "ママ、あのね！"
+ },
+ {
+  "key": "pre_mtdenwa_gao",
+  "who": "gao",
+  "text": "ママ、あのね！"
+ },
+ {
+  "key": "pre_mtdenwa_meebaa",
+  "who": "meebaa",
+  "text": "ママ、あのね！"
+ },
+ {
+  "key": "pre_irete_pyon",
+  "who": "pyon",
+  "text": "ねえ、いれて！"
+ },
+ {
+  "key": "pre_irete_mii",
+  "who": "mii",
+  "text": "ねえ、いれて！"
+ },
+ {
+  "key": "pre_irete_chu",
+  "who": "chu",
+  "text": "ねえ、いれて！"
+ },
+ {
+  "key": "pre_irete_gao",
+  "who": "gao",
+  "text": "ねえ、いれて！"
+ },
+ {
+  "key": "pre_irete_meebaa",
+  "who": "meebaa",
+  "text": "ねえ、いれて！"
+ },
+ {
+  "key": "pre_ocbenkyou_pyon",
+  "who": "pyon",
+  "text": "あそぼう！"
+ },
+ {
+  "key": "pre_ocbenkyou_mii",
+  "who": "mii",
+  "text": "あそぼう！"
+ },
+ {
+  "key": "pre_ocbenkyou_chu",
+  "who": "chu",
+  "text": "あそぼう！"
+ },
+ {
+  "key": "pre_ocbenkyou_gao",
+  "who": "gao",
+  "text": "あそぼう！"
+ },
+ {
+  "key": "pre_ocbenkyou_meebaa",
+  "who": "meebaa",
+  "text": "あそぼう！"
+ },
+ {
+  "key": "pre_ftiyanan_pyon",
+  "who": "pyon",
+  "text": "やめてよ"
+ },
+ {
+  "key": "pre_ftiyanan_mii",
+  "who": "mii",
+  "text": "やめてよ"
+ },
+ {
+  "key": "pre_ftiyanan_chu",
+  "who": "chu",
+  "text": "やめてよ"
+ },
+ {
+  "key": "pre_ftiyanan_gao",
+  "who": "gao",
+  "text": "やめてよ"
+ },
+ {
+  "key": "pre_ftiyanan_meebaa",
+  "who": "meebaa",
+  "text": "やめてよ"
+ },
+ {
+  "key": "pre_kniyadatta_pyon",
+  "who": "pyon",
+  "text": "こげおにぎり！"
+ },
+ {
+  "key": "pre_kniyadatta_mii",
+  "who": "mii",
+  "text": "こげおにぎり！"
+ },
+ {
+  "key": "pre_kniyadatta_chu",
+  "who": "chu",
+  "text": "こげおにぎり！"
+ },
+ {
+  "key": "pre_kniyadatta_gao",
+  "who": "gao",
+  "text": "こげおにぎり！"
+ },
+ {
+  "key": "pre_kniyadatta_meebaa",
+  "who": "meebaa",
+  "text": "こげおにぎり！"
+ },
+ {
+  "key": "pre_tdchigau_pyon",
+  "who": "pyon",
+  "text": "すべりだい しようよ"
+ },
+ {
+  "key": "pre_tdchigau_mii",
+  "who": "mii",
+  "text": "すべりだい しようよ"
+ },
+ {
+  "key": "pre_tdchigau_chu",
+  "who": "chu",
+  "text": "すべりだい しようよ"
+ },
+ {
+  "key": "pre_tdchigau_gao",
+  "who": "gao",
+  "text": "すべりだい しようよ"
+ },
+ {
+  "key": "pre_tdchigau_meebaa",
+  "who": "meebaa",
+  "text": "すべりだい しようよ"
+ },
+ {
+  "key": "pre_snmachi_busy",
+  "who": "nobbo",
+  "text": "……はい、では そういう ことで"
+ }
+]
