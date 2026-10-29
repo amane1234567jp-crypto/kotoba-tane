@@ -8,7 +8,7 @@ const ICON_ITEM = { "🎒": "bag", "⚽": "ball", "🏐": "ball2", "📚": "book
   "🍚": "rice", "🎫": "ticket", "🎟": "ticket", "🎮": "gamebox", "📝": "memo", "📄": "paper", "✂": "scissors", "👕": "shirt", "💉": "syringe", "🚃": "train", "🚄": "train", "🚅": "train", "🚃🚃🚃": "train", "🚗": "car", "🚙": "car", "🚕": "car",
   "🏰": "castle", "🐸": "frog", "🧀": "cheese", "🎂": "cake", "🧁": "cake", "🥢": "chopsticks", "🥢🍲": "chopsticks", "🍽️": "plate", "🪢": "rope", "🃏": "card", "🧴": "bottle", "🥄": "ladle", "🧩": "puzzle", "🪣": "tub", "🧱": "blocks", "🖼": "famdraw", "🔮": "clay" };
 const ICON_CHAR = { "🐻": "kuma", "🦊": "kon", "🐭": "chu", "🐰": "pyon", "🐱": "mii", "🐘": "doshin", "🦒": "nobbo", "🧑‍🏫": "nobbo", "🐯": "tora", "🐤": "piyo", "🐔": "piyo", "👩": "mama", "👨": "papa", "👴": "gaojii", "👵": "miibaa", "👮": "omawari", "🧒": "shima", "👦": "onii",
-  "🧑‍✈️": "ojisan", "🐶": "wanko", "🐕": "wanko", "🦁": "gao", "🐑": "meebaa", "👨‍👧": "papa", "🧑‍🦯": "kamejii", "👥": "pyon", "👫": "pyon" };
+  "🧑‍✈️": "ojisan", "🐶": "wanko", "🐕": "wanko", "🦁": "gao", "🐑": "meebaa", "👨‍👧": "papa", "🧑‍🦯": "kamejii", };
 const IC = { s: (w = 6) => ({ stroke: INK, "stroke-width": w, "stroke-linejoin": "round", "stroke-linecap": "round" }), P: (g, d, fill, w) => el("path", { d, fill: fill || "none", ...IC.s(w) }, g), C: (g, cx, cy, r, fill, w) => el("circle", { cx, cy, r, fill, ...IC.s(w) }, g),
   R: (g, x, y, w, h, fill, rx = 10, sw) => el("rect", { x, y, width: w, height: h, rx, fill, ...IC.s(sw) }, g), E: (g, cx, cy, rx, ry, fill, w) => el("ellipse", { cx, cy, rx, ry, fill, ...IC.s(w) }, g),
   face(g, fill, mouth, eyes) { IC.C(g, 0, 0, 90, fill); (eyes || [[-32, -15], [32, -15]]).forEach(([x, y]) => IC.C(g, x, y, 9, INK, 0)); if (mouth) IC.P(g, mouth, "none", 7); return g; },
@@ -195,3 +195,19 @@ const txtW = (s, size) => [...s].reduce((a, c) => a + (c.charCodeAt(0) < 0x2E80 
     draw(s); let cur = s;
     Object.defineProperty(wrap, "textContent", { get: () => cur, set(v) { cur = v; draw(v); } });
     return wrap; }; }
+// メニューなどの HTML の 文字の 中の 絵文字も、おなじ 絵に（「🤔 かんがえる」「👥 みんなで あそぶ」など）。inline の svg に 置きかえる
+function iconSvgHtml(key) { const bb = iconMeasure(key, gg => iconDrawInto(gg, key)); const s = Math.max(bb.width, bb.height) * 1.08, cx = bb.x + bb.width / 2, cy = bb.y + bb.height / 2;
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); svg.setAttribute("viewBox", `${cx - s / 2} ${cy - s / 2} ${s} ${s}`); svg.setAttribute("class", "emo-ic"); svg.setAttribute("aria-hidden", "true");
+  svg.style.cssText = "display:inline-block;height:1.1em;width:1.1em;vertical-align:-.2em;overflow:visible"; iconDrawInto(el("g", {}, svg), key); return svg; }
+ICON_DRAW["👥"] = g => { IC.person(el("g", { transform: "translate(35 10) scale(.8)" }, g), "#FF8FA3"); IC.person(el("g", { transform: "translate(-35 0) scale(.9)" }, g), "#7FCBF0"); }; ICON_DRAW["👫"] = ICON_DRAW["👥"];
+const ICON_TOKEN_RE = /\p{Extended_Pictographic}️?(?:‍\p{Extended_Pictographic}️?)*⃣?/gu;
+function iconifyHtml(root) { if (!root) return; const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); const nodes = [];
+  while (walker.nextNode()) { const n = walker.currentNode; if (n.parentNode && n.parentNode.tagName !== "SCRIPT" && n.parentNode.tagName !== "STYLE" && ICON_TOKEN_RE.test(n.nodeValue)) nodes.push(n); ICON_TOKEN_RE.lastIndex = 0; }
+  nodes.forEach(n => { const s = n.nodeValue, frag = document.createDocumentFragment(); let last = 0, any = false;
+    for (const m of s.matchAll(ICON_TOKEN_RE)) { const k = iconKey(m[0]); if (!k) continue; any = true; if (m.index > last) frag.append(s.slice(last, m.index)); frag.append(iconSvgHtml(k)); last = m.index + m[0].length; }
+    if (!any) return; if (last < s.length) frag.append(s.slice(last)); n.replaceWith(frag); }); }
+{ let pend = false; const kick = () => { if (pend) return; pend = true; requestAnimationFrame(() => { pend = false; try { iconifyHtml(document.getElementById("startBox")); } catch (e) { } }); };
+  const mo = new MutationObserver(kick); const start = () => { const b = document.getElementById("startBox"); if (b) { mo.observe(b, { childList: true, subtree: true, characterData: true }); kick(); } };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
+  const mo2 = new MutationObserver(() => { const b = document.getElementById("startBox"); if (b && !b.__ic) { b.__ic = true; mo.observe(b, { childList: true, subtree: true, characterData: true }); kick(); } }); mo2.observe(document.body || document.documentElement, { childList: true }); }
+{ const st = document.createElement("style"); st.textContent = ".m2title{white-space:nowrap} .m2title svg.emo-ic{margin-right:.15em}"; document.head.appendChild(st); }
