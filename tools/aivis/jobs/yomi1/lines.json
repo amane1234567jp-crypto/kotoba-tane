@@ -1,0 +1,372 @@
+[
+ {
+  "key": "csn_a_にん_17",
+  "who": "chu",
+  "text": "じゅうななにん！"
+ },
+ {
+  "key": "csn_a_にん_7",
+  "who": "chu",
+  "text": "ななにん！"
+ },
+ {
+  "key": "dt_ev_rest",
+  "who": "kamejii",
+  "text": "いっしょに おひるね するでちゅ。つぎは 1かい やすみでちゅ"
+ },
+ {
+  "key": "gtk_m_10",
+  "who": "gao",
+  "text": "じゅっぷん"
+ },
+ {
+  "key": "gtk_mae_10",
+  "who": "gao",
+  "text": "じゅっぷんまえ"
+ },
+ {
+  "key": "jka_kuma_l_hiya_manju",
+  "who": "kuma",
+  "text": "かった！ きょうから きみは ひやおまんじゅう！"
+ },
+ {
+  "key": "jka_tora_l_hiya_manju",
+  "who": "tora",
+  "text": "かった！ きょうから きみは ひやおまんじゅう！"
+ },
+ {
+  "key": "lk_fbutsukaru_t0",
+  "who": "tora",
+  "text": "いてっ！"
+ },
+ {
+  "key": "lk_fitai_t0",
+  "who": "doshin",
+  "text": "いてっ！ ころんじゃった"
+ },
+ {
+  "key": "lk_fkaeri_t0",
+  "who": "doshinpapa",
+  "text": "もう ごじだね。おうちの ひとが しんぱい するよ"
+ },
+ {
+  "key": "lk_nkame_t",
+  "who": "tora",
+  "text": "しってる？ カメって ひゃくさいまで いきるんだって"
+ },
+ {
+  "key": "lk_nkyouryuu_r",
+  "who": "doshin",
+  "text": "ティラノサウルス！ つよいんだよ"
+ },
+ {
+  "key": "lk_nneko_t",
+  "who": "doshin",
+  "text": "うちで ねこを かいはじめたんだ"
+ },
+ {
+  "key": "lk_nsakaagari_t",
+  "who": "kuma",
+  "text": "さかあがり、できるように なったんだ"
+ },
+ {
+  "key": "lk_numi_r",
+  "who": "kuma",
+  "text": "すなで おしろを つくったよ！"
+ },
+ {
+  "key": "sg_abkutsu_5",
+  "who": "mii",
+  "text": "わかりました。くつを ぬいで そろえてから、あそびに いきますね"
+ },
+ {
+  "key": "sg_abnagenai_5",
+  "who": "mii",
+  "text": "ボールは なげないで。ほかの こに あたったら けがを するよ"
+ },
+ {
+  "key": "sg_aboogoe_4",
+  "who": "mii",
+  "text": "ほかの ひとも いるから、ちいさい こえで はなそう"
+ },
+ {
+  "key": "sg_bgseki_4",
+  "who": "pyon",
+  "text": "せきが あいてないから、あくまで ここで まとう"
+ },
+ {
+  "key": "sg_bgseki_5",
+  "who": "pyon",
+  "text": "いまは せきが ぜんぶ うまってるから、あくまで たって まってよう"
+ },
+ {
+  "key": "sg_bsie_2",
+  "who": "gao",
+  "text": "テーブルの したに もぐる"
+ },
+ {
+  "key": "sg_bsie_3",
+  "who": "gao",
+  "text": "ママ、じしんだ！ テーブルの したに もぐろう"
+ },
+ {
+  "key": "sg_bsjishin_1",
+  "who": "gao",
+  "text": "つくえの したに もぐる"
+ },
+ {
+  "key": "sg_bsjishin_2",
+  "who": "gao",
+  "text": "つくえの したで あたまを まもる"
+ },
+ {
+  "key": "sg_bynetsu_0",
+  "who": "chu",
+  "text": "38ど"
+ },
+ {
+  "key": "sg_bynetsu_1",
+  "who": "chu",
+  "text": "38どです"
+ },
+ {
+  "key": "sg_bynetsu_2",
+  "who": "chu",
+  "text": "38ど ありました"
+ },
+ {
+  "key": "sg_bynetsu_3",
+  "who": "chu",
+  "text": "けさ はかったら、38ど ありました"
+ },
+ {
+  "key": "sg_bynetsu_4",
+  "who": "chu",
+  "text": "けさ はかったら 38ど ありました。からだが あついです"
+ },
+ {
+  "key": "sg_bynetsu_5",
+  "who": "chu",
+  "text": "けさ はかったら 38ど あって、さむくて ふるえて いました"
+ },
+ {
+  "key": "sg_hshamigaki_3",
+  "who": "gao",
+  "text": "あさごはんの あとと、ねる まえに みがいて います"
+ },
+ {
+  "key": "sg_hshamigaki_4",
+  "who": "gao",
+  "text": "あさごはんの あとと ねる まえに、ママと いっしょに みがいて います"
+ },
+ {
+  "key": "sg_hshamigaki_5",
+  "who": "gao",
+  "text": "あさごはんの あとと ねる まえに みがいて、よるは ママに しあげみがきを して もらいます"
+ },
+ {
+  "key": "sg_iechigau_2",
+  "who": "chu",
+  "text": "さきに おえかき、つぎは ブロックね"
+ },
+ {
+  "key": "sg_iechigau_3",
+  "who": "chu",
+  "text": "いいよ。さきに おえかきして、つぎは ブロックに しよう"
+ },
+ {
+  "key": "sg_iechigau_5",
+  "who": "chu",
+  "text": "おえかきも たのしそうだね。さきに おえかきして、そのあと ブロックで あそぼう"
+ },
+ {
+  "key": "sg_khhayai_5",
+  "who": "kon",
+  "text": "すみません、はやくて ききとれませんでした。なんページを ひらけば いいですか？"
+ },
+ {
+  "key": "sg_knsasoi_5",
+  "who": "gao",
+  "text": "よりみちは、がっこうの きまりで だめだよ。いちど いえに かえってから、おうちの ひとに いって あそぼう"
+ },
+ {
+  "key": "sg_knurayamashii_3",
+  "who": "gao",
+  "text": "いえに かえってから、おうちの ひとと おいでよ"
+ },
+ {
+  "key": "sg_knurayamashii_4",
+  "who": "gao",
+  "text": "いちど いえに かえってから、おうちの ひとと いっしょに おいでよ"
+ },
+ {
+  "key": "sg_knurayamashii_5",
+  "who": "gao",
+  "text": "ちゅうくんも、いちど いえに かえってから、おうちの ひとと いっしょに おいでよ。まってるね"
+ },
+ {
+  "key": "sg_krkouen_2",
+  "who": "mii",
+  "text": "ざんねん。おうちで あそぶ"
+ },
+ {
+  "key": "sg_krkouen_3",
+  "who": "mii",
+  "text": "わかった。じゃあ、おうちで ブロックを する"
+ },
+ {
+  "key": "sg_krkouen_4",
+  "who": "mii",
+  "text": "ざんねんだけど、わかった。おうちで ブロックで あそぶね"
+ },
+ {
+  "key": "sg_krkouen_5",
+  "who": "mii",
+  "text": "ざんねんだけど、しかたないね。おうちで ブロックを して、はれたら こうえんに いこう"
+ },
+ {
+  "key": "sg_ocfuku_1",
+  "who": "mii",
+  "text": "ほかの ふくが いい"
+ },
+ {
+  "key": "sg_ocgame2_2",
+  "who": "mii",
+  "text": "おにいちゃん、つぎ ぼくにも やらせて"
+ },
+ {
+  "key": "sg_snjunban_2",
+  "who": "pyon",
+  "text": "せんせい、つぎは ぼくですか"
+ },
+ {
+  "key": "sg_snjunban_3",
+  "who": "pyon",
+  "text": "せんせい、つぎは ぼくの ばんですか"
+ },
+ {
+  "key": "sg_snjunban_5",
+  "who": "pyon",
+  "text": "せんせい、つぎは ぼくの ばんですか。どこから よめば いいですか"
+ },
+ {
+  "key": "sg_snnimotsu_5",
+  "who": "pyon",
+  "text": "こうちょうせんせい、おもそうですね。はんぶん もちましょうか"
+ },
+ {
+  "key": "sg_szfuku_4",
+  "who": "pyon",
+  "text": "かわいいけど、くびの ところが チクチクして いやなんだ"
+ },
+ {
+  "key": "sg_szhitogomi_2",
+  "who": "pyon",
+  "text": "ひとが おおくて つかれた"
+ },
+ {
+  "key": "sg_szhitogomi_4",
+  "who": "pyon",
+  "text": "ひとが おおくて つかれたから、すこし すわって やすみたい"
+ },
+ {
+  "key": "sg_tdchigau_2",
+  "who": "chu",
+  "text": "さきに すなば、つぎは すべりだいね"
+ },
+ {
+  "key": "sg_tdchigau_4",
+  "who": "chu",
+  "text": "さきに どしんくんの あそびを して、つぎは ぼくの あそびに しよう"
+ },
+ {
+  "key": "sg_yasumu_5",
+  "who": "pyon",
+  "text": "たくさん はしって つかれたので、ひかげで やすんでも いいですか"
+ },
+ {
+  "key": "sq_abosanai",
+  "who": "kon",
+  "text": "はやく はやく〜！ いけいけ〜！"
+ },
+ {
+  "key": "sq_kromukae",
+  "who": "nobbo",
+  "text": "おうちの ひとの おむかえが、すこし おそく なるそうですよ"
+ },
+ {
+  "key": "sq_sknani",
+  "who": "chu",
+  "text": "ふんふん〜♪"
+ },
+ {
+  "key": "sr_abosanai",
+  "who": "kon",
+  "text": "あ、ごめん〜。まってるね"
+ },
+ {
+  "key": "sr_bgseki",
+  "who": "mama",
+  "text": "そうね。あくまで まちましょう"
+ },
+ {
+  "key": "sr_bynetsu",
+  "who": "wanko",
+  "text": "38どですか。すこし たかいですね"
+ },
+ {
+  "key": "sr_hkshizuka",
+  "who": "kon",
+  "text": "あ……そっか。ごめん〜"
+ },
+ {
+  "key": "st_enogu_0",
+  "who": "chu",
+  "text": "かぞくの えを かいて いるんだ。ママと、パパと……"
+ },
+ {
+  "key": "sx_bsie_2",
+  "who": "gao",
+  "text": "テーブルを したに もぐる"
+ },
+ {
+  "key": "sx_bynetsu_2",
+  "who": "chu",
+  "text": "38どを ありました"
+ },
+ {
+  "key": "sx_gkitai_3",
+  "who": "pyon",
+  "text": "ぶつかって、あしを いたいです"
+ },
+ {
+  "key": "sx_iechigau_2",
+  "who": "chu",
+  "text": "さきを おえかき、つぎは ブロックね"
+ },
+ {
+  "key": "sx_krkouen_2",
+  "who": "mii",
+  "text": "ざんねん。おうちを あそぶ"
+ },
+ {
+  "key": "sx_szhitogomi_2",
+  "who": "pyon",
+  "text": "ひとを おおくて つかれた"
+ },
+ {
+  "key": "szg_jikan",
+  "who": "gao",
+  "text": "ほんとだ、もう こんな じかん。……さて、つづき あそぼうっと"
+ },
+ {
+  "key": "szr_tsumiki",
+  "who": "chu",
+  "text": "ほんとだ。そっと そっと……できた！"
+ },
+ {
+  "key": "kmr_toriai_kon",
+  "who": "kon",
+  "text": "うん、いいよ。じゅんばんこね"
+ }
+]
