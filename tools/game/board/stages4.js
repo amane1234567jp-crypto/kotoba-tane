@@ -212,7 +212,7 @@ Object.assign(BOARD_BG, {
 });
 BLOCK_DEF.ouchi1 = { who: "onii", sleep: false, intro: ["p_blk_ouchi1", "おにいちゃんが ろうかで まんがを よんで いるよ"], say: ["blk_ouchi1", "おにいちゃん、ちょっと とおして"], to: "おにいちゃんに いおう",
   keys: [["とおして", "通して"]], res: ["rs_ouchi1", "おっと、ごめん ごめん。どうぞ"] };
-BLOCK_DEF.tomodachi1 = { who: "kuma", sleep: false, intro: ["p_blk_tomodachi1", "くまくんが みちに すわって いるよ"], say: ["blk_tomodachi1", "となりを とおっても いい？"], to: "くまたに いおう",
+BLOCK_DEF.tomodachi1 = { who: "kuma", sleep: false, intro: ["p_blk_tomodachi1", "くまくんが みちに すわって いるよ"], say: ["blk_tomodachi1", "となりを とおっても いい？"], to: "くまくんに いおう",
   keys: [["とおって", "通って"], ["いい", "良い"]], res: ["rs_tomodachi1", "うん、どうぞ"] };
 BLOCK_DEF.sensei1 = { who: "meebaa", sleep: false, intro: ["p_blk_sensei1", "めえばあせんせいが いるよ。あいさつ しよう！"], say: ["blk_sensei1", "めえばあせんせい、こんにちは"], to: "めえばあせんせいに いおう",
   keys: [["こんにちは", "今日は"]], res: ["rs_sensei1", "はい、こんにちは。げんきね"] };

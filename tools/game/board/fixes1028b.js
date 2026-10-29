@@ -73,7 +73,7 @@ const PRE_X = {
   mtdenwa: { raise: true, text: "ママ、あのね！" },
   irete: { text: "ねえ、いれて！" }, chime: { bell: true }, ocbenkyou: { text: "あそぼう！" },
   ftiyanan: { text: "やめてよ" }, kniyadatta: { text: "こげおにぎり！" }, tdchigau: { text: "すべりだい しようよ" }, tdnakanaori: { text: "……" },
-  hkknock: { knock: true }, shitsurei: { knock: true }, snmachi: { busy: true },
+  hkknock: { knock: true }, shitsurei: { knock: true }, snmachi: { busy: true }, mtshitsumon: { raise: true },
 };
 { const pi = playIntro; playIntro = async function (s, h, a) {
     const p = PRE_X[s.id]; if (!p) return pi(s, h, a);
@@ -82,5 +82,6 @@ const PRE_X = {
     if (p.knock) { for (let i = 0; i < 2; i++) later(i * 260, () => noise(.08, 600, .4)); say(h, "コンコン"); await sleep(1100); unsay(); }
     if (p.bell) { for (let i = 0; i < 6; i++) later(i * 140, () => blip(1800, 1800, .08, "square")); say(h, "（チャイム）"); await sleep(1000); unsay(); }
     if (p.raise) { h.armR.t = -160; markAbove(h, "ex"); later(1500, () => h.armR.t = 0); }
-    if (p.text) { const k = AUD[`pre_${s.id}_${h.kind}`] ? `pre_${s.id}_${h.kind}` : `pre_${s.id}`; await speak(h, k, p.text); await sleep(200); } // 声を つける（2026-10-29：ひらがなが 読めない 子にも わかるように）。その 子の 声（まるシマは AivisSpeech「まい」）。ない ときは ぽにーの 声
+    if (p.text && /^[…・.\s]+$/.test(p.text)) { say(h, p.text); await sleep(1100); unsay(); await sleep(200); } // 「……」（だまって いる）は 声なし
+    else if (p.text) { const k = AUD[`pre_${s.id}_${h.kind}`] ? `pre_${s.id}_${h.kind}` : `pre_${s.id}`; await speak(h, k, p.text); await sleep(200); } // 声を つける（2026-10-29：ひらがなが 読めない 子にも わかるように）。その 子の 声（まるシマは AivisSpeech「まい」）。ない ときは ぽにーの 声
     return r; }; }

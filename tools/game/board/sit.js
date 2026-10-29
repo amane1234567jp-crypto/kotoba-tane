@@ -242,7 +242,7 @@ async function resolve(s, h, a, ok) {
   if (PRE[s.id]) await PRE[s.id](h, a);
   await speak(a, "sr_" + s.id + (s.vk || ""), s.res);
   if (POST[s.id]) await POST[s.id](h, a);
-  else if (RESOLVE[s.item]) await RESOLVE[s.item](h, a); else if (ok) (a.kind === "kamejii" ? playMove(a, "nod") : SPECIAL[a.kind](a));
+  else if (RESOLVE[s.item]) await RESOLVE[s.item](h, a); else if (ok) (a.kind !== "kamejii" && typeof SPECIAL[a.kind] === "function" ? SPECIAL[a.kind](a) : playMove(a, "nod")); // 2026-10-30：とくべつな よろこびかたが ない キャラ（おまわりさん・てんいんさん など）で 止まって いた
   await sleep(500); // 最後の「おぼえる物カード」は出さない（ややこしいので）
 }
 async function runSit(place, heroKind = "shima") {
