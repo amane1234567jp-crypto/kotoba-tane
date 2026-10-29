@@ -6,7 +6,7 @@ const S11L = ["souzou", "tachiba", "sakiyomi", "chotto", "aite"];
 const S11_READY = true;
 const AS_READY = true; /* あいての サイン：声が そろうまで false */
 Object.assign(RIVAL_OF, { souzou: "gao", tachiba: "gao", sakiyomi: "gao", chotto: "gao", aite: "gao" });
-STAGES.push(/* 2026-10-29：「そうぞう たんてい」「さきよみ」は カット（メニューから はずす。中身は のこす） */ { id: "tachiba", name: "じぶんの たちば", icon: "🎩", ready: S11_READY }, { id: "chotto", name: "ちょっと まって", icon: "🛑", ready: S11_READY }, { id: "aite", name: "あいての サイン", icon: "🤝", ready: AS_READY });
+STAGES.push(/* 2026-10-29：「そうぞう たんてい」「さきよみ」「ちょっと まって」は カット（メニューから はずす。中身は のこす） */ { id: "tachiba", name: "じぶんの たちば", icon: "🎩", ready: S11_READY }, { id: "aite", name: "あいての サイン", icon: "🤝", ready: AS_READY });
 ["sz", "tb", "sk", "cm", "as"].forEach(k => ASK_ON_STAGE.add(k));
 const S11_N = new Map(), S11_R = new Set(), AS_GOT = [];
 { const ap = applyStage; applyStage = function (id, ...a) { if (S11L.includes(id)) { S11_N.clear(); S11_R.clear(); AS_GOT.length = 0; } return ap(id, ...a); }; }
