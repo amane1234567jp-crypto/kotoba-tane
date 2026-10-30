@@ -58,3 +58,4 @@ J = R / "tools/aivis/jobs/fix8"; J.mkdir(parents=True, exist_ok=True)
 (J / "lines.json").write_text(json.dumps(L, ensure_ascii=False, indent=1)); (J / "yomi.json").write_text(json.dumps(Y, ensure_ascii=False, indent=1))
 Path("/tmp/pony_fix8.json").write_text(json.dumps(pony, ensure_ascii=False))
 print(len(L), "aivis（うち ずれ", n2, "）", len(pony), "pony")
+# 2026-10-31：じてんしゃ「くるま」（jtkuruma）の 段4「うしろを みてから また はしるね」は、くるまは まえから きたので おかしい → 「ひだりの はしに よって、とまって まつね」（sits.json を 直接 なおした。声は jobs/fix9）
