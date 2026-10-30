@@ -8,7 +8,7 @@ const S10_READY = true; /* 声が そろうまで「じゅんびちゅう」 */
 STAGES.push(
   { id: "kirikae", name: "きりかえ", icon: "🔄", ready: S10_READY }, { id: "kikikaesu", name: "ききかえす", icon: "👂", ready: S10_READY },
   /* 2026-10-30：「まつ・こえの ものさし」は カット（メニューから はずす。中身は のこす） */ { id: "sos", name: "からだの SOS", icon: "🙉", ready: S10_READY },
-  { id: "junban", name: "じゅんばんに いおう", icon: "🔢", ready: S10_READY }, { id: "kotowaru", name: "ことわる", icon: "✋", ready: S10_READY },
+  /* 2026-10-30：「じゅんばんに いおう」も カット */ { id: "kotowaru", name: "ことわる", icon: "✋", ready: S10_READY },
   /* 2026-10-30：「じしん・かじ」は カット（メニューから はずす。中身は のこす） */  /* 2026-10-30：「でんわ」も カット */);
 const S10 = SITS.filter(s => S10L.includes(s.stage));
 S10.forEach(s => ASK_ON_STAGE.add(s.intro));

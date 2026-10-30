@@ -1,6 +1,6 @@
 /* ================= 「まねっこ しちゃった」ショートコース（manekko、2026-10-25） =================
    台本は sit/manekko_gen.py（manekko_data.js）。会話の「ながれ」を まなぶ：1つの 場面で 4かい やりとりが つづく。
-   ターンごとに あいての ことば → カードで いいかたを えらぶ（まずい いいかたは あいての かおが くもる）→ いい いいかたを こえで いう。
+   ターンごとに あいての ことば → ぽにー「なんて こたえる？」→ お手本 → こえで いう（2026-10-30 まで：カードで いいかたを えらんで いた）。
    さいごまで つながると、あいてが「いっしょに あそぼう」と さそって くれる（ごほうび）。きもちメーター（😠😟🙂😄）で あいての かおを みせる。
    ライバルは がお（場面には ださない。がおの ばんは、がおが まずい いいかたを して、こどもが おしえる）。 */
 const S13L = ["manekko"];
@@ -8,6 +8,7 @@ const S13_READY = true; /* 声が そろうまで false */
 Object.assign(RIVAL_OF, { manekko: "gao" });
 STAGES.push({ id: "manekko", name: "まねっこ しちゃった", icon: "🙊", ready: S13_READY });
 ASK_ON_STAGE.add("mk");
+const MK_INTRO2 = "だれかの まねを して、ちゅうい されちゃう ことって あるよね。あいての はなしを よく きいて、こたえて みよう"; // 2026-10-30：カードを やめたので せつめいも かえた
 const MNK_N = new Map(); let MNK_FRIENDS = 0, MNK_FIRST = true;
 { const ap = applyStage; applyStage = function (id, ...a) { if (S13L.includes(id)) { MNK_N.clear(); MNK_FRIENDS = 0; MNK_FIRST = true; } return ap(id, ...a); }; }
 const mnkName = k => ({ tora: "とらおくん", kuma: "くまくん", panna: "ぱんなちゃん", nobbo: "せんせい" })[k] || NAMES[k];
@@ -78,7 +79,7 @@ async function mnkRun(hero, first) {
   showEngine(null, `まねっこ（${sc.id}・${sc.flow}・段${t + 1}）`);
   const { hero: h, ask: a } = setSitView({ id: "mk_" + sc.id, place: sc.place, asker: sc.ptr, intro: "mk" }, hero); a.dx.v = a.dx.t = 0; mnkSet(sc);
   enter(h); await sleep(900);
-  if (first) await speak(C.pony, "mk_intro", MNK.txt.mk_intro);
+  if (first) await speak(C.pony, "mk_intro2", MK_INTRO2);
   // まねされた 子が やって みせる → （help でなければ）こどもが まねする／（help なら）あいてが まねする
   if (sc.anim === "cut") await mnkLine(sc, h, a, hero, true); else {
   const m = xtra(sc.model, 900, (KID_S[sc.model] || 1) * .82); m.dx.v = m.dx.t = 0;
@@ -94,13 +95,10 @@ async function mnkRun(hero, first) {
     if (tu.who === "nobbo") { if (!tch) { tch = xtra("nobbo", 820, (ASK_AT.nobbo || [0, 1])[1] * .95); tch.dx.v = 600; tch.dx.t = 0; hold(tch, "run", .9); await sleep(900); mt.set(2, "nobbo"); } sp = tch; }
     else if (tch) mt.set(mood, sc.ptr);
     await speak(sp, `mk_${sc.id}_t${i}`, tu.say);
-    await speak(C.pony, help && i === 0 ? "mk_help" : "mk_pick", help && i === 0 ? MNK.txt.mk_help : MNK.txt.mk_pick);
-    const opts = shuffle([{ t: tu.good[0], good: 1 }, ...tu.bad.map(([b, r], j) => ({ t: b, r, j }))]);
-    const ch = mnkChoose(opts, async o => { wrong++; log.push(`✖${o.t}`); const v = sp === tch ? 1 : (mood = Math.max(0, mood - 1)); if (sp !== tch) { mt.set(mood); face(a, mood); } else { mt.set(1); playMove(tch, "think"); }
-      await speak(sp, `mk_${sc.id}_t${i}_b${o.j}`, o.r); await speak(C.pony, "mk_retry", MNK.txt.mk_retry); });
-    await ch.done; ch.g.remove();
+    // 2026-10-30：カードで えらぶのを やめて、ふつうに やりとりする（ロールプレイ）。ぽにーが きいて → お手本 → こどもが いう
+    await speak(C.pony, help && i === 0 ? "p_help" : "p_ask", help && i === 0 ? "なんて いって あげる？" : "なんて こたえる？");
+    const r = await kmSay(h, `mk_${sc.id}_t${i}_g${lv}`, tu.good[lv], tu.keys[lv], help ? "いって あげよう" : "こたえよう"); if (r.ok) okN++; log.push(`${r.ok ? "○" : "×"}${r.heard}`);
     if (sp === tch) mt.set(3); else { mood = Math.min(3, mood + 1); mt.set(mood); face(a, mood); }
-    const r = await kmSay(h, `mk_${sc.id}_t${i}_g${lv}`, tu.good[lv], tu.keys[lv], help ? "いって あげよう" : "いって みよう"); if (r.ok) okN++; log.push(`${r.ok ? "○" : "×"}${r.heard}`);
   }
   // さいごまで つながった：あいてが さそって くれる
   if (tch) { tch.dx.t = -900; } mt.set(3, sc.ptr); mood = 3; a.sadMouth = false; joy(a); await speak(a, `mk_${sc.id}_end`, sc.end);
