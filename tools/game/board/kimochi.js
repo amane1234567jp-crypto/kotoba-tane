@@ -36,7 +36,7 @@ BOARD_BG[KCS] = L => {
   Y.forEach((y, r) => { el("rect", { x: 30, y: y - 70, width: 1540, height: 140, rx: 70, fill: C4[r], ...S6(4) }, L);
     const x = r === 3 ? 1520 : 80; /* おでかけ は ゴールの はんたいがわ */ txt(L, x, y + 6, I4[r], 46, { "text-anchor": "middle" }); txt(L, x, y + 44, N4[r], N4[r].length > 3 ? 17 : 20, { "text-anchor": "middle" }); });
   [["💗", 150, 300], ["😊", 400, 330], ["😳", 1210, 320], ["😢", 1400, 300], ["😨", 300, 240], ["🤗", 1320, 230]].forEach(([e, x, y]) => txt(L, x, y, e, 54, { "text-anchor": "middle", opacity: .85 }));
-  el("rect", { x: 540, y: 212, width: 520, height: 80, rx: 22, fill: "#E86A9A", ...S6(5) }, L); txt(L, 800, 266, "💗 きもちの だいぼうけん", 38, { "text-anchor": "middle", fill: "#FFFFFF" });
+  { const tg = el("g", { "data-top": 1 }, L); el("rect", { x: 960, y: 38, width: 440, height: 72, rx: 22, fill: "#E86A9A", ...S6(5) }, tg); txt(tg, 1180, 86, "💗 きもちの だいぼうけん", 32, { "text-anchor": "middle", fill: "#FFFFFF" }); } // コースの なまえは 上の バーに（2026-10-31）
 };
 /* ---------- 声の パック ---------- */
 { const lp = loadPack; loadPack = async function (id) { const r = await lp(id); if (id !== KCS) return r;

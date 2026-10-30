@@ -40,7 +40,8 @@ NEWL.forEach(sid => { BOARD_BG[sid] = L => {
   (dk ? [["📖", 150, 300], ["✏️", 400, 330], ["🗓", 1210, 320], ["💬", 1400, 300]] : [["💪", 150, 300], ["🌈", 400, 330], ["🏅", 1210, 320], ["✊", 1400, 300]]).forEach(([e, x, y]) => txt(L, x, y, e, 54, { "text-anchor": "middle", opacity: .85 }));
   Object.entries(EVENTS[sid] || {}).forEach(([id, [type]]) => { const to = slWarpTo(sid, id, type); if (!to || !NODES[id] || !NODES[to]) return; const [x1, y1] = NODES[id], [x2, y2] = NODES[to];
     el("path", { d: `M${x1} ${y1} Q${(x1 + x2) / 2 + 160} ${(y1 + y2) / 2} ${x2} ${y2}`, fill: "none", stroke: "#8E5BD6", "stroke-width": 6, "stroke-dasharray": "16 14", opacity: .6 }, L); });
-  el("rect", { x: 540, y: 212, width: 520, height: 80, rx: 22, fill: dk ? "#3E7FD6" : "#F08A3C", ...S6(5) }, L); txt(L, 800, 266, `${T.icon} ${T.name}`, 38, { "text-anchor": "middle", fill: "#FFFFFF" }); }; });
+  // コースの なまえは 上の バーに ちいさく（2026-10-31。まえは 盤の 上に 大きく あって、そのぶん 盤が ちいさかった）
+  { const tg = el("g", { "data-top": 1 }, L); el("rect", { x: 960, y: 38, width: 440, height: 72, rx: 22, fill: dk ? "#3E7FD6" : "#F08A3C", ...S6(5) }, tg); txt(tg, 1180, 86, `${T.icon} ${T.name}`, 32, { "text-anchor": "middle", fill: "#FFFFFF" }); } }; });
 /* ---------- 声の パック ---------- */
 { const lp = loadPack; loadPack = async function (id) { const r = await lp(id); if (!NEWL.includes(id)) return r;
     if (!PACK.loaded[id]) { try { const q = await fetch(`packs/${id}.json`, { cache: "no-cache" }); if (q.ok) { const d = await q.json(); Object.keys(d).forEach(k => AUD[k] = "data:audio/mpeg;base64," + d[k]); PACK.loaded[id] = Object.keys(d); } } catch (e) { /* なくても あそべる */ } }

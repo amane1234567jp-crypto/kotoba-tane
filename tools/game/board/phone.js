@@ -26,7 +26,7 @@ addEventListener("resize", () => setTimeout(phDecide, 60)); addEventListener("or
 phDecide(); setTimeout(phDecide, 500);
 const phCam = () => `translate(${(-PH.E).toFixed(1)} ${(-PH.cy).toFixed(1)}) scale(${PH.k.toFixed(4)})`;
 const phFeet = c => [c.x + 200 * c.s, c.y + (c.base || 0) * c.s];
-{ const _say = say; say = function (c, text) { _say(c, text); PH.bubCam = !!(c && BOARD_PIECES.includes(c)); bub.setAttribute("transform", PH.bubCam && PH.was === "cam" ? phCam() : "");
+{ const _say = say; say = function (c, text) { _say(c, text); PH.bubCam = !!(c && BOARD_PIECES.includes(c)); PH.bubC = c; bub.setAttribute("transform", PH.bubCam && PH.was === "cam" ? phCam() : "");
     if (phSceneMode()) { const y = +bubR.getAttribute("y") || 0; if (y < PH.crop + 10) bub.setAttribute("transform", `translate(0 ${(PH.crop + 10 - y).toFixed(1)})`); } }; }
 { const _st = showTask; showTask = function (text, tag, cy = 230) { return _st(text, tag, PH.on && view !== "board" && view !== "menu" && cy < 500 ? cy + PH.crop : cy); }; }
 function phTick() {
@@ -34,7 +34,15 @@ function phTick() {
   const board = boardLayer.style.display !== "none" && view !== "menu";
   const cam = false; // カメラの おいかけは やめた（2026-10-28）。盤は board_wide.js で 横に 伸ばして ぜんぶ 見せる
   phViewBox(view === "menu" && (PH.on || document.body.classList.contains("phoneport")) ? "cover" : phSceneMode() ? "scene" : "wide");
-  if (cam) {
+  // 2026-10-31：盤の マスが 画面に たいして ちいさい ときは、盤ぜんたいを 画面いっぱいまで 大きく する（BW.fit。コマも いっしょに 大きく）
+  const fit = board && view === "board" && typeof BW !== "undefined" && BW.fit ? BW.fit : null;
+  if (fit) { BOARD_PIECES.forEach(c => { if (c && c.root && c.root.parentNode !== camChars) camChars.appendChild(c.root); });
+    const t = `translate(${fit.tx.toFixed(1)} ${fit.ty.toFixed(1)}) scale(${fit.s.toFixed(4)})`;
+    if (PH.was !== "fit" || PH.fitT !== t) { [boardLayer, camChars, fxLayer].forEach(g => g.setAttribute("transform", t)); PH.fitT = t; if (PH.was !== "fit" && typeof C !== "undefined" && C.pony) bwPony(); }
+    bub.setAttribute("transform", PH.bubCam ? phFitBub() : ""); PH.was = "fit";
+    // ロングコース（マスが 画面の 左はしまで ある）では、ぽにーは しゃべる ときだけ 出す
+    if (typeof C !== "undefined" && C.pony) { const o = fit.long && speaker !== C.pony ? "0" : ""; if (C.pony.root.style.opacity !== o) { C.pony.root.style.transition = "opacity .25s"; C.pony.root.style.opacity = o; } } }
+  else if (cam) {
     BOARD_PIECES.forEach(c => { if (c && c.root && c.root.parentNode !== camChars) camChars.appendChild(c.root); });
     // うごいた コマを おいかける（とまって いる ときは さいごに うごいた コマ。さいしょは こども）
     let moved = null; BOARD_PIECES.forEach(c => { if (!c || c.root.style.display === "none") return; const p = phFeet(c), q = PH.last.get(c); if (q && Math.hypot(p[0] - q[0], p[1] - q[1]) > .8) moved = c; PH.last.set(c, p); });
@@ -47,14 +55,15 @@ function phTick() {
     //   盤の 上に いると マスに かさなるので、しゃべって いる ときだけ 出す
     if (typeof C !== "undefined" && C.pony && view === "board") { place(C.pony, -PH.E + 120, 985, .36); C.pony.root.style.display = speaker === C.pony ? "" : "none"; }
     PH.was = "cam";
-  } else if (PH.was !== "flat") {
-    [boardLayer, camChars, fxLayer, bub].forEach(g => g.removeAttribute("transform")); PH.was = "flat";
-    if (view === "board" && typeof C !== "undefined" && C.pony) place(C.pony, 200, 372, .42);
+  } else if (!fit && PH.was !== "flat") {
+    [boardLayer, camChars, fxLayer, bub].forEach(g => g.removeAttribute("transform")); PH.was = "flat"; PH.fitT = null;
+    if (typeof C !== "undefined" && C.pony) C.pony.root.style.opacity = "";
+    if (view === "board" && typeof C !== "undefined" && C.pony) bwPony();
   }
   // わかれみちの やじるし（HTML の ボタン）を カメラに あわせる
   stage.querySelectorAll(".arrow[data-wx]").forEach(b => {
     const x = +b.dataset.wx, y = +b.dataset.wy, r = svg.getBoundingClientRect(), s = r.height / 1000;
-    const X = cam ? -PH.E + x * PH.k : x, Y = cam ? y * PH.k - PH.cy : y;
+    const X = cam ? -PH.E + x * PH.k : fit ? fit.tx + x * fit.s : x, Y = cam ? y * PH.k - PH.cy : fit ? fit.ty + y * fit.s : y;
     const sr = stage.getBoundingClientRect();
     b.style.left = (r.left - sr.left + (X + PH.E) * s - b.offsetWidth / 2) + "px"; b.style.top = (r.top - sr.top + Y * s - b.offsetHeight * .5) + "px";
   });

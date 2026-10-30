@@ -29,7 +29,7 @@ BOARD_BG[OD] = L => {
   [["🏠", 260, 870], ["🏡", 520, 870], ["🐕", 760, 870], ["🏪", 1000, 870], ["🌷", 1220, 870], ["🏬", 380, 710], ["🍦", 640, 710], ["📮", 880, 710], ["🏫", 1130, 710], ["🌳", 300, 550], ["⛲", 560, 550], ["🌳", 820, 550], ["🛝", 1000, 550], ["🦆", 420, 385], ["🌉", 980, 385]]
     .forEach(([e, x, y]) => txt(L, x, y + 20, e, 54, { "text-anchor": "middle", opacity: .9 }));
   [["🚶 あるいて", 60, 860], ["🚲 じてんしゃ", 1190, 545]].forEach(([t, x, y]) => { el("rect", { x: x - 10, y: y - 34, width: 40 + t.length * 22, height: 46, rx: 23, fill: "#FFFFFF", ...S6(3) }, L); txt(L, x + 8, y, t, 26); });
-  el("rect", { x: 160, y: 196, width: 470, height: 76, rx: 18, fill: "#3E7FD6", ...S6(5) }, L); txt(L, 395, 248, "🚲 おでかけ だいぼうけん", 36, { "text-anchor": "middle", fill: "#FFFFFF" });
+  { const tg = el("g", { "data-top": 1 }, L); el("rect", { x: 960, y: 38, width: 440, height: 72, rx: 22, fill: "#3E7FD6", ...S6(5) }, tg); txt(tg, 1180, 86, "🚲 おでかけ だいぼうけん", 32, { "text-anchor": "middle", fill: "#FFFFFF" }); } // コースの なまえは 上の バーに（2026-10-31）
   Object.entries(EVENTS[OD]).forEach(([id, [type]]) => { const to = slWarpTo(OD, id, type); if (!to) return; const [x1, y1] = NODES[id], [x2, y2] = NODES[to];
     el("path", { d: `M${x1} ${y1} Q${(x1 + x2) / 2 + 120} ${(y1 + y2) / 2} ${x2} ${y2}`, fill: "none", stroke: "#8E5BD6", "stroke-width": 6, "stroke-dasharray": "16 14", opacity: .6 }, L); });
 };

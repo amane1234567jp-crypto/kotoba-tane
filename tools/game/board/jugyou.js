@@ -139,6 +139,6 @@ BOARD_BG[JGS] = L => {
     const x = r === 3 ? 1520 : 80; txt(L, x, y + 6, I4[r], 46, { "text-anchor": "middle" }); txt(L, x, y + 44, `${r + 1}じかんめ`, 18, { "text-anchor": "middle" }); });
   // こくばん（コースの なまえ）と きゅうしょく（ゴール）
   // コースの なまえは 上の バー（「〇〇の ばん」の みぎ）に ちいさな こくばんで（2026-10-25）
-  el("rect", { x: 960, y: 38, width: 400, height: 72, rx: 12, fill: "#2F6B4F", stroke: "#8B5A2B", "stroke-width": 8 }, L);
-  txt(L, 1160, 86, `${T.icon} ${T.name}`, 32, { "text-anchor": "middle", fill: "#FFFFFF" });
+  const tg = el("g", { "data-top": 1 }, L); el("rect", { x: 960, y: 38, width: 400, height: 72, rx: 12, fill: "#2F6B4F", stroke: "#8B5A2B", "stroke-width": 8 }, tg);
+  txt(tg, 1160, 86, `${T.icon} ${T.name}`, 32, { "text-anchor": "middle", fill: "#FFFFFF" });
 };

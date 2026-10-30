@@ -74,8 +74,8 @@ BOARD_BG[DTS] = L => { const T = SL_TH[DTS];
     const x = r === 3 ? 1520 : 80; txt(L, x, y + 6, I4[r], 46, { "text-anchor": "middle" }); txt(L, x, y + 44, T.areas[r], T.areas[r].length > 3 ? 17 : 20, { "text-anchor": "middle" }); });
   Object.entries(EVENTS[DTS] || {}).forEach(([id, [type]]) => { const to = slWarpTo(DTS, id, type); if (!to || !NODES[id] || !NODES[to]) return; const [x1, y1] = NODES[id], [x2, y2] = NODES[to];
     el("path", { d: `M${x1} ${y1} Q${(x1 + x2) / 2 + 160} ${(y1 + y2) / 2} ${x2} ${y2}`, fill: "none", stroke: "#8E5BD6", "stroke-width": 6, "stroke-dasharray": "16 14", opacity: .6 }, L); });
-  el("rect", { x: 935, y: 40, width: 350, height: 68, rx: 12, fill: "#F08A3C", stroke: "#8B5A2B", "stroke-width": 8 }, L);
-  txt(L, 1110, 86, `${T.icon} ${T.name}`, 32, { "text-anchor": "middle", fill: "#FFFFFF" }); };
+  const tg = el("g", { "data-top": 1 }, L); el("rect", { x: 935, y: 40, width: 350, height: 68, rx: 12, fill: "#F08A3C", stroke: "#8B5A2B", "stroke-width": 8 }, tg);
+  txt(tg, 1110, 86, `${T.icon} ${T.name}`, 32, { "text-anchor": "middle", fill: "#FFFFFF" }); };
 
 /* ---------- 声の パック ---------- */
 { const lp = loadPack; loadPack = async function (id) { const r = await lp(id); if (id !== DTS) return r;

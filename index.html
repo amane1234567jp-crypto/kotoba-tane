@@ -62780,7 +62780,7 @@ const BOARD = {};
   n["15"] = [560, 760, "goal"]; pl["15"] = "えき"; n["0"].push("start"); n["4"].push("block");
   linkLine(nx, ["0", "1", "2", "3", "4", "f1", "a1", "a2", "a3", "m1", "f2", "c1", "c2", "15"]); linkLine(nx, ["f1", "b1", "b2", "b3", "b4", "m1"]); linkLine(nx, ["f2", "d1", "15"]);
   BOARD.densha = { nodes: n, place: pl, next: nx, away: [300, 760], style: (a, b) => pl[a] === "バス" || pl[b] === "バス" || ["f2", "d1", "c1", "c2"].includes(a) ? "bus" : "rail",
-    labels: [["えき", 640, 985], ["でんしゃ", 1470, 340], ["バス", 1040, 760], ["バスてい", 300, 560]] }; }
+    labels: [["えき", 640, 950], ["でんしゃ", 1230, 530], ["バス", 1040, 760], ["バスてい", 300, 560]] }; }
 /* ---------- がっこう2：こうしゃの 1かい → 2かい → 3かい（かいだんを えらぶ） ---------- */
 { const n = {}, pl = {}, nx = {}; const F1 = 900, F2 = 620, F3 = 340;
   chain(["0", "1", "2", "3", "4", "f1"], [[420, F1], [620, F1], [820, F1], [1020, F1], [1220, F1], [1420, F1]], "たいいくかん", n, pl); pl["0"] = pl["1"] = pl["2"] = "きゅうしょく";
@@ -67270,7 +67270,7 @@ BOARD_BG[OD] = L => {
   [["🏠", 260, 870], ["🏡", 520, 870], ["🐕", 760, 870], ["🏪", 1000, 870], ["🌷", 1220, 870], ["🏬", 380, 710], ["🍦", 640, 710], ["📮", 880, 710], ["🏫", 1130, 710], ["🌳", 300, 550], ["⛲", 560, 550], ["🌳", 820, 550], ["🛝", 1000, 550], ["🦆", 420, 385], ["🌉", 980, 385]]
     .forEach(([e, x, y]) => txt(L, x, y + 20, e, 54, { "text-anchor": "middle", opacity: .9 }));
   [["🚶 あるいて", 60, 860], ["🚲 じてんしゃ", 1190, 545]].forEach(([t, x, y]) => { el("rect", { x: x - 10, y: y - 34, width: 40 + t.length * 22, height: 46, rx: 23, fill: "#FFFFFF", ...S6(3) }, L); txt(L, x + 8, y, t, 26); });
-  el("rect", { x: 160, y: 196, width: 470, height: 76, rx: 18, fill: "#3E7FD6", ...S6(5) }, L); txt(L, 395, 248, "🚲 おでかけ だいぼうけん", 36, { "text-anchor": "middle", fill: "#FFFFFF" });
+  { const tg = el("g", { "data-top": 1 }, L); el("rect", { x: 960, y: 38, width: 440, height: 72, rx: 22, fill: "#3E7FD6", ...S6(5) }, tg); txt(tg, 1180, 86, "🚲 おでかけ だいぼうけん", 32, { "text-anchor": "middle", fill: "#FFFFFF" }); } // コースの なまえは 上の バーに（2026-10-31）
   Object.entries(EVENTS[OD]).forEach(([id, [type]]) => { const to = slWarpTo(OD, id, type); if (!to) return; const [x1, y1] = NODES[id], [x2, y2] = NODES[to];
     el("path", { d: `M${x1} ${y1} Q${(x1 + x2) / 2 + 120} ${(y1 + y2) / 2} ${x2} ${y2}`, fill: "none", stroke: "#8E5BD6", "stroke-width": 6, "stroke-dasharray": "16 14", opacity: .6 }, L); });
 };
@@ -67596,7 +67596,7 @@ BOARD_BG[KCS] = L => {
   Y.forEach((y, r) => { el("rect", { x: 30, y: y - 70, width: 1540, height: 140, rx: 70, fill: C4[r], ...S6(4) }, L);
     const x = r === 3 ? 1520 : 80; /* おでかけ は ゴールの はんたいがわ */ txt(L, x, y + 6, I4[r], 46, { "text-anchor": "middle" }); txt(L, x, y + 44, N4[r], N4[r].length > 3 ? 17 : 20, { "text-anchor": "middle" }); });
   [["💗", 150, 300], ["😊", 400, 330], ["😳", 1210, 320], ["😢", 1400, 300], ["😨", 300, 240], ["🤗", 1320, 230]].forEach(([e, x, y]) => txt(L, x, y, e, 54, { "text-anchor": "middle", opacity: .85 }));
-  el("rect", { x: 540, y: 212, width: 520, height: 80, rx: 22, fill: "#E86A9A", ...S6(5) }, L); txt(L, 800, 266, "💗 きもちの だいぼうけん", 38, { "text-anchor": "middle", fill: "#FFFFFF" });
+  { const tg = el("g", { "data-top": 1 }, L); el("rect", { x: 960, y: 38, width: 440, height: 72, rx: 22, fill: "#E86A9A", ...S6(5) }, tg); txt(tg, 1180, 86, "💗 きもちの だいぼうけん", 32, { "text-anchor": "middle", fill: "#FFFFFF" }); } // コースの なまえは 上の バーに（2026-10-31）
 };
 /* ---------- 声の パック ---------- */
 { const lp = loadPack; loadPack = async function (id) { const r = await lp(id); if (id !== KCS) return r;
@@ -67893,7 +67893,8 @@ NEWL.forEach(sid => { BOARD_BG[sid] = L => {
   (dk ? [["📖", 150, 300], ["✏️", 400, 330], ["🗓", 1210, 320], ["💬", 1400, 300]] : [["💪", 150, 300], ["🌈", 400, 330], ["🏅", 1210, 320], ["✊", 1400, 300]]).forEach(([e, x, y]) => txt(L, x, y, e, 54, { "text-anchor": "middle", opacity: .85 }));
   Object.entries(EVENTS[sid] || {}).forEach(([id, [type]]) => { const to = slWarpTo(sid, id, type); if (!to || !NODES[id] || !NODES[to]) return; const [x1, y1] = NODES[id], [x2, y2] = NODES[to];
     el("path", { d: `M${x1} ${y1} Q${(x1 + x2) / 2 + 160} ${(y1 + y2) / 2} ${x2} ${y2}`, fill: "none", stroke: "#8E5BD6", "stroke-width": 6, "stroke-dasharray": "16 14", opacity: .6 }, L); });
-  el("rect", { x: 540, y: 212, width: 520, height: 80, rx: 22, fill: dk ? "#3E7FD6" : "#F08A3C", ...S6(5) }, L); txt(L, 800, 266, `${T.icon} ${T.name}`, 38, { "text-anchor": "middle", fill: "#FFFFFF" }); }; });
+  // コースの なまえは 上の バーに ちいさく（2026-10-31。まえは 盤の 上に 大きく あって、そのぶん 盤が ちいさかった）
+  { const tg = el("g", { "data-top": 1 }, L); el("rect", { x: 960, y: 38, width: 440, height: 72, rx: 22, fill: dk ? "#3E7FD6" : "#F08A3C", ...S6(5) }, tg); txt(tg, 1180, 86, `${T.icon} ${T.name}`, 32, { "text-anchor": "middle", fill: "#FFFFFF" }); } }; });
 /* ---------- 声の パック ---------- */
 { const lp = loadPack; loadPack = async function (id) { const r = await lp(id); if (!NEWL.includes(id)) return r;
     if (!PACK.loaded[id]) { try { const q = await fetch(`packs/${id}.json`, { cache: "no-cache" }); if (q.ok) { const d = await q.json(); Object.keys(d).forEach(k => AUD[k] = "data:audio/mpeg;base64," + d[k]); PACK.loaded[id] = Object.keys(d); } } catch (e) { /* なくても あそべる */ } }
@@ -68233,8 +68234,8 @@ BOARD_BG[JGS] = L => {
     const x = r === 3 ? 1520 : 80; txt(L, x, y + 6, I4[r], 46, { "text-anchor": "middle" }); txt(L, x, y + 44, `${r + 1}じかんめ`, 18, { "text-anchor": "middle" }); });
   // こくばん（コースの なまえ）と きゅうしょく（ゴール）
   // コースの なまえは 上の バー（「〇〇の ばん」の みぎ）に ちいさな こくばんで（2026-10-25）
-  el("rect", { x: 960, y: 38, width: 400, height: 72, rx: 12, fill: "#2F6B4F", stroke: "#8B5A2B", "stroke-width": 8 }, L);
-  txt(L, 1160, 86, `${T.icon} ${T.name}`, 32, { "text-anchor": "middle", fill: "#FFFFFF" });
+  const tg = el("g", { "data-top": 1 }, L); el("rect", { x: 960, y: 38, width: 400, height: 72, rx: 12, fill: "#2F6B4F", stroke: "#8B5A2B", "stroke-width": 8 }, tg);
+  txt(tg, 1160, 86, `${T.icon} ${T.name}`, 32, { "text-anchor": "middle", fill: "#FFFFFF" });
 };
 
 /* 「そうぞう たんてい」コースの データ（sit/souzou_gen.py が かく。sit/kangaeru_fix.py で 直し） */
@@ -69568,8 +69569,8 @@ BOARD_BG[DTS] = L => { const T = SL_TH[DTS];
     const x = r === 3 ? 1520 : 80; txt(L, x, y + 6, I4[r], 46, { "text-anchor": "middle" }); txt(L, x, y + 44, T.areas[r], T.areas[r].length > 3 ? 17 : 20, { "text-anchor": "middle" }); });
   Object.entries(EVENTS[DTS] || {}).forEach(([id, [type]]) => { const to = slWarpTo(DTS, id, type); if (!to || !NODES[id] || !NODES[to]) return; const [x1, y1] = NODES[id], [x2, y2] = NODES[to];
     el("path", { d: `M${x1} ${y1} Q${(x1 + x2) / 2 + 160} ${(y1 + y2) / 2} ${x2} ${y2}`, fill: "none", stroke: "#8E5BD6", "stroke-width": 6, "stroke-dasharray": "16 14", opacity: .6 }, L); });
-  el("rect", { x: 935, y: 40, width: 350, height: 68, rx: 12, fill: "#F08A3C", stroke: "#8B5A2B", "stroke-width": 8 }, L);
-  txt(L, 1110, 86, `${T.icon} ${T.name}`, 32, { "text-anchor": "middle", fill: "#FFFFFF" }); };
+  const tg = el("g", { "data-top": 1 }, L); el("rect", { x: 935, y: 40, width: 350, height: 68, rx: 12, fill: "#F08A3C", stroke: "#8B5A2B", "stroke-width": 8 }, tg);
+  txt(tg, 1110, 86, `${T.icon} ${T.name}`, 32, { "text-anchor": "middle", fill: "#FFFFFF" }); };
 
 /* ---------- 声の パック ---------- */
 { const lp = loadPack; loadPack = async function (id) { const r = await lp(id); if (id !== DTS) return r;
@@ -69824,7 +69825,7 @@ addEventListener("resize", () => setTimeout(phDecide, 60)); addEventListener("or
 phDecide(); setTimeout(phDecide, 500);
 const phCam = () => `translate(${(-PH.E).toFixed(1)} ${(-PH.cy).toFixed(1)}) scale(${PH.k.toFixed(4)})`;
 const phFeet = c => [c.x + 200 * c.s, c.y + (c.base || 0) * c.s];
-{ const _say = say; say = function (c, text) { _say(c, text); PH.bubCam = !!(c && BOARD_PIECES.includes(c)); bub.setAttribute("transform", PH.bubCam && PH.was === "cam" ? phCam() : "");
+{ const _say = say; say = function (c, text) { _say(c, text); PH.bubCam = !!(c && BOARD_PIECES.includes(c)); PH.bubC = c; bub.setAttribute("transform", PH.bubCam && PH.was === "cam" ? phCam() : "");
     if (phSceneMode()) { const y = +bubR.getAttribute("y") || 0; if (y < PH.crop + 10) bub.setAttribute("transform", `translate(0 ${(PH.crop + 10 - y).toFixed(1)})`); } }; }
 { const _st = showTask; showTask = function (text, tag, cy = 230) { return _st(text, tag, PH.on && view !== "board" && view !== "menu" && cy < 500 ? cy + PH.crop : cy); }; }
 function phTick() {
@@ -69832,7 +69833,15 @@ function phTick() {
   const board = boardLayer.style.display !== "none" && view !== "menu";
   const cam = false; // カメラの おいかけは やめた（2026-10-28）。盤は board_wide.js で 横に 伸ばして ぜんぶ 見せる
   phViewBox(view === "menu" && (PH.on || document.body.classList.contains("phoneport")) ? "cover" : phSceneMode() ? "scene" : "wide");
-  if (cam) {
+  // 2026-10-31：盤の マスが 画面に たいして ちいさい ときは、盤ぜんたいを 画面いっぱいまで 大きく する（BW.fit。コマも いっしょに 大きく）
+  const fit = board && view === "board" && typeof BW !== "undefined" && BW.fit ? BW.fit : null;
+  if (fit) { BOARD_PIECES.forEach(c => { if (c && c.root && c.root.parentNode !== camChars) camChars.appendChild(c.root); });
+    const t = `translate(${fit.tx.toFixed(1)} ${fit.ty.toFixed(1)}) scale(${fit.s.toFixed(4)})`;
+    if (PH.was !== "fit" || PH.fitT !== t) { [boardLayer, camChars, fxLayer].forEach(g => g.setAttribute("transform", t)); PH.fitT = t; if (PH.was !== "fit" && typeof C !== "undefined" && C.pony) bwPony(); }
+    bub.setAttribute("transform", PH.bubCam ? phFitBub() : ""); PH.was = "fit";
+    // ロングコース（マスが 画面の 左はしまで ある）では、ぽにーは しゃべる ときだけ 出す
+    if (typeof C !== "undefined" && C.pony) { const o = fit.long && speaker !== C.pony ? "0" : ""; if (C.pony.root.style.opacity !== o) { C.pony.root.style.transition = "opacity .25s"; C.pony.root.style.opacity = o; } } }
+  else if (cam) {
     BOARD_PIECES.forEach(c => { if (c && c.root && c.root.parentNode !== camChars) camChars.appendChild(c.root); });
     // うごいた コマを おいかける（とまって いる ときは さいごに うごいた コマ。さいしょは こども）
     let moved = null; BOARD_PIECES.forEach(c => { if (!c || c.root.style.display === "none") return; const p = phFeet(c), q = PH.last.get(c); if (q && Math.hypot(p[0] - q[0], p[1] - q[1]) > .8) moved = c; PH.last.set(c, p); });
@@ -69845,14 +69854,15 @@ function phTick() {
     //   盤の 上に いると マスに かさなるので、しゃべって いる ときだけ 出す
     if (typeof C !== "undefined" && C.pony && view === "board") { place(C.pony, -PH.E + 120, 985, .36); C.pony.root.style.display = speaker === C.pony ? "" : "none"; }
     PH.was = "cam";
-  } else if (PH.was !== "flat") {
-    [boardLayer, camChars, fxLayer, bub].forEach(g => g.removeAttribute("transform")); PH.was = "flat";
-    if (view === "board" && typeof C !== "undefined" && C.pony) place(C.pony, 200, 372, .42);
+  } else if (!fit && PH.was !== "flat") {
+    [boardLayer, camChars, fxLayer, bub].forEach(g => g.removeAttribute("transform")); PH.was = "flat"; PH.fitT = null;
+    if (typeof C !== "undefined" && C.pony) C.pony.root.style.opacity = "";
+    if (view === "board" && typeof C !== "undefined" && C.pony) bwPony();
   }
   // わかれみちの やじるし（HTML の ボタン）を カメラに あわせる
   stage.querySelectorAll(".arrow[data-wx]").forEach(b => {
     const x = +b.dataset.wx, y = +b.dataset.wy, r = svg.getBoundingClientRect(), s = r.height / 1000;
-    const X = cam ? -PH.E + x * PH.k : x, Y = cam ? y * PH.k - PH.cy : y;
+    const X = cam ? -PH.E + x * PH.k : fit ? fit.tx + x * fit.s : x, Y = cam ? y * PH.k - PH.cy : fit ? fit.ty + y * fit.s : y;
     const sr = stage.getBoundingClientRect();
     b.style.left = (r.left - sr.left + (X + PH.E) * s - b.offsetWidth / 2) + "px"; b.style.top = (r.top - sr.top + Y * s - b.offsetHeight * .5) + "px";
   });
@@ -70575,7 +70585,36 @@ BA.stages.forEach(id => { BOARD_BG[id] = (L, B) => BA.paint(L, B, id); });
    道・マス・コマ・わかれ道の 矢印・へや（board_art）は マスの 座標から かくので いっしょに 伸びる。
    もとから 絵が かいて ある 盤（うんどうじょう・こうえん・おみせ・でんしゃ・とうこう・がっこう2）は、背景の 絵も 横に 伸ばす。
    こうしゃ は へや（ZONES）を 伸ばす。ロングコースは そのまま（もともと 横いっぱい）。 */
-const BW = { k: 1 };
+const BW = { k: 1, fit: null };
+/* 2026-10-31：盤を 画面いっぱいまで 大きく する（「コースが 小さすぎて キャラが 見えない」）。
+   マス（と コマの 頭の ぶん）の はんいを、画面の あいて いる ところ（上の バーの 下〜下の はし）に あわせて、
+   たて・よこ 同じ 倍率で 大きく する（さいだい 1.7倍）。よこに あまれば これまでどおり マスの 間を 横に 伸ばす（さいだい 1.3倍）。
+   大きく するのは 盤・コマ・こうか（boardLayer / camChars / fxLayer）。ぽにー・さいころ・上の バーは そのまま。 */
+function bwFitCalc(src, longish, hasB) {
+  if (!PH.on || !src) return null;
+  const P = Object.values(src); if (!P.length) return null;
+  let x0 = Math.min(...P.map(p => p[0])) - 80, x1 = Math.max(...P.map(p => p[0])) + 80;
+  const y0 = Math.min(...P.map(p => p[1])) - 150, y1 = Math.max(...P.map(p => p[1])) + (longish ? 80 : 62);
+  if (longish) { x0 = Math.min(x0, 30); x1 = Math.max(x1, 1570); }
+  const X0 = -PH.E + 30, X1 = 1600 + PH.E - 30, Y0 = 118, Y1 = 996, TW = X1 - X0, TH = Y1 - Y0;
+  const w = x1 - x0, h = y1 - y0, s = Math.min(1.7, TH / h, TW / w);
+  if (s < 1.03) return null;
+  const k = Math.max(1, Math.min(1.3, TW / (w * s))), cx = 800 + ((x0 + x1) / 2 - 800) * k, W = w * k * s;
+  const slack = TW - W, left = X0 + Math.min(slack, longish ? slack / 2 : 200 + Math.max(0, slack - 200) / 2);
+  const tx = left - s * (cx - w * k / 2), ty = Y0 + (TH - h * s) / 2 - s * y0;
+  return { s, k, tx, ty, long: longish }; }
+// ぽにー（ナビ）：左上の すみ。盤を 大きく した ときも 画面の 左はしに
+function bwPony() { if (BW.fit) place(C.pony, -PH.E + 60, 372, .42); else place(C.pony, bwX(200), 372, .42); }
+// ふきだし：盤を 大きく した ときは、しゃべって いる コマの 頭の ところへ（ふきだしの 大きさは そのまま）
+function phFitBub() { const f = BW.fit, c = PH.bubC; if (!f || !c || !c.root) return "";
+  const ax = c.x + 200 * c.s, ay = c.y + ((c.base || 0) - 330) * c.s; let dx = (f.s - 1) * ax + f.tx, dy = (f.s - 1) * ay + f.ty;
+  try { const x = +bubR.getAttribute("x"), y = +bubR.getAttribute("y"), w = +bubR.getAttribute("width"), h = +bubR.getAttribute("height");
+    dx = Math.max(-PH.E + 10 - x, Math.min(1600 + PH.E - 10 - w - x, dx)); dy = Math.max(120 - y, Math.min(990 - h - y, dy)); } catch (e) { }
+  return `translate(${dx.toFixed(1)} ${dy.toFixed(1)})`; }
+// 上の バーに おく もの（コースの なまえ など。data-top）は 盤と いっしょに 大きく しない
+const bwTop = el("g", {}, boardLayer.parentNode); boardLayer.parentNode.insertBefore(bwTop, boardLayer.nextSibling);
+function bwTopMove() { while (bwTop.firstChild) bwTop.firstChild.remove(); boardLayer.querySelectorAll("[data-top]").forEach(n => bwTop.appendChild(n)); }
+(function bwTopTick() { bwTop.style.display = boardLayer.style.display === "none" || view === "menu" ? "none" : ""; requestAnimationFrame(bwTopTick); })();
 const bwX = x => 800 + (x - 800) * BW.k;
 function bwCalc() { if (!PH.on) return 1; const vw = 1600 + 2 * PH.E; return Math.max(1, Math.min(1.3, vw / 1600)); }
 // 背景の 絵（レーンなど）を 横に 伸ばす。文字は 伸ばさない（文字ごとに 逆に ちぢめる）
@@ -70591,6 +70630,7 @@ BW_FIXED.forEach(id => { const f = BOARD_BG[id]; if (!f) return; BOARD_BG[id] = 
     if (longish && BOARD_BG[curStage] && !BOARD_BG[curStage].__bw) bwWrapBg(curStage);
     const B = BOARD[curStage];
     const src = B ? B.nodes : (typeof LAYOUT !== "undefined" && LAYOUT[curStage] ? LAYOUT[curStage].nodes : KOUSHA_NODES);
+    BW.fit = bwFitCalc(src, longish, !!B); if (BW.fit) BW.k = BW.fit.k;
     Object.entries(src).forEach(([id, v]) => { if (NODES[id]) NODES[id][0] = bwX(v[0]); });
     if (!B && typeof KOUSHA_ZONES !== "undefined") ZONES.forEach((z, i) => { const o = KOUSHA_ZONES[i]; if (!o) return; z.x = bwX(o.x); z.w = o.w * BW.k; });
     let keep = null; if (B && B.labels && BW.k > 1.001) { keep = B.labels; B.labels = keep.map(([t, x, y]) => [t, bwX(x), y]); }
@@ -70598,10 +70638,11 @@ BW_FIXED.forEach(id => { const f = BOARD_BG[id]; if (!f) return; BOARD_BG[id] = 
     BOARD_PIECES.forEach(pc => { if (pc && pc.node != null && NODES[pc.node]) setPiece(pc, pc.node); });
     // 盤の 地面を 左右にも（もとの 地面は 0〜1600 しか ない）
     const first = boardLayer.firstElementChild, fill = first && first.tagName === "rect" ? first.getAttribute("fill") : null;
-    if (fill) { const r = el("rect", { x: -700, y: 0, width: 3000, height: 1000, fill }); boardLayer.insertBefore(r, first); }
-    if (typeof C !== "undefined" && C.pony && view === "board") place(C.pony, bwX(200), 372, .42);
+    if (fill) { const r = el("rect", { x: -1200, y: -600, width: 4000, height: 2200, fill }); boardLayer.insertBefore(r, first); }
+    bwTopMove();
+    if (typeof C !== "undefined" && C.pony && view === "board") bwPony();
   }; }
-{ const sv = setView; setView = function (v, ...a) { const r = sv(v, ...a); if (v === "board" && typeof C !== "undefined" && C.pony) place(C.pony, bwX(200), 372, .42); return r; }; }
+{ const sv = setView; setView = function (v, ...a) { const r = sv(v, ...a); if (v === "board" && typeof C !== "undefined" && C.pony) bwPony(); return r; }; }
 // ねむっている どしんの 「どいた あとの 場所」も 伸ばす
 { const sa = sleeperAway; sleeperAway = function () { const p = sa(); return [bwX(p[0]), p[1]]; }; }
 // あいた ばしょ さがし（bgFree）の はんいも 画面の はばに
@@ -70742,6 +70783,7 @@ const IC = { s: (w = 6) => ({ stroke: INK, "stroke-width": w, "stroke-linejoin":
   bubble(g, fill = "#FFFFFF") { IC.P(g, "M-90 -70 H90 Q100 -70 100 -60 V20 Q100 30 90 30 H-20 L-50 70 L-45 30 H-90 Q-100 30 -100 20 V-60 Q-100 -70 -90 -70 Z", fill, 6); },
   arrow(g, dir = 1, fill = "#FFD25E") { const t = el("g", { transform: dir === 1 ? "" : dir === -1 ? "scale(-1 1)" : dir === 2 ? "rotate(-90)" : "rotate(90)" }, g); IC.P(t, "M-90 -35 H20 V-80 L100 0 L20 80 V35 H-90 Z", fill, 6); } };
 const ICON_DRAW = {
+  "🍮": g => { IC.E(g, 0, 78, 100, 20, "#FFFFFF"); IC.P(g, "M-70 70 L-48 -40 Q0 -58 48 -40 L70 70 Q0 88 -70 70 Z", "#FFD86B", 6); IC.P(g, "M-48 -40 Q0 -58 48 -40 L41 -6 Q20 6 8 -8 Q-6 10 -22 -4 Q-34 6 -42 -10 Z", "#8B4A1E", 6); IC.E(g, 0, -45, 48, 12, "#A45A26", 5); IC.P(g, "M-34 30 Q-30 0 -24 -2", "none", 6); IC.C(g, 14, -70, 14, "#FF4F6D", 5); },
   // ---- 顔・きもち ----
   "😊": g => IC.face(g, "#FFD25E", "M-40 25 Q0 60 40 25", [[-32, -12], [32, -12]]), "🙂": g => IC.face(g, "#FFD25E", "M-35 30 Q0 50 35 30"), "😄": g => { IC.face(g, "#FFD25E", null); IC.P(g, "M-45 20 Q0 75 45 20 Z", "#FFFFFF", 6); IC.P(g, "M-45 -25 Q-30 -40 -15 -25 M15 -25 Q30 -40 45 -25", "none", 7); }, "😀": g => ICON_DRAW["😄"](g), "😃": g => ICON_DRAW["😄"](g), "😆": g => ICON_DRAW["😄"](g),
   "😢": g => { IC.face(g, "#A9D8F5", "M-30 45 Q0 20 30 45"); IC.drop(g, 44, 20, 14); }, "😥": g => ICON_DRAW["😢"](g), "😞": g => IC.face(g, "#A9D8F5", "M-30 45 Q0 20 30 45"), "😟": g => IC.face(g, "#FFD25E", "M-30 45 Q0 25 30 45"), "😣": g => { IC.face(g, "#FFB0A0", "M-30 45 Q0 25 30 45"); IC.P(g, "M-45 -35 L-20 -15 M-45 -15 L-20 -35 M20 -15 L45 -35 M20 -35 L45 -15", "none", 7); },
@@ -70845,7 +70887,7 @@ ICON_DRAW["📖"] = g => { IC.P(g, "M0 -50 Q-50 -80 -100 -60 V60 Q-50 40 0 70 Q5
 // ---- 2回目（文の 先頭の 絵文字・のこり） ----
 Object.assign(ICON_ITEM, { "🧀": "cheese", "🥢": "chopsticks", "🪣": "tub", "🍟": "fries", "🥕": "carrot", "🤖": "robot", "📕": "ehon", "🖍️": "crayons", "☂️": "umbrella", "☔": "umbrella", "⛑": "helmet", "👛": "purse", "💺": "chair", "🧽": "soap", "🧻": "tissue", "🪥": "toothbrush", "✂️": "scissors", "🏀": "ball", "🧳": "bag" });
 Object.assign(ICON_CHAR, { "🐢": "kamejii", "👧": "pyon", "🐑": "meebaa", "👪": "mama", "🧍": "shima", "🦸": "gao", "🐧": "piyo" });
-const ALIAS = { "⬆️": "⬆", "➡️": "➡", "⬅️": "⬅", "↻": "🔄", "✈": "✈️", "☁": "☁️", "🌧️": "🌧", "⛰": "⛰️", "🍽": "🍽️", "🌞": "☀", "🟤": "🟫", "🔎": "🔍", "🕐": "🕒", "🕗": "🕒", "📅": "🗓", "🚫": "🛑", "🥵": "😣", "😡": "😠", "😖": "😣", "😭": "😢", "🥺": "😟", "😲": "😳", "😱": "😨", "😪": "😴", "🤒": "🤕", "😂": "🤣", "😝": "🤪", "🤩": "😄", "😒": "😞", "🙄": "😶", "😤": "😠", "⚠": "❗", "🆘": "🚨", "🍰": "🎂", "🍮": "🧁", "🥬": "🫑", "🐛": "🦗", "🐌": "🐚", "📭": "📮", "📪": "📮", "💾": "🎮", "⏳": "⏰", "⏱": "⏰", "⏺": "🔴", "⚪": "🔵", "⬛": "⚫", "🟢": "🔵", "🛍": "🛒", "🥟": "🍙", "🌿": "🌱", "👊": "✊", "🤙": "👋", "🙏": "🙌", "🤷": "🙋", "👣": "🦶", "👅": "😋", "💝": "💖", "🚽": "🛁", "🚿": "🛁", "👖": "👕", "🥾": "👟", "🥈": "🏅", "👑": "🏅", "🎓": "🎩", "📐": "📏", "🪜": "🚧", "⚾": "⚽", "🛤": "🛤️", "🖐️": "✋", "👨‍👩‍👧": "👪", "👩‍👧": "👪", "🧑": "🧒", "👨‍": "👨", "👩‍": "👩", "🧑‍": "🧒" };
+const ALIAS = { "⬆️": "⬆", "➡️": "➡", "⬅️": "⬅", "↻": "🔄", "✈": "✈️", "☁": "☁️", "🌧️": "🌧", "⛰": "⛰️", "🍽": "🍽️", "🌞": "☀", "🟤": "🟫", "🔎": "🔍", "🕐": "🕒", "🕗": "🕒", "📅": "🗓", "🚫": "🛑", "🥵": "😣", "😡": "😠", "😖": "😣", "😭": "😢", "🥺": "😟", "😲": "😳", "😱": "😨", "😪": "😴", "🤒": "🤕", "😂": "🤣", "😝": "🤪", "🤩": "😄", "😒": "😞", "🙄": "😶", "😤": "😠", "⚠": "❗", "🆘": "🚨", "🍰": "🎂", "🥬": "🫑", "🐛": "🦗", "🐌": "🐚", "📭": "📮", "📪": "📮", "💾": "🎮", "⏳": "⏰", "⏱": "⏰", "⏺": "🔴", "⚪": "🔵", "⬛": "⚫", "🟢": "🔵", "🛍": "🛒", "🥟": "🍙", "🌿": "🌱", "👊": "✊", "🤙": "👋", "🙏": "🙌", "🤷": "🙋", "👣": "🦶", "👅": "😋", "💝": "💖", "🚽": "🛁", "🚿": "🛁", "👖": "👕", "🥾": "👟", "🥈": "🏅", "👑": "🏅", "🎓": "🎩", "📐": "📏", "🪜": "🚧", "⚾": "⚽", "🛤": "🛤️", "🖐️": "✋", "👨‍👩‍👧": "👪", "👩‍👧": "👪", "🧑": "🧒", "👨‍": "👨", "👩‍": "👩", "🧑‍": "🧒" };
 ICON_DRAW["✅"] = g => { IC.R(g, -85, -85, 170, 170, "#7BD389", 24); IC.P(g, "M-50 0 L-15 40 L55 -45", "none", 18); el("path", { d: "M-50 0 L-15 40 L55 -45", stroke: "#FFFFFF", "stroke-width": 9, fill: "none", "stroke-linecap": "round", "stroke-linejoin": "round" }, g); }; ICON_DRAW["☑"] = ICON_DRAW["✅"]; ICON_DRAW["✔"] = g => IC.P(g, "M-70 0 L-20 50 L75 -55", "none", 22);
 ICON_DRAW["😶"] = g => IC.face(g, "#FFD25E", null, [[-32, -15], [32, -15]]); ICON_DRAW["🤥"] = g => { IC.face(g, "#FFD25E", "M-30 35 Q0 50 30 35"); IC.P(g, "M60 10 H120", "#FFE0B2", 12); }; ICON_DRAW["🐣"] = g => { IC.P(g, "M-70 20 Q-70 -60 0 -60 Q70 -60 70 20 L55 5 L40 25 L20 5 L0 25 L-20 5 L-40 25 L-55 5 Z", "#FFFFFF", 6); IC.C(g, 0, -10, 45, "#FFD25E"); IC.C(g, -15, -15, 6, INK, 0); IC.C(g, 15, -15, 6, INK, 0); IC.P(g, "M-8 5 L0 15 L8 5 Z", "#FF8C42", 3); };
 ICON_DRAW["◀"] = g => IC.arrow(g, -1); ICON_DRAW["↔"] = g => { IC.P(g, "M-60 0 H60 M-60 0 L-30 -30 M-60 0 L-30 30 M60 0 L30 -30 M60 0 L30 30", "none", 14); }; ICON_DRAW["⬇"] = g => IC.arrow(g, 3); ICON_DRAW["⬇️"] = ICON_DRAW["⬇"]; ICON_DRAW["↘"] = g => { const t = el("g", { transform: "rotate(45)" }, g); IC.arrow(t, 1); }; ICON_DRAW["↱"] = g => IC.P(g, "M-60 90 V-20 Q-60 -60 -20 -60 H40 M10 -90 L50 -60 L10 -30", "none", 14); ICON_DRAW["←"] = g => IC.P(g, "M80 0 H-80 M-80 0 L-30 -45 M-80 0 L-30 45", "none", 14); ICON_DRAW["→"] = g => IC.P(g, "M-80 0 H80 M80 0 L30 -45 M80 0 L30 45", "none", 14); ICON_DRAW["👈"] = g => IC.arrow(g, -1, "#FFE0B2");
