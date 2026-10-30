@@ -5,7 +5,7 @@ const GENRES = [
   ["jugyou", "✏️", "じゅぎょう", ["kokugo", "sansu", "tokei", "ongaku", "zukou", "taiiku"]],
   ["machi", "🚃", "まち・おでかけ", ["toukou", "gekou", "kaerimichi", "omise", "densha", "burger", "byouin", "haisha", "jitensha"]],
   ["ouchi", "🏡", "おうち・あそび", ["ouchi1", "ie1", "yuushoku", "kouen", "kouen2", "asobiba", "tomodachi1"]],
-  ["tsutaeru", "💬", "きもちを つたえる", ["manekko", "kikikaesu", "sos", "junban", "kotowaru", "aite"]],
+  ["tsutaeru", "💬", "きもちを つたえる", ["manekko", "kikikaesu", "sos", "junban", "kotowaru"]],
   ["kangaeru", "🤔", "かんがえる", ["komatta", "kirikae"]],
   ["long", "⭐", "ロングコース", []],
 ];
