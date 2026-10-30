@@ -8,11 +8,17 @@
 const BW = { k: 1 };
 const bwX = x => 800 + (x - 800) * BW.k;
 function bwCalc() { if (!PH.on) return 1; const vw = 1600 + 2 * PH.E; return Math.max(1, Math.min(1.3, vw / 1600)); }
+// 背景の 絵（レーンなど）を 横に 伸ばす。文字は 伸ばさない（文字ごとに 逆に ちぢめる）
+function bwWrapBg(id) { const f = BOARD_BG[id]; const w = (L, B) => { if (BW.k <= 1.001) return f(L, B);
+    const g = el("g", { transform: `translate(800 0) scale(${BW.k.toFixed(4)} 1) translate(-800 0)` }, L), t0 = txt;
+    txt = function (gg, x, y, ...r) { const t = t0(gg, x, y, ...r); try { const tr = t.getAttribute("transform") || ""; t.setAttribute("transform", `translate(${x} ${y}) scale(${(1 / BW.k).toFixed(4)} 1) translate(${-x} ${-y}) ${tr}`); } catch (e) { } return t; };
+    try { return f(g, B); } finally { txt = t0; } }; w.__bw = true; BOARD_BG[id] = w; }
 const BW_FIXED = ["undou", "kouen", "omise", "densha", "toukou", "gakkou2"];
 BW_FIXED.forEach(id => { const f = BOARD_BG[id]; if (!f) return; BOARD_BG[id] = (L, B) => { const g = BW.k > 1.001 ? el("g", { transform: `translate(800 0) scale(${BW.k.toFixed(4)} 1) translate(-800 0)` }, L) : L; return f(g, B); }; });
 { const db = drawBoard; drawBoard = function () {
     const longish = (typeof isLong === "function" && isLong()) || (typeof isSL === "function" && isSL());
-    BW.k = longish ? 1 : bwCalc();
+    BW.k = bwCalc(); // 2026-10-30：ロングコースも 横に 伸ばす（まえは 伸ばさず、左右が あいて いた）
+    if (longish && BOARD_BG[curStage] && !BOARD_BG[curStage].__bw) bwWrapBg(curStage);
     const B = BOARD[curStage];
     const src = B ? B.nodes : (typeof LAYOUT !== "undefined" && LAYOUT[curStage] ? LAYOUT[curStage].nodes : KOUSHA_NODES);
     Object.entries(src).forEach(([id, v]) => { if (NODES[id]) NODES[id][0] = bwX(v[0]); });
