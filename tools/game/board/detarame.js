@@ -113,7 +113,7 @@ async function dtScene(pc) {
   const ap = headTop(a); dtPoof(ap.x, ap.y + 150, 18); await sleep(200); a.root.style.display = ""; jump(a, .8); await sleep(400);
   if (!DT_SEEN.has(it.v)) { DT_SEEN.add(it.v); playMove(a, DT_MOVE[it.v]); await speak(a, `dt_hi_${it.v}`, DT.v[it.v].hi); unsay(); }
   let bike = null; if (it.id === "y1") { // じてんしゃで ろうかを はしりまくる（2026-10-25）
-    bike = el("g", {}); bikeG(bike); follow(bike, () => { const q = world(a, 200, a.base - 50); return [q.x, q.y, 0, a.s * .7]; });
+    bike = (typeof rideOn === "function") ? rideOn(a) : (() => { const g = el("g", {}); bikeG(g); follow(g, () => { const q = world(a, 200, a.base - 50); return [q.x, q.y, 0, a.s * .7]; }); return g; })();
     hold(a, "run", 3.2); [[0, 260], [700, -320], [1400, 220], [2100, -180], [2800, 0]].forEach(([t, x]) => later(t, () => { a.dx.t = x; })); for (let i = 0; i < 5; i++) later(i * 500, () => noise(.25, 500, .35)); }
   if (it.id !== "y1") dtActs(a, it.v); await speak(a, `dt_${it.id}_b`, it.boke); unsay();
   surprise(C.pony); markAbove(C.pony, "ex"); await speak(C.pony, "dtp_go", dtTxt("dtp_go"));
