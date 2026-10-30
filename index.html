@@ -70621,6 +70621,19 @@ const PX_CLOCK = (x, y, hour = 5, r = 70) => PX_WALL(g => { el("circle", { cx: x
   const ah = (hour / 12) * Math.PI * 2 - Math.PI / 2; el("path", { d: `M${x} ${y} L${x + Math.cos(ah) * r * .5} ${y + Math.sin(ah) * r * .5}`, ...S6(8) }, g); el("path", { d: `M${x} ${y} V${y - r * .72}`, ...S6(6) }, g); });
 const PX_TV = (x, y, on = true, w = 260) => PX_WALL(g => { el("rect", { x: x - w / 2, y: y - w * .32, width: w, height: w * .64, rx: 14, fill: "#2B2A33", ...S6(6) }, g); el("rect", { x: x - w / 2 + 16, y: y - w * .32 + 16, width: w - 32, height: w * .64 - 32, rx: 6, fill: on ? "#7FCBF0" : "#555B66" }, g);
   if (on) { el("circle", { cx: x - 30, cy: y - 10, r: 26, fill: "#FFD25E" }, g); el("path", { d: `M${x - 60} ${y + 40} q30 -40 60 0 q30 -40 60 0`, fill: "none", stroke: "#7BD389", "stroke-width": 10 }, g); } el("rect", { x: x - 30, y: y + w * .32, width: 60, height: 18, fill: INK }, g); });
+// たいようは まどの そと（まどの 中に 見える たいようと、まどから さしこむ ひかり）。2026-10-30：教室の 中に たいようが かかれて いた
+const PX_SUN_OUT = () => { const g = el("g", {}, propG);
+  const sky = f => { const m = /^#([0-9a-f]{6})$/i.exec(f || ""); if (!m) return false; const n = parseInt(m[1], 16), r = n >> 16, gg = (n >> 8) & 255, b = n & 255; return b > 200 && b > r + 15 && gg > 180; };
+  const wins = [...sceneLayer.querySelectorAll("rect")].filter(r => sky(r.getAttribute("fill")) && +r.getAttribute("width") >= 60 && +r.getAttribute("height") >= 80 && +r.getAttribute("y") < 600 && +r.getAttribute("x") > 600);
+  if (!wins.length) return g; const w = wins.sort((a, b) => +b.getAttribute("x") - +a.getAttribute("x"))[0];
+  const x = +w.getAttribute("x"), y = +w.getAttribute("y"), W = +w.getAttribute("width"), H = +w.getAttribute("height");
+  const id = "sunclip" + Math.random().toString(36).slice(2, 7), d = el("defs", {}, g), cp = el("clipPath", { id }, d); el("rect", { x, y, width: W, height: H, rx: 6 }, cp);
+  const s = el("g", { "clip-path": `url(#${id})` }, g); const cx = x + W * .7, cy = y + H * .3, r = Math.min(W, H) * .32;
+  for (let i = 0; i < 12; i++) { const an = i / 6 * Math.PI; el("path", { d: `M${cx + Math.cos(an) * r * 1.25} ${cy + Math.sin(an) * r * 1.25} L${cx + Math.cos(an) * r * 1.7} ${cy + Math.sin(an) * r * 1.7}`, ...S6(6) }, s); }
+  el("circle", { cx, cy, r, fill: "#FFE27A", ...S6(5) }, s);
+  // まどから さしこむ ひかり（へやの 中は ひかりの すじだけ）
+  el("path", { d: `M${x} ${y + H * .2} L${x + W} ${y + H * .1} L${x + W * .2} 980 L${x - W * 1.6} 980 Z`, fill: "#FFF3B0", opacity: .35 }, g);
+  return g; };
 const PX_RAIN_OUT = () => { // 雨は まどの そと（まどの 中だけに かく。そらも くもる）
   const g = el("g", {}, propG); const wins = [...sceneLayer.querySelectorAll("rect")].filter(r => (r.getAttribute("fill") || "").toUpperCase() === "#BDE3F2" && +r.getAttribute("width") > 100 && +r.getAttribute("y") < 600);
   wins.forEach(w => { const x = +w.getAttribute("x"), y = +w.getAttribute("y"), W = +w.getAttribute("width"), H = +w.getAttribute("height"); w.setAttribute("fill", "#9FB4C8");
@@ -70655,7 +70668,7 @@ const PROP_X = {
   khmichi: () => PX_SIGN(900, 560, "← えき", "#7FCBF0"), khjunbi: (h, a) => PXI("btray", 980, 945, .6), khshitaku: (h) => PXI("shirt", 780, 930, .5),
   // ---- SOS ----
   szkutsushita: (h) => { PXI("sock", 700, 950, .5, -20); for (let i = 0; i < 5; i++) PX_WALL(g => el("ellipse", { cx: 640 + i * 40, cy: 972, rx: 16, ry: 5, fill: "#7FB4E0", opacity: .7 }, g)); },
-  szfue: (h, a) => PX_IN_HAND(a, "recorder", .3, -30), szmabushii: () => PX_WALL(g => { el("circle", { cx: 1380, cy: 140, r: 90, fill: "#FFE27A", ...S6(6) }, g); for (let i = 0; i < 12; i++) { const an = i / 6 * Math.PI; el("path", { d: `M${1380 + Math.cos(an) * 110} ${140 + Math.sin(an) * 110} L${1380 + Math.cos(an) * 150} ${140 + Math.sin(an) * 150}`, ...S6(8) }, g); } }),
+  szfue: (h, a) => PX_IN_HAND(a, "recorder", .3, -30), szmabushii: () => PX_SUN_OUT(),
   sznioi: () => PX_WALL(g => { [820, 870, 920].forEach((x, i) => el("path", { d: `M${x} 900 q20 -40 0 -80 q-20 -40 0 -80`, fill: "none", stroke: "#8FA86A", "stroke-width": 8, "stroke-linecap": "round", opacity: .8 }, g)); el("rect", { x: 790, y: 900, width: 160, height: 75, rx: 10, fill: "#8A9B6A", ...S6(6) }, g); }),
   sznodo: (h, a) => PXI("bottle", 980, 940, .5), szfuku: (h) => PXI("shirtb", 780, 930, .5),
   szdakitsuki: (h, a) => later(600, () => { a.dx.t = -(a.x - h.x - 330 * h.s - 100); hold(a, "run", .7); later(900, () => { a.armL.t = 60; a.armR.t = -60; a.happyOn = true; }); }),
