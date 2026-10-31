@@ -1,0 +1,72 @@
+++ dirname tools/aivis/run.sh
++ cd tools/aivis
++ python3 survey.py /tmp/out
+openapi from https://api.aivis-project.com/v1/openapi.json
+SEARCH /v1/aivm-models/search ['keyword', 'tags', 'tiers', 'categories', 'voice_timbres', 'license_types', 'sort', 'page', 'limit']
+page 1 30 75
+page 2 30 75
+page 3 15 75
+page 4 0 75
+models 75
++ '[' -f cast.json ']'
++ bash synth.sh /tmp/out
++ sudo apt-get -qq update
++ sudo apt-get -qq install -y ffmpeg
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
++ pip install -q numpy
++ mkdir -p /home/runner/.local/share/AivisSpeech-Engine
++ sudo chown -R 1000:1000 /home/runner/.local/share/AivisSpeech-Engine
++ docker pull -q ghcr.io/aivis-project/aivisspeech-engine:cpu-latest
+ghcr.io/aivis-project/aivisspeech-engine:cpu-latest
++ docker run -d --name aivis -p 10101:10101 -v /home/runner/.local/share/AivisSpeech-Engine:/home/user/.local/share/AivisSpeech-Engine-Dev ghcr.io/aivis-project/aivisspeech-engine:cpu-latest
+092787ccce8b5956335655c68c0beb0fd6d2141d12f190120732ea5f84ab1fdc
+++ seq 1 120
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
++ sleep 10
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
++ sleep 10
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
++ sleep 10
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
+"latest"+ break
++ echo
+
++ docker logs aivis
++ tail -20
+[2026/10/31 15:10:51.149] INFO:     Downloaded AIVMX file.
+[2026/10/31 15:10:51.192] INFO:     Installing AIVMX file ...
+[2026/10/31 15:10:51.245] INFO:     Installed AIVMX file to /home/user/.local/share/AivisSpeech-Engine-Dev/Models/a59cb814-0083-4369-8542-f51a29e72af7.aivmx.
+[2026/10/31 15:10:51.852] INFO:     Updated latest version information.
+[2026/10/31 15:10:52.134] INFO:     Installed models:
+[2026/10/31 15:10:52.135] INFO:     - コハク (22e8ed77-94fe-4ef2-871f-a86f94e9a579) (default)
+[2026/10/31 15:10:52.135] INFO:     - まお (a59cb814-0083-4369-8542-f51a29e72af7) (default)
+[2026/10/31 15:10:52.855] INFO:     Using CPU for inference.
+[2026/10/31 15:10:52.855] INFO:     Loading BERT model and tokenizer...
+[2026/10/31 15:11:01.229] INFO:     BERT model and tokenizer loaded. (8.37s)
+[2026/10/31 15:11:01.254] INFO:     Current user dictionary (CSV format):
+[2026/10/31 15:11:01.254] INFO:     - 担々麺,1348,1348,8609,名詞,固有名詞,一般,*,*,*,担々麺,タンタンメン,タンタンメン,3/6,*
+reading /home/user/.local/share/AivisSpeech-Engine-Dev/user.dict_csv-ed5c1175-28be-4b23-a45e-7b94339d3d9d.tmp ... 1
+emitting double-array: 100% |###########################################| 
+[2026/10/31 15:11:01.256] INFO:     User dictionary applied. (0.00s)
+[2026/10/31 15:11:01.907] INFO:     Started server process [1]
+[2026/10/31 15:11:01.907] INFO:     Waiting for application startup.
+[2026/10/31 15:11:01.907] INFO:     Application startup complete.
+[2026/10/31 15:11:01.907] INFO:     Uvicorn running on http://0.0.0.0:10101 (Press CTRL+C to quit)
+[2026/10/31 15:11:07.684] INFO:     172.17.0.1:53550 - "GET /version HTTP/1.1" 200 OK
+++ cat RUN
++ JOBS=
++ docker logs aivis
++ tail -40
