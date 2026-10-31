@@ -122,7 +122,7 @@ SL.forEach(sid => {
   RIVAL_OF[sid] = "gao"; SLEEPER_OF[sid] = T.blk.who; BLOCK_DEF[sid] = { ...T.blk, sleep: false };
   // しかけ と 課題の ならび
   const EVS = ["dice2", "fake", "warp", "kumikae", "home", "x2", "rand", "bonus", "allf", "janken", "zero", "rest", "nebou", "atsumare", "bigwarp", "again", "trolley", "back10", "dice2", "allb", "call", "warp", "kumikae", "fake", "rand"]; // ふりだしは はやめ、10マスもどるは 1かいだけ
-  const WORD = ["kaiwa", "scene", "gag", "yasashiku", "monomane", "tsunagu", "haya", "scene", "oogoe", "kaiwa", "sakasa", "sagasu", "scene", "yasashiku", "gag", "tsunagu", "monomane", "kaiwa", "scene"];
+  const WORD = ["kaiwa", "scene", "gag", "yasashiku", "monomane", "tsunagu", "haya", "scene", "yasashiku", "kaiwa", "sakasa", "sagasu", "scene", "yasashiku", "gag", "tsunagu", "monomane", "kaiwa", "scene"];
   const FUN = ["stop", "catch", "balloon", "more", "cups", "shadow", "battle", "stop", "balloon", "catch", "cups", "more", "shadow", "battle", "balloon", "stop", "catch", "cups", "more"];
   const ev = {}, task = {}; let e = 0, w = 0, f = 0;
   ids.forEach((id, i) => { if (i === 0 || id === "4" || id === "15") return;
@@ -130,7 +130,7 @@ SL.forEach(sid => {
     if ((slot === 1 || slot === 3) && e < EVS.length && i < ids.length - 3) { const t = EVS[e++]; ev[id] = [t, 0, `sl_${sid}_${t}`, t === "tsukkomi" ? "つっこみマス！" : SL_EVT[sid][t]]; }
     else if (slot === 0 || slot === 4 ? w <= f : w < f) { const t = WORD[w++ % WORD.length]; task[id] = sid === "eki" && t === "gag" ? "scene" : t; } /* えきに がっこうの にせもの せんせいは ださない */ else task[id] = FUN[f++ % FUN.length]; });
   EVENTS[sid] = ev; LONG_TASKS[sid] = task;
-  LEGENDS[sid] = [["kaiwa", "ことば"], ["scene", "いってみよう"], ["stop", "おもしろ"], ["oogoe", "こえ"]];
+  LEGENDS[sid] = [["kaiwa", "ことば"], ["scene", "いってみよう"], ["stop", "おもしろ"], ["monomane", "こえ"]]; // 「おおきな こえで よぼう」は なし（2026-10-31。きんじょ めいわく）
   const SCHOOL = ["げんかん", "きゅうしょく", "きょうしつ", "ほけんしつ", "しょくいんしつ", "としょしつ", "トラック"]; // えきの コースでは がっこうの 会話を ださない
   LDATA[sid] = { kaiwa: sid === "eki" ? LONG.kaiwa.filter(k => !SCHOOL.includes(k.place)) : LONG.kaiwa, gag: LONG.gag, haya: LONG.haya, sagasu: LONG.sagasu, hantai: LONG.hantai, yasashiku: LONG_T.yasashiku, tsunagu: LONG_T.tsunagu };
   BOARD_BG[sid] = L => slBG(sid, L);
@@ -486,7 +486,7 @@ async function slSakasa(pc) {
   else await speak(C.pony, `sl_ska_${i}`, it.w === it.r ? `こたえは「${it.r}」。さかさまでも おなじなんだよ` : `こたえは「${it.r}」`);
   playLog({ type: "sakasa", w: it.w, ok, who: NAMES[pc.kind] }); grade(ok); await sleep(400); g.remove(); await delta(pc, ok ? 1 : 0); return ok;
 }
-Object.assign(LTASK_RUN, { stop: slStop, catch: slCatch, balloon: slBalloon, more: slMore, cups: slCups, shadow: slShadow, jump: slJump, battle: slBattle, oogoe: slOogoe, monomane: slMonomane, sakasa: slSakasa });
+Object.assign(LTASK_RUN, { stop: slStop, catch: slCatch, balloon: slBalloon, more: slMore, cups: slCups, shadow: slShadow, jump: slJump, battle: slBattle, oogoe: pc => slMonomane(pc) /* おおきな こえの 課題は なし（2026-10-31）。のこって いても ものまねに */, monomane: slMonomane, sakasa: slSakasa });
 
 /* ---------- メニュー：みんなで あそぶ に 3つ ---------- */
 { const smm = showMultiMenu; showMultiMenu = function () {
