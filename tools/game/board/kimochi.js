@@ -78,7 +78,7 @@ function feelAnim(c, f) {
   }
 }
 /* ---------- ききとり ---------- */
-const kcPraise = () => { const k = rnd(2) ? "kp_ok" : "kp_ok2"; return speak(C.pony, k, KC.txt[k]); };
+const kcPraise = () => speak(C.pony, "kp_ok", KC.txt.kp_ok); // まねして いう 形に したので「よく わかったね」は つかわない（2026-10-31）
 const kcHas = (heard, f) => KF[f].keys.some(v => heard.includes(v) || norm(heard).includes(norm(v)));
 function kcWhich(heard, prefer = []) { for (const f of prefer) if (kcHas(heard, f)) return f; for (const f of Object.keys(KF)) if (kcHas(heard, f)) return f; return null; }
 const KC_ALL = [Object.values(KF).flatMap(v => v.keys)];
@@ -93,30 +93,15 @@ function freeListen(ms = 12000) {
 function kcCards(fs, y = 130, par = hudLayer) { const g = el("g", {}, par); const W = 330, x0 = 800 - fs.length * (W + 24) / 2 + 12;
   el("rect", { x: x0 - 30, y: y - 14, width: fs.length * (W + 24) + 36, height: 200, rx: 30, fill: "#FFFFFFE8", ...S6(5) }, g);
   const cs = fs.map((f, i) => { const c = card(g, x0 + i * (W + 24), y, W, 172, KF[f].w, KF[f].e, { es: 84, fs: 50 }); c.f = f; return c; }); g.cs = cs; return g; }
-// 「どんな きもち？」に こたえる。くやしいと いったら、ぴったりの ことばを おしえる
+// 「どんな きもち？」：ロールプレイ型（2026-10-31）。「？」で じぶんの きもちを いわせない。
+//   ぽにーが その 子の せりふを お手本で いう（きもちの ことばは せりふの なかに ある） → 子どもは その 子に なって まねして いう
 async function kcFeel(h, sc, t, ask, qKey, qText, tag) {
-  const F = sc.f, okSet = [F, ...(sc.also || [])], st = { said: null, iikae: false, wrong: false, ok: false };
-  if (ask) await speak(ask, qKey, qText); else await speak(C.pony, qKey, qText);
-  let cg = null; const showC = () => { if (!cg) cg = kcCards(shuffle([F, ...sc.opts])); };
-  if (t < 3) showC(); /* 段4から：カードは いちど いえなかった ときだけ */
-  for (let n = 0; n < 2 && !st.said; n++) {
-    showTask("？", tag); setListen(h, true);
-    const tap = cg ? new Promise(r => cg.cs.forEach(c => c.onclick = () => r({ r: "ok", heard: KF[c.f].w, tap: c.f }))) : new Promise(() => { });
-    const r = await Promise.race([listen(KC_ALL, 9000), tap]); setListen(h, false); hideTask(); if (cg) cg.cs.forEach(c => c.onclick = null);
-    let f = r.tap || kcWhich(r.heard || "", okSet);
-    if (!f && r.r === "ok") f = F; // 確認ボタン・にて いる おとで あった とき
-    if (f) { st.said = f; break; }
-    if (n === 0) { showC(); await speak(C.pony, "kp_tap", "カードを みても いいよ"); }
-  }
-  const f = st.said;
-  if (f && okSet.includes(f)) { st.ok = true; if (cg) { const c = cg.cs.find(x => x.f === f) || cg.cs.find(x => x.f === F); if (c) c.rect.setAttribute("fill", "#FFE27A"); } chime(); markAbove(h, "sparkle");
-    await kcPraise(); }
-  else {
-    if (f === "kuyashii") { st.iikae = true; await speak(C.pony, `kp_ii_${F}`, KC.txt[`kp_ii_${F}`]); }
-    else { st.wrong = !!f; await speak(C.pony, `kp_pt_${F}`, KC.txt[`kp_pt_${F}`]); }
-    if (cg) { const c = cg.cs.find(x => x.f === F); if (c) c.rect.setAttribute("fill", "#FFE27A"); }
-    const r = await kmSay(h, `kp_w_${F}`, KF[F].w, [KF[F].keys], "まねして いおう"); st.ok = r.ok && st.iikae; }
-  if (cg) cg.remove();
+  const F = sc.f, st = { said: null, iikae: false, wrong: false, ok: false };
+  await speak(C.pony, qKey, qText);
+  const line = KC_RP.sc[sc.id] || KF[F].w, key = KC_RP.sc[sc.id] ? `kc_${sc.id}_fm` : `kp_w_${F}`;
+  const r = await kmSay(h, key, line, [KF[F].keys], `${NAMES[h.kind] || "まるシマ"}に なって`);
+  st.ok = r.ok; st.said = r.ok ? F : null;
+  if (r.ok) await kcPraise();
   return st;
 }
 /* ---------- なにが あったか を アニメで みせる（2026-10-20） ---------- */
@@ -186,7 +171,7 @@ async function kcScene(pc) {
   enter(a); await sleep(1000);
   const log = [], said = []; let okN = 0, nSay = 1, iikae = false, wrong = false;
   // 1) どんな きもち？
-  const st = await kcFeel(h, sc, t, null, `kpq_${other ? "other" : "feel"}`, KC.txt[`kpq_${other ? "other" : "feel"}`], other ? "ともだちの きもちは？" : "きもちの ことばで");
+  const st = await kcFeel(h, sc, t, null, `kpq_${other ? "other" : "feel"}`, KC.txt[`kpq_${other ? "other" : "feel"}`]);
   if (loop) { clearInterval(loop); loop = null; }
   if (st.ok) okN++; iikae = st.iikae; wrong = st.wrong; said.push(st.said); log.push(`きもち:${st.said ? KF[st.said].w : "-"}${st.iikae ? "→" + KF[sc.f].w : ""}${st.ok ? "○" : "×"}`);
   feelAnim(who, sc.f); await speak(C.pony, `kp_body_${sc.f}`, KC.txt[`kp_body_${sc.f}`]); hb.remove();
@@ -210,30 +195,31 @@ async function kcScene(pc) {
   await sleep(400); setView("board"); return ok;
 }
 /* ---------- 🎭 きもち ぴったり ---------- */
+// kmSay と おなじ（お手本 → 2かいまで）。せりふの わくの 高さだけ かえられる
+async function kcSayAt(h, key, text, keys, tag, cy) {
+  showTask(text, tag, cy); await speak(C.pony, key, text); unsay();
+  let ok = false; for (let n = 0; n < 2 && !ok; n++) { setListen(h, true); const r = await listen(keys, 8000); setListen(h, false); ok = r.r === "ok";
+    if (!ok && n === 0) await speak(C.pony, "p_again", "もう いっかい いってみよう"); }
+  if (!ok) { await speak(C.pony, "p_together", "いっしょに いおうね"); await speak(C.pony, key, text); }
+  hideTask(); if (ok) { chime(); markAbove(h, "sparkle"); } return { ok }; }
+//   2026-10-31 ロールプレイ型に：カードを えらばせる クイズを やめ、ばめんの 子に なって、ぽにーの お手本を まねして いう
 const KC_PN = new Map();
 async function kcPitta(pc) {
   let pool = KC.pitta; const m = Math.min(...pool.map(x => KC_PN.get(x.id) || 0)); pool = pool.filter(x => (KC_PN.get(x.id) || 0) === m); const it = pool[rnd(pool.length)]; KC_PN.set(it.id, m + 1);
-  const t = tierOf(), g = panel("きもち ぴったり", "#FFF6E0");
+  const g = panel("きもち ぴったり", "#FFF6E0");
   el("rect", { x: 170, y: 140, width: 1260, height: 330, rx: 30, fill: "#FFFFFF", ...S6(6) }, g); txt(g, 330, 360, it.emo, 170, { "text-anchor": "middle" });
   const words = it.t.split("、"); words.forEach((l, i) => txt(g, 900, 315 + (i - (words.length - 1) / 2) * 72, l + (i < words.length - 1 ? "、" : ""), l.length > 13 ? 42 : 50, { "text-anchor": "middle" }));
-  await speak(C.pony, "kp_pitta", KC.txt.kp_pitta); await speak(C.pony, `kpt_${it.id}_q`, it.t);
-  const fs = shuffle([it.f, ...it.opts]), cs = fs.map((f, j) => { const c = card(g, 190 + j * 420, 530, 380, 250, KF[f].w, KF[f].e, { es: 110, fs: 50 }); c.f = f; return c; });
-  let first = true, iikae = false; const picks = [];
-  const chosen = await new Promise(res => { let live = true, busy = false;
-    const pick = async f => { if (!live || busy) return; const c = cs.find(x => x.f === f); if (!c || c.dim) return; picks.push(f);
-      if (f === it.f) { live = false; cs.forEach(x => x.onclick = null); res(c); return; }
-      busy = true; first = false; if (f === "kuyashii") iikae = true; c.dim = 1; c.setAttribute("opacity", .35); noise(.1, 700, .35);
-      await speak(C.pony, `kp_def_${f}`, KC.txt[`kp_def_${f}`]); busy = false; };
-    cs.forEach(c => c.onclick = () => pick(c.f));
-    (async () => { const ks = [fs.flatMap(f => KF[f].keys)]; while (live) { setListen(pc, true); const r = await listen(ks, 9000); setListen(pc, false); if (!live) return;
-        if (r.r === "ok") { const f = kcWhich(r.heard || "", [it.f]) || (r.heard && r.heard.includes("確認") ? it.f : null); if (f && fs.includes(f)) await pick(f); }
-        await sleep(200); } })(); });
-  chosen.rect.setAttribute("fill", "#FFE27A"); chime(); confetti(30); const big = chosen.childNodes[1]; if (big) tween(500, k => big.setAttribute("transform", `translate(0 ${(-30 * Math.sin(k * Math.PI)).toFixed(0)})`));
-  await kcPraise(); await speak(C.pony, `kp_def_${it.f}`, KC.txt[`kp_def_${it.f}`]);
-  let okR = true; if (t >= 1) { await speak(C.pony, "kp_pitta_say", KC.txt.kp_pitta_say); const r = await kmSay(pc, `kp_w_${it.f}`, KF[it.f].w, [KF[it.f].keys], "ことばで いおう"); okR = r.ok; }
+  const me = clone(pc.kind, 1300, 950, (KID_S[pc.kind] || .8) * .5); hudLayer.appendChild(me.root);
+  await speak(C.pony, `kpt_${it.id}_q`, it.t); feelAnim(me, it.f);
+  // きもちの ことば（かお＋ことば）は ばめんの わくの 下に。せりふの わくは その 下（かさならない ように）
+  const chip = el("g", {}, g); el("rect", { x: 620, y: 420, width: 360, height: 96, rx: 48, fill: "#FFE27A", ...S6(5) }, chip); txt(chip, 800, 488, `${KF[it.f].e} ${KF[it.f].w}`, 46, { "text-anchor": "middle" });
+  await speak(C.pony, "kp_rp", KC_RP.txt.kp_rp);
+  const r = await kcSayAt(pc, `kpt_${it.id}_m`, KC_RP.pt[it.id], [KF[it.f].keys], `${NAMES[pc.kind] || "まるシマ"}に なって`, 690);
+  if (r.ok) { chime(); confetti(30); joy(me); await kcPraise(); }
+  await speak(C.pony, `kp_def_${it.f}`, KC.txt[`kp_def_${it.f}`]);
   KC_GOT.push({ kind: pc.kind, f: it.f });
-  const ok = first && okR; grade(ok); playLog({ type: "pitta", id: it.id, f: it.f, picks, iikae, ok, ...(MODE === "multi" ? { who: NAMES[pc.kind] } : {}) });
-  await sleep(500); g.remove(); if (ok) await slGo(pc, 1); return ok;
+  grade(r.ok); playLog({ type: "pitta", id: it.id, f: it.f, picks: [], iikae: false, ok: r.ok, ...(MODE === "multi" ? { who: NAMES[pc.kind] } : {}) });
+  await sleep(500); clearClones(); g.remove(); if (r.ok) await slGo(pc, 1); return r.ok;
 }
 /* ---------- 🎤 きもちの インタビュー（じぶんの ことを はなす） ---------- */
 async function kcInterview(pc) {

@@ -86,15 +86,16 @@ function mkTower(h) { const g = el("g", {}, propG), cx = h.x + 200 * h.s + 330, 
   return { g, fall: () => { mode = "wobble"; t = 0; later(900, () => { mode = "fall"; bs.forEach((b, i) => { b.st.y -= 1; }); noise(.5, 300, .5); later(250, () => noise(.3, 200, .4)); }); } }; }
 /* =============== ✊ ぽにーと じゃんけん =============== */
 const JK = [["✊", "グー", ["ぐー", "グー"]], ["✌", "チョキ", ["ちょき", "チョキ"]], ["✋", "パー", ["ぱー", "パー"]]];
-async function mkJanken(pc) { // 2026-10-25 つくりなおし：3かい しょうぶ・てを ふる アニメ・ぽにーの せりふを しぜんに
+async function mkJanken(pc) { // 2026-10-25 つくりなおし（2026-10-31 1かい しょうぶに）・てを ふる アニメ・ぽにーの せりふを しぜんに
   const g = panel("ぽにーと じゃんけん", "#FFF6DC"), name = NAMES[pc.kind] || "きみ";
   const me = clone(pc.kind, 330, 900, (KID_S[pc.kind] || .8) * .62), po = clone("pony", 1270, 900, .5); hudLayer.appendChild(me.root); hudLayer.appendChild(po.root);
   const hm = txt(g, 560, 420, "✊", 150, { "text-anchor": "middle" }), hp = txt(g, 1040, 420, "✊", 150, { "text-anchor": "middle", transform: "scale(-1 1) translate(-2080 0)" });
   txt(g, 800, 400, "VS", 70, { "text-anchor": "middle" }); const sc = txt(g, 800, 250, "", 64, { "text-anchor": "middle" });
-  let w = 0, l = 0; const show = () => { sc.textContent = `${name} ${w} − ${l} ぽにー`; }; show();
-  await speak(C.pony, "mkp_jk3_intro", nTxt("mkp_jk3_intro"));
-  while (w < 2 && l < 2) { let first = true, res = 0;
-    while (!res) { hm.textContent = hp.textContent = "✊"; if (first) await speak(C.pony, "mkp_jk3_pick", nTxt("mkp_jk3_pick"));
+  // 2026-10-31：1かい しょうぶに（「なんかいも させるのは よくない」）。点数の 表示も なし
+  let w = 0, l = 0; const show = () => { sc.textContent = ""; }; show();
+  await speak(C.pony, "mkp_jk_intro", nTxt("mkp_jk_intro"));
+  while (w + l < 1) { let first = true, res = 0;
+    while (!res) { hm.textContent = hp.textContent = "✊";
       const cs = JK.map((j, i) => { const c = card(g, 330 + i * 330, 580, 280, 200, j[1], j[0], { es: 90, fs: 40 }); c.i = i; return c; });
       const pick = await new Promise(r => { let live = true; cs.forEach(c => c.onclick = () => { if (live) { live = false; r(c.i); } });
         (async () => { while (live) { setListen(pc, true); const q = await listen([JK.flatMap(j => j[2])], 8000); setListen(pc, false); if (!live) return;
@@ -103,11 +104,11 @@ async function mkJanken(pc) { // 2026-10-25 つくりなおし：3かい しょ�
       // てを ふりながら「じゃん、けん、ぽん！」
       const sp = speak(C.pony, first ? "mkp_jk3_jan" : "mkp_jk3_aiko", nTxt(first ? "mkp_jk3_jan" : "mkp_jk3_aiko")); let t = 0;
       addTick(dt => { if (t > 1.1 || !g.isConnected) { hm.removeAttribute("dy"); return false; } t += dt; const y = Math.abs(Math.sin(t * 8)) * -40; hm.setAttribute("y", 420 + y); hp.setAttribute("y", 420 + y); });
-      await sleep(1150); const want = (w + l >= 1 && rnd(4) === 0) ? 0 : [1, -1, 0][rnd(3)], pi = want === 0 ? pick : want === 1 ? (pick + 1) % 3 : (pick + 2) % 3;
+      await sleep(1150); const want = [1, -1, 0][rnd(3)], pi = want === 0 ? pick : want === 1 ? (pick + 1) % 3 : (pick + 2) % 3;
       hm.textContent = JK[pick][0]; hp.textContent = JK[pi][0]; hm.setAttribute("y", 420); hp.setAttribute("y", 420); blip(600, 900, .1, "square"); await sp; await sleep(500);
       res = want; first = false; if (!res) { noise(.08, 500, .2); playMove(me, "think"); playMove(po, "think"); } }
-    if (res > 0) { w++; show(); joy(me); playMove(po, "frustrated"); markAbove(me, "sparkle"); await speak(C.pony, "mkp_jk3_rw", nTxt("mkp_jk3_rw")); }
-    else { l++; show(); joy(po); playMove(me, "frustrated"); await speak(C.pony, "mkp_jk3_rl", nTxt("mkp_jk3_rl")); }
+    if (res > 0) { w++; joy(me); playMove(po, "frustrated"); markAbove(me, "sparkle"); }
+    else { l++; joy(po); playMove(me, "frustrated"); }
     await sleep(400); }
   let ok;
   if (w < l) { joy(po); await speak(C.pony, "mkp_jk3_lose", nTxt("mkp_jk3_lose")); await speak(C.pony, "mkp_jk3_say", nTxt("mkp_jk3_say"));
