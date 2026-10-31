@@ -64,15 +64,17 @@ async function jkRun(heroKind) {
   else { joy(a); noise(.15, 500, .3); await speak(C.pony, "jk_lose", "まけちゃった！ どんな あだなに なるかな？");
     await jkSpin(g, 600, JK_C, ci); await jkSpin(g, 1000, JK_F, fi); await sleep(500);
     await speak(a, `jka_${pk}_l_${nk}`, `かった！ きょうから きみは ${nick}！`);
-    line = t <= 1 ? "おもしろい！" : t <= 3 ? `${nick}？ おもしろい！` : `えー、${nick}？ おもしろい！ つぎは まけないぞ`;
-    say = async () => { if (t >= 4) await speak(C.pony, "jk_ee", "えー、"); if (t >= 2) await speak(C.pony, `jk_nq_${nk}`, nick + "？"); await speak(C.pony, "jk_omo", "おもしろい！"); if (t >= 4) await speak(C.pony, "jk_tsugi", "つぎは まけないぞ"); };
-    keys = t <= 1 ? [["おもしろ", "面白"]] : [JK_KEYS[fk], ["おもしろ", "面白"]]; }
+    // 2026-10-31：つけられた あだなは「おもしろい！」と うけいれず、「あだなで よばないで」と いう（「ゆでたけのこ」が あだなだと わかりにくい、との 指摘）
+    line = t <= 1 ? "あだなで よばないで" : t <= 3 ? `${nick}？ あだなで よばないで` : `えー、${nick}？ その あだなで よばないで。なまえで よんでね`;
+    say = async () => { if (t >= 4) await speak(C.pony, "jk_ee", "えー、"); if (t >= 2) await speak(C.pony, `jk_nq_${nk}`, nick + "？");
+      if (t >= 4) await speak(C.pony, "jk_sono", "その あだなで よばないで。なまえで よんでね"); else await speak(C.pony, "jk_yobanai", "あだなで よばないで"); };
+    keys = [["あだな", "あだ名"], ["よばないで", "呼ばないで", "よばない", "呼ばない"]]; }
   g.innerHTML = "";
   showTask(line, res > 0 ? `${pn}に いおう` : `${pn}に こたえよう`); await say(); unsay();
   let ok = false; for (let n = 0; n < 2 && !ok; n++) { setListen(h, true); const r = await listen(keys, 9000); setListen(h, false); ok = r.r === "ok"; if (!ok && n === 0) await speak(C.pony, "p_again", "もう いっかい いってみよう"); }
   hideTask();
-  if (ok) { confetti(40); joy(C.pony); joy(a); await speak(a, res > 0 ? `jka_${pk}_ok` : `jka_${pk}_next`, res > 0 ? "あはは、おもしろい あだな！" : "つぎも まけないよ！"); }
-  else { await speak(C.pony, "p_together", "いっしょに いおうね"); await say(); }
+  if (ok) { confetti(40); joy(C.pony); joy(a); await speak(a, res > 0 ? `jka_${pk}_ok` : `jka_${pk}_sorry`, res > 0 ? "あはは、おもしろい あだな！" : "あ、ごめん。もう いわないね"); }
+  else { await speak(C.pony, "p_together", "いっしょに いおうね"); await say(); if (res < 0) { playMove(a, "nod"); await speak(a, `jka_${pk}_sorry`, "あ、ごめん。もう いわないね"); } }
   grade(ok); GS.tasks++; if (ok) GS.ok++;
   playLog({ type: "adana", nick, win: res > 0, ok, ...(MODE === "multi" ? { who: NAMES[heroKind] } : {}) });
   await sleep(500); g.remove(); setView("board"); return ok;

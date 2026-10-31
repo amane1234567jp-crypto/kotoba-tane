@@ -21,6 +21,17 @@ function resumeAll() {
 }
 const whenShown = () => new Promise(r => { if (!HIDE.off) return r(); const t = setInterval(() => { if (!HIDE.off) { clearInterval(t); r(); } }, 200); });
 document.addEventListener("visibilitychange", () => document.hidden ? pauseAll() : resumeAll());
+/* 2026-10-31：iPhone を スリープ → もどすと 音が きえて いた（課題が でるまで もどらない）。
+   iOS は スリープで AudioContext が "interrupted" に なり、さいせいの 再開には タッチが いる ことが ある。
+   → もどった とき・フォーカス・タッチの たびに、とまって いたら もう いちど ならす。1びょう ごとにも みる */
+function audioKick() { if (document.hidden || HIDE.off) return;
+  try { if (ctx && ctx.state !== "running" && ctx.state !== "closed") ctx.resume().catch(() => { }); } catch (e) { }
+  try { if (ROUTE.el && ROUTE.el.paused) ROUTE.el.play().catch(() => { }); } catch (e) { }
+ }
+["pointerdown", "touchend", "keydown"].forEach(ev => document.addEventListener(ev, audioKick, { capture: true, passive: true }));
+window.addEventListener("focus", () => setTimeout(audioKick, 100));
+document.addEventListener("visibilitychange", () => { if (!document.hidden) { setTimeout(audioKick, 300); setTimeout(audioKick, 1200); } });
+setInterval(audioKick, 1000);
 window.addEventListener("pagehide", pauseAll); window.addEventListener("pageshow", () => { if (!document.hidden) resumeAll(); });
 // 聞きとりの とちゅうで とじたら、もどってから もう いちど
 { const ls = listen; listen = async function (groups, ms) {

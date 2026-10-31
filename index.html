@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="manifest" href="manifest.json">
 <style>body{margin:0}</style>
-<script>const PACK_VER="ceb245029f";{const f0=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&/(^|\/)packs\/[^?]+\.json$/.test(u))u+="?v="+PACK_VER;return f0.call(this,u,o);};}</script>
+<script>const PACK_VER="ed9a034b39";{const f0=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&/(^|\/)packs\/[^?]+\.json$/.test(u))u+="?v="+PACK_VER;return f0.call(this,u,o);};}</script>
 <script>if("serviceWorker" in navigator&&location.protocol==="https:")addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));</script>
 </head><body>
 <title>ことばのたね すごろく試作</title>
@@ -60237,7 +60237,9 @@ function audio() {
     analyser = ctx.createAnalyser(); analyser.fftSize = 1024; analyser.connect(ctx.destination);
     buf = new Float32Array(analyser.fftSize);
   }
-  if (ctx.state === "suspended") ctx.resume();
+  // iPhone を スリープ → もどると "interrupted" に なる（"suspended" では ない）。どちらでも もどす（2026-10-31）
+  if (ctx.state !== "running" && ctx.state !== "closed") { try { ctx.resume(); } catch (e) { } }
+  try { if (typeof ROUTE !== "undefined" && ROUTE.el && ROUTE.el.paused && !document.hidden) ROUTE.el.play().catch(() => { }); } catch (e) { }
   return ctx;
 }
 function blip(f0, f1, dur, type = "sine") {
@@ -68663,15 +68665,17 @@ async function jkRun(heroKind) {
   else { joy(a); noise(.15, 500, .3); await speak(C.pony, "jk_lose", "まけちゃった！ どんな あだなに なるかな？");
     await jkSpin(g, 600, JK_C, ci); await jkSpin(g, 1000, JK_F, fi); await sleep(500);
     await speak(a, `jka_${pk}_l_${nk}`, `かった！ きょうから きみは ${nick}！`);
-    line = t <= 1 ? "おもしろい！" : t <= 3 ? `${nick}？ おもしろい！` : `えー、${nick}？ おもしろい！ つぎは まけないぞ`;
-    say = async () => { if (t >= 4) await speak(C.pony, "jk_ee", "えー、"); if (t >= 2) await speak(C.pony, `jk_nq_${nk}`, nick + "？"); await speak(C.pony, "jk_omo", "おもしろい！"); if (t >= 4) await speak(C.pony, "jk_tsugi", "つぎは まけないぞ"); };
-    keys = t <= 1 ? [["おもしろ", "面白"]] : [JK_KEYS[fk], ["おもしろ", "面白"]]; }
+    // 2026-10-31：つけられた あだなは「おもしろい！」と うけいれず、「あだなで よばないで」と いう（「ゆでたけのこ」が あだなだと わかりにくい、との 指摘）
+    line = t <= 1 ? "あだなで よばないで" : t <= 3 ? `${nick}？ あだなで よばないで` : `えー、${nick}？ その あだなで よばないで。なまえで よんでね`;
+    say = async () => { if (t >= 4) await speak(C.pony, "jk_ee", "えー、"); if (t >= 2) await speak(C.pony, `jk_nq_${nk}`, nick + "？");
+      if (t >= 4) await speak(C.pony, "jk_sono", "その あだなで よばないで。なまえで よんでね"); else await speak(C.pony, "jk_yobanai", "あだなで よばないで"); };
+    keys = [["あだな", "あだ名"], ["よばないで", "呼ばないで", "よばない", "呼ばない"]]; }
   g.innerHTML = "";
   showTask(line, res > 0 ? `${pn}に いおう` : `${pn}に こたえよう`); await say(); unsay();
   let ok = false; for (let n = 0; n < 2 && !ok; n++) { setListen(h, true); const r = await listen(keys, 9000); setListen(h, false); ok = r.r === "ok"; if (!ok && n === 0) await speak(C.pony, "p_again", "もう いっかい いってみよう"); }
   hideTask();
-  if (ok) { confetti(40); joy(C.pony); joy(a); await speak(a, res > 0 ? `jka_${pk}_ok` : `jka_${pk}_next`, res > 0 ? "あはは、おもしろい あだな！" : "つぎも まけないよ！"); }
-  else { await speak(C.pony, "p_together", "いっしょに いおうね"); await say(); }
+  if (ok) { confetti(40); joy(C.pony); joy(a); await speak(a, res > 0 ? `jka_${pk}_ok` : `jka_${pk}_sorry`, res > 0 ? "あはは、おもしろい あだな！" : "あ、ごめん。もう いわないね"); }
+  else { await speak(C.pony, "p_together", "いっしょに いおうね"); await say(); if (res < 0) { playMove(a, "nod"); await speak(a, `jka_${pk}_sorry`, "あ、ごめん。もう いわないね"); } }
   grade(ok); GS.tasks++; if (ok) GS.ok++;
   playLog({ type: "adana", nick, win: res > 0, ok, ...(MODE === "multi" ? { who: NAMES[heroKind] } : {}) });
   await sleep(500); g.remove(); setView("board"); return ok;
@@ -69289,6 +69293,17 @@ function resumeAll() {
 }
 const whenShown = () => new Promise(r => { if (!HIDE.off) return r(); const t = setInterval(() => { if (!HIDE.off) { clearInterval(t); r(); } }, 200); });
 document.addEventListener("visibilitychange", () => document.hidden ? pauseAll() : resumeAll());
+/* 2026-10-31：iPhone を スリープ → もどすと 音が きえて いた（課題が でるまで もどらない）。
+   iOS は スリープで AudioContext が "interrupted" に なり、さいせいの 再開には タッチが いる ことが ある。
+   → もどった とき・フォーカス・タッチの たびに、とまって いたら もう いちど ならす。1びょう ごとにも みる */
+function audioKick() { if (document.hidden || HIDE.off) return;
+  try { if (ctx && ctx.state !== "running" && ctx.state !== "closed") ctx.resume().catch(() => { }); } catch (e) { }
+  try { if (ROUTE.el && ROUTE.el.paused) ROUTE.el.play().catch(() => { }); } catch (e) { }
+ }
+["pointerdown", "touchend", "keydown"].forEach(ev => document.addEventListener(ev, audioKick, { capture: true, passive: true }));
+window.addEventListener("focus", () => setTimeout(audioKick, 100));
+document.addEventListener("visibilitychange", () => { if (!document.hidden) { setTimeout(audioKick, 300); setTimeout(audioKick, 1200); } });
+setInterval(audioKick, 1000);
 window.addEventListener("pagehide", pauseAll); window.addEventListener("pageshow", () => { if (!document.hidden) resumeAll(); });
 // 聞きとりの とちゅうで とじたら、もどってから もう いちど
 { const ls = listen; listen = async function (groups, ms) {

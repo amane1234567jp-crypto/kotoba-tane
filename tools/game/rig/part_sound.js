@@ -6,7 +6,9 @@ function audio() {
     analyser = ctx.createAnalyser(); analyser.fftSize = 1024; analyser.connect(ctx.destination);
     buf = new Float32Array(analyser.fftSize);
   }
-  if (ctx.state === "suspended") ctx.resume();
+  // iPhone を スリープ → もどると "interrupted" に なる（"suspended" では ない）。どちらでも もどす（2026-10-31）
+  if (ctx.state !== "running" && ctx.state !== "closed") { try { ctx.resume(); } catch (e) { } }
+  try { if (typeof ROUTE !== "undefined" && ROUTE.el && ROUTE.el.paused && !document.hidden) ROUTE.el.play().catch(() => { }); } catch (e) { }
   return ctx;
 }
 function blip(f0, f1, dur, type = "sine") {
