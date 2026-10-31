@@ -4,10 +4,10 @@
 
 /* ---------- 盤：マスの 種類を ふやす ---------- */
 Object.assign(LTASK, { gag: ["#FFD08A", "😂"], haya: ["#FFC6E0", "👅"], sagasu: ["#BFEDE2", "👀"] });
-{ const order = ["kaiwa", "gag", "sagasu", "hantai", "haya", "scene", "joshi", "gag", "machi", "kaiwa", "sagasu", "teinei", "haya", "gag", "kaiwa", "joshi", "sagasu", "machi"]; let i = 0;
+{ const order = ["kaiwa", "gag", "sagasu", "hantai", "haya", "scene", "kaiwa", "gag", "machi", "kaiwa", "sagasu", "teinei", "haya", "gag", "kaiwa", "scene", "sagasu", "machi"] /* ことば パズル（が・を）は なし（2026-10-31。ひらがなが よめない 子には むずかしい） */; let i = 0;
   Object.keys(LONG_TASK).forEach(k => delete LONG_TASK[k]);
   Object.keys(BOARD.long.nodes).forEach(id => { if (["0", "4", "15"].includes(id) || EVENTS.long[id]) return; LONG_TASK[id] = order[i++ % order.length]; }); }
-LEGEND_L.splice(0, LEGEND_L.length, ["kaiwa", "かいわ"], ["gag", "つっこみ"], ["haya", "はやくち"], ["sagasu", "さがす"], ["hantai", "はんたい"], ["joshi", "パズル"], ["machi", "まちがい"], ["teinei", "ていねい"], ["scene", "よみあげ"]);
+LEGEND_L.splice(0, LEGEND_L.length, ["kaiwa", "かいわ"], ["gag", "つっこみ"], ["haya", "はやくち"], ["sagasu", "さがす"], ["hantai", "はんたい"], ["machi", "まちがい"], ["teinei", "ていねい"], ["scene", "よみあげ"]);
 
 /* ---------- ふえる キャラ（かぞく・さがす 用）：つかいおわったら かならず けす ---------- */
 const CLONES = [], CLEAN = []; // CLEAN：場面の あとに もとに もどす 関数

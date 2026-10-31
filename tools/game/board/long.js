@@ -248,7 +248,7 @@ async function lkTeinei(pc) {
   const pick = await tapOnce(cards); const ok = opts[pick].ok; flashCard(cards[pick], ok); if (!ok) { await sleep(500); flashCard(cards[opts.findIndex(o => o.ok)], true); } else { confetti(30); chime(); }
   await speak(C.pony, `lk_${it.id}_a`, it.kind === "which" ? `「${it.ok}」と いうと いいね` : `「${it.ok}」だね`); grade(ok); await sleep(400); g.remove(); return ok;
 }
-const LTASK_RUN = { kaiwa: lkKaiwa, hantai: lkHantai, joshi: lkJoshi, machi: lkMachi, teinei: lkTeinei };
+const LTASK_RUN = { kaiwa: lkKaiwa, hantai: lkHantai, joshi: pc => lkKaiwa(pc) /* ことば パズルは なし（2026-10-31） */, machi: lkMachi, teinei: lkTeinei };
 
 /* ---------- 盤の 見た目 ---------- */
 BOARD_BG.long = function (L) {

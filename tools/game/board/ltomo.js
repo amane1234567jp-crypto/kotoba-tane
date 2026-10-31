@@ -72,15 +72,18 @@ BOARD_BG.ltomo = function (L) {
 //   ばめんの 絵と ことばを みせ、ぽにーが やさしい いいかたを お手本で いう → まねして いう（ロールプレイ型）
 const lkKeys = t => { const w = t.replace(/[、。！？…]/g, " ").split(/\s+/).filter(x => x.length >= 2).sort((p, q) => q.length - p.length).slice(0, 2); return w.length ? w.map(x => [x]) : [[t]]; };
 async function lkYasashiku(pc) {
-  const it = pickL("yasashiku"); const g = panel("やさしく いうと？", "#FFF0F5");
-  txt(g, 800, 290, it.e, 150, { "text-anchor": "middle" }); txt(g, 800, 420, it.q, it.q.length > 18 ? 46 : 54, { "text-anchor": "middle" });
-  const me = clone(pc.kind, 1260, 950, (KID_S[pc.kind] || .8) * .55); hudLayer.appendChild(me.root);
-  await speak(C.pony, `lk_${it.id}_s`, it.q);
-  await speak(C.pony, "lt_yasa_rp", "やさしい いいかたを、まねして いって みよう");
-  const r = await kcSayAt(pc, `lk_${it.id}_m`, it.ok, lkKeys(it.ok), `${NAMES[pc.kind] || "まるシマ"}に なって`, 690);
-  if (r.ok) { confetti(40); joy(me); await speak(C.pony, "lt_yasa_ok", "やさしい いいかただね！ ともだちも うれしいね"); }
+  // 2026-10-31：ふつうの ロールプレイに（「やさしく いって みよう」の ひとことも なし）。
+  //   ともだちが いる 場面 → ぽにーが なにが あったか を いう → ぽにーの お手本 → まねして いう → ともだちが よろこぶ
+  const it = pickL("yasashiku"), fr = shuffle(["kuma", "tora", "kon", "doshin", "pyon", "chu"]).find(k => k !== pc.kind && k !== SLEEPER) || "kuma";
+  const s = { id: "lk_" + it.id, place: zoneOf(pc.node), asker: ["kamejii", "nobbo", "meebaa"].find(k => k !== pc.kind), cast: [fr], intro: "kaiwa", talk: [] };
+  STORY_POS[s.id] = [1180];
+  const { hero: h } = setSitView(s, pc.kind); const f = STORY_CAST[fr]; f.dx.v = f.dx.t = 0; await sleep(700);
+  const hb = hint7(f, it.e, ""); if (/ころんだ|ないて|まちがえ|こぼした/.test(it.q)) f.sadMouth = true;
+  await speak(C.pony, `lk_${it.id}_s`, it.q); playMove(h, "look");
+  const r = await kmSay(h, `lk_${it.id}_m`, it.ok, lkKeys(it.ok), `${NAMES[pc.kind] || "まるシマ"}に なって`);
+  hb.remove(); f.sadMouth = false; joy(f); if (r.ok) { chime(); playMove(h, "nod"); } await sleep(900);
   grade(r.ok); playLog({ type: "yasashiku", id: it.id, ok: r.ok, who: NAMES[pc.kind] });
-  await sleep(400); clearClones(); g.remove(); await moveAfter(pc, r.ok ? 1 : 0); return r.ok;
+  await sleep(300); setView("board"); await moveAfter(pc, r.ok ? 1 : 0); return r.ok;
 }
 /* ---------- 🔁 つなげよう ---------- */
 async function lkTsunagu(pc) {
