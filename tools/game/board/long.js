@@ -162,18 +162,15 @@ async function lkKaiwa(pc) {
   const { hero: h } = setSitView(s, pc.kind); const cast = STORY_CAST; await sleep(600);
   for (let i = 0; i < it.talk.length; i++) { const [who, text] = it.talk[i]; lkMove(cast[who], (LK_MOVE[it.id] || [])[i]); if (it.id === "odaiji" && i === 0) later(900, () => cast[who].sadMouth = true); await speak(cast[who], `lk_${it.id}_t${i}`, text); }
   playMove(h, "think");
-  const opts = shuffle(it.opts.map((o, i) => ({ t: o[0], e: o[1], ok: i === 0 })));
-  const g = el("g", {}, hudLayer); el("rect", { x: 60, y: 130, width: 1480, height: 470, rx: 34, fill: "#FFFFFFEE", ...S6(6) }, g);
-  txt(g, 800, 190, "つぎに なんて いえば いいかな？", 46, { "text-anchor": "middle" });
-  const cards = opts.map((o, i) => card(g, 100 + (i % 2) * 710, 225 + Math.floor(i / 2) * 180, 690, 160, o.t, o.e, { fs: 56, es: 90 }));
-  await speak(C.pony, "lk_ask", "つぎに なんて いえば いいかな？ カードを こえに だして よんでね");
-  let pick = -1; for (let n = 0; n < 2 && pick < 0; n++) { pick = await sayChoice(h, opts.map(o => o.t), cards); if (pick < 0 && n === 0) await speak(C.pony, "p_again", "もう いっかい いってみよう"); }
-  const okIdx = opts.findIndex(o => o.ok); let ok = false, move = 0;
-  if (pick < 0) { flashCard(cards[okIdx], true); await speak(C.pony, `lk_${it.id}_a`, `こたえは「${it.opts[0][0]}」`); }
-  else if (opts[pick].ok) { ok = true; move = 1; flashCard(cards[pick], true); confetti(40); chime(); playMove(h, "nod"); await speak(C.pony, "lk_seikai", "せいかい！"); }
-  else { move = -1; flashCard(cards[pick], false); await sleep(500); flashCard(cards[okIdx], true); await speak(C.pony, `lk_${it.id}_a`, `こたえは「${it.opts[0][0]}」`); }
+  // 2026-10-31：4まいの 文の カードから えらぶ 問題は やめた（ひらがなが よめない 子が できない）。
+  //   ぽにーが つぎの ことばを お手本で いう → まねして いう（ロールプレイ型）。絵は 1まいだけ そえる
+  const [okT, okE] = it.opts[0]; const g = el("g", {}, hudLayer);
+  await speak(C.pony, "lk_rp", "つぎに なんて いうかな？ まねして いって みよう");
+  const hint = okE ? hint7(h, okE, "") : null;
+  const r = await kmSay(h, `lk_${it.id}_m`, okT, lkKeys(okT), `${NAMES[pc.kind] || "まるシマ"}に なって`); if (hint) hint.remove();
+  const ok = r.ok, move = ok ? 1 : 0, pick = -1, opts = []; if (ok) { confetti(40); chime(); playMove(h, "nod"); }
   g.remove(); const [rw, rt] = it.reply; lkMove(cast[rw], (LK_MOVE[it.id] || [])[2]); await speak(cast[rw], `lk_${it.id}_r`, rt);
-  grade(ok); playLog({ type: "kaiwa", id: it.id, ok, picked: pick >= 0 ? opts[pick].t : "", who: NAMES[pc.kind] });
+  grade(ok); playLog({ type: "kaiwa", id: it.id, ok, picked: "", who: NAMES[pc.kind] });
   await sleep(500); setView("board"); await moveAfter(pc, move); return ok;
 }
 /* 2) はんたい ことば */

@@ -68,23 +68,19 @@ BOARD_BG.ltomo = function (L) {
 (function () { const s = document.createElement("style"); s.textContent = `.start.menu .mst.mtomo{background:#FFE0EE;border-color:#E86A9A}.start.menu .mst.mtomo .mname{font-size:clamp(10px,1.2vw,14px);line-height:1.1}.start.menu .mmcard .mstages{grid-template-columns:repeat(8,minmax(0,1fr))!important}.start.menu .mmcard .mst .mname{white-space:normal;word-break:keep-all;font-size:clamp(9px,1.06vw,12.5px);letter-spacing:-.06em}.start.menu .mmcard .mst{padding-left:1px!important;padding-right:1px!important}.start.menu .mmcard .mst .mstat{font-size:clamp(9px,1.05vw,12px);padding:2px 6px;letter-spacing:-.04em}.start.menu .mmcard .mstages{gap:6px}`; document.head.appendChild(s); })();
 
 /* ---------- 💗 やさしく いうと？ ---------- */
+// 2026-10-31：ふたつの 文から えらぶ 問題は やめた（ひらがなが よめない 子が できない）。
+//   ばめんの 絵と ことばを みせ、ぽにーが やさしい いいかたを お手本で いう → まねして いう（ロールプレイ型）
+const lkKeys = t => { const w = t.replace(/[、。！？…]/g, " ").split(/\s+/).filter(x => x.length >= 2).sort((p, q) => q.length - p.length).slice(0, 2); return w.length ? w.map(x => [x]) : [[t]]; };
 async function lkYasashiku(pc) {
   const it = pickL("yasashiku"); const g = panel("やさしく いうと？", "#FFF0F5");
-  txt(g, 800, 255, it.e, 120, { "text-anchor": "middle" }); txt(g, 800, 360, it.q, it.q.length > 18 ? 46 : 54, { "text-anchor": "middle" });
-  const opts = shuffle([{ t: it.ok, ok: true }, { t: it.ng, ok: false }]);
-  const cards = opts.map((o, i) => card(g, 150 + i * 670, 450, 630, 250, o.t, o.ok ? "💗" : "💢", { fs: 56, es: 90 }));
-  // どっちが やさしいか まだ 見えないように、しるしは あとで 出す
-  cards.forEach(c => { const e = c.childNodes[1]; if (e) e.setAttribute("opacity", 0); });
-  await speak(C.pony, `lk_${it.id}_q`, `${it.q}。やさしい いいかたは どっちかな？`);
-  await speak(C.pony, "lt_yasa_say", "やさしい ほうを、こえに だして よんでね");
-  let pick = -1; for (let n = 0; n < 2 && pick < 0; n++) { pick = await sayChoice(pc, opts.map(o => o.t), cards); if (pick < 0 && n === 0) await speak(C.pony, "p_again", "もう いっかい いってみよう"); }
-  if (pick < 0) pick = await tapOnce(cards);
-  cards.forEach(c => { const e = c.childNodes[1]; if (e) tween(300, k => e.setAttribute("opacity", k)); });
-  const ok = opts[pick].ok, okIdx = opts.findIndex(o => o.ok); flashCard(cards[pick], ok);
-  if (ok) { confetti(40); chime(); await speak(C.pony, "lt_yasa_ok", "やさしい いいかただね！ ともだちも うれしいね"); }
-  else { await sleep(500); flashCard(cards[okIdx], true); await speak(C.pony, `lk_${it.id}_a`, `${it.ok}、と いうと、ともだちが うれしいね`); }
-  grade(ok); playLog({ type: "yasashiku", id: it.id, ok, who: NAMES[pc.kind] });
-  await sleep(400); g.remove(); await moveAfter(pc, ok ? 1 : 0); return ok;
+  txt(g, 800, 290, it.e, 150, { "text-anchor": "middle" }); txt(g, 800, 420, it.q, it.q.length > 18 ? 46 : 54, { "text-anchor": "middle" });
+  const me = clone(pc.kind, 1260, 950, (KID_S[pc.kind] || .8) * .55); hudLayer.appendChild(me.root);
+  await speak(C.pony, `lk_${it.id}_s`, it.q);
+  await speak(C.pony, "lt_yasa_rp", "やさしい いいかたを、まねして いって みよう");
+  const r = await kcSayAt(pc, `lk_${it.id}_m`, it.ok, lkKeys(it.ok), `${NAMES[pc.kind] || "まるシマ"}に なって`, 690);
+  if (r.ok) { confetti(40); joy(me); await speak(C.pony, "lt_yasa_ok", "やさしい いいかただね！ ともだちも うれしいね"); }
+  grade(r.ok); playLog({ type: "yasashiku", id: it.id, ok: r.ok, who: NAMES[pc.kind] });
+  await sleep(400); clearClones(); g.remove(); await moveAfter(pc, r.ok ? 1 : 0); return r.ok;
 }
 /* ---------- 🔁 つなげよう ---------- */
 async function lkTsunagu(pc) {
@@ -93,18 +89,12 @@ async function lkTsunagu(pc) {
   STORY_POS[s.id] = [1180];
   const { hero: h } = setSitView(s, pc.kind); const f = STORY_CAST[it.who]; f.dx.v = f.dx.t = 0; await sleep(600);
   playMove(f, "point"); await speak(f, `lk_${it.id}_t`, it.t); playMove(h, "think");
-  const opts = shuffle([{ t: it.ok, ok: true }, ...it.ng.map(t => ({ t, ok: false }))]);
-  const g = el("g", {}, hudLayer); el("rect", { x: 60, y: 108, width: 1480, height: 450, rx: 34, fill: "#FFFFFFEE", ...S6(6) }, g);
-  txt(g, 800, 162, "なんて へんじ したら、おはなしが つづくかな？", 42, { "text-anchor": "middle" });
-  const cards = opts.map((o, i) => card(g, 120, 186 + i * 120, 1360, 108, o.t, " ", { fs: 54, es: 64 }));
-  cards.forEach((c, i) => { const y = 186 + i * 120 + 54; el("circle", { cx: 182, cy: y, r: 36, fill: ["#FF8FA3", "#7FCBF0", "#7BD389"][i], ...S6(5) }, c); txt(c, 182, y + 15, "ABC"[i], 42, { "text-anchor": "middle", fill: "#FFFFFF", stroke: INK, "stroke-width": 5, "paint-order": "stroke" }); });
-  await speak(C.pony, "lt_tsuna_ask", "なんて へんじ したら、おはなしが つづくかな？ カードを こえに だして よんでね");
-  let pick = -1; for (let n = 0; n < 2 && pick < 0; n++) { pick = await sayChoice(h, opts.map(o => o.t), cards); if (pick < 0 && n === 0) await speak(C.pony, "p_again", "もう いっかい いってみよう"); }
-  const okIdx = opts.findIndex(o => o.ok); let ok = false;
-  if (pick >= 0 && opts[pick].ok) { ok = true; flashCard(cards[pick], true); confetti(40); chime(); playMove(h, "nod"); await speak(C.pony, "lk_seikai", "せいかい！"); }
-  else { if (pick >= 0) { flashCard(cards[pick], false); playMove(f, "sad"); await sleep(600); } flashCard(cards[okIdx], true); await speak(C.pony, `lk_${it.id}_a`, `${it.ok}、って いうと、おはなしが つづくね`); }
-  g.remove(); if (ok) { joy(f); await speak(f, `lk_${it.id}_r`, it.r); playMove(h, "laugh"); } else { f.headY.t = 0; playMove(f, "nod"); await sleep(600); }
-  grade(ok); playLog({ type: "tsunagu", id: it.id, ok, picked: pick >= 0 ? opts[pick].t : "", who: NAMES[pc.kind] });
+  // 2026-10-31：3つの 文から えらぶ 問題は やめ、お手本を まねして へんじ する（ロールプレイ型）
+  await speak(C.pony, "lt_tsuna_rp", "おはなしが つづく へんじを、まねして いって みよう");
+  const r = await kmSay(h, `lk_${it.id}_m`, it.ok, lkKeys(it.ok), `${NAMES[pc.kind] || "まるシマ"}に なって`), ok = r.ok, pick = -1, opts = [];
+  const g = el("g", {}, hudLayer); if (ok) { confetti(40); chime(); playMove(h, "nod"); }
+  g.remove(); joy(f); await speak(f, `lk_${it.id}_r`, it.r); playMove(h, "laugh"); /* まねして いえたら、あいては ふつうに へんじを する */
+  grade(ok); playLog({ type: "tsunagu", id: it.id, ok, picked: "", who: NAMES[pc.kind] });
   await sleep(500); setView("board"); await moveAfter(pc, ok ? 1 : 0); return ok;
 }
 Object.assign(LTASK_RUN, { yasashiku: lkYasashiku, tsunagu: lkTsunagu });
