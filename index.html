@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="manifest" href="manifest.json">
 <style>body{margin:0}</style>
-<script>const PACK_VER="9253f42823";{const f0=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&/(^|\/)packs\/[^?]+\.json$/.test(u))u+="?v="+PACK_VER;return f0.call(this,u,o);};}</script>
+<script>const PACK_VER="064bc086f9";{const f0=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&/(^|\/)packs\/[^?]+\.json$/.test(u))u+="?v="+PACK_VER;return f0.call(this,u,o);};}</script>
 <script>if("serviceWorker" in navigator&&location.protocol==="https:")addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));</script>
 </head><body>
 <title>ことばのたね すごろく試作</title>
@@ -58219,115 +58219,104 @@ const SITS = [
   "qy": "勝った！今日から君は、ゆでたけのこ！",
   "tiers": [
    {
-    "a": "もう いっかい",
-    "y": "もう一回",
+    "a": "あだなは いや",
+    "y": "あだ名は嫌",
     "keys": [
      [
-      "もういっかい",
-      "もう一回",
-      "もういちど",
-      "もう一度",
-      "もう いっかい",
-      "もう いちど"
+      "あだな",
+      "あだ名"
+     ],
+     [
+      "いや",
+      "嫌"
      ]
     ]
    },
    {
-    "a": "いいよ。もう いっかい！",
-    "y": "いいよ。もう一回！",
+    "a": "あだなで よばないで",
+    "y": "あだ名で呼ばないで",
     "keys": [
      [
-      "もういっかい",
-      "もう一回",
-      "もういちど",
-      "もう一度",
-      "もう いっかい",
-      "もう いちど"
+      "あだな",
+      "あだ名"
+     ],
+     [
+      "よばないで",
+      "呼ばないで"
      ]
     ]
    },
    {
-    "a": "ゆでたけのこ？ もう いっかい！",
-    "y": "ゆでたけのこ？もう一回！",
+    "a": "ゆでたけのこ？ あだなで よばないで",
+    "y": "ゆでたけのこ？あだ名で呼ばないで",
     "keys": [
      [
-      "たけのこ",
-      "筍",
-      "タケノコ"
+      "あだな",
+      "あだ名"
      ],
      [
-      "もういっかい",
-      "もう一回",
-      "もういちど",
-      "もう一度",
-      "もう いっかい",
-      "もう いちど"
+      "よばないで",
+      "呼ばないで"
      ]
     ]
    },
    {
-    "a": "ゆでたけのこ？ いいよ。もう いっかい！",
-    "y": "ゆでたけのこ？いいよ。もう一回！",
+    "a": "ゆでたけのこって あだなは いやだよ。なまえで よんでね",
+    "y": "ゆでたけのこってあだ名は嫌だよ。名前で呼んでね",
     "keys": [
      [
-      "たけのこ",
-      "筍",
-      "タケノコ"
+      "あだな",
+      "あだ名"
      ],
      [
-      "もういっかい",
-      "もう一回",
-      "もういちど",
-      "もう一度",
-      "もう いっかい",
-      "もう いちど"
+      "いや",
+      "嫌"
+     ],
+     [
+      "なまえ",
+      "名前"
      ]
     ]
    },
    {
-    "a": "えー、ゆでたけのこ？ おもしろい！ もう いっかい やろう",
-    "y": "えー、ゆでたけのこ？面白い！もう一回やろう",
+    "a": "えー、ゆでたけのこ？ その あだなで よばないで。なまえで よんでね",
+    "y": "えー、ゆでたけのこ？そのあだ名で呼ばないで。名前で呼んでね",
     "keys": [
      [
-      "たけのこ",
-      "筍",
-      "タケノコ"
+      "あだな",
+      "あだ名"
      ],
      [
-      "おもしろ",
-      "面白"
+      "よばないで",
+      "呼ばないで"
      ],
      [
-      "もういっかい",
-      "もう一回",
-      "もういちど",
-      "もう一度",
-      "もう いっかい",
-      "もう いちど"
+      "なまえ",
+      "名前"
      ]
     ]
    },
    {
-    "a": "えー、ゆでたけのこ？ おもしろい！ もう いっかい やろう。つぎは まけないぞ",
-    "y": "えー、ゆでたけのこ？面白い！もう一回やろう。つぎは負けないぞ",
+    "a": "えー、ゆでたけのこ？ へんな あだなで よばれると いやだな。ぼくの なまえで よんでね",
+    "y": "えー、ゆでたけのこ？変なあだ名で呼ばれると嫌だな。僕の名前で呼んでね",
     "keys": [
      [
-      "もういっかい",
-      "もう一回",
-      "もういちど",
-      "もう一度",
-      "もう いっかい",
-      "もう いちど"
+      "あだな",
+      "あだ名"
      ],
      [
-      "まけな",
-      "負けな"
+      "いや",
+      "嫌"
+     ],
+     [
+      "なまえ",
+      "名前"
      ]
     ]
    }
   ],
-  "res": "いいよ、もう いっかい！ じゃんけん ぽん！",
-  "ry": "いいよ、もう一回！じゃんけんぽん！",
+  "res": "あ、ごめんね。もう いわないよ",
+  "ry": "あ、ごめんね。もう言わないよ",
   "an": [
    "laugh",
    "🎍",
@@ -62460,7 +62449,7 @@ Object.assign(INTRO, {
   async searchshelf(h, a) { enter(h); await sleep(1100); playMove(h, "look"); await sleep(900); markAbove(h, "q"); playMove(h, "think"); await sleep(600); enter(a); await sleep(900); },
   async register(h, a) { a.dx.v = a.dx.t = 40; const b = prop("bag", 0, 0, .4); hand(h, b, .4, 0); window.__bag = b; enter(h); await sleep(1200); for (let i = 0; i < 3; i++) later(i * 250, () => blip(1500, 1500, .06, "square")); await sleep(900); },
   async change(h, a) { a.dx.v = a.dx.t = 40; enter(h); await sleep(1200); const c = prop("coin", 0, 0, .35); hand(h, c, .35, 0); window.__coin = c; blip(1200, 1600, .1); await sleep(600); playMove(h, "think"); markAbove(h, "q"); await sleep(1000); },
-  async notenough(h, a) { a.dx.v = a.dx.t = 40; enter(h); await sleep(1200); const pu = prop("purse", 0, 0, .35); hand(h, pu, .35, 0); playMove(h, "look"); await sleep(900);
+  async notenough(h, a) { a.dx.v = a.dx.t = -60; /* 2026-11-01：みぎに よりすぎて 画面から はみでて いた */ enter(h); await sleep(1200); const pu = prop("purse", 0, 0, .35); hand(h, pu, .35, 0); playMove(h, "look"); await sleep(900);
     for (let i = 0; i < 4; i++) later(i * 300, () => markAbove(h, "drop", { dx: i % 2 ? 70 : -70, vy: 50 })); playMove(h, "sad"); await sleep(1100); },
   // でんしゃとバス
   async ticket(h, a) { enter(h); await sleep(1300); playMove(h, "look"); await sleep(600); wave(a); await sleep(400); },
@@ -63990,6 +63979,9 @@ function outBase(L, sky = "#CFEAFB", ground = "#C9C9C9") { el("rect", { x: 0, y:
   el("rect", { x: 0, y: 760, width: 1600, height: 240, fill: ground }, L); el("path", { d: "M0 760 H1600", ...S6(6) }, L); }
 function house(L, x, y, w, h, wall, roof) { el("rect", { x, y, width: w, height: h, fill: wall, ...S6(6) }, L); el("path", { d: `M${x - 30} ${y} L${x + w / 2} ${y - h * .45} L${x + w + 30} ${y} Z`, fill: roof, ...S6(6) }, L);
   el("rect", { x: x + w * .12, y: y + h * .2, width: w * .26, height: h * .26, rx: 6, fill: "#CFEAFB", ...S6(4) }, L); }
+// おうだんほどう（よこから すこし 上から 見た 道路）：しろい 線は 道路と おなじ むき（よこ長）で、道路の てまえから おくへ ならぶ（2026-11-01）
+function crossW(L, x0, x1, top = 640, h = 130) { el("rect", { x: x0 - 10, y: top, width: x1 - x0 + 20, height: h, fill: "#7A7F88" }, L); const n = 4, bh = h / n * .5;
+  for (let i = 0; i < n; i++) { const y = top + (i + .5) * h / n - bh / 2, k = .9 + .1 * i / (n - 1), w = (x1 - x0) * k, x = (x0 + x1) / 2 - w / 2; el("rect", { x, y, width: w, height: bh, fill: "#FFFFFF" }, L); } }
 function street(L) { el("rect", { x: 0, y: 640, width: 1600, height: 130, fill: "#7A7F88" }, L); el("path", { d: "M0 705 H1600", stroke: "#FFFFFF", "stroke-width": 8, "stroke-dasharray": "60 40" }, L);
   el("rect", { x: 0, y: 770, width: 1600, height: 18, fill: "#E3E3E3", ...S6(4) }, L); el("path", { d: "M0 800 H1600", stroke: "#FFFFFF", "stroke-width": 10 }, L); }
 function signal(L, x) { const hold = el("g", {}, L); // ほこうしゃようの しんごう（えは odekake.js の sigG）
@@ -64008,13 +64000,13 @@ const ROOMS3 = {
     el("path", { d: "M1440 760 V380", ...S6(8) }, L); el("rect", { x: 1300, y: 300, width: 280, height: 100, rx: 14, fill: "#FFD25E", ...S6(6) }, L); txt(L, 1440, 365, "しゅうごうばしょ", 34, { "text-anchor": "middle" }); sceneTree(L, 1080, 100); },
   "つうがくろ"(L) { outBase(L); house(L, 60, 380, 300, 260, "#FFF1D6", "#B9A8D9"); house(L, 520, 360, 320, 280, "#E3F0FF", "#E8735A"); house(L, 1040, 380, 300, 260, "#FFE0E6", "#7CC36A"); street(L);
     el("path", { d: "M1460 640 V200", stroke: "#9A8A7A", "stroke-width": 26 }, L); el("path", { d: "M1400 240 H1520", stroke: "#9A8A7A", "stroke-width": 12 }, L); },
-  "おうだんほどう"(L) { outBase(L); house(L, 80, 380, 300, 260, "#FFF1D6", "#E8735A"); street(L); for (let x = 560; x < 1160; x += 70) el("rect", { x, y: 650, width: 40, height: 115, fill: "#FFFFFF" }, L); signal(L, 1420); },
+  "おうだんほどう"(L) { outBase(L); house(L, 80, 380, 300, 260, "#FFF1D6", "#E8735A"); street(L); crossW(L, 620, 1060); signal(L, 1420); },
   "こうもん"(L) { outBase(L, "#CFEAFB", "#D9CDB8"); el("rect", { x: 300, y: 220, width: 1000, height: 540, fill: "#FFF4E0", ...S6(8) }, L); el("rect", { x: 740, y: 620, width: 120, height: 140, rx: 6, fill: "#B9824A", ...S6(5) }, L); el("path", { d: "M800 620 V760", ...S6(4) }, L); [[380, 470], [600, 470], [960, 470], [1180, 470]].forEach(([x, y]) => el("rect", { x, y, width: 110, height: 90, rx: 6, fill: "#CFEAFB", ...S6(4) }, L)); el("path", { d: "M300 220 L800 140 L1300 220 Z", fill: "#E8735A", ...S6(8) }, L);
     [[380, 300], [600, 300], [960, 300], [1180, 300]].forEach(([x, y]) => el("rect", { x, y, width: 110, height: 90, rx: 6, fill: "#CFEAFB", ...S6(4) }, L)); el("circle", { cx: 800, cy: 190, r: 26, fill: "#FFFFFF", ...S6(5) }, L);
     [920, 1460].forEach(x => el("rect", { x: x - 40, y: 440, width: 80, height: 320, rx: 6, fill: "#BDB6AA", ...S6(6) }, L)); el("rect", { x: 1420, y: 480, width: 80, height: 180, fill: "#FFFFFF", ...S6(4) }, L);
     ["が", "っ", "こ", "う"].forEach((t, i) => txt(L, 1460, 520 + i * 40, t, 34, { "text-anchor": "middle" })); el("circle", { cx: 160, cy: 380, r: 130, fill: "#FFC2D1", ...S6(6) }, L); el("rect", { x: 140, y: 480, width: 40, height: 280, fill: "#9A6B43", ...S6(5) }, L); },
   "かえりみち"(L) { outBase(L, "#FFE3C2"); house(L, 60, 380, 300, 260, "#FFF1D6", "#B9A8D9"); house(L, 620, 360, 320, 280, "#E3F0FF", "#E8735A"); street(L); [180, 320, 460].forEach((x, i) => flower(L, x, 740, ["#FF8FA3", "#FFD25E", "#B9A8D9"][i])); },
-  "こうさてん"(L) { outBase(L, "#FFE3C2"); house(L, 60, 380, 300, 260, "#FFF1D6", "#E8735A"); street(L); for (let x = 460; x < 900; x += 70) el("rect", { x, y: 650, width: 40, height: 115, fill: "#FFFFFF" }, L); signal(L, 1500); window.__sig("green"); },
+  "こうさてん"(L) { outBase(L, "#FFE3C2"); house(L, 60, 380, 300, 260, "#FFF1D6", "#E8735A"); street(L); crossW(L, 500, 880); signal(L, 1500); window.__sig("green"); },
   "びょういん"(L) { el("rect", { x: 0, y: 0, width: 1600, height: 760, fill: "#EAF7F2" }, L); el("rect", { x: 0, y: 760, width: 1600, height: 240, fill: "#CDE6DA" }, L); el("path", { d: "M0 760 H1600", ...S6(6) }, L);
     el("rect", { x: 380, y: 150, width: 160, height: 160, rx: 20, fill: "#FFFFFF", ...S6(6) }, L); el("path", { d: "M460 180 V280 M410 230 H510", stroke: "#E8473C", "stroke-width": 30 }, L);
     el("rect", { x: 700, y: 560, width: 380, height: 60, rx: 14, fill: "#FFFFFF", ...S6(6) }, L); el("rect", { x: 700, y: 620, width: 380, height: 40, fill: "#BFE3F7", ...S6(4) }, L); el("path", { d: "M720 660 V760 M1060 660 V760", ...S6(8) }, L);

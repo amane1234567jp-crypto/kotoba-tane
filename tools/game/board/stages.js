@@ -321,7 +321,7 @@ Object.assign(INTRO, {
   async searchshelf(h, a) { enter(h); await sleep(1100); playMove(h, "look"); await sleep(900); markAbove(h, "q"); playMove(h, "think"); await sleep(600); enter(a); await sleep(900); },
   async register(h, a) { a.dx.v = a.dx.t = 40; const b = prop("bag", 0, 0, .4); hand(h, b, .4, 0); window.__bag = b; enter(h); await sleep(1200); for (let i = 0; i < 3; i++) later(i * 250, () => blip(1500, 1500, .06, "square")); await sleep(900); },
   async change(h, a) { a.dx.v = a.dx.t = 40; enter(h); await sleep(1200); const c = prop("coin", 0, 0, .35); hand(h, c, .35, 0); window.__coin = c; blip(1200, 1600, .1); await sleep(600); playMove(h, "think"); markAbove(h, "q"); await sleep(1000); },
-  async notenough(h, a) { a.dx.v = a.dx.t = 40; enter(h); await sleep(1200); const pu = prop("purse", 0, 0, .35); hand(h, pu, .35, 0); playMove(h, "look"); await sleep(900);
+  async notenough(h, a) { a.dx.v = a.dx.t = -60; /* 2026-11-01：みぎに よりすぎて 画面から はみでて いた */ enter(h); await sleep(1200); const pu = prop("purse", 0, 0, .35); hand(h, pu, .35, 0); playMove(h, "look"); await sleep(900);
     for (let i = 0; i < 4; i++) later(i * 300, () => markAbove(h, "drop", { dx: i % 2 ? 70 : -70, vy: 50 })); playMove(h, "sad"); await sleep(1100); },
   // でんしゃとバス
   async ticket(h, a) { enter(h); await sleep(1300); playMove(h, "look"); await sleep(600); wave(a); await sleep(400); },
