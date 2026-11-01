@@ -69,7 +69,7 @@ const fSlot = i => i < F_SLOTS.length ? F_SLOTS[i] : F_OVER[i - F_SLOTS.length];
 function fCam(n) {
   n = Math.min(n, F_CAP);
   const k = fGiant(n); let c = 1;
-  if (k) { const hs = Math.min(860, 300 + 2 * (n - 30)); c = Math.min(c, hs / (320 * k + 80)); }
+  if (k) { const hs = Math.min(560, 200 + 1.2 * (n - 30)); c = Math.min(c, hs / (320 * k + 80)); } // 2026-11-01：巨木は とおくに ちいさく 見える ように（まえは 画面の たかさ いっぱいまで）
   const m = Math.min(n, F_SLOTS.length + F_MAXT) - F_SLOTS.length;
   if (m > 0) { let dx = 0; for (let j = Math.max(0, m - 12); j < m; j++) dx = Math.max(dx, Math.abs(F_OVER[j].x - 800) * F_LAY[F_OVER[j].L].s / .55); c = Math.min(c, 820 / (dx + 120)); }
   return Math.max(.035, c); }
@@ -115,7 +115,7 @@ async function forestScene(newSeeds, kinds) {
   el("stop", { offset: 0, "stop-color": "#8FD3F5" }, grad); el("stop", { offset: .7, "stop-color": "#D9F1FB" }, grad); el("stop", { offset: 1, "stop-color": "#F4FBE8" }, grad);
   const hz = el("linearGradient", { id: "fhaze", x1: 0, y1: 300, x2: 0, y2: 600, gradientUnits: "userSpaceOnUse" }, defs); el("stop", { offset: 0, "stop-color": "#E6F5FB", "stop-opacity": 0 }, hz); el("stop", { offset: 1, "stop-color": "#E6F5FB", "stop-opacity": .26 }, hz);
   const sky0 = el("g", {}, root); el("rect", { x: -100, y: -100, width: 1800, height: 1200, fill: "url(#fsky)" }, sky0);
-  const world = el("g", {}, root); let cam = fCam(old); const camT = () => world.setAttribute("transform", `translate(${(800 * (1 - cam)).toFixed(1)} ${(1000 * (1 - cam)).toFixed(1)}) scale(${cam.toFixed(4)})`); camT();
+  const world = el("g", {}, root); let cam = 1; /* 2026-11-01：はじめは ちかくの 森（てまえ）から。ひくのは 木が そだった あと */ const camT = () => world.setAttribute("transform", `translate(${(800 * (1 - cam)).toFixed(1)} ${(1000 * (1 - cam)).toFixed(1)}) scale(${cam.toFixed(4)})`); camT();
   const toScr = (x, y) => ({ x: 800 + (x - 800) * cam, y: 1000 + (y - 1000) * cam });
   const sky = el("g", {}, world); el("rect", { x: -4000, y: -100, width: 9600, height: 1200, fill: "url(#fsky)", opacity: 0 }, sky);
   const sun = el("g", { transform: "translate(1440 140)" }, sky0); const sunR = el("g", {}, sun);
@@ -144,7 +144,7 @@ async function forestScene(newSeeds, kinds) {
     const fade = Math.min(.62, .28 + .035 * k); // おおきく なるほど とおくに ある → うすく
     big.k.querySelectorAll("*").forEach(e => { if (/^#[0-9A-F]{6}$/i.test(e.dataset.f)) e.setAttribute("fill", fMix(e.dataset.f, "#D4EAF4", fade)); if (/^#[0-9A-F]{6}$/i.test(e.dataset.s)) e.setAttribute("stroke", fMix(e.dataset.s, "#D4EAF4", fade * .9)); });
     big.k.setAttribute("transform", `translate(800 ${F_LAY[0].hill + 40}) scale(${k.toFixed(4)})`); };
-  bigS(old);
+  bigS(old); bigG.setAttribute("opacity", 0); // 巨木は ひきの 絵に なってから、かすみの むこうに あらわれる
   const flies = []; const nBf = total >= 5 ? Math.min(10, 1 + Math.floor(total / 12)) : 0;
   for (let i = 0; i < nBf; i++) { const b = el("g", {}, root); const w1 = el("ellipse", { cx: -10, cy: 0, rx: 12, ry: 16, fill: ["#FFD25E", "#FF8FA3", "#8FC7F2", "#B9A8D9", "#FFFFFF"][i % 5], stroke: INK, "stroke-width": 3 }, b), w2 = el("ellipse", { cx: 10, cy: 0, rx: 12, ry: 16, fill: ["#FFD25E", "#FF8FA3", "#8FC7F2", "#B9A8D9", "#FFFFFF"][i % 5], stroke: INK, "stroke-width": 3 }, b); el("ellipse", { cx: 0, cy: 0, rx: 3, ry: 12, fill: INK }, b); world.appendChild(b); flies.push({ b, w1, w2, x: 300 + (i % 5) * 220 + Math.floor(i / 5) * 110, y: 760 + (i % 2) * 70, ph: i * 1.7 }); }
   const birds = total >= 12 ? el("g", {}, world) : null; if (birds) [[0, 0], [50, 22], [-46, 26]].forEach(([x, y]) => el("path", { d: `M${x - 18} ${y} Q${x - 8} ${y - 12} ${x} ${y} Q${x + 8} ${y - 12} ${x + 18} ${y}`, fill: "none", ...S6(5) }, birds));
@@ -188,15 +188,19 @@ async function forestScene(newSeeds, kinds) {
   }
   // --- 前の 木が そだつ ---
   const grow = []; for (let i = 0; i < Math.min(old, nDraw); i++) { const s0 = stageOf(i, sess), s1 = stageOf(i, sessAfter); if (s1 > s0) grow.push([i, s0, s1]); }
-  // 巨木が じわじわ おおきく なる。はいりきらなければ カメラを ひく
-  { const c0 = cam, c1 = fCam(total), gg = fGiant(total) > fGiant(old);
-    if (gg || c1 < c0) { if (gg && !fGiant(old)) blip(300, 600, .4, "triangle");
-      await tween(c1 < c0 * .9 ? 2600 : 1800, k => { const e = 1 - Math.pow(1 - k, 3); if (gg) bigS(old + (total - old) * e); if (c1 < c0) { cam = c0 + (c1 - c0) * e; camT(); placeP(); } }); } }
   if (grow.length) {
     tune([[N.C5, .25], [N.E5, .25], [N.G5, .25], [N.C6, .25], [N.E5 * 2, 1]], 200, "triangle", .1);
     grow.forEach(([i, s0, s1], q) => later(Math.min(1400, q * 18), () => { const t = T[i]; tween(700, k => { t.z = fZ(s0) + (fZ(s1) - fZ(s0)) * easeBack(k); }).then(() => { if (s1 >= 5) t.fruit.concat(t.bloom).forEach(e => { e.style.display = ""; }); }); }));
     await sleep(Math.min(1400, grow.length * 18) + 800);
   }
+  // --- ひいて いく → とおくで 巨木が すこしずつ そだつ（2026-11-01） ---
+  //   ① てまえの 森が そだった あと、ゆっくり ひきの 絵に（巨木は かすみの むこうに ふわっと あらわれる）
+  //   ② ひきの 絵の なかで、ずっと むこうの 巨木が ちょっとずつ おおきく なる（はいりきらない ぶんだけ カメラも すこし ひく）
+  { const cA = Math.min(1, fCam(old)), cB = fCam(total), gg = fGiant(total) > fGiant(old);
+    if (cA < .999 || fGiant(old)) await tween(cA < .6 ? 3200 : 2400, k => { const e = 1 - Math.pow(1 - k, 3); cam = 1 + (cA - 1) * e; camT(); placeP(); if (fGiant(old)) bigG.setAttribute("opacity", e.toFixed(3)); });
+    if (gg || cB < cA) { if (gg && !fGiant(old)) { bigS(30); bigG.setAttribute("opacity", 1); blip(300, 600, .4, "triangle"); } else bigG.setAttribute("opacity", 1);
+      await tween(3600, k => { const e = k * k * (3 - 2 * k); if (gg) bigS(Math.max(30, old) + (total - Math.max(30, old)) * e); if (cB < cA) { cam = cA + (cB - cA) * e; camT(); placeP(); } }); }
+    await sleep(300); }
   // --- かぞえる ---
   for (let v = old + 1; v <= total; v++) { tagT.textContent = `× ${v}`; const nn = total - old, k = Math.max(1, Math.ceil(nn / 12)); if ((v - old) % k === 0 || v === total) { const f = 700 + Math.min(12, (v - old) / k) * 40; blip(f, f * 1.2, .06, "triangle"); } await sleep(Math.max(25, Math.min(160, 1800 / nn))); }
   chime(); people.forEach((c, i) => later(i * 120, () => joy(c))); confetti(40);
