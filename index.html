@@ -63483,7 +63483,7 @@ async function lkTeinei(pc) {
   const pick = await tapOnce(cards); const ok = opts[pick].ok; flashCard(cards[pick], ok); if (!ok) { await sleep(500); flashCard(cards[opts.findIndex(o => o.ok)], true); } else { confetti(30); chime(); }
   await speak(C.pony, `lk_${it.id}_a`, it.kind === "which" ? `「${it.ok}」と いうと いいね` : `「${it.ok}」だね`); grade(ok); await sleep(400); g.remove(); return ok;
 }
-const LTASK_RUN = { kaiwa: lkKaiwa, hantai: lkHantai, joshi: pc => lkKaiwa(pc) /* ことば パズルは なし（2026-10-31） */, machi: lkMachi, teinei: lkTeinei };
+const LTASK_RUN = { kaiwa: lkKaiwa, hantai: pc => lkKaiwa(pc) /* はんたい ことばは なし（2026-11-01） */, joshi: pc => lkKaiwa(pc) /* ことば パズルは なし（2026-10-31） */, machi: lkMachi, teinei: pc => lkKaiwa(pc) /* ていねいな ことばは なし（2026-11-01） */ };
 
 /* ---------- 盤の 見た目 ---------- */
 BOARD_BG.long = function (L) {
@@ -63530,10 +63530,10 @@ ROOMS2.いえ = function (L) {
 
 /* ---------- 盤：マスの 種類を ふやす ---------- */
 Object.assign(LTASK, { gag: ["#FFD08A", "😂"], haya: ["#FFC6E0", "👅"], sagasu: ["#BFEDE2", "👀"] });
-{ const order = ["kaiwa", "gag", "sagasu", "hantai", "haya", "scene", "kaiwa", "gag", "machi", "kaiwa", "sagasu", "teinei", "haya", "gag", "kaiwa", "scene", "sagasu", "machi"] /* ことば パズル（が・を）は なし（2026-10-31。ひらがなが よめない 子には むずかしい） */; let i = 0;
+{ const order = ["kaiwa", "gag", "sagasu", "scene", "haya", "scene", "kaiwa", "gag", "machi", "kaiwa", "sagasu", "gag", "haya", "gag", "kaiwa", "scene", "sagasu", "machi"] /* はんたい ことば・ていねいな ことば も なし（2026-11-01） */ /* ことば パズル（が・を）は なし（2026-10-31。ひらがなが よめない 子には むずかしい） */; let i = 0;
   Object.keys(LONG_TASK).forEach(k => delete LONG_TASK[k]);
   Object.keys(BOARD.long.nodes).forEach(id => { if (["0", "4", "15"].includes(id) || EVENTS.long[id]) return; LONG_TASK[id] = order[i++ % order.length]; }); }
-LEGEND_L.splice(0, LEGEND_L.length, ["kaiwa", "かいわ"], ["gag", "つっこみ"], ["haya", "はやくち"], ["sagasu", "さがす"], ["hantai", "はんたい"], ["machi", "まちがい"], ["teinei", "ていねい"], ["scene", "よみあげ"]);
+LEGEND_L.splice(0, LEGEND_L.length, ["kaiwa", "かいわ"], ["gag", "つっこみ"], ["haya", "はやくち"], ["sagasu", "さがす"], ["machi", "まちがい"], ["scene", "よみあげ"]);
 
 /* ---------- ふえる キャラ（かぞく・さがす 用）：つかいおわったら かならず けす ---------- */
 const CLONES = [], CLEAN = []; // CLEAN：場面の あとに もとに もどす 関数
