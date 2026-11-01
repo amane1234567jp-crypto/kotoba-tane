@@ -65808,9 +65808,12 @@ kmRival = async function () {
 // 2026-11-01：このコースは いう 文が ながいので、ききとりを ゆるく する。
 //   キーワードの どれか ひとつが きこえれば OK（まえは ぜんぶの まとまりが そろう ひつようが あった。「から」も ひっす だった）。「おしい」も OK あつかい
 { const ks = kmSay; kmSay = function (h, key, text, keys, ...r) {
-    if (curStage === "komatta" && Array.isArray(keys) && keys.length) { const all = keys.flat().filter(k => k && k !== "から" && k.length >= 2); keys = [all.length ? all : keys.flat()]; }
+    if ((curStage === "komatta" || curStage === "dekigoto") && Array.isArray(keys) && keys.length) { const all = keys.flat().filter(k => k && k !== "から" && k.length >= 2); keys = [all.length ? all : keys.flat()]; }
     return ks(h, key, text, keys, ...r); }; }
-{ const ls = listen; listen = async function (groups, ms) { const r = await ls(groups, ms); if (curStage === "komatta" && r && r.r === "part") return { ...r, r: "ok" }; return r; }; }
+{ const ls = listen; listen = async function (groups, ms) { const r = await ls(groups, ms); if (curStage === "komatta" && r && r.r === "part") return { ...r, r: "ok" };
+    // 2026-11-01：「きょうの できごと」も ゆるく。キーワードの どれか ひとつ・おしい・なにか ことばを いえたら（2もじ いじょう）OK
+    if (curStage === "dekigoto" && r && r.r !== "ok" && (r.r === "part" || (r.heard || "").replace(/[\s、。！？…（）()]/g, "").length >= 2)) return { ...r, r: "ok" };
+    return r; }; }
 
 /* ================= ショートコース 8つ（2026-10-19 その2） =================
    台本は sit/sits_new8.py。きりかえ・ききかえす・まつ（こえの ものさし）・からだと かんかくの SOS・じゅんばん（カードならべ）・ことわる・ぼうさい・でんわ。
