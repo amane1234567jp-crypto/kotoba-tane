@@ -12,25 +12,34 @@ function odHero(pc, x, base) { const c = odMe(pc.kind, x, base); if (odUseBike(p
 { const oe = odEnd; odEnd = async function (pc, g, ok, log) { clearClones(); document.querySelectorAll(".odfx").forEach(e => e.remove()); return oe(pc, g, ok, log); }; }
 const odFx = () => { const g = el("g", { class: "odfx" }, front()); return g; };
 
+// 道路と おうだんほどう（2026-10-31：まえは しまが 道路に そって ならび、道路と 平行に なって いた）
+//   上から みた 道路：横に のびる 道路を、しまの 線（横長の しろい 線を たてに ならべる）が よこぎる。こどもは 手前の ほどうから 奥へ わたる
+function odRoad(g, top = 400, h = 250, cx = 800) {
+  el("rect", { x: 140, y: top - 80, width: 1320, height: 80, fill: "#E9E1CC" }, g); el("rect", { x: 140, y: top + h, width: 1320, height: 110, fill: "#E9E1CC" }, g);
+  el("rect", { x: 140, y: top, width: 1320, height: h, fill: "#8C939C" }, g);
+  for (let x = 170; x < 1440; x += 130) if (Math.abs(x + 30 - cx) > 210) el("rect", { x, y: top + h / 2 - 5, width: 60, height: 10, fill: "#FFFFFF" }, g);
+  const n = 5, bh = h / n * .55; for (let i = 0; i < n; i++) el("rect", { x: cx - 160, y: top + (i + .5) * h / n - bh / 2, width: 320, height: bh, fill: "#FFFFFF", ...S6(3) }, g);
+  return { top, h, cx, near: top + h + 95, far: top - 12 }; }
+async function odCross(c, R, ms = 1600) { const s0 = c.s, x = odCx(c), b0 = odBase(c); hold(c, "run", ms / 1000); if (c.__bike) { } await tween(ms, k => place(c, x, b0 + (R.far - b0) * k, s0 * (1 - .22 * k))); }
 // 🚦 しんごう
 async function odSig2(pc) { const red = !!rnd(2), g = panel("しんごう", "#EAF6FF");
-  el("rect", { x: 140, y: 560, width: 1320, height: 170, fill: "#8C939C" }, g); zebraG(g, 560, 585); sigG(g, 1300, 470, red ? "red" : "green", .9);
-  const me = odHero(pc, 380, 600);
+  const R = odRoad(g, 380, 230, 800); sigG(g, 1060, R.top - 10 - 340 * .4, red ? "red" : "green", .4); /* むこうがわの ほどうに たつ */
+  const me = odHero(pc, 800, R.near);
   await speak(C.pony, `od_sig_q_${red ? "red" : "green"}`, red ? "しんごうが あかだよ。とまる？ わたる？ タッチしてね" : "しんごうが あおに なったよ。とまる？ わたる？ タッチしてね");
   const wrong = await odChoose(g, [["とまる", "✋", red ? 1 : 0], ["わたる", "🚶", red ? 0 : 1]], 760);
-  if (red) { me.armR.t = -150; later(1200, () => me.armR.t = 0); } else { me.headRot.t = -18; await sleep(350); me.headRot.t = 18; await sleep(350); me.headRot.t = 0; odWalk(me, 1000, 1300); }
+  if (red) { me.armR.t = -150; later(1200, () => me.armR.t = 0); } else { me.headRot.t = -18; await sleep(350); me.headRot.t = 18; await sleep(350); me.headRot.t = 0; odCross(me, R, 1300); }
   await speak(C.pony, "od_ok", "せいかい！"); await speak(C.pony, "od_say", "ルールを いって みよう");
   const ok = await odSay(pc, `od_sig_r_${red ? "red" : "green"}`, red ? "あかは とまれ" : "あおでも、みぎと ひだりを みて わたる", red ? [["あか", "赤"], ["とまれ", "止まれ", "とまる", "止まる"]] : [["みぎ", "右"], ["ひだり", "左"]]);
   return odEnd(pc, g, ok && !wrong, { type: "od_sig", id: red ? "red" : "green", wrong }); }
 // 🚸 おうだんほどう：みぎ・ひだり・みぎ（あたまを うごかす）
 async function odZebra2(pc) { const g = panel("おうだんほどう", "#EAF6FF");
-  el("rect", { x: 140, y: 600, width: 1320, height: 170, fill: "#8C939C" }, g); zebraG(g, 520, 625); const me = odMe(pc.kind, 400, 640);
-  const car = txt(g, 1380, 700, "🚗", 110, { "text-anchor": "middle" });
+  const R = odRoad(g, 420, 250, 800); const me = odMe(pc.kind, 800, R.near);
+  const car = txt(g, 1300, R.top + R.h * .8, "🚗", 100, { "text-anchor": "middle" });
   const arr = txt(g, 800, 300, "", 90, { "text-anchor": "middle" }); let t = 0;
   addTick(dt => { if (!g.isConnected) return false; t += dt; const k = Math.floor(t / .9) % 4; arr.textContent = ["✋ とまって", "👉 みぎ", "👈 ひだり", "👉 もう いちど みぎ"][k]; me.headRot.t = [0, 22, -22, 22][k]; });
   await speak(C.pony, "od_zb_intro2", "どうろを わたる ときは、まず とまって、みぎ、ひだり、もう いちど みぎを みるよ");
-  const ok = await odSay(pc, "od_zb_r2", "とまって、みぎ、ひだり、もう いちど みぎ", [["とまって", "止まって"], ["みぎ", "右"], ["ひだり", "左"]]);
-  if (ok) { arr.remove(); me.headRot.t = 0; chime(); await odWalk(me, 1150, 1300); }
+  const ok = await odSay(pc, "od_zb_r3", "どうろを わたる ときは、とまって、みぎ、ひだり、もう いちど みぎ", [["とまって", "止まって"], ["みぎ", "右"], ["ひだり", "左"]]);
+  if (ok) { arr.remove(); me.headRot.t = 0; chime(); await odCross(me, R, 1500); }
   return odEnd(pc, g, ok, { type: "od_zebra" }); }
 // 🛑 とまれ：ブレーキを ながく おして、せんの まえで とまる（キャラが じてんしゃに のる）
 async function odTomare2(pc) { const g = panel("とまれ", "#FFF6E9");
