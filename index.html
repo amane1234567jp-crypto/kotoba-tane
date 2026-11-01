@@ -60270,7 +60270,7 @@ function level() {
 const bits = [];
 function confetti(n = 70) {
   const cols = ["#FF6F91", "#FFD25E", "#7FCBF0", "#7CC36A", "#B9A8D9"];
-  n = Math.round(n * Math.max(.15, motion));
+  n = Math.round(n * .55 * Math.max(.15, motion)); // 2026-11-01：iPad で 紙ふぶきが おおいと 声が とぎれる ことが あるので へらす
   for (let i = 0; i < n; i++) {
     const r = el("rect", { width: 18, height: 10, rx: 3, fill: cols[i % cols.length], stroke: INK, "stroke-width": 2 }, fxLayer);
     bits.push({ r, x: 800 + (Math.random() - .5) * 300, y: 520, vx: (Math.random() - .5) * 900, vy: -700 - Math.random() * 600, a: Math.random() * 360, va: (Math.random() - .5) * 720, life: 2.4 });
@@ -71124,8 +71124,9 @@ ICON_DRAW["🏟️"] = ICON_DRAW["🏟"];
     try { sb.querySelectorAll(".m2g").forEach(t => { if (!t.querySelector(".m2gi")) return; const m = /\bg-([a-z0-9]+)\b/.exec(t.className); artTile(t, t.classList.contains("m2multi") ? "multi" : m && m[1]); }); } catch (e) { }
     try { iconifyHtml(sb); } catch (e) { } };
   const kick = () => { if (pend) return; pend = true; requestAnimationFrame(fix); };
-  new MutationObserver(kick).observe(document.body || document.documentElement, { childList: true, subtree: true });
-  addEventListener("resize", () => setTimeout(kick, 200)); setInterval(() => { const sb = document.getElementById("startBox"); if (sb && sb.offsetParent !== null && sb.querySelector(".mico, .m2gi")) kick(); }, 1500); }
+  // ページ ぜんたいの 見はり（MutationObserver）は やめた（2026-11-01）：ゲーム中の 絵の 出し入れ（紙ふぶき など）の たびに よばれ、音が とぎれる 原因に なりうる。メニューが 出て いる ときだけ みじかい 間かくで みる
+  setInterval(() => { const sb = document.getElementById("startBox"); if (sb && sb.getClientRects().length) kick(); }, 350);
+  addEventListener("resize", () => setTimeout(kick, 200)); setInterval(() => { const sb = document.getElementById("startBox"); if (sb && sb.getClientRects().length && sb.querySelector(".mico, .m2gi")) kick(); }, 1500); }
 
 /* ================= アプリを おわる ボタン（2026-11-01） =================
    メニューの 右上（⚙ の となり）に「おわる」。おすと たしかめて、音・マイクを とめて「またね」の 画面に する。
@@ -71147,7 +71148,7 @@ function appExit() {
 }
 { const add = () => { const r = document.querySelector("#startBox .m3right"); if (!r || r.querySelector(".m3exit")) return;
     const b = document.createElement("button"); b.type = "button"; b.className = "m3exit"; b.setAttribute("aria-label", "おわる"); b.innerHTML = "おわる"; b.onclick = appExit; r.append(b); };
-  new MutationObserver(add).observe(document.body || document.documentElement, { childList: true, subtree: true }); add();
+  setInterval(add, 500); add(); // メニューの ときだけ はたらく（ゲーム中は なにも しない）
   const st = document.createElement("style"); st.textContent = `
 .start.menu.m3 .m3exit{height:min(10vh,48px);padding:0 .8em;border-radius:999px!important;border:3px solid #2B2A33!important;background:#FFE0E6!important;box-shadow:0 3px 0 #2B2A33!important;font:inherit;font-size:min(4.2vh,20px);color:#2B2A33;margin-left:.4em;cursor:pointer}
 .kexit{position:fixed;inset:0;z-index:200;background:#2B2A3399;display:grid;place-items:center}

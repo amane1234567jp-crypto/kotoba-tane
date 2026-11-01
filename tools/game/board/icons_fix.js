@@ -98,5 +98,6 @@ ICON_DRAW["🏟️"] = ICON_DRAW["🏟"];
     try { sb.querySelectorAll(".m2g").forEach(t => { if (!t.querySelector(".m2gi")) return; const m = /\bg-([a-z0-9]+)\b/.exec(t.className); artTile(t, t.classList.contains("m2multi") ? "multi" : m && m[1]); }); } catch (e) { }
     try { iconifyHtml(sb); } catch (e) { } };
   const kick = () => { if (pend) return; pend = true; requestAnimationFrame(fix); };
-  new MutationObserver(kick).observe(document.body || document.documentElement, { childList: true, subtree: true });
-  addEventListener("resize", () => setTimeout(kick, 200)); setInterval(() => { const sb = document.getElementById("startBox"); if (sb && sb.offsetParent !== null && sb.querySelector(".mico, .m2gi")) kick(); }, 1500); }
+  // ページ ぜんたいの 見はり（MutationObserver）は やめた（2026-11-01）：ゲーム中の 絵の 出し入れ（紙ふぶき など）の たびに よばれ、音が とぎれる 原因に なりうる。メニューが 出て いる ときだけ みじかい 間かくで みる
+  setInterval(() => { const sb = document.getElementById("startBox"); if (sb && sb.getClientRects().length) kick(); }, 350);
+  addEventListener("resize", () => setTimeout(kick, 200)); setInterval(() => { const sb = document.getElementById("startBox"); if (sb && sb.getClientRects().length && sb.querySelector(".mico, .m2gi")) kick(); }, 1500); }

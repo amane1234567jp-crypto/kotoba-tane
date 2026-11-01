@@ -18,7 +18,7 @@ function appExit() {
 }
 { const add = () => { const r = document.querySelector("#startBox .m3right"); if (!r || r.querySelector(".m3exit")) return;
     const b = document.createElement("button"); b.type = "button"; b.className = "m3exit"; b.setAttribute("aria-label", "おわる"); b.innerHTML = "おわる"; b.onclick = appExit; r.append(b); };
-  new MutationObserver(add).observe(document.body || document.documentElement, { childList: true, subtree: true }); add();
+  setInterval(add, 500); add(); // メニューの ときだけ はたらく（ゲーム中は なにも しない）
   const st = document.createElement("style"); st.textContent = `
 .start.menu.m3 .m3exit{height:min(10vh,48px);padding:0 .8em;border-radius:999px!important;border:3px solid #2B2A33!important;background:#FFE0E6!important;box-shadow:0 3px 0 #2B2A33!important;font:inherit;font-size:min(4.2vh,20px);color:#2B2A33;margin-left:.4em;cursor:pointer}
 .kexit{position:fixed;inset:0;z-index:200;background:#2B2A3399;display:grid;place-items:center}
