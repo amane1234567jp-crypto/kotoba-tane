@@ -60270,7 +60270,7 @@ function level() {
 const bits = [];
 function confetti(n = 70) {
   const cols = ["#FF6F91", "#FFD25E", "#7FCBF0", "#7CC36A", "#B9A8D9"];
-  n = Math.round(n * .55 * Math.max(.15, motion)); // 2026-11-01：iPad で 紙ふぶきが おおいと 声が とぎれる ことが あるので へらす
+  n = Math.round(n * Math.max(.15, motion));
   for (let i = 0; i < n; i++) {
     const r = el("rect", { width: 18, height: 10, rx: 3, fill: cols[i % cols.length], stroke: INK, "stroke-width": 2 }, fxLayer);
     bits.push({ r, x: 800 + (Math.random() - .5) * 300, y: 520, vx: (Math.random() - .5) * 900, vy: -700 - Math.random() * 600, a: Math.random() * 360, va: (Math.random() - .5) * 720, life: 2.4 });
