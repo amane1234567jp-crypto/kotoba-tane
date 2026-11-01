@@ -56,7 +56,7 @@ DT.t.filter(t => t.v === "robo").forEach(t => { VFX[`dt_${t.id}_b`] = "robo"; VF
 { const PL = [null, "dt", "e:dice2", "dt", "stop", "e:fake", "dt", "e:warp", "dt", "e:nebou", "cups", "dt",
     "e:trolley", "dt", "e:rand", "dt", "balloon", "e:x2", "dt", "e:home", "dt", null, "e:again", "dt",
     "catch", "e:zero", "dt", "e:warp", "dt", "e:allb", "more", "dt", "e:call", "dt", "e:back10", "dt",
-    "e:bonus", "battle", "dt", "e:allf", "dt", "e:atsumare", "dt", "e:janken", "dt", "e:rest", "dt", null];
+    "e:bonus", "battle", "dt", "e:allf", "dt", "e:atsumare", "dt", "e:bonus", "dt", "e:rest", "dt", null];
   const O = SL_ORDER[DTS], ev = {}, task = {};
   O.forEach((id, i) => { const p = PL[i]; if (!p || id === "0" || id === "4" || id === "15") return;
     if (p.startsWith("e:")) { const t = p.slice(2); ev[id] = [t, 0, `dt_ev_${t}`, DT.ev[t].text]; } else task[id] = p; });

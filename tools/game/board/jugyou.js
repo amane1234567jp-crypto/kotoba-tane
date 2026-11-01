@@ -8,7 +8,7 @@ const JGS = "jugyou";
 const jgT = k => JG.txt[k] || "";
 /* ---------- マスの ならび（48マス・1だん 12マス） ---------- */
 { const PL = [null, "jk", "jk", "e:wasure", "jk", "jj", "e:kotai", "jk", "jc", "jk", "e:sekigae", "jk",
-    "js", "js", "e:test100", "jj", "js", "e:shukudai", "js", "jc", "js", null, "e:dodge", "js",
+    "js", "js", "e:test100", "jj", "js", "e:shukudai", "js", "jc", "js", null, "e:chime", "js",
     "jo", "jz", "e:toban", "jo", "jc", "jz", "e:kotai", "jo", "jz", "e:chime", "jo", "jz",
     "jt", "jt", "e:sekigae", "jt", "jc", "e:test100", "jt", "jj", "e:wasure", "jt", "jt", null];
   const O = SL_ORDER[JGS], ev = {}, task = {};

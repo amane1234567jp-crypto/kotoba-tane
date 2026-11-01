@@ -189,7 +189,11 @@ const banner = el("g", { opacity: 0 }, hudLayer);
 const bannerR = el("rect", { x: 420, y: 400, width: 760, height: 160, rx: 80, fill: "#FFD25E", ...S6(8) }, banner);
 const bannerT = txt(banner, 800, 505, "", 68, { "text-anchor": "middle" });
 async function showBanner(text, ms = 1600) {
-  bannerT.textContent = text; banner.setAttribute("opacity", 1);
+  bannerT.textContent = text;
+  // 2026-11-01：ながい ことばで 文字が わくから はみでて いた → 文字の はばに あわせて わくを ひろげ、ひろすぎる ときは 文字を ちいさく
+  { const n = [...text].reduce((w, c) => w + (c.charCodeAt(0) < 0x2E80 ? .6 : 1), 0); let fs = 68; if (n * fs > 1340) fs = Math.max(40, Math.floor(1340 / n));
+    const w = Math.max(760, Math.min(1500, n * fs + 140)); bannerT.setAttribute("font-size", fs); bannerT.setAttribute("y", 480 + fs * .37); bannerR.setAttribute("x", 800 - w / 2); bannerR.setAttribute("width", w); }
+  banner.setAttribute("opacity", 1);
   const t0 = performance.now(); const anim = () => { const k = Math.min(1, (performance.now() - t0) / 260); const s = 1 + (1 - k) * .6 * Math.sin(k * 9) * (motion > .5 ? 1 : 0);
     banner.setAttribute("transform", `translate(800 480) scale(${s.toFixed(3)}) translate(-800 -480)`); if (k < 1) requestAnimationFrame(anim); }; anim();
   await sleep(ms); banner.setAttribute("opacity", 0);

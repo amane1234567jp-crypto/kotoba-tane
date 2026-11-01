@@ -7,8 +7,8 @@ const OD = "odekake", OD_BIKE_AT = 24;
 const odIdx = pc => SL_ORDER[OD].indexOf(pc.node);
 /* ---------- マスの ならび（くみかえは しない：あるき → じてんしゃ の じゅんばんを まもる） ---------- */
 { const O = SL_ORDER[OD], T = SL_TH[OD];
-  const PLAN = [null, "sig", "e:dice2", "scene", "zebra", "e:allb", "kaiwa", "tobi", "e:bonus", "catch", "sumimasen", "e:warp", "maru", "scene", "e:rest", "tomare", "balloon", "e:fake", "police", "hito", "e:janken", null, "sig", "e:x2",
-    "bike", "scene", "e:zero", "kado", "stop", "e:back10", "bike", "yasashiku", "e:allf", "maru", "e:again", "tomare", "cups", "e:nebou", "kado", "scene", "e:trolley", "sig", "hito", "e:call", "zebra", "bike", "police"];
+  const PLAN = [null, /* 2026-11-01：ブレーキの ゲーム（tomare）は なし */ "sig", "e:dice2", "scene", "zebra", "e:allb", "kaiwa", "tobi", "e:bonus", "catch", "sumimasen", "e:warp", "scene", "scene", "e:rest", "kado", "balloon", "e:fake", "police", "hito", "e:bonus", null, "sig", "e:x2",
+    "bike", "scene", "e:zero", "kado", "stop", "e:back10", "bike", "yasashiku", "e:allf", "hito", "e:again", "zebra", "cups", "e:nebou", "kado", "scene", "e:trolley", "sig", "hito", "e:call", "zebra", "bike", "police"];
   const ev = {}, task = {};
   O.forEach((id, i) => { const p = PLAN[i]; if (!p || id === "0" || id === "4" || id === "15") return;
     if (p.startsWith("e:")) { const t = p.slice(2); ev[id] = [t, 0, `sl_${OD}_${t}`, SL_EVT[OD][t]]; } else task[id] = p; });

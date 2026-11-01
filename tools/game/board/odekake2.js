@@ -25,10 +25,10 @@ async function odCross(c, R, ms = 1600) { const s0 = c.s, x = odCx(c), b0 = odBa
 async function odSig2(pc) { const red = !!rnd(2), g = panel("しんごう", "#EAF6FF");
   const R = odRoad(g, 380, 230, 800); sigG(g, 1060, R.top - 10 - 340 * .4, red ? "red" : "green", .4); /* むこうがわの ほどうに たつ */
   const me = odHero(pc, 800, R.near);
-  await speak(C.pony, `od_sig_q_${red ? "red" : "green"}`, red ? "しんごうが あかだよ。とまる？ わたる？ タッチしてね" : "しんごうが あおに なったよ。とまる？ わたる？ タッチしてね");
+  await speak(C.pony, `od_sig_n_${red ? "red" : "green"}`, red ? "しんごうが あかだよ" : "しんごうが あおに なったよ");
   const wrong = await odChoose(g, [["とまる", "✋", red ? 1 : 0], ["わたる", "🚶", red ? 0 : 1]], 760);
   if (red) { me.armR.t = -150; later(1200, () => me.armR.t = 0); } else { me.headRot.t = -18; await sleep(350); me.headRot.t = 18; await sleep(350); me.headRot.t = 0; odCross(me, R, 1300); }
-  await speak(C.pony, "od_ok", "せいかい！"); await speak(C.pony, "od_say", "ルールを いって みよう");
+  await speak(C.pony, "od_say", "ルールを いって みよう");
   const ok = await odSay(pc, `od_sig_r2_${red ? "red" : "green"}`, red ? "しんごうが あかの ときは、とまる" : "しんごうが あおでも、みぎと ひだりを みて わたる", red ? [["あか", "赤"], ["とまる", "止まる", "とまれ", "止まれ"]] : [["みぎ", "右"], ["ひだり", "左"]]);
   return odEnd(pc, g, ok && !wrong, { type: "od_sig", id: red ? "red" : "green", wrong }); }
 // 🚸 おうだんほどう：みぎ・ひだり・みぎ（あたまを うごかす）
@@ -61,36 +61,43 @@ async function odTobi2(pc) { const g = panel("あぶない！", "#FFF0F5");
   const car = txt(g, 1500, 500, "🚗", 120, { "text-anchor": "middle" }); const me = odMe(pc.kind, 380, 640); const b = txt(g, 470, 620, "⚽", 70, { "text-anchor": "middle" });
   tween(900, k => b.setAttribute("transform", `translate(${(420 * k).toFixed(0)} ${(-140 * k).toFixed(0)}) rotate(${(k * 540).toFixed(0)} 470 600)`)); noise(.1, 900, .3);
   await sleep(500); surprise(me); hold(me, "run", .5);
-  await speak(C.pony, "od_tb_q", "ボールが どうろに ころがって いったよ。どうする？");
+  await speak(C.pony, "od_tb_n", "ボールが どうろに ころがって いったよ");
   const wrong = await odChoose(g, [["おいかける", "🏃", 0], ["とまる", "✋", 1]], 700);
   me.armR.t = -150; later(1000, () => me.armR.t = 0); tween(1200, k => car.setAttribute("transform", `translate(${(-1500 * k).toFixed(0)} 0)`)); noise(.4, 200, .3);
-  await speak(C.pony, "od_ok", "せいかい！"); await speak(C.pony, "od_say", "ルールを いって みよう");
+  await speak(C.pony, "od_say", "ルールを いって みよう");
   const ok = await odSay(pc, "od_tb_r2", "ボールが ころがっても、どうろに とびださない", [["とびださない", "飛び出さない", "とびだしちゃ", "飛び出しちゃ"]]);
   return odEnd(pc, g, ok && !wrong, { type: "od_tobi", wrong }); }
 // ↱ まがりかど：むこうが みえない → とまって たしかめる → かどから くまくんが でて くる
 async function odKado2(pc) { const g = panel("まがりかど", "#EAF6FF");
-  el("rect", { x: 140, y: 560, width: 1320, height: 170, fill: "#8C939C" }, g);
-  el("rect", { x: 980, y: 180, width: 420, height: 380, fill: "#E9DCC6", ...S6(6) }, g); txt(g, 1190, 420, "🏠", 140, { "text-anchor": "middle" }); // かどの いえ（むこうが みえない）
-  const me = odHero(pc, 260, 660); await odWalk(me, 560, 900);
-  await speak(C.pony, "od_kd_q", "まがりかどに きたよ。むこうが みえないね。どうする？");
-  const wrong = await odChoose(g, [["とまって たしかめる", "✋", 1], ["そのまま まがる", "💨", 0]], 760);
-  me.headRot.t = 15; markAbove(me, "q"); const k2 = odWho("kuma", 1560, 660); k2.dx.v = k2.dx.t = 0; await odWalk(k2, 1100, 1100); surprise(k2); markAbove(C.pony, "ex");
-  await speak(C.pony, "od_kd_see", "ほら、かどから ひとが でて きたね。とまって よかった！"); me.headRot.t = 0;
+  // 2026-11-01：上から 見た L字の みち に。てまえの みちを 右へ すすむと、かどで 上からの みちに つながる。かどの いえで 上の みちが 見えない
+  el("rect", { x: 140, y: 120, width: 1320, height: 800, fill: "#CFE8B8" }, g);
+  el("rect", { x: 140, y: 560, width: 1080, height: 180, fill: "#8C939C" }, g); el("rect", { x: 1040, y: 120, width: 180, height: 620, fill: "#8C939C" }, g);
+  el("path", { d: "M160 650 H1020 M1130 140 V540", stroke: "#FFFFFF", "stroke-width": 7, "stroke-dasharray": "44 32" }, g);
+  el("rect", { x: 520, y: 150, width: 500, height: 390, rx: 10, fill: "#E9DCC6", ...S6(6) }, g); txt(g, 770, 420, "🏠", 170, { "text-anchor": "middle" }); // かどの いえ（上の みちが 見えない）
+  el("path", { d: "M520 540 H1020 V150", fill: "none", stroke: "#B9824A", "stroke-width": 12 }, g); // へい
+  const me = odHero(pc, 300, 700); await odWalk(me, 880, 1100);
+  await speak(C.pony, "od_kd_n", "まがりかどに きたよ。むこうが みえないね");
+  me.headRot.t = 15; markAbove(me, "q"); await sleep(400);
+  const k2 = odWho("kuma", 1130, 210, .8); k2.dx.v = k2.dx.t = 0; hold(k2, "run", 1.2); await tween(1200, k => place(k2, 1130, 210 + 420 * k, k2.s)); surprise(k2); surprise(me); markAbove(C.pony, "ex");
+  await speak(C.pony, "od_kd_see2", "ほら、かどの むこうから ひとが きたね。とまって よかった！"); me.headRot.t = 0;
   await speak(C.pony, "od_say", "ルールを いって みよう");
   const ok = await odSay(pc, "od_kd_r", "まがりかどは、とまって たしかめる", [["まがりかど", "曲がり角"], ["とまって", "止まって", "たしかめ", "確かめ"]]);
-  return odEnd(pc, g, ok && !wrong, { type: "od_kado", wrong }); }
+  return odEnd(pc, g, ok, { type: "od_kado" }); }
 // 🚶 とめて ある くるまの かげから こどもが でて くる
 async function odHito2(pc) { const g = panel("とびだしに ちゅうい", "#FFF0F5");
-  el("rect", { x: 140, y: 470, width: 1320, height: 190, fill: "#8C939C" }, g); el("rect", { x: 140, y: 660, width: 1320, height: 60, fill: "#D9CDB8", ...S6(4) }, g);
-  const kid = odWho("panna", 1150, 650, .9); kid.root.style.display = "none"; const car = el("g", {}, hudLayer); txt(car, 1020, 640, "🚙", 230, { "text-anchor": "middle" });
-  const me = odHero(pc, 260, 690); await odWalk(me, 480, 800);
-  await speak(C.pony, "od_ht_q", "とめて ある くるまの かげから、ひとが でて くるかも しれないよ。どう する？");
-  const wrong = await odChoose(g, [["ゆっくり、よく みる", "👀", 1], ["いそいで いく", "💨", 0]], 760);
-  kid.root.style.display = ""; await odWalk(kid, 860, 700); surprise(me); noise(.1, 900, .3);
-  await speak(C.pony, "od_ht_see", "ほら、くるまの かげから こどもが でて きた！ ゆっくりで よかったね");
+  // 2026-11-01：あるく こども むけに。とめて ある くるまの かげから、どうろに とびださない（まえは「ひとの とびだしに きを つける」で うんてんする ひと むけ だった）
+  el("rect", { x: 140, y: 470, width: 1320, height: 190, fill: "#8C939C" }, g); el("path", { d: "M140 565 H1460", stroke: "#FFFFFF", "stroke-width": 8, "stroke-dasharray": "50 36" }, g);
+  el("rect", { x: 140, y: 660, width: 1320, height: 60, fill: "#D9CDB8", ...S6(4) }, g);
+  const park = el("g", {}, hudLayer); txt(park, 1010, 650, "🚙", 230, { "text-anchor": "middle" });
+  const me = odHero(pc, 260, 700); await odWalk(me, 760, 900);
+  await speak(C.pony, "od_ht_n2", "どうろの むこうに いきたいよ。でも、とめて ある くるまの かげで、むこうが みえないね");
+  const wrong = await odChoose(g, [["とまって、よく みる", "👀", 1], ["とびだす", "💨", 0]], 760);
+  const mv = el("g", {}, hudLayer); const c = txt(mv, 0, 0, "🚗", 170, { "text-anchor": "middle" }); c.setAttribute("transform", "scale(-1 1)");
+  surprise(me); noise(.12, 600, .3); await tween(1300, k => mv.setAttribute("transform", `translate(${(1560 - 1500 * k).toFixed(0)} 560)`)); mv.remove();
+  await speak(C.pony, "od_ht_see2", "ほら、くるまが はしって きた！ くるまの かげから とびだすと、うんてんする ひとから みえなくて あぶないよ");
   await speak(C.pony, "od_say", "ルールを いって みよう");
-  const ok = await odSay(pc, "od_ht_r2", "とめて ある くるまの かげは、ひとの とびだしに きを つける", [["とびだし", "飛び出し"], ["きを つけ", "気をつけ", "気を付け", "ちゅうい", "注意"]]);
-  car.remove(); return odEnd(pc, g, ok && !wrong, { type: "od_hito", wrong }); }
+  const ok = await odSay(pc, "od_ht_r3", "とめて ある くるまの かげから、どうろに とびださない", [["くるま", "車"], ["とびださない", "飛び出さない", "とびだしちゃ", "飛び出しちゃ"]]);
+  park.remove(); return odEnd(pc, g, ok && !wrong, { type: "od_hito", wrong }); }
 // ⛰ くだりざか（キャラが じてんしゃで おりる）
 async function odSaka2(pc) { const g = panel("くだりざか", "#EAF6FF"); el("path", { d: "M140 380 L1460 820 L1460 900 L140 900 Z", fill: "#B9DE9F", ...S6(5) }, g);
   const me = odMe(pc.kind, 300, 430, .5); odRide(me);
@@ -113,4 +120,14 @@ async function odPolice2(pc) { const g = panel("おまわりさん", "#EAF6FF");
   const ok = await odSay(pc, "od_po_r", "こんにちは", [["こんにちは", "今日は", "こんにちわ"]]);
   if (ok) { po.armR.t = -140; playMove(po, "nod"); later(1300, () => po.armR.t = 0); joy(me); await speak(C.pony, "od_po_ok", "おまわりさんに ほめられた！"); }
   return odEnd(pc, g, ok, { type: "od_police" }); }
-Object.assign(LTASK_RUN, { sig: odSig2, zebra: odZebra2, tomare: odTomare2, tobi: odTobi2, kado: odKado2, hito: odHito2, saka: odSaka2, sumimasen: odSumimasen2, police: odPolice2 });
+Object.assign(LTASK_RUN, { sig: odSig2, zebra: odZebra2, tomare: pc => odKado2(pc) /* ブレーキの ゲームは なし（2026-11-01） */, tobi: odTobi2, kado: odKado2, hito: odHito2, saka: odSaka2, sumimasen: odSumimasen2, police: odPolice2 });
+
+/* 2026-11-01：「とまる？ わたる？」の ように えらばせるのは やめた（えらばなくても、ようすを 見て ルールを いえば いい）。
+   odChoose は なにも ださずに すすむ（ただしい うごきの アニメは そのまま）。まる・ばつ クイズも なし（じてんしゃの ルールに） */
+odChoose = async () => 0;
+async function odBike2(pc) { let pool = RQ.filter(x => !OD_BQ_USED.has(x.id)); if (!pool.length) { OD_BQ_USED.clear(); pool = RQ; } const it = pool[rnd(pool.length)]; OD_BQ_USED.add(it.id);
+  const g = panel("じてんしゃの ルール", "#EAF6FF"); el("rect", { x: 560, y: 300, width: 480, height: 300, rx: 30, fill: "#FFFFFF", ...S6(6) }, g); (it.id === "aka" ? sigG(g, 800, 585, "red", .82, false) : txt(g, 800, 500, it.pic, it.pic.length > 2 ? 120 : 170, { "text-anchor": "middle" }));
+  await speak(C.pony, "od_bk_intro", "じてんしゃの ルールを いって みよう");
+  const ok = await odSay(pc, `rl_${it.id}`, it.rule, it.keys);
+  return odEnd(pc, g, ok, { type: "od_bike", id: it.id }); }
+Object.assign(LTASK_RUN, { bike: odBike2, maru: odBike2 });

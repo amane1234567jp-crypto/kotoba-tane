@@ -11,7 +11,7 @@ const KC_N = new Map(); let KC_GOT = [];
 { const O = SL_ORDER[KCS];
   const PLAN = [null, "ks", "ks", "e:kf1", "kp", "ks", "e:dice2", "kv", "ks", "e:warp", "ks", "kp",
     "ks", "e:kb1", "ks", "kp", "ks", "e:rest", "ks", "kv", "e:x2", null, "ks", "e:fake",
-    "ks", "kp", "ks", "e:rand", "ks", "kv", "e:bonus", "ks", "e:kb2", "kp", "ks", "e:janken",
+    "ks", "kp", "ks", "e:rand", "ks", "kv", "e:bonus", "ks", "e:kb2", "kp", "ks", "e:bonus",
     "ks", "e:again", "ks", "kp", "e:allf", "ks", "kv", "ks", "e:kf2", "ks", "e:trolley", null]; // しかけを ふやした（2026-10-20）
   const ev = {}, task = {};
   O.forEach((id, i) => { const p = PLAN[i]; if (!p || id === "0" || id === "4" || id === "15") return;

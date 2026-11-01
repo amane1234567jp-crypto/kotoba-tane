@@ -121,7 +121,7 @@ SL.forEach(sid => {
   STAGE_DEF[sid] = { ground: T.ground, sky: "#CFEAFB", names: STAGE_DEF.undou.names, fills: Object.fromEntries(T.areas.map((a, i) => [a, T.fills[i]])) };
   RIVAL_OF[sid] = "gao"; SLEEPER_OF[sid] = T.blk.who; BLOCK_DEF[sid] = { ...T.blk, sleep: false };
   // しかけ と 課題の ならび
-  const EVS = ["dice2", "fake", "warp", "kumikae", "home", "x2", "rand", "bonus", "allf", "janken", "zero", "rest", "nebou", "atsumare", "bigwarp", "again", "trolley", "back10", "dice2", "allb", "call", "warp", "kumikae", "fake", "rand"]; // ふりだしは はやめ、10マスもどるは 1かいだけ
+  const EVS = ["dice2", "fake", "warp", "kumikae", "home", "x2", "rand", "bonus", "allf", "bonus", "zero", "rest", "nebou", "atsumare", "bigwarp", "again", "trolley", "back10", "dice2", "allb", "call", "warp", "kumikae", "fake", "rand"]; // ふりだしは はやめ、10マスもどるは 1かいだけ
   const WORD = ["kaiwa", "scene", "gag", "yasashiku", "monomane", "tsunagu", "haya", "scene", "yasashiku", "kaiwa", "sakasa", "sagasu", "scene", "yasashiku", "gag", "tsunagu", "monomane", "kaiwa", "scene"];
   const FUN = ["stop", "catch", "balloon", "more", "cups", "shadow", "battle", "stop", "balloon", "catch", "cups", "more", "shadow", "battle", "balloon", "stop", "catch", "cups", "more"];
   const ev = {}, task = {}; let e = 0, w = 0, f = 0;
@@ -223,7 +223,8 @@ async function slTsukkomi(pc) {
     await speak(C.pony, "sl_tsk_ok", "ナイス つっこみ！ 2マス すすむよ"); await slGo(pc, 2); return true; }
   playMove(C.pony, "laugh"); await speak(C.pony, `sl_tska_${it.id}`, `あはは、${it.a}`); return false;
 }
-async function slJanken(pc) {
+async function slJanken(pc) { // 2026-11-01：みんなで あそぶ じゃんけんは なし（おなじ 画面だと あいての てが 見える）。のこって いても 1マス すすむ だけ
+  if (!window.__jkOld) { await slGo(pc, 1); return; }
   const lead = others(pc).sort((a, b) => slIdx(b.node) - slIdx(a.node))[0];
   if (!lead || slIdx(lead.node) <= slIdx(pc.node)) { await speak(C.pony, "sl_jk_top", "きみが いちばん まえ！ そのままだよ"); return; }
   const H = ["✊", "✌️", "🖐"];
