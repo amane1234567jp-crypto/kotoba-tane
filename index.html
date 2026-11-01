@@ -69327,7 +69327,21 @@ function pauseAll() {
   HIDE.paused = [...HIDE.voices].filter(a => !a.paused && !a.ended); HIDE.paused.forEach(a => { try { a.pause(); } catch (e) { } });
   try { if (typeof BGM !== "undefined" && BGM.el && !BGM.el.paused) { BGM.el.pause(); HIDE.bgmEl = true; } } catch (e) { }
 }
+/* 2026-11-01：⏸ボタンの ひとやすみでは、音の 出口（AudioContext・audio要素）は とめない。
+   iPhone は マイクが ついた まま 出口を さいかいすると、通話の ような あつかいに なって 音が とても 小さく なる ことが あった。
+   声・BGM だけ とめて（BGM は 音量 0）、出口は ながしっぱなしに する */
+function pauseSoft() { if (HIDE.off) return; HIDE.off = true; HIDE.n++; HIDE.sr = srUsable; HIDE.soft = true;
+  HIDE.paused = [...HIDE.voices].filter(a => !a.paused && !a.ended); HIDE.paused.forEach(a => { try { a.pause(); } catch (e) { } });
+  try { if (BGM.gain && ctx) { HIDE.bgmV = BGM.gain.gain.value; BGM.gain.gain.setValueAtTime(0, ctx.currentTime); } } catch (e) { }
+  try { if (typeof BGM !== "undefined" && BGM.el && !BGM.el.paused) { BGM.el.pause(); HIDE.bgmEl = true; } } catch (e) { } }
+function resumeSoft() { if (!HIDE.off) return; HIDE.off = false; HIDE.soft = false;
+  if (HIDE.sr && !srUsable) { srUsable = true; srStatus("idle"); }
+  HIDE.paused.forEach(a => { try { a.play().catch(() => { }); } catch (e) { } }); HIDE.paused = [];
+  try { if (BGM.gain && ctx && HIDE.bgmV != null) { BGM.gain.gain.setValueAtTime(HIDE.bgmV, ctx.currentTime); HIDE.bgmV = null; } } catch (e) { }
+  try { if (HIDE.bgmEl) { BGM.el.play().catch(() => { }); HIDE.bgmEl = false; } } catch (e) { }
+  try { if (ctx && ctx.state !== "running") ctx.resume(); if (ROUTE.el && ROUTE.el.paused) ROUTE.el.play().catch(() => { }); } catch (e) { } }
 function resumeAll() {
+  if (HIDE.soft) return; // ひとやすみ中は「つづける」を おすまで そのまま
   if (!HIDE.off) return; HIDE.off = false;
   if (HIDE.sr && !srUsable) { srUsable = true; srStatus("idle"); } // とじた せいで とまった マイクは もとに もどす
   try { if (ctx && ctx.state !== "running") ctx.resume(); } catch (e) { }
@@ -69377,11 +69391,11 @@ window.addEventListener("pagehide", pauseAll); window.addEventListener("pageshow
   const b = document.createElement("button"); b.id = "pauseBtn"; b.type = "button"; b.textContent = "⏸"; b.setAttribute("aria-label", "とめる"); st.appendChild(b);
   setInterval(() => { b.style.display = document.getElementById("startBox") || document.getElementById("pauseBox") ? "none" : ""; }, 400);
   b.onclick = () => {
-    if (document.getElementById("pauseBox")) return; pauseAll();
+    if (document.getElementById("pauseBox")) return; pauseSoft();
     const box = document.createElement("div"); box.id = "pauseBox";
     box.innerHTML = '<div class="pcard"><b>ひとやすみ</b><button type="button" class="pgo" style="background:#7BD389">つづける</button><button type="button" class="pmenu" style="background:#FFD25E">メニューに もどる</button></div>';
     st.appendChild(box);
-    box.querySelector(".pgo").onclick = () => { box.remove(); resumeAll(); };
+    box.querySelector(".pgo").onclick = () => { box.remove(); resumeSoft(); };
     box.querySelector(".pmenu").onclick = () => { try { localStorage.setItem("kotoba-tane-skipresume", "1"); } catch (e) { } location.reload(); };
   };
 })();
