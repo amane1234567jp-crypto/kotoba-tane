@@ -134,8 +134,12 @@ async function forestScene(newSeeds, kinds) {
     return { D, g, trees: el("g", {}, g), dx: 0, z: 1 + D.zoom };
   });
   // にぎやか：花・ちょうちょ・とり・大きな 木
-  const front = layers[3].g, nFl = Math.min(140, total * 2), fr = rng32(11);
-  for (let i = 0; i < nFl; i++) fFlower(front, -300 + fr() * 2200, 900 + fr() * 90, .7 + fr() * .5, ["#FF8FA3", "#FFD25E", "#B9A8D9", "#FFFFFF", "#8FC7F2"][i % 5]);
+  // 足もとの 花：これまでの たねの かずで さき、たねまきで ふえる（2026-11-01。まえは はじめから ぜんぶ さいて いた）
+  const front = layers[3].g, FL_MAX = 320, flN = n => Math.min(FL_MAX, n * 2), fr = rng32(11), FLC = ["#FF8FA3", "#FFD25E", "#B9A8D9", "#FFFFFF", "#8FC7F2"];
+  const FL = Array.from({ length: FL_MAX }, (_, i) => [-300 + fr() * 2200, 900 + fr() * 90, .7 + fr() * .5, FLC[i % 5]]); let flDone = 0;
+  const flTo = (n, pop) => { const m = flN(n); for (; flDone < m; flDone++) { const [x, y, sc, c] = FL[flDone]; const f = fFlower(front, x, y, sc, c);
+      if (pop && f) tween(380, k => f.setAttribute("transform", `translate(${x} ${y}) scale(${(sc * easeBack(k)).toFixed(3)})`)); } };
+  flTo(old, false);
   let big = null; const bigG = el("g", {}); layers[0].g.insertBefore(bigG, layers[0].g.firstChild); // 巨木は いちばん おくの おかの うしろ
   // くもは 巨木の まえを ながれる（巨木が くもを つきぬけて 見える）。ひきの 絵でも 空に くもが あるように ひろく まく
   const cloudG = cloudHold; bigG.after(cloudG);
@@ -181,10 +185,10 @@ async function forestScene(newSeeds, kinds) {
       plants.push(tween(620, k => { const x = p.x + (x1 - p.x) * k, y = p.y + (y1 - p.y) * k - Math.sin(k * Math.PI) * 260; sd.setAttribute("transform", `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(k * 540).toFixed(0)}) scale(${(.55 * cam * (1 - .4 * k * (3 - sl.L) / 3)).toFixed(3)})`); }).then(() => {
         sd.remove(); for (let q = 0; q < 5; q++) mark("sparkle", x1, y1, { vx: (q - 2) * 120 * cam, vy: (-160 - q * 20) * cam, life: .5, s: (.35 + sl.L * .08) * cam });
         const f = PENTA[j % 6] * (j >= 6 ? 2 : 1); blip(f, f * 1.01, .14, "triangle"); later(60, () => blip(f * 1.5, f * 1.5, .08, "sine"));
-        const t = putTree(i); return tween(520, k => { t.z = F_STAGE[1] * easeBack(k); }); }));
+        flTo(i + 1, true); const t = putTree(i); return tween(520, k => { t.z = F_STAGE[1] * easeBack(k); }); }));
       await sleep(iv);
     }
-    await Promise.all(plants); drift = 1;
+    await Promise.all(plants); flTo(total, true); drift = 1;
   }
   // --- 前の 木が そだつ ---
   const grow = []; for (let i = 0; i < Math.min(old, nDraw); i++) { const s0 = stageOf(i, sess), s1 = stageOf(i, sessAfter); if (s1 > s0) grow.push([i, s0, s1]); }
