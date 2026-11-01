@@ -73,7 +73,7 @@ kmRun = async function (heroKind) {
 };
 // ライバル（がお）の ばん：あわてて よくない やりかたを いう → こどもが おしえる（相手は 来ない）
 kmRival = async function () {
-  const sc = kmPick(RIVAL, true), asker = kmAsker(sc, RIVAL) || "nobbo";
+  const sc = kmPick(RIVAL), asker = kmAsker(sc, RIVAL) || "nobbo"; KM_N.set(sc.id, (KM_N.get(sc.id) || 0) + 1); // 2026-11-01：こどもが やった 場面の くりかえしを やめ、まだ でて いない 場面から
   showEngine(null, `${NAMES[RIVAL]}の ばん（${sc.id}）`);
   const { h, hb } = await kmIntro(sc, RIVAL, asker);
   await speak(C.pony, "kmp_rival", "がおくんも こまって いるみたい");
