@@ -178,3 +178,10 @@ for st in ["detarame", "kimochi", "makete", "dekigoto", "jugyou"]:
     if ch: f.write_text(json.dumps(pack, separators=(",", ":")))
 print("missing", len(missing), missing[:20])
 if missing and "--strict" in sys.argv: sys.exit(1)
+
+# ショートコースの おもしろマス（ルーレット・ふうせん・サイコロ2ばい）の 声（2026-11-01）
+pack = {}
+for k in ["sl_stop", "sl_st_d2", "sl_balloon", "sl_bl_tane", "sl_f1", "sl_f2", "sl_f3", "sl_f4", "sl_b1", "sl_b2", "sl_0", "sl_d2_more", "sl_x2_now", "sf_x2"]:
+    f = A / f"{k}.mp3"
+    if f.exists(): pack[k] = base64.b64encode(f.read_bytes()).decode()
+(OUT / "sfun.json").write_text(json.dumps(pack, separators=(",", ":"))); print("sfun", len(pack))
