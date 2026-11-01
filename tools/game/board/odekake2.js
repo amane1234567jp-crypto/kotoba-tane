@@ -29,7 +29,7 @@ async function odSig2(pc) { const red = !!rnd(2), g = panel("しんごう", "#EA
   const wrong = await odChoose(g, [["とまる", "✋", red ? 1 : 0], ["わたる", "🚶", red ? 0 : 1]], 760);
   if (red) { me.armR.t = -150; later(1200, () => me.armR.t = 0); } else { me.headRot.t = -18; await sleep(350); me.headRot.t = 18; await sleep(350); me.headRot.t = 0; odCross(me, R, 1300); }
   await speak(C.pony, "od_ok", "せいかい！"); await speak(C.pony, "od_say", "ルールを いって みよう");
-  const ok = await odSay(pc, `od_sig_r_${red ? "red" : "green"}`, red ? "あかは とまれ" : "あおでも、みぎと ひだりを みて わたる", red ? [["あか", "赤"], ["とまれ", "止まれ", "とまる", "止まる"]] : [["みぎ", "右"], ["ひだり", "左"]]);
+  const ok = await odSay(pc, `od_sig_r2_${red ? "red" : "green"}`, red ? "しんごうが あかの ときは、とまる" : "しんごうが あおでも、みぎと ひだりを みて わたる", red ? [["あか", "赤"], ["とまる", "止まる", "とまれ", "止まれ"]] : [["みぎ", "右"], ["ひだり", "左"]]);
   return odEnd(pc, g, ok && !wrong, { type: "od_sig", id: red ? "red" : "green", wrong }); }
 // 🚸 おうだんほどう：みぎ・ひだり・みぎ（あたまを うごかす）
 async function odZebra2(pc) { const g = panel("おうだんほどう", "#EAF6FF");
@@ -52,7 +52,7 @@ async function odTomare2(pc) { const g = panel("とまれ", "#FFF6E9");
   const res = await new Promise(r => addTick(dt => { if (!g.isConnected) { r("x"); return false; } if (brake) v = Math.max(0, v - 330 * dt); x += v * dt; place(me, x, 640, me.s);
       if (v === 0) { r(x + 60 <= LINE ? "ok" : "over"); return false; } if (x > LINE + 120) { r("over"); return false; } }));
   let ok = false;
-  if (res === "ok") { chime(); await speak(C.pony, "od_tm_ok", "ぴたっと とまれた！"); await speak(C.pony, "od_say", "ルールを いって みよう"); ok = await odSay(pc, "rl_tomare", "とまれでは いちど とまる", [["とまれ", "止まれ", "とまる", "止まる"]]); }
+  if (res === "ok") { chime(); await speak(C.pony, "od_tm_ok", "ぴたっと とまれた！"); await speak(C.pony, "od_say", "ルールを いって みよう"); ok = await odSay(pc, "od_tm_r", "「とまれ」の ところでは、いちど とまる", [["とまれ", "止まれ", "とまる", "止まる"]]); }
   else { noise(.3, 500, .5); surprise(me); await speak(C.pony, "od_tm_ng", "せんを こえちゃった！ あぶない！ つぎは はやめに ブレーキを かけようね"); }
   return odEnd(pc, g, ok, { type: "od_tomare", res }); }
 // ⚽ とびだし：ボールが どうろへ → おいかけそうに なって とまる
@@ -65,7 +65,7 @@ async function odTobi2(pc) { const g = panel("あぶない！", "#FFF0F5");
   const wrong = await odChoose(g, [["おいかける", "🏃", 0], ["とまる", "✋", 1]], 700);
   me.armR.t = -150; later(1000, () => me.armR.t = 0); tween(1200, k => car.setAttribute("transform", `translate(${(-1500 * k).toFixed(0)} 0)`)); noise(.4, 200, .3);
   await speak(C.pony, "od_ok", "せいかい！"); await speak(C.pony, "od_say", "ルールを いって みよう");
-  const ok = await odSay(pc, "od_tb_r", "どうろに とびださない", [["とびださない", "飛び出さない", "とびだしちゃ", "飛び出しちゃ"]]);
+  const ok = await odSay(pc, "od_tb_r2", "ボールが ころがっても、どうろに とびださない", [["とびださない", "飛び出さない", "とびだしちゃ", "飛び出しちゃ"]]);
   return odEnd(pc, g, ok && !wrong, { type: "od_tobi", wrong }); }
 // ↱ まがりかど：むこうが みえない → とまって たしかめる → かどから くまくんが でて くる
 async function odKado2(pc) { const g = panel("まがりかど", "#EAF6FF");
@@ -89,13 +89,13 @@ async function odHito2(pc) { const g = panel("とびだしに ちゅうい", "#F
   kid.root.style.display = ""; await odWalk(kid, 860, 700); surprise(me); noise(.1, 900, .3);
   await speak(C.pony, "od_ht_see", "ほら、くるまの かげから こどもが でて きた！ ゆっくりで よかったね");
   await speak(C.pony, "od_say", "ルールを いって みよう");
-  const ok = await odSay(pc, "od_ht_r", "ひとの とびだしに きを つける", [["とびだし", "飛び出し"], ["きを つけ", "気をつけ", "気を付け", "ちゅうい", "注意"]]);
+  const ok = await odSay(pc, "od_ht_r2", "とめて ある くるまの かげは、ひとの とびだしに きを つける", [["とびだし", "飛び出し"], ["きを つけ", "気をつけ", "気を付け", "ちゅうい", "注意"]]);
   car.remove(); return odEnd(pc, g, ok && !wrong, { type: "od_hito", wrong }); }
 // ⛰ くだりざか（キャラが じてんしゃで おりる）
 async function odSaka2(pc) { const g = panel("くだりざか", "#EAF6FF"); el("path", { d: "M140 380 L1460 820 L1460 900 L140 900 Z", fill: "#B9DE9F", ...S6(5) }, g);
   const me = odMe(pc.kind, 300, 430, .5); odRide(me);
   await speak(C.pony, "od_sk_intro", "ながい くだりざかだ！ なにに きを つける？");
-  const ok = await odSay(pc, "od_sk_r", "スピードを だしすぎない", [["すぴーど", "スピード"], ["だしすぎ", "出しすぎ", "出し過ぎ", "ださない", "出さない"]]);
+  const ok = await odSay(pc, "od_sk_r2", "くだりざかは、スピードを だしすぎない", [["すぴーど", "スピード"], ["だしすぎ", "出しすぎ", "出し過ぎ", "ださない", "出さない"]]);
   await tween(ok ? 1500 : 800, k => place(me, 300 + 1000 * k, 430 + 333 * k, me.s));
   return odEnd(pc, g, ok, { type: "od_saka" }); }
 // 🙇 ほそい みち：「すみません、とおります」→ みんなが よけて くれる

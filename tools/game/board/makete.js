@@ -125,16 +125,14 @@ const MK_CN = new Map();
 async function mkCard(pc) {
   let pool = MK.cards; const m = Math.min(...pool.map(x => MK_CN.get(x.id) || 0)); pool = pool.filter(x => (MK_CN.get(x.id) || 0) === m); const it = pool[rnd(pool.length)]; MK_CN.set(it.id, m + 1);
   const g = panel("きりかえ カード", "#EFFAEA"); el("rect", { x: 170, y: 140, width: 1260, height: 200, rx: 30, fill: "#FFFFFF", ...S6(6) }, g); txt(g, 800, 260, it.q, it.q.length > 18 ? 44 : 52, { "text-anchor": "middle" });
-  await speak(C.pony, `mkc_${it.id}_q`, it.q); await speak(C.pony, "mkp_cardq", nTxt("mkp_cardq"));
-  const opts = shuffle([[...it.good, -1], ...it.bad.map((b, i) => [...b, i])]);
-  const cs = opts.map((o, j) => { const c = card(g, 130 + j * 460, 420, 420, 300, o[1], o[0], { es: 100, fs: 40 }); c.bi = o[2]; return c; });
-  let wrong = 0;
-  await new Promise(res => { let busy = false; cs.forEach(c => c.onclick = async () => { if (busy || c.dim) return; if (c.bi < 0) { cs.forEach(x => x.onclick = null); c.rect.setAttribute("fill", "#FFE27A"); chime(); res(); return; }
-      busy = true; wrong++; c.dim = 1; c.setAttribute("opacity", .35); noise(.1, 700, .35); await speak(C.pony, `mkc_${it.id}_b${c.bi}`, nTxt(`mkc_${it.id}_b${c.bi}`)); busy = false; }); });
-  await speak(C.pony, "mkp_card_ok", nTxt("mkp_card_ok")); const r = await kmSay(pc, `mkc_${it.id}_a`, it.good[1], it.keys, "いって みよう");
+  // 2026-11-01：3まいの 文の カードから えらぶ 形を やめ、ぽにーの お手本を まねして いう（ひらがなが よめない 子でも できる）
+  const me = clone(pc.kind, 800, 900, (KID_S[pc.kind] || .8) * .6); hudLayer.appendChild(me.root); playMove(me, "frustrated");
+  await speak(C.pony, `mkc_${it.id}_q`, it.q);
+  const r = await kcSayAt(pc, `mkc_${it.id}_a`, it.good[1], it.keys, `${NAMES[pc.kind] || "まるシマ"}に なって`, 560), wrong = 0;
+  if (r.ok) joy(me);
   if (r.ok) { MK_GOT.push(it.good[1]); confetti(30); }
   const ok = r.ok && !wrong; grade(ok); playLog({ type: "mkcard", id: it.id, wrong, ok: r.ok, ...(MODE === "multi" ? { who: NAMES[pc.kind] } : {}) });
-  await sleep(400); g.remove(); return r.ok; }
+  await sleep(400); clearClones(); g.remove(); return r.ok; }
 
 /* =============== 📖 きょうの できごと（ママに おはなし） =============== */
 const DG_N = new Map();

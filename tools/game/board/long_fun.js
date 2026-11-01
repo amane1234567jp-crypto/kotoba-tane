@@ -276,7 +276,7 @@ async function lkHaya(pc) {
   CAST_X[1] = CAST_X[1] || [900];
   const { hero: h } = setSitView(s, pc.kind); const b = STORY_CAST[bw]; place(b, 1100, 975, { gao: .9, mii: .86, chu: .46, pyon: .86, doshin: 1.0, kamejii: .9 }[bw] || .86);
   // ことばの かんばん
-  const sg = el("g", {}, propG); const words = it.t.split(" "); const lines = []; let cur = "";
+  const sg = el("g", { transform: `translate(0 ${PH.on ? Math.max(0, PH.crop - 110).toFixed(0) : 0})` }, propG); /* スマホは 上を きるので かんばんを さげる（2026-11-01） */ const words = it.t.split(" "); const lines = []; let cur = "";
   words.forEach(w => { if ((cur + w).length > 11 && cur) { lines.push(cur.trim()); cur = ""; } cur += w + " "; }); lines.push(cur.trim());
   const fs = Math.min(84, 1100 / Math.max(...lines.map(l => l.length)));
   el("rect", { x: 230, y: 150, width: 1140, height: 110 + lines.length * fs * 1.2, rx: 30, fill: "#FFF8E8", ...S6(8) }, sg);

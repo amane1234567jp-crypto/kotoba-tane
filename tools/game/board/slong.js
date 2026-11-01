@@ -400,7 +400,9 @@ async function slShadow(pc) {
   const f = el("filter", { id: "slsil" }, el("defs", {}, g)); el("feColorMatrix", { type: "matrix", values: "0 0 0 0 .17  0 0 0 0 .16  0 0 0 0 .2  0 0 0 1 0" }, f);
   const c = clone(ans, 800, 640, Math.min(.9, (KID_S[ans] || .8) * .9)); c.root.setAttribute("filter", "url(#slsil)"); hudLayer.appendChild(c.root);
   await speak(C.pony, "sl_shadow", "この かげは だれかな？");
-  const cards = opts.map((k, i) => card(g, 140 + i * 450, 740, 420, 170, (SL_DESC[k] || "") + NAMES[k], null, { fs: 50 }));
+  // 2026-11-01：なまえ だけの カードだと ひらがなが よめない 子が えらべない → キャラの かおを つける
+  const FACE = { pyon: "🐰", mii: "🐱", chu: "🐭", gao: "🦁", doshin: "🐘", kamejii: "🐢", nobbo: "🦒", kon: "🦊", meebaa: "🐑", kuma: "🐻", tora: "🐯" };
+  const cards = opts.map((k, i) => card(g, 140 + i * 450, 700, 420, 220, NAMES[k], FACE[k], { es: 120, fs: 44 }));
   const i = await tapOnce(cards); const ok = opts[i] === ans; flashCard(cards[i], ok);
   c.root.removeAttribute("filter"); jump(c, .6); if (ok) { chime(); confetti(30); await speak(C.pony, "sl_good", "やったね！"); } else { flashCard(cards[opts.indexOf(ans)], true); await speak(C.pony, "sl_miss", "ざんねん！"); }
   await sleep(900); clearClones(); g.remove(); await delta(pc, ok ? 2 : 0); return false;
