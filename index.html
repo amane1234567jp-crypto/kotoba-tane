@@ -65699,11 +65699,18 @@ async function kmRival() {
 /* ---------- 盤 ---------- */
 STAGE_DEF.komatta = { ground: "#FFF8E8", sky: "#CFEAFB", names: ["いえ", "いえ", "がっこう", "がっこう", "こうえん", "こうえん", "まち", "まち", "いえ"], fills: { いえ: "#FFE3B3", がっこう: "#D7ECFF", こうえん: "#D7F0D2", まち: "#FFD1D9" } };
 board7("komatta", ["いえ", "いえ", "がっこう", "こうえん", "まち", "いえ"], "hall");
+// 2026-11-01：かだいが ながいので マスを へらす（15マス → 9マス。わかれみち なし）
+{ const n = {}, pl = {}, nx = {}, P = ["いえ", "いえ", "がっこう", "こうえん", "まち", "いえ"];
+  chain(["0", "1", "2", "4", "f1"], [[220, 880], [470, 900], [720, 900], [970, 900], [1240, 860]], P[0], n, pl); pl["4"] = pl.f1 = P[1];
+  chain(["a1"], [[1400, 620]], P[2], n, pl); chain(["m1", "m2"], [[1160, 390], [840, 320]], P[3], n, pl); chain(["c1"], [[520, 400]], P[4], n, pl);
+  n["15"] = [600, 680, "goal"]; pl["15"] = P[5]; n["0"].push("start"); n["4"].push("block");
+  linkLine(nx, ["0", "1", "2", "4", "f1", "a1", "m1", "m2", "c1", "15"]);
+  BOARD.komatta = { nodes: n, place: pl, next: nx, away: [1300, 760], style: () => "hall", labels: [[P[0], 260, 990], [P[2], 1470, 450], [P[3], 1000, 210], [P[4], 420, 290]] }; }
 BOARD_BG.komatta = L => { bg7(L, "#FFF8E8", ["#FFE3B3", "#D7ECFF", "#D7F0D2"], "🤔 かんがえて みよう", "#8E6FD6"); txt(L, 1460, 180, "💡", 110, { "text-anchor": "middle" }); };
 BLOCK_DEF.komatta = { who: "doshin", sleep: false, intro: ["p_blk_komatta", "どしんが おおきな にもつを もって こまって いるよ。どう したら いいかな？"], say: ["blk_komatta", "いっしょに はこぼう"], to: "どしんに いおう",
   keys: [["いっしょ", "一緒", "はこぼう", "運ぼう"]], res: ["rs_komatta", "ありがとう！ ふたりなら はこべるね"] };
 SLEEPER_OF.komatta = "doshin";
-EVENTS.komatta = { a2: ["fwd", 2, "ev_komattaf", "いい アイデアが うかんだ！ 2マス すすむよ"], m2: ["back", 2, "ev_komattab", "みちに まよった！ 2マス もどるよ"], d1: ["back", 4, "ev_komattah", "わすれものを した！ 4マス もどるよ"] };
+EVENTS.komatta = { m2: ["back", 2, "ev_komattab", "みちに まよった！ 2マス もどるよ"] }; // 2026-11-01：みじかい 盤に あわせて しかけは 1つ
 
 /* かんがえて みよう！ の 作りかえ（sit/komatta_gen2.py が かく）：さいごに 相手に いう ことば と へんじ */
 const KM2 = {"say": {"kutsu": {"to": null, "say": "ママ、くつが かたほう ないの。いっしょに さがして", "keys": [["くつ", "靴"], ["さがして", "探して"]], "reply": "あら、たいへん。いっしょに さがそう"}, "kobosu": {"to": null, "say": "ママ、ジュースを こぼしちゃった。ふきん かして", "keys": [["こぼし", "零し"], ["ふきん", "布巾", "かして", "貸して"]], "reply": "はい、ふきん。いっしょに ふこうね"}, "game": {"to": null, "say": "ママ、セーブしたら やめるね", "keys": [["せーぶ", "セーブ"], ["やめる"]], "reply": "うん。やくそくを まもれて、えらいね"}, "purint": {"to": null, "say": "ママ、プリントが ないの。いっしょに さがして", "keys": [["ぷりんと", "プリント"], ["さがして", "探して"]], "reply": "いいよ。ランドセルの おくも みて みよう"}, "keshigomu": {"to": null, "say": "せんせい、けしごむを わすれました。かして ください", "keys": [["けしごむ", "消しゴム"], ["かして", "貸して"]], "reply": "はい、どうぞ。つぎは わすれないでね"}, "wakaranai": {"to": null, "say": "せんせい、もう いちど いって ください", "keys": [["もういちど", "もう一度", "もういっかい", "もう一回"], ["いって", "言って"]], "reply": "はい。では、もう いちど いいますね"}, "toire": {"to": null, "say": "せんせい、トイレに いきたいです", "keys": [["といれ", "トイレ"], ["いきたい", "行きたい"]], "reply": "はい、いって きて いいですよ"}, "nigate": {"to": null, "say": "せんせい、ピーマンを へらして ください", "keys": [["ぴーまん", "ピーマン"], ["へらして", "減らして"]], "reply": "わかりました。ひとくちは がんばろうね"}, "buranko": {"to": null, "say": "ママ、じゅう かぞえたら こうたいって、いって みるね", "keys": [["かぞえ", "数え"], ["こうたい", "交代"]], "reply": "いい かんがえね。いって ごらん"}, "kasa": {"to": null, "say": "せんせい、かさを かして ください", "keys": [["かさ", "傘"], ["かして", "貸して"]], "reply": "はい、どうぞ。あした かえして くださいね"}, "suitou": {"to": null, "say": "ママ、みずが なくなっちゃった。ひかげで やすみたい", "keys": [["みず", "水"], ["ひかげ", "日陰", "やすみたい", "休みたい"]], "reply": "そうね。ひかげで やすんで、みずを かいに いこう"}, "kega": {"to": null, "say": "せんせい、ころんで ひざから ちが でました", "keys": [["ころん", "転ん"], ["ひざ", "膝", "ち", "血"]], "reply": "たいへん。みずで あらって、てあてを しましょう"}, "maigo": {"to": null, "say": "まいごに なりました。ママを よんで ください", "keys": [["まいご", "迷子"], ["ママ", "まま"]], "reply": "わかりました。ママを よんで あげるね"}, "toriai": {"to": "kon", "say": "こんくん、じゅんばんこに つかおう", "keys": [["じゅんばん", "順番"], ["つかお", "使お"]], "reply": "うん、いいよ。じゅんばんこね"}, "naiteru": {"to": "chu", "say": "ちゅうくん、どうしたの？ だいじょうぶ？", "keys": [["どうしたの"], ["だいじょうぶ", "大丈夫"]], "reply": "……うん。きいて くれて、ありがとう"}}, "go": {"nobbo": "kmp_go_sensei", "mama": "kmp_go_mama", "pyonmama": "kmp_go_mama", "gaomama": "kmp_go_mama", "miimama": "kmp_go_mama", "chumama": "kmp_go_mama", "doshinpapa": "kmp_go_papa", "tenin": "kmp_go_tenin", "kon": "kmp_go_kon", "chu": "kmp_go_chu"}};
@@ -65720,6 +65727,10 @@ kmIntro = async function (sc, hero, asker) {
   const v = setSitView(s, hero), h = v.hero, a = v.ask; a.dx.v = a.dx.t = 900;
   let ex = null; if (sc.extra) { ex = xtra(sc.extra, 1000); if (sc.extra === "chu") { ex.sadMouth = true; for (let i = 0; i < 4; i++) later(400 + i * 350, () => markAbove(ex, "drop", { dx: i % 2 ? 50 : -50 })); } else { hp7(ex, "shovel", .35); } }
   if (sc.id === "toriai") window.__kms = hp7(h, "shovel", .35);
+  // 2026-11-01：場面の ことばと 絵を あわせる。ブランコ＝だれかが のって いる／かさ＝あめが ふって いる
+  if (sc.id === "buranko") { const k = ["tora", "kuma", "pyon", "chu"].find(x => x !== hero && x !== asker) || "tora", c = xtra(k, 1105); stay(c); place(c, 1105, 700, .62 * ((KID_S[k] || .8) / (KID_S.shima || .8))); c.happyOn = true;
+    const t0 = performance.now(); addTick(() => { if (!c.root.isConnected || view === "board") return false; c.dx.v = c.dx.t = Math.sin((performance.now() - t0) / 700 * Math.PI) * 55; }); }
+  if (sc.id === "kasa") { rainOn(); try { rain10(); } catch (e) { } sceneLayer.querySelectorAll("circle").forEach(c => { if (/^#FF[DE]/i.test(c.getAttribute("fill") || "") && +c.getAttribute("r") > 30) c.setAttribute("fill", "#C9D3DE"); }); const sky = el("rect", { x: -400, y: 0, width: 2400, height: 1000, fill: "#5A6A80", opacity: .18 }, propG); }
   enter(h); await sleep(1000); h.sadMouth = true; playMove(h, "think"); const hb = hint7(h, sc.emo, sc.hint); markAbove(h, "q"); await sleep(900);
   return { h, a, hb, ex }; };
 // さいごの ステップ：相手に いって、へんじを もらう
@@ -71086,6 +71097,15 @@ Object.assign(ICON_DRAW, {
   "🏟": g => { IC.R(g, -95, -20, 190, 110, "#FFF1C9", 6); IC.P(g, "M-105 -15 Q0 -110 105 -15 Z", "#7FCBF0", 6); IC.R(g, -25, 30, 50, 60, "#C98A4B", 6); [-70, 45].forEach(x => IC.R(g, x, 10, 28, 28, "#BDE3F2", 4, 4)); }
 });
 ICON_DRAW["🏟️"] = ICON_DRAW["🏟"];
+/* 2026-11-01：ゲームの あと メニューに もどると、メニューの 絵文字が 端末の 絵文字の まま、コースの 絵も 出ない ことが あった
+   （メニューを つくりなおすと、見はりが 新しい メニューに つかなかった）。ページ ぜんたいを 見はって、そのつど 絵に する */
+{ let pend = false; const fix = () => { pend = false; const sb = document.getElementById("startBox"); if (!sb) return;
+    try { const now = performance.now(); sb.querySelectorAll(".mstages .mst:not(.m2off)").forEach(b => { if (!b.querySelector(".mico") || !(b.getBoundingClientRect().width > 0)) return; if (!b.__t0) { b.__t0 = now; return; } if (now - b.__t0 > 900) artCourseTile(b); }); /* いつもの しくみで かけなかった ときだけ（ならびが きまってから） */ } catch (e) { }
+    try { sb.querySelectorAll(".m2g").forEach(t => { if (!t.querySelector(".m2gi")) return; const m = /\bg-([a-z0-9]+)\b/.exec(t.className); artTile(t, t.classList.contains("m2multi") ? "multi" : m && m[1]); }); } catch (e) { }
+    try { iconifyHtml(sb); } catch (e) { } };
+  const kick = () => { if (pend) return; pend = true; requestAnimationFrame(fix); };
+  new MutationObserver(kick).observe(document.body || document.documentElement, { childList: true, subtree: true });
+  addEventListener("resize", () => setTimeout(kick, 200)); setInterval(() => { const sb = document.getElementById("startBox"); if (sb && sb.offsetParent !== null && sb.querySelector(".mico, .m2gi")) kick(); }, 1500); }
 
 /* ================= 2026-10-29 の 直し：ロングの ライバルの 場面 =================
    ・ともだち ロング（ltomo）：ライバル（がお）に あう 場面が ltomo に なく、pickSit が undefined を かえして 止まって いた → こうしゃの 場面を つかう

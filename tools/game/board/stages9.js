@@ -104,8 +104,15 @@ async function kmRival() {
 /* ---------- 盤 ---------- */
 STAGE_DEF.komatta = { ground: "#FFF8E8", sky: "#CFEAFB", names: ["いえ", "いえ", "がっこう", "がっこう", "こうえん", "こうえん", "まち", "まち", "いえ"], fills: { いえ: "#FFE3B3", がっこう: "#D7ECFF", こうえん: "#D7F0D2", まち: "#FFD1D9" } };
 board7("komatta", ["いえ", "いえ", "がっこう", "こうえん", "まち", "いえ"], "hall");
+// 2026-11-01：かだいが ながいので マスを へらす（15マス → 9マス。わかれみち なし）
+{ const n = {}, pl = {}, nx = {}, P = ["いえ", "いえ", "がっこう", "こうえん", "まち", "いえ"];
+  chain(["0", "1", "2", "4", "f1"], [[220, 880], [470, 900], [720, 900], [970, 900], [1240, 860]], P[0], n, pl); pl["4"] = pl.f1 = P[1];
+  chain(["a1"], [[1400, 620]], P[2], n, pl); chain(["m1", "m2"], [[1160, 390], [840, 320]], P[3], n, pl); chain(["c1"], [[520, 400]], P[4], n, pl);
+  n["15"] = [600, 680, "goal"]; pl["15"] = P[5]; n["0"].push("start"); n["4"].push("block");
+  linkLine(nx, ["0", "1", "2", "4", "f1", "a1", "m1", "m2", "c1", "15"]);
+  BOARD.komatta = { nodes: n, place: pl, next: nx, away: [1300, 760], style: () => "hall", labels: [[P[0], 260, 990], [P[2], 1470, 450], [P[3], 1000, 210], [P[4], 420, 290]] }; }
 BOARD_BG.komatta = L => { bg7(L, "#FFF8E8", ["#FFE3B3", "#D7ECFF", "#D7F0D2"], "🤔 かんがえて みよう", "#8E6FD6"); txt(L, 1460, 180, "💡", 110, { "text-anchor": "middle" }); };
 BLOCK_DEF.komatta = { who: "doshin", sleep: false, intro: ["p_blk_komatta", "どしんが おおきな にもつを もって こまって いるよ。どう したら いいかな？"], say: ["blk_komatta", "いっしょに はこぼう"], to: "どしんに いおう",
   keys: [["いっしょ", "一緒", "はこぼう", "運ぼう"]], res: ["rs_komatta", "ありがとう！ ふたりなら はこべるね"] };
 SLEEPER_OF.komatta = "doshin";
-EVENTS.komatta = { a2: ["fwd", 2, "ev_komattaf", "いい アイデアが うかんだ！ 2マス すすむよ"], m2: ["back", 2, "ev_komattab", "みちに まよった！ 2マス もどるよ"], d1: ["back", 4, "ev_komattah", "わすれものを した！ 4マス もどるよ"] };
+EVENTS.komatta = { m2: ["back", 2, "ev_komattab", "みちに まよった！ 2マス もどるよ"] }; // 2026-11-01：みじかい 盤に あわせて しかけは 1つ

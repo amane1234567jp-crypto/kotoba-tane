@@ -91,3 +91,12 @@ Object.assign(ICON_DRAW, {
   "🏟": g => { IC.R(g, -95, -20, 190, 110, "#FFF1C9", 6); IC.P(g, "M-105 -15 Q0 -110 105 -15 Z", "#7FCBF0", 6); IC.R(g, -25, 30, 50, 60, "#C98A4B", 6); [-70, 45].forEach(x => IC.R(g, x, 10, 28, 28, "#BDE3F2", 4, 4)); }
 });
 ICON_DRAW["🏟️"] = ICON_DRAW["🏟"];
+/* 2026-11-01：ゲームの あと メニューに もどると、メニューの 絵文字が 端末の 絵文字の まま、コースの 絵も 出ない ことが あった
+   （メニューを つくりなおすと、見はりが 新しい メニューに つかなかった）。ページ ぜんたいを 見はって、そのつど 絵に する */
+{ let pend = false; const fix = () => { pend = false; const sb = document.getElementById("startBox"); if (!sb) return;
+    try { const now = performance.now(); sb.querySelectorAll(".mstages .mst:not(.m2off)").forEach(b => { if (!b.querySelector(".mico") || !(b.getBoundingClientRect().width > 0)) return; if (!b.__t0) { b.__t0 = now; return; } if (now - b.__t0 > 900) artCourseTile(b); }); /* いつもの しくみで かけなかった ときだけ（ならびが きまってから） */ } catch (e) { }
+    try { sb.querySelectorAll(".m2g").forEach(t => { if (!t.querySelector(".m2gi")) return; const m = /\bg-([a-z0-9]+)\b/.exec(t.className); artTile(t, t.classList.contains("m2multi") ? "multi" : m && m[1]); }); } catch (e) { }
+    try { iconifyHtml(sb); } catch (e) { } };
+  const kick = () => { if (pend) return; pend = true; requestAnimationFrame(fix); };
+  new MutationObserver(kick).observe(document.body || document.documentElement, { childList: true, subtree: true });
+  addEventListener("resize", () => setTimeout(kick, 200)); setInterval(() => { const sb = document.getElementById("startBox"); if (sb && sb.offsetParent !== null && sb.querySelector(".mico, .m2gi")) kick(); }, 1500); }

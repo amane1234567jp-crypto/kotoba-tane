@@ -10,6 +10,10 @@ kmIntro = async function (sc, hero, asker) {
   const v = setSitView(s, hero), h = v.hero, a = v.ask; a.dx.v = a.dx.t = 900;
   let ex = null; if (sc.extra) { ex = xtra(sc.extra, 1000); if (sc.extra === "chu") { ex.sadMouth = true; for (let i = 0; i < 4; i++) later(400 + i * 350, () => markAbove(ex, "drop", { dx: i % 2 ? 50 : -50 })); } else { hp7(ex, "shovel", .35); } }
   if (sc.id === "toriai") window.__kms = hp7(h, "shovel", .35);
+  // 2026-11-01：場面の ことばと 絵を あわせる。ブランコ＝だれかが のって いる／かさ＝あめが ふって いる
+  if (sc.id === "buranko") { const k = ["tora", "kuma", "pyon", "chu"].find(x => x !== hero && x !== asker) || "tora", c = xtra(k, 1105); stay(c); place(c, 1105, 700, .62 * ((KID_S[k] || .8) / (KID_S.shima || .8))); c.happyOn = true;
+    const t0 = performance.now(); addTick(() => { if (!c.root.isConnected || view === "board") return false; c.dx.v = c.dx.t = Math.sin((performance.now() - t0) / 700 * Math.PI) * 55; }); }
+  if (sc.id === "kasa") { rainOn(); try { rain10(); } catch (e) { } sceneLayer.querySelectorAll("circle").forEach(c => { if (/^#FF[DE]/i.test(c.getAttribute("fill") || "") && +c.getAttribute("r") > 30) c.setAttribute("fill", "#C9D3DE"); }); const sky = el("rect", { x: -400, y: 0, width: 2400, height: 1000, fill: "#5A6A80", opacity: .18 }, propG); }
   enter(h); await sleep(1000); h.sadMouth = true; playMove(h, "think"); const hb = hint7(h, sc.emo, sc.hint); markAbove(h, "q"); await sleep(900);
   return { h, a, hb, ex }; };
 // さいごの ステップ：相手に いって、へんじを もらう
