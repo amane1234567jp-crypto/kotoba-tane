@@ -218,7 +218,7 @@ Object.assign(LTASK_RUN, { mg: mkScene, mj: mkJanken, mc: mkCard, ds: dgStory, d
         ws.forEach((w, i) => { const y = 200 + i * 82, c = el("g", {}, g); el("rect", { x: 260, y: y - 52, width: 1080, height: 70, rx: 35, fill: "#FFFFFF", ...S6(5) }, c); txt(c, 320, y - 4, "🌈", 44, { "text-anchor": "middle" }); txt(c, 820, y - 2, w, 40, { "text-anchor": "middle" });
           c.setAttribute("opacity", 0); later(300 + i * 220, () => { c.setAttribute("opacity", 1); blip(700 + i * 40, 1000, .08, "square"); }); });
         await speak(C.pony, "mkp_goal", nTxt("mkp_goal")); await sleep(1500 + ws.length * 220); g.remove(); }
-      if (curStage === "dekigoto" && DG_GOT.length) { const ids = [...new Set(DG_GOT)].slice(0, 8), g = panel("おはなし できた できごと", "#EAF6FF");
+      if (false && curStage === "dekigoto" && DG_GOT.length) { /* 2026-11-01：この 画面は カット */ const ids = [...new Set(DG_GOT)].slice(0, 8), g = panel("おはなし できた できごと", "#EAF6FF");
         ids.forEach((id, i) => { const sc = DG.st.find(s => s.id === id), x = 260 + (i % 4) * 360, y = 220 + Math.floor(i / 4) * 300, c = el("g", {}, g);
           el("rect", { x: x - 160, y, width: 320, height: 240, rx: 26, fill: "#FFFFFF", ...S6(5) }, c); txt(c, x, y + 110, sc.s.map(s => s[0]).join(""), 54, { "text-anchor": "middle" }); txt(c, x, y + 190, sc.s[2][1], sc.s[2][1].length > 9 ? 26 : 32, { "text-anchor": "middle" });
           c.setAttribute("opacity", 0); later(300 + i * 220, () => { c.setAttribute("opacity", 1); blip(700 + i * 40, 1000, .08, "square"); }); });
