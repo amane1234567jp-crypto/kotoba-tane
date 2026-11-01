@@ -96,3 +96,6 @@ kmRival = async function () {
     // 2026-11-01：「きょうの できごと」も ゆるく。キーワードの どれか ひとつ・おしい・なにか ことばを いえたら（2もじ いじょう）OK
     if (curStage === "dekigoto" && r && r.r !== "ok" && (r.r === "part" || (r.heard || "").replace(/[\s、。！？…（）()]/g, "").length >= 2)) return { ...r, r: "ok" };
     return r; }; }
+// 2026-11-01：ながい こたえ（12もじ いじょう）は「おしい」（キーワードの いくつかが きこえた）でも OK に（どの コースでも）
+{ const ls = listen; listen = async function (groups, ms) { const r = await ls(groups, ms);
+    if (r && r.r === "part" && typeof taskText === "string" && taskText.replace(/\s/g, "").length >= 12) return { ...r, r: "ok" }; return r; }; }

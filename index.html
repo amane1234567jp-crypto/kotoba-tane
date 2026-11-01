@@ -65814,6 +65814,9 @@ kmRival = async function () {
     // 2026-11-01：「きょうの できごと」も ゆるく。キーワードの どれか ひとつ・おしい・なにか ことばを いえたら（2もじ いじょう）OK
     if (curStage === "dekigoto" && r && r.r !== "ok" && (r.r === "part" || (r.heard || "").replace(/[\s、。！？…（）()]/g, "").length >= 2)) return { ...r, r: "ok" };
     return r; }; }
+// 2026-11-01：ながい こたえ（12もじ いじょう）は「おしい」（キーワードの いくつかが きこえた）でも OK に（どの コースでも）
+{ const ls = listen; listen = async function (groups, ms) { const r = await ls(groups, ms);
+    if (r && r.r === "part" && typeof taskText === "string" && taskText.replace(/\s/g, "").length >= 12) return { ...r, r: "ok" }; return r; }; }
 
 /* ================= ショートコース 8つ（2026-10-19 その2） =================
    台本は sit/sits_new8.py。きりかえ・ききかえす・まつ（こえの ものさし）・からだと かんかくの SOS・じゅんばん（カードならべ）・ことわる・ぼうさい・でんわ。
@@ -69077,7 +69080,7 @@ const F_SMAX = F_STAGE.length - 1;
 const fZ = s => s <= F_SMAX ? F_STAGE[s] : Math.min(2.6, F_STAGE[F_SMAX] + (s - F_SMAX) * .05); // 10かいめ からも ゆっくり そだつ（2026-10-21）
 // とおくの 巨木：たねが 30こ から あらわれ、たねの かずで ずっと おおきく なる（上限なし）
 const F_CAP = 1280; // この かずの ときの 絵が いちばん おおきい（それより おおくても おなじ 絵。かずの 札は ほんとうの かず）2026-10-21
-const fGiant = n => n < 30 ? 0 : .55 + .01 * (Math.min(n, F_CAP) - 30);
+const fGiant = n => n < 30 ? 0 : .45 + .0012 * (Math.min(n, F_CAP) - 30); // 2026-11-01：ほんとうに すこしずつ（まえは .01 ずつで、すぐ 超巨木に なった）
 // 木の ばしょ：はじめの スロットが うまったら、おくの 3まいの 層を そとへ そとへ ひろげる（ひきの 絵で 見える）
 const F_MAXT = 2600;
 const F_OVER = []; { const cnt = { 0: [0, 0], 1: [0, 0], 2: [0, 0] }, seq = [2, 1, 0, 0, 1, 0, 2, 0, 1, 0], r = rng32(19);
@@ -69135,13 +69138,13 @@ async function forestScene(newSeeds, kinds) {
   el("stop", { offset: 0, "stop-color": "#8FD3F5" }, grad); el("stop", { offset: .7, "stop-color": "#D9F1FB" }, grad); el("stop", { offset: 1, "stop-color": "#F4FBE8" }, grad);
   const hz = el("linearGradient", { id: "fhaze", x1: 0, y1: 300, x2: 0, y2: 600, gradientUnits: "userSpaceOnUse" }, defs); el("stop", { offset: 0, "stop-color": "#E6F5FB", "stop-opacity": 0 }, hz); el("stop", { offset: 1, "stop-color": "#E6F5FB", "stop-opacity": .26 }, hz);
   const sky0 = el("g", {}, root); el("rect", { x: -100, y: -100, width: 1800, height: 1200, fill: "url(#fsky)" }, sky0);
-  const world = el("g", {}, root); let cam = 1; /* 2026-11-01：はじめは ちかくの 森（てまえ）から。ひくのは 木が そだった あと */ const camT = () => world.setAttribute("transform", `translate(${(800 * (1 - cam)).toFixed(1)} ${(1000 * (1 - cam)).toFixed(1)}) scale(${cam.toFixed(4)})`); camT();
+  const world = el("g", {}, root); const WIDE = old >= 30; let cam = WIDE ? Math.min(fCam(total), .42) : 1; /* 2026-11-01：森が ある ていど そだつ まで（30本）は ちかくの 絵の まま。そだったら はじめから ひきの 絵（とちゅうで きりかえない） */ const camT = () => world.setAttribute("transform", `translate(${(800 * (1 - cam)).toFixed(1)} ${(1000 * (1 - cam)).toFixed(1)}) scale(${cam.toFixed(4)})`); camT();
   const toScr = (x, y) => ({ x: 800 + (x - 800) * cam, y: 1000 + (y - 1000) * cam });
   const sky = el("g", {}, world); el("rect", { x: -4000, y: -100, width: 9600, height: 1200, fill: "url(#fsky)", opacity: 0 }, sky);
   const sun = el("g", { transform: "translate(1440 140)" }, sky0); const sunR = el("g", {}, sun);
   for (let i = 0; i < 12; i++) el("path", { d: "M0 -92 L12 -70 L-12 -70 Z", fill: "#FFD25E", ...S6(4), transform: `rotate(${i * 30})` }, sunR);
   el("circle", { r: 58, fill: "#FFE27A", ...S6(6) }, sun); el("circle", { cx: -18, cy: -6, r: 5, fill: INK }, sun); el("circle", { cx: 18, cy: -6, r: 5, fill: INK }, sun); el("path", { d: "M-16 14 Q0 28 16 14", fill: "none", ...S6(5) }, sun);
-  if (total >= 30) { const rb = el("g", { opacity: 0 }, sky0); ["#FF8FA3", "#FFC36E", "#FFE27A", "#9BD68A", "#8FC7F2", "#B9A8D9"].forEach((c, i) => el("path", { d: `M180 620 A${560 - i * 22} ${430 - i * 22} 0 0 1 ${1300 - i * 44 + 44 * 0} 620`, fill: "none", stroke: c, "stroke-width": 22, opacity: .75 }, rb)); later(2500, () => tween(1500, k => rb.setAttribute("opacity", k.toFixed(2)))); }
+  if (total >= 30) { const rb = el("g", { opacity: 0, transform: `translate(0 ${(1000 + (F_LAY[0].hill + 30 - 1000) * cam - 620).toFixed(1)})` }, sky0); /* にじの ねもとを じめんに */ ["#FF8FA3", "#FFC36E", "#FFE27A", "#9BD68A", "#8FC7F2", "#B9A8D9"].forEach((c, i) => el("path", { d: `M180 620 A${560 - i * 22} ${430 - i * 22} 0 0 1 ${1300 - i * 44 + 44 * 0} 620`, fill: "none", stroke: c, "stroke-width": 22, opacity: .75 }, rb)); later(2500, () => tween(1500, k => rb.setAttribute("opacity", k.toFixed(2)))); }
   const cloudHold = el("g", {}), camEnd = fCam(old + newSeeds), span = 2000 / camEnd, cr = rng32(5), nCl = Math.min(40, 3 + Math.round(3 / camEnd));
   const clouds = Array.from({ length: nCl }, (_, i) => { const x = i < 3 ? [200, 760, 1150][i] : 800 - span / 2 + cr() * span, y = i < 3 ? [140, 90, 230][i] : 60 + cr() * 330 - (1 / camEnd - 1) * 40 * cr(), s = i < 3 ? [1, .8, .7][i] : .8 + cr() * Math.min(4, .6 / camEnd);
     const c = el("g", {}, cloudHold); [[0, 0, 46], [44, -16, 52], [92, 0, 42]].forEach(([cx, cy, r]) => el("circle", { cx, cy, r, fill: "#FFFFFF", stroke: "#C9D9E6", "stroke-width": 4 }, c)); return { c, x, y, s }; });
@@ -69164,7 +69167,7 @@ async function forestScene(newSeeds, kinds) {
     const fade = Math.min(.62, .28 + .035 * k); // おおきく なるほど とおくに ある → うすく
     big.k.querySelectorAll("*").forEach(e => { if (/^#[0-9A-F]{6}$/i.test(e.dataset.f)) e.setAttribute("fill", fMix(e.dataset.f, "#D4EAF4", fade)); if (/^#[0-9A-F]{6}$/i.test(e.dataset.s)) e.setAttribute("stroke", fMix(e.dataset.s, "#D4EAF4", fade * .9)); });
     big.k.setAttribute("transform", `translate(800 ${F_LAY[0].hill + 40}) scale(${k.toFixed(4)})`); };
-  bigS(old); bigG.setAttribute("opacity", 0); // 巨木は ひきの 絵に なってから、かすみの むこうに あらわれる
+  bigS(old); if (!WIDE) bigG.setAttribute("opacity", 0); // 巨木は ひきの 絵の ときだけ
   const flies = []; const nBf = total >= 5 ? Math.min(10, 1 + Math.floor(total / 12)) : 0;
   for (let i = 0; i < nBf; i++) { const b = el("g", {}, root); const w1 = el("ellipse", { cx: -10, cy: 0, rx: 12, ry: 16, fill: ["#FFD25E", "#FF8FA3", "#8FC7F2", "#B9A8D9", "#FFFFFF"][i % 5], stroke: INK, "stroke-width": 3 }, b), w2 = el("ellipse", { cx: 10, cy: 0, rx: 12, ry: 16, fill: ["#FFD25E", "#FF8FA3", "#8FC7F2", "#B9A8D9", "#FFFFFF"][i % 5], stroke: INK, "stroke-width": 3 }, b); el("ellipse", { cx: 0, cy: 0, rx: 3, ry: 12, fill: INK }, b); world.appendChild(b); flies.push({ b, w1, w2, x: 300 + (i % 5) * 220 + Math.floor(i / 5) * 110, y: 760 + (i % 2) * 70, ph: i * 1.7 }); }
   const birds = total >= 12 ? el("g", {}, world) : null; if (birds) [[0, 0], [50, 22], [-46, 26]].forEach(([x, y]) => el("path", { d: `M${x - 18} ${y} Q${x - 8} ${y - 12} ${x} ${y} Q${x + 8} ${y - 12} ${x + 18} ${y}`, fill: "none", ...S6(5) }, birds));
@@ -69216,11 +69219,7 @@ async function forestScene(newSeeds, kinds) {
   // --- ひいて いく → とおくで 巨木が すこしずつ そだつ（2026-11-01） ---
   //   ① てまえの 森が そだった あと、ゆっくり ひきの 絵に（巨木は かすみの むこうに ふわっと あらわれる）
   //   ② ひきの 絵の なかで、ずっと むこうの 巨木が ちょっとずつ おおきく なる（はいりきらない ぶんだけ カメラも すこし ひく）
-  { const cA = Math.min(1, fCam(old)), cB = fCam(total), gg = fGiant(total) > fGiant(old);
-    if (cA < .999 || fGiant(old)) await tween(cA < .6 ? 3200 : 2400, k => { const e = 1 - Math.pow(1 - k, 3); cam = 1 + (cA - 1) * e; camT(); placeP(); if (fGiant(old)) bigG.setAttribute("opacity", e.toFixed(3)); });
-    if (gg || cB < cA) { if (gg && !fGiant(old)) { bigS(30); bigG.setAttribute("opacity", 1); blip(300, 600, .4, "triangle"); } else bigG.setAttribute("opacity", 1);
-      await tween(3600, k => { const e = k * k * (3 - 2 * k); if (gg) bigS(Math.max(30, old) + (total - Math.max(30, old)) * e); if (cB < cA) { cam = cA + (cB - cA) * e; camT(); placeP(); } }); }
-    await sleep(300); }
+  if (WIDE && fGiant(total) > fGiant(old)) await tween(5000, k => bigS(old + (total - old) * k)); // とおくの 巨木が ゆっくり すこし そだつ（カメラは うごかさない）
   // --- かぞえる ---
   for (let v = old + 1; v <= total; v++) { tagT.textContent = `× ${v}`; const nn = total - old, k = Math.max(1, Math.ceil(nn / 12)); if ((v - old) % k === 0 || v === total) { const f = 700 + Math.min(12, (v - old) / k) * 40; blip(f, f * 1.2, .06, "triangle"); } await sleep(Math.max(25, Math.min(160, 1800 / nn))); }
   chime(); people.forEach((c, i) => later(i * 120, () => joy(c))); confetti(40);
