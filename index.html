@@ -61668,9 +61668,10 @@ function pickSit(place, heroKind = "shima") {
     && !(heroKind === "chu" && s.intro === "tag") && !(s.cast && s.cast.includes(heroKind)) && !(s.noHero && s.noHero.includes(heroKind)) && !(s.late && GS.tasks < 4)
     && famOk(s, heroKind) && !(typeof RIVAL !== "undefined" && RIVAL && s.asker === RIVAL && heroKind !== RIVAL); // ライバルは 場面に ださない // ママの 場面は、じぶんの ママが いる 子だけ // やりとりに 出ている キャラは、その場面の 主人公に しない
   if (MODE === "solo" && heroKind !== "shima") { // ひとりで あそぶ ときの ライバルは、こどもが もう やった 場面から えらぶ（こどもの ぶんの あたらしい 場面を へらさない）
-    let rp = SITS.filter(s => okFor(s) && sitUsed.has(s.id)); if (!rp.length) rp = SITS.filter(okFor);
+    // 2026-11-01：まえは こどもが やった 場面を くりかえして いた（おなじ しつもん・こたえが なんども 出る、との 指摘）→ まだ だれも やって いない 場面から えらぶ
+    let rp = SITS.filter(s => okFor(s) && !sitUsed.has(s.id)); if (!rp.length) rp = SITS.filter(okFor);
     if (!rp.length) return null; // ライバルに あう 場面が ない（ともだち ロング など）→ 場面なし
-    const m = Math.min(...rp.map(x => SIT_N.get(x.id) || 0)); rp = rp.filter(x => (SIT_N.get(x.id) || 0) === m); const s = rp[rnd(rp.length)];
+    const m = Math.min(...rp.map(x => SIT_N.get(x.id) || 0)); rp = rp.filter(x => (SIT_N.get(x.id) || 0) === m); const s = rp[rnd(rp.length)]; sitUsed.add(s.id);
     return famSwap(s, heroKind); }
   let pool = SITS.filter(s => okFor(s) && s.place === place && !sitUsed.has(s.id));
   if (!pool.length) pool = SITS.filter(s => okFor(s) && !sitUsed.has(s.id));
