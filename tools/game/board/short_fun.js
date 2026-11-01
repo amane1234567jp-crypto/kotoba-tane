@@ -9,8 +9,8 @@ function sfPlace(id) { if (SF_POS[id] !== undefined) return SF_POS[id]; const B 
   const path = []; let cur = "0", guard = 0; while (cur && guard++ < 80) { path.push(cur); const nx = B.next[cur] || []; if (!nx.length) break; cur = nx[0]; }
   const ev = (EVENTS[id] || {}), ok = n => { const v = B.nodes[n]; return v && !v[2] && !ev[n] && (B.next[n] || []).length === 1 && n !== "0" && n !== "15"; };
   const cand = path.filter(ok); if (cand.length < 3) return null;
-  const pick = [.3, .55, .8].map(f => cand[Math.min(cand.length - 1, Math.round(f * (cand.length - 1)))]); if (new Set(pick).size < 3) return null;
-  return SF_POS[id] = { [pick[0]]: "stop", [pick[1]]: "x2", [pick[2]]: "balloon" }; }
+  const pick = [.35, .7].map(f => cand[Math.min(cand.length - 1, Math.round(f * (cand.length - 1)))]); if (new Set(pick).size < 2) return null;
+  return SF_POS[id] = { [pick[0]]: "stop", [pick[1]]: "balloon" }; } // サイコロ2ばいの マスは なし（2026-11-01）
 const sfAt = (id, n) => { if (!sfShort(id)) return null; const m = sfPlace(id); return m && m[n] || null; };
 // 盤に しるし
 { const db = drawBoard; drawBoard = function () { db(); try { const m = sfShort(curStage) && sfPlace(curStage); if (!m) return;
