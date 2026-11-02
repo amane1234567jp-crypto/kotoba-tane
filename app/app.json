@@ -13,7 +13,7 @@
     ],
     "ios": {
       "bundleIdentifier": "com.uchinoaji.kotobatane",
-      "buildNumber": "1",
+      "buildNumber": "2",
       "supportsTablet": true,
       "requireFullScreen": true,
       "infoPlist": {
@@ -25,7 +25,9 @@
           "ja"
         ],
         "NSSpeechRecognitionUsageDescription": "お子さんが言った言葉がお手本と合っているかを調べるために、音声認識を使います。",
-        "NSMicrophoneUsageDescription": "話す練習で、お子さんの声を聞き取るためにマイクを使います。"
+        "NSMicrophoneUsageDescription": "話す練習で、お子さんの声を聞き取るためにマイクを使います。",
+        "NSPhotoLibraryUsageDescription": "このアプリでは写真を読み込みません。",
+        "NSCameraUsageDescription": "このアプリではカメラを使いません。"
       }
     },
     "android": {
