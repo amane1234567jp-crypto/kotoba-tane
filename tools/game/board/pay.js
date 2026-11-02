@@ -14,7 +14,9 @@ const PAY_FREE = new Set([
 ]);
 const PAY_PRICE = "100円", PAY_KEY = "kotoba-tane-unlock";
 const PAY = {
-  get on() { try { return localStorage.getItem(PAY_KEY) === "1"; } catch (e) { return false; } },
+  // うちの子 用の リンク（?uchi）は いつも ぜんぶ ひらく。ホーム画面に おいても この アドレスの まま なので ひらいた まま（2026-11-02）
+  uchi: /[?&]uchi\b/.test(location.search) && !(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()),
+  get on() { if (this.uchi) return true; try { return localStorage.getItem(PAY_KEY) === "1"; } catch (e) { return false; } },
   set on(v) { try { v ? localStorage.setItem(PAY_KEY, "1") : localStorage.removeItem(PAY_KEY); } catch (e) { } },
   native() { try { const C = window.Capacitor; return C && C.isNativePlatform && C.isNativePlatform() && C.Plugins && C.Plugins.KotobaPay || null; } catch (e) { return null; } },
   async buy() { const N = this.native(); if (!N) return { ok: true, trial: true }; try { return await N.buy({ product: "kotoba_tane_all" }); } catch (e) { return { ok: false, err: String(e && e.message || e) }; } },
@@ -59,7 +61,7 @@ function payShop() {
   const ov = document.createElement("div"); ov.className = "kpay kpay-adultui";
   const body = () => PAY.on
     ? `<div class="kpay-h">すべてのコースが開いています</div><div class="kpay-p">ご購入ありがとうございます。全${all}コースで遊べます。</div>
-       <div class="kpay-row"><button type="button" class="kpay-no">とじる</button>${trial ? `<button type="button" class="kpay-relock">ロックに戻す（確認用）</button>` : ""}</div>`
+       <div class="kpay-row"><button type="button" class="kpay-no">とじる</button>${trial && !PAY.uchi ? `<button type="button" class="kpay-relock">ロックに戻す（確認用）</button>` : ""}</div>`
     : `<div class="kpay-h">すべてのコースを開く</div>
        <div class="kpay-p">いまは${all}コースのうち${free}コースを無料で遊べます。<br>${PAY_PRICE}（1回だけのお支払い）で、残りの${all - free}コースもすべて遊べるようになります。<br>広告や毎月の料金はありません。</div>
        ${trial ? `<div class="kpay-note">この公開ページはお試し版です。お金はかからず、そのまま開きます。</div>` : ""}
@@ -110,3 +112,5 @@ setInterval(() => { const sb = document.getElementById("startBox"); if (sb && sb
 .kpay-pad button{padding:.25em 0;border-radius:14px;font-size:min(4.4vh,24px)}
 .kpay-pad button:last-child{grid-column:2}
 `; document.head.appendChild(st); }
+// うちの子 用の リンクで ホーム画面に おいたとき、ひらく アドレスも ?uchi の ままに する
+if (PAY.uchi) { const m = document.querySelector('link[rel="manifest"]'); if (m) m.href = "manifest_uchi.json"; }
