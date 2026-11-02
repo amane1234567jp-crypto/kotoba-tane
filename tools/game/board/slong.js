@@ -5,7 +5,7 @@
    あたらしい 声は ぽにーだけ（sl_*・n0・n7〜n12。packs/slong.json）。 */
 const JG_ROWS = [935, 730, 525, 320];
 const DT_ROWS = [895, 698, 501, 304]; // でたらめ がっこう：でこぼこの ぶん うえに（いちばん したが きれない）
-const SL = ["sumi", "sokashi", "suchu", "eki", "odekake", "kimochi", "makete", "dekigoto", "jugyou", "detarame"];
+const SL = ["sumi", "sokashi", "suchu", "eki", "odekake", "kimochi", "makete", "dekigoto", "jugyou", "detarame", "yuen"];
 const SL_HIDE = new Set([]); /* 声が そろうまで メニューに ださない コースを ここに */
 const isSL = () => SL.includes(curStage);
 SL.forEach(id => LONGS.add(id));
@@ -42,6 +42,10 @@ const SL_TH = {
   detarame: { name: "でたらめ がっこう", icon: "🤪", areas: ["あさ", "じゅぎょう", "やすみじかん", "ほうかご"], fills: ["#FFE9C7", "#E3F0FF", "#FFE0EE", "#E6F6D8"], ground: "#FFF6E6",
     blk: { who: "nobbo", intro: ["dtp_blk", "のっぽせんせいが、へんな こうちょうを さがして ろうかを ふさいで いるよ"], say: ["lk_blk_say", "せんせい、とおして ください"], to: "せんせいに いおう", keys: [["せんせい", "先生"], ["とおして", "通して", "とうして"], ["ください", "下さい"]], res: ["lk_blk_res", "おっと、すみません。どうぞ"] },
     item: "ドーナツ", obs: "ボール", call: "こうちょうせんせい", deco: [] },
+  // ゆうえんち（2026-11-02、yuen.js）：おでかけの こまりごとと ゆうえんちの かいわ
+  yuen: { name: "ゆうえんち", icon: "🎡", areas: ["いりぐち", "のりもの", "おばけ・ショー", "おみせ"], fills: ["#FFF1D6", "#D7ECFF", "#EEE6FA", "#FFE0E6"], ground: "#FFF6E6",
+    blk: { who: "kamejii", intro: ["sl_yuen_blk", "かめじいが、ちずを みながら みちの まんなかで たちどまって いるよ"], say: ["blk_jitensha", "すみません、とおります"], to: "かめじいに いおう", keys: [["すみません", "済みません"]], res: ["rs_jitensha", "ほっほ、ていねいに ありがとう"] },
+    item: "ふうせん", obs: "ひとごみ", call: "かかりの ひと", deco: [] },
   dekigoto: { name: "きょうの できごと", icon: "📖", areas: ["がっこう", "こうえん", "いえ", "おでかけ"], fills: ["#E3F0FF", "#DDF2D0", "#FFE9D6", "#FFE0EE"], ground: "#F2F7FF",
     blk: { who: "chu", intro: ["p_blk_dekigoto", "ちゅうくんが、きょうの ことを はなしたそうに して いるよ。きいて あげよう"], say: ["blk_dekigoto", "きょう、なにが あったの？"], to: "ちゅうくんに きこう", keys: [["なにが", "何が", "あったの", "どうしたの"]], res: ["rs_dekigoto", "きいて！ さかあがりが できたんだ！"] },
     item: "ほん", obs: "あめ", call: "ともだち", deco: [] },
@@ -81,7 +85,7 @@ const SL_EVT = {
     nebou: "ベンチで ねちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "サイクリングの なかまが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを むかえに いくよ",
     atsumare: "こうえんで ひとやすみ！ みんな ここに あつまれ！", kumikae: "みちが こうじちゅう！ コースが くみかわるよ" },
   kimochi: {}, /* しかけは kimochi.js で きめる */
-  makete: {}, dekigoto: {}, jugyou: {}, detarame: {},
+  makete: {}, dekigoto: {}, jugyou: {}, detarame: {}, yuen: {},
 };
 const SL_ICON = { dice2: "🎲", warp: "🌀", bigwarp: "🚀", fake: "🤪", rand: "❓", rest: "💤", x2: "✖️", zero: "0️⃣", home: "↩", back10: "⏪", bonus: "🎁", allf: "⏩", allb: "🌊", janken: "✊", again: "🔁", nebou: "😴", trolley: "🚃", call: "🧲", tsukkomi: "🤣", atsumare: "📣", kumikae: "🔀" };
 const SL_EVC = { warp: "#D9C2F0", bigwarp: "#D9C2F0", rand: "#D9C2F0", home: "#FFC2D1", back10: "#FFC2D1", fake: "#FFE27A", tsukkomi: "#FFE27A", bonus: "#C9EBB5", atsumare: "#FFE27A", kumikae: "#FFE27A" };
@@ -105,6 +109,7 @@ const SL_SHAPE = { // 47マス＋ゴール（まえは 65＋1。ながすぎた�
     return P; },
   kimochi() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + Math.sin(col * .8 + r * 1.3) * 22]); } }); return P; }, // 4だん＝4つの ばしょ（いえ・がっこう・こうえん・おでかけ）
   makete() { return SL_SHAPE.kimochi(); },
+  yuen() { return SL_SHAPE.kimochi(); },
   dekigoto() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 7; j++) { const col = r % 2 ? 6 - j : j; P.push([200 + col * 200, y + Math.sin(col * .9 + r * 1.3) * 22]); } }); return P; }, // ながすぎたので 4だん×7＝28マスに（2026-10-25）
   detarame() { const P = []; DT_ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + (col % 2 ? -28 : 24) + (col % 3 === 2 ? 10 : 0)]); } }); return P; }, // でこぼこ（でたらめ）な 4だん
   jugyou() { const P = [], ROWS = JG_ROWS; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + Math.sin(col * .8 + r * 1.3) * 22]); } }); return P; }, // コース名を 上の バーに うつして 4だんを ひろげた（2026-10-25）

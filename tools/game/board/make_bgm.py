@@ -329,6 +329,10 @@ SONGS = {
  "aite": dict(bpm=124, root=65, scale=MAJ, bars=8, lead=flute, lead2=glock, drums=D_easy, comp="piano", bass="sq", swing=.2, extra=X_bell,
    mel="3 - 5 - 6 - 5 - | 3 - 2 - 1 - - - | 2 - 4 - 6 - 5 - | 4 - 3 - 2 - - - | 3 - 5 - 1' - 7 - | 6 - 5 - 6 - 1' - | 5 - 3 - 2 - 7, - | 1 - - - . . . .",
    chords=[1, 1, 2, 5, 1, 4, 5, 1]),
+ # ゆうえんち（2026-11-02）：メリーゴーランドの ワルツ（グロッケン＋フルート）
+ "yuen": dict(bpm=160, root=67, scale=MAJ, bars=8, lead=glock, lead2=flute, drums=D_waltz, comp="pad", per_bar=6,
+   mel="1 - 3 5 - 3 | 4 - 6 1' - 6 | 5 - 3 1 - 3 | 2 - - 5, - - | 1 - 3 5 - 1' | 2' - 1' 7 - 6 | 5 - 4 2 - 7, | 1 - - . . .",
+   chords=[1, 4, 1, 5, 1, 4, 5, 1]),
  "makete": dict(bpm=136, root=67, scale=MAJ, bars=8, lead=brass, lead2=glock, drums=D_march, comp="pluck", bass="sq", swing=.1, extra=X_bell,
    mel="5 - 5 - 1' - 5 - | 6 - 5 - 3 - - - | 4 - 4 - 6 - 4 - | 5 - - - 2 - - - | 5 - 5 - 1' - 5 - | 6 - 1' - 2' - 1' - | 7 - 5 - 6 - 7 - | 1' - - - . . . .",
    chords=[1, 4, 4, 5, 1, 4, 5, 1]),

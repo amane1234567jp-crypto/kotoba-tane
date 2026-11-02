@@ -115,6 +115,7 @@ TXT = {
  "yup_wheel": "かんらんしゃ ルーレット！ すきな ときに タッチして、ゴンドラを とめてね",
  "yup_wheel_d2": "ポップコーンの ゴンドラ！ つぎは サイコロ 2こで ふれるよ",
 }
+EVT_BLK = {"sl_yuen_blk": "かめじいが、ちずを みながら みちの まんなかで たちどまって いるよ"}
 out, pony, lines, yomi = [], [], [], {}
 for (sid, area, place, who, n, line, say, keys, res, t2) in SC:
   s = {"id": sid, "area": area, "place": place, "who": who, "n": n, "say": say, "keys": keys, "line": line[0] if line else None, "res": res[0] if res else None}
@@ -129,6 +130,7 @@ for (sid, area, place, who, n, line, say, keys, res, t2) in SC:
   out.append(s)
 for key, t in TXT.items(): pony.append([key, t, {}, None])
 for key, t in EVT.items(): pony.append([f"sl_yuen_{key}", t, {}, None])
+for key, t in EVT_BLK.items(): pony.append([key, t, {}, None])
 data = {"sc": out, "txt": TXT, "evt": EVT}
 (G / "board/yuen_data.js").write_text("/* sit/yuen_gen.py で つくる（てで なおさない） */\nconst YU = " + json.dumps(data, ensure_ascii=False) + ";\n")
 (G / "sit/pony_yuen.json").write_text(json.dumps(pony, ensure_ascii=False, indent=0))
