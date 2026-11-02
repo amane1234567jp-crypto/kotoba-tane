@@ -52,8 +52,8 @@ jobs:
           export EAS_BUILD_NO_EXPO_GO_WARNING=true
           if [ "${{ steps.s.outputs.platform }}" = "ios" ]; then
             # iOS は はじめての ときに 証明書・プロファイルを つくる 質問が でるので、画面つきで うごかして すべて「はい」（Enter）で こたえる
-            (while true; do echo; sleep 4; done) | timeout 150m script -qefc "npx eas-cli build -p ios --profile ${{ steps.s.outputs.profile }} $EXTRA" /tmp/out/log.txt > /dev/null || echo "FAILED" >> /tmp/out/log.txt
-            npx eas-cli build:list -p ios --limit 1 --json --non-interactive > /tmp/out/build.json || true
+            (for i in $(seq 1 200); do echo; sleep 4; done) | timeout 150m env -u CI -u GITHUB_ACTIONS script -qefc "npx eas-cli build -p ios --profile ${{ steps.s.outputs.profile }} $EXTRA" /tmp/out/log.txt > /dev/null || echo "FAILED" >> /tmp/out/log.txt
+            timeout 5m npx eas-cli build:list -p ios --limit 1 --json --non-interactive > /tmp/out/build.json < /dev/null || true
           else
             npx eas-cli build -p ${{ steps.s.outputs.platform }} --profile ${{ steps.s.outputs.profile }} --non-interactive --wait --json $EXTRA > /tmp/out/build.json 2> >(tee /tmp/out/log.txt >&2) || echo "FAILED" >> /tmp/out/log.txt
           fi
