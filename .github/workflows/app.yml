@@ -27,7 +27,7 @@ jobs:
         id: s
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then P="${{ inputs.platform }}"; F="${{ inputs.profile }}"; S="${{ inputs.submit }}";
-          else read P F S < app/BUILD || true; fi
+          else read P F S REST < <(sed 's/#.*//' app/BUILD) || true; fi
           echo "platform=${P:-android}" >> $GITHUB_OUTPUT; echo "profile=${F:-preview}" >> $GITHUB_OUTPUT; echo "submit=${S:-no}" >> $GITHUB_OUTPUT
           echo "platform=${P:-android} profile=${F:-preview} submit=${S:-no}"
       - name: prepare
