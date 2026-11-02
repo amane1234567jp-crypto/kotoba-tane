@@ -808,7 +808,7 @@ audio = function () {
   const first = !ctx;
   if (first && !(typeof MIC !== "undefined" && (MIC.stream || micTrying))) { try { if (navigator.audioSession) { navigator.audioSession.type = "playback"; ROUTE.session = "playback"; } } catch (e) { ROUTE.session = "設定できず"; } }
   audioBase();
-  if (first) routeThroughMedia();
+  if (first && !window.KT_IN_APP) routeThroughMedia(); // アプリでは しない：iPhone の アプリは マナーモードでも 鳴る 設定に してあり、この まわり道は 音声認識の あと 音が 消えたり 小さく なったり する（2026-11-02）
   return ctx;
 };
 function routeThroughMedia() {
