@@ -1,0 +1,312 @@
+[
+ {
+  "key": "yuw_nyujo",
+  "who": "tenin",
+  "text": "いらっしゃいませ。チケットを みせてね"
+ },
+ {
+  "key": "yur_nyujo",
+  "who": "tenin",
+  "text": "ありがとう。たのしんでね"
+ },
+ {
+  "key": "yuw_chizu",
+  "who": "tenin",
+  "text": "なにか こまって いるのかな？"
+ },
+ {
+  "key": "yur_chizu",
+  "who": "tenin",
+  "text": "はい、どうぞ。ジェットコースターは あっちだよ"
+ },
+ {
+  "key": "yuw_tsunagu",
+  "who": "mama",
+  "text": "はぐれないように、てを つなごうね"
+ },
+ {
+  "key": "yur_tsunagu",
+  "who": "mama",
+  "text": "ありがとう。これで あんしんね"
+ },
+ {
+  "key": "yuw_toilet",
+  "who": "mama",
+  "text": "どうしたの？ もじもじ して"
+ },
+ {
+  "key": "yur_toilet",
+  "who": "mama",
+  "text": "トイレは あそこよ"
+ },
+ {
+  "key": "yuw2_toilet",
+  "who": "mama",
+  "text": "ひとりで いけるかな？"
+ },
+ {
+  "key": "yur2_toilet",
+  "who": "mama",
+  "text": "いいわよ。いっしょに いこうね"
+ },
+ {
+  "key": "yuw_nodo",
+  "who": "papa",
+  "text": "かおが まっかだぞ。だいじょうぶか？"
+ },
+ {
+  "key": "yur_nodo",
+  "who": "papa",
+  "text": "よし、ベンチで おみずを のもう"
+ },
+ {
+  "key": "yuw_noritai",
+  "who": "mama",
+  "text": "さいしょは なにに のりたい？"
+ },
+ {
+  "key": "yur_noritai",
+  "who": "mama",
+  "text": "いいわね。いって みよう"
+ },
+ {
+  "key": "yuw_nenrei",
+  "who": "tenin",
+  "text": "ごめんね。この のりものは 8さいから なんだ"
+ },
+ {
+  "key": "yur_nenrei",
+  "who": "tenin",
+  "text": "くやしいよね。おおきく なったら また きてね"
+ },
+ {
+  "key": "yuw2_nenrei",
+  "who": "tenin",
+  "text": "かわりに、となりの のりものは どうかな？"
+ },
+ {
+  "key": "yur2_nenrei",
+  "who": "tenin",
+  "text": "いってらっしゃい"
+ },
+ {
+  "key": "yuw_retsu",
+  "who": "mama",
+  "text": "60ぷん まちだって。どう する？"
+ },
+ {
+  "key": "yur_retsu",
+  "who": "mama",
+  "text": "えらいね。いっしょに まとうね"
+ },
+ {
+  "key": "yuw2_retsu",
+  "who": "mama",
+  "text": "まって いる あいだ、なにを しようか？"
+ },
+ {
+  "key": "yur2_retsu",
+  "who": "mama",
+  "text": "いいわね。じゃあ、りんご"
+ },
+ {
+  "key": "yuw_tsukare",
+  "who": "papa",
+  "text": "あと すこしで じゅんばんだぞ"
+ },
+ {
+  "key": "yur_tsukare",
+  "who": "papa",
+  "text": "よく がんばったな。すこし だっこ しよう"
+ },
+ {
+  "key": "yuw_warikomi",
+  "who": "tora",
+  "text": "ここ、はいっちゃおうっと"
+ },
+ {
+  "key": "yur_warikomi",
+  "who": "tora",
+  "text": "あっ、ごめん。うしろに ならぶね"
+ },
+ {
+  "key": "yuw_merry",
+  "who": "tenin",
+  "text": "あぶないよ！ うまの うえで たたないでね"
+ },
+ {
+  "key": "yur_merry",
+  "who": "tenin",
+  "text": "ありがとう。それなら あんしんだね"
+ },
+ {
+  "key": "yuw_kowai",
+  "who": "papa",
+  "text": "いよいよ じゅんばんだぞ"
+ },
+ {
+  "key": "yur_kowai",
+  "who": "papa",
+  "text": "いいよ。むりしなくて いいんだぞ"
+ },
+ {
+  "key": "yuw_obake",
+  "who": "onii",
+  "text": "おばけやしき、いっしょに いこうよ！"
+ },
+ {
+  "key": "yur_obake",
+  "who": "onii",
+  "text": "そっか。むりに いかなくて いいよ"
+ },
+ {
+  "key": "yuw2_obake",
+  "who": "onii",
+  "text": "じゃあ、ここで まってる？"
+ },
+ {
+  "key": "yur2_obake",
+  "who": "onii",
+  "text": "すぐ もどって くるからね"
+ },
+ {
+  "key": "yuw_kurai",
+  "who": "mama",
+  "text": "だいじょうぶ？"
+ },
+ {
+  "key": "yur_kurai",
+  "who": "mama",
+  "text": "はい、ぎゅっ。いっしょだから だいじょうぶよ"
+ },
+ {
+  "key": "yur_seki",
+  "who": "ojisan",
+  "text": "あいてるよ。どうぞ"
+ },
+ {
+  "key": "yuw_mienai",
+  "who": "mama",
+  "text": "ショー、たのしいね"
+ },
+ {
+  "key": "yur_mienai",
+  "who": "mama",
+  "text": "あら、ほんとね。はい、だっこ"
+ },
+ {
+  "key": "yuw_shashin",
+  "who": "panna",
+  "text": "やあ！ あそびに きて くれて ありがとう"
+ },
+ {
+  "key": "yur_shashin",
+  "who": "panna",
+  "text": "いいよ！ はい、ポーズ！"
+ },
+ {
+  "key": "yuw_fuusen",
+  "who": "mama",
+  "text": "あらら、ふうせんが……"
+ },
+ {
+  "key": "yur_fuusen",
+  "who": "mama",
+  "text": "かなしいね。ちゃんと いえて えらいわ"
+ },
+ {
+  "key": "yuw_ice",
+  "who": "tenin",
+  "text": "いらっしゃいませ。なにに しますか？"
+ },
+ {
+  "key": "yur_ice",
+  "who": "tenin",
+  "text": "はい。あじは どれに しますか？"
+ },
+ {
+  "key": "yur2_ice",
+  "who": "tenin",
+  "text": "はい、どうぞ。おとさないように きを つけてね"
+ },
+ {
+  "key": "yuw_yoi",
+  "who": "mama",
+  "text": "かおいろが わるいわね"
+ },
+ {
+  "key": "yur_yoi",
+  "who": "mama",
+  "text": "ベンチで やすもうね"
+ },
+ {
+  "key": "yuw_maigo",
+  "who": "tenin",
+  "text": "どうしたの？ ひとりかな？"
+ },
+ {
+  "key": "yur_maigo",
+  "who": "tenin",
+  "text": "それは こまったね。いっしょに さがそう"
+ },
+ {
+  "key": "yuw2_maigo",
+  "who": "tenin",
+  "text": "おなまえ、いえるかな？"
+ },
+ {
+  "key": "yur2_maigo",
+  "who": "tenin",
+  "text": "まるシマくんだね。ほうそうで ママを よんで もらおう"
+ },
+ {
+  "key": "yuw_kaeri",
+  "who": "mama",
+  "text": "そろそろ かえる じかんよ"
+ },
+ {
+  "key": "yur_kaeri",
+  "who": "mama",
+  "text": "じゃあ、あと ひとつだけね"
+ },
+ {
+  "key": "yuw2_kaeri",
+  "who": "mama",
+  "text": "それに のったら、かえろうね"
+ },
+ {
+  "key": "yur2_kaeri",
+  "who": "mama",
+  "text": "やくそくね"
+ },
+ {
+  "key": "yuw_omiyage",
+  "who": "papa",
+  "text": "おみやげ、ひとつ えらんで いいぞ"
+ },
+ {
+  "key": "yur_omiyage",
+  "who": "papa",
+  "text": "よし、それに しよう"
+ },
+ {
+  "key": "yuw_tanoshi",
+  "who": "papa",
+  "text": "きょうは どうだった？"
+ },
+ {
+  "key": "yur_tanoshi",
+  "who": "papa",
+  "text": "よかった。また こような"
+ },
+ {
+  "key": "yuw2_tanoshi",
+  "who": "papa",
+  "text": "なにが いちばん たのしかった？"
+ },
+ {
+  "key": "yur2_tanoshi",
+  "who": "papa",
+  "text": "そうか。パパも たのしかったぞ"
+ }
+]
