@@ -3,14 +3,15 @@
    かぎの コースを おすと ぽにーが「おうちの ひとに きいてみてね」（声つき）。おうちの ひとは かけざんの こたえを 入れて（こども よけ）、かう・かいものを もどす。
    ストアの アプリでは Capacitor の プラグイン（KotobaPay：buy() / restore() が {ok:true} を かえす）を つかう。
    ブラウザ（いまの 公開ページ）は ためしばん：おかねは かからず、そのまま ひらく。 */
+// 各ジャンルの メニューで あたまの 2つ（ロングコースは さいしょの 1つ）を むりょうに（2026-11-02 あまねさんの きめ）
 const PAY_FREE = new Set([
-  "kousha", "kyuushoku", "yasumi",      // がっこう
-  "kokugo", "sansu",                    // じゅぎょう
-  "toukou", "omise", "densha",          // まち・おでかけ
-  "kouen", "ouchi1",                    // おうち・あそび
-  "kikikaesu", "sos",                   // きもちを つたえる
-  "komatta",                            // かんがえる
-  "long", "kimochi", "dekigoto",        // ロングコース
+  "kousha", "undou",        // がっこう
+  "tokei", "sansu",         // じゅぎょう
+  "omise", "densha",        // まち・おでかけ
+  "kouen", "ouchi1",        // おうち・あそび
+  "kikikaesu", "sos",       // きもちを つたえる
+  "komatta", "kirikae",     // かんがえる
+  "long",                   // ロングコース（だいぼうけん）
 ]);
 const PAY_PRICE = "100円", PAY_KEY = "kotoba-tane-unlock";
 const PAY = {
