@@ -3,7 +3,11 @@
 // ・ウェブ版 だけの しくみ（service worker・manifest）は はずす
 const fs = require("fs"), path = require("path");
 const ROOT = path.resolve(__dirname, "../.."), OUT = path.resolve(__dirname, "../assets/web");
-let html = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+// アプリに 入れる ゲーム本体は、あまねさんが OK した 版（app/web_commit.txt の コミット）に 固定する（2026-11-02）。
+// 公開ページの 最新版を そのまま アプリに 入れない。新しい 版を 入れる ときは web_commit.txt を かきかえる。
+const pin = (() => { try { return fs.readFileSync(path.resolve(__dirname, "../web_commit.txt"), "utf8").trim(); } catch (e) { return ""; } })();
+let html = pin ? require("child_process").execSync(`git show ${pin}:index.html`, { cwd: ROOT, maxBuffer: 1 << 28 }).toString("utf8") : fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+console.log("web:", pin || "(いまの index.html)");
 const used = new Set([...html].map(c => c.codePointAt(0)));
 function fontCss(pkg, family, weights) {
   const dir = path.dirname(require.resolve(`@fontsource/${pkg}/package.json`)); let css = "", n = 0, bytes = 0;
