@@ -31,10 +31,15 @@ jobs:
           echo "platform=${P:-android}" >> $GITHUB_OUTPUT; echo "profile=${F:-preview}" >> $GITHUB_OUTPUT; echo "submit=${S:-no}" >> $GITHUB_OUTPUT
           echo "platform=${P:-android} profile=${F:-preview} submit=${S:-no}"
       - name: prepare
+        env:
+          ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
         run: |
           cd app && npm ci --no-audit --no-fund && node scripts/copy-web.js
           mkdir -p /tmp/out /tmp/b && rsync -a --exclude .git ./ /tmp/b/
-          if [ -n "${{ secrets.ASC_API_KEY_P8 }}" ]; then echo "${{ secrets.ASC_API_KEY_P8 }}" > /tmp/b/asc.p8; fi
+          printf '%s\n' "$ASC_P8" | tr -d '\r' | sed 's/^[ \t]*//;s/[ \t]*$//' | sed '/^$/d' > /tmp/b/asc.p8
+          # かぎの 中身は 出さず、形だけ たしかめる（行数・はじめと おわりの 行）
+          echo "p8: $(wc -l < /tmp/b/asc.p8) lines / begin=$(head -1 /tmp/b/asc.p8 | grep -c 'BEGIN PRIVATE KEY') / end=$(tail -1 /tmp/b/asc.p8 | grep -c 'END PRIVATE KEY') / bytes=$(wc -c < /tmp/b/asc.p8)" | tee /tmp/out/p8check.txt
+          if ! head -1 /tmp/b/asc.p8 | grep -q BEGIN; then B=$(tr -d ' \n' < /tmp/b/asc.p8); printf -- '-----BEGIN PRIVATE KEY-----\n%s\n-----END PRIVATE KEY-----\n' "$(echo "$B" | fold -w 64)" > /tmp/b/asc.p8; echo "p8: header added" | tee -a /tmp/out/p8check.txt; fi
       - name: eas project
         run: |
           cd /tmp/b
