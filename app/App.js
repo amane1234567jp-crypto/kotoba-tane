@@ -4,7 +4,7 @@
 //   ・声の パック（packs/*.json）：はじめて あそぶ コースの ときに 公開ページから とりよせて 保存（2かいめからは ネットなしで）
 //   ・「おわる」ボタン（Android は アプリを とじる。iOS は とじない きまりなので「またね」の 画面）
 import { useEffect, useRef, useState } from "react";
-import { View, BackHandler, Platform, StyleSheet, AppState } from "react-native";
+import { View, Text, ScrollView, BackHandler, Platform, StyleSheet, AppState } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { WebView } from "react-native-webview";
 import { Asset } from "expo-asset";
@@ -17,9 +17,15 @@ import WEB_VER from "./assets/web/version.json";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 // iPhone：音は 下の スピーカーから。マナーモードでも 鳴らす（子どもが 声を 聞けない と すすめない ため）
-function speakerOn() { if (Platform.OS !== "ios") return;
-  try { SR.setCategoryIOS({ category: "playAndRecord", categoryOptions: ["defaultToSpeaker", "allowBluetooth", "allowBluetoothA2DP", "mixWithOthers"], mode: "default" }); } catch (e) { }
-  try { SR.setAudioSessionActiveIOS(true); } catch (e) { } }
+// 2026-11-02：マイクの 許可が おりる まえは さわらない（許可の ない まま 録音できる 設定に すると、音が 出なく なる・許可の 確認が おくれる うたがい）
+const DBG = { log: [], t0: Date.now(), on: false, set: null };
+function dlog(s) { DBG.log.push(`${((Date.now() - DBG.t0) / 1000).toFixed(1)}s ${s}`); if (DBG.log.length > 60) DBG.log.shift(); if (DBG.set) DBG.set([...DBG.log]); }
+let PERM_OK = false;
+function speakerOn(why = "") { if (Platform.OS !== "ios") return; if (!PERM_OK) { dlog("speakerOn skip(no perm) " + why); return; }
+  try { SR.setCategoryIOS({ category: "playAndRecord", categoryOptions: ["defaultToSpeaker", "allowBluetooth", "allowBluetoothA2DP", "mixWithOthers"], mode: "default" }); } catch (e) { dlog("setCategory err " + e.message); }
+  try { SR.setAudioSessionActiveIOS(true); } catch (e) { dlog("setActive err " + e.message); }
+  dlog("speakerOn " + why + " " + sessionInfo()); }
+function sessionInfo() { try { const c = SR.getAudioSessionCategoryAndOptionsIOS(); return `${c.category}/${c.mode}/${(c.categoryOptions || []).join("+")}`; } catch (e) { return "?"; } }
 const PAGES = "https://amane1234567jp-crypto.github.io/kotoba-tane/";
 const SKU = "kotoba_tane_all";
 const WEB = FS.documentDirectory + "web/";
@@ -30,7 +36,12 @@ const BRIDGE = `(function(){
   function post(o){ RN.postMessage(JSON.stringify(o)); }
   function call(t, a){ return new Promise(function(r){ var id = ++n; cb[id] = r; post({ t: t, id: id, a: a || null }); }); }
   window.__ktReply = function(id, v){ var f = cb[id]; delete cb[id]; if (f) f(v); };
-  window.KT_APP = { platform: ${JSON.stringify(Platform.OS)}, buy: function(){ return call("buy"); }, restore: function(){ return call("restore"); }, owned: function(){ return call("owned"); }, exit: function(){ return call("exit"); } };
+  window.KT_APP = { platform: ${JSON.stringify(Platform.OS)}, buy: function(){ return call("buy"); }, restore: function(){ return call("restore"); }, owned: function(){ return call("owned"); }, exit: function(){ return call("exit"); }, audioReset: function(){ return call("audioReset"); } };
+  // おとなの かくにん用：タイトル「ことばのたね」を 5かい つづけて タップすると、音の 状態の 画面が ひらく
+  var taps = 0, tapT = 0;
+  document.addEventListener("pointerdown", function(e){ var el = e.target.closest && e.target.closest(".m3title, .mtitle, h1, .mhero"); if (!el) { return; } var now = Date.now(); taps = now - tapT < 1500 ? taps + 1 : 1; tapT = now; if (taps >= 5) { taps = 0; post({ t: "debug" }); } }, true);
+  window.__ktState = function(){ try { return JSON.stringify({ ctx: (typeof ctx !== "undefined" && ctx) ? ctx.state : null, bgm: (typeof BGM !== "undefined" && BGM.gain) ? +BGM.gain.gain.value.toFixed(2) : null, route: typeof ROUTE !== "undefined" ? ROUTE.out : null, stage: typeof curStage !== "undefined" ? curStage : null, hide: typeof HIDE !== "undefined" ? !!HIDE.off : null }); } catch(e) { return "err " + e.message; } };
+  window.addEventListener("load", function(){ post({ t: "pageload" }); });
   // 声の パック：アプリが 保存した ファイルを よむ
   var f0 = window.fetch.bind(window);
   window.fetch = function(u, o){
@@ -111,14 +122,15 @@ export default function App() {
       SR.addListener("result", e => js(`window.__ktSR(${sr.cur},"result",${JSON.stringify({ results: (e.results || []).map(r => ({ transcript: r.transcript, confidence: r.confidence })), isFinal: e.isFinal })})`)),
       // 「きこえなかった」以外の まちがいで ゲームが 音声認識を あきらめない ように、こまかい ものは「no-speech」に まとめる
       SR.addListener("error", e => { const real = ["not-allowed", "service-not-allowed", "language-not-supported"].includes(e.error); js(`window.__ktSR(${sr.cur},"error",${JSON.stringify({ error: real ? e.error : (e.error === "aborted" ? "aborted" : "no-speech"), message: e.message })})`); }),
-      SR.addListener("end", () => { const s = sr.cur; sr.busy = false; js(`window.__ktSR(${s},"end",{})`); if (sr.next) { const o = sr.next; sr.next = null; srStart(o); } else speakerOn(); }),
+      SR.addListener("end", () => { const s = sr.cur; sr.busy = false; js(`window.__ktSR(${s},"end",{})`); if (sr.next) { const o = sr.next; sr.next = null; srStart(o); } else speakerOn("sr end"); }),
     ];
     return () => L.forEach(l => l.remove()); }, []);
-  useEffect(() => { askPerm(); prepareWeb().then(setUri).catch(() => setUri(null)); activateKeepAwakeAsync().catch(() => {}); speakerOn(); }, []);
+  useEffect(() => { dlog("mount " + sessionInfo()); askPerm(); prepareWeb().then(setUri).catch(() => setUri(null)); activateKeepAwakeAsync().catch(() => {}); }, []);
   // マイク・音声認識の 許可は ゲームの とちゅうでは なく、起動して すぐに 聞く
   // ひとつの 約束（promise）に まとめて、なんど よばれても 確認は 1かいだけ
-  const askPerm = () => sr.permP || (sr.permP = (async () => { try { sr.perm = (await SR.requestPermissionsAsync()).granted; } catch (e) { sr.perm = false; } speakerOn(); return sr.perm; })());
-  useEffect(() => { const s = AppState.addEventListener("change", st => { if (st === "active") speakerOn(); }); return () => s.remove(); }, []);
+  const askPerm = () => sr.permP || (sr.permP = (async () => { dlog("perm ask"); try { const r = await SR.requestPermissionsAsync(); sr.perm = r.granted; dlog("perm " + r.status + " again=" + r.canAskAgain); } catch (e) { sr.perm = false; dlog("perm err " + e.message); } PERM_OK = !!sr.perm; speakerOn("after perm"); return sr.perm; })());
+  useEffect(() => { const s = AppState.addEventListener("change", st => { dlog("appstate " + st); if (st === "active") speakerOn("active"); }); return () => s.remove(); }, []);
+  const [dbg, setDbg] = useState(null); useEffect(() => { DBG.set = setDbg; return () => { DBG.set = null; }; }, []);
   // Android の もどるボタン：ゲームの 中では なにも しない（まちがって とじない ように）
   useEffect(() => { const s = BackHandler.addEventListener("hardwareBackPress", () => true); return () => s.remove(); }, []);
 
@@ -126,6 +138,10 @@ export default function App() {
     if (m.t === "pack") reply(m.id, await getPack(m.a));
     else if (m.t === "buy") reply(m.id, await buy());
     else if (m.t === "restore" || m.t === "owned") reply(m.id, await owned());
+    else if (m.t === "pageload") { dlog("page load " + sessionInfo()); speakerOn("pageload"); }
+    else if (m.t === "audioReset") { dlog("audioReset"); try { if (Platform.OS === "ios") { SR.setAudioSessionActiveIOS(false, { notifyOthersOnDeactivation: true }); } } catch (e) { dlog("reset err " + e.message); } reply(m.id, true); }
+    else if (m.t === "debug") { DBG.on = !DBG.on; setDbg([...DBG.log]); if (DBG.on) { web.current && web.current.injectJavaScript(`window.ReactNativeWebView.postMessage(JSON.stringify({t:"state",a:window.__ktState()}));true;`); } }
+    else if (m.t === "state") { dlog("page " + m.a); }
     else if (m.t === "exit") { if (Platform.OS === "android") { reply(m.id, true); BackHandler.exitApp(); } else reply(m.id, false); }
     else if (m.t === "sr") { const a = m.a;
       if (a.op === "start") { if (sr.busy) { sr.next = a; try { SR.abort(); } catch (e) { } } else srStart(a); }
@@ -143,5 +159,11 @@ export default function App() {
         allowsBackForwardNavigationGestures={false} allowsLinkPreview={false} webviewDebuggingEnabled={__DEV__}
         onLoadEnd={() => { SplashScreen.hideAsync().catch(() => {}); }}
         onContentProcessDidTerminate={() => web.current && web.current.reload()} onRenderProcessGone={() => web.current && web.current.reload()} />}
+      {DBG.on && dbg && <View style={S.dbg} pointerEvents="box-none"><ScrollView style={S.dbgBox}><Text style={S.dbgT}>{`音の状態（おとな用）  perm=${PERM_OK} session=${sessionInfo()}\n` + dbg.slice(-40).join("\n")}</Text></ScrollView>
+        <Text style={S.dbgBtn} onPress={() => { web.current && web.current.injectJavaScript(`window.ReactNativeWebView.postMessage(JSON.stringify({t:"state",a:window.__ktState()}));true;`); }}>いまの状態をとる</Text>
+        <Text style={S.dbgBtn} onPress={() => { DBG.on = false; setDbg(null); }}>とじる</Text></View>}
     </View>); }
-const S = StyleSheet.create({ root: { flex: 1, backgroundColor: "#FFF8E8" } });
+const S = StyleSheet.create({ root: { flex: 1, backgroundColor: "#FFF8E8" },
+  dbg: { position: "absolute", left: 8, right: 8, bottom: 8, maxHeight: "60%", backgroundColor: "#000000CC", borderRadius: 12, padding: 8 },
+  dbgBox: { maxHeight: 260 }, dbgT: { color: "#9FE870", fontSize: 11, fontFamily: Platform.OS === "ios" ? "Menlo" : "monospace" },
+  dbgBtn: { color: "#FFFFFF", backgroundColor: "#444", padding: 8, marginTop: 6, borderRadius: 8, textAlign: "center", fontSize: 14 } });
