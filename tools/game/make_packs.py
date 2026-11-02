@@ -185,3 +185,10 @@ for k in ["sl_stop", "sl_st_d2", "sl_balloon", "sl_bl_tane", "sl_f1", "sl_f2", "
     f = A / f"{k}.mp3"
     if f.exists(): pack[k] = base64.b64encode(f.read_bytes()).decode()
 (OUT / "sfun.json").write_text(json.dumps(pack, separators=(",", ":"))); print("sfun", len(pack))
+
+# コースの かぎ（ぜんぶ ひらく）の ぽにーの 声（2026-11-02）。メニューで かぎの コースを おしたときに よみこむ
+pack = {}
+for k in ["pay_lock", "pay_open"]:
+    f = A / f"{k}.mp3"
+    if f.exists(): pack[k] = base64.b64encode(f.read_bytes()).decode()
+(OUT / "pay.json").write_text(json.dumps(pack, separators=(",", ":"))); print("pay", len(pack))
