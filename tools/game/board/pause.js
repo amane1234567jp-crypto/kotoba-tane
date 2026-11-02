@@ -80,10 +80,21 @@ window.addEventListener("pagehide", pauseAll); window.addEventListener("pageshow
     box.innerHTML = '<div class="pcard"><b>ひとやすみ</b><button type="button" class="pgo" style="background:#7BD389">つづける</button><button type="button" class="pmenu" style="background:#FFD25E">メニューに もどる</button></div>';
     st.appendChild(box);
     box.querySelector(".pgo").onclick = () => { box.remove(); resumeSoft(); };
-    box.querySelector(".pmenu").onclick = () => { try { localStorage.setItem("kotoba-tane-skipresume", "1"); } catch (e) { } location.reload(); };
+    box.querySelector(".pmenu").onclick = () => { try { localStorage.setItem("kotoba-tane-skipresume", "1"); } catch (e) { } audioTeardown().then(() => location.reload()); };
   };
 })();
 
+/* 2026-11-02：メニューに もどる（ページを よみなおす）まえの 後かたづけ。
+   iPad・iPhone は、マイクと 音を うごかした まま よみなおすと、つぎの ページの 音が「うごいて いる」ままで 鳴らない ことが ある。
+   → マイクを とめ、音の 出口を とじ、マナーモードの 設定を もとに もどしてから よみなおす */
+async function audioTeardown() {
+  try { if (typeof MIC !== "undefined" && MIC.stream) { MIC.stream.getTracks().forEach(t => t.stop()); MIC.stream = null; } } catch (e) { }
+  try { if (typeof BGM !== "undefined" && BGM.src) BGM.src.stop(); } catch (e) { }
+  try { if (ROUTE.el) { ROUTE.el.pause(); ROUTE.el.srcObject = null; ROUTE.el.remove(); ROUTE.el = null; } } catch (e) { }
+  try { if (navigator.audioSession) navigator.audioSession.type = "auto"; } catch (e) { }
+  try { if (window.KT_APP && window.KT_APP.audioReset) window.KT_APP.audioReset(); } catch (e) { }
+  try { if (ctx && ctx.state !== "closed") await Promise.race([ctx.close(), new Promise(r => setTimeout(r, 800))]); } catch (e) { }
+  await new Promise(r => setTimeout(r, 150)); }
 /* ================= れんだ しても 音が つぶれない ように（2026-10-17） =================
    こうかおんを みじかい あいだに たくさん ならすと、音が われたり 小さく なったり する。
    → 0.15びょうに 6つまで。さいごに リミッター（コンプレッサー）を はさむ。 */
