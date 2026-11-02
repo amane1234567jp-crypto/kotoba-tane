@@ -26,7 +26,7 @@ function speakerOn(why = "") { if (Platform.OS !== "ios") return; if (!PERM_OK) 
   try { SR.setAudioSessionActiveIOS(true); } catch (e) { dlog("setActive err " + e.message); }
   dlog("speakerOn " + why + " " + sessionInfo()); }
 // マイクを ことわられた ときも、マナーモードで 音が きえない ように「さいせい」あつかいに
-function playbackOn() { if (Platform.OS !== "ios") return; try { SR.setCategoryIOS({ category: "playback", categoryOptions: ["mixWithOthers"], mode: "default" }); SR.setAudioSessionActiveIOS(true); } catch (e) { } dlog("playbackOn " + sessionInfo()); }
+function playbackOn(why = "") { if (Platform.OS !== "ios") return; try { SR.setCategoryIOS({ category: "playback", categoryOptions: ["mixWithOthers"], mode: "default" }); SR.setAudioSessionActiveIOS(true); } catch (e) { dlog("playback err " + e.message); } dlog("playbackOn " + why + " " + sessionInfo()); }
 function sessionInfo() { try { const c = SR.getAudioSessionCategoryAndOptionsIOS(); return `${c.category}/${c.mode}/${(c.categoryOptions || []).join("+")}`; } catch (e) { return "?"; } }
 const PAGES = "https://amane1234567jp-crypto.github.io/kotoba-tane/";
 const SKU = "kotoba_tane_all";
@@ -67,7 +67,11 @@ const BRIDGE = `(function(){
   // マイクは アプリ側の 音声認識が つかうので、ページからは ひらかない
   if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = function(){ return Promise.resolve(new MediaStream()); };
   // ページが「play-and-record」に きりかえると iPhone が 音を 受話口（耳に あてる 小さな スピーカー）に まわして しまう。アプリでは アプリ側が きめるので、ページからの 切りかえは うけつけない
-  try { if (navigator.audioSession) Object.defineProperty(navigator.audioSession, "type", { configurable: true, get: function(){ return "auto"; }, set: function(){} }); } catch (e) {}
+  // 2026-11-03：iPhone の アプリでは、ゲームの 音を いつも「さいせい（playback）」あつかいに する。
+  //   なにも しないと「マナーモードで きえる」あつかい（ambient）に なって 無音、「play-and-record」だと 受話口から 小さく なる。
+  //   ページが ほかの 種類に しようと しても playback に する（マイクの あいだは アプリ側が 録音できる 設定に きりかえる）
+  try { if (navigator.audioSession) { var as = navigator.audioSession, P = Object.getPrototypeOf(as), d = Object.getOwnPropertyDescriptor(P, "type");
+      if (d && d.set) { d.set.call(as, "playback"); Object.defineProperty(as, "type", { configurable: true, get: function(){ return d.get.call(as); }, set: function(){ d.set.call(as, "playback"); } }); } } } catch (e) {}
   true; })();`;
 
 // ゲーム本体を 書きこみできる 場所へ（パックと おなじ フォルダに おくと、ページから ファイルとして よめる）
@@ -124,7 +128,7 @@ export default function App() {
       SR.addListener("result", e => js(`window.__ktSR(${sr.cur},"result",${JSON.stringify({ results: (e.results || []).map(r => ({ transcript: r.transcript, confidence: r.confidence })), isFinal: e.isFinal })})`)),
       // 「きこえなかった」以外の まちがいで ゲームが 音声認識を あきらめない ように、こまかい ものは「no-speech」に まとめる
       SR.addListener("error", e => { const real = ["not-allowed", "service-not-allowed", "language-not-supported"].includes(e.error); js(`window.__ktSR(${sr.cur},"error",${JSON.stringify({ error: real ? e.error : (e.error === "aborted" ? "aborted" : "no-speech"), message: e.message })})`); }),
-      SR.addListener("end", () => { const s = sr.cur; sr.busy = false; js(`window.__ktSR(${s},"end",{})`); if (sr.next) { const o = sr.next; sr.next = null; srStart(o); } else speakerOn("sr end"); }),
+      SR.addListener("end", () => { const s = sr.cur; sr.busy = false; js(`window.__ktSR(${s},"end",{})`); if (sr.next) { const o = sr.next; sr.next = null; srStart(o); } else playbackOn("sr end"); }),
     ];
     return () => L.forEach(l => l.remove()); }, []);
   // 2026-11-02：ゲームの 音が うまれる まえに、マイクの 許可と 音の 出口（マナーモードでも 鳴る 設定）を きめて おく。
@@ -132,12 +136,12 @@ export default function App() {
   const [ready, setReady] = useState(false), [gate, setGate] = useState(false);
   useEffect(() => { dlog("mount " + sessionInfo()); prepareWeb().then(setUri).catch(() => setUri(null)); activateKeepAwakeAsync().catch(() => {});
     (async () => { let g = false; try { const r = await SR.getPermissionsAsync(); g = r.granted; dlog("perm now " + r.status); } catch (e) { dlog("perm check err " + e.message); }
-      if (g) { sr.perm = true; sr.permP = Promise.resolve(true); PERM_OK = true; speakerOn("start"); setReady(true); } else { SplashScreen.hideAsync().catch(() => {}); setGate(true); } })(); }, []);
-  const startGame = async () => { setGate(false); const ok = await askPerm(); if (!ok) playbackOn(); setReady(true); };
+      if (g) { sr.perm = true; sr.permP = Promise.resolve(true); PERM_OK = true; playbackOn("start"); setReady(true); } else { SplashScreen.hideAsync().catch(() => {}); setGate(true); } })(); }, []);
+  const startGame = async () => { setGate(false); await askPerm(); setReady(true); };
   // マイク・音声認識の 許可は ゲームの とちゅうでは なく、起動して すぐに 聞く
   // ひとつの 約束（promise）に まとめて、なんど よばれても 確認は 1かいだけ
-  const askPerm = () => sr.permP || (sr.permP = (async () => { dlog("perm ask"); try { const r = await SR.requestPermissionsAsync(); sr.perm = r.granted; dlog("perm " + r.status + " again=" + r.canAskAgain); } catch (e) { sr.perm = false; dlog("perm err " + e.message); } PERM_OK = !!sr.perm; speakerOn("after perm"); return sr.perm; })());
-  useEffect(() => { const s = AppState.addEventListener("change", st => { dlog("appstate " + st); if (st === "active") { if (PERM_OK) speakerOn("active"); else if (sr.perm === false) playbackOn(); } }); return () => s.remove(); }, []);
+  const askPerm = () => sr.permP || (sr.permP = (async () => { dlog("perm ask"); try { const r = await SR.requestPermissionsAsync(); sr.perm = r.granted; dlog("perm " + r.status + " again=" + r.canAskAgain); } catch (e) { sr.perm = false; dlog("perm err " + e.message); } PERM_OK = !!sr.perm; playbackOn("after perm"); return sr.perm; })());
+  useEffect(() => { const s = AppState.addEventListener("change", st => { dlog("appstate " + st); if (st === "active") playbackOn("active"); }); return () => s.remove(); }, []);
   const [dbg, setDbg] = useState(null); useEffect(() => { DBG.set = setDbg; return () => { DBG.set = null; }; }, []);
   // Android の もどるボタン：ゲームの 中では なにも しない（まちがって とじない ように）
   useEffect(() => { const s = BackHandler.addEventListener("hardwareBackPress", () => true); return () => s.remove(); }, []);
@@ -146,7 +150,7 @@ export default function App() {
     if (m.t === "pack") reply(m.id, await getPack(m.a));
     else if (m.t === "buy") reply(m.id, await buy());
     else if (m.t === "restore" || m.t === "owned") reply(m.id, await owned());
-    else if (m.t === "pageload") { dlog("page load " + sessionInfo()); if (PERM_OK) speakerOn("pageload"); else playbackOn(); }
+    else if (m.t === "pageload") { dlog("page load " + sessionInfo()); playbackOn("pageload"); }
     else if (m.t === "audioReset") { dlog("audioReset"); try { if (Platform.OS === "ios") { SR.setAudioSessionActiveIOS(false, { notifyOthersOnDeactivation: true }); } } catch (e) { dlog("reset err " + e.message); } reply(m.id, true); }
     else if (m.t === "debug") { DBG.on = !DBG.on; setDbg([...DBG.log]); if (DBG.on) { web.current && web.current.injectJavaScript(`window.ReactNativeWebView.postMessage(JSON.stringify({t:"state",a:window.__ktState()}));true;`); } }
     else if (m.t === "state") { dlog("page " + m.a); }
