@@ -98,7 +98,7 @@ export default function App() {
   // 音声認識：まえの きき取りが おわってから つぎを はじめる
   const sr = useRef({ cur: 0, busy: false, next: null, perm: null }).current;
   const srStart = async o => {
-    if (sr.perm === null) { try { sr.perm = (await SR.requestPermissionsAsync()).granted; } catch (e) { sr.perm = false; } }
+    if (sr.perm === null) await askPerm();
     if (!sr.perm) { js(`window.__ktSR(${o.sid},"error",{error:"not-allowed"});window.__ktSR(${o.sid},"end",{})`); return; }
     sr.cur = o.sid; sr.busy = true;
     try { SR.start({ lang: o.lang || "ja-JP", interimResults: o.interim, maxAlternatives: o.maxAlt, continuous: false, iosTaskHint: "confirmation",
@@ -114,9 +114,10 @@ export default function App() {
       SR.addListener("end", () => { const s = sr.cur; sr.busy = false; js(`window.__ktSR(${s},"end",{})`); if (sr.next) { const o = sr.next; sr.next = null; srStart(o); } else speakerOn(); }),
     ];
     return () => L.forEach(l => l.remove()); }, []);
-  useEffect(() => { prepareWeb().then(setUri).catch(() => setUri(null)); activateKeepAwakeAsync().catch(() => {}); speakerOn(); }, []);
+  useEffect(() => { askPerm(); prepareWeb().then(setUri).catch(() => setUri(null)); activateKeepAwakeAsync().catch(() => {}); speakerOn(); }, []);
   // マイク・音声認識の 許可は ゲームの とちゅうでは なく、起動して すぐに 聞く
-  const askPerm = async () => { if (sr.perm !== null) return; try { sr.perm = (await SR.requestPermissionsAsync()).granted; } catch (e) { sr.perm = false; } speakerOn(); };
+  // ひとつの 約束（promise）に まとめて、なんど よばれても 確認は 1かいだけ
+  const askPerm = () => sr.permP || (sr.permP = (async () => { try { sr.perm = (await SR.requestPermissionsAsync()).granted; } catch (e) { sr.perm = false; } speakerOn(); return sr.perm; })());
   useEffect(() => { const s = AppState.addEventListener("change", st => { if (st === "active") speakerOn(); }); return () => s.remove(); }, []);
   // Android の もどるボタン：ゲームの 中では なにも しない（まちがって とじない ように）
   useEffect(() => { const s = BackHandler.addEventListener("hardwareBackPress", () => true); return () => s.remove(); }, []);
@@ -140,7 +141,7 @@ export default function App() {
         injectedJavaScriptBeforeContentLoaded={BRIDGE} onMessage={onMessage}
         bounces={false} overScrollMode="never" setSupportMultipleWindows={false} textZoom={100}
         allowsBackForwardNavigationGestures={false} allowsLinkPreview={false} webviewDebuggingEnabled={__DEV__}
-        onLoadEnd={() => { SplashScreen.hideAsync().catch(() => {}); setTimeout(askPerm, 600); }}
+        onLoadEnd={() => { SplashScreen.hideAsync().catch(() => {}); }}
         onContentProcessDidTerminate={() => web.current && web.current.reload()} onRenderProcessGone={() => web.current && web.current.reload()} />}
     </View>); }
 const S = StyleSheet.create({ root: { flex: 1, backgroundColor: "#FFF8E8" } });
