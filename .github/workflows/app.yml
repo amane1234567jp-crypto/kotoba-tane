@@ -1,0 +1,60 @@
+name: app
+# ことばのたね アプリの ビルド（EAS）。app/BUILD に「android preview」などを 書いて プッシュすると うごく。
+# 結果（ビルドの URL など）は app-out ブランチへ。
+on:
+  push:
+    branches: [main]
+    paths: ["app/BUILD"]
+  workflow_dispatch:
+    inputs:
+      platform: { description: "android / ios / all", default: "android" }
+      profile: { description: "preview / production", default: "preview" }
+      submit: { description: "ストアへ送る（production のみ）", default: "no" }
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      EAS_NO_VCS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: settings
+        id: s
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then P="${{ inputs.platform }}"; F="${{ inputs.profile }}"; S="${{ inputs.submit }}";
+          else read P F S < app/BUILD || true; fi
+          echo "platform=${P:-android}" >> $GITHUB_OUTPUT; echo "profile=${F:-preview}" >> $GITHUB_OUTPUT; echo "submit=${S:-no}" >> $GITHUB_OUTPUT
+          echo "platform=${P:-android} profile=${F:-preview} submit=${S:-no}"
+      - name: prepare
+        run: |
+          cd app && npm ci --no-audit --no-fund && node scripts/copy-web.js
+          mkdir -p /tmp/out /tmp/b && rsync -a --exclude .git ./ /tmp/b/
+          if [ -n "${{ secrets.ASC_API_KEY_P8 }}" ]; then echo "${{ secrets.ASC_API_KEY_P8 }}" > /tmp/b/asc.p8; fi
+      - name: eas project
+        run: |
+          cd /tmp/b
+          if ! grep -q projectId app.json; then npx eas-cli init --non-interactive --force 2>&1 | tee /tmp/out/init.txt; cp app.json $GITHUB_WORKSPACE/app/app.json; fi
+      - name: build
+        env:
+          EXPO_ASC_API_KEY_PATH: /tmp/b/asc.p8
+          EXPO_ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          EXPO_ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          EXPO_APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          EXPO_APPLE_TEAM_TYPE: COMPANY_OR_ORGANIZATION
+        run: |
+          cd /tmp/b
+          EXTRA=""; if [ "${{ steps.s.outputs.submit }}" = "yes" ]; then EXTRA="--auto-submit"; fi
+          npx eas-cli build -p ${{ steps.s.outputs.platform }} --profile ${{ steps.s.outputs.profile }} --non-interactive --wait --json $EXTRA > /tmp/out/build.json 2> >(tee /tmp/out/log.txt >&2) || echo "FAILED" >> /tmp/out/log.txt
+          cat /tmp/out/build.json || true
+      - name: publish
+        if: always()
+        run: |
+          git config user.name "app-bot"; git config user.email "app-bot@users.noreply.github.com"
+          if ! git diff --quiet app/app.json; then git add app/app.json; git commit -q -m "アプリ：EAS の プロジェクト ID"; git pull -q --rebase && git push -q; fi
+          cp -r /tmp/out /tmp/res; git checkout -q --orphan app-out-tmp; git rm -rf -q . ; rm -rf ./* ./.github
+          cp -r /tmp/res/. .; git add -A; git commit -q -m "app build ${GITHUB_SHA}"; git push -f -q origin HEAD:app-out

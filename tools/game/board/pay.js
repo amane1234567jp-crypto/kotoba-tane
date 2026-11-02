@@ -1,7 +1,7 @@
 /* ================= コースの かぎ・ぜんぶ ひらく（2026-11-02） =================
    基本は むりょう。PAY_FREE の コースだけ さいしょから あそべて、ほかは 100円の「ぜんぶ ひらく」を かうと ひらく（1かい かえば ずっと）。
    かぎの コースを おすと ぽにーが「おうちの ひとに きいてみてね」（声つき）。おうちの ひとは かけざんの こたえを 入れて（こども よけ）、かう・かいものを もどす。
-   ストアの アプリでは Capacitor の プラグイン（KotobaPay：buy() / restore() が {ok:true} を かえす）を つかう。
+   ストアの アプリでは アプリ側（app/App.js）が window.KT_APP を 用意する（buy() / restore() / owned() が {ok:true} を かえす）。
    ブラウザ（いまの 公開ページ）は ためしばん：おかねは かからず、そのまま ひらく。 */
 // 各ジャンルの メニューで あたまの 2つ（きもちを つたえる・かんがえる・ロングコースは さいしょの 1つ）を むりょうに（2026-11-02 あまねさんの きめ）
 const PAY_FREE = new Set([
@@ -16,12 +16,12 @@ const PAY_FREE = new Set([
 const PAY_PRICE = "100円", PAY_KEY = "kotoba-tane-unlock";
 const PAY = {
   // うちの子 用の リンク（?uchi）は いつも ぜんぶ ひらく。ホーム画面に おいても この アドレスの まま なので ひらいた まま（2026-11-02）
-  uchi: /[?&]uchi\b/.test(location.search) && !(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()),
+  uchi: /[?&]uchi\b/.test(location.search) && !window.KT_APP,
   get on() { if (this.uchi) return true; try { return localStorage.getItem(PAY_KEY) === "1"; } catch (e) { return false; } },
   set on(v) { try { v ? localStorage.setItem(PAY_KEY, "1") : localStorage.removeItem(PAY_KEY); } catch (e) { } },
-  native() { try { const C = window.Capacitor; return C && C.isNativePlatform && C.isNativePlatform() && C.Plugins && C.Plugins.KotobaPay || null; } catch (e) { return null; } },
-  async buy() { const N = this.native(); if (!N) return { ok: true, trial: true }; try { return await N.buy({ product: "kotoba_tane_all" }); } catch (e) { return { ok: false, err: String(e && e.message || e) }; } },
-  async restore() { const N = this.native(); if (!N) return { ok: this.on, trial: true }; try { return await N.restore({ product: "kotoba_tane_all" }); } catch (e) { return { ok: false, err: String(e && e.message || e) }; } },
+  native() { return window.KT_APP || null; },
+  async buy() { const N = this.native(); if (!N) return { ok: true, trial: true }; try { return await N.buy(); } catch (e) { return { ok: false, err: String(e && e.message || e) }; } },
+  async restore() { const N = this.native(); if (!N) return { ok: this.on, trial: true }; try { return await N.restore(); } catch (e) { return { ok: false, err: String(e && e.message || e) }; } },
 };
 function payLocked(id) { return !!id && !PAY.on && !PAY_FREE.has(id); }
 // 声：メニューでは ステージの 声が よみこまれて いないので、packs/pay.json を その ときに よむ
@@ -115,3 +115,5 @@ setInterval(() => { const sb = document.getElementById("startBox"); if (sb && sb
 `; document.head.appendChild(st); }
 // うちの子 用の リンクで ホーム画面に おいたとき、ひらく アドレスも ?uchi の ままに する
 if (PAY.uchi) { const m = document.querySelector('link[rel="manifest"]'); if (m) m.href = "manifest_uchi.json"; }
+// アプリでは、はじめに ストアで かった ことが あるかを だまって しらべる（機種変更・入れなおし・あとから とどいた 購入）
+if (window.KT_APP) setTimeout(() => { try { window.KT_APP.owned().then(r => { if (r && r.ok && !PAY.on) { PAY.on = true; payMark(); } }).catch(() => { }); } catch (e) { } }, 1500);

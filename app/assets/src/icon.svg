@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <rect width="1024" height="1024" fill="#FFC94F"/>
+  <ellipse cx="512" cy="800" rx="330" ry="80" fill="#8A5A2B"/>
+  <path d="M512 800 V470" stroke="#2B2A33" stroke-width="64" stroke-linecap="round"/>
+  <path d="M512 800 V470" stroke="#3FA34D" stroke-width="34" stroke-linecap="round"/>
+  <path d="M500 500 C420 380 250 360 150 420 C230 560 400 590 500 500 Z" fill="#7BD389" stroke="#2B2A33" stroke-width="26" stroke-linejoin="round"/>
+  <path d="M524 500 C600 360 760 330 870 380 C800 530 640 580 524 500 Z" fill="#7BD389" stroke="#2B2A33" stroke-width="26" stroke-linejoin="round"/>
+  <path d="M480 480 C400 430 300 420 210 430" fill="none" stroke="#5DBB6E" stroke-width="12" stroke-linecap="round"/>
+  <path d="M545 480 C620 420 720 400 800 395" fill="none" stroke="#5DBB6E" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="290" cy="230" r="96" fill="#FFFFFF" stroke="#2B2A33" stroke-width="22"/>
+  <circle cx="720" cy="170" r="96" fill="#FFFFFF" stroke="#2B2A33" stroke-width="22"/>
+  <text x="290" y="268" font-size="112" text-anchor="middle" font-family="Zen Maru Gothic" font-weight="700" fill="#2B2A33">あ</text>
+  <text x="720" y="208" font-size="112" text-anchor="middle" font-family="Zen Maru Gothic" font-weight="700" fill="#2B2A33">い</text>
+</svg>

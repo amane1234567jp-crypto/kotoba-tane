@@ -9,8 +9,8 @@ function appExit() {
   ov.querySelector(".kexit-yes").onclick = () => {
     try { pauseAll(); } catch (e) { } try { if (typeof MIC !== "undefined" && MIC.stream) MIC.stream.getTracks().forEach(t => t.stop()); } catch (e) { }
     try { if (ctx) ctx.suspend(); } catch (e) { }
-    try { const C = window.Capacitor; if (C && C.Plugins && C.Plugins.App && C.Plugins.App.exitApp) { C.Plugins.App.exitApp(); return; } } catch (e) { }
-    try { window.close(); } catch (e) { }
+    // アプリ：Android は とじる。iOS は アプリが じぶんで とじない きまり なので「またね」の 画面
+    if (window.KT_APP) { try { window.KT_APP.exit(); } catch (e) { } } else { try { window.close(); } catch (e) { } }
     ov.innerHTML = `<div class="kexit-box kexit-bye"><div class="kexit-big">👋</div><div class="kexit-q">またね！</div><div class="kexit-sub">この がめんは とじて だいじょうぶ</div><button type="button" class="kexit-no">もう いちど あそぶ</button></div>`;
     try { iconifyHtml(ov); } catch (e) { }
     ov.querySelector(".kexit-no").onclick = () => { ov.remove(); try { HIDE.off = true; resumeAll(); } catch (e) { } try { audio(); } catch (e) { } };
