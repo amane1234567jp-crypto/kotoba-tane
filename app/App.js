@@ -4,7 +4,7 @@
 //   ・声の パック（packs/*.json）：はじめて あそぶ コースの ときに 公開ページから とりよせて 保存（2かいめからは ネットなしで）
 //   ・「おわる」ボタン（Android は アプリを とじる。iOS は とじない きまりなので「またね」の 画面）
 import { useEffect, useRef, useState } from "react";
-import { View, BackHandler, Platform, StyleSheet } from "react-native";
+import { View, BackHandler, Platform, StyleSheet, AppState } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { WebView } from "react-native-webview";
 import { Asset } from "expo-asset";
@@ -16,6 +16,10 @@ import * as IAP from "expo-iap";
 import WEB_VER from "./assets/web/version.json";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
+// iPhone：音は 下の スピーカーから。マナーモードでも 鳴らす（子どもが 声を 聞けない と すすめない ため）
+function speakerOn() { if (Platform.OS !== "ios") return;
+  try { SR.setCategoryIOS({ category: "playAndRecord", categoryOptions: ["defaultToSpeaker", "allowBluetooth", "allowBluetoothA2DP", "mixWithOthers"], mode: "default" }); } catch (e) { }
+  try { SR.setAudioSessionActiveIOS(true); } catch (e) { } }
 const PAGES = "https://amane1234567jp-crypto.github.io/kotoba-tane/";
 const SKU = "kotoba_tane_all";
 const WEB = FS.documentDirectory + "web/";
@@ -49,6 +53,8 @@ const BRIDGE = `(function(){
   window.SpeechRecognition = window.webkitSpeechRecognition = SRec;
   // マイクは アプリ側の 音声認識が つかうので、ページからは ひらかない
   if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = function(){ return Promise.resolve(new MediaStream()); };
+  // ページが「play-and-record」に きりかえると iPhone が 音を 受話口（耳に あてる 小さな スピーカー）に まわして しまう。アプリでは アプリ側が きめるので、ページからの 切りかえは うけつけない
+  try { if (navigator.audioSession) Object.defineProperty(navigator.audioSession, "type", { configurable: true, get: function(){ return "auto"; }, set: function(){} }); } catch (e) {}
   true; })();`;
 
 // ゲーム本体を 書きこみできる 場所へ（パックと おなじ フォルダに おくと、ページから ファイルとして よめる）
@@ -105,10 +111,13 @@ export default function App() {
       SR.addListener("result", e => js(`window.__ktSR(${sr.cur},"result",${JSON.stringify({ results: (e.results || []).map(r => ({ transcript: r.transcript, confidence: r.confidence })), isFinal: e.isFinal })})`)),
       // 「きこえなかった」以外の まちがいで ゲームが 音声認識を あきらめない ように、こまかい ものは「no-speech」に まとめる
       SR.addListener("error", e => { const real = ["not-allowed", "service-not-allowed", "language-not-supported"].includes(e.error); js(`window.__ktSR(${sr.cur},"error",${JSON.stringify({ error: real ? e.error : (e.error === "aborted" ? "aborted" : "no-speech"), message: e.message })})`); }),
-      SR.addListener("end", () => { const s = sr.cur; sr.busy = false; js(`window.__ktSR(${s},"end",{})`); if (sr.next) { const o = sr.next; sr.next = null; srStart(o); } }),
+      SR.addListener("end", () => { const s = sr.cur; sr.busy = false; js(`window.__ktSR(${s},"end",{})`); if (sr.next) { const o = sr.next; sr.next = null; srStart(o); } else speakerOn(); }),
     ];
     return () => L.forEach(l => l.remove()); }, []);
-  useEffect(() => { prepareWeb().then(setUri).catch(() => setUri(null)); activateKeepAwakeAsync().catch(() => {}); }, []);
+  useEffect(() => { prepareWeb().then(setUri).catch(() => setUri(null)); activateKeepAwakeAsync().catch(() => {}); speakerOn(); }, []);
+  // マイク・音声認識の 許可は ゲームの とちゅうでは なく、起動して すぐに 聞く
+  const askPerm = async () => { if (sr.perm !== null) return; try { sr.perm = (await SR.requestPermissionsAsync()).granted; } catch (e) { sr.perm = false; } speakerOn(); };
+  useEffect(() => { const s = AppState.addEventListener("change", st => { if (st === "active") speakerOn(); }); return () => s.remove(); }, []);
   // Android の もどるボタン：ゲームの 中では なにも しない（まちがって とじない ように）
   useEffect(() => { const s = BackHandler.addEventListener("hardwareBackPress", () => true); return () => s.remove(); }, []);
 
@@ -131,7 +140,7 @@ export default function App() {
         injectedJavaScriptBeforeContentLoaded={BRIDGE} onMessage={onMessage}
         bounces={false} overScrollMode="never" setSupportMultipleWindows={false} textZoom={100}
         allowsBackForwardNavigationGestures={false} allowsLinkPreview={false} webviewDebuggingEnabled={__DEV__}
-        onLoadEnd={() => SplashScreen.hideAsync().catch(() => {})}
+        onLoadEnd={() => { SplashScreen.hideAsync().catch(() => {}); setTimeout(askPerm, 600); }}
         onContentProcessDidTerminate={() => web.current && web.current.reload()} onRenderProcessGone={() => web.current && web.current.reload()} />}
     </View>); }
 const S = StyleSheet.create({ root: { flex: 1, backgroundColor: "#FFF8E8" } });
