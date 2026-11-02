@@ -13,7 +13,7 @@
     ],
     "ios": {
       "bundleIdentifier": "com.uchinoaji.kotobatane",
-      "buildNumber": "6",
+      "buildNumber": "7",
       "supportsTablet": true,
       "requireFullScreen": true,
       "infoPlist": {

@@ -4,7 +4,7 @@
 //   ・声の パック（packs/*.json）：はじめて あそぶ コースの ときに 公開ページから とりよせて 保存（2かいめからは ネットなしで）
 //   ・「おわる」ボタン（Android は アプリを とじる。iOS は とじない きまりなので「またね」の 画面）
 import { useEffect, useRef, useState } from "react";
-import { View, Text, ScrollView, BackHandler, Platform, StyleSheet, AppState } from "react-native";
+import { View, Text, ScrollView, Image, Pressable, BackHandler, Platform, StyleSheet, AppState } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { WebView } from "react-native-webview";
 import { Asset } from "expo-asset";
@@ -25,6 +25,8 @@ function speakerOn(why = "") { if (Platform.OS !== "ios") return; if (!PERM_OK) 
   try { SR.setCategoryIOS({ category: "playAndRecord", categoryOptions: ["defaultToSpeaker", "allowBluetooth", "allowBluetoothA2DP", "mixWithOthers"], mode: "default" }); } catch (e) { dlog("setCategory err " + e.message); }
   try { SR.setAudioSessionActiveIOS(true); } catch (e) { dlog("setActive err " + e.message); }
   dlog("speakerOn " + why + " " + sessionInfo()); }
+// マイクを ことわられた ときも、マナーモードで 音が きえない ように「さいせい」あつかいに
+function playbackOn() { if (Platform.OS !== "ios") return; try { SR.setCategoryIOS({ category: "playback", categoryOptions: ["mixWithOthers"], mode: "default" }); SR.setAudioSessionActiveIOS(true); } catch (e) { } dlog("playbackOn " + sessionInfo()); }
 function sessionInfo() { try { const c = SR.getAudioSessionCategoryAndOptionsIOS(); return `${c.category}/${c.mode}/${(c.categoryOptions || []).join("+")}`; } catch (e) { return "?"; } }
 const PAGES = "https://amane1234567jp-crypto.github.io/kotoba-tane/";
 const SKU = "kotoba_tane_all";
@@ -39,7 +41,7 @@ const BRIDGE = `(function(){
   window.KT_APP = { platform: ${JSON.stringify(Platform.OS)}, buy: function(){ return call("buy"); }, restore: function(){ return call("restore"); }, owned: function(){ return call("owned"); }, exit: function(){ return call("exit"); }, audioReset: function(){ return call("audioReset"); } };
   // おとなの かくにん用：タイトル「ことばのたね」を 5かい つづけて タップすると、音の 状態の 画面が ひらく
   var taps = 0, tapT = 0;
-  document.addEventListener("pointerdown", function(e){ var el = e.target.closest && e.target.closest(".m3title, .mtitle, h1, .mhero"); if (!el) { return; } var now = Date.now(); taps = now - tapT < 1500 ? taps + 1 : 1; tapT = now; if (taps >= 5) { taps = 0; post({ t: "debug" }); } }, true);
+  document.addEventListener("pointerdown", function(e){ var el = e.target.closest && e.target.closest(".m3head, .mhero, .mtitle"); if (!el) { return; } var now = Date.now(); taps = now - tapT < 1500 ? taps + 1 : 1; tapT = now; if (taps >= 5) { taps = 0; post({ t: "debug" }); } }, true);
   window.__ktState = function(){ try { return JSON.stringify({ ctx: (typeof ctx !== "undefined" && ctx) ? ctx.state : null, bgm: (typeof BGM !== "undefined" && BGM.gain) ? +BGM.gain.gain.value.toFixed(2) : null, route: typeof ROUTE !== "undefined" ? ROUTE.out : null, stage: typeof curStage !== "undefined" ? curStage : null, hide: typeof HIDE !== "undefined" ? !!HIDE.off : null }); } catch(e) { return "err " + e.message; } };
   window.addEventListener("load", function(){ post({ t: "pageload" }); });
   // 声の パック：アプリが 保存した ファイルを よむ
@@ -125,11 +127,17 @@ export default function App() {
       SR.addListener("end", () => { const s = sr.cur; sr.busy = false; js(`window.__ktSR(${s},"end",{})`); if (sr.next) { const o = sr.next; sr.next = null; srStart(o); } else speakerOn("sr end"); }),
     ];
     return () => L.forEach(l => l.remove()); }, []);
-  useEffect(() => { dlog("mount " + sessionInfo()); askPerm(); prepareWeb().then(setUri).catch(() => setUri(null)); activateKeepAwakeAsync().catch(() => {}); }, []);
+  // 2026-11-02：ゲームの 音が うまれる まえに、マイクの 許可と 音の 出口（マナーモードでも 鳴る 設定）を きめて おく。
+  // まだ 許可が ない ときは、さいしょに おとな むけの「はじめる」画面を 出し、ボタンを おした ときに 許可を きく（アプリが 前に ある ときに きくので すぐ 出る）。
+  const [ready, setReady] = useState(false), [gate, setGate] = useState(false);
+  useEffect(() => { dlog("mount " + sessionInfo()); prepareWeb().then(setUri).catch(() => setUri(null)); activateKeepAwakeAsync().catch(() => {});
+    (async () => { let g = false; try { const r = await SR.getPermissionsAsync(); g = r.granted; dlog("perm now " + r.status); } catch (e) { dlog("perm check err " + e.message); }
+      if (g) { sr.perm = true; sr.permP = Promise.resolve(true); PERM_OK = true; speakerOn("start"); setReady(true); } else { SplashScreen.hideAsync().catch(() => {}); setGate(true); } })(); }, []);
+  const startGame = async () => { setGate(false); const ok = await askPerm(); if (!ok) playbackOn(); setReady(true); };
   // マイク・音声認識の 許可は ゲームの とちゅうでは なく、起動して すぐに 聞く
   // ひとつの 約束（promise）に まとめて、なんど よばれても 確認は 1かいだけ
   const askPerm = () => sr.permP || (sr.permP = (async () => { dlog("perm ask"); try { const r = await SR.requestPermissionsAsync(); sr.perm = r.granted; dlog("perm " + r.status + " again=" + r.canAskAgain); } catch (e) { sr.perm = false; dlog("perm err " + e.message); } PERM_OK = !!sr.perm; speakerOn("after perm"); return sr.perm; })());
-  useEffect(() => { const s = AppState.addEventListener("change", st => { dlog("appstate " + st); if (st === "active") speakerOn("active"); }); return () => s.remove(); }, []);
+  useEffect(() => { const s = AppState.addEventListener("change", st => { dlog("appstate " + st); if (st === "active") { if (PERM_OK) speakerOn("active"); else if (sr.perm === false) playbackOn(); } }); return () => s.remove(); }, []);
   const [dbg, setDbg] = useState(null); useEffect(() => { DBG.set = setDbg; return () => { DBG.set = null; }; }, []);
   // Android の もどるボタン：ゲームの 中では なにも しない（まちがって とじない ように）
   useEffect(() => { const s = BackHandler.addEventListener("hardwareBackPress", () => true); return () => s.remove(); }, []);
@@ -138,7 +146,7 @@ export default function App() {
     if (m.t === "pack") reply(m.id, await getPack(m.a));
     else if (m.t === "buy") reply(m.id, await buy());
     else if (m.t === "restore" || m.t === "owned") reply(m.id, await owned());
-    else if (m.t === "pageload") { dlog("page load " + sessionInfo()); speakerOn("pageload"); }
+    else if (m.t === "pageload") { dlog("page load " + sessionInfo()); if (PERM_OK) speakerOn("pageload"); else playbackOn(); }
     else if (m.t === "audioReset") { dlog("audioReset"); try { if (Platform.OS === "ios") { SR.setAudioSessionActiveIOS(false, { notifyOthersOnDeactivation: true }); } } catch (e) { dlog("reset err " + e.message); } reply(m.id, true); }
     else if (m.t === "debug") { DBG.on = !DBG.on; setDbg([...DBG.log]); if (DBG.on) { web.current && web.current.injectJavaScript(`window.ReactNativeWebView.postMessage(JSON.stringify({t:"state",a:window.__ktState()}));true;`); } }
     else if (m.t === "state") { dlog("page " + m.a); }
@@ -151,7 +159,10 @@ export default function App() {
   return (
     <View style={S.root}>
       <StatusBar hidden />
-      {uri && <WebView ref={web} source={{ uri }} originWhitelist={["*"]} style={S.root}
+      {gate && <View style={S.gate}><Image source={require("./assets/splash.png")} style={S.gateImg} resizeMode="contain" />
+        <Text style={S.gateT}>ことばのたね は、お子さんが 言った ことばを 聞きとるために、マイクと 音声認識を つかいます。</Text>
+        <Pressable onPress={startGame} style={S.gateBtn}><Text style={S.gateBtnT}>▶ はじめる</Text></Pressable></View>}
+      {ready && uri && <WebView ref={web} source={{ uri }} originWhitelist={["*"]} style={S.root}
         allowFileAccess allowFileAccessFromFileURLs allowUniversalAccessFromFileURLs allowingReadAccessToURL={WEB}
         javaScriptEnabled domStorageEnabled mediaPlaybackRequiresUserAction={false} allowsInlineMediaPlayback
         injectedJavaScriptBeforeContentLoaded={BRIDGE} onMessage={onMessage}
@@ -165,5 +176,8 @@ export default function App() {
     </View>); }
 const S = StyleSheet.create({ root: { flex: 1, backgroundColor: "#FFF8E8" },
   dbg: { position: "absolute", left: 8, right: 8, bottom: 8, maxHeight: "60%", backgroundColor: "#000000CC", borderRadius: 12, padding: 8 },
+  gate: { flex: 1, alignItems: "center", justifyContent: "center", padding: 24, backgroundColor: "#FFF8E8" },
+  gateImg: { width: 160, height: 160, marginBottom: 12 }, gateT: { fontSize: 18, color: "#2B2A33", textAlign: "center", lineHeight: 28, maxWidth: 560, marginBottom: 20 },
+  gateBtn: { backgroundColor: "#7BD389", borderColor: "#2B2A33", borderWidth: 4, borderRadius: 999, paddingVertical: 14, paddingHorizontal: 48 }, gateBtnT: { fontSize: 26, color: "#2B2A33", fontWeight: "700" },
   dbgBox: { maxHeight: 260 }, dbgT: { color: "#9FE870", fontSize: 11, fontFamily: Platform.OS === "ios" ? "Menlo" : "monospace" },
   dbgBtn: { color: "#FFFFFF", backgroundColor: "#444", padding: 8, marginTop: 6, borderRadius: 8, textAlign: "center", fontSize: 14 } });
