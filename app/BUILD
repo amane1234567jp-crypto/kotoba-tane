@@ -1,1 +1,1 @@
-android production no
+ios production yes
