@@ -1,1 +1,1 @@
-android preview no
+android production no
