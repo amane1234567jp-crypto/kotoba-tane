@@ -42,9 +42,9 @@ jobs:
       - name: build
         env:
           EXPO_ASC_API_KEY_PATH: /tmp/b/asc.p8
-          EXPO_ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
-          EXPO_ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
-          EXPO_APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          EXPO_ASC_KEY_ID: MKX36V742D
+          EXPO_ASC_ISSUER_ID: 2fa8da34-49c0-4c52-aae7-77f748a041f7
+          EXPO_APPLE_TEAM_ID: ZGYPGQ9WPN
           EXPO_APPLE_TEAM_TYPE: COMPANY_OR_ORGANIZATION
         run: |
           cd /tmp/b
