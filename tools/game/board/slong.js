@@ -4,8 +4,11 @@
    ことばの 課題は だいぼうけん・ともだちの だいぼうけんの ものを つかう（声も その パックから）。
    あたらしい 声は ぽにーだけ（sl_*・n0・n7〜n12。packs/slong.json）。 */
 const JG_ROWS = [935, 730, 525, 320];
+// かわあそび（2026-11-03）：くねくね まがった 形の 盤（ほかの コースの ような だん では ない）。KW_RIV は かわの まんなかの せん（kawa.js が かく）
+const KW_PTS = [[130, 945], [232, 952], [335, 957], [438, 953], [540, 941], [639, 918], [724, 863], [761, 769], [710, 683], [620, 635], [518, 637], [423, 672], [370, 759], [286, 808], [185, 791], [120, 717], [114, 616], [144, 497], [269, 491], [360, 412], [474, 407], [572, 477], [689, 466], [760, 560], [852, 605], [945, 648], [1044, 678], [1145, 696], [1247, 699], [1349, 686], [1446, 653], [1499, 569], [1486, 470], [1411, 401], [1311, 392], [1212, 419], [1120, 463], [1033, 516], [934, 498], [854, 435], [840, 337], [895, 252], [984, 203], [1085, 211], [1184, 238], [1286, 234], [1389, 234], [1490, 250]];
+const KW_RIV = [[-90, 800], [41, 749], [33, 589], [126, 474], [238, 412], [356, 382], [476, 377], [595, 395], [701, 438], [735, 330], [725, 160], [715, -80]];
 const DT_ROWS = [895, 698, 501, 304]; // でたらめ がっこう：でこぼこの ぶん うえに（いちばん したが きれない）
-const SL = ["sumi", "sokashi", "suchu", "eki", "odekake", "kimochi", "makete", "dekigoto", "jugyou", "detarame", "yuen"];
+const SL = ["sumi", "sokashi", "suchu", "eki", "odekake", "kimochi", "makete", "dekigoto", "jugyou", "detarame", "yuen", "kawa"];
 const SL_HIDE = new Set([]); /* 声が そろうまで メニューに ださない コースを ここに */
 const isSL = () => SL.includes(curStage);
 SL.forEach(id => LONGS.add(id));
@@ -46,6 +49,10 @@ const SL_TH = {
   yuen: { name: "ゆうえんち", icon: "🎡", areas: ["いりぐち", "のりもの", "おばけ・ショー", "おみせ"], fills: ["#FFF1D6", "#D7ECFF", "#EEE6FA", "#FFE0E6"], ground: "#FFF6E6",
     blk: { who: "kamejii", intro: ["sl_yuen_blk", "かめじいが、ちずを みながら みちの まんなかで たちどまって いるよ"], say: ["blk_jitensha", "すみません、とおります"], to: "かめじいに いおう", keys: [["すみません", "済みません"]], res: ["rs_jitensha", "ほっほ、ていねいに ありがとう"] },
     item: "ふうせん", obs: "ひとごみ", call: "かかりの ひと", deco: [] },
+  // かわあそび（2026-11-03、kawa.js）：なつの かわの かいわと みずの あんぜん。2だんめが かわ（きし と みずの マス）
+  kawa: { name: "かわあそび", icon: "🏞", areas: ["じゅんび", "かわで あそぶ", "あぶない！", "おひる・かえり"], fills: ["#EFE6D2", "#BFE3F2", "#D9F0C8", "#FFE9C7"], ground: "#CFE8C0",
+    blk: { who: "kamejii", intro: ["sl_kawa_blk", "かめじいが、きしで つりを して いて、とおれないよ"], say: ["blk_jitensha", "すみません、とおります"], to: "かめじいに いおう", keys: [["すみません", "済みません"]], res: ["rs_jitensha", "ほっほ、ていねいに ありがとう"] },
+    item: "さかな", obs: "いし", call: "おとなの ひと", deco: [] },
   dekigoto: { name: "きょうの できごと", icon: "📖", areas: ["がっこう", "こうえん", "いえ", "おでかけ"], fills: ["#E3F0FF", "#DDF2D0", "#FFE9D6", "#FFE0EE"], ground: "#F2F7FF",
     blk: { who: "chu", intro: ["p_blk_dekigoto", "ちゅうくんが、きょうの ことを はなしたそうに して いるよ。きいて あげよう"], say: ["blk_dekigoto", "きょう、なにが あったの？"], to: "ちゅうくんに きこう", keys: [["なにが", "何が", "あったの", "どうしたの"]], res: ["rs_dekigoto", "きいて！ さかあがりが できたんだ！"] },
     item: "ほん", obs: "あめ", call: "ともだち", deco: [] },
@@ -85,7 +92,7 @@ const SL_EVT = {
     nebou: "ベンチで ねちゃった！ みんなで「おきて！」って いって、おこして あげて", trolley: "サイクリングの なかまが きた！ ちかくの ひとも いっしょに 3マス すすむよ", call: "おーい！ いちばん うしろの ひとを むかえに いくよ",
     atsumare: "こうえんで ひとやすみ！ みんな ここに あつまれ！", kumikae: "みちが こうじちゅう！ コースが くみかわるよ" },
   kimochi: {}, /* しかけは kimochi.js で きめる */
-  makete: {}, dekigoto: {}, jugyou: {}, detarame: {}, yuen: {},
+  makete: {}, dekigoto: {}, jugyou: {}, detarame: {}, yuen: {}, kawa: {},
 };
 const SL_ICON = { dice2: "🎲", warp: "🌀", bigwarp: "🚀", fake: "🤪", rand: "❓", rest: "💤", x2: "✖️", zero: "0️⃣", home: "↩", back10: "⏪", bonus: "🎁", allf: "⏩", allb: "🌊", janken: "✊", again: "🔁", nebou: "😴", trolley: "🚃", call: "🧲", tsukkomi: "🤣", atsumare: "📣", kumikae: "🔀" };
 const SL_EVC = { warp: "#D9C2F0", bigwarp: "#D9C2F0", rand: "#D9C2F0", home: "#FFC2D1", back10: "#FFC2D1", fake: "#FFE27A", tsukkomi: "#FFE27A", bonus: "#C9EBB5", atsumare: "#FFE27A", kumikae: "#FFE27A" };
@@ -110,6 +117,7 @@ const SL_SHAPE = { // 47マス＋ゴール（まえは 65＋1。ながすぎた�
   kimochi() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + Math.sin(col * .8 + r * 1.3) * 22]); } }); return P; }, // 4だん＝4つの ばしょ（いえ・がっこう・こうえん・おでかけ）
   makete() { return SL_SHAPE.kimochi(); },
   yuen() { return SL_SHAPE.kimochi(); },
+  kawa() { return KW_PTS.map(p => p.slice()); }, // くねくね（kawa.js）
   dekigoto() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 7; j++) { const col = r % 2 ? 6 - j : j; P.push([200 + col * 200, y + Math.sin(col * .9 + r * 1.3) * 22]); } }); return P; }, // ながすぎたので 4だん×7＝28マスに（2026-10-25）
   detarame() { const P = []; DT_ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + (col % 2 ? -28 : 24) + (col % 3 === 2 ? 10 : 0)]); } }); return P; }, // でこぼこ（でたらめ）な 4だん
   jugyou() { const P = [], ROWS = JG_ROWS; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + Math.sin(col * .8 + r * 1.3) * 22]); } }); return P; }, // コース名を 上の バーに うつして 4だんを ひろげた（2026-10-25）

@@ -138,6 +138,11 @@ def D_class(put, t0, tim, b, pb):
     for k in range(1, 8, 2): put("drum", t0 + tim(k), hat(), .4)
 def X_birds(put, t0, tim, b, pb, c):
     if b % 2 == 0: put("fx", t0 + tim(3), bird(), 1); put("fx", t0 + tim(3) + .18, bird(), .8)
+def drop():  # みずの しずく（ぽちゃん：ひくい ところから すっと あがる）
+    n = int(.12 * SR); t = np.arange(n) / SR; f = 700 + 2200 * (t / .12) ** 1.6; return np.sin(2 * np.pi * np.cumsum(f) / SR) * env(n, .002, .03) * .22
+def X_drops(put, t0, tim, b, pb, c):  # かわの せせらぎ：しずくの おとが ぽちゃん・ぽちゃん（2026-11-03 かわあそび）
+    if b % 2 == 1: put("fx", t0 + tim(5), drop(), 1); put("fx", t0 + tim(6) + .07, drop(), .7)
+    if b % 4 == 2: put("fx", t0 + tim(1), bird(), .6)
 def X_bell(put, t0, tim, b, pb, c):
     if b == 0 and c % 2 == 0: [put("fx", t0 + i * .32, glock(mf(m), .3), .2) for i, m in enumerate((76, 72, 74, 67))]
 
@@ -333,6 +338,10 @@ SONGS = {
  "yuen": dict(bpm=160, root=67, scale=MAJ, bars=8, lead=glock, lead2=flute, drums=D_waltz, comp="pad", per_bar=6,
    mel="1 - 3 5 - 3 | 4 - 6 1' - 6 | 5 - 3 1 - 3 | 2 - - 5, - - | 1 - 3 5 - 1' | 2' - 1' 7 - 6 | 5 - 4 2 - 7, | 1 - - . . .",
    chords=[1, 4, 1, 5, 1, 4, 5, 1]),
+ # かわあそび（2026-11-03）：なつの かわらを のんびり あるく。フルートと ウクレレ、しずくの おと
+ "kawa": dict(bpm=104, root=62, scale=MAJ, bars=8, lead=flute, lead2=marimba, drums=D_walk, comp="pluck", bass="tri", swing=.25, extra=X_drops,
+   mel="5 - 6 5 3 - 1 - | 2 - 3 - 5 - - - | 6 - 5 - 3 - 2 3 | 5 - - - . . . . | 1' - 6 - 5 - 3 - | 2 - 3 5 6 - 5 - | 3 - 2 - 6, - 2 - | 1 - - - . . . .",
+   chords=[1, 5, 4, 1, 4, 1, 5, 1]),
  "makete": dict(bpm=136, root=67, scale=MAJ, bars=8, lead=brass, lead2=glock, drums=D_march, comp="pluck", bass="sq", swing=.1, extra=X_bell,
    mel="5 - 5 - 1' - 5 - | 6 - 5 - 3 - - - | 4 - 4 - 6 - 4 - | 5 - - - 2 - - - | 5 - 5 - 1' - 5 - | 6 - 1' - 2' - 1' - | 7 - 5 - 6 - 7 - | 1' - - - . . . .",
    chords=[1, 4, 4, 5, 1, 4, 5, 1]),

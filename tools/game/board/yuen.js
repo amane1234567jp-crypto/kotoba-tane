@@ -78,6 +78,9 @@ function yuFlags(L, y = 150) { el("path", { d: `M0 ${y} Q400 ${y + 60} 800 ${y} 
 function yuSign(L, x, y, w, text, fill = "#FFFFFF", size = 40) { el("rect", { x: x - w / 2, y, width: w, height: size * 1.7, rx: 16, fill, ...S6(5) }, L); txt(L, x, y + size * 1.2, text, size, { "text-anchor": "middle" }); }
 function yuTree(L, x, y = 760, s = 1) { tree8(L, x, y, s); }
 function yuBench(L, x, y = 760) { el("rect", { x: x - 120, y: y - 70, width: 240, height: 24, rx: 8, fill: "#C98A4B", ...S6(5) }, L); el("rect", { x: x - 120, y: y - 120, width: 240, height: 20, rx: 8, fill: "#C98A4B", ...S6(5) }, L); el("path", { d: `M${x - 100} ${y - 46} V${y} M${x + 100} ${y - 46} V${y}`, ...S6(7) }, L); }
+function yuBack(L, x, y, k, c, hair) { const g = el("g", { transform: `translate(${x} ${y}) scale(${k})` }, L); // うしろすがたの ひと（y＝あしもと）
+  el("path", { d: "M-34 0 V-60 M34 0 V-60", ...S6(10) }, g); el("path", { d: "M-70 -60 V-230 Q-70 -280 0 -280 Q70 -280 70 -230 V-60 Z", fill: c, ...S6(6) }, g);
+  el("circle", { cx: 0, cy: -340, r: 62, fill: "#FFE0B2", ...S6(6) }, g); el("path", { d: "M-62 -330 Q-66 -410 0 -410 Q66 -410 62 -330 Q0 -300 -62 -330 Z", fill: hair, ...S6(5) }, g); }
 function yuRope(L, x1, x2, y = 700) { for (let x = x1; x <= x2; x += 220) { el("rect", { x: x - 8, y: y - 60, width: 16, height: 120, rx: 6, fill: "#C9B8A8", ...S6(4) }, L); el("circle", { cx: x, cy: y - 64, r: 12, fill: "#FFD25E", ...S6(3) }, L); }
   for (let x = x1; x < x2; x += 220) el("path", { d: `M${x} ${y - 50} Q${x + 110} ${y - 10} ${x + 220} ${y - 50}`, fill: "none", stroke: "#E8473C", "stroke-width": 10 }, L); }
 const ROOMS_YU = {
@@ -104,6 +107,10 @@ const ROOMS_YU = {
     el("path", { d: "M1395 590 V760", ...S6(10) }, L); } },
   ぎょうれつ(L) { yuSky(L, "#CFEAFB", "#E3D3B8"); yuCoaster(L, 300, 420, 1.4);
     yuSign(L, 1280, 300, 380, "まちじかん 60ぷん", "#FFF4E0", 38); el("path", { d: "M1280 368 V520", ...S6(8) }, L);
+    // まえに ならんで いる ひと（うしろすがた）：おくの れつ（くねくね）と てまえの れつ。ずらっと ながい ぎょうれつ（2026-11-03）
+    const CL = ["#E8735A", "#7FCBF0", "#7BD389", "#FFD25E", "#B79CE0", "#FF8FA3", "#6E7FA8", "#F2A65A"], HR = ["#3B2A20", "#5A4030", "#2B2A33", "#8A5A2B", "#C98A4B"];
+    for (let i = 0; i < 12; i++) yuBack(L, 1480 - i * 104, 600 + (i % 2) * 6, .42, CL[(i * 3) % 8], HR[i % 5]); // おく（のりばの ほうへ）
+    for (let i = 0; i < 9; i++) yuBack(L, 360 + i * 130, 712 + (i % 2) * 8, .58, CL[(i * 5 + 1) % 8], HR[(i + 2) % 5]); // てまえ
     yuRope(L, 120, 1520, 720); },
   メリーゴーランド(L) { yuSky(L, "#FFE9F2", "#E9DCC2"); yuFlags(L, 120);
     const cx = 1000; el("path", { d: `M${cx - 420} 330 L${cx} 180 L${cx + 420} 330 Z`, fill: "#FF8FA3", ...S6(6) }, L); for (let i = 0; i < 7; i++) el("path", { d: `M${cx} 180 L${cx - 420 + i * 140} 330`, ...S6(3) }, L);
@@ -186,6 +193,7 @@ async function yuScene(pc) {
   await step(`yus_${sc.id}`, sc.say, sc.keys, "まるシマに なって いおう");
   h.sadMouth = false;
   if (sc.res) { playMove(a, "nod"); await speak(a, `yur_${sc.id}`, sc.res); }
+  if (sc.id === "mienai" || sc.id === "tsukare") await yuDakko(h, a); // 「だっこ」と いったら、ほんとうに だっこ する
   const t2 = sc.t2 && t >= 1 && !(sc.id === "maigo" && hero !== "shima") ? sc.t2 : (sc.t2 && !sc.res ? sc.t2 : null); // へんじの ない 場面（seki・ice）は いつも 2おうふくめ まで
   if (t2) { if (t2.line) { playMove(a, "nod"); await speak(a, `yuw2_${sc.id}`, t2.line); }
     await step(`yus2_${sc.id}`, t2.say, t2.keys, "つづけて いおう");
@@ -194,6 +202,13 @@ async function yuScene(pc) {
   playLog({ type: "yuen", id: sc.id, tier: t, okN, nSay, tries: log, ...(MODE === "multi" ? { who: NAMES[hero] } : {}) });
   if (ok) { confetti(36); joy(h); const k = rnd(2) ? "yup_ok" : "yup_good"; await speak(C.pony, k, YU.txt[k]); }
   await sleep(400); setView("board"); return ok; }
+// だっこ：おとなが そばに きて うでを ひろげ、こどもを もちあげる（2026-11-03）
+async function yuDakko(h, a) { // こどもを かたの よこに だきあげ、おとなの うでで ささえる
+  a.dx.t = (h.x + 200 * h.s + 100) - (a.x + 200 * a.s); hold(a, "run", .8); await sleep(900); // おとなが こどもの すぐ よこへ
+  try { h.root.parentNode.appendChild(h.root); } catch (e) { } // こどもを てまえに
+  const y0 = h.y; if (ctx) blip(500, 900, .25, "sine");
+  await tween(650, k => { const e = 1 - (1 - k) * (1 - k); h.y = y0 - 115 * h.s * e; a.armL.t = 150 * e; a.armR.t = -20 * e; });
+  a.happyOn = true; joy(h); markAbove(h, "heart"); await sleep(900); }
 /* ---------- 🎡 かんらんしゃ ルーレット ---------- */
 async function yuWheel(pc) {
   const g = panel("かんらんしゃ ルーレット", "#EAF6FF"), V = [1, 2, 3, "🍿", 1, 4, 2, 3];
