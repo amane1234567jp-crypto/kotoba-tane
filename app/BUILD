@@ -1,1 +1,1 @@
-ios production yes # build11 審査用の合言葉
+android production no # vc4 審査用の合言葉
