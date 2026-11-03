@@ -550,10 +550,30 @@ function wakeSound() {
 }
 document.addEventListener("pointerdown", wakeSound, true);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) setTimeout(wakeSound, 300); });
+/* ---------- メニューに もどる（とちゅうで やめる） ----------
+   確認してから、盤をすてて はじめの画面へ。遠隔対戦なら 相手にも知らせて、カメラと通話を止める */
+function toMenu() {
+  G.hist = []; G.ended = false; saveGame();
+  try { NET.local?.getTracks().forEach(tr => tr.stop()); NET.peer?.destroy(); } catch (e) { /* もう切れている */ }
+  location.replace(location.pathname);   // ページを読みなおすのが いちばん確実に まっさらに もどる
+}
+$("menuBtn").addEventListener("click", () => {
+  $("quitNote").textContent = NET.role ? "あいてとの つうわも おわります。" : "";
+  $("quitOv").hidden = false;
+});
+$("quitNo").addEventListener("click", () => { $("quitOv").hidden = true; });
+$("quitYes").addEventListener("click", () => { NET.send({ t: "quit" }); setTimeout(toMenu, 300); });
+async function quitByOther() {
+  G.paused = true; G.busy = true; clearHints(); updateButtons(); $("againOv").hidden = true; $("askOv").hidden = true;
+  camMsg(otherSide(), "あいてが おわりにしました");
+  await showHost(host.pony);
+  await say(host.pony, "あいてが おわりにしたよ。また あそぼうね", 2500);
+  toMenu();
+}
 function unlock() {
   audio();
   try { if ("speechSynthesis" in window) { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); } } catch (e) { /* 読み上げなしでも遊べる */ }
-  $("startOv").hidden = true; G.started = true; keepAwake(); preloadVoices();
+  $("startOv").hidden = true; G.started = true; keepAwake(); preloadVoices(); $("menuBtn").hidden = false;
 }
 $("startBtn").addEventListener("click", async () => {
   unlock();
@@ -614,6 +634,7 @@ function handle(m) {
     case "sync": if (NET.role === "host") sendState(); break;
     case "state": applyState(m); break;
     case "new": newGame(); break;
+    case "quit": quitByOther(); break;
   }
 }
 function resync() { NET.role === "host" ? sendState() : NET.send({ t: "sync" }); }

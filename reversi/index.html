@@ -105,8 +105,8 @@ body {
 .stone[data-c="1"] { background: radial-gradient(circle at 34% 30%, var(--disc-k-hi), var(--disc-k) 58%); }
 .stone[data-c="2"] { background: radial-gradient(circle at 34% 30%, #FFFFFF, var(--disc-w) 45%, var(--disc-w-lo)); }
 .slot { flex: 1; min-height: 80px; }
-.score { display: flex; align-items: center; justify-content: center; gap: 12px; font-family: var(--display); font-size: clamp(34px, 6vmin, 64px); line-height: 1; font-variant-numeric: tabular-nums; }
-.score small { font-size: .42em; align-self: flex-end; margin-bottom: .25em; margin-left: -.35em; }
+.score { display: flex; flex-wrap: nowrap; white-space: nowrap; align-items: center; justify-content: center; gap: 12px; font-family: var(--display); font-size: clamp(34px, 6vmin, 64px); line-height: 1; font-variant-numeric: tabular-nums; }
+.score small { font-size: .42em; align-self: center; margin-left: -.35em; transform: translateY(.45em); }
 .score .stone { width: .8em; height: .8em; border-width: 4px; }
 .matta {
   font: 900 clamp(18px, 2.6vmin, 30px) var(--body); color: var(--ink); background: #FFFFFF; border: 4px solid var(--ink); border-radius: 999px;
@@ -185,6 +185,17 @@ body {
 .askBtns { display: flex; align-items: center; gap: 24px; pointer-events: auto; }
 .small { font: 700 clamp(16px, 2.4vmin, 22px) var(--body); padding: .5em 1.1em; border: 3px solid var(--ink); border-radius: 999px; background: #FFFFFF; color: var(--ink); cursor: pointer; }
 
+.menuBtn { position: fixed; z-index: 7; top: calc(env(safe-area-inset-top, 0px) + 6px); left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 6px; font: 700 15px var(--body); color: var(--ink); background: rgba(255, 253, 246, .92);
+  border: 3px solid var(--ink); border-radius: 999px; padding: 5px 14px 5px 10px; cursor: pointer; }
+.menuBtn svg { width: 20px; height: 20px; }
+.menuBtn:focus-visible { outline: 4px solid var(--pink); outline-offset: 3px; }
+#quitOv { background: rgba(43, 42, 51, .45); }
+.quit { text-align: center; }
+.quit h2 { font-size: 22px; }
+.quit .lead { margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted); }
+.quit .lead:empty { display: none; }
+
 @media (orientation: portrait), (max-aspect-ratio: 11/10) {
   #app { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
   .boardWrap { grid-column: 1 / -1; grid-row: 1; }
@@ -253,6 +264,14 @@ body {
 <div class="cover" id="askOv" hidden><div class="askBtns"><button class="big" id="okBtn" type="button">いいよ</button><button class="small" id="ngBtn" type="button">だめ</button></div></div>
 <div class="cover" id="againOv" hidden><button class="big" id="againBtn" type="button">もういっかい</button></div>
 
+<button type="button" id="menuBtn" class="menuBtn" hidden aria-label="メニューに もどる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8M6 9.5V20h4.5v-6h3v6H18V9.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>メニュー</button>
+<div class="cover" id="quitOv" hidden>
+  <div class="panel quit" role="dialog" aria-label="ゲームを やめる">
+    <h2>ゲームを やめて メニューに もどる？</h2>
+    <p class="lead" id="quitNote"></p>
+    <div class="panelBtns"><button type="button" id="quitNo" class="primary">つづける</button><button type="button" id="quitYes">やめる</button></div>
+  </div>
+</div>
 <div class="cover" id="settings" hidden>
   <div class="panel" role="dialog" aria-label="せってい">
     <h2>せってい</h2>
@@ -2151,10 +2170,30 @@ function wakeSound() {
 }
 document.addEventListener("pointerdown", wakeSound, true);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) setTimeout(wakeSound, 300); });
+/* ---------- メニューに もどる（とちゅうで やめる） ----------
+   確認してから、盤をすてて はじめの画面へ。遠隔対戦なら 相手にも知らせて、カメラと通話を止める */
+function toMenu() {
+  G.hist = []; G.ended = false; saveGame();
+  try { NET.local?.getTracks().forEach(tr => tr.stop()); NET.peer?.destroy(); } catch (e) { /* もう切れている */ }
+  location.replace(location.pathname);   // ページを読みなおすのが いちばん確実に まっさらに もどる
+}
+$("menuBtn").addEventListener("click", () => {
+  $("quitNote").textContent = NET.role ? "あいてとの つうわも おわります。" : "";
+  $("quitOv").hidden = false;
+});
+$("quitNo").addEventListener("click", () => { $("quitOv").hidden = true; });
+$("quitYes").addEventListener("click", () => { NET.send({ t: "quit" }); setTimeout(toMenu, 300); });
+async function quitByOther() {
+  G.paused = true; G.busy = true; clearHints(); updateButtons(); $("againOv").hidden = true; $("askOv").hidden = true;
+  camMsg(otherSide(), "あいてが おわりにしました");
+  await showHost(host.pony);
+  await say(host.pony, "あいてが おわりにしたよ。また あそぼうね", 2500);
+  toMenu();
+}
 function unlock() {
   audio();
   try { if ("speechSynthesis" in window) { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); } } catch (e) { /* 読み上げなしでも遊べる */ }
-  $("startOv").hidden = true; G.started = true; keepAwake(); preloadVoices();
+  $("startOv").hidden = true; G.started = true; keepAwake(); preloadVoices(); $("menuBtn").hidden = false;
 }
 $("startBtn").addEventListener("click", async () => {
   unlock();
@@ -2215,6 +2254,7 @@ function handle(m) {
     case "sync": if (NET.role === "host") sendState(); break;
     case "state": applyState(m); break;
     case "new": newGame(); break;
+    case "quit": quitByOther(); break;
   }
 }
 function resync() { NET.role === "host" ? sendState() : NET.send({ t: "sync" }); }
