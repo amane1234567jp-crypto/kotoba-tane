@@ -460,10 +460,82 @@ const BUILD = {
     el("path", { d: "M104 100 Q200 20 296 100 L296 116 L104 116 Z", fill: "#2E4A7A", ...ST(6) }, p.head.g); el("path", { d: "M100 116 Q200 104 300 116 L300 132 Q200 120 100 132 Z", fill: "#1E2E50", ...ST(5) }, p.head.g);
     el("circle", { cx: 200, cy: 84, r: 16, fill: "#FFD25E", ...ST(4) }, p.head.g);
     return p; },
+  inukei(root) { // イヌの おまわりさん（かいだん、2026-11-04）：ちゃいろの いぬ・ぴんと たった みみ・こんの せいふくと ぼうし・バッジ・むせんき
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); if (p.brows) p.brows.innerHTML = ""; const F = "#C98B4F", D = "#A8703F", N = "#24345C", N2 = "#18244A", GD = "#F2C14E";
+    recolor(root, { "#FFC94D": F, "#FFF1D6": "#F7E6CC", "#FFB3C1": "#E9A88F" });
+    p.ears.forEach(e => e.g.setAttribute("display", "none"));
+    // しっぽ：ふさふさ
+    p.tail.g.innerHTML = ""; el("path", { d: "M258 352 Q300 350 318 318 Q334 286 322 262 Q346 282 344 318 Q338 360 262 370 Z", fill: F, ...ST(6) }, p.tail.g); el("path", { d: "M330 270 Q340 286 336 304", fill: "none", stroke: "#F7E6CC", "stroke-width": 8, "stroke-linecap": "round" }, p.tail.g);
+    // ズボンと くつ
+    p.legs.forEach(l => { l.g.firstChild.setAttribute("fill", N2); el("rect", { x: l.px - 22, y: 394, width: 44, height: 22, rx: 10, fill: "#1C1C24", ...ST(5) }, l.g); el("path", { d: `M${l.px - 12} 400 h10`, stroke: "#FFFFFF", "stroke-width": 3, "stroke-linecap": "round", opacity: .6 }, l.g); });
+    // うで：せいふくの そで＋ちゃいろの て
+    p.arms.forEach(a => { a.g.firstChild.setAttribute("fill", N); el("path", { d: `M${a.px - 18} ${a.py + 52} Q${a.px} ${a.py + 60} ${a.px + 18} ${a.py + 52}`, fill: "none", stroke: GD, "stroke-width": 4 }, a.g); el("circle", { cx: a.px, cy: a.py + 70, r: 15, fill: F, ...ST(5) }, a.g); });
+    neckFill(root, p, F);
+    // せいふく（うわぎ）
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g);
+    el("path", { d: "M120 292 Q200 266 280 292 L290 392 Q200 414 110 392 Z", fill: N, ...ST(5) }, bd);
+    el("path", { d: "M172 280 L200 320 L228 280 L214 276 L200 296 L186 276 Z", fill: "#BFD7F2", ...ST(4) }, bd); // シャツの えり
+    el("path", { d: "M196 300 L200 316 L204 300 L202 332 L200 338 L198 332 Z", fill: "#3A4F86", ...ST(2) }, bd); // ネクタイ
+    el("path", { d: "M158 284 L200 340 L242 284", fill: "none", ...ST(4) }, bd); // えりの せん
+    [348, 372].forEach(y => el("circle", { cx: 200, cy: y, r: 6, fill: GD, ...ST(3) }, bd));
+    el("rect", { x: 118, y: 372, width: 164, height: 18, rx: 6, fill: "#2B2A33", ...ST(4) }, bd); el("rect", { x: 188, y: 370, width: 24, height: 22, rx: 4, fill: GD, ...ST(3) }, bd); // ベルト
+    // むねの バッジ（ほし）・なふだ・むせんき
+    const bg = el("g", { transform: "translate(166 322)" }, bd); el("path", { d: "M0 -16 L4.7 -6 L15 -5 L7.5 2.5 L9.4 13 L0 8 L-9.4 13 L-7.5 2.5 L-15 -5 L-4.7 -6 Z", fill: GD, ...ST(3) }, bg); el("circle", { r: 4, fill: "#FFFFFF" }, bg);
+    el("rect", { x: 222, y: 316, width: 34, height: 12, rx: 3, fill: "#FFFFFF", ...ST(3) }, bd);
+    const rd = el("g", {}, bd); el("rect", { x: 232, y: 338, width: 24, height: 32, rx: 5, fill: "#3B3A44", ...ST(3) }, rd); el("path", { d: "M250 338 V318", ...ST(4) }, rd); el("circle", { cx: 244, cy: 346, r: 3, fill: "#7BD389" }, rd);
+    el("path", { d: "M150 300 Q160 330 176 346", fill: "none", stroke: "#C9D3DE", "stroke-width": 4, "stroke-dasharray": "3 4" }, bd); // ふえの くさり
+    // かおの もよう：めの まわりの こい いろ・おおきな はな
+    const H = p.head.g;
+    const ch = el("path", { d: "M112 150 Q150 108 200 112 Q250 108 288 150 Q262 132 230 140 Q200 128 170 140 Q138 132 112 150 Z", fill: D }); H.insertBefore(ch, p.eyes[0].g);
+    el("path", { d: "M138 140 Q160 132 184 140 M216 140 Q240 132 262 140", fill: "none", stroke: "#5A3A22", "stroke-width": 9, "stroke-linecap": "round" }, p.brows); // まじめな まゆ（おこって いない）
+    el("ellipse", { cx: 200, cy: 196, rx: 20, ry: 13, fill: INK, ...ST(4) }, H); el("ellipse", { cx: 193, cy: 191, rx: 6, ry: 3.5, fill: "#FFFFFF", opacity: .7 }, H);
+    // ぴんと たった みみ（ぼうしの うしろ）
+    [[128, -1], [272, 1]].forEach(([x, s]) => { const g = el("g", {}); H.insertBefore(g, H.firstChild);
+      el("path", { d: `M${x - s * 26} 120 L${x + s * 14} 30 L${x + s * 40} 112 Z`, fill: F, ...ST(6) }, g); el("path", { d: `M${x - s * 10} 110 L${x + s * 14} 52 L${x + s * 28} 106 Z`, fill: "#E9A88F" }, g);
+      el("path", { d: `M${x + s * 4} 54 L${x + s * 14} 30 L${x + s * 24} 56`, fill: D }, g); });
+    // ぼうし
+    const hat = el("g", {}, H);
+    el("path", { d: "M102 104 Q96 52 200 44 Q304 52 298 104 Z", fill: N, ...ST(6) }, hat);
+    el("rect", { x: 112, y: 92, width: 176, height: 22, rx: 6, fill: N2, ...ST(5) }, hat);
+    el("path", { d: "M116 103 H284", stroke: GD, "stroke-width": 4 }, hat);
+    el("path", { d: "M118 112 Q200 150 282 112 Q200 128 118 112 Z", fill: "#1C1C24", ...ST(5) }, hat); // つば
+    el("path", { d: "M150 120 Q200 134 250 120", fill: "none", stroke: "#FFFFFF", "stroke-width": 3, opacity: .5 }, hat);
+    const em = el("g", { transform: "translate(200 74)" }, hat); el("ellipse", { rx: 22, ry: 18, fill: "#E8C05A", ...ST(3) }, em); el("path", { d: "M0 -12 L3.5 -4 L12 -3.5 L5.5 2 L7 10 L0 6 L-7 10 L-5.5 2 L-12 -3.5 L-3.5 -4 Z", fill: "#FFF3C4", ...ST(2) }, em);
+    [-1, 1].forEach(s => el("path", { d: `M${s * 24} 6 q${s * 16} -6 ${s * 24} -22`, fill: "none", stroke: GD, "stroke-width": 4, transform: "translate(200 74)" }, hat));
+    p.tempo = .92; return p; },
+  kumadr(root) { // クマの おいしゃさん（かいだん、2026-11-04）：おおきな ちゃいろの くま・まるい めがね・ひたいの かがみ・しろい はくい・ちょうしんき
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); const F = "#8E5E3B", L2 = "#E6C79F";
+    recolor(root, { "#FFC94D": F, "#FFF1D6": L2, "#FFB3C1": "#D9A07A" }); if (p.brows) p.brows.innerHTML = ""; p.tail.g.setAttribute("display", "none");
+    p.legs.forEach(l => { l.g.firstChild.setAttribute("fill", "#7FB3D9"); el("rect", { x: l.px - 22, y: 394, width: 44, height: 20, rx: 10, fill: "#FFFFFF", ...ST(5) }, l.g); }); // ズボン（ブルー）と しろい くつ
+    p.arms.forEach(a => { a.g.firstChild.setAttribute("fill", "#FFFFFF"); el("circle", { cx: a.px, cy: a.py + 70, r: 16, fill: F, ...ST(5) }, a.g); el("path", { d: `M${a.px - 17} ${a.py + 54} H${a.px + 17}`, ...ST(4) }, a.g); });
+    neckFill(root, p, F);
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g);
+    el("path", { d: "M166 282 L200 318 L234 282 L250 300 L200 330 L150 300 Z", fill: "#7FB3D9", ...ST(4) }, bd); // なかの ブルーの ふく
+    el("path", { d: "M126 288 Q200 266 274 288 L290 404 Q200 420 110 404 Z", fill: "#FFFFFF", ...ST(5) }, bd); // はくい
+    el("path", { d: "M166 282 L200 330 L176 404 M234 282 L200 330", fill: "none", ...ST(4) }, bd);
+    el("path", { d: "M174 286 L200 328 L226 286 Z", fill: "#7FB3D9", ...ST(3) }, bd);
+    [[214, 352], [214, 382]].forEach(([x, y]) => el("circle", { cx: x, cy: y, r: 5, fill: "#DCE3EA", ...ST(2) }, bd));
+    // むねポケットの ペン・なふだ
+    el("rect", { x: 140, y: 330, width: 38, height: 30, rx: 4, fill: "#FFFFFF", ...ST(3) }, bd);
+    [[148, "#E8473C"], [158, "#3E9BD6"], [168, "#2B2A33"]].forEach(([x, c]) => el("rect", { x: x - 3, y: 316, width: 7, height: 22, rx: 3, fill: c, ...ST(2) }, bd));
+    el("rect", { x: 228, y: 318, width: 40, height: 16, rx: 3, fill: "#FFE9EE", ...ST(3) }, bd); el("path", { d: "M234 326 h20", stroke: "#E8473C", "stroke-width": 3 }, bd);
+    // ちょうしんき（くびに かける）
+    const sc = el("g", {}, bd); el("path", { d: "M164 284 Q150 330 178 352 M236 284 Q252 330 222 352", fill: "none", stroke: "#4A4A58", "stroke-width": 7, "stroke-linecap": "round" }, sc);
+    el("path", { d: "M178 352 Q200 368 222 352", fill: "none", stroke: "#4A4A58", "stroke-width": 6 }, sc); el("path", { d: "M200 362 V376", stroke: "#4A4A58", "stroke-width": 6 }, sc);
+    el("circle", { cx: 200, cy: 384, r: 13, fill: "#C9D3DE", ...ST(4) }, sc); el("circle", { cx: 200, cy: 384, r: 5, fill: "#FFFFFF" }, sc);
+    // かお：まるい めがね・ひたいの かがみ・すこし しろい まゆ
+    const H = p.head.g; const [a, b] = p.eyes;
+    el("ellipse", { cx: 200, cy: 196, rx: 18, ry: 12, fill: INK, ...ST(3) }, H);
+    const gl = el("g", {}, H); [a, b].forEach(e => el("circle", { cx: e.cx, cy: e.cy + 2, r: 30, fill: "#FFFFFF2A", stroke: "#6B4A36", "stroke-width": 6 }, gl));
+    el("path", { d: `M${a.cx + 30} ${a.cy} Q200 ${a.cy - 10} ${b.cx - 30} ${b.cy}`, fill: "none", stroke: "#6B4A36", "stroke-width": 5 }, gl);
+    [a, b].forEach(e => el("path", { d: `M${e.cx - 20} ${e.cy - 40} Q${e.cx} ${e.cy - 50} ${e.cx + 20} ${e.cy - 40}`, fill: "none", stroke: "#F3EDE4", "stroke-width": 9, "stroke-linecap": "round" }, H));
+    const hm = el("g", {}, H); el("path", { d: "M114 118 Q200 84 286 118", fill: "none", stroke: "#3B3A44", "stroke-width": 10, "stroke-linecap": "round" }, hm);
+    el("circle", { cx: 200, cy: 98, r: 26, fill: "#DCE6EE", ...ST(5) }, hm); el("circle", { cx: 200, cy: 98, r: 9, fill: "#FFFFFF", ...ST(3) }, hm); el("path", { d: "M184 88 Q190 80 198 80", fill: "none", stroke: "#FFFFFF", "stroke-width": 4, "stroke-linecap": "round" }, hm);
+    p.tempo = .85; return p; },
 };
 
 const NAMES = { pony: "ぽにー", shima: "まるシマ", doshin: "どしん", nobbo: "のっぽ", gao: "がお", chu: "ちゅう", pyon: "ぴょん", mii: "みい", kamejii: "かめじい", kamedr: "かめせんせい", meebaa: "めえばあ",
-  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", papa: "パパ", gaopapa: "がおの パパ", gaonii: "がおの おにいちゃん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "かんごしさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くま", piyo: "ぴよこ", ekiin: "えきいんさん", tenin: "てんいんさん", onii: "おにいちゃん" };
+  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", papa: "パパ", gaopapa: "がおの パパ", gaonii: "がおの おにいちゃん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "かんごしさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くま", piyo: "ぴよこ", ekiin: "えきいんさん", tenin: "てんいんさん", onii: "おにいちゃん", inukei: "おまわりさん", kumadr: "おいしゃさん" };
 const LINES = { pony: "きょねん、うみに いったね", shima: "やったー！ いえたね！", doshin: "どいて、あげるよ", nobbo: "それは、ずかんに のって いますよ", gao: "つぎは、まけないぞ",
   chu: "こ、こわかったよう", pyon: "いっしょに あそぼう！", mii: "ふーん。まあまあ じゃない", kamejii: "よく いえましたね", kamedr: "よく いえましたね", meebaa: "いらっしゃいませ" };
 
@@ -616,5 +688,7 @@ const SPECIAL = {
   panna: c => { jump(c, .5); c.happyOn = true; later(1200, () => c.happyOn = false); },
   pannamama: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
   omawari: c => { c.tm.nod = 1.2; c.armR.t = -140; later(1000, () => c.armR.t = 0); },
+  inukei: c => { c.tm.nod = 1.2; c.armR.t = -150; later(1000, () => c.armR.t = 0); }, // けいれい
+  kumadr: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
   meebaa: c => { c.armL.t = -55; c.armR.t = 55; c.happyOn = true; c.lean.t = 6; later(500, () => c.lean.t = -6); later(1000, () => c.lean.t = 0); later(1400, () => { c.armL.t = 0; c.armR.t = 0; c.happyOn = false; }); },
 };

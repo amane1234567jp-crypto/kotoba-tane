@@ -1,0 +1,117 @@
+[
+ {
+  "key": "kdw_onii_race",
+  "who": "onii",
+  "text": "かいだん、どっちが さきに のぼれるか、きょうそうだ！"
+ },
+ {
+  "key": "kdw_onii_itai",
+  "who": "onii",
+  "text": "いたいよう……あしが いたい……"
+ },
+ {
+  "key": "kdw_mama_dou",
+  "who": "mama",
+  "text": "どうしたの！？"
+ },
+ {
+  "key": "kdw_mama_kyu",
+  "who": "mama",
+  "text": "たいへん！ きゅうきゅうしゃを よぶわ！"
+ },
+ {
+  "key": "kdw_dr_hone",
+  "who": "kumadr",
+  "text": "あしの ほねが おれて います。しばらく あるけません"
+ },
+ {
+  "key": "kdw_dr_naze",
+  "who": "kumadr",
+  "text": "どうして、かいだんから おちたのかな？"
+ },
+ {
+  "key": "kdw_onii_iya",
+  "who": "onii",
+  "text": "……いたかったよ。もう、まるシマとは あそばない"
+ },
+ {
+  "key": "kdw_pol_dare",
+  "who": "inukei",
+  "text": "おにいさんを おして、おおけがを させたのは、だれですか？"
+ },
+ {
+  "key": "kdw_pol_ikenai",
+  "who": "inukei",
+  "text": "ひとを おして けがを させるのは、とても いけない ことです。けいさつしょに いっしょに きて もらいます"
+ },
+ {
+  "key": "kdw_mama_ohayo",
+  "who": "mama",
+  "text": "おはよう。うなされて いたよ。どうしたの？"
+ },
+ {
+  "key": "kdw_mama_daijobu",
+  "who": "mama",
+  "text": "こわかったね。もう だいじょうぶよ。ぎゅっ"
+ },
+ {
+  "key": "kdw_onii_souka",
+  "who": "onii",
+  "text": "そっか。かいだんは、あぶないもんな"
+ },
+ {
+  "key": "kdw_onii_saki",
+  "who": "onii",
+  "text": "じゃあ、おれが さきに のぼって いい？"
+ },
+ {
+  "key": "kdw_onii_arigato",
+  "who": "onii",
+  "text": "ありがとう。てすりを もって、ゆっくり のぼろうな"
+ },
+ {
+  "key": "kdw_onii_ii",
+  "who": "onii",
+  "text": "いいね！ よーい、どん！"
+ },
+ {
+  "key": "kdw_onii_hayai",
+  "who": "onii",
+  "text": "はあ、はあ。まるシマ、はやく なったなあ！"
+ },
+ {
+  "key": "kdw_pol_erai",
+  "who": "inukei",
+  "text": "かいだんで、きょうそう しなかったんだって？ えらいね"
+ },
+ {
+  "key": "kdw_dr_ichiban",
+  "who": "kumadr",
+  "text": "けがを しないのが、いちばんだよ"
+ },
+ {
+  "key": "kdw_onii_daisuki",
+  "who": "onii",
+  "text": "まるシマ、また いっしょに あそぼうな"
+ },
+ {
+  "key": "kdw_tora_hayaku",
+  "who": "tora",
+  "text": "はやく のぼってよ！"
+ },
+ {
+  "key": "kdw_tora_gomen",
+  "who": "tora",
+  "text": "あっ、ごめん。ゆっくり のぼるね"
+ },
+ {
+  "key": "kdw_mama_eki",
+  "who": "mama",
+  "text": "ひとが いっぱいね。どう やって のぼる？"
+ },
+ {
+  "key": "kdw_mama_erai",
+  "who": "mama",
+  "text": "えらいね。それなら あんしんね"
+ }
+]
