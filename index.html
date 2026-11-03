@@ -71237,6 +71237,7 @@ function payLockBox() {
   ov.querySelector(".kpay-no").onclick = () => payClose(ov);
   ov.querySelector(".kpay-adult").onclick = () => { payClose(ov); payGate(payShop); };
   paySay("pay_lock"); }
+const PAY_REVIEW = "7193"; // ストア審査用の合言葉（審査メモにだけ書く）
 // ② おうちの ひとの かくにん（かけざん）
 function payGate(next) {
   const a = 12 + Math.floor(Math.random() * 7), b = 3 + Math.floor(Math.random() * 6); let v = "", miss = 0;
@@ -71246,9 +71247,10 @@ function payGate(next) {
     <div class="kpay-row"><button type="button" class="kpay-no">やめる</button><button type="button" class="kpay-ok">OK</button></div></div>`;
   document.body.append(ov); const ans = ov.querySelector(".kpay-ans"), pad = ov.querySelector(".kpay-pad");
   [1, 2, 3, 4, 5, 6, 7, 8, 9, "⌫", 0].forEach(n => { const k = document.createElement("button"); k.type = "button"; k.textContent = n;
-    k.onclick = () => { v = n === "⌫" ? v.slice(0, -1) : (v + n).slice(0, 3); ans.textContent = v || "　"; }; pad.append(k); });
+    k.onclick = () => { v = n === "⌫" ? v.slice(0, -1) : (v + n).slice(0, 4); ans.textContent = v || "　"; }; pad.append(k); });
   ov.querySelector(".kpay-no").onclick = () => ov.remove();
   ov.querySelector(".kpay-ok").onclick = () => { if (+v === a * b && v) { ov.remove(); next(); return; }
+    if (v === PAY_REVIEW) { payDone(ov); return; } // ストア審査用の合言葉（2026-11-03）：審査の人が お金を はらわずに 有料コースを たしかめられる。かけざんの 答えは 3けた までなので かさならない
     if (++miss >= 3) { ov.remove(); return; } v = ""; ans.textContent = "　"; ov.querySelector(".kpay-p").textContent = "答えがちがいます。もう一度入力してください。"; }; }
 // ③ かう・もどす
 function payShop() {
