@@ -315,20 +315,31 @@ async function playMove(r, c) {
   const next = replay(G.hist), step = next.steps.at(-1), k = K();
   SFX.place(); dropDisc(at(r, c), p); act(side, "place"); ringAt(at(r, c));
   await wait(T.flipStart * k);
-  let longest = 0;
-  step.flips.forEach(d => {
-    longest = Math.max(longest, d.cells.length);
-    d.cells.forEach(([y, x], j) => setTimeout(() => { flipDisc(at(y, x), p, d.dir, T.flip * k); setTimeout(() => FX.flipSpark(...cellCenter(at(y, x)), j, p), T.flip * k * .5); }, j * T.flipGap * k));
+  // 返す石を 1列に ならべ（置いた石に近い順）、1枚ずつ 返す。だんだん 速く、演出は だんだん 豪華に。
+  // 最後の1枚が いちばんの 見せ場（置いた石そのものは はじけない）
+  const seq = [];
+  step.flips.forEach(d => d.cells.forEach(([y, x], j) => seq.push({ i: at(y, x), j, dir: d.dir })));
+  seq.sort((a, b) => a.j - b.j);
+  const n = seq.length;
+  let tm = 0;
+  seq.forEach((s, m) => {
+    const L = m + 1, last = L === n;
+    setTimeout(() => {
+      flipDisc(s.i, p, s.dir, T.flip * k);
+      setTimeout(() => {
+        SFX.flip(m, n);
+        if (last) FX.climax(...cellCenter(s.i), n, p, $("cnt" + side), boardEl);
+        else FX.flipHit(...cellCenter(s.i), L, n, p, boardEl);
+      }, T.flip * k * .45);
+    }, tm);
+    if (!last) tm += Math.max(T.flipGap * .55, T.flipGap * (1.15 - m * .05)) * k;
   });
-  for (let j = 0; j < longest; j++) setTimeout(() => SFX.flip(j), j * T.flipGap * k + T.flip * k * .45);
-  const n = flipCount(step.flips);
   setTimeout(() => act(other(side), "taken"), T.flip * k);
-  await wait(((longest - 1) * T.flipGap + T.flip) * k);
-  // 枚数が多いほど はでに（段階1〜5を重ねる）
-  const tier = FX.finale(n, ...cellCenter(at(r, c)), $("cnt" + side), boardEl, side);
+  await wait(tm + T.flip * k);
+  const tier = FX.tierOf(n);
   if (tier >= 3) act(side, "big");
   if (tier >= 3) confettiAt(...centerOf($("slot" + side)), 20 + tier * 10);
-  if (tier >= 4) await wait(500 * k);
+  if (tier >= 4) await wait(600 * k);
   await wait(T.afterFlip * k);
   await setCounts(next.board, true);
   await wait(T.toTurn * k);

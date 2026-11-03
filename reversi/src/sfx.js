@@ -27,10 +27,18 @@ const SFX = (() => {
   }
   // 木琴の音階（ド→レ→ミ…、最大8段）
   const XYLO = [523.25, 587.33, 659.25, 698.46, 783.99, 880, 987.77, 1046.5];
+  const PENTA = [523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1174.66, 1318.51, 1567.98, 1760, 2093, 2349.32, 2637.02, 3135.96, 3520, 4186.01];
   const now = () => (out(), ctx.currentTime + .01);
   return {
     place() { const t = now(); hiss(t, .09, 900, 2.5, .9); tone(190, t, .12, "sine", .35, .002); tone(380, t, .06, "triangle", .08, .002); },
-    flip(k) { const t = now(), f = XYLO[Math.min(k, 7)]; tone(f, t, .15 * 1.6, "sine", .22); tone(f * 4, t, .06, "sine", .05); tone(f * 2, t, .1, "triangle", .05); },
+    // m 枚目（0から）／ぜんぶで n 枚。ペンタトニックで 上がっていき、あとの石ほど 音を重ねる
+    flip(m, n = 1) {
+      const t = now(), f = PENTA[Math.min(m, PENTA.length - 1)], last = m === n - 1;
+      tone(f, t, .24, "sine", .22); tone(f * 4, t, .06, "sine", .05); tone(f * 2, t, .1, "triangle", .05);
+      if (m >= 3) tone(f * 1.5, t, .2, "triangle", .04 + Math.min(.06, m * .006));
+      if (m >= 6) hiss(t, .08, 6000 + m * 300, 1.5, .12 + Math.min(.2, m * .015));
+      if (last && n >= 3) tone(f / 2, t, .5, "sine", .12);
+    },
     sparkle() { const t = now(); [1046.5, 1318.5, 1568, 2093, 2637].forEach((f, i) => tone(f, t + i * .07, .35, "sine", .12)); },
     turn() { const t = now(); tone(659.25, t, .3 * 1.4, "sine", .16, .01); tone(1318.5, t, .2, "sine", .04, .01); },
     swoosh() { const t = now(); hiss(t, .2, 3200, 1.2, .5, 600); },

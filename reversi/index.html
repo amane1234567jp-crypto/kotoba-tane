@@ -1247,10 +1247,18 @@ const SFX = (() => {
   }
   // 木琴の音階（ド→レ→ミ…、最大8段）
   const XYLO = [523.25, 587.33, 659.25, 698.46, 783.99, 880, 987.77, 1046.5];
+  const PENTA = [523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1174.66, 1318.51, 1567.98, 1760, 2093, 2349.32, 2637.02, 3135.96, 3520, 4186.01];
   const now = () => (out(), ctx.currentTime + .01);
   return {
     place() { const t = now(); hiss(t, .09, 900, 2.5, .9); tone(190, t, .12, "sine", .35, .002); tone(380, t, .06, "triangle", .08, .002); },
-    flip(k) { const t = now(), f = XYLO[Math.min(k, 7)]; tone(f, t, .15 * 1.6, "sine", .22); tone(f * 4, t, .06, "sine", .05); tone(f * 2, t, .1, "triangle", .05); },
+    // m 枚目（0から）／ぜんぶで n 枚。ペンタトニックで 上がっていき、あとの石ほど 音を重ねる
+    flip(m, n = 1) {
+      const t = now(), f = PENTA[Math.min(m, PENTA.length - 1)], last = m === n - 1;
+      tone(f, t, .24, "sine", .22); tone(f * 4, t, .06, "sine", .05); tone(f * 2, t, .1, "triangle", .05);
+      if (m >= 3) tone(f * 1.5, t, .2, "triangle", .04 + Math.min(.06, m * .006));
+      if (m >= 6) hiss(t, .08, 6000 + m * 300, 1.5, .12 + Math.min(.2, m * .015));
+      if (last && n >= 3) tone(f / 2, t, .5, "sine", .12);
+    },
     sparkle() { const t = now(); [1046.5, 1318.5, 1568, 2093, 2637].forEach((f, i) => tone(f, t + i * .07, .35, "sine", .12)); },
     turn() { const t = now(); tone(659.25, t, .3 * 1.4, "sine", .16, .01); tone(1318.5, t, .2, "sine", .04, .01); },
     swoosh() { const t = now(); hiss(t, .2, 3200, 1.2, .5, 600); },
@@ -1403,26 +1411,33 @@ const FX = (() => {
     if (flash > .005) { g.fillStyle = `rgba(${flashCol},${flash})`; g.fillRect(0, 0, W, H); flash *= Math.exp(-7 * dt); }
   }
 
-  /* ---- 1枚返るたびの火花（枚数が多いほど大きく） ---- */
-  function flipSpark(x, y, k, color) {
-    const cols = color === BLACK ? ["#C9C9FF", "#FFFFFF", "#FFD25E"] : ["#FFFFFF", "#FFF3B0", "#7FE3C9"];
-    burst(x, y, { n: 6 + k * 2, cols, min: 80, max: 200 + k * 30, life: .45, size: 2.4, g: 200 });
-  }
-  /* ---- 返し終わったときの まとめの演出：段階（1〜5）で 重ねる ---- */
   function tierOf(n) { return n >= 12 ? 5 : n >= 8 ? 4 : n >= 5 ? 3 : n >= 3 ? 2 : 1; }
-  function finale(n, x, y, scoreEl, boardEl, side) {
-    const t = tierOf(n);
+  const colsOf = color => color === BLACK ? ["#C9C9FF", "#FFFFFF", "#FFD25E"] : ["#FFFFFF", "#FFF3B0", "#7FE3C9"];
+  /* ---- 1枚返るたび：L 枚目ほど 豪華に（火花→輪→星と光の筋→ゆれ） ---- */
+  function flipHit(x, y, L, n, color, boardEl) {
+    const cols = L >= 5 ? [...colsOf(color), ...GOLD] : colsOf(color);
+    burst(x, y, { n: 6 + L * 3, cols, min: 80, max: 200 + L * 35, life: .45 + L * .02, size: 2.4 + Math.min(2, L * .15), g: 200 });
+    if (L >= 3) ring(x, y, 40 + L * 9, "255,236,160", .4, 4 + L * .5);
+    if (L >= 5) burst(x, y, { kind: "star", n: 2 + Math.floor(L / 2), cols: GOLD, min: 120, max: 260 + L * 15, life: .7, size: 7, g: 240 });
+    if (L >= 7) rayBurst(x, y, 6 + L, 50 + L * 10);
+    if (L >= 9) shake(boardEl, Math.min(2, (L - 7) * .4));
+  }
+  /* ---- 最後の1枚：いちばんの見せ場。全体の枚数 n の段階（1〜5）で 重ねる ---- */
+  function climax(x, y, n, color, scoreEl, boardEl) {
+    const t = tierOf(n), cols = [...colsOf(color), ...GOLD];
     SFX.tier(t);
-    if (t >= 2) { ring(x, y, 120 + t * 40); burst(x, y, { n: 18 + t * 8, cols: GOLD, min: 160, max: 420 + t * 60, size: 3 }); }
-    if (t >= 3) { rayBurst(x, y, 10 + t * 2, 160 + t * 50); burst(x, y, { kind: "star", n: 10 + t * 3, cols: GOLD, min: 140, max: 380, life: .9, size: 9, g: 260 }); shake(boardEl, t - 2); }
+    burst(x, y, { n: 14 + n * 4, cols, min: 120, max: 260 + n * 30, life: .6 + t * .08, size: 3 + t * .4, g: 220 });
+    if (t >= 2) ring(x, y, 70 + t * 45, "255,226,122", .55, 8 + t * 2);
+    if (t >= 3) { rayBurst(x, y, 10 + t * 3, 120 + t * 60); burst(x, y, { kind: "star", n: 8 + t * 4, cols: GOLD, min: 140, max: 380 + t * 40, life: .95, size: 9, g: 260 }); shake(boardEl, t - 1.5); }
     if (t >= 4) {
-      doFlash(.35);
-      rain(t === 4 ? 70 : 140);
+      doFlash(.3 + (t - 4) * .15); ring(x, y, 420, "255,255,255", .7, 14);
+      rain(t === 4 ? 80 : 160);
       // 星が 自分の 石の数へ 飛んでいく（「ふえた」が目で見える）
-      const r = scoreEl.getBoundingClientRect(), tx = r.left + r.width / 2, ty = r.top + r.height / 2;
-      for (let i = 0; i < 8 * amt(); i++) { const a = Math.atan2(ty - y, tx - x); burst(x, y, { kind: "star", n: 1, cols: ["#FFE27A"], angle: a, spread: .5, min: 500, max: 800, life: .9, g: 0, drag: .6, size: 10 }); }
+      const r = scoreEl.getBoundingClientRect(), tx = r.left + r.width / 2, ty = r.top + r.height / 2, a = Math.atan2(ty - y, tx - x);
+      burst(x, y, { kind: "star", n: 10, cols: ["#FFE27A"], angle: a, spread: .45, min: 500, max: 820, life: .9, g: 0, drag: .6, size: 10 });
     }
-    if (t >= 5) { const br = boardEl.getBoundingClientRect(); [0, 260, 520].forEach((ms, i) => setTimeout(() => explode({ x: br.left + br.width * (.25 + .25 * i), y: br.top + br.height * rnd(.2, .45), cols: PAL, big: .9 }), ms)); }
+    if (t >= 5) { const br = boardEl.getBoundingClientRect(), cx = Math.min(br.right - 160, Math.max(br.left + 160, x)), cy = Math.max(br.top + 120, Math.min(br.bottom - 160, y - 100));
+      [0, 220, 440].forEach((ms, i) => setTimeout(() => explode({ x: cx + (i - 1) * 140, y: cy - (i % 2) * 60, cols: PAL, big: .95 }), ms)); }
     return t;
   }
   /* ---- 勝ったとき：勝った側の上を中心に花火。ひきわけは両方に少しずつ ---- */
@@ -1435,7 +1450,7 @@ const FX = (() => {
     rain(160); setTimeout(() => rain(120), 1800);
     doFlash(.5, "255,236,170");
   }
-  return { step, burst, ring, flipSpark, finale, victory, tierOf };
+  return { step, burst, ring, flipHit, climax, victory, tierOf };
 })();
 
 /* ---------- 遠隔対戦（段階2）：ビデオ通話と手の同期 ----------
@@ -1897,20 +1912,31 @@ async function playMove(r, c) {
   const next = replay(G.hist), step = next.steps.at(-1), k = K();
   SFX.place(); dropDisc(at(r, c), p); act(side, "place"); ringAt(at(r, c));
   await wait(T.flipStart * k);
-  let longest = 0;
-  step.flips.forEach(d => {
-    longest = Math.max(longest, d.cells.length);
-    d.cells.forEach(([y, x], j) => setTimeout(() => { flipDisc(at(y, x), p, d.dir, T.flip * k); setTimeout(() => FX.flipSpark(...cellCenter(at(y, x)), j, p), T.flip * k * .5); }, j * T.flipGap * k));
+  // 返す石を 1列に ならべ（置いた石に近い順）、1枚ずつ 返す。だんだん 速く、演出は だんだん 豪華に。
+  // 最後の1枚が いちばんの 見せ場（置いた石そのものは はじけない）
+  const seq = [];
+  step.flips.forEach(d => d.cells.forEach(([y, x], j) => seq.push({ i: at(y, x), j, dir: d.dir })));
+  seq.sort((a, b) => a.j - b.j);
+  const n = seq.length;
+  let tm = 0;
+  seq.forEach((s, m) => {
+    const L = m + 1, last = L === n;
+    setTimeout(() => {
+      flipDisc(s.i, p, s.dir, T.flip * k);
+      setTimeout(() => {
+        SFX.flip(m, n);
+        if (last) FX.climax(...cellCenter(s.i), n, p, $("cnt" + side), boardEl);
+        else FX.flipHit(...cellCenter(s.i), L, n, p, boardEl);
+      }, T.flip * k * .45);
+    }, tm);
+    if (!last) tm += Math.max(T.flipGap * .55, T.flipGap * (1.15 - m * .05)) * k;
   });
-  for (let j = 0; j < longest; j++) setTimeout(() => SFX.flip(j), j * T.flipGap * k + T.flip * k * .45);
-  const n = flipCount(step.flips);
   setTimeout(() => act(other(side), "taken"), T.flip * k);
-  await wait(((longest - 1) * T.flipGap + T.flip) * k);
-  // 枚数が多いほど はでに（段階1〜5を重ねる）
-  const tier = FX.finale(n, ...cellCenter(at(r, c)), $("cnt" + side), boardEl, side);
+  await wait(tm + T.flip * k);
+  const tier = FX.tierOf(n);
   if (tier >= 3) act(side, "big");
   if (tier >= 3) confettiAt(...centerOf($("slot" + side)), 20 + tier * 10);
-  if (tier >= 4) await wait(500 * k);
+  if (tier >= 4) await wait(600 * k);
   await wait(T.afterFlip * k);
   await setCounts(next.board, true);
   await wait(T.toTurn * k);

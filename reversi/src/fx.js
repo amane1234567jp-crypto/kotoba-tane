@@ -124,26 +124,33 @@ const FX = (() => {
     if (flash > .005) { g.fillStyle = `rgba(${flashCol},${flash})`; g.fillRect(0, 0, W, H); flash *= Math.exp(-7 * dt); }
   }
 
-  /* ---- 1枚返るたびの火花（枚数が多いほど大きく） ---- */
-  function flipSpark(x, y, k, color) {
-    const cols = color === BLACK ? ["#C9C9FF", "#FFFFFF", "#FFD25E"] : ["#FFFFFF", "#FFF3B0", "#7FE3C9"];
-    burst(x, y, { n: 6 + k * 2, cols, min: 80, max: 200 + k * 30, life: .45, size: 2.4, g: 200 });
-  }
-  /* ---- 返し終わったときの まとめの演出：段階（1〜5）で 重ねる ---- */
   function tierOf(n) { return n >= 12 ? 5 : n >= 8 ? 4 : n >= 5 ? 3 : n >= 3 ? 2 : 1; }
-  function finale(n, x, y, scoreEl, boardEl, side) {
-    const t = tierOf(n);
+  const colsOf = color => color === BLACK ? ["#C9C9FF", "#FFFFFF", "#FFD25E"] : ["#FFFFFF", "#FFF3B0", "#7FE3C9"];
+  /* ---- 1枚返るたび：L 枚目ほど 豪華に（火花→輪→星と光の筋→ゆれ） ---- */
+  function flipHit(x, y, L, n, color, boardEl) {
+    const cols = L >= 5 ? [...colsOf(color), ...GOLD] : colsOf(color);
+    burst(x, y, { n: 6 + L * 3, cols, min: 80, max: 200 + L * 35, life: .45 + L * .02, size: 2.4 + Math.min(2, L * .15), g: 200 });
+    if (L >= 3) ring(x, y, 40 + L * 9, "255,236,160", .4, 4 + L * .5);
+    if (L >= 5) burst(x, y, { kind: "star", n: 2 + Math.floor(L / 2), cols: GOLD, min: 120, max: 260 + L * 15, life: .7, size: 7, g: 240 });
+    if (L >= 7) rayBurst(x, y, 6 + L, 50 + L * 10);
+    if (L >= 9) shake(boardEl, Math.min(2, (L - 7) * .4));
+  }
+  /* ---- 最後の1枚：いちばんの見せ場。全体の枚数 n の段階（1〜5）で 重ねる ---- */
+  function climax(x, y, n, color, scoreEl, boardEl) {
+    const t = tierOf(n), cols = [...colsOf(color), ...GOLD];
     SFX.tier(t);
-    if (t >= 2) { ring(x, y, 120 + t * 40); burst(x, y, { n: 18 + t * 8, cols: GOLD, min: 160, max: 420 + t * 60, size: 3 }); }
-    if (t >= 3) { rayBurst(x, y, 10 + t * 2, 160 + t * 50); burst(x, y, { kind: "star", n: 10 + t * 3, cols: GOLD, min: 140, max: 380, life: .9, size: 9, g: 260 }); shake(boardEl, t - 2); }
+    burst(x, y, { n: 14 + n * 4, cols, min: 120, max: 260 + n * 30, life: .6 + t * .08, size: 3 + t * .4, g: 220 });
+    if (t >= 2) ring(x, y, 70 + t * 45, "255,226,122", .55, 8 + t * 2);
+    if (t >= 3) { rayBurst(x, y, 10 + t * 3, 120 + t * 60); burst(x, y, { kind: "star", n: 8 + t * 4, cols: GOLD, min: 140, max: 380 + t * 40, life: .95, size: 9, g: 260 }); shake(boardEl, t - 1.5); }
     if (t >= 4) {
-      doFlash(.35);
-      rain(t === 4 ? 70 : 140);
+      doFlash(.3 + (t - 4) * .15); ring(x, y, 420, "255,255,255", .7, 14);
+      rain(t === 4 ? 80 : 160);
       // 星が 自分の 石の数へ 飛んでいく（「ふえた」が目で見える）
-      const r = scoreEl.getBoundingClientRect(), tx = r.left + r.width / 2, ty = r.top + r.height / 2;
-      for (let i = 0; i < 8 * amt(); i++) { const a = Math.atan2(ty - y, tx - x); burst(x, y, { kind: "star", n: 1, cols: ["#FFE27A"], angle: a, spread: .5, min: 500, max: 800, life: .9, g: 0, drag: .6, size: 10 }); }
+      const r = scoreEl.getBoundingClientRect(), tx = r.left + r.width / 2, ty = r.top + r.height / 2, a = Math.atan2(ty - y, tx - x);
+      burst(x, y, { kind: "star", n: 10, cols: ["#FFE27A"], angle: a, spread: .45, min: 500, max: 820, life: .9, g: 0, drag: .6, size: 10 });
     }
-    if (t >= 5) { const br = boardEl.getBoundingClientRect(); [0, 260, 520].forEach((ms, i) => setTimeout(() => explode({ x: br.left + br.width * (.25 + .25 * i), y: br.top + br.height * rnd(.2, .45), cols: PAL, big: .9 }), ms)); }
+    if (t >= 5) { const br = boardEl.getBoundingClientRect(), cx = Math.min(br.right - 160, Math.max(br.left + 160, x)), cy = Math.max(br.top + 120, Math.min(br.bottom - 160, y - 100));
+      [0, 220, 440].forEach((ms, i) => setTimeout(() => explode({ x: cx + (i - 1) * 140, y: cy - (i % 2) * 60, cols: PAL, big: .95 }), ms)); }
     return t;
   }
   /* ---- 勝ったとき：勝った側の上を中心に花火。ひきわけは両方に少しずつ ---- */
@@ -156,5 +163,5 @@ const FX = (() => {
     rain(160); setTimeout(() => rain(120), 1800);
     doFlash(.5, "255,236,170");
   }
-  return { step, burst, ring, flipSpark, finale, victory, tierOf };
+  return { step, burst, ring, flipHit, climax, victory, tierOf };
 })();
