@@ -127,9 +127,12 @@ const FX = (() => {
   function tierOf(n) { return n >= 12 ? 5 : n >= 8 ? 4 : n >= 5 ? 3 : n >= 3 ? 2 : 1; }
   const colsOf = color => color === BLACK ? ["#C9C9FF", "#FFFFFF", "#FFD25E"] : ["#FFFFFF", "#FFF3B0", "#7FE3C9"];
   /* ---- 1枚返るたび：L 枚目ほど 豪華に（火花→輪→星と光の筋→ゆれ） ---- */
+  /* 全体の枚数 n による 強さ（少ない枚数は控えめ、11枚以上で いまの最大と同じ） */
+  const amp = n => .3 + .7 * Math.pow(Math.min(1, (n - 1) / 10), 1.3);
   function flipHit(x, y, L, n, color, boardEl) {
+    const a = amp(n);
     const cols = L >= 5 ? [...colsOf(color), ...GOLD] : colsOf(color);
-    burst(x, y, { n: 6 + L * 3, cols, min: 80, max: 200 + L * 35, life: .45 + L * .02, size: 2.4 + Math.min(2, L * .15), g: 200 });
+    burst(x, y, { n: Math.max(3, Math.round((6 + L * 3) * a)), cols, min: 60 + 20 * a, max: (140 + 60 * a) + L * 35, life: .35 + .1 * a + L * .02, size: 1.8 + .6 * a + Math.min(2, L * .15), g: 200 });
     if (L >= 3) ring(x, y, 40 + L * 9, "255,236,160", .4, 4 + L * .5);
     if (L >= 5) burst(x, y, { kind: "star", n: 2 + Math.floor(L / 2), cols: GOLD, min: 120, max: 260 + L * 15, life: .7, size: 7, g: 240 });
     if (L >= 7) rayBurst(x, y, 6 + L, 50 + L * 10);
@@ -138,9 +141,10 @@ const FX = (() => {
   /* ---- 最後の1枚：いちばんの見せ場。全体の枚数 n の段階（1〜5）で 重ねる ---- */
   function climax(x, y, n, color, scoreEl, boardEl) {
     const t = tierOf(n), cols = [...colsOf(color), ...GOLD];
-    SFX.tier(t);
-    burst(x, y, { n: 14 + n * 4, cols, min: 120, max: 260 + n * 30, life: .6 + t * .08, size: 3 + t * .4, g: 220 });
-    if (t >= 2) ring(x, y, 70 + t * 45, "255,226,122", .55, 8 + t * 2);
+    const a = amp(n);
+    SFX.tier(t, a);
+    burst(x, y, { n: Math.round((14 + n * 4) * a), cols, min: 90 + 30 * a, max: (160 + 100 * a) + n * 30, life: .45 + .15 * a + t * .08, size: 2.2 + .8 * a + t * .4, g: 220 });
+    if (t >= 2) ring(x, y, (40 + 30 * a) + t * 45, "255,226,122", .45 + .1 * a, 4 + 4 * a + t * 2);
     if (t >= 3) { rayBurst(x, y, 10 + t * 3, 120 + t * 60); burst(x, y, { kind: "star", n: 8 + t * 4, cols: GOLD, min: 140, max: 380 + t * 40, life: .95, size: 9, g: 260 }); shake(boardEl, t - 1.5); }
     if (t >= 4) {
       doFlash(.3 + (t - 4) * .15); ring(x, y, 420, "255,255,255", .7, 14);

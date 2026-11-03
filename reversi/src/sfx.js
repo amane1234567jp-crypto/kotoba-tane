@@ -33,8 +33,9 @@ const SFX = (() => {
     place() { const t = now(); hiss(t, .09, 900, 2.5, .9); tone(190, t, .12, "sine", .35, .002); tone(380, t, .06, "triangle", .08, .002); },
     // m 枚目（0から）／ぜんぶで n 枚。ペンタトニックで 上がっていき、あとの石ほど 音を重ねる
     flip(m, n = 1) {
-      const t = now(), f = PENTA[Math.min(m, PENTA.length - 1)], last = m === n - 1;
-      tone(f, t, .24, "sine", .22); tone(f * 4, t, .06, "sine", .05); tone(f * 2, t, .1, "triangle", .05);
+      // 少ない枚数は控えめ（11枚以上で いまの最大）
+      const t = now(), f = PENTA[Math.min(m, PENTA.length - 1)], last = m === n - 1, a = .3 + .7 * Math.pow(Math.min(1, (n - 1) / 10), 1.3);
+      tone(f, t, .2 + .04 * a, "sine", .12 + .1 * a); tone(f * 4, t, .06, "sine", .05 * a); tone(f * 2, t, .1, "triangle", .05 * a);
       if (m >= 3) tone(f * 1.5, t, .2, "triangle", .04 + Math.min(.06, m * .006));
       if (m >= 6) hiss(t, .08, 6000 + m * 300, 1.5, .12 + Math.min(.2, m * .015));
       if (last && n >= 3) tone(f / 2, t, .5, "sine", .12);
@@ -46,10 +47,10 @@ const SFX = (() => {
     ng() { const t = now(); tone(392, t, .2, "triangle", .14); },
     gather(sec) { const t = now(); for (let i = 0; i < sec * 22; i++) { const tt = t + i / 22 + Math.random() * .02; hiss(tt, .03, 1800 + Math.random() * 1600, 4, .5); } },
     // 返した枚数の段階（1〜5）ごとの ごほうびの音。段階が上がるほど 楽器を重ねる
-    tier(k) {
+    tier(k, a = 1) {
       const t = now(), C = [523.25, 659.25, 783.99], up = [1046.5, 1318.5, 1568, 2093];
-      if (k === 1) { tone(1568, t, .25, "sine", .08); return; }
-      C.forEach(f => tone(f, t, .5, "triangle", .07));                                     // 2：和音
+      if (k === 1) { tone(1568, t, .2, "sine", .03); return; }
+      C.forEach(f => tone(f, t, .3 + .2 * a, "triangle", .07 * a));                                     // 2：和音
       if (k >= 3) { tone(130.8, t, .45, "sine", .3, .003); hiss(t, .25, 5000, .8, .25); up.forEach((f, i) => tone(f, t + .06 * i, .4, "sine", .06)); } // 3：低音＋シャララ
       if (k >= 4) { hiss(t + .02, .9, 7000, .5, .35, 3000); [783.99, 987.77, 1174.66, 1567.98, 1975.53].forEach((f, i) => tone(f, t + .08 * i, .35, "square", .035)); } // 4：シンバル＋かけあがり
       if (k >= 5) { [[523.25, 0, .14], [659.25, .14, .14], [783.99, .28, .14], [1046.5, .42, .7]].forEach(([f, d, l]) => { tone(f, t + .5 + d, l + .2, "triangle", .14); tone(f / 2, t + .5 + d, l, "sine", .08); }); } // 5：ファンファーレ
