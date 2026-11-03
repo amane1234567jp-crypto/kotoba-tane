@@ -285,7 +285,7 @@ function setTurn(state, quiet) {
   ["A", "B"].forEach(s => $("side" + s).classList.toggle("active", s === side && !state.over));
   if (SOLO() || side === mySide()) showHints(legalMoves(state.board, state.turn)); else clearHints();
   G.busy = false; G.animating = false; updateButtons();
-  if (!quiet) { SFX.turn(); act(side, "turn"); }
+  if (!quiet) act(side, "turn");
 }
 async function afterMove(state) {
   if (state.over) return endGame(state);
@@ -357,7 +357,6 @@ async function animUndo(side, depth) {
   const k = K();
   for (let d = 0; d < depth; d++) {
     const step = replay(G.hist).steps.at(-1);
-    SFX.swoosh();
     // 返したときと逆順に、逆回転でもどす
     const order = [];
     step.flips.forEach(f => f.cells.forEach(([y, x], j) => order.push({ i: at(y, x), j, dir: f.dir })));
@@ -407,7 +406,6 @@ async function answerUndo(ok) {
   if (!askFor) return;
   const m = askFor; askFor = null; clearTimeout(askTimer); $("askOv").hidden = true; hideBubble();
   NET.send({ t: "undoAns", ok, n: m.n });
-  ok ? SFX.ok() : SFX.ng();
   await hideHost(host.pony);
   if (ok && m.n === G.hist.length) animUndo(m.side, undoDepth(G.hist, colorOf(m.side)));
   else setTurn(cur, true);
@@ -428,7 +426,6 @@ async function endGame(state) {
   const sorted = new Array(64).fill(EMPTY);
   for (let i = 0; i < c.black; i++) sorted[i] = BLACK;
   for (let i = 0; i < c.white; i++) sorted[63 - i] = WHITE;
-  SFX.gather(T.gather / 1000);
   cells.forEach(x => x.disc.animate([{ opacity: 1, transform: "none" }, { opacity: 0, transform: "scale(.6)" }], { duration: 400, fill: "forwards" }));
   await wait(450);
   cells.forEach((x, i) => { x.disc.getAnimations().forEach(a => a.cancel()); setDisc(i, sorted[i]); x.disc.style.opacity = 0; });
@@ -438,11 +435,11 @@ async function endGame(state) {
   await speak(host.kame, [`rv_k${c.black}`, `rv_s${c.white}`]);
   const win = c.black === c.white ? null : sideOf(c.black > c.white ? BLACK : WHITE);
   if (win) {
-    SFX.fanfare(false); act(win, "win"); act(other(win), "lose"); confettiAt(...centerOf($("slot" + win)), 80);
+    act(win, "win"); act(other(win), "lose"); confettiAt(...centerOf($("slot" + win)), 80);
     FX.victory($("side" + win).getBoundingClientRect(), false); $("side" + win).classList.add("winner");
     await speak(host.kame, "rv_win_" + (colorOf(win) === BLACK ? "k" : "s"));
   } else {
-    SFX.fanfare(true); act("A", "win"); act("B", "win"); FX.victory(null, true);
+    act("A", "win"); act("B", "win"); FX.victory(null, true);
     await speak(host.kame, "rv_draw");
   }
   await hideHost(host.kame);
@@ -487,7 +484,7 @@ setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e
   const b = e.target.closest("button"); if (!b) return;
   CFG[seg.dataset.key] = +b.dataset.v; saveCfg(); syncPanel();
   if (seg.dataset.key === "hints" && !G.busy && G.started && !G.ended) showHints(legalMoves(cur.board, cur.turn));
-  if (seg.dataset.key === "sfx") SFX.turn();
+  if (seg.dataset.key === "sfx") SFX.place();   // 音の大きさの ためし
 }));
 $("closeBtn").addEventListener("click", () => { setPanel.hidden = true; });
 $("resetBtn").addEventListener("click", () => {
@@ -509,6 +506,9 @@ async function keepAwake() { try { lock = await navigator.wakeLock?.request("scr
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && G.started) keepAwake(); });
 
 /* ---------- はじめる ---------- */
+/* 鳴らす音は「置く音」「返す音」「返すときの演出の音（と花火）」だけ（2026-11-03 あまねさんの指示）。
+   ことばのたね の キャラの演技には 小さな音がついているので、ここでは 鳴らさない */
+blip = () => { }; chime = () => { }; tune = () => { }; noise = () => { };
 /* ---------- 音の出口（iPad・iPhone のマナーモード対策。ことばのたね と同じ方法） ----------
    1) navigator.audioSession：1台で遊ぶときは "playback"（マナーモードでも鳴らす）、
       通話するときは "play-and-record"（マイクを使いながら鳴らす。この種類はマナーモードで消えない）
@@ -551,7 +551,7 @@ function wakeSound() {
 document.addEventListener("pointerdown", wakeSound, true);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) setTimeout(wakeSound, 300); });
 function unlock() {
-  audio(); SFX.turn();
+  audio();
   try { if ("speechSynthesis" in window) { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); } } catch (e) { /* 読み上げなしでも遊べる */ }
   $("startOv").hidden = true; G.started = true; keepAwake(); preloadVoices();
 }
