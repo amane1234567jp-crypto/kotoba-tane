@@ -360,7 +360,7 @@ async function animUndo(side, depth) {
   setTurn(s);
 }
 /* まった：自分の手の直後なら すぐもどす。相手が打ったあとなら、相手の「いいよ」で2手もどす。
-   こどもからの まったは、設定「おばあちゃんは じどうで いいよ」なら きかずに もどす。 */
+   こどもからの まったは、設定「あいては じどうで いいよ」なら きかずに もどす。 */
 let undoTimer = null;
 function requestUndo(side) {
   if (G.busy || G.ended || G.paused) return;
