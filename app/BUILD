@@ -1,1 +1,1 @@
-ios production yes # build9 音の設定を固定
+ios production yes # build10 方式D

@@ -24,7 +24,7 @@ function fontCss(pkg, family, weights) {
 const css = fontCss("mochiy-pop-one", "Mochiy Pop One", [400]) + fontCss("zen-maru-gothic", "Zen Maru Gothic", [500, 700]);
 const before = html.length;
 html = html.replace(/<link[^>]*fonts\.googleapis\.com[^>]*>/g, "").replace(/<link[^>]*fonts\.gstatic\.com[^>]*>/g, "").replace(/<link rel="manifest"[^>]*>/, "");
-html = html.replace("</head>", `<style>${css}</style>\n<script>window.KT_IN_APP=true;</script>\n</head>`);
+html = html.replace("</head>", `<style>${css}</style>\n<script>window.KT_IN_APP = window.KT_IN_APP !== false;</script>\n</head>`);
 html = html.replace(/navigator\.serviceWorker\.register\([^)]*\)/g, "Promise.resolve()");
 fs.mkdirSync(OUT, { recursive: true }); fs.writeFileSync(path.join(OUT, "index.html"), html);
 // 版の しるし（アプリが 古い ゲーム本体を つかいつづけない ように）
