@@ -32,7 +32,7 @@
     },
     "android": {
       "package": "com.uchinoaji.kotobatane",
-      "versionCode": 2,
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-fg.png",
         "backgroundColor": "#FFC94F"

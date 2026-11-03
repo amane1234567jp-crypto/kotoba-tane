@@ -1,1 +1,1 @@
-ios production yes # build10 方式D
+android production no # android vc3 方式Dと同じ外枠
