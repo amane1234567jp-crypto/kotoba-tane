@@ -172,7 +172,7 @@ body {
 .qr svg { width: 100%; height: 100%; display: block; }
 .link { margin: 0; font-size: 13px; color: var(--muted); overflow-wrap: anywhere; -webkit-user-select: text; user-select: text; }
 .invite .panelBtns { width: 100%; }
-.lineBtn { flex: 1; font: 900 19px var(--body); padding: 14px; border: 3px solid var(--ink); border-radius: 14px; background: #06C755; color: #FFFFFF; text-decoration: none; text-align: center; }
+.lineBtn { flex: 1; cursor: pointer; font: 900 19px var(--body); padding: 14px; border: 3px solid var(--ink); border-radius: 14px; background: #06C755; color: #FFFFFF; text-decoration: none; text-align: center; }
 .lineBtn:focus-visible { outline: 4px solid var(--pink); outline-offset: 3px; }
 #askOv { place-items: end center; padding-block: 0 8vh; pointer-events: none; }
 .askBtns { display: flex; align-items: center; gap: 24px; pointer-events: auto; }
@@ -234,11 +234,10 @@ body {
 <div class="cover" id="inviteOv" hidden>
   <div class="panel invite" role="dialog" aria-label="たいせんあいてを よぶ">
     <h2>たいせんあいてに リンクを おくる</h2>
-    <p class="lead">あいてが リンクを タップして「はじめる」を おすと、つながります。</p>
+    <p class="lead">「LINEで おくる」→ 出てきた画面で LINE を えらんで 送ってね。送ると この画面に もどります。<br>あいてが リンクを タップして「はじめる」を おすと、つながります。</p>
     <div class="qr" id="qr" aria-label="リンクの QRコード"></div>
     <div class="panelBtns">
-      <a class="lineBtn" id="lineBtn" href="#" target="_blank" rel="noopener">LINEで おくる</a>
-      <button type="button" id="shareBtn" hidden>ほかの アプリで おくる</button>
+      <button type="button" class="lineBtn" id="lineBtn">LINEで おくる</button>
     </div>
     <p class="link" id="inviteLink"></p>
     <div class="panelBtns"><button type="button" id="copyBtn">リンクを コピー</button><button type="button" id="inviteClose" class="primary">とじる（まつ）</button></div>

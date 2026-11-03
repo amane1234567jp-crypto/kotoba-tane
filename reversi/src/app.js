@@ -223,8 +223,10 @@ function playBuf(buf) {
   });
 }
 // key（または key の並び）で話す。文は VOICE_TEXT から
-function speak(c, keys, min = 0, keep = false) {
+async function speak(c, keys, min = 0, keep = false) {
   keys = [].concat(keys);
+  // まだ読みこめていない声は 少しだけ待つ（端末の読み上げに なるのを さける）
+  if (CFG.voice && keys.some(k => !vbuf[k])) await Promise.race([Promise.all(keys.map(loadVoice)), wait(1500)]);
   return say(c, keys.map(k => VOICE_TEXT[k] || "").join(" ").replace(/、 /g, "、"), min, keep, keys);
 }
 function say(c, text, min = 0, keep = false, keys = null) {
@@ -507,6 +509,47 @@ async function keepAwake() { try { lock = await navigator.wakeLock?.request("scr
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && G.started) keepAwake(); });
 
 /* ---------- はじめる ---------- */
+/* ---------- 音の出口（iPad・iPhone のマナーモード対策。ことばのたね と同じ方法） ----------
+   1) navigator.audioSession：1台で遊ぶときは "playback"（マナーモードでも鳴らす）、
+      通話するときは "play-and-record"（マイクを使いながら鳴らす。この種類はマナーモードで消えない）
+   2) 1台で遊ぶときは、作った音を audio 要素（音声ファイル扱い）を通して鳴らす。うまく動かなければ ふつうの出口に戻す
+   3) 画面にさわるたび・カメラが入ったあと・画面に戻ったときに、止まっていた音を 再開する */
+const SOUND = { session: "なし", out: "ふつう", el: null };
+function setSession(type) { try { if (navigator.audioSession) { navigator.audioSession.type = type; SOUND.session = type; } } catch (e) { SOUND.session = "設定できず"; } }
+const audioBase = audio;
+audio = function () {
+  const first = !ctx;
+  if (first) setSession(NET.role ? "play-and-record" : "playback");
+  audioBase();
+  if (first && !NET.role) routeThroughMedia();
+  return ctx;
+};
+function routeThroughMedia() {
+  const real = ctx.destination, master = ctx.createGain(); master.connect(real);
+  Object.defineProperty(ctx, "destination", { value: master, configurable: true });
+  analyser.disconnect(); analyser.connect(master);
+  const back = why => { try { master.disconnect(); } catch (e) { } master.connect(real); SOUND.out = "ふつう（" + why + "）"; };
+  try {
+    if (!ctx.createMediaStreamDestination) return back("未対応");
+    const dest = ctx.createMediaStreamDestination(), el = document.createElement("audio");
+    el.setAttribute("playsinline", ""); el.srcObject = dest.stream; el.style.display = "none"; SOUND.el = el; document.body.appendChild(el);
+    master.disconnect(); master.connect(dest); SOUND.out = "音声ファイル経由";
+    const p = el.play(); if (p && p.catch) p.catch(() => back("再生できず"));
+    setTimeout(() => { if (el.paused && SOUND.out === "音声ファイル経由") back("止まっていた"); }, 1500);
+  } catch (e) { back("エラー"); }
+}
+// 通話を始めるときは、マナーモード用の まわり道を やめて ふつうの出口に戻す
+function soundForCall() {
+  setSession("play-and-record");
+  if (SOUND.el && ctx) { try { const real = ctx.destination; SOUND.el.pause(); SOUND.el.remove(); SOUND.el = null; delete ctx.destination; real.disconnect(); real.connect(ctx.destination); SOUND.out = "ふつう（通話）"; } catch (e) { } }
+}
+function wakeSound() {
+  if (!ctx) return;
+  if (ctx.state !== "running" && ctx.state !== "closed") { try { ctx.resume(); } catch (e) { } }
+  if (SOUND.el && SOUND.el.paused && !document.hidden) SOUND.el.play().catch(() => { });
+}
+document.addEventListener("pointerdown", wakeSound, true);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) setTimeout(wakeSound, 300); });
 function unlock() {
   audio(); SFX.turn();
   try { if ("speechSynthesis" in window) { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); } } catch (e) { /* 読み上げなしでも遊べる */ }
@@ -539,6 +582,7 @@ NET.on("local", s => {
     return;
   }
   c.v.muted = true; c.v.srcObject = s; playVideo(c.v); camMsg(mySide(), "");
+  setTimeout(wakeSound, 300); setTimeout(wakeSound, 1500);   // カメラ・マイクが入ると iPad の音が止まることがある
 });
 NET.on("remote", s => { const c = camOf(otherSide()); c.v.muted = false; c.v.srcObject = s; playVideo(c.v); camMsg(otherSide(), ""); });
 
@@ -613,8 +657,11 @@ function startOnline() {
 }
 // たいせんあいてを よぶ（ホスト）
 async function callGrandma(fresh) {
-  unlock(); NET.role = "host"; NET.relayOnly = !!CFG.relay; startOnline();
-  const s = replay(G.hist); paint(s.board); setCounts(s.board, false);
+  NET.role = "host"; if (ctx) soundForCall(); unlock(); NET.relayOnly = !!CFG.relay; startOnline();
+  // 相手を よんだら、1台で遊んでいた とちゅうの盤は すてて、新しい対局から始める（くろ＝こども）
+  G.hist = []; G.blackSide = "A"; G.ended = false; G.begun = false; saveGame(); clearHalo();
+  $("againOv").hidden = true; ["A", "B"].forEach(s => $("side" + s).classList.remove("winner", "active"));
+  const s = replay(G.hist); cur = s; paintSides(); paint(s.board); setCounts(s.board, false); clearHints(); updateButtons();
   await NET.host(fresh);
   showInvite();
 }
@@ -622,8 +669,7 @@ function showInvite() {
   const url = NET.inviteURL();
   try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("qr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("qr").textContent = ""; }
   $("inviteLink").textContent = url;
-  $("lineBtn").href = "https://line.me/R/share?text=" + encodeURIComponent("まるシマリバーシで あそぼう！ ここを タップしてね\n" + url);
-  $("shareBtn").hidden = !navigator.share;
+
   $("inviteOv").hidden = false;
 }
 $("callBtn").addEventListener("click", () => callGrandma(false));
@@ -632,7 +678,14 @@ $("copyBtn").addEventListener("click", () => {
   const pick = () => { const r = document.createRange(); r.selectNodeContents($("inviteLink")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
   try { navigator.clipboard.writeText(url).then(done, pick); } catch (e) { pick(); }
 });
-$("shareBtn").addEventListener("click", () => { navigator.share?.({ title: "まるシマリバーシ", text: "まるシマリバーシで あそぼう！", url: NET.inviteURL() }).catch(() => {}); });
+/* LINEで おくる：iPad の「共有」画面を出す（LINE を選ぶ）。共有画面は この画面の上に重なるだけなので、
+   送り終わると 自動でリバーシの画面に戻る。共有画面が使えない端末だけ、LINE アプリを直接ひらく */
+const inviteText = () => "まるシマリバーシで あそぼう！ ここを タップしてね\n" + NET.inviteURL();
+$("lineBtn").addEventListener("click", async () => {
+  if (navigator.share) {
+    try { await navigator.share({ text: inviteText() }); $("inviteOv").hidden = true; camMsg(otherSide(), "まっています…"); } catch (e) { /* やめたときは そのまま */ }
+  } else location.href = "line://msg/text/" + encodeURIComponent(inviteText());
+});
 $("inviteClose").addEventListener("click", () => { $("inviteOv").hidden = true; });
 $("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (NET.role === "host") showInvite(); else callGrandma(false); });
 
