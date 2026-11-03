@@ -1,0 +1,53 @@
+Failed to get Git root path with `git rev-parse --show-toplevel`. Error: git rev-parse --show-toplevel exited with non-zero code: 128
+Falling back to using current working directory as project root.
+You can set `EAS_PROJECT_ROOT` environment variable to let eas-cli know where your project is located.
+[
+  {
+    "id": "36862ce5-7207-4725-9a31-7093abe0fe69",
+    "status": "FINISHED",
+    "platform": "IOS",
+    "artifacts": {
+      "buildUrl": "https://expo.dev/artifacts/eas/9TkNXoYNeqPsGgkb2K7gNz-R7ggI5sAWkhvjNc4KWEk.ipa",
+      "xcodeBuildLogsUrl": "https://storage.googleapis.com/eas-workflows-production/logs/ec8f3ba4-bb45-4e86-9d2d-99d76f289b68/36862ce5-7207-4725-9a31-7093abe0fe69/2026-11-03T03%3A49%3A31Z-36862ce5-7207-4725-9a31-7093abe0fe69-xcode.txt?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=www-production%40exponentjs.iam.gserviceaccount.com%2F20261103%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261103T040220Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=97192d88fcc238a0d28a7a2046c939f924a6706c184bda76a7ad08aa8c352b207ad62555d88dbf00564d6d39d085f870f17c7bd1b182def1a9140bfe51796ace914fc44e2e2f5ec3475db84a5794d2bf5572d32b45b09ad2036c1178bc02eb1fa7251969a393010541434e00b75dcd7c99125ea82d511bdbe0a3a316c8733ec06de507ce54a93dd67bdc2af005e03929d516056c30bec5a2fbb048f6e835965fadd5e9f7123c961f95252a2187df7e49ec6aa3d2a80dd88ece6e8472f8733b01c6c35a4d8ccee83aa6529018fdfe4b8799b85b2a0b82d90eb9953ee4d99e23270aa2372022d117a554f9cbc4b8db249158219442f467e79df63974dee604d015",
+      "applicationArchiveUrl": "https://expo.dev/artifacts/eas/9TkNXoYNeqPsGgkb2K7gNz-R7ggI5sAWkhvjNc4KWEk.ipa"
+    },
+    "fingerprint": {
+      "id": "01a19b39-0c3e-7636-97d1-d201279f7468",
+      "hash": "6271e1a0a3644cd411b7336c103f907440024db1"
+    },
+    "initiatingActor": {
+      "id": "5a22e068-a9c4-4ce2-bf47-993318bd2703",
+      "displayName": "uchinoaji"
+    },
+    "logFiles": [
+      "https://storage.googleapis.com/eas-workflows-production/logs/ec8f3ba4-bb45-4e86-9d2d-99d76f289b68/36862ce5-7207-4725-9a31-7093abe0fe69/2026-11-03T03%3A49%3A31Z-36862ce5-7207-4725-9a31-7093abe0fe69-xcode.txt?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=www-production%40exponentjs.iam.gserviceaccount.com%2F20261103%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261103T040220Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=97192d88fcc238a0d28a7a2046c939f924a6706c184bda76a7ad08aa8c352b207ad62555d88dbf00564d6d39d085f870f17c7bd1b182def1a9140bfe51796ace914fc44e2e2f5ec3475db84a5794d2bf5572d32b45b09ad2036c1178bc02eb1fa7251969a393010541434e00b75dcd7c99125ea82d511bdbe0a3a316c8733ec06de507ce54a93dd67bdc2af005e03929d516056c30bec5a2fbb048f6e835965fadd5e9f7123c961f95252a2187df7e49ec6aa3d2a80dd88ece6e8472f8733b01c6c35a4d8ccee83aa6529018fdfe4b8799b85b2a0b82d90eb9953ee4d99e23270aa2372022d117a554f9cbc4b8db249158219442f467e79df63974dee604d015",
+      "https://storage.googleapis.com/eas-workflows-production/logs/ec8f3ba4-bb45-4e86-9d2d-99d76f289b68/36862ce5-7207-4725-9a31-7093abe0fe69/2026-11-03T03%3A49%3A31Z-fc1b1877-dddb-4502-966b-75db76affd98.txt?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=www-production%40exponentjs.iam.gserviceaccount.com%2F20261103%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261103T040220Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=81e990fff7e7104f42d70e02b92f1fc7d79f8bf66e0c22d20d2b147eadbd6116b82e3448b004ec5b8fdbaa6ed67e1c5ecfca8611ab2367d33760347b321e73c15baf3ee04d6da533d7a9141ee54e50499347723f5504c99f1f8cb0ce598328877faffaea0d541aae049b18213f085eb382b02b0706e7896c236f36405b48c0e70745ddd7ffab7b4bb71f6d64d66367b0baac727e3c9522b376d856477d92b87ce47a48fc31cc85840bc17c4b234cb5a7903d8df04946d93b876c666fd546cb9126aac4e7737754f0bee1ac1927ae7ee614f7553d1209cefe47e89276c7010e5f47901606a0dc0354a53f74e688716b538e2ca7ada88abf7ad30297229832808a"
+    ],
+    "app": {
+      "id": "ec8f3ba4-bb45-4e86-9d2d-99d76f289b68",
+      "name": "kotoba-tane",
+      "slug": "kotoba-tane",
+      "ownerAccount": {
+        "id": "77fad4c7-032f-42a0-8a16-9921709087fd",
+        "name": "uchinoaji-app"
+      }
+    },
+    "distribution": "STORE",
+    "buildProfile": "production",
+    "appIdentifier": "com.uchinoaji.kotobatane",
+    "sdkVersion": "58.0.0",
+    "appVersion": "1.0.0",
+    "appBuildVersion": "11",
+    "priority": "NORMAL",
+    "createdAt": "2026-11-03T03:49:26.174Z",
+    "updatedAt": "2026-11-03T03:52:27.723Z",
+    "completedAt": "2026-11-03T03:52:27.342Z",
+    "expirationDate": "2026-12-03T03:49:26.229Z",
+    "isForIosSimulator": false,
+    "metrics": {
+      "buildWaitTime": 4043,
+      "buildQueueTime": 31127,
+      "buildDuration": 145998
+    }
+  }
+]
