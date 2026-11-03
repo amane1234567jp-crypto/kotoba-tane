@@ -461,7 +461,7 @@ const setPanel = $("settings");
 function syncPanel() {
   setPanel.querySelectorAll(".seg").forEach(seg => seg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === +CFG[seg.dataset.key]))));
   $("resetBtn").textContent = "さいしょから"; $("resetBtn").classList.remove("confirm");
-  $("routeInfo").textContent = NET.open && NET.via ? `いまのつながり：${NET.via}` : (CFG.relay ? "「中継だけ」は、つぎに「おばあちゃんを よぶ」を押したときから使います" : "");
+  $("routeInfo").textContent = NET.open && NET.via ? `いまのつながり：${NET.via}` : (CFG.relay ? "「中継だけ」は、つぎに「たいせんあいてを よぶ」を押したときから使います" : "");
 }
 setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
@@ -593,7 +593,7 @@ function startOnline() {
   G.busy = true;
   if (NET.role === "guest") { camMsg(otherSide(), "つないでいます…"); NET.guest(); }
 }
-// おばあちゃんを よぶ（ホスト）
+// たいせんあいてを よぶ（ホスト）
 async function callGrandma(fresh) {
   unlock(); NET.role = "host"; NET.relayOnly = !!CFG.relay; startOnline();
   const s = replay(G.hist); paint(s.board); setCounts(s.board, false);
