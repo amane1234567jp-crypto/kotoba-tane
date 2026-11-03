@@ -1,0 +1,272 @@
+[
+ {
+  "key": "kww_hiyake",
+  "who": "mama",
+  "text": "かわに いく まえに、ひやけどめを ぬろうね"
+ },
+ {
+  "key": "kwr_hiyake",
+  "who": "mama",
+  "text": "はい、せなかにも ぬったよ"
+ },
+ {
+  "key": "kww_taisou",
+  "who": "mama",
+  "text": "いきなり はいると、あしが つるよ"
+ },
+ {
+  "key": "kwr_taisou",
+  "who": "mama",
+  "text": "そうね。いっしょに、いち、に、さん、し"
+ },
+ {
+  "key": "kww_boushi",
+  "who": "mama",
+  "text": "きょうは あついね。なにを もって いく？"
+ },
+ {
+  "key": "kwr_boushi",
+  "who": "mama",
+  "text": "そうね。ぼうしを かぶって、すいとうを もとうね"
+ },
+ {
+  "key": "kww_hitori",
+  "who": "papa",
+  "text": "パパは、くるまから にもつを だしてるぞ"
+ },
+ {
+  "key": "kwr_hitori",
+  "who": "papa",
+  "text": "えらいな"
+ },
+ {
+  "key": "kww2_hitori",
+  "who": "papa",
+  "text": "どこで まつ？"
+ },
+ {
+  "key": "kwr2_hitori",
+  "who": "papa",
+  "text": "よし。すぐ いくからな"
+ },
+ {
+  "key": "kww_ishi",
+  "who": "mama",
+  "text": "いしが つるつる してるね"
+ },
+ {
+  "key": "kwr_ishi",
+  "who": "mama",
+  "text": "そうそう。ころばないようにね"
+ },
+ {
+  "key": "kww_tsumetai",
+  "who": "onii",
+  "text": "みず、どう？"
+ },
+ {
+  "key": "kwr_tsumetai",
+  "who": "onii",
+  "text": "だよな！ きもちいいよな"
+ },
+ {
+  "key": "kww_sakana",
+  "who": "papa",
+  "text": "なにか みえるか？"
+ },
+ {
+  "key": "kwr_sakana",
+  "who": "papa",
+  "text": "ほんとだ。ちいさい さかなが いっぱいだ"
+ },
+ {
+  "key": "kww2_sakana",
+  "who": "papa",
+  "text": "つかまえて みるか？"
+ },
+ {
+  "key": "kwr2_sakana",
+  "who": "papa",
+  "text": "はい、あみ。そっとね"
+ },
+ {
+  "key": "kww_kani",
+  "who": "onii",
+  "text": "いしの したに、なにか いるよ"
+ },
+ {
+  "key": "kwr_kani",
+  "who": "onii",
+  "text": "そっとね。ちいさい カニだ"
+ },
+ {
+  "key": "kww_mizukiri",
+  "who": "papa",
+  "text": "いしを なげて、みずの うえを はねさせて みよう"
+ },
+ {
+  "key": "kwr_mizukiri",
+  "who": "papa",
+  "text": "いいぞ。よこから、しゅっと なげるんだ"
+ },
+ {
+  "key": "kww_nageru",
+  "who": "tora",
+  "text": "あっちに いしを なげようぜ"
+ },
+ {
+  "key": "kwr_nageru",
+  "who": "tora",
+  "text": "あっ、ほんとだ。ごめん、やめとく"
+ },
+ {
+  "key": "kww_mizukake",
+  "who": "onii",
+  "text": "それっ！ みずかけだ！"
+ },
+ {
+  "key": "kwr_mizukake",
+  "who": "onii",
+  "text": "ごめん。かおには かけないね"
+ },
+ {
+  "key": "kww_ukiwa",
+  "who": "pyon",
+  "text": "その うきわ、かして"
+ },
+ {
+  "key": "kwr_ukiwa",
+  "who": "pyon",
+  "text": "ありがとう！ じゅんばんこ だね"
+ },
+ {
+  "key": "kww_fukai",
+  "who": "mama",
+  "text": "そっちは ふかいよ。いろが ちがうでしょ"
+ },
+ {
+  "key": "kwr_fukai",
+  "who": "mama",
+  "text": "そう。ふかい ところには いかないでね"
+ },
+ {
+  "key": "kww_nagare",
+  "who": "papa",
+  "text": "あそこは ながれが はやいぞ"
+ },
+ {
+  "key": "kwr_nagare",
+  "who": "papa",
+  "text": "そうだ。ここなら あんしんだ"
+ },
+ {
+  "key": "kwr_sandal",
+  "who": "papa",
+  "text": "おしえて くれて ありがとう。おいかけちゃ だめだぞ"
+ },
+ {
+  "key": "kwr2_sandal",
+  "who": "papa",
+  "text": "えらいぞ。パパが あみで とって くるからな"
+ },
+ {
+  "key": "kww_kuchibiru",
+  "who": "mama",
+  "text": "くちびるが むらさきだよ"
+ },
+ {
+  "key": "kwr_kuchibiru",
+  "who": "mama",
+  "text": "そうね。タオルで ふいて、あったまろう"
+ },
+ {
+  "key": "kww_nigori",
+  "who": "ojisan",
+  "text": "やまの ほうで あめが ふった みたいだ。みずが ふえるぞ"
+ },
+ {
+  "key": "kwr_nigori",
+  "who": "ojisan",
+  "text": "きを つけてな。はやく きしに あがるんだよ"
+ },
+ {
+  "key": "kwr_tomodachi",
+  "who": "papa",
+  "text": "よく よんで くれた！ じぶんで はいらなかったのも、えらいぞ"
+ },
+ {
+  "key": "kww_kega",
+  "who": "mama",
+  "text": "どうしたの？"
+ },
+ {
+  "key": "kwr_kega",
+  "who": "mama",
+  "text": "みせて。あらって、ばんそうこうを はろうね"
+ },
+ {
+  "key": "kww_hachi",
+  "who": "papa",
+  "text": "うごかないで。ハチが いるぞ"
+ },
+ {
+  "key": "kwr_hachi",
+  "who": "papa",
+  "text": "そうだ。ハチは どこかへ いったぞ"
+ },
+ {
+  "key": "kww_bbq",
+  "who": "papa",
+  "text": "おにくが やけたぞ"
+ },
+ {
+  "key": "kwr_bbq",
+  "who": "papa",
+  "text": "どうぞ。たくさん たべろよ"
+ },
+ {
+  "key": "kww2_bbq",
+  "who": "papa",
+  "text": "あついから、きを つけてな"
+ },
+ {
+  "key": "kwr2_bbq",
+  "who": "papa",
+  "text": "そうそう。じょうずだな"
+ },
+ {
+  "key": "kww_gomi",
+  "who": "mama",
+  "text": "かえる まえに、なにを する？"
+ },
+ {
+  "key": "kwr_gomi",
+  "who": "mama",
+  "text": "えらいね。かわが きれいに なるね"
+ },
+ {
+  "key": "kww_mada",
+  "who": "papa",
+  "text": "そろそろ かえる じかんだぞ"
+ },
+ {
+  "key": "kwr_mada",
+  "who": "papa",
+  "text": "そうか。じゃあ、あと 5ふんな"
+ },
+ {
+  "key": "kwr2_mada",
+  "who": "papa",
+  "text": "やくそくだぞ"
+ },
+ {
+  "key": "kww_matakuru",
+  "who": "kamejii",
+  "text": "たのしかったかの？"
+ },
+ {
+  "key": "kwr_matakuru",
+  "who": "kamejii",
+  "text": "ほっほ。また おいで"
+ }
+]
