@@ -324,11 +324,6 @@
    "speed": 0.95
   },
   "kumadr": {
-   "model": "e5bd2b5e-90a8-4fb3-a69f-2fbd2d3a8a43",
-   "style": "落ち着き",
-   "speed": 0.88
-  },
-  "kumadr2": {
    "model": "71e72188-2726-4739-9aa9-39567396fb2a",
    "style": "ノーマル",
    "speed": 0.9

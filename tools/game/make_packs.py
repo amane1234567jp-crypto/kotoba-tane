@@ -144,6 +144,13 @@ for k in [p[0] for p in json.loads((G / "sit/pony_kawa.json").read_text())] + [l
     if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
     else: missing.append(k)
 (OUT / "kawa.json").write_text(json.dumps(pack, separators=(",", ":"))); print("kawa", len(pack), round((OUT / "kawa.json").stat().st_size / 1e6, 2), "MB")
+# かいだん（ショート、2026-11-04）：ぽにー（sit/pony_kaidan.json）・あいて（aivis/jobs/kd1）・BGM 2つ（ほんとう・ゆめ）
+pack = {}
+for k in [p[0] for p in json.loads((G / "sit/pony_kaidan.json").read_text())] + [l["key"] for l in json.loads((R / "tools/aivis/jobs/kd1/lines.json").read_text())] + ["bgm_kaidan", "bgm_kaidan_yume"]:
+    p = A / f"{k}.mp3"
+    if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
+    else: missing.append(k)
+(OUT / "kaidan.json").write_text(json.dumps(pack, separators=(",", ":"))); print("kaidan", len(pack), round((OUT / "kaidan.json").stat().st_size / 1e6, 2), "MB")
 # じゅぎょうの いちにち（ロング、2026-10-21）：ぽにー（sit/pony_jugyou.json）＋ ちょうロングの きょうつうの 声（slong・long の lk_ の いちぶ）＋ BGM。
 # 場面の 声は ショートコースの パック（kokugo・sansu・ongaku・zukou・taiiku・tokei・gakkou2・sensei1・seki1）を その ときに よむ
 import re as _re
