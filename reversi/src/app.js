@@ -11,7 +11,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const CFG_KEY = "marushima-reversi-cfg", GAME_KEY = "marushima-reversi-game";
 const load = k => { try { return JSON.parse(localStorage.getItem(k)) || null; } catch (e) { return null; } };
 const keep = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* 保存できなくても遊べる */ } };
-const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2, autoOk: 1, relay: 0 }, load(CFG_KEY) || {});
+const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2, autoOk: 1, relay: 0, fx: 2 }, load(CFG_KEY) || {});
 const saveCfg = () => keep(CFG_KEY, CFG);
 
 /* ---------- 対局の状態 ---------- */
@@ -265,6 +265,7 @@ function stepConfetti(dt) {
     if (b.life < 0 || b.y > innerHeight + 40) { b.r.remove(); paper.splice(i, 1); }
   }
 }
+function cellCenter(i) { const r = cells[i].b.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }
 function centerOf(e) { const r = e.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height * .35]; }
 
 /* ---------- 手番 ---------- */
@@ -317,13 +318,17 @@ async function playMove(r, c) {
   let longest = 0;
   step.flips.forEach(d => {
     longest = Math.max(longest, d.cells.length);
-    d.cells.forEach(([y, x], j) => setTimeout(() => flipDisc(at(y, x), p, d.dir, T.flip * k), j * T.flipGap * k));
+    d.cells.forEach(([y, x], j) => setTimeout(() => { flipDisc(at(y, x), p, d.dir, T.flip * k); setTimeout(() => FX.flipSpark(...cellCenter(at(y, x)), j, p), T.flip * k * .5); }, j * T.flipGap * k));
   });
   for (let j = 0; j < longest; j++) setTimeout(() => SFX.flip(j), j * T.flipGap * k + T.flip * k * .45);
   const n = flipCount(step.flips);
   setTimeout(() => act(other(side), "taken"), T.flip * k);
   await wait(((longest - 1) * T.flipGap + T.flip) * k);
-  if (n >= 4) { SFX.sparkle(); act(side, "big"); confettiAt(...centerOf($("slot" + side)), 40); }
+  // 枚数が多いほど はでに（段階1〜5を重ねる）
+  const tier = FX.finale(n, ...cellCenter(at(r, c)), $("cnt" + side), boardEl, side);
+  if (tier >= 3) act(side, "big");
+  if (tier >= 3) confettiAt(...centerOf($("slot" + side)), 20 + tier * 10);
+  if (tier >= 4) await wait(500 * k);
   await wait(T.afterFlip * k);
   await setCounts(next.board, true);
   await wait(T.toTurn * k);
@@ -421,9 +426,10 @@ async function endGame(state) {
   const win = c.black === c.white ? null : sideOf(c.black > c.white ? BLACK : WHITE);
   if (win) {
     SFX.fanfare(false); act(win, "win"); act(other(win), "lose"); confettiAt(...centerOf($("slot" + win)), 80);
+    FX.victory($("side" + win).getBoundingClientRect(), false); $("side" + win).classList.add("winner");
     await speak(host.kame, "rv_win_" + (colorOf(win) === BLACK ? "k" : "s"));
   } else {
-    SFX.fanfare(true); act("A", "win"); act("B", "win");
+    SFX.fanfare(true); act("A", "win"); act("B", "win"); FX.victory(null, true);
     await speak(host.kame, "rv_draw");
   }
   await hideHost(host.kame);
@@ -432,6 +438,7 @@ async function endGame(state) {
   $("againOv").hidden = false;
 }
 async function rematch() {
+  ["A", "B"].forEach(s => $("side" + s).classList.remove("winner"));
   G.readyMe = G.readyThem = false; $("againBtn").disabled = false; $("againBtn").textContent = "もういっかい";
   $("againOv").hidden = true; await hideHost(host.pony);
   G.blackSide = other(G.blackSide);
@@ -653,7 +660,7 @@ function frame(now) {
   });
   idleTick(seat.A, dt, G.busy); idleTick(seat.B, dt, G.busy);
   if (talking || keepBubble) bubbleAt(talking || keepBubble);
-  stepMarks(dt); stepConfetti(dt);
+  stepMarks(dt); stepConfetti(dt); FX.step(dt);
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);

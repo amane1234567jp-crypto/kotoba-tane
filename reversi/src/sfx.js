@@ -37,6 +37,19 @@ const SFX = (() => {
     ok() { const t = now(); tone(1318.5, t, .2, "sine", .18); },
     ng() { const t = now(); tone(392, t, .2, "triangle", .14); },
     gather(sec) { const t = now(); for (let i = 0; i < sec * 22; i++) { const tt = t + i / 22 + Math.random() * .02; hiss(tt, .03, 1800 + Math.random() * 1600, 4, .5); } },
+    // 返した枚数の段階（1〜5）ごとの ごほうびの音。段階が上がるほど 楽器を重ねる
+    tier(k) {
+      const t = now(), C = [523.25, 659.25, 783.99], up = [1046.5, 1318.5, 1568, 2093];
+      if (k === 1) { tone(1568, t, .25, "sine", .08); return; }
+      C.forEach(f => tone(f, t, .5, "triangle", .07));                                     // 2：和音
+      if (k >= 3) { tone(130.8, t, .45, "sine", .3, .003); hiss(t, .25, 5000, .8, .25); up.forEach((f, i) => tone(f, t + .06 * i, .4, "sine", .06)); } // 3：低音＋シャララ
+      if (k >= 4) { hiss(t + .02, .9, 7000, .5, .35, 3000); [783.99, 987.77, 1174.66, 1567.98, 1975.53].forEach((f, i) => tone(f, t + .08 * i, .35, "square", .035)); } // 4：シンバル＋かけあがり
+      if (k >= 5) { [[523.25, 0, .14], [659.25, .14, .14], [783.99, .28, .14], [1046.5, .42, .7]].forEach(([f, d, l]) => { tone(f, t + .5 + d, l + .2, "triangle", .14); tone(f / 2, t + .5 + d, l, "sine", .08); }); } // 5：ファンファーレ
+    },
+    whistle() { const t = now(), o = ctx.createOscillator(), g = ctx.createGain(); o.type = "sine"; o.frequency.setValueAtTime(900, t); o.frequency.exponentialRampToValueAtTime(2400, t + .7);
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.035, t + .05); g.gain.exponentialRampToValueAtTime(.001, t + .75); o.connect(g).connect(out()); o.start(t); o.stop(t + .8); },
+    boom(big = 1) { const t = now(); tone(70, t, .9, "sine", .45 * big, .002); hiss(t, .7, 400, .7, .9 * big, 120); hiss(t, .25, 2500, 1, .3); },
+    crackle() { const t = now(); for (let i = 0; i < 14; i++) hiss(t + Math.random() * .7, .02, 3000 + Math.random() * 4000, 3, .35); },
     fanfare(gentle) {
       const t = now(), seq = gentle ? [[523.25, 0, .3], [659.25, .3, .3], [783.99, .6, .7]] : [[523.25, 0, .16], [659.25, .16, .16], [783.99, .32, .16], [1046.5, .48, .5], [783.99, .98, .14], [1046.5, 1.12, .6]];
       seq.forEach(([f, d, l]) => { tone(f, t + d, l + .2, gentle ? "sine" : "triangle", gentle ? .14 : .16, .01); if (!gentle) tone(f / 2, t + d, l, "sine", .08, .01); });
