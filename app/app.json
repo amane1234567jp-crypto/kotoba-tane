@@ -13,7 +13,7 @@
     ],
     "ios": {
       "bundleIdentifier": "com.uchinoaji.kotobatane",
-      "buildNumber": "10",
+      "buildNumber": "11",
       "supportsTablet": true,
       "requireFullScreen": true,
       "infoPlist": {
@@ -32,7 +32,7 @@
     },
     "android": {
       "package": "com.uchinoaji.kotobatane",
-      "versionCode": 3,
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-fg.png",
         "backgroundColor": "#FFC94F"

@@ -1,1 +1,1 @@
-android production no # android vc3 方式Dと同じ外枠
+ios production yes # build11 審査用の合言葉
