@@ -2332,14 +2332,10 @@ $("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (N
 
 /* ---------- 起動：前回の続き、または確認用の局面（#pass / #end） ---------- */
 (function boot() {
-  const saved = load(GAME_KEY), tag = location.hash.slice(1);
-  if (FIX[tag]) { G.hist = FIX[tag].slice(); G.blackSide = "A"; }
-  else if (saved && Array.isArray(saved.hist)) {
-    try { replay(saved.hist); G.hist = saved.hist; G.blackSide = saved.blackSide === "B" ? "B" : "A"; } catch (e) { G.hist = []; }
-  }
-  window.claude?.hot?.snapshot?.(() => ({ hist: G.hist, blackSide: G.blackSide }));
-  const hd = window.claude?.hot?.data;
-  if (hd && Array.isArray(hd.hist)) { try { replay(hd.hist); G.hist = hd.hist; G.blackSide = hd.blackSide; } catch (e) { /* 保存がこわれていたら最初から */ } }
+  // リンクを開いたら いつも最初から（前回の とちゅうの盤は 読みこまない。2026-11-03）
+  // 遠隔対戦の とちゅうで つなぎなおしたときは、相手（ホスト）の盤に 合わせて 続きから になる
+  const tag = location.hash.slice(1);
+  G.hist = FIX[tag] ? FIX[tag].slice() : []; G.blackSide = "A"; saveGame();
   const s = replay(G.hist); cur = s;
   paintSides(); paint(s.board); setCounts(s.board, false); haloFor(G.hist);
   if (NET.role === "guest") {
