@@ -1,8 +1,13 @@
 [
  {
-  "key": "kdw_onii_race",
+  "key": "kdw_onii_iku",
   "who": "onii",
-  "text": "かいだん、どっちが さきに のぼれるか、きょうそうだ！"
+  "text": "さきに 2かいへ いってるね"
+ },
+ {
+  "key": "kdw_shima_saki",
+  "who": "shima",
+  "text": "ぼくが さきに いきたい！"
  },
  {
   "key": "kdw_onii_itai",
@@ -37,12 +42,12 @@
  {
   "key": "kdw_pol_dare",
   "who": "inukei",
-  "text": "おにいさんを おして、おおけがを させたのは、だれですか？"
+  "text": "おにいさんを ひっぱって、おおけがを させたのは、だれですか？"
  },
  {
   "key": "kdw_pol_ikenai",
   "who": "inukei",
-  "text": "ひとを おして けがを させるのは、とても いけない ことです。けいさつしょに いっしょに きて もらいます"
+  "text": "ひとを ひっぱって けがを させるのは、とても いけない ことです。けいさつしょに いっしょに きて もらいます"
  },
  {
   "key": "kdw_mama_ohayo",
@@ -53,16 +58,6 @@
   "key": "kdw_mama_daijobu",
   "who": "mama",
   "text": "こわかったね。もう だいじょうぶよ。ぎゅっ"
- },
- {
-  "key": "kdw_onii_souka",
-  "who": "onii",
-  "text": "そっか。かいだんは、あぶないもんな"
- },
- {
-  "key": "kdw_onii_saki",
-  "who": "onii",
-  "text": "じゃあ、おれが さきに のぼって いい？"
  },
  {
   "key": "kdw_onii_arigato",
@@ -82,7 +77,7 @@
  {
   "key": "kdw_pol_erai",
   "who": "inukei",
-  "text": "かいだんで、きょうそう しなかったんだって？ えらいね"
+  "text": "かいだんで、おにいちゃんに さきを ゆずったんだって？ えらいね"
  },
  {
   "key": "kdw_dr_ichiban",
