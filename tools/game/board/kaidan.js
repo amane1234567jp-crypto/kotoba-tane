@@ -1,10 +1,11 @@
 /* ================= ショートコース「かいだん」（kaidan、2026-11-04） =================
-   いちばんに なりたくて、かいだんで おにいちゃんを おして しまう ことを やめる ための おはなし。
+   いちばんに なりたくて、かってに きょうそう して、さきに いく おにいちゃんを ひっぱって しまう ことを やめる ための おはなし
+   （おにいちゃんが きょうそうを しかけたのでは ない：2026-11-04 あまねさん）。
    とまった マスごとに 1しょう ずつ すすむ（ばしょは かんけい ない）。ゴールに ついたら のこりの しょうと さいごの しょう。
-     ゆめ①：かいだんで おして しまう → おにいちゃんが ころげおちる →「たすけて！」→ いえの まえに きゅうきゅうしゃ
-     ゆめ②：びょういん（クマの おいしゃさん）→「ぼくが おしました。ごめんなさい」→ おにいちゃん「もう あそばない」
+     ゆめ①：さきに いく おにいちゃんを、かってに きょうそう して ひっぱって しまう → ころげおちる →「たすけて！」→ いえの まえに きゅうきゅうしゃ
+     ゆめ②：びょういん（クマの おいしゃさん）→「ぼくが ひっぱりました。ごめんなさい」→ おにいちゃん「もう あそばない」
      ゆめ③：イヌの おまわりさん →「ぼくです」→ よるの パトカー → てつの ぼうの へや →「おうちに かえりたい」→ めが さめる →「こわい ゆめを みたの」
-     ほんとう①：おなじ かいだん →「かいだんでは きょうそう しないよ」→「さきに いって いいよ」→ てすりを もって ゆっくり
+     ほんとう①：おなじ かいだん。また さきに いきたく なる → じぶんに「かいだんでは、きょうそう しない」→「さきに いって いいよ」→ てすりを もって ゆっくり
      ほんとう②：むずむず →「いちばんじゃなくても だいじょうぶ」→「ひろい ところで かけっこ しよう」→ こうえんで かけっこ
      さいご（ゴール）：ゆめで あった おまわりさんと おいしゃさんが ほめて くれる
    ゆめの あいだは くもの わく と オルゴールの きょく（bgm_kaidan_yume）。ほんとうに つかまる はなしには しない（あまねさんの きめ）。
@@ -324,13 +325,15 @@ const KD_CH = [
     const w = await kdCloudWipe(true); KD_DREAM = true; kdBgm(true); ({ h, a } = kdView("かいだん"));
     kdPut(a, ...kdStep(0), KD_S); kdPut(h, ...kdStep(-1), KD_S); kdPut(C.pony, 120, 975, .46);
     await sleep(200); await kdCloudWipe(false).then(g => g.remove()); w.remove();
-    playMove(a, "point"); await kdSpeak(a, "kdw_onii_race"); playMove(h, "pump");
-    // かけあがる：おにいちゃんが さき
-    const up1 = kdClimb(a, 0, 5, 330); await sleep(260); await kdClimb(h, -1, 4, 300); await up1;
+    // おにいちゃんは きょうそう して いない。ふつうに 2かいへ
+    joy(a); await kdSpeak(a, "kdw_onii_iku"); const up1 = kdClimb(a, 0, 5, 560);
+    // まるシマが かってに「さきに いきたい！」
+    await sleep(500); markAbove(h, "ex"); playMove(h, "pump"); await kdSpeak(h, "kdw_shima_saki");
+    await kdClimb(h, -1, 4, 260); await up1;
     await kdSpeak(C.pony, "kdp_push");
-    // おす（ゆっくり → ドン）
-    h.lean.t = 18; h.armR.t = -95; h.armL.t = 95; await sleep(500); kdBurst(KD_FG, ...((p => [p.x - 40, p.y - 40])(world(a, 140, 260))));
-    kdThud(1.2); shake(500, 26); surprise(a); markAbove(a, "ex"); a.lean.t = -30; await sleep(350); h.lean.t = 0; h.armR.t = 0; h.armL.t = 0;
+    // うしろから ひっぱる（グイッ）→ おにいちゃんが うしろへ
+    h.armR.t = -150; h.armL.t = 150; h.lean.t = -10; await sleep(450); kdBurst(KD_FG, ...((p => [p.x - 60, p.y + 20])(world(a, 140, 300))), "グイッ！");
+    kdThud(1.2); shake(500, 26); surprise(a); markAbove(a, "ex"); a.lean.t = -35; await kdMove(a, ...kdStep(4).map((v, i) => v - (i ? 0 : 40)), 220, 30); h.lean.t = 0; h.armR.t = 0; h.armL.t = 0;
     // ころげおちる（だんで はねながら）
     a.spinDur = 1.6; a.spinTurns = -2; hold(a, "spin", 1.6); hold(a, "closed", 2);
     for (const i of [3, 1]) { const [x, y] = kdStep(i); await kdMove(a, x - 30, y, 300, 70); kdThud(.8); shake(200, 14); }
@@ -413,14 +416,14 @@ const KD_CH = [
     KD_DREAM = false; kdBgm(false); let { h, a } = kdView("かいだん");
     kdPut(a, ...kdStep(0), KD_S); kdPut(h, ...kdStep(-1), KD_S); kdPut(C.pony, 120, 975, .46);
     await sleep(400); await kdSpeak(C.pony, "kdp_real"); joy(a);
-    playMove(a, "point"); await kdSpeak(a, "kdw_onii_race");
-    await kdSay("kds_kyousou");
-    playMove(a, "nod"); await kdSpeak(a, "kdw_onii_souka");
-    await kdSpeak(C.pony, "kdp_real2"); await kdSpeak(a, "kdw_onii_saki");
-    await kdSay("kds_saki");
+    // おにいちゃんは ふつうに のぼりはじめる → まるシマは また さきに いきたく なる
+    await kdSpeak(a, "kdw_onii_iku"); await kdClimb(a, 0, 2, 560);
+    const mz = kdMozu(KD_FG, h); hold(h, "shiver", 3); h.sadMouth = true; await kdSpeak(C.pony, "kdp_real2");
+    await kdSay("kds_kyousou", "じぶんに いおう"); mz.remove(); h.sadMouth = false; for (let i = 0; i < 6; i++) later(i * 120, () => markAbove(h, "sparkle", { dx: (i - 3) * 30 }));
+    a.headRot.t = -10; await kdSay("kds_saki", "おにいちゃんに いおう"); a.headRot.t = 0;
     joy(a); await kdSpeak(a, "kdw_onii_arigato");
     // てすりを もって ゆっくり（てを あげて てすりに）
-    a.armL.t = 150; h.armL.t = 150; const u = kdClimb(a, 0, 9, 520); await sleep(1100); await kdClimb(h, -1, 7, 520); await u; a.armL.t = h.armL.t = 0;
+    a.armL.t = 150; h.armL.t = 150; const u = kdClimb(a, 2, 9, 520); await sleep(1100); await kdClimb(h, -1, 7, 520); await u; a.armL.t = h.armL.t = 0;
     joy(a); joy(h); confetti(30); return [h]; },
   // ほんとう②：むずむず → こうえんで かけっこ
   async function () {

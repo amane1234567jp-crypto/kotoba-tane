@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="manifest" href="manifest.json">
 <style>body{margin:0}</style>
-<script>const PACK_VER="a1869aae49";{const f0=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&/(^|\/)packs\/[^?]+\.json$/.test(u))u+="?v="+PACK_VER;return f0.call(this,u,o);};}</script>
+<script>const PACK_VER="ef5e5866fc";{const f0=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&/(^|\/)packs\/[^?]+\.json$/.test(u))u+="?v="+PACK_VER;return f0.call(this,u,o);};}</script>
 <script>if("serviceWorker" in navigator&&location.protocol==="https:")addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));</script>
 </head><body>
 <title>ことばのたね すごろく試作</title>
@@ -72014,15 +72014,16 @@ Object.assign(ICON_DRAW, {
 });
 
 /* sit/kaidan_gen.py で つくる（てで なおさない） */
-const KD = {"pony": {"kdp_intro": "まるシマは、いつも いちばんに なりたい。おにいちゃんと、かいだんで きょうそう する ことも あるよね", "kdp_moshi": "もしも、おにいちゃんを おしちゃったら……どう なるかな？", "kdp_push": "おにいちゃんが さきに いきそう。まるシマは、おにいちゃんを おしちゃった！", "kdp_fall": "おにいちゃんが、かいだんから おちて しまった！ ママを よぼう", "kdp_amb": "ピーポー、ピーポー。きゅうきゅうしゃが きたよ", "kdp_hosp": "びょういんに ついたよ。おにいちゃんの あしは、まっしろな ギプスで ぐるぐる", "kdp_hosp2": "おにいちゃんは、とても かなしそう。まるシマの むねが、ぎゅっと いたく なったよ", "kdp_police": "そこへ、おまわりさんが やって きたよ", "kdp_patrol": "まるシマは、パトカーに のって、けいさつしょへ いく ことに なった", "kdp_cell": "てつの ぼうの ある、つめたい へや。ママにも、おにいちゃんにも あえない。ひとりぼっちだよ", "kdp_wake": "……はっ！ ゆめ だったんだ！", "kdp_real": "おにいちゃんは、げんき いっぱい。こんどは、ほんとうの かいだんだよ", "kdp_real2": "おにいちゃんが、さきに のぼりたいみたい", "kdp_mozu": "ほんとうは、いちばんに なりたかったね。むずむず する きもちを、ことばで いって みよう", "kdp_park": "こうえんの ひろば だよ。たいらで ひろい ところなら、きょうそう しても あんしん", "kdp_race_end": "おもいきり はしれて、たのしいね", "kdp_more": "おはなしの つづきを みよう", "kdp_finale": "あっ！ ゆめで あった、おまわりさんと おいしゃさんだ", "kdp_end": "おにいちゃんを たいせつに できたね。かいだんでは きょうそう しない。やくそくだよ", "kdp_ok": "じょうずに いえたね！", "kdp_good": "そう いえば、つたわるね！", "kdp_x_slide": "すべりだいの かいだんで、とらおくんが うしろから せかして くるよ", "kdp_x_eki": "えきの かいだんは、ひとが いっぱい", "kdp_x_ok": "かいだんでは、あんぜんが いちばんだね", "p_blk_kaidan": "どしんが、かいだんの まんなかに すわりこんで いて、とおれないよ", "ev_kaidanf": "てすりを もって、すいすい！ 2マス すすむよ", "ev_kaidanb": "あっ、くつひもが ほどけた！ むすびなおして、2マス もどるよ"}, "say": {"kds_tasukete": {"text": "たすけて！ おにいちゃんが、かいだんから おちた", "keys": [["たすけて", "助けて", "おちた", "落ちた", "おにいちゃん", "お兄ちゃん"]]}, "kds_gomen": {"text": "ぼくが おしました。ごめんなさい", "keys": [["ごめん", "おしました", "押しました", "おした", "押した"]]}, "kds_boku": {"text": "ぼくです", "keys": [["ぼく", "僕", "ボク", "わたし", "私"]]}, "kds_kaeritai": {"text": "さびしいよ。おうちに かえりたい", "keys": [["かえりたい", "帰りたい", "さびしい", "寂しい", "淋しい"]]}, "kds_yume": {"text": "こわい ゆめを みたの", "keys": [["ゆめ", "夢", "こわい", "怖い"]]}, "kds_kyousou": {"text": "かいだんでは きょうそう しないよ", "keys": [["きょうそう", "競争", "しない"]]}, "kds_saki": {"text": "さきに いって いいよ", "keys": [["さき", "先", "いいよ", "どうぞ"]]}, "kds_daijoubu": {"text": "いちばんじゃなくても だいじょうぶ", "keys": [["だいじょうぶ", "大丈夫", "いちばん", "一番"]]}, "kds_kakekko": {"text": "ひろい ところで、かけっこ しよう", "keys": [["かけっこ", "駆けっこ", "きょうそう", "競争", "はしろう", "走ろう"]]}, "kds_x_osanai": {"text": "おさないで。かいだんは あぶないよ", "keys": [["おさない", "押さない", "あぶない", "危ない"]]}, "kds_x_tesuri": {"text": "てすりを もって、ゆっくり のぼる", "keys": [["てすり", "手すり", "ゆっくり"]]}}, "line": {"kdw_onii_race": {"who": "onii", "text": "かいだん、どっちが さきに のぼれるか、きょうそうだ！"}, "kdw_onii_itai": {"who": "onii", "text": "いたいよう……あしが いたい……"}, "kdw_mama_dou": {"who": "mama", "text": "どうしたの！？"}, "kdw_mama_kyu": {"who": "mama", "text": "たいへん！ きゅうきゅうしゃを よぶわ！"}, "kdw_dr_hone": {"who": "kumadr", "text": "あしの ほねが おれて います。しばらく あるけません"}, "kdw_dr_naze": {"who": "kumadr", "text": "どうして、かいだんから おちたのかな？"}, "kdw_onii_iya": {"who": "onii", "text": "……いたかったよ。もう、まるシマとは あそばない"}, "kdw_pol_dare": {"who": "inukei", "text": "おにいさんを おして、おおけがを させたのは、だれですか？"}, "kdw_pol_ikenai": {"who": "inukei", "text": "ひとを おして けがを させるのは、とても いけない ことです。けいさつしょに いっしょに きて もらいます"}, "kdw_mama_ohayo": {"who": "mama", "text": "おはよう。うなされて いたよ。どうしたの？"}, "kdw_mama_daijobu": {"who": "mama", "text": "こわかったね。もう だいじょうぶよ。ぎゅっ"}, "kdw_onii_souka": {"who": "onii", "text": "そっか。かいだんは、あぶないもんな"}, "kdw_onii_saki": {"who": "onii", "text": "じゃあ、おれが さきに のぼって いい？"}, "kdw_onii_arigato": {"who": "onii", "text": "ありがとう。てすりを もって、ゆっくり のぼろうな"}, "kdw_onii_ii": {"who": "onii", "text": "いいね！ よーい、どん！"}, "kdw_onii_hayai": {"who": "onii", "text": "はあ、はあ。まるシマ、はやく なったなあ！"}, "kdw_pol_erai": {"who": "inukei", "text": "かいだんで、きょうそう しなかったんだって？ えらいね"}, "kdw_dr_ichiban": {"who": "kumadr", "text": "けがを しないのが、いちばんだよ"}, "kdw_onii_daisuki": {"who": "onii", "text": "まるシマ、また いっしょに あそぼうな"}, "kdw_tora_hayaku": {"who": "tora", "text": "はやく のぼってよ！"}, "kdw_tora_gomen": {"who": "tora", "text": "あっ、ごめん。ゆっくり のぼるね"}, "kdw_mama_eki": {"who": "mama", "text": "ひとが いっぱいね。どう やって のぼる？"}, "kdw_mama_erai": {"who": "mama", "text": "えらいね。それなら あんしんね"}}};
+const KD = {"pony": {"kdp_intro": "まるシマと おにいちゃんが、2かいへ あがるよ。まるシマは、いつも いちばんが いいんだって", "kdp_moshi": "もしも、さきに いく おにいちゃんを、ひっぱっちゃったら……どう なるかな？", "kdp_push": "おにいちゃんは きょうそう して いないのに、まるシマは おにいちゃんを ひっぱっちゃった！", "kdp_fall": "おにいちゃんが、かいだんから おちて しまった！ ママを よぼう", "kdp_amb": "ピーポー、ピーポー。きゅうきゅうしゃが きたよ", "kdp_hosp": "びょういんに ついたよ。おにいちゃんの あしは、まっしろな ギプスで ぐるぐる", "kdp_hosp2": "おにいちゃんは、とても かなしそう。まるシマの むねが、ぎゅっと いたく なったよ", "kdp_police": "そこへ、おまわりさんが やって きたよ", "kdp_patrol": "まるシマは、パトカーに のって、けいさつしょへ いく ことに なった", "kdp_cell": "てつの ぼうの ある、つめたい へや。ママにも、おにいちゃんにも あえない。ひとりぼっちだよ", "kdp_wake": "……はっ！ ゆめ だったんだ！", "kdp_real": "おにいちゃんは、げんき いっぱい。こんどは、ほんとうの かいだんだよ", "kdp_real2": "あれれ、まるシマは また、おにいちゃんより さきに いきたく なっちゃった", "kdp_mozu": "ほんとうは、いちばんに なりたかったね。むずむず する きもちを、ことばで いって みよう", "kdp_park": "こうえんの ひろば だよ。たいらで ひろい ところなら、きょうそう しても あんしん", "kdp_race_end": "おもいきり はしれて、たのしいね", "kdp_more": "おはなしの つづきを みよう", "kdp_finale": "あっ！ ゆめで あった、おまわりさんと おいしゃさんだ", "kdp_end": "おにいちゃんを たいせつに できたね。かいだんでは きょうそう しない。ひっぱったり、おしたり しない。やくそくだよ", "kdp_ok": "じょうずに いえたね！", "kdp_good": "そう いえば、つたわるね！", "kdp_x_slide": "すべりだいの かいだんで、とらおくんが うしろから せかして くるよ", "kdp_x_eki": "えきの かいだんは、ひとが いっぱい", "kdp_x_ok": "かいだんでは、あんぜんが いちばんだね", "p_blk_kaidan": "どしんが、かいだんの まんなかに すわりこんで いて、とおれないよ", "ev_kaidanf": "てすりを もって、すいすい！ 2マス すすむよ", "ev_kaidanb": "あっ、くつひもが ほどけた！ むすびなおして、2マス もどるよ"}, "say": {"kds_tasukete": {"text": "たすけて！ おにいちゃんが、かいだんから おちた", "keys": [["たすけて", "助けて", "おちた", "落ちた", "おにいちゃん", "お兄ちゃん"]]}, "kds_gomen": {"text": "ぼくが ひっぱりました。ごめんなさい", "keys": [["ごめん", "ひっぱり", "引っ張り", "ひっぱった", "引っ張った"]]}, "kds_boku": {"text": "ぼくです", "keys": [["ぼく", "僕", "ボク", "わたし", "私"]]}, "kds_kaeritai": {"text": "さびしいよ。おうちに かえりたい", "keys": [["かえりたい", "帰りたい", "さびしい", "寂しい", "淋しい"]]}, "kds_yume": {"text": "こわい ゆめを みたの", "keys": [["ゆめ", "夢", "こわい", "怖い"]]}, "kds_kyousou": {"text": "かいだんでは、きょうそう しない", "keys": [["きょうそう", "競争", "しない"]]}, "kds_saki": {"text": "さきに いって いいよ", "keys": [["さき", "先", "いいよ", "どうぞ"]]}, "kds_daijoubu": {"text": "いちばんじゃなくても だいじょうぶ", "keys": [["だいじょうぶ", "大丈夫", "いちばん", "一番"]]}, "kds_kakekko": {"text": "ひろい ところで、かけっこ しよう", "keys": [["かけっこ", "駆けっこ", "きょうそう", "競争", "はしろう", "走ろう"]]}, "kds_x_osanai": {"text": "おさないで。かいだんは あぶないよ", "keys": [["おさない", "押さない", "あぶない", "危ない"]]}, "kds_x_tesuri": {"text": "てすりを もって、ゆっくり のぼる", "keys": [["てすり", "手すり", "ゆっくり"]]}}, "line": {"kdw_onii_iku": {"who": "onii", "text": "さきに 2かいへ いってるね"}, "kdw_shima_saki": {"who": "shima", "text": "ぼくが さきに いきたい！"}, "kdw_onii_itai": {"who": "onii", "text": "いたいよう……あしが いたい……"}, "kdw_mama_dou": {"who": "mama", "text": "どうしたの！？"}, "kdw_mama_kyu": {"who": "mama", "text": "たいへん！ きゅうきゅうしゃを よぶわ！"}, "kdw_dr_hone": {"who": "kumadr", "text": "あしの ほねが おれて います。しばらく あるけません"}, "kdw_dr_naze": {"who": "kumadr", "text": "どうして、かいだんから おちたのかな？"}, "kdw_onii_iya": {"who": "onii", "text": "……いたかったよ。もう、まるシマとは あそばない"}, "kdw_pol_dare": {"who": "inukei", "text": "おにいさんを ひっぱって、おおけがを させたのは、だれですか？"}, "kdw_pol_ikenai": {"who": "inukei", "text": "ひとを ひっぱって けがを させるのは、とても いけない ことです。けいさつしょに いっしょに きて もらいます"}, "kdw_mama_ohayo": {"who": "mama", "text": "おはよう。うなされて いたよ。どうしたの？"}, "kdw_mama_daijobu": {"who": "mama", "text": "こわかったね。もう だいじょうぶよ。ぎゅっ"}, "kdw_onii_arigato": {"who": "onii", "text": "ありがとう。てすりを もって、ゆっくり のぼろうな"}, "kdw_onii_ii": {"who": "onii", "text": "いいね！ よーい、どん！"}, "kdw_onii_hayai": {"who": "onii", "text": "はあ、はあ。まるシマ、はやく なったなあ！"}, "kdw_pol_erai": {"who": "inukei", "text": "かいだんで、おにいちゃんに さきを ゆずったんだって？ えらいね"}, "kdw_dr_ichiban": {"who": "kumadr", "text": "けがを しないのが、いちばんだよ"}, "kdw_onii_daisuki": {"who": "onii", "text": "まるシマ、また いっしょに あそぼうな"}, "kdw_tora_hayaku": {"who": "tora", "text": "はやく のぼってよ！"}, "kdw_tora_gomen": {"who": "tora", "text": "あっ、ごめん。ゆっくり のぼるね"}, "kdw_mama_eki": {"who": "mama", "text": "ひとが いっぱいね。どう やって のぼる？"}, "kdw_mama_erai": {"who": "mama", "text": "えらいね。それなら あんしんね"}}};
 
 /* ================= ショートコース「かいだん」（kaidan、2026-11-04） =================
-   いちばんに なりたくて、かいだんで おにいちゃんを おして しまう ことを やめる ための おはなし。
+   いちばんに なりたくて、かってに きょうそう して、さきに いく おにいちゃんを ひっぱって しまう ことを やめる ための おはなし
+   （おにいちゃんが きょうそうを しかけたのでは ない：2026-11-04 あまねさん）。
    とまった マスごとに 1しょう ずつ すすむ（ばしょは かんけい ない）。ゴールに ついたら のこりの しょうと さいごの しょう。
-     ゆめ①：かいだんで おして しまう → おにいちゃんが ころげおちる →「たすけて！」→ いえの まえに きゅうきゅうしゃ
-     ゆめ②：びょういん（クマの おいしゃさん）→「ぼくが おしました。ごめんなさい」→ おにいちゃん「もう あそばない」
+     ゆめ①：さきに いく おにいちゃんを、かってに きょうそう して ひっぱって しまう → ころげおちる →「たすけて！」→ いえの まえに きゅうきゅうしゃ
+     ゆめ②：びょういん（クマの おいしゃさん）→「ぼくが ひっぱりました。ごめんなさい」→ おにいちゃん「もう あそばない」
      ゆめ③：イヌの おまわりさん →「ぼくです」→ よるの パトカー → てつの ぼうの へや →「おうちに かえりたい」→ めが さめる →「こわい ゆめを みたの」
-     ほんとう①：おなじ かいだん →「かいだんでは きょうそう しないよ」→「さきに いって いいよ」→ てすりを もって ゆっくり
+     ほんとう①：おなじ かいだん。また さきに いきたく なる → じぶんに「かいだんでは、きょうそう しない」→「さきに いって いいよ」→ てすりを もって ゆっくり
      ほんとう②：むずむず →「いちばんじゃなくても だいじょうぶ」→「ひろい ところで かけっこ しよう」→ こうえんで かけっこ
      さいご（ゴール）：ゆめで あった おまわりさんと おいしゃさんが ほめて くれる
    ゆめの あいだは くもの わく と オルゴールの きょく（bgm_kaidan_yume）。ほんとうに つかまる はなしには しない（あまねさんの きめ）。
@@ -72342,13 +72343,15 @@ const KD_CH = [
     const w = await kdCloudWipe(true); KD_DREAM = true; kdBgm(true); ({ h, a } = kdView("かいだん"));
     kdPut(a, ...kdStep(0), KD_S); kdPut(h, ...kdStep(-1), KD_S); kdPut(C.pony, 120, 975, .46);
     await sleep(200); await kdCloudWipe(false).then(g => g.remove()); w.remove();
-    playMove(a, "point"); await kdSpeak(a, "kdw_onii_race"); playMove(h, "pump");
-    // かけあがる：おにいちゃんが さき
-    const up1 = kdClimb(a, 0, 5, 330); await sleep(260); await kdClimb(h, -1, 4, 300); await up1;
+    // おにいちゃんは きょうそう して いない。ふつうに 2かいへ
+    joy(a); await kdSpeak(a, "kdw_onii_iku"); const up1 = kdClimb(a, 0, 5, 560);
+    // まるシマが かってに「さきに いきたい！」
+    await sleep(500); markAbove(h, "ex"); playMove(h, "pump"); await kdSpeak(h, "kdw_shima_saki");
+    await kdClimb(h, -1, 4, 260); await up1;
     await kdSpeak(C.pony, "kdp_push");
-    // おす（ゆっくり → ドン）
-    h.lean.t = 18; h.armR.t = -95; h.armL.t = 95; await sleep(500); kdBurst(KD_FG, ...((p => [p.x - 40, p.y - 40])(world(a, 140, 260))));
-    kdThud(1.2); shake(500, 26); surprise(a); markAbove(a, "ex"); a.lean.t = -30; await sleep(350); h.lean.t = 0; h.armR.t = 0; h.armL.t = 0;
+    // うしろから ひっぱる（グイッ）→ おにいちゃんが うしろへ
+    h.armR.t = -150; h.armL.t = 150; h.lean.t = -10; await sleep(450); kdBurst(KD_FG, ...((p => [p.x - 60, p.y + 20])(world(a, 140, 300))), "グイッ！");
+    kdThud(1.2); shake(500, 26); surprise(a); markAbove(a, "ex"); a.lean.t = -35; await kdMove(a, ...kdStep(4).map((v, i) => v - (i ? 0 : 40)), 220, 30); h.lean.t = 0; h.armR.t = 0; h.armL.t = 0;
     // ころげおちる（だんで はねながら）
     a.spinDur = 1.6; a.spinTurns = -2; hold(a, "spin", 1.6); hold(a, "closed", 2);
     for (const i of [3, 1]) { const [x, y] = kdStep(i); await kdMove(a, x - 30, y, 300, 70); kdThud(.8); shake(200, 14); }
@@ -72431,14 +72434,14 @@ const KD_CH = [
     KD_DREAM = false; kdBgm(false); let { h, a } = kdView("かいだん");
     kdPut(a, ...kdStep(0), KD_S); kdPut(h, ...kdStep(-1), KD_S); kdPut(C.pony, 120, 975, .46);
     await sleep(400); await kdSpeak(C.pony, "kdp_real"); joy(a);
-    playMove(a, "point"); await kdSpeak(a, "kdw_onii_race");
-    await kdSay("kds_kyousou");
-    playMove(a, "nod"); await kdSpeak(a, "kdw_onii_souka");
-    await kdSpeak(C.pony, "kdp_real2"); await kdSpeak(a, "kdw_onii_saki");
-    await kdSay("kds_saki");
+    // おにいちゃんは ふつうに のぼりはじめる → まるシマは また さきに いきたく なる
+    await kdSpeak(a, "kdw_onii_iku"); await kdClimb(a, 0, 2, 560);
+    const mz = kdMozu(KD_FG, h); hold(h, "shiver", 3); h.sadMouth = true; await kdSpeak(C.pony, "kdp_real2");
+    await kdSay("kds_kyousou", "じぶんに いおう"); mz.remove(); h.sadMouth = false; for (let i = 0; i < 6; i++) later(i * 120, () => markAbove(h, "sparkle", { dx: (i - 3) * 30 }));
+    a.headRot.t = -10; await kdSay("kds_saki", "おにいちゃんに いおう"); a.headRot.t = 0;
     joy(a); await kdSpeak(a, "kdw_onii_arigato");
     // てすりを もって ゆっくり（てを あげて てすりに）
-    a.armL.t = 150; h.armL.t = 150; const u = kdClimb(a, 0, 9, 520); await sleep(1100); await kdClimb(h, -1, 7, 520); await u; a.armL.t = h.armL.t = 0;
+    a.armL.t = 150; h.armL.t = 150; const u = kdClimb(a, 2, 9, 520); await sleep(1100); await kdClimb(h, -1, 7, 520); await u; a.armL.t = h.armL.t = 0;
     joy(a); joy(h); confetti(30); return [h]; },
   // ほんとう②：むずむず → こうえんで かけっこ
   async function () {
