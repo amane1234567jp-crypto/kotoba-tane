@@ -432,7 +432,7 @@ const stageOfKey = k => { const m = SCENE_KEY.exec(k); return m ? STAGE_OF[m[2]]
 async function loadPack(id) {
   // 1) ほかの ステージの 場面の声は 手ばなす（メモリを あける）。ページに 入っている こうしゃの声は データだけ のこす
   Object.keys(VBUF).forEach(k => { const st = stageOfKey(k); if (st && st !== id) delete VBUF[k]; });
-  Object.keys(PACK.loaded).forEach(s => { if (s !== id) { PACK.loaded[s].forEach(k => { delete AUD[k]; delete VBUF[k]; }); delete PACK.loaded[s]; } });
+  Object.keys(PACK.loaded).forEach(s => { if (s !== id) { PACK.loaded[s].forEach(k => delete AUD[k]); delete PACK.loaded[s]; } });
   // 2) このステージの声（パック）を 読みこむ
   if (!PACK.loaded[id]) {
     let data = null;
@@ -443,10 +443,6 @@ async function loadPack(id) {
   // 3) このステージの 場面の声を ぜんぶ 音のデータに しておく（遊ぶ前に 用意）
   const mine = Object.keys(AUD).filter(k => stageOfKey(k) === id);
   await Promise.all(mine.map(k => voiceBuf(k)));
-  // 4) 2026-11-04：このコースの パックの 声と、ぽにーの よく つかう 声を、うしろで じゅんばんに 音に して おく
-  //    （声を ページの そとに だしたので、はじめて ならす ときに 読みこみが はいり、とけいの「3じ」「はん」などが とぎれた）
-  const later4 = [...(PACK.loaded[id] || []).filter(k => !k.startsWith("bgm_")), ...Object.keys(AUD).filter(k => /^(p_|n\d$|roll$|goal$|teach|rv_)/.test(k))].filter(k => !VBUF[k]);
-  (async () => { for (const k of later4) { if (curStage !== id && PACK.loaded[id] === undefined) break; if (AUD[k]) await voiceBuf(k); } })();
   return !!PACK.loaded[id];
 }
 async function withLoading(fn) {

@@ -10,14 +10,6 @@ for p in sorted((R/"board/audio").glob("*.mp3")): AUD[p.stem] = b64(p)
 for k in ["k13_main", "k16_main"]: AUD[k] = b64(R/"kousha/audio"/(k + ".mp3"))
 for p in sorted((R/"sit/audio").glob("*.mp3")): AUD[p.stem] = b64(p)
 for p in sorted((R/"board/sfx").glob("*.mp3")): AUD["sfx_" + p.stem] = b64(p)
-# 2026-11-04：ページを かるく する（メモリの すくない iPad で Safari が おちた）。声は ページに うめこまず、
-# リポジトリの voice/<key>.mp3 に おいて、ならす ときに はじめて 読みこむ（AUD には ファイルの ばしょだけ）。こうかおん（sfx_）だけ うめこむ
-import shutil
-VD = Path("../../voice"); VD.mkdir(exist_ok=True)
-for old in VD.glob("*.mp3"): old.unlink()
-for k, v in list(AUD.items()):
-    if k.startswith("sfx_"): continue
-    (VD / f"{k}.mp3").write_bytes(base64.b64decode(v.split(",", 1)[1])); AUD[k] = f"voice/{k}.mp3"
 AUD["sfx_bgm"] = "data:audio/wav;base64," + base64.b64encode((R/"board/sfx/bgm.wav").read_bytes()).decode()
 shell = (R/"board/board_shell.html").read_text()
 rep = {"__AUDIO__": json.dumps(AUD), "__SCENES__": (R/"kousha/scenes.json").read_text(), "__KEYS__": (R/"board/keys.json").read_text(),

@@ -58,7 +58,7 @@ function tkWrong(q) {
   if (m) { parts.push([`tk_m_${m}`, tkMinText(m)]); text += " " + tkMinText(m); }
   return { text, parts };
 }
-async function tkSay(c, parts, pre = "") { await Promise.all(parts.map(([k]) => AUD[pre + k] && voiceBuf(pre + k))); for (let i = 0; i < parts.length; i++) { const [k, t] = parts[i]; await speak(c, pre + k, t); } }
+async function tkSay(c, parts, pre = "") { for (let i = 0; i < parts.length; i++) { const [k, t] = parts[i]; await speak(c, pre + k, t); } }
 
 /* ---------- とけいの 絵 ---------- */
 function drawClock(L, cx, cy, r, opts = {}) {
