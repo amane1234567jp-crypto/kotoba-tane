@@ -6,7 +6,10 @@ const ROOT = path.resolve(__dirname, "../.."), OUT = path.resolve(__dirname, "..
 // アプリに 入れる ゲーム本体は、あまねさんが OK した 版（app/web_commit.txt の コミット）に 固定する（2026-11-02）。
 // 公開ページの 最新版を そのまま アプリに 入れない。新しい 版を 入れる ときは web_commit.txt を かきかえる。
 const pin = (() => { try { return fs.readFileSync(path.resolve(__dirname, "../web_commit.txt"), "utf8").trim(); } catch (e) { return ""; } })();
-let html = pin ? require("child_process").execSync(`git show ${pin}:index.html`, { cwd: ROOT, maxBuffer: 1 << 28 }).toString("utf8") : fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+// 2026-11-04 から ゲーム本体は game.html（index.html は ウェブ版の ロードがめん）。古い 版は index.html が 本体
+const gitShow = f => require("child_process").execSync(`git show ${pin}:${f}`, { cwd: ROOT, maxBuffer: 1 << 28, stdio: ["ignore", "pipe", "ignore"] }).toString("utf8");
+let html = pin ? (() => { try { return gitShow("game.html"); } catch (e) { return gitShow("index.html"); } })()
+  : fs.readFileSync(path.join(ROOT, fs.existsSync(path.join(ROOT, "game.html")) ? "game.html" : "index.html"), "utf8");
 console.log("web:", pin || "(いまの index.html)");
 const used = new Set([...html].map(c => c.codePointAt(0)));
 function fontCss(pkg, family, weights) {

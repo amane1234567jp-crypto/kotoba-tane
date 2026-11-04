@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ことばのたね"><meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="icon.png"><link rel="manifest" href="manifest.json">
+<title>ことばのたね</title>
+<!-- ロードがめん（2026-11-04）：ゲーム本体（game.html・とても おおきい）を よみこむ あいだ、たねが そだつ アニメと パーセントを みせる。
+     よみおわったら おなじ アドレスへ うつる（ブラウザに のこって いるので すぐ ひらく）。tools/game/make_index.py が __VER__ などを うめる -->
+<style>
+html,body{margin:0;height:100%;background:#FFF8E8;overflow:hidden;font-family:"Hiragino Maru Gothic ProN","Hiragino Sans","Zen Maru Gothic",sans-serif;color:#2B2A33;-webkit-user-select:none;user-select:none}
+#w{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+svg{width:min(100vw,160vh);height:auto;max-height:100vh}
+.cl{animation:drift 30s linear infinite}.cl2{animation:drift 44s linear infinite}
+@keyframes drift{from{transform:translateX(-260px)}to{transform:translateX(1700px)}}
+#can{transform-origin:330px 600px;animation:tilt 2.4s ease-in-out infinite}
+@keyframes tilt{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(-24deg)}}
+.dp{animation:drop 1.2s linear infinite;opacity:0}
+@keyframes drop{0%{transform:translate(0,0);opacity:0}15%{opacity:1}100%{transform:translate(40px,150px);opacity:0}}
+.bf{animation:fly 7s ease-in-out infinite}
+@keyframes fly{0%{transform:translate(1120px,420px)}25%{transform:translate(1300px,300px)}50%{transform:translate(1200px,220px)}75%{transform:translate(1050px,330px)}100%{transform:translate(1120px,420px)}}
+.wg{animation:flap .25s ease-in-out infinite alternate;transform-origin:0 0}
+@keyframes flap{from{transform:scaleX(1)}to{transform:scaleX(.3)}}
+#bob{animation:bob 1.6s ease-in-out infinite;transform-origin:800px 560px}
+@keyframes bob{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+.lf{transition:transform .6s cubic-bezier(.3,1.6,.5,1)}
+#fl{transition:transform .8s cubic-bezier(.3,1.6,.5,1)}
+.tw{animation:tw 1.6s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.2}50%{opacity:1}}
+</style></head><body>
+<div id="w"><svg viewBox="0 0 1600 1000" aria-label="よみこみちゅう">
+<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFE6FA"/><stop offset="1" stop-color="#FFF4D6"/></linearGradient></defs>
+<rect width="1600" height="1000" fill="url(#sky)"/>
+<g class="cl"><g fill="#fff" stroke="#2B2A33" stroke-width="6"><path d="M80 170 a40 40 0 0 1 60 -40 a50 50 0 0 1 90 10 a38 38 0 0 1 20 70 h-150 a40 40 0 0 1 -20 -40z"/></g></g>
+<g class="cl2" style="animation-delay:-20s"><g fill="#fff" stroke="#2B2A33" stroke-width="6"><path d="M80 300 a34 34 0 0 1 50 -34 a42 42 0 0 1 76 8 a32 32 0 0 1 16 60 h-126 a34 34 0 0 1 -16 -34z"/></g></g>
+<path d="M0 760 Q400 700 800 740 T1600 730 V1000 H0Z" fill="#BFE3A6" stroke="#2B2A33" stroke-width="6"/>
+<!-- タイトル -->
+<g transform="translate(800 120)"><rect x="-300" y="-62" width="600" height="110" rx="55" fill="#FFD25E" stroke="#2B2A33" stroke-width="8"/>
+<text y="16" text-anchor="middle" font-size="64" font-weight="700" fill="#2B2A33">ことばのたね</text></g>
+<!-- じょうろ -->
+<g transform="translate(150 50)"><g id="can"><path d="M250 560 h140 l10 110 h-160z" fill="#7FCBF0" stroke="#2B2A33" stroke-width="7" stroke-linejoin="round"/>
+<path d="M390 590 l120 -50 l12 22 l-122 60z" fill="#7FCBF0" stroke="#2B2A33" stroke-width="7" stroke-linejoin="round"/>
+<path d="M265 560 q55 -70 110 0" fill="none" stroke="#2B2A33" stroke-width="10"/><circle cx="520" cy="550" r="20" fill="#3E9BD6" stroke="#2B2A33" stroke-width="6"/>
+<g fill="#9FD6F5" stroke="#2B2A33" stroke-width="3"><path class="dp" d="M535 570 q8 14 0 20 q-8 -6 0 -20z"/><path class="dp" style="animation-delay:.4s" d="M548 562 q8 14 0 20 q-8 -6 0 -20z"/><path class="dp" style="animation-delay:.8s" d="M525 578 q8 14 0 20 q-8 -6 0 -20z"/></g></g></g>
+<!-- たね → め → はな（パーセントで そだつ） -->
+<g id="bob">
+<g id="stem"><path id="st" d="M800 740 V740" fill="none" stroke="#2B2A33" stroke-width="24" stroke-linecap="round"/><path id="st2" d="M800 740 V740" fill="none" stroke="#5BA34D" stroke-width="13" stroke-linecap="round"/></g>
+<g id="l1" class="lf" style="transform:translate(800px,640px) scale(0)"><path d="M0 0 q-90 -70 -150 -10 q70 50 150 10z" fill="#7BD389" stroke="#2B2A33" stroke-width="7" stroke-linejoin="round"/></g>
+<g id="l2" class="lf" style="transform:translate(800px,560px) scale(0)"><path d="M0 0 q90 -70 150 -10 q-70 50 -150 10z" fill="#7BD389" stroke="#2B2A33" stroke-width="7" stroke-linejoin="round"/></g>
+<g id="l3" class="lf" style="transform:translate(800px,480px) scale(0)"><path d="M0 0 q-80 -60 -130 -8 q60 44 130 8z" fill="#7BD389" stroke="#2B2A33" stroke-width="7" stroke-linejoin="round"/></g>
+<g id="fl" style="transform:translate(800px,400px) scale(0)"><g fill="#FF8FA3" stroke="#2B2A33" stroke-width="6"><circle cx="0" cy="-48" r="34"/><circle cx="46" cy="-15" r="34"/><circle cx="28" cy="40" r="34"/><circle cx="-28" cy="40" r="34"/><circle cx="-46" cy="-15" r="34"/></g>
+<circle r="30" fill="#FFD25E" stroke="#2B2A33" stroke-width="6"/><circle cx="-10" cy="-4" r="4" fill="#2B2A33"/><circle cx="10" cy="-4" r="4" fill="#2B2A33"/><path d="M-10 8 q10 10 20 0" fill="none" stroke="#2B2A33" stroke-width="4" stroke-linecap="round"/></g>
+</g>
+<!-- うえきばち -->
+<path d="M690 730 h220 l-24 130 h-172z" fill="#E8735A" stroke="#2B2A33" stroke-width="8" stroke-linejoin="round"/><rect x="675" y="712" width="250" height="40" rx="12" fill="#D9604A" stroke="#2B2A33" stroke-width="8"/>
+<ellipse cx="800" cy="726" rx="100" ry="14" fill="#8A5A33"/>
+<!-- ちょうちょ -->
+<g class="bf"><g class="wg"><path d="M0 0 q-40 -50 -50 -10 q10 30 50 10z M0 0 q-40 40 -30 50 q20 0 30 -50z" fill="#FFD25E" stroke="#2B2A33" stroke-width="5"/></g><g class="wg" style="transform:scaleX(-1)"><path d="M0 0 q-40 -50 -50 -10 q10 30 50 10z M0 0 q-40 40 -30 50 q20 0 30 -50z" fill="#FFD25E" stroke="#2B2A33" stroke-width="5"/></g></g>
+<g class="tw" fill="#FFE27A" stroke="#2B2A33" stroke-width="4"><path d="M1140 560 l8 22 22 8 -22 8 -8 22 -8 -22 -22 -8 22 -8z"/></g>
+<g class="tw" style="animation-delay:.8s" fill="#FFE27A" stroke="#2B2A33" stroke-width="4"><path d="M460 300 l7 18 18 7 -18 7 -7 18 -7 -18 -18 -7 18 -7z"/></g>
+<!-- パーセント と バー -->
+<rect x="400" y="890" width="800" height="44" rx="22" fill="#fff" stroke="#2B2A33" stroke-width="7"/>
+<rect id="bar" x="408" y="898" width="0" height="28" rx="14" fill="#7BD389"/>
+<text id="pc" x="1250" y="928" font-size="54" font-weight="700" fill="#2B2A33">0%</text>
+<text id="msg" x="800" y="250" text-anchor="middle" font-size="38" fill="#2B2A33" stroke="#FFFFFF" stroke-width="10" paint-order="stroke">たねに みずを あげて いるよ…</text>
+</svg></div>
+<script>
+(function () {
+  var VER = "__VER__", RAW = __RAW__, GZ = __GZ__;
+  var url = "game.html?v=" + VER + (location.search ? "&" + location.search.slice(1) : "") + location.hash;
+  var $ = function (i) { return document.getElementById(i); }, shown = 0, target = 0, done = false, MSG = ["たねに みずを あげて いるよ…", "めが でて きたよ…", "はっぱが ふえて きたよ…", "もうすぐ はなが さくよ…"];
+  function draw(p) { // p: 0〜100
+    var h = 300 * Math.min(1, p / 100), y = 740 - h; $("st").setAttribute("d", "M800 740 V" + y.toFixed(0)); $("st2").setAttribute("d", "M800 740 V" + y.toFixed(0));
+    [["l1", 25, 640], ["l2", 50, 560], ["l3", 75, 480]].forEach(function (a) { $(a[0]).style.transform = "translate(800px," + a[2] + "px) scale(" + (p >= a[1] ? 1 : 0) + ")"; });
+    $("fl").style.transform = "translate(800px,430px) scale(" + (p >= 100 ? 1 : 0) + ")";
+    $("bar").setAttribute("width", (784 * p / 100).toFixed(0)); $("pc").textContent = Math.floor(p) + "%";
+    $("msg").textContent = p >= 100 ? "はじまるよ！" : MSG[Math.min(3, Math.floor(p / 25))];
+  }
+  (function tick() { shown += (target - shown) * .15; if (target - shown < .2) shown = target; draw(shown); if (!(done && shown >= 100)) requestAnimationFrame(tick); else setTimeout(go, 350); })();
+  window.__ktDraw = draw; function go() { location.replace(url); }
+  try {
+    var x = new XMLHttpRequest(); x.open("GET", url, true); x.responseType = "blob";
+    x.onprogress = function (e) { var tot = e.lengthComputable && e.total > 0 ? e.total : (e.loaded > GZ * 1.05 ? RAW : GZ); target = Math.min(99, e.loaded / tot * 100); };
+    x.onload = function () { if (x.status >= 200 && x.status < 400) { target = 100; done = true; } else go(); };
+    x.onerror = function () { go(); }; x.send();
+  } catch (e) { go(); }
+  if ("serviceWorker" in navigator && location.protocol === "https:") addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () { }); });
+})();
+</script>
+</body></html>
