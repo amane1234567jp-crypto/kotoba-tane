@@ -1,0 +1,18 @@
+name: fetchform
+on:
+  push:
+    branches: [main]
+    paths: [".github/workflows/fetchform.yml"]
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          mkdir out && cd out
+          curl -sSfL -o fw8ben.pdf https://www.irs.gov/pub/irs-pdf/fw8ben.pdf
+          curl -sSfL -o iw8ben.pdf https://www.irs.gov/pub/irs-pdf/iw8ben.pdf
+          git init -q && git config user.name bot && git config user.email bot@users.noreply.github.com
+          git checkout -q -b form-out && git add -A && git commit -q -m "IRS blank W-8BEN"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" HEAD:form-out
