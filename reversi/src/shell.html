@@ -283,6 +283,8 @@ body {
 <script src="lib/peerjs.min.js"></script>
 <script src="lib/qrcode.js"></script>
 <script>
+/* iPadOS 15.4 より前の Safari 向け */
+if (!Array.prototype.at) Array.prototype.at = function (i) { i = Math.trunc(i) || 0; if (i < 0) i += this.length; return this[i]; };
 const NS = "http://www.w3.org/2000/svg";
 const INK = "#2B2A33";
 const svg = document.getElementById("stage");

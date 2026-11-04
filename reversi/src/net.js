@@ -35,7 +35,7 @@ const NET = (() => {
     role: q.get("r") ? "guest" : null,   // null = 1台で遊ぶ
     room: q.get("r") || null,
     peer: null, conn: null, call: null, local: null, remote: null,
-    open: false, lastHeard: 0, handlers: {}, relayOnly: false, via: "",
+    open: false, lastHeard: 0, handlers: {}, relayOnly: false, via: "", busy: false, media: "", since: 0,
     on(type, fn) { this.handlers[type] = fn; },
     send(msg) { if (this.conn && this.open) try { this.conn.send(msg); } catch (e) { /* 切れていたら再接続で送り直す */ } },
     get available() { return typeof Peer !== "undefined" && !!navigator.mediaDevices; },
@@ -43,24 +43,40 @@ const NET = (() => {
   const emit = (type, ...a) => N.handlers[type]?.(...a);
 
   async function camera() {
-    try {
-      N.local = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "user", width: { ideal: 320 }, height: { ideal: 240 }, frameRate: { ideal: 15 } },
-        audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
-      });
-    } catch (e) { N.local = null; }
+    const V = { facingMode: "user", width: { ideal: 320 }, height: { ideal: 240 }, frameRate: { ideal: 15 } };
+    const A = { echoCancellation: true, noiseSuppression: true, autoGainControl: true };
+    // カメラかマイクの 片方が だめでも、使えるほうだけで 通話する
+    N.local = null; N.media = "";
+    for (const [c, label] of [[{ video: V, audio: A }, "both"], [{ audio: A }, "audio"], [{ video: V }, "video"]]) {
+      try { N.local = await navigator.mediaDevices.getUserMedia(c); N.media = label; break; } catch (e) { /* 次をためす */ }
+    }
     emit("local", N.local);
     return N.local;
   }
 
   function adopt(conn) {
+    // ホスト：いまの相手が 元気なら（8秒以内に 便りがある）、あとから来た接続は ことわる。
+    // 同じリンクを 2回ひらいた ときなどに、2つの画面が 相手を うばいあうのを ふせぐ
+    if (N.role === "host" && N.conn && N.open && Date.now() - N.lastHeard < 8000) {
+      conn.on("open", () => { try { conn.send({ t: "busy" }); } catch (e) { } setTimeout(() => { try { conn.close(); } catch (e) { } }, 500); });
+      return;
+    }
     if (N.conn && N.conn !== conn) try { N.conn.close(); } catch (e) { /* 古い接続 */ }
     N.conn = conn;
     conn.on("open", () => {
       N.open = true; N.lastHeard = Date.now(); emit("open"); setTimeout(() => route(conn), 1500);
-      if (N.role === "host" && N.local) callGuest(conn.peer);
+      if (N.role === "host") N.local ? callGuest(conn.peer) : conn.send({ t: "callme" });
     });
-    conn.on("data", m => { N.lastHeard = Date.now(); if (m && m.t !== "ping") emit("msg", m); });
+    conn.on("data", m => {
+      if (conn !== N.conn) return;
+      N.lastHeard = Date.now();
+      if (!m || m.t === "ping") return;
+      // ことわられたら 10秒あとに もう一度（前の画面の接続が 切れきる前に 入りなおした ときは、これで つながる）
+      if (m.t === "busy") { N.busy = true; N.open = false; try { conn.close(); } catch (e) { } emit("busy"); setTimeout(() => { N.busy = false; dialHost(); }, 10000); return; }
+      // ホストに カメラも マイクも ないときは、ゲストのほうから 通話を かける
+      if (m.t === "callme") { if (N.role === "guest" && N.local) try { watchCall(N.peer.call(conn.peer, N.local)); } catch (e) { } return; }
+      emit("msg", m);
+    });
     conn.on("close", () => lost(conn));
     conn.on("error", () => lost(conn));
   }
@@ -86,7 +102,7 @@ const NET = (() => {
     if (conn && conn !== N.conn) return;
     if (!N.open) return;
     N.open = false; emit("lost");
-    if (N.role === "guest") setTimeout(dialHost, 1500);
+    if (N.role === "guest" && !N.busy) setTimeout(dialHost, 1500);
   }
 
   function makePeer(id) {
@@ -121,7 +137,7 @@ const NET = (() => {
     N.peer.on("error", e => { if (e.type === "peer-unavailable") setTimeout(dialHost, 3000); else emit("error", e.type); });
   }
   function dialHost() {
-    if (N.open || !N.peer || N.peer.destroyed) return;
+    if (N.open || N.busy || !N.peer || N.peer.destroyed) return;
     if (N.peer.disconnected) { try { N.peer.reconnect(); } catch (e) { /* 再試行 */ } setTimeout(dialHost, 3000); return; }
     adopt(N.peer.connect(idOf(N.room), { serialization: "json", reliable: true }));
     setTimeout(() => { if (!N.open) dialHost(); }, 6000);

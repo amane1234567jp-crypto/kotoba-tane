@@ -502,7 +502,23 @@ document.addEventListener("pointerdown", e => {
 
 /* ---------- 画面を消さない ---------- */
 let lock = null;
-async function keepAwake() { try { lock = await navigator.wakeLock?.request("screen"); } catch (e) { lock = null; } }
+// iPadOS 16.4 より前は Wake Lock がないので、音なしの小さな動画を くりかえし流して 画面が消えるのを ふせぐ（NoSleep と同じ方法）
+let sleepVid = null;
+function keepAwakeVideo() {
+  if (!sleepVid) {
+    sleepVid = document.createElement("video");
+    Object.assign(sleepVid, { src: "lib/nosleep.mp4", muted: true, loop: true, playsInline: true });
+    sleepVid.setAttribute("playsinline", ""); sleepVid.setAttribute("muted", "");
+    sleepVid.style.cssText = "position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:0;top:0";
+    document.body.appendChild(sleepVid);
+    setInterval(() => { if (sleepVid && !sleepVid.paused && sleepVid.currentTime > 1) sleepVid.currentTime = 0; }, 15000);
+  }
+  sleepVid.play().catch(() => { });
+}
+async function keepAwake() {
+  try { lock = await navigator.wakeLock.request("screen"); } catch (e) { lock = null; }
+  if (!lock) keepAwakeVideo();
+}
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && G.started) keepAwake(); });
 
 /* ---------- はじめる ---------- */
@@ -601,7 +617,7 @@ NET.on("local", s => {
     camMsg(mySide(), NET.role === "guest" ? "カメラが使えません。設定の「Safari」→「カメラ」「マイク」を「許可」にして、もう一度リンクを開いてください" : "カメラが つかえません");
     return;
   }
-  c.v.muted = true; c.v.srcObject = s; playVideo(c.v); camMsg(mySide(), "");
+  c.v.muted = true; c.v.srcObject = s; playVideo(c.v); camMsg(mySide(), NET.media === "audio" ? "カメラが つかえません（こえだけ）" : NET.media === "video" ? "マイクが つかえません（えいぞうだけ）" : "");
   setTimeout(wakeSound, 300); setTimeout(wakeSound, 1500);   // カメラ・マイクが入ると iPad の音が止まることがある
 });
 NET.on("remote", s => { const c = camOf(otherSide()); c.v.muted = false; c.v.srcObject = s; playVideo(c.v); camMsg(otherSide(), ""); });
@@ -654,6 +670,7 @@ let lostSaid = false;
 NET.on("open", () => {
   const back = lostSaid; G.paused = false; lostSaid = false; $("inviteOv").hidden = true; camMsg(otherSide(), "");
   if (back && !G.animating) speak(host.pony, "rv_back");
+  setTimeout(() => { if (NET.open && !NET.remote) camMsg(otherSide(), "あいての カメラが うつりません（ゲームは できます）"); }, 9000);
   if (NET.role !== "host") return;
   sendState();
   if (G.begun) return updateButtons();
@@ -668,13 +685,19 @@ NET.on("lost", () => {
   if (!lostSaid && !G.animating) { lostSaid = true; speak(host.pony, "rv_hold"); }
 });
 NET.on("ready", () => camMsg(otherSide(), "まっています…"));
+// 同じリンクを もう1つの画面で ひらいていて、そちらが つながっているとき
+NET.on("busy", () => { G.paused = true; G.busy = true; clearHints(); updateButtons(); camMsg(otherSide(), "ほかの がめんで つながっています。この がめんは とじてください"); });
 NET.on("route", via => { $("routeInfo").textContent = via ? `いまのつながり：${via}` : ""; });
 NET.on("error", type => camMsg(otherSide(), type === "network" || type === "server-error" ? "インターネットを たしかめてね" : "つなぎなおしています…"));
 
 function startOnline() {
   showCams();
   G.busy = true;
-  if (NET.role === "guest") { camMsg(otherSide(), "つないでいます…"); NET.guest(); }
+  if (NET.role === "guest") {
+    camMsg(otherSide(), "つないでいます…"); NET.guest();
+    // 30秒たっても つながらないときは、あいての画面を たしかめてもらう
+    setTimeout(() => { if (!NET.open && !NET.busy) camMsg(otherSide(), "まだ つながりません。あいての iPad で「たいせんあいてを よぶ」の画面が ひらいているか たしかめてね"); }, 30000);
+  }
 }
 // たいせんあいてを よぶ（ホスト）
 async function callGrandma(fresh) {
