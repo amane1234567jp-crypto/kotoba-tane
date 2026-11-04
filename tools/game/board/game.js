@@ -909,6 +909,8 @@ function dataToArrayBuffer(uri) {
   return u.buffer;
 }
 function decodeData(uri) {
+  if (uri && !uri.startsWith("data:")) // 2026-11-04：ページの そとの ファイル（voice/）は、ならす ときに 読みこむ
+    return fetch(uri).then(r => { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); }).then(b => new Promise((ok, ng) => { const p = ctx.decodeAudioData(b, ok, ng); if (p && p.catch) p.catch(ng); }));
   return new Promise((ok, ng) => { try { const p = ctx.decodeAudioData(dataToArrayBuffer(uri), ok, ng); if (p && p.catch) p.catch(ng); } catch (e) { ng(e); } });
 }
 function voiceBuf(key) {
@@ -1092,7 +1094,8 @@ async function micOpen() {
 function boot() { // 最初のタップで音を使えるようにする
   if (started) return; started = true;
   micAlwaysOn(); audio(); loadSfx(); bgmStart();
-  preloadVoices(Object.keys(AUD).filter(k => !/^k\d|^gk/.test(k) && !/^(sq|sr|sa|sg|sx|sw)_/.test(k))); // 場面の声は ステージを はじめるときに（loadPack）
+  // 2026-11-04：声を ぜんぶ さきに 音に して おくのを やめた（メモリの すくない iPad で おちる）。よく つかう ものだけ。ほかは ならす ときに
+  preloadVoices(["roll", "p_your", "n1", "n2", "n3", "n4", "n5", "n6", "goal"]);
 }
 function micBadge() { const b = document.getElementById("micBadge"); if (b) b.textContent = MIC.stream ? "🎤 マイク オン" : (SRC ? "🎤 マイク：がめんを タップすると オン" : ""); }
 function showMenu() {
