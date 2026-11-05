@@ -532,10 +532,37 @@ const BUILD = {
     const hm = el("g", {}, H); el("path", { d: "M114 118 Q200 84 286 118", fill: "none", stroke: "#3B3A44", "stroke-width": 10, "stroke-linecap": "round" }, hm);
     el("circle", { cx: 200, cy: 98, r: 26, fill: "#DCE6EE", ...ST(5) }, hm); el("circle", { cx: 200, cy: 98, r: 9, fill: "#FFFFFF", ...ST(3) }, hm); el("path", { d: "M184 88 Q190 80 198 80", fill: "none", stroke: "#FFFFFF", "stroke-width": 4, "stroke-linecap": "round" }, hm);
     p.tempo = .85; return p; },
+  piko(root) { // うちゅうじんの ピコ（うちゅう たんけん、2026-11-05）：みどりの こども。あたまに しょっかく・おおきな くろい め・みみ なし・しっぽ なし
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); if (p.brows) p.brows.innerHTML = ""; p.tail.g.setAttribute("display", "none");
+    const F = "#8FE08A", L2 = "#D6F7C6"; recolor(root, { "#FFC94D": F, "#FFF1D6": L2, "#FFB3C1": "#BFF0B5", "#FF9FB0": "#7CCB78" });
+    p.ears.forEach(e => e.g.setAttribute("display", "none")); neckFill(root, p, F);
+    const H = p.head.g;
+    // しょっかく（あたまの うしろに）：2ほん、さきに ひかる たま
+    [[150, -1], [250, 1]].forEach(([x, s], i) => { const g = el("g", {}); H.insertBefore(g, H.firstChild);
+      el("path", { d: `M${x} 100 Q${x + s * 30} 40 ${x + s * 56} 14`, fill: "none", ...ST(9) }, g); el("path", { d: `M${x} 100 Q${x + s * 30} 40 ${x + s * 56} 14`, fill: "none", stroke: F, "stroke-width": 4 }, g);
+      const b = el("circle", { cx: x + s * 58, cy: 10, r: 16, fill: "#FFE27A", ...ST(5) }, g); el("circle", { cx: x + s * 54, cy: 5, r: 5, fill: "#FFFFFF" }, g);
+      el("animate", { attributeName: "fill", values: "#FFE27A;#FFF6C8;#FFE27A", dur: `${1.2 + i * .4}s`, repeatCount: "indefinite" }, b); });
+    // おおきな くろい め（もとの めの うえに）
+    p.eyes.forEach(e => { e.g.querySelectorAll("ellipse,circle").forEach(q => q.setAttribute("display", "none")); el("ellipse", { cx: e.cx, cy: 164, rx: 24, ry: 30, fill: "#1E2A3A", ...ST(4) }, e.g); el("ellipse", { cx: e.cx - 7, cy: 152, rx: 8, ry: 10, fill: "#FFFFFF" }, e.g); el("circle", { cx: e.cx + 8, cy: 176, r: 4, fill: "#FFFFFF", opacity: .7 }, e.g); });
+    el("ellipse", { cx: 200, cy: 200, rx: 7, ry: 4, fill: "#5BA34D" }, H); // ちいさな はな
+    // からだの もよう（おなかの まるい もよう）
+    [[180, 322], [222, 334], [200, 356]].forEach(([x, y]) => el("circle", { cx: x, cy: y, r: 6, fill: "#5BA34D", opacity: .5 }, root));
+    p.tempo = 1.1; return p; },
+  gabo(root) { // うちゅうじんの ガボ（ピコの おとうさん）：むらさきで おおきくて まるい（おおきさは KID_S）。みっつめの め・しょっかく 1ぽん・のんびり
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); if (p.brows) p.brows.innerHTML = ""; p.tail.g.setAttribute("display", "none");
+    const F = "#A98BD6", L2 = "#DDD0F2"; recolor(root, { "#FFC94D": F, "#FFF1D6": L2, "#FFB3C1": "#C9B3EA", "#FF9FB0": "#8E72C4" });
+    p.ears.forEach(e => e.g.setAttribute("display", "none")); neckFill(root, p, F);
+    const H = p.head.g; const g0 = el("g", {}); H.insertBefore(g0, H.firstChild);
+    el("path", { d: "M200 90 Q236 40 206 0", fill: "none", ...ST(10) }, g0); el("path", { d: "M200 90 Q236 40 206 0", fill: "none", stroke: F, "stroke-width": 5 }, g0);
+    const b = el("circle", { cx: 206, cy: -6, r: 20, fill: "#FF8FA3", ...ST(5) }, g0); el("animate", { attributeName: "r", values: "20;24;20", dur: "1.6s", repeatCount: "indefinite" }, b);
+    el("ellipse", { cx: 200, cy: 112, rx: 15, ry: 19, fill: "#1E2A3A", ...ST(4) }, H); el("circle", { cx: 195, cy: 105, r: 5, fill: "#FFFFFF" }, H); // みっつめの め（ひたい）
+    p.eyes.forEach(e => { e.g.querySelectorAll("ellipse,circle").forEach(q => q.setAttribute("display", "none")); el("ellipse", { cx: e.cx, cy: 164, rx: 20, ry: 24, fill: "#1E2A3A", ...ST(4) }, e.g); el("ellipse", { cx: e.cx - 6, cy: 154, rx: 7, ry: 8, fill: "#FFFFFF" }, e.g); });
+    [[176, 322], [224, 322], [200, 352]].forEach(([x, y]) => el("circle", { cx: x, cy: y, r: 9, fill: "#7A5CB0", opacity: .45 }, root));
+    p.tempo = .8; return p; },
 };
 
 const NAMES = { pony: "ぽにー", shima: "まるシマ", doshin: "どしん", nobbo: "のっぽ", gao: "がお", chu: "ちゅう", pyon: "ぴょん", mii: "みい", kamejii: "かめじい", kamedr: "かめせんせい", meebaa: "めえばあ",
-  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", papa: "パパ", gaopapa: "がおの パパ", gaonii: "がおの おにいちゃん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "かんごしさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くま", piyo: "ぴよこ", ekiin: "えきいんさん", tenin: "てんいんさん", onii: "おにいちゃん", inukei: "おまわりさん", kumadr: "おいしゃさん" };
+  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", papa: "パパ", gaopapa: "がおの パパ", gaonii: "がおの おにいちゃん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "かんごしさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くま", piyo: "ぴよこ", ekiin: "えきいんさん", tenin: "てんいんさん", onii: "おにいちゃん", inukei: "おまわりさん", kumadr: "おいしゃさん", piko: "ピコ", gabo: "ガボ" };
 const LINES = { pony: "きょねん、うみに いったね", shima: "やったー！ いえたね！", doshin: "どいて、あげるよ", nobbo: "それは、ずかんに のって いますよ", gao: "つぎは、まけないぞ",
   chu: "こ、こわかったよう", pyon: "いっしょに あそぼう！", mii: "ふーん。まあまあ じゃない", kamejii: "よく いえましたね", kamedr: "よく いえましたね", meebaa: "いらっしゃいませ" };
 
@@ -688,6 +715,8 @@ const SPECIAL = {
   panna: c => { jump(c, .5); c.happyOn = true; later(1200, () => c.happyOn = false); },
   pannamama: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
   omawari: c => { c.tm.nod = 1.2; c.armR.t = -140; later(1000, () => c.armR.t = 0); },
+  piko: c => { c.tm.dance = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
+  gabo: c => { c.tm.nod = 1.6; c.happyOn = true; later(1600, () => c.happyOn = false); },
   inukei: c => { c.tm.nod = 1.2; c.armR.t = -150; later(1000, () => c.armR.t = 0); }, // けいれい
   kumadr: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
   meebaa: c => { c.armL.t = -55; c.armR.t = 55; c.happyOn = true; c.lean.t = 6; later(500, () => c.lean.t = -6); later(1000, () => c.lean.t = 0); later(1400, () => { c.armL.t = 0; c.armR.t = 0; c.happyOn = false; }); },
