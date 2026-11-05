@@ -11,7 +11,7 @@
    ゆめの あいだは くもの わく と オルゴールの きょく（bgm_kaidan_yume）。ほんとうに つかまる はなしには しない（あまねさんの きめ）。
    それより おおく とまったら、すべりだい・えきの かいだん の みじかい れんしゅう。ライバル（がお）は 場面に ださない。
    データと 声：sit/kaidan_gen.py → kaidan_data.js・sit/pony_kaidan.json・aivis/jobs/kd1 */
-STAGES.push({ id: "kaidan", name: "かいだん", icon: "🪜", ready: true });
+// STAGES への とうろくは kaidan_reg.js（メニューを つくる まえに いれる ため、stages13.js の すぐ あと）
 Object.assign(RIVAL_OF, { kaidan: "gao" }); SLEEPER_OF.kaidan = "doshin";
 Object.assign(ASK_AT, { inukei: [1250, .78], kumadr: [1270, .8] }); Object.assign(KID_S, { inukei: .78, kumadr: .8 }); PIECE_S.inukei = .26; PIECE_S.kumadr = .27;
 { const g = GENRES.find(g => g[0] === "ouchi"); if (g && !g[3].includes("kaidan")) g[3].push("kaidan"); }
