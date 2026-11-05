@@ -34,11 +34,11 @@ const SFX = (() => {
     // m 枚目（0から）／ぜんぶで n 枚。ペンタトニックで 上がっていき、あとの石ほど 音を重ねる
     flip(m, n = 1) {
       // 少ない枚数は控えめ（11枚以上で いまの最大）
-      const t = now(), f = PENTA[Math.min(m, PENTA.length - 1)], last = m === n - 1, a = .3 + .7 * Math.pow(Math.min(1, (n - 1) / 10), 1.3);
+      const t = now(), f = PENTA[Math.min(m, PENTA.length - 1)], last = m === n - 1, a = Math.min(1, .08 * Math.pow(2, (n - 1) / 2.75));   // 指数関数的（fx.js の amp と同じ）
       tone(f, t, .2 + .04 * a, "sine", .12 + .1 * a); tone(f * 4, t, .06, "sine", .05 * a); tone(f * 2, t, .1, "triangle", .05 * a);
-      if (m >= 3) tone(f * 1.5, t, .2, "triangle", .04 + Math.min(.06, m * .006));
-      if (m >= 6) hiss(t, .08, 6000 + m * 300, 1.5, .12 + Math.min(.2, m * .015));
-      if (last && n >= 3) tone(f / 2, t, .5, "sine", .12);
+      if (m >= 3) tone(f * 1.5, t, .2, "triangle", (.04 + Math.min(.06, m * .006)) * a);
+      if (m >= 6) hiss(t, .08, 6000 + m * 300, 1.5, (.12 + Math.min(.2, m * .015)) * a);
+      if (last && n >= 5) tone(f / 2, t, .5, "sine", .12 * a);
     },
     sparkle() { const t = now(); [1046.5, 1318.5, 1568, 2093, 2637].forEach((f, i) => tone(f, t + i * .07, .35, "sine", .12)); },
     turn() { const t = now(); tone(659.25, t, .3 * 1.4, "sine", .16, .01); tone(1318.5, t, .2, "sine", .04, .01); },

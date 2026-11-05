@@ -11,12 +11,18 @@
   --wall: #F5F0E4;
   --wall-2: #E9E0CC;
   --lattice: #DCCFB4;
-  --felt-hi: #63C392;
-  --felt: #3E9F6B;
-  --felt-lo: #2C8257;
-  --line: #13201A;
-  --frame: #2F363D;
-  --frame-hi: #4A535C;
+  --felt-hi: #4FAE78;
+  --felt: #37935F;
+  --felt-lo: #25714A;
+  --line: #10231A;
+  --frame: #1E2226;
+  --frame-hi: #3A4046;
+  --frame-lo: #0E1013;
+  --w-face: #F4F1E8;
+  --w-edge: #C9C5B8;
+  --k-face: #1F1F23;
+  --k-edge: #2C2C31;
+  --e: calc(var(--bs, 600px) * .0078);   /* 石の厚み（上から少し斜めに見たときの帯） */
   --mint: #8CF2D6;
   --halo: 255, 92, 112;
   --seat: #FFFDF6;
@@ -46,18 +52,27 @@ body {
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 16px;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 12px;
 }
-.boardWrap { display: flex; align-items: center; justify-content: center; min-width: 0; }
+.boardWrap { display: flex; align-items: center; justify-content: center; min-width: 0; perspective: 2200px; perspective-origin: 50% 30%; }
 #board {
   width: var(--bs, 600px); height: var(--bs, 600px); box-sizing: border-box; position: relative;
   display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, 1fr); gap: 0;
-  background: radial-gradient(ellipse at 50% 46%, var(--felt-hi) 0%, var(--felt) 52%, var(--felt-lo) 100%);
-  border: calc(var(--bs, 600px) * .036) solid var(--frame); border-top-color: var(--frame-hi); border-radius: 12px;
-  outline: 5px solid var(--ink); box-shadow: inset 0 0 0 2px var(--line), 0 10px 0 rgba(43, 42, 51, .2);
+  background: url("__FELT__"), radial-gradient(ellipse at 50% 42%, var(--felt-hi) 0%, var(--felt) 55%, var(--felt-lo) 100%);
+  background-size: calc(var(--bs, 600px) * .16) calc(var(--bs, 600px) * .16), auto; background-blend-mode: overlay, normal;
+  border: calc(var(--bs, 600px) * .04) solid var(--frame); border-radius: calc(var(--bs, 600px) * .022);
+  border-top-color: var(--frame-hi); border-left-color: #2A2F34; border-right-color: #15181B; border-bottom-color: var(--frame-lo);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .55), inset 0 calc(var(--bs, 600px) * .012) calc(var(--bs, 600px) * .018) rgba(0, 0, 0, .45),
+    inset 0 calc(var(--bs, 600px) * -.004) calc(var(--bs, 600px) * .01) rgba(255, 255, 255, .08),
+    0 2px 0 rgba(255, 255, 255, .06), 0 calc(var(--bs, 600px) * .022) calc(var(--bs, 600px) * .03) rgba(20, 20, 30, .45), 0 4px 0 var(--ink);
+  transform: rotateX(4deg); transform-origin: 50% 100%;
 }
-#board::after { content: ""; position: absolute; inset: 0; background: rgba(255, 253, 246, .5); opacity: 0; transition: opacity .3s; pointer-events: none; border-radius: 4px; }
+/* 枠の角の面取り（光るふち） */
+#board::before { content: ""; position: absolute; inset: calc(var(--bs, 600px) * -.04); border-radius: calc(var(--bs, 600px) * .03); pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .18), rgba(255, 255, 255, 0) 18%, rgba(0, 0, 0, 0) 82%, rgba(0, 0, 0, .35)); z-index: 1;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; padding: calc(var(--bs, 600px) * .04); }
+#board::after { content: ""; position: absolute; inset: 0; background: rgba(255, 253, 246, .5); opacity: 0; transition: opacity .3s; pointer-events: none; border-radius: 4px; z-index: 4; }
 #board.dim::after { opacity: 1; }
-.cell { position: relative; background: transparent; box-shadow: inset 0 0 0 1.5px var(--line); border: 0; padding: 0; margin: 0; perspective: 420px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-.star { position: absolute; width: calc(var(--bs, 600px) * .017); height: calc(var(--bs, 600px) * .017); border-radius: 50%; background: var(--line); transform: translate(-50%, -50%); pointer-events: none; z-index: 1; }
+.cell { position: relative; background: transparent; box-shadow: inset 0 0 0 1px rgba(16, 35, 26, .9), inset 0 0 0 1.6px rgba(16, 35, 26, .35); border: 0; padding: 0; margin: 0; perspective: 420px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.star { position: absolute; width: calc(var(--bs, 600px) * .017); height: calc(var(--bs, 600px) * .017); border-radius: 50%; background: radial-gradient(circle at 40% 35%, #2A3A30, #0B1811 70%); box-shadow: 0 1px 1px rgba(0, 0, 0, .4); transform: translate(-50%, -50%); pointer-events: none; z-index: 1; }
 #halo { position: absolute; width: 22%; height: 22%; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; display: none;
   background: radial-gradient(circle, rgba(var(--halo), .72) 0, rgba(var(--halo), .4) 42%, rgba(var(--halo), 0) 70%); }
 #halo.on { display: block; animation: halo .35s ease-out; }
@@ -75,15 +90,27 @@ body {
 .disc[data-c="0"] { visibility: hidden; }
 .f { position: absolute; inset: 0; border-radius: 50%; backface-visibility: hidden; -webkit-backface-visibility: hidden; box-sizing: border-box; }
 .f.b { transform: rotateY(180deg); }
-/* 止まっている石は真上から見た平たい円。下に見える細い帯が厚み（黒の石の下は白、白の石の下は黒） */
-.f[data-c="1"] { background: radial-gradient(circle at 42% 36%, #3A3A40 0, #232326 52%, #18181A 100%);
-  box-shadow: inset 0 0 0 max(1px, calc(var(--bs, 600px) * .0025)) rgba(255, 255, 255, .07), 0 calc(var(--bs, 600px) * .0035) 0 #0E0E10, 0 calc(var(--bs, 600px) * .0075) 0 #D2D2CC, 0 calc(var(--bs, 600px) * .011) calc(var(--bs, 600px) * .01) rgba(0, 0, 0, .38); }
-.f[data-c="2"] { background: radial-gradient(circle at 42% 36%, #FFFFFF 0, #F3F3EF 55%, #E3E3DD 100%);
-  box-shadow: inset 0 0 0 max(1px, calc(var(--bs, 600px) * .0025)) rgba(0, 0, 0, .06), 0 calc(var(--bs, 600px) * .0035) 0 #BEBEB8, 0 calc(var(--bs, 600px) * .0075) 0 #1C1C1F, 0 calc(var(--bs, 600px) * .011) calc(var(--bs, 600px) * .01) rgba(0, 0, 0, .34); }
+/* 止まっている石：.disc::before が「厚みの帯＋フェルトに落ちる影」（手前に見える側面：上半分は上面の色、下に反対の色がのぞく）、
+   .f が上面（ドーム状の艶）、.f::after がハイライトとふちの丸み */
+.disc::before { content: ""; position: absolute; inset: 0; border-radius: 50%; z-index: -1; transform: translateY(var(--e));
+  box-shadow: 0 calc(var(--e) * 1.6) calc(var(--e) * 2.2) rgba(0, 0, 0, .45), 0 calc(var(--e) * .5) calc(var(--e) * .5) rgba(0, 0, 0, .35); }
+.disc[data-c="1"]::before { background: linear-gradient(to top, #B9B5A9 0, #E6E3D9 calc(var(--e) * .5), #16161A calc(var(--e) * .5), var(--k-edge) 100%); }
+.disc[data-c="2"]::before { background: linear-gradient(to top, #0E0E11 0, #2A2A2F calc(var(--e) * .5), #AFAB9F calc(var(--e) * .5), var(--w-edge) 100%); }
+.f::after { content: ""; position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(ellipse 38% 26% at 34% 26%, rgba(255, 255, 255, .55) 0, rgba(255, 255, 255, .18) 45%, rgba(255, 255, 255, 0) 100%),
+    radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0) 66%, rgba(0, 0, 0, .14) 90%, rgba(0, 0, 0, .3) 100%); }
+.f[data-c="1"] { background: radial-gradient(circle at 44% 38%, #3E3E45 0, #27272C 40%, var(--k-face) 70%, #141417 100%); }
+.f[data-c="1"]::after { opacity: .9; }
+.f[data-c="2"] { background: radial-gradient(circle at 44% 38%, #FFFFFF 0, #FAF8F2 38%, var(--w-face) 70%, #DAD5C7 100%); }
+.f[data-c="2"]::after { opacity: .7; }
 .cyl { position: absolute; inset: 7%; transform-style: preserve-3d; z-index: 3; pointer-events: none; }
 .cyl .f { box-shadow: none; }
-.cyl .f[data-c="1"] { background: radial-gradient(circle at 42% 36%, #3A3A40 0, #232326 52%, #18181A 100%); }
+.cyl .f::before { display: none; }
+/* 返している最中に フェルトに落ちる影（石が立つと細くなる） */
+.cylShadow { position: absolute; inset: 7%; border-radius: 50%; z-index: 1; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, .42) 0, rgba(0, 0, 0, .28) 55%, rgba(0, 0, 0, 0) 78%); transform: translateY(calc(var(--e) * 1.6)); }
 .edge { position: absolute; left: 50%; top: 50%; backface-visibility: visible; }
+.edge i { position: absolute; inset: 0; display: block; background: linear-gradient(to bottom, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 30%, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, .3)); }
 
 .side {
   display: flex; flex-direction: column; align-items: stretch; gap: 10px; min-width: 0;
@@ -95,8 +122,8 @@ body {
 .chip { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-size: clamp(18px, 2.4vmin, 28px); line-height: 1.2; min-width: 0; }
 .chip .nm { min-width: 0; overflow-wrap: anywhere; }
 .stone { flex: none; width: 1.3em; height: 1.3em; border-radius: 50%; border: 3px solid var(--ink); box-sizing: border-box; }
-.stone[data-c="1"] { background: radial-gradient(circle at 34% 30%, var(--disc-k-hi), var(--disc-k) 58%); }
-.stone[data-c="2"] { background: radial-gradient(circle at 34% 30%, #FFFFFF, var(--disc-w) 45%, var(--disc-w-lo)); }
+.stone[data-c="1"] { background: radial-gradient(circle at 38% 32%, #4A4A52, var(--k-face) 60%); }
+.stone[data-c="2"] { background: radial-gradient(circle at 38% 32%, #FFFFFF, var(--w-face) 50%, #D9D4C6); }
 .slot { flex: 1; min-height: 80px; }
 .score { display: flex; flex-wrap: nowrap; white-space: nowrap; align-items: center; justify-content: center; gap: 12px; font-family: var(--display); font-size: clamp(34px, 6vmin, 64px); line-height: 1; font-variant-numeric: tabular-nums; }
 .score small { font-size: .42em; align-self: center; margin-left: -.35em; transform: translateY(.45em); }
@@ -157,6 +184,7 @@ body {
 .panelBtns { display: flex; gap: 10px; flex-wrap: wrap; }
 .panelBtns button { flex: 1; font: 700 17px var(--body); padding: 12px; border: 3px solid var(--ink); border-radius: 14px; background: #FFFFFF; color: var(--ink); cursor: pointer; }
 .panelBtns .primary { background: var(--glow); }
+.panelBtns button:disabled { opacity: .4; cursor: default; }
 .panelBtns .confirm { background: var(--pink); color: #FFFFFF; }
 
 /* ビデオ：自分の顔は小さく、相手の顔は大きく。それぞれの席の上に出す */
@@ -184,6 +212,16 @@ body {
 .menuBtn svg { width: 20px; height: 20px; }
 .menuBtn:focus-visible { outline: 4px solid var(--pink); outline-offset: 3px; }
 #quitOv { background: rgba(43, 42, 51, .45); }
+.ver { position: fixed; right: max(10px, env(safe-area-inset-right, 0px)); bottom: max(6px, env(safe-area-inset-bottom, 0px)); margin: 0; font: 500 11px var(--body); color: var(--muted); opacity: .75; }
+.cell.nudge .hint i { animation-duration: .8s; border-color: #FFE27A; box-shadow: 0 0 calc(var(--bs, 600px) * .03) rgba(255, 226, 122, .9); }
+.left { margin: -10px 0 0; font: 700 clamp(14px, 2.2vmin, 18px) var(--body); color: var(--muted); }
+.left.zero { color: #C0392B; }
+#unlockOv { background: rgba(43, 42, 51, .45); }
+.warn { margin: 0; font: 700 14px/1.6 var(--body); color: #C0392B; }
+.unlock { text-align: center; }
+.unlock h2 { font-size: 21px; line-height: 1.4; }
+.unlock .lead { margin: 0; font-size: 15px; line-height: 1.7; color: var(--ink); }
+.unlock .lead:empty { display: none; }
 .quit { text-align: center; }
 .quit h2 { font-size: 22px; }
 .quit .lead { margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted); }
@@ -230,6 +268,7 @@ body {
   <div class="startCard">
     <h1 class="logo">まるシマ<span>リバーシ</span></h1>
     <button class="big" id="callBtn" type="button">たいせんあいてを よぶ</button>
+    <p class="left" id="leftNote" hidden></p>
     <button class="big sub" id="startBtn" type="button">1だいで あそぶ</button>
     <div class="guestLead" id="guestLead" hidden>
       <p class="gTitle">リバーシのお誘いです</p>
@@ -240,6 +279,7 @@ body {
       <p class="gNote">お孫さんの顔が映ったら、黒と白の石を交互に置いて遊びます。</p>
     </div>
     <p class="note" id="startNote">おとなの せってい：ばんの そとを 3びょう ながおし</p>
+    <p class="ver">__VER__</p>
   </div>
 </div>
 <div class="cover" id="inviteOv" hidden>
@@ -251,6 +291,7 @@ body {
       <button type="button" class="lineBtn" id="lineBtn">LINEで おくる</button>
     </div>
     <p class="link" id="inviteLink"></p>
+    <p class="warn" id="inviteWarn" hidden>無料分（10回）は使い切っています。相手が解放ずみなら遊べます。そうでなければ、つながったあとに解放の案内が出ます。</p>
     <div class="panelBtns"><button type="button" id="copyBtn">リンクを コピー</button><button type="button" id="inviteClose" class="primary">とじる（まつ）</button></div>
   </div>
 </div>
@@ -258,6 +299,15 @@ body {
 <div class="cover" id="againOv" hidden><button class="big" id="againBtn" type="button">もういっかい</button></div>
 
 <button type="button" id="menuBtn" class="menuBtn" hidden aria-label="メニューに もどる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8M6 9.5V20h4.5v-6h3v6H18V9.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>メニュー</button>
+<div class="cover" id="unlockOv" hidden>
+  <div class="panel unlock" role="dialog" aria-label="遠隔対戦の解放">
+    <h2 id="unlockTitle">遠隔対戦の無料分（10回）を使い切りました</h2>
+    <p class="lead">解放すると、回数の制限なく遠隔対戦ができます。1台で遊ぶのは、これからも無料です。<br>お支払いはどちらか一方だけでかまいません。相手が解放ずみなら、自分は払わなくても遊べます。</p>
+    <p class="lead" id="unlockNote"></p>
+    <div class="panelBtns"><button type="button" id="buyBtn" class="primary">解放する</button><button type="button" id="restoreBtn">購入を引きつぐ</button></div>
+    <div class="panelBtns"><button type="button" id="unlockClose">とじる</button></div>
+  </div>
+</div>
 <div class="cover" id="quitOv" hidden>
   <div class="panel quit" role="dialog" aria-label="ゲームを やめる">
     <h2>ゲームを やめて メニューに もどる？</h2>
@@ -275,6 +325,7 @@ body {
     <div class="row"><span>キャラの こえ</span><div class="seg" data-key="voice"><button type="button" id="voice0" data-v="0">なし</button><button type="button" id="voice1" data-v="1">小</button><button type="button" id="voice2" data-v="2">中</button><button type="button" id="voice3" data-v="3">大</button></div></div>
     <div class="row"><span>こどもの まったに あいては じどうで いいよ</span><div class="seg" data-key="autoOk"><button type="button" id="autoOk1" data-v="1">じどうで いいよ</button><button type="button" id="autoOk0" data-v="0">きいてから</button></div></div>
     <div class="row"><span>つながり方（テスト用。「中継だけ」は、家の外でもつながるかを家の中で確かめるとき）</span><div class="seg" data-key="relay"><button type="button" id="relay0" data-v="0">ふつう</button><button type="button" id="relay1" data-v="1">中継だけ</button></div><span class="route" id="routeInfo"></span></div>
+    <div class="row"><span>遠隔対戦（10回まで無料）</span><span class="route" id="remoteInfo"></span><div class="seg" data-key="devUnlock"><button type="button" id="devUnlock0" data-v="0">ふつう</button><button type="button" id="devUnlock1" data-v="1">テスト用に解放</button></div></div>
     <div class="panelBtns"><button type="button" id="reinviteBtn">たいせんあいてを よぶ（リンク）</button></div>
     <div class="panelBtns"><button type="button" id="resetBtn">さいしょから</button><button type="button" id="closeBtn" class="primary">とじる</button></div>
   </div>
@@ -307,5 +358,6 @@ __FIXTURES__
 __SFX__
 __FX__
 __NET__
+__BILLING__
 __APP__
 </script>

@@ -11,12 +11,12 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const CFG_KEY = "marushima-reversi-cfg", GAME_KEY = "marushima-reversi-game";
 const load = k => { try { return JSON.parse(localStorage.getItem(k)) || null; } catch (e) { return null; } };
 const keep = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* 保存できなくても遊べる */ } };
-const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2, autoOk: 1, relay: 0, fx: 2 }, load(CFG_KEY) || {});
+const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2, autoOk: 1, relay: 0, fx: 2, devUnlock: 0 }, load(CFG_KEY) || {});
 const saveCfg = () => keep(CFG_KEY, CFG);
 
 /* ---------- 対局の状態 ---------- */
 // A = こども（左）、B = おばあちゃん（右）。blackSide が くろ（先手）の側。対局ごとに交代する。
-const G = { hist: [], blackSide: "A", busy: true, started: false, ended: false, paused: false, animating: false, readyMe: false, readyThem: false };
+const G = { hist: [], blackSide: "A", busy: true, started: false, ended: false, paused: false, animating: false, readyMe: false, readyThem: false, theirUnlocked: false, pendingRematch: false };
 // 遠隔対戦では、この端末が受け持つ側だけを操作できる（ホスト＝こども A、ゲスト＝おばあちゃん B）
 const SOLO = () => !NET.role;
 const mySide = () => (NET.role === "guest" ? "B" : "A");
@@ -53,16 +53,17 @@ function clearHints() { cells.forEach(x => x.b.classList.remove("can")); }
 function dropDisc(i, v) {
   setDisc(i, v);
   cells[i].disc.animate([
-    { transform: "translateY(-38%) scale(1.35)", opacity: 0 },
-    { transform: "translateY(0) scale(.9)", opacity: 1, offset: .78 },
+    { transform: "translateY(-30%) scale(1.22)", opacity: 0, filter: "drop-shadow(0 18px 10px rgba(0,0,0,.25))" },
+    { transform: "translateY(0) scale(1)", opacity: 1, filter: "drop-shadow(0 0 0 rgba(0,0,0,0))", offset: .7 },
+    { transform: "translateY(0) scale(.97)", opacity: 1, offset: .82 },
     { transform: "none", opacity: 1 },
-  ], { duration: T.drop * K(), easing: "cubic-bezier(.5,0,.7,1)" });
+  ], { duration: T.drop * K(), easing: "cubic-bezier(.4,0,.6,1)" });
 }
 // 方向に合わせた軸でくるっと返す（横に並ぶ石はたて軸、たてに並ぶ石はよこ軸）
 /* 返すときだけ、厚みのある円柱（表の面・裏の面・側面24枚）を組み立てて回す。
    側面は本物の石と同じく半分ずつ黒と白。光の向きに合わせて明暗をつける。 */
-const FACE = { 1: "#1E1E21", 2: "#F2F2EE" }, EDGE = { 1: [42, 42, 46], 2: [214, 214, 208] };
-const SEG = 24, THICK = .2;
+const FACE = { 1: "#1F1F23", 2: "#F4F1E8" }, EDGE = { 1: [46, 46, 52], 2: [208, 204, 192] };
+const SEG = 32, THICK = .17;   // 本物の石は 直径34mm・厚さ約6mm
 const shade = (rgb, k) => `rgb(${rgb.map(v => Math.round(Math.min(255, v * k))).join(",")})`;
 function makeCylinder(from, to, D) {
   const H = D * THICK, w = Math.PI * D / SEG * 1.12;
@@ -70,10 +71,11 @@ function makeCylinder(from, to, D) {
   const front = document.createElement("span"); front.className = "f"; front.dataset.c = from; front.style.transform = `translateZ(${H / 2}px)`;
   const back = document.createElement("span"); back.className = "f"; back.dataset.c = to; back.style.transform = `rotateY(180deg) translateZ(${H / 2}px)`;
   for (let k = 0; k < SEG; k++) {
-    const ang = k * 360 / SEG, light = .62 + .5 * Math.max(0, Math.cos((ang - 200) * Math.PI / 180));
+    const ang = k * 360 / SEG, light = .58 + .55 * Math.max(0, Math.cos((ang - 200) * Math.PI / 180));
     const e = document.createElement("span"); e.className = "edge";
     e.style.cssText = `width:${w}px;height:${H}px;margin:${-H / 2}px 0 0 ${-w / 2}px;transform:rotateZ(${ang}deg) translateY(${D / 2 - .6}px) rotateX(90deg);` +
       `background:linear-gradient(to bottom, ${shade(EDGE[to], light)} 0 50%, ${shade(EDGE[from], light)} 50% 100%)`;
+    e.appendChild(document.createElement("i"));   // ふちの丸み（上下が少し暗く、中ほどが明るい）
     cy.appendChild(e);
   }
   cy.append(back, front);
@@ -82,13 +84,21 @@ function makeCylinder(from, to, D) {
 function flipDisc(i, to, dir, dur) {
   const x = cells[i], ax = -dir[0], ay = dir[1], from = +x.disc.dataset.c || (to === BLACK ? WHITE : BLACK);
   const D = x.disc.offsetWidth, cy = makeCylinder(from, to, D);
-  x.b.appendChild(cy); x.disc.style.visibility = "hidden";
+  const sh = document.createElement("span"); sh.className = "cylShadow";
+  x.b.appendChild(sh); x.b.appendChild(cy); x.disc.style.visibility = "hidden";
+  // 影：石が立つほど細く、浮くぶん少し大きく薄く
+  const vert = Math.abs(ax) > Math.abs(ay);
+  sh.animate([
+    { transform: "translateY(var(--e)) scale(1, 1)", opacity: 1 },
+    { transform: `translateY(calc(var(--e) * 3)) scale(${vert ? 1.15 : .3}, ${vert ? .3 : 1.15})`, opacity: .55 },
+    { transform: "translateY(var(--e)) scale(1, 1)", opacity: 1 },
+  ], { duration: dur, easing: "ease-in-out", fill: "forwards" });
   const a = cy.animate([
     { transform: `rotate3d(${ax}, ${ay}, 0, 0deg) scale(1)` },
     { transform: `rotate3d(${ax}, ${ay}, 0, 90deg) scale(1.22)` },
     { transform: `rotate3d(${ax}, ${ay}, 0, 180deg) scale(1)` },
   ], { duration: dur, easing: "ease-in-out", fill: "forwards" });
-  a.onfinish = () => { x.fa.dataset.c = to; x.fb.dataset.c = to; x.disc.dataset.c = to; x.disc.style.visibility = ""; cy.remove(); };
+  a.onfinish = () => { x.fa.dataset.c = to; x.fb.dataset.c = to; x.disc.dataset.c = to; x.disc.style.visibility = ""; cy.remove(); sh.remove(); };
 }
 // 最後に置いた石を赤い光で示す（次の手まで残す）
 const halo = document.createElement("div"); halo.id = "halo"; boardEl.prepend(halo);
@@ -279,13 +289,24 @@ function updateButtons() {
     b.disabled = G.busy || G.ended || G.paused || !undoDepth(G.hist, colorOf(s));
   });
 }
+let nudgeT = null;
+function clearNudge() { clearTimeout(nudgeT); nudgeT = null; cells.forEach(x => x.b.classList.remove("nudge")); }
+function armNudge(side) {
+  clearNudge();
+  nudgeT = setTimeout(() => {
+    if (G.busy || G.ended || G.paused) return;
+    act(side, "turn"); cells.forEach(x => { if (x.b.classList.contains("can")) x.b.classList.add("nudge"); });
+    nudgeT = setTimeout(() => armNudge(side), 25000);
+  }, 18000);
+}
 function setTurn(state, quiet) {
-  cur = state;
+  cur = state; clearNudge();
   const side = sideOf(state.turn);
   ["A", "B"].forEach(s => $("side" + s).classList.toggle("active", s === side && !state.over));
   if (SOLO() || side === mySide()) showHints(legalMoves(state.board, state.turn)); else clearHints();
   G.busy = false; G.animating = false; updateButtons();
   if (!quiet) act(side, "turn");
+  if (!state.over && (SOLO() || side === mySide())) armNudge(side);
 }
 async function afterMove(state) {
   if (state.over) return endGame(state);
@@ -300,7 +321,8 @@ async function afterMove(state) {
   setTurn(state);
 }
 
-function shakeCell(r, c) { const b = cells[at(r, c)].b; b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); }
+function shakeCell(r, c) {
+  clearNudge(); const b = cells[at(r, c)].b; b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); }
 async function tap(r, c) {
   if (G.busy || !G.started || G.ended || G.paused) return;
   const moves = legalMoves(cur.board, cur.turn), side = sideOf(cur.turn);
@@ -311,7 +333,7 @@ async function tap(r, c) {
 }
 async function playMove(r, c) {
   const side = sideOf(cur.turn);
-  G.busy = true; G.animating = true; clearHints(); updateButtons();
+  G.busy = true; G.animating = true; clearHints(); clearNudge(); updateButtons();
   const p = cur.turn;
   G.hist.push([r, c]); saveGame();
   const next = replay(G.hist), step = next.steps.at(-1), k = K();
@@ -452,6 +474,10 @@ async function rematch() {
   G.readyMe = G.readyThem = false; $("againBtn").disabled = false; $("againBtn").textContent = "もういっかい";
   $("againOv").hidden = true; await hideHost(host.pony);
   G.blackSide = other(G.blackSide);
+  if (NET.role === "host") {
+    if (!remoteAllowed()) { G.pendingRematch = true; lockBoth(); return; }
+    countGame();
+  }
   newGame();
 }
 $("againBtn").addEventListener("click", () => {
@@ -477,7 +503,7 @@ async function newGame(announce = true) {
 const setPanel = $("settings");
 function syncPanel() {
   setPanel.querySelectorAll(".seg").forEach(seg => seg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === +CFG[seg.dataset.key]))));
-  $("resetBtn").textContent = "さいしょから"; $("resetBtn").classList.remove("confirm");
+  $("resetBtn").textContent = "さいしょから"; $("resetBtn").classList.remove("confirm"); refreshLeft();
   $("routeInfo").textContent = NET.open && NET.via ? `いまのつながり：${NET.via}` : (CFG.relay ? "「中継だけ」は、つぎに「たいせんあいてを よぶ」を押したときから使います" : "");
 }
 setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e => {
@@ -485,6 +511,7 @@ setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e
   CFG[seg.dataset.key] = +b.dataset.v; saveCfg(); syncPanel();
   if (seg.dataset.key === "hints" && !G.busy && G.started && !G.ended) showHints(legalMoves(cur.board, cur.turn));
   if (seg.dataset.key === "sfx") SFX.place();   // 音の大きさの ためし
+  if (seg.dataset.key === "devUnlock") { refreshLeft(); if (NET.open) { sendLic(); if (NET.role === "host") recheckLock(); } }
 }));
 $("closeBtn").addEventListener("click", () => { setPanel.hidden = true; });
 $("resetBtn").addEventListener("click", () => {
@@ -651,6 +678,9 @@ function handle(m) {
     case "state": applyState(m); break;
     case "new": newGame(); break;
     case "quit": quitByOther(); break;
+    case "lic": G.theirUnlocked = !!m.u; refreshLeft(); if (NET.role === "host") recheckLock(); break;
+    case "locked": if (NET.role === "guest") { G.busy = true; clearHints(); updateButtons(); showUnlock(); } break;
+    case "unlocked": $("unlockOv").hidden = true; break;
   }
 }
 function resync() { NET.role === "host" ? sendState() : NET.send({ t: "sync" }); }
@@ -671,14 +701,22 @@ NET.on("open", () => {
   const back = lostSaid; G.paused = false; lostSaid = false; $("inviteOv").hidden = true; camMsg(otherSide(), "");
   if (back && !G.animating) speak(host.pony, "rv_back");
   setTimeout(() => { if (NET.open && !NET.remote) camMsg(otherSide(), "あいての カメラが うつりません（ゲームは できます）"); }, 9000);
+  sendLic();
   if (NET.role !== "host") return;
   sendState();
   if (G.begun) return updateButtons();
-  G.begun = true;
-  const s = replay(G.hist);
-  if (!G.hist.length) { NET.send({ t: "new" }); newGame(); }
-  else s.over ? endGame(s) : setTurn(s, true);
+  // 相手の「解放ずみか」が届くのを 少しだけ待ってから 始める
+  clearTimeout(G.licWait); G.licWait = setTimeout(hostBegin, 1500);
 });
+function hostBegin() {
+  clearTimeout(G.licWait);
+  if (G.begun || !NET.open) return;
+  if (!remoteAllowed()) { lockBoth(); return; }
+  G.begun = true; $("unlockOv").hidden = true;
+  const s = replay(G.hist);
+  if (!G.hist.length) { NET.send({ t: "new" }); countGame(); newGame(); }
+  else s.over ? endGame(s) : setTurn(s, true);
+}
 NET.on("lost", () => {
   G.paused = true; updateButtons();
   camMsg(otherSide(), "つなぎなおしています…");
@@ -713,9 +751,52 @@ function showInvite() {
   const url = NET.inviteURL();
   try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("qr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("qr").textContent = ""; }
   $("inviteLink").textContent = url;
+  $("inviteWarn").hidden = remoteAllowed();
 
   $("inviteOv").hidden = false;
 }
+/* ---------- 遠隔対戦の回数（10回まで無料。払うのは よぶ側だけ） ---------- */
+/* どちらかが解放ずみなら遊べる。解放ずみの人がいないときは、よぶ側の無料分（10回）を使う */
+const myUnlocked = () => BILLING.unlocked || !!CFG.devUnlock;
+const remoteAllowed = () => myUnlocked() || !!G.theirUnlocked || BILLING.left > 0;
+function sendLic() { NET.send({ t: "lic", u: myUnlocked() }); }
+function countGame() { if (!myUnlocked() && !G.theirUnlocked) BILLING.count(); refreshLeft(); }
+// ホスト：無料分を使い切り、どちらも解放していない → 両方の画面に案内。どちらかが解放したら 続きが始まる
+function lockBoth() { NET.send({ t: "locked" }); showUnlock(); }
+function recheckLock() {
+  if (!remoteAllowed()) return;
+  $("unlockOv").hidden = true; NET.send({ t: "unlocked" });
+  if (!G.begun) hostBegin();
+  else if (G.pendingRematch) { G.pendingRematch = false; countGame(); newGame(); }
+}
+function afterUnlock() {
+  refreshLeft(); sendLic();
+  if (NET.role === "host") recheckLock();
+  else if (NET.role === "guest") { $("unlockOv").hidden = true; camMsg(otherSide(), "かいほうしました。すこし まってね"); }
+  else { $("unlockOv").hidden = true; }
+}
+function refreshLeft() {
+  const el = $("leftNote"), un = myUnlocked();
+  el.hidden = NET.role === "guest";
+  el.textContent = un ? "遠隔対戦：解放ずみ" : BILLING.left > 0 ? `遠隔対戦：あと ${BILLING.left}回 むりょう` : "遠隔対戦：無料分おわり（相手が解放ずみなら遊べます）";
+  el.classList.toggle("zero", !un && BILLING.left === 0);
+  $("remoteInfo").textContent = un ? `解放ずみ（${BILLING.unlocked ? "購入" : "テスト用"}）。これまで ${BILLING.used}回` : `これまで ${BILLING.used}回・のこり ${BILLING.left}回`;
+}
+function showUnlock() {
+  $("unlockTitle").textContent = NET.role === "guest" ? "呼んだ側の無料分（10回）が終わりました" : "遠隔対戦の無料分（10回）を使い切りました";
+  $("unlockNote").textContent = (BILLING.canBuy ? "" : "この Web 版では購入できません。App Store／Google Play 版で解放できます（準備中）。") + (NET.open ? " どちらか一方が解放すれば、そのまま対局が始まります。" : "");
+  $("buyBtn").disabled = !BILLING.canBuy; $("restoreBtn").disabled = !BILLING.canBuy;
+  $("unlockOv").hidden = false;
+}
+$("unlockClose").addEventListener("click", () => { $("unlockOv").hidden = true; });
+$("buyBtn").addEventListener("click", async () => {
+  $("buyBtn").disabled = true; const r = await BILLING.purchase(); $("buyBtn").disabled = false;
+  if (r.ok) afterUnlock(); else $("unlockNote").textContent = "購入できませんでした。";
+});
+$("restoreBtn").addEventListener("click", async () => {
+  const r = await BILLING.restore();
+  if (r.ok) afterUnlock(); else $("unlockNote").textContent = "引きつげる購入が見つかりませんでした。";
+});
 $("callBtn").addEventListener("click", () => callGrandma(false));
 $("copyBtn").addEventListener("click", () => {
   const url = NET.inviteURL(), done = () => { $("copyBtn").textContent = "コピーしました"; setTimeout(() => $("copyBtn").textContent = "リンクを コピー", 2000); };
@@ -749,7 +830,9 @@ $("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (N
     $("startNote").textContent = "";
   }
   else if (!NET.available) $("callBtn").hidden = true;
+  refreshLeft();
   layout(); placeAll();
+  setTimeout(() => { if (!G.started) { wave(seat.A); mv(seat.B, "nod"); } }, 900);
 })();
 
 /* ---------- 毎フレーム ---------- */

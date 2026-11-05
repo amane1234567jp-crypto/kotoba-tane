@@ -18,12 +18,18 @@
   --wall: #F5F0E4;
   --wall-2: #E9E0CC;
   --lattice: #DCCFB4;
-  --felt-hi: #63C392;
-  --felt: #3E9F6B;
-  --felt-lo: #2C8257;
-  --line: #13201A;
-  --frame: #2F363D;
-  --frame-hi: #4A535C;
+  --felt-hi: #4FAE78;
+  --felt: #37935F;
+  --felt-lo: #25714A;
+  --line: #10231A;
+  --frame: #1E2226;
+  --frame-hi: #3A4046;
+  --frame-lo: #0E1013;
+  --w-face: #F4F1E8;
+  --w-edge: #C9C5B8;
+  --k-face: #1F1F23;
+  --k-edge: #2C2C31;
+  --e: calc(var(--bs, 600px) * .0078);   /* 石の厚み（上から少し斜めに見たときの帯） */
   --mint: #8CF2D6;
   --halo: 255, 92, 112;
   --seat: #FFFDF6;
@@ -53,18 +59,27 @@ body {
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 16px;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 12px;
 }
-.boardWrap { display: flex; align-items: center; justify-content: center; min-width: 0; }
+.boardWrap { display: flex; align-items: center; justify-content: center; min-width: 0; perspective: 2200px; perspective-origin: 50% 30%; }
 #board {
   width: var(--bs, 600px); height: var(--bs, 600px); box-sizing: border-box; position: relative;
   display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, 1fr); gap: 0;
-  background: radial-gradient(ellipse at 50% 46%, var(--felt-hi) 0%, var(--felt) 52%, var(--felt-lo) 100%);
-  border: calc(var(--bs, 600px) * .036) solid var(--frame); border-top-color: var(--frame-hi); border-radius: 12px;
-  outline: 5px solid var(--ink); box-shadow: inset 0 0 0 2px var(--line), 0 10px 0 rgba(43, 42, 51, .2);
+  background: url("data:image/png;base64,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"), radial-gradient(ellipse at 50% 42%, var(--felt-hi) 0%, var(--felt) 55%, var(--felt-lo) 100%);
+  background-size: calc(var(--bs, 600px) * .16) calc(var(--bs, 600px) * .16), auto; background-blend-mode: overlay, normal;
+  border: calc(var(--bs, 600px) * .04) solid var(--frame); border-radius: calc(var(--bs, 600px) * .022);
+  border-top-color: var(--frame-hi); border-left-color: #2A2F34; border-right-color: #15181B; border-bottom-color: var(--frame-lo);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .55), inset 0 calc(var(--bs, 600px) * .012) calc(var(--bs, 600px) * .018) rgba(0, 0, 0, .45),
+    inset 0 calc(var(--bs, 600px) * -.004) calc(var(--bs, 600px) * .01) rgba(255, 255, 255, .08),
+    0 2px 0 rgba(255, 255, 255, .06), 0 calc(var(--bs, 600px) * .022) calc(var(--bs, 600px) * .03) rgba(20, 20, 30, .45), 0 4px 0 var(--ink);
+  transform: rotateX(4deg); transform-origin: 50% 100%;
 }
-#board::after { content: ""; position: absolute; inset: 0; background: rgba(255, 253, 246, .5); opacity: 0; transition: opacity .3s; pointer-events: none; border-radius: 4px; }
+/* 枠の角の面取り（光るふち） */
+#board::before { content: ""; position: absolute; inset: calc(var(--bs, 600px) * -.04); border-radius: calc(var(--bs, 600px) * .03); pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .18), rgba(255, 255, 255, 0) 18%, rgba(0, 0, 0, 0) 82%, rgba(0, 0, 0, .35)); z-index: 1;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; padding: calc(var(--bs, 600px) * .04); }
+#board::after { content: ""; position: absolute; inset: 0; background: rgba(255, 253, 246, .5); opacity: 0; transition: opacity .3s; pointer-events: none; border-radius: 4px; z-index: 4; }
 #board.dim::after { opacity: 1; }
-.cell { position: relative; background: transparent; box-shadow: inset 0 0 0 1.5px var(--line); border: 0; padding: 0; margin: 0; perspective: 420px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-.star { position: absolute; width: calc(var(--bs, 600px) * .017); height: calc(var(--bs, 600px) * .017); border-radius: 50%; background: var(--line); transform: translate(-50%, -50%); pointer-events: none; z-index: 1; }
+.cell { position: relative; background: transparent; box-shadow: inset 0 0 0 1px rgba(16, 35, 26, .9), inset 0 0 0 1.6px rgba(16, 35, 26, .35); border: 0; padding: 0; margin: 0; perspective: 420px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.star { position: absolute; width: calc(var(--bs, 600px) * .017); height: calc(var(--bs, 600px) * .017); border-radius: 50%; background: radial-gradient(circle at 40% 35%, #2A3A30, #0B1811 70%); box-shadow: 0 1px 1px rgba(0, 0, 0, .4); transform: translate(-50%, -50%); pointer-events: none; z-index: 1; }
 #halo { position: absolute; width: 22%; height: 22%; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; display: none;
   background: radial-gradient(circle, rgba(var(--halo), .72) 0, rgba(var(--halo), .4) 42%, rgba(var(--halo), 0) 70%); }
 #halo.on { display: block; animation: halo .35s ease-out; }
@@ -82,15 +97,27 @@ body {
 .disc[data-c="0"] { visibility: hidden; }
 .f { position: absolute; inset: 0; border-radius: 50%; backface-visibility: hidden; -webkit-backface-visibility: hidden; box-sizing: border-box; }
 .f.b { transform: rotateY(180deg); }
-/* 止まっている石は真上から見た平たい円。下に見える細い帯が厚み（黒の石の下は白、白の石の下は黒） */
-.f[data-c="1"] { background: radial-gradient(circle at 42% 36%, #3A3A40 0, #232326 52%, #18181A 100%);
-  box-shadow: inset 0 0 0 max(1px, calc(var(--bs, 600px) * .0025)) rgba(255, 255, 255, .07), 0 calc(var(--bs, 600px) * .0035) 0 #0E0E10, 0 calc(var(--bs, 600px) * .0075) 0 #D2D2CC, 0 calc(var(--bs, 600px) * .011) calc(var(--bs, 600px) * .01) rgba(0, 0, 0, .38); }
-.f[data-c="2"] { background: radial-gradient(circle at 42% 36%, #FFFFFF 0, #F3F3EF 55%, #E3E3DD 100%);
-  box-shadow: inset 0 0 0 max(1px, calc(var(--bs, 600px) * .0025)) rgba(0, 0, 0, .06), 0 calc(var(--bs, 600px) * .0035) 0 #BEBEB8, 0 calc(var(--bs, 600px) * .0075) 0 #1C1C1F, 0 calc(var(--bs, 600px) * .011) calc(var(--bs, 600px) * .01) rgba(0, 0, 0, .34); }
+/* 止まっている石：.disc::before が「厚みの帯＋フェルトに落ちる影」（手前に見える側面：上半分は上面の色、下に反対の色がのぞく）、
+   .f が上面（ドーム状の艶）、.f::after がハイライトとふちの丸み */
+.disc::before { content: ""; position: absolute; inset: 0; border-radius: 50%; z-index: -1; transform: translateY(var(--e));
+  box-shadow: 0 calc(var(--e) * 1.6) calc(var(--e) * 2.2) rgba(0, 0, 0, .45), 0 calc(var(--e) * .5) calc(var(--e) * .5) rgba(0, 0, 0, .35); }
+.disc[data-c="1"]::before { background: linear-gradient(to top, #B9B5A9 0, #E6E3D9 calc(var(--e) * .5), #16161A calc(var(--e) * .5), var(--k-edge) 100%); }
+.disc[data-c="2"]::before { background: linear-gradient(to top, #0E0E11 0, #2A2A2F calc(var(--e) * .5), #AFAB9F calc(var(--e) * .5), var(--w-edge) 100%); }
+.f::after { content: ""; position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(ellipse 38% 26% at 34% 26%, rgba(255, 255, 255, .55) 0, rgba(255, 255, 255, .18) 45%, rgba(255, 255, 255, 0) 100%),
+    radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0) 66%, rgba(0, 0, 0, .14) 90%, rgba(0, 0, 0, .3) 100%); }
+.f[data-c="1"] { background: radial-gradient(circle at 44% 38%, #3E3E45 0, #27272C 40%, var(--k-face) 70%, #141417 100%); }
+.f[data-c="1"]::after { opacity: .9; }
+.f[data-c="2"] { background: radial-gradient(circle at 44% 38%, #FFFFFF 0, #FAF8F2 38%, var(--w-face) 70%, #DAD5C7 100%); }
+.f[data-c="2"]::after { opacity: .7; }
 .cyl { position: absolute; inset: 7%; transform-style: preserve-3d; z-index: 3; pointer-events: none; }
 .cyl .f { box-shadow: none; }
-.cyl .f[data-c="1"] { background: radial-gradient(circle at 42% 36%, #3A3A40 0, #232326 52%, #18181A 100%); }
+.cyl .f::before { display: none; }
+/* 返している最中に フェルトに落ちる影（石が立つと細くなる） */
+.cylShadow { position: absolute; inset: 7%; border-radius: 50%; z-index: 1; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, .42) 0, rgba(0, 0, 0, .28) 55%, rgba(0, 0, 0, 0) 78%); transform: translateY(calc(var(--e) * 1.6)); }
 .edge { position: absolute; left: 50%; top: 50%; backface-visibility: visible; }
+.edge i { position: absolute; inset: 0; display: block; background: linear-gradient(to bottom, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 30%, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, .3)); }
 
 .side {
   display: flex; flex-direction: column; align-items: stretch; gap: 10px; min-width: 0;
@@ -102,8 +129,8 @@ body {
 .chip { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-size: clamp(18px, 2.4vmin, 28px); line-height: 1.2; min-width: 0; }
 .chip .nm { min-width: 0; overflow-wrap: anywhere; }
 .stone { flex: none; width: 1.3em; height: 1.3em; border-radius: 50%; border: 3px solid var(--ink); box-sizing: border-box; }
-.stone[data-c="1"] { background: radial-gradient(circle at 34% 30%, var(--disc-k-hi), var(--disc-k) 58%); }
-.stone[data-c="2"] { background: radial-gradient(circle at 34% 30%, #FFFFFF, var(--disc-w) 45%, var(--disc-w-lo)); }
+.stone[data-c="1"] { background: radial-gradient(circle at 38% 32%, #4A4A52, var(--k-face) 60%); }
+.stone[data-c="2"] { background: radial-gradient(circle at 38% 32%, #FFFFFF, var(--w-face) 50%, #D9D4C6); }
 .slot { flex: 1; min-height: 80px; }
 .score { display: flex; flex-wrap: nowrap; white-space: nowrap; align-items: center; justify-content: center; gap: 12px; font-family: var(--display); font-size: clamp(34px, 6vmin, 64px); line-height: 1; font-variant-numeric: tabular-nums; }
 .score small { font-size: .42em; align-self: center; margin-left: -.35em; transform: translateY(.45em); }
@@ -164,6 +191,7 @@ body {
 .panelBtns { display: flex; gap: 10px; flex-wrap: wrap; }
 .panelBtns button { flex: 1; font: 700 17px var(--body); padding: 12px; border: 3px solid var(--ink); border-radius: 14px; background: #FFFFFF; color: var(--ink); cursor: pointer; }
 .panelBtns .primary { background: var(--glow); }
+.panelBtns button:disabled { opacity: .4; cursor: default; }
 .panelBtns .confirm { background: var(--pink); color: #FFFFFF; }
 
 /* ビデオ：自分の顔は小さく、相手の顔は大きく。それぞれの席の上に出す */
@@ -191,6 +219,16 @@ body {
 .menuBtn svg { width: 20px; height: 20px; }
 .menuBtn:focus-visible { outline: 4px solid var(--pink); outline-offset: 3px; }
 #quitOv { background: rgba(43, 42, 51, .45); }
+.ver { position: fixed; right: max(10px, env(safe-area-inset-right, 0px)); bottom: max(6px, env(safe-area-inset-bottom, 0px)); margin: 0; font: 500 11px var(--body); color: var(--muted); opacity: .75; }
+.cell.nudge .hint i { animation-duration: .8s; border-color: #FFE27A; box-shadow: 0 0 calc(var(--bs, 600px) * .03) rgba(255, 226, 122, .9); }
+.left { margin: -10px 0 0; font: 700 clamp(14px, 2.2vmin, 18px) var(--body); color: var(--muted); }
+.left.zero { color: #C0392B; }
+#unlockOv { background: rgba(43, 42, 51, .45); }
+.warn { margin: 0; font: 700 14px/1.6 var(--body); color: #C0392B; }
+.unlock { text-align: center; }
+.unlock h2 { font-size: 21px; line-height: 1.4; }
+.unlock .lead { margin: 0; font-size: 15px; line-height: 1.7; color: var(--ink); }
+.unlock .lead:empty { display: none; }
 .quit { text-align: center; }
 .quit h2 { font-size: 22px; }
 .quit .lead { margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted); }
@@ -237,6 +275,7 @@ body {
   <div class="startCard">
     <h1 class="logo">まるシマ<span>リバーシ</span></h1>
     <button class="big" id="callBtn" type="button">たいせんあいてを よぶ</button>
+    <p class="left" id="leftNote" hidden></p>
     <button class="big sub" id="startBtn" type="button">1だいで あそぶ</button>
     <div class="guestLead" id="guestLead" hidden>
       <p class="gTitle">リバーシのお誘いです</p>
@@ -247,6 +286,7 @@ body {
       <p class="gNote">お孫さんの顔が映ったら、黒と白の石を交互に置いて遊びます。</p>
     </div>
     <p class="note" id="startNote">おとなの せってい：ばんの そとを 3びょう ながおし</p>
+    <p class="ver">v2026.11.05 987e202f</p>
   </div>
 </div>
 <div class="cover" id="inviteOv" hidden>
@@ -258,6 +298,7 @@ body {
       <button type="button" class="lineBtn" id="lineBtn">LINEで おくる</button>
     </div>
     <p class="link" id="inviteLink"></p>
+    <p class="warn" id="inviteWarn" hidden>無料分（10回）は使い切っています。相手が解放ずみなら遊べます。そうでなければ、つながったあとに解放の案内が出ます。</p>
     <div class="panelBtns"><button type="button" id="copyBtn">リンクを コピー</button><button type="button" id="inviteClose" class="primary">とじる（まつ）</button></div>
   </div>
 </div>
@@ -265,6 +306,15 @@ body {
 <div class="cover" id="againOv" hidden><button class="big" id="againBtn" type="button">もういっかい</button></div>
 
 <button type="button" id="menuBtn" class="menuBtn" hidden aria-label="メニューに もどる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8M6 9.5V20h4.5v-6h3v6H18V9.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>メニュー</button>
+<div class="cover" id="unlockOv" hidden>
+  <div class="panel unlock" role="dialog" aria-label="遠隔対戦の解放">
+    <h2 id="unlockTitle">遠隔対戦の無料分（10回）を使い切りました</h2>
+    <p class="lead">解放すると、回数の制限なく遠隔対戦ができます。1台で遊ぶのは、これからも無料です。<br>お支払いはどちらか一方だけでかまいません。相手が解放ずみなら、自分は払わなくても遊べます。</p>
+    <p class="lead" id="unlockNote"></p>
+    <div class="panelBtns"><button type="button" id="buyBtn" class="primary">解放する</button><button type="button" id="restoreBtn">購入を引きつぐ</button></div>
+    <div class="panelBtns"><button type="button" id="unlockClose">とじる</button></div>
+  </div>
+</div>
 <div class="cover" id="quitOv" hidden>
   <div class="panel quit" role="dialog" aria-label="ゲームを やめる">
     <h2>ゲームを やめて メニューに もどる？</h2>
@@ -282,6 +332,7 @@ body {
     <div class="row"><span>キャラの こえ</span><div class="seg" data-key="voice"><button type="button" id="voice0" data-v="0">なし</button><button type="button" id="voice1" data-v="1">小</button><button type="button" id="voice2" data-v="2">中</button><button type="button" id="voice3" data-v="3">大</button></div></div>
     <div class="row"><span>こどもの まったに あいては じどうで いいよ</span><div class="seg" data-key="autoOk"><button type="button" id="autoOk1" data-v="1">じどうで いいよ</button><button type="button" id="autoOk0" data-v="0">きいてから</button></div></div>
     <div class="row"><span>つながり方（テスト用。「中継だけ」は、家の外でもつながるかを家の中で確かめるとき）</span><div class="seg" data-key="relay"><button type="button" id="relay0" data-v="0">ふつう</button><button type="button" id="relay1" data-v="1">中継だけ</button></div><span class="route" id="routeInfo"></span></div>
+    <div class="row"><span>遠隔対戦（10回まで無料）</span><span class="route" id="remoteInfo"></span><div class="seg" data-key="devUnlock"><button type="button" id="devUnlock0" data-v="0">ふつう</button><button type="button" id="devUnlock1" data-v="1">テスト用に解放</button></div></div>
     <div class="panelBtns"><button type="button" id="reinviteBtn">たいせんあいてを よぶ（リンク）</button></div>
     <div class="panelBtns"><button type="button" id="resetBtn">さいしょから</button><button type="button" id="closeBtn" class="primary">とじる</button></div>
   </div>
@@ -1348,11 +1399,11 @@ const SFX = (() => {
     // m 枚目（0から）／ぜんぶで n 枚。ペンタトニックで 上がっていき、あとの石ほど 音を重ねる
     flip(m, n = 1) {
       // 少ない枚数は控えめ（11枚以上で いまの最大）
-      const t = now(), f = PENTA[Math.min(m, PENTA.length - 1)], last = m === n - 1, a = .3 + .7 * Math.pow(Math.min(1, (n - 1) / 10), 1.3);
+      const t = now(), f = PENTA[Math.min(m, PENTA.length - 1)], last = m === n - 1, a = Math.min(1, .08 * Math.pow(2, (n - 1) / 2.75));   // 指数関数的（fx.js の amp と同じ）
       tone(f, t, .2 + .04 * a, "sine", .12 + .1 * a); tone(f * 4, t, .06, "sine", .05 * a); tone(f * 2, t, .1, "triangle", .05 * a);
-      if (m >= 3) tone(f * 1.5, t, .2, "triangle", .04 + Math.min(.06, m * .006));
-      if (m >= 6) hiss(t, .08, 6000 + m * 300, 1.5, .12 + Math.min(.2, m * .015));
-      if (last && n >= 3) tone(f / 2, t, .5, "sine", .12);
+      if (m >= 3) tone(f * 1.5, t, .2, "triangle", (.04 + Math.min(.06, m * .006)) * a);
+      if (m >= 6) hiss(t, .08, 6000 + m * 300, 1.5, (.12 + Math.min(.2, m * .015)) * a);
+      if (last && n >= 5) tone(f / 2, t, .5, "sine", .12 * a);
     },
     sparkle() { const t = now(); [1046.5, 1318.5, 1568, 2093, 2637].forEach((f, i) => tone(f, t + i * .07, .35, "sine", .12)); },
     turn() { const t = now(); tone(659.25, t, .3 * 1.4, "sine", .16, .01); tone(1318.5, t, .2, "sine", .04, .01); },
@@ -1506,19 +1557,20 @@ const FX = (() => {
     if (flash > .005) { g.fillStyle = `rgba(${flashCol},${flash})`; g.fillRect(0, 0, W, H); flash *= Math.exp(-7 * dt); }
   }
 
-  function tierOf(n) { return n >= 12 ? 5 : n >= 8 ? 4 : n >= 5 ? 3 : n >= 3 ? 2 : 1; }
+  function tierOf(n) { return n >= 12 ? 5 : n >= 9 ? 4 : n >= 7 ? 3 : n >= 5 ? 2 : 1; }
   const colsOf = color => color === BLACK ? ["#C9C9FF", "#FFFFFF", "#FFD25E"] : ["#FFFFFF", "#FFF3B0", "#7FE3C9"];
   /* ---- 1枚返るたび：L 枚目ほど 豪華に（火花→輪→星と光の筋→ゆれ） ---- */
   /* 全体の枚数 n による 強さ（少ない枚数は控えめ、11枚以上で いまの最大と同じ） */
-  const amp = n => .3 + .7 * Math.pow(Math.min(1, (n - 1) / 10), 1.3);
+  // 強さは枚数に対して指数関数的（1枚 0.08 → 4枚 0.17 → 7枚 0.36 → 10枚 0.77 → 11枚以上 1.0）。4枚までは地味
+  const amp = n => Math.min(1, .08 * Math.pow(2, (n - 1) / 2.75));
   function flipHit(x, y, L, n, color, boardEl) {
     const a = amp(n);
     const cols = L >= 5 ? [...colsOf(color), ...GOLD] : colsOf(color);
     burst(x, y, { n: Math.max(3, Math.round((6 + L * 3) * a)), cols, min: 60 + 20 * a, max: (140 + 60 * a) + L * 35, life: .35 + .1 * a + L * .02, size: 1.8 + .6 * a + Math.min(2, L * .15), g: 200 });
-    if (L >= 3) ring(x, y, 40 + L * 9, "255,236,160", .4, 4 + L * .5);
-    if (L >= 5) burst(x, y, { kind: "star", n: 2 + Math.floor(L / 2), cols: GOLD, min: 120, max: 260 + L * 15, life: .7, size: 7, g: 240 });
-    if (L >= 7) rayBurst(x, y, 6 + L, 50 + L * 10);
-    if (L >= 9) shake(boardEl, Math.min(2, (L - 7) * .4));
+    if (L >= 3 && n >= 5) ring(x, y, (30 + L * 9) * (.5 + .5 * a), "255,236,160", .4, (3 + L * .5) * (.5 + .5 * a));
+    if (L >= 5 && n >= 7) burst(x, y, { kind: "star", n: Math.round((2 + Math.floor(L / 2)) * a), cols: GOLD, min: 120, max: 260 + L * 15, life: .7, size: 7, g: 240 });
+    if (L >= 7 && n >= 9) rayBurst(x, y, 6 + L, (50 + L * 10) * a);
+    if (L >= 9) shake(boardEl, Math.min(2, (L - 7) * .4) * a);
   }
   /* ---- 最後の1枚：いちばんの見せ場。全体の枚数 n の段階（1〜5）で 重ねる ---- */
   function climax(x, y, n, color, scoreEl, boardEl) {
@@ -1710,6 +1762,47 @@ const NET = (() => {
   return N;
 })();
 
+/* ---------- 遠隔対戦の回数と、課金による解放 ----------
+   遠隔対戦は 10回まで無料。11回目からは「解放」（買い切り）が必要。
+   払うのは よぶ側（親機・ホスト）だけ。リンクから入る相手（ゲスト）は いつでも無料。
+   回数は「対局が始まった」ときに数える（もういっかい も1回。つなぎなおしは数えない）。
+
+   いまの Web 版（GitHub Pages）では ストアの課金が使えないので、購入ボタンは
+   「ストア版で解放できます」の案内になる。ストア版（Capacitor）では window.MarushimaIAP
+   （ネイティブ側が用意する）を通して App Store／Google Play のアプリ内課金を呼ぶ。
+   開発・確認用に、おとなの設定の中に「テスト用に解放」の切り替えがある（ストア版では外す）。 */
+const BILLING = (() => {
+  const FREE = 10, KEY = "marushima-reversi-remote";
+  const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } };
+  const save = v => { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) { /* 保存できなくても遊べる */ } };
+  const st = Object.assign({ used: 0, unlocked: false, log: [] }, load());
+  const iap = () => window.MarushimaIAP || null;
+  const B = {
+    FREE,
+    get used() { return st.used; },
+    get left() { return Math.max(0, FREE - st.used); },
+    get unlocked() { return !!st.unlocked; },
+    get allowed() { return st.unlocked || st.used < FREE; },
+    // 対局が始まったときに1回数える
+    count() { if (st.unlocked) return; st.used++; st.log = (st.log || []).concat(Date.now()).slice(-50); save(st); },
+    setUnlocked(v, how) { st.unlocked = !!v; st.unlockedBy = how || ""; st.unlockedAt = v ? Date.now() : 0; save(st); },
+    get canBuy() { return !!iap(); },
+    // 購入（ストア版だけ）。成功したら解放
+    async purchase() {
+      const p = iap(); if (!p) return { ok: false, reason: "web" };
+      try { const r = await p.purchase("remote_unlock"); if (r && r.ok) B.setUnlocked(true, "store"); return r || { ok: false }; }
+      catch (e) { return { ok: false, reason: String(e) }; }
+    },
+    // 機種変更などで購入を引きつぐ（ストア版だけ）
+    async restore() {
+      const p = iap(); if (!p) return { ok: false, reason: "web" };
+      try { const r = await p.restore("remote_unlock"); if (r && r.ok) B.setUnlocked(true, "restore"); return r || { ok: false }; }
+      catch (e) { return { ok: false, reason: String(e) }; }
+    },
+  };
+  return B;
+})();
+
 /* ---------- まるシマリバーシ 段階1（1台で交互に打つ） ----------
    秒数は仕様書 第4章・第5章の「ふつう」の値。ゆっくり は 1.5 倍。 */
 const T = {
@@ -1723,12 +1816,12 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const CFG_KEY = "marushima-reversi-cfg", GAME_KEY = "marushima-reversi-game";
 const load = k => { try { return JSON.parse(localStorage.getItem(k)) || null; } catch (e) { return null; } };
 const keep = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* 保存できなくても遊べる */ } };
-const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2, autoOk: 1, relay: 0, fx: 2 }, load(CFG_KEY) || {});
+const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2, autoOk: 1, relay: 0, fx: 2, devUnlock: 0 }, load(CFG_KEY) || {});
 const saveCfg = () => keep(CFG_KEY, CFG);
 
 /* ---------- 対局の状態 ---------- */
 // A = こども（左）、B = おばあちゃん（右）。blackSide が くろ（先手）の側。対局ごとに交代する。
-const G = { hist: [], blackSide: "A", busy: true, started: false, ended: false, paused: false, animating: false, readyMe: false, readyThem: false };
+const G = { hist: [], blackSide: "A", busy: true, started: false, ended: false, paused: false, animating: false, readyMe: false, readyThem: false, theirUnlocked: false, pendingRematch: false };
 // 遠隔対戦では、この端末が受け持つ側だけを操作できる（ホスト＝こども A、ゲスト＝おばあちゃん B）
 const SOLO = () => !NET.role;
 const mySide = () => (NET.role === "guest" ? "B" : "A");
@@ -1765,16 +1858,17 @@ function clearHints() { cells.forEach(x => x.b.classList.remove("can")); }
 function dropDisc(i, v) {
   setDisc(i, v);
   cells[i].disc.animate([
-    { transform: "translateY(-38%) scale(1.35)", opacity: 0 },
-    { transform: "translateY(0) scale(.9)", opacity: 1, offset: .78 },
+    { transform: "translateY(-30%) scale(1.22)", opacity: 0, filter: "drop-shadow(0 18px 10px rgba(0,0,0,.25))" },
+    { transform: "translateY(0) scale(1)", opacity: 1, filter: "drop-shadow(0 0 0 rgba(0,0,0,0))", offset: .7 },
+    { transform: "translateY(0) scale(.97)", opacity: 1, offset: .82 },
     { transform: "none", opacity: 1 },
-  ], { duration: T.drop * K(), easing: "cubic-bezier(.5,0,.7,1)" });
+  ], { duration: T.drop * K(), easing: "cubic-bezier(.4,0,.6,1)" });
 }
 // 方向に合わせた軸でくるっと返す（横に並ぶ石はたて軸、たてに並ぶ石はよこ軸）
 /* 返すときだけ、厚みのある円柱（表の面・裏の面・側面24枚）を組み立てて回す。
    側面は本物の石と同じく半分ずつ黒と白。光の向きに合わせて明暗をつける。 */
-const FACE = { 1: "#1E1E21", 2: "#F2F2EE" }, EDGE = { 1: [42, 42, 46], 2: [214, 214, 208] };
-const SEG = 24, THICK = .2;
+const FACE = { 1: "#1F1F23", 2: "#F4F1E8" }, EDGE = { 1: [46, 46, 52], 2: [208, 204, 192] };
+const SEG = 32, THICK = .17;   // 本物の石は 直径34mm・厚さ約6mm
 const shade = (rgb, k) => `rgb(${rgb.map(v => Math.round(Math.min(255, v * k))).join(",")})`;
 function makeCylinder(from, to, D) {
   const H = D * THICK, w = Math.PI * D / SEG * 1.12;
@@ -1782,10 +1876,11 @@ function makeCylinder(from, to, D) {
   const front = document.createElement("span"); front.className = "f"; front.dataset.c = from; front.style.transform = `translateZ(${H / 2}px)`;
   const back = document.createElement("span"); back.className = "f"; back.dataset.c = to; back.style.transform = `rotateY(180deg) translateZ(${H / 2}px)`;
   for (let k = 0; k < SEG; k++) {
-    const ang = k * 360 / SEG, light = .62 + .5 * Math.max(0, Math.cos((ang - 200) * Math.PI / 180));
+    const ang = k * 360 / SEG, light = .58 + .55 * Math.max(0, Math.cos((ang - 200) * Math.PI / 180));
     const e = document.createElement("span"); e.className = "edge";
     e.style.cssText = `width:${w}px;height:${H}px;margin:${-H / 2}px 0 0 ${-w / 2}px;transform:rotateZ(${ang}deg) translateY(${D / 2 - .6}px) rotateX(90deg);` +
       `background:linear-gradient(to bottom, ${shade(EDGE[to], light)} 0 50%, ${shade(EDGE[from], light)} 50% 100%)`;
+    e.appendChild(document.createElement("i"));   // ふちの丸み（上下が少し暗く、中ほどが明るい）
     cy.appendChild(e);
   }
   cy.append(back, front);
@@ -1794,13 +1889,21 @@ function makeCylinder(from, to, D) {
 function flipDisc(i, to, dir, dur) {
   const x = cells[i], ax = -dir[0], ay = dir[1], from = +x.disc.dataset.c || (to === BLACK ? WHITE : BLACK);
   const D = x.disc.offsetWidth, cy = makeCylinder(from, to, D);
-  x.b.appendChild(cy); x.disc.style.visibility = "hidden";
+  const sh = document.createElement("span"); sh.className = "cylShadow";
+  x.b.appendChild(sh); x.b.appendChild(cy); x.disc.style.visibility = "hidden";
+  // 影：石が立つほど細く、浮くぶん少し大きく薄く
+  const vert = Math.abs(ax) > Math.abs(ay);
+  sh.animate([
+    { transform: "translateY(var(--e)) scale(1, 1)", opacity: 1 },
+    { transform: `translateY(calc(var(--e) * 3)) scale(${vert ? 1.15 : .3}, ${vert ? .3 : 1.15})`, opacity: .55 },
+    { transform: "translateY(var(--e)) scale(1, 1)", opacity: 1 },
+  ], { duration: dur, easing: "ease-in-out", fill: "forwards" });
   const a = cy.animate([
     { transform: `rotate3d(${ax}, ${ay}, 0, 0deg) scale(1)` },
     { transform: `rotate3d(${ax}, ${ay}, 0, 90deg) scale(1.22)` },
     { transform: `rotate3d(${ax}, ${ay}, 0, 180deg) scale(1)` },
   ], { duration: dur, easing: "ease-in-out", fill: "forwards" });
-  a.onfinish = () => { x.fa.dataset.c = to; x.fb.dataset.c = to; x.disc.dataset.c = to; x.disc.style.visibility = ""; cy.remove(); };
+  a.onfinish = () => { x.fa.dataset.c = to; x.fb.dataset.c = to; x.disc.dataset.c = to; x.disc.style.visibility = ""; cy.remove(); sh.remove(); };
 }
 // 最後に置いた石を赤い光で示す（次の手まで残す）
 const halo = document.createElement("div"); halo.id = "halo"; boardEl.prepend(halo);
@@ -1991,13 +2094,24 @@ function updateButtons() {
     b.disabled = G.busy || G.ended || G.paused || !undoDepth(G.hist, colorOf(s));
   });
 }
+let nudgeT = null;
+function clearNudge() { clearTimeout(nudgeT); nudgeT = null; cells.forEach(x => x.b.classList.remove("nudge")); }
+function armNudge(side) {
+  clearNudge();
+  nudgeT = setTimeout(() => {
+    if (G.busy || G.ended || G.paused) return;
+    act(side, "turn"); cells.forEach(x => { if (x.b.classList.contains("can")) x.b.classList.add("nudge"); });
+    nudgeT = setTimeout(() => armNudge(side), 25000);
+  }, 18000);
+}
 function setTurn(state, quiet) {
-  cur = state;
+  cur = state; clearNudge();
   const side = sideOf(state.turn);
   ["A", "B"].forEach(s => $("side" + s).classList.toggle("active", s === side && !state.over));
   if (SOLO() || side === mySide()) showHints(legalMoves(state.board, state.turn)); else clearHints();
   G.busy = false; G.animating = false; updateButtons();
   if (!quiet) act(side, "turn");
+  if (!state.over && (SOLO() || side === mySide())) armNudge(side);
 }
 async function afterMove(state) {
   if (state.over) return endGame(state);
@@ -2012,7 +2126,8 @@ async function afterMove(state) {
   setTurn(state);
 }
 
-function shakeCell(r, c) { const b = cells[at(r, c)].b; b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); }
+function shakeCell(r, c) {
+  clearNudge(); const b = cells[at(r, c)].b; b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); }
 async function tap(r, c) {
   if (G.busy || !G.started || G.ended || G.paused) return;
   const moves = legalMoves(cur.board, cur.turn), side = sideOf(cur.turn);
@@ -2023,7 +2138,7 @@ async function tap(r, c) {
 }
 async function playMove(r, c) {
   const side = sideOf(cur.turn);
-  G.busy = true; G.animating = true; clearHints(); updateButtons();
+  G.busy = true; G.animating = true; clearHints(); clearNudge(); updateButtons();
   const p = cur.turn;
   G.hist.push([r, c]); saveGame();
   const next = replay(G.hist), step = next.steps.at(-1), k = K();
@@ -2164,6 +2279,10 @@ async function rematch() {
   G.readyMe = G.readyThem = false; $("againBtn").disabled = false; $("againBtn").textContent = "もういっかい";
   $("againOv").hidden = true; await hideHost(host.pony);
   G.blackSide = other(G.blackSide);
+  if (NET.role === "host") {
+    if (!remoteAllowed()) { G.pendingRematch = true; lockBoth(); return; }
+    countGame();
+  }
   newGame();
 }
 $("againBtn").addEventListener("click", () => {
@@ -2189,7 +2308,7 @@ async function newGame(announce = true) {
 const setPanel = $("settings");
 function syncPanel() {
   setPanel.querySelectorAll(".seg").forEach(seg => seg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === +CFG[seg.dataset.key]))));
-  $("resetBtn").textContent = "さいしょから"; $("resetBtn").classList.remove("confirm");
+  $("resetBtn").textContent = "さいしょから"; $("resetBtn").classList.remove("confirm"); refreshLeft();
   $("routeInfo").textContent = NET.open && NET.via ? `いまのつながり：${NET.via}` : (CFG.relay ? "「中継だけ」は、つぎに「たいせんあいてを よぶ」を押したときから使います" : "");
 }
 setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e => {
@@ -2197,6 +2316,7 @@ setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e
   CFG[seg.dataset.key] = +b.dataset.v; saveCfg(); syncPanel();
   if (seg.dataset.key === "hints" && !G.busy && G.started && !G.ended) showHints(legalMoves(cur.board, cur.turn));
   if (seg.dataset.key === "sfx") SFX.place();   // 音の大きさの ためし
+  if (seg.dataset.key === "devUnlock") { refreshLeft(); if (NET.open) { sendLic(); if (NET.role === "host") recheckLock(); } }
 }));
 $("closeBtn").addEventListener("click", () => { setPanel.hidden = true; });
 $("resetBtn").addEventListener("click", () => {
@@ -2363,6 +2483,9 @@ function handle(m) {
     case "state": applyState(m); break;
     case "new": newGame(); break;
     case "quit": quitByOther(); break;
+    case "lic": G.theirUnlocked = !!m.u; refreshLeft(); if (NET.role === "host") recheckLock(); break;
+    case "locked": if (NET.role === "guest") { G.busy = true; clearHints(); updateButtons(); showUnlock(); } break;
+    case "unlocked": $("unlockOv").hidden = true; break;
   }
 }
 function resync() { NET.role === "host" ? sendState() : NET.send({ t: "sync" }); }
@@ -2383,14 +2506,22 @@ NET.on("open", () => {
   const back = lostSaid; G.paused = false; lostSaid = false; $("inviteOv").hidden = true; camMsg(otherSide(), "");
   if (back && !G.animating) speak(host.pony, "rv_back");
   setTimeout(() => { if (NET.open && !NET.remote) camMsg(otherSide(), "あいての カメラが うつりません（ゲームは できます）"); }, 9000);
+  sendLic();
   if (NET.role !== "host") return;
   sendState();
   if (G.begun) return updateButtons();
-  G.begun = true;
-  const s = replay(G.hist);
-  if (!G.hist.length) { NET.send({ t: "new" }); newGame(); }
-  else s.over ? endGame(s) : setTurn(s, true);
+  // 相手の「解放ずみか」が届くのを 少しだけ待ってから 始める
+  clearTimeout(G.licWait); G.licWait = setTimeout(hostBegin, 1500);
 });
+function hostBegin() {
+  clearTimeout(G.licWait);
+  if (G.begun || !NET.open) return;
+  if (!remoteAllowed()) { lockBoth(); return; }
+  G.begun = true; $("unlockOv").hidden = true;
+  const s = replay(G.hist);
+  if (!G.hist.length) { NET.send({ t: "new" }); countGame(); newGame(); }
+  else s.over ? endGame(s) : setTurn(s, true);
+}
 NET.on("lost", () => {
   G.paused = true; updateButtons();
   camMsg(otherSide(), "つなぎなおしています…");
@@ -2425,9 +2556,52 @@ function showInvite() {
   const url = NET.inviteURL();
   try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("qr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("qr").textContent = ""; }
   $("inviteLink").textContent = url;
+  $("inviteWarn").hidden = remoteAllowed();
 
   $("inviteOv").hidden = false;
 }
+/* ---------- 遠隔対戦の回数（10回まで無料。払うのは よぶ側だけ） ---------- */
+/* どちらかが解放ずみなら遊べる。解放ずみの人がいないときは、よぶ側の無料分（10回）を使う */
+const myUnlocked = () => BILLING.unlocked || !!CFG.devUnlock;
+const remoteAllowed = () => myUnlocked() || !!G.theirUnlocked || BILLING.left > 0;
+function sendLic() { NET.send({ t: "lic", u: myUnlocked() }); }
+function countGame() { if (!myUnlocked() && !G.theirUnlocked) BILLING.count(); refreshLeft(); }
+// ホスト：無料分を使い切り、どちらも解放していない → 両方の画面に案内。どちらかが解放したら 続きが始まる
+function lockBoth() { NET.send({ t: "locked" }); showUnlock(); }
+function recheckLock() {
+  if (!remoteAllowed()) return;
+  $("unlockOv").hidden = true; NET.send({ t: "unlocked" });
+  if (!G.begun) hostBegin();
+  else if (G.pendingRematch) { G.pendingRematch = false; countGame(); newGame(); }
+}
+function afterUnlock() {
+  refreshLeft(); sendLic();
+  if (NET.role === "host") recheckLock();
+  else if (NET.role === "guest") { $("unlockOv").hidden = true; camMsg(otherSide(), "かいほうしました。すこし まってね"); }
+  else { $("unlockOv").hidden = true; }
+}
+function refreshLeft() {
+  const el = $("leftNote"), un = myUnlocked();
+  el.hidden = NET.role === "guest";
+  el.textContent = un ? "遠隔対戦：解放ずみ" : BILLING.left > 0 ? `遠隔対戦：あと ${BILLING.left}回 むりょう` : "遠隔対戦：無料分おわり（相手が解放ずみなら遊べます）";
+  el.classList.toggle("zero", !un && BILLING.left === 0);
+  $("remoteInfo").textContent = un ? `解放ずみ（${BILLING.unlocked ? "購入" : "テスト用"}）。これまで ${BILLING.used}回` : `これまで ${BILLING.used}回・のこり ${BILLING.left}回`;
+}
+function showUnlock() {
+  $("unlockTitle").textContent = NET.role === "guest" ? "呼んだ側の無料分（10回）が終わりました" : "遠隔対戦の無料分（10回）を使い切りました";
+  $("unlockNote").textContent = (BILLING.canBuy ? "" : "この Web 版では購入できません。App Store／Google Play 版で解放できます（準備中）。") + (NET.open ? " どちらか一方が解放すれば、そのまま対局が始まります。" : "");
+  $("buyBtn").disabled = !BILLING.canBuy; $("restoreBtn").disabled = !BILLING.canBuy;
+  $("unlockOv").hidden = false;
+}
+$("unlockClose").addEventListener("click", () => { $("unlockOv").hidden = true; });
+$("buyBtn").addEventListener("click", async () => {
+  $("buyBtn").disabled = true; const r = await BILLING.purchase(); $("buyBtn").disabled = false;
+  if (r.ok) afterUnlock(); else $("unlockNote").textContent = "購入できませんでした。";
+});
+$("restoreBtn").addEventListener("click", async () => {
+  const r = await BILLING.restore();
+  if (r.ok) afterUnlock(); else $("unlockNote").textContent = "引きつげる購入が見つかりませんでした。";
+});
 $("callBtn").addEventListener("click", () => callGrandma(false));
 $("copyBtn").addEventListener("click", () => {
   const url = NET.inviteURL(), done = () => { $("copyBtn").textContent = "コピーしました"; setTimeout(() => $("copyBtn").textContent = "リンクを コピー", 2000); };
@@ -2461,7 +2635,9 @@ $("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (N
     $("startNote").textContent = "";
   }
   else if (!NET.available) $("callBtn").hidden = true;
+  refreshLeft();
   layout(); placeAll();
+  setTimeout(() => { if (!G.started) { wave(seat.A); mv(seat.B, "nod"); } }, 900);
 })();
 
 /* ---------- 毎フレーム ---------- */

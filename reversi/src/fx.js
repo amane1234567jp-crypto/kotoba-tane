@@ -124,19 +124,20 @@ const FX = (() => {
     if (flash > .005) { g.fillStyle = `rgba(${flashCol},${flash})`; g.fillRect(0, 0, W, H); flash *= Math.exp(-7 * dt); }
   }
 
-  function tierOf(n) { return n >= 12 ? 5 : n >= 8 ? 4 : n >= 5 ? 3 : n >= 3 ? 2 : 1; }
+  function tierOf(n) { return n >= 12 ? 5 : n >= 9 ? 4 : n >= 7 ? 3 : n >= 5 ? 2 : 1; }
   const colsOf = color => color === BLACK ? ["#C9C9FF", "#FFFFFF", "#FFD25E"] : ["#FFFFFF", "#FFF3B0", "#7FE3C9"];
   /* ---- 1枚返るたび：L 枚目ほど 豪華に（火花→輪→星と光の筋→ゆれ） ---- */
   /* 全体の枚数 n による 強さ（少ない枚数は控えめ、11枚以上で いまの最大と同じ） */
-  const amp = n => .3 + .7 * Math.pow(Math.min(1, (n - 1) / 10), 1.3);
+  // 強さは枚数に対して指数関数的（1枚 0.08 → 4枚 0.17 → 7枚 0.36 → 10枚 0.77 → 11枚以上 1.0）。4枚までは地味
+  const amp = n => Math.min(1, .08 * Math.pow(2, (n - 1) / 2.75));
   function flipHit(x, y, L, n, color, boardEl) {
     const a = amp(n);
     const cols = L >= 5 ? [...colsOf(color), ...GOLD] : colsOf(color);
     burst(x, y, { n: Math.max(3, Math.round((6 + L * 3) * a)), cols, min: 60 + 20 * a, max: (140 + 60 * a) + L * 35, life: .35 + .1 * a + L * .02, size: 1.8 + .6 * a + Math.min(2, L * .15), g: 200 });
-    if (L >= 3) ring(x, y, 40 + L * 9, "255,236,160", .4, 4 + L * .5);
-    if (L >= 5) burst(x, y, { kind: "star", n: 2 + Math.floor(L / 2), cols: GOLD, min: 120, max: 260 + L * 15, life: .7, size: 7, g: 240 });
-    if (L >= 7) rayBurst(x, y, 6 + L, 50 + L * 10);
-    if (L >= 9) shake(boardEl, Math.min(2, (L - 7) * .4));
+    if (L >= 3 && n >= 5) ring(x, y, (30 + L * 9) * (.5 + .5 * a), "255,236,160", .4, (3 + L * .5) * (.5 + .5 * a));
+    if (L >= 5 && n >= 7) burst(x, y, { kind: "star", n: Math.round((2 + Math.floor(L / 2)) * a), cols: GOLD, min: 120, max: 260 + L * 15, life: .7, size: 7, g: 240 });
+    if (L >= 7 && n >= 9) rayBurst(x, y, 6 + L, (50 + L * 10) * a);
+    if (L >= 9) shake(boardEl, Math.min(2, (L - 7) * .4) * a);
   }
   /* ---- 最後の1枚：いちばんの見せ場。全体の枚数 n の段階（1〜5）で 重ねる ---- */
   function climax(x, y, n, color, scoreEl, boardEl) {
