@@ -226,6 +226,9 @@ body {
 .big.partner small { font: 700 .42em var(--body); color: var(--muted); letter-spacing: .06em; }
 .resend { align-self: center; margin-top: -4px; }
 .nameRow { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+.nameBtn { font: 700 15px var(--body); color: var(--ink); background: #FFFFFF; border: 2px solid var(--ink); border-radius: 999px; padding: 6px 16px; margin-top: 2px; cursor: pointer; }
+.panel.name .nameRow { margin: 10px 0; }
+.panel.name input { font-size: 22px; }
 .nameRow input { font: 700 18px var(--body); padding: 8px 10px; border: 3px solid var(--ink); border-radius: 12px; min-width: 0; color: var(--ink); background: #FFFFFF; }
 .left { margin: -10px 0 0; font: 700 clamp(14px, 2.2vmin, 18px) var(--body); color: var(--muted); }
 .left.zero { color: #C0392B; }
@@ -283,6 +286,7 @@ body {
     <h1 class="logo">まるシマ<span>リバーシ</span></h1>
     <div class="partners" id="partners" hidden></div>
     <button class="big" id="callBtn" type="button">たいせんあいてを よぶ</button>
+    <button class="nameBtn" id="nameBtn" type="button" hidden></button>
     <p class="left" id="leftNote" hidden></p>
     <button class="big sub" id="startBtn" type="button">1だいで あそぶ</button>
     <div class="guestLead" id="guestLead" hidden>
@@ -295,7 +299,7 @@ body {
       <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と 対戦する」を押すだけでつながります。</p>
     </div>
     <p class="note" id="startNote">おとなの せってい：ばんの そとを 3びょう ながおし</p>
-    <p class="ver">v2026.11.05 d926511e</p>
+    <p class="ver">v2026.11.05 49fe97d0</p>
   </div>
 </div>
 <div class="cover" id="inviteOv" hidden>
@@ -324,6 +328,14 @@ body {
     <div class="panelBtns"><button type="button" id="unlockClose">とじる</button></div>
   </div>
 </div>
+<div class="cover" id="nameOv" hidden>
+  <div class="panel name" role="dialog" aria-label="なまえ">
+    <h2>なまえ</h2>
+    <label class="nameRow" for="myName" id="myNameRow">じぶんの なまえ（あいての がめんに でます。10もじまで）<input id="myName" type="text" maxlength="10" autocomplete="off" placeholder="れい：ゆうくん"></label>
+    <div id="partnerNames"></div>
+    <div class="panelBtns"><button type="button" id="nameOk" class="primary">きめた</button></div>
+  </div>
+</div>
 <div class="cover" id="quitOv" hidden>
   <div class="panel quit" role="dialog" aria-label="ゲームを やめる">
     <h2>ゲームを やめて メニューに もどる？</h2>
@@ -342,8 +354,7 @@ body {
     <div class="row"><span>こどもの まったに あいては じどうで いいよ</span><div class="seg" data-key="autoOk"><button type="button" id="autoOk1" data-v="1">じどうで いいよ</button><button type="button" id="autoOk0" data-v="0">きいてから</button></div></div>
     <div class="row"><span>つながり方（テスト用。「中継だけ」は、家の外でもつながるかを家の中で確かめるとき）</span><div class="seg" data-key="relay"><button type="button" id="relay0" data-v="0">ふつう</button><button type="button" id="relay1" data-v="1">中継だけ</button></div><span class="route" id="routeInfo"></span></div>
     <div class="row"><span>対戦相手の登録</span><span class="route" id="partnerInfo"></span>
-      <label class="nameRow" for="myName">相手の画面に出る自分の名前（10文字まで。例：ゆうくん）<input id="myName" type="text" maxlength="10" autocomplete="off"></label>
-      <div class="panelBtns"><button type="button" id="newRoomBtn">あたらしい部屋にする（リンクを作りなおす）</button><button type="button" id="forgetBtn" hidden>この端末に登録した相手を けす</button></div></div>
+      <div class="panelBtns"><button type="button" id="nameBtn2">名前を変える</button><button type="button" id="newRoomBtn">あたらしい部屋にする（リンクを作りなおす）</button><button type="button" id="forgetBtn" hidden>この端末に登録した相手を けす</button></div></div>
     <div class="row"><span>遠隔対戦（10回まで無料）</span><span class="route" id="remoteInfo"></span><div class="seg" data-key="devUnlock"><button type="button" id="devUnlock0" data-v="0">ふつう</button><button type="button" id="devUnlock1" data-v="1">テスト用に解放</button></div></div>
     <div class="panelBtns"><button type="button" id="reinviteBtn">たいせんあいてを よぶ（リンク）</button></div>
     <div class="panelBtns"><button type="button" id="resetBtn">さいしょから</button><button type="button" id="closeBtn" class="primary">とじる</button></div>
@@ -2323,7 +2334,7 @@ const setPanel = $("settings");
 function syncPanel() {
   setPanel.querySelectorAll(".seg").forEach(seg => seg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === +CFG[seg.dataset.key]))));
   $("resetBtn").textContent = "さいしょから"; $("resetBtn").classList.remove("confirm"); refreshLeft();
-  $("myName").value = CFG.myName || ""; $("newRoomBtn").textContent = "あたらしい部屋にする（リンクを作りなおす）"; $("newRoomBtn").classList.remove("confirm");
+  $("newRoomBtn").textContent = "あたらしい部屋にする（リンクを作りなおす）"; $("newRoomBtn").classList.remove("confirm");
   $("partnerInfo").textContent = (CFG.hasPartner ? "相手は登録ずみ（「たいせんあいてを よぶ」で すぐ待ち受けます）。" : "相手はまだ登録されていません（リンクを開いてつながると登録されます）。") + (partners.list.length ? ` この端末に登録した相手：${partners.list.map(p => p.name).join("、")}` : "");
   $("forgetBtn").hidden = !partners.list.length; $("forgetBtn").textContent = "この端末に登録した相手を けす";
   $("routeInfo").textContent = NET.open && NET.via ? `いまのつながり：${NET.via}` : (CFG.relay ? "「中継だけ」は、つぎに「たいせんあいてを よぶ」を押したときから使います" : "");
@@ -2336,7 +2347,33 @@ setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e
   if (seg.dataset.key === "devUnlock") { refreshLeft(); if (NET.open) { sendLic(); if (NET.role === "host") recheckLock(); } }
 }));
 $("closeBtn").addEventListener("click", () => { setPanel.hidden = true; });
-$("myName").addEventListener("input", e => { CFG.myName = e.target.value.trim().slice(0, 10); saveCfg(); });
+/* なまえの画面：自分の名前（相手の画面の「○○と 対戦する」に出る）と、この端末に登録した相手の名前を変えられる。
+   開始画面の「なまえ」ボタン、設定の「名前を変える」から。名前が未設定のまま「たいせんあいてを よぶ」を押したときも先に出す */
+let nameNext = null;
+function showNames(next) {
+  nameNext = next || null;
+  $("myName").value = CFG.myName || "";
+  $("myNameRow").hidden = NET.role === "guest" && !!NET.room && !CFG.myName;
+  const box = $("partnerNames"); box.innerHTML = "";
+  partners.list.forEach((p, i) => {
+    const l = document.createElement("label"); l.className = "nameRow";
+    l.innerHTML = `あいての なまえ（${i + 1}人め）`;
+    const inp = document.createElement("input"); inp.type = "text"; inp.maxLength = 10; inp.autocomplete = "off"; inp.value = p.name;
+    inp.addEventListener("input", () => { p.name = inp.value.trim().slice(0, 10) || "たいせんあいて"; partners.save(); renderPartners(); });
+    l.appendChild(inp); box.appendChild(l);
+  });
+  $("nameOv").hidden = false;
+  if (!$("myNameRow").hidden) setTimeout(() => $("myName").focus(), 50);
+}
+$("myName").addEventListener("input", e => { CFG.myName = e.target.value.trim().slice(0, 10); saveCfg(); renderNameBtn(); });
+$("nameOk").addEventListener("click", () => { $("nameOv").hidden = true; const f = nameNext; nameNext = null; if (f) f(); });
+function renderNameBtn() {
+  const b = $("nameBtn");
+  b.hidden = NET.role === "guest" && !!NET.room;
+  b.textContent = CFG.myName ? `なまえ：${CFG.myName}（かえる）` : "なまえを きめる";
+}
+$("nameBtn").addEventListener("click", () => showNames());
+$("nameBtn2").addEventListener("click", () => { setPanel.hidden = true; showNames(); });
 $("newRoomBtn").addEventListener("click", () => {
   const b = $("newRoomBtn");
   if (!b.classList.contains("confirm")) { b.textContent = "もういちど おすと 作りなおします（古いリンクは使えなくなります）"; b.classList.add("confirm"); return; }
@@ -2533,7 +2570,11 @@ function handle(m) {
     case "state": applyState(m); break;
     case "new": newGame(); break;
     case "quit": quitByOther(); break;
-    case "hello": if (m.reg && NET.role === "host" && !CFG.hasPartner) { CFG.hasPartner = 1; saveCfg(); } break;
+    case "hello":
+      if (m.reg && NET.role === "host" && !CFG.hasPartner) { CFG.hasPartner = 1; saveCfg(); }
+      // よぶ側が名前を変えたら、こちらの「○○と 対戦する」も新しい名前に
+      if (m.name && NET.role === "guest") { registerPartner(NET.room, m.name); renderPartners(); }
+      break;
     case "lic": G.theirUnlocked = !!m.u; refreshLeft(); if (NET.role === "host") recheckLock(); break;
     case "locked": if (NET.role === "guest") { G.busy = true; clearHints(); updateButtons(); showUnlock(); } break;
     case "unlocked": $("unlockOv").hidden = true; break;
@@ -2560,6 +2601,7 @@ NET.on("open", () => {
   sendLic();
   if (NET.role === "guest") { registerPartner(NET.room, NET.linkName || (partners.list.find(p => p.room === NET.room) || {}).name); NET.send({ t: "hello", reg: true }); }
   if (NET.role !== "host") return;
+  NET.send({ t: "hello", name: CFG.myName });
   $("resendBtn").hidden = true;
   sendState();
   if (G.begun) return updateButtons();
@@ -2660,7 +2702,7 @@ $("restoreBtn").addEventListener("click", async () => {
   const r = await BILLING.restore();
   if (r.ok) afterUnlock(); else $("unlockNote").textContent = "引きつげる購入が見つかりませんでした。";
 });
-$("callBtn").addEventListener("click", () => callGrandma(false));
+$("callBtn").addEventListener("click", () => { if (CFG.myName) callGrandma(false); else showNames(() => callGrandma(false)); });
 $("copyBtn").addEventListener("click", () => {
   const url = NET.inviteURL(), done = () => { $("copyBtn").textContent = "コピーしました"; setTimeout(() => $("copyBtn").textContent = "リンクを コピー", 2000); };
   const pick = () => { const r = document.createRange(); r.selectNodeContents($("inviteLink")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
@@ -2695,7 +2737,7 @@ $("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (N
     $("startNote").textContent = "";
   }
   else if (!NET.available) $("callBtn").hidden = true;
-  refreshLeft(); renderPartners();
+  refreshLeft(); renderPartners(); renderNameBtn();
   layout(); placeAll();
   setTimeout(() => { if (!G.started) { wave(seat.A); mv(seat.B, "nod"); } }, 900);
 })();

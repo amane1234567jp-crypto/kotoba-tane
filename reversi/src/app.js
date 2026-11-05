@@ -504,7 +504,7 @@ const setPanel = $("settings");
 function syncPanel() {
   setPanel.querySelectorAll(".seg").forEach(seg => seg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === +CFG[seg.dataset.key]))));
   $("resetBtn").textContent = "さいしょから"; $("resetBtn").classList.remove("confirm"); refreshLeft();
-  $("myName").value = CFG.myName || ""; $("newRoomBtn").textContent = "あたらしい部屋にする（リンクを作りなおす）"; $("newRoomBtn").classList.remove("confirm");
+  $("newRoomBtn").textContent = "あたらしい部屋にする（リンクを作りなおす）"; $("newRoomBtn").classList.remove("confirm");
   $("partnerInfo").textContent = (CFG.hasPartner ? "相手は登録ずみ（「たいせんあいてを よぶ」で すぐ待ち受けます）。" : "相手はまだ登録されていません（リンクを開いてつながると登録されます）。") + (partners.list.length ? ` この端末に登録した相手：${partners.list.map(p => p.name).join("、")}` : "");
   $("forgetBtn").hidden = !partners.list.length; $("forgetBtn").textContent = "この端末に登録した相手を けす";
   $("routeInfo").textContent = NET.open && NET.via ? `いまのつながり：${NET.via}` : (CFG.relay ? "「中継だけ」は、つぎに「たいせんあいてを よぶ」を押したときから使います" : "");
@@ -517,7 +517,33 @@ setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e
   if (seg.dataset.key === "devUnlock") { refreshLeft(); if (NET.open) { sendLic(); if (NET.role === "host") recheckLock(); } }
 }));
 $("closeBtn").addEventListener("click", () => { setPanel.hidden = true; });
-$("myName").addEventListener("input", e => { CFG.myName = e.target.value.trim().slice(0, 10); saveCfg(); });
+/* なまえの画面：自分の名前（相手の画面の「○○と 対戦する」に出る）と、この端末に登録した相手の名前を変えられる。
+   開始画面の「なまえ」ボタン、設定の「名前を変える」から。名前が未設定のまま「たいせんあいてを よぶ」を押したときも先に出す */
+let nameNext = null;
+function showNames(next) {
+  nameNext = next || null;
+  $("myName").value = CFG.myName || "";
+  $("myNameRow").hidden = NET.role === "guest" && !!NET.room && !CFG.myName;
+  const box = $("partnerNames"); box.innerHTML = "";
+  partners.list.forEach((p, i) => {
+    const l = document.createElement("label"); l.className = "nameRow";
+    l.innerHTML = `あいての なまえ（${i + 1}人め）`;
+    const inp = document.createElement("input"); inp.type = "text"; inp.maxLength = 10; inp.autocomplete = "off"; inp.value = p.name;
+    inp.addEventListener("input", () => { p.name = inp.value.trim().slice(0, 10) || "たいせんあいて"; partners.save(); renderPartners(); });
+    l.appendChild(inp); box.appendChild(l);
+  });
+  $("nameOv").hidden = false;
+  if (!$("myNameRow").hidden) setTimeout(() => $("myName").focus(), 50);
+}
+$("myName").addEventListener("input", e => { CFG.myName = e.target.value.trim().slice(0, 10); saveCfg(); renderNameBtn(); });
+$("nameOk").addEventListener("click", () => { $("nameOv").hidden = true; const f = nameNext; nameNext = null; if (f) f(); });
+function renderNameBtn() {
+  const b = $("nameBtn");
+  b.hidden = NET.role === "guest" && !!NET.room;
+  b.textContent = CFG.myName ? `なまえ：${CFG.myName}（かえる）` : "なまえを きめる";
+}
+$("nameBtn").addEventListener("click", () => showNames());
+$("nameBtn2").addEventListener("click", () => { setPanel.hidden = true; showNames(); });
 $("newRoomBtn").addEventListener("click", () => {
   const b = $("newRoomBtn");
   if (!b.classList.contains("confirm")) { b.textContent = "もういちど おすと 作りなおします（古いリンクは使えなくなります）"; b.classList.add("confirm"); return; }
@@ -714,7 +740,11 @@ function handle(m) {
     case "state": applyState(m); break;
     case "new": newGame(); break;
     case "quit": quitByOther(); break;
-    case "hello": if (m.reg && NET.role === "host" && !CFG.hasPartner) { CFG.hasPartner = 1; saveCfg(); } break;
+    case "hello":
+      if (m.reg && NET.role === "host" && !CFG.hasPartner) { CFG.hasPartner = 1; saveCfg(); }
+      // よぶ側が名前を変えたら、こちらの「○○と 対戦する」も新しい名前に
+      if (m.name && NET.role === "guest") { registerPartner(NET.room, m.name); renderPartners(); }
+      break;
     case "lic": G.theirUnlocked = !!m.u; refreshLeft(); if (NET.role === "host") recheckLock(); break;
     case "locked": if (NET.role === "guest") { G.busy = true; clearHints(); updateButtons(); showUnlock(); } break;
     case "unlocked": $("unlockOv").hidden = true; break;
@@ -741,6 +771,7 @@ NET.on("open", () => {
   sendLic();
   if (NET.role === "guest") { registerPartner(NET.room, NET.linkName || (partners.list.find(p => p.room === NET.room) || {}).name); NET.send({ t: "hello", reg: true }); }
   if (NET.role !== "host") return;
+  NET.send({ t: "hello", name: CFG.myName });
   $("resendBtn").hidden = true;
   sendState();
   if (G.begun) return updateButtons();
@@ -841,7 +872,7 @@ $("restoreBtn").addEventListener("click", async () => {
   const r = await BILLING.restore();
   if (r.ok) afterUnlock(); else $("unlockNote").textContent = "引きつげる購入が見つかりませんでした。";
 });
-$("callBtn").addEventListener("click", () => callGrandma(false));
+$("callBtn").addEventListener("click", () => { if (CFG.myName) callGrandma(false); else showNames(() => callGrandma(false)); });
 $("copyBtn").addEventListener("click", () => {
   const url = NET.inviteURL(), done = () => { $("copyBtn").textContent = "コピーしました"; setTimeout(() => $("copyBtn").textContent = "リンクを コピー", 2000); };
   const pick = () => { const r = document.createRange(); r.selectNodeContents($("inviteLink")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
@@ -876,7 +907,7 @@ $("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (N
     $("startNote").textContent = "";
   }
   else if (!NET.available) $("callBtn").hidden = true;
-  refreshLeft(); renderPartners();
+  refreshLeft(); renderPartners(); renderNameBtn();
   layout(); placeAll();
   setTimeout(() => { if (!G.started) { wave(seat.A); mv(seat.B, "nod"); } }, 900);
 })();
