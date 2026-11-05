@@ -1,0 +1,282 @@
+[
+ {
+  "key": "ucw_count",
+  "who": "nobbo",
+  "text": "はっしゃ 5びょうまえ。じゅんびは いいか？"
+ },
+ {
+  "key": "ucr_count",
+  "who": "nobbo",
+  "text": "よし。3、2、1、はっしゃ！"
+ },
+ {
+  "key": "ucw_oto",
+  "who": "pyon",
+  "text": "まるシマくん、だいじょうぶ？"
+ },
+ {
+  "key": "ucr_oto",
+  "who": "pyon",
+  "text": "はい、ぎゅっ。すぐ しずかに なるよ"
+ },
+ {
+  "key": "ucw_fuwa",
+  "who": "nobbo",
+  "text": "むじゅうりょくだ。どんな きもちだ？"
+ },
+ {
+  "key": "ucr_fuwa",
+  "who": "nobbo",
+  "text": "はっは。うちゅうでは、みんな うくんだ"
+ },
+ {
+  "key": "ucw_chikyu",
+  "who": "kamejii",
+  "text": "ほれ、まどを みて ごらん"
+ },
+ {
+  "key": "ucr_chikyu",
+  "who": "kamejii",
+  "text": "ほっほ。あれが わしらの ほしじゃ"
+ },
+ {
+  "key": "ucw_shoku",
+  "who": "nobbo",
+  "text": "うちゅうしょくだ。たべて みるか？"
+ },
+ {
+  "key": "ucr_shoku",
+  "who": "nobbo",
+  "text": "ストローで すうんだぞ。どうぞ"
+ },
+ {
+  "key": "ucw2_shoku",
+  "who": "nobbo",
+  "text": "どうだ、あじは？"
+ },
+ {
+  "key": "ucr2_shoku",
+  "who": "nobbo",
+  "text": "よかった。おかわりも あるぞ"
+ },
+ {
+  "key": "ucw_helmet",
+  "who": "pyon",
+  "text": "そとに でる じゅんび、できたよ！"
+ },
+ {
+  "key": "ucr_helmet",
+  "who": "pyon",
+  "text": "あっ、ほんとだ。ありがとう"
+ },
+ {
+  "key": "ucw_jump",
+  "who": "pyon",
+  "text": "わあ、まるシマくん、すごい！"
+ },
+ {
+  "key": "ucr_jump",
+  "who": "pyon",
+  "text": "つきは、かるいんだね！"
+ },
+ {
+  "key": "ucw_ishi",
+  "who": "kamejii",
+  "text": "それは つきの いしじゃ"
+ },
+ {
+  "key": "ucr_ishi",
+  "who": "kamejii",
+  "text": "ええとも。ちきゅうへ もって かえろう"
+ },
+ {
+  "key": "ucw2_ishi",
+  "who": "kamejii",
+  "text": "どんな いしじゃ？"
+ },
+ {
+  "key": "ucr2_ishi",
+  "who": "kamejii",
+  "text": "ほっほ、それは めずらしい"
+ },
+ {
+  "key": "ucw_hata",
+  "who": "kamejii",
+  "text": "ここに しるしを のこそう"
+ },
+ {
+  "key": "ucr_hata",
+  "who": "kamejii",
+  "text": "よし。いっしょに たてるぞ"
+ },
+ {
+  "key": "ucw_ana",
+  "who": "nobbo",
+  "text": "さあ、まっすぐ すすむぞ"
+ },
+ {
+  "key": "ucr_ana",
+  "who": "nobbo",
+  "text": "おっと！ よく きづいたな"
+ },
+ {
+  "key": "ucw_michi",
+  "who": "kamejii",
+  "text": "ふむ、どうした？"
+ },
+ {
+  "key": "ucr_michi",
+  "who": "kamejii",
+  "text": "ロケットは あっちじゃ。ついて きなさい"
+ },
+ {
+  "key": "ucw_kuuki",
+  "who": "nobbo",
+  "text": "くうきは まだ あるか？"
+ },
+ {
+  "key": "ucr_kuuki",
+  "who": "nobbo",
+  "text": "よし、すぐ ロケットに もどるぞ"
+ },
+ {
+  "key": "ucw_inseki",
+  "who": "nobbo",
+  "text": "ん？ なにか みえるか？"
+ },
+ {
+  "key": "ucr_inseki",
+  "who": "nobbo",
+  "text": "うわっ！ よく みつけた。みんな、つかまれ！"
+ },
+ {
+  "key": "ucw_rope",
+  "who": "pyon",
+  "text": "さきに そとに でちゃおう！"
+ },
+ {
+  "key": "ucr_rope",
+  "who": "pyon",
+  "text": "そっか。ロープが ないと、ながされちゃうもんね"
+ },
+ {
+  "key": "ucw_musen",
+  "who": "nobbo",
+  "text": "こちら せんちょう。きこえるか？"
+ },
+ {
+  "key": "ucr_musen",
+  "who": "nobbo",
+  "text": "りょうかい。きを つけてな"
+ },
+ {
+  "key": "ucr_nagasare",
+  "who": "nobbo",
+  "text": "なに！？ すぐ ロープで ひきよせる！"
+ },
+ {
+  "key": "ucw2_nagasare",
+  "who": "nobbo",
+  "text": "ぴょんは ぶじだ。よく よんで くれた"
+ },
+ {
+  "key": "ucr2_nagasare",
+  "who": "nobbo",
+  "text": "ああ、もう だいじょうぶだ"
+ },
+ {
+  "key": "ucw_bh",
+  "who": "kamejii",
+  "text": "あれに ちかづいては いかん"
+ },
+ {
+  "key": "ucr_bh",
+  "who": "kamejii",
+  "text": "そのとおり。とおまわり して いこう"
+ },
+ {
+  "key": "ucw_hoshi",
+  "who": "pyon",
+  "text": "ねえ、まるシマくん、なに みてるの？"
+ },
+ {
+  "key": "ucr_hoshi",
+  "who": "pyon",
+  "text": "ほんとだ！ きれいだね"
+ },
+ {
+  "key": "ucw_aisatsu",
+  "who": "piko",
+  "text": "ピコピコ……あなたは だれ？"
+ },
+ {
+  "key": "ucr_aisatsu",
+  "who": "piko",
+  "text": "まるシマ！ わたしは、ピコ"
+ },
+ {
+  "key": "ucw2_aisatsu",
+  "who": "piko",
+  "text": "まるシマは、どこから きたの？"
+ },
+ {
+  "key": "ucr2_aisatsu",
+  "who": "piko",
+  "text": "ちきゅう！ とおいね"
+ },
+ {
+  "key": "ucw_uchugo",
+  "who": "piko",
+  "text": "ピコピコ ポポ、ピロリロ ピー！"
+ },
+ {
+  "key": "ucr_uchugo",
+  "who": "piko",
+  "text": "あっ、ごめん。「いっしょに あそぼう」って いったの"
+ },
+ {
+  "key": "ucw_tabemono",
+  "who": "piko",
+  "text": "はい、どうぞ。この ほしの おやつ"
+ },
+ {
+  "key": "ucr_tabemono",
+  "who": "piko",
+  "text": "ほしの ゼリーだよ。あまいよ"
+ },
+ {
+  "key": "ucr2_tabemono",
+  "who": "piko",
+  "text": "どう？ おいしい？"
+ },
+ {
+  "key": "ucw_asobo",
+  "who": "piko",
+  "text": "ねえねえ、ひまー？"
+ },
+ {
+  "key": "ucr_asobo",
+  "who": "piko",
+  "text": "やったー！ こっち こっち！"
+ },
+ {
+  "key": "ucw_kowai",
+  "who": "gabo",
+  "text": "……ガボ、こわい……"
+ },
+ {
+  "key": "ucr_kowai",
+  "who": "gabo",
+  "text": "……ほんと？ じゃあ、ガボも あそぶ"
+ },
+ {
+  "key": "ucw_sayonara",
+  "who": "piko",
+  "text": "もう かえっちゃうの？"
+ },
+ {
+  "key": "ucr_sayonara",
+  "who": "piko",
+  "text": "やくそくだよ！ ばいばーい"
+ }
+]

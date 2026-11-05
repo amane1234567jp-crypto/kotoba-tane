@@ -327,6 +327,16 @@
    "model": "71e72188-2726-4739-9aa9-39567396fb2a",
    "style": "ノーマル",
    "speed": 0.9
+  },
+  "piko": {
+   "model": "f5017410-fbb5-49e1-97cb-e785f42e15f5",
+   "style": "Happy",
+   "speed": 1.1
+  },
+  "gabo": {
+   "model": "47e53151-a378-46f3-abee-ce13aa07feb1",
+   "style": "Calm",
+   "speed": 0.85
   }
  },
  "lines": {
