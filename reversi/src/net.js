@@ -35,7 +35,7 @@ const NET = (() => {
     role: q.get("r") ? "guest" : null,   // null = 1台で遊ぶ
     room: q.get("r") || null,
     peer: null, conn: null, call: null, local: null, remote: null,
-    open: false, lastHeard: 0, handlers: {}, relayOnly: false, via: "", busy: false, media: "", since: 0,
+    open: false, lastHeard: 0, handlers: {}, relayOnly: false, via: "", busy: false, media: "", since: 0, name: "",
     on(type, fn) { this.handlers[type] = fn; },
     send(msg) { if (this.conn && this.open) try { this.conn.send(msg); } catch (e) { /* 切れていたら再接続で送り直す */ } },
     get available() { return typeof Peer !== "undefined" && !!navigator.mediaDevices; },
@@ -115,7 +115,8 @@ const NET = (() => {
   async function host(fresh) {
     N.role = "host";
     let saved = null; try { saved = JSON.parse(localStorage.getItem(ROOM_KEY)); } catch (e) { saved = null; }
-    if (!fresh && saved && Date.now() - saved.at < 3 * 3600e3) N.room = saved.room;
+    // 部屋は この端末に固定（一度おくったリンクが ずっと使える）。「あたらしい部屋」にしたときだけ作りなおす
+    if (!fresh && saved && saved.room) N.room = saved.room;
     else N.room = Math.random().toString(36).slice(2, 10);
     try { localStorage.setItem(ROOM_KEY, JSON.stringify({ room: N.room, at: Date.now() })); } catch (e) { /* 保存できなくても続ける */ }
     await camera(); await prepareIce();
@@ -152,6 +153,7 @@ const NET = (() => {
 
   N.host = host; N.guest = guest;
   // openExternalBrowser=1：LINE の中のブラウザではなく Safari／Chrome で開かせる（LINE の中ではカメラが使えないことがある）
-  N.inviteURL = () => location.origin + location.pathname + "?r=" + N.room + (ps ? "&ps=" + ps : "") + "&openExternalBrowser=1";
+  N.inviteURL = () => location.origin + location.pathname + "?r=" + N.room + (N.name ? "&n=" + encodeURIComponent(N.name) : "") + (ps ? "&ps=" + ps : "") + "&openExternalBrowser=1";
+  N.linkName = q.get("n") || "";
   return N;
 })();

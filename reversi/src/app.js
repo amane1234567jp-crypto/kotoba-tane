@@ -11,7 +11,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const CFG_KEY = "marushima-reversi-cfg", GAME_KEY = "marushima-reversi-game";
 const load = k => { try { return JSON.parse(localStorage.getItem(k)) || null; } catch (e) { return null; } };
 const keep = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* 保存できなくても遊べる */ } };
-const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2, autoOk: 1, relay: 0, fx: 2, devUnlock: 0 }, load(CFG_KEY) || {});
+const CFG = Object.assign({ slow: 0, hints: 1, sfx: 2, voice: 2, autoOk: 1, relay: 0, fx: 2, devUnlock: 0, myName: "", hasPartner: 0 }, load(CFG_KEY) || {});
 const saveCfg = () => keep(CFG_KEY, CFG);
 
 /* ---------- 対局の状態 ---------- */
@@ -504,6 +504,9 @@ const setPanel = $("settings");
 function syncPanel() {
   setPanel.querySelectorAll(".seg").forEach(seg => seg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === +CFG[seg.dataset.key]))));
   $("resetBtn").textContent = "さいしょから"; $("resetBtn").classList.remove("confirm"); refreshLeft();
+  $("myName").value = CFG.myName || ""; $("newRoomBtn").textContent = "あたらしい部屋にする（リンクを作りなおす）"; $("newRoomBtn").classList.remove("confirm");
+  $("partnerInfo").textContent = (CFG.hasPartner ? "相手は登録ずみ（「たいせんあいてを よぶ」で すぐ待ち受けます）。" : "相手はまだ登録されていません（リンクを開いてつながると登録されます）。") + (partners.list.length ? ` この端末に登録した相手：${partners.list.map(p => p.name).join("、")}` : "");
+  $("forgetBtn").hidden = !partners.list.length; $("forgetBtn").textContent = "この端末に登録した相手を けす";
   $("routeInfo").textContent = NET.open && NET.via ? `いまのつながり：${NET.via}` : (CFG.relay ? "「中継だけ」は、つぎに「たいせんあいてを よぶ」を押したときから使います" : "");
 }
 setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e => {
@@ -514,6 +517,13 @@ setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e
   if (seg.dataset.key === "devUnlock") { refreshLeft(); if (NET.open) { sendLic(); if (NET.role === "host") recheckLock(); } }
 }));
 $("closeBtn").addEventListener("click", () => { setPanel.hidden = true; });
+$("myName").addEventListener("input", e => { CFG.myName = e.target.value.trim().slice(0, 10); saveCfg(); });
+$("newRoomBtn").addEventListener("click", () => {
+  const b = $("newRoomBtn");
+  if (!b.classList.contains("confirm")) { b.textContent = "もういちど おすと 作りなおします（古いリンクは使えなくなります）"; b.classList.add("confirm"); return; }
+  CFG.hasPartner = 0; saveCfg(); setPanel.hidden = true; callGrandma(true);
+});
+$("forgetBtn").addEventListener("click", () => { partners.list = []; partners.save(); renderPartners(); $("forgetBtn").textContent = "けしました"; });
 $("resetBtn").addEventListener("click", () => {
   const b = $("resetBtn");
   if (!b.classList.contains("confirm")) { b.textContent = "もういちど おすと さいしょから"; b.classList.add("confirm"); return; }
@@ -626,6 +636,32 @@ $("startBtn").addEventListener("click", async () => {
   else newGame();
 });
 
+/* ---------- 対戦相手の登録 ----------
+   リンクを一度ひらいた端末は、その部屋を「登録した相手」として覚える。次からは開始画面の「○○と 対戦する」を押すだけでつながる。
+   よぶ側は、相手が登録ずみなら「たいせんあいてを よぶ」でリンクの画面を出さず、すぐ待ち受けに入る。 */
+const PARTNER_KEY = "marushima-reversi-partners";
+const partners = { list: load(PARTNER_KEY) || [], save() { keep(PARTNER_KEY, this.list); } };
+function registerPartner(room, name) {
+  if (!room) return;
+  const i = partners.list.findIndex(p => p.room === room), rec = { room, name: name || (i >= 0 ? partners.list[i].name : "") || "たいせんあいて", at: Date.now() };
+  if (i >= 0) partners.list[i] = rec; else partners.list.unshift(rec);
+  partners.list = partners.list.slice(0, 5); partners.save();
+}
+function renderPartners() {
+  const box = $("partners"); box.innerHTML = "";
+  if (NET.role === "guest" || !partners.list.length) { box.hidden = true; return; }
+  partners.list.forEach(p => {
+    const b = document.createElement("button"); b.type = "button"; b.className = "big partner";
+    b.innerHTML = `<small>登録ずみ</small>${p.name}と 対戦する`;
+    b.addEventListener("click", () => joinPartner(p));
+    box.appendChild(b);
+  });
+  box.hidden = false;
+}
+function joinPartner(p) {
+  NET.role = "guest"; NET.room = p.room; registerPartner(p.room, p.name);
+  unlock(); $("guestLead").hidden = true; startOnline();
+}
 /* ---------- 遠隔対戦（段階2） ---------- */
 const otherSide = () => other(mySide());
 function camOf(side) { return { box: $("cam" + side), v: $("vid" + side), msg: $("msg" + side) }; }
@@ -678,6 +714,7 @@ function handle(m) {
     case "state": applyState(m); break;
     case "new": newGame(); break;
     case "quit": quitByOther(); break;
+    case "hello": if (m.reg && NET.role === "host" && !CFG.hasPartner) { CFG.hasPartner = 1; saveCfg(); } break;
     case "lic": G.theirUnlocked = !!m.u; refreshLeft(); if (NET.role === "host") recheckLock(); break;
     case "locked": if (NET.role === "guest") { G.busy = true; clearHints(); updateButtons(); showUnlock(); } break;
     case "unlocked": $("unlockOv").hidden = true; break;
@@ -702,7 +739,9 @@ NET.on("open", () => {
   if (back && !G.animating) speak(host.pony, "rv_back");
   setTimeout(() => { if (NET.open && !NET.remote) camMsg(otherSide(), "あいての カメラが うつりません（ゲームは できます）"); }, 9000);
   sendLic();
+  if (NET.role === "guest") { registerPartner(NET.room, NET.linkName || (partners.list.find(p => p.room === NET.room) || {}).name); NET.send({ t: "hello", reg: true }); }
   if (NET.role !== "host") return;
+  $("resendBtn").hidden = true;
   sendState();
   if (G.begun) return updateButtons();
   // 相手の「解放ずみか」が届くのを 少しだけ待ってから 始める
@@ -722,7 +761,7 @@ NET.on("lost", () => {
   camMsg(otherSide(), "つなぎなおしています…");
   if (!lostSaid && !G.animating) { lostSaid = true; speak(host.pony, "rv_hold"); }
 });
-NET.on("ready", () => camMsg(otherSide(), "まっています…"));
+NET.on("ready", () => { if (!NET.open) camMsg(otherSide(), CFG.hasPartner ? "登録ずみの あいてを まっています…" : "まっています…"); });
 // 同じリンクを もう1つの画面で ひらいていて、そちらが つながっているとき
 NET.on("busy", () => { G.paused = true; G.busy = true; clearHints(); updateButtons(); camMsg(otherSide(), "ほかの がめんで つながっています。この がめんは とじてください"); });
 NET.on("route", via => { $("routeInfo").textContent = via ? `いまのつながり：${via}` : ""; });
@@ -744,9 +783,13 @@ async function callGrandma(fresh) {
   G.hist = []; G.blackSide = "A"; G.ended = false; G.begun = false; saveGame(); clearHalo();
   $("againOv").hidden = true; ["A", "B"].forEach(s => $("side" + s).classList.remove("winner", "active"));
   const s = replay(G.hist); cur = s; paintSides(); paint(s.board); setCounts(s.board, false); clearHints(); updateButtons();
+  NET.name = CFG.myName;
   await NET.host(fresh);
-  showInvite();
+  if (fresh || !CFG.hasPartner) showInvite();
+  else { camMsg(otherSide(), "登録ずみの あいてを まっています…"); $("resendBtn").hidden = false; }
 }
+$("resendBtn").addEventListener("click", () => showInvite());
+NET.on("lost", () => { if (NET.role === "host") $("resendBtn").hidden = false; });
 function showInvite() {
   const url = NET.inviteURL();
   try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("qr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("qr").textContent = ""; }
@@ -824,6 +867,8 @@ $("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (N
   const s = replay(G.hist); cur = s;
   paintSides(); paint(s.board); setCounts(s.board, false); haloFor(G.hist);
   if (NET.role === "guest") {
+    registerPartner(NET.room, NET.linkName);
+    $("regNote").hidden = false;
     // おばあちゃん向け：大人なので漢字まじりで、大きく、手順を2つだけ
     $("callBtn").hidden = true; $("startOv").classList.add("guest");
     $("startBtn").textContent = "はじめる"; $("startBtn").classList.remove("sub");
@@ -831,7 +876,7 @@ $("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (N
     $("startNote").textContent = "";
   }
   else if (!NET.available) $("callBtn").hidden = true;
-  refreshLeft();
+  refreshLeft(); renderPartners();
   layout(); placeAll();
   setTimeout(() => { if (!G.started) { wave(seat.A); mv(seat.B, "nod"); } }, 900);
 })();

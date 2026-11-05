@@ -214,6 +214,12 @@ body {
 #quitOv { background: rgba(43, 42, 51, .45); }
 .ver { position: fixed; right: max(10px, env(safe-area-inset-right, 0px)); bottom: max(6px, env(safe-area-inset-bottom, 0px)); margin: 0; font: 500 11px var(--body); color: var(--muted); opacity: .75; }
 .cell.nudge .hint i { animation-duration: .8s; border-color: #FFE27A; box-shadow: 0 0 calc(var(--bs, 600px) * .03) rgba(255, 226, 122, .9); }
+.partners { display: grid; gap: 12px; justify-items: center; }
+.big.partner { background: #FFFFFF; font-size: clamp(22px, 4.2vmin, 42px); display: grid; justify-items: center; line-height: 1.15; }
+.big.partner small { font: 700 .42em var(--body); color: var(--muted); letter-spacing: .06em; }
+.resend { align-self: center; margin-top: -4px; }
+.nameRow { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+.nameRow input { font: 700 18px var(--body); padding: 8px 10px; border: 3px solid var(--ink); border-radius: 12px; min-width: 0; color: var(--ink); background: #FFFFFF; }
 .left { margin: -10px 0 0; font: 700 clamp(14px, 2.2vmin, 18px) var(--body); color: var(--muted); }
 .left.zero { color: #C0392B; }
 #unlockOv { background: rgba(43, 42, 51, .45); }
@@ -255,6 +261,7 @@ body {
   <section class="side" id="sideB" aria-label="あいての せき">
     <div class="chip"><span class="stone" data-c="2"></span><span class="nm" id="nameB">しろ</span></div>
     <div class="cam" id="camB" hidden><video id="vidB" playsinline autoplay muted></video><span class="camMsg" id="msgB" hidden></span></div>
+    <button type="button" class="small resend" id="resendBtn" hidden>リンクを おくる</button>
     <div class="slot" id="slotB"></div>
     <div class="score"><span class="stone" data-c="2"></span><b id="cntB">2</b><small>まい</small></div>
     <button class="matta" id="mattaB" type="button" disabled>__HAND__まった</button>
@@ -267,6 +274,7 @@ body {
 <div class="cover" id="startOv">
   <div class="startCard">
     <h1 class="logo">まるシマ<span>リバーシ</span></h1>
+    <div class="partners" id="partners" hidden></div>
     <button class="big" id="callBtn" type="button">たいせんあいてを よぶ</button>
     <p class="left" id="leftNote" hidden></p>
     <button class="big sub" id="startBtn" type="button">1だいで あそぶ</button>
@@ -277,6 +285,7 @@ body {
         <li>カメラとマイクの確認が出たら<b>「許可」</b>を押します</li>
       </ol>
       <p class="gNote">お孫さんの顔が映ったら、黒と白の石を交互に置いて遊びます。</p>
+      <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と 対戦する」を押すだけでつながります。</p>
     </div>
     <p class="note" id="startNote">おとなの せってい：ばんの そとを 3びょう ながおし</p>
     <p class="ver">__VER__</p>
@@ -325,6 +334,9 @@ body {
     <div class="row"><span>キャラの こえ</span><div class="seg" data-key="voice"><button type="button" id="voice0" data-v="0">なし</button><button type="button" id="voice1" data-v="1">小</button><button type="button" id="voice2" data-v="2">中</button><button type="button" id="voice3" data-v="3">大</button></div></div>
     <div class="row"><span>こどもの まったに あいては じどうで いいよ</span><div class="seg" data-key="autoOk"><button type="button" id="autoOk1" data-v="1">じどうで いいよ</button><button type="button" id="autoOk0" data-v="0">きいてから</button></div></div>
     <div class="row"><span>つながり方（テスト用。「中継だけ」は、家の外でもつながるかを家の中で確かめるとき）</span><div class="seg" data-key="relay"><button type="button" id="relay0" data-v="0">ふつう</button><button type="button" id="relay1" data-v="1">中継だけ</button></div><span class="route" id="routeInfo"></span></div>
+    <div class="row"><span>対戦相手の登録</span><span class="route" id="partnerInfo"></span>
+      <label class="nameRow" for="myName">相手の画面に出る自分の名前（10文字まで。例：ゆうくん）<input id="myName" type="text" maxlength="10" autocomplete="off"></label>
+      <div class="panelBtns"><button type="button" id="newRoomBtn">あたらしい部屋にする（リンクを作りなおす）</button><button type="button" id="forgetBtn" hidden>この端末に登録した相手を けす</button></div></div>
     <div class="row"><span>遠隔対戦（10回まで無料）</span><span class="route" id="remoteInfo"></span><div class="seg" data-key="devUnlock"><button type="button" id="devUnlock0" data-v="0">ふつう</button><button type="button" id="devUnlock1" data-v="1">テスト用に解放</button></div></div>
     <div class="panelBtns"><button type="button" id="reinviteBtn">たいせんあいてを よぶ（リンク）</button></div>
     <div class="panelBtns"><button type="button" id="resetBtn">さいしょから</button><button type="button" id="closeBtn" class="primary">とじる</button></div>
