@@ -777,8 +777,9 @@ function afterUnlock() {
 }
 function refreshLeft() {
   const el = $("leftNote"), un = myUnlocked();
-  el.hidden = NET.role === "guest";
-  el.textContent = un ? "遠隔対戦：解放ずみ" : BILLING.left > 0 ? `遠隔対戦：あと ${BILLING.left}回 むりょう` : "遠隔対戦：無料分おわり（相手が解放ずみなら遊べます）";
+  // 「あと N回」は のこり3回からだけ出す（それまでは何も出さない）
+  el.hidden = NET.role === "guest" || un || BILLING.left > 3;
+  el.textContent = BILLING.left > 0 ? `遠隔対戦：あと ${BILLING.left}回 むりょう` : "遠隔対戦：無料分おわり（相手が解放ずみなら遊べます）";
   el.classList.toggle("zero", !un && BILLING.left === 0);
   $("remoteInfo").textContent = un ? `解放ずみ（${BILLING.unlocked ? "購入" : "テスト用"}）。これまで ${BILLING.used}回` : `これまで ${BILLING.used}回・のこり ${BILLING.left}回`;
 }
