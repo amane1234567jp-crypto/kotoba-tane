@@ -3,6 +3,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
 <meta name="apple-mobile-web-app-title" content="まるシマリバーシ">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1E8A52">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <style>body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
 </head><body>
 <title>まるシマリバーシ</title>
@@ -230,6 +235,13 @@ body {
 .big.partner small { font: 700 .42em var(--body); color: var(--muted); letter-spacing: .06em; }
 .resend { align-self: center; margin-top: -4px; }
 .nameRow { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+.ringNote { font: 900 clamp(18px, 2.6vmin, 26px) var(--body); color: #FFFFFF; background: #E2574C; border: 3px solid var(--ink); border-radius: 16px; padding: 8px 18px; margin: 0; animation: ring 1s ease-in-out infinite; }
+@keyframes ring { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+.pushCard { display: grid; gap: 4px; justify-items: center; }
+.pushCard button { font: 700 15px var(--body); color: var(--ink); background: #FFF6D8; border: 2px solid var(--ink); border-radius: 999px; padding: 7px 16px; cursor: pointer; }
+.pushCard p { margin: 0; font-size: 13px; color: var(--muted); max-width: 30em; text-align: center; }
+.panel.home .steps { margin: 6px 0 10px; padding-left: 1.4em; display: grid; gap: 6px; font-size: 16px; line-height: 1.5; }
+.panel.home .small { font-size: 13px; }
 .nameBtn { font: 700 15px var(--body); color: var(--ink); background: #FFFFFF; border: 2px solid var(--ink); border-radius: 999px; padding: 6px 16px; margin-top: 2px; cursor: pointer; }
 .panel.name .nameRow { margin: 10px 0; }
 .panel.name input { font-size: 22px; }
@@ -288,6 +300,7 @@ body {
 <div class="cover" id="startOv">
   <div class="startCard">
     <h1 class="logo">まるシマ<span>リバーシ</span></h1>
+    <p class="ringNote" id="ringNote" hidden></p>
     <div class="partners" id="partners" hidden></div>
     <button class="big" id="callBtn" type="button">たいせんあいてを よぶ</button>
     <button class="nameBtn" id="nameBtn" type="button" hidden></button>
@@ -302,8 +315,9 @@ body {
       <p class="gNote">お孫さんの顔が映ったら、黒と白の石を交互に置いて遊びます。</p>
       <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と 対戦する」を押すだけでつながります。</p>
     </div>
+    <div class="pushCard" id="pushCard" hidden><button type="button" id="pushBtn"></button><p id="pushMsg"></p></div>
     <p class="note" id="startNote">おとなの せってい：ばんの そとを 3びょう ながおし</p>
-    <p class="ver">v2026.11.07 ed2a9f2e</p>
+    <p class="ver">v2026.11.07 f8132bea</p>
   </div>
 </div>
 <div class="cover" id="inviteOv" hidden>
@@ -340,6 +354,20 @@ body {
     <div class="panelBtns"><button type="button" id="nameOk" class="primary">きめた</button></div>
   </div>
 </div>
+<div class="cover" id="homeOv" hidden>
+  <div class="panel home" role="dialog" aria-label="ホーム画面に追加">
+    <h2>よびだしを うけとる じゅんび</h2>
+    <p class="lead">iPhone・iPad は、ホーム画面に追加した アイコンから開いたときだけ よびだしが届きます。</p>
+    <ol class="steps">
+      <li>Safari の <b>共有ボタン</b>（四角から上向きの矢印）を押す</li>
+      <li><b>「ホーム画面に追加」</b>→ 右上の <b>「追加」</b> を押す</li>
+      <li>ホーム画面にできた <b>リバーシのアイコン</b> から開く</li>
+      <li>はじめの画面の <b>「よびだしを うけとる」</b> を押して、通知を <b>「許可」</b></li>
+    </ol>
+    <p class="lead small">登録した相手や名前は、そのままアイコンのほうに引っこします。</p>
+    <div class="panelBtns"><button type="button" id="homeClose" class="primary">わかった</button></div>
+  </div>
+</div>
 <div class="cover" id="quitOv" hidden>
   <div class="panel quit" role="dialog" aria-label="ゲームを やめる">
     <h2>ゲームを やめて メニューに もどる？</h2>
@@ -360,6 +388,8 @@ body {
     <div class="row"><span>つながり方（テスト用。「中継だけ」は、家の外でもつながるかを家の中で確かめるとき）</span><div class="seg" data-key="relay"><button type="button" id="relay0" data-v="0">ふつう</button><button type="button" id="relay1" data-v="1">中継だけ</button></div><span class="route" id="routeInfo"></span></div>
     <div class="row"><span>対戦相手の登録</span><span class="route" id="partnerInfo"></span>
       <div class="panelBtns"><button type="button" id="nameBtn2">名前を変える</button><button type="button" id="newRoomBtn">あたらしい部屋にする（リンクを作りなおす）</button><button type="button" id="forgetBtn" hidden>この端末に登録した相手を けす</button></div></div>
+    <div class="row"><span>よびだし（通知で 相手を よぶ・相手から よばれる）</span><span class="route" id="pushInfo"></span>
+      <div class="panelBtns"><button type="button" id="pushOn">この端末で よびだしを うけとる</button><button type="button" id="pushOff" hidden>よびだしを うけとらない</button></div></div>
     <div class="row"><span>遠隔対戦（10回まで無料）</span><span class="route" id="remoteInfo"></span><div class="seg" data-key="devUnlock"><button type="button" id="devUnlock0" data-v="0">ふつう</button><button type="button" id="devUnlock1" data-v="1">テスト用に解放</button></div></div>
     <div class="panelBtns"><button type="button" id="reinviteBtn">たいせんあいてを よぶ（リンク）</button></div>
     <div class="panelBtns"><button type="button" id="resetBtn">さいしょから</button><button type="button" id="closeBtn" class="primary">とじる</button></div>
@@ -371,6 +401,101 @@ body {
 <script>
 /* iPadOS 15.4 より前の Safari 向け */
 if (!Array.prototype.at) Array.prototype.at = function (i) { i = Math.trunc(i) || 0; if (i < 0) i += this.length; return this[i]; };
+/* ---------- よびだし（2026-11-07）：一度つながった相手を、通知で直接よぶ ----------
+   Web Push を使う。中継は Supabase（uchinoaji プロジェクト）の Edge Function「rv-push」。
+   端末ごとに id と secret をこの端末で作って覚える（ログインなし）。つながったときに おたがいの id を教えあう。
+   - Android：Chrome のままで通知が届く
+   - iPhone・iPad：「ホーム画面に追加」したアイコンから開いたときだけ届く（iOS 16.4 以降）。
+     ホーム画面のアプリは Safari と保存場所が別なので、追加する前に「引っこし用のリンク」に切り替えて、
+     登録した相手や部屋をそのまま持っていく（?setup=…。アイコンで初めて開いたときに一度だけ読みこむ）
+   ストア版（Capacitor）では、ここを ネイティブの通知（APNs／FCM）に差しかえる。 */
+const CALL = (() => {
+  const API = "https://rlqeoyvevaglwngxtvrw.supabase.co/functions/v1/rv-push";
+  const VAPID = "BNR0O2kVDy02vPUZJ5m8Uuz6BRhgXChA3sUmOwxcGPzUDVLj2OtjjN8UftIlT2P1AuSzOLSB75aCyU9dd0-_7HY";
+  const DEV_KEY = "marushima-reversi-dev", MOVE_KEYS = ["marushima-reversi-cfg", "marushima-reversi-room", "marushima-reversi-partners", "marushima-reversi-callers", "marushima-reversi-remote", DEV_KEY];
+  const rnd = n => { const a = new Uint8Array(n); crypto.getRandomValues(a); return Array.from(a, b => "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"[b % 62]).join(""); };
+  const get = k => { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } };
+  const put = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } };
+  const q = new URLSearchParams(location.search);
+
+  // ホーム画面のアイコンで初めて開いたとき：引っこし用のリンクの中身を読みこむ（この端末にまだ何もないときだけ）
+  (function importSetup() {
+    const s = q.get("setup"); if (!s) return;
+    try {
+      if (get(DEV_KEY)) return;
+      const data = JSON.parse(decodeURIComponent(escape(atob(s.replace(/-/g, "+").replace(/_/g, "/")))));
+      for (const k of MOVE_KEYS) if (data[k] != null) localStorage.setItem(k, JSON.stringify(data[k]));
+    } catch (e) { /* 読めなければ ふつうに始める */ }
+  })();
+
+  let dev = get(DEV_KEY);
+  if (!dev || !dev.id) { dev = { id: rnd(22), secret: rnd(32), push: false }; put(DEV_KEY, dev); }
+  const save = () => put(DEV_KEY, dev);
+
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  const canPush = "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+  const C = {
+    get id() { return dev.id; },
+    get on() { return !!dev.push && canPush && Notification.permission === "granted"; },
+    isIOS, standalone, canPush,
+    // iPhone・iPad の Safari では 通知が使えない → まずホーム画面に追加
+    get needsHome() { return isIOS && !standalone; },
+    get blocked() { return canPush && Notification.permission === "denied"; },
+  };
+  async function post(body) {
+    const r = await fetch(API, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(Object.assign({ id: dev.id, secret: dev.secret }, body)) });
+    return r.json().catch(() => ({}));
+  }
+  const b64 = s => { const p = "=".repeat((4 - s.length % 4) % 4), raw = atob((s + p).replace(/-/g, "+").replace(/_/g, "/")); return Uint8Array.from(raw, c => c.charCodeAt(0)); };
+  async function swReg() { return navigator.serviceWorker.register("sw.js", { scope: "./" }); }
+
+  // 「よびだしを うけとる」：通知を許可してもらい、宛先を中継に登録する（ボタンを押したときに呼ぶ）
+  C.enable = async name => {
+    if (!canPush) return { ok: false, why: "この端末では使えません" };
+    const perm = await Notification.requestPermission();
+    if (perm !== "granted") return { ok: false, why: perm === "denied" ? "通知が「許可しない」になっています" : "通知が許可されませんでした" };
+    try {
+      const reg = await swReg(); await navigator.serviceWorker.ready;
+      let sub = await reg.pushManager.getSubscription();
+      if (!sub) sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64(VAPID) });
+      const r = await post({ op: "reg", name: name || "", sub: sub.toJSON() });
+      if (!r.ok) return { ok: false, why: "登録できませんでした" + (r.error ? "（" + r.error + "）" : "") };
+      dev.push = true; save();
+      return { ok: true };
+    } catch (e) { return { ok: false, why: "登録できませんでした（" + String(e && e.message || e).slice(0, 60) + "）" }; }
+  };
+  // 開くたびに 宛先と名前を登録しなおす（購読は ときどき 入れかわる）
+  C.refresh = async name => {
+    try {
+      if ("serviceWorker" in navigator) swReg().catch(() => { });   // ホーム画面に追加できるように いつも入れておく
+      if (!C.on) { await post({ op: "reg", name: name || "" }); return; }
+      const reg = await swReg(); const sub = await reg.pushManager.getSubscription();
+      await post({ op: "reg", name: name || "", sub: sub ? sub.toJSON() : null, clear: !sub });
+      if (!sub) { dev.push = false; save(); }
+    } catch (e) { /* 通信できなくても遊べる */ }
+  };
+  C.off = async () => {
+    try { const reg = await navigator.serviceWorker.getRegistration(); const sub = reg && await reg.pushManager.getSubscription(); if (sub) await sub.unsubscribe(); } catch (e) { }
+    dev.push = false; save(); post({ op: "reg", clear: true }).catch(() => { });
+  };
+  // 相手をよぶ。url は 相手が通知をタップしたときに開く場所
+  C.ring = async (to, name, url) => {
+    if (!to) return { ok: false, reason: "noid" };
+    try {
+      return await post({ op: "call", to, tag: "rv-call", title: "まるシマリバーシ", body: `${name || "あいて"}から よびだしです。タップして はじめてね`, url });
+    } catch (e) { return { ok: false, reason: "net" }; }
+  };
+  C.cancel = to => { if (to) post({ op: "cancel", to, tag: "rv-call" }).catch(() => { }); };
+  // 引っこし用のリンク（iPhone・iPad で ホーム画面に追加する前に、この URL に切り替える）
+  C.setupURL = () => {
+    const data = {}; for (const k of MOVE_KEYS) { const v = get(k); if (v != null) data[k] = v; }
+    const s = btoa(unescape(encodeURIComponent(JSON.stringify(data)))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    return location.origin + location.pathname + "?setup=" + s;
+  };
+  return C;
+})();
+
 const NS = "http://www.w3.org/2000/svg";
 const INK = "#2B2A33";
 const svg = document.getElementById("stage");
@@ -2440,6 +2565,13 @@ function showNames(next) {
     inp.addEventListener("input", () => { p.name = inp.value.trim().slice(0, 10) || "たいせんあいて"; partners.save(); renderPartners(); });
     l.appendChild(inp); box.appendChild(l);
   });
+  callers.list.forEach((p, i) => {
+    const l = document.createElement("label"); l.className = "nameRow";
+    l.innerHTML = `よびだす あいての なまえ（${i + 1}人め）`;
+    const inp = document.createElement("input"); inp.type = "text"; inp.maxLength = 10; inp.autocomplete = "off"; inp.value = p.name;
+    inp.addEventListener("input", () => { p.name = inp.value.trim().slice(0, 10) || "あいて"; callers.save(); renderPartners(); });
+    l.appendChild(inp); box.appendChild(l);
+  });
   $("nameOv").hidden = false;
   if (!$("myNameRow").hidden) setTimeout(() => $("myName").focus(), 50);
 }
@@ -2455,9 +2587,9 @@ $("nameBtn2").addEventListener("click", () => { setPanel.hidden = true; showName
 $("newRoomBtn").addEventListener("click", () => {
   const b = $("newRoomBtn");
   if (!b.classList.contains("confirm")) { b.textContent = "もういちど おすと 作りなおします（古いリンクは使えなくなります）"; b.classList.add("confirm"); return; }
-  CFG.hasPartner = 0; saveCfg(); setPanel.hidden = true; callGrandma(true);
+  CFG.hasPartner = 0; saveCfg(); callers.list = []; callers.save(); setPanel.hidden = true; callGrandma(true);
 });
-$("forgetBtn").addEventListener("click", () => { partners.list = []; partners.save(); renderPartners(); $("forgetBtn").textContent = "けしました"; });
+$("forgetBtn").addEventListener("click", () => { partners.list = []; partners.save(); callers.list = []; callers.save(); renderPartners(); renderPush(); $("forgetBtn").textContent = "けしました"; });
 $("resetBtn").addEventListener("click", () => {
   const b = $("resetBtn");
   if (!b.classList.contains("confirm")) { b.textContent = "もういちど おすと さいしょから"; b.classList.add("confirm"); return; }
@@ -2467,7 +2599,7 @@ $("resetBtn").addEventListener("click", () => {
 let pressT = null;
 document.addEventListener("pointerdown", e => {
   if (e.target.closest("button, input, .panel, #board")) return;
-  clearTimeout(pressT); pressT = setTimeout(() => { syncPanel(); setPanel.hidden = false; }, 3000);
+  clearTimeout(pressT); pressT = setTimeout(() => { syncPanel(); renderPush(); setPanel.hidden = false; }, 3000);
 });
 ["pointerup", "pointercancel", "pointerleave"].forEach(t => document.addEventListener(t, () => clearTimeout(pressT)));
 
@@ -2588,6 +2720,7 @@ addEventListener("pageshow", e => { if (e.persisted) location.reload(); });
 /* ---------- メニューに もどる（とちゅうで やめる） ----------
    確認してから、盤をすてて はじめの画面へ。遠隔対戦なら 相手にも知らせて、カメラと通話を止める */
 function toMenu() {
+  try { ringing.forEach(c => CALL.cancel(c.dev)); } catch (e) { }
   G.hist = []; G.ended = false; saveGame();
   try { NET.local?.getTracks().forEach(tr => tr.stop()); NET.peer?.destroy(); } catch (e) { /* もう切れている */ }
   location.replace(location.pathname);   // ページを読みなおすのが いちばん確実に まっさらに もどる
@@ -2625,11 +2758,13 @@ const PARTNER_KEY = "marushima-reversi-partners";
 const partners = { list: load(PARTNER_KEY) || [], save() { keep(PARTNER_KEY, this.list); } };
 function registerPartner(room, name) {
   if (!room) return;
-  const i = partners.list.findIndex(p => p.room === room), rec = { room, name: name || (i >= 0 ? partners.list[i].name : "") || "たいせんあいて", at: Date.now() };
+  const i = partners.list.findIndex(p => p.room === room), rec = { room, name: name || (i >= 0 ? partners.list[i].name : "") || "たいせんあいて", dev: i >= 0 ? partners.list[i].dev : undefined, at: Date.now() };
   if (i >= 0) partners.list[i] = rec; else partners.list.unshift(rec);
   partners.list = partners.list.slice(0, 5); partners.save();
 }
 function renderPartners() {
+  // よぶ側：相手の端末を知っていれば「○○を よぶ」（押すと 通知で よびだす）
+  if (NET.role !== "guest" && CFG.hasPartner && callers.list.length) $("callBtn").textContent = callers.list.length === 1 ? `${callers.list[0].name}を よぶ` : "たいせんあいてを よぶ";
   const box = $("partners"); box.innerHTML = "";
   if (NET.role === "guest" || !partners.list.length) { box.hidden = true; return; }
   partners.list.forEach(p => {
@@ -2643,7 +2778,68 @@ function renderPartners() {
 function joinPartner(p) {
   NET.role = "guest"; NET.room = p.room; registerPartner(p.room, p.name);
   unlock(); $("guestLead").hidden = true; startOnline();
+  // 相手の端末を知っていれば、通知でよぶ（相手が「たいせんあいてを よぶ」を押すと つながる）
+  if (p.dev) ringOut([{ dev: p.dev, name: p.name }], BASE + "?ring=1&fd=" + CALL.id + "&from=" + encodeURIComponent(CFG.myName || ""));
 }
+/* ---------- よびだし（通知で 直接よぶ。2026-11-07） ---------- */
+const BASE = location.origin + location.pathname;
+const CALLER_KEY = "marushima-reversi-callers";
+// よぶ側（ホスト）が覚えている相手の端末。部屋はホストの部屋なので、相手の端末 id と名前だけ
+const callers = { list: load(CALLER_KEY) || [], save() { keep(CALLER_KEY, this.list); } };
+function registerCaller(dev, name) {
+  if (!dev) return;
+  const i = callers.list.findIndex(c => c.dev === dev), rec = { dev, name: name || (i >= 0 ? callers.list[i].name : "") || "あいて", at: Date.now() };
+  if (i >= 0) callers.list[i] = rec; else callers.list.unshift(rec);
+  callers.list = callers.list.slice(0, 5); callers.save(); renderPartners();
+}
+let ringTimer = 0, ringing = [];
+async function ringOut(list, url) {
+  clearTimeout(ringTimer); ringing = list.filter(c => c.dev);
+  if (!ringing.length) return;
+  const who = ringing.map(c => c.name).join("・");
+  camMsg(otherSide(), `${who}を よびだしています…`);
+  const rs = await Promise.all(ringing.map(c => CALL.ring(c.dev, CFG.myName, url)));
+  if (NET.open) return;
+  if (!rs.some(r => r && r.ok)) {
+    const r = rs[0] || {};
+    camMsg(otherSide(), r.reason === "nosub" || r.reason === "gone" ? `${who}の 端末は まだ よびだしを うけとれません（リンクを おくってね）` : "よびだしを 送れませんでした（リンクを おくってね）");
+    if (NET.role === "host") $("resendBtn").hidden = false;
+    return;
+  }
+  ringTimer = setTimeout(() => {
+    if (NET.open) return;
+    ringing.forEach(c => CALL.cancel(c.dev)); ringing = [];
+    camMsg(otherSide(), "でられない みたい。また あとで よんでね");
+    if (NET.role === "host") $("resendBtn").hidden = false;
+  }, 60000);
+}
+function stopRing() { clearTimeout(ringTimer); ringing = []; }
+// はじめの画面の「よびだしを うけとる」と 設定の よびだしの欄
+function renderPush() {
+  const card = $("pushCard"), btn = $("pushBtn"), msg = $("pushMsg");
+  const known = partners.list.length || callers.list.length || (NET.role === "guest" && !!NET.room);
+  $("pushOff").hidden = !CALL.on; $("pushOn").hidden = CALL.on;
+  $("pushInfo").textContent = CALL.on ? "この端末は よびだしを うけとれます。" : CALL.blocked ? "通知が「許可しない」になっています。設定アプリで このページ（アイコン）の通知を許可してください。" : CALL.needsHome ? "iPhone・iPad は、ホーム画面に追加したアイコンから開くと うけとれます。" : CALL.canPush ? "まだ うけとらない設定です。" : "この端末では使えません。";
+  msg.textContent = "";
+  if (CALL.on || !known || (!CALL.canPush && !CALL.needsHome)) { card.hidden = true; return; }
+  card.hidden = false;
+  btn.textContent = CALL.needsHome ? "つぎから よびだしで つながるように する" : "よびだしを うけとる（通知を ゆるす）";
+  if (CALL.blocked) { btn.hidden = true; msg.textContent = $("pushInfo").textContent; } else btn.hidden = false;
+}
+async function pushOn() {
+  if (CALL.needsHome) {
+    // ホーム画面に追加する前に、いまの登録を持っていける URL に切り替える（追加するときは この URL が使われる）
+    try { history.replaceState(null, "", CALL.setupURL()); } catch (e) { }
+    $("homeOv").hidden = false; return;
+  }
+  const r = await CALL.enable(CFG.myName);
+  $("pushMsg").textContent = r.ok ? "うけとれるように なりました" : r.why;
+  if (r.ok) { NET.send({ t: "dev", id: CALL.id, name: CFG.myName }); setTimeout(renderPush, 1200); } else renderPush(), $("pushMsg").textContent = r.why;
+}
+$("pushBtn").addEventListener("click", pushOn);
+$("pushOn").addEventListener("click", async () => { await pushOn(); renderPush(); });
+$("pushOff").addEventListener("click", async () => { await CALL.off(); renderPush(); });
+$("homeClose").addEventListener("click", () => { $("homeOv").hidden = true; });
 /* ---------- 遠隔対戦（段階2） ---------- */
 const otherSide = () => other(mySide());
 function camOf(side) { return { box: $("cam" + side), v: $("vid" + side), msg: $("msg" + side) }; }
@@ -2697,6 +2893,11 @@ function handle(m) {
     case "state": applyState(m); break;
     case "new": newGame(); break;
     case "quit": quitByOther(); break;
+    case "dev":
+      // 相手の端末 id（よびだし用）を覚える
+      if (NET.role === "guest") { const p = partners.list.find(x => x.room === NET.room); if (p && m.id) { p.dev = m.id; partners.save(); } }
+      else if (NET.role === "host") { registerCaller(m.id, m.name); if (!CFG.hasPartner) { CFG.hasPartner = 1; saveCfg(); } }
+      break;
     case "hello":
       if (m.reg && NET.role === "host" && !CFG.hasPartner) { CFG.hasPartner = 1; saveCfg(); }
       // よぶ側が名前を変えたら、こちらの「○○と 対戦する」も新しい名前に
@@ -2725,7 +2926,8 @@ NET.on("open", () => {
   const back = lostSaid; G.paused = false; lostSaid = false; $("inviteOv").hidden = true; camMsg(otherSide(), "");
   if (back && !G.animating) speak(host.pony, "rv_back");
   setTimeout(() => { if (NET.open && !NET.remote) camMsg(otherSide(), "あいての カメラが うつりません（ゲームは できます）"); }, 9000);
-  sendLic();
+  sendLic(); stopRing();
+  NET.send({ t: "dev", id: CALL.id, name: CFG.myName });
   if (NET.role === "guest") { registerPartner(NET.room, NET.linkName || (partners.list.find(p => p.room === NET.room) || {}).name); NET.send({ t: "hello", reg: true }); }
   if (NET.role !== "host") return;
   NET.send({ t: "hello", name: CFG.myName });
@@ -2749,7 +2951,7 @@ NET.on("lost", () => {
   camMsg(otherSide(), "つなぎなおしています…");
   if (!lostSaid && !G.animating) { lostSaid = true; speak(host.pony, "rv_hold"); }
 });
-NET.on("ready", () => { if (!NET.open) camMsg(otherSide(), CFG.hasPartner ? "登録ずみの あいてを まっています…" : "まっています…"); });
+NET.on("ready", () => { if (!NET.open && !ringing.length) camMsg(otherSide(), CFG.hasPartner ? "登録ずみの あいてを まっています…" : "まっています…"); });
 // 同じリンクを もう1つの画面で ひらいていて、そちらが つながっているとき
 NET.on("busy", () => { G.paused = true; G.busy = true; clearHints(); updateButtons(); camMsg(otherSide(), "ほかの がめんで つながっています。この がめんは とじてください"); });
 NET.on("route", via => { $("routeInfo").textContent = via ? `いまのつながり：${via}` : ""; });
@@ -2765,7 +2967,7 @@ function startOnline() {
   }
 }
 // たいせんあいてを よぶ（ホスト）
-async function callGrandma(fresh) {
+async function callGrandma(fresh, answering) {
   NET.role = "host"; if (ctx) soundForCall(); unlock(); NET.relayOnly = !!CFG.relay; startOnline();
   // 相手を よんだら、1台で遊んでいた とちゅうの盤は すてて、新しい対局から始める（くろ＝こども）
   G.hist = []; G.blackSide = "A"; G.ended = false; G.begun = false; saveGame(); clearHalo();
@@ -2774,7 +2976,11 @@ async function callGrandma(fresh) {
   NET.name = CFG.myName;
   await NET.host(fresh);
   if (fresh || !CFG.hasPartner) showInvite();
-  else { camMsg(otherSide(), "登録ずみの あいてを まっています…"); $("resendBtn").hidden = false; }
+  else {
+    camMsg(otherSide(), answering ? "つないでいます…" : "登録ずみの あいてを まっています…"); $("resendBtn").hidden = false;
+    // 相手の端末を知っていれば 通知で よびだす（相手から よばれて 開いたときは よびかえさない）
+    if (!answering && callers.list.length) ringOut(callers.list.slice(0, 1), BASE + "?r=" + NET.room + "&n=" + encodeURIComponent(CFG.myName || "") + "&ring=1");
+  }
 }
 $("resendBtn").addEventListener("click", () => showInvite());
 NET.on("lost", () => { if (NET.role === "host") $("resendBtn").hidden = false; });
@@ -2829,7 +3035,8 @@ $("restoreBtn").addEventListener("click", async () => {
   const r = await BILLING.restore();
   if (r.ok) afterUnlock(); else $("unlockNote").textContent = "引きつげる購入が見つかりませんでした。";
 });
-$("callBtn").addEventListener("click", () => { if (CFG.myName) callGrandma(false); else showNames(() => callGrandma(false)); });
+const answeringRing = !NET.role && new URLSearchParams(location.search).get("ring") === "1";
+$("callBtn").addEventListener("click", () => { const a = answeringRing; if (CFG.myName || a) callGrandma(false, a); else showNames(() => callGrandma(false)); });
 $("copyBtn").addEventListener("click", () => {
   const url = NET.inviteURL(), done = () => { $("copyBtn").textContent = "コピーしました"; setTimeout(() => $("copyBtn").textContent = "リンクを コピー", 2000); };
   const pick = () => { const r = document.createRange(); r.selectNodeContents($("inviteLink")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
@@ -2864,7 +3071,19 @@ $("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (N
     $("startNote").textContent = "";
   }
   else if (!NET.available) $("callBtn").hidden = true;
-  refreshLeft(); renderPartners(); renderNameBtn();
+  refreshLeft(); renderPartners(); renderNameBtn(); renderPush();
+  CALL.refresh(CFG.myName);
+  // 相手からの よびだしを タップして 開いたとき（よぶ側の端末）
+  if (NET.role === "guest" && new URLSearchParams(location.search).get("ring") === "1") {
+    $("ringNote").textContent = `${NET.linkName || "あいて"}から よびだし！`; $("ringNote").hidden = false;
+  }
+  if (answeringRing) {
+    const uq = new URLSearchParams(location.search), known = callers.list.find(c => c.dev === uq.get("fd"));
+    const from = (known && known.name !== "あいて" && known.name) || uq.get("from") || (known && known.name) || "あいて";
+    $("ringNote").textContent = `${from}から よびだし！ 下の ボタンを おしてね`; $("ringNote").hidden = false;
+    $("callBtn").textContent = `${from}と つなぐ`;
+    try { history.replaceState(null, "", location.pathname); } catch (e) { }
+  }
   layout(); placeAll();
   setTimeout(() => { if (!G.started) { wave(seat.A); mv(seat.B, "nod"); } }, 900);
 })();

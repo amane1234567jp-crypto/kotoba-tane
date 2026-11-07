@@ -223,6 +223,13 @@ body {
 .big.partner small { font: 700 .42em var(--body); color: var(--muted); letter-spacing: .06em; }
 .resend { align-self: center; margin-top: -4px; }
 .nameRow { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+.ringNote { font: 900 clamp(18px, 2.6vmin, 26px) var(--body); color: #FFFFFF; background: #E2574C; border: 3px solid var(--ink); border-radius: 16px; padding: 8px 18px; margin: 0; animation: ring 1s ease-in-out infinite; }
+@keyframes ring { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+.pushCard { display: grid; gap: 4px; justify-items: center; }
+.pushCard button { font: 700 15px var(--body); color: var(--ink); background: #FFF6D8; border: 2px solid var(--ink); border-radius: 999px; padding: 7px 16px; cursor: pointer; }
+.pushCard p { margin: 0; font-size: 13px; color: var(--muted); max-width: 30em; text-align: center; }
+.panel.home .steps { margin: 6px 0 10px; padding-left: 1.4em; display: grid; gap: 6px; font-size: 16px; line-height: 1.5; }
+.panel.home .small { font-size: 13px; }
 .nameBtn { font: 700 15px var(--body); color: var(--ink); background: #FFFFFF; border: 2px solid var(--ink); border-radius: 999px; padding: 6px 16px; margin-top: 2px; cursor: pointer; }
 .panel.name .nameRow { margin: 10px 0; }
 .panel.name input { font-size: 22px; }
@@ -281,6 +288,7 @@ body {
 <div class="cover" id="startOv">
   <div class="startCard">
     <h1 class="logo">まるシマ<span>リバーシ</span></h1>
+    <p class="ringNote" id="ringNote" hidden></p>
     <div class="partners" id="partners" hidden></div>
     <button class="big" id="callBtn" type="button">たいせんあいてを よぶ</button>
     <button class="nameBtn" id="nameBtn" type="button" hidden></button>
@@ -295,6 +303,7 @@ body {
       <p class="gNote">お孫さんの顔が映ったら、黒と白の石を交互に置いて遊びます。</p>
       <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と 対戦する」を押すだけでつながります。</p>
     </div>
+    <div class="pushCard" id="pushCard" hidden><button type="button" id="pushBtn"></button><p id="pushMsg"></p></div>
     <p class="note" id="startNote">おとなの せってい：ばんの そとを 3びょう ながおし</p>
     <p class="ver">__VER__</p>
   </div>
@@ -333,6 +342,20 @@ body {
     <div class="panelBtns"><button type="button" id="nameOk" class="primary">きめた</button></div>
   </div>
 </div>
+<div class="cover" id="homeOv" hidden>
+  <div class="panel home" role="dialog" aria-label="ホーム画面に追加">
+    <h2>よびだしを うけとる じゅんび</h2>
+    <p class="lead">iPhone・iPad は、ホーム画面に追加した アイコンから開いたときだけ よびだしが届きます。</p>
+    <ol class="steps">
+      <li>Safari の <b>共有ボタン</b>（四角から上向きの矢印）を押す</li>
+      <li><b>「ホーム画面に追加」</b>→ 右上の <b>「追加」</b> を押す</li>
+      <li>ホーム画面にできた <b>リバーシのアイコン</b> から開く</li>
+      <li>はじめの画面の <b>「よびだしを うけとる」</b> を押して、通知を <b>「許可」</b></li>
+    </ol>
+    <p class="lead small">登録した相手や名前は、そのままアイコンのほうに引っこします。</p>
+    <div class="panelBtns"><button type="button" id="homeClose" class="primary">わかった</button></div>
+  </div>
+</div>
 <div class="cover" id="quitOv" hidden>
   <div class="panel quit" role="dialog" aria-label="ゲームを やめる">
     <h2>ゲームを やめて メニューに もどる？</h2>
@@ -353,6 +376,8 @@ body {
     <div class="row"><span>つながり方（テスト用。「中継だけ」は、家の外でもつながるかを家の中で確かめるとき）</span><div class="seg" data-key="relay"><button type="button" id="relay0" data-v="0">ふつう</button><button type="button" id="relay1" data-v="1">中継だけ</button></div><span class="route" id="routeInfo"></span></div>
     <div class="row"><span>対戦相手の登録</span><span class="route" id="partnerInfo"></span>
       <div class="panelBtns"><button type="button" id="nameBtn2">名前を変える</button><button type="button" id="newRoomBtn">あたらしい部屋にする（リンクを作りなおす）</button><button type="button" id="forgetBtn" hidden>この端末に登録した相手を けす</button></div></div>
+    <div class="row"><span>よびだし（通知で 相手を よぶ・相手から よばれる）</span><span class="route" id="pushInfo"></span>
+      <div class="panelBtns"><button type="button" id="pushOn">この端末で よびだしを うけとる</button><button type="button" id="pushOff" hidden>よびだしを うけとらない</button></div></div>
     <div class="row"><span>遠隔対戦（10回まで無料）</span><span class="route" id="remoteInfo"></span><div class="seg" data-key="devUnlock"><button type="button" id="devUnlock0" data-v="0">ふつう</button><button type="button" id="devUnlock1" data-v="1">テスト用に解放</button></div></div>
     <div class="panelBtns"><button type="button" id="reinviteBtn">たいせんあいてを よぶ（リンク）</button></div>
     <div class="panelBtns"><button type="button" id="resetBtn">さいしょから</button><button type="button" id="closeBtn" class="primary">とじる</button></div>
@@ -364,6 +389,7 @@ body {
 <script>
 /* iPadOS 15.4 より前の Safari 向け */
 if (!Array.prototype.at) Array.prototype.at = function (i) { i = Math.trunc(i) || 0; if (i < 0) i += this.length; return this[i]; };
+__CALL__
 const NS = "http://www.w3.org/2000/svg";
 const INK = "#2B2A33";
 const svg = document.getElementById("stage");

@@ -12,11 +12,11 @@ try: sha = subprocess.run(["git", "rev-parse", "--short", "HEAD"], capture_outpu
 except Exception: sha = ""
 VER = "v" + datetime.date.today().strftime("%Y.%m.%d") + (" " + sha if sha else "")
 html = (S / "shell.html").read_text().replace("__VER__", VER)
-for k, v in {"__HAND__": hand, "__VENDOR__": vendor, "__RULES__": rules + "\n" + (S.parent / "voice/lines.js").read_text(), "__FIXTURES__": (S / "fixtures.js").read_text(), "__SFX__": (S / "sfx.js").read_text(), "__NET__": (S / "net.js").read_text(), "__FX__": (S / "fx.js").read_text(), "__BILLING__": (S / "billing.js").read_text(), "__APP__": (S / "app.js").read_text(), "__FELT__": (S / "felt.txt").read_text().strip()}.items():
+for k, v in {"__HAND__": hand, "__VENDOR__": vendor, "__RULES__": rules + "\n" + (S.parent / "voice/lines.js").read_text(), "__FIXTURES__": (S / "fixtures.js").read_text(), "__SFX__": (S / "sfx.js").read_text(), "__NET__": (S / "net.js").read_text(), "__FX__": (S / "fx.js").read_text(), "__BILLING__": (S / "billing.js").read_text(), "__CALL__": (S / "call.js").read_text(), "__APP__": (S / "app.js").read_text(), "__FELT__": (S / "felt.txt").read_text().strip()}.items():
     html = html.replace(k, v)
 head = ('<!doctype html>\n<html lang="ja"><head><meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n<meta name="robots" content="noindex">\n'
-        '<meta name="apple-mobile-web-app-title" content="まるシマリバーシ">\n<style>body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>\n</head><body>\n')
+        '<meta name="apple-mobile-web-app-title" content="まるシマリバーシ">\n<meta name="apple-mobile-web-app-capable" content="yes">\n<meta name="mobile-web-app-capable" content="yes">\n<meta name="theme-color" content="#1E8A52">\n<link rel="manifest" href="manifest.webmanifest">\n<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">\n<style>body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>\n</head><body>\n')
 Path(__file__).parent.joinpath("index.html").write_text(head + html + "\n</body></html>\n")
 js = html[html.index("<script>") + 8: html.rindex("</script>")]
 import subprocess, tempfile
