@@ -622,13 +622,33 @@ function soundForCall() {
   setSession("play-and-record");
   if (SOUND.el && ctx) { try { const real = ctx.destination; SOUND.el.pause(); SOUND.el.remove(); SOUND.el = null; delete ctx.destination; real.disconnect(); real.connect(ctx.destination); SOUND.out = "ふつう（通話）"; } catch (e) { } }
 }
+/* 電話が来たあと（iPhone）：AudioContext が "interrupted" のまま resume しても戻らないことがある。
+   一度 resume を試して 1.5秒たっても鳴らせなければ、次にさわったときに出口ごと作りなおす（2026-11-07） */
+function rebuildAudio() {
+  try { if (SOUND.el) { SOUND.el.pause(); SOUND.el.remove(); } } catch (e) { }
+  SOUND.el = null; SOUND.tried = 0; SOUND.rebuilt = (SOUND.rebuilt || 0) + 1;
+  const old = ctx; ctx = null; try { old.close(); } catch (e) { }
+  audio();
+}
 function wakeSound() {
   if (!ctx) return;
-  if (ctx.state !== "running" && ctx.state !== "closed") { try { ctx.resume(); } catch (e) { } }
+  if (ctx.state === "running") SOUND.tried = 0;
+  else if (ctx.state !== "closed") {
+    if (SOUND.tried && Date.now() - SOUND.tried > 1500) return rebuildAudio();
+    SOUND.tried = SOUND.tried || Date.now();
+    try { const p = ctx.resume(); if (p && p.then) p.then(() => { if (ctx && ctx.state === "running") SOUND.tried = 0; }, () => { }); } catch (e) { }
+  }
   if (SOUND.el && SOUND.el.paused && !document.hidden) SOUND.el.play().catch(() => { });
 }
 document.addEventListener("pointerdown", wakeSound, true);
-document.addEventListener("visibilitychange", () => { if (!document.hidden) setTimeout(wakeSound, 300); });
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) return;
+  setTimeout(wakeSound, 300);
+  // 電話のあと：止まったカメラ・マイクを取りなおし、相手の映像・声も再生しなおす
+  if (NET.role && G.started) setTimeout(() => { NET.refreshMedia(); ["A", "B"].forEach(sd => { const v = camOf(sd).v; if (v.srcObject && v.paused) v.play().catch(() => { }); }); }, 1200);
+});
+// 戻るボタンなどで古い画面がそのまま復元されたときは読みなおす（音の出口が死んでいる）
+addEventListener("pageshow", e => { if (e.persisted) location.reload(); });
 /* ---------- メニューに もどる（とちゅうで やめる） ----------
    確認してから、盤をすてて はじめの画面へ。遠隔対戦なら 相手にも知らせて、カメラと通話を止める */
 function toMenu() {
@@ -913,10 +933,18 @@ $("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (N
 })();
 
 /* ---------- 毎フレーム ---------- */
-let last = performance.now();
+/* 発熱対策（2026-11-07）：キャラの描画は 30fps まで（120Hz の iPhone で 4分の1）。
+   位置決め（getBoundingClientRect）は毎フレームやらず、大きさが変わったときだけ */
+let last = performance.now(), acc = 0;
+let placeDirty = true;
+addEventListener("resize", () => { placeDirty = true; });
+if (window.ResizeObserver) new ResizeObserver(() => { placeDirty = true; }).observe($("app"));
 function frame(now) {
-  const dt = Math.min(.05, (now - last) / 1000); last = now;
-  placeAll();
+  requestAnimationFrame(frame);
+  const raw = (now - last) / 1000;
+  if (raw < 1 / 31) return;
+  const dt = Math.min(.05, raw); last = now;
+  if (placeDirty) { placeDirty = false; placeAll(); }
   all.forEach(c => {
     if (talking === c) c.speakingLevel = .3 + .4 * Math.abs(Math.sin(now / 70));
     if (c.enter) c.enter.step(dt);
@@ -925,6 +953,5 @@ function frame(now) {
   idleTick(seat.A, dt, G.busy); idleTick(seat.B, dt, G.busy);
   if (talking || keepBubble) bubbleAt(talking || keepBubble);
   stepMarks(dt); stepConfetti(dt); FX.step(dt);
-  requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);

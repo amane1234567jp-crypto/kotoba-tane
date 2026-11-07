@@ -50,9 +50,34 @@ const NET = (() => {
     for (const [c, label] of [[{ video: V, audio: A }, "both"], [{ audio: A }, "audio"], [{ video: V }, "video"]]) {
       try { N.local = await navigator.mediaDevices.getUserMedia(c); N.media = label; break; } catch (e) { /* 次をためす */ }
     }
+    // iPhone で電話が来ると、カメラ・マイクの線が止まったまま戻らない。止まったら取りなおす
+    if (N.local) N.local.getTracks().forEach(t => t.addEventListener("ended", () => setTimeout(refreshMedia, 800)));
     emit("local", N.local);
     return N.local;
   }
+  // 止まった（ended / muted のままの）カメラ・マイクを取りなおして、通話中なら新しい線に差しかえる
+  let refreshing = false;
+  async function refreshMedia(force) {
+    if (refreshing || !N.role) return false;
+    const old = N.local;
+    const dead = !old || !old.getTracks().length || old.getTracks().some(t => t.readyState === "ended" || t.muted);
+    if (!dead && !force) return false;
+    refreshing = true;
+    try {
+      await camera();
+      const pc = N.call && N.call.peerConnection;
+      if (pc && N.local) {
+        for (const snd of pc.getSenders()) {
+          const kind = snd.track && snd.track.kind;
+          const t = kind && N.local.getTracks().find(x => x.kind === kind);
+          if (t) try { await snd.replaceTrack(t); } catch (e) { /* 差しかえられなければ 次の通話で */ }
+        }
+      }
+      if (old && old !== N.local) old.getTracks().forEach(t => { try { t.stop(); } catch (e) { } });
+    } finally { refreshing = false; }
+    return true;
+  }
+  N.refreshMedia = refreshMedia;
 
   function adopt(conn) {
     // ホスト：いまの相手が 元気なら（8秒以内に 便りがある）、あとから来た接続は ことわる。

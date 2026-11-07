@@ -70,7 +70,12 @@ const FX = (() => {
     fire();
   }
 
+  let wasBlank = false;
   function step(dt) {
+    // なにも描くものがないときは キャンバスにさわらない（発熱対策）
+    const blank = !rockets.length && !rays.length && !rings.length && !parts.length && night.a <= .01 && night.to <= .01 && flash <= .005;
+    if (blank) { if (wasBlank) return; wasBlank = true; g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H); return; }
+    wasBlank = false;
     g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
     night.a += (night.to - night.a) * Math.min(1, dt * 2.2);
     if (night.a > .01) {
@@ -121,7 +126,7 @@ const FX = (() => {
       }
     }
     g.globalCompositeOperation = "source-over";
-    if (flash > .005) { g.fillStyle = `rgba(${flashCol},${flash})`; g.fillRect(0, 0, W, H); flash *= Math.exp(-7 * dt); }
+    if (flash > .005) { g.fillStyle = `rgba(${flashCol},${flash})`; g.fillRect(0, 0, W, H); flash *= Math.exp(-7 * dt); if (flash <= .005) flash = 0; }
   }
 
   function tierOf(n) { return n >= 12 ? 5 : n >= 9 ? 4 : n >= 7 ? 3 : n >= 5 ? 2 : 1; }
