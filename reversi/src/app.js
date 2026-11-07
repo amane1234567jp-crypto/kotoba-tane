@@ -158,13 +158,25 @@ function placeAll() {
     const sc = Math.min(r.height / (c.base - c.top + 24), r.width / 285) * .98;
     place(c, r.left + r.width / 2, r.bottom - 2, Math.max(.12, sc));
   });
-  const br = boardEl.getBoundingClientRect();
+  const br = boardEl.getBoundingClientRect(); boardH = br.height;
   Object.values(host).forEach(c => {
     const sc = br.height * .56 / (c.base - c.top);
     place(c, br.left + br.width / 2, br.bottom - br.height * .07, sc);
-    const off = c.enter.v * br.height * .7;
-    c.wrap.setAttribute("transform", `translate(0 ${off.toFixed(1)})`);
-    c.wrap.setAttribute("opacity", Math.max(0, Math.min(1, 1 - c.enter.v * 1.3)).toFixed(3));
+    c._wk = "";
+  });
+  placeHosts();
+}
+let boardH = 600;
+// 盤の上に出てくるキャラ（ぽにー・かめじい）：出入りの位置と透明度だけ 毎フレーム。
+// かくれて止まっているときは 描かない（display:none）
+function placeHosts() {
+  Object.values(host).forEach(c => {
+    const off = c.enter.v * boardH * .7, op = Math.max(0, Math.min(1, 1 - c.enter.v * 1.3));
+    const away = c.hidden && op <= 0.001 && Math.abs(c.enter.vel) < .01;
+    const key = away ? "away" : off.toFixed(1) + "/" + op.toFixed(3);
+    if (key === c._wk) return; c._wk = key;
+    c.wrap.style.display = away ? "none" : "";
+    if (!away) { c.wrap.setAttribute("transform", `translate(0 ${off.toFixed(1)})`); c.wrap.setAttribute("opacity", op.toFixed(3)); }
   });
 }
 async function showHost(c) { c.hidden = false; c.enter.t = 0; boardEl.classList.add("dim"); await wait(450); }
@@ -507,6 +519,7 @@ function syncPanel() {
   $("newRoomBtn").textContent = "あたらしい部屋にする（リンクを作りなおす）"; $("newRoomBtn").classList.remove("confirm");
   $("partnerInfo").textContent = (CFG.hasPartner ? "相手は登録ずみ（「たいせんあいてを よぶ」で すぐ待ち受けます）。" : "相手はまだ登録されていません（リンクを開いてつながると登録されます）。") + (partners.list.length ? ` この端末に登録した相手：${partners.list.map(p => p.name).join("、")}` : "");
   $("forgetBtn").hidden = !partners.list.length; $("forgetBtn").textContent = "この端末に登録した相手を けす";
+  $("sndInfo").textContent = soundInfo();
   $("routeInfo").textContent = NET.open && NET.via ? `いまのつながり：${NET.via}` : (CFG.relay ? "「中継だけ」は、つぎに「たいせんあいてを よぶ」を押したときから使います" : "");
 }
 setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e => {
@@ -588,65 +601,81 @@ document.addEventListener("visibilitychange", () => { if (document.visibilitySta
 /* 鳴らす音は「置く音」「返す音」「返すときの演出の音（と花火）」だけ（2026-11-03 あまねさんの指示）。
    ことばのたね の キャラの演技には 小さな音がついているので、ここでは 鳴らさない */
 blip = () => { }; chime = () => { }; tune = () => { }; noise = () => { };
-/* ---------- 音の出口（iPad・iPhone のマナーモード対策。ことばのたね と同じ方法） ----------
-   1) navigator.audioSession：1台で遊ぶときは "playback"（マナーモードでも鳴らす）、
-      通話するときは "play-and-record"（マイクを使いながら鳴らす。この種類はマナーモードで消えない）
-   2) 1台で遊ぶときは、作った音を audio 要素（音声ファイル扱い）を通して鳴らす。うまく動かなければ ふつうの出口に戻す
-   3) 画面にさわるたび・カメラが入ったあと・画面に戻ったときに、止まっていた音を 再開する */
-const SOUND = { session: "なし", out: "ふつう", el: null };
-function setSession(type) { try { if (navigator.audioSession) { navigator.audioSession.type = type; SOUND.session = type; } } catch (e) { SOUND.session = "設定できず"; } }
+/* ---------- 音の出口（iPad・iPhone のマナーモード対策と、電話のあとの復旧） 2026-11-07 作りなおし ----------
+   1) navigator.audioSession（iOS 17 以降）：1台で遊ぶときは "playback"、通話するときは "play-and-record"。
+      電話のあとは iOS が種類を戻してしまうことがあるので、画面に戻るたび・さわるたびに 設定しなおす
+   2) 1台で遊ぶときは、無音の音声ファイルを audio 要素で くりかえし流しておく（unmute.js と同じ方法。
+      こうすると iPhone が「音楽を再生中」とみなして、マナーモードでも Web Audio の音が出る）。
+      前は 作った音そのものを audio 要素に通していたが、電話で止まると 戻らなかった
+   3) 音の出口（AudioContext）が止まっていたら resume。さわっても動かなければ その場で作りなおす */
+const SOUND = { session: "なし", out: "ふつう", keep: null, rebuilt: 0, why: "" };
+function setSession(type) {
+  try {
+    if (!navigator.audioSession) { SOUND.session = "なし（古いiOS）"; return; }
+    if (navigator.audioSession.type !== type) navigator.audioSession.type = type;
+    SOUND.session = type;
+  } catch (e) { SOUND.session = "設定できず"; }
+}
+const wantSession = () => NET.role ? "play-and-record" : "playback";
+// 無音の WAV（0.5秒・8kHz・8bit）をその場で作る
+const SILENT = (() => {
+  const n = 4000, b = new Uint8Array(44 + n), v = new DataView(b.buffer), w = (o, t) => [...t].forEach((ch, i) => b[o + i] = ch.charCodeAt(0));
+  w(0, "RIFF"); v.setUint32(4, 36 + n, true); w(8, "WAVE"); w(12, "fmt "); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+  v.setUint32(24, 8000, true); v.setUint32(28, 8000, true); v.setUint16(32, 1, true); v.setUint16(34, 8, true); w(36, "data"); v.setUint32(40, n, true); b.fill(128, 44);
+  let bin = ""; b.forEach(x => bin += String.fromCharCode(x)); return "data:audio/wav;base64," + btoa(bin);
+})();
+function keepAlive() {
+  if (NET.role) { if (SOUND.keep) { SOUND.keep.pause(); } return; }   // 通話中は いらない（play-and-record はマナーモードで消えない）
+  if (!SOUND.keep) {
+    const el = document.createElement("audio");
+    el.setAttribute("playsinline", ""); el.setAttribute("x-webkit-airplay", "deny"); el.preload = "auto"; el.loop = true; el.src = SILENT;
+    el.style.display = "none"; document.body.appendChild(el); SOUND.keep = el;
+  }
+  if (SOUND.keep.paused && !document.hidden) SOUND.keep.play().then(() => SOUND.out = "マナーモード対策あり", () => SOUND.out = "マナーモード対策できず");
+}
 const audioBase = audio;
 audio = function () {
   const first = !ctx;
-  if (first) setSession(NET.role ? "play-and-record" : "playback");
+  if (first) setSession(wantSession());
   audioBase();
-  if (first && !NET.role) routeThroughMedia();
+  if (first) keepAlive();
   return ctx;
 };
-function routeThroughMedia() {
-  const real = ctx.destination, master = ctx.createGain(); master.connect(real);
-  Object.defineProperty(ctx, "destination", { value: master, configurable: true });
-  analyser.disconnect(); analyser.connect(master);
-  const back = why => { try { master.disconnect(); } catch (e) { } master.connect(real); SOUND.out = "ふつう（" + why + "）"; };
-  try {
-    if (!ctx.createMediaStreamDestination) return back("未対応");
-    const dest = ctx.createMediaStreamDestination(), el = document.createElement("audio");
-    el.setAttribute("playsinline", ""); el.srcObject = dest.stream; el.style.display = "none"; SOUND.el = el; document.body.appendChild(el);
-    master.disconnect(); master.connect(dest); SOUND.out = "音声ファイル経由";
-    const p = el.play(); if (p && p.catch) p.catch(() => back("再生できず"));
-    setTimeout(() => { if (el.paused && SOUND.out === "音声ファイル経由") back("止まっていた"); }, 1500);
-  } catch (e) { back("エラー"); }
-}
-// 通話を始めるときは、マナーモード用の まわり道を やめて ふつうの出口に戻す
-function soundForCall() {
-  setSession("play-and-record");
-  if (SOUND.el && ctx) { try { const real = ctx.destination; SOUND.el.pause(); SOUND.el.remove(); SOUND.el = null; delete ctx.destination; real.disconnect(); real.connect(ctx.destination); SOUND.out = "ふつう（通話）"; } catch (e) { } }
-}
-/* 電話が来たあと（iPhone）：AudioContext が "interrupted" のまま resume しても戻らないことがある。
-   一度 resume を試して 1.5秒たっても鳴らせなければ、次にさわったときに出口ごと作りなおす（2026-11-07） */
-function rebuildAudio() {
-  try { if (SOUND.el) { SOUND.el.pause(); SOUND.el.remove(); } } catch (e) { }
-  SOUND.el = null; SOUND.tried = 0; SOUND.rebuilt = (SOUND.rebuilt || 0) + 1;
-  const old = ctx; ctx = null; try { old.close(); } catch (e) { }
+function rebuildAudio(why) {
+  const old = ctx; ctx = null; try { old && old.close(); } catch (e) { }
+  SOUND.rebuilt++; SOUND.why = why || ""; SOUND.tried = 0;
   audio();
 }
-function wakeSound() {
+// 通話を始めるとき：種類を play-and-record にして、無音の再生はやめる
+function soundForCall() { setSession("play-and-record"); if (SOUND.keep) SOUND.keep.pause(); }
+// さわったとき（ユーザー操作の中なので、作りなおしも再生も許される）
+function wakeSound(e) {
   if (!ctx) return;
-  if (ctx.state === "running") SOUND.tried = 0;
-  else if (ctx.state !== "closed") {
-    if (SOUND.tried && Date.now() - SOUND.tried > 1500) return rebuildAudio();
-    SOUND.tried = SOUND.tried || Date.now();
-    try { const p = ctx.resume(); if (p && p.then) p.then(() => { if (ctx && ctx.state === "running") SOUND.tried = 0; }, () => { }); } catch (e) { }
-  }
-  if (SOUND.el && SOUND.el.paused && !document.hidden) SOUND.el.play().catch(() => { });
+  setSession(wantSession());
+  keepAlive();
+  if (ctx.state === "running") { SOUND.tried = 0; return; }
+  if (ctx.state === "closed" || (e && SOUND.tried)) return rebuildAudio(ctx.state);   // 前にさわっても戻らなかった → 作りなおす
+  SOUND.tried = Date.now();
+  try { const p = ctx.resume(); if (p && p.then) p.then(() => { if (ctx && ctx.state === "running") SOUND.tried = 0; }, () => { }); } catch (err) { }
 }
 document.addEventListener("pointerdown", wakeSound, true);
+document.addEventListener("touchend", wakeSound, true);
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) return;
-  setTimeout(wakeSound, 300);
+  setTimeout(() => wakeSound(), 300);
   // 電話のあと：止まったカメラ・マイクを取りなおし、相手の映像・声も再生しなおす
   if (NET.role && G.started) setTimeout(() => { NET.refreshMedia(); ["A", "B"].forEach(sd => { const v = camOf(sd).v; if (v.srcObject && v.paused) v.play().catch(() => { }); }); }, 1200);
 });
+$("sndTest").addEventListener("click", () => {
+  if (ctx) rebuildAudio("テスト"); else audio();
+  setTimeout(() => { SFX.place(); setTimeout(() => SFX.flip(1, 1), 220); }, 60);
+  setTimeout(() => { $("sndInfo").textContent = soundInfo(); }, 600);
+});
+// 設定の「音の テスト」：作りなおしてから ポン と鳴らす。いまの状態も出す（実機で原因を見るため）
+function soundInfo() {
+  const st = ctx ? ctx.state : "まだ";
+  return `音：${st}・${SOUND.session}・${SOUND.out}${SOUND.rebuilt ? `・作りなおし${SOUND.rebuilt}回` : ""}`;
+}
 // 戻るボタンなどで古い画面がそのまま復元されたときは読みなおす（音の出口が死んでいる）
 addEventListener("pageshow", e => { if (e.persisted) location.reload(); });
 /* ---------- メニューに もどる（とちゅうで やめる） ----------
@@ -939,15 +968,28 @@ let last = performance.now(), acc = 0;
 let placeDirty = true;
 addEventListener("resize", () => { placeDirty = true; });
 if (window.ResizeObserver) new ResizeObserver(() => { placeDirty = true; }).observe($("app"));
+const SPRINGS = ["squash", "lean", "headRot", "earL", "earR", "armL", "armR", "eyeScale", "mouthOpen", "dx", "lift", "headY", "eyeX", "eyeY"];
+function atRest(c) {
+  if (c.enter) { if (!(c.hidden && Math.abs(c.enter.vel) < .01 && c.enter.v > .999)) return false; return true; }
+  if (talking === c || c.speakingLevel > .001 || c.listening || c.jumpY || c.jumpV || Object.keys(c.tm).length) return false;
+  if (!c.noBlink && (c.blink < 1 || c.nextBlink < .06)) return false;
+  if (!c._seen || now0() - c._seen < 400) return false;   // 止まる前に 最後の形まで描ききる
+  for (const k of SPRINGS) { const p = c[k]; if (p && (Math.abs(p.vel) > .02 || Math.abs(p.v - p.t) > .004)) { c._seen = now0(); return false; } }
+  return true;
+}
+const now0 = () => performance.now();
 function frame(now) {
   requestAnimationFrame(frame);
   const raw = (now - last) / 1000;
   if (raw < 1 / 31) return;
   const dt = Math.min(.05, raw); last = now;
-  if (placeDirty) { placeDirty = false; placeAll(); }
+  if (placeDirty) { placeDirty = false; placeAll(); all.forEach(c => c._seen = now); } else placeHosts();
   all.forEach(c => {
     if (talking === c) c.speakingLevel = .3 + .4 * Math.abs(Math.sin(now / 70));
     if (c.enter) c.enter.step(dt);
+    // 発熱対策：じっとしているキャラ（動き・声・まばたき・ばねの揺れがない）は 描きなおさない。
+    // 時計だけ進めて、まばたきの直前や 動きが入ったら また描く（呼吸のわずかな揺れは 止まる）
+    if (atRest(c)) { c.t += dt; c.nextBlink -= dt; return; }
     drawChar(c, dt, false);
   });
   idleTick(seat.A, dt, G.busy); idleTick(seat.B, dt, G.busy);

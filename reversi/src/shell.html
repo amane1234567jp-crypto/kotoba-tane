@@ -115,10 +115,14 @@ body {
 .side {
   display: flex; flex-direction: column; align-items: stretch; gap: 10px; min-width: 0;
   background: var(--seat); border: 5px solid var(--ink); border-radius: 26px; padding: 12px; box-sizing: border-box;
-  transition: box-shadow .3s;
+  transition: box-shadow .3s; position: relative;
 }
-.side.active { animation: seat 1.6s ease-in-out infinite; }
-@keyframes seat { 0%, 100% { box-shadow: 0 0 0 6px var(--glow); } 50% { box-shadow: 0 0 0 10px var(--glow); } }
+/* 手番の光：box-shadow を動かすと 毎フレーム描きなおしになって 本体が熱くなるので、
+   光は ::after に固定で描いて、透明度だけ動かす（GPU だけで済む。2026-11-07） */
+.side::after { content: ""; position: absolute; inset: -5px; border-radius: 26px; pointer-events: none; opacity: 0; box-shadow: 0 0 0 10px var(--glow); transition: opacity .3s; }
+.side.active { box-shadow: 0 0 0 6px var(--glow); }
+.side.active::after { animation: seat 1.6s ease-in-out infinite; }
+@keyframes seat { 0%, 100% { opacity: 0; } 50% { opacity: .9; } }
 .chip { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-size: clamp(18px, 2.4vmin, 28px); line-height: 1.2; min-width: 0; }
 .chip .nm { min-width: 0; overflow-wrap: anywhere; }
 .stone { flex: none; width: 1.3em; height: 1.3em; border-radius: 50%; border: 3px solid var(--ink); box-sizing: border-box; }
@@ -138,8 +142,8 @@ body {
 .matta:focus-visible, .big:focus-visible, .seg button:focus-visible { outline: 4px solid var(--pink); outline-offset: 3px; }
 
 #fx { position: fixed; inset: 0; pointer-events: none; z-index: 4; }
-.side.winner { animation: win 1.2s ease-in-out infinite; }
-@keyframes win { 0%, 100% { box-shadow: 0 0 0 6px #FFD25E, 0 0 30px 10px rgba(255, 210, 94, .6); } 50% { box-shadow: 0 0 0 12px #FFB13B, 0 0 60px 24px rgba(255, 210, 94, .8); } }
+.side.winner { box-shadow: 0 0 0 6px #FFD25E, 0 0 30px 10px rgba(255, 210, 94, .6); }
+.side.winner::after { box-shadow: 0 0 0 12px #FFB13B, 0 0 60px 24px rgba(255, 210, 94, .8); animation: seat 1.2s ease-in-out infinite; }
 #stage { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; overflow: visible; }
 #bubble {
   position: fixed; z-index: 6; max-width: min(78vw, 640px); transform: translate(-50%, -100%);
@@ -249,7 +253,7 @@ body {
   .score { grid-column: 2; grid-row: 2; }
   .matta { grid-column: 2; grid-row: 3; }
 }
-@media (prefers-reduced-motion: reduce) { .hint i, .side.active { animation-duration: 4s; } }
+@media (prefers-reduced-motion: reduce) { .hint i, .side.active::after { animation-duration: 4s; } }
 </style>
 
 <div id="app">
@@ -343,6 +347,7 @@ body {
     <div class="row"><span>おける ばしょの ひかり</span><div class="seg" data-key="hints"><button type="button" id="hints1" data-v="1">みせる</button><button type="button" id="hints0" data-v="0">みせない</button></div></div>
     <div class="row"><span>えんしゅつ</span><div class="seg" data-key="fx"><button type="button" id="fx2" data-v="2">はで</button><button type="button" id="fx1" data-v="1">ひかえめ</button></div></div>
     <div class="row"><span>こうかおん</span><div class="seg" data-key="sfx"><button type="button" id="sfx0" data-v="0">なし</button><button type="button" id="sfx1" data-v="1">小</button><button type="button" id="sfx2" data-v="2">中</button><button type="button" id="sfx3" data-v="3">大</button></div></div>
+    <div class="row"><span>音が出ないとき</span><div class="panelBtns"><button type="button" id="sndTest">音の テスト（なおす）</button></div><span class="route" id="sndInfo"></span></div>
     <div class="row"><span>キャラの こえ</span><div class="seg" data-key="voice"><button type="button" id="voice0" data-v="0">なし</button><button type="button" id="voice1" data-v="1">小</button><button type="button" id="voice2" data-v="2">中</button><button type="button" id="voice3" data-v="3">大</button></div></div>
     <div class="row"><span>こどもの まったに あいては じどうで いいよ</span><div class="seg" data-key="autoOk"><button type="button" id="autoOk1" data-v="1">じどうで いいよ</button><button type="button" id="autoOk0" data-v="0">きいてから</button></div></div>
     <div class="row"><span>つながり方（テスト用。「中継だけ」は、家の外でもつながるかを家の中で確かめるとき）</span><div class="seg" data-key="relay"><button type="button" id="relay0" data-v="0">ふつう</button><button type="button" id="relay1" data-v="1">中継だけ</button></div><span class="route" id="routeInfo"></span></div>
