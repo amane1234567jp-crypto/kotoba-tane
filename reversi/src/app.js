@@ -649,8 +649,20 @@ function rebuildAudio(why) {
 // 通話を始めるとき：種類を play-and-record にして、無音の再生はやめる
 function soundForCall() { setSession("play-and-record"); if (SOUND.keep) SOUND.keep.pause(); }
 // さわったとき（ユーザー操作の中なので、作りなおしも再生も許される）
+/* Android（Chrome）：カメラ・マイクを使い始める前に作った音の出口は、通話が始まると
+   「動いているのに 音が出ない」ことがある（2026-11-07 Android×iPhone で、最初の対局だけ Android が無音）。
+   通話の線が入ったら、出口を一度だけ作りなおす。iPhone・iPad は今のままで鳴っているので さわらない */
+const IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+function freshForCall(why) {
+  if (IOS || !ctx || SOUND.fresh === why) return;
+  SOUND.fresh = why;
+  // ページで一度でも操作していれば（Android はそれで再生が許される）すぐ作りなおす。まだなら 次にさわったとき
+  if (!navigator.userActivation || navigator.userActivation.hasBeenActive) rebuildAudio("通話");
+  else SOUND.needFresh = true;
+}
 function wakeSound(e) {
   if (!ctx) return;
+  if (SOUND.needFresh && e) { SOUND.needFresh = false; return rebuildAudio("通話"); }
   setSession(wantSession());
   keepAlive();
   if (ctx.state === "running") { SOUND.tried = 0; return; }
@@ -757,8 +769,9 @@ NET.on("local", s => {
   }
   c.v.muted = true; c.v.srcObject = s; playVideo(c.v); camMsg(mySide(), NET.media === "audio" ? "カメラが つかえません（こえだけ）" : NET.media === "video" ? "マイクが つかえません（えいぞうだけ）" : "");
   setTimeout(wakeSound, 300); setTimeout(wakeSound, 1500);   // カメラ・マイクが入ると iPad の音が止まることがある
+  setTimeout(() => freshForCall("local"), 400);
 });
-NET.on("remote", s => { const c = camOf(otherSide()); c.v.muted = false; c.v.srcObject = s; playVideo(c.v); camMsg(otherSide(), ""); });
+NET.on("remote", s => { const c = camOf(otherSide()); c.v.muted = false; c.v.srcObject = s; playVideo(c.v); camMsg(otherSide(), ""); setTimeout(() => freshForCall("remote"), 400); });
 
 // 受け取った知らせは順番に処理する。盤が動いている間は待つ。
 const inbox = [];
