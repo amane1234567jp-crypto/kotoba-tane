@@ -48,6 +48,10 @@ jobs:
           cd /tmp/b
           # 設定が読めるか先に確かめる（だめなら ここで理由が出る）
           npx expo config --json > /tmp/out/config.json 2> /tmp/out/config_err.txt || { echo "expo config 失敗:"; cat /tmp/out/config_err.txt; }
+          { echo "--- in /tmp/b"; node --version; ls -la node_modules/.bin/expo; node node_modules/expo/bin/cli config --json 2>&1 | head -c 600; echo "exit=${PIPESTATUS[0]}";
+            echo "--- in repo dir"; cd $GITHUB_WORKSPACE/reversi/app && node node_modules/expo/bin/cli config --json 2>&1 | head -c 300; echo "exit=${PIPESTATUS[0]}";
+            echo "--- debug"; cd /tmp/b && EXPO_DEBUG=1 DEBUG='expo:*' node node_modules/expo/bin/cli config --json 2>&1 | tail -40; } > /tmp/out/diag.txt 2>&1 || true
+          cat /tmp/out/diag.txt
           if ! grep -q projectId app.json; then npx eas-cli init --non-interactive --force 2>&1 | tee /tmp/out/init.txt; cp app.json $GITHUB_WORKSPACE/reversi/app/app.json; fi
           grep -o '"projectId": *"[^"]*"' app.json | tee /tmp/out/projectId.txt
       - name: build
