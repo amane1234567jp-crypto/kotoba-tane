@@ -1,0 +1,6 @@
+node_modules/
+android/
+ios/
+.expo/
+assets/web.zip
+assets/web-version.json

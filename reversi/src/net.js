@@ -47,6 +47,8 @@ const NET = (() => {
     const A = { echoCancellation: true, noiseSuppression: true, autoGainControl: true };
     // カメラかマイクの 片方が だめでも、使えるほうだけで 通話する
     N.local = null; N.media = "";
+    // アプリ版（Android）：先に殻に カメラ・マイクの許可をとってもらう
+    if (window.RVNative && window.RV && window.RV.askMedia) { try { await window.RV.askMedia(); } catch (e) { } }
     for (const [c, label] of [[{ video: V, audio: A }, "both"], [{ audio: A }, "audio"], [{ video: V }, "video"]]) {
       try { N.local = await navigator.mediaDevices.getUserMedia(c); N.media = label; break; } catch (e) { /* 次をためす */ }
     }
@@ -216,7 +218,9 @@ const NET = (() => {
 
   N.host = host; N.guest = guest;
   // openExternalBrowser=1：LINE の中のブラウザではなく Safari／Chrome で開かせる（LINE の中ではカメラが使えないことがある）
-  N.inviteURL = () => location.origin + location.pathname + "?r=" + N.room + (N.name ? "&n=" + encodeURIComponent(N.name) : "") + (ps ? "&ps=" + ps : "") + "&openExternalBrowser=1";
+  // アプリ版（localhost で動く）でも、リンクは Web 版の公開 URL にする（相手は Web でもアプリでも入れる）
+  N.publicBase = () => window.RVNative ? "https://amane1234567jp-crypto.github.io/kotoba-tane/reversi/" : location.origin + location.pathname;
+  N.inviteURL = () => N.publicBase() + "?r=" + N.room + (N.name ? "&n=" + encodeURIComponent(N.name) : "") + (ps ? "&ps=" + ps : "") + "&openExternalBrowser=1";
   N.linkName = q.get("n") || "";
   return N;
 })();

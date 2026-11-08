@@ -573,6 +573,8 @@ $("resetBtn").addEventListener("click", () => {
   if (G.started) newGame();
 });
 $("adultBtn").addEventListener("click", () => { syncPanel(); renderPush(); setPanel.hidden = false; });
+// アプリ版では テスト用の設定（中継だけ・テスト用に解放）と Web だけの案内を出さない
+if (window.RVNative) document.querySelectorAll("[data-key=relay], [data-key=devUnlock]").forEach(el => { const row = el.closest(".row"); if (row) row.hidden = true; const h = row && row.previousElementSibling; if (h && h.tagName === "H3" && h.textContent.includes("テスト")) h.hidden = true; });
 
 /* ---------- 画面を消さない ---------- */
 let lock = null;
@@ -590,6 +592,7 @@ function keepAwakeVideo() {
   sleepVid.play().catch(() => { });
 }
 async function keepAwake() {
+  if (window.RVNative) return;   // アプリ版は殻（expo-keep-awake）がやる
   try { lock = await navigator.wakeLock.request("screen"); } catch (e) { lock = null; }
   if (!lock) keepAwakeVideo();
 }
@@ -608,6 +611,7 @@ blip = () => { }; chime = () => { }; tune = () => { }; noise = () => { };
    3) 音の出口（AudioContext）が止まっていたら resume。さわっても動かなければ その場で作りなおす */
 const SOUND = { session: "なし", out: "ふつう", keep: null, rebuilt: 0, why: "" };
 function setSession(type) {
+  if (window.RVNative) { SOUND.session = "アプリ"; return; }
   try {
     if (!navigator.audioSession) { SOUND.session = "なし（古いiOS）"; return; }
     if (navigator.audioSession.type !== type) navigator.audioSession.type = type;
@@ -623,6 +627,7 @@ const SILENT = (() => {
   let bin = ""; b.forEach(x => bin += String.fromCharCode(x)); return "data:audio/wav;base64," + btoa(bin);
 })();
 function keepAlive() {
+  if (window.RVNative) return;   // アプリ版は殻が音の種類（マナーモードでも鳴る）を決める
   if (NET.role) { if (SOUND.keep) { SOUND.keep.pause(); } return; }   // 通話中は いらない（play-and-record はマナーモードで消えない）
   if (!SOUND.keep) {
     const el = document.createElement("audio");
@@ -778,7 +783,7 @@ function joinPartner(p) {
   if (p.dev) ringOut([{ dev: p.dev, name: p.name }], BASE + "?ring=1&fd=" + CALL.id + "&from=" + encodeURIComponent(CFG.myName || ""));
 }
 /* ---------- よびだし（通知で 直接よぶ。2026-11-07） ---------- */
-const BASE = location.origin + location.pathname;
+const BASE = NET.publicBase();
 const CALLER_KEY = "marushima-reversi-callers";
 // よぶ側（ホスト）が覚えている相手の端末。部屋はホストの部屋なので、相手の端末 id と名前だけ
 const callers = { list: load(CALLER_KEY) || [], save() { keep(CALLER_KEY, this.list); } };
@@ -1005,8 +1010,10 @@ function showInvite(again) {
 }
 /* ---------- 遠隔対戦の回数（10回まで無料。払うのは よぶ側だけ） ---------- */
 /* どちらかが解放ずみなら遊べる。解放ずみの人がいないときは、よぶ側の無料分（10回）を使う */
-const myUnlocked = () => BILLING.unlocked || !!CFG.devUnlock;
-const remoteAllowed = () => myUnlocked() || !!G.theirUnlocked || BILLING.left > 0;
+// アプリ版で まだ課金が つながっていないあいだは 制限しない（暫定。IAP をつないだら外す）
+const IAP_PENDING = () => !!window.RVNative && !window.MarushimaIAP;
+const myUnlocked = () => IAP_PENDING() || BILLING.unlocked || !!CFG.devUnlock;
+const remoteAllowed = () => IAP_PENDING() || myUnlocked() || !!G.theirUnlocked || BILLING.left > 0;
 function sendLic() { NET.send({ t: "lic", u: myUnlocked() }); }
 function countGame() { if (!myUnlocked() && !G.theirUnlocked) BILLING.count(); refreshLeft(); }
 // ホスト：無料分を使い切り、どちらも解放していない → 両方の画面に案内。どちらかが解放したら 続きが始まる
@@ -1029,7 +1036,7 @@ function refreshLeft() {
   el.hidden = NET.role === "guest" || un || BILLING.left > 3;
   el.textContent = BILLING.left > 0 ? `遠隔対戦：あと ${BILLING.left}回 むりょう` : "遠隔対戦：無料分おわり（相手が解放ずみなら遊べます）";
   el.classList.toggle("zero", !un && BILLING.left === 0);
-  $("remoteInfo").textContent = un ? `解放ずみ（${BILLING.unlocked ? "購入" : "テスト用"}）。これまで ${BILLING.used}回` : `これまで ${BILLING.used}回・のこり ${BILLING.left}回`;
+  $("remoteInfo").textContent = IAP_PENDING() ? `いまは回数の制限なし（課金の準備中）。これまで ${BILLING.used}回` : un ? `解放ずみ（${BILLING.unlocked ? "購入" : "テスト用"}）。これまで ${BILLING.used}回` : `これまで ${BILLING.used}回・のこり ${BILLING.left}回`;
 }
 function showUnlock() {
   $("unlockTitle").textContent = NET.role === "guest" ? "呼んだ側の無料分（10回）が終わりました" : "遠隔対戦の無料分（10回）を使い切りました";
@@ -1057,6 +1064,7 @@ $("copyBtn").addEventListener("click", () => {
    送り終わると 自動でリバーシの画面に戻る。共有画面が使えない端末だけ、LINE アプリを直接ひらく */
 const inviteText = () => "まるシマリバーシで あそぼう！ ここを タップしてね\n" + NET.inviteURL();
 $("lineBtn").addEventListener("click", async () => {
+  if (window.RVNative) { CALL.toApp({ t: "share", text: inviteText() }); $("inviteOv").hidden = true; camMsg(otherSide(), "まっています…"); return; }
   if (navigator.share) {
     try { await navigator.share({ text: inviteText() }); $("inviteOv").hidden = true; camMsg(otherSide(), "まっています…"); } catch (e) { /* やめたときは そのまま */ }
   } else location.href = "line://msg/text/" + encodeURIComponent(inviteText());

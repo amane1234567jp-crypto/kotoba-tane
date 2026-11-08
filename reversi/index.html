@@ -328,7 +328,7 @@ body {
       <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と あそぶ」を押すだけでつながります。</p>
     </div>
     <button class="adultBtn" id="adultBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Zm7.4-2.1.9-.7-1.5-2.6-1.1.3a6 6 0 0 0-1.3-.8l-.2-1.1h-3l-.2 1.1a6 6 0 0 0-1.3.8l-1.1-.3-1.5 2.6.9.7v1.3l-.9.7 1.5 2.6 1.1-.3a6 6 0 0 0 1.3.8l.2 1.1h3l.2-1.1a6 6 0 0 0 1.3-.8l1.1.3 1.5-2.6-.9-.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>おとなの せってい</button>
-    <p class="ver">v2026.11.08 3a35e1d5</p>
+    <p class="ver">v2026.11.08 ae7ec7c0</p>
   </div>
 </div>
 <!-- 相手が 2人以上 登録されているときだけ：だれと あそぶ？ -->
@@ -468,14 +468,28 @@ const CALL = (() => {
 
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
-  const canPush = "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+  // アプリ版（Expo の殻の中）：通知はアプリ（APNs／FCM → Expo）で受けとる。window.RVNative は殻が入れる
+  const NATIVE = !!window.RVNative;
+  const canPush = NATIVE ? window.RVNative.push !== false : ("serviceWorker" in navigator && "PushManager" in window && "Notification" in window);
   const C = {
     get id() { return dev.id; },
-    get on() { return !!dev.push && canPush && Notification.permission === "granted"; },
-    isIOS, standalone, canPush,
-    // iPhone・iPad の Safari では 通知が使えない → まずホーム画面に追加
-    get needsHome() { return isIOS && !standalone; },
-    get blocked() { return canPush && Notification.permission === "denied"; },
+    get on() { return NATIVE ? !!dev.expo : (!!dev.push && canPush && Notification.permission === "granted"); },
+    isIOS, standalone, canPush, native: NATIVE,
+    // iPhone・iPad の Safari では 通知が使えない → まずホーム画面に追加（アプリ版は不要）
+    get needsHome() { return !NATIVE && isIOS && !standalone; },
+    get blocked() { return NATIVE ? dev.pushDenied === true : (canPush && Notification.permission === "denied"); },
+  };
+  // 殻との やりとり（web → app は postMessage、app → web は window.RV.native(msg)）
+  const toApp = m => { try { window.ReactNativeWebView.postMessage(JSON.stringify(m)); } catch (e) { } };
+  let tokenWait = null;
+  window.RV = window.RV || {};
+  let mediaWait = null;
+  window.RV.askMedia = () => new Promise(res => { mediaWait = res; toApp({ t: "needMedia" }); setTimeout(() => { if (mediaWait) { mediaWait(); mediaWait = null; } }, 20000); });
+  window.RV.native = m => {
+    if (!m) return;
+    if (m.t === "media") { if (mediaWait) { mediaWait(); mediaWait = null; } }
+    if (m.t === "token") { dev.pushDenied = false; if (m.expo && m.expo !== dev.expo) { dev.expo = m.expo; save(); } if (tokenWait) { tokenWait(m.expo || null); tokenWait = null; } }
+    if (m.t === "denied") { dev.pushDenied = true; dev.expo = ""; save(); if (tokenWait) { tokenWait(null); tokenWait = null; } }
   };
   async function post(body) {
     const r = await fetch(API, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(Object.assign({ id: dev.id, secret: dev.secret }, body)) });
@@ -486,6 +500,13 @@ const CALL = (() => {
 
   // 「よびだしを うけとる」：通知を許可してもらい、宛先を中継に登録する（ボタンを押したときに呼ぶ）
   C.enable = async name => {
+    if (NATIVE) {
+      const expo = await new Promise(res => { tokenWait = res; toApp({ t: "needPush" }); setTimeout(() => { if (tokenWait) { tokenWait(null); tokenWait = null; } }, 15000); });
+      if (!expo) return { ok: false, why: dev.pushDenied ? "通知が「許可しない」になっています。設定アプリで このアプリの通知を許可してください" : "通知の登録が できませんでした" };
+      const r = await post({ op: "reg", name: name || "", expo }).catch(() => ({}));
+      if (!r.ok) return { ok: false, why: "登録できませんでした" + (r.error ? "（" + r.error + "）" : "") };
+      return { ok: true };
+    }
     if (!canPush) return { ok: false, why: "この端末では使えません" };
     const perm = await Notification.requestPermission();
     if (perm !== "granted") return { ok: false, why: perm === "denied" ? "通知が「許可しない」になっています" : "通知が許可されませんでした" };
@@ -502,6 +523,7 @@ const CALL = (() => {
   // 開くたびに 宛先と名前を登録しなおす（購読は ときどき 入れかわる）
   C.refresh = async name => {
     try {
+      if (NATIVE) { if (dev.expo) await post({ op: "reg", name: name || "", expo: dev.expo }); else { await post({ op: "reg", name: name || "" }); toApp({ t: "pushIfGranted" }); } return; }
       if ("serviceWorker" in navigator) swReg().catch(() => { });   // ホーム画面に追加できるように いつも入れておく
       if (!C.on) { await post({ op: "reg", name: name || "" }); return; }
       const reg = await swReg(); const sub = await reg.pushManager.getSubscription();
@@ -510,6 +532,7 @@ const CALL = (() => {
     } catch (e) { /* 通信できなくても遊べる */ }
   };
   C.off = async () => {
+    if (NATIVE) { dev.expo = ""; save(); post({ op: "reg", clear: true }).catch(() => { }); return; }
     try { const reg = await navigator.serviceWorker.getRegistration(); const sub = reg && await reg.pushManager.getSubscription(); if (sub) await sub.unsubscribe(); } catch (e) { }
     dev.push = false; save(); post({ op: "reg", clear: true }).catch(() => { });
   };
@@ -520,6 +543,7 @@ const CALL = (() => {
       return await post({ op: "call", to, tag: "rv-call", title: "まるシマリバーシ", body: `${name || "あいて"}から よびだしです。タップして はじめてね`, url });
     } catch (e) { return { ok: false, reason: "net" }; }
   };
+  C.toApp = toApp;
   C.cancel = to => { if (to) post({ op: "cancel", to, tag: "rv-call" }).catch(() => { }); };
   // 引っこし用のリンク（iPhone・iPad で ホーム画面に追加する前に、この URL に切り替える）
   C.setupURL = () => {
@@ -1878,6 +1902,8 @@ const NET = (() => {
     const A = { echoCancellation: true, noiseSuppression: true, autoGainControl: true };
     // カメラかマイクの 片方が だめでも、使えるほうだけで 通話する
     N.local = null; N.media = "";
+    // アプリ版（Android）：先に殻に カメラ・マイクの許可をとってもらう
+    if (window.RVNative && window.RV && window.RV.askMedia) { try { await window.RV.askMedia(); } catch (e) { } }
     for (const [c, label] of [[{ video: V, audio: A }, "both"], [{ audio: A }, "audio"], [{ video: V }, "video"]]) {
       try { N.local = await navigator.mediaDevices.getUserMedia(c); N.media = label; break; } catch (e) { /* 次をためす */ }
     }
@@ -2047,7 +2073,9 @@ const NET = (() => {
 
   N.host = host; N.guest = guest;
   // openExternalBrowser=1：LINE の中のブラウザではなく Safari／Chrome で開かせる（LINE の中ではカメラが使えないことがある）
-  N.inviteURL = () => location.origin + location.pathname + "?r=" + N.room + (N.name ? "&n=" + encodeURIComponent(N.name) : "") + (ps ? "&ps=" + ps : "") + "&openExternalBrowser=1";
+  // アプリ版（localhost で動く）でも、リンクは Web 版の公開 URL にする（相手は Web でもアプリでも入れる）
+  N.publicBase = () => window.RVNative ? "https://amane1234567jp-crypto.github.io/kotoba-tane/reversi/" : location.origin + location.pathname;
+  N.inviteURL = () => N.publicBase() + "?r=" + N.room + (N.name ? "&n=" + encodeURIComponent(N.name) : "") + (ps ? "&ps=" + ps : "") + "&openExternalBrowser=1";
   N.linkName = q.get("n") || "";
   return N;
 })();
@@ -2668,6 +2696,8 @@ $("resetBtn").addEventListener("click", () => {
   if (G.started) newGame();
 });
 $("adultBtn").addEventListener("click", () => { syncPanel(); renderPush(); setPanel.hidden = false; });
+// アプリ版では テスト用の設定（中継だけ・テスト用に解放）と Web だけの案内を出さない
+if (window.RVNative) document.querySelectorAll("[data-key=relay], [data-key=devUnlock]").forEach(el => { const row = el.closest(".row"); if (row) row.hidden = true; const h = row && row.previousElementSibling; if (h && h.tagName === "H3" && h.textContent.includes("テスト")) h.hidden = true; });
 
 /* ---------- 画面を消さない ---------- */
 let lock = null;
@@ -2685,6 +2715,7 @@ function keepAwakeVideo() {
   sleepVid.play().catch(() => { });
 }
 async function keepAwake() {
+  if (window.RVNative) return;   // アプリ版は殻（expo-keep-awake）がやる
   try { lock = await navigator.wakeLock.request("screen"); } catch (e) { lock = null; }
   if (!lock) keepAwakeVideo();
 }
@@ -2703,6 +2734,7 @@ blip = () => { }; chime = () => { }; tune = () => { }; noise = () => { };
    3) 音の出口（AudioContext）が止まっていたら resume。さわっても動かなければ その場で作りなおす */
 const SOUND = { session: "なし", out: "ふつう", keep: null, rebuilt: 0, why: "" };
 function setSession(type) {
+  if (window.RVNative) { SOUND.session = "アプリ"; return; }
   try {
     if (!navigator.audioSession) { SOUND.session = "なし（古いiOS）"; return; }
     if (navigator.audioSession.type !== type) navigator.audioSession.type = type;
@@ -2718,6 +2750,7 @@ const SILENT = (() => {
   let bin = ""; b.forEach(x => bin += String.fromCharCode(x)); return "data:audio/wav;base64," + btoa(bin);
 })();
 function keepAlive() {
+  if (window.RVNative) return;   // アプリ版は殻が音の種類（マナーモードでも鳴る）を決める
   if (NET.role) { if (SOUND.keep) { SOUND.keep.pause(); } return; }   // 通話中は いらない（play-and-record はマナーモードで消えない）
   if (!SOUND.keep) {
     const el = document.createElement("audio");
@@ -2873,7 +2906,7 @@ function joinPartner(p) {
   if (p.dev) ringOut([{ dev: p.dev, name: p.name }], BASE + "?ring=1&fd=" + CALL.id + "&from=" + encodeURIComponent(CFG.myName || ""));
 }
 /* ---------- よびだし（通知で 直接よぶ。2026-11-07） ---------- */
-const BASE = location.origin + location.pathname;
+const BASE = NET.publicBase();
 const CALLER_KEY = "marushima-reversi-callers";
 // よぶ側（ホスト）が覚えている相手の端末。部屋はホストの部屋なので、相手の端末 id と名前だけ
 const callers = { list: load(CALLER_KEY) || [], save() { keep(CALLER_KEY, this.list); } };
@@ -3100,8 +3133,10 @@ function showInvite(again) {
 }
 /* ---------- 遠隔対戦の回数（10回まで無料。払うのは よぶ側だけ） ---------- */
 /* どちらかが解放ずみなら遊べる。解放ずみの人がいないときは、よぶ側の無料分（10回）を使う */
-const myUnlocked = () => BILLING.unlocked || !!CFG.devUnlock;
-const remoteAllowed = () => myUnlocked() || !!G.theirUnlocked || BILLING.left > 0;
+// アプリ版で まだ課金が つながっていないあいだは 制限しない（暫定。IAP をつないだら外す）
+const IAP_PENDING = () => !!window.RVNative && !window.MarushimaIAP;
+const myUnlocked = () => IAP_PENDING() || BILLING.unlocked || !!CFG.devUnlock;
+const remoteAllowed = () => IAP_PENDING() || myUnlocked() || !!G.theirUnlocked || BILLING.left > 0;
 function sendLic() { NET.send({ t: "lic", u: myUnlocked() }); }
 function countGame() { if (!myUnlocked() && !G.theirUnlocked) BILLING.count(); refreshLeft(); }
 // ホスト：無料分を使い切り、どちらも解放していない → 両方の画面に案内。どちらかが解放したら 続きが始まる
@@ -3124,7 +3159,7 @@ function refreshLeft() {
   el.hidden = NET.role === "guest" || un || BILLING.left > 3;
   el.textContent = BILLING.left > 0 ? `遠隔対戦：あと ${BILLING.left}回 むりょう` : "遠隔対戦：無料分おわり（相手が解放ずみなら遊べます）";
   el.classList.toggle("zero", !un && BILLING.left === 0);
-  $("remoteInfo").textContent = un ? `解放ずみ（${BILLING.unlocked ? "購入" : "テスト用"}）。これまで ${BILLING.used}回` : `これまで ${BILLING.used}回・のこり ${BILLING.left}回`;
+  $("remoteInfo").textContent = IAP_PENDING() ? `いまは回数の制限なし（課金の準備中）。これまで ${BILLING.used}回` : un ? `解放ずみ（${BILLING.unlocked ? "購入" : "テスト用"}）。これまで ${BILLING.used}回` : `これまで ${BILLING.used}回・のこり ${BILLING.left}回`;
 }
 function showUnlock() {
   $("unlockTitle").textContent = NET.role === "guest" ? "呼んだ側の無料分（10回）が終わりました" : "遠隔対戦の無料分（10回）を使い切りました";
@@ -3152,6 +3187,7 @@ $("copyBtn").addEventListener("click", () => {
    送り終わると 自動でリバーシの画面に戻る。共有画面が使えない端末だけ、LINE アプリを直接ひらく */
 const inviteText = () => "まるシマリバーシで あそぼう！ ここを タップしてね\n" + NET.inviteURL();
 $("lineBtn").addEventListener("click", async () => {
+  if (window.RVNative) { CALL.toApp({ t: "share", text: inviteText() }); $("inviteOv").hidden = true; camMsg(otherSide(), "まっています…"); return; }
   if (navigator.share) {
     try { await navigator.share({ text: inviteText() }); $("inviteOv").hidden = true; camMsg(otherSide(), "まっています…"); } catch (e) { /* やめたときは そのまま */ }
   } else location.href = "line://msg/text/" + encodeURIComponent(inviteText());

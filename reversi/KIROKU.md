@@ -161,3 +161,15 @@
 - **Android で効果音・声が出ない（iPhone×Android、Android が呼ばれ側）**：出口を作りなおすだけでは直らなかった。Android は通話中「通話モード」になり、Web Audio の音（メディアの線）が消される端末があると見て、音を MediaStream にして audio 要素で鳴らす＝相手の声と同じ「通話の線」に乗せる（`routeViaCall`。`OUTN()` で出口を差しかえ、rig の `ctx.destination` も build で `OUTN()` に）。iPhone・iPad は使わない。音のテストの行に「通話の線」と出る
 - **iPhone の発熱（5局で熱い）**：映像の符号化が原因と見る。SDP で H.264 を先に並べる（iPhone はハードウェア符号化。VP8 はソフトウェアで熱い）＋ `b=AS:300`、つながったら送信側に maxBitrate 250kbps・maxFramerate 12・maintain-framerate、カメラは 12fps（最大15）。`tuneSdp` は合成 SDP で並べかえを確認（手元の Chromium は H.264 なしなので実機で）
 - 確認：codec.py（上限値・b=AS・通話の線に音が流れる）、net2／net3／recover／andr は通る
+
+## 2026-11-08 アプリ版（段階4）に着手
+
+あまねさんの指示：Web 版は残しつつアプリ版を作る。アプリ版では不要なボタン・機能は外す。
+
+- **作り**：Expo（SDK 54、うちのあじと同じ）＋ WebView の「殻」（`reversi/app/`）。ゲーム本体は Web 版と同じ 1枚の HTML を `assets/web.zip` に同梱し、起動時に端末内へ展開して、端末内だけの小さなサーバー（http://127.0.0.1:ポート、`@dr.pogodin/react-native-static-server`）で配る（file:// だとカメラ・fetch・crypto が使えないため）。Capacitor にしなかったのは、iOS のビルドを Mac なしで EAS に任せたいから
+- **殻がやること**：カメラ・マイクの許可（Android は先に runtime permission）、通知の受けとり（expo-notifications、チャンネル「call」最大重要度）、通知タップ → URL の ?以降 を持ってゲームを開きなおす、共有（LINE は OS の共有画面）、画面を消さない（expo-keep-awake）、音の種類（expo-audio：マナーモードでも鳴る・録音可）
+- **Web 側の入口**：殻が `window.RVNative={platform,version,push}` を入れる。あると：Web Push → ネイティブ通知（`needPush`→`token`）、共有 → `share`、カメラ前に `needMedia`→`media`、ホーム画面の案内・無音 WAV・audioSession は使わない、設定の「テスト用」（中継だけ・テスト用に解放）を隠す、招待リンクは公開 URL（GitHub Pages）のまま、**課金がつながるまでは回数制限なし**（`IAP_PENDING`。IAP をつないだら外す）
+- **中継**：`reg` に `expo`（ExponentPushToken）、`call` で Expo の送信 API へ。CORS は localhost の任意ポートも許可
+- **ビルド**：GitHub Actions `reversi-app-android.yml` で `expo prebuild` → gradle の release APK（テスト専用の鍵 `app/keys/test.keystore`、公開前提）→ `reversi-app-out` ブランチ。iOS とストア版は EAS（プロジェクト作成と GitHub 連携はあまねさん側の操作が要る）
+- **通知が実際に届くには**（まだ）：EAS プロジェクト作成（`extra.eas.projectId`）、Android は Firebase の google-services.json と FCM の鍵を EAS に登録、iOS は APNs の鍵。それまで `extra.pushReady=false` で、アプリ版では「よびだしを うけとる」を出さない（LINE リンクと「○○と あそぶ」でつながる）
+- 確認：nativesim.py（殻のふりをしたブラウザで、通知の登録・設定の非表示・よびだし・共有・音の出口）、ローカルで `expo prebuild --platform android` が通ることを確認
