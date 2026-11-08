@@ -775,23 +775,26 @@ function registerCaller(dev, name) {
 let ringTimer = 0, ringing = [];
 async function ringOut(list, url) {
   clearTimeout(ringTimer); ringing = list.filter(c => c.dev);
-  if (!ringing.length) return;
+  if (!ringing.length) return false;
   const who = ringing.map(c => c.name).join("・");
   camMsg(otherSide(), `${who}を よびだしています…`);
   const rs = await Promise.all(ringing.map(c => CALL.ring(c.dev, CFG.myName, url)));
-  if (NET.open) return;
+  if (NET.open) return true;
   if (!rs.some(r => r && r.ok)) {
     const r = rs[0] || {};
-    camMsg(otherSide(), r.reason === "nosub" || r.reason === "gone" ? `${who}の 端末は まだ よびだしを うけとれません（リンクを おくってね）` : "よびだしを 送れませんでした（リンクを おくってね）");
+    ringing = [];
+    camMsg(otherSide(), r.reason === "nosub" || r.reason === "gone" ? `${who}の 端末は まだ よびだしを うけとれません` : "よびだしを 送れませんでした");
     if (NET.role === "host") $("resendBtn").hidden = false;
-    return;
+    return false;
   }
+  camMsg(otherSide(), `${who}を よびだしています…`);
   ringTimer = setTimeout(() => {
     if (NET.open) return;
     ringing.forEach(c => CALL.cancel(c.dev)); ringing = [];
     camMsg(otherSide(), "でられない みたい。また あとで よんでね");
     if (NET.role === "host") $("resendBtn").hidden = false;
   }, 60000);
+  return true;
 }
 function stopRing() { clearTimeout(ringTimer); ringing = []; }
 // はじめの画面の「よびだしを うけとる」と 設定の よびだしの欄
@@ -955,17 +958,23 @@ async function callGrandma(fresh, answering) {
   const s = replay(G.hist); cur = s; paintSides(); paint(s.board); setCounts(s.board, false); clearHints(); updateButtons();
   NET.name = CFG.myName;
   await NET.host(fresh);
-  if (fresh || !CFG.hasPartner) showInvite();
-  else {
-    camMsg(otherSide(), answering ? "つないでいます…" : "登録ずみの あいてを まっています…"); $("resendBtn").hidden = false;
-    // 相手の端末を知っていれば 通知で よびだす（相手から よばれて 開いたときは よびかえさない）
-    if (!answering && callers.list.length) ringOut(callers.list.slice(0, 1), BASE + "?r=" + NET.room + "&n=" + encodeURIComponent(CFG.myName || "") + "&ring=1");
+  // 相手から よばれて 開いたとき：つなぐだけ
+  if (answering) { camMsg(otherSide(), "つないでいます…"); $("resendBtn").hidden = false; return; }
+  // 相手の端末に 通知を送れるなら それで よぶ。送れなかったら リンクの画面へ
+  if (!fresh && CFG.hasPartner && callers.list.length) {
+    $("resendBtn").hidden = false;
+    const ok = await ringOut(callers.list.slice(0, 1), BASE + "?r=" + NET.room + "&n=" + encodeURIComponent(CFG.myName || "") + "&ring=1");
+    if (!ok && !NET.open) showInvite(true);
+    return;
   }
+  // 通知で よべない相手 → すぐ リンクの画面（2回目からは まえと同じリンク。あいては「○○と 対戦する」からも入れる）
+  showInvite(!fresh && CFG.hasPartner);
 }
 $("resendBtn").addEventListener("click", () => showInvite());
 NET.on("lost", () => { if (NET.role === "host") $("resendBtn").hidden = false; });
-function showInvite() {
+function showInvite(again) {
   const url = NET.inviteURL();
+  $("inviteAgain").hidden = !again;
   try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("qr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("qr").textContent = ""; }
   $("inviteLink").textContent = url;
   $("inviteWarn").hidden = remoteAllowed();
