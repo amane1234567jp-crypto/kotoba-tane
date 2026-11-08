@@ -256,6 +256,9 @@ body {
   .slot { grid-column: 1; grid-row: 2 / 4; min-height: 0; }
   body.online .side { grid-template-rows: auto auto 1fr auto; }
   body.online .cam { grid-column: 1 / -1; grid-row: 2; width: auto; height: min(19vh, 100%); justify-self: center; }
+  /* 縦画面：映像の箱が細いので、文を出すときは 箱を横いっぱいに広げて 切れないようにする */
+  body.online .cam.msgOn { width: 100%; aspect-ratio: auto; }
+  body.online .cam.msgOn .camMsg { font-size: clamp(13px, 3.4vw, 17px); padding: 6px 8px; }
   body.online .slot { grid-row: 3 / 5; } body.online .score { grid-row: 3; } body.online .matta { grid-row: 4; }
   .score { grid-column: 2; grid-row: 2; }
   .matta { grid-column: 2; grid-row: 3; }

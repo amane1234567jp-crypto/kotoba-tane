@@ -268,6 +268,9 @@ body {
   .slot { grid-column: 1; grid-row: 2 / 4; min-height: 0; }
   body.online .side { grid-template-rows: auto auto 1fr auto; }
   body.online .cam { grid-column: 1 / -1; grid-row: 2; width: auto; height: min(19vh, 100%); justify-self: center; }
+  /* 縦画面：映像の箱が細いので、文を出すときは 箱を横いっぱいに広げて 切れないようにする */
+  body.online .cam.msgOn { width: 100%; aspect-ratio: auto; }
+  body.online .cam.msgOn .camMsg { font-size: clamp(13px, 3.4vw, 17px); padding: 6px 8px; }
   body.online .slot { grid-row: 3 / 5; } body.online .score { grid-row: 3; } body.online .matta { grid-row: 4; }
   .score { grid-column: 2; grid-row: 2; }
   .matta { grid-column: 2; grid-row: 3; }
@@ -317,7 +320,7 @@ body {
     </div>
     <div class="pushCard" id="pushCard" hidden><button type="button" id="pushBtn"></button><p id="pushMsg"></p></div>
     <p class="note" id="startNote">おとなの せってい：ばんの そとを 3びょう ながおし</p>
-    <p class="ver">v2026.11.07 f8132bea</p>
+    <p class="ver">v2026.11.08 ac030dee</p>
   </div>
 </div>
 <div class="cover" id="inviteOv" hidden>
@@ -2843,7 +2846,7 @@ $("homeClose").addEventListener("click", () => { $("homeOv").hidden = true; });
 /* ---------- 遠隔対戦（段階2） ---------- */
 const otherSide = () => other(mySide());
 function camOf(side) { return { box: $("cam" + side), v: $("vid" + side), msg: $("msg" + side) }; }
-function camMsg(side, text) { const m = camOf(side).msg; m.textContent = text || ""; m.hidden = !text; }
+function camMsg(side, text) { const c = camOf(side); c.msg.textContent = text || ""; c.msg.hidden = !text; $("cam" + side).classList.toggle("msgOn", !!text); }
 function playVideo(v) { const p = v.play(); if (p) p.catch(() => camMsg(v === camOf(mySide()).v ? mySide() : otherSide(), "がめんを タップしてね")); }
 document.addEventListener("click", () => ["A", "B"].forEach(s => { const v = $("vid" + s); if (v.srcObject && v.paused) v.play().catch(() => {}); }), true);
 ["A", "B"].forEach(s => { $("vid" + s).addEventListener("playing", () => camMsg(s, "")); });

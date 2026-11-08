@@ -823,7 +823,7 @@ $("homeClose").addEventListener("click", () => { $("homeOv").hidden = true; });
 /* ---------- 遠隔対戦（段階2） ---------- */
 const otherSide = () => other(mySide());
 function camOf(side) { return { box: $("cam" + side), v: $("vid" + side), msg: $("msg" + side) }; }
-function camMsg(side, text) { const m = camOf(side).msg; m.textContent = text || ""; m.hidden = !text; }
+function camMsg(side, text) { const c = camOf(side); c.msg.textContent = text || ""; c.msg.hidden = !text; $("cam" + side).classList.toggle("msgOn", !!text); }
 function playVideo(v) { const p = v.play(); if (p) p.catch(() => camMsg(v === camOf(mySide()).v ? mySide() : otherSide(), "がめんを タップしてね")); }
 document.addEventListener("click", () => ["A", "B"].forEach(s => { const v = $("vid" + s); if (v.srcObject && v.paused) v.play().catch(() => {}); }), true);
 ["A", "B"].forEach(s => { $("vid" + s).addEventListener("playing", () => camMsg(s, "")); });
