@@ -30,6 +30,7 @@
     "react-native-zip-archive": "^9.5.3"
   },
   "devDependencies": {
-    "adm-zip": "^0.5.18"
+    "adm-zip": "^0.5.18",
+    "babel-preset-expo": "~54.0.0"
   }
 }
