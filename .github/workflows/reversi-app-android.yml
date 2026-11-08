@@ -51,12 +51,21 @@ jobs:
           open(p,"w").write(s)
           print("release signing:", "signingConfig signingConfigs.release" in s)
           PY
+      - name: gradle wrapper
+        run: |
+          # Gradle 本体の取得。GitHub の配布が 504 を返すことがあるので、何度か待ってだめなら ミラーに切り替える
+          cd android && chmod +x gradlew
+          ok=0
+          for i in 1 2 3 4; do ./gradlew --version -q >/dev/null 2>&1 && ok=1 && break; echo "gradle 取得 失敗 $i 回目"; sleep 45; done
+          if [ $ok = 0 ]; then
+            V=$(grep -o 'gradle-[0-9.]*-bin.zip' gradle/wrapper/gradle-wrapper.properties | head -1)
+            sed -i "s#^distributionUrl=.*#distributionUrl=https\\://mirrors.cloud.tencent.com/gradle/$V#" gradle/wrapper/gradle-wrapper.properties
+            grep distributionUrl gradle/wrapper/gradle-wrapper.properties
+            ./gradlew --version -q
+          fi
       - name: gradle
         run: |
-          # Gradle 本体の配布元を GitHub から services.gradle.org に（GitHub 側が 504 を返して止まることがあった）
-          sed -i 's#https\\://github.com/gradle/gradle-distributions/releases/download/v\([0-9.]*\)/#https\\://services.gradle.org/distributions/#' android/gradle/wrapper/gradle-wrapper.properties
-          grep distributionUrl android/gradle/wrapper/gradle-wrapper.properties
-          cd android && chmod +x gradlew && ./gradlew assembleRelease --no-daemon -q 2>&1 | tail -40
+          cd android && ./gradlew assembleRelease --no-daemon -q 2>&1 | tail -40
           ls -la app/build/outputs/apk/release/
       - name: publish
         if: success()
