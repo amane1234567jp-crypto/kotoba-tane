@@ -806,7 +806,8 @@ function renderPush() {
 }
 // 一度だけ聞く：登録した相手がいて、まだ うけとれない端末なら
 function maybeAskPush() {
-  if (CFG.pushAsked || CALL.on || CALL.blocked || (!CALL.canPush && !CALL.needsHome)) return;
+  // iPhone・iPad の Safari（ホーム画面に追加していない）では聞かない：手順がややこしいので、アプリ版まで待つ（あまねさん 2026-11-08）。設定からはいつでも
+  if (CFG.pushAsked || CALL.on || CALL.blocked || !CALL.canPush || CALL.needsHome) return;
   if (!partners.list.length && !callers.list.length) return;
   CFG.pushAsked = 1; saveCfg();
   $("pushAskOv").hidden = false;
