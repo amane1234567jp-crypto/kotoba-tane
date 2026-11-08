@@ -237,12 +237,16 @@ body {
 .nameRow { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
 .ringNote { font: 900 clamp(18px, 2.6vmin, 26px) var(--body); color: #FFFFFF; background: #E2574C; border: 3px solid var(--ink); border-radius: 16px; padding: 8px 18px; margin: 0; animation: ring 1s ease-in-out infinite; }
 @keyframes ring { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
-.pushCard { display: grid; gap: 4px; justify-items: center; }
-.pushCard button { font: 700 15px var(--body); color: var(--ink); background: #FFF6D8; border: 2px solid var(--ink); border-radius: 999px; padding: 7px 16px; cursor: pointer; }
-.pushCard p { margin: 0; font-size: 13px; color: var(--muted); max-width: 30em; text-align: center; }
-.panel.home .steps { margin: 6px 0 10px; padding-left: 1.4em; display: grid; gap: 6px; font-size: 16px; line-height: 1.5; }
+.adultBtn { display: inline-flex; align-items: center; gap: 6px; font: 700 15px var(--body); color: var(--muted); background: transparent; border: 2px solid rgba(43, 42, 51, .35); border-radius: 999px; padding: 6px 14px; margin-top: 6px; cursor: pointer; }
+.adultBtn svg { width: 18px; height: 18px; }
+.panel h3 { margin: 10px 0 -2px; padding-top: 10px; border-top: 2px dashed rgba(43, 42, 51, .18); font: 900 15px var(--body); color: var(--muted); letter-spacing: .06em; }
+.panel.who { gap: 12px; }
+.panel.who .partners { gap: 10px; }
+.panel.home .hsteps { display: grid; gap: 10px; margin: 4px 0 8px; }
+.panel.home .hsteps div { display: flex; align-items: center; gap: 10px; }
+.panel.home .hsteps p { margin: 0; font-size: 16px; line-height: 1.45; }
+.panel.home .hsteps svg { flex: none; width: 34px; height: 34px; color: var(--ink); }
 .panel.home .small { font-size: 13px; }
-.nameBtn { font: 700 15px var(--body); color: var(--ink); background: #FFFFFF; border: 2px solid var(--ink); border-radius: 999px; padding: 6px 16px; margin-top: 2px; cursor: pointer; }
 .panel.name .nameRow { margin: 10px 0; }
 .panel.name input { font-size: 22px; }
 .nameRow input { font: 700 18px var(--body); padding: 8px 10px; border: 3px solid var(--ink); border-radius: 12px; min-width: 0; color: var(--ink); background: #FFFFFF; }
@@ -304,9 +308,7 @@ body {
   <div class="startCard">
     <h1 class="logo">まるシマ<span>リバーシ</span></h1>
     <p class="ringNote" id="ringNote" hidden></p>
-    <div class="partners" id="partners" hidden></div>
     <button class="big" id="callBtn" type="button">たいせんあいてを よぶ</button>
-    <button class="nameBtn" id="nameBtn" type="button" hidden></button>
     <p class="left" id="leftNote" hidden></p>
     <button class="big sub" id="startBtn" type="button">1だいで あそぶ</button>
     <div class="guestLead" id="guestLead" hidden>
@@ -316,11 +318,26 @@ body {
         <li>カメラとマイクの確認が出たら<b>「許可」</b>を押します</li>
       </ol>
       <p class="gNote">お孫さんの顔が映ったら、黒と白の石を交互に置いて遊びます。</p>
-      <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と 対戦する」を押すだけでつながります。</p>
+      <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と あそぶ」を押すだけでつながります。</p>
     </div>
-    <div class="pushCard" id="pushCard" hidden><button type="button" id="pushBtn"></button><p id="pushMsg"></p></div>
-    <p class="note" id="startNote">おとなの せってい：ばんの そとを 3びょう ながおし</p>
-    <p class="ver">v2026.11.08 1219049b</p>
+    <button class="adultBtn" id="adultBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Zm7.4-2.1.9-.7-1.5-2.6-1.1.3a6 6 0 0 0-1.3-.8l-.2-1.1h-3l-.2 1.1a6 6 0 0 0-1.3.8l-1.1-.3-1.5 2.6.9.7v1.3l-.9.7 1.5 2.6 1.1-.3a6 6 0 0 0 1.3.8l.2 1.1h3l.2-1.1a6 6 0 0 0 1.3-.8l1.1.3 1.5-2.6-.9-.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>おとなの せってい</button>
+    <p class="ver">v2026.11.08 b9121e4b</p>
+  </div>
+</div>
+<!-- 相手が 2人以上 登録されているときだけ：だれと あそぶ？ -->
+<div class="cover" id="whoOv" hidden>
+  <div class="panel who" role="dialog" aria-label="だれと あそぶ？">
+    <h2>だれと あそぶ？</h2>
+    <div class="partners" id="whoList"></div>
+    <div class="panelBtns"><button type="button" id="whoNew">あたらしい あいてを よぶ（リンク）</button><button type="button" id="whoClose">やめる</button></div>
+  </div>
+</div>
+<!-- 一度だけ聞く：つぎから よびだしで つながる？ -->
+<div class="cover" id="pushAskOv" hidden>
+  <div class="panel who" role="dialog" aria-label="よびだし">
+    <h2>つぎから よびだしで つながる？</h2>
+    <p class="lead">うけとれるようにすると、あいてが「○○と あそぶ」を おしたとき 通知が来て、すぐ つながります。あとからでも「おとなの せってい」で できます。</p>
+    <div class="panelBtns"><button type="button" id="pushAskYes" class="primary">する</button><button type="button" id="pushAskNo">あとで</button></div>
   </div>
 </div>
 <div class="cover" id="inviteOv" hidden>
@@ -360,14 +377,13 @@ body {
 </div>
 <div class="cover" id="homeOv" hidden>
   <div class="panel home" role="dialog" aria-label="ホーム画面に追加">
-    <h2>よびだしを うけとる じゅんび</h2>
-    <p class="lead">iPhone・iPad は、ホーム画面に追加した アイコンから開いたときだけ よびだしが届きます。</p>
-    <ol class="steps">
-      <li>Safari の <b>共有ボタン</b>（四角から上向きの矢印）を押す</li>
-      <li><b>「ホーム画面に追加」</b>→ 右上の <b>「追加」</b> を押す</li>
-      <li>ホーム画面にできた <b>リバーシのアイコン</b> から開く</li>
-      <li>はじめの画面の <b>「よびだしを うけとる」</b> を押して、通知を <b>「許可」</b></li>
-    </ol>
+    <h2>ホーム画面に 追加してね</h2>
+    <p class="lead">iPhone・iPad は、ホーム画面のアイコンから開いたときだけ よびだしが届きます。</p>
+    <div class="hsteps">
+      <div><svg viewBox="0 0 24 24"><path d="M12 15V4m0 0-4 4m4-4 4 4M5 12v7h14v-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p><b>1.</b> 下の<b>共有ボタン</b>を押す</p></div>
+      <div><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><p><b>2.</b> <b>「ホーム画面に追加」</b>→<b>「追加」</b></p></div>
+      <div><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="#1E8A52"/><circle cx="9.5" cy="9.5" r="2.4" fill="#fff"/><circle cx="14.5" cy="14.5" r="2.4" fill="#fff"/><circle cx="14.5" cy="9.5" r="2.4" fill="#222"/><circle cx="9.5" cy="14.5" r="2.4" fill="#222"/></svg><p><b>3.</b> ホーム画面の<b>アイコン</b>から開いて、「よびだしを うけとる」→「許可」</p></div>
+    </div>
     <p class="lead small">登録した相手や名前は、そのままアイコンのほうに引っこします。</p>
     <div class="panelBtns"><button type="button" id="homeClose" class="primary">わかった</button></div>
   </div>
@@ -380,22 +396,27 @@ body {
   </div>
 </div>
 <div class="cover" id="settings" hidden>
-  <div class="panel" role="dialog" aria-label="せってい">
-    <h2>せってい</h2>
+  <div class="panel" role="dialog" aria-label="おとなの せってい">
+    <h2>おとなの せってい</h2>
+    <h3>あそびかた</h3>
     <div class="row"><span>テンポ</span><div class="seg" data-key="slow"><button type="button" id="slow0" data-v="0">ふつう</button><button type="button" id="slow1" data-v="1">ゆっくり</button></div></div>
     <div class="row"><span>おける ばしょの ひかり</span><div class="seg" data-key="hints"><button type="button" id="hints1" data-v="1">みせる</button><button type="button" id="hints0" data-v="0">みせない</button></div></div>
+    <div class="row"><span>こどもの「まった」に あいては</span><div class="seg" data-key="autoOk"><button type="button" id="autoOk1" data-v="1">じどうで いいよ</button><button type="button" id="autoOk0" data-v="0">きいてから</button></div></div>
+    <h3>音と えんしゅつ</h3>
     <div class="row"><span>えんしゅつ</span><div class="seg" data-key="fx"><button type="button" id="fx2" data-v="2">はで</button><button type="button" id="fx1" data-v="1">ひかえめ</button></div></div>
     <div class="row"><span>こうかおん</span><div class="seg" data-key="sfx"><button type="button" id="sfx0" data-v="0">なし</button><button type="button" id="sfx1" data-v="1">小</button><button type="button" id="sfx2" data-v="2">中</button><button type="button" id="sfx3" data-v="3">大</button></div></div>
-    <div class="row"><span>音が出ないとき</span><div class="panelBtns"><button type="button" id="sndTest">音の テスト（なおす）</button></div><span class="route" id="sndInfo"></span></div>
     <div class="row"><span>キャラの こえ</span><div class="seg" data-key="voice"><button type="button" id="voice0" data-v="0">なし</button><button type="button" id="voice1" data-v="1">小</button><button type="button" id="voice2" data-v="2">中</button><button type="button" id="voice3" data-v="3">大</button></div></div>
-    <div class="row"><span>こどもの まったに あいては じどうで いいよ</span><div class="seg" data-key="autoOk"><button type="button" id="autoOk1" data-v="1">じどうで いいよ</button><button type="button" id="autoOk0" data-v="0">きいてから</button></div></div>
-    <div class="row"><span>つながり方（テスト用。「中継だけ」は、家の外でもつながるかを家の中で確かめるとき）</span><div class="seg" data-key="relay"><button type="button" id="relay0" data-v="0">ふつう</button><button type="button" id="relay1" data-v="1">中継だけ</button></div><span class="route" id="routeInfo"></span></div>
-    <div class="row"><span>対戦相手の登録</span><span class="route" id="partnerInfo"></span>
-      <div class="panelBtns"><button type="button" id="nameBtn2">名前を変える</button><button type="button" id="newRoomBtn">あたらしい部屋にする（リンクを作りなおす）</button><button type="button" id="forgetBtn" hidden>この端末に登録した相手を けす</button></div></div>
-    <div class="row"><span>よびだし（通知で 相手を よぶ・相手から よばれる）</span><span class="route" id="pushInfo"></span>
+    <div class="row"><span>音が出ないとき</span><div class="panelBtns"><button type="button" id="sndTest">音の テスト（なおす）</button></div><span class="route" id="sndInfo"></span></div>
+    <h3>なまえと あいて</h3>
+    <div class="row"><span class="route" id="partnerInfo"></span>
+      <div class="panelBtns"><button type="button" id="nameBtn2">なまえを かえる</button><button type="button" id="reinviteBtn">リンクで あいてを よぶ</button><button type="button" id="newRoomBtn">あたらしい部屋にする（リンクを作りなおす）</button><button type="button" id="forgetBtn" hidden>この端末に登録した相手を けす</button></div></div>
+    <h3>よびだし（通知）</h3>
+    <div class="row"><span class="route" id="pushInfo"></span>
       <div class="panelBtns"><button type="button" id="pushOn">この端末で よびだしを うけとる</button><button type="button" id="pushOff" hidden>よびだしを うけとらない</button></div></div>
-    <div class="row"><span>遠隔対戦（10回まで無料）</span><span class="route" id="remoteInfo"></span><div class="seg" data-key="devUnlock"><button type="button" id="devUnlock0" data-v="0">ふつう</button><button type="button" id="devUnlock1" data-v="1">テスト用に解放</button></div></div>
-    <div class="panelBtns"><button type="button" id="reinviteBtn">たいせんあいてを よぶ（リンク）</button></div>
+    <h3>遠隔対戦（10回まで無料）</h3>
+    <div class="row"><span class="route" id="remoteInfo"></span><div class="seg" data-key="devUnlock"><button type="button" id="devUnlock0" data-v="0">ふつう</button><button type="button" id="devUnlock1" data-v="1">テスト用に解放</button></div></div>
+    <h3>テスト用</h3>
+    <div class="row"><span>つながり方（「中継だけ」は、家の外でもつながるかを家の中で確かめるとき）</span><div class="seg" data-key="relay"><button type="button" id="relay0" data-v="0">ふつう</button><button type="button" id="relay1" data-v="1">中継だけ</button></div><span class="route" id="routeInfo"></span></div>
     <div class="panelBtns"><button type="button" id="resetBtn">さいしょから</button><button type="button" id="closeBtn" class="primary">とじる</button></div>
   </div>
 </div>
@@ -2581,31 +2602,21 @@ function showNames(next) {
 }
 $("myName").addEventListener("input", e => { CFG.myName = e.target.value.trim().slice(0, 10); saveCfg(); renderNameBtn(); });
 $("nameOk").addEventListener("click", () => { $("nameOv").hidden = true; const f = nameNext; nameNext = null; if (f) f(); });
-function renderNameBtn() {
-  const b = $("nameBtn");
-  b.hidden = NET.role === "guest" && !!NET.room;
-  b.textContent = CFG.myName ? `なまえ：${CFG.myName}（かえる）` : "なまえを きめる";
-}
-$("nameBtn").addEventListener("click", () => showNames());
-$("nameBtn2").addEventListener("click", () => { setPanel.hidden = true; showNames(); });
+function renderNameBtn() { $("nameBtn2").textContent = CFG.myName ? `なまえを かえる（いま：${CFG.myName}）` : "なまえを きめる"; }
+$("nameBtn2").addEventListener("click", () => { setPanel.hidden = true; showNames(() => { renderNameBtn(); }); });
 $("newRoomBtn").addEventListener("click", () => {
   const b = $("newRoomBtn");
   if (!b.classList.contains("confirm")) { b.textContent = "もういちど おすと 作りなおします（古いリンクは使えなくなります）"; b.classList.add("confirm"); return; }
   CFG.hasPartner = 0; saveCfg(); callers.list = []; callers.save(); setPanel.hidden = true; callGrandma(true);
 });
-$("forgetBtn").addEventListener("click", () => { partners.list = []; partners.save(); callers.list = []; callers.save(); renderPartners(); renderPush(); $("forgetBtn").textContent = "けしました"; });
+$("forgetBtn").addEventListener("click", () => { partners.list = []; partners.save(); callers.list = []; callers.save(); CFG.hasPartner = 0; saveCfg(); renderPartners(); renderPush(); $("forgetBtn").textContent = "けしました"; });
 $("resetBtn").addEventListener("click", () => {
   const b = $("resetBtn");
   if (!b.classList.contains("confirm")) { b.textContent = "もういちど おすと さいしょから"; b.classList.add("confirm"); return; }
   setPanel.hidden = true; $("againOv").hidden = true; host.pony.enter.t = 1; host.pony.hidden = true; boardEl.classList.remove("dim");
   if (G.started) newGame();
 });
-let pressT = null;
-document.addEventListener("pointerdown", e => {
-  if (e.target.closest("button, input, .panel, #board")) return;
-  clearTimeout(pressT); pressT = setTimeout(() => { syncPanel(); renderPush(); setPanel.hidden = false; }, 3000);
-});
-["pointerup", "pointercancel", "pointerleave"].forEach(t => document.addEventListener(t, () => clearTimeout(pressT)));
+$("adultBtn").addEventListener("click", () => { syncPanel(); renderPush(); setPanel.hidden = false; });
 
 /* ---------- 画面を消さない ---------- */
 let lock = null;
@@ -2766,19 +2777,29 @@ function registerPartner(room, name) {
   if (i >= 0) partners.list[i] = rec; else partners.list.unshift(rec);
   partners.list = partners.list.slice(0, 5); partners.save();
 }
-function renderPartners() {
-  // よぶ側：相手の端末を知っていれば「○○を よぶ」（押すと 通知で よびだす）
-  if (NET.role !== "guest" && CFG.hasPartner && callers.list.length) $("callBtn").textContent = callers.list.length === 1 ? `${callers.list[0].name}を よぶ` : "たいせんあいてを よぶ";
-  const box = $("partners"); box.innerHTML = "";
-  if (NET.role === "guest" || !partners.list.length) { box.hidden = true; return; }
-  partners.list.forEach(p => {
-    const b = document.createElement("button"); b.type = "button"; b.className = "big partner";
-    b.innerHTML = `<small>登録ずみ</small>${p.name}と 対戦する`;
-    b.addEventListener("click", () => joinPartner(p));
-    box.appendChild(b);
-  });
-  box.hidden = false;
+/* 開始画面の大きいボタンは 1つだけ。登録した相手がいれば「○○と あそぶ」、いなければ「たいせんあいてを よぶ」。
+   押したあとの判断（通知で よぶ／リンクを出す／だれと？を聞く）は アプリがやる */
+function candidates() {
+  const list = callers.list.map(c => ({ kind: "host", name: c.name, dev: c.dev })).concat(partners.list.map(p => ({ kind: "guest", name: p.name, p })));
+  return list;
 }
+function renderPartners() {
+  if (NET.role === "guest" || answeringRing) return;
+  const cs = candidates();
+  $("callBtn").textContent = !cs.length ? "たいせんあいてを よぶ" : cs.length === 1 ? `${cs[0].name}と あそぶ` : "あいてと あそぶ";
+}
+function playWith(c) { if (c.kind === "guest") joinPartner(c.p); else callGrandma(false); }
+function pressPlay() {
+  if (answeringRing) return callGrandma(false, true);
+  const cs = candidates();
+  if (!cs.length) return CFG.myName ? callGrandma(false) : showNames(() => callGrandma(false));
+  if (cs.length === 1) return playWith(cs[0]);
+  const box = $("whoList"); box.innerHTML = "";
+  cs.forEach(c => { const b = document.createElement("button"); b.type = "button"; b.className = "big partner"; b.textContent = `${c.name}と あそぶ`; b.addEventListener("click", () => { $("whoOv").hidden = true; playWith(c); }); box.appendChild(b); });
+  $("whoOv").hidden = false;
+}
+$("whoClose").addEventListener("click", () => { $("whoOv").hidden = true; });
+$("whoNew").addEventListener("click", () => { $("whoOv").hidden = true; CFG.myName ? callGrandma(true) : showNames(() => callGrandma(true)); });
 function joinPartner(p) {
   NET.role = "guest"; NET.room = p.room; registerPartner(p.room, p.name);
   unlock(); $("guestLead").hidden = true; startOnline();
@@ -2823,16 +2844,19 @@ async function ringOut(list, url) {
 function stopRing() { clearTimeout(ringTimer); ringing = []; }
 // はじめの画面の「よびだしを うけとる」と 設定の よびだしの欄
 function renderPush() {
-  const card = $("pushCard"), btn = $("pushBtn"), msg = $("pushMsg");
-  const known = partners.list.length || callers.list.length || (NET.role === "guest" && !!NET.room);
   $("pushOff").hidden = !CALL.on; $("pushOn").hidden = CALL.on;
   $("pushInfo").textContent = CALL.on ? "この端末は よびだしを うけとれます。" : CALL.blocked ? "通知が「許可しない」になっています。設定アプリで このページ（アイコン）の通知を許可してください。" : CALL.needsHome ? "iPhone・iPad は、ホーム画面に追加したアイコンから開くと うけとれます。" : CALL.canPush ? "まだ うけとらない設定です。" : "この端末では使えません。";
-  msg.textContent = "";
-  if (CALL.on || !known || (!CALL.canPush && !CALL.needsHome)) { card.hidden = true; return; }
-  card.hidden = false;
-  btn.textContent = CALL.needsHome ? "つぎから よびだしで つながるように する" : "よびだしを うけとる（通知を ゆるす）";
-  if (CALL.blocked) { btn.hidden = true; msg.textContent = $("pushInfo").textContent; } else btn.hidden = false;
+  $("pushOn").disabled = !!CALL.blocked || (!CALL.canPush && !CALL.needsHome);
 }
+// 一度だけ聞く：登録した相手がいて、まだ うけとれない端末なら
+function maybeAskPush() {
+  if (CFG.pushAsked || CALL.on || CALL.blocked || (!CALL.canPush && !CALL.needsHome)) return;
+  if (!partners.list.length && !callers.list.length) return;
+  CFG.pushAsked = 1; saveCfg();
+  $("pushAskOv").hidden = false;
+}
+$("pushAskYes").addEventListener("click", async () => { $("pushAskOv").hidden = true; await pushOn(); });
+$("pushAskNo").addEventListener("click", () => { $("pushAskOv").hidden = true; });
 async function pushOn() {
   if (CALL.needsHome) {
     // ホーム画面に追加する前に、いまの登録を持っていける URL に切り替える（追加するときは この URL が使われる）
@@ -2840,11 +2864,12 @@ async function pushOn() {
     $("homeOv").hidden = false; return;
   }
   const r = await CALL.enable(CFG.myName);
-  $("pushMsg").textContent = r.ok ? "うけとれるように なりました" : r.why;
-  if (r.ok) { NET.send({ t: "dev", id: CALL.id, name: CFG.myName }); setTimeout(renderPush, 1200); } else renderPush(), $("pushMsg").textContent = r.why;
+  if (r.ok) NET.send({ t: "dev", id: CALL.id, name: CFG.myName });
+  else { $("pushInfo").textContent = r.why; }
+  renderPush();
+  if (r.ok) $("pushInfo").textContent = "うけとれるように なりました。";
 }
-$("pushBtn").addEventListener("click", pushOn);
-$("pushOn").addEventListener("click", async () => { await pushOn(); renderPush(); });
+$("pushOn").addEventListener("click", pushOn);
 $("pushOff").addEventListener("click", async () => { await CALL.off(); renderPush(); });
 $("homeClose").addEventListener("click", () => { $("homeOv").hidden = true; });
 /* ---------- 遠隔対戦（段階2） ---------- */
@@ -2985,14 +3010,14 @@ async function callGrandma(fresh, answering) {
   // 相手から よばれて 開いたとき：つなぐだけ
   if (answering) { camMsg(otherSide(), "つないでいます…"); $("resendBtn").hidden = false; return; }
   // 相手の端末に 通知を送れるなら それで よぶ。送れなかったら リンクの画面へ
-  if (!fresh && CFG.hasPartner && callers.list.length) {
+  if (!fresh && !forceLink && CFG.hasPartner && callers.list.length) {
     $("resendBtn").hidden = false;
     const ok = await ringOut(callers.list.slice(0, 1), BASE + "?r=" + NET.room + "&n=" + encodeURIComponent(CFG.myName || "") + "&ring=1");
     if (!ok && !NET.open) showInvite(true);
     return;
   }
   // 通知で よべない相手 → すぐ リンクの画面（2回目からは まえと同じリンク。あいては「○○と 対戦する」からも入れる）
-  $("resendBtn").hidden = false;
+  $("resendBtn").hidden = false; forceLink = false;
   showInvite(!fresh && CFG.hasPartner);
 }
 $("resendBtn").addEventListener("click", () => showInvite());
@@ -3050,7 +3075,7 @@ $("restoreBtn").addEventListener("click", async () => {
   if (r.ok) afterUnlock(); else $("unlockNote").textContent = "引きつげる購入が見つかりませんでした。";
 });
 const answeringRing = !NET.role && new URLSearchParams(location.search).get("ring") === "1";
-$("callBtn").addEventListener("click", () => { const a = answeringRing; if (CFG.myName || a) callGrandma(false, a); else showNames(() => callGrandma(false)); });
+$("callBtn").addEventListener("click", pressPlay);
 $("copyBtn").addEventListener("click", () => {
   const url = NET.inviteURL(), done = () => { $("copyBtn").textContent = "コピーしました"; setTimeout(() => $("copyBtn").textContent = "リンクを コピー", 2000); };
   const pick = () => { const r = document.createRange(); r.selectNodeContents($("inviteLink")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
@@ -3066,7 +3091,8 @@ $("lineBtn").addEventListener("click", async () => {
 });
 // リンクの画面をとじて待つあいだも、「リンクを おくる」を出しておく（また LINE で送れる）
 $("inviteClose").addEventListener("click", () => { $("inviteOv").hidden = true; if (NET.role === "host" && !NET.open) $("resendBtn").hidden = false; });
-$("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (NET.role === "host") showInvite(); else callGrandma(false); });
+$("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (NET.role === "host") showInvite(!!CFG.hasPartner); else { forceLink = true; CFG.myName ? callGrandma(false) : showNames(() => callGrandma(false)); } });
+let forceLink = false;
 
 /* ---------- 起動：前回の続き、または確認用の局面（#pass / #end） ---------- */
 (function boot() {
@@ -3083,11 +3109,11 @@ $("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (N
     $("callBtn").hidden = true; $("startOv").classList.add("guest");
     $("startBtn").textContent = "はじめる"; $("startBtn").classList.remove("sub");
     $("guestLead").hidden = false; $("callBtn").before($("guestLead"));   // 説明を「はじめる」の上に
-    $("startNote").textContent = "";
   }
   else if (!NET.available) $("callBtn").hidden = true;
   refreshLeft(); renderPartners(); renderNameBtn(); renderPush();
   CALL.refresh(CFG.myName);
+  if (!NET.role) setTimeout(maybeAskPush, 600);
   // 相手からの よびだしを タップして 開いたとき（よぶ側の端末）
   if (NET.role === "guest" && new URLSearchParams(location.search).get("ring") === "1") {
     $("ringNote").textContent = `${NET.linkName || "あいて"}から よびだし！`; $("ringNote").hidden = false;

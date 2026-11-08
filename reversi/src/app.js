@@ -557,31 +557,21 @@ function showNames(next) {
 }
 $("myName").addEventListener("input", e => { CFG.myName = e.target.value.trim().slice(0, 10); saveCfg(); renderNameBtn(); });
 $("nameOk").addEventListener("click", () => { $("nameOv").hidden = true; const f = nameNext; nameNext = null; if (f) f(); });
-function renderNameBtn() {
-  const b = $("nameBtn");
-  b.hidden = NET.role === "guest" && !!NET.room;
-  b.textContent = CFG.myName ? `なまえ：${CFG.myName}（かえる）` : "なまえを きめる";
-}
-$("nameBtn").addEventListener("click", () => showNames());
-$("nameBtn2").addEventListener("click", () => { setPanel.hidden = true; showNames(); });
+function renderNameBtn() { $("nameBtn2").textContent = CFG.myName ? `なまえを かえる（いま：${CFG.myName}）` : "なまえを きめる"; }
+$("nameBtn2").addEventListener("click", () => { setPanel.hidden = true; showNames(() => { renderNameBtn(); }); });
 $("newRoomBtn").addEventListener("click", () => {
   const b = $("newRoomBtn");
   if (!b.classList.contains("confirm")) { b.textContent = "もういちど おすと 作りなおします（古いリンクは使えなくなります）"; b.classList.add("confirm"); return; }
   CFG.hasPartner = 0; saveCfg(); callers.list = []; callers.save(); setPanel.hidden = true; callGrandma(true);
 });
-$("forgetBtn").addEventListener("click", () => { partners.list = []; partners.save(); callers.list = []; callers.save(); renderPartners(); renderPush(); $("forgetBtn").textContent = "けしました"; });
+$("forgetBtn").addEventListener("click", () => { partners.list = []; partners.save(); callers.list = []; callers.save(); CFG.hasPartner = 0; saveCfg(); renderPartners(); renderPush(); $("forgetBtn").textContent = "けしました"; });
 $("resetBtn").addEventListener("click", () => {
   const b = $("resetBtn");
   if (!b.classList.contains("confirm")) { b.textContent = "もういちど おすと さいしょから"; b.classList.add("confirm"); return; }
   setPanel.hidden = true; $("againOv").hidden = true; host.pony.enter.t = 1; host.pony.hidden = true; boardEl.classList.remove("dim");
   if (G.started) newGame();
 });
-let pressT = null;
-document.addEventListener("pointerdown", e => {
-  if (e.target.closest("button, input, .panel, #board")) return;
-  clearTimeout(pressT); pressT = setTimeout(() => { syncPanel(); renderPush(); setPanel.hidden = false; }, 3000);
-});
-["pointerup", "pointercancel", "pointerleave"].forEach(t => document.addEventListener(t, () => clearTimeout(pressT)));
+$("adultBtn").addEventListener("click", () => { syncPanel(); renderPush(); setPanel.hidden = false; });
 
 /* ---------- 画面を消さない ---------- */
 let lock = null;
@@ -742,19 +732,29 @@ function registerPartner(room, name) {
   if (i >= 0) partners.list[i] = rec; else partners.list.unshift(rec);
   partners.list = partners.list.slice(0, 5); partners.save();
 }
-function renderPartners() {
-  // よぶ側：相手の端末を知っていれば「○○を よぶ」（押すと 通知で よびだす）
-  if (NET.role !== "guest" && CFG.hasPartner && callers.list.length) $("callBtn").textContent = callers.list.length === 1 ? `${callers.list[0].name}を よぶ` : "たいせんあいてを よぶ";
-  const box = $("partners"); box.innerHTML = "";
-  if (NET.role === "guest" || !partners.list.length) { box.hidden = true; return; }
-  partners.list.forEach(p => {
-    const b = document.createElement("button"); b.type = "button"; b.className = "big partner";
-    b.innerHTML = `<small>登録ずみ</small>${p.name}と 対戦する`;
-    b.addEventListener("click", () => joinPartner(p));
-    box.appendChild(b);
-  });
-  box.hidden = false;
+/* 開始画面の大きいボタンは 1つだけ。登録した相手がいれば「○○と あそぶ」、いなければ「たいせんあいてを よぶ」。
+   押したあとの判断（通知で よぶ／リンクを出す／だれと？を聞く）は アプリがやる */
+function candidates() {
+  const list = callers.list.map(c => ({ kind: "host", name: c.name, dev: c.dev })).concat(partners.list.map(p => ({ kind: "guest", name: p.name, p })));
+  return list;
 }
+function renderPartners() {
+  if (NET.role === "guest" || answeringRing) return;
+  const cs = candidates();
+  $("callBtn").textContent = !cs.length ? "たいせんあいてを よぶ" : cs.length === 1 ? `${cs[0].name}と あそぶ` : "あいてと あそぶ";
+}
+function playWith(c) { if (c.kind === "guest") joinPartner(c.p); else callGrandma(false); }
+function pressPlay() {
+  if (answeringRing) return callGrandma(false, true);
+  const cs = candidates();
+  if (!cs.length) return CFG.myName ? callGrandma(false) : showNames(() => callGrandma(false));
+  if (cs.length === 1) return playWith(cs[0]);
+  const box = $("whoList"); box.innerHTML = "";
+  cs.forEach(c => { const b = document.createElement("button"); b.type = "button"; b.className = "big partner"; b.textContent = `${c.name}と あそぶ`; b.addEventListener("click", () => { $("whoOv").hidden = true; playWith(c); }); box.appendChild(b); });
+  $("whoOv").hidden = false;
+}
+$("whoClose").addEventListener("click", () => { $("whoOv").hidden = true; });
+$("whoNew").addEventListener("click", () => { $("whoOv").hidden = true; CFG.myName ? callGrandma(true) : showNames(() => callGrandma(true)); });
 function joinPartner(p) {
   NET.role = "guest"; NET.room = p.room; registerPartner(p.room, p.name);
   unlock(); $("guestLead").hidden = true; startOnline();
@@ -799,16 +799,19 @@ async function ringOut(list, url) {
 function stopRing() { clearTimeout(ringTimer); ringing = []; }
 // はじめの画面の「よびだしを うけとる」と 設定の よびだしの欄
 function renderPush() {
-  const card = $("pushCard"), btn = $("pushBtn"), msg = $("pushMsg");
-  const known = partners.list.length || callers.list.length || (NET.role === "guest" && !!NET.room);
   $("pushOff").hidden = !CALL.on; $("pushOn").hidden = CALL.on;
   $("pushInfo").textContent = CALL.on ? "この端末は よびだしを うけとれます。" : CALL.blocked ? "通知が「許可しない」になっています。設定アプリで このページ（アイコン）の通知を許可してください。" : CALL.needsHome ? "iPhone・iPad は、ホーム画面に追加したアイコンから開くと うけとれます。" : CALL.canPush ? "まだ うけとらない設定です。" : "この端末では使えません。";
-  msg.textContent = "";
-  if (CALL.on || !known || (!CALL.canPush && !CALL.needsHome)) { card.hidden = true; return; }
-  card.hidden = false;
-  btn.textContent = CALL.needsHome ? "つぎから よびだしで つながるように する" : "よびだしを うけとる（通知を ゆるす）";
-  if (CALL.blocked) { btn.hidden = true; msg.textContent = $("pushInfo").textContent; } else btn.hidden = false;
+  $("pushOn").disabled = !!CALL.blocked || (!CALL.canPush && !CALL.needsHome);
 }
+// 一度だけ聞く：登録した相手がいて、まだ うけとれない端末なら
+function maybeAskPush() {
+  if (CFG.pushAsked || CALL.on || CALL.blocked || (!CALL.canPush && !CALL.needsHome)) return;
+  if (!partners.list.length && !callers.list.length) return;
+  CFG.pushAsked = 1; saveCfg();
+  $("pushAskOv").hidden = false;
+}
+$("pushAskYes").addEventListener("click", async () => { $("pushAskOv").hidden = true; await pushOn(); });
+$("pushAskNo").addEventListener("click", () => { $("pushAskOv").hidden = true; });
 async function pushOn() {
   if (CALL.needsHome) {
     // ホーム画面に追加する前に、いまの登録を持っていける URL に切り替える（追加するときは この URL が使われる）
@@ -816,11 +819,12 @@ async function pushOn() {
     $("homeOv").hidden = false; return;
   }
   const r = await CALL.enable(CFG.myName);
-  $("pushMsg").textContent = r.ok ? "うけとれるように なりました" : r.why;
-  if (r.ok) { NET.send({ t: "dev", id: CALL.id, name: CFG.myName }); setTimeout(renderPush, 1200); } else renderPush(), $("pushMsg").textContent = r.why;
+  if (r.ok) NET.send({ t: "dev", id: CALL.id, name: CFG.myName });
+  else { $("pushInfo").textContent = r.why; }
+  renderPush();
+  if (r.ok) $("pushInfo").textContent = "うけとれるように なりました。";
 }
-$("pushBtn").addEventListener("click", pushOn);
-$("pushOn").addEventListener("click", async () => { await pushOn(); renderPush(); });
+$("pushOn").addEventListener("click", pushOn);
 $("pushOff").addEventListener("click", async () => { await CALL.off(); renderPush(); });
 $("homeClose").addEventListener("click", () => { $("homeOv").hidden = true; });
 /* ---------- 遠隔対戦（段階2） ---------- */
@@ -961,14 +965,14 @@ async function callGrandma(fresh, answering) {
   // 相手から よばれて 開いたとき：つなぐだけ
   if (answering) { camMsg(otherSide(), "つないでいます…"); $("resendBtn").hidden = false; return; }
   // 相手の端末に 通知を送れるなら それで よぶ。送れなかったら リンクの画面へ
-  if (!fresh && CFG.hasPartner && callers.list.length) {
+  if (!fresh && !forceLink && CFG.hasPartner && callers.list.length) {
     $("resendBtn").hidden = false;
     const ok = await ringOut(callers.list.slice(0, 1), BASE + "?r=" + NET.room + "&n=" + encodeURIComponent(CFG.myName || "") + "&ring=1");
     if (!ok && !NET.open) showInvite(true);
     return;
   }
   // 通知で よべない相手 → すぐ リンクの画面（2回目からは まえと同じリンク。あいては「○○と 対戦する」からも入れる）
-  $("resendBtn").hidden = false;
+  $("resendBtn").hidden = false; forceLink = false;
   showInvite(!fresh && CFG.hasPartner);
 }
 $("resendBtn").addEventListener("click", () => showInvite());
@@ -1026,7 +1030,7 @@ $("restoreBtn").addEventListener("click", async () => {
   if (r.ok) afterUnlock(); else $("unlockNote").textContent = "引きつげる購入が見つかりませんでした。";
 });
 const answeringRing = !NET.role && new URLSearchParams(location.search).get("ring") === "1";
-$("callBtn").addEventListener("click", () => { const a = answeringRing; if (CFG.myName || a) callGrandma(false, a); else showNames(() => callGrandma(false)); });
+$("callBtn").addEventListener("click", pressPlay);
 $("copyBtn").addEventListener("click", () => {
   const url = NET.inviteURL(), done = () => { $("copyBtn").textContent = "コピーしました"; setTimeout(() => $("copyBtn").textContent = "リンクを コピー", 2000); };
   const pick = () => { const r = document.createRange(); r.selectNodeContents($("inviteLink")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
@@ -1042,7 +1046,8 @@ $("lineBtn").addEventListener("click", async () => {
 });
 // リンクの画面をとじて待つあいだも、「リンクを おくる」を出しておく（また LINE で送れる）
 $("inviteClose").addEventListener("click", () => { $("inviteOv").hidden = true; if (NET.role === "host" && !NET.open) $("resendBtn").hidden = false; });
-$("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (NET.role === "host") showInvite(); else callGrandma(false); });
+$("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (NET.role === "host") showInvite(!!CFG.hasPartner); else { forceLink = true; CFG.myName ? callGrandma(false) : showNames(() => callGrandma(false)); } });
+let forceLink = false;
 
 /* ---------- 起動：前回の続き、または確認用の局面（#pass / #end） ---------- */
 (function boot() {
@@ -1059,11 +1064,11 @@ $("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (N
     $("callBtn").hidden = true; $("startOv").classList.add("guest");
     $("startBtn").textContent = "はじめる"; $("startBtn").classList.remove("sub");
     $("guestLead").hidden = false; $("callBtn").before($("guestLead"));   // 説明を「はじめる」の上に
-    $("startNote").textContent = "";
   }
   else if (!NET.available) $("callBtn").hidden = true;
   refreshLeft(); renderPartners(); renderNameBtn(); renderPush();
   CALL.refresh(CFG.myName);
+  if (!NET.role) setTimeout(maybeAskPush, 600);
   // 相手からの よびだしを タップして 開いたとき（よぶ側の端末）
   if (NET.role === "guest" && new URLSearchParams(location.search).get("ring") === "1") {
     $("ringNote").textContent = `${NET.linkName || "あいて"}から よびだし！`; $("ringNote").hidden = false;
