@@ -174,3 +174,10 @@
 - **通知が実際に届くには**（まだ）：EAS プロジェクト作成（`extra.eas.projectId`）、Android は Firebase の google-services.json と FCM の鍵を EAS に登録、iOS は APNs の鍵。それまで `extra.pushReady=false` で、アプリ版では「よびだしを うけとる」を出さない（LINE リンクと「○○と あそぶ」でつながる）
 - 確認：nativesim.py（殻のふりをしたブラウザで、通知の登録・設定の非表示・よびだし・共有・音の出口）、ローカルで `expo prebuild --platform android` が通ることを確認
 - Android テスト APK の初回ビルドまでに5回失敗：(1) `@dr.pogodin/react-native-static-server` 0.28 が RN 0.81 と合わず codegen で失敗 → 0.25.4／react-native-fs 2.36.2 に固定。(2) `babel-preset-expo` が devDependencies に無く Metro が失敗 → 追加（`npx expo export` でローカル再現できる）。(3)〜(5) GitHub の release 配布（Gradle 本体 gradle-8.14.3-bin.zip）が 504 を返し続けた（services.gradle.org も GitHub へ転送される）→ 4回まで待って だめなら Tencent のミラーに切り替える手順を入れて通った（約10分）。APK は `reversi-app-out` ブランチ、案内ページは `reversi/app-dl/`（通知はまだ使えない版）
+
+## 2026-11-08 アプリ版：ストア向けビルド（EAS）の立ち上げ
+
+- リポジトリに ことばのたね の EAS の仕組み（`.github/workflows/app.yml`、秘密情報 EXPO_TOKEN・ASC_API_KEY_P8、App Store Connect の API 鍵の ID）があったので流用。`reversi-app-eas.yml`（クラウドの EAS Build）を作り、`eas init --non-interactive --force` で EAS プロジェクト @uchinoaji-app/marushima-reversi を自動作成。Apple の識別子 com.uchinoaji.marushima.reversi・配布証明書（うちのあじ と共有）・プロビジョニングプロファイルも自動で作れた
+- つまずき：(1) `/tmp` にコピーして動かすと `expo config` が黙って exit 1（原因不明。リポジトリの中で動かせば通る）→ reversi/app の中で実行。(2) 「通知の鍵（APNs）を作るか」で Apple ID のログインを求められ止まる → `cli.promptToConfigurePushNotifications=false`。(3) zip 展開の部品が iOS 15.5 以上を要求 → expo-build-properties で deploymentTarget 15.5。(4) **EAS の無料枠（iOS の月のビルド回数）が今月分なし**（12/1 に回復。ことばのたね で使った）→ GitHub の Mac ランナーで `eas build --local` する `reversi-app-ios.yml` に切り替え（公開リポジトリなので無料。署名は EAS に保存したもの）
+- **あまねさんの操作待ち**：(a) App Store Connect に「アプリの枠」を作るには Apple ID のサインインが要る（PC の Chrome のセッションが切れていた）→ サインインしてもらえれば枠の作成と TestFlight への送付は Claude が進める。(b) iOS の通知の鍵（APNs .p8）の作成も developer.apple.com のサインインが要る（expo.dev に保存済みの鍵はなし）。(c) Android の通知は Firebase（google-services.json・FCM の鍵）が要る
+- 無駄：EAS へのアップロードが 438MB（.easignore が効いていない？ node_modules が入っている疑い）。クラウドビルドを使うときに直す
