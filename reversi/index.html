@@ -328,7 +328,7 @@ body {
       <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と あそぶ」を押すだけでつながります。</p>
     </div>
     <button class="adultBtn" id="adultBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Zm7.4-2.1.9-.7-1.5-2.6-1.1.3a6 6 0 0 0-1.3-.8l-.2-1.1h-3l-.2 1.1a6 6 0 0 0-1.3.8l-1.1-.3-1.5 2.6.9.7v1.3l-.9.7 1.5 2.6 1.1-.3a6 6 0 0 0 1.3.8l.2 1.1h3l.2-1.1a6 6 0 0 0 1.3-.8l1.1.3 1.5-2.6-.9-.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>おとなの せってい</button>
-    <p class="ver">v2026.11.08 3d1bde7c</p>
+    <p class="ver">v2026.11.08 3a35e1d5</p>
   </div>
 </div>
 <!-- 相手が 2人以上 登録されているときだけ：だれと あそぶ？ -->
@@ -530,6 +530,9 @@ const CALL = (() => {
   return C;
 })();
 
+// 音の出口。ふつうは ctx.destination。Android の通話中は MediaStream → audio 要素（通話と同じ線）に差しかえる
+window.__out = null;
+function OUTN() { return (window.__out && window.__out.context === ctx) ? window.__out : ctx.destination; }
 const NS = "http://www.w3.org/2000/svg";
 const INK = "#2B2A33";
 const svg = document.getElementById("stage");
@@ -1275,7 +1278,7 @@ let ctx = null, analyser = null, buf = null;
 function audio() {
   if (!ctx) {
     ctx = new (window.AudioContext || window.webkitAudioContext)();
-    analyser = ctx.createAnalyser(); analyser.fftSize = 1024; analyser.connect(ctx.destination);
+    analyser = ctx.createAnalyser(); analyser.fftSize = 1024; analyser.connect(OUTN());
     buf = new Float32Array(analyser.fftSize);
   }
   // iPhone を スリープ → もどると "interrupted" に なる（"suspended" では ない）。どちらでも もどす（2026-10-31）
@@ -1288,7 +1291,7 @@ function blip(f0, f1, dur, type = "sine") {
   const t = ctx.currentTime, o = ctx.createOscillator(), g = ctx.createGain();
   o.type = type; o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f1, t + dur);
   g.gain.setValueAtTime(.12, t); g.gain.exponentialRampToValueAtTime(.001, t + dur);
-  o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + dur + .02);
+  o.connect(g).connect(OUTN()); o.start(t); o.stop(t + dur + .02);
 }
 function chime() {
   if (!ctx) return;
@@ -1296,7 +1299,7 @@ function chime() {
     const t = ctx.currentTime + i * .09, o = ctx.createOscillator(), g = ctx.createGain();
     o.type = "triangle"; o.frequency.value = f;
     g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.14, t + .01); g.gain.exponentialRampToValueAtTime(.001, t + .5);
-    o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + .55);
+    o.connect(g).connect(OUTN()); o.start(t); o.stop(t + .55);
   });
 }
 let speaker = null;
@@ -1380,13 +1383,13 @@ function noise(dur = .15, f = 2500, gain = .25) {
   for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
   const s = ctx.createBufferSource(), fl = ctx.createBiquadFilter(), g = ctx.createGain();
   s.buffer = b; fl.type = "bandpass"; fl.frequency.value = f; g.gain.value = gain;
-  s.connect(fl).connect(g).connect(ctx.destination); s.start();
+  s.connect(fl).connect(g).connect(OUTN()); s.start();
 }
 function tune(notes, bpm = 150, type = "triangle", vol = .12) {
   if (!ctx) return; const beat = 60 / bpm; let t = ctx.currentTime + .02;
   notes.forEach(([f, len]) => { if (f) { const o = ctx.createOscillator(), g = ctx.createGain(); o.type = type; o.frequency.value = f;
     g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .01); g.gain.exponentialRampToValueAtTime(.001, t + beat * len * .95);
-    o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + beat * len); } t += beat * len; });
+    o.connect(g).connect(OUTN()); o.start(t); o.stop(t + beat * len); } t += beat * len; });
 }
 const N = { C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99, A5: 880, B5: 987.77, C6: 1046.5, G4: 392, A4: 440, E4: 329.63, C4: 261.63 };
 
@@ -1587,8 +1590,8 @@ const SFX = (() => {
   const LV = [0, .45, .8, 1.15];
   function out() {
     audio();
-    if (master && master.context !== ctx) master = null;   // 音の出口を作りなおしたあと
-    if (!master) { master = ctx.createGain(); master.connect(ctx.destination); }
+    if (master && (master.context !== ctx || master._out !== OUTN())) master = null;   // 出口を作りなおした／差しかえたあと
+    if (!master) { master = ctx.createGain(); master.connect(OUTN()); master._out = OUTN(); }
     master.gain.value = LV[CFG.sfx] ?? .8;
     return master;
   }
@@ -1871,7 +1874,7 @@ const NET = (() => {
   const emit = (type, ...a) => N.handlers[type]?.(...a);
 
   async function camera() {
-    const V = { facingMode: "user", width: { ideal: 320 }, height: { ideal: 240 }, frameRate: { ideal: 15 } };
+    const V = { facingMode: "user", width: { ideal: 320 }, height: { ideal: 240 }, frameRate: { ideal: 12, max: 15 } };
     const A = { echoCancellation: true, noiseSuppression: true, autoGainControl: true };
     // カメラかマイクの 片方が だめでも、使えるほうだけで 通話する
     N.local = null; N.media = "";
@@ -1927,7 +1930,7 @@ const NET = (() => {
       // ことわられたら 10秒あとに もう一度（前の画面の接続が 切れきる前に 入りなおした ときは、これで つながる）
       if (m.t === "busy") { N.busy = true; N.open = false; try { conn.close(); } catch (e) { } emit("busy"); setTimeout(() => { N.busy = false; dialHost(); }, 10000); return; }
       // ホストに カメラも マイクも ないときは、ゲストのほうから 通話を かける
-      if (m.t === "callme") { if (N.role === "guest" && N.local) try { watchCall(N.peer.call(conn.peer, N.local)); } catch (e) { } return; }
+      if (m.t === "callme") { if (N.role === "guest" && N.local) try { watchCall(N.peer.call(conn.peer, N.local, CALL_OPT)); } catch (e) { } return; }
       emit("msg", m);
     });
     conn.on("close", () => lost(conn));
@@ -1944,12 +1947,50 @@ const NET = (() => {
       emit("route", N.via);
     } catch (e) { /* 調べられなくても続ける */ }
   }
+  // 発熱対策（2026-11-08）：映像は H.264 を先に（iPhone はハードウェアで符号化できる。VP8 だとソフトウェアで熱い）。
+  // 映像の帯域に上限（b=AS:300kbps）。相手の声の線は変えない
+  function tuneSdp(sdp) {
+    try {
+      const lines = sdp.split("\r\n");
+      const h264 = [], rtxOf = {};
+      lines.forEach(l => {
+        let m = l.match(/^a=rtpmap:(\d+) H264\/90000/); if (m) h264.push(m[1]);
+        m = l.match(/^a=fmtp:(\d+) apt=(\d+)/); if (m) rtxOf[m[2]] = m[1];
+      });
+      const pref = h264.concat(h264.map(p => rtxOf[p]).filter(Boolean));
+      let inVideo = false; const out = [];
+      for (const l of lines) {
+        if (l.startsWith("m=")) inVideo = l.startsWith("m=video");
+        if (inVideo && l.startsWith("m=video") && pref.length) {
+          const p = l.split(" "), head = p.slice(0, 3), rest = p.slice(3).filter(x => !pref.includes(x));
+          out.push(head.concat(pref.filter(x => p.includes(x)), rest).join(" ")); continue;
+        }
+        out.push(l);
+        if (inVideo && l.startsWith("c=")) out.push("b=AS:300");
+      }
+      return out.join("\r\n");
+    } catch (e) { return sdp; }
+  }
+  const CALL_OPT = { sdpTransform: tuneSdp };
+  // つながったあと：送る映像の上限（ビットレート・フレームレート）を下げる
+  async function capSenders(call) {
+    try {
+      const pc = call.peerConnection; if (!pc) return;
+      for (const snd of pc.getSenders()) {
+        if (!snd.track || snd.track.kind !== "video") continue;
+        const prm = snd.getParameters(); if (!prm.encodings || !prm.encodings.length) prm.encodings = [{}];
+        prm.encodings[0].maxBitrate = 250000; prm.encodings[0].maxFramerate = 12;
+        prm.degradationPreference = "maintain-framerate";
+        await snd.setParameters(prm);
+      }
+    } catch (e) { /* 対応していない端末では そのまま */ }
+  }
   function watchCall(call) {
     if (N.call && N.call !== call) try { N.call.close(); } catch (e) { /* 古い通話 */ }
     N.call = call;
-    call.on("stream", s => { N.remote = s; emit("remote", s); });
+    call.on("stream", s => { N.remote = s; emit("remote", s); setTimeout(() => capSenders(call), 1500); });
   }
-  function callGuest(id) { try { watchCall(N.peer.call(id, N.local)); } catch (e) { /* 映像なしでも対局は続ける */ } }
+  function callGuest(id) { try { watchCall(N.peer.call(id, N.local, CALL_OPT)); } catch (e) { /* 映像なしでも対局は続ける */ } }
 
   function lost(conn) {
     if (conn && conn !== N.conn) return;
@@ -1977,7 +2018,7 @@ const NET = (() => {
       N.peer = makePeer(idOf(N.room));
       N.peer.on("open", () => emit("ready"));
       N.peer.on("connection", adopt);
-      N.peer.on("call", c => { c.answer(N.local || undefined); watchCall(c); });
+      N.peer.on("call", c => { c.answer(N.local || undefined, CALL_OPT); watchCall(c); });
       N.peer.on("error", e => { if (e.type === "unavailable-id") { N.peer.destroy(); setTimeout(start, 3000); } else emit("error", e.type); });
     };
     start();
@@ -1987,7 +2028,7 @@ const NET = (() => {
     await camera(); await prepareIce();
     N.peer = makePeer(null);
     N.peer.on("open", dialHost);
-    N.peer.on("call", c => { c.answer(N.local || undefined); watchCall(c); });
+    N.peer.on("call", c => { c.answer(N.local || undefined, CALL_OPT); watchCall(c); });
     N.peer.on("error", e => { if (e.type === "peer-unavailable") setTimeout(dialHost, 3000); else emit("error", e.type); });
   }
   function dialHost() {
@@ -2294,7 +2335,7 @@ const preloadVoices = () => Object.keys(VOICE_TEXT).filter(k => !/^rv_[ks]\d+$/.
 function playBuf(buf) {
   return new Promise(res => {
     const s = ctx.createBufferSource(), g = ctx.createGain();
-    s.buffer = buf; g.gain.value = [0, .5, .85, 1.2][CFG.voice]; s.connect(g).connect(ctx.destination);
+    s.buffer = buf; g.gain.value = [0, .5, .85, 1.2][CFG.voice]; s.connect(g).connect(OUTN());
     s.onended = res; s.start(); setTimeout(res, buf.duration * 1000 + 400);
   });
 }
@@ -2690,9 +2731,23 @@ audio = function () {
   const first = !ctx;
   if (first) setSession(wantSession());
   audioBase();
-  if (first) keepAlive();
+  if (first) { keepAlive(); if (SOUND.viaCall) routeViaCall(); }
   return ctx;
 };
+/* Android（Chrome）の通話中：Web Audio の音（効果音・声）は「メディア」の線、通話の声は「通話」の線で鳴る。
+   通話モードのあいだ メディアの線が消される端末があるらしく（2026-11-08 iPhone×Android で Android だけ無音）、
+   音を MediaStream にして audio 要素で鳴らす＝通話と同じ線に乗せる。iPhone・iPad では使わない */
+function routeViaCall() {
+  try {
+    const dest = ctx.createMediaStreamDestination();
+    window.__out = dest;
+    if (typeof analyser !== "undefined" && analyser) { try { analyser.disconnect(); } catch (e) { } analyser.connect(dest); }
+    let el = SOUND.callEl;
+    if (!el) { el = document.createElement("audio"); el.setAttribute("playsinline", ""); el.autoplay = true; el.style.display = "none"; document.body.appendChild(el); SOUND.callEl = el; }
+    el.srcObject = dest.stream; el.muted = false; el.volume = 1;
+    el.play().then(() => { SOUND.out = "通話の線"; }, () => { SOUND.out = "通話の線（再生できず）"; });
+  } catch (e) { SOUND.out = "通話の線にできず"; window.__out = null; }
+}
 function rebuildAudio(why) {
   const old = ctx; ctx = null; try { old && old.close(); } catch (e) { }
   SOUND.rebuilt++; SOUND.why = why || ""; SOUND.tried = 0;
@@ -2706,14 +2761,15 @@ function soundForCall() { setSession("play-and-record"); if (SOUND.keep) SOUND.k
    通話の線が入ったら、出口を一度だけ作りなおす。iPhone・iPad は今のままで鳴っているので さわらない */
 const IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 function freshForCall(why) {
-  if (IOS || !ctx || SOUND.fresh === why) return;
-  SOUND.fresh = why;
+  if (IOS || !ctx || SOUND.fresh) return;
+  SOUND.fresh = why; SOUND.viaCall = true;
   // ページで一度でも操作していれば（Android はそれで再生が許される）すぐ作りなおす。まだなら 次にさわったとき
   if (!navigator.userActivation || navigator.userActivation.hasBeenActive) rebuildAudio("通話");
   else SOUND.needFresh = true;
 }
 function wakeSound(e) {
   if (!ctx) return;
+  if (SOUND.callEl && SOUND.callEl.paused && !document.hidden) SOUND.callEl.play().catch(() => { });
   if (SOUND.needFresh && e) { SOUND.needFresh = false; return rebuildAudio("通話"); }
   setSession(wantSession());
   keepAlive();
@@ -2738,7 +2794,7 @@ $("sndTest").addEventListener("click", () => {
 // 設定の「音の テスト」：作りなおしてから ポン と鳴らす。いまの状態も出す（実機で原因を見るため）
 function soundInfo() {
   const st = ctx ? ctx.state : "まだ";
-  return `音：${st}・${SOUND.session}・${SOUND.out}${SOUND.rebuilt ? `・作りなおし${SOUND.rebuilt}回` : ""}`;
+  return `音：${st}・${SOUND.session}・${SOUND.out}${SOUND.viaCall ? "・通話の線" : ""}${SOUND.rebuilt ? `・作りなおし${SOUND.rebuilt}回` : ""}`;
 }
 // 戻るボタンなどで古い画面がそのまま復元されたときは読みなおす（音の出口が死んでいる）
 addEventListener("pageshow", e => { if (e.persisted) location.reload(); });

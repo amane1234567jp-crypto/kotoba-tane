@@ -240,7 +240,7 @@ const preloadVoices = () => Object.keys(VOICE_TEXT).filter(k => !/^rv_[ks]\d+$/.
 function playBuf(buf) {
   return new Promise(res => {
     const s = ctx.createBufferSource(), g = ctx.createGain();
-    s.buffer = buf; g.gain.value = [0, .5, .85, 1.2][CFG.voice]; s.connect(g).connect(ctx.destination);
+    s.buffer = buf; g.gain.value = [0, .5, .85, 1.2][CFG.voice]; s.connect(g).connect(OUTN());
     s.onended = res; s.start(); setTimeout(res, buf.duration * 1000 + 400);
   });
 }
@@ -636,9 +636,23 @@ audio = function () {
   const first = !ctx;
   if (first) setSession(wantSession());
   audioBase();
-  if (first) keepAlive();
+  if (first) { keepAlive(); if (SOUND.viaCall) routeViaCall(); }
   return ctx;
 };
+/* Android（Chrome）の通話中：Web Audio の音（効果音・声）は「メディア」の線、通話の声は「通話」の線で鳴る。
+   通話モードのあいだ メディアの線が消される端末があるらしく（2026-11-08 iPhone×Android で Android だけ無音）、
+   音を MediaStream にして audio 要素で鳴らす＝通話と同じ線に乗せる。iPhone・iPad では使わない */
+function routeViaCall() {
+  try {
+    const dest = ctx.createMediaStreamDestination();
+    window.__out = dest;
+    if (typeof analyser !== "undefined" && analyser) { try { analyser.disconnect(); } catch (e) { } analyser.connect(dest); }
+    let el = SOUND.callEl;
+    if (!el) { el = document.createElement("audio"); el.setAttribute("playsinline", ""); el.autoplay = true; el.style.display = "none"; document.body.appendChild(el); SOUND.callEl = el; }
+    el.srcObject = dest.stream; el.muted = false; el.volume = 1;
+    el.play().then(() => { SOUND.out = "通話の線"; }, () => { SOUND.out = "通話の線（再生できず）"; });
+  } catch (e) { SOUND.out = "通話の線にできず"; window.__out = null; }
+}
 function rebuildAudio(why) {
   const old = ctx; ctx = null; try { old && old.close(); } catch (e) { }
   SOUND.rebuilt++; SOUND.why = why || ""; SOUND.tried = 0;
@@ -652,14 +666,15 @@ function soundForCall() { setSession("play-and-record"); if (SOUND.keep) SOUND.k
    通話の線が入ったら、出口を一度だけ作りなおす。iPhone・iPad は今のままで鳴っているので さわらない */
 const IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 function freshForCall(why) {
-  if (IOS || !ctx || SOUND.fresh === why) return;
-  SOUND.fresh = why;
+  if (IOS || !ctx || SOUND.fresh) return;
+  SOUND.fresh = why; SOUND.viaCall = true;
   // ページで一度でも操作していれば（Android はそれで再生が許される）すぐ作りなおす。まだなら 次にさわったとき
   if (!navigator.userActivation || navigator.userActivation.hasBeenActive) rebuildAudio("通話");
   else SOUND.needFresh = true;
 }
 function wakeSound(e) {
   if (!ctx) return;
+  if (SOUND.callEl && SOUND.callEl.paused && !document.hidden) SOUND.callEl.play().catch(() => { });
   if (SOUND.needFresh && e) { SOUND.needFresh = false; return rebuildAudio("通話"); }
   setSession(wantSession());
   keepAlive();
@@ -684,7 +699,7 @@ $("sndTest").addEventListener("click", () => {
 // 設定の「音の テスト」：作りなおしてから ポン と鳴らす。いまの状態も出す（実機で原因を見るため）
 function soundInfo() {
   const st = ctx ? ctx.state : "まだ";
-  return `音：${st}・${SOUND.session}・${SOUND.out}${SOUND.rebuilt ? `・作りなおし${SOUND.rebuilt}回` : ""}`;
+  return `音：${st}・${SOUND.session}・${SOUND.out}${SOUND.viaCall ? "・通話の線" : ""}${SOUND.rebuilt ? `・作りなおし${SOUND.rebuilt}回` : ""}`;
 }
 // 戻るボタンなどで古い画面がそのまま復元されたときは読みなおす（音の出口が死んでいる）
 addEventListener("pageshow", e => { if (e.persisted) location.reload(); });

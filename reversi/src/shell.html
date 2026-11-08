@@ -424,6 +424,9 @@ body {
 /* iPadOS 15.4 より前の Safari 向け */
 if (!Array.prototype.at) Array.prototype.at = function (i) { i = Math.trunc(i) || 0; if (i < 0) i += this.length; return this[i]; };
 __CALL__
+// 音の出口。ふつうは ctx.destination。Android の通話中は MediaStream → audio 要素（通話と同じ線）に差しかえる
+window.__out = null;
+function OUTN() { return (window.__out && window.__out.context === ctx) ? window.__out : ctx.destination; }
 const NS = "http://www.w3.org/2000/svg";
 const INK = "#2B2A33";
 const svg = document.getElementById("stage");

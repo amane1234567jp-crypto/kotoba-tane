@@ -43,7 +43,7 @@ const NET = (() => {
   const emit = (type, ...a) => N.handlers[type]?.(...a);
 
   async function camera() {
-    const V = { facingMode: "user", width: { ideal: 320 }, height: { ideal: 240 }, frameRate: { ideal: 15 } };
+    const V = { facingMode: "user", width: { ideal: 320 }, height: { ideal: 240 }, frameRate: { ideal: 12, max: 15 } };
     const A = { echoCancellation: true, noiseSuppression: true, autoGainControl: true };
     // カメラかマイクの 片方が だめでも、使えるほうだけで 通話する
     N.local = null; N.media = "";
@@ -99,7 +99,7 @@ const NET = (() => {
       // ことわられたら 10秒あとに もう一度（前の画面の接続が 切れきる前に 入りなおした ときは、これで つながる）
       if (m.t === "busy") { N.busy = true; N.open = false; try { conn.close(); } catch (e) { } emit("busy"); setTimeout(() => { N.busy = false; dialHost(); }, 10000); return; }
       // ホストに カメラも マイクも ないときは、ゲストのほうから 通話を かける
-      if (m.t === "callme") { if (N.role === "guest" && N.local) try { watchCall(N.peer.call(conn.peer, N.local)); } catch (e) { } return; }
+      if (m.t === "callme") { if (N.role === "guest" && N.local) try { watchCall(N.peer.call(conn.peer, N.local, CALL_OPT)); } catch (e) { } return; }
       emit("msg", m);
     });
     conn.on("close", () => lost(conn));
@@ -116,12 +116,50 @@ const NET = (() => {
       emit("route", N.via);
     } catch (e) { /* 調べられなくても続ける */ }
   }
+  // 発熱対策（2026-11-08）：映像は H.264 を先に（iPhone はハードウェアで符号化できる。VP8 だとソフトウェアで熱い）。
+  // 映像の帯域に上限（b=AS:300kbps）。相手の声の線は変えない
+  function tuneSdp(sdp) {
+    try {
+      const lines = sdp.split("\r\n");
+      const h264 = [], rtxOf = {};
+      lines.forEach(l => {
+        let m = l.match(/^a=rtpmap:(\d+) H264\/90000/); if (m) h264.push(m[1]);
+        m = l.match(/^a=fmtp:(\d+) apt=(\d+)/); if (m) rtxOf[m[2]] = m[1];
+      });
+      const pref = h264.concat(h264.map(p => rtxOf[p]).filter(Boolean));
+      let inVideo = false; const out = [];
+      for (const l of lines) {
+        if (l.startsWith("m=")) inVideo = l.startsWith("m=video");
+        if (inVideo && l.startsWith("m=video") && pref.length) {
+          const p = l.split(" "), head = p.slice(0, 3), rest = p.slice(3).filter(x => !pref.includes(x));
+          out.push(head.concat(pref.filter(x => p.includes(x)), rest).join(" ")); continue;
+        }
+        out.push(l);
+        if (inVideo && l.startsWith("c=")) out.push("b=AS:300");
+      }
+      return out.join("\r\n");
+    } catch (e) { return sdp; }
+  }
+  const CALL_OPT = { sdpTransform: tuneSdp };
+  // つながったあと：送る映像の上限（ビットレート・フレームレート）を下げる
+  async function capSenders(call) {
+    try {
+      const pc = call.peerConnection; if (!pc) return;
+      for (const snd of pc.getSenders()) {
+        if (!snd.track || snd.track.kind !== "video") continue;
+        const prm = snd.getParameters(); if (!prm.encodings || !prm.encodings.length) prm.encodings = [{}];
+        prm.encodings[0].maxBitrate = 250000; prm.encodings[0].maxFramerate = 12;
+        prm.degradationPreference = "maintain-framerate";
+        await snd.setParameters(prm);
+      }
+    } catch (e) { /* 対応していない端末では そのまま */ }
+  }
   function watchCall(call) {
     if (N.call && N.call !== call) try { N.call.close(); } catch (e) { /* 古い通話 */ }
     N.call = call;
-    call.on("stream", s => { N.remote = s; emit("remote", s); });
+    call.on("stream", s => { N.remote = s; emit("remote", s); setTimeout(() => capSenders(call), 1500); });
   }
-  function callGuest(id) { try { watchCall(N.peer.call(id, N.local)); } catch (e) { /* 映像なしでも対局は続ける */ } }
+  function callGuest(id) { try { watchCall(N.peer.call(id, N.local, CALL_OPT)); } catch (e) { /* 映像なしでも対局は続ける */ } }
 
   function lost(conn) {
     if (conn && conn !== N.conn) return;
@@ -149,7 +187,7 @@ const NET = (() => {
       N.peer = makePeer(idOf(N.room));
       N.peer.on("open", () => emit("ready"));
       N.peer.on("connection", adopt);
-      N.peer.on("call", c => { c.answer(N.local || undefined); watchCall(c); });
+      N.peer.on("call", c => { c.answer(N.local || undefined, CALL_OPT); watchCall(c); });
       N.peer.on("error", e => { if (e.type === "unavailable-id") { N.peer.destroy(); setTimeout(start, 3000); } else emit("error", e.type); });
     };
     start();
@@ -159,7 +197,7 @@ const NET = (() => {
     await camera(); await prepareIce();
     N.peer = makePeer(null);
     N.peer.on("open", dialHost);
-    N.peer.on("call", c => { c.answer(N.local || undefined); watchCall(c); });
+    N.peer.on("call", c => { c.answer(N.local || undefined, CALL_OPT); watchCall(c); });
     N.peer.on("error", e => { if (e.type === "peer-unavailable") setTimeout(dialHost, 3000); else emit("error", e.type); });
   }
   function dialHost() {

@@ -6,8 +6,8 @@ const SFX = (() => {
   const LV = [0, .45, .8, 1.15];
   function out() {
     audio();
-    if (master && master.context !== ctx) master = null;   // 音の出口を作りなおしたあと
-    if (!master) { master = ctx.createGain(); master.connect(ctx.destination); }
+    if (master && (master.context !== ctx || master._out !== OUTN())) master = null;   // 出口を作りなおした／差しかえたあと
+    if (!master) { master = ctx.createGain(); master.connect(OUTN()); master._out = OUTN(); }
     master.gain.value = LV[CFG.sfx] ?? .8;
     return master;
   }

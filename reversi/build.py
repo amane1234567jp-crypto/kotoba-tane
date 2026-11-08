@@ -6,6 +6,8 @@ hand = ('<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 26V12a3 3 0 0 
         'c0 9-6 14-13 14s-11-3-15-9l-5-8a3 3 0 0 1 5-3l4 5z" fill="#FFE9CF" stroke="#2B2A33" stroke-width="3.5" stroke-linejoin="round"/></svg>')
 RIG = Path(__file__).resolve().parents[1] / "tools/game/rig"
 vendor = "\n".join((RIG / f).read_text() for f in ["part_chars.js", "part_sound.js", "part_moves.js"])
+# 音の出口を差しかえられるように、ctx.destination を OUTN()（shell.html で定義）に（Android の通話中は 通話の線で鳴らす）
+vendor = vendor.replace("ctx.destination", "OUTN()")
 rules = (S / "rules.js").read_text().split("if (typeof module")[0]
 import subprocess, datetime
 try: sha = subprocess.run(["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True, cwd=S).stdout.strip()
