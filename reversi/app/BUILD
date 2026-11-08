@@ -1,1 +1,1 @@
-android preview no # 診断（すぐ終わる）
+ios production no # 3回目（リポジトリの中で動かす）
