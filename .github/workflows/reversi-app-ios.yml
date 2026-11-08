@@ -1,0 +1,74 @@
+# まるシマリバーシ アプリ版（iOS）を GitHub の Mac で作る（EAS の「ローカルビルド」）
+# EAS の無料枠（iOS のビルド回数）を使わずに済む。署名の証明書・プロファイルは EAS に保存したものを使う。
+# reversi/app/BUILD_IOS に「production」などを書いて push すると動く。できた .ipa は reversi-ios-out ブランチへ。
+# TestFlight へ送るには App Store Connect に アプリの枠が要る（ascAppId を eas.json に書いたら submit=yes で送る）
+name: reversi-app-ios
+on:
+  push:
+    branches: [main]
+    paths: ["reversi/app/BUILD_IOS"]
+  workflow_dispatch:
+    inputs:
+      profile: { description: "preview / production", default: "production" }
+      submit: { description: "TestFlight へ送る（yes/no）", default: "no" }
+permissions:
+  contents: write
+concurrency:
+  group: reversi-app-ios
+jobs:
+  ipa:
+    runs-on: macos-15
+    timeout-minutes: 120
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      EAS_NO_VCS: "1"
+      EAS_BUILD_NO_EXPO_GO_WARNING: "true"
+    defaults:
+      run: { working-directory: reversi/app }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: settings
+        id: s
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then F="${{ inputs.profile }}"; S="${{ inputs.submit }}";
+          else read F S REST < <(sed 's/#.*//' BUILD_IOS) || true; fi
+          echo "profile=${F:-production}" >> $GITHUB_OUTPUT; echo "submit=${S:-no}" >> $GITHUB_OUTPUT
+          echo "profile=${F:-production} submit=${S:-no}"
+      - name: prepare
+        env:
+          ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
+        run: |
+          npm ci --no-audit --no-fund 2>&1 | tail -2 && npm run pack-web
+          mkdir -p /tmp/out
+          printf '%s\n' "$ASC_P8" | tr -d '\r' | sed 's/^[ \t]*//;s/[ \t]*$//' | sed '/^$/d' > asc.p8
+          if ! head -1 asc.p8 | grep -q BEGIN; then B=$(tr -d ' \n' < asc.p8); printf -- '-----BEGIN PRIVATE KEY-----\n%s\n-----END PRIVATE KEY-----\n' "$(echo "$B" | fold -w 64)" > asc.p8; fi
+          echo "p8 lines: $(wc -l < asc.p8)"
+          sudo gem install cocoapods -N 2>&1 | tail -1 || true
+          brew install fastlane 2>&1 | tail -1 || true
+          xcodebuild -version | head -1; pod --version; fastlane --version 2>/dev/null | tail -1
+      - name: build (local)
+        env:
+          EXPO_ASC_API_KEY_PATH: ${{ github.workspace }}/reversi/app/asc.p8
+          EXPO_ASC_KEY_ID: MKX36V742D
+          EXPO_ASC_ISSUER_ID: 2fa8da34-49c0-4c52-aae7-77f748a041f7
+          EXPO_APPLE_TEAM_ID: ZGYPGQ9WPN
+          EXPO_APPLE_TEAM_TYPE: COMPANY_OR_ORGANIZATION
+        run: |
+          npx eas-cli build -p ios --profile ${{ steps.s.outputs.profile }} --local --non-interactive --output /tmp/out/marushima-reversi.ipa 2>&1 | tee /tmp/out/log.txt | tail -60
+          ls -la /tmp/out
+      - name: submit
+        if: steps.s.outputs.submit == 'yes'
+        run: |
+          npx eas-cli submit -p ios --profile production --path /tmp/out/marushima-reversi.ipa --non-interactive 2>&1 | tee /tmp/out/submit.txt | tail -30
+      - name: publish
+        if: always()
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          sed -i '' 's/\x1b\[[0-9;?]*[A-Za-z]//g' /tmp/out/log.txt 2>/dev/null || true
+          rm -f /tmp/out/*.p8
+          echo "{\"sha\":\"${GITHUB_SHA}\",\"at\":\"$(date -u +%FT%TZ)\"}" > /tmp/out/latest.json
+          git config user.name "app-bot"; git config user.email "app-bot@users.noreply.github.com"
+          git checkout -q --orphan rv-ios-tmp; git rm -rf -q . ; rm -rf ./* ./.github
+          cp -r /tmp/out/. .; git add -A; git commit -q -m "reversi app ios ${GITHUB_SHA}"; git push -f -q origin HEAD:reversi-ios-out
