@@ -186,6 +186,10 @@ body {
 .seg button[aria-pressed="true"] { background: var(--glow); }
 .route { font-weight: 500 !important; color: var(--ink) !important; letter-spacing: 0 !important; }
 .panelBtns { display: flex; gap: 10px; flex-wrap: wrap; }
+/* 設定：長いので、上に「×」を貼りつけておく（どこまでスクロールしても閉じられる） */
+.panel.settings { padding-top: 0; }
+.panelHead { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; margin: 0 -22px; padding: 14px 22px 10px; background: var(--seat); border-bottom: 2px solid rgba(43, 42, 51, .15); }
+.xBtn { width: 44px; height: 44px; border-radius: 50%; border: 3px solid var(--ink); background: #FFFFFF; font: 900 26px/1 var(--body); color: var(--ink); cursor: pointer; display: grid; place-items: center; padding: 0 0 3px; }
 .panelBtns button { flex: 1; font: 700 17px var(--body); padding: 12px; border: 3px solid var(--ink); border-radius: 14px; background: #FFFFFF; color: var(--ink); cursor: pointer; }
 .panelBtns .primary { background: var(--glow); }
 .panelBtns button:disabled { opacity: .4; cursor: default; }
@@ -227,6 +231,7 @@ body {
 @keyframes ring { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
 .adultBtn { display: inline-flex; align-items: center; gap: 6px; font: 700 15px var(--body); color: var(--muted); background: transparent; border: 2px solid rgba(43, 42, 51, .35); border-radius: 999px; padding: 6px 14px; margin-top: 6px; cursor: pointer; }
 .adultBtn svg { width: 18px; height: 18px; }
+.panel h3.plain, .panel .panelHead + h3 { border-top: 0; padding-top: 0; margin-top: 0; }
 .panel h3 { margin: 10px 0 -2px; padding-top: 10px; border-top: 2px dashed rgba(43, 42, 51, .18); font: 900 15px var(--body); color: var(--muted); letter-spacing: .06em; }
 .panel.who { gap: 12px; }
 .panel.who .partners { gap: 10px; }
@@ -316,8 +321,10 @@ body {
 <div class="cover" id="whoOv" hidden>
   <div class="panel who" role="dialog" aria-label="だれと あそぶ？">
     <h2>だれと あそぶ？</h2>
+    <h3 class="plain">まえに あそんだ ひと</h3>
     <div class="partners" id="whoList"></div>
-    <div class="panelBtns"><button type="button" id="whoNew">あたらしい あいてを よぶ（リンク）</button><button type="button" id="whoClose">やめる</button></div>
+    <h3 class="plain">はじめての ひと</h3>
+    <div class="panelBtns"><button type="button" id="whoNew" class="primary">あたらしい あいてを よぶ</button><button type="button" id="whoClose">やめる</button></div>
   </div>
 </div>
 <!-- 一度だけ聞く：つぎから よびだしで つながる？ -->
@@ -384,8 +391,8 @@ body {
   </div>
 </div>
 <div class="cover" id="settings" hidden>
-  <div class="panel" role="dialog" aria-label="おとなの せってい">
-    <h2>おとなの せってい</h2>
+  <div class="panel settings" role="dialog" aria-label="おとなの せってい">
+    <div class="panelHead"><h2>おとなの せってい</h2><button type="button" class="xBtn" id="closeX" aria-label="とじる">×</button></div>
     <h3>あそびかた</h3>
     <div class="row"><span>テンポ</span><div class="seg" data-key="slow"><button type="button" id="slow0" data-v="0">ふつう</button><button type="button" id="slow1" data-v="1">ゆっくり</button></div></div>
     <div class="row"><span>おける ばしょの ひかり</span><div class="seg" data-key="hints"><button type="button" id="hints1" data-v="1">みせる</button><button type="button" id="hints0" data-v="0">みせない</button></div></div>

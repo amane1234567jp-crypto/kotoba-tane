@@ -529,6 +529,7 @@ setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e
   if (seg.dataset.key === "sfx") SFX.place();   // 音の大きさの ためし
   if (seg.dataset.key === "devUnlock") { refreshLeft(); if (NET.open) { sendLic(); if (NET.role === "host") recheckLock(); } }
 }));
+$("closeX").addEventListener("click", () => { setPanel.hidden = true; });
 $("closeBtn").addEventListener("click", () => { setPanel.hidden = true; });
 /* なまえの画面：自分の名前（相手の画面の「○○と 対戦する」に出る）と、この端末に登録した相手の名前を変えられる。
    開始画面の「なまえ」ボタン、設定の「名前を変える」から。名前が未設定のまま「たいせんあいてを よぶ」を押したときも先に出す */
@@ -741,14 +742,14 @@ function candidates() {
 function renderPartners() {
   if (NET.role === "guest" || answeringRing) return;
   const cs = candidates();
-  $("callBtn").textContent = !cs.length ? "たいせんあいてを よぶ" : cs.length === 1 ? `${cs[0].name}と あそぶ` : "あいてと あそぶ";
+  $("callBtn").textContent = !cs.length ? "たいせんあいてを よぶ" : "あいてと あそぶ";
 }
 function playWith(c) { if (c.kind === "guest") joinPartner(c.p); else callGrandma(false); }
 function pressPlay() {
   if (answeringRing) return callGrandma(false, true);
   const cs = candidates();
   if (!cs.length) return CFG.myName ? callGrandma(false) : showNames(() => callGrandma(false));
-  if (cs.length === 1) return playWith(cs[0]);
+  // まえに あそんだ ひとが いれば、かならず「だれと あそぶ？」（あたらしい あいても ここから よべる）
   const box = $("whoList"); box.innerHTML = "";
   cs.forEach(c => { const b = document.createElement("button"); b.type = "button"; b.className = "big partner"; b.textContent = `${c.name}と あそぶ`; b.addEventListener("click", () => { $("whoOv").hidden = true; playWith(c); }); box.appendChild(b); });
   $("whoOv").hidden = false;

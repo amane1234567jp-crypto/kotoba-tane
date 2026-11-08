@@ -198,6 +198,10 @@ body {
 .seg button[aria-pressed="true"] { background: var(--glow); }
 .route { font-weight: 500 !important; color: var(--ink) !important; letter-spacing: 0 !important; }
 .panelBtns { display: flex; gap: 10px; flex-wrap: wrap; }
+/* 設定：長いので、上に「×」を貼りつけておく（どこまでスクロールしても閉じられる） */
+.panel.settings { padding-top: 0; }
+.panelHead { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; margin: 0 -22px; padding: 14px 22px 10px; background: var(--seat); border-bottom: 2px solid rgba(43, 42, 51, .15); }
+.xBtn { width: 44px; height: 44px; border-radius: 50%; border: 3px solid var(--ink); background: #FFFFFF; font: 900 26px/1 var(--body); color: var(--ink); cursor: pointer; display: grid; place-items: center; padding: 0 0 3px; }
 .panelBtns button { flex: 1; font: 700 17px var(--body); padding: 12px; border: 3px solid var(--ink); border-radius: 14px; background: #FFFFFF; color: var(--ink); cursor: pointer; }
 .panelBtns .primary { background: var(--glow); }
 .panelBtns button:disabled { opacity: .4; cursor: default; }
@@ -239,6 +243,7 @@ body {
 @keyframes ring { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
 .adultBtn { display: inline-flex; align-items: center; gap: 6px; font: 700 15px var(--body); color: var(--muted); background: transparent; border: 2px solid rgba(43, 42, 51, .35); border-radius: 999px; padding: 6px 14px; margin-top: 6px; cursor: pointer; }
 .adultBtn svg { width: 18px; height: 18px; }
+.panel h3.plain, .panel .panelHead + h3 { border-top: 0; padding-top: 0; margin-top: 0; }
 .panel h3 { margin: 10px 0 -2px; padding-top: 10px; border-top: 2px dashed rgba(43, 42, 51, .18); font: 900 15px var(--body); color: var(--muted); letter-spacing: .06em; }
 .panel.who { gap: 12px; }
 .panel.who .partners { gap: 10px; }
@@ -321,15 +326,17 @@ body {
       <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と あそぶ」を押すだけでつながります。</p>
     </div>
     <button class="adultBtn" id="adultBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Zm7.4-2.1.9-.7-1.5-2.6-1.1.3a6 6 0 0 0-1.3-.8l-.2-1.1h-3l-.2 1.1a6 6 0 0 0-1.3.8l-1.1-.3-1.5 2.6.9.7v1.3l-.9.7 1.5 2.6 1.1-.3a6 6 0 0 0 1.3.8l.2 1.1h3l.2-1.1a6 6 0 0 0 1.3-.8l1.1.3 1.5-2.6-.9-.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>おとなの せってい</button>
-    <p class="ver">v2026.11.08 b9121e4b</p>
+    <p class="ver">v2026.11.08 66130bff</p>
   </div>
 </div>
 <!-- 相手が 2人以上 登録されているときだけ：だれと あそぶ？ -->
 <div class="cover" id="whoOv" hidden>
   <div class="panel who" role="dialog" aria-label="だれと あそぶ？">
     <h2>だれと あそぶ？</h2>
+    <h3 class="plain">まえに あそんだ ひと</h3>
     <div class="partners" id="whoList"></div>
-    <div class="panelBtns"><button type="button" id="whoNew">あたらしい あいてを よぶ（リンク）</button><button type="button" id="whoClose">やめる</button></div>
+    <h3 class="plain">はじめての ひと</h3>
+    <div class="panelBtns"><button type="button" id="whoNew" class="primary">あたらしい あいてを よぶ</button><button type="button" id="whoClose">やめる</button></div>
   </div>
 </div>
 <!-- 一度だけ聞く：つぎから よびだしで つながる？ -->
@@ -396,8 +403,8 @@ body {
   </div>
 </div>
 <div class="cover" id="settings" hidden>
-  <div class="panel" role="dialog" aria-label="おとなの せってい">
-    <h2>おとなの せってい</h2>
+  <div class="panel settings" role="dialog" aria-label="おとなの せってい">
+    <div class="panelHead"><h2>おとなの せってい</h2><button type="button" class="xBtn" id="closeX" aria-label="とじる">×</button></div>
     <h3>あそびかた</h3>
     <div class="row"><span>テンポ</span><div class="seg" data-key="slow"><button type="button" id="slow0" data-v="0">ふつう</button><button type="button" id="slow1" data-v="1">ゆっくり</button></div></div>
     <div class="row"><span>おける ばしょの ひかり</span><div class="seg" data-key="hints"><button type="button" id="hints1" data-v="1">みせる</button><button type="button" id="hints0" data-v="0">みせない</button></div></div>
@@ -2574,6 +2581,7 @@ setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e
   if (seg.dataset.key === "sfx") SFX.place();   // 音の大きさの ためし
   if (seg.dataset.key === "devUnlock") { refreshLeft(); if (NET.open) { sendLic(); if (NET.role === "host") recheckLock(); } }
 }));
+$("closeX").addEventListener("click", () => { setPanel.hidden = true; });
 $("closeBtn").addEventListener("click", () => { setPanel.hidden = true; });
 /* なまえの画面：自分の名前（相手の画面の「○○と 対戦する」に出る）と、この端末に登録した相手の名前を変えられる。
    開始画面の「なまえ」ボタン、設定の「名前を変える」から。名前が未設定のまま「たいせんあいてを よぶ」を押したときも先に出す */
@@ -2786,14 +2794,14 @@ function candidates() {
 function renderPartners() {
   if (NET.role === "guest" || answeringRing) return;
   const cs = candidates();
-  $("callBtn").textContent = !cs.length ? "たいせんあいてを よぶ" : cs.length === 1 ? `${cs[0].name}と あそぶ` : "あいてと あそぶ";
+  $("callBtn").textContent = !cs.length ? "たいせんあいてを よぶ" : "あいてと あそぶ";
 }
 function playWith(c) { if (c.kind === "guest") joinPartner(c.p); else callGrandma(false); }
 function pressPlay() {
   if (answeringRing) return callGrandma(false, true);
   const cs = candidates();
   if (!cs.length) return CFG.myName ? callGrandma(false) : showNames(() => callGrandma(false));
-  if (cs.length === 1) return playWith(cs[0]);
+  // まえに あそんだ ひとが いれば、かならず「だれと あそぶ？」（あたらしい あいても ここから よべる）
   const box = $("whoList"); box.innerHTML = "";
   cs.forEach(c => { const b = document.createElement("button"); b.type = "button"; b.className = "big partner"; b.textContent = `${c.name}と あそぶ`; b.addEventListener("click", () => { $("whoOv").hidden = true; playWith(c); }); box.appendChild(b); });
   $("whoOv").hidden = false;
