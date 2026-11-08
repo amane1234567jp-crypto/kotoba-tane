@@ -1,1 +1,1 @@
-ios production no # まるシマリバーシ 最初の iOS ビルド（証明書・識別子を EAS に作らせる）
+ios production no # 2回目（設定の確認つき）
