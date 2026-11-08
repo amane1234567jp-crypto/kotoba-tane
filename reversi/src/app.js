@@ -968,6 +968,7 @@ async function callGrandma(fresh, answering) {
     return;
   }
   // 通知で よべない相手 → すぐ リンクの画面（2回目からは まえと同じリンク。あいては「○○と 対戦する」からも入れる）
+  $("resendBtn").hidden = false;
   showInvite(!fresh && CFG.hasPartner);
 }
 $("resendBtn").addEventListener("click", () => showInvite());
@@ -1039,7 +1040,8 @@ $("lineBtn").addEventListener("click", async () => {
     try { await navigator.share({ text: inviteText() }); $("inviteOv").hidden = true; camMsg(otherSide(), "まっています…"); } catch (e) { /* やめたときは そのまま */ }
   } else location.href = "line://msg/text/" + encodeURIComponent(inviteText());
 });
-$("inviteClose").addEventListener("click", () => { $("inviteOv").hidden = true; });
+// リンクの画面をとじて待つあいだも、「リンクを おくる」を出しておく（また LINE で送れる）
+$("inviteClose").addEventListener("click", () => { $("inviteOv").hidden = true; if (NET.role === "host" && !NET.open) $("resendBtn").hidden = false; });
 $("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (NET.role === "host") showInvite(); else callGrandma(false); });
 
 /* ---------- 起動：前回の続き、または確認用の局面（#pass / #end） ---------- */
