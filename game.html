@@ -63454,7 +63454,7 @@ loadPack = async function (id) {
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = rnd(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const LDATA = { long: LONG }; // ステージごとの 課題の データ
 const usedL = {}; function pickL(kind, ok = () => true) { const all = (LDATA[curStage] || LONG)[kind].filter(ok); const u = usedL[curStage + kind] = usedL[curStage + kind] || new Set(); let pool = all.filter(x => !u.has(x.id)); if (!pool.length) { u.clear(); pool = all; } const x = pool[rnd(pool.length)]; u.add(x.id); return x; }
-function panel(title, color = "#FFFFFF") { const g = el("g", {}, hudLayer); el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#2B2A3388" }, g);
+function panel(title, color = "#FFFFFF") { const g = el("g", {}, hudLayer); g.__panel = true; /* エラー時に かたづける しるし（errlog.js） */ el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#2B2A3388" }, g);
   el("rect", { x: 70, y: 60, width: 1460, height: 880, rx: 40, fill: color, ...S6(8) }, g); const t = el("g", {}, g); const tw = title.length * 40 + 80;
   el("rect", { x: 800 - tw / 2, y: 30, width: tw, height: 70, rx: 35, fill: "#FFD25E", ...S6(6) }, t); txt(t, 800, 80, title, 40, { "text-anchor": "middle" }); return g; }
 function card(parent, x, y, w, h, label, emo, opt = {}) {
@@ -63934,7 +63934,7 @@ async function lkHaya(pc) {
     if (ok) { const st = slam("いえたー！", 330, 140); later(1500, () => st.remove()); cannon(60, 1, 30); cannon(1540, -1, 30); hold(b, "clap", 2); joy(h); await speak(C.pony, "lk_y_ok", "いえたね！ すごい！ 1マス よけいに すすむよ"); }
     else { playMove(b, "laugh"); playMove(h, "laugh"); await speak(C.pony, "lk_y_ng", "おしい！ はやくちことばは、むずかしいね"); }
     await sleep(400);
-  } finally { }
+  } finally { try { setListen(h, false); taskListen(false); sg.remove(); } catch (e) { } } // 2026-11-08：とちゅうで とまっても かんばん・きいている しるしを のこさない
   setView("board"); if (ok) { await sleep(300); await forceStep(pc, 1); } return ok;
 }
 
@@ -69439,7 +69439,7 @@ function soloLongInfo(sid) { // メニューでは みじかい なまえ（1ぎ
 if (document.getElementById("startBox")) showMenu();
 (function () { const s = document.createElement("style"); s.textContent = `.start.menu .mcard .mstages.mwide{grid-template-columns:repeat(13,minmax(0,1fr))}.start.menu .mcard{width:min(96%,1180px)}@media (max-aspect-ratio: 1/1){.start.menu .mcard .mstages.mwide{gap:4px}.start.menu .mcard .mmulti{padding:4px 18px;font-size:clamp(14px,2vw,20px)}.start.menu .mcard .mlap{padding:0 14px}}.start.menu .mst.mslong .mname{font-size:clamp(9px,1.1vw,13px);line-height:1.1}`; document.head.appendChild(s); })();
 // マスの 課題で もし エラーが おきても、ゲームが とまらない ように（盤に もどって つづける）
-{ const lc = landChild; landChild = async function (pc = P.shima) { try { return await lc(pc); } catch (e) { console.error(e); try { clearClones(); hideTask(); } catch (_) { } setView("board"); } }; }
+{ const lc = landChild; landChild = async function (pc = P.shima) { try { return await lc(pc); } catch (e) { console.error(e); try { logErr(e, "landChild"); tidyAfterError(); } catch (_) { try { clearClones(); hideTask(); } catch (__) { } } setView("board"); } }; } // 2026-11-08：きろくに のこし、かたづける（errlog.js）
 // スマホ（たての せまい がめん）：メニューは がめん いっぱいに ひろげて、4れつで スクロール
 (function () { const s = document.createElement("style"); s.textContent = `@media (max-width:700px),(max-height:520px){
 .start.menu{position:fixed!important;inset:0!important;z-index:50!important;overflow-y:auto!important;background:#FFF8E1!important;padding:8px 8px 28px!important;display:block!important}
@@ -72990,6 +72990,35 @@ function rideOn(c, layerBack, layerFront, k = RIDE.k) {
 // 場面の じてんしゃ（じてんしゃ コース・おでかけ・でたらめ）を のる かたちに
 rideBike = c => rideOn(c);
 odRide = c => { const g = rideOn(c, propG, hudLayer, .58); c.__bike = g; return g; };
+
+/* ================= エラーの きろく と あとかたづけ（2026-11-08） =================
+   あまねさん：ロングコース「うちゅう」の はやくちことばの とちゅうで、課題が でた まま 盤に もどって すすんで しまった。
+   課題の 中で エラーが おきると solo_long.js の まもりが「盤に もどして つづける」が、
+   ① なにが おきたか どこにも のこらない ② きいている しるし（わく・きこえた ことば）や かんばんが のこる。
+   → エラーは「あそんだ きろく」に のこし（おとなの かたへ → きろくを 見る）、盤に もどる まえに ぜんぶ かたづける。 */
+let ERR_AT = -1e9;
+function logErr(e, where) {
+  try { const t = performance.now(); if (t - ERR_AT < 2000) return; ERR_AT = t; // れんぞくで 同じ エラーが ふえすぎない ように
+    const pc = (typeof CUR_PL !== "undefined" && CUR_PL && CUR_PL.pc) || P.shima;
+    playLog({ type: "err", where: where || "", stage: typeof curStage !== "undefined" ? curStage : "", node: pc && pc.node, task: ((typeof LONG_TASKS !== "undefined" && LONG_TASKS[curStage]) || {})[pc && pc.node] || "", view: typeof view !== "undefined" ? view : "",
+      msg: String(e && e.message || e).slice(0, 200), at: String(e && e.stack || "").split("\n").slice(0, 4).map(s => s.trim()).join(" < ").slice(0, 400), ua: navigator.userAgent.replace(/Mozilla\/5\.0 /, "").slice(0, 90) }); } catch (_) { }
+}
+window.addEventListener("error", ev => logErr(ev.error || ev.message, "window"));
+window.addEventListener("unhandledrejection", ev => logErr(ev.reason, "promise"));
+// 課題の 中で とまった ときの あとかたづけ（盤に もどる まえ）
+function tidyAfterError() {
+  try { clearClones(); } catch (_) { } try { hideTask(); taskListen(false); } catch (_) { } try { unsay(); showEar(null, false); } catch (_) { }
+  try { heardEl.textContent = ""; } catch (_) { } try { delete window.__wob; delete window.__stall; } catch (_) { }
+  try { if (propG && propG.parentNode) { propG.remove(); propG = null; } } catch (_) { } // かんばん などの こどうぐ
+  try { if (typeof hudLayer !== "undefined") [...hudLayer.querySelectorAll("g")].filter(g => g.__panel).forEach(g => g.remove()); } catch (_) { }
+}
+{ const lc = landChild; landChild = async function (pc = P.shima) { try { return await lc(pc); } catch (e) { logErr(e, "landChild"); tidyAfterError(); setView("board"); } }; }
+{ const be = boardEvent; boardEvent = async function (pc) { try { return await be(pc); } catch (e) { logErr(e, "boardEvent"); tidyAfterError(); setView("board"); } }; }
+// 「あそんだ きろく」の 1ぎょう
+{ const lt = logText; logText = function () { const r = lt(); let a = []; try { a = JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); } catch (e) { }
+    const errs = a.filter(x => x.type === "err"); if (!errs.length) return r;
+    const d = t => { const x = new Date(t); return `${x.getMonth() + 1}/${x.getDate()} ${String(x.getHours()).padStart(2, "0")}:${String(x.getMinutes()).padStart(2, "0")}`; };
+    r.text = r.text.replace(/\n[^\n]*"type":"err"[^\n]*/g, "") + "\n\n⚠ エラーの きろく（Claude に 見せて ください）\n" + errs.map(x => `${d(x.t)} [${x.where}] コース ${x.stage} マス ${x.node} 課題 ${x.task} がめん ${x.view}\n   ${x.msg}\n   ${x.at}\n   ${x.ua}`).join("\n"); return r; }; }
 
 </script>
 

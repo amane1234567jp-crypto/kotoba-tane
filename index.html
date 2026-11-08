@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="icon.png"><link rel="manifest" href="manifest.json">
 <title>ことばのたね</title>
 <!-- ロードがめん（2026-11-04）：ゲーム本体（game.html・とても おおきい）を よみこむ あいだ、たねが そだつ アニメと パーセントを みせる。
-     よみおわったら おなじ アドレスへ うつる（ブラウザに のこって いるので すぐ ひらく）。tools/game/make_index.py が f88f9bbc82 などを うめる -->
+     よみおわったら おなじ アドレスへ うつる（ブラウザに のこって いるので すぐ ひらく）。tools/game/make_index.py が 0a34b55330 などを うめる -->
 <style>
 html,body{margin:0;height:100%;background:#FFF8E8;overflow:hidden;font-family:"Hiragino Maru Gothic ProN","Hiragino Sans","Zen Maru Gothic",sans-serif;color:#2B2A33;-webkit-user-select:none;user-select:none}
 #w{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
@@ -67,7 +67,7 @@ svg{width:min(100vw,160vh);height:auto;max-height:100vh}
 </svg></div>
 <script>
 (function () {
-  var VER = "f88f9bbc82", RAW = 17661100, GZ = 10754605;
+  var VER = "0a34b55330", RAW = 17664957, GZ = 10756072;
   var url = "game.html?v=" + VER + (location.search ? "&" + location.search.slice(1) : "") + location.hash;
   var $ = function (i) { return document.getElementById(i); }, shown = 0, target = 0, done = false, MSG = ["たねに みずを あげて いるよ…", "めが でて きたよ…", "はっぱが ふえて きたよ…", "もうすぐ はなが さくよ…"];
   function draw(p) { // p: 0〜100

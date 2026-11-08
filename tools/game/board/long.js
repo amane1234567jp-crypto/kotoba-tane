@@ -110,7 +110,7 @@ loadPack = async function (id) {
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = rnd(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const LDATA = { long: LONG }; // ステージごとの 課題の データ
 const usedL = {}; function pickL(kind, ok = () => true) { const all = (LDATA[curStage] || LONG)[kind].filter(ok); const u = usedL[curStage + kind] = usedL[curStage + kind] || new Set(); let pool = all.filter(x => !u.has(x.id)); if (!pool.length) { u.clear(); pool = all; } const x = pool[rnd(pool.length)]; u.add(x.id); return x; }
-function panel(title, color = "#FFFFFF") { const g = el("g", {}, hudLayer); el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#2B2A3388" }, g);
+function panel(title, color = "#FFFFFF") { const g = el("g", {}, hudLayer); g.__panel = true; /* エラー時に かたづける しるし（errlog.js） */ el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#2B2A3388" }, g);
   el("rect", { x: 70, y: 60, width: 1460, height: 880, rx: 40, fill: color, ...S6(8) }, g); const t = el("g", {}, g); const tw = title.length * 40 + 80;
   el("rect", { x: 800 - tw / 2, y: 30, width: tw, height: 70, rx: 35, fill: "#FFD25E", ...S6(6) }, t); txt(t, 800, 80, title, 40, { "text-anchor": "middle" }); return g; }
 function card(parent, x, y, w, h, label, emo, opt = {}) {
