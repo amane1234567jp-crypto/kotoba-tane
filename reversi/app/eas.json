@@ -1,8 +1,32 @@
 {
-  "cli": { "version": ">= 16.0.0", "appVersionSource": "local" },
-  "build": {
-    "preview": { "distribution": "internal", "android": { "buildType": "apk" } },
-    "production": { "autoIncrement": true }
+  "cli": {
+    "version": ">= 27.0.0",
+    "appVersionSource": "local"
   },
-  "submit": { "production": {} }
+  "build": {
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "simulator": false
+      }
+    },
+    "production": {
+      "android": {
+        "buildType": "app-bundle"
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleTeamId": "ZGYPGQ9WPN",
+        "ascApiKeyPath": "./asc.p8",
+        "ascApiKeyIssuerId": "2fa8da34-49c0-4c52-aae7-77f748a041f7",
+        "ascApiKeyId": "MKX36V742D"
+      }
+    }
+  }
 }
