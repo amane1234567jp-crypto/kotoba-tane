@@ -213,6 +213,8 @@ body {
 .cam video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .cam.mine video { transform: scaleX(-1); }
 .camMsg { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 8px; color: #FFFFFF; font: 700 clamp(13px, 1.9vmin, 18px)/1.4 var(--body); background: rgba(43, 42, 51, .55); }
+#callBtn { font-size: clamp(22px, min(5vmin, 6.6vw), 50px); padding-left: 1.1em; padding-right: 1.1em; white-space: nowrap; }
+.big small { display: block; font: 700 .42em/1.2 var(--body); color: rgba(43, 42, 51, .7); margin-top: 2px; letter-spacing: .04em; }
 .big.sub { font-size: clamp(18px, 3.4vmin, 32px); background: #FFFFFF; padding: .35em 1.2em; box-shadow: 0 6px 0 var(--ink); }
 .invite { text-align: center; justify-items: center; }
 .invite .lead { margin: 0; font-size: 16px; line-height: 1.6; text-wrap: balance; }
@@ -313,7 +315,7 @@ body {
   <div class="startCard">
     <h1 class="logo">まるシマ<span>リバーシ</span></h1>
     <p class="ringNote" id="ringNote" hidden></p>
-    <button class="big" id="callBtn" type="button">たいせんあいてを よぶ</button>
+    <button class="big" id="callBtn" type="button">とおくの ひとと あそぶ<small>テレビでんわで つながるよ</small></button>
     <p class="left" id="leftNote" hidden></p>
     <button class="big sub" id="startBtn" type="button">1だいで あそぶ</button>
     <div class="guestLead" id="guestLead" hidden>
@@ -326,7 +328,7 @@ body {
       <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と あそぶ」を押すだけでつながります。</p>
     </div>
     <button class="adultBtn" id="adultBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Zm7.4-2.1.9-.7-1.5-2.6-1.1.3a6 6 0 0 0-1.3-.8l-.2-1.1h-3l-.2 1.1a6 6 0 0 0-1.3.8l-1.1-.3-1.5 2.6.9.7v1.3l-.9.7 1.5 2.6 1.1-.3a6 6 0 0 0 1.3.8l.2 1.1h3l.2-1.1a6 6 0 0 0 1.3-.8l1.1.3 1.5-2.6-.9-.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>おとなの せってい</button>
-    <p class="ver">v2026.11.08 66130bff</p>
+    <p class="ver">v2026.11.08 be4e23fa</p>
   </div>
 </div>
 <!-- 相手が 2人以上 登録されているときだけ：だれと あそぶ？ -->
@@ -2569,10 +2571,10 @@ function syncPanel() {
   setPanel.querySelectorAll(".seg").forEach(seg => seg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === +CFG[seg.dataset.key]))));
   $("resetBtn").textContent = "さいしょから"; $("resetBtn").classList.remove("confirm"); refreshLeft();
   $("newRoomBtn").textContent = "あたらしい部屋にする（リンクを作りなおす）"; $("newRoomBtn").classList.remove("confirm");
-  $("partnerInfo").textContent = (CFG.hasPartner ? "相手は登録ずみ（「たいせんあいてを よぶ」で すぐ待ち受けます）。" : "相手はまだ登録されていません（リンクを開いてつながると登録されます）。") + (partners.list.length ? ` この端末に登録した相手：${partners.list.map(p => p.name).join("、")}` : "");
+  $("partnerInfo").textContent = (CFG.hasPartner ? "相手は登録ずみ（「とおくの ひとと あそぶ」で すぐ待ち受けます）。" : "相手はまだ登録されていません（リンクを開いてつながると登録されます）。") + (partners.list.length ? ` この端末に登録した相手：${partners.list.map(p => p.name).join("、")}` : "");
   $("forgetBtn").hidden = !partners.list.length; $("forgetBtn").textContent = "この端末に登録した相手を けす";
   $("sndInfo").textContent = soundInfo();
-  $("routeInfo").textContent = NET.open && NET.via ? `いまのつながり：${NET.via}` : (CFG.relay ? "「中継だけ」は、つぎに「たいせんあいてを よぶ」を押したときから使います" : "");
+  $("routeInfo").textContent = NET.open && NET.via ? `いまのつながり：${NET.via}` : (CFG.relay ? "「中継だけ」は、つぎに「とおくの ひとと あそぶ」を押したときから使います" : "");
 }
 setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
@@ -2794,7 +2796,7 @@ function candidates() {
 function renderPartners() {
   if (NET.role === "guest" || answeringRing) return;
   const cs = candidates();
-  $("callBtn").textContent = !cs.length ? "たいせんあいてを よぶ" : "あいてと あそぶ";
+  $("callBtn").innerHTML = "とおくの ひとと あそぶ<small>テレビでんわで つながるよ</small>";
 }
 function playWith(c) { if (c.kind === "guest") joinPartner(c.p); else callGrandma(false); }
 function pressPlay() {
@@ -3003,7 +3005,7 @@ function startOnline() {
   if (NET.role === "guest") {
     camMsg(otherSide(), "つないでいます…"); NET.guest();
     // 30秒たっても つながらないときは、あいての画面を たしかめてもらう
-    setTimeout(() => { if (!NET.open && !NET.busy) camMsg(otherSide(), "まだ つながりません。あいての iPad で「たいせんあいてを よぶ」の画面が ひらいているか たしかめてね"); }, 30000);
+    setTimeout(() => { if (!NET.open && !NET.busy) camMsg(otherSide(), "まだ つながりません。あいての iPad で「とおくの ひとと あそぶ」の画面が ひらいているか たしかめてね"); }, 30000);
   }
 }
 // たいせんあいてを よぶ（ホスト）

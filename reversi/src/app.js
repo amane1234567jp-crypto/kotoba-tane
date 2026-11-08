@@ -517,10 +517,10 @@ function syncPanel() {
   setPanel.querySelectorAll(".seg").forEach(seg => seg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === +CFG[seg.dataset.key]))));
   $("resetBtn").textContent = "さいしょから"; $("resetBtn").classList.remove("confirm"); refreshLeft();
   $("newRoomBtn").textContent = "あたらしい部屋にする（リンクを作りなおす）"; $("newRoomBtn").classList.remove("confirm");
-  $("partnerInfo").textContent = (CFG.hasPartner ? "相手は登録ずみ（「たいせんあいてを よぶ」で すぐ待ち受けます）。" : "相手はまだ登録されていません（リンクを開いてつながると登録されます）。") + (partners.list.length ? ` この端末に登録した相手：${partners.list.map(p => p.name).join("、")}` : "");
+  $("partnerInfo").textContent = (CFG.hasPartner ? "相手は登録ずみ（「とおくの ひとと あそぶ」で すぐ待ち受けます）。" : "相手はまだ登録されていません（リンクを開いてつながると登録されます）。") + (partners.list.length ? ` この端末に登録した相手：${partners.list.map(p => p.name).join("、")}` : "");
   $("forgetBtn").hidden = !partners.list.length; $("forgetBtn").textContent = "この端末に登録した相手を けす";
   $("sndInfo").textContent = soundInfo();
-  $("routeInfo").textContent = NET.open && NET.via ? `いまのつながり：${NET.via}` : (CFG.relay ? "「中継だけ」は、つぎに「たいせんあいてを よぶ」を押したときから使います" : "");
+  $("routeInfo").textContent = NET.open && NET.via ? `いまのつながり：${NET.via}` : (CFG.relay ? "「中継だけ」は、つぎに「とおくの ひとと あそぶ」を押したときから使います" : "");
 }
 setPanel.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
@@ -742,7 +742,7 @@ function candidates() {
 function renderPartners() {
   if (NET.role === "guest" || answeringRing) return;
   const cs = candidates();
-  $("callBtn").textContent = !cs.length ? "たいせんあいてを よぶ" : "あいてと あそぶ";
+  $("callBtn").innerHTML = "とおくの ひとと あそぶ<small>テレビでんわで つながるよ</small>";
 }
 function playWith(c) { if (c.kind === "guest") joinPartner(c.p); else callGrandma(false); }
 function pressPlay() {
@@ -951,7 +951,7 @@ function startOnline() {
   if (NET.role === "guest") {
     camMsg(otherSide(), "つないでいます…"); NET.guest();
     // 30秒たっても つながらないときは、あいての画面を たしかめてもらう
-    setTimeout(() => { if (!NET.open && !NET.busy) camMsg(otherSide(), "まだ つながりません。あいての iPad で「たいせんあいてを よぶ」の画面が ひらいているか たしかめてね"); }, 30000);
+    setTimeout(() => { if (!NET.open && !NET.busy) camMsg(otherSide(), "まだ つながりません。あいての iPad で「とおくの ひとと あそぶ」の画面が ひらいているか たしかめてね"); }, 30000);
   }
 }
 // たいせんあいてを よぶ（ホスト）
