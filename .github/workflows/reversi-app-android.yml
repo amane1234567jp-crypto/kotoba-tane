@@ -53,6 +53,9 @@ jobs:
           PY
       - name: gradle
         run: |
+          # Gradle 本体の配布元を GitHub から services.gradle.org に（GitHub 側が 504 を返して止まることがあった）
+          sed -i 's#https\\://github.com/gradle/gradle-distributions/releases/download/v\([0-9.]*\)/#https\\://services.gradle.org/distributions/#' android/gradle/wrapper/gradle-wrapper.properties
+          grep distributionUrl android/gradle/wrapper/gradle-wrapper.properties
           cd android && chmod +x gradlew && ./gradlew assembleRelease --no-daemon -q 2>&1 | tail -40
           ls -la app/build/outputs/apk/release/
       - name: publish
