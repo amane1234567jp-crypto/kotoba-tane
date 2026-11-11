@@ -1,0 +1,31 @@
+# まるシマリバーシ：TestFlight の内部テスト（グループとテスター）を API で整える。手動（workflow_dispatch）か、reversi/app/TESTFLIGHT を push で動く
+name: reversi-testflight
+on:
+  push:
+    branches: [main]
+    paths: ["reversi/app/TESTFLIGHT"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  tf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: run
+        env:
+          ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
+          ASC_KEY_ID: MKX36V742D
+          ASC_ISSUER_ID: 2fa8da34-49c0-4c52-aae7-77f748a041f7
+        run: |
+          mkdir -p /tmp/out
+          printf '%s\n' "$ASC_P8" | tr -d '\r' | sed 's/^[ \t]*//;s/[ \t]*$//' | sed '/^$/d' > /tmp/asc.p8
+          if ! head -1 /tmp/asc.p8 | grep -q BEGIN; then B=$(tr -d ' \n' < /tmp/asc.p8); printf -- '-----BEGIN PRIVATE KEY-----\n%s\n-----END PRIVATE KEY-----\n' "$(echo "$B" | fold -w 64)" > /tmp/asc.p8; fi
+          pip install -q pyjwt cryptography
+          ASC_P8_PATH=/tmp/asc.p8 python3 reversi/app/scripts/testflight.py
+      - name: publish
+        if: always()
+        run: |
+          git config user.name "app-bot"; git config user.email "app-bot@users.noreply.github.com"
+          git checkout -q --orphan tf-tmp; git rm -rf -q . ; rm -rf ./* ./.github
+          cp /tmp/out/* . 2>/dev/null || true; git add -A; git commit -q -m "testflight ${GITHUB_SHA}" || true; git push -f -q origin HEAD:reversi-testflight-out
