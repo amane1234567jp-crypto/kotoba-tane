@@ -33,6 +33,11 @@ log("builds:", s)
 for b in j.get("data", []):
     a = b["attributes"]; log("  build", a.get("version"), a.get("processingState"), a.get("uploadedDate"), "encryption:", a.get("usesNonExemptEncryption"))
 
+# ビルドが見えないとき：アップロード側の状態も見る
+if not j.get("data"):
+    for path in [f"/v1/apps/{APP}/builds?limit=5", f"/v1/apps/{APP}/preReleaseVersions?limit=5", f"/v1/buildUploads?filter[app]={APP}&limit=5"]:
+        s0, j0 = api("GET", path); log("check", path, s0, json.dumps(j0, ensure_ascii=False)[:700])
+
 # 2) 内部グループ
 s, j = api("GET", f"/v1/betaGroups?filter[app]={APP}&limit=50")
 groups = j.get("data", [])
