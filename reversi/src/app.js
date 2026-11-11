@@ -575,6 +575,9 @@ $("resetBtn").addEventListener("click", () => {
 $("adultBtn").addEventListener("click", () => { syncPanel(); renderPush(); setPanel.hidden = false; });
 // アプリ版では テスト用の設定（中継だけ・テスト用に解放）と Web だけの案内を出さない
 if (window.RVNative) document.querySelectorAll("[data-key=relay], [data-key=devUnlock]").forEach(el => { const row = el.closest(".row"); if (row) row.hidden = true; const h = row && row.previousElementSibling; if (h && h.tagName === "H3" && h.textContent.includes("テスト")) h.hidden = true; });
+// アプリ版：まだ使えない・関係のない欄は見せない（課金の準備中は「遠隔対戦」の欄ごと、通知の準備前は「よびだし」の欄ごと）
+const hideSection = (rowEl) => { const row = rowEl && rowEl.closest(".row"); if (!row) return; row.hidden = true; const h = row.previousElementSibling; if (h && h.tagName === "H3") h.hidden = true; };
+if (window.RVNative) { if (!window.MarushimaIAP) hideSection($("remoteInfo")); if (window.RVNative.push === false) hideSection($("pushInfo")); }
 
 /* ---------- 画面を消さない ---------- */
 let lock = null;
