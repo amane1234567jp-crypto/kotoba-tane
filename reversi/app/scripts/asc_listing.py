@@ -179,3 +179,28 @@ if MODE == "submit":
     log("item:", s, err(s, j))
     s, j = api("PATCH", f"/v1/reviewSubmissions/{sub['id']}", {"data": {"type": "reviewSubmissions", "id": sub["id"], "attributes": {"submitted": True}}})
     log("submitted:", s, err(s, j))
+
+if MODE == "fix":
+    # 年齢制限（socialMedia も要る）と、配信地域（全地域を並べて 日本だけ true）
+    s, j = api("GET", f"/v1/appInfos/{info['id']}/ageRatingDeclaration")
+    age = j.get("data", {}); have_keys = set((age.get("attributes") or {}).keys())
+    FREQ = ["alcoholTobaccoOrDrugUseOrReferences", "contests", "gamblingSimulated", "gunsOrOtherWeapons", "medicalOrTreatmentInformation", "profanityOrCrudeHumor",
+            "sexualContentGraphicAndNudity", "sexualContentOrNudity", "horrorOrFearThemes", "matureOrSuggestiveThemes", "violenceCartoonOrFantasy",
+            "violenceRealisticProlongedGraphicOrSadistic", "violenceRealistic"]
+    BOOL = ["advertising", "ageAssurance", "gambling", "healthOrWellnessTopics", "lootBox", "parentalControls", "unrestrictedWebAccess", "userGeneratedContent", "socialMedia"]
+    attrs = {k: "NONE" for k in FREQ if k in have_keys}
+    attrs.update({k: False for k in BOOL if k in have_keys})
+    attrs["messagingAndChat"] = True
+    s, j = api("PATCH", f"/v1/ageRatingDeclarations/{age['id']}", {"data": {"type": "ageRatingDeclarations", "id": age["id"], "attributes": attrs}})
+    log("age rating:", s, err(s, j))
+    s, j = api("GET", f"/v1/appInfos/{info['id']}?fields[appInfos]=appStoreAgeRating"); log("age result:", short(j.get("data", {}).get("attributes")))
+    terr = []; nxt = "/v1/territories?limit=200"
+    while nxt:
+        s, j = api("GET", nxt); terr += [t["id"] for t in j.get("data", [])]; nxt = j.get("links", {}).get("next")
+    log("territories:", len(terr))
+    inc = [{"type": "territoryAvailabilities", "id": "${t%s}" % t, "attributes": {"available": t == "JPN"},
+            "relationships": {"territory": {"data": {"type": "territories", "id": t}}}} for t in terr]
+    s, j = api("POST", "/v2/appAvailabilities", {"data": {"type": "appAvailabilities", "attributes": {"availableInNewTerritories": False},
+        "relationships": {"app": {"data": {"type": "apps", "id": APP}}, "territoryAvailabilities": {"data": [{"type": "territoryAvailabilities", "id": x["id"]} for x in inc]}}},
+        "included": inc})
+    log("availability:", s, err(s, j))
