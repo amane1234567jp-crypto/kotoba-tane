@@ -83,12 +83,15 @@ if MODE == "apply":
     log("category:", s, err(s, j))
     # 4) 年齢制限の申告：暴力などは「なし」。ビデオ通話（招待した相手とだけ）があるので messagingAndChat は true
     s, j = api("GET", f"/v1/appInfos/{info['id']}/ageRatingDeclaration")
-    age = j.get("data", {}); attrs = {}
-    for k, v in (age.get("attributes") or {}).items():
-        if k in ("messagingAndChat",): attrs[k] = True
-        elif k in ("kidsAgeBand", "ageRatingOverride", "ageRatingOverrideV2", "koreaAgeRatingOverride", "developerAgeRatingInfoUrl"): continue
-        elif isinstance(v, bool) or (v is None and k in ("advertising", "gambling", "lootBox", "healthOrWellnessTopics", "parentalControls", "ageAssurance", "userGeneratedContent", "unrestrictedWebAccess", "seventeenPlus")): attrs[k] = False
-        elif isinstance(v, str) or v is None: attrs[k] = "NONE"
+    age = j.get("data", {})
+    FREQ = ["alcoholTobaccoOrDrugUseOrReferences", "contests", "gamblingSimulated", "gunsOrOtherWeapons", "medicalOrTreatmentInformation", "profanityOrCrudeHumor",
+            "sexualContentGraphicAndNudity", "sexualContentOrNudity", "horrorOrFearThemes", "matureOrSuggestiveThemes", "violenceCartoonOrFantasy",
+            "violenceRealisticProlongedGraphicOrSadistic", "violenceRealistic"]
+    BOOL = ["advertising", "ageAssurance", "gambling", "healthOrWellnessTopics", "lootBox", "parentalControls", "unrestrictedWebAccess", "userGeneratedContent"]
+    have_keys = set((age.get("attributes") or {}).keys())
+    attrs = {k: "NONE" for k in FREQ if k in have_keys}
+    attrs.update({k: False for k in BOOL if k in have_keys})
+    if "messagingAndChat" in have_keys: attrs["messagingAndChat"] = True
     log("age attrs to set:", short(attrs, 1500))
     if age:
         s, j = api("PATCH", f"/v1/ageRatingDeclarations/{age['id']}", {"data": {"type": "ageRatingDeclarations", "id": age["id"], "attributes": attrs}})
