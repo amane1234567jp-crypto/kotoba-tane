@@ -35,8 +35,8 @@ for b in j.get("data", []):
 
 # ビルドが見えないとき：アップロード側の状態も見る
 if not j.get("data"):
-    for path in [f"/v1/apps/{APP}/builds?limit=5", f"/v1/apps/{APP}/preReleaseVersions?limit=5", f"/v1/buildUploads?filter[app]={APP}&limit=5"]:
-        s0, j0 = api("GET", path); log("check", path, s0, json.dumps(j0, ensure_ascii=False)[:700])
+    for path in [f"/v1/apps/{APP}/builds?limit=5", f"/v1/apps/{APP}/preReleaseVersions?limit=5", f"/v1/buildUploads/{os.environ.get('UPLOAD_ID','890adaaf-fce0-4a73-8851-e86672dc907f')}", f"/v1/buildUploads/{os.environ.get('UPLOAD_ID','890adaaf-fce0-4a73-8851-e86672dc907f')}/buildUploadFiles"]:
+        s0, j0 = api("GET", path); log("check", path, s0, json.dumps(j0, ensure_ascii=False)[:3000])
 
 # 2) 内部グループ
 s, j = api("GET", f"/v1/betaGroups?filter[app]={APP}&limit=50")
