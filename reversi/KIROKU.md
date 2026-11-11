@@ -200,3 +200,12 @@
 - 最初の iOS ビルドは Apple で弾かれていた：エラー 90725「iOS 18.5 SDK で作られている。iOS 26 SDK（Xcode 26）以降が必要」。
   → reversi-app-ios.yml で Xcode 26 を選んでから作るように変更し、作りなおし中。
 - Xcode 26.3 で作りなおした版（0.1.0 ビルド1）は Apple の処理を通過（VALID）。TestFlight 内部グループ「家族」（全ビルド配布）で 周 が入れられる状態。
+
+## 2026-11-12 iPhone 版を無料で先に公開する準備
+- 【決定】iPhone 版だけ先に「無料」で公開する（課金は後の版で。既存ユーザーは AppTransaction の最初の入手日で見分けて無料のままにできる）。Android は後。
+- アプリ 1.0.0（ビルド2）：課金準備中・よびだし（通知準備前）の欄をアプリでは隠す／使っていない背景モード（audio・voip）を外した。TestFlight でも配布中。
+- プライバシーポリシー・サポート：reversi/legal/privacy.html・support.html（連絡先 info@uchinoaji.com）。
+- スクリーンショット：reversi/app/store/（iPhone 6.9 インチ 4枚・iPad 13 インチ 4枚、作り方の道具つき）。掲載文は store/listing.json。
+- App Store Connect に API で入力済み（reversi-asc.yml・scripts/asc_listing.py）：名前・サブタイトル・説明・キーワード・サポート/プライバシーURL・カテゴリ（ゲーム／ボード・ファミリー）・年齢 4+・価格 無料・配信 日本のみ・著作権・手動リリース・審査メモ（英語）・スクショ・ビルド2。
+- 残り（ブラウザで）：「App のプライバシー」の申告、審査の連絡先（氏名・電話・メール。公開リポジトリなので API の設定には書かない）。そのあと あまねさんの確認 → 審査へ提出（MODE=submit）。
+- 巻き戻し地点：`backup/reversi-20261112-before-release`（公開用の変更を入れる前）。
