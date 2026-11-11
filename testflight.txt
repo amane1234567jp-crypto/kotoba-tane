@@ -1,0 +1,6 @@
+builds: 200
+  build 1 VALID 2026-11-11T07:39:21-08:00 encryption: False
+group exists: 家族
+users: 200 1
+  already/skip: 周
+testers in group: 1 ['周']
