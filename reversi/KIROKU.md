@@ -193,3 +193,9 @@
 | 11/08 アプリ版の殻 | c171d0b5 | Expo＋WebView の殻、Android テスト APK |
 | 11/11 23:56 | `backup/reversi-20261111`（b694f206） | iOS ビルドを TestFlight に送付済み・処理状況の調査中 |
 - Web 版だけ戻すときは reversi/src と build.py を その地点のものにして build → index.html を出しなおす（アプリ版の作業は消えない）。
+
+## 2026-11-11 公開の保留と iOS ビルドのやりなおし
+- 【決定】課金の仕組みの整理（別チャットで進行中）が片づくまで、アプリの一般公開（App Store／Google Play の審査提出）はしない。
+  TestFlight（家族だけの内部テスト）と Android のテスト APK は続けてよい。
+- 最初の iOS ビルドは Apple で弾かれていた：エラー 90725「iOS 18.5 SDK で作られている。iOS 26 SDK（Xcode 26）以降が必要」。
+  → reversi-app-ios.yml で Xcode 26 を選んでから作るように変更し、作りなおし中。
