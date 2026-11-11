@@ -183,3 +183,13 @@
 - 無駄：EAS へのアップロードが 438MB（.easignore が効いていない？ node_modules が入っている疑い）。クラウドビルドを使うときに直す
 - 同日 夜：あまねさんが PC の Chrome で App Store Connect にサインイン → Claude が「新規アプリ」で枠を作成（名前 まるシマリバーシ・日本語・バンドル ID com.uchinoaji.marushima.reversi・SKU marushima-reversi・ascAppId **6832225234**。フォームは React 製で form_input が効かず、javascript_tool で値を入れた）。`reversi-app-ios.yml`（GitHub の Mac で `eas build --local`）で .ipa（13MB）を作り、`eas submit` で App Store Connect へアップロード済み（Apple の処理待ち → TestFlight）。ローカルビルドは .gitignore のものを除くので、assets/web.zip と web-version.json はリポジトリに入れた
 - 次：TestFlight の内部テスターに あまねさん（Apple ID）を追加して iPhone に入れる／iOS 通知の鍵（developer.apple.com のサインインが要る）／Android 通知（Firebase）／課金（IAP）
+
+## 巻き戻し地点（バックアップ）
+うまくいかなくなったら、ここの地点まで戻せる。戻すときは Claude に「○○の地点に戻して」と言えばよい。
+- 保管の場所：GitHub の `backup/…` ブランチ（消さずに残す）。新しい大きな作業に入る前に 1つずつ増やす。
+| 地点 | ブランチ／コミット | その時点の状態 |
+|---|---|---|
+| 11/08 Web版 完成形 | ae7ec7c0 | 開始画面の整理・音と発熱の対策まで。アプリ版に手をつける前の Web 版 |
+| 11/08 アプリ版の殻 | c171d0b5 | Expo＋WebView の殻、Android テスト APK |
+| 11/11 23:56 | `backup/reversi-20261111`（b694f206） | iOS ビルドを TestFlight に送付済み・処理状況の調査中 |
+- Web 版だけ戻すときは reversi/src と build.py を その地点のものにして build → index.html を出しなおす（アプリ版の作業は消えない）。
