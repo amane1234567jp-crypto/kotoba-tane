@@ -1,0 +1,37 @@
+# まるシマリバーシ：App Store の掲載情報を API で入れる。reversi/app/ASC に inspect / apply / submit を書いて push で動く
+# 結果は reversi-asc-out ブランチの asc.txt（公開リポジトリなので 個人の連絡先は ここでは扱わない）
+name: reversi-asc
+on:
+  push:
+    branches: [main]
+    paths: ["reversi/app/ASC"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: reversi-asc
+jobs:
+  asc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: run
+        env:
+          ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
+          ASC_KEY_ID: MKX36V742D
+          ASC_ISSUER_ID: 2fa8da34-49c0-4c52-aae7-77f748a041f7
+        run: |
+          mkdir -p /tmp/out
+          printf '%s\n' "$ASC_P8" | tr -d '\r' | sed 's/^[ \t]*//;s/[ \t]*$//' | sed '/^$/d' > /tmp/asc.p8
+          if ! head -1 /tmp/asc.p8 | grep -q BEGIN; then B=$(tr -d ' \n' < /tmp/asc.p8); printf -- '-----BEGIN PRIVATE KEY-----\n%s\n-----END PRIVATE KEY-----\n' "$(echo "$B" | fold -w 64)" > /tmp/asc.p8; fi
+          pip install -q pyjwt cryptography
+          read M REST < <(sed 's/#.*//' reversi/app/ASC) || true
+          echo "mode=$M"
+          MODE="${M:-inspect}" ASC_P8_PATH=/tmp/asc.p8 python3 reversi/app/scripts/asc_listing.py
+      - name: publish
+        if: always()
+        run: |
+          rm -f /tmp/asc.p8
+          git config user.name "app-bot"; git config user.email "app-bot@users.noreply.github.com"
+          git checkout -q --orphan asc-tmp; git rm -rf -q . ; rm -rf ./* ./.github
+          cp /tmp/out/* . 2>/dev/null || true; git add -A; git commit -q -m "asc ${GITHUB_SHA}" || true; git push -f -q origin HEAD:reversi-asc-out
