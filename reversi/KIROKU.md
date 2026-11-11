@@ -199,3 +199,4 @@
   TestFlight（家族だけの内部テスト）と Android のテスト APK は続けてよい。
 - 最初の iOS ビルドは Apple で弾かれていた：エラー 90725「iOS 18.5 SDK で作られている。iOS 26 SDK（Xcode 26）以降が必要」。
   → reversi-app-ios.yml で Xcode 26 を選んでから作るように変更し、作りなおし中。
+- Xcode 26.3 で作りなおした版（0.1.0 ビルド1）は Apple の処理を通過（VALID）。TestFlight 内部グループ「家族」（全ビルド配布）で 周 が入れられる状態。
