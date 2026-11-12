@@ -1065,7 +1065,7 @@ $("copyBtn").addEventListener("click", () => {
 });
 /* LINEで おくる：iPad の「共有」画面を出す（LINE を選ぶ）。共有画面は この画面の上に重なるだけなので、
    送り終わると 自動でリバーシの画面に戻る。共有画面が使えない端末だけ、LINE アプリを直接ひらく */
-const inviteText = () => "まるシマリバーシで あそぼう！ ここを タップしてね\n" + NET.inviteURL();
+const inviteText = () => "テレビ電話リバーシで あそぼう！ ここを タップしてね\n" + NET.inviteURL();
 $("lineBtn").addEventListener("click", async () => {
   if (window.RVNative) { CALL.toApp({ t: "share", text: inviteText() }); $("inviteOv").hidden = true; camMsg(otherSide(), "まっています…"); return; }
   if (navigator.share) {

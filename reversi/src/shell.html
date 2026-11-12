@@ -1,4 +1,4 @@
-<title>まるシマリバーシ</title>
+<title>まるシマ テレビ電話リバーシ</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -161,6 +161,7 @@ body {
 .logo { font-family: var(--display); font-size: clamp(36px, 8vmin, 84px); line-height: 1.1; margin: 0; letter-spacing: .02em; text-wrap: balance;
   -webkit-text-stroke: 3px var(--ink); paint-order: stroke fill; color: #FFFFFF; text-shadow: 0 6px 0 var(--ink); }
 .logo span { color: var(--glow); }
+.logo small { display: block; font-size: .64em; letter-spacing: .08em; margin-bottom: .1em; -webkit-text-stroke-width: 2px; text-shadow: 0 4px 0 var(--ink); }
 .big {
   font: 900 clamp(26px, 5vmin, 50px) var(--display); color: var(--ink); background: var(--glow); border: 5px solid var(--ink); border-radius: 999px;
   padding: .4em 1.6em; cursor: pointer; box-shadow: 0 8px 0 var(--ink);
@@ -301,7 +302,7 @@ body {
 
 <div class="cover" id="startOv">
   <div class="startCard">
-    <h1 class="logo">まるシマ<span>リバーシ</span></h1>
+    <h1 class="logo"><small>まるシマ</small>テレビ電話<span>リバーシ</span></h1>
     <p class="ringNote" id="ringNote" hidden></p>
     <button class="big" id="callBtn" type="button">とおくの ひとと あそぶ<small>テレビでんわで つながるよ</small></button>
     <p class="left" id="leftNote" hidden></p>

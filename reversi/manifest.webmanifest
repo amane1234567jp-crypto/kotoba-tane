@@ -1,6 +1,6 @@
 {
-  "name": "まるシマリバーシ",
-  "short_name": "リバーシ",
+  "name": "まるシマ テレビ電話リバーシ",
+  "short_name": "テレビ電話リバーシ",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
@@ -8,8 +8,21 @@
   "theme_color": "#1E8A52",
   "lang": "ja",
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
-    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }

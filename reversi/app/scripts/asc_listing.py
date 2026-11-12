@@ -68,6 +68,40 @@ def upsert_loc(list_path, create_type, rel_name, rel_type, rel_id, attrs):
                                                       "relationships": {rel_name: {"data": {"type": rel_type, "id": rel_id}}}}})
     log("create", create_type, s, err(s, j)); return j.get("data", {}).get("id")
 
+def shots_and_build(vloc):
+    # 9) スクリーンショット（同じ種類の既存分は消して入れなおす）
+    sets = {"APP_IPHONE_67": sorted(glob.glob(os.path.join(STORE, "iphone69-*.png"))), "APP_IPAD_PRO_3GEN_129": sorted(glob.glob(os.path.join(STORE, "ipad13-*.png")))}
+    s, j = api("GET", f"/v1/appStoreVersionLocalizations/{vloc}/appScreenshotSets?include=appScreenshots")
+    have = {x["attributes"]["screenshotDisplayType"]: x for x in j.get("data", [])}
+    for dt, files in sets.items():
+        if dt in have:
+            sid = have[dt]["id"]
+            s, jj = api("GET", f"/v1/appScreenshotSets/{sid}/appScreenshots")
+            for sc in jj.get("data", []): api("DELETE", f"/v1/appScreenshots/{sc['id']}")
+        else:
+            s, jj = api("POST", "/v1/appScreenshotSets", {"data": {"type": "appScreenshotSets", "attributes": {"screenshotDisplayType": dt},
+                                                                  "relationships": {"appStoreVersionLocalization": {"data": {"type": "appStoreVersionLocalizations", "id": vloc}}}}})
+            log("create set", dt, s, err(s, jj)); sid = jj["data"]["id"]
+        for f in files:
+            data = open(f, "rb").read()
+            s, jj = api("POST", "/v1/appScreenshots", {"data": {"type": "appScreenshots", "attributes": {"fileName": os.path.basename(f), "fileSize": len(data)},
+                                                              "relationships": {"appScreenshotSet": {"data": {"type": "appScreenshotSets", "id": sid}}}}})
+            if s >= 300: log("reserve", f, s, err(s, jj)); continue
+            sc = jj["data"]
+            for op in sc["attributes"]["uploadOperations"]:
+                part = data[op["offset"]: op["offset"] + op["length"]]
+                hs = {h["name"]: h["value"] for h in op.get("requestHeaders", [])}
+                s2, _ = api(op["method"], op["url"], raw=part, headers=hs, full=True)
+            s, jj = api("PATCH", f"/v1/appScreenshots/{sc['id']}", {"data": {"type": "appScreenshots", "id": sc["id"], "attributes": {"uploaded": True, "sourceFileChecksum": hashlib.md5(data).hexdigest()}}})
+            log("screenshot", dt, os.path.basename(f), s, err(s, jj))
+    # 10) ビルドをつなぐ（1.0.0 の処理ずみで いちばん新しいもの）
+    cand = [b for b in builds.get("data", []) if pre.get(b["relationships"]["preReleaseVersion"]["data"]["id"]) == L["versionString"] and b["attributes"]["processingState"] == "VALID"]
+    if cand:
+        s, j = api("PATCH", f"/v1/appStoreVersions/{ver['id']}/relationships/build", {"data": {"type": "builds", "id": cand[0]["id"]}})
+        log("attach build:", cand[0]["attributes"]["version"], s, err(s, j))
+    else:
+        log("attach build: 1.0.0 の処理ずみビルドが まだない")
+
 if MODE == "apply":
     # 1) 権利の申告（第三者のコンテンツは使っていない）
     s, j = api("PATCH", f"/v1/apps/{APP}", {"data": {"type": "apps", "id": APP, "attributes": {"contentRightsDeclaration": "DOES_NOT_USE_THIRD_PARTY_CONTENT"}}})
@@ -135,38 +169,7 @@ if MODE == "apply":
     else:
         s, j = api("POST", "/v1/appStoreReviewDetails", {"data": {"type": "appStoreReviewDetails", "attributes": rv, "relationships": {"appStoreVersion": {"data": {"type": "appStoreVersions", "id": ver["id"]}}}}})
     log("review detail:", s, err(s, j))
-    # 9) スクリーンショット（同じ種類の既存分は消して入れなおす）
-    sets = {"APP_IPHONE_67": sorted(glob.glob(os.path.join(STORE, "iphone69-*.png"))), "APP_IPAD_PRO_3GEN_129": sorted(glob.glob(os.path.join(STORE, "ipad13-*.png")))}
-    s, j = api("GET", f"/v1/appStoreVersionLocalizations/{vloc}/appScreenshotSets?include=appScreenshots")
-    have = {x["attributes"]["screenshotDisplayType"]: x for x in j.get("data", [])}
-    for dt, files in sets.items():
-        if dt in have:
-            sid = have[dt]["id"]
-            s, jj = api("GET", f"/v1/appScreenshotSets/{sid}/appScreenshots")
-            for sc in jj.get("data", []): api("DELETE", f"/v1/appScreenshots/{sc['id']}")
-        else:
-            s, jj = api("POST", "/v1/appScreenshotSets", {"data": {"type": "appScreenshotSets", "attributes": {"screenshotDisplayType": dt},
-                                                                  "relationships": {"appStoreVersionLocalization": {"data": {"type": "appStoreVersionLocalizations", "id": vloc}}}}})
-            log("create set", dt, s, err(s, jj)); sid = jj["data"]["id"]
-        for f in files:
-            data = open(f, "rb").read()
-            s, jj = api("POST", "/v1/appScreenshots", {"data": {"type": "appScreenshots", "attributes": {"fileName": os.path.basename(f), "fileSize": len(data)},
-                                                              "relationships": {"appScreenshotSet": {"data": {"type": "appScreenshotSets", "id": sid}}}}})
-            if s >= 300: log("reserve", f, s, err(s, jj)); continue
-            sc = jj["data"]
-            for op in sc["attributes"]["uploadOperations"]:
-                part = data[op["offset"]: op["offset"] + op["length"]]
-                hs = {h["name"]: h["value"] for h in op.get("requestHeaders", [])}
-                s2, _ = api(op["method"], op["url"], raw=part, headers=hs, full=True)
-            s, jj = api("PATCH", f"/v1/appScreenshots/{sc['id']}", {"data": {"type": "appScreenshots", "id": sc["id"], "attributes": {"uploaded": True, "sourceFileChecksum": hashlib.md5(data).hexdigest()}}})
-            log("screenshot", dt, os.path.basename(f), s, err(s, jj))
-    # 10) ビルドをつなぐ（1.0.0 の処理ずみで いちばん新しいもの）
-    cand = [b for b in builds.get("data", []) if pre.get(b["relationships"]["preReleaseVersion"]["data"]["id"]) == L["versionString"] and b["attributes"]["processingState"] == "VALID"]
-    if cand:
-        s, j = api("PATCH", f"/v1/appStoreVersions/{ver['id']}/relationships/build", {"data": {"type": "builds", "id": cand[0]["id"]}})
-        log("attach build:", cand[0]["attributes"]["version"], s, err(s, j))
-    else:
-        log("attach build: 1.0.0 の処理ずみビルドが まだない")
+    shots_and_build(vloc)
 
 if MODE == "submit":
     s, j = api("POST", "/v1/reviewSubmissions", {"data": {"type": "reviewSubmissions", "attributes": {"platform": "IOS"}, "relationships": {"app": {"data": {"type": "apps", "id": APP}}}}})
@@ -211,3 +214,12 @@ if MODE == "text":
                {"description": L["description"], "keywords": L["keywords"], "supportUrl": L["supportUrl"], "promotionalText": L["promotionalText"]})
     upsert_loc(f"/v1/appInfos/{info['id']}/appInfoLocalizations", "appInfoLocalizations", "appInfo", "appInfos", info["id"],
                {"name": L["name"], "subtitle": L["subtitle"], "privacyPolicyUrl": L["privacyPolicyUrl"]})
+
+if MODE in ("shots", "build"):
+    s, j = api("GET", f"/v1/appStoreVersions/{ver['id']}/appStoreVersionLocalizations")
+    vloc = next(x["id"] for x in j["data"] if x["attributes"]["locale"] == L["locale"])
+    if MODE == "shots": shots_and_build(vloc)
+    else:
+        cand = [b for b in builds.get("data", []) if pre.get(b["relationships"]["preReleaseVersion"]["data"]["id"]) == L["versionString"] and b["attributes"]["processingState"] == "VALID"]
+        s, j = api("PATCH", f"/v1/appStoreVersions/{ver['id']}/relationships/build", {"data": {"type": "builds", "id": cand[0]["id"]}})
+        log("attach build:", cand[0]["attributes"]["version"], s, err(s, j))

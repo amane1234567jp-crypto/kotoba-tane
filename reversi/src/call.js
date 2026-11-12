@@ -103,7 +103,7 @@ const CALL = (() => {
   C.ring = async (to, name, url) => {
     if (!to) return { ok: false, reason: "noid" };
     try {
-      return await post({ op: "call", to, tag: "rv-call", title: "まるシマリバーシ", body: `${name || "あいて"}から よびだしです。タップして はじめてね`, url });
+      return await post({ op: "call", to, tag: "rv-call", title: "テレビ電話リバーシ", body: `${name || "あいて"}から よびだしです。タップして はじめてね`, url });
     } catch (e) { return { ok: false, reason: "net" }; }
   };
   C.toApp = toApp;
