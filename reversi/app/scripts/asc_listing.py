@@ -204,3 +204,10 @@ if MODE == "fix":
         "relationships": {"app": {"data": {"type": "apps", "id": APP}}, "territoryAvailabilities": {"data": [{"type": "territoryAvailabilities", "id": x["id"]} for x in inc]}}},
         "included": inc})
     log("availability:", s, err(s, j))
+
+if MODE == "text":
+    # 説明文・キーワードなど 文字だけ入れなおす（スクショは触らない）
+    upsert_loc(f"/v1/appStoreVersions/{ver['id']}/appStoreVersionLocalizations", "appStoreVersionLocalizations", "appStoreVersion", "appStoreVersions", ver["id"],
+               {"description": L["description"], "keywords": L["keywords"], "supportUrl": L["supportUrl"], "promotionalText": L["promotionalText"]})
+    upsert_loc(f"/v1/appInfos/{info['id']}/appInfoLocalizations", "appInfoLocalizations", "appInfo", "appInfos", info["id"],
+               {"name": L["name"], "subtitle": L["subtitle"], "privacyPolicyUrl": L["privacyPolicyUrl"]})
