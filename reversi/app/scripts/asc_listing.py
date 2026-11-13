@@ -223,3 +223,13 @@ if MODE in ("shots", "build"):
         cand = [b for b in builds.get("data", []) if pre.get(b["relationships"]["preReleaseVersion"]["data"]["id"]) == L["versionString"] and b["attributes"]["processingState"] == "VALID"]
         s, j = api("PATCH", f"/v1/appStoreVersions/{ver['id']}/relationships/build", {"data": {"type": "builds", "id": cand[0]["id"]}})
         log("attach build:", cand[0]["attributes"]["version"], s, err(s, j))
+
+if MODE == "release":
+    # 審査に通った版（手動リリース待ち）を公開する
+    v = next((x for x in vers.get("data", []) if x["attributes"]["appStoreState"] == "PENDING_DEVELOPER_RELEASE"), None)
+    if not v: log("release: 公開待ちの版がない")
+    else:
+        s, j = api("POST", "/v1/appStoreVersionReleaseRequests", {"data": {"type": "appStoreVersionReleaseRequests",
+            "relationships": {"appStoreVersion": {"data": {"type": "appStoreVersions", "id": v["id"]}}}}})
+        log("release:", v["attributes"]["versionString"], s, err(s, j))
+        s, j = api("GET", f"/v1/appStoreVersions/{v['id']}?fields[appStoreVersions]=appStoreState"); log("state after:", short(j.get("data", {}).get("attributes")))
