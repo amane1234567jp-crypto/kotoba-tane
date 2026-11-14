@@ -1,0 +1,40 @@
+[2026/11/14 11:59:48.291] INFO:     Speaker: ろてじん（長老ボイス） / Style: ノーマル
+[2026/11/14 11:59:48.291] INFO:     Running inference...
+[2026/11/14 11:59:48.291] INFO:     Text: 白が、63枚。
+[2026/11/14 11:59:48.291] INFO:              Speed: 1.09 (Input: 0.92)
+[2026/11/14 11:59:48.291] INFO:       Style Weight: 1.00 (Input: 1.00)
+[2026/11/14 11:59:48.291] INFO:     Tempo Dynamics: 0.20 (Input: 1.00)
+[2026/11/14 11:59:48.291] INFO:              Pitch: 1.00 (Input: 0.00)
+[2026/11/14 11:59:48.291] INFO:             Volume: 1.00
+[2026/11/14 11:59:48.292] INFO:        Pre-Silence: 0.05
+[2026/11/14 11:59:48.292] INFO:       Post-Silence: 0.10
+[2026/11/14 11:59:49.916] INFO:     Inference done. Elapsed time: 1.62 sec.
+[2026/11/14 11:59:49.919] INFO:     172.17.0.1:41760 - "POST /synthesis?speaker=391794336 HTTP/1.1" 200 OK
+[2026/11/14 11:59:50.402] INFO:     172.17.0.1:41766 - "POST /audio_query?text=%E9%BB%92%E3%81%8C%E3%80%8164%E6%9E%9A%E3%80%82&speaker=391794336 HTTP/1.1" 200 OK
+[2026/11/14 11:59:50.405] INFO:     Model: ろてじん（長老ボイス） / Version 1.0.0
+[2026/11/14 11:59:50.405] INFO:     Speaker: ろてじん（長老ボイス） / Style: ノーマル
+[2026/11/14 11:59:50.405] INFO:     Running inference...
+[2026/11/14 11:59:50.405] INFO:     Text: 黒が、64枚。
+[2026/11/14 11:59:50.405] INFO:              Speed: 1.09 (Input: 0.92)
+[2026/11/14 11:59:50.405] INFO:       Style Weight: 1.00 (Input: 1.00)
+[2026/11/14 11:59:50.405] INFO:     Tempo Dynamics: 0.20 (Input: 1.00)
+[2026/11/14 11:59:50.405] INFO:              Pitch: 1.00 (Input: 0.00)
+[2026/11/14 11:59:50.406] INFO:             Volume: 1.00
+[2026/11/14 11:59:50.406] INFO:        Pre-Silence: 0.05
+[2026/11/14 11:59:50.406] INFO:       Post-Silence: 0.10
+[2026/11/14 11:59:51.998] INFO:     Inference done. Elapsed time: 1.59 sec.
+[2026/11/14 11:59:52.001] INFO:     172.17.0.1:41782 - "POST /synthesis?speaker=391794336 HTTP/1.1" 200 OK
+[2026/11/14 11:59:52.453] INFO:     172.17.0.1:55384 - "POST /audio_query?text=%E7%99%BD%E3%81%8C%E3%80%8164%E6%9E%9A%E3%80%82&speaker=391794336 HTTP/1.1" 200 OK
+[2026/11/14 11:59:52.456] INFO:     Model: ろてじん（長老ボイス） / Version 1.0.0
+[2026/11/14 11:59:52.456] INFO:     Speaker: ろてじん（長老ボイス） / Style: ノーマル
+[2026/11/14 11:59:52.456] INFO:     Running inference...
+[2026/11/14 11:59:52.456] INFO:     Text: 白が、64枚。
+[2026/11/14 11:59:52.456] INFO:              Speed: 1.09 (Input: 0.92)
+[2026/11/14 11:59:52.457] INFO:       Style Weight: 1.00 (Input: 1.00)
+[2026/11/14 11:59:52.457] INFO:     Tempo Dynamics: 0.20 (Input: 1.00)
+[2026/11/14 11:59:52.457] INFO:              Pitch: 1.00 (Input: 0.00)
+[2026/11/14 11:59:52.457] INFO:             Volume: 1.00
+[2026/11/14 11:59:52.457] INFO:        Pre-Silence: 0.05
+[2026/11/14 11:59:52.457] INFO:       Post-Silence: 0.10
+[2026/11/14 11:59:54.093] INFO:     Inference done. Elapsed time: 1.64 sec.
+[2026/11/14 11:59:54.095] INFO:     172.17.0.1:55398 - "POST /synthesis?speaker=391794336 HTTP/1.1" 200 OK

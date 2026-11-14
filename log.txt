@@ -1,0 +1,242 @@
+++ dirname tools/aivis/run.sh
++ cd tools/aivis
++ python3 survey.py /tmp/out
+openapi from https://api.aivis-project.com/v1/openapi.json
+SEARCH /v1/aivm-models/search ['keyword', 'tags', 'tiers', 'categories', 'voice_timbres', 'license_types', 'sort', 'page', 'limit']
+page 1 30 77
+page 2 30 77
+page 3 17 77
+page 4 0 77
+models 77
++ '[' -f cast.json ']'
++ bash synth.sh /tmp/out
++ sudo apt-get -qq update
++ sudo apt-get -qq install -y ffmpeg
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ systemctl restart hosted-compute-agent.service
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
++ pip install -q numpy
++ mkdir -p /home/runner/.local/share/AivisSpeech-Engine
++ sudo chown -R 1000:1000 /home/runner/.local/share/AivisSpeech-Engine
++ docker pull -q ghcr.io/aivis-project/aivisspeech-engine:cpu-latest
+ghcr.io/aivis-project/aivisspeech-engine:cpu-latest
++ docker run -d --name aivis -p 10101:10101 -v /home/runner/.local/share/AivisSpeech-Engine:/home/user/.local/share/AivisSpeech-Engine-Dev ghcr.io/aivis-project/aivisspeech-engine:cpu-latest
+c1f1a77fedeb810e508d976df48a789bfa98a6ead60d99cc0a8b736bdfde8133
+++ seq 1 120
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
++ sleep 10
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
++ sleep 10
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
++ sleep 10
++ for i in $(seq 1 120)
++ curl -sf 127.0.0.1:10101/version
+"latest"+ break
++ echo
+
++ docker logs aivis
++ tail -20
+[2026/11/14 11:51:47.747] INFO:     Downloaded AIVMX file.
+[2026/11/14 11:51:47.816] INFO:     Installing AIVMX file ...
+[2026/11/14 11:51:47.880] INFO:     Installed AIVMX file to /home/user/.local/share/AivisSpeech-Engine-Dev/Models/a59cb814-0083-4369-8542-f51a29e72af7.aivmx.
+[2026/11/14 11:51:48.708] INFO:     Updated latest version information.
+[2026/11/14 11:51:48.852] INFO:     Installed models:
+[2026/11/14 11:51:48.852] INFO:     - コハク (22e8ed77-94fe-4ef2-871f-a86f94e9a579) (default)
+[2026/11/14 11:51:48.852] INFO:     - まお (a59cb814-0083-4369-8542-f51a29e72af7) (default)
+[2026/11/14 11:51:50.101] INFO:     Using CPU for inference.
+[2026/11/14 11:51:50.101] INFO:     Loading BERT model and tokenizer...
+[2026/11/14 11:51:55.542] INFO:     BERT model and tokenizer loaded. (5.44s)
+[2026/11/14 11:51:55.579] INFO:     Current user dictionary (CSV format):
+[2026/11/14 11:51:55.579] INFO:     - 担々麺,1348,1348,8609,名詞,固有名詞,一般,*,*,*,担々麺,タンタンメン,タンタンメン,3/6,*
+reading /home/user/.local/share/AivisSpeech-Engine-Dev/user.dict_csv-817abcf6-e742-4d4e-b0ae-da0f70be3d65.tmp ... 1
+emitting double-array: 100% |###########################################| 
+[2026/11/14 11:51:55.583] INFO:     User dictionary applied. (0.00s)
+[2026/11/14 11:51:56.594] INFO:     Started server process [1]
+[2026/11/14 11:51:56.595] INFO:     Waiting for application startup.
+[2026/11/14 11:51:56.595] INFO:     Application startup complete.
+[2026/11/14 11:51:56.595] INFO:     Uvicorn running on http://0.0.0.0:10101 (Press CTRL+C to quit)
+[2026/11/14 11:52:04.575] INFO:     172.17.0.1:39006 - "GET /version HTTP/1.1" 200 OK
+++ cat RUN
++ JOBS=jobs/rv2
++ for j in $JOBS
++ j=jobs/rv2
++ '[' jobs/rv2 = check ']'
++ '[' jobs/rv2 = listen ']'
++ '[' -f jobs/rv2/lines.json ']'
++ python3 synth.py /tmp/out jobs/rv2
+installed metan 1b2830f4-8cf1-4184-a0d9-3a1bace3a844
+installed meebaa baaae3c0-7b22-4605-8ba5-80c959b41a48
+installed kamejii 696c98a2-c0b7-4fe7-8cf2-c7e9b8a9bd82
+installed gao 2e1fdde8-d089-42d7-b64f-cf89952b1bdc
+installed chu 9f36ec0d-8dac-42dc-aff4-149c5f99faad
+installed doshin 47e53151-a378-46f3-abee-ce13aa07feb1
+installed pyon f5017410-fbb5-49e1-97cb-e785f42e15f5
+installed nobbo 71e72188-2726-4739-9aa9-39567396fb2a
+installed pyonmama f83c385c-829b-40c4-8c11-639027e61636
+installed gaojii 470a41e2-863f-4bf2-8a20-bf7cde0d8f7b
+installed miibaa 2ff1c526-27d4-4eeb-b069-4207ae5fe259
+install fail doshinpapa HTTP Error 500: Internal Server Error b'{"detail":"AIVMX \xe3\x83\x95\xe3\x82\xa1\xe3\x82\xa4\xe3\x83\xab\xe3\x81\xae\xe3\x83\x80\xe3\x82\xa6\xe3\x83\xb3\xe3\x83\xad\xe3\x83\xbc\xe3\x83\x89\xe3\x81\xab\xe5\xa4\xb1\xe6\x95\x97\xe3\x81\x97\xe3\x81\xbe\xe3\x81\x97\xe3\x81\x9f\xe3\x80\x82(Client error \'404 Not Found\' for url \'https://api.aivis-project.com/v1/aivm-models/e5bd2b5e-90a8-4fb3-a69f-2fbd2d3a8a43/download?model_type=AIVMX\'\\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP'
+installed kon a670e6b8-0852-45b2-8704-1bc9862f2fe6
+installed mama 21d8d535-f206-462d-a3bb-05f8252dede7
+installed ookami b2bee8fc-3f65-4c99-9607-a1075a10066b
+installed ojisan 70a875a9-feae-41e6-a586-8cf9e47c6c0b
+installed omawari 3dabea2b-cc10-41da-955b-4618ce84e716
+installed tora e40d5b99-8cde-4442-a45b-0ebec9167506
+installed kuma 1f04a608-916c-4d9e-bf6e-b9da5c176f85
+installed onii 6d11c6c2-f4a4-4435-887e-23dd60f8b8dd
+install fail kb_fisher HTTP Error 500: Internal Server Error b'{"detail":"AIVMX \xe3\x83\x95\xe3\x82\xa1\xe3\x82\xa4\xe3\x83\xab\xe3\x81\xae\xe3\x83\x80\xe3\x82\xa6\xe3\x83\xb3\xe3\x83\xad\xe3\x83\xbc\xe3\x83\x89\xe3\x81\xab\xe5\xa4\xb1\xe6\x95\x97\xe3\x81\x97\xe3\x81\xbe\xe3\x81\x97\xe3\x81\x9f\xe3\x80\x82(Client error \'404 Not Found\' for url \'https://api.aivis-project.com/v1/aivm-models/e5bd2b5e-90a8-4fb3-a69f-2fbd2d3a8a43/download?model_type=AIVMX\'\\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP'
+installed pannamama 59f96896-64d2-4378-830a-4d5feb3d81aa
+installed gaomama 18972473-ca36-4e06-a33a-5cc14adba0c4
+installed miimama b1b8072f-809f-4c6d-9ba1-2ca94d9c3663
+installed chumama 9a7feb22-b6f3-4f79-92d9-26849e063fa1
+installed wanko 80fe2db4-5891-4550-a3f3-dff9a91c0946
+installed biba 3bef4d35-124e-4ddd-93d3-75f292732195
+installed piyoko 4f281e78-eba6-495a-8e50-5c322d02b5b1
+installed papa ed47c952-c253-405e-adba-1172399816a1
+installed gaonii 70ad7e84-6a10-48d6-8f9a-8dac4bba3c0b
+installed shima e9339137-2ae3-4d41-9394-fb757a7e61e6
+{'key': 'rv_k0', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 4.6, 'text': '黒が、0枚。', 'acc': 'クロガ,[1] / ゼロマイ.[2]'}
+{'key': 'rv_s0', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.7, 'text': '白が、0枚。', 'acc': 'シロガ,[1] / ゼロマイ.[2]'}
+{'key': 'rv_k1', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '黒が、1枚。', 'acc': 'クロガ,[1] / イチマイ.[2]'}
+{'key': 'rv_s1', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '白が、1枚。', 'acc': 'シロガ,[1] / イチマイ.[2]'}
+{'key': 'rv_k2', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.6, 'text': '黒が、2枚。', 'acc': 'クロガ,[1] / ニマイ.[1]'}
+{'key': 'rv_s2', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.7, 'text': '白が、2枚。', 'acc': 'シロガ,[1] / ニマイ.[1]'}
+{'key': 'rv_k3', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.6, 'text': '黒が、3枚。', 'acc': 'クロガ,[1] / サンマイ.[1]'}
+{'key': 'rv_s3', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '白が、3枚。', 'acc': 'シロガ,[1] / サンマイ.[1]'}
+{'key': 'rv_k4', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.7, 'text': '黒が、4枚。', 'acc': 'クロガ,[1] / ヨンマイ.[1]'}
+{'key': 'rv_s4', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '白が、4枚。', 'acc': 'シロガ,[1] / ヨンマイ.[1]'}
+{'key': 'rv_k5', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.7, 'text': '黒が、5枚。', 'acc': 'クロガ,[1] / ゴマイ.[1]'}
+{'key': 'rv_s5', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.7, 'text': '白が、5枚。', 'acc': 'シロガ,[1] / ゴマイ.[1]'}
+{'key': 'rv_k6', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '黒が、6枚。', 'acc': 'クロガ,[1] / ロクマイ.[2]'}
+{'key': 'rv_s6', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '白が、6枚。', 'acc': 'シロガ,[1] / ロクマイ.[2]'}
+{'key': 'rv_k7', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '黒が、7枚。', 'acc': 'クロガ,[1] / ナナマイ.[2]'}
+{'key': 'rv_s7', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '白が、7枚。', 'acc': 'シロガ,[1] / ナナマイ.[2]'}
+{'key': 'rv_k8', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.7, 'text': '黒が、8枚。', 'acc': 'クロガ,[1] / ハチマイ.[2]'}
+{'key': 'rv_s8', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '白が、8枚。', 'acc': 'シロガ,[1] / ハチマイ.[2]'}
+{'key': 'rv_k9', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.7, 'text': '黒が、9枚。', 'acc': 'クロガ,[1] / キュウマイ.[1]'}
+{'key': 'rv_s9', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.7, 'text': '白が、9枚。', 'acc': 'シロガ,[1] / キュウマイ.[1]'}
+{'key': 'rv_k10', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.7, 'text': '黒が、10枚。', 'acc': 'クロガ,[1] / ジュウマイ.[1]'}
+{'key': 'rv_s10', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.7, 'text': '白が、10枚。', 'acc': 'シロガ,[1] / ジュウマイ.[1]'}
+{'key': 'rv_k11', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '黒が、11枚。', 'acc': 'クロガ,[1] / ジュウ[2] / イチマイ.[2]'}
+{'key': 'rv_s11', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '白が、11枚。', 'acc': 'シロガ,[1] / ジュウ[2] / イチマイ.[2]'}
+{'key': 'rv_k12', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.7, 'text': '黒が、12枚。', 'acc': 'クロガ,[1] / ジュウニマイ.[3]'}
+{'key': 'rv_s12', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '白が、12枚。', 'acc': 'シロガ,[1] / ジュウニマイ.[3]'}
+{'key': 'rv_k13', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '黒が、13枚。', 'acc': 'クロガ,[1] / ジュウサンマイ.[3]'}
+{'key': 'rv_s13', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '白が、13枚。', 'acc': 'シロガ,[1] / ジュウサンマイ.[3]'}
+{'key': 'rv_k14', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '黒が、14枚。', 'acc': 'クロガ,[1] / ジュウヨンマイ.[3]'}
+{'key': 'rv_s14', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '白が、14枚。', 'acc': 'シロガ,[1] / ジュウヨンマイ.[3]'}
+{'key': 'rv_k15', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '黒が、15枚。', 'acc': 'クロガ,[1] / ジュウゴマイ.[3]'}
+{'key': 'rv_s15', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '白が、15枚。', 'acc': 'シロガ,[1] / ジュウゴマイ.[3]'}
+{'key': 'rv_k16', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '黒が、16枚。', 'acc': 'クロガ,[1] / ジュウ[2] / ロクマイ.[2]'}
+{'key': 'rv_s16', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '白が、16枚。', 'acc': 'シロガ,[1] / ジュウ[2] / ロクマイ.[2]'}
+{'key': 'rv_k17', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '黒が、17枚。', 'acc': 'クロガ,[1] / ジュウ[2] / ナナマイ.[2]'}
+{'key': 'rv_s17', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '白が、17枚。', 'acc': 'シロガ,[1] / ジュウ[2] / ナナマイ.[2]'}
+{'key': 'rv_k18', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '黒が、18枚。', 'acc': 'クロガ,[1] / ジュウ[2] / ハチマイ.[2]'}
+{'key': 'rv_s18', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '白が、18枚。', 'acc': 'シロガ,[1] / ジュウ[2] / ハチマイ.[2]'}
+{'key': 'rv_k19', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.9, 'text': '黒が、19枚。', 'acc': 'クロガ,[1] / ジュウキュウマイ.[3]'}
+{'key': 'rv_s19', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '白が、19枚。', 'acc': 'シロガ,[1] / ジュウキュウマイ.[3]'}
+{'key': 'rv_k20', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '黒が、20枚。', 'acc': 'クロガ,[1] / ニジュウマイ.[2]'}
+{'key': 'rv_s20', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '白が、20枚。', 'acc': 'シロガ,[1] / ニジュウマイ.[2]'}
+{'key': 'rv_k21', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、21枚。', 'acc': 'クロガ,[1] / ニジュウ[1] / イチマイ.[2]'}
+{'key': 'rv_s21', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '白が、21枚。', 'acc': 'シロガ,[1] / ニジュウ[1] / イチマイ.[2]'}
+{'key': 'rv_k22', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、22枚。', 'acc': 'クロガ,[1] / ニジュウ[1] / ニマイ.[1]'}
+{'key': 'rv_s22', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '白が、22枚。', 'acc': 'シロガ,[1] / ニジュウ[1] / ニマイ.[1]'}
+{'key': 'rv_k23', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、23枚。', 'acc': 'クロガ,[1] / ニジュウ[1] / サンマイ.[1]'}
+{'key': 'rv_s23', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、23枚。', 'acc': 'シロガ,[1] / ニジュウ[1] / サンマイ.[1]'}
+{'key': 'rv_k24', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、24枚。', 'acc': 'クロガ,[1] / ニジュウ[1] / ヨンマイ.[1]'}
+{'key': 'rv_s24', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、24枚。', 'acc': 'シロガ,[1] / ニジュウ[1] / ヨンマイ.[1]'}
+{'key': 'rv_k25', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、25枚。', 'acc': 'クロガ,[1] / ニジュウ[1] / ゴマイ.[1]'}
+{'key': 'rv_s25', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '白が、25枚。', 'acc': 'シロガ,[1] / ニジュウ[1] / ゴマイ.[1]'}
+{'key': 'rv_k26', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、26枚。', 'acc': 'クロガ,[1] / ニジュウ[1] / ロクマイ.[2]'}
+{'key': 'rv_s26', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.2, 'text': '白が、26枚。', 'acc': 'シロガ,[1] / ニジュウ[1] / ロクマイ.[2]'}
+{'key': 'rv_k27', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、27枚。', 'acc': 'クロガ,[1] / ニジュウ[1] / ナナマイ.[2]'}
+{'key': 'rv_s27', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、27枚。', 'acc': 'シロガ,[1] / ニジュウ[1] / ナナマイ.[2]'}
+{'key': 'rv_k28', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '黒が、28枚。', 'acc': 'クロガ,[1] / ニジュウ[1] / ハチマイ.[2]'}
+{'key': 'rv_s28', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、28枚。', 'acc': 'シロガ,[1] / ニジュウ[1] / ハチマイ.[2]'}
+{'key': 'rv_k29', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、29枚。', 'acc': 'クロガ,[1] / ニジュウ[1] / キュウマイ.[1]'}
+{'key': 'rv_s29', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、29枚。', 'acc': 'シロガ,[1] / ニジュウ[1] / キュウマイ.[1]'}
+{'key': 'rv_k30', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '黒が、30枚。', 'acc': 'クロガ,[1] / サンジュウマイ.[3]'}
+{'key': 'rv_s30', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '白が、30枚。', 'acc': 'シロガ,[1] / サンジュウマイ.[3]'}
+{'key': 'rv_k31', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '黒が、31枚。', 'acc': 'クロガ,[1] / サンジュウ[1] / イチマイ.[2]'}
+{'key': 'rv_s31', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、31枚。', 'acc': 'シロガ,[1] / サンジュウ[1] / イチマイ.[2]'}
+{'key': 'rv_k32', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、32枚。', 'acc': 'クロガ,[1] / サンジュウ[1] / ニマイ.[1]'}
+{'key': 'rv_s32', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、32枚。', 'acc': 'シロガ,[1] / サンジュウ[1] / ニマイ.[1]'}
+{'key': 'rv_k33', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.2, 'text': '黒が、33枚。', 'acc': 'クロガ,[1] / サンジュウ[1] / サンマイ.[1]'}
+{'key': 'rv_s33', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 3.1, 'text': '白が、33枚。', 'acc': 'シロガ,[1] / サンジュウ[1] / サンマイ.[1]'}
+{'key': 'rv_k34', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '黒が、34枚。', 'acc': 'クロガ,[1] / サンジュウ[1] / ヨンマイ.[1]'}
+{'key': 'rv_s34', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、34枚。', 'acc': 'シロガ,[1] / サンジュウ[1] / ヨンマイ.[1]'}
+{'key': 'rv_k35', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、35枚。', 'acc': 'クロガ,[1] / サンジュウ[1] / ゴマイ.[1]'}
+{'key': 'rv_s35', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '白が、35枚。', 'acc': 'シロガ,[1] / サンジュウ[1] / ゴマイ.[1]'}
+{'key': 'rv_k36', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '黒が、36枚。', 'acc': 'クロガ,[1] / サンジュウ[1] / ロクマイ.[2]'}
+{'key': 'rv_s36', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、36枚。', 'acc': 'シロガ,[1] / サンジュウ[1] / ロクマイ.[2]'}
+{'key': 'rv_k37', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.2, 'text': '黒が、37枚。', 'acc': 'クロガ,[1] / サンジュウ[1] / ナナマイ.[2]'}
+{'key': 'rv_s37', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.2, 'text': '白が、37枚。', 'acc': 'シロガ,[1] / サンジュウ[1] / ナナマイ.[2]'}
+{'key': 'rv_k38', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '黒が、38枚。', 'acc': 'クロガ,[1] / サンジュウ[1] / ハチマイ.[2]'}
+{'key': 'rv_s38', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、38枚。', 'acc': 'シロガ,[1] / サンジュウ[1] / ハチマイ.[2]'}
+{'key': 'rv_k39', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、39枚。', 'acc': 'クロガ,[1] / サンジュウ[1] / キュウマイ.[1]'}
+{'key': 'rv_s39', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、39枚。', 'acc': 'シロガ,[1] / サンジュウ[1] / キュウマイ.[1]'}
+{'key': 'rv_k40', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '黒が、40枚。', 'acc': 'クロガ,[1] / ヨンジュウマイ.[3]'}
+{'key': 'rv_s40', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '白が、40枚。', 'acc': 'シロガ,[1] / ヨンジュウマイ.[3]'}
+{'key': 'rv_k41', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、41枚。', 'acc': 'クロガ,[1] / ヨンジュウ[1] / イチマイ.[2]'}
+{'key': 'rv_s41', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、41枚。', 'acc': 'シロガ,[1] / ヨンジュウ[1] / イチマイ.[2]'}
+{'key': 'rv_k42', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '黒が、42枚。', 'acc': 'クロガ,[1] / ヨンジュウ[1] / ニマイ.[1]'}
+{'key': 'rv_s42', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '白が、42枚。', 'acc': 'シロガ,[1] / ヨンジュウ[1] / ニマイ.[1]'}
+{'key': 'rv_k43', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '黒が、43枚。', 'acc': 'クロガ,[1] / ヨンジュウ[1] / サンマイ.[1]'}
+{'key': 'rv_s43', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、43枚。', 'acc': 'シロガ,[1] / ヨンジュウ[1] / サンマイ.[1]'}
+{'key': 'rv_k44', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、44枚。', 'acc': 'クロガ,[1] / ヨンジュウ[1] / ヨンマイ.[1]'}
+{'key': 'rv_s44', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '白が、44枚。', 'acc': 'シロガ,[1] / ヨンジュウ[1] / ヨンマイ.[1]'}
+{'key': 'rv_k45', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '黒が、45枚。', 'acc': 'クロガ,[1] / ヨンジュウ[1] / ゴマイ.[1]'}
+{'key': 'rv_s45', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '白が、45枚。', 'acc': 'シロガ,[1] / ヨンジュウ[1] / ゴマイ.[1]'}
+{'key': 'rv_k46', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、46枚。', 'acc': 'クロガ,[1] / ヨンジュウ[1] / ロクマイ.[2]'}
+{'key': 'rv_s46', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '白が、46枚。', 'acc': 'シロガ,[1] / ヨンジュウ[1] / ロクマイ.[2]'}
+{'key': 'rv_k47', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、47枚。', 'acc': 'クロガ,[1] / ヨンジュウ[1] / ナナマイ.[2]'}
+{'key': 'rv_s47', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、47枚。', 'acc': 'シロガ,[1] / ヨンジュウ[1] / ナナマイ.[2]'}
+{'key': 'rv_k48', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 3.1, 'text': '黒が、48枚。', 'acc': 'クロガ,[1] / ヨンジュウ[1] / ハチマイ.[2]'}
+{'key': 'rv_s48', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、48枚。', 'acc': 'シロガ,[1] / ヨンジュウ[1] / ハチマイ.[2]'}
+{'key': 'rv_k49', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、49枚。', 'acc': 'クロガ,[1] / ヨンジュウ[1] / キュウマイ.[1]'}
+{'key': 'rv_s49', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '白が、49枚。', 'acc': 'シロガ,[1] / ヨンジュウ[1] / キュウマイ.[1]'}
+{'key': 'rv_k50', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.8, 'text': '黒が、50枚。', 'acc': 'クロガ,[1] / ゴジュウマイ.[2]'}
+{'key': 'rv_s50', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '白が、50枚。', 'acc': 'シロガ,[1] / ゴジュウマイ.[2]'}
+{'key': 'rv_k51', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、51枚。', 'acc': 'クロガ,[1] / ゴジュウ[3] / イチマイ.[2]'}
+{'key': 'rv_s51', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '白が、51枚。', 'acc': 'シロガ,[1] / ゴジュウ[3] / イチマイ.[2]'}
+{'key': 'rv_k52', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、52枚。', 'acc': 'クロガ,[1] / ゴジュウニマイ.[4]'}
+{'key': 'rv_s52', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '白が、52枚。', 'acc': 'シロガ,[1] / ゴジュウニマイ.[4]'}
+{'key': 'rv_k53', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、53枚。', 'acc': 'クロガ,[1] / ゴジュウサンマイ.[4]'}
+{'key': 'rv_s53', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、53枚。', 'acc': 'シロガ,[1] / ゴジュウサンマイ.[4]'}
+{'key': 'rv_k54', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、54枚。', 'acc': 'クロガ,[1] / ゴジュウヨンマイ.[4]'}
+{'key': 'rv_s54', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '白が、54枚。', 'acc': 'シロガ,[1] / ゴジュウヨンマイ.[4]'}
+{'key': 'rv_k55', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '黒が、55枚。', 'acc': 'クロガ,[1] / ゴジュウゴマイ.[4]'}
+{'key': 'rv_s55', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '白が、55枚。', 'acc': 'シロガ,[1] / ゴジュウゴマイ.[4]'}
+{'key': 'rv_k56', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '黒が、56枚。', 'acc': 'クロガ,[1] / ゴジュウ[3] / ロクマイ.[2]'}
+{'key': 'rv_s56', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '白が、56枚。', 'acc': 'シロガ,[1] / ゴジュウ[3] / ロクマイ.[2]'}
+{'key': 'rv_k57', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、57枚。', 'acc': 'クロガ,[1] / ゴジュウ[3] / ナナマイ.[2]'}
+{'key': 'rv_s57', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '白が、57枚。', 'acc': 'シロガ,[1] / ゴジュウ[3] / ナナマイ.[2]'}
+{'key': 'rv_k58', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '黒が、58枚。', 'acc': 'クロガ,[1] / ゴジュウ[3] / ハチマイ.[2]'}
+{'key': 'rv_s58', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、58枚。', 'acc': 'シロガ,[1] / ゴジュウ[3] / ハチマイ.[2]'}
+{'key': 'rv_k59', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、59枚。', 'acc': 'クロガ,[1] / ゴジュウキュウマイ.[4]'}
+{'key': 'rv_s59', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '白が、59枚。', 'acc': 'シロガ,[1] / ゴジュウキュウマイ.[4]'}
+{'key': 'rv_k60', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 1.9, 'text': '黒が、60枚。', 'acc': 'クロガ,[1] / ロクジュウマイ.[3]'}
+{'key': 'rv_s60', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、60枚。', 'acc': 'シロガ,[1] / ロクジュウマイ.[3]'}
+{'key': 'rv_k61', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '黒が、61枚。', 'acc': 'クロガ,[1] / ロクジュウ[4] / イチマイ.[2]'}
+{'key': 'rv_s61', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、61枚。', 'acc': 'シロガ,[1] / ロクジュウ[4] / イチマイ.[2]'}
+{'key': 'rv_k62', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '黒が、62枚。', 'acc': 'クロガ,[1] / ロクジュウニマイ.[5]'}
+{'key': 'rv_s62', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.0, 'text': '白が、62枚。', 'acc': 'シロガ,[1] / ロクジュウニマイ.[5]'}
+{'key': 'rv_k63', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 3.0, 'text': '黒が、63枚。', 'acc': 'クロガ,[1] / ロクジュウサンマイ.[5]'}
+{'key': 'rv_s63', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、63枚。', 'acc': 'シロガ,[1] / ロクジュウサンマイ.[5]'}
+{'key': 'rv_k64', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '黒が、64枚。', 'acc': 'クロガ,[1] / ロクジュウヨンマイ.[5]'}
+{'key': 'rv_s64', 'who': 'kamejii', 'style': 'ノーマル', 'sec': 2.1, 'text': '白が、64枚。', 'acc': 'シロガ,[1] / ロクジュウヨンマイ.[5]'}
++ docker logs aivis
++ tail -40
