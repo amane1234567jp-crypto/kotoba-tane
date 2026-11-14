@@ -22,6 +22,7 @@ for who, c in cast["chars"].items():
     except Exception as e: print("install fail", who, e, getattr(e, "read", lambda: b"")()[:300])
     installed = json.loads(call("GET", "/aivm_models"))
 (OUT / "installed.json").write_text(json.dumps(installed, ensure_ascii=False, indent=1)[:300000])
+(OUT / "models_map.json").write_text(json.dumps({u: {"name": m.get("name"), "speakers": [sp["speaker"]["name"] for sp in m.get("speakers", [])]} for u, m in installed.items()}, ensure_ascii=False, indent=1))
 speakers = json.loads(call("GET", "/speakers")); (OUT / "speakers.json").write_text(json.dumps(speakers, ensure_ascii=False, indent=1))
 def style_id(model, style):
     info = installed.get(model)
