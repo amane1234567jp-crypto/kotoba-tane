@@ -211,7 +211,7 @@ if MODE == "fix":
 if MODE == "text":
     # 説明文・キーワードなど 文字だけ入れなおす（スクショは触らない）
     upsert_loc(f"/v1/appStoreVersions/{ver['id']}/appStoreVersionLocalizations", "appStoreVersionLocalizations", "appStoreVersion", "appStoreVersions", ver["id"],
-               {"description": L["description"], "keywords": L["keywords"], "supportUrl": L["supportUrl"], "promotionalText": L["promotionalText"]})
+               {"description": L["description"], "keywords": L["keywords"], "supportUrl": L["supportUrl"], "promotionalText": L["promotionalText"], **({"whatsNew": L["whatsNew"]} if L.get("whatsNew") else {})})
     upsert_loc(f"/v1/appInfos/{info['id']}/appInfoLocalizations", "appInfoLocalizations", "appInfo", "appInfos", info["id"],
                {"name": L["name"], "subtitle": L["subtitle"], "privacyPolicyUrl": L["privacyPolicyUrl"]})
 
