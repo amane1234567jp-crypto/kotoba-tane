@@ -56,18 +56,22 @@ jobs:
           sudo gem install cocoapods -N 2>&1 | tail -1 || true
           brew install fastlane 2>&1 | tail -1 || true
           xcodebuild -version | head -1; pod --version; fastlane --version 2>/dev/null | tail -1
+          # リポジトリの 外に うつして 作る（git の 中だと app/.gitignore の assets/web/ が はずされ、ゲーム本体が 入らない）
+          mkdir -p /tmp/b && rsync -a --exclude .git ./ /tmp/b/
       - name: build (local)
         env:
-          EXPO_ASC_API_KEY_PATH: ${{ github.workspace }}/app/asc.p8
+          EXPO_ASC_API_KEY_PATH: /tmp/b/asc.p8
           EXPO_ASC_KEY_ID: MKX36V742D
           EXPO_ASC_ISSUER_ID: 2fa8da34-49c0-4c52-aae7-77f748a041f7
           EXPO_APPLE_TEAM_ID: ZGYPGQ9WPN
           EXPO_APPLE_TEAM_TYPE: COMPANY_OR_ORGANIZATION
+        working-directory: /tmp/b
         run: |
           npx eas-cli build -p ios --profile ${{ steps.s.outputs.profile }} --local --non-interactive --output /tmp/out/kotoba-tane.ipa 2>&1 | tee /tmp/out/log.txt | tail -60
           ls -la /tmp/out
       - name: submit
         if: steps.s.outputs.submit == 'yes'
+        working-directory: /tmp/b
         run: |
           npx eas-cli submit -p ios --profile production --path /tmp/out/kotoba-tane.ipa --non-interactive 2>&1 | tee /tmp/out/submit.txt | tail -30
       - name: publish
