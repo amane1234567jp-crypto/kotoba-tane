@@ -1,0 +1,76 @@
+Script started on 2026-11-14 06:56:20+00:00 [COMMAND="npx eas-cli build -p ios --profile production --auto-submit" <not executed on terminal>]
+
+⠙⠹⠸Need to install the following packages:
+eas-cli@27.10.0
+Ok to proceed? (y) 
+
+⠙⠹⠸⠼⠴⠦⠧⠇⠏⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏⠋⠙⠹⠸⠼
+⠴⠦⠧⠇⠏⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏⠋⠙⠹⠸⠼⠴⠦⠧⠇npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+⠇⠏⠋npm warn deprecated rimraf@2.4.5: Rimraf versions prior to v4 are no longer supported
+⠋⠙⠹⠸⠼⠴npm warn deprecated glob@6.0.4: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+⠴npm warn deprecated http-call@5.3.0: Renamed to @heroku/http-call — please install @heroku/http-call instead.
+⠴⠦⠧⠇
+⠏npm warn deprecated uuid@7.0.3: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+⠏⠋npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+⠋npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+⠋npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+⠙npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+⠙⠹⠸⠼⠴⠦⠧⠇⠏⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏⠋⠙
+Using EAS CLI without version control system is not recommended, use this mode only if you know what you are doing.
+Failed to get Git root path with `git rev-parse --show-toplevel`. Error: git rev-parse --show-toplevel exited with non-zero code: 128
+Falling back to using current working directory as project root.
+You can set `EAS_PROJECT_ROOT` environment variable to let eas-cli know where your project is located.
+Resolved "production" environment for the build. Learn more: https://docs.expo.dev/eas/environment-variables/#setting-the-environment-for-your-builds
+No environment variables with visibility "Plain text" and "Sensitive" found for the "production" environment on EAS.
+
+
+You've used 83% of your included build credits this billing period. █████████████████████████░░░░░
+You won't be able to start new builds once you reach the limit. Upgrade your plan to continue service.: https://expo.dev/accounts/uchinoaji-app/settings/billing Run eas billing:subscribe starter --account uchinoaji-app to upgrade to the Starter plan.
+
+✔ Using remote iOS credentials (Expo server)
+
+⠋ Linking bundle identifier com.uchinoaji.kotobatane⠙ Linking bundle identifier com.uchinoaji.kotobatane⠹ Linking bundle identifier com.uchinoaji.kotobatane⠸ Linking bundle identifier com.uchinoaji.kotobatane✔ Bundle identifier registered com.uchinoaji.kotobatane
+⠋ Syncing capabilities⠙ Syncing capabilities✔ Synced capabilities: No updates
+⠋ Syncing capabilities identifiersSkipping capability identifier syncing because the current Apple authentication session is not using Cookies (username/password).
+⠋ Syncing capabilities identifiers✔ Synced capability identifiers: No updates
+⠋ Fetching Apple distribution certificates⠙ Fetching Apple distribution certificates✔ Fetched Apple distribution certificates
+⠋ Fetching Apple provisioning profiles⠙ Fetching Apple provisioning profiles⠹ Fetching Apple provisioning profiles⠸ Fetching Apple provisioning profiles⠼ Fetching Apple provisioning profiles⠴ Fetching Apple provisioning profiles⠦ Fetching Apple provisioning profiles✔ Fetched Apple provisioning profiles
+
+Project Credentials Configuration
+
+Project                   @uchinoaji-app/kotoba-tane
+Bundle Identifier         com.uchinoaji.kotobatane
+                          
+App Store Configuration   
+                          
+Distribution Certificate  
+Serial Number             3D9F11464DC17FC371991EDD49CD51BF
+Expiration Date           Mon, 27 Sep 2027 12:53:03 UTC
+Apple Team                ZGYPGQ9WPN (UCHINOAJI (Company/Organization))
+Updated                   1 month ago
+                          
+Provisioning Profile      
+Developer Portal ID       78SF3HAG8B
+Status                    active
+Expiration                Mon, 27 Sep 2027 12:53:03 UTC
+Apple Team                ZGYPGQ9WPN (UCHINOAJI (Company/Organization))
+Updated                   11 days ago
+                          
+All credentials are ready to build @uchinoaji-app/kotoba-tane (com.uchinoaji.kotobatane)
+
+
+Compressing project files and uploading to EAS Build. Learn more: https://expo.fyi/eas-build-archive
+⠋ Uploading to EAS Build (0 / 14.3 MB)⠙ Uploading to EAS Build (14.3 MB / 14.3 MB)⠹ Uploading to EAS Build (14.3 MB / 14.3 MB)⠸ Uploading to EAS Build (14.3 MB / 14.3 MB)✔ Uploaded to EAS 
+⠋ Computing project fingerprint⠙ Computing project fingerprint⠹ Computing project fingerprint⠸ Computing project fingerprint⠼ Computing project fingerprint✔ Computed project fingerprint
+This account has used its iOS builds from the Free plan this month, which will reset in 16 days (on Tue Dec 01 2026). Upgrade your plan for more builds with shorter wait times and longer timeouts, and to run more builds concurrently with a subscription plan. https://expo.dev/accounts/uchinoaji-app/settings/billing
+Run eas billing:subscribe starter --account uchinoaji-app to upgrade to the Starter plan.
+? Open the Starter plan checkout in your browser now? › (y/N)✔ Open the Starter plan checkout in your browser now? … no
+    Error: build command failed.
+⠙npm notice
+npm notice New major version of npm available! 10.9.9 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+⠙
+Script done on 2026-11-14 06:56:41+00:00 [COMMAND_EXIT_CODE="1"]
+FAILED
