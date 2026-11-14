@@ -1,1 +1,1 @@
-ios production yes # build12 ふぐあい報告フォーム
+android production no # vc5 ふぐあい報告フォーム
