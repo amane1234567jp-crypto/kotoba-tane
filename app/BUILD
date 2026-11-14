@@ -1,1 +1,1 @@
-android production no # vc4 審査用の合言葉
+ios production yes # build12 ふぐあい報告フォーム

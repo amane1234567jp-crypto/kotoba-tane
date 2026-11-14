@@ -73053,7 +73053,8 @@ function showReport() {
   ov.innerHTML = `<div class="krep-box"><div class="krep-t">ふぐあいを しらせる</div>
 <div class="krep-s">おかしな 動きや、気づいた ことを 書いて ください（音声入力も つかえます）。</div>
 <textarea class="krep-ta" maxlength="3000" placeholder="例：うちゅうの はやくちことばの とちゅうで、課題が 出た まま 盤に もどった"></textarea>
-<label class="krep-ck"><input type="checkbox" checked> あそんだ きろく（さいごの 60件）と エラーを そえる</label>
+<label class="krep-ck"><input type="checkbox" checked> あそんだ きろく（さいごの 60件。聞きとった ことばを ふくむ）と エラーを そえる</label>
+<div class="krep-note">「おくる」を おした ときだけ、書いた 文章・いまの コースと マス・端末の 種類・ゲームの 版を 開発者に おくります。名前や 連絡先は おくりません。</div>
 <div class="krep-where"></div>
 <div class="krep-row"><button type="button" class="krep-send">おくる</button><button type="button" class="krep-no">やめる</button></div></div>`;
   (document.getElementById("stage") || document.body).append(ov);
@@ -73081,6 +73082,7 @@ function showReport() {
 .krep-ta{width:100%;box-sizing:border-box;min-height:min(28vh,180px);font:inherit;font-size:clamp(15px,2vw,20px);border:3px solid #2B2A33;border-radius:14px;padding:10px;resize:vertical;-webkit-user-select:text;user-select:text}
 .krep-ck{font-size:clamp(12px,1.6vw,16px);display:flex;gap:8px;align-items:center}
 .krep-ck input{width:20px;height:20px}
+.krep-note{font-size:clamp(11px,1.4vw,14px);color:#6b5e4f;line-height:1.4}
 .krep-where{font-size:clamp(12px,1.5vw,15px);color:#6b5e4f}
 .krep-row{display:flex;gap:14px;justify-content:center}
 .krep button{font:inherit;font-size:clamp(17px,2.4vw,26px);padding:.4em 1.3em;border-radius:999px;border:4px solid #2B2A33;box-shadow:0 3px 0 #2B2A33;background:#fff;cursor:pointer;color:#2B2A33}
