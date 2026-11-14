@@ -299,7 +299,7 @@ async function lkHaya(pc) {
     if (ok) { const st = slam("いえたー！", 330, 140); later(1500, () => st.remove()); cannon(60, 1, 30); cannon(1540, -1, 30); hold(b, "clap", 2); joy(h); await speak(C.pony, "lk_y_ok", "いえたね！ すごい！ 1マス よけいに すすむよ"); }
     else { playMove(b, "laugh"); playMove(h, "laugh"); await speak(C.pony, "lk_y_ng", "おしい！ はやくちことばは、むずかしいね"); }
     await sleep(400);
-  } finally { }
+  } finally { try { setListen(h, false); taskListen(false); sg.remove(); } catch (e) { } } // 2026-11-08：とちゅうで とまっても かんばん・きいている しるしを のこさない
   setView("board"); if (ok) { await sleep(300); await forceStep(pc, 1); } return ok;
 }
 

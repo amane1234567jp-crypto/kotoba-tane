@@ -78,7 +78,7 @@ function soloLongInfo(sid) { // メニューでは みじかい なまえ（1ぎ
 if (document.getElementById("startBox")) showMenu();
 (function () { const s = document.createElement("style"); s.textContent = `.start.menu .mcard .mstages.mwide{grid-template-columns:repeat(13,minmax(0,1fr))}.start.menu .mcard{width:min(96%,1180px)}@media (max-aspect-ratio: 1/1){.start.menu .mcard .mstages.mwide{gap:4px}.start.menu .mcard .mmulti{padding:4px 18px;font-size:clamp(14px,2vw,20px)}.start.menu .mcard .mlap{padding:0 14px}}.start.menu .mst.mslong .mname{font-size:clamp(9px,1.1vw,13px);line-height:1.1}`; document.head.appendChild(s); })();
 // マスの 課題で もし エラーが おきても、ゲームが とまらない ように（盤に もどって つづける）
-{ const lc = landChild; landChild = async function (pc = P.shima) { try { return await lc(pc); } catch (e) { console.error(e); try { clearClones(); hideTask(); } catch (_) { } setView("board"); } }; }
+{ const lc = landChild; landChild = async function (pc = P.shima) { try { return await lc(pc); } catch (e) { console.error(e); try { logErr(e, "landChild"); tidyAfterError(); } catch (_) { try { clearClones(); hideTask(); } catch (__) { } } setView("board"); } }; } // 2026-11-08：きろくに のこし、かたづける（errlog.js）
 // スマホ（たての せまい がめん）：メニューは がめん いっぱいに ひろげて、4れつで スクロール
 (function () { const s = document.createElement("style"); s.textContent = `@media (max-width:700px),(max-height:520px){
 .start.menu{position:fixed!important;inset:0!important;z-index:50!important;overflow-y:auto!important;background:#FFF8E1!important;padding:8px 8px 28px!important;display:block!important}

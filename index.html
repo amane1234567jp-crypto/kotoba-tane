@@ -63350,7 +63350,7 @@ loadPack = async function (id) {
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = rnd(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const LDATA = { long: LONG }; // ステージごとの 課題の データ
 const usedL = {}; function pickL(kind, ok = () => true) { const all = (LDATA[curStage] || LONG)[kind].filter(ok); const u = usedL[curStage + kind] = usedL[curStage + kind] || new Set(); let pool = all.filter(x => !u.has(x.id)); if (!pool.length) { u.clear(); pool = all; } const x = pool[rnd(pool.length)]; u.add(x.id); return x; }
-function panel(title, color = "#FFFFFF") { const g = el("g", {}, hudLayer); el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#2B2A3388" }, g);
+function panel(title, color = "#FFFFFF") { const g = el("g", {}, hudLayer); g.__panel = true; /* エラー時に かたづける しるし（errlog.js） */ el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#2B2A3388" }, g);
   el("rect", { x: 70, y: 60, width: 1460, height: 880, rx: 40, fill: color, ...S6(8) }, g); const t = el("g", {}, g); const tw = title.length * 40 + 80;
   el("rect", { x: 800 - tw / 2, y: 30, width: tw, height: 70, rx: 35, fill: "#FFD25E", ...S6(6) }, t); txt(t, 800, 80, title, 40, { "text-anchor": "middle" }); return g; }
 function card(parent, x, y, w, h, label, emo, opt = {}) {
@@ -63830,7 +63830,7 @@ async function lkHaya(pc) {
     if (ok) { const st = slam("いえたー！", 330, 140); later(1500, () => st.remove()); cannon(60, 1, 30); cannon(1540, -1, 30); hold(b, "clap", 2); joy(h); await speak(C.pony, "lk_y_ok", "いえたね！ すごい！ 1マス よけいに すすむよ"); }
     else { playMove(b, "laugh"); playMove(h, "laugh"); await speak(C.pony, "lk_y_ng", "おしい！ はやくちことばは、むずかしいね"); }
     await sleep(400);
-  } finally { }
+  } finally { try { setListen(h, false); taskListen(false); sg.remove(); } catch (e) { } } // 2026-11-08：とちゅうで とまっても かんばん・きいている しるしを のこさない
   setView("board"); if (ok) { await sleep(300); await forceStep(pc, 1); } return ok;
 }
 
@@ -69312,7 +69312,7 @@ function soloLongInfo(sid) { // メニューでは みじかい なまえ（1ぎ
 if (document.getElementById("startBox")) showMenu();
 (function () { const s = document.createElement("style"); s.textContent = `.start.menu .mcard .mstages.mwide{grid-template-columns:repeat(13,minmax(0,1fr))}.start.menu .mcard{width:min(96%,1180px)}@media (max-aspect-ratio: 1/1){.start.menu .mcard .mstages.mwide{gap:4px}.start.menu .mcard .mmulti{padding:4px 18px;font-size:clamp(14px,2vw,20px)}.start.menu .mcard .mlap{padding:0 14px}}.start.menu .mst.mslong .mname{font-size:clamp(9px,1.1vw,13px);line-height:1.1}`; document.head.appendChild(s); })();
 // マスの 課題で もし エラーが おきても、ゲームが とまらない ように（盤に もどって つづける）
-{ const lc = landChild; landChild = async function (pc = P.shima) { try { return await lc(pc); } catch (e) { console.error(e); try { clearClones(); hideTask(); } catch (_) { } setView("board"); } }; }
+{ const lc = landChild; landChild = async function (pc = P.shima) { try { return await lc(pc); } catch (e) { console.error(e); try { logErr(e, "landChild"); tidyAfterError(); } catch (_) { try { clearClones(); hideTask(); } catch (__) { } } setView("board"); } }; } // 2026-11-08：きろくに のこし、かたづける（errlog.js）
 // スマホ（たての せまい がめん）：メニューは がめん いっぱいに ひろげて、4れつで スクロール
 (function () { const s = document.createElement("style"); s.textContent = `@media (max-width:700px),(max-height:520px){
 .start.menu{position:fixed!important;inset:0!important;z-index:50!important;overflow-y:auto!important;background:#FFF8E1!important;padding:8px 8px 28px!important;display:block!important}
@@ -71484,6 +71484,112 @@ function rideOn(c, layerBack, layerFront, k = RIDE.k) {
 // 場面の じてんしゃ（じてんしゃ コース・おでかけ・でたらめ）を のる かたちに
 rideBike = c => rideOn(c);
 odRide = c => { const g = rideOn(c, propG, hudLayer, .58); c.__bike = g; return g; };
+
+/* ================= エラーの きろく と あとかたづけ（2026-11-08） =================
+   あまねさん：ロングコース「うちゅう」の はやくちことばの とちゅうで、課題が でた まま 盤に もどって すすんで しまった。
+   課題の 中で エラーが おきると solo_long.js の まもりが「盤に もどして つづける」が、
+   ① なにが おきたか どこにも のこらない ② きいている しるし（わく・きこえた ことば）や かんばんが のこる。
+   → エラーは「あそんだ きろく」に のこし（おとなの かたへ → きろくを 見る）、盤に もどる まえに ぜんぶ かたづける。 */
+let ERR_AT = -1e9;
+function logErr(e, where) {
+  try { const t = performance.now(); if (t - ERR_AT < 2000) return; ERR_AT = t; // れんぞくで 同じ エラーが ふえすぎない ように
+    const pc = (typeof CUR_PL !== "undefined" && CUR_PL && CUR_PL.pc) || P.shima;
+    playLog({ type: "err", where: where || "", stage: typeof curStage !== "undefined" ? curStage : "", node: pc && pc.node, task: ((typeof LONG_TASKS !== "undefined" && LONG_TASKS[curStage]) || {})[pc && pc.node] || "", view: typeof view !== "undefined" ? view : "",
+      msg: String(e && e.message || e).slice(0, 200), at: String(e && e.stack || "").split("\n").slice(0, 4).map(s => s.trim()).join(" < ").slice(0, 400), ua: navigator.userAgent.replace(/Mozilla\/5\.0 /, "").slice(0, 90) }); } catch (_) { }
+}
+window.addEventListener("error", ev => logErr(ev.error || ev.message, "window"));
+window.addEventListener("unhandledrejection", ev => logErr(ev.reason, "promise"));
+// 課題の 中で とまった ときの あとかたづけ（盤に もどる まえ）
+function tidyAfterError() {
+  try { clearClones(); } catch (_) { } try { hideTask(); taskListen(false); } catch (_) { } try { unsay(); showEar(null, false); } catch (_) { }
+  try { heardEl.textContent = ""; } catch (_) { } try { delete window.__wob; delete window.__stall; } catch (_) { }
+  try { if (propG && propG.parentNode) { propG.remove(); propG = null; } } catch (_) { } // かんばん などの こどうぐ
+  try { if (typeof hudLayer !== "undefined") [...hudLayer.querySelectorAll("g")].filter(g => g.__panel).forEach(g => g.remove()); } catch (_) { }
+}
+{ const lc = landChild; landChild = async function (pc = P.shima) { try { return await lc(pc); } catch (e) { logErr(e, "landChild"); tidyAfterError(); setView("board"); } }; }
+{ const be = boardEvent; boardEvent = async function (pc) { try { return await be(pc); } catch (e) { logErr(e, "boardEvent"); tidyAfterError(); setView("board"); } }; }
+// 「あそんだ きろく」の 1ぎょう
+{ const lt = logText; logText = function () { const r = lt(); let a = []; try { a = JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); } catch (e) { }
+    const errs = a.filter(x => x.type === "err"); if (!errs.length) return r;
+    const d = t => { const x = new Date(t); return `${x.getMonth() + 1}/${x.getDate()} ${String(x.getHours()).padStart(2, "0")}:${String(x.getMinutes()).padStart(2, "0")}`; };
+    r.text = r.text.replace(/\n[^\n]*"type":"err"[^\n]*/g, "") + "\n\n⚠ エラーの きろく（Claude に 見せて ください）\n" + errs.map(x => `${d(x.t)} [${x.where}] コース ${x.stage} マス ${x.node} 課題 ${x.task} がめん ${x.view}\n   ${x.msg}\n   ${x.at}\n   ${x.ua}`).join("\n"); return r; }; }
+
+/* ================= ふぐあいを しらせる（2026-11-14） =================
+   あまねさん：「まだ バグが どこかに ひそんで いる 気が する。バグ報告用の メッセージフォームを」
+   ・ゲーム中：⏸ →「ふぐあいを しらせる」（その ときの コース・マス・がめんを いっしょに おくる）
+   ・メニュー：⚙（おとなの かたへ）→「ふぐあいを しらせる」
+   おくりさき：Supabase（uchinoaji プロジェクトの kt_reports。書きこみ だけ できる。よむのは Claude）。
+   おくれない ときは 端末に のこし、つぎに ひらいた ときに おくりなおす。 */
+const KT_REP = { url: "https://rlqeoyvevaglwngxtvrw.supabase.co/rest/v1/kt_reports", key: "sb_publishable_y30RlP3UI_NVyH8RRfydHA_UFDIMaRv", q: "kotoba-tane-reportq" };
+function repContext(withLog) {
+  const g = (f, d) => { try { const v = f(); return v === undefined ? d : v; } catch (e) { return d; } };
+  const pc = g(() => (typeof CUR_PL !== "undefined" && CUR_PL && CUR_PL.pc) || P.shima, null);
+  const stg = g(() => curStage, "");
+  const c = { ver: (new URLSearchParams(location.search).get("v")) || "", app: !!window.KT_APP, uchi: /uchi/.test(location.search), ua: navigator.userAgent.slice(0, 200),
+    scr: `${innerWidth}x${innerHeight}@${devicePixelRatio}`, inGame: !document.getElementById("startBox"), stage: stg, node: pc && pc.node, mode: g(() => MODE, ""),
+    task: g(() => (LONG_TASKS[stg] || {})[pc.node] || "", ""), view: g(() => view, ""), L: g(() => E.L, null), lap: g(() => SAVE.lap, null), at: new Date().toISOString() };
+  if (withLog) { let a = []; try { a = JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); } catch (e) { }
+    c.errs = a.filter(x => x.type === "err").slice(-15); c.log = a.slice(-60); }
+  return c;
+}
+async function repPost(rec) {
+  const r = await fetch(KT_REP.url, { method: "POST", headers: { "Content-Type": "application/json", apikey: KT_REP.key, Prefer: "return=minimal" }, body: JSON.stringify(rec) });
+  if (!r.ok) throw new Error("HTTP " + r.status); }
+function repQueue(rec) { try { const a = JSON.parse(localStorage.getItem(KT_REP.q) || "[]"); a.push(rec); localStorage.setItem(KT_REP.q, JSON.stringify(a.slice(-10))); } catch (e) { } }
+async function repFlush() { let a = []; try { a = JSON.parse(localStorage.getItem(KT_REP.q) || "[]"); } catch (e) { } if (!a.length) return;
+  const left = []; for (const rec of a) { try { await repPost(rec); } catch (e) { left.push(rec); } }
+  try { if (left.length) localStorage.setItem(KT_REP.q, JSON.stringify(left)); else localStorage.removeItem(KT_REP.q); } catch (e) { } }
+setTimeout(() => { repFlush(); }, 8000);
+function showReport() {
+  if (document.querySelector(".krep")) return;
+  const ctx0 = repContext(false); // ひらいた しゅんかんの ようす（コース・マス・がめん）
+  const ov = document.createElement("div"); ov.className = "krep";
+  ov.innerHTML = `<div class="krep-box"><div class="krep-t">ふぐあいを しらせる</div>
+<div class="krep-s">おかしな 動きや、気づいた ことを 書いて ください（音声入力も つかえます）。</div>
+<textarea class="krep-ta" maxlength="3000" placeholder="例：うちゅうの はやくちことばの とちゅうで、課題が 出た まま 盤に もどった"></textarea>
+<label class="krep-ck"><input type="checkbox" checked> あそんだ きろく（さいごの 60件。聞きとった ことばを ふくむ）と エラーを そえる</label>
+<div class="krep-note">「おくる」を おした ときだけ、書いた 文章・いまの コースと マス・端末の 種類・ゲームの 版を 開発者に おくります。名前や 連絡先は おくりません。</div>
+<div class="krep-where"></div>
+<div class="krep-row"><button type="button" class="krep-send">おくる</button><button type="button" class="krep-no">やめる</button></div></div>`;
+  (document.getElementById("stage") || document.body).append(ov);
+  const ta = ov.querySelector(".krep-ta"), send = ov.querySelector(".krep-send"), ck = ov.querySelector("input");
+  ov.querySelector(".krep-where").textContent = ctx0.inGame ? `いまの ばしょ：コース ${ctx0.stage || "-"}／マス ${ctx0.node ?? "-"}${ctx0.task ? "（" + ctx0.task + "）" : ""} も いっしょに おくります` : "";
+  ov.querySelector(".krep-no").onclick = () => ov.remove();
+  ["keydown", "keyup", "keypress"].forEach(t => ta.addEventListener(t, e => e.stopPropagation())); // ゲームの キー操作に とられない
+  setTimeout(() => ta.focus(), 50);
+  send.onclick = async () => {
+    const body = ta.value.trim(); if (!body) { ta.focus(); ta.placeholder = "なにか ひとこと 書いて ください"; return; }
+    send.disabled = true; send.textContent = "おくって います…";
+    const c = repContext(ck.checked); Object.assign(c, { stage: ctx0.stage, node: ctx0.node, task: ctx0.task, view: ctx0.view, inGame: ctx0.inGame });
+    const rec = { body, ctx: c }; let ok = false;
+    try { await repPost(rec); ok = true; } catch (e) { repQueue(rec); }
+    const box = ov.querySelector(".krep-box");
+    box.innerHTML = `<div class="krep-t">${ok ? "おくりました" : "いまは おくれませんでした"}</div><div class="krep-s">${ok ? "ありがとうございます。Claude が 見て なおします。" : "この 端末に のこしました。つぎに ひらいた ときに、じどうで おくりなおします。"}</div><div class="krep-row"><button type="button" class="krep-no">とじる</button></div>`;
+    box.querySelector(".krep-no").onclick = () => ov.remove();
+  };
+}
+{ const st = document.createElement("style"); st.textContent = `
+.krep{position:absolute;inset:0;z-index:300;background:#2B2A3399;display:grid;place-items:center}
+.krep-box{background:#FFF8E8;border:5px solid #2B2A33;border-radius:26px;box-shadow:0 6px 0 #2B2A33;padding:18px 22px;width:min(90%,640px);display:grid;gap:10px;font-family:inherit}
+.krep-t{font-size:clamp(20px,3vw,30px);text-align:center}
+.krep-s{font-size:clamp(13px,1.8vw,18px);color:#4A4A55;text-align:center}
+.krep-ta{width:100%;box-sizing:border-box;min-height:min(28vh,180px);font:inherit;font-size:clamp(15px,2vw,20px);border:3px solid #2B2A33;border-radius:14px;padding:10px;resize:vertical;-webkit-user-select:text;user-select:text}
+.krep-ck{font-size:clamp(12px,1.6vw,16px);display:flex;gap:8px;align-items:center}
+.krep-ck input{width:20px;height:20px}
+.krep-note{font-size:clamp(11px,1.4vw,14px);color:#6b5e4f;line-height:1.4}
+.krep-where{font-size:clamp(12px,1.5vw,15px);color:#6b5e4f}
+.krep-row{display:flex;gap:14px;justify-content:center}
+.krep button{font:inherit;font-size:clamp(17px,2.4vw,26px);padding:.4em 1.3em;border-radius:999px;border:4px solid #2B2A33;box-shadow:0 3px 0 #2B2A33;background:#fff;cursor:pointer;color:#2B2A33}
+.krep .krep-send{background:#7BD389}
+.krep button:disabled{opacity:.6}
+#pauseBox .prep{font-size:clamp(14px,2vw,20px)!important;padding:6px 22px!important;background:#FFFFFF;border-width:3px!important}`; document.head.appendChild(st); }
+// ⏸ の ひとやすみ がめんに ボタンを たす
+setInterval(() => { const c = document.querySelector("#pauseBox .pcard"); if (!c || c.querySelector(".prep")) return;
+  const b = document.createElement("button"); b.type = "button"; b.className = "prep"; b.textContent = "ふぐあいを しらせる"; b.onclick = showReport; c.append(b); }, 300);
+// おとなの かたへ（⚙）に ボタンを たす
+setInterval(() => { document.querySelectorAll(".madult").forEach(ad => { if (ad.querySelector(".mrep")) return;
+  const b = document.createElement("button"); b.type = "button"; b.className = "mreset mrep"; b.textContent = "ふぐあいを しらせる"; b.onclick = showReport;
+  const lg = [...ad.querySelectorAll("button")].find(x => /きろくを 見る/.test(x.textContent)); if (lg) lg.after(b); else ad.prepend(b); }); }, 500);
 
 </script>
 
