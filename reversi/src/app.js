@@ -226,6 +226,14 @@ function bubbleAt(c) {
    ファイルがないとき（1枚だけの確認版など）は、端末の読み上げにまかせる。 */
 const VOICE_DIR = "voice/out/", vbuf = {};
 const vload = {};
+// 声の読みこみは 音の出口（AudioContext）を使わず、オフライン用の箱で行う＝さわる前（開始画面）から読みはじめられる
+let dec = null;
+function decoder() {
+  if (dec) return dec;
+  const O = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+  try { dec = O ? new O(1, 1, 44100) : audio(); } catch (e) { dec = audio(); }
+  return dec;
+}
 // 同じ声を2回読まない。読みかけなら その読みこみを待つ（前は 読みかけだと すぐ null を返していて、待てていなかった）
 function loadVoice(key) {
   if (vbuf[key]) return Promise.resolve(vbuf[key]);
@@ -234,7 +242,7 @@ function loadVoice(key) {
     try {
       const r = await fetch(VOICE_DIR + key + ".mp3"); if (!r.ok) throw new Error("http " + r.status);
       const data = await r.arrayBuffer();
-      vbuf[key] = await new Promise((ok, ng) => audio().decodeAudioData(data, ok, ng));
+      vbuf[key] = await new Promise((ok, ng) => decoder().decodeAudioData(data, ok, ng));
     } catch (e) { vbuf[key] = null; SOUND.voiceErr = key + ":" + String(e && e.message || e).slice(0, 40); delete vload[key]; }
     return vbuf[key];
   })();
@@ -242,10 +250,27 @@ function loadVoice(key) {
 // 数の声（くろが Nこ…）は 終局のときに 2本だけ読む。ほかは はじめに読んでおく
 // はじめの「くろからだよ」（rv_start）を先に読み、残りは そのあと（いっせいに読むと 最初の声が間に合わず、端末の別の声になった 2026-11-14）
 let preloading = null;
+const PRE_KEYS = () => ["rv_start", ...Object.keys(VOICE_TEXT).filter(k => k !== "rv_start" && !/^rv_[ks]\d+$/.test(k))];
+const VLOAD = { done: 0, total: 0 };
 const preloadVoices = () => preloading || (preloading = (async () => {
-  await loadVoice("rv_start");
-  Object.keys(VOICE_TEXT).filter(k => !/^rv_[ks]\d+$/.test(k)).forEach(k => loadVoice(k));
+  const keys = PRE_KEYS(); VLOAD.total = keys.length;
+  await loadVoice(keys[0]); VLOAD.done = 1;
+  await Promise.all(keys.slice(1).map(k => loadVoice(k).then(() => { VLOAD.done++; })));
 })());
+/* 2026-11-14：はじまる前に 声がそろっていなければ「じゅんびちゅう」の画面（石がくるくる返る・進みぐあい）を出して待つ。
+   ふつうは 開始画面を見ているあいだに 読みおわるので、出ることは少ない */
+async function voicesReady() {
+  if (!CFG.voice) return;
+  const p = preloadVoices();
+  if (VLOAD.total && VLOAD.done >= VLOAD.total) return;
+  const ov = $("loadOv"), bar = $("loadBar"), pct = $("loadPct");
+  let shown = false;
+  const showT = setTimeout(() => { shown = true; ov.hidden = false; }, 250);   // すぐ終わるときは 出さない
+  const tick = setInterval(() => { const r = VLOAD.total ? VLOAD.done / VLOAD.total : 0; bar.style.width = Math.round(r * 100) + "%"; pct.textContent = Math.round(r * 100) + "%"; }, 100);
+  await Promise.race([p, wait(15000)]);
+  clearTimeout(showT); clearInterval(tick);
+  if (shown) { bar.style.width = "100%"; pct.textContent = "100%"; await wait(350); ov.hidden = true; }
+}
 function playBuf(buf) {
   return new Promise(res => {
     const s = ctx.createBufferSource(), g = ctx.createGain();
@@ -512,6 +537,7 @@ async function newGame(announce = true) {
   G.hist = []; G.ended = false; G.busy = true; G.animating = true; saveGame(); clearHalo();
   cur = replay([]); paintSides(); paint(cur.board); setCounts(cur.board, false); updateButtons();
   if (announce) {
+    await voicesReady();
     await showHost(host.kame);
     act("A", "turn"); act("B", "turn");
     await speak(host.kame, "rv_start");
@@ -1156,3 +1182,6 @@ function frame(now) {
   stepMarks(dt); stepConfetti(dt); FX.step(dt);
 }
 requestAnimationFrame(frame);
+
+// 開始画面を見ているあいだに 声を読みはじめる（2026-11-14）
+setTimeout(() => { try { if (CFG.voice) preloadVoices(); } catch (e) { } }, 400);

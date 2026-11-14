@@ -276,6 +276,20 @@ body {
   .matta { grid-column: 2; grid-row: 3; }
 }
 @media (prefers-reduced-motion: reduce) { .hint i, .side.active::after { animation-duration: 4s; } }
+
+/* じゅんびちゅう（声の読みこみ）2026-11-14 */
+#loadOv { background: rgba(231, 242, 236, .86); }
+.loadBox { display: grid; justify-items: center; gap: 14px; font-family: var(--display); color: var(--ink); }
+.loadDiscs { display: flex; gap: 12px; perspective: 400px; }
+.loadDiscs i { width: 46px; height: 46px; border-radius: 50%; background: #2B2A33; box-shadow: inset 0 -5px 0 rgba(0,0,0,.35), 0 4px 0 rgba(0,0,0,.18); animation: rvFlip 1.6s ease-in-out infinite; }
+.loadDiscs i:nth-child(2) { animation-delay: .2s; } .loadDiscs i:nth-child(3) { animation-delay: .4s; } .loadDiscs i:nth-child(4) { animation-delay: .6s; }
+@keyframes rvFlip { 0%, 30% { transform: rotateY(0) translateY(0); background: #2B2A33; } 45% { transform: rotateY(90deg) translateY(-14px); } 50% { background: #FFFFFF; } 60%, 80% { transform: rotateY(180deg) translateY(0); background: #FFFFFF; } 95% { transform: rotateY(270deg) translateY(-14px); } 96% { background: #2B2A33; } 100% { transform: rotateY(360deg); background: #2B2A33; } }
+.loadTxt { font-size: clamp(22px, 5vmin, 34px); }
+.loadTrack { width: min(70vw, 320px); height: 16px; border: 3px solid var(--ink); border-radius: 999px; background: #fff; overflow: hidden; }
+.loadBar { height: 100%; width: 0; background: var(--glow); transition: width .2s; }
+.loadPct { font-size: 20px; }
+.row.about { display: block; } .row.about p { margin: 0 0 .4em; font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: reduce) { .loadDiscs i { animation-duration: 3.2s; } }
 </style>
 
 <div id="app">
@@ -393,6 +407,14 @@ body {
     <div class="panelBtns"><button type="button" id="quitNo" class="primary">つづける</button><button type="button" id="quitYes">やめる</button></div>
   </div>
 </div>
+<div class="cover" id="loadOv" hidden>
+  <div class="loadBox" role="status" aria-live="polite">
+    <div class="loadDiscs"><i></i><i></i><i></i><i></i></div>
+    <div class="loadTxt">じゅんびちゅう…</div>
+    <div class="loadTrack"><div class="loadBar" id="loadBar"></div></div>
+    <div class="loadPct" id="loadPct">0%</div>
+  </div>
+</div>
 <div class="cover" id="settings" hidden>
   <div class="panel settings" role="dialog" aria-label="おとなの せってい">
     <div class="panelHead"><h2>おとなの せってい</h2><button type="button" class="xBtn" id="closeX" aria-label="とじる">×</button></div>
@@ -413,6 +435,10 @@ body {
       <div class="panelBtns"><button type="button" id="pushOn">この端末で よびだしを うけとる</button><button type="button" id="pushOff" hidden>よびだしを うけとらない</button></div></div>
     <h3>遠隔対戦（10回まで無料）</h3>
     <div class="row"><span class="route" id="remoteInfo"></span><div class="seg" data-key="devUnlock"><button type="button" id="devUnlock0" data-v="0">ふつう</button><button type="button" id="devUnlock1" data-v="1">テスト用に解放</button></div></div>
+    <h3>このアプリについて</h3>
+    <div class="row about"><p>テレビ電話リバーシ（まるシマ）　© UCHINOAJI</p>
+      <p>声（音声合成）：VOICEVOX:四国めたん（<a href="https://voicevox.hiroshiba.jp/" target="_blank" rel="noopener">VOICEVOX</a>）／AivisSpeech の音声合成モデル「ろてじん（長老ボイス）」（作者：ろてじん・ACML 1.0）</p>
+      <p>文字：Mochiy Pop One・Zen Maru Gothic（SIL Open Font License）。効果音はアプリの中で合成しています。</p></div>
     <h3>テスト用</h3>
     <div class="row"><span>つながり方（「中継だけ」は、家の外でもつながるかを家の中で確かめるとき）</span><div class="seg" data-key="relay"><button type="button" id="relay0" data-v="0">ふつう</button><button type="button" id="relay1" data-v="1">中継だけ</button></div><span class="route" id="routeInfo"></span></div>
     <div class="panelBtns"><button type="button" id="resetBtn">さいしょから</button><button type="button" id="closeBtn" class="primary">とじる</button></div>
