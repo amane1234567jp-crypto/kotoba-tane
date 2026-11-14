@@ -1,0 +1,31 @@
+Using EAS CLI without version control system is not recommended, use this mode only if you know what you are doing.
+Failed to get Git root path with `git rev-parse --show-toplevel`. Error: git rev-parse --show-toplevel exited with non-zero code: 128
+Falling back to using current working directory as project root.
+You can set `EAS_PROJECT_ROOT` environment variable to let eas-cli know where your project is located.
+
+Uploading your app archive to EAS Submit
+- Uploading to EAS Submit 0%
+✔ Uploaded to EAS Submit 
+No complete App Store Connect credentials, skipping TestFlight setup
+
+ASC App ID:                 6829634922
+Project ID:                 ec8f3ba4-bb45-4e86-9d2d-99d76f289b68
+App Store Connect API Key:  
+    Key ID    :  MKX36V742D
+    Key Source:  local
+    Key Path  :  ./asc.p8
+Archive Path:               /tmp/out/kotoba-tane.ipa
+
+- Scheduling iOS submission
+✔ Scheduled iOS submission
+
+Submission details: https://expo.dev/accounts/uchinoaji-app/projects/kotoba-tane/submissions/aaff565d-3f99-4e4d-a042-578a848ea944
+
+Waiting for submission to complete. You can press Ctrl+C to exit.
+- Submitting
+✔ Submitted your app to Apple App Store Connect!
+
+Your binary has been successfully uploaded to App Store Connect!
+- It is now being processed by Apple - you will receive an email when the processing finishes.
+- It usually takes about 5-10 minutes depending on how busy Apple servers are.
+- When it's done, you can see your build here: https://appstoreconnect.apple.com/apps/6829634922/testflight/ios

@@ -1,0 +1,918 @@
+npm warn exec The following package was not found and will be installed: eas-cli@27.10.0
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated rimraf@2.4.5: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated glob@6.0.4: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated http-call@5.3.0: Renamed to @heroku/http-call — please install @heroku/http-call instead.
+npm warn deprecated uuid@7.0.3: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+Using EAS CLI without version control system is not recommended, use this mode only if you know what you are doing.
+Failed to get Git root path with `git rev-parse --show-toplevel`. Error: git rev-parse --show-toplevel exited with non-zero code: 128
+Falling back to using current working directory as project root.
+You can set `EAS_PROJECT_ROOT` environment variable to let eas-cli know where your project is located.
+Resolved "production" environment for the build. Learn more: https://docs.expo.dev/eas/environment-variables/#setting-the-environment-for-your-builds
+No environment variables with visibility "Plain text" and "Sensitive" found for the "production" environment on EAS.
+
+✔ Using remote iOS credentials (Expo server)
+
+Distribution Certificate is not validated for non-interactive builds.
+- Fetching Apple provisioning profiles
+✔ Fetched Apple provisioning profiles
+
+Project Credentials Configuration
+
+Project                   @uchinoaji-app/kotoba-tane
+Bundle Identifier         com.uchinoaji.kotobatane
+                          
+App Store Configuration   
+                          
+Distribution Certificate  
+Serial Number             3D9F11464DC17FC371991EDD49CD51BF
+Expiration Date           Mon, 27 Sep 2027 12:53:03 UTC
+Apple Team                ZGYPGQ9WPN (UCHINOAJI (Company/Organization))
+Updated                   1 month ago
+                          
+Provisioning Profile      
+Developer Portal ID       78SF3HAG8B
+Status                    active
+Expiration                Mon, 27 Sep 2027 12:53:03 UTC
+Apple Team                ZGYPGQ9WPN (UCHINOAJI (Company/Organization))
+Updated                   12 days ago
+                          
+All credentials are ready to build @uchinoaji-app/kotoba-tane (com.uchinoaji.kotobatane)
+
+- Compressing project files
+- Computing project fingerprint
+✔ Computed project fingerprint
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated rimraf@2.4.5: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated glob@6.0.4: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated uuid@7.0.3: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+npm warn deprecated uuid@9.0.1: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+[SETUP_WORKINGDIR] Preparing workingdir /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e
+[START_BUILD] Starting build
+  "job": {
+    "type": "managed",
+    "platform": "ios",
+    "projectArchive": {
+      "type": "PATH",
+      "path": "/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-cli-nodejs/43a7144e-975f-4d77-8082-5f588561e766.tar.gz"
+    },
+    "projectRootDirectory": ".",
+    "builderEnvironment": {
+      "env": {}
+    },
+    "cache": {
+      "disabled": false,
+      "paths": [],
+      "clear": false
+    },
+    "updates": {},
+    "scheme": "app",
+    "username": "uchinoaji",
+    "experimental": {},
+    "mode": "build",
+    "triggeredBy": "EAS_CLI",
+    "appId": "ec8f3ba4-bb45-4e86-9d2d-99d76f289b68",
+    "initiatingUserId": "5a22e068-a9c4-4ce2-bf47-993318bd2703"
+  }
+[PREPARE_PROJECT] Normalizing project source permissions
+[READ_EAS_JSON] Using eas.json:
+[READ_EAS_JSON] {
+  "cli": { "version": ">= 27.0.0", "appVersionSource": "local" },
+  "build": {
+    "preview": { "distribution": "internal", "android": { "buildType": "apk" }, "ios": { "simulator": false } },
+    "production": { "android": { "buildType": "app-bundle" } }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "ascAppId": "6829634922",
+        "appleTeamId": "ZGYPGQ9WPN",
+        "ascApiKeyPath": "./asc.p8",
+        "ascApiKeyIssuerId": "2fa8da34-49c0-4c52-aae7-77f748a041f7",
+        "ascApiKeyId": "MKX36V742D"
+      }
+    }
+  }
+}
+
+[READ_PACKAGE_JSON] Using package.json:
+[READ_PACKAGE_JSON] {
+  "name": "kotoba-tane-app",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "web": "node scripts/copy-web.js"
+  },
+  "dependencies": {
+    "expo": "58.0.22",
+    "expo-asset": "~58.0.19",
+    "expo-build-properties": "~58.0.12",
+    "expo-file-system": "~58.0.13",
+    "expo-iap": "6.4.1",
+    "expo-keep-awake": "~58.0.3",
+    "expo-navigation-bar": "~58.0.4",
+    "expo-speech-recognition": "58.0.1",
+    "expo-splash-screen": "~58.0.12",
+    "expo-status-bar": "~58.0.4",
+    "react": "19.3.0",
+    "react-native": "0.88.1",
+    "react-native-webview": "14.0.1"
+  },
+  "devDependencies": {
+    "@fontsource/mochiy-pop-one": "5.3.0",
+    "@fontsource/zen-maru-gothic": "5.3.1"
+  }
+}
+[INSTALL_DEPENDENCIES] Running "npm ci --include=dev" in /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build directory
+[INSTALL_DEPENDENCIES] added 464 packages, and audited 465 packages in 22s
+[INSTALL_DEPENDENCIES] 
+[INSTALL_DEPENDENCIES] 49 packages are looking for funding
+[INSTALL_DEPENDENCIES]   run `npm fund` for details
+[INSTALL_DEPENDENCIES] 8 moderate severity vulnerabilities
+[INSTALL_DEPENDENCIES] 
+[INSTALL_DEPENDENCIES] To address all issues, run:
+[INSTALL_DEPENDENCIES]   npm audit fix
+[INSTALL_DEPENDENCIES] 
+[INSTALL_DEPENDENCIES] Run `npm audit` for details.
+The NODE_ENV environment variable is required but was not specified. Ensure the project is bundled with Expo CLI or NODE_ENV is set.
+Proceeding without mode-specific .env
+[READ_APP_CONFIG] Using app configuration:
+[READ_APP_CONFIG] {
+  "name": "ことばのたね",
+  "slug": "kotoba-tane",
+  "owner": "uchinoaji-app",
+  "version": "1.0.0",
+  "orientation": "landscape",
+  "icon": "./assets/icon.png",
+  "userInterfaceStyle": "light",
+  "backgroundColor": "#FFF8E8",
+  "assetBundlePatterns": [
+    "assets/web/*"
+  ],
+  "ios": {
+    "bundleIdentifier": "com.uchinoaji.kotobatane",
+    "buildNumber": "12",
+    "supportsTablet": true,
+    "requireFullScreen": true,
+    "infoPlist": {
+      "ITSAppUsesNonExemptEncryption": false,
+      "UIStatusBarHidden": true,
+      "UIViewControllerBasedStatusBarAppearance": false,
+      "CFBundleDevelopmentRegion": "ja",
+      "CFBundleLocalizations": [
+        "ja"
+      ],
+      "NSSpeechRecognitionUsageDescription": "お子さんが言った言葉がお手本と合っているかを調べるために、音声認識を使います。",
+      "NSMicrophoneUsageDescription": "話す練習で、お子さんの声を聞き取るためにマイクを使います。",
+      "NSPhotoLibraryUsageDescription": "このアプリでは写真を読み込みません。",
+      "NSCameraUsageDescription": "このアプリではカメラを使いません。"
+    }
+  },
+  "android": {
+    "package": "com.uchinoaji.kotobatane",
+    "versionCode": 5,
+    "adaptiveIcon": {
+      "foregroundImage": "./assets/adaptive-fg.png",
+      "backgroundColor": "#FFC94F"
+    },
+    "permissions": [
+      "android.permission.RECORD_AUDIO",
+      "com.android.vending.BILLING"
+    ],
+    "blockedPermissions": [
+      "android.permission.READ_EXTERNAL_STORAGE",
+      "android.permission.WRITE_EXTERNAL_STORAGE",
+      "android.permission.SYSTEM_ALERT_WINDOW"
+    ]
+  },
+  "plugins": [
+    [
+      "expo-splash-screen",
+      {
+        "image": "./assets/splash.png",
+        "imageWidth": 220,
+        "backgroundColor": "#FFF8E8"
+      }
+    ],
+    [
+      "expo-speech-recognition",
+      {
+        "microphonePermission": "話す練習で、お子さんの声を聞き取るためにマイクを使います。",
+        "speechRecognitionPermission": "お子さんが言った言葉がお手本と合っているかを調べるために、音声認識を使います。",
+        "androidSpeechServicePackages": [
+          "com.google.android.googlequicksearchbox",
+          "com.google.android.tts"
+        ]
+      }
+    ],
+    [
+      "expo-iap",
+      {
+        "android": {
+          "store": "play"
+        }
+      }
+    ],
+    [
+      "expo-build-properties",
+      {
+        "ios": {
+          "deploymentTarget": "16.4"
+        },
+        "android": {
+          "minSdkVersion": 26
+        }
+      }
+    ]
+  ],
+  "extra": {
+    "eas": {
+      "projectId": "ec8f3ba4-bb45-4e86-9d2d-99d76f289b68"
+    }
+  },
+  "sdkVersion": "58.0.0",
+  "platforms": [
+    "ios",
+    "android"
+  ]
+}
+[RUN_EXPO_DOCTOR] Running "expo doctor"
+[RUN_EXPO_DOCTOR] Running 20 checks on your project...
+[RUN_EXPO_DOCTOR] 19/20 checks passed. 1 checks failed. Possible issues detected:
+[RUN_EXPO_DOCTOR] Use the --verbose flag to see more details about passed checks.
+[RUN_EXPO_DOCTOR] 
+[RUN_EXPO_DOCTOR] ✖ Check that packages match versions required by installed Expo SDK
+[RUN_EXPO_DOCTOR] 
+[RUN_EXPO_DOCTOR] 🔧 Patch version mismatches
+[RUN_EXPO_DOCTOR] package             expected  found    
+[RUN_EXPO_DOCTOR] expo                ~58.0.25  58.0.22  
+[RUN_EXPO_DOCTOR] expo-asset          ~58.0.21  58.0.19  
+[RUN_EXPO_DOCTOR] expo-keep-awake     ~58.0.4   58.0.3   
+[RUN_EXPO_DOCTOR] expo-splash-screen  ~58.0.14  58.0.12  
+[RUN_EXPO_DOCTOR] expo-status-bar     ~58.0.5   58.0.4   
+[RUN_EXPO_DOCTOR] 
+[RUN_EXPO_DOCTOR] Changelogs:
+[RUN_EXPO_DOCTOR] - expo-asset → https://github.com/expo/expo/blob/sdk-58/packages/expo-asset/CHANGELOG.md
+[RUN_EXPO_DOCTOR] - expo-keep-awake → https://github.com/expo/expo/blob/sdk-58/packages/expo-keep-awake/CHANGELOG.md
+[RUN_EXPO_DOCTOR] - expo-splash-screen → https://github.com/expo/expo/blob/sdk-58/packages/expo-splash-screen/CHANGELOG.md
+[RUN_EXPO_DOCTOR] - expo-status-bar → https://github.com/expo/expo/blob/sdk-58/packages/expo-status-bar/CHANGELOG.md
+[RUN_EXPO_DOCTOR] 
+[RUN_EXPO_DOCTOR] 5 packages out of date.
+[RUN_EXPO_DOCTOR] Advice:
+[RUN_EXPO_DOCTOR] Use 'npx expo install --check' to review and upgrade your dependencies.
+[RUN_EXPO_DOCTOR] To ignore specific packages, add them to "expo.install.exclude" in package.json. Learn more: https://expo.fyi/dependency-validation
+[RUN_EXPO_DOCTOR] 1 check failed, indicating possible issues with the project.
+[RUN_EXPO_DOCTOR] Command "expo doctor" failed.
+Error: npx -y expo-doctor exited with non-zero code: 1
+    at ChildProcess.completionListener (/Users/runner/.npm/_npx/b403ec6be95bf9ef/node_modules/@expo/spawn-async/build/spawnAsync.js:113:23)
+    at Object.onceWrapper (node:events:634:26)
+    at ChildProcess.emit (node:events:519:28)
+    at ChildProcess.emit (node:domain:489:12)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:456:11)
+    at Socket.emit (node:events:519:28)
+    at Socket.emit (node:domain:489:12)
+    at Pipe.<anonymous> (node:net:347:12)
+    ...
+    at spawnAsync (/Users/runner/.npm/_npx/b403ec6be95bf9ef/node_modules/@expo/spawn-async/build/spawnAsync.js:9:23)
+    at spawn (/Users/runner/.npm/_npx/b403ec6be95bf9ef/node_modules/@expo/turtle-spawn/dist/index.js:16:47)
+    at runExpoDoctor (/Users/runner/.npm/_npx/b403ec6be95bf9ef/node_modules/@expo/build-tools/dist/common/setup.js:163:52)
+    at async /Users/runner/.npm/_npx/b403ec6be95bf9ef/node_modules/@expo/build-tools/dist/common/setup.js:142:17
+    at async BuildContext.runBuildPhase (/Users/runner/.npm/_npx/b403ec6be95bf9ef/node_modules/@expo/build-tools/dist/context.js:131:28)
+    at async setupAsync (/Users/runner/.npm/_npx/b403ec6be95bf9ef/node_modules/@expo/build-tools/dist/common/setup.js:140:9)
+    at async buildInnerAsync (/Users/runner/.npm/_npx/b403ec6be95bf9ef/node_modules/@expo/build-tools/dist/builders/ios.js:67:5)
+    at async buildAsync (/Users/runner/.npm/_npx/b403ec6be95bf9ef/node_modules/@expo/build-tools/dist/builders/ios.js:57:9)
+    at async runBuilderWithHooksAsync (/Users/runner/.npm/_npx/b403ec6be95bf9ef/node_modules/@expo/build-tools/dist/builders/common.js:13:13)
+    at async Object.iosBuilder (/Users/runner/.npm/_npx/b403ec6be95bf9ef/node_modules/@expo/build-tools/dist/builders/ios.js:42:16)
+[PREPARE_CREDENTIALS] Preparing credentials
+[PREPARE_CREDENTIALS] Creating keychain
+[PREPARE_CREDENTIALS] Preparing credentials for target 'app'
+[PREPARE_CREDENTIALS] Getting distribution certificate fingerprint and common name
+[PREPARE_CREDENTIALS] Fingerprint = "99F45201A800B56D1273FCB98F01E307227D4910", common name = iPhone Distribution: UCHINOAJI (ZGYPGQ9WPN)
+[PREPARE_CREDENTIALS] Writing distribution certificate to /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/282d2c0d-afcd-4f6f-842c-1f328419067c.p12
+[PREPARE_CREDENTIALS] Importing distribution certificate into the keychain
+[PREPARE_CREDENTIALS] Initializing provisioning profile
+[PREPARE_CREDENTIALS] Validating whether the distribution certificate has been imported successfully
+[PREPARE_CREDENTIALS] Verifying whether the distribution certificate and provisioning profile match
+[PREBUILD] 🔍 [expo-iap] Config values: horizonAppId=undefined, pinnedStore=play, amazonAppstoreKey=none, vega=auto, onside=false
+[PREBUILD] 📦 [expo-iap] Using OpenIAP from CocoaPods
+[PREBUILD] - Creating native directory (./ios)
+[PREBUILD] ✔ Created native directory
+[PREBUILD] - Updating package.json
+[PREBUILD] ✔ Updated package.json | no changes
+[PREBUILD] - Running prebuild
+[PREBUILD] » ios: ios.backgroundColor: Install expo-system-ui to enable this feature https://docs.expo.dev/versions/latest/sdk/system-ui/
+[PREBUILD] - Running prebuild
+[PREBUILD] 📦 expo-iap: Added CocoaPods CDN source to Podfile
+[PREBUILD] - Running prebuild
+[PREBUILD] ✔ Finished prebuild
+[PREBUILD] Running "npm install --include=dev" in /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build directory
+[PREBUILD] up to date, audited 465 packages in 1s
+[PREBUILD] 
+[PREBUILD] 49 packages are looking for funding
+[PREBUILD]   run `npm fund` for details
+[PREBUILD] 8 moderate severity vulnerabilities
+[PREBUILD] 
+[PREBUILD] To address all issues, run:
+[PREBUILD]   npm audit fix
+[PREBUILD] 
+[PREBUILD] Run `npm audit` for details.
+[RESTORE_CACHE] Local builds do not support restoring cache
+[INSTALL_PODS] Using Expo modules
+[INSTALL_PODS] [Expo] Enabling modular headers for pod ExpoModulesCore
+[INSTALL_PODS] [Expo] Enabling modular headers for pod React-Core
+[INSTALL_PODS] [Expo] Enabling modular headers for pod ExpoModulesJSI
+[INSTALL_PODS] [Expo] Enabling modular headers for pod React-RCTAppDelegate
+[INSTALL_PODS] [Expo] Enabling modular headers for pod React-RCTFabric
+[INSTALL_PODS] [Expo] Enabling modular headers for pod ReactAppDependencyProvider
+[INSTALL_PODS] [Expo] Enabling modular headers for pod ReactCodegen
+[INSTALL_PODS] [Expo] Enabling modular headers for pod RCTRequired
+[INSTALL_PODS] [Expo] Enabling modular headers for pod RCTTypeSafety
+[INSTALL_PODS] [Expo] Enabling modular headers for pod React-bridging
+[INSTALL_PODS] [Expo] Enabling modular headers for pod ReactCommon
+[INSTALL_PODS] [Expo] Enabling modular headers for pod React-NativeModulesApple
+[INSTALL_PODS] [Expo] Enabling modular headers for pod Yoga
+[INSTALL_PODS] [Expo] Enabling modular headers for pod React-Fabric
+[INSTALL_PODS] [Expo] Enabling modular headers for pod React-graphics
+[INSTALL_PODS] [Expo] Enabling modular headers for pod React-utils
+[INSTALL_PODS] [Expo] Enabling modular headers for pod React-featureflags
+[INSTALL_PODS] [Expo] Enabling modular headers for pod React-debug
+[INSTALL_PODS] [Expo] Enabling modular headers for pod React-ImageManager
+[INSTALL_PODS] [Expo] Enabling modular headers for pod React-rendererdebug
+[INSTALL_PODS] [Expo] Enabling modular headers for pod React-jsi
+[INSTALL_PODS] [Expo] Enabling modular headers for pod React-renderercss
+[INSTALL_PODS] [Expo] Enabling modular headers for pod React-cxxstableapi
+[INSTALL_PODS] [Expo] Enabling modular headers for pod hermes-engine
+[INSTALL_PODS] [Expo] Enabling modular headers for pod glog
+[INSTALL_PODS] [Expo] Enabling modular headers for pod boost
+[INSTALL_PODS] [Expo] Enabling modular headers for pod DoubleConversion
+[INSTALL_PODS] [Expo] Enabling modular headers for pod fast_float
+[INSTALL_PODS] [Expo] Enabling modular headers for pod fmt
+[INSTALL_PODS] [Expo] Enabling modular headers for pod RCT-Folly
+[INSTALL_PODS] [Expo] Enabling modular headers for pod SocketRocket
+[INSTALL_PODS] [Expo] Enabling modular headers for pod openiap
+[INSTALL_PODS] [Expo] Enabling modular headers for pod React-jsinspector
+[INSTALL_PODS] Found 2 modules for target `app`
+[INSTALL_PODS] link_native_modules! {ios_packages: [{configurations: [], name: "expo", root: "/private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/node_modules/expo", path: "../node_modules/expo", podspec_path: "/private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/node_modules/expo/Expo.podspec", script_phases: []}, {configurations: [], name: "react-native-webview", root: "/private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/node_modules/react-native-webview", path: "../node_modules/react-native-webview", podspec_path: "/private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/node_modules/react-native-webview/react-native-webview.podspec", script_phases: []}], ios_project_root_path: "/private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios", react_native_path: "../node_modules/react-native"}
+[INSTALL_PODS] Auto-linking React Native module for target `app`: react-native-webview
+[INSTALL_PODS] Framework build type is static library
+[INSTALL_PODS] [ReactNativeDependencies] Setting up ReactNativeDependencies...
+[INSTALL_PODS] [ReactNativeDependencies] Building from source: false
+[INSTALL_PODS] [ReactNativeDependencies] Using tarball from URL: https://repo.reactnative.dev/maven2/com/facebook/react/react-native-artifacts/0.88.1/react-native-artifacts-0.88.1-reactnative-dependencies-debug.tar.gz
+[INSTALL_PODS] [ReactNativeDependencies] Cache miss: downloading reactnative-dependencies-0.88.1-debug.tar.gz from https://repo.reactnative.dev/maven2/com/facebook/react/react-native-artifacts/0.88.1/react-native-artifacts-0.88.1-reactnative-dependencies-debug.tar.gz
+[INSTALL_PODS] % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+[INSTALL_PODS]                                  Dload  Upload   Total   Spent    Left  Speed
+[INSTALL_PODS]   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+[INSTALL_PODS] 100 37.6M  100 37.6M    0     0  83.4M      0 --:--:-- --:--:-- --:--:-- 83.4M
+[INSTALL_PODS] [ReactNativeDependencies] Verifying checksum for downloaded reactnative-dependencies-0.88.1-debug.tar.gz...
+[INSTALL_PODS] [Cache] SHA1 verified for reactnative-dependencies-0.88.1-debug.tar.gz
+[INSTALL_PODS] [ReactNativeDependencies] Saved reactnative-dependencies-0.88.1-debug.tar.gz to shared cache (/Users/runner/Library/Caches/ReactNative)
+[INSTALL_PODS] [ReactNativeDependencies] Cache miss: downloading reactnative-dependencies-0.88.1-release.tar.gz from https://repo.reactnative.dev/maven2/com/facebook/react/react-native-artifacts/0.88.1/react-native-artifacts-0.88.1-reactnative-dependencies-release.tar.gz
+[INSTALL_PODS] % Total    % Received % Xferd  Average Speed   Time    Ti
+[INSTALL_PODS] me     Time  Current
+[INSTALL_PODS]                                  Dload  Upload   Total   Spent    Left  Speed
+[INSTALL_PODS]   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+[INSTALL_PODS] 0 30.5M    0  100k    0     0  1499k      0  0:00:20 --:--:--  0:00:20 1484k
+[INSTALL_PODS] 100 30.5M  100 30.5M    0     0  70.4M      0 --:--:-- --:--:-- --:--:-- 70.3M
+[INSTALL_PODS] [ReactNativeDependencies] Verifying checksum for downloaded reactnative-dependencies-0.88.1-release.tar.gz...
+[INSTALL_PODS] [Cache] SHA1 verified for reactnative-dependencies-0.88.1-release.tar.gz
+[INSTALL_PODS] [ReactNativeDependencies] Saved reactnative-dependencies-0.88.1-release.tar.gz to shared cache (/Users/runner/Library/Caches/ReactNative)
+[INSTALL_PODS] [ReactNativeDependencies] Source: {http: "https://repo.reactnative.dev/maven2/com/facebook/react/react-native-artifacts/0.88.1/react-native-artifacts-0.88.1-reactnative-dependencies-debug.tar.gz"}
+[INSTALL_PODS] [ReactNativeCore] Setting up ReactNativeCore...
+[INSTALL_PODS] [ReactNativeCore] Building from source: false
+[INSTALL_PODS] Configuring the target with the New Architecture
+[INSTALL_PODS] [ReactNativeCore] Using React Native Core and React Native Dependencies prebuilt versions.
+[INSTALL_PODS] [Codegen] Analyzing /private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/package.json
+[INSTALL_PODS] [Codegen] Searching for codegen-enabled libraries in the app.
+[INSTALL_PODS] [Codegen] The "codegenConfig" field is not defined in package.json. Assuming there is nothing to generate at the app level.
+[INSTALL_PODS] [Codegen] Searching for codegen-enabled libraries in react-native.config.js
+[INSTALL_PODS] [Codegen] Found react-native-webview
+[INSTALL_PODS] [Codegen] Processing RNCWebViewSpec
+[INSTALL_PODS] [Codegen] Searching for podspec in the project dependencies.
+[INSTALL_PODS] [Codegen] Supported Apple platforms: ios, macos, visionos for RNCWebViewSpec
+[INSTALL_PODS] [Codegen] Generating Native Code for RNCWebViewSpec - ios
+[INSTALL_PODS] [Codegen] Generated artifacts: /private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/build/generated/ios/ReactCodegen
+[INSTALL_PODS] [Codegen] Generating RCTThirdPartyComponentsProvider.h
+[INSTALL_PODS] [Codegen] Generated artifact: /private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/build/generated/ios/ReactCodegen/RCTThirdPartyComponentsProvider.h
+[INSTALL_PODS] [Codegen] Generating RCTThirdPartyComponentsProvider.mm
+[INSTALL_PODS] [Codegen] Generated artifact: /private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/build/generated/ios/ReactCodegen/RCTThirdPartyComponentsProvider.mm
+[INSTALL_PODS] [Codegen] Generating RCTModulesProvider.h
+[INSTALL_PODS] [Codegen] Generated artifact: /private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/build/generated/ios/ReactCodegen/RCTModuleProviders.h
+[INSTALL_PODS] [Codegen] Generating RCTModuleProviders.mm
+[INSTALL_PODS] [Codegen] Generated artifact: /private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/build/generated/ios/ReactCodegen/RCTModuleProviders.mm
+[INSTALL_PODS] [Codegen] Generating RCTAppDependencyProvider
+[INSTALL_PODS] [Codegen] Generated artifact: /private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/build/generated/ios/ReactAppDependencyProvider/RCTAppDependencyProvider.h
+[INSTALL_PODS] [Codegen] Generated artifact: /private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/build/generated/ios/ReactAppDependencyProvider/RCTAppDependencyProvider.mm
+[INSTALL_PODS] [Codegen] Generated podspec: /private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/build/generated/ios/ReactAppDependencyProvider/ReactAppDependencyProvider.podspec
+[INSTALL_PODS] [Codegen] Generated podspec: /private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/build/generated/ios/ReactCodegen/ReactCodegen.podspec
+[INSTALL_PODS] [Codegen] Generating Package.swift
+[INSTALL_PODS] [Codegen] Generated artifact: /private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/build/generated/ios/Package.swift
+[INSTALL_PODS] [Codegen] Done.
+[INSTALL_PODS] Analyzing dependencies
+[INSTALL_PODS] Fetching podspec for `ExpoFileSystem` from `../node_modules/expo-file-system/ios/ExpoFileSystem.podspec`
+[INSTALL_PODS] Fetching podspec for `ExpoFont` from `../node_modules/expo/node_modules/expo-font/ios/ExpoFont.podspec`
+[INSTALL_PODS] Fetching podspec for `ExpoModulesCore` from `../node_modules/expo-modules-core/ExpoModulesCore.podspec`
+[INSTALL_PODS] Fetching podspec for `ExpoModulesWorklets` from `../node_modules/expo-modules-core/ExpoModulesWorklets.podspec`
+[INSTALL_PODS] Fetching podspec for `React-Core-prebuilt` from `../node_modules/react-native/React-Core-prebuilt.podspec`
+[INSTALL_PODS] [ReactNativeCore] Cache miss: downloading reactnative-core-0.88.1-debug.tar.gz from https://repo.reactnative.dev/maven2/com/facebook/react/react-native-artifacts/0.88.1/react-native-artifacts-0.88.1-reactnative-core-debug.tar.gz
+[INSTALL_PODS] % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+[INSTALL_PODS]                                  Dload  Upload   Total   Spent    Left  Speed
+[INSTALL_PODS]   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+[INSTALL_PODS] 21 96.2M   21 20.2M    0     0  42.4M      0  0:00:02 --:--:--  0:00:02 42.4M
+[INSTALL_PODS] 88 96.2M   88 84.8M    0     0  57.3M      0  0:00:01  0:00:01 --:--:-- 57.3M
+[INSTALL_PODS] 100 96.2M  100 96.2M    0     0  58.7M      0  0:00:01  0:00:01 --:--:-- 58.7M
+[INSTALL_PODS] [ReactNativeCore] Verifying checksum for downloaded reactnative-core-0.88.1-debug.tar.gz...
+[INSTALL_PODS] [Cache] SHA1 verified for reactnative-core-0.88.1-debug.tar.gz
+[INSTALL_PODS] [ReactNativeCore] Saved reactnative-core-0.88.1-debug.tar.gz to shared cache (/Users/runner/Library/Caches/ReactNative)
+[INSTALL_PODS] [ReactNativeCore] Cache miss: downloading reactnative-core-0.88.1-release.tar.gz from https://repo.reactnative.dev/maven2/com/facebook/react/react-native-artifacts/0.88.1/react-native-artifacts-0.88.1-reactnative-core-release.tar.gz
+[INSTALL_PODS] % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+[INSTALL_PODS]                                  Dload  Upload   Total   Spent    Left  Speed
+[INSTALL_PODS]   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+[INSTALL_PODS] 50 30.5M   50 15.3M    0     0  63.0M      0 --:--:-- --:--:-- --:--:-- 62.8M
+[INSTALL_PODS] 100 30.5M  100 30.5M    0     0  64.4M      0 --:--:-- --:--:-- --:--:-- 64.4M
+[INSTALL_PODS] [ReactNativeCore] Verifying checksum for downloaded reactnative-core-0.88.1-release.tar.gz...
+[INSTALL_PODS] [Cache] SHA1 verified for reactnative-core-0.88.1-release.tar.gz
+[INSTALL_PODS] [ReactNativeCore] Saved reactnative-core-0.88.1-release.tar.gz to shared cache (/Users/runner/Library/Caches/ReactNative)
+[INSTALL_PODS] [ReactNativeCore] Resolved stable ReactNativeCore-prebuilt version:
+[INSTALL_PODS] [ReactNativeCore]   ../../ios/Pods/ReactNativeCore-artifacts/reactnative-core-0.88.1-debug.tar.gz
+[INSTALL_PODS] [ReactNativeCore]   ../../ios/Pods/ReactNativeCore-artifacts/reactnative-core-0.88.1-release.tar.gz
+[INSTALL_PODS] Fetching podspec for `ReactNativeDependencies` from `../node_modules/react-native/third-party-podspecs/ReactNativeDependencies.podspec`
+[INSTALL_PODS] [ReactNativeDependencies] Using tarball from URL: https://repo.reactnative.dev/maven2/com/facebook/react/react-native-artifacts/0.88.1/react-native-artifacts-0.88.1-reactnative-dependencies-debug.tar.gz
+[INSTALL_PODS] [ReactNativeDependencies] Tarball reactnative-dependencies-0.88.1-debug.tar.gz already exists in Pods. Skipping download.
+[INSTALL_PODS] [ReactNativeDependencies] Tarball reactnative-dependencies-0.88.1-release.tar.gz already exists in Pods. Skipping download.
+[INSTALL_PODS] Fetching podspec for `hermes-engine` from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`
+[INSTALL_PODS] [Hermes] Using release tarball from URL: https://repo.reactnative.dev/maven2/com/facebook/hermes/hermes-ios/260318099.0.5/hermes-ios-260318099.0.5-hermes-ios-debug.tar.gz
+[INSTALL_PODS] [Hermes] Cache miss: downloading hermes-ios-260318099.0.5-debug.tar.gz from https://repo.reactnative.dev/maven2/com/facebook/hermes/hermes-ios/260318099.0.5/hermes-ios-260318099.0.5-hermes-ios-debug.tar.gz
+[INSTALL_PODS] % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+[INSTALL_PODS]                                  Dload  Upload   Total   Spent    Left  Speed
+[INSTALL_PODS]   0     0    0
+[INSTALL_PODS] 0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+[INSTALL_PODS] 100 30.3M  100 30.3M    0     0  64.1M      0 --:--:-- --:--:-- --:--:-- 64.2M
+[INSTALL_PODS] [Hermes] Verifying checksum for downloaded hermes-ios-260318099.0.5-debug.tar.gz...
+[INSTALL_PODS] [Hermes] SHA1 verified for hermes-ios-260318099.0.5-debug.tar.gz
+[INSTALL_PODS] [Hermes] Saved hermes-ios-260318099.0.5-debug.tar.gz to shared cache (/Users/runner/Library/Caches/ReactNative)
+[INSTALL_PODS] [Hermes] Cache miss: downloading hermes-ios-260318099.0.5-release.tar.gz from https://repo.reactnative.dev/maven2/com/facebook/hermes/hermes-ios/260318099.0.5/hermes-ios-260318099.0.5-hermes-ios-release.tar.gz
+[INSTALL_PODS] % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+[INSTALL_PODS]                                  Dload  Upload   Total   Spent    Left  Speed
+[INSTALL_PODS]   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+[INSTALL_PODS] 100 24.2M  100 24.2M    0     0  64.6M      0 --:--:-- --:--:-- --:--:-- 64.7M
+[INSTALL_PODS] [Hermes] Verifying checksum for downloaded hermes-ios-260318099.0.5-release.tar.gz...
+[INSTALL_PODS] [Hermes] SHA1 verified for hermes-ios-260318099.0.5-release.tar.gz
+[INSTALL_PODS] [Hermes] Saved hermes-ios-260318099.0.5-release.tar.gz to shared cache (/Users/runner/Library/Caches/ReactNative)
+[INSTALL_PODS] Adding spec repo `trunk` with CDN `https://cdn.cocoapods.org/`
+[INSTALL_PODS] Downloading dependencies
+[INSTALL_PODS] Installing DoubleConversion (1.1.6)
+[INSTALL_PODS] Installing EXConstants (58.0.14)
+[INSTALL_PODS] Installing Expo (58.0.22)
+[INSTALL_PODS] Installing ExpoAsset (58.0.19)
+[INSTALL_PODS] Installing ExpoDomWebView (58.0.2)
+[INSTALL_PODS] Installing ExpoFileSystem (58.0.13)
+[INSTALL_PODS] Installing ExpoFont (58.0.11)
+[INSTALL_PODS] Installing ExpoIap (6.4.1)
+[INSTALL_PODS] Installing ExpoKeepAwake (58.0.3)
+[INSTALL_PODS] Installing ExpoLogBox (58.0.14)
+[INSTALL_PODS] Installing ExpoModulesCore (58.0.29)
+[INSTALL_PODS] Installing ExpoModulesJSI (58.0.21)
+[INSTALL_PODS] Installing ExpoModulesWorklets (58.0.29)
+[INSTALL_PODS] Installing ExpoSpeechRecognition (58.0.1)
+[INSTALL_PODS] Installing ExpoSplashScreen (58.0.12)
+[INSTALL_PODS] Installing ExpoStatusBar (58.0.4)
+[INSTALL_PODS] Installing FBLazyVector (0.88.1)
+[INSTALL_PODS] Installing RCT-Folly (2024.11.18.00)
+[INSTALL_PODS] Installing RCTDeprecation (0.88.1)
+[INSTALL_PODS] Installing RCTRequired (0.88.1)
+[INSTALL_PODS] Installing RCTSwiftUI (0.88.1)
+[INSTALL_PODS] Installing RCTSwiftUIWrapper (0.88.1)
+[INSTALL_PODS] Installing RCTTypeSafety (0.88.1)
+[INSTALL_PODS] Installing React (0.88.1)
+[INSTALL_PODS] Installing React-Core (0.88.1)
+[INSTALL_PODS] Installing React-Core-prebuilt (0.88.1)
+[INSTALL_PODS] Installing React-CoreModules (0.88.1)
+[INSTALL_PODS] Installing React-Fabric (0.88.1)
+[INSTALL_PODS] Installing React-FabricComponents (0.88.1)
+[INSTALL_PODS] Installing React-FabricImage (0.88.1)
+[INSTALL_PODS] Installing React-ImageManager (0.88.1)
+[INSTALL_PODS] Installing React-Mapbuffer (0.88.1)
+[INSTALL_PODS] Installing React-NativeModulesApple (0.88.1)
+[INSTALL_PODS] Installing React-RCTActionSheet (0.88.1)
+[INSTALL_PODS] Installing React-RCTAnimatedModuleProvider (0.88.1)
+[INSTALL_PODS] Installing React-RCTAnimation (0.88.1)
+[INSTALL_PODS] Installing React-RCTAppDelegate (0.88.1)
+[INSTALL_PODS] Installing React-RCTBlob (0.88.1)
+[INSTALL_PODS] Installing React-RCTFBReactNativeSpec (0.88.1)
+[INSTALL_PODS] Installing React-RCTFabric (0.88.1)
+[INSTALL_PODS] Installing React-RCTImage (0.88.1)
+[INSTALL_PODS] Installing React-RCTLinking (0.88.1)
+[INSTALL_PODS] Installing React-RCTNetwork (0.88.1)
+[INSTALL_PODS] Installing React-RCTRuntime (0.88.1)
+[INSTALL_PODS] Installing React-RCTSettings (0.88.1)
+[INSTALL_PODS] Installing React-RCTText (0.88.1)
+[INSTALL_PODS] Installing React-RCTVibration (0.88.1)
+[INSTALL_PODS] Installing React-RuntimeApple (0.88.1)
+[INSTALL_PODS] Installing React-RuntimeCore (0.88.1)
+[INSTALL_PODS] Installing React-RuntimeHermes (0.88.1)
+[INSTALL_PODS] Installing React-bridging (0.88.1)
+[INSTALL_PODS] Installing React-callinvoker (0.88.1)
+[INSTALL_PODS] Installing React-cxxreact (0.88.1)
+[INSTALL_PODS] Installing React-cxxstableapi (0.88.1)
+[INSTALL_PODS] Installing React-debug (0.88.1)
+[INSTALL_PODS] Installing React-defaultsnativemodule (0.88.1)
+[INSTALL_PODS] Installing React-domnativemodule (0.88.1)
+[INSTALL_PODS] Installing React-featureflags (0.88.1)
+[INSTALL_PODS] Installing React-featureflagsnativemodule (0.88.1)
+[INSTALL_PODS] Installing React-graphics (0.88.1)
+[INSTALL_PODS] Installing React-hermes (0.88.1)
+[INSTALL_PODS] Installing React-idlecallbacksnativemodule (0.88.1)
+[INSTALL_PODS] Installing React-intersectionobservernativemodule (0.88.1)
+[INSTALL_PODS] Installing React-jserrorhandler (0.88.1)
+[INSTALL_PODS] Installing React-jsi (0.88.1)
+[INSTALL_PODS] Installing React-jsiexecutor (0.88.1)
+[INSTALL_PODS] Installing React-jsinspector (0.88.1)
+[INSTALL_PODS] Installing React-jsinspectorcdp (0.88.1)
+[INSTALL_PODS] Installing React-jsinspectornetwork (0.88.1)
+[INSTALL_PODS] Installing React-jsinspectortracing (0.88.1)
+[INSTALL_PODS] Installing React-jsitooling (0.88.1)
+[INSTALL_PODS] Installing React-jsitracing (0.88.1)
+[INSTALL_PODS] Installing React-logger (0.88.1)
+[INSTALL_PODS] Installing React-microtasksnativemodule (0.88.1)
+[INSTALL_PODS] Installing React-mutationobservernativemodule (0.88.1)
+[INSTALL_PODS] Installing React-networking (0.88.1)
+[INSTALL_PODS] Installing React-oscompat (0.88.1)
+[INSTALL_PODS] Installing React-perflogger (0.88.1)
+[INSTALL_PODS] Installing React-performancecdpmetrics (0.88.1)
+[INSTALL_PODS] Installing React-performancetimeline (0.88.1)
+[INSTALL_PODS] Installing React-rendererconsistency (0.88.1)
+[INSTALL_PODS] Installing React-renderercss (0.88.1)
+[INSTALL_PODS] Installing React-rendererdebug (0.88.1)
+[INSTALL_PODS] Installing React-resizeobservernativemodule (0.88.1)
+[INSTALL_PODS] Installing React-runtimeexecutor (0.88.1)
+[INSTALL_PODS] Installing React-runtimescheduler (0.88.1)
+[INSTALL_PODS] Installing React-timing (0.88.1)
+[INSTALL_PODS] Installing React-utils (0.88.1)
+[INSTALL_PODS] Installing React-viewtransitionnativemodule (0.88.1)
+[INSTALL_PODS] Installing React-webperformancenativemodule (0.88.1)
+[INSTALL_PODS] Installing ReactAppDependencyProvider (0.88.1)
+[INSTALL_PODS] Installing ReactCodegen (0.88.1)
+[INSTALL_PODS] Installing ReactCommon (0.88.1)
+[INSTALL_PODS] Installing ReactNativeDependencies (0.88.1)
+[INSTALL_PODS] Installing SocketRocket (0.7.1)
+[INSTALL_PODS] Installing Yoga (0.0.0)
+[INSTALL_PODS] Installing boost (1.84.0)
+[INSTALL_PODS] Installing fast_float (8.0.0)
+[INSTALL_PODS] Installing fmt (12.1.0)
+[INSTALL_PODS] Installing glog (0.3.5)
+[INSTALL_PODS] Installing hermes-engine (260318099.0.5)
+[INSTALL_PODS] Installing openiap (4.0.7)
+[INSTALL_PODS] Installing react-native-webview (14.0.1)
+[INSTALL_PODS] [Expo] Ensuring required slices in ExpoModulesJSI.xcframework
+[INSTALL_PODS] Generating Pods project
+[INSTALL_PODS] Setting USE_HERMES build settings
+[INSTALL_PODS] Setting REACT_NATIVE_PATH build settings
+[INSTALL_PODS] Setting SWIFT_ACTIVE_COMPILATION_CONDITIONS build settings
+[INSTALL_PODS] [Ccache]: Removing Ccache from CC, LD, CXX & LDPLUSPLUS build settings
+[INSTALL_PODS] Setting GCC_OPTIMIZATION_LEVEL to 2 for React Native pods in Release, and for Yoga, glog in all configurations
+[INSTALL_PODS] [ReactNativeCore] Configuring xcconfig for prebuilt React Native Core...
+[INSTALL_PODS] [ReactNativeCore] Prebuilt xcconfig configuration complete
+[INSTALL_PODS] [ReactNativeDependencies] Configuring xcconfig for prebuilt React Native Dependencies...
+[INSTALL_PODS] [ReactNativeDependencies] Prebuilt deps xcconfig configuration complete
+[INSTALL_PODS] [SPM] Cleaning old SPM dependencies from Pods project
+[INSTALL_PODS] [SPM] Adding SPM dependencies to Pods project
+[INSTALL_PODS] [Privacy Manifest Aggregation] No existing PrivacyInfo.xcprivacy file found, creating a new one.
+[INSTALL_PODS] [Privacy Manifest Aggregation] Reading .xcprivacy files to aggregate all used Required Reason APIs.
+[INSTALL_PODS] file_root: app
+[INSTALL_PODS] Setting CLANG_CXX_LANGUAGE_STANDARD to c++20 on /private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/app.xcodeproj
+[INSTALL_PODS] ==================== DEPRECATION NOTICE =====================
+[INSTALL_PODS] Calling `pod install` directly is deprecated in React Native
+[INSTALL_PODS] because we are moving away from Cocoapods toward alternative
+[INSTALL_PODS] solutions to build the project.
+[INSTALL_PODS] * If you are using Expo, please run:
+[INSTALL_PODS] `npx expo run:ios`
+[INSTALL_PODS] * If you are using the Community CLI, please run:
+[INSTALL_PODS] `yarn ios`
+[INSTALL_PODS] =============================================================
+[INSTALL_PODS] Pod install took 132 [s] to run
+[INSTALL_PODS] Integrating client project
+[INSTALL_PODS] [!] Please close any current Xcode sessions and use `app.xcworkspace` for this project from now on.
+[INSTALL_PODS] warning: The @ExpoModule class 'CoreModule' (/private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/node_modules/expo-modules-core/ios/Core/Modules/CoreModule.swift) is internal, so the generated modules provider cannot reference it. Declare it public to link it automatically, or use a lower access level such as private to opt it out of linking.
+[INSTALL_PODS] [Expo] Installing the build script for target app
+[INSTALL_PODS] Pod installation complete! There are 103 dependencies from the Podfile and 103 total pods installed.
+[INSTALL_PODS] [Expo-precompiled] Precompiled modules:
+[INSTALL_PODS] [Expo-precompiled]   📦 ExpoFileSystem (58.0.13)
+[INSTALL_PODS] [Expo-precompiled]   📦 ExpoFont (58.0.11)
+[INSTALL_PODS] [Expo-precompiled]   📦 ExpoModulesCore (58.0.29)
+[INSTALL_PODS] [Expo-precompiled]   📦 ExpoModulesWorklets (58.0.29)
+[INSTALL_PODS] [Expo] Disabling SWIFT_EMIT_MODULE_INTERFACE for pod targets (prebuilt React compatibility)
+[INSTALL_PODS] [Expo] Ensured modular React header flags on 0 xcconfig(s)
+[INSTALL_PODS] [Expo-precompiled] Looking for ExpoModulesCore.xcframework at: /private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/Pods/ExpoModulesCore/ExpoModulesCore.xcframework
+[INSTALL_PODS] [Expo-precompiled] Adding ExpoModulesJSI header search paths to all targets
+[INSTALL_PODS] [Expo] Adding '[Expo] Remove duplicate codegen output' build phase to ReactCodegen
+[INSTALL_PODS] [Expo] Raised deployment target for Expo modules matching ExpoModulesCore:
+[INSTALL_PODS]   ExpoIap (iOS=16.4)
+[INSTALL_PODS] [!] ExpoFileSystem has added 2 script phases. Please inspect before executing a build. See `https://guides.cocoapods.org/syntax/podspec.html#script_phases` for more information.
+[INSTALL_PODS] [!] ExpoFont has added 2 script phases. Please inspect before executing a build. See `https://guides.cocoapods.org/syntax/podspec.html#script_phases` for more information.
+[INSTALL_PODS] [!] ExpoModulesCore has added 2 script phases. Please inspect before executing a build. See `https://guides.cocoapods.org/syntax/podspec.html#script_phases` for more information.
+[INSTALL_PODS] [!] ExpoModulesWorklets has added 2 script phases. Please inspect before executing a build. See `https://guides.cocoapods.org/syntax/podspec.html#script_phases` for more information.
+[INSTALL_PODS] [!] React-Core-prebuilt has added 1 script phase. Please inspect before executing a build. See `https://guides.cocoapods.org/syntax/podspec.html#script_phases` for more information.
+[INSTALL_PODS] [!] ReactNativeDependencies has added 1 script phase. Please inspect before executing a build. See `https://guides.cocoapods.org/syntax/podspec.html#script_phases` for more information.
+[INSTALL_PODS] [!] hermes-engine has added 1 script phase. Please inspect before executing a build. See `https://guides.cocoapods.org/syntax/podspec.html#script_phases` for more information.
+[CONFIGURE_XCODE_PROJECT] Configuring Xcode project
+[CONFIGURE_XCODE_PROJECT] Assigning provisioning profile '*[expo] com.uchinoaji.kotobatane AppStore 2026-11-02T07:30:41.273Z' (Apple Team ID: ZGYPGQ9WPN) to target 'app'
+[EAGER_BUNDLE] 🔍 [expo-iap] Config values: horizonAppId=undefined, pinnedStore=play, amazonAppstoreKey=none, vega=auto, onside=false
+[EAGER_BUNDLE] 📦 [expo-iap] Using OpenIAP from CocoaPods
+[EAGER_BUNDLE] Starting Metro Bundler
+[EAGER_BUNDLE] iOS Bundled 11468ms index.js (666 modules)
+[EAGER_BUNDLE] Writing bundle output to: /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/70gkjy8kyoe/main.jsbundle
+[EAGER_BUNDLE] Copying 2 asset files
+[EAGER_BUNDLE] Done writing bundle output
+[RUN_FASTLANE] Creating Gymfile
+[RUN_FASTLANE] Gymfile created
+[RUN_FASTLANE] fastlane 2.241.2 (Ruby 3.4.12, gem)
+[RUN_FASTLANE] Successfully loaded '/private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/Gymfile' 📄
+[RUN_FASTLANE] +---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+[RUN_FASTLANE] |                                                                  Detected Values from './Gymfile'                                                                   |
+[RUN_FASTLANE] +-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+[RUN_FASTLANE] | suppress_xcode_output | true                                                                                                                                        |
+[RUN_FASTLANE] | clean                 | false                                                                                                                                       |
+[RUN_FASTLANE] | scheme                | app                                                                                                                                         |
+[RUN_FASTLANE] | configuration         | Release                                                                                                                                     |
+[RUN_FASTLANE] | export_options        |                                                                                                                                             |
+[RUN_FASTLANE] | export_xcargs         | OTHER_CODE_SIGN_FLAGS="--keychain /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-8a520a86-4cff-48dc-9b83-03295ecac3d3.keychain" |
+[RUN_FASTLANE] | disable_xcpretty      | true                                                                                                                                        |
+[RUN_FASTLANE] | buildlog_path         | /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/logs                           |
+[RUN_FASTLANE] | derived_data_path     | ./build                                                                                                                                     |
+[RUN_FASTLANE] | result_bundle         | true                                                                                                                                        |
+[RUN_FASTLANE] | result_bundle_path    | /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/result-bundle-1794644574355.xcresult                                                       |
+[RUN_FASTLANE] | output_directory      | ./build                                                                                                                                     |
+[RUN_FASTLANE] +-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+[RUN_FASTLANE] Resolving Swift Package Manager dependencies...
+[RUN_FASTLANE] $ xcodebuild -resolvePackageDependencies -workspace ./app.xcworkspace -scheme app -configuration Release -derivedDataPath ./build
+[RUN_FASTLANE] ▸ Command line invocation:
+[RUN_FASTLANE] ▸     /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/xcodebuild -resolvePackageDependencies -workspace ./app.xcworkspace -scheme app -configuration Release -derivedDataPath ./build
+[RUN_FASTLANE] ▸ resolved source packages:
+[RUN_FASTLANE] $ xcodebuild -showBuildSettings -workspace ./app.xcworkspace -scheme app -configuration Release -derivedDataPath ./build 2>&1
+[RUN_FASTLANE] Command timed out after 3 seconds on try 1 of 4, trying again with a 6 second timeout...
+[RUN_FASTLANE] Detected provisioning profile mapping: {"com.uchinoaji.kotobatane": "ed57234a-3eb0-485c-8ab0-b37e8476d0e9"}
+[RUN_FASTLANE] 
+[RUN_FASTLANE] +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+[RUN_FASTLANE] |                                                                                          Summary for gym 2.241.2                                                                                           |
+[RUN_FASTLANE] +--------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+[RUN_FASTLANE] | workspace                                                    | ./app.xcworkspace                                                                                                                           |
+[RUN_FASTLANE] | scheme                                                       | app                                                                                                                                         |
+[RUN_FASTLANE] | clean                                                        | false                                                                                                                                       |
+[RUN_FASTLANE] | output_directory                                             | ./build                                                                                                                                     |
+[RUN_FASTLANE] | output_name                                                  | app                                                                                                                                         |
+[RUN_FASTLANE] | configuration                                                | Release                                                                                                                                     |
+[RUN_FASTLANE] | silent                                                       | false                                                                                                                                       |
+[RUN_FASTLANE] | skip_package_ipa                                             | false                                                                                                                                       |
+[RUN_FASTLANE] | skip_package_pkg                                             | false                                                                                                                                       |
+[RUN_FASTLANE] | export_options.method                                        | app-store                                                                                                                                   |
+[RUN_FASTLANE] | export_options.provisioningProfiles.com.uchinoaji.kotobatane | ed57234a-3eb0-485c-8ab0-b37e8476d0e9                                                                                                        |
+[RUN_FASTLANE] | export_xcargs                                                | OTHER_CODE_SIGN_FLAGS="--keychain /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-8a520a86-4cff-48dc-9b83-03295ecac3d3.keychain" |
+[RUN_FASTLANE] | build_path                                                   | /Users/runner/Library/Developer/Xcode/Archives/2026-11-14                                                                                   |
+[RUN_FASTLANE] | derived_data_path                                            | ./build                                                                                                                                     |
+[RUN_FASTLANE] | result_bundle                                                | true                                                                                                                                        |
+[RUN_FASTLANE] | result_bundle_path                                           | /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/result-bundle-1794644574355.xcresult                                                       |
+[RUN_FASTLANE] | buildlog_path                                                | /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/logs                           |
+[RUN_FASTLANE] | destination                                                  | generic/platform=iOS                                                                                                                        |
+[RUN_FASTLANE] | suppress_xcode_output                                        | true                                                                                                                                        |
+[RUN_FASTLANE] | xcodebuild_formatter                                         | xcbeautify                                                                                                                                  |
+[RUN_FASTLANE] | build_timing_summary                                         | false                                                                                                                                       |
+[RUN_FASTLANE] | disable_xcpretty                                             | true                                                                                                                                        |
+[RUN_FASTLANE] | skip_profile_detection                                       | false                                                                                                                                       |
+[RUN_FASTLANE] | xcodebuild_command                                           | xcodebuild                                                                                                                                  |
+[RUN_FASTLANE] | skip_package_dependencies_resolution                         | false                                                                                                                                       |
+[RUN_FASTLANE] | disallow_xcodebuild_settings_lookup                          | false                                                                                                                                       |
+[RUN_FASTLANE] | disable_package_automatic_updates                            | false                                                                                                                                       |
+[RUN_FASTLANE] | skip_package_repository_fetches                              | false                                                                                                                                       |
+[RUN_FASTLANE] | use_system_scm                                               | false                                                                                                                                       |
+[RUN_FASTLANE] | generate_appstore_info                                       | false                                                                                                                                       |
+[RUN_FASTLANE] | xcode_path                                                   | /Applications/Xcode_26.6.0.app                                                                                                              |
+[RUN_FASTLANE] +--------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+[RUN_FASTLANE] $ set -o pipefail && xcodebuild -workspace ./app.xcworkspace -scheme app -configuration Release -derivedDataPath ./build -destination generic/platform\=iOS -archivePath /Users/runner/Library/Developer/Xcode/Archives/2026-11-14/app\ 2026-11-14\ 08.23.15.xcarchive -resultBundlePath /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/result-bundle-1794644574355.xcresult archive | tee /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/logs/app-app.log > /dev/null
+[RUN_FASTLANE] › Executing react-native Pods/hermes-engine » [CP-User] [Hermes] Replace Hermes for the right configuration, if needed
+[RUN_FASTLANE] › Executing react-native Pods/ReactNativeDependencies » [CP-User] [RNDeps] Replace React Native Dependencies for the right configuration, if needed
+[RUN_FASTLANE] › Executing react-native Pods/hermes-engine » [CP] Copy XCFrameworks
+[RUN_FASTLANE] › Preparing Pods/React-timing-React-timing_privacy » ResourceBundle-React-timing_privacy-React-timing-Info.plist
+[RUN_FASTLANE] › Copying   ios/build/Build/Intermediates.noindex/ArchiveIntermediates/app/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/React-timing_privacy.bundle/PrivacyInfo.xcprivacy ➜ ../../../var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/node_modules/react-native/ReactCommon/react/timing/PrivacyInfo.xcprivacy
+[RUN_FASTLANE] › Creating  Pods/React-timing-React-timing_privacy » React-timing_privacy.bundle
+[RUN_FASTLANE] › Preparing Pods/React-cxxreact-React-cxxreact_privacy » ResourceBundle-React-cxxreact_privacy-React-cxxreact-Info.plist
+[RUN_FASTLANE] › Copying   ios/build/Build/Intermediates.noindex/ArchiveIntermediates/app/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/React-cxxreact_privacy.bundle/PrivacyInfo.xcprivacy ➜ ../../../var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/node_modules/react-native/ReactCommon/cxxreact/PrivacyInfo.xcprivacy
+[RUN_FASTLANE] › Creating  Pods/React-cxxreact-React-cxxreact_privacy » React-cxxreact_privacy.bundle
+[RUN_FASTLANE] › Preparing Pods/ExpoFileSystem-ExpoFileSystem_privacy » ResourceBundle-ExpoFileSystem_privacy-ExpoFileSystem-Info.plist
+[RUN_FASTLANE] › Preparing Pods/EXConstants-ExpoConstants_privacy » ResourceBundle-ExpoConstants_privacy-EXConstants-Info.plist
+[RUN_FASTLANE] › Copying   ios/build/Build/Intermediates.noindex/ArchiveIntermediates/app/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/ExpoConstants_privacy.bundle/PrivacyInfo.xcprivacy ➜ ../../../var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/node_modules/expo-constants/ios/PrivacyInfo.xcprivacy
+[RUN_FASTLANE] › Creating  Pods/ExpoFileSystem-ExpoFileSystem_privacy » ExpoFileSystem_privacy.bundle
+[RUN_FASTLANE] › Preparing expo-constants Pods/EXConstants-EXConstants » ResourceBundle-EXConstants-EXConstants-Info.plist
+[RUN_FASTLANE] › Creating  Pods/EXConstants-ExpoConstants_privacy » ExpoConstants_privacy.bundle
+[RUN_FASTLANE] › Creating  expo-constants Pods/EXConstants-EXConstants » EXConstants.bundle
+[RUN_FASTLANE] › Executing react-native Pods/ReactNativeDependencies » [CP] Copy XCFrameworks
+[RUN_FASTLANE] › Executing react-native Pods/React-Core-prebuilt » [CP-User] [RNCore] Replace React Native Core for the right configuration, if needed
+[RUN_FASTLANE] › Executing react-native Pods/React-Core-prebuilt » [CP] Copy XCFrameworks
+[RUN_FASTLANE] › Executing react-native Pods/React-RCTFBReactNativeSpec » [CP-User] [RN]Check FBReactNativeSpec
+[RUN_FASTLANE] › Executing expo-modules-jsi Pods/ExpoModulesJSI » [CP-User] Build ExpoModulesJSI xcframework
+[RUN_FASTLANE] › Executing kotoba-tane-app Pods/ReactCodegen » [CP-User] Generate Specs
+[RUN_FASTLANE] › Executing kotoba-tane-app Pods/ReactCodegen » [Expo] Remove duplicate codegen output
+[RUN_FASTLANE] › Compiling kotoba-tane-app Pods/ReactCodegen » States.cpp
+[RUN_FASTLANE] › Compiling kotoba-tane-app Pods/ReactCodegen » ShadowNodes.cpp
+[RUN_FASTLANE] › Compiling kotoba-tane-app Pods/ReactCodegen » RNCWebViewSpec-generated.mm
+[RUN_FASTLANE] › Compiling kotoba-tane-app Pods/ReactCodegen » RCTUnstableModulesRequiringMainQueueSetupProvider.mm
+[RUN_FASTLANE] › Compiling kotoba-tane-app Pods/ReactCodegen » RCTThirdPartyComponentsProvider.mm
+[RUN_FASTLANE] › Compiling kotoba-tane-app Pods/ReactCodegen » RCTModulesConformingToProtocolsProvider.mm
+[RUN_FASTLANE] › Compiling kotoba-tane-app Pods/ReactCodegen » RCTModuleProviders.mm
+[RUN_FASTLANE] › Compiling kotoba-tane-app Pods/ReactCodegen » Props.cpp
+[RUN_FASTLANE] › Compiling kotoba-tane-app Pods/ReactCodegen » EventEmitters.cpp
+[RUN_FASTLANE] › Compiling kotoba-tane-app Pods/ReactCodegen » ComponentDescriptors.cpp
+[RUN_FASTLANE] › Compiling expo Pods/ExpoLogBox » ExpoRedBoxSwap.mm
+[RUN_FASTLANE] › Compiling @expo/log-box Pods/ExpoLogBox » ExpoLogBox-dummy.m
+[RUN_FASTLANE] › Packaging @expo/log-box Pods/ExpoLogBox » libExpoLogBox.a
+[RUN_FASTLANE] › Compiling kotoba-tane-app Pods/ReactCodegen » ReactCodegen-dummy.m
+[RUN_FASTLANE] › Packaging kotoba-tane-app Pods/ReactCodegen » libReactCodegen.a
+[RUN_FASTLANE] › Executing @expo/log-box Pods/ExpoLogBox » Copy generated compatibility header
+[RUN_FASTLANE] › Compiling react-native-webview Pods/react-native-webview » RNCWebViewModule.mm
+[RUN_FASTLANE] › Compiling react-native-webview Pods/react-native-webview » RNCWebViewManager.mm
+[RUN_FASTLANE] › Compiling react-native-webview Pods/react-native-webview » RNCWebView.mm
+[RUN_FASTLANE] › Compiling expo-iap Pods/openiap » openiap-dummy.m
+[RUN_FASTLANE] › Packaging expo-iap Pods/openiap » libopeniap.a
+[RUN_FASTLANE] › Compiling react-native-webview Pods/react-native-webview » react-native-webview-dummy.m
+[RUN_FASTLANE] › Executing expo-iap Pods/openiap » Copy generated compatibility header
+[RUN_FASTLANE] › Executing expo-modules-jsi Pods/ExpoModulesJSI » [CP] Copy XCFrameworks
+[RUN_FASTLANE] › Compiling kotoba-tane-app Pods/ReactAppDependencyProvider » RCTAppDependencyProvider.mm
+[RUN_FASTLANE] › Compiling kotoba-tane-app Pods/ReactAppDependencyProvider » ReactAppDependencyProvider-dummy.m
+[RUN_FASTLANE] › Executing expo-modules-core Pods/ExpoModulesCore » [CP-User] [Expo] Resolve ExpoModulesCore dSYM source maps
+[RUN_FASTLANE] › Packaging kotoba-tane-app Pods/ReactAppDependencyProvider » libReactAppDependencyProvider.a
+[RUN_FASTLANE] › Executing expo-modules-core Pods/ExpoModulesCore » [CP-User] [Expo] Switch ExpoModulesCore XCFramework for build configuration
+[RUN_FASTLANE] › Executing expo-modules-core Pods/ExpoModulesCore » [CP] Copy XCFrameworks
+[RUN_FASTLANE] › Compiling react-native-webview Pods/react-native-webview » RNCWebViewImpl.m
+[RUN_FASTLANE] › Compiling react-native-webview Pods/react-native-webview » RNCWebViewDecisionManager.m
+[RUN_FASTLANE] › Compiling react-native-webview Pods/react-native-webview » RNCWKProcessPoolManager.m
+[RUN_FASTLANE] › Compiling react-native-webview Pods/react-native-webview » RCTConvert+WKDataDetectorTypes.m
+[RUN_FASTLANE] › Packaging react-native-webview Pods/react-native-webview » libreact-native-webview.a
+[RUN_FASTLANE] › Executing expo-modules-core Pods/ExpoModulesWorklets » [CP-User] [Expo] Resolve ExpoModulesWorklets dSYM source maps
+[RUN_FASTLANE] › Executing expo-font Pods/ExpoFont » [CP-User] [Expo] Resolve ExpoFont dSYM source maps
+[RUN_FASTLANE] › Executing expo-file-system Pods/ExpoFileSystem » [CP-User] [Expo] Resolve ExpoFileSystem dSYM source maps
+[RUN_FASTLANE] › Executing expo-modules-core Pods/ExpoModulesWorklets » [CP-User] [Expo] Switch ExpoModulesWorklets XCFramework for build configuration
+[RUN_FASTLANE] › Executing expo-modules-core Pods/ExpoModulesWorklets » [CP] Copy XCFrameworks
+[RUN_FASTLANE] › Executing expo-font Pods/ExpoFont » [CP-User] [Expo] Switch ExpoFont XCFramework for build configuration
+[RUN_FASTLANE] › Executing expo-file-system Pods/ExpoFileSystem » [CP-User] [Expo] Switch ExpoFileSystem XCFramework for build configuration
+[RUN_FASTLANE] › Executing expo-font Pods/ExpoFont » [CP] Copy XCFrameworks
+[RUN_FASTLANE] › Executing expo-file-system Pods/ExpoFileSystem » [CP] Copy XCFrameworks
+[RUN_FASTLANE] › Compiling expo-status-bar Pods/ExpoStatusBar » ExpoStatusBar-dummy.m
+[RUN_FASTLANE] › Packaging expo-status-bar Pods/ExpoStatusBar » libExpoStatusBar.a
+[RUN_FASTLANE] › Compiling expo-splash-screen Pods/ExpoSplashScreen » ExpoSplashScreen-dummy.m
+[RUN_FASTLANE] › Packaging expo-splash-screen Pods/ExpoSplashScreen » libExpoSplashScreen.a
+[RUN_FASTLANE] › Executing expo-status-bar Pods/ExpoStatusBar » Copy generated compatibility header
+[RUN_FASTLANE] › Executing expo-splash-screen Pods/ExpoSplashScreen » Copy generated compatibility header
+[RUN_FASTLANE] › Compiling expo-keep-awake Pods/ExpoKeepAwake » ExpoKeepAwake-dummy.m
+[RUN_FASTLANE] › Packaging expo-keep-awake Pods/ExpoKeepAwake » libExpoKeepAwake.a
+[RUN_FASTLANE] › Executing expo-keep-awake Pods/ExpoKeepAwake » Copy generated compatibility header
+[RUN_FASTLANE] › Compiling expo-speech-recognition Pods/ExpoSpeechRecognition » ExpoSpeechRecognition-dummy.m
+[RUN_FASTLANE] › Packaging expo-speech-recognition Pods/ExpoSpeechRecognition » libExpoSpeechRecognition.a
+[RUN_FASTLANE] › Executing expo-speech-recognition Pods/ExpoSpeechRecognition » Copy generated compatibility header
+[RUN_FASTLANE] › Compiling @expo/dom-webview Pods/ExpoDomWebView » ExpoDomWebView-dummy.m
+[RUN_FASTLANE] › Packaging @expo/dom-webview Pods/ExpoDomWebView » libExpoDomWebView.a
+[RUN_FASTLANE] › Executing @expo/dom-webview Pods/ExpoDomWebView » Copy generated compatibility header
+[RUN_FASTLANE] › Executing expo-constants Pods/EXConstants » [CP-User] Generate app.config for prebuilt Constants.manifest
+[RUN_FASTLANE] › Compiling expo-iap Pods/ExpoIap » ExpoIap-dummy.m
+[RUN_FASTLANE] › Packaging expo-iap Pods/ExpoIap » libExpoIap.a
+[RUN_FASTLANE] › Executing expo-iap Pods/ExpoIap » Copy generated compatibility header
+[RUN_FASTLANE] › Compiling expo-asset Pods/ExpoAsset » ExpoAsset-dummy.m
+[RUN_FASTLANE] › Packaging expo-asset Pods/ExpoAsset » libExpoAsset.a
+[RUN_FASTLANE] › Executing expo-asset Pods/ExpoAsset » Copy generated compatibility header
+[RUN_FASTLANE] › Compiling expo-constants Pods/EXConstants » EXConstantsInstallationIdProvider.m
+[RUN_FASTLANE] › Compiling expo-constants Pods/EXConstants » EXConstants-dummy.m
+[RUN_FASTLANE] › Compiling expo-constants Pods/EXConstants » EXConstantsService.m
+[RUN_FASTLANE] › Packaging expo-constants Pods/EXConstants » libEXConstants.a
+[RUN_FASTLANE] › Executing expo-constants Pods/EXConstants » Copy generated compatibility header
+[RUN_FASTLANE] › Compiling expo Pods/Expo » ExpoReactNativeFactory.mm
+[RUN_FASTLANE] › Compiling expo Pods/Expo » EXReactRootViewFactory.mm
+[RUN_FASTLANE] › Compiling expo Pods/Expo » EXBundleConfiguration.mm
+[RUN_FASTLANE] › Compiling expo Pods/Expo » Expo-dummy.m
+[RUN_FASTLANE] › Compiling expo Pods/Expo » EXLegacyAppDelegateWrapper.m
+[RUN_FASTLANE] › Compiling expo Pods/Expo » EXAppDefinesLoader.m
+[RUN_FASTLANE] › Compiling expo Pods/Expo » EXAppDelegatesLoader.m
+[RUN_FASTLANE] › Packaging expo Pods/Expo » libExpo.a
+[RUN_FASTLANE] › Executing expo Pods/Expo » Copy generated compatibility header
+[RUN_FASTLANE] › Compiling Pods/Pods-app » Pods-app-dummy.m
+[RUN_FASTLANE] › Packaging Pods/Pods-app » libPods-app.a
+[RUN_FASTLANE] › Executing app » [CP] Check Pods Manifest.lock
+[RUN_FASTLANE] › Executing app » [Expo] Configure project
+[RUN_FASTLANE]     The @ExpoModule class 'CoreModule' (/private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/node_modules/expo-modules-core/ios/Core/Modules/CoreModule.swift) is internal, so the generated modules provider cannot reference it. Declare it public to link it automatically, or use a lower access level such as private to opt it out of linking.
+[RUN_FASTLANE] › Copying   ios/build/Build/Intermediates.noindex/ArchiveIntermediates/app/InstallationBuildProductsLocation/Applications/app.app/PrivacyInfo.xcprivacy ➜ ./PrivacyInfo.xcprivacy
+[RUN_FASTLANE] › Copying   ios/app/Supporting/Expo.plist ➜ ./Expo.plist
+[RUN_FASTLANE] › Compiling app » SplashScreen.storyboard
+[RUN_FASTLANE] › Preparing app » Info.plist
+[RUN_FASTLANE] › Compiling app » app_vers.c
+[RUN_FASTLANE] › Linking   app » app
+[RUN_FASTLANE] ⚠️  ignoring duplicate libraries: '-lc++'
+   └─/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/app.xcodeproj: app: ld
+[RUN_FASTLANE] › Executing app » Bundle React Native code and images
+[RUN_FASTLANE] ⚠️  search path '/var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v17.6.109.0.ulM3Vh/Metal.xctoolchain/usr/lib/swift/iphoneos' not found
+   └─/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/app.xcodeproj: app: ld
+[RUN_FASTLANE] › Generating debug app » app.app.dSYM
+[RUN_FASTLANE] › Executing app » [CP] Copy Pods Resources
+[RUN_FASTLANE] › Executing app » [CP] Embed Pods Frameworks
+[RUN_FASTLANE] › Signing   app » app.app
+[RUN_FASTLANE] › Creating  app » app.app
+[RUN_FASTLANE] › Archive Succeeded
+[RUN_FASTLANE] Generated plist file with the following values:
+[RUN_FASTLANE] ▸ -----------------------------------------
+[RUN_FASTLANE] ▸ {
+[RUN_FASTLANE] ▸   "method": "app-store",
+[RUN_FASTLANE] ▸   "provisioningProfiles": {
+[RUN_FASTLANE] ▸     "com.uchinoaji.kotobatane": "ed57234a-3eb0-485c-8ab0-b37e8476d0e9"
+[RUN_FASTLANE] ▸   },
+[RUN_FASTLANE] ▸   "signingStyle": "manual"
+[RUN_FASTLANE] ▸ }
+[RUN_FASTLANE] ▸ -----------------------------------------
+[RUN_FASTLANE] $ /usr/bin/xcrun /opt/homebrew/lib/ruby/gems/3.4.0/gems/fastlane-2.241.2/gym/lib/assets/wrap_xcodebuild/xcbuild-safe.sh -exportArchive -exportOptionsPlist /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/gym_config20261114-17855-kx8yhj.plist -archivePath /Users/runner/Library/Developer/Xcode/Archives/2026-11-14/app\ 2026-11-14\ 08.23.15.xcarchive -exportPath /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/gym_output20261114-17855-qs6ioo OTHER_CODE_SIGN_FLAGS="--keychain /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-8a520a86-4cff-48dc-9b83-03295ecac3d3.keychain"
+[RUN_FASTLANE] Compressing 6 dSYM(s)
+[RUN_FASTLANE] $ cd /Users/runner/Library/Developer/Xcode/Archives/2026-11-14/app\ 2026-11-14\ 08.23.15.xcarchive/dSYMs && zip -r /private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/build/app.app.dSYM.zip *.dSYM
+[RUN_FASTLANE] ▸   adding: app.app.dSYM/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: app.app.dSYM/Contents/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: app.app.dSYM/Contents/Resources/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: app.app.dSYM/Contents/Resources/Relocations/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: app.app.dSYM/Contents/Resources/Relocations/aarch64/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: app.app.dSYM/Contents/Resources/Relocations/aarch64/app.yml (deflated 89%)
+[RUN_FASTLANE] ▸   adding: app.app.dSYM/Contents/Resources/DWARF/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: app.app.dSYM/Contents/Resources/DWARF/app (deflated 72%)
+[RUN_FASTLANE] ▸   adding: app.app.dSYM/Contents/Resources/Swift/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: app.app.dSYM/Contents/Resources/Swift/aarch64/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: app.app.dSYM/Contents/Resources/Swift/aarch64/ExpoFileSystem.swiftinterface (deflated 64%)
+[RUN_FASTLANE] ▸   adding: app.app.dSYM/Contents/Resources/Swift/aarch64/ExpoFont.swiftinterface (deflated 58%)
+[RUN_FASTLANE] ▸   adding: app.app.dSYM/Contents/Resources/Swift/aarch64/ExpoModulesCore.swiftinterface (deflated 87%)
+[RUN_FASTLANE] ▸   adding: app.app.dSYM/Contents/Info.plist (deflated 52%)
+[RUN_FASTLANE] ▸   adding: ExpoFileSystem.framework.dSYM/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoFileSystem.framework.dSYM/Contents/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoFileSystem.framework.dSYM/Contents/Resources/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoFileSystem.framework.dSYM/Contents/Resources/Relocations/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoFileSystem.framework.dSYM/Contents/Resources/Relocations/aarch64/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoFileSystem.framework.dSYM/Contents/Resources/Relocations/aarch64/ExpoFileSystem.yml (deflated 87%)
+[RUN_FASTLANE] ▸   adding: ExpoFileSystem.framework.dSYM/Contents/Resources/DWARF/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoFileSystem.framework.dSYM/Contents/Resources/DWARF/ExpoFileSystem (deflated 71%)
+[RUN_FASTLANE] ▸   adding: ExpoFileSystem.framework.dSYM/Contents/Resources/Swift/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoFileSystem.framework.dSYM/Contents/Resources/Swift/aarch64/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoFileSystem.framework.dSYM/Contents/Info.plist (deflated 52%)
+[RUN_FASTLANE] ▸   adding: ExpoFont.framework.dSYM/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoFont.framework.dSYM/Contents/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoFont.framework.dSYM/Contents/Resources/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoFont.framework.dSYM/Contents/Resources/Relocations/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoFont.framework.dSYM/Contents/Resources/Relocations/aarch64/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoFont.framework.dSYM/Contents/Resources/Relocations/aarch64/ExpoFont.yml (deflated 84%)
+[RUN_FASTLANE] ▸   adding: ExpoFont.framework.dSYM/Contents/Resources/DWARF/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoFont.framework.dSYM/Contents/Resources/DWARF/ExpoFont (deflated 66%)
+[RUN_FASTLANE] ▸   adding: ExpoFont.framework.dSYM/Contents/Resources/Swift/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoFont.framework.dSYM/Contents/Resources/Swift/aarch64/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoFont.framework.dSYM/Contents/Info.plist (deflated 52%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesCore.framework.dSYM/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesCore.framework.dSYM/Contents/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesCore.framework.dSYM/Contents/Resources/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesCore.framework.dSYM/Contents/Resources/Relocations/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesCore.framework.dSYM/Contents/Resources/Relocations/aarch64/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesCore.framework.dSYM/Contents/Resources/Relocations/aarch64/ExpoModulesCore.yml (deflated 88%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesCore.framework.dSYM/Contents/Resources/DWARF/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesCore.framework.dSYM/Contents/Resources/DWARF/ExpoModulesCore (deflated 73%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesCore.framework.dSYM/Contents/Info.plist (deflated 52%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesJSI.framework.dSYM/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesJSI.framework.dSYM/Contents/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesJSI.framework.dSYM/Contents/Resources/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesJSI.framework.dSYM/Contents/Resources/Relocations/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesJSI.framework.dSYM/Contents/Resources/Relocations/aarch64/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesJSI.framework.dSYM/Contents/Resources/Relocations/aarch64/ExpoModulesJSI.yml (deflated 88%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesJSI.framework.dSYM/Contents/Resources/DWARF/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesJSI.framework.dSYM/Contents/Resources/DWARF/ExpoModulesJSI (deflated 71%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesJSI.framework.dSYM/Contents/Info.plist (deflated 52%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesWorklets.framework.dSYM/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesWorklets.framework.dSYM/Contents/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesWorklets.framework.dSYM/Contents/Resources/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesWorklets.framework.dSYM/Contents/Resources/Relocations/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesWorklets.framework.dSYM/Contents/Resources/Relocations/aarch64/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesWorklets.framework.dSYM/Contents/Resources/Relocations/aarch64/ExpoModulesWorklets.yml (deflated 86%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesWorklets.framework.dSYM/Contents/Resources/DWARF/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesWorklets.framework.dSYM/Contents/Resources/DWARF/ExpoModulesWorklets (deflated 65%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesWorklets.framework.dSYM/Contents/Resources/Swift/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesWorklets.framework.dSYM/Contents/Resources/Swift/aarch64/ (stored 0%)
+[RUN_FASTLANE] ▸   adding: ExpoModulesWorklets.framework.dSYM/Contents/Info.plist (deflated 52%)
+[RUN_FASTLANE] Successfully exported and compressed dSYM file
+[RUN_FASTLANE] Successfully exported and signed the ipa file:
+[RUN_FASTLANE] /private/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/build/app.ipa
+[RUN_FASTLANE] 
+› 0 error(s), and 3 warning(s)
+
+[CLEAN_UP_CREDENTIALS] Destroying keychain - /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-8a520a86-4cff-48dc-9b83-03295ecac3d3.keychain
+[CLEAN_UP_CREDENTIALS] Removing provisioning profile
+[PARSE_XCACTIVITYLOG] Local builds skip build performance analysis.
+[UPLOAD_APPLICATION_ARCHIVE] Application archives:
+[UPLOAD_APPLICATION_ARCHIVE]   - /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/eas-build-local-nodejs/5b7c0602-df99-4f93-9621-ab692c70e37e/build/ios/build/app.ipa (25.5 MB)
+[UPLOAD_APPLICATION_ARCHIVE] Uploading application archive...
+[PREPARE_ARTIFACTS] Preparing artifacts
+[PREPARE_ARTIFACTS] Writing artifacts to /tmp/out/kotoba-tane.ipa
+[SAVE_CACHE] Local builds do not support saving cache.
+
+Build successful
+You can find the build artifacts in /tmp/out/kotoba-tane.ipa
