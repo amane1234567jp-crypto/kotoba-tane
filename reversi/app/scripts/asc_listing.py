@@ -247,3 +247,19 @@ if MODE == "newver":
     upsert_loc(f"/v1/appStoreVersions/{ver['id']}/appStoreVersionLocalizations", "appStoreVersionLocalizations", "appStoreVersion", "appStoreVersions", ver["id"],
                {"description": L["description"], "keywords": L["keywords"], "supportUrl": L["supportUrl"], "promotionalText": L["promotionalText"], "whatsNew": L.get("whatsNew", "")})
     s, j = api("GET", f"/v1/appStoreVersions/{ver['id']}/appStoreReviewDetail"); log("review detail carried:", s, bool(j.get("data")))
+
+if MODE == "tf":
+    # TestFlight：グループ・テスターの状態を見て、招待を送りなおす（公開リポジトリなのでメールは出さない）
+    s, j = api("GET", f"/v1/apps/{APP}/betaGroups")
+    for g in j.get("data", []):
+        a = g["attributes"]; log("group:", g["id"], a.get("name"), "internal" if a.get("isInternalGroup") else "external", "allBuilds" if a.get("hasAccessToAllBuilds") else "")
+        s2, t = api("GET", f"/v1/betaGroups/{g['id']}/betaTesters?limit=50")
+        for x in t.get("data", []):
+            xa = x["attributes"]; log("  tester:", x["id"], xa.get("firstName"), xa.get("inviteType"), xa.get("state"))
+            s3, r = api("POST", "/v1/betaTesterInvitations", {"data": {"type": "betaTesterInvitations", "relationships": {
+                "app": {"data": {"type": "apps", "id": APP}}, "betaTester": {"data": {"type": "betaTesters", "id": x["id"]}}}}})
+            log("  invite resend:", s3, err(s3, r))
+        s2, bl = api("GET", f"/v1/betaGroups/{g['id']}/builds?limit=5")
+        log("  builds in group:", [b["attributes"]["version"] for b in bl.get("data", [])])
+    s, j = api("GET", f"/v1/builds?filter[app]={APP}&sort=-uploadedDate&limit=2&fields[builds]=version,processingState,expired&include=buildBetaDetail")
+    for d in j.get("included", []): log("beta detail:", short(d.get("attributes")))
