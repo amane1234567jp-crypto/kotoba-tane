@@ -11,6 +11,13 @@ def ko(n):
     tens = "" if t == 0 else ("じゅう" if t == 1 else ONES[t] + "じゅう")
     if o == 0: return tens[:-3] + "じゅっこ"
     return tens + {1: "いっこ", 6: "ろっこ", 8: "はっこ"}.get(o, ONES[o] + "こ")
+def mai(n):
+    """数＋「まい」のよみ（2026-11-14：石は「こ」ではなく「まい」で数える）"""
+    if n == 0: return "ぜろまい"
+    t, o = divmod(n, 10)
+    tens = "" if t == 0 else ("じゅう" if t == 1 else ONES[t] + "じゅう")
+    return tens + ONES[o] + "まい"
+assert mai(1) == "いちまい" and mai(10) == "じゅうまい" and mai(19) == "じゅうきゅうまい" and mai(64) == "ろくじゅうよんまい"
 assert ko(1) == "いっこ" and ko(10) == "じゅっこ" and ko(20) == "にじゅっこ" and ko(36) == "さんじゅうろっこ" and ko(64) == "ろくじゅうよんこ" and ko(0) == "ぜろこ"
 PONY = [
     ("rv_pass_k", "くろは おけるところが ないから パス！ しろの ばん！"),
@@ -25,14 +32,14 @@ PONY = [
 ]
 KAME = [("rv_start", "はじめ！ さきは くろ からだよ"), ("rv_win_k", "くろの かち！"), ("rv_win_s", "しろの かち！"), ("rv_draw", "おなじ かず！ ひきわけ！")]
 for n in range(65):
-    KAME.append((f"rv_k{n}", f"くろが {ko(n)}、"))
-    KAME.append((f"rv_s{n}", f"しろが {ko(n)}"))
+    KAME.append((f"rv_k{n}", f"くろが {mai(n)}、"))
+    KAME.append((f"rv_s{n}", f"しろが {mai(n)}"))
 (H / "pony.json").write_text(json.dumps([[k, t, {}, None] for k, t in PONY], ensure_ascii=False, indent=0))
 # AivisSpeech は漢字まじりのほうが読み・アクセントが安定するので、読ませる文（yomi）を別に持つ
 YOMI = {"rv_start": "はじめ！ 先は、黒からだよ。", "rv_win_k": "黒の、勝ち！", "rv_win_s": "白の、勝ち！", "rv_draw": "同じ数！ 引き分け！"}
 for n in range(65):
-    YOMI[f"rv_k{n}"] = f"黒が、{n}個。"
-    YOMI[f"rv_s{n}"] = f"白が、{n}個。"
+    YOMI[f"rv_k{n}"] = f"黒が、{n}枚。"
+    YOMI[f"rv_s{n}"] = f"白が、{n}枚。"
 J = H / "rv1"; J.mkdir(exist_ok=True)
 (J / "lines.json").write_text(json.dumps([{"key": k, "who": "kamejii", "text": t} for k, t in KAME], ensure_ascii=False, indent=0))
 (J / "yomi.json").write_text(json.dumps(YOMI, ensure_ascii=False, indent=0))

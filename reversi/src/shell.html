@@ -221,6 +221,13 @@ body {
   display: flex; align-items: center; gap: 6px; font: 700 15px var(--body); color: var(--ink); background: rgba(255, 253, 246, .92);
   border: 3px solid var(--ink); border-radius: 999px; padding: 5px 14px 5px 10px; cursor: pointer; }
 .menuBtn svg { width: 20px; height: 20px; }
+/* メニューのボタンが盤にかからないように（2026-11-14）。盤の大きさは変えない：
+   縦画面は 盤を少し下げて その分を下の札から、横画面は ボタンを左上（くろの札の上）に置いて 札を少し下げる */
+@media (orientation: portrait), (max-aspect-ratio: 11/10) { body.playing .boardWrap { margin-top: 44px; } }
+@media not ((orientation: portrait) or (max-aspect-ratio: 11/10)) {
+  .menuBtn { left: max(16px, env(safe-area-inset-left, 0px)); transform: none; }
+  body.playing #sideA { margin-top: 50px; }
+}
 .menuBtn:focus-visible { outline: 4px solid var(--pink); outline-offset: 3px; }
 #quitOv { background: rgba(43, 42, 51, .45); }
 .ver { position: fixed; right: max(10px, env(safe-area-inset-right, 0px)); bottom: max(6px, env(safe-area-inset-bottom, 0px)); margin: 0; font: 500 11px var(--body); color: var(--muted); opacity: .75; }

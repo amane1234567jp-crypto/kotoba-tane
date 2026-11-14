@@ -770,6 +770,7 @@ function unlock() {
   audio();
   try { if ("speechSynthesis" in window) { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); } } catch (e) { /* 読み上げなしでも遊べる */ }
   $("startOv").hidden = true; G.started = true; keepAwake(); preloadVoices(); $("menuBtn").hidden = false;
+  document.body.classList.add("playing"); layout(); requestAnimationFrame(() => { try { placeAll(); } catch (e) { } });
 }
 $("startBtn").addEventListener("click", async () => {
   unlock();

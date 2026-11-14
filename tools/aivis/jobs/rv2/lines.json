@@ -1,0 +1,652 @@
+[
+{
+"key": "rv_k0",
+"who": "kamejii",
+"text": "くろが ぜろまい、"
+},
+{
+"key": "rv_s0",
+"who": "kamejii",
+"text": "しろが ぜろまい"
+},
+{
+"key": "rv_k1",
+"who": "kamejii",
+"text": "くろが いちまい、"
+},
+{
+"key": "rv_s1",
+"who": "kamejii",
+"text": "しろが いちまい"
+},
+{
+"key": "rv_k2",
+"who": "kamejii",
+"text": "くろが にまい、"
+},
+{
+"key": "rv_s2",
+"who": "kamejii",
+"text": "しろが にまい"
+},
+{
+"key": "rv_k3",
+"who": "kamejii",
+"text": "くろが さんまい、"
+},
+{
+"key": "rv_s3",
+"who": "kamejii",
+"text": "しろが さんまい"
+},
+{
+"key": "rv_k4",
+"who": "kamejii",
+"text": "くろが よんまい、"
+},
+{
+"key": "rv_s4",
+"who": "kamejii",
+"text": "しろが よんまい"
+},
+{
+"key": "rv_k5",
+"who": "kamejii",
+"text": "くろが ごまい、"
+},
+{
+"key": "rv_s5",
+"who": "kamejii",
+"text": "しろが ごまい"
+},
+{
+"key": "rv_k6",
+"who": "kamejii",
+"text": "くろが ろくまい、"
+},
+{
+"key": "rv_s6",
+"who": "kamejii",
+"text": "しろが ろくまい"
+},
+{
+"key": "rv_k7",
+"who": "kamejii",
+"text": "くろが ななまい、"
+},
+{
+"key": "rv_s7",
+"who": "kamejii",
+"text": "しろが ななまい"
+},
+{
+"key": "rv_k8",
+"who": "kamejii",
+"text": "くろが はちまい、"
+},
+{
+"key": "rv_s8",
+"who": "kamejii",
+"text": "しろが はちまい"
+},
+{
+"key": "rv_k9",
+"who": "kamejii",
+"text": "くろが きゅうまい、"
+},
+{
+"key": "rv_s9",
+"who": "kamejii",
+"text": "しろが きゅうまい"
+},
+{
+"key": "rv_k10",
+"who": "kamejii",
+"text": "くろが じゅうまい、"
+},
+{
+"key": "rv_s10",
+"who": "kamejii",
+"text": "しろが じゅうまい"
+},
+{
+"key": "rv_k11",
+"who": "kamejii",
+"text": "くろが じゅういちまい、"
+},
+{
+"key": "rv_s11",
+"who": "kamejii",
+"text": "しろが じゅういちまい"
+},
+{
+"key": "rv_k12",
+"who": "kamejii",
+"text": "くろが じゅうにまい、"
+},
+{
+"key": "rv_s12",
+"who": "kamejii",
+"text": "しろが じゅうにまい"
+},
+{
+"key": "rv_k13",
+"who": "kamejii",
+"text": "くろが じゅうさんまい、"
+},
+{
+"key": "rv_s13",
+"who": "kamejii",
+"text": "しろが じゅうさんまい"
+},
+{
+"key": "rv_k14",
+"who": "kamejii",
+"text": "くろが じゅうよんまい、"
+},
+{
+"key": "rv_s14",
+"who": "kamejii",
+"text": "しろが じゅうよんまい"
+},
+{
+"key": "rv_k15",
+"who": "kamejii",
+"text": "くろが じゅうごまい、"
+},
+{
+"key": "rv_s15",
+"who": "kamejii",
+"text": "しろが じゅうごまい"
+},
+{
+"key": "rv_k16",
+"who": "kamejii",
+"text": "くろが じゅうろくまい、"
+},
+{
+"key": "rv_s16",
+"who": "kamejii",
+"text": "しろが じゅうろくまい"
+},
+{
+"key": "rv_k17",
+"who": "kamejii",
+"text": "くろが じゅうななまい、"
+},
+{
+"key": "rv_s17",
+"who": "kamejii",
+"text": "しろが じゅうななまい"
+},
+{
+"key": "rv_k18",
+"who": "kamejii",
+"text": "くろが じゅうはちまい、"
+},
+{
+"key": "rv_s18",
+"who": "kamejii",
+"text": "しろが じゅうはちまい"
+},
+{
+"key": "rv_k19",
+"who": "kamejii",
+"text": "くろが じゅうきゅうまい、"
+},
+{
+"key": "rv_s19",
+"who": "kamejii",
+"text": "しろが じゅうきゅうまい"
+},
+{
+"key": "rv_k20",
+"who": "kamejii",
+"text": "くろが にじゅうまい、"
+},
+{
+"key": "rv_s20",
+"who": "kamejii",
+"text": "しろが にじゅうまい"
+},
+{
+"key": "rv_k21",
+"who": "kamejii",
+"text": "くろが にじゅういちまい、"
+},
+{
+"key": "rv_s21",
+"who": "kamejii",
+"text": "しろが にじゅういちまい"
+},
+{
+"key": "rv_k22",
+"who": "kamejii",
+"text": "くろが にじゅうにまい、"
+},
+{
+"key": "rv_s22",
+"who": "kamejii",
+"text": "しろが にじゅうにまい"
+},
+{
+"key": "rv_k23",
+"who": "kamejii",
+"text": "くろが にじゅうさんまい、"
+},
+{
+"key": "rv_s23",
+"who": "kamejii",
+"text": "しろが にじゅうさんまい"
+},
+{
+"key": "rv_k24",
+"who": "kamejii",
+"text": "くろが にじゅうよんまい、"
+},
+{
+"key": "rv_s24",
+"who": "kamejii",
+"text": "しろが にじゅうよんまい"
+},
+{
+"key": "rv_k25",
+"who": "kamejii",
+"text": "くろが にじゅうごまい、"
+},
+{
+"key": "rv_s25",
+"who": "kamejii",
+"text": "しろが にじゅうごまい"
+},
+{
+"key": "rv_k26",
+"who": "kamejii",
+"text": "くろが にじゅうろくまい、"
+},
+{
+"key": "rv_s26",
+"who": "kamejii",
+"text": "しろが にじゅうろくまい"
+},
+{
+"key": "rv_k27",
+"who": "kamejii",
+"text": "くろが にじゅうななまい、"
+},
+{
+"key": "rv_s27",
+"who": "kamejii",
+"text": "しろが にじゅうななまい"
+},
+{
+"key": "rv_k28",
+"who": "kamejii",
+"text": "くろが にじゅうはちまい、"
+},
+{
+"key": "rv_s28",
+"who": "kamejii",
+"text": "しろが にじゅうはちまい"
+},
+{
+"key": "rv_k29",
+"who": "kamejii",
+"text": "くろが にじゅうきゅうまい、"
+},
+{
+"key": "rv_s29",
+"who": "kamejii",
+"text": "しろが にじゅうきゅうまい"
+},
+{
+"key": "rv_k30",
+"who": "kamejii",
+"text": "くろが さんじゅうまい、"
+},
+{
+"key": "rv_s30",
+"who": "kamejii",
+"text": "しろが さんじゅうまい"
+},
+{
+"key": "rv_k31",
+"who": "kamejii",
+"text": "くろが さんじゅういちまい、"
+},
+{
+"key": "rv_s31",
+"who": "kamejii",
+"text": "しろが さんじゅういちまい"
+},
+{
+"key": "rv_k32",
+"who": "kamejii",
+"text": "くろが さんじゅうにまい、"
+},
+{
+"key": "rv_s32",
+"who": "kamejii",
+"text": "しろが さんじゅうにまい"
+},
+{
+"key": "rv_k33",
+"who": "kamejii",
+"text": "くろが さんじゅうさんまい、"
+},
+{
+"key": "rv_s33",
+"who": "kamejii",
+"text": "しろが さんじゅうさんまい"
+},
+{
+"key": "rv_k34",
+"who": "kamejii",
+"text": "くろが さんじゅうよんまい、"
+},
+{
+"key": "rv_s34",
+"who": "kamejii",
+"text": "しろが さんじゅうよんまい"
+},
+{
+"key": "rv_k35",
+"who": "kamejii",
+"text": "くろが さんじゅうごまい、"
+},
+{
+"key": "rv_s35",
+"who": "kamejii",
+"text": "しろが さんじゅうごまい"
+},
+{
+"key": "rv_k36",
+"who": "kamejii",
+"text": "くろが さんじゅうろくまい、"
+},
+{
+"key": "rv_s36",
+"who": "kamejii",
+"text": "しろが さんじゅうろくまい"
+},
+{
+"key": "rv_k37",
+"who": "kamejii",
+"text": "くろが さんじゅうななまい、"
+},
+{
+"key": "rv_s37",
+"who": "kamejii",
+"text": "しろが さんじゅうななまい"
+},
+{
+"key": "rv_k38",
+"who": "kamejii",
+"text": "くろが さんじゅうはちまい、"
+},
+{
+"key": "rv_s38",
+"who": "kamejii",
+"text": "しろが さんじゅうはちまい"
+},
+{
+"key": "rv_k39",
+"who": "kamejii",
+"text": "くろが さんじゅうきゅうまい、"
+},
+{
+"key": "rv_s39",
+"who": "kamejii",
+"text": "しろが さんじゅうきゅうまい"
+},
+{
+"key": "rv_k40",
+"who": "kamejii",
+"text": "くろが よんじゅうまい、"
+},
+{
+"key": "rv_s40",
+"who": "kamejii",
+"text": "しろが よんじゅうまい"
+},
+{
+"key": "rv_k41",
+"who": "kamejii",
+"text": "くろが よんじゅういちまい、"
+},
+{
+"key": "rv_s41",
+"who": "kamejii",
+"text": "しろが よんじゅういちまい"
+},
+{
+"key": "rv_k42",
+"who": "kamejii",
+"text": "くろが よんじゅうにまい、"
+},
+{
+"key": "rv_s42",
+"who": "kamejii",
+"text": "しろが よんじゅうにまい"
+},
+{
+"key": "rv_k43",
+"who": "kamejii",
+"text": "くろが よんじゅうさんまい、"
+},
+{
+"key": "rv_s43",
+"who": "kamejii",
+"text": "しろが よんじゅうさんまい"
+},
+{
+"key": "rv_k44",
+"who": "kamejii",
+"text": "くろが よんじゅうよんまい、"
+},
+{
+"key": "rv_s44",
+"who": "kamejii",
+"text": "しろが よんじゅうよんまい"
+},
+{
+"key": "rv_k45",
+"who": "kamejii",
+"text": "くろが よんじゅうごまい、"
+},
+{
+"key": "rv_s45",
+"who": "kamejii",
+"text": "しろが よんじゅうごまい"
+},
+{
+"key": "rv_k46",
+"who": "kamejii",
+"text": "くろが よんじゅうろくまい、"
+},
+{
+"key": "rv_s46",
+"who": "kamejii",
+"text": "しろが よんじゅうろくまい"
+},
+{
+"key": "rv_k47",
+"who": "kamejii",
+"text": "くろが よんじゅうななまい、"
+},
+{
+"key": "rv_s47",
+"who": "kamejii",
+"text": "しろが よんじゅうななまい"
+},
+{
+"key": "rv_k48",
+"who": "kamejii",
+"text": "くろが よんじゅうはちまい、"
+},
+{
+"key": "rv_s48",
+"who": "kamejii",
+"text": "しろが よんじゅうはちまい"
+},
+{
+"key": "rv_k49",
+"who": "kamejii",
+"text": "くろが よんじゅうきゅうまい、"
+},
+{
+"key": "rv_s49",
+"who": "kamejii",
+"text": "しろが よんじゅうきゅうまい"
+},
+{
+"key": "rv_k50",
+"who": "kamejii",
+"text": "くろが ごじゅうまい、"
+},
+{
+"key": "rv_s50",
+"who": "kamejii",
+"text": "しろが ごじゅうまい"
+},
+{
+"key": "rv_k51",
+"who": "kamejii",
+"text": "くろが ごじゅういちまい、"
+},
+{
+"key": "rv_s51",
+"who": "kamejii",
+"text": "しろが ごじゅういちまい"
+},
+{
+"key": "rv_k52",
+"who": "kamejii",
+"text": "くろが ごじゅうにまい、"
+},
+{
+"key": "rv_s52",
+"who": "kamejii",
+"text": "しろが ごじゅうにまい"
+},
+{
+"key": "rv_k53",
+"who": "kamejii",
+"text": "くろが ごじゅうさんまい、"
+},
+{
+"key": "rv_s53",
+"who": "kamejii",
+"text": "しろが ごじゅうさんまい"
+},
+{
+"key": "rv_k54",
+"who": "kamejii",
+"text": "くろが ごじゅうよんまい、"
+},
+{
+"key": "rv_s54",
+"who": "kamejii",
+"text": "しろが ごじゅうよんまい"
+},
+{
+"key": "rv_k55",
+"who": "kamejii",
+"text": "くろが ごじゅうごまい、"
+},
+{
+"key": "rv_s55",
+"who": "kamejii",
+"text": "しろが ごじゅうごまい"
+},
+{
+"key": "rv_k56",
+"who": "kamejii",
+"text": "くろが ごじゅうろくまい、"
+},
+{
+"key": "rv_s56",
+"who": "kamejii",
+"text": "しろが ごじゅうろくまい"
+},
+{
+"key": "rv_k57",
+"who": "kamejii",
+"text": "くろが ごじゅうななまい、"
+},
+{
+"key": "rv_s57",
+"who": "kamejii",
+"text": "しろが ごじゅうななまい"
+},
+{
+"key": "rv_k58",
+"who": "kamejii",
+"text": "くろが ごじゅうはちまい、"
+},
+{
+"key": "rv_s58",
+"who": "kamejii",
+"text": "しろが ごじゅうはちまい"
+},
+{
+"key": "rv_k59",
+"who": "kamejii",
+"text": "くろが ごじゅうきゅうまい、"
+},
+{
+"key": "rv_s59",
+"who": "kamejii",
+"text": "しろが ごじゅうきゅうまい"
+},
+{
+"key": "rv_k60",
+"who": "kamejii",
+"text": "くろが ろくじゅうまい、"
+},
+{
+"key": "rv_s60",
+"who": "kamejii",
+"text": "しろが ろくじゅうまい"
+},
+{
+"key": "rv_k61",
+"who": "kamejii",
+"text": "くろが ろくじゅういちまい、"
+},
+{
+"key": "rv_s61",
+"who": "kamejii",
+"text": "しろが ろくじゅういちまい"
+},
+{
+"key": "rv_k62",
+"who": "kamejii",
+"text": "くろが ろくじゅうにまい、"
+},
+{
+"key": "rv_s62",
+"who": "kamejii",
+"text": "しろが ろくじゅうにまい"
+},
+{
+"key": "rv_k63",
+"who": "kamejii",
+"text": "くろが ろくじゅうさんまい、"
+},
+{
+"key": "rv_s63",
+"who": "kamejii",
+"text": "しろが ろくじゅうさんまい"
+},
+{
+"key": "rv_k64",
+"who": "kamejii",
+"text": "くろが ろくじゅうよんまい、"
+},
+{
+"key": "rv_s64",
+"who": "kamejii",
+"text": "しろが ろくじゅうよんまい"
+}
+]
