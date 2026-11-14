@@ -2,7 +2,7 @@
   "expo": {
     "name": "テレビ電話リバーシ",
     "slug": "marushima-reversi",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "default",
     "icon": "./assets/icon.png",
     "scheme": "marushima",
@@ -15,7 +15,7 @@
     },
     "ios": {
       "bundleIdentifier": "com.uchinoaji.marushima.reversi",
-      "buildNumber": "3",
+      "buildNumber": "4",
       "supportsTablet": true,
       "infoPlist": {
         "NSCameraUsageDescription": "とおくの相手と顔を見ながら対戦するために、カメラを使います。",
@@ -28,7 +28,7 @@
     },
     "android": {
       "package": "com.uchinoaji.marushima.reversi",
-      "versionCode": 3,
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1E8A52"

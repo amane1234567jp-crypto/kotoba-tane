@@ -225,18 +225,27 @@ function bubbleAt(c) {
 /* 合成した声（voice/out/*.mp3）。ぽにー＝VOICEVOX 調整版、かめじい＝AivisSpeech。
    ファイルがないとき（1枚だけの確認版など）は、端末の読み上げにまかせる。 */
 const VOICE_DIR = "voice/out/", vbuf = {};
-async function loadVoice(key) {
-  if (key in vbuf) return vbuf[key];
-  vbuf[key] = null;
-  try {
-    const r = await fetch(VOICE_DIR + key + ".mp3"); if (!r.ok) return null;
-    const data = await r.arrayBuffer();
-    vbuf[key] = await new Promise((ok, ng) => audio().decodeAudioData(data, ok, ng));
-  } catch (e) { vbuf[key] = null; }
-  return vbuf[key];
+const vload = {};
+// 同じ声を2回読まない。読みかけなら その読みこみを待つ（前は 読みかけだと すぐ null を返していて、待てていなかった）
+function loadVoice(key) {
+  if (vbuf[key]) return Promise.resolve(vbuf[key]);
+  if (vload[key]) return vload[key];
+  return vload[key] = (async () => {
+    try {
+      const r = await fetch(VOICE_DIR + key + ".mp3"); if (!r.ok) throw new Error("http " + r.status);
+      const data = await r.arrayBuffer();
+      vbuf[key] = await new Promise((ok, ng) => audio().decodeAudioData(data, ok, ng));
+    } catch (e) { vbuf[key] = null; SOUND.voiceErr = key + ":" + String(e && e.message || e).slice(0, 40); delete vload[key]; }
+    return vbuf[key];
+  })();
 }
 // 数の声（くろが Nこ…）は 終局のときに 2本だけ読む。ほかは はじめに読んでおく
-const preloadVoices = () => Object.keys(VOICE_TEXT).filter(k => !/^rv_[ks]\d+$/.test(k)).forEach(k => loadVoice(k));
+// はじめの「くろからだよ」（rv_start）を先に読み、残りは そのあと（いっせいに読むと 最初の声が間に合わず、端末の別の声になった 2026-11-14）
+let preloading = null;
+const preloadVoices = () => preloading || (preloading = (async () => {
+  await loadVoice("rv_start");
+  Object.keys(VOICE_TEXT).filter(k => !/^rv_[ks]\d+$/.test(k)).forEach(k => loadVoice(k));
+})());
 function playBuf(buf) {
   return new Promise(res => {
     const s = ctx.createBufferSource(), g = ctx.createGain();
@@ -248,7 +257,7 @@ function playBuf(buf) {
 async function speak(c, keys, min = 0, keep = false) {
   keys = [].concat(keys);
   // まだ読みこめていない声は 少しだけ待つ（端末の読み上げに なるのを さける）
-  if (CFG.voice && keys.some(k => !vbuf[k])) await Promise.race([Promise.all(keys.map(loadVoice)), wait(1500)]);
+  if (CFG.voice && keys.some(k => !vbuf[k])) await Promise.race([Promise.all(keys.map(loadVoice)), wait(4000)]);
   return say(c, keys.map(k => VOICE_TEXT[k] || "").join(" ").replace(/、 /g, "、"), min, keep, keys);
 }
 function say(c, text, min = 0, keep = false, keys = null) {
@@ -614,7 +623,7 @@ blip = () => { }; chime = () => { }; tune = () => { }; noise = () => { };
    3) 音の出口（AudioContext）が止まっていたら resume。さわっても動かなければ その場で作りなおす */
 const SOUND = { session: "なし", out: "ふつう", keep: null, rebuilt: 0, why: "" };
 function setSession(type) {
-  if (window.RVNative) { SOUND.session = "アプリ"; return; }
+  // アプリ版も同じ（2026-11-14：殻の設定だけでは WKWebView が音の種類を戻してしまい、マナーモードで 効果音・声が消えた）
   try {
     if (!navigator.audioSession) { SOUND.session = "なし（古いiOS）"; return; }
     if (navigator.audioSession.type !== type) navigator.audioSession.type = type;
@@ -630,7 +639,6 @@ const SILENT = (() => {
   let bin = ""; b.forEach(x => bin += String.fromCharCode(x)); return "data:audio/wav;base64," + btoa(bin);
 })();
 function keepAlive() {
-  if (window.RVNative) return;   // アプリ版は殻が音の種類（マナーモードでも鳴る）を決める
   if (NET.role) { if (SOUND.keep) { SOUND.keep.pause(); } return; }   // 通話中は いらない（play-and-record はマナーモードで消えない）
   if (!SOUND.keep) {
     const el = document.createElement("audio");
@@ -707,7 +715,7 @@ $("sndTest").addEventListener("click", () => {
 // 設定の「音の テスト」：作りなおしてから ポン と鳴らす。いまの状態も出す（実機で原因を見るため）
 function soundInfo() {
   const st = ctx ? ctx.state : "まだ";
-  return `音：${st}・${SOUND.session}・${SOUND.out}${SOUND.viaCall ? "・通話の線" : ""}${SOUND.rebuilt ? `・作りなおし${SOUND.rebuilt}回` : ""}`;
+  return `音：${st}・${SOUND.session}・${SOUND.out}${SOUND.viaCall ? "・通話の線" : ""}${SOUND.rebuilt ? `・作りなおし${SOUND.rebuilt}回` : ""}${SOUND.voiceErr ? `・声：${SOUND.voiceErr}` : ""}`;
 }
 // 戻るボタンなどで古い画面がそのまま復元されたときは読みなおす（音の出口が死んでいる）
 addEventListener("pageshow", e => { if (e.persisted) location.reload(); });

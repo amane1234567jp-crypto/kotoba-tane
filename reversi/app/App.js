@@ -59,7 +59,8 @@ export default function App() {
     let alive = true;
     (async () => {
       try {
-        await setAudioModeAsync({ playsInSilentMode: true, allowsRecording: true, interruptionMode: "doNotMix", shouldPlayInBackground: false, shouldRouteThroughEarpiece: false });
+        // マナーモードでも鳴らす。マイクを使う設定（PlayAndRecord）は ここでは入れない＝通話のときに WebView が自分で切り替える
+        await setAudioModeAsync({ playsInSilentMode: true, allowsRecording: false, interruptionMode: "mixWithOthers", shouldPlayInBackground: false, shouldRouteThroughEarpiece: false });
       } catch (e) { }
       try {
         if (Platform.OS === "android") {
