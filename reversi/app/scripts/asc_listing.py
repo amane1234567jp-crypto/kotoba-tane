@@ -233,3 +233,17 @@ if MODE == "release":
             "relationships": {"appStoreVersion": {"data": {"type": "appStoreVersions", "id": v["id"]}}}}})
         log("release:", v["attributes"]["versionString"], s, err(s, j))
         s, j = api("GET", f"/v1/appStoreVersions/{v['id']}?fields[appStoreVersions]=appStoreState"); log("state after:", short(j.get("data", {}).get("attributes")))
+
+if MODE == "newver":
+    # 更新版：新しい版を作り（前の版の掲載情報・スクショは Apple が引きつぐ）、説明と「新機能」を入れる
+    if not ver:
+        s, j = api("POST", "/v1/appStoreVersions", {"data": {"type": "appStoreVersions", "attributes": {"platform": "IOS", "versionString": L["versionString"], "releaseType": "MANUAL", "copyright": L["copyright"]},
+                                                           "relationships": {"app": {"data": {"type": "apps", "id": APP}}}}})
+        log("create version:", s, err(s, j)); ver = j.get("data")
+    else:
+        s, j = api("PATCH", f"/v1/appStoreVersions/{ver['id']}", {"data": {"type": "appStoreVersions", "id": ver["id"], "attributes": {"versionString": L["versionString"], "releaseType": "MANUAL"}}})
+        log("version attrs:", s, err(s, j))
+    time.sleep(5)
+    upsert_loc(f"/v1/appStoreVersions/{ver['id']}/appStoreVersionLocalizations", "appStoreVersionLocalizations", "appStoreVersion", "appStoreVersions", ver["id"],
+               {"description": L["description"], "keywords": L["keywords"], "supportUrl": L["supportUrl"], "promotionalText": L["promotionalText"], "whatsNew": L.get("whatsNew", "")})
+    s, j = api("GET", f"/v1/appStoreVersions/{ver['id']}/appStoreReviewDetail"); log("review detail carried:", s, bool(j.get("data")))
