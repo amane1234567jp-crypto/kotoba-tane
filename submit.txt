@@ -1,0 +1,28 @@
+Using EAS CLI without version control system is not recommended, use this mode only if you know what you are doing.
+
+Uploading your app archive to EAS Submit
+- Uploading to EAS Submit 0%
+✔ Uploaded to EAS Submit 
+No complete App Store Connect credentials, skipping TestFlight setup
+
+ASC App ID:                 6832225234
+Project ID:                 0b857b49-a1e4-4c91-8e30-a0fcc3d604d3
+App Store Connect API Key:  
+    Key ID    :  MKX36V742D
+    Key Source:  local
+    Key Path  :  ./asc.p8
+Archive Path:               /tmp/out/marushima-reversi.ipa
+
+- Scheduling iOS submission
+✔ Scheduled iOS submission
+
+Submission details: https://expo.dev/accounts/uchinoaji-app/projects/marushima-reversi/submissions/d873ffec-3009-4aa2-8332-ea2ed6ea63f7
+
+Waiting for submission to complete. You can press Ctrl+C to exit.
+- Submitting
+✔ Submitted your app to Apple App Store Connect!
+
+Your binary has been successfully uploaded to App Store Connect!
+- It is now being processed by Apple - you will receive an email when the processing finishes.
+- It usually takes about 5-10 minutes depending on how busy Apple servers are.
+- When it's done, you can see your build here: https://appstoreconnect.apple.com/apps/6832225234/testflight/ios
