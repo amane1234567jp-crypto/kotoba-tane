@@ -1,0 +1,82 @@
+# ことばのたね アプリ版（iOS）を GitHub の Mac で作る（EAS の「ローカルビルド」。reversi-app-ios.yml と おなじ しくみ）
+# 2026-11-14：EAS の 無料枠（iOS ビルド回数）を 使いきったので こちらで 作る
+# EAS の無料枠（iOS のビルド回数）を使わずに済む。署名の証明書・プロファイルは EAS に保存したものを使う。
+# app/BUILD_IOS に「production yes」などを書いて push すると動く。できた .ipa と ログは app-ios-out ブランチへ。
+name: app-ios-local
+on:
+  push:
+    branches: [main]
+    paths: ["app/BUILD_IOS"]
+  workflow_dispatch:
+    inputs:
+      profile: { description: "preview / production", default: "production" }
+      submit: { description: "TestFlight へ送る（yes/no）", default: "no" }
+permissions:
+  contents: write
+concurrency:
+  group: app-ios-local
+jobs:
+  ipa:
+    runs-on: macos-15
+    timeout-minutes: 120
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      EAS_NO_VCS: "1"
+      EAS_BUILD_NO_EXPO_GO_WARNING: "true"
+    defaults:
+      run: { working-directory: app }
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }  # copy-web.js が web_commit.txt の 版を git show で とりだす
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: xcode 26
+        # App Store Connect は iOS 26 SDK（Xcode 26 以降）で作ったものしか受けつけない（2026-11 に 90725 で弾かれた）
+        run: |
+          ls -d /Applications/Xcode*.app
+          X=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | grep -v -i beta | sort -V | tail -1)
+          if [ -z "$X" ]; then echo "Xcode 26 が見つかりません"; exit 1; fi
+          sudo xcode-select -s "$X/Contents/Developer"; xcodebuild -version
+      - name: settings
+        id: s
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then F="${{ inputs.profile }}"; S="${{ inputs.submit }}";
+          else read F S REST < <(sed 's/#.*//' BUILD_IOS) || true; fi
+          echo "profile=${F:-production}" >> $GITHUB_OUTPUT; echo "submit=${S:-no}" >> $GITHUB_OUTPUT
+          echo "profile=${F:-production} submit=${S:-no}"
+      - name: prepare
+        env:
+          ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
+        run: |
+          npm ci --no-audit --no-fund 2>&1 | tail -2 && node scripts/copy-web.js
+          mkdir -p /tmp/out
+          printf '%s\n' "$ASC_P8" | tr -d '\r' | sed 's/^[ \t]*//;s/[ \t]*$//' | sed '/^$/d' > asc.p8
+          if ! head -1 asc.p8 | grep -q BEGIN; then B=$(tr -d ' \n' < asc.p8); printf -- '-----BEGIN PRIVATE KEY-----\n%s\n-----END PRIVATE KEY-----\n' "$(echo "$B" | fold -w 64)" > asc.p8; fi
+          echo "p8 lines: $(wc -l < asc.p8)"
+          sudo gem install cocoapods -N 2>&1 | tail -1 || true
+          brew install fastlane 2>&1 | tail -1 || true
+          xcodebuild -version | head -1; pod --version; fastlane --version 2>/dev/null | tail -1
+      - name: build (local)
+        env:
+          EXPO_ASC_API_KEY_PATH: ${{ github.workspace }}/app/asc.p8
+          EXPO_ASC_KEY_ID: MKX36V742D
+          EXPO_ASC_ISSUER_ID: 2fa8da34-49c0-4c52-aae7-77f748a041f7
+          EXPO_APPLE_TEAM_ID: ZGYPGQ9WPN
+          EXPO_APPLE_TEAM_TYPE: COMPANY_OR_ORGANIZATION
+        run: |
+          npx eas-cli build -p ios --profile ${{ steps.s.outputs.profile }} --local --non-interactive --output /tmp/out/kotoba-tane.ipa 2>&1 | tee /tmp/out/log.txt | tail -60
+          ls -la /tmp/out
+      - name: submit
+        if: steps.s.outputs.submit == 'yes'
+        run: |
+          npx eas-cli submit -p ios --profile production --path /tmp/out/kotoba-tane.ipa --non-interactive 2>&1 | tee /tmp/out/submit.txt | tail -30
+      - name: publish
+        if: always()
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          sed -i '' 's/\x1b\[[0-9;?]*[A-Za-z]//g' /tmp/out/log.txt 2>/dev/null || true
+          rm -f /tmp/out/*.p8
+          echo "{\"sha\":\"${GITHUB_SHA}\",\"at\":\"$(date -u +%FT%TZ)\"}" > /tmp/out/latest.json
+          git config user.name "app-bot"; git config user.email "app-bot@users.noreply.github.com"
+          git checkout -q --orphan app-ios-tmp; git rm -rf -q . ; rm -rf ./* ./.github
+          cp -r /tmp/out/. .; git add -A; git commit -q -m "kotoba app ios ${GITHUB_SHA}"; git push -f -q origin HEAD:app-ios-out
