@@ -50,6 +50,7 @@ footer a { color: var(--sub); }
       <a class="btn primary" id="open" href="#">アプリで ひらく</a>
       <p class="note">あいてと つながって、テレビ電話で あそべます。</p></li>
   </ol>
+  <p class="note" id="webFallback" style="margin-top:18px"><a href="#" id="webLink">アプリが うまく ひらかない ときは、ブラウザで あそぶ</a></p>
   <footer><a href="legal/support.html">サポート</a>　<a href="legal/privacy.html">プライバシーポリシー</a></footer>
 </main>
 <script>
@@ -64,7 +65,7 @@ footer a { color: var(--sub); }
   if (isAndroid && !PLAY_LIVE) { const q2 = new URLSearchParams(location.search); q2.set("dev", "1"); location.replace("play.html?" + q2.toString()); return; }
   if (isIOS) document.getElementById("android").hidden = true;
   if (isAndroid) document.getElementById("ios").hidden = true;
-  if (!r) { document.getElementById("openStep").hidden = true; document.getElementById("had").hidden = true; return; }
+  if (!r) { document.getElementById("openStep").hidden = true; document.getElementById("had").hidden = true; document.getElementById("webFallback").hidden = true; return; }
   const fromEl = document.getElementById("from");
   fromEl.textContent = (n ? n + " から" : "") + " テレビ電話リバーシの おさそいです";
   const pass = new URLSearchParams(); pass.set("r", r); if (n) pass.set("n", n);
@@ -78,6 +79,10 @@ footer a { color: var(--sub); }
   const hint = () => { try { fetch("https://rlqeoyvevaglwngxtvrw.supabase.co/functions/v1/rv-push", { method: "POST", keepalive: true, headers: { "content-type": "application/json" }, body: JSON.stringify({ op: "hint", r, n, fp }) }).catch(() => { }); } catch (e) { } };
   hint();
   for (const id of ["ios", "android"]) document.getElementById(id).addEventListener("click", hint);
+  // 切りかえの あいだだけ：アプリの更新が行きわたるまで ブラウザ版への道も残す（WEB_FALLBACK を false にすれば消える）
+  const WEB_FALLBACK = true;
+  if (WEB_FALLBACK) { const q3 = new URLSearchParams(location.search); q3.set("dev", "1"); document.getElementById("webLink").href = "play.html?" + q3.toString(); }
+  else document.getElementById("webFallback").hidden = true;
   const open = document.getElementById("open");
   // Android は intent:（入っていなければ Google Play へ）、iPhone・iPad は アプリの URL（marushima://）
   open.href = isAndroid

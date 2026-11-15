@@ -238,3 +238,4 @@
 - 11/15 招待の引きつぎ（Branch などと同じ「端末の照合」を自前で）：案内ページを開くと 中継（rv-push の op:hint）に「通信元IP・画面の大きさ・OS・時間帯・言語・部屋・呼び名」を記録（表 rv_invites、1時間で消える）。アプリを はじめて開いたとき op:claim で照合し、当たれば その部屋につなぐ（1回だけ）。当たらなければ 開始画面に「リンクを もういちど タップしてね」。プライバシーポリシーに 2-2 を追記（改定日 11/15）。
 - 案内ページ：Android は Google Play に出るまで これまでの Web 版（play.html?dev=1）へ移す（PLAY_LIVE=false）。
 - 11/15 1.0.2（ビルド8）TestFlight 配信・App Store 1.0.2 の枠につないだ（審査メモ・スクショ更新済み）。あまねさんの実機確認待ち。
+- 11/15 招待リンクの行き先を 案内ページに切りかえ（reversi/index.html ＝ landing.html の写し）。切りかえ期間は 下に「ブラウザで あそぶ」（play.html?dev=1）を残す（WEB_FALLBACK）。Android は Play に出るまで Web 版へ（PLAY_LIVE=false）。元の Web 版は play.html?dev=1 と git の履歴にある。
