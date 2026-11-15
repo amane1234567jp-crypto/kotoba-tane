@@ -45,8 +45,8 @@ footer a { color: var(--sub); }
     <li><span class="num">1</span><span class="step">アプリを いれる（むりょう）</span>
       <a class="btn" id="ios" href="https://apps.apple.com/jp/app/id6832225234">App Store で いれる（iPhone・iPad）</a>
       <a class="btn" id="android" href="https://play.google.com/store/apps/details?id=com.uchinoaji.marushima.reversi">Google Play で いれる（Android）</a>
-      <p class="note" id="had">もう いれてある ひとは 2 へ</p></li>
-    <li id="openStep"><span class="num">2</span><span class="step">アプリで ひらく</span>
+      <p class="note" id="had">いれおわったら、App Store の「ひらく」を おしてね。そのまま あいてと つながります。</p></li>
+    <li id="openStep"><span class="num">2</span><span class="step">もう アプリが ある ひと・つながらない とき</span>
       <a class="btn primary" id="open" href="#">アプリで ひらく</a>
       <p class="note">あいてと つながって、テレビ電話で あそべます。</p></li>
   </ol>
@@ -59,6 +59,9 @@ footer a { color: var(--sub); }
   const ua = navigator.userAgent;
   const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   const isAndroid = /Android/.test(ua);
+  // Google Play に出るまでは Android の人には これまでの Web 版を出す（出たら true に）
+  const PLAY_LIVE = false;
+  if (isAndroid && !PLAY_LIVE) { const q2 = new URLSearchParams(location.search); q2.set("dev", "1"); location.replace("play.html?" + q2.toString()); return; }
   if (isIOS) document.getElementById("android").hidden = true;
   if (isAndroid) document.getElementById("ios").hidden = true;
   if (!r) { document.getElementById("openStep").hidden = true; document.getElementById("had").hidden = true; return; }
@@ -66,6 +69,15 @@ footer a { color: var(--sub); }
   fromEl.textContent = (n ? n + " から" : "") + " テレビ電話リバーシの おさそいです";
   const pass = new URLSearchParams(); pass.set("r", r); if (n) pass.set("n", n);
   for (const k of ["ring", "fd"]) if (q.get(k)) pass.set(k, q.get(k));
+  // アプリを入れて はじめて開いたときに この招待へ つなげるよう、中継に「この端末で 入れに行った」と残す（1時間で消える）
+  const ua2 = navigator.userAgent; let os = "";
+  let m = ua2.match(/OS (\d+)_(\d+)/); if (m && /iPhone|iPad|iPod|Macintosh/.test(ua2)) os = "iOS " + m[1] + "." + m[2];
+  m = ua2.match(/Android (\d+)/); if (m) os = "Android " + m[1];
+  let tz = ""; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) { }
+  const fp = { os, w: String(screen.width), h: String(screen.height), dpr: String(window.devicePixelRatio || 1), tz, lang: (navigator.language || "").slice(0, 2) };
+  const hint = () => { try { fetch("https://rlqeoyvevaglwngxtvrw.supabase.co/functions/v1/rv-push", { method: "POST", keepalive: true, headers: { "content-type": "application/json" }, body: JSON.stringify({ op: "hint", r, n, fp }) }).catch(() => { }); } catch (e) { } };
+  hint();
+  for (const id of ["ios", "android"]) document.getElementById(id).addEventListener("click", hint);
   const open = document.getElementById("open");
   // Android は intent:（入っていなければ Google Play へ）、iPhone・iPad は アプリの URL（marushima://）
   open.href = isAndroid

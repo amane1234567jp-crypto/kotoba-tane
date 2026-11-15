@@ -1186,3 +1186,27 @@ requestAnimationFrame(frame);
 
 // 開始画面を見ているあいだに 声を読みはじめる（2026-11-14）
 setTimeout(() => { try { if (CFG.voice) preloadVoices(); } catch (e) { } }, 400);
+
+/* 招待の引きつぎ（2026-11-15）：アプリを入れて はじめて開いたとき、さっき 招待の案内ページを見ていたなら その部屋につなぐ。
+   案内ページが「この端末（通信元・画面の大きさ・OS・時間帯）で アプリを入れに行った」と中継に残している。照合できなければ 開始画面で「リンクを もういちど タップしてね」 */
+(function inviteHandoff() {
+  if (!window.RVNative || NET.role) return;
+  const KEY = "marushima-reversi-claimed";
+  let done = null; try { done = localStorage.getItem(KEY); } catch (e) { }
+  if (!partners.list.length && !callers.list.length) $("linkNote").hidden = false;
+  if (done) return;
+  try { localStorage.setItem(KEY, String(Date.now())); } catch (e) { }
+  fetch("https://rlqeoyvevaglwngxtvrw.supabase.co/functions/v1/rv-push", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ op: "claim", fp: deviceHint() }) })
+    .then(r => r.json()).then(j => {
+      if (!j || !j.ok || !j.r || G.started) return;
+      const q = new URLSearchParams(); q.set("r", j.r); if (j.n) q.set("n", j.n);
+      location.replace(location.pathname + "?" + q.toString());
+    }).catch(() => { });
+})();
+function deviceHint() {
+  const ua = navigator.userAgent; let os = "";
+  let m = ua.match(/OS (\d+)_(\d+)/); if (m && /iPhone|iPad|iPod|Macintosh/.test(ua)) os = "iOS " + m[1] + "." + m[2];
+  m = ua.match(/Android (\d+)/); if (m) os = "Android " + m[1];
+  let tz = ""; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) { }
+  return { os, w: String(screen.width), h: String(screen.height), dpr: String(window.devicePixelRatio || 1), tz, lang: (navigator.language || "").slice(0, 2) };
+}

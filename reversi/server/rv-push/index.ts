@@ -3,6 +3,8 @@
 //   POST {op:"reg",  id, secret, name, sub | expo}  … 通知の宛先（Web Push の購読、またはアプリ版の Expo トークン）を登録・更新
 //   POST {op:"call", id, secret, to, title, body, url, tag} … 相手に通知を送る
 //   POST {op:"cancel", id, secret, to, tag}          … 呼び出しを取り消す（相手の通知を消す）
+//   POST {op:"hint", r, n, fp}                        … 招待の案内ページ：この端末で アプリを入れに行った、と一時的に記録（1時間）
+//   POST {op:"claim", fp}                             … アプリを初めて開いた：さっきの招待があれば その部屋を返す（返したら消す）
 import { createClient } from "npm:@supabase/supabase-js@2.45.4";
 import webpush from "npm:web-push@3.6.7";
 
@@ -31,6 +33,39 @@ async function me(id: string, secret: string) {
   if (error) throw new Error(error.message);
   if (!data || data.secret_hash !== await sha(secret)) return null;
   return data;
+}
+
+// 招待の引きつぎ（2026-11-15）：通信元（IP）と 端末のようす（画面の大きさ・OS・時間帯・言語）で照合する
+const FP_KEYS = ["os", "w", "h", "dpr", "tz", "lang"];
+function cleanFp(f: any) {
+  const o: Record<string, string> = {};
+  for (const k of FP_KEYS) o[k] = clip(f && f[k], 40);
+  return o;
+}
+const same = (a: Record<string, string>, b: Record<string, string>, keys: string[]) => keys.every(k => a[k] && a[k] === b[k]);
+async function handleInvite(b: Record<string, any>, ip: string) {
+  await db.from("rv_invites").delete().lt("at", new Date(Date.now() - 3600e3).toISOString());
+  const fp = cleanFp(b.fp);
+  if (b.op === "hint") {
+    if (!ok(String(b.r || "").padEnd(16, "_")) || String(b.r).length > 40) return [400, { error: "bad r" }];
+    const { count } = await db.from("rv_invites").select("id", { count: "exact", head: true }).eq("ip", ip);
+    if ((count || 0) > 20) return [429, { error: "too many" }];
+    await db.from("rv_invites").delete().eq("ip", ip).eq("room", b.r);
+    const { error } = await db.from("rv_invites").insert({ ip, fp, room: b.r, name: clip(b.n, 20) });
+    if (error) return [500, { error: error.message }];
+    return [200, { ok: true }];
+  }
+  // claim：まず「同じ通信元 ＋ 同じ画面・OS・時間帯」、なければ「画面・OS・時間帯・言語が同じで 1件だけ」（携帯の通信元が変わったとき）
+  const { data } = await db.from("rv_invites").select("*").order("at", { ascending: false }).limit(200);
+  const rows = (data || []) as any[];
+  let hit = ip && rows.find(r => r.ip === ip && same(r.fp, fp, ["os", "w", "h", "dpr", "tz"]));
+  if (!hit) {
+    const c = rows.filter(r => Date.now() - new Date(r.at).getTime() < 20 * 60e3 && same(r.fp, fp, ["os", "w", "h", "dpr", "tz", "lang"]));
+    if (c.length === 1) hit = c[0];
+  }
+  if (!hit) return [200, { ok: false }];
+  await db.from("rv_invites").delete().eq("id", hit.id);
+  return [200, { ok: true, r: hit.room, n: hit.name }];
 }
 
 async function handle(b: Record<string, any>) {
@@ -102,6 +137,10 @@ Deno.serve(async req => {
   if (req.method === "OPTIONS") return new Response(null, { headers: cors });
   if (req.method !== "POST") return new Response("", { status: 405, headers: cors });
   let status = 500, body: unknown = { error: "server" };
-  try { [status, body] = await handle(await req.json()) as [number, unknown]; } catch (e) { body = { error: String(e).slice(0, 200) }; }
+  const ip = (req.headers.get("cf-connecting-ip") || req.headers.get("x-real-ip") || (req.headers.get("x-forwarded-for") || "").split(",")[0] || "").trim().slice(0, 64);
+  try {
+    const b = await req.json();
+    [status, body] = (b && (b.op === "hint" || b.op === "claim") ? await handleInvite(b, ip) : await handle(b)) as [number, unknown];
+  } catch (e) { body = { error: String(e).slice(0, 200) }; }
   return new Response(JSON.stringify(body), { status, headers: { ...cors, "Content-Type": "application/json" } });
 });

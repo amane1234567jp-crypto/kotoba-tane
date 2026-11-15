@@ -235,3 +235,5 @@
 - Android の本番用 AAB：reversi-app-aab.yml（EAS の鍵で署名・versionCode 7）。
 - 巻き戻し地点：`backup/reversi-20261115-before-appOnly`。
 - 11/15 Android 本番 AAB（1.0.2・versionCode 7）作成成功。署名の鍵は EAS が新しく作って保存（@uchinoaji-app/marushima-reversi の Android 認証情報）。AAB は reversi-aab-out ブランチ。
+- 11/15 招待の引きつぎ（Branch などと同じ「端末の照合」を自前で）：案内ページを開くと 中継（rv-push の op:hint）に「通信元IP・画面の大きさ・OS・時間帯・言語・部屋・呼び名」を記録（表 rv_invites、1時間で消える）。アプリを はじめて開いたとき op:claim で照合し、当たれば その部屋につなぐ（1回だけ）。当たらなければ 開始画面に「リンクを もういちど タップしてね」。プライバシーポリシーに 2-2 を追記（改定日 11/15）。
+- 案内ページ：Android は Google Play に出るまで これまでの Web 版（play.html?dev=1）へ移す（PLAY_LIVE=false）。
