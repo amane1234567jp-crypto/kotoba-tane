@@ -234,3 +234,4 @@
 - アプリ内の文：招待の説明・招待文を「アプリを いれて」に。招待の窓の下のボタンの文字が途中で折れないように。
 - Android の本番用 AAB：reversi-app-aab.yml（EAS の鍵で署名・versionCode 7）。
 - 巻き戻し地点：`backup/reversi-20261115-before-appOnly`。
+- 11/15 Android 本番 AAB（1.0.2・versionCode 7）作成成功。署名の鍵は EAS が新しく作って保存（@uchinoaji-app/marushima-reversi の Android 認証情報）。AAB は reversi-aab-out ブランチ。
