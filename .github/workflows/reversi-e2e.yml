@@ -1,0 +1,26 @@
+# 招待の引きつぎの通し確認（公開ページ＋中継）。reversi/tests/RUN を push で動く。結果は reversi-e2e-out ブランチ
+name: reversi-e2e
+on:
+  push:
+    branches: [main]
+    paths: ["reversi/tests/RUN"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: run
+        run: |
+          mkdir -p /tmp/e && cd /tmp/e && npm init -y >/dev/null && npm i -q playwright@1.48.2 >/dev/null 2>&1 && npx playwright install --with-deps chromium >/dev/null 2>&1
+          cp "$GITHUB_WORKSPACE/reversi/tests/handoff-e2e.js" . && node handoff-e2e.js 2>&1 | tee /tmp/e/out.txt
+      - name: publish
+        if: always()
+        run: |
+          git config user.name "app-bot"; git config user.email "app-bot@users.noreply.github.com"
+          git checkout -q --orphan e2e-tmp; git rm -rf -q . ; rm -rf ./* ./.github
+          cp /tmp/e/out.txt . 2>/dev/null || echo "no output" > out.txt; git add -A; git commit -q -m "e2e ${GITHUB_SHA}"; git push -f -q origin HEAD:reversi-e2e-out
