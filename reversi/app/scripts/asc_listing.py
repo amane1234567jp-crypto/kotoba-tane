@@ -263,3 +263,13 @@ if MODE == "tf":
         log("  builds in group:", [b["attributes"]["version"] for b in bl.get("data", [])])
     s, j = api("GET", f"/v1/builds?filter[app]={APP}&sort=-uploadedDate&limit=2&fields[builds]=version,processingState,expired&include=buildBetaDetail")
     for d in j.get("included", []): log("beta detail:", short(d.get("attributes")))
+
+if MODE == "prep":
+    # 審査メモの更新・スクショの入れかえ・ビルドをつなぐ（更新版用）
+    s, j = api("GET", f"/v1/appStoreVersions/{ver['id']}/appStoreReviewDetail")
+    if j.get("data"):
+        rid = j["data"]["id"]; s, j = api("PATCH", f"/v1/appStoreReviewDetails/{rid}", {"data": {"type": "appStoreReviewDetails", "id": rid, "attributes": {"notes": L["reviewNotes"]}}})
+        log("review notes:", s, err(s, j))
+    s, j = api("GET", f"/v1/appStoreVersions/{ver['id']}/appStoreVersionLocalizations")
+    vloc = next(x["id"] for x in j["data"] if x["attributes"]["locale"] == L["locale"])
+    shots_and_build(vloc)
