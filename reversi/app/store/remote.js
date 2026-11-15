@@ -1,6 +1,6 @@
 const { chromium } = require('playwright');
 const [S, W, H, DSF, tag] = [process.argv[2], +process.argv[3], +process.argv[4], +process.argv[5], process.argv[6]];
-const BASE = "http://localhost:8000/reversi/?ps=127.0.0.1:9000";
+const BASE = "http://localhost:8000/reversi/play.html?ps=127.0.0.1:9000";
 const cam = (emoji, c1, c2) => `(() => {
   window.RVNative = { platform: 'ios', version: '1.0.0', push: false };
   window.ReactNativeWebView = { postMessage: (s) => { try { const m = JSON.parse(s); if (m.t === 'needMedia') setTimeout(() => window.RV.native({ t: 'media' }), 10); } catch (e) {} } };
@@ -26,7 +26,7 @@ const cam = (emoji, c1, c2) => `(() => {
   const url = await h.textContent('#inviteLink').catch(() => null);
   console.log('invite', url);
   const g = await mk('おばあちゃん', '👵', '#ffe0c2', '#fff4e6');
-  await g.goto(url.replace(/^https:\/\/[^/]+\/kotoba-tane\/reversi\/?/, 'http://localhost:8000/reversi/') + (url.includes('ps=') ? '' : '&ps=127.0.0.1:9000'));
+  await g.goto(url.replace(/^https:\/\/[^/]+\/kotoba-tane\/reversi\/?/, 'http://localhost:8000/reversi/play.html') + (url.includes('ps=') ? '' : '&ps=127.0.0.1:9000'));
   await g.waitForTimeout(800); await g.click('#startBtn').catch(() => {}); await g.waitForTimeout(7000);
   for (let m = 0; m < 30; m++) {
     for (const pg of [h, g]) { const c = await pg.$$('.cell.can'); if (c.length) { await c[(m * 5) % c.length].click(); await pg.waitForTimeout(2600); } }
