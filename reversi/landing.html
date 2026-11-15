@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>テレビ電話リバーシ</title>
+<meta name="description" content="はなれて暮らす家族と、テレビ電話で顔を見ながらリバーシ。">
+<meta property="og:title" content="テレビ電話リバーシ">
+<meta property="og:description" content="はなれて暮らす家族と、テレビ電話で顔を見ながらリバーシ。">
+<meta property="og:image" content="https://amane1234567jp-crypto.github.io/kotoba-tane/reversi/icons/icon-512.png">
+<meta name="theme-color" content="#1E8A52">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<!-- 招待リンクの案内ページ（2026-11-15 Web 版を閉じて アプリだけに）。リンク ?r=部屋&n=名前 を アプリに渡す -->
+<style>
+:root { --bg: #F7F1E6; --ink: #2B2A33; --sub: #5d5a66; --green: #1E8A52; --glow: #FFD45C; --card: #FFFDF8; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Hiragino Maru Gothic ProN", "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif; line-height: 1.7; }
+main { max-width: 520px; margin: 0 auto; padding: calc(28px + env(safe-area-inset-top, 0px)) 16px 48px; text-align: center; }
+.icon { width: 96px; height: 96px; border-radius: 22px; box-shadow: 0 6px 0 rgba(0,0,0,.12); }
+h1 { font-size: 28px; margin: 12px 0 4px; letter-spacing: .02em; }
+.tag { margin: 0 0 20px; color: var(--sub); font-size: 15px; }
+.from { background: var(--card); border: 3px solid var(--ink); border-radius: 18px; padding: 14px 16px; margin: 0 0 22px; font-size: 19px; font-weight: 700; }
+.from:empty { display: none; }
+ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; text-align: left; }
+li { background: var(--card); border: 3px solid var(--ink); border-radius: 18px; padding: 16px; }
+.num { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 700; margin-right: 8px; }
+.step { font-weight: 700; font-size: 18px; }
+.btn { display: block; margin-top: 12px; padding: 15px 12px; border: 3px solid var(--ink); border-radius: 16px; background: #fff; color: var(--ink); font-weight: 700; font-size: 18px; text-align: center; text-decoration: none; }
+.btn.primary { background: var(--glow); }
+.note { color: var(--sub); font-size: 14px; margin: 8px 0 0; }
+footer { margin-top: 28px; font-size: 13px; color: var(--sub); }
+footer a { color: var(--sub); }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #1d1c22; --ink: #eeeae2; --sub: #b5b0a6; --card: #26252c; }
+  .btn { background: #2f2e36; } .btn.primary { background: var(--glow); color: #2B2A33; }
+  .num { background: #eeeae2; color: #1d1c22; }
+}
+</style>
+</head><body>
+<main>
+  <img class="icon" src="icons/icon-192.png" alt="">
+  <h1>テレビ電話リバーシ</h1>
+  <p class="tag">はなれて暮らす家族と、顔を見ながらリバーシ</p>
+  <p class="from" id="from"></p>
+  <ol>
+    <li><span class="num">1</span><span class="step">アプリを いれる（むりょう）</span>
+      <a class="btn" id="ios" href="https://apps.apple.com/jp/app/id6832225234">App Store で いれる（iPhone・iPad）</a>
+      <a class="btn" id="android" href="https://play.google.com/store/apps/details?id=com.uchinoaji.marushima.reversi">Google Play で いれる（Android）</a>
+      <p class="note" id="had">もう いれてある ひとは 2 へ</p></li>
+    <li id="openStep"><span class="num">2</span><span class="step">アプリで ひらく</span>
+      <a class="btn primary" id="open" href="#">アプリで ひらく</a>
+      <p class="note">あいてと つながって、テレビ電話で あそべます。</p></li>
+  </ol>
+  <footer><a href="legal/support.html">サポート</a>　<a href="legal/privacy.html">プライバシーポリシー</a></footer>
+</main>
+<script>
+(() => {
+  const q = new URLSearchParams(location.search);
+  const r = q.get("r"), n = (q.get("n") || "").slice(0, 20);
+  const ua = navigator.userAgent;
+  const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const isAndroid = /Android/.test(ua);
+  if (isIOS) document.getElementById("android").hidden = true;
+  if (isAndroid) document.getElementById("ios").hidden = true;
+  if (!r) { document.getElementById("openStep").hidden = true; document.getElementById("had").hidden = true; return; }
+  const fromEl = document.getElementById("from");
+  fromEl.textContent = (n ? n + " から" : "") + " テレビ電話リバーシの おさそいです";
+  const pass = new URLSearchParams(); pass.set("r", r); if (n) pass.set("n", n);
+  for (const k of ["ring", "fd"]) if (q.get(k)) pass.set(k, q.get(k));
+  const open = document.getElementById("open");
+  // Android は intent:（入っていなければ Google Play へ）、iPhone・iPad は アプリの URL（marushima://）
+  open.href = isAndroid
+    ? "intent://join?" + pass + "#Intent;scheme=marushima;package=com.uchinoaji.marushima.reversi;S.browser_fallback_url=" + encodeURIComponent("https://play.google.com/store/apps/details?id=com.uchinoaji.marushima.reversi") + ";end"
+    : "marushima://join?" + pass;
+})();
+</script>
+</body></html>

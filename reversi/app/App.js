@@ -91,6 +91,22 @@ export default function App() {
       setQuery(q); setKey(k => k + 1);
     } catch (e) { }
   }, []);
+  // 招待リンクから開いたとき（案内ページの「アプリで ひらく」＝ marushima://join?r=部屋&n=名前）：その部屋につなぐ
+  const openFromLink = useCallback(url => {
+    try {
+      if (!url || !url.includes("?")) return;
+      const q = new URLSearchParams(url.slice(url.indexOf("?") + 1));
+      if (!q.get("r")) return;
+      const keep = new URLSearchParams();
+      for (const k of ["r", "n", "ring", "fd"]) if (q.get(k)) keep.set(k, q.get(k));
+      setQuery("?" + keep.toString()); setKey(k => k + 1);
+    } catch (e) { }
+  }, []);
+  useEffect(() => {
+    Linking.getInitialURL().then(openFromLink).catch(() => { });
+    const sub = Linking.addEventListener("url", e => openFromLink(e && e.url));
+    return () => sub.remove();
+  }, [openFromLink]);
   useEffect(() => {
     const sub = Notifications.addNotificationResponseReceivedListener(openFromNotification);
     Notifications.getLastNotificationResponseAsync().then(r => { if (r) openFromNotification(r); }).catch(() => { });

@@ -1,4 +1,5 @@
-"""まるシマリバーシを1枚のHTMLに組み立てる: python3 reversi/build.py → reversi/index.html
+"""まるシマリバーシを1枚のHTMLに組み立てる: python3 reversi/build.py → reversi/play.html（アプリに入れるゲーム本体）
+2026-11-15：Web 版は閉じる。reversi/index.html は 招待リンクの案内ページ（手書き）。play.html をブラウザで開くと 案内ページへ移る（?dev=1 なら そのまま）
 キャラは ことばのたね の原画（tools/game/rig）をそのまま読み込む。"""
 from pathlib import Path
 S = Path(__file__).parent / "src"
@@ -18,8 +19,9 @@ for k, v in {"__HAND__": hand, "__VENDOR__": vendor, "__RULES__": rules + "\n" +
     html = html.replace(k, v)
 head = ('<!doctype html>\n<html lang="ja"><head><meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n<meta name="robots" content="noindex">\n'
+        '<script>if(!window.RVNative&&!/[?&]dev=1/.test(location.search))location.replace("./"+location.search)</script>\n'
         '<meta name="apple-mobile-web-app-title" content="テレビ電話リバーシ">\n<meta name="apple-mobile-web-app-capable" content="yes">\n<meta name="mobile-web-app-capable" content="yes">\n<meta name="theme-color" content="#1E8A52">\n<link rel="manifest" href="manifest.webmanifest">\n<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">\n<style>body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>\n</head><body>\n')
-Path(__file__).parent.joinpath("index.html").write_text(head + html + "\n</body></html>\n")
+Path(__file__).parent.joinpath("play.html").write_text(head + html + "\n</body></html>\n")
 js = html[html.index("<script>") + 8: html.rindex("</script>")]
 import subprocess, tempfile
 with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False) as f: f.write(js)

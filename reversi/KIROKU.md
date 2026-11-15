@@ -225,3 +225,12 @@
 - 11/14 指摘2点：①メニューのボタンが盤にかかる → 盤の大きさは変えずに、縦画面は盤を少し下げる（下の札が短くなる）、横画面はボタンを左上（くろの札の上）へ。②かめじいが石の数を「〜こ」と読む → 「〜まい」に統一（gen_lines.py の mai()、AivisSpeech で 130本を作りなおし：tools/aivis/jobs/rv2）。
 - 11/14 21:2x 1.0.1（ビルド6：音の修正・じゅんびちゅう画面・クレジット・メニュー位置・数の読み「まい」）を審査に提出（あまねさんの実機確認OK）。リリースは手動。かめじいのモデルは AivisSpeech エンジンの一覧で「ろてじん（長老ボイス）」と確認済み。
 - 11/15 1.0.1 審査通過 → あまねさんの指示で App Store に公開。
+
+## 2026-11-15 Web 版を閉じて アプリだけに／Android 版も Google Play へ
+- 【決定】Web 版は閉じる。招待リンク（…/reversi/?r=部屋&n=名前）は 案内ページにして、アプリ（App Store／Google Play）だけを案内する。Android 版も Google Play に出す。
+- しくみ：ゲーム本体は reversi/play.html（build.py の出力）。アプリはこれを index.html として中に持つ。ブラウザで play.html を開くと 案内ページへ移る（?dev=1 は除く）。
+  案内ページ reversi/landing.html は 両ストアに出たあと reversi/index.html に置きかえる（それまで index.html は いまの Web 版のまま）。
+  「アプリで ひらく」＝ iPhone は marushima://join?r=…、Android は intent:（未導入なら Play へ）。アプリ（1.0.2）は そのリンクで受けて その部屋につなぐ。
+- アプリ内の文：招待の説明・招待文を「アプリを いれて」に。招待の窓の下のボタンの文字が途中で折れないように。
+- Android の本番用 AAB：reversi-app-aab.yml（EAS の鍵で署名・versionCode 7）。
+- 巻き戻し地点：`backup/reversi-20261115-before-appOnly`。

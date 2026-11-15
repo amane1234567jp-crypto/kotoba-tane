@@ -1,0 +1,45 @@
+# まるシマリバーシ（テレビ電話リバーシ）Google Play 用の AAB を GitHub の Linux で作る（EAS の「ローカルビルド」）
+# 署名の鍵は EAS に保存（初回は EAS が作る）。reversi/app/BUILD_AAB を push すると動く。できた .aab は reversi-aab-out ブランチへ
+name: reversi-app-aab
+on:
+  push:
+    branches: [main]
+    paths: ["reversi/app/BUILD_AAB"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: reversi-app-aab
+jobs:
+  aab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      EAS_NO_VCS: "1"
+      EAS_BUILD_NO_EXPO_GO_WARNING: "true"
+    defaults:
+      run: { working-directory: reversi/app }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 17 }
+      - name: prepare
+        run: |
+          npm ci --no-audit --no-fund 2>&1 | tail -2 && npm run pack-web
+          mkdir -p /tmp/out
+      - name: build (local)
+        run: |
+          npx eas-cli build -p android --profile production --local --non-interactive --output /tmp/out/marushima-reversi.aab 2>&1 | tee /tmp/out/log.txt | tail -60
+          ls -la /tmp/out
+      - name: publish
+        if: always()
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          sed -i 's/\x1b\[[0-9;?]*[A-Za-z]//g' /tmp/out/log.txt 2>/dev/null || true
+          echo "{\"sha\":\"${GITHUB_SHA}\",\"at\":\"$(date -u +%FT%TZ)\"}" > /tmp/out/latest.json
+          git config user.name "app-bot"; git config user.email "app-bot@users.noreply.github.com"
+          git checkout -q --orphan rv-aab-tmp; git rm -rf -q . ; rm -rf ./* ./.github
+          cp -r /tmp/out/. .; git add -A; git commit -q -m "reversi app aab ${GITHUB_SHA}"; git push -f -q origin HEAD:reversi-aab-out

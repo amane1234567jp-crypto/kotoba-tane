@@ -191,7 +191,7 @@ body {
 .panel.settings { padding-top: 0; }
 .panelHead { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; margin: 0 -22px; padding: 14px 22px 10px; background: var(--seat); border-bottom: 2px solid rgba(43, 42, 51, .15); }
 .xBtn { width: 44px; height: 44px; border-radius: 50%; border: 3px solid var(--ink); background: #FFFFFF; font: 900 26px/1 var(--body); color: var(--ink); cursor: pointer; display: grid; place-items: center; padding: 0 0 3px; }
-.panelBtns button { flex: 1; font: 700 17px var(--body); padding: 12px; border: 3px solid var(--ink); border-radius: 14px; background: #FFFFFF; color: var(--ink); cursor: pointer; }
+.panelBtns button { flex: 1 1 auto; white-space: nowrap; word-break: keep-all; font: 700 17px var(--body); padding: 12px; border: 3px solid var(--ink); border-radius: 14px; background: #FFFFFF; color: var(--ink); cursor: pointer; }
 .panelBtns .primary { background: var(--glow); }
 .panelBtns button:disabled { opacity: .4; cursor: default; }
 .panelBtns .confirm { background: var(--pink); color: #FFFFFF; }
@@ -362,7 +362,7 @@ body {
 <div class="cover" id="inviteOv" hidden>
   <div class="panel invite" role="dialog" aria-label="たいせんあいてを よぶ">
     <h2>たいせんあいてに リンクを おくる</h2>
-    <p class="lead">「LINEで おくる」→ 出てきた画面で LINE を えらんで 送ってね。送ると この画面に もどります。<br>あいてが リンクを タップして「はじめる」を おすと、つながります。</p>
+    <p class="lead">「LINEで おくる」→ 出てきた画面で LINE を えらんで 送ってね。送ると この画面に もどります。<br>あいてが リンクを ひらいて アプリを いれ、「アプリで ひらく」を おすと、つながります。</p>
     <div class="qr" id="qr" aria-label="リンクの QRコード"></div>
     <div class="panelBtns">
       <button type="button" class="lineBtn" id="lineBtn">LINEで おくる</button>
