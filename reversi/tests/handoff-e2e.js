@@ -18,11 +18,11 @@ const BASE = "https://amane1234567jp-crypto.github.io/kotoba-tane/reversi/";
   const app = await ctx2.newPage();
   const claim = app.waitForResponse(r => r.url().includes("rv-push") && (r.request().postData() || "").includes("claim"), { timeout: 30000 }).catch(() => null);
   await app.goto(BASE + "play.html", { waitUntil: "load" });
-  const c = await claim; console.log("2) アプリ初回の照合:", c ? c.status() + " " + await c.text() : "なし");
+  const c = await claim; console.log("2) アプリ初回の照合:", c ? c.status() + " " + await c.text().catch(() => "（本文は移動で読めず）") : "なし");
   await app.waitForURL(u => String(u).includes("r=" + room), { timeout: 15000 }).catch(() => { });
   const ok = app.url().includes("r=" + room);
   console.log("3) アプリの行き先:", app.url(), ok ? "→ 成功（その部屋につながる）" : "→ 失敗");
   // 2回目に開いたときは 照合しない（1回だけ）
   await b.close();
-  process.exit(ok ? 0 : 1);
+  process.exitCode = ok ? 0 : 1;
 })();
