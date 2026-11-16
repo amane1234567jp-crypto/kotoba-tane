@@ -256,3 +256,4 @@
 - 名前は必ず自分で入力（ボタン廃止）。1.0.3 をビルド11で作りなおし。
 - 11/16 ビルド11 失敗：配布用プロファイルに Associated Domains が無い → ASC API で App ID に ASSOCIATED_DOMAINS を追加し、古いプロファイルを削除（EAS が作りなおす）。iOS の Actions はビルド失敗で止まるように（pipefail）。
 - 11/16 1.0.3（ビルド11：Associated Domains 付き・EAS がプロファイルを作りなおし）を TestFlight 配信・審査に提出。
+- 11/16 あまねさんの指示「審査に通ったら公開して」→ 1.0.3 のリリース方法を「承認後に自動で公開」（AFTER_APPROVAL）に変更（審査待ちの間に API で）。
