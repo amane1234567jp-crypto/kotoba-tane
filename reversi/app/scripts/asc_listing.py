@@ -273,3 +273,19 @@ if MODE == "prep":
     s, j = api("GET", f"/v1/appStoreVersions/{ver['id']}/appStoreVersionLocalizations")
     vloc = next(x["id"] for x in j["data"] if x["attributes"]["locale"] == L["locale"])
     shots_and_build(vloc)
+
+if MODE == "cap":
+    # Associated Domains（ユニバーサルリンク）を App ID に足し、古い配布用プロファイルを消す（EAS が次のビルドで作りなおす）
+    s, j = api("GET", "/v1/bundleIds?filter[identifier]=com.uchinoaji.marushima.reversi&include=bundleIdCapabilities,profiles")
+    bid = next((x for x in j.get("data", []) if x["attributes"]["identifier"] == "com.uchinoaji.marushima.reversi"), None)
+    log("bundleId:", bid and bid["id"])
+    caps = [x["attributes"].get("capabilityType") for x in j.get("included", []) if x["type"] == "bundleIdCapabilities"]
+    log("caps:", caps)
+    if "ASSOCIATED_DOMAINS" not in caps:
+        s, r = api("POST", "/v1/bundleIdCapabilities", {"data": {"type": "bundleIdCapabilities", "attributes": {"capabilityType": "ASSOCIATED_DOMAINS"},
+                                                                  "relationships": {"bundleId": {"data": {"type": "bundleIds", "id": bid["id"]}}}}})
+        log("add ASSOCIATED_DOMAINS:", s, err(s, r))
+    for p in [x for x in j.get("included", []) if x["type"] == "profiles"]:
+        a = p["attributes"]; log("profile:", p["id"], a.get("name"), a.get("profileType"), a.get("profileState"))
+        if a.get("profileType") == "IOS_APP_STORE":
+            s, r = api("DELETE", f"/v1/profiles/{p['id']}"); log("  delete:", s, err(s, r))
