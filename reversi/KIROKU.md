@@ -240,3 +240,4 @@
 - 11/15 1.0.2（ビルド8）TestFlight 配信・App Store 1.0.2 の枠につないだ（審査メモ・スクショ更新済み）。あまねさんの実機確認待ち。
 - 11/15 招待リンクの行き先を 案内ページに切りかえ（reversi/index.html ＝ landing.html の写し）。切りかえ期間は 下に「ブラウザで あそぶ」（play.html?dev=1）を残す（WEB_FALLBACK）。Android は Play に出るまで Web 版へ（PLAY_LIVE=false）。元の Web 版は play.html?dev=1 と git の履歴にある。
 - 11/15 招待の引きつぎを 公開ページ＋本物の中継で通し確認（reversi-e2e.yml）：案内ページで記録 → アプリ初回の照合で同じ部屋へ → 成功。1.0.2（ビルド8）を審査に提出。
+- 11/16 1.0.2 審査通過 → あまねさんの指示で App Store に公開。案内ページの「ブラウザで あそぶ」（WEB_FALLBACK）は 行きわたったら外す。
