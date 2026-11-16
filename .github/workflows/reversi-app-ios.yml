@@ -63,6 +63,7 @@ jobs:
           EXPO_APPLE_TEAM_ID: ZGYPGQ9WPN
           EXPO_APPLE_TEAM_TYPE: COMPANY_OR_ORGANIZATION
         run: |
+          set -o pipefail
           npx eas-cli build -p ios --profile ${{ steps.s.outputs.profile }} --local --non-interactive --output /tmp/out/marushima-reversi.ipa 2>&1 | tee /tmp/out/log.txt | tail -60
           ls -la /tmp/out
       - name: submit

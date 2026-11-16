@@ -254,3 +254,4 @@
 - 11/16 【決定】案B（アプリが入っていれば リンクで直接アプリが開く）を先に。招待リンクを https://www.uchinoaji.com/rv/?r=…&n=…&fd=… に変更（うちのあじのサイト＝Cloudflare Pages の functions/ に 3つ足した：/rv＝案内ページ（kotoba-tane の landing.html を取ってきて返す）、/.well-known/apple-app-site-association、/.well-known/assetlinks.json）。アプリ：iOS associatedDomains applinks:www.uchinoaji.com、Android intentFilters（autoVerify・/rv）。中継の CORS に www.uchinoaji.com を追加（rv-push v7）。
 - assetlinks の指紋は EAS のアップロード鍵（AC:B0:6B:…:DE:4A）だけ。Google Play に出したら Play のアプリ署名鍵の指紋を足すこと（うちのあじ リポジトリ site/functions/.well-known/assetlinks.json.js）。
 - 名前は必ず自分で入力（ボタン廃止）。1.0.3 をビルド11で作りなおし。
+- 11/16 ビルド11 失敗：配布用プロファイルに Associated Domains が無い → ASC API で App ID に ASSOCIATED_DOMAINS を追加し、古いプロファイルを削除（EAS が作りなおす）。iOS の Actions はビルド失敗で止まるように（pipefail）。
