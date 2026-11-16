@@ -106,6 +106,9 @@ const CALL = (() => {
       return await post({ op: "call", to, tag: "rv-call", title: "テレビ電話リバーシ", body: `${name || "あいて"}から よびだしです。タップして はじめてね`, url });
     } catch (e) { return { ok: false, reason: "net" }; }
   };
+  // 招待リンクを開いた：招待した人に「とうろく」を伝える ／ 自分あての「とうろく」を受けとる（2026-11-16）
+  C.accept = async (to, name) => { if (!to || to === dev.id) return; try { await post({ op: "reg", name: name || "" }); await post({ op: "accept", to, name: name || "" }); } catch (e) { } };
+  C.pending = async () => { try { const r = await post({ op: "pending" }); return (r && r.list) || []; } catch (e) { return []; } };
   C.toApp = toApp;
   C.cancel = to => { if (to) post({ op: "cancel", to, tag: "rv-call" }).catch(() => { }); };
   // 引っこし用のリンク（iPhone・iPad で ホーム画面に追加する前に、この URL に切り替える）

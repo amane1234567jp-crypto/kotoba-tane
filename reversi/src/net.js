@@ -220,7 +220,8 @@ const NET = (() => {
   // openExternalBrowser=1：LINE の中のブラウザではなく Safari／Chrome で開かせる（LINE の中ではカメラが使えないことがある）
   // アプリ版（localhost で動く）でも、リンクは Web 版の公開 URL にする（相手は Web でもアプリでも入れる）
   N.publicBase = () => window.RVNative ? "https://amane1234567jp-crypto.github.io/kotoba-tane/reversi/" : location.origin + location.pathname;
-  N.inviteURL = () => N.publicBase() + "?r=" + N.room + (N.name ? "&n=" + encodeURIComponent(N.name) : "") + (ps ? "&ps=" + ps : "") + "&openExternalBrowser=1";
+  N.inviteURL = () => N.publicBase() + "?r=" + N.room + (N.name ? "&n=" + encodeURIComponent(N.name) : "") + (typeof CALL !== "undefined" && CALL.id ? "&fd=" + CALL.id : "") + (ps ? "&ps=" + ps : "") + "&openExternalBrowser=1";
   N.linkName = q.get("n") || "";
+  N.linkDev = /^[A-Za-z0-9_-]{16,64}$/.test(q.get("fd") || "") ? q.get("fd") : "";
   return N;
 })();

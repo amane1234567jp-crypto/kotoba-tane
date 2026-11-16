@@ -76,7 +76,7 @@ footer a { color: var(--sub); }
   m = ua2.match(/Android (\d+)/); if (m) os = "Android " + m[1];
   let tz = ""; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) { }
   const fp = { os, w: String(screen.width), h: String(screen.height), dpr: String(window.devicePixelRatio || 1), tz, lang: (navigator.language || "").slice(0, 2) };
-  const hint = () => { try { fetch("https://rlqeoyvevaglwngxtvrw.supabase.co/functions/v1/rv-push", { method: "POST", keepalive: true, headers: { "content-type": "application/json" }, body: JSON.stringify({ op: "hint", r, n, fp }) }).catch(() => { }); } catch (e) { } };
+  const hint = () => { try { fetch("https://rlqeoyvevaglwngxtvrw.supabase.co/functions/v1/rv-push", { method: "POST", keepalive: true, headers: { "content-type": "application/json" }, body: JSON.stringify({ op: "hint", r, n, fd: q.get("fd") || "", fp }) }).catch(() => { }); } catch (e) { } };
   hint();
   for (const id of ["ios", "android"]) document.getElementById(id).addEventListener("click", hint);
   // 切りかえの あいだだけ：アプリの更新が行きわたるまで ブラウザ版への道も残す（WEB_FALLBACK を false にすれば消える）

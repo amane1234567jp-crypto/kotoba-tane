@@ -3,7 +3,9 @@
 //   POST {op:"reg",  id, secret, name, sub | expo}  … 通知の宛先（Web Push の購読、またはアプリ版の Expo トークン）を登録・更新
 //   POST {op:"call", id, secret, to, title, body, url, tag} … 相手に通知を送る
 //   POST {op:"cancel", id, secret, to, tag}          … 呼び出しを取り消す（相手の通知を消す）
-//   POST {op:"hint", r, n, fp}                        … 招待の案内ページ：この端末で アプリを入れに行った、と一時的に記録（1時間）
+//   POST {op:"hint", r, n, fd, fp}                    … 招待の案内ページ：この端末で アプリを入れに行った、と一時的に記録（1時間）
+//   POST {op:"accept", id, secret, to, name}          … 招待リンクを開いた：招待した人（to）に「とうろく」を伝える（通知を受けとれれば 通知も）
+//   POST {op:"pending", id, secret}                   … 自分あての「とうろく」を受けとる（受けとったら消す）
 //   POST {op:"claim", fp}                             … アプリを初めて開いた：さっきの招待があれば その部屋を返す（返したら消す）
 import { createClient } from "npm:@supabase/supabase-js@2.45.4";
 import webpush from "npm:web-push@3.6.7";
@@ -51,7 +53,8 @@ async function handleInvite(b: Record<string, any>, ip: string) {
     const { count } = await db.from("rv_invites").select("id", { count: "exact", head: true }).eq("ip", ip);
     if ((count || 0) > 20) return [429, { error: "too many" }];
     await db.from("rv_invites").delete().eq("ip", ip).eq("room", b.r);
-    const { error } = await db.from("rv_invites").insert({ ip, fp, room: b.r, name: clip(b.n, 20) });
+    const fd = /^[A-Za-z0-9_-]{16,64}$/.test(String(b.fd || "")) ? String(b.fd) : "";
+    const { error } = await db.from("rv_invites").insert({ ip, fp: { ...fp, fd }, room: b.r, name: clip(b.n, 20) });
     if (error) return [500, { error: error.message }];
     return [200, { ok: true }];
   }
@@ -65,7 +68,7 @@ async function handleInvite(b: Record<string, any>, ip: string) {
   }
   if (!hit) return [200, { ok: false }];
   await db.from("rv_invites").delete().eq("id", hit.id);
-  return [200, { ok: true, r: hit.room, n: hit.name }];
+  return [200, { ok: true, r: hit.room, n: hit.name, fd: (hit.fp && hit.fp.fd) || "" }];
 }
 
 async function handle(b: Record<string, any>) {
@@ -83,6 +86,31 @@ async function handle(b: Record<string, any>) {
     const { error: e2 } = await db.from("rv_devices").upsert(row);
     if (e2) return [500, { error: e2.message }];
     return [200, { ok: true, push: !!sub }];
+  }
+  if (b.op === "accept") {
+    const from = await me(b.id, b.secret);
+    if (!from) return [403, { error: "who" }];
+    if (!ok(b.to) || b.to === from.id) return [400, { error: "bad to" }];
+    const name = clip(b.name || from.name, 20);
+    const { error } = await db.from("rv_pairs").upsert({ to_id: b.to, from_id: from.id, name, at: new Date().toISOString() }, { onConflict: "to_id,from_id" });
+    if (error) return [500, { error: error.message }];
+    // 招待した人が アプリの通知を受けとれるなら しらせる（受けとれないときは 次に開いたとき pending で わかる）
+    const { data: to } = await db.from("rv_devices").select("id,sub").eq("id", b.to).maybeSingle();
+    if (to && to.sub && to.sub.expo) {
+      try {
+        await fetch("https://exp.host/--/api/v2/push/send", { method: "POST", headers: { "content-type": "application/json", accept: "application/json" }, body: JSON.stringify({
+          to: to.sub.expo, title: "テレビ電話リバーシ", body: `${name || "あいて"}が じゅんび できたよ。タップして あそぼう`, sound: "default", priority: "high", ttl: 3600, channelId: "call",
+          data: { url: clip(b.url, 400), tag: "rv-accept", from: from.id, at: Date.now() } }) });
+      } catch (e) { /* 通知できなくても 登録は残る */ }
+    }
+    return [200, { ok: true }];
+  }
+  if (b.op === "pending") {
+    const meRow = await me(b.id, b.secret);
+    if (!meRow) return [403, { error: "who" }];
+    const { data } = await db.from("rv_pairs").select("from_id,name,at").eq("to_id", meRow.id).order("at", { ascending: true }).limit(20);
+    if (data && data.length) await db.from("rv_pairs").delete().eq("to_id", meRow.id);
+    return [200, { ok: true, list: (data || []).map((r: any) => ({ dev: r.from_id, name: r.name })) }];
   }
   if (b.op === "call" || b.op === "cancel") {
     const from = await me(b.id, b.secret);

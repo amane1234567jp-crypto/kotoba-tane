@@ -251,6 +251,7 @@ body {
 .resend { align-self: center; margin-top: -4px; }
 .nameRow { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
 .linkNote { font: 700 clamp(14px, 2.2vmin, 18px) var(--body); color: var(--ink); background: #FFFFFF; border: 3px dashed var(--ink); border-radius: 14px; padding: 10px 14px; margin: 4px 0 0; max-width: 30em; line-height: 1.6; }
+.ringNote.calm { animation: none; background: var(--glow); color: var(--ink); }
 .ringNote { font: 900 clamp(18px, 2.6vmin, 26px) var(--body); color: #FFFFFF; background: #E2574C; border: 3px solid var(--ink); border-radius: 16px; padding: 8px 18px; margin: 0; animation: ring 1s ease-in-out infinite; }
 @keyframes ring { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
 .adultBtn { display: inline-flex; align-items: center; gap: 6px; font: 700 15px var(--body); color: var(--muted); background: transparent; border: 2px solid rgba(43, 42, 51, .35); border-radius: 999px; padding: 6px 14px; margin-top: 6px; cursor: pointer; }
@@ -326,6 +327,7 @@ body {
     <div class="chip"><span class="stone" data-c="2"></span><span class="nm" id="nameB">しろ</span></div>
     <div class="cam" id="camB" hidden><video id="vidB" playsinline autoplay muted></video><span class="camMsg" id="msgB" hidden></span></div>
     <button type="button" class="small resend" id="resendBtn" hidden>リンクを おくる</button>
+    <button type="button" class="small resend" id="tellBtn" hidden>しらせる</button>
     <div class="slot" id="slotB"></div>
     <div class="score"><span class="stone" data-c="2"></span><b id="cntB">2</b><small>まい</small></div>
     <button class="matta" id="mattaB" type="button" disabled><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 26V12a3 3 0 0 1 6 0v10V8a3 3 0 0 1 6 0v14V10a3 3 0 0 1 6 0v14v-8a3 3 0 0 1 6 0v14c0 9-6 14-13 14s-11-3-15-9l-5-8a3 3 0 0 1 5-3l4 5z" fill="#FFE9CF" stroke="#2B2A33" stroke-width="3.5" stroke-linejoin="round"/></svg>まった</button>
@@ -353,7 +355,7 @@ body {
       <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と あそぶ」を押すだけでつながります。</p>
     </div>
     <button class="adultBtn" id="adultBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Zm7.4-2.1.9-.7-1.5-2.6-1.1.3a6 6 0 0 0-1.3-.8l-.2-1.1h-3l-.2 1.1a6 6 0 0 0-1.3.8l-1.1-.3-1.5 2.6.9.7v1.3l-.9.7 1.5 2.6 1.1-.3a6 6 0 0 0 1.3.8l.2 1.1h3l.2-1.1a6 6 0 0 0 1.3-.8l1.1.3 1.5-2.6-.9-.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>おとなの せってい</button>
-    <p class="ver">v2026.11.16 b99ee62e</p>
+    <p class="ver">v2026.11.16 22db37f6</p>
   </div>
 </div>
 <!-- 相手が 2人以上 登録されているときだけ：だれと あそぶ？ -->
@@ -580,6 +582,9 @@ const CALL = (() => {
       return await post({ op: "call", to, tag: "rv-call", title: "テレビ電話リバーシ", body: `${name || "あいて"}から よびだしです。タップして はじめてね`, url });
     } catch (e) { return { ok: false, reason: "net" }; }
   };
+  // 招待リンクを開いた：招待した人に「とうろく」を伝える ／ 自分あての「とうろく」を受けとる（2026-11-16）
+  C.accept = async (to, name) => { if (!to || to === dev.id) return; try { await post({ op: "reg", name: name || "" }); await post({ op: "accept", to, name: name || "" }); } catch (e) { } };
+  C.pending = async () => { try { const r = await post({ op: "pending" }); return (r && r.list) || []; } catch (e) { return []; } };
   C.toApp = toApp;
   C.cancel = to => { if (to) post({ op: "cancel", to, tag: "rv-call" }).catch(() => { }); };
   // 引っこし用のリンク（iPhone・iPad で ホーム画面に追加する前に、この URL に切り替える）
@@ -2112,8 +2117,9 @@ const NET = (() => {
   // openExternalBrowser=1：LINE の中のブラウザではなく Safari／Chrome で開かせる（LINE の中ではカメラが使えないことがある）
   // アプリ版（localhost で動く）でも、リンクは Web 版の公開 URL にする（相手は Web でもアプリでも入れる）
   N.publicBase = () => window.RVNative ? "https://amane1234567jp-crypto.github.io/kotoba-tane/reversi/" : location.origin + location.pathname;
-  N.inviteURL = () => N.publicBase() + "?r=" + N.room + (N.name ? "&n=" + encodeURIComponent(N.name) : "") + (ps ? "&ps=" + ps : "") + "&openExternalBrowser=1";
+  N.inviteURL = () => N.publicBase() + "?r=" + N.room + (N.name ? "&n=" + encodeURIComponent(N.name) : "") + (typeof CALL !== "undefined" && CALL.id ? "&fd=" + CALL.id : "") + (ps ? "&ps=" + ps : "") + "&openExternalBrowser=1";
   N.linkName = q.get("n") || "";
+  N.linkDev = /^[A-Za-z0-9_-]{16,64}$/.test(q.get("fd") || "") ? q.get("fd") : "";
   return N;
 })();
 
@@ -2945,9 +2951,9 @@ $("startBtn").addEventListener("click", async () => {
    よぶ側は、相手が登録ずみなら「たいせんあいてを よぶ」でリンクの画面を出さず、すぐ待ち受けに入る。 */
 const PARTNER_KEY = "marushima-reversi-partners";
 const partners = { list: load(PARTNER_KEY) || [], save() { keep(PARTNER_KEY, this.list); } };
-function registerPartner(room, name) {
+function registerPartner(room, name, dev) {
   if (!room) return;
-  const i = partners.list.findIndex(p => p.room === room), rec = { room, name: name || (i >= 0 ? partners.list[i].name : "") || "たいせんあいて", dev: i >= 0 ? partners.list[i].dev : undefined, at: Date.now() };
+  const i = partners.list.findIndex(p => p.room === room), rec = { room, name: name || (i >= 0 ? partners.list[i].name : "") || "たいせんあいて", dev: dev || (i >= 0 ? partners.list[i].dev : undefined), at: Date.now() };
   if (i >= 0) partners.list[i] = rec; else partners.list.unshift(rec);
   partners.list = partners.list.slice(0, 5); partners.save();
 }
@@ -3130,6 +3136,7 @@ function applyState(m) {
 }
 let lostSaid = false;
 NET.on("open", () => {
+  $("tellBtn").hidden = true;
   const back = lostSaid; G.paused = false; lostSaid = false; $("inviteOv").hidden = true; camMsg(otherSide(), "");
   if (back && !G.animating) speak(host.pony, "rv_back");
   setTimeout(() => { if (NET.open && !NET.remote) camMsg(otherSide(), "あいての カメラが うつりません（ゲームは できます）"); }, 9000);
@@ -3170,7 +3177,14 @@ function startOnline() {
   if (NET.role === "guest") {
     camMsg(otherSide(), "つないでいます…"); NET.guest();
     // 30秒たっても つながらないときは、あいての画面を たしかめてもらう
-    setTimeout(() => { if (!NET.open && !NET.busy) camMsg(otherSide(), "まだ つながりません。あいての iPad で「とおくの ひとと あそぶ」の画面が ひらいているか たしかめてね"); }, 30000);
+    setTimeout(() => {
+      if (NET.open || NET.busy) return;
+      const who = NET.linkName || (partners.list.find(p => p.room === NET.room) || {}).name || "あいて";
+      camMsg(otherSide(), `${who}を まっています`);
+      const btn = $("tellBtn"), cam = $("cam" + otherSide());
+      cam.after(btn);   // あいての席（まっている画面の下）に出す
+      btn.textContent = "しらせる"; btn.hidden = false;
+    }, 20000);
   }
 }
 // たいせんあいてを よぶ（ホスト）
@@ -3281,7 +3295,9 @@ let forceLink = false;
   const s = replay(G.hist); cur = s;
   paintSides(); paint(s.board); setCounts(s.board, false); haloFor(G.hist);
   if (NET.role === "guest") {
-    registerPartner(NET.room, NET.linkName);
+    // リンクを開いた時点で おたがいを「とうろくした ひと」にする（まだ遊んでいなくても。2026-11-16）
+    registerPartner(NET.room, NET.linkName, NET.linkDev);
+    if (NET.linkDev) CALL.accept(NET.linkDev, CFG.myName);
     $("regNote").hidden = false;
     // おばあちゃん向け：大人なので漢字まじりで、大きく、手順を2つだけ
     $("callBtn").hidden = true; $("startOv").classList.add("guest");
@@ -3291,6 +3307,12 @@ let forceLink = false;
   else if (!NET.available) $("callBtn").hidden = true;
   refreshLeft(); renderPartners(); renderNameBtn(); renderPush();
   CALL.refresh(CFG.myName);
+  // 招待した人：リンクを開いてくれた相手を 受けとって「とうろくした ひと」に入れる
+  if (NET.role !== "guest") CALL.pending().then(list => {
+    if (!list.length) return;
+    list.forEach(x => registerCaller(x.dev, x.name)); if (!CFG.hasPartner) { CFG.hasPartner = 1; saveCfg(); }
+    if (!G.started && !answeringRing) { $("ringNote").textContent = `${list.map(x => x.name || "あいて").join("・")}が とうろく されました`; $("ringNote").hidden = false; $("ringNote").classList.add("calm"); }
+  });
   if (!NET.role) setTimeout(maybeAskPush, 600);
   // 相手からの よびだしを タップして 開いたとき（よぶ側の端末）
   if (NET.role === "guest" && new URLSearchParams(location.search).get("ring") === "1") {
@@ -3359,7 +3381,7 @@ setTimeout(() => { try { if (CFG.voice) preloadVoices(); } catch (e) { } }, 400)
   fetch("https://rlqeoyvevaglwngxtvrw.supabase.co/functions/v1/rv-push", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ op: "claim", fp: deviceHint() }) })
     .then(r => r.json()).then(j => {
       if (!j || !j.ok || !j.r || G.started) return;
-      const q = new URLSearchParams(); q.set("r", j.r); if (j.n) q.set("n", j.n);
+      const q = new URLSearchParams(); q.set("r", j.r); if (j.n) q.set("n", j.n); if (j.fd) q.set("fd", j.fd);
       location.replace(location.pathname + "?" + q.toString());
     }).catch(() => { });
 })();
@@ -3370,6 +3392,14 @@ function deviceHint() {
   let tz = ""; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) { }
   return { os, w: String(screen.width), h: String(screen.height), dpr: String(window.devicePixelRatio || 1), tz, lang: (navigator.language || "").slice(0, 2) };
 }
+
+// 招待された人が まっているのに 相手が いないとき：LINE などで「じゅんび できたよ」と しらせる（2026-11-16）
+$("tellBtn").addEventListener("click", async () => {
+  const me = CFG.myName ? CFG.myName + "です。" : "";
+  const text = `${me}テレビ電話リバーシの じゅんび できたよ！ アプリを ひらいて「とおくの ひとと あそぶ」を おしてね。まってるよ`;
+  if (window.RVNative) { CALL.toApp({ t: "share", text }); return; }
+  try { await navigator.share({ text }); } catch (e) { try { await navigator.clipboard.writeText(text); $("tellBtn").textContent = "コピーしました（LINE に はりつけてね）"; } catch (e2) { } }
+});
 
 </script>
 

@@ -238,6 +238,7 @@ body {
 .resend { align-self: center; margin-top: -4px; }
 .nameRow { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
 .linkNote { font: 700 clamp(14px, 2.2vmin, 18px) var(--body); color: var(--ink); background: #FFFFFF; border: 3px dashed var(--ink); border-radius: 14px; padding: 10px 14px; margin: 4px 0 0; max-width: 30em; line-height: 1.6; }
+.ringNote.calm { animation: none; background: var(--glow); color: var(--ink); }
 .ringNote { font: 900 clamp(18px, 2.6vmin, 26px) var(--body); color: #FFFFFF; background: #E2574C; border: 3px solid var(--ink); border-radius: 16px; padding: 8px 18px; margin: 0; animation: ring 1s ease-in-out infinite; }
 @keyframes ring { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
 .adultBtn { display: inline-flex; align-items: center; gap: 6px; font: 700 15px var(--body); color: var(--muted); background: transparent; border: 2px solid rgba(43, 42, 51, .35); border-radius: 999px; padding: 6px 14px; margin-top: 6px; cursor: pointer; }
@@ -313,6 +314,7 @@ body {
     <div class="chip"><span class="stone" data-c="2"></span><span class="nm" id="nameB">しろ</span></div>
     <div class="cam" id="camB" hidden><video id="vidB" playsinline autoplay muted></video><span class="camMsg" id="msgB" hidden></span></div>
     <button type="button" class="small resend" id="resendBtn" hidden>リンクを おくる</button>
+    <button type="button" class="small resend" id="tellBtn" hidden>しらせる</button>
     <div class="slot" id="slotB"></div>
     <div class="score"><span class="stone" data-c="2"></span><b id="cntB">2</b><small>まい</small></div>
     <button class="matta" id="mattaB" type="button" disabled>__HAND__まった</button>
