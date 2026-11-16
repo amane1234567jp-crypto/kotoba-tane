@@ -573,7 +573,7 @@ function showNames(next, first) {
   nameNext = next || null;
   $("myName").value = CFG.myName || "";
   $("myNameRow").hidden = false;
-  // はじめて なまえを きくとき（よばれた人も）：よくある呼び名を ボタンで。あいての なまえの欄は 出さない（2026-11-16）
+  // はじめて なまえを きくとき（よばれた人も）：かならず 自分で いれてもらう（おばあちゃんは 何人も いるので。2026-11-16）。あいての なまえの欄は 出さない
   $("nameChips").hidden = !first;
   const box = $("partnerNames"); box.innerHTML = "";
   if (first) { $("nameOv").hidden = false; setTimeout(() => $("myName").focus(), 50); return; }
@@ -595,7 +595,6 @@ function showNames(next, first) {
   if (!$("myNameRow").hidden) setTimeout(() => $("myName").focus(), 50);
 }
 $("myName").addEventListener("input", e => { CFG.myName = e.target.value.trim().slice(0, 10); saveCfg(); renderNameBtn(); });
-$("nameChips").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; $("myName").value = b.textContent; CFG.myName = b.textContent; saveCfg(); renderNameBtn(); });
 $("nameOk").addEventListener("click", () => {
   if (!$("nameChips").hidden && !CFG.myName) { $("myName").focus(); return; }   // はじめては なまえを いれてから
   $("nameOv").hidden = true;

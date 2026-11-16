@@ -238,8 +238,7 @@ body {
 .resend { align-self: center; margin-top: -4px; }
 .nameRow { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
 .linkNote { font: 700 clamp(14px, 2.2vmin, 18px) var(--body); color: var(--ink); background: #FFFFFF; border: 3px dashed var(--ink); border-radius: 14px; padding: 10px 14px; margin: 4px 0 0; max-width: 30em; line-height: 1.6; }
-.nameChips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 4px 0 8px; }
-.nameChips button { font: 700 17px var(--body); padding: 8px 14px; border: 3px solid var(--ink); border-radius: 999px; background: #fff; color: var(--ink); }
+.nameHint { font-size: 15px; color: var(--ink); background: #FFF6D6; border-radius: 12px; padding: 8px 12px; margin: 4px 0 8px; line-height: 1.6; }
 .ringNote.calm { animation: none; background: var(--glow); color: var(--ink); }
 .ringNote { font: 900 clamp(18px, 2.6vmin, 26px) var(--body); color: #FFFFFF; background: #E2574C; border: 3px solid var(--ink); border-radius: 16px; padding: 8px 18px; margin: 0; animation: ring 1s ease-in-out infinite; }
 @keyframes ring { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
@@ -396,7 +395,7 @@ body {
   <div class="panel name" role="dialog" aria-label="なまえ">
     <h2>なまえ</h2>
     <label class="nameRow" for="myName" id="myNameRow">じぶんの なまえ（あいての がめんに でます。10もじまで）<input id="myName" type="text" maxlength="10" autocomplete="off" placeholder="れい：ゆうくん"></label>
-    <div class="nameChips" id="nameChips" hidden><button type="button">おばあちゃん</button><button type="button">おじいちゃん</button><button type="button">ママ</button><button type="button">パパ</button></div>
+    <p class="nameHint" id="nameChips" hidden>おなじ よびかたの ひとが いても わかるように いれてね（れい：○○の おばあちゃん、△△ばあば）</p>
     <div id="partnerNames"></div>
     <div class="panelBtns"><button type="button" id="nameOk" class="primary">きめた</button></div>
   </div>
