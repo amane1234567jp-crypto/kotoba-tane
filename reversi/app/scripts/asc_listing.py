@@ -289,3 +289,8 @@ if MODE == "cap":
         a = p["attributes"]; log("profile:", p["id"], a.get("name"), a.get("profileType"), a.get("profileState"))
         if a.get("profileType") == "IOS_APP_STORE":
             s, r = api("DELETE", f"/v1/profiles/{p['id']}"); log("  delete:", s, err(s, r))
+
+if MODE == "autorelease":
+    # 審査に通ったら 自動で公開する（あまねさんの指示があるときだけ使う）
+    s, j = api("PATCH", f"/v1/appStoreVersions/{ver['id']}", {"data": {"type": "appStoreVersions", "id": ver["id"], "attributes": {"releaseType": "AFTER_APPROVAL"}}})
+    log("releaseType AFTER_APPROVAL:", ver["attributes"]["versionString"], s, err(s, j))
