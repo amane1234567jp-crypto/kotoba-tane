@@ -807,7 +807,7 @@ function pressPlay() {
   if (answeringRing) return callGrandma(false, true);
   const cs = candidates();
   if (!cs.length) return CFG.myName ? callGrandma(false) : showNames(() => callGrandma(false));
-  // まえに あそんだ ひとが いれば、かならず「だれと あそぶ？」（あたらしい あいても ここから よべる）
+  // とうろくした ひとが いれば、かならず「だれと あそぶ？」（あたらしい あいても ここから よべる）
   const box = $("whoList"); box.innerHTML = "";
   cs.forEach(c => { const b = document.createElement("button"); b.type = "button"; b.className = "big partner"; b.textContent = `${c.name}と あそぶ`; b.addEventListener("click", () => { $("whoOv").hidden = true; playWith(c); }); box.appendChild(b); });
   $("whoOv").hidden = false;
