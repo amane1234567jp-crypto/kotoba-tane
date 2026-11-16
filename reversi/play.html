@@ -251,6 +251,8 @@ body {
 .resend { align-self: center; margin-top: -4px; }
 .nameRow { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
 .linkNote { font: 700 clamp(14px, 2.2vmin, 18px) var(--body); color: var(--ink); background: #FFFFFF; border: 3px dashed var(--ink); border-radius: 14px; padding: 10px 14px; margin: 4px 0 0; max-width: 30em; line-height: 1.6; }
+.nameChips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 4px 0 8px; }
+.nameChips button { font: 700 17px var(--body); padding: 8px 14px; border: 3px solid var(--ink); border-radius: 999px; background: #fff; color: var(--ink); }
 .ringNote.calm { animation: none; background: var(--glow); color: var(--ink); }
 .ringNote { font: 900 clamp(18px, 2.6vmin, 26px) var(--body); color: #FFFFFF; background: #E2574C; border: 3px solid var(--ink); border-radius: 16px; padding: 8px 18px; margin: 0; animation: ring 1s ease-in-out infinite; }
 @keyframes ring { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
@@ -355,7 +357,7 @@ body {
       <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と あそぶ」を押すだけでつながります。</p>
     </div>
     <button class="adultBtn" id="adultBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Zm7.4-2.1.9-.7-1.5-2.6-1.1.3a6 6 0 0 0-1.3-.8l-.2-1.1h-3l-.2 1.1a6 6 0 0 0-1.3.8l-1.1-.3-1.5 2.6.9.7v1.3l-.9.7 1.5 2.6 1.1-.3a6 6 0 0 0 1.3.8l.2 1.1h3l.2-1.1a6 6 0 0 0 1.3-.8l1.1.3 1.5-2.6-.9-.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>おとなの せってい</button>
-    <p class="ver">v2026.11.16 22db37f6</p>
+    <p class="ver">v2026.11.16 8d5a9def</p>
   </div>
 </div>
 <!-- 相手が 2人以上 登録されているときだけ：だれと あそぶ？ -->
@@ -407,6 +409,7 @@ body {
   <div class="panel name" role="dialog" aria-label="なまえ">
     <h2>なまえ</h2>
     <label class="nameRow" for="myName" id="myNameRow">じぶんの なまえ（あいての がめんに でます。10もじまで）<input id="myName" type="text" maxlength="10" autocomplete="off" placeholder="れい：ゆうくん"></label>
+    <div class="nameChips" id="nameChips" hidden><button type="button">おばあちゃん</button><button type="button">おじいちゃん</button><button type="button">ママ</button><button type="button">パパ</button></div>
     <div id="partnerNames"></div>
     <div class="panelBtns"><button type="button" id="nameOk" class="primary">きめた</button></div>
   </div>
@@ -2735,11 +2738,14 @@ $("closeBtn").addEventListener("click", () => { setPanel.hidden = true; });
 /* なまえの画面：自分の名前（相手の画面の「○○と 対戦する」に出る）と、この端末に登録した相手の名前を変えられる。
    開始画面の「なまえ」ボタン、設定の「名前を変える」から。名前が未設定のまま「たいせんあいてを よぶ」を押したときも先に出す */
 let nameNext = null;
-function showNames(next) {
+function showNames(next, first) {
   nameNext = next || null;
   $("myName").value = CFG.myName || "";
-  $("myNameRow").hidden = NET.role === "guest" && !!NET.room && !CFG.myName;
+  $("myNameRow").hidden = false;
+  // はじめて なまえを きくとき（よばれた人も）：よくある呼び名を ボタンで。あいての なまえの欄は 出さない（2026-11-16）
+  $("nameChips").hidden = !first;
   const box = $("partnerNames"); box.innerHTML = "";
+  if (first) { $("nameOv").hidden = false; setTimeout(() => $("myName").focus(), 50); return; }
   partners.list.forEach((p, i) => {
     const l = document.createElement("label"); l.className = "nameRow";
     l.innerHTML = `あいての なまえ（${i + 1}人め）`;
@@ -2758,7 +2764,12 @@ function showNames(next) {
   if (!$("myNameRow").hidden) setTimeout(() => $("myName").focus(), 50);
 }
 $("myName").addEventListener("input", e => { CFG.myName = e.target.value.trim().slice(0, 10); saveCfg(); renderNameBtn(); });
-$("nameOk").addEventListener("click", () => { $("nameOv").hidden = true; const f = nameNext; nameNext = null; if (f) f(); });
+$("nameChips").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; $("myName").value = b.textContent; CFG.myName = b.textContent; saveCfg(); renderNameBtn(); });
+$("nameOk").addEventListener("click", () => {
+  if (!$("nameChips").hidden && !CFG.myName) { $("myName").focus(); return; }   // はじめては なまえを いれてから
+  $("nameOv").hidden = true;
+  // なまえが きまったら 中継にも伝える（よばれた人は 招待した人に なまえ つきで とうろくしなおす）
+  CALL.refresh(CFG.myName); if (NET.role === "guest" && NET.linkDev && CFG.myName) CALL.accept(NET.linkDev, CFG.myName); const f = nameNext; nameNext = null; if (f) f(); });
 function renderNameBtn() { $("nameBtn2").textContent = CFG.myName ? `なまえを かえる（いま：${CFG.myName}）` : "なまえを きめる"; }
 $("nameBtn2").addEventListener("click", () => { setPanel.hidden = true; showNames(() => { renderNameBtn(); }); });
 $("newRoomBtn").addEventListener("click", () => {
@@ -2940,7 +2951,7 @@ function unlock() {
 }
 $("startBtn").addEventListener("click", async () => {
   unlock();
-  if (NET.role === "guest") return startOnline();
+  if (NET.role === "guest") return CFG.myName ? startOnline() : showNames(() => startOnline(), true);
   const saved = G.hist.length > 0;
   if (saved) { const s = replay(G.hist); paint(s.board); setCounts(s.board, false); s.over ? endGame(s) : setTurn(s); }
   else newGame();
@@ -2972,14 +2983,14 @@ function playWith(c) { if (c.kind === "guest") joinPartner(c.p); else callGrandm
 function pressPlay() {
   if (answeringRing) return callGrandma(false, true);
   const cs = candidates();
-  if (!cs.length) return CFG.myName ? callGrandma(false) : showNames(() => callGrandma(false));
+  if (!cs.length) return CFG.myName ? callGrandma(false) : showNames(() => callGrandma(false), true);
   // とうろくした ひとが いれば、かならず「だれと あそぶ？」（あたらしい あいても ここから よべる）
   const box = $("whoList"); box.innerHTML = "";
   cs.forEach(c => { const b = document.createElement("button"); b.type = "button"; b.className = "big partner"; b.textContent = `${c.name}と あそぶ`; b.addEventListener("click", () => { $("whoOv").hidden = true; playWith(c); }); box.appendChild(b); });
   $("whoOv").hidden = false;
 }
 $("whoClose").addEventListener("click", () => { $("whoOv").hidden = true; });
-$("whoNew").addEventListener("click", () => { $("whoOv").hidden = true; CFG.myName ? callGrandma(true) : showNames(() => callGrandma(true)); });
+$("whoNew").addEventListener("click", () => { $("whoOv").hidden = true; CFG.myName ? callGrandma(true) : showNames(() => callGrandma(true), true); });
 function joinPartner(p) {
   NET.role = "guest"; NET.room = p.room; registerPartner(p.room, p.name);
   unlock(); $("guestLead").hidden = true; startOnline();

@@ -569,11 +569,14 @@ $("closeBtn").addEventListener("click", () => { setPanel.hidden = true; });
 /* なまえの画面：自分の名前（相手の画面の「○○と 対戦する」に出る）と、この端末に登録した相手の名前を変えられる。
    開始画面の「なまえ」ボタン、設定の「名前を変える」から。名前が未設定のまま「たいせんあいてを よぶ」を押したときも先に出す */
 let nameNext = null;
-function showNames(next) {
+function showNames(next, first) {
   nameNext = next || null;
   $("myName").value = CFG.myName || "";
-  $("myNameRow").hidden = NET.role === "guest" && !!NET.room && !CFG.myName;
+  $("myNameRow").hidden = false;
+  // はじめて なまえを きくとき（よばれた人も）：よくある呼び名を ボタンで。あいての なまえの欄は 出さない（2026-11-16）
+  $("nameChips").hidden = !first;
   const box = $("partnerNames"); box.innerHTML = "";
+  if (first) { $("nameOv").hidden = false; setTimeout(() => $("myName").focus(), 50); return; }
   partners.list.forEach((p, i) => {
     const l = document.createElement("label"); l.className = "nameRow";
     l.innerHTML = `あいての なまえ（${i + 1}人め）`;
@@ -592,7 +595,12 @@ function showNames(next) {
   if (!$("myNameRow").hidden) setTimeout(() => $("myName").focus(), 50);
 }
 $("myName").addEventListener("input", e => { CFG.myName = e.target.value.trim().slice(0, 10); saveCfg(); renderNameBtn(); });
-$("nameOk").addEventListener("click", () => { $("nameOv").hidden = true; const f = nameNext; nameNext = null; if (f) f(); });
+$("nameChips").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; $("myName").value = b.textContent; CFG.myName = b.textContent; saveCfg(); renderNameBtn(); });
+$("nameOk").addEventListener("click", () => {
+  if (!$("nameChips").hidden && !CFG.myName) { $("myName").focus(); return; }   // はじめては なまえを いれてから
+  $("nameOv").hidden = true;
+  // なまえが きまったら 中継にも伝える（よばれた人は 招待した人に なまえ つきで とうろくしなおす）
+  CALL.refresh(CFG.myName); if (NET.role === "guest" && NET.linkDev && CFG.myName) CALL.accept(NET.linkDev, CFG.myName); const f = nameNext; nameNext = null; if (f) f(); });
 function renderNameBtn() { $("nameBtn2").textContent = CFG.myName ? `なまえを かえる（いま：${CFG.myName}）` : "なまえを きめる"; }
 $("nameBtn2").addEventListener("click", () => { setPanel.hidden = true; showNames(() => { renderNameBtn(); }); });
 $("newRoomBtn").addEventListener("click", () => {
@@ -774,7 +782,7 @@ function unlock() {
 }
 $("startBtn").addEventListener("click", async () => {
   unlock();
-  if (NET.role === "guest") return startOnline();
+  if (NET.role === "guest") return CFG.myName ? startOnline() : showNames(() => startOnline(), true);
   const saved = G.hist.length > 0;
   if (saved) { const s = replay(G.hist); paint(s.board); setCounts(s.board, false); s.over ? endGame(s) : setTurn(s); }
   else newGame();
@@ -806,14 +814,14 @@ function playWith(c) { if (c.kind === "guest") joinPartner(c.p); else callGrandm
 function pressPlay() {
   if (answeringRing) return callGrandma(false, true);
   const cs = candidates();
-  if (!cs.length) return CFG.myName ? callGrandma(false) : showNames(() => callGrandma(false));
+  if (!cs.length) return CFG.myName ? callGrandma(false) : showNames(() => callGrandma(false), true);
   // とうろくした ひとが いれば、かならず「だれと あそぶ？」（あたらしい あいても ここから よべる）
   const box = $("whoList"); box.innerHTML = "";
   cs.forEach(c => { const b = document.createElement("button"); b.type = "button"; b.className = "big partner"; b.textContent = `${c.name}と あそぶ`; b.addEventListener("click", () => { $("whoOv").hidden = true; playWith(c); }); box.appendChild(b); });
   $("whoOv").hidden = false;
 }
 $("whoClose").addEventListener("click", () => { $("whoOv").hidden = true; });
-$("whoNew").addEventListener("click", () => { $("whoOv").hidden = true; CFG.myName ? callGrandma(true) : showNames(() => callGrandma(true)); });
+$("whoNew").addEventListener("click", () => { $("whoOv").hidden = true; CFG.myName ? callGrandma(true) : showNames(() => callGrandma(true), true); });
 function joinPartner(p) {
   NET.role = "guest"; NET.room = p.room; registerPartner(p.room, p.name);
   unlock(); $("guestLead").hidden = true; startOnline();
