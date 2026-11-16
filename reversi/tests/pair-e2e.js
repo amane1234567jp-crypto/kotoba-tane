@@ -2,6 +2,8 @@
 const { chromium, devices } = require("playwright");
 const BASE = "https://amane1234567jp-crypto.github.io/kotoba-tane/reversi/";
 (async () => {
+  // 公開ページが新しい版になるまで待つ（GitHub Pages の反映待ち）
+  for (let i = 0; i < 40; i++) { const t = await fetch(BASE + "play.html?x=" + Date.now()).then(r => r.text()).catch(() => ""); if (t.includes("tellBtn")) break; console.log("公開ページの反映待ち…"); await new Promise(z => setTimeout(z, 15000)); }
   const b = await chromium.launch();
   const mk = async () => { const c = await b.newContext({ ...devices["iPhone 13"], locale: "ja-JP", timezoneId: "Asia/Tokyo" }); await c.addInitScript(() => { window.RVNative = { platform: "ios", version: "1.0.3", push: false }; try { localStorage.setItem("marushima-reversi-claimed", "1"); } catch (e) {} }); return c; };
   const A = await mk(); const a = await A.newPage();
