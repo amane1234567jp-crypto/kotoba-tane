@@ -218,8 +218,9 @@ const NET = (() => {
 
   N.host = host; N.guest = guest;
   // openExternalBrowser=1：LINE の中のブラウザではなく Safari／Chrome で開かせる（LINE の中ではカメラが使えないことがある）
-  // アプリ版（localhost で動く）でも、リンクは Web 版の公開 URL にする（相手は Web でもアプリでも入れる）
-  N.publicBase = () => window.RVNative ? "https://amane1234567jp-crypto.github.io/kotoba-tane/reversi/" : location.origin + location.pathname;
+  // アプリ版のリンクは https://www.uchinoaji.com/rv/（2026-11-16）：アプリが入っていれば タップで アプリが直接ひらく（ユニバーサルリンク・App Links）。
+  // 入っていなければ 案内ページ（App Store／Google Play）が出る
+  N.publicBase = () => window.RVNative ? "https://www.uchinoaji.com/rv/" : location.origin + location.pathname;
   N.inviteURL = () => N.publicBase() + "?r=" + N.room + (N.name ? "&n=" + encodeURIComponent(N.name) : "") + (typeof CALL !== "undefined" && CALL.id ? "&fd=" + CALL.id : "") + (ps ? "&ps=" + ps : "") + "&openExternalBrowser=1";
   N.linkName = q.get("n") || "";
   N.linkDev = /^[A-Za-z0-9_-]{16,64}$/.test(q.get("fd") || "") ? q.get("fd") : "";

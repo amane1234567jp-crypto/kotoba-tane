@@ -356,7 +356,7 @@ body {
       <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と あそぶ」を押すだけでつながります。</p>
     </div>
     <button class="adultBtn" id="adultBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Zm7.4-2.1.9-.7-1.5-2.6-1.1.3a6 6 0 0 0-1.3-.8l-.2-1.1h-3l-.2 1.1a6 6 0 0 0-1.3.8l-1.1-.3-1.5 2.6.9.7v1.3l-.9.7 1.5 2.6 1.1-.3a6 6 0 0 0 1.3.8l.2 1.1h3l.2-1.1a6 6 0 0 0 1.3-.8l1.1.3 1.5-2.6-.9-.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>おとなの せってい</button>
-    <p class="ver">v2026.11.16 411903bb</p>
+    <p class="ver">v2026.11.16 b0acdd25</p>
   </div>
 </div>
 <!-- 相手が 2人以上 登録されているときだけ：だれと あそぶ？ -->
@@ -2117,8 +2117,9 @@ const NET = (() => {
 
   N.host = host; N.guest = guest;
   // openExternalBrowser=1：LINE の中のブラウザではなく Safari／Chrome で開かせる（LINE の中ではカメラが使えないことがある）
-  // アプリ版（localhost で動く）でも、リンクは Web 版の公開 URL にする（相手は Web でもアプリでも入れる）
-  N.publicBase = () => window.RVNative ? "https://amane1234567jp-crypto.github.io/kotoba-tane/reversi/" : location.origin + location.pathname;
+  // アプリ版のリンクは https://www.uchinoaji.com/rv/（2026-11-16）：アプリが入っていれば タップで アプリが直接ひらく（ユニバーサルリンク・App Links）。
+  // 入っていなければ 案内ページ（App Store／Google Play）が出る
+  N.publicBase = () => window.RVNative ? "https://www.uchinoaji.com/rv/" : location.origin + location.pathname;
   N.inviteURL = () => N.publicBase() + "?r=" + N.room + (N.name ? "&n=" + encodeURIComponent(N.name) : "") + (typeof CALL !== "undefined" && CALL.id ? "&fd=" + CALL.id : "") + (ps ? "&ps=" + ps : "") + "&openExternalBrowser=1";
   N.linkName = q.get("n") || "";
   N.linkDev = /^[A-Za-z0-9_-]{16,64}$/.test(q.get("fd") || "") ? q.get("fd") : "";

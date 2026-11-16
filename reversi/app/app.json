@@ -15,7 +15,7 @@
     },
     "ios": {
       "bundleIdentifier": "com.uchinoaji.marushima.reversi",
-      "buildNumber": "10",
+      "buildNumber": "11",
       "supportsTablet": true,
       "infoPlist": {
         "NSCameraUsageDescription": "とおくの相手と顔を見ながら対戦するために、カメラを使います。",
@@ -24,11 +24,14 @@
           "NSAllowsLocalNetworking": true
         },
         "ITSAppUsesNonExemptEncryption": false
-      }
+      },
+      "associatedDomains": [
+        "applinks:www.uchinoaji.com"
+      ]
     },
     "android": {
       "package": "com.uchinoaji.marushima.reversi",
-      "versionCode": 10,
+      "versionCode": 11,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1E8A52"
@@ -49,6 +52,23 @@
         "android.permission.READ_MEDIA_VIDEO",
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE"
+      ],
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "www.uchinoaji.com",
+              "pathPrefix": "/rv"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
       ]
     },
     "plugins": [

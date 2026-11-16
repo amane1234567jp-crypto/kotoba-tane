@@ -10,8 +10,8 @@
 import { createClient } from "npm:@supabase/supabase-js@2.45.4";
 import webpush from "npm:web-push@3.6.7";
 
-// 許す呼び出し元：Web 版（GitHub Pages）と、アプリ版の中の localhost（番号は毎回変わる）、手元の確認用
-const ORIGINS = ["https://amane1234567jp-crypto.github.io"];
+// 許す呼び出し元：Web 版（GitHub Pages）・招待リンクの案内ページ（www.uchinoaji.com/rv）と、アプリ版の中の localhost（番号は毎回変わる）、手元の確認用
+const ORIGINS = ["https://amane1234567jp-crypto.github.io", "https://www.uchinoaji.com"];
 const originOk = (o: string) => ORIGINS.includes(o) || /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(o);
 const db = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, { auth: { persistSession: false } });
 let vapidReady = false;

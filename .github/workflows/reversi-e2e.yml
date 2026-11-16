@@ -17,7 +17,7 @@ jobs:
       - name: run
         run: |
           mkdir -p /tmp/e && cd /tmp/e && npm init -y >/dev/null && npm i -q playwright@1.48.2 >/dev/null 2>&1 && npx playwright install --with-deps chromium >/dev/null 2>&1
-          cp "$GITHUB_WORKSPACE/reversi/tests/"*-e2e.js . && set -o pipefail; (node handoff-e2e.js; node pair-e2e.js) 2>&1 | tee /tmp/e/out.txt
+          cp "$GITHUB_WORKSPACE/reversi/tests/"*-e2e.js . && set -o pipefail; (bash "$GITHUB_WORKSPACE/reversi/tests/links-check.sh"; node handoff-e2e.js; node pair-e2e.js) 2>&1 | tee /tmp/e/out.txt
       - name: publish
         if: always()
         run: |
