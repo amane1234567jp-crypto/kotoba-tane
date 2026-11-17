@@ -17,6 +17,7 @@ import * as Notifications from "expo-notifications";
 import { setAudioModeAsync } from "expo-audio";
 import { unzip } from "react-native-zip-archive";
 import Server from "@dr.pogodin/react-native-static-server";
+const { storeScript } = require("./storeBridge");
 
 const WEB_ZIP = require("./assets/web.zip");
 const WEB_VER = require("./assets/web-version.json");
@@ -29,6 +30,14 @@ Notifications.setNotificationHandler({
 });
 
 const strip = u => u.replace(/^file:\/\//, "");
+
+// 端末の中のサーバーの番号（ポート）は固定する。番号が変わると WebView の保存場所が変わり、
+// 名前や「とうろくした ひと」が毎回消える（1.0.3 までの不具合）。ふさがっていたときだけ 空いている番号で。
+const PORT = 47913;
+// WebView の localStorage の控え（storeBridge.js）
+const STORE_FILE = FS.documentDirectory + "webstore.json";
+async function readStore() { try { const o = JSON.parse(await FS.readAsStringAsync(STORE_FILE)); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
+async function writeStore(o) { try { await FS.writeAsStringAsync(STORE_FILE + ".tmp", JSON.stringify(o)); await FS.moveAsync({ from: STORE_FILE + ".tmp", to: STORE_FILE }); } catch (e) { try { await FS.writeAsStringAsync(STORE_FILE, JSON.stringify(o)); } catch (e2) { } } }
 
 // ゲーム本体を端末の中に展開（アプリの版か中身の版が変わったときだけ やりなおす）
 async function ensureWeb() {
@@ -53,6 +62,7 @@ export default function App() {
   const [query, setQuery] = useState("");
   const [err, setErr] = useState("");
   const [key, setKey] = useState(0);
+  const snap = useRef({});
 
   // 起動：音の種類 → 展開 → サーバー
   useEffect(() => {
@@ -71,9 +81,16 @@ export default function App() {
         }
       } catch (e) { }
       try {
+        snap.current = await readStore();
         const dir = await ensureWeb();
-        const s = new Server({ fileDir: strip(dir), hostname: "127.0.0.1", port: 0, stopInBackground: false });
-        const o = await s.start();
+        let s = new Server({ fileDir: strip(dir), hostname: "127.0.0.1", port: PORT, stopInBackground: false });
+        let o;
+        try { o = await s.start(); }
+        catch (e) {
+          try { s.stop(); } catch (e2) { }
+          s = new Server({ fileDir: strip(dir), hostname: "127.0.0.1", port: 0, stopInBackground: false });
+          o = await s.start();
+        }
         server.current = s;
         if (alive) setOrigin(o.replace(/\/$/, ""));
       } catch (e) { if (alive) setErr(String(e && e.message || e)); }
@@ -136,6 +153,7 @@ export default function App() {
   const onMessage = async e => {
     let m = null; try { m = JSON.parse(e.nativeEvent.data); } catch (err) { return; }
     if (!m) return;
+    if (m.t === "store") { if (m.data && typeof m.data === "object") { snap.current = m.data; await writeStore(m.data); } return; }
     if (m.t === "share") { try { await Share.share(Platform.OS === "ios" ? { message: m.text } : { message: m.text }); } catch (err) { } }
     else if (m.t === "needPush") { try { await getPushToken(true); } catch (err) { send({ t: "denied" }); } }
     else if (m.t === "pushIfGranted") { try { await getPushToken(false); } catch (err) { } }
@@ -143,7 +161,7 @@ export default function App() {
     else if (m.t === "open") { try { await Linking.openURL(m.url); } catch (err) { } }
   };
 
-  const boot = `window.RVNative = ${JSON.stringify({ platform: Platform.OS, version: APP_VER, push: PUSH_READY })}; true;`;
+  const boot = `window.RVNative = ${JSON.stringify({ platform: Platform.OS, version: APP_VER, push: PUSH_READY })};` + storeScript(snap.current) + " true;";
 
   if (err) return <View style={st.center}><Text style={st.msg}>ゲームを よみこめませんでした。{"\n"}アプリを いちど とじて、もう一度ひらいてください。{"\n\n"}{err}</Text></View>;
   if (!origin) return <View style={st.center}><Text style={st.msg}>じゅんびちゅう…</Text></View>;
