@@ -248,6 +248,8 @@ body {
 .panel h3 { margin: 10px 0 -2px; padding-top: 10px; border-top: 2px dashed rgba(43, 42, 51, .18); font: 900 15px var(--body); color: var(--muted); letter-spacing: .06em; }
 .panel.who { gap: 12px; }
 .panel.who .partners { gap: 10px; }
+.whoEmpty { font: 700 clamp(15px, 2.4vmin, 19px) var(--body); color: #8A8790; margin: 2px 0; }
+.whoNote { margin: 0 auto; font-size: clamp(13px, 2vmin, 16px); }
 .panel.home .hsteps { display: grid; gap: 10px; margin: 4px 0 8px; }
 .panel.home .hsteps div { display: flex; align-items: center; gap: 10px; }
 .panel.home .hsteps p { margin: 0; font-size: 16px; line-height: 1.45; }
@@ -353,7 +355,9 @@ body {
     <h3 class="plain">とうろくした ひと</h3>
     <div class="partners" id="whoList"></div>
     <h3 class="plain">はじめての ひと</h3>
-    <div class="panelBtns"><button type="button" id="whoNew" class="primary">あたらしい あいてを よぶ</button><button type="button" id="whoClose">やめる</button></div>
+    <div class="panelBtns"><button type="button" id="whoNew" class="primary">あたらしい ひとを さそう</button></div>
+    <p class="linkNote whoNote">LINE などで <b>おさそいの リンク</b>を もらった ひとは、ここではなく その リンクを タップしてね</p>
+    <div class="panelBtns"><button type="button" id="whoClose">やめる</button></div>
   </div>
 </div>
 <!-- 一度だけ聞く：つぎから よびだしで つながる？ -->

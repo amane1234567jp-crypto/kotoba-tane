@@ -812,15 +812,17 @@ function renderPartners() {
 function playWith(c) { if (c.kind === "guest") joinPartner(c.p); else callGrandma(false); }
 function pressPlay() {
   if (answeringRing) return callGrandma(false, true);
+  // いつも おなじ順番（2026-11-17 あまねさん）：①はじめては 自分の なまえ → ②かならず「だれと あそぶ？」→ ③えらんだ相手 or さそう
+  // とうろくした ひとが いなくても ②を出す（リンクを もらった ひとが「さそう」画面に 迷いこまないように、案内も ここに置く）
+  if (!CFG.myName) return showNames(() => pressPlay(), true);
   const cs = candidates();
-  if (!cs.length) return CFG.myName ? callGrandma(false) : showNames(() => callGrandma(false), true);
-  // とうろくした ひとが いれば、かならず「だれと あそぶ？」（あたらしい あいても ここから よべる）
   const box = $("whoList"); box.innerHTML = "";
+  if (!cs.length) { const p = document.createElement("p"); p.className = "whoEmpty"; p.textContent = "まだ いません"; box.appendChild(p); }
   cs.forEach(c => { const b = document.createElement("button"); b.type = "button"; b.className = "big partner"; b.textContent = `${c.name}と あそぶ`; b.addEventListener("click", () => { $("whoOv").hidden = true; playWith(c); }); box.appendChild(b); });
   $("whoOv").hidden = false;
 }
 $("whoClose").addEventListener("click", () => { $("whoOv").hidden = true; });
-$("whoNew").addEventListener("click", () => { $("whoOv").hidden = true; CFG.myName ? callGrandma(true) : showNames(() => callGrandma(true), true); });
+$("whoNew").addEventListener("click", () => { $("whoOv").hidden = true; callGrandma(true); });
 function joinPartner(p) {
   NET.role = "guest"; NET.room = p.room; registerPartner(p.room, p.name);
   unlock(); $("guestLead").hidden = true; startOnline();
@@ -1216,7 +1218,6 @@ setTimeout(() => { try { if (CFG.voice) preloadVoices(); } catch (e) { } }, 400)
   if (!window.RVNative || NET.role) return;
   const KEY = "marushima-reversi-claimed";
   let done = null; try { done = localStorage.getItem(KEY); } catch (e) { }
-  if (!partners.list.length && !callers.list.length) $("linkNote").hidden = false;
   if (done) return;
   try { localStorage.setItem(KEY, String(Date.now())); } catch (e) { }
   fetch("https://rlqeoyvevaglwngxtvrw.supabase.co/functions/v1/rv-push", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ op: "claim", fp: deviceHint() }) })
