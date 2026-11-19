@@ -65,18 +65,26 @@ footer a { color: var(--sub); }
   if (isAndroid && !PLAY_LIVE) { const q2 = new URLSearchParams(location.search); q2.set("dev", "1"); location.replace("play.html?" + q2.toString()); return; }
   if (isIOS) document.getElementById("android").hidden = true;
   if (isAndroid) document.getElementById("ios").hidden = true;
-  if (!r) { document.getElementById("openStep").hidden = true; document.getElementById("had").hidden = true; document.getElementById("webFallback").hidden = true; return; }
+  // なかまの さそい（とうろくだけ。2026-11-19）：?m=reg&n=名前&fd=端末番号（部屋なし）
+  const fdOk = /^[A-Za-z0-9_-]{16,64}$/.test(q.get("fd") || "");
+  const reg = !r && q.get("m") === "reg" && fdOk;
+  if (!r && !reg) { document.getElementById("openStep").hidden = true; document.getElementById("had").hidden = true; document.getElementById("webFallback").hidden = true; return; }
   const fromEl = document.getElementById("from");
-  fromEl.textContent = (n ? n + " から" : "") + " テレビ電話リバーシの おさそいです";
-  const pass = new URLSearchParams(); pass.set("r", r); if (n) pass.set("n", n);
-  for (const k of ["ring", "fd"]) if (q.get(k)) pass.set(k, q.get(k));
+  fromEl.textContent = (n ? n + " から" : "") + (reg ? " テレビ電話リバーシの なかまの おさそいです" : " テレビ電話リバーシの おさそいです");
+  if (reg) {
+    document.getElementById("had").textContent = "いれおわったら、App Store の「ひらく」を おしてね。" + (n ? n + "と" : "") + " なかまに なります（ゲームは まだ はじまりません）。";
+    document.querySelector("#openStep .note").textContent = "なかまに なります。あそぶときは アプリの「とおくの ひとと あそぶ」から。";
+    document.getElementById("webFallback").hidden = true;
+  }
+  const pass = new URLSearchParams(); if (reg) pass.set("m", "reg"); else pass.set("r", r); if (n) pass.set("n", n);
+  for (const k of ["ring", "fd", "m"]) if (q.get(k) && !pass.has(k)) pass.set(k, q.get(k));
   // アプリを入れて はじめて開いたときに この招待へ つなげるよう、中継に「この端末で 入れに行った」と残す（1時間で消える）
   const ua2 = navigator.userAgent; let os = "";
   let m = ua2.match(/OS (\d+)_(\d+)/); if (m && /iPhone|iPad|iPod|Macintosh/.test(ua2)) os = "iOS " + m[1] + "." + m[2];
   m = ua2.match(/Android (\d+)/); if (m) os = "Android " + m[1];
   let tz = ""; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) { }
   const fp = { os, w: String(screen.width), h: String(screen.height), dpr: String(window.devicePixelRatio || 1), tz, lang: (navigator.language || "").slice(0, 2) };
-  const hint = () => { try { fetch("https://rlqeoyvevaglwngxtvrw.supabase.co/functions/v1/rv-push", { method: "POST", keepalive: true, headers: { "content-type": "application/json" }, body: JSON.stringify({ op: "hint", r, n, fd: q.get("fd") || "", fp }) }).catch(() => { }); } catch (e) { } };
+  const hint = () => { try { fetch("https://rlqeoyvevaglwngxtvrw.supabase.co/functions/v1/rv-push", { method: "POST", keepalive: true, headers: { "content-type": "application/json" }, body: JSON.stringify({ op: "hint", r: reg ? "reg" : r, n, fd: q.get("fd") || "", fp }) }).catch(() => { }); } catch (e) { } };
   hint();
   for (const id of ["ios", "android"]) document.getElementById(id).addEventListener("click", hint);
   // 切りかえの あいだだけ：アプリの更新が行きわたるまで ブラウザ版への道も残す（WEB_FALLBACK を false にすれば消える）

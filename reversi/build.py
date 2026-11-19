@@ -9,7 +9,7 @@ RIG = Path(__file__).resolve().parents[1] / "tools/game/rig"
 vendor = "\n".join((RIG / f).read_text() for f in ["part_chars.js", "part_sound.js", "part_moves.js"])
 # 音の出口を差しかえられるように、ctx.destination を OUTN()（shell.html で定義）に（Android の通話中は 通話の線で鳴らす）
 vendor = vendor.replace("ctx.destination", "OUTN()")
-rules = (S / "rules.js").read_text().split("if (typeof module")[0]
+rules = (S / "rules.js").read_text().split("if (typeof module")[0] + "\n" + (S / "people.js").read_text().split("if (typeof module")[0]
 import subprocess, datetime
 try: sha = subprocess.run(["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True, cwd=S).stdout.strip()
 except Exception: sha = ""

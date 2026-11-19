@@ -37,12 +37,15 @@ const vis = (page, id) => page.evaluate(i => { const e = document.getElementById
   check(/まだ いません/.test(await page.textContent("#whoList")), "とうろくした ひとが いなければ「まだ いません」");
   check(/リンクを タップ/.test(await page.textContent("#whoOv")), "リンクを もらった ひと への 案内が ある");
   check((await page.textContent("#whoNew")).includes("さそう"), "ボタンは「あたらしい ひとを さそう」");
-  await page.click("#whoNew"); await page.waitForFunction(() => !document.getElementById("inviteOv").hidden, null, { timeout: 20000 }).catch(() => {});
+  await page.click("#whoNew"); await page.waitForTimeout(500);
   check(!(await vis(page, "whoOv")), "さそう を押すと だれと？ は とじる");
-  check(await vis(page, "inviteOv"), "さそう を押すと 招待画面が 出る");
+  check(await vis(page, "regOv"), "さそう を押すと「なかまを さそう」（とうろくだけ）が 出る");
+  check(!(await vis(page, "inviteOv")), "  （対局の 招待画面は 出ない）");
+  check(await page.evaluate(() => !document.body.classList.contains("playing")), "  （ゲーム画面に ならない）");
+  await page.click("#regClose");
 
   // ② 2回目：なまえと とうろくした ひと が 保存されている
-  await page.evaluate(() => localStorage.setItem("marushima-reversi-partners", JSON.stringify([{ room: "testroom", name: "ゆうくん", at: Date.now() }])));
+  await page.evaluate(() => localStorage.setItem("marushima-reversi-people", JSON.stringify([{ dev: "AAAAAAAAAAAAAAAAAAAA", room: "", name: "ゆうくん", at: Date.now() }])));
   await page.goto("http://127.0.0.1:47914/play.html"); await page.waitForTimeout(800);
   await page.click("#callBtn"); await page.waitForTimeout(300);
   check(!(await vis(page, "nameOv")), "2回目は なまえを 聞かない");

@@ -551,9 +551,7 @@ const setPanel = $("settings");
 function syncPanel() {
   setPanel.querySelectorAll(".seg").forEach(seg => seg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === +CFG[seg.dataset.key]))));
   $("resetBtn").textContent = "さいしょから"; $("resetBtn").classList.remove("confirm"); refreshLeft();
-  $("newRoomBtn").textContent = "あたらしい部屋にする（リンクを作りなおす）"; $("newRoomBtn").classList.remove("confirm");
-  $("partnerInfo").textContent = (CFG.hasPartner ? "相手は登録ずみ（「とおくの ひとと あそぶ」で すぐ待ち受けます）。" : "相手はまだ登録されていません（リンクを開いてつながると登録されます）。") + (partners.list.length ? ` この端末に登録した相手：${partners.list.map(p => p.name).join("、")}` : "");
-  $("forgetBtn").hidden = !partners.list.length; $("forgetBtn").textContent = "この端末に登録した相手を けす";
+  renderPeopleSet();
   $("sndInfo").textContent = soundInfo();
   $("routeInfo").textContent = NET.open && NET.via ? `いまのつながり：${NET.via}` : (CFG.relay ? "「中継だけ」は、つぎに「とおくの ひとと あそぶ」を押したときから使います" : "");
 }
@@ -577,18 +575,11 @@ function showNames(next, first) {
   $("nameChips").hidden = !first;
   const box = $("partnerNames"); box.innerHTML = "";
   if (first) { $("nameOv").hidden = false; setTimeout(() => $("myName").focus(), 50); return; }
-  partners.list.forEach((p, i) => {
+  people.list.forEach((p, i) => {
     const l = document.createElement("label"); l.className = "nameRow";
-    l.innerHTML = `あいての なまえ（${i + 1}人め）`;
+    l.innerHTML = `とうろくした ひとの なまえ（${i + 1}人め）`;
     const inp = document.createElement("input"); inp.type = "text"; inp.maxLength = 10; inp.autocomplete = "off"; inp.value = p.name;
-    inp.addEventListener("input", () => { p.name = inp.value.trim().slice(0, 10) || "たいせんあいて"; partners.save(); renderPartners(); });
-    l.appendChild(inp); box.appendChild(l);
-  });
-  callers.list.forEach((p, i) => {
-    const l = document.createElement("label"); l.className = "nameRow";
-    l.innerHTML = `よびだす あいての なまえ（${i + 1}人め）`;
-    const inp = document.createElement("input"); inp.type = "text"; inp.maxLength = 10; inp.autocomplete = "off"; inp.value = p.name;
-    inp.addEventListener("input", () => { p.name = inp.value.trim().slice(0, 10) || "あいて"; callers.save(); renderPartners(); });
+    inp.addEventListener("input", () => { p.name = inp.value.trim().slice(0, 10) || "あいて"; people.save(); renderPartners(); });
     l.appendChild(inp); box.appendChild(l);
   });
   $("nameOv").hidden = false;
@@ -602,12 +593,23 @@ $("nameOk").addEventListener("click", () => {
   CALL.refresh(CFG.myName); if (NET.role === "guest" && NET.linkDev && CFG.myName) CALL.accept(NET.linkDev, CFG.myName); const f = nameNext; nameNext = null; if (f) f(); });
 function renderNameBtn() { $("nameBtn2").textContent = CFG.myName ? `なまえを かえる（いま：${CFG.myName}）` : "なまえを きめる"; }
 $("nameBtn2").addEventListener("click", () => { setPanel.hidden = true; showNames(() => { renderNameBtn(); }); });
-$("newRoomBtn").addEventListener("click", () => {
-  const b = $("newRoomBtn");
-  if (!b.classList.contains("confirm")) { b.textContent = "もういちど おすと 作りなおします（古いリンクは使えなくなります）"; b.classList.add("confirm"); return; }
-  CFG.hasPartner = 0; saveCfg(); callers.list = []; callers.save(); setPanel.hidden = true; callGrandma(true);
-});
-$("forgetBtn").addEventListener("click", () => { partners.list = []; partners.save(); callers.list = []; callers.save(); CFG.hasPartner = 0; saveCfg(); renderPartners(); renderPush(); $("forgetBtn").textContent = "けしました"; });
+// とうろくした ひと：1人ずつ「けす」（2回おして けす。2026-11-19）
+function renderPeopleSet() {
+  const box = $("peopleSet"); box.innerHTML = "";
+  $("partnerInfo").textContent = people.list.length ? "とうろくした ひと：" : "とうろくした ひとは まだ いません。「なかまを さそう」で リンクを おくると、あいてが ひらいたときに はいります。";
+  people.list.forEach(p => {
+    const row = document.createElement("div"); row.className = "personRow";
+    const nm = document.createElement("span"); nm.textContent = p.name;
+    const b = document.createElement("button"); b.type = "button"; b.className = "small"; b.textContent = "けす";
+    b.addEventListener("click", () => {
+      if (!b.classList.contains("confirm")) { b.textContent = "もういちど おすと けします"; b.classList.add("confirm"); return; }
+      people.list = peopleRemove(people.list, peopleKey(p)); people.save();
+      if (!people.list.length) { CFG.hasPartner = 0; saveCfg(); }
+      renderPartners(); renderPeopleSet();
+    });
+    row.append(nm, b); box.appendChild(row);
+  });
+}
 $("resetBtn").addEventListener("click", () => {
   const b = $("resetBtn");
   if (!b.classList.contains("confirm")) { b.textContent = "もういちど おすと さいしょから"; b.classList.add("confirm"); return; }
@@ -790,26 +792,29 @@ $("startBtn").addEventListener("click", async () => {
 /* ---------- 対戦相手の登録 ----------
    リンクを一度ひらいた端末は、その部屋を「登録した相手」として覚える。次からは開始画面の「○○と 対戦する」を押すだけでつながる。
    よぶ側は、相手が登録ずみなら「たいせんあいてを よぶ」でリンクの画面を出さず、すぐ待ち受けに入る。 */
-const PARTNER_KEY = "marushima-reversi-partners";
-const partners = { list: load(PARTNER_KEY) || [], save() { keep(PARTNER_KEY, this.list); } };
-function registerPartner(room, name, dev) {
-  if (!room) return;
-  const i = partners.list.findIndex(p => p.room === room), rec = { room, name: name || (i >= 0 ? partners.list[i].name : "") || "たいせんあいて", dev: dev || (i >= 0 ? partners.list[i].dev : undefined), at: Date.now() };
-  if (i >= 0) partners.list[i] = rec; else partners.list.unshift(rec);
-  partners.list = partners.list.slice(0, 5); partners.save();
+const PARTNER_KEY = "marushima-reversi-partners", CALLER_KEY = "marushima-reversi-callers", PEOPLE_KEY = "marushima-reversi-people";
+// とうろくした ひと（2026-11-19：むかしの2つの表 partners／callers を 1つに。端末番号＋名前。部屋は 1.0.4 までの記録だけ）
+const people = { list: load(PEOPLE_KEY) || peopleMigrate(load(PARTNER_KEY), load(CALLER_KEY)), save() { keep(PEOPLE_KEY, this.list); } };
+people.save();
+const LINK = parseLink(location.search);
+const personByRoom = room => people.list.find(p => p.room === room);
+function addPerson(rec) {
+  if (rec.dev && rec.dev === CALL.id) return;   // 自分の リンクを 自分で ひらいたとき
+  people.list = peopleUpsert(people.list, rec); people.save();
+  if (!CFG.hasPartner) { CFG.hasPartner = 1; saveCfg(); }
 }
+function registerPartner(room, name, dev) { if (room) addPerson({ room, name, dev }); }
 /* 開始画面の大きいボタンは 1つだけ。登録した相手がいれば「○○と あそぶ」、いなければ「たいせんあいてを よぶ」。
    押したあとの判断（通知で よぶ／リンクを出す／だれと？を聞く）は アプリがやる */
-function candidates() {
-  const list = callers.list.map(c => ({ kind: "host", name: c.name, dev: c.dev })).concat(partners.list.map(p => ({ kind: "guest", name: p.name, p })));
-  return list;
-}
+function candidates() { return people.list.map(p => ({ name: p.name, p })); }
 function renderPartners() {
   if (NET.role === "guest" || answeringRing) return;
   const cs = candidates();
   $("callBtn").innerHTML = "とおくの ひとと あそぶ<small>テレビでんわで つながるよ</small>";
 }
-function playWith(c) { if (c.kind === "guest") joinPartner(c.p); else callGrandma(false); }
+// 端末番号を知っている人：自分の部屋で まって、LINE（通知が使えれば 通知）で しらせる。どちらからでも よべる（2026-11-19）
+// 部屋だけ覚えている むかしの記録：これまでどおり 相手の部屋に はいりに行く
+function playWith(c) { if (c.p.dev) callGrandma(false, false, c.p); else joinPartner(c.p); }
 function pressPlay() {
   if (answeringRing) return callGrandma(false, true);
   // いつも おなじ順番（2026-11-17 あまねさん）：①はじめては 自分の なまえ → ②かならず「だれと あそぶ？」→ ③えらんだ相手 or さそう
@@ -822,7 +827,7 @@ function pressPlay() {
   $("whoOv").hidden = false;
 }
 $("whoClose").addEventListener("click", () => { $("whoOv").hidden = true; });
-$("whoNew").addEventListener("click", () => { $("whoOv").hidden = true; callGrandma(true); });
+$("whoNew").addEventListener("click", () => { $("whoOv").hidden = true; showRegInvite(); });
 function joinPartner(p) {
   NET.role = "guest"; NET.room = p.room; registerPartner(p.room, p.name);
   unlock(); $("guestLead").hidden = true; startOnline();
@@ -831,15 +836,7 @@ function joinPartner(p) {
 }
 /* ---------- よびだし（通知で 直接よぶ。2026-11-07） ---------- */
 const BASE = NET.publicBase();
-const CALLER_KEY = "marushima-reversi-callers";
-// よぶ側（ホスト）が覚えている相手の端末。部屋はホストの部屋なので、相手の端末 id と名前だけ
-const callers = { list: load(CALLER_KEY) || [], save() { keep(CALLER_KEY, this.list); } };
-function registerCaller(dev, name) {
-  if (!dev) return;
-  const i = callers.list.findIndex(c => c.dev === dev), rec = { dev, name: name || (i >= 0 ? callers.list[i].name : "") || "あいて", at: Date.now() };
-  if (i >= 0) callers.list[i] = rec; else callers.list.unshift(rec);
-  callers.list = callers.list.slice(0, 5); callers.save(); renderPartners();
-}
+function registerCaller(dev, name) { if (dev) { addPerson({ dev, name }); renderPartners(); } }
 let ringTimer = 0, ringing = [];
 async function ringOut(list, url) {
   clearTimeout(ringTimer); ringing = list.filter(c => c.dev);
@@ -875,7 +872,7 @@ function renderPush() {
 function maybeAskPush() {
   // iPhone・iPad の Safari（ホーム画面に追加していない）では聞かない：手順がややこしいので、アプリ版まで待つ（あまねさん 2026-11-08）。設定からはいつでも
   if (CFG.pushAsked || CALL.on || CALL.blocked || !CALL.canPush || CALL.needsHome) return;
-  if (!partners.list.length && !callers.list.length) return;
+  if (!people.list.length) return;
   CFG.pushAsked = 1; saveCfg();
   $("pushAskOv").hidden = false;
 }
@@ -951,7 +948,7 @@ function handle(m) {
     case "quit": quitByOther(); break;
     case "dev":
       // 相手の端末 id（よびだし用）を覚える
-      if (NET.role === "guest") { const p = partners.list.find(x => x.room === NET.room); if (p && m.id) { p.dev = m.id; partners.save(); } }
+      if (NET.role === "guest") { if (m.id) addPerson({ room: NET.room, dev: m.id, name: m.name }); }
       else if (NET.role === "host") { registerCaller(m.id, m.name); if (!CFG.hasPartner) { CFG.hasPartner = 1; saveCfg(); } }
       break;
     case "hello":
@@ -979,13 +976,13 @@ function applyState(m) {
 }
 let lostSaid = false;
 NET.on("open", () => {
-  $("tellBtn").hidden = true;
+  $("tellBtn").hidden = true; clearTimeout(waitTimer);
   const back = lostSaid; G.paused = false; lostSaid = false; $("inviteOv").hidden = true; camMsg(otherSide(), "");
   if (back && !G.animating) speak(host.pony, "rv_back");
   setTimeout(() => { if (NET.open && !NET.remote) camMsg(otherSide(), "あいての カメラが うつりません（ゲームは できます）"); }, 9000);
   sendLic(); stopRing();
   NET.send({ t: "dev", id: CALL.id, name: CFG.myName });
-  if (NET.role === "guest") { registerPartner(NET.room, NET.linkName || (partners.list.find(p => p.room === NET.room) || {}).name); NET.send({ t: "hello", reg: true }); }
+  if (NET.role === "guest") { registerPartner(NET.room, NET.linkName || (personByRoom(NET.room) || {}).name, NET.linkDev); NET.send({ t: "hello", reg: true }); }
   if (NET.role !== "host") return;
   NET.send({ t: "hello", name: CFG.myName });
   $("resendBtn").hidden = true;
@@ -1008,7 +1005,7 @@ NET.on("lost", () => {
   camMsg(otherSide(), "つなぎなおしています…");
   if (!lostSaid && !G.animating) { lostSaid = true; speak(host.pony, "rv_hold"); }
 });
-NET.on("ready", () => { if (!NET.open && !ringing.length) camMsg(otherSide(), CFG.hasPartner ? "登録ずみの あいてを まっています…" : "まっています…"); });
+NET.on("ready", () => { if (!NET.open && !ringing.length) camMsg(otherSide(), target ? `${target.name}を まっています…` : CFG.hasPartner ? "登録ずみの あいてを まっています…" : "まっています…"); });
 // 同じリンクを もう1つの画面で ひらいていて、そちらが つながっているとき
 NET.on("busy", () => { G.paused = true; G.busy = true; clearHints(); updateButtons(); camMsg(otherSide(), "ほかの がめんで つながっています。この がめんは とじてください"); });
 NET.on("route", via => { $("routeInfo").textContent = via ? `いまのつながり：${via}` : ""; });
@@ -1022,7 +1019,7 @@ function startOnline() {
     // 30秒たっても つながらないときは、あいての画面を たしかめてもらう
     setTimeout(() => {
       if (NET.open || NET.busy) return;
-      const who = NET.linkName || (partners.list.find(p => p.room === NET.room) || {}).name || "あいて";
+      const who = NET.linkName || (personByRoom(NET.room) || {}).name || "あいて";
       camMsg(otherSide(), `${who}を まっています`);
       const btn = $("tellBtn"), cam = $("cam" + otherSide());
       cam.after(btn);   // あいての席（まっている画面の下）に出す
@@ -1031,7 +1028,9 @@ function startOnline() {
   }
 }
 // たいせんあいてを よぶ（ホスト）
-async function callGrandma(fresh, answering) {
+let target = null, waitTimer = 0;
+async function callGrandma(fresh, answering, who) {
+  target = who || null;
   NET.role = "host"; if (ctx) soundForCall(); unlock(); NET.relayOnly = !!CFG.relay; startOnline();
   // 相手を よんだら、1台で遊んでいた とちゅうの盤は すてて、新しい対局から始める（くろ＝こども）
   G.hist = []; G.blackSide = "A"; G.ended = false; G.begun = false; saveGame(); clearHalo();
@@ -1041,10 +1040,20 @@ async function callGrandma(fresh, answering) {
   await NET.host(fresh);
   // 相手から よばれて 開いたとき：つなぐだけ
   if (answering) { camMsg(otherSide(), "つないでいます…"); $("resendBtn").hidden = false; return; }
-  // 相手の端末に 通知を送れるなら それで よぶ。送れなかったら リンクの画面へ
-  if (!fresh && !forceLink && CFG.hasPartner && callers.list.length) {
+  // とうろくした ひとと あそぶ：通知が とどけば それで よぶ。とどかなければ すぐ「○○に しらせる」（LINE）
+  if (target) {
     $("resendBtn").hidden = false;
-    const ok = await ringOut(callers.list.slice(0, 1), BASE + "?r=" + NET.room + "&n=" + encodeURIComponent(CFG.myName || "") + "&ring=1");
+    // 10分 だれも来なければ カメラを止めて 開始画面へ
+    clearTimeout(waitTimer);
+    waitTimer = setTimeout(() => { if (NET.open) return; camMsg(otherSide(), "きょうは もう おわりに するね。また よんでね"); setTimeout(() => { if (!NET.open) toMenu(); }, 4000); }, 10 * 60 * 1000);
+    const ok = target.dev ? await ringOut([{ dev: target.dev, name: target.name }], playLink(BASE, NET.room, CFG.myName, CALL.id) + "&ring=1") : false;
+    if (!ok && !NET.open) showInvite();
+    return;
+  }
+  // 相手の端末に 通知を送れるなら それで よぶ。送れなかったら リンクの画面へ
+  if (!fresh && !forceLink && CFG.hasPartner && people.list.some(p => p.dev)) {
+    $("resendBtn").hidden = false;
+    const ok = await ringOut(people.list.filter(p => p.dev).slice(0, 1), BASE + "?r=" + NET.room + "&n=" + encodeURIComponent(CFG.myName || "") + "&ring=1");
     if (!ok && !NET.open) showInvite(true);
     return;
   }
@@ -1054,9 +1063,21 @@ async function callGrandma(fresh, answering) {
 }
 $("resendBtn").addEventListener("click", () => showInvite());
 NET.on("lost", () => { if (NET.role === "host") $("resendBtn").hidden = false; });
+// リンクの画面：とうろくした ひとと あそぶときは「○○に しらせる」（あそぶ リンク）、それ以外は むかしの 招待リンク
+let INV = { url: "", text: "" };
 function showInvite(again) {
-  const url = NET.inviteURL();
-  $("inviteAgain").hidden = !again;
+  if (target) {
+    const url = playLink(BASE, NET.room, CFG.myName, CALL.id);
+    INV = { url, text: playText(CFG.myName, url) };
+    $("inviteTitle").textContent = `${target.name}に しらせる`;
+    $("inviteLead").textContent = `「LINEで おくる」で ${target.name}に しらせてね。${target.name}が リンクを タップすると、つながります。`;
+  } else {
+    INV = { url: NET.inviteURL(), text: inviteText() };
+    $("inviteTitle").textContent = "たいせんあいてに リンクを おくる";
+    $("inviteLead").innerHTML = INVITE_LEAD;
+  }
+  const url = INV.url;
+  $("inviteAgain").hidden = !again || !!target;
   try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("qr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("qr").textContent = ""; }
   $("inviteLink").textContent = url;
   $("inviteWarn").hidden = remoteAllowed();
@@ -1110,23 +1131,26 @@ $("restoreBtn").addEventListener("click", async () => {
 });
 const answeringRing = !NET.role && new URLSearchParams(location.search).get("ring") === "1";
 $("callBtn").addEventListener("click", pressPlay);
+const INVITE_LEAD = $("inviteLead").innerHTML;
 $("copyBtn").addEventListener("click", () => {
-  const url = NET.inviteURL(), done = () => { $("copyBtn").textContent = "コピーしました"; setTimeout(() => $("copyBtn").textContent = "リンクを コピー", 2000); };
+  const url = INV.url || NET.inviteURL(), done = () => { $("copyBtn").textContent = "コピーしました"; setTimeout(() => $("copyBtn").textContent = "リンクを コピー", 2000); };
   const pick = () => { const r = document.createRange(); r.selectNodeContents($("inviteLink")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
   try { navigator.clipboard.writeText(url).then(done, pick); } catch (e) { pick(); }
 });
 /* LINEで おくる：iPad の「共有」画面を出す（LINE を選ぶ）。共有画面は この画面の上に重なるだけなので、
    送り終わると 自動でリバーシの画面に戻る。共有画面が使えない端末だけ、LINE アプリを直接ひらく */
 const inviteText = () => "テレビ電話リバーシで あそぼう！ ここを タップして、アプリを いれてね\n" + NET.inviteURL();
+const waitMsg = () => target ? `${target.name}を まっています…` : "まっています…";
 $("lineBtn").addEventListener("click", async () => {
-  if (window.RVNative) { CALL.toApp({ t: "share", text: inviteText() }); $("inviteOv").hidden = true; camMsg(otherSide(), "まっています…"); return; }
+  const text = INV.text || inviteText();
+  if (window.RVNative) { CALL.toApp({ t: "share", text }); $("inviteOv").hidden = true; camMsg(otherSide(), waitMsg()); return; }
   if (navigator.share) {
-    try { await navigator.share({ text: inviteText() }); $("inviteOv").hidden = true; camMsg(otherSide(), "まっています…"); } catch (e) { /* やめたときは そのまま */ }
-  } else location.href = "line://msg/text/" + encodeURIComponent(inviteText());
+    try { await navigator.share({ text }); $("inviteOv").hidden = true; camMsg(otherSide(), waitMsg()); } catch (e) { /* やめたときは そのまま */ }
+  } else location.href = "line://msg/text/" + encodeURIComponent(text);
 });
 // リンクの画面をとじて待つあいだも、「リンクを おくる」を出しておく（また LINE で送れる）
 $("inviteClose").addEventListener("click", () => { $("inviteOv").hidden = true; if (NET.role === "host" && !NET.open) $("resendBtn").hidden = false; });
-$("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (NET.role === "host") showInvite(!!CFG.hasPartner); else { forceLink = true; CFG.myName ? callGrandma(false) : showNames(() => callGrandma(false)); } });
+$("reinviteBtn").addEventListener("click", () => { setPanel.hidden = true; if (NET.role === "host") showInvite(!!CFG.hasPartner); else if (!NET.role) CFG.myName ? showRegInvite() : showNames(() => showRegInvite(), true); });
 let forceLink = false;
 
 /* ---------- 起動：前回の続き、または確認用の局面（#pass / #end） ---------- */
@@ -1138,10 +1162,11 @@ let forceLink = false;
   const s = replay(G.hist); cur = s;
   paintSides(); paint(s.board); setCounts(s.board, false); haloFor(G.hist);
   if (NET.role === "guest") {
+    if (LINK.mode === "play") $("regNote").textContent = "";
     // リンクを開いた時点で おたがいを「とうろくした ひと」にする（まだ遊んでいなくても。2026-11-16）
     registerPartner(NET.room, NET.linkName, NET.linkDev);
     if (NET.linkDev) CALL.accept(NET.linkDev, CFG.myName);
-    $("regNote").hidden = false;
+    $("regNote").hidden = !$("regNote").textContent;
     // おばあちゃん向け：大人なので漢字まじりで、大きく、手順を2つだけ
     $("callBtn").hidden = true; $("startOv").classList.add("guest");
     $("startBtn").textContent = "はじめる"; $("startBtn").classList.remove("sub");
@@ -1150,19 +1175,16 @@ let forceLink = false;
   else if (!NET.available) $("callBtn").hidden = true;
   refreshLeft(); renderPartners(); renderNameBtn(); renderPush();
   CALL.refresh(CFG.myName);
-  // 招待した人：リンクを開いてくれた相手を 受けとって「とうろくした ひと」に入れる
-  if (NET.role !== "guest") CALL.pending().then(list => {
-    if (!list.length) return;
-    list.forEach(x => registerCaller(x.dev, x.name)); if (!CFG.hasPartner) { CFG.hasPartner = 1; saveCfg(); }
-    if (!G.started && !answeringRing) { $("ringNote").textContent = `${list.map(x => x.name || "あいて").join("・")}が とうろく されました`; $("ringNote").hidden = false; $("ringNote").classList.add("calm"); }
-  });
+  // さそった人：リンクを開いてくれた相手を 受けとって「とうろくした ひと」に入れる
+  if (NET.role !== "guest") checkPending();
+  if (LINK.mode === "reg") gotRegLink();
   if (!NET.role) setTimeout(maybeAskPush, 600);
   // 相手からの よびだしを タップして 開いたとき（よぶ側の端末）
   if (NET.role === "guest" && new URLSearchParams(location.search).get("ring") === "1") {
     $("ringNote").textContent = `${NET.linkName || "あいて"}から よびだし！`; $("ringNote").hidden = false;
   }
   if (answeringRing) {
-    const uq = new URLSearchParams(location.search), known = callers.list.find(c => c.dev === uq.get("fd"));
+    const uq = new URLSearchParams(location.search), known = people.list.find(c => c.dev && c.dev === uq.get("fd"));
     const from = (known && known.name !== "あいて" && known.name) || uq.get("from") || (known && known.name) || "あいて";
     $("ringNote").textContent = `${from}から よびだし！ 下の ボタンを おしてね`; $("ringNote").hidden = false;
     $("callBtn").textContent = `${from}と つなぐ`;
@@ -1215,7 +1237,7 @@ setTimeout(() => { try { if (CFG.voice) preloadVoices(); } catch (e) { } }, 400)
 /* 招待の引きつぎ（2026-11-15）：アプリを入れて はじめて開いたとき、さっき 招待の案内ページを見ていたなら その部屋につなぐ。
    案内ページが「この端末（通信元・画面の大きさ・OS・時間帯）で アプリを入れに行った」と中継に残している。照合できなければ 開始画面で「リンクを もういちど タップしてね」 */
 (function inviteHandoff() {
-  if (!window.RVNative || NET.role) return;
+  if (!window.RVNative || NET.role || LINK.mode) return;
   const KEY = "marushima-reversi-claimed";
   let done = null; try { done = localStorage.getItem(KEY); } catch (e) { }
   if (done) return;
@@ -1223,7 +1245,8 @@ setTimeout(() => { try { if (CFG.voice) preloadVoices(); } catch (e) { } }, 400)
   fetch("https://rlqeoyvevaglwngxtvrw.supabase.co/functions/v1/rv-push", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ op: "claim", fp: deviceHint() }) })
     .then(r => r.json()).then(j => {
       if (!j || !j.ok || !j.r || G.started) return;
-      const q = new URLSearchParams(); q.set("r", j.r); if (j.n) q.set("n", j.n); if (j.fd) q.set("fd", j.fd);
+      // さそう（とうろくだけ）リンクは 部屋のかわりに "reg" と 残してある
+      const q = new URLSearchParams(); if (j.r === "reg") q.set("m", "reg"); else q.set("r", j.r); if (j.n) q.set("n", j.n); if (j.fd) q.set("fd", j.fd);
       location.replace(location.pathname + "?" + q.toString());
     }).catch(() => { });
 })();
@@ -1242,3 +1265,60 @@ $("tellBtn").addEventListener("click", async () => {
   if (window.RVNative) { CALL.toApp({ t: "share", text }); return; }
   try { await navigator.share({ text }); } catch (e) { try { await navigator.clipboard.writeText(text); $("tellBtn").textContent = "コピーしました（LINE に はりつけてね）"; } catch (e2) { } }
 });
+
+/* ---------- なかまを さそう（とうろくだけ。2026-11-19 あまねさん「まずは互いの登録だけ」） ----------
+   カメラも ゲームも うごかさない。LINE で リンクを おくって 開始画面に もどる。
+   あいてが リンクを ひらく → なまえ → 中継に「とうろく」を残す → こちらは pending で うけとる */
+let pendTimer = 0, pendUntil = 0;
+function showRegInvite() {
+  if (!CFG.myName) return showNames(() => showRegInvite(), true);
+  const url = regLink(BASE, CFG.myName, CALL.id);
+  try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("regQr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("regQr").textContent = ""; }
+  $("regLinkTxt").textContent = url;
+  $("regOv").hidden = false;
+  CALL.refresh(CFG.myName);
+}
+function regSent() {
+  $("regOv").hidden = true;
+  $("ringNote").textContent = "おくりました。あいてが リンクを ひらくと「とうろくした ひと」に はいります"; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
+  // しばらく（15分）は 20秒ごとに たしかめる
+  pendUntil = Date.now() + 15 * 60 * 1000; clearInterval(pendTimer);
+  pendTimer = setInterval(() => { if (Date.now() > pendUntil || G.started) { clearInterval(pendTimer); return; } checkPending(); }, 20000);
+}
+$("regLine").addEventListener("click", async () => {
+  const text = regText(CFG.myName, regLink(BASE, CFG.myName, CALL.id));
+  if (window.RVNative) { CALL.toApp({ t: "share", text }); regSent(); return; }
+  if (navigator.share) { try { await navigator.share({ text }); regSent(); } catch (e) { } }
+  else location.href = "line://msg/text/" + encodeURIComponent(text);
+});
+$("regCopy").addEventListener("click", () => {
+  const url = regLink(BASE, CFG.myName, CALL.id);
+  try { navigator.clipboard.writeText(url).then(() => { $("regCopy").textContent = "コピーしました"; setTimeout(() => $("regCopy").textContent = "リンクを コピー", 2000); }); } catch (e) { }
+});
+$("regClose").addEventListener("click", () => { $("regOv").hidden = true; });
+function checkPending() {
+  return CALL.pending().then(list => {
+    if (!list.length) return;
+    list.forEach(x => registerCaller(x.dev, x.name));
+    if (!G.started && !answeringRing) {
+      $("ringNote").textContent = `${list.map(x => x.name || "あいて").join("・")}が なかまに なりました`; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
+      if (!$("whoOv").hidden) pressPlay();
+    }
+  });
+}
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && NET.role !== "guest" && !G.started) checkPending(); });
+// さそう リンクを ひらいた人：なまえ（はじめてだけ）→ なかまに なる。ゲームは はじめない
+function gotRegLink() {
+  try { history.replaceState(null, "", location.pathname); } catch (e) { }
+  if (LINK.dev === CALL.id) { $("ringNote").textContent = "これは じぶんが おくった さそいの リンクです"; $("ringNote").hidden = false; $("ringNote").classList.add("calm"); return; }
+  const done = () => {
+    addPerson({ dev: LINK.dev, name: LINK.name }); renderPartners();
+    CALL.accept(LINK.dev, CFG.myName);
+    const who = LINK.name || "あいて";
+    $("regDoneTitle").textContent = `${who}と なかまに なりました！`;
+    $("regDoneLead").textContent = `あそぶときは「とおくの ひとと あそぶ」→「${who}と あそぶ」を おしてね。`;
+    $("regDoneOv").hidden = false;
+  };
+  if (!CFG.myName) showNames(done, true); else done();
+}
+$("regDoneOk").addEventListener("click", () => { $("regDoneOv").hidden = true; });

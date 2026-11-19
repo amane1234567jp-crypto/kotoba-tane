@@ -17,7 +17,7 @@ const BASE = "https://amane1234567jp-crypto.github.io/kotoba-tane/reversi/";
   const r = await acc; console.log("B → accept:", r ? r.status() + " " + await r.text().catch(() => "") : "なし");
   console.log("B の とうろくした ひと:", await g.evaluate(() => localStorage.getItem("marushima-reversi-partners")));
   await a.reload({ waitUntil: "load" }); await a.waitForTimeout(4000);
-  const callers = await a.evaluate(() => localStorage.getItem("marushima-reversi-callers"));
+  const callers = await a.evaluate(() => localStorage.getItem("marushima-reversi-people") || localStorage.getItem("marushima-reversi-callers"));
   const note = await a.evaluate(() => !document.getElementById("ringNote").hidden && document.getElementById("ringNote").textContent);
   console.log("A が受けとった:", callers, "／ 開始画面:", note);
   const ok = !!callers && callers.includes("dev");

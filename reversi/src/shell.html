@@ -248,6 +248,9 @@ body {
 .panel h3 { margin: 10px 0 -2px; padding-top: 10px; border-top: 2px dashed rgba(43, 42, 51, .18); font: 900 15px var(--body); color: var(--muted); letter-spacing: .06em; }
 .panel.who { gap: 12px; }
 .panel.who .partners { gap: 10px; }
+.peopleSet { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+.personRow { display: flex; align-items: center; justify-content: space-between; gap: 10px; font: 700 clamp(15px, 2.2vmin, 18px) var(--body); padding: 6px 4px; border-bottom: 1px dashed #D8D4CC; }
+.personRow button.confirm { background: #E2574C; color: #FFFFFF; }
 .whoEmpty { font: 700 clamp(15px, 2.4vmin, 19px) var(--body); color: #8A8790; margin: 2px 0; }
 .whoNote { margin: 0 auto; font-size: clamp(13px, 2vmin, 16px); }
 .panel.home .hsteps { display: grid; gap: 10px; margin: 4px 0 8px; }
@@ -370,8 +373,8 @@ body {
 </div>
 <div class="cover" id="inviteOv" hidden>
   <div class="panel invite" role="dialog" aria-label="たいせんあいてを よぶ">
-    <h2>たいせんあいてに リンクを おくる</h2>
-    <p class="lead">「LINEで おくる」→ 出てきた画面で LINE を えらんで 送ってね。送ると この画面に もどります。<br>あいてが リンクを ひらいて アプリを いれ、「アプリで ひらく」を おすと、つながります。</p>
+    <h2 id="inviteTitle">たいせんあいてに リンクを おくる</h2>
+    <p class="lead" id="inviteLead">「LINEで おくる」→ 出てきた画面で LINE を えらんで 送ってね。送ると この画面に もどります。<br>あいてが リンクを ひらいて アプリを いれ、「アプリで ひらく」を おすと、つながります。</p>
     <div class="qr" id="qr" aria-label="リンクの QRコード"></div>
     <div class="panelBtns">
       <button type="button" class="lineBtn" id="lineBtn">LINEで おくる</button>
@@ -380,6 +383,23 @@ body {
     <p class="lead small" id="inviteAgain" hidden>まえに おくった リンクと おなじです。あいての がめんの「○○と 対戦する」からも はいれます。</p>
     <p class="warn" id="inviteWarn" hidden>無料分（10回）は使い切っています。相手が解放ずみなら遊べます。そうでなければ、つながったあとに解放の案内が出ます。</p>
     <div class="panelBtns"><button type="button" id="copyBtn">リンクを コピー</button><button type="button" id="inviteClose" class="primary">とじる（まつ）</button></div>
+  </div>
+</div>
+<div class="cover" id="regOv" hidden>
+  <div class="panel invite" role="dialog" aria-label="なかまを さそう">
+    <h2>なかまを さそう</h2>
+    <p class="lead">「LINEで おくる」で リンクを おくってね。あいてが アプリを いれて リンクを タップすると、おたがいの「とうろくした ひと」に はいります。<br>ゲームは まだ はじまりません。あそぶときは「だれと あそぶ？」から よびます。</p>
+    <div class="qr" id="regQr" aria-label="リンクの QRコード"></div>
+    <div class="panelBtns"><button type="button" class="lineBtn" id="regLine">LINEで おくる</button></div>
+    <p class="link" id="regLinkTxt"></p>
+    <div class="panelBtns"><button type="button" id="regCopy">リンクを コピー</button><button type="button" id="regClose" class="primary">とじる</button></div>
+  </div>
+</div>
+<div class="cover" id="regDoneOv" hidden>
+  <div class="panel invite" role="dialog" aria-label="なかまに なりました">
+    <h2 id="regDoneTitle">なかまに なりました！</h2>
+    <p class="lead" id="regDoneLead"></p>
+    <div class="panelBtns"><button type="button" id="regDoneOk" class="primary">OK</button></div>
   </div>
 </div>
 <div class="cover" id="askOv" hidden><div class="askBtns"><button class="big" id="okBtn" type="button">いいよ</button><button class="small" id="ngBtn" type="button">だめ</button></div></div>
@@ -446,7 +466,8 @@ body {
     <div class="row"><span>音が出ないとき</span><div class="panelBtns"><button type="button" id="sndTest">音の テスト（なおす）</button></div><span class="route" id="sndInfo"></span></div>
     <h3>なまえと あいて</h3>
     <div class="row"><span class="route" id="partnerInfo"></span>
-      <div class="panelBtns"><button type="button" id="nameBtn2">なまえを かえる</button><button type="button" id="reinviteBtn">リンクで あいてを よぶ</button><button type="button" id="newRoomBtn">あたらしい部屋にする（リンクを作りなおす）</button><button type="button" id="forgetBtn" hidden>この端末に登録した相手を けす</button></div></div>
+      <div class="panelBtns"><button type="button" id="nameBtn2">なまえを かえる</button><button type="button" id="reinviteBtn">なかまを さそう（リンクを おくる）</button></div>
+      <div class="peopleSet" id="peopleSet"></div></div>
     <h3>よびだし（通知）</h3>
     <div class="row"><span class="route" id="pushInfo"></span>
       <div class="panelBtns"><button type="button" id="pushOn">この端末で よびだしを うけとる</button><button type="button" id="pushOff" hidden>よびだしを うけとらない</button></div></div>
