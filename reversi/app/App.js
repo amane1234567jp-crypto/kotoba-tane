@@ -40,17 +40,22 @@ async function readStore() { try { const o = JSON.parse(await FS.readAsStringAsy
 async function writeStore(o) { try { await FS.writeAsStringAsync(STORE_FILE + ".tmp", JSON.stringify(o)); await FS.moveAsync({ from: STORE_FILE + ".tmp", to: STORE_FILE }); } catch (e) { try { await FS.writeAsStringAsync(STORE_FILE, JSON.stringify(o)); } catch (e2) { } } }
 
 // ゲーム本体を端末の中に展開（アプリの版か中身の版が変わったときだけ やりなおす）
+// ゲームは 版ごとに べつの フォルダ（web/<版>/）に 展開して、その パスで ひらく（2026-11-21）。
+// サーバーの番号を固定（1.0.4）してから、WebView が 前の版の index.html を キャッシュから 出してしまい、
+// 更新しても 古いゲームのままに なることがあった。パスが変われば キャッシュは使われない。
+// 保存場所（オリジン＝ http://127.0.0.1:番号）は 変わらないので、名前や とうろくした ひと は そのまま。
+const WEB_WANT = APP_VER + "|" + WEB_VER.ver + "|" + WEB_VER.at;
+const WEB_SUB = "v" + (APP_VER + "-" + WEB_VER.at).replace(/[^0-9A-Za-z]/g, "");
 async function ensureWeb() {
   const dir = FS.documentDirectory + "web/";
   const stamp = dir + ".ver";
-  const want = APP_VER + "|" + WEB_VER.ver + "|" + WEB_VER.at;
-  try { const cur = await FS.readAsStringAsync(stamp); if (cur === want) return dir; } catch (e) { /* まだない */ }
+  try { const cur = await FS.readAsStringAsync(stamp); if (cur === WEB_WANT) return dir; } catch (e) { /* まだない */ }
   try { await FS.deleteAsync(dir, { idempotent: true }); } catch (e) { }
-  await FS.makeDirectoryAsync(dir, { intermediates: true });
+  await FS.makeDirectoryAsync(dir + WEB_SUB + "/", { intermediates: true });
   const asset = Asset.fromModule(WEB_ZIP);
   await asset.downloadAsync();
-  await unzip(strip(asset.localUri || asset.uri), strip(dir));
-  await FS.writeAsStringAsync(stamp, want);
+  await unzip(strip(asset.localUri || asset.uri), strip(dir + WEB_SUB + "/"));
+  await FS.writeAsStringAsync(stamp, WEB_WANT);
   return dir;
 }
 
@@ -173,7 +178,7 @@ export default function App() {
       <WebView
         key={key}
         ref={web}
-        source={{ uri: origin + "/index.html" + query }}
+        source={{ uri: origin + "/" + WEB_SUB + "/index.html" + query }}
         style={st.web}
         originWhitelist={["*"]}
         injectedJavaScriptBeforeContentLoaded={boot}
