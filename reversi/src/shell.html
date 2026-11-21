@@ -374,11 +374,13 @@ body {
 <div class="cover" id="inviteOv" hidden>
   <div class="panel invite" role="dialog" aria-label="たいせんあいてを よぶ">
     <h2 id="inviteTitle">たいせんあいてに リンクを おくる</h2>
-    <p class="lead" id="inviteLead">「LINEで おくる」→ 出てきた画面で LINE を えらんで 送ってね。送ると この画面に もどります。<br>あいてが リンクを ひらいて アプリを いれ、「アプリで ひらく」を おすと、つながります。</p>
+    <p class="lead" id="inviteLead">「LINEで おくる」で LINE が ひらきます。あいてを えらんで 送ってね。<br>あいてが リンクを ひらいて アプリを いれ、「アプリで ひらく」を おすと、つながります。</p>
     <div class="qr" id="qr" aria-label="リンクの QRコード"></div>
     <div class="panelBtns">
       <button type="button" class="lineBtn" id="lineBtn">LINEで おくる</button>
     </div>
+    <div class="panelBtns testOnly"><button type="button" id="lineBtn2">LINEで おくる（ためし２）</button></div>
+    <div class="panelBtns"><button type="button" id="otherBtn">ほかの アプリで おくる</button></div>
     <p class="link" id="inviteLink"></p>
     <p class="lead small" id="inviteAgain" hidden>まえに おくった リンクと おなじです。あいての がめんの「○○と 対戦する」からも はいれます。</p>
     <p class="warn" id="inviteWarn" hidden>無料分（10回）は使い切っています。相手が解放ずみなら遊べます。そうでなければ、つながったあとに解放の案内が出ます。</p>
@@ -386,18 +388,20 @@ body {
   </div>
 </div>
 <div class="cover" id="regOv" hidden>
-  <div class="panel invite" role="dialog" aria-label="なかまを さそう">
-    <h2>なかまを さそう</h2>
-    <p class="lead">「LINEで おくる」で リンクを おくってね。あいてが アプリを いれて リンクを タップすると、おたがいの「とうろくした ひと」に はいります。<br>ゲームは まだ はじまりません。あそぶときは「だれと あそぶ？」から よびます。</p>
+  <div class="panel invite" role="dialog" aria-label="あいてを さそう">
+    <h2>あいてを さそう</h2>
+    <p class="lead">「LINEで おくる」で リンクを おくってね。あいてが アプリを いれて ひらくと、おたがいの「とうろくした ひと」に はいります。<br><small>おくっても すぐには はじまりません。あそぶときは「だれと あそぶ？」から よびます。</small></p>
     <div class="qr" id="regQr" aria-label="リンクの QRコード"></div>
     <div class="panelBtns"><button type="button" class="lineBtn" id="regLine">LINEで おくる</button></div>
+    <div class="panelBtns testOnly"><button type="button" id="regLine2">LINEで おくる（ためし２）</button></div>
+    <div class="panelBtns"><button type="button" id="regOther">ほかの アプリで おくる</button></div>
     <p class="link" id="regLinkTxt"></p>
     <div class="panelBtns"><button type="button" id="regCopy">リンクを コピー</button><button type="button" id="regClose" class="primary">とじる</button></div>
   </div>
 </div>
 <div class="cover" id="regDoneOv" hidden>
-  <div class="panel invite" role="dialog" aria-label="なかまに なりました">
-    <h2 id="regDoneTitle">なかまに なりました！</h2>
+  <div class="panel invite" role="dialog" aria-label="とうろく しました">
+    <h2 id="regDoneTitle">とうろく しました！</h2>
     <p class="lead" id="regDoneLead"></p>
     <div class="panelBtns"><button type="button" id="regDoneOk" class="primary">OK</button></div>
   </div>
@@ -466,7 +470,7 @@ body {
     <div class="row"><span>音が出ないとき</span><div class="panelBtns"><button type="button" id="sndTest">音の テスト（なおす）</button></div><span class="route" id="sndInfo"></span></div>
     <h3>なまえと あいて</h3>
     <div class="row"><span class="route" id="partnerInfo"></span>
-      <div class="panelBtns"><button type="button" id="nameBtn2">なまえを かえる</button><button type="button" id="reinviteBtn">なかまを さそう（リンクを おくる）</button></div>
+      <div class="panelBtns"><button type="button" id="nameBtn2">なまえを かえる</button><button type="button" id="reinviteBtn">あいてを さそう（リンクを おくる）</button></div>
       <div class="peopleSet" id="peopleSet"></div></div>
     <h3>よびだし（通知）</h3>
     <div class="row"><span class="route" id="pushInfo"></span>

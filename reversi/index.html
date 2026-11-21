@@ -65,15 +65,15 @@ footer a { color: var(--sub); }
   if (isAndroid && !PLAY_LIVE) { const q2 = new URLSearchParams(location.search); q2.set("dev", "1"); location.replace("play.html?" + q2.toString()); return; }
   if (isIOS) document.getElementById("android").hidden = true;
   if (isAndroid) document.getElementById("ios").hidden = true;
-  // なかまの さそい（とうろくだけ。2026-11-19）：?m=reg&n=名前&fd=端末番号（部屋なし）
+  // さそい（とうろくだけ。2026-11-19）：?m=reg&n=名前&fd=端末番号（部屋なし）
   const fdOk = /^[A-Za-z0-9_-]{16,64}$/.test(q.get("fd") || "");
   const reg = !r && q.get("m") === "reg" && fdOk;
   if (!r && !reg) { document.getElementById("openStep").hidden = true; document.getElementById("had").hidden = true; document.getElementById("webFallback").hidden = true; return; }
   const fromEl = document.getElementById("from");
-  fromEl.textContent = (n ? n + " から" : "") + (reg ? " テレビ電話リバーシの なかまの おさそいです" : " テレビ電話リバーシの おさそいです");
+  fromEl.textContent = (n ? n + " から" : "") + (reg ? " テレビ電話リバーシの おさそいです" : " テレビ電話リバーシの おさそいです");
   if (reg) {
-    document.getElementById("had").textContent = "いれおわったら、App Store の「ひらく」を おしてね。" + (n ? n + "と" : "") + " なかまに なります（ゲームは まだ はじまりません）。";
-    document.querySelector("#openStep .note").textContent = "なかまに なります。あそぶときは アプリの「とおくの ひとと あそぶ」から。";
+    document.getElementById("had").textContent = "いれおわったら、App Store の「ひらく」を おしてね。" + (n ? n + "が" : "あいてが") + " とうろく されます。";
+    document.querySelector("#openStep .note").textContent = "とうろく されます。あそぶときは アプリの「とおくの ひとと あそぶ」から。";
     document.getElementById("webFallback").hidden = true;
   }
   const pass = new URLSearchParams(); if (reg) pass.set("m", "reg"); else pass.set("r", r); if (n) pass.set("n", n);

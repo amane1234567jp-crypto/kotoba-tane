@@ -155,7 +155,8 @@ export default function App() {
     let m = null; try { m = JSON.parse(e.nativeEvent.data); } catch (err) { return; }
     if (!m) return;
     if (m.t === "store") { if (m.data && typeof m.data === "object") { snap.current = m.data; await writeStore(m.data); } return; }
-    if (m.t === "share") { try { await Share.share(Platform.OS === "ios" ? { message: m.text } : { message: m.text }); } catch (err) { } }
+    // 共有画面：送ったか（sharedAction）・閉じただけか（dismissedAction）を ゲームへ返す。どのアプリか（activityType）は iPhone だけ
+    if (m.t === "share") { let r = null; try { r = await Share.share({ message: m.text }); } catch (err) { } send({ t: "shared", ok: !!r && r.action === Share.sharedAction, act: (r && r.activityType) || "" }); }
     else if (m.t === "needPush") { try { await getPushToken(true); } catch (err) { send({ t: "denied" }); } }
     else if (m.t === "pushIfGranted") { try { await getPushToken(false); } catch (err) { } }
     else if (m.t === "needMedia") { await askMedia(); }

@@ -6,8 +6,8 @@ const ROOT = path.join(process.env.GITHUB_WORKSPACE || path.join(__dirname, "../
 const PORT = 47917, HOST = `http://localhost:${PORT}/play.html`;
 let fail = 0;
 const check = (ok, msg) => { console.log((ok ? "OK  " : "NG  ") + msg); if (!ok) fail++; };
-const NATIVE = `window.__shared=[];window.__media=0;
-window.ReactNativeWebView={postMessage:function(m){try{var o=JSON.parse(m);if(o.t==="share")window.__shared.push(o.text);if(o.t==="needMedia")setTimeout(function(){window.RV&&window.RV.native({t:"media"})},30);}catch(e){}}};
+const NATIVE = `window.__shared=[];window.__opened=[];window.__media=0;
+window.ReactNativeWebView={postMessage:function(m){try{var o=JSON.parse(m);if(o.t==="open"){window.__opened.push(o.url);var k=o.url.indexOf("text=")>=0?o.url.indexOf("text=")+5:(o.url.indexOf("msg/text/")>=0?o.url.indexOf("msg/text/")+9:-1);if(k>=0)window.__shared.push(decodeURIComponent(o.url.slice(k)));}if(o.t==="share"){window.__shared.push(o.text);var R=window.__shareResult||{ok:true,act:"jp.naver.line.Share"};setTimeout(function(){window.RV.native({t:"shared",ok:R.ok,act:R.act})},50);}if(o.t==="needMedia")setTimeout(function(){window.RV&&window.RV.native({t:"media"})},30);}catch(e){}}};
 window.RVNative={platform:"ios",version:"1.0.5",push:false};
 try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
 (function(){var md=navigator.mediaDevices;if(md&&md.getUserMedia){var g=md.getUserMedia.bind(md);md.getUserMedia=function(c){window.__media++;return g(c)}}})();`;
@@ -43,7 +43,7 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   check(!!r && r.status() === 200, "B：本物の中継に とうろくを 残した（" + (r ? r.status() : "なし") + "）");
   check(await g.evaluate(() => !document.getElementById("regDoneOv").hidden) && await g.evaluate(() => window.__media) === 0, "B：なかまに なった（カメラなし）");
 
-  await a.waitForFunction(() => /ばあばE2Eが なかまに なりました/.test(document.getElementById("ringNote").textContent), null, { timeout: 45000 }).catch(() => { });
+  await a.waitForFunction(() => /ばあばE2Eが とうろく しました/.test(document.getElementById("ringNote").textContent), null, { timeout: 45000 }).catch(() => { });
   const ap = await a.evaluate(() => JSON.parse(localStorage.getItem("marushima-reversi-people") || "[]"));
   check(ap.some(p => p.dev === gid && p.name === "ばあばE2E"), "A：開いたまま 本物の中継から ばあば を うけとった");
 

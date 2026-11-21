@@ -21,8 +21,8 @@ async function relay(route) {
   if (b.op === "call") out = { ok: false, reason: "nosub" };
   await route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: JSON.stringify(out) });
 }
-const NATIVE = `window.__shared=[];window.__media=0;
-window.ReactNativeWebView={postMessage:function(m){try{var o=JSON.parse(m);if(o.t==="share")window.__shared.push(o.text);if(o.t==="needMedia")setTimeout(function(){window.RV&&window.RV.native({t:"media"})},30);}catch(e){}}};
+const NATIVE = `window.__shared=[];window.__opened=[];window.__media=0;
+window.ReactNativeWebView={postMessage:function(m){try{var o=JSON.parse(m);if(o.t==="open"){window.__opened.push(o.url);var k=o.url.indexOf("text=")>=0?o.url.indexOf("text=")+5:(o.url.indexOf("msg/text/")>=0?o.url.indexOf("msg/text/")+9:-1);if(k>=0)window.__shared.push(decodeURIComponent(o.url.slice(k)));}if(o.t==="share"){window.__shared.push(o.text);var R=window.__shareResult||{ok:true,act:"jp.naver.line.Share"};setTimeout(function(){window.RV.native({t:"shared",ok:R.ok,act:R.act})},50);}if(o.t==="needMedia")setTimeout(function(){window.RV&&window.RV.native({t:"media"})},30);}catch(e){}}};
 window.RVNative={platform:"ios",version:"1.0.5",push:false};
 try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
 (function(){var md=navigator.mediaDevices;if(md&&md.getUserMedia){var g=md.getUserMedia.bind(md);md.getUserMedia=function(c){window.__media++;return g(c)}}})();`;
@@ -54,11 +54,24 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   check(await a.evaluate(() => window.__media) === 0, "A：カメラは つかない");
   check(await a.evaluate(() => !document.body.classList.contains("playing")), "A：ゲーム画面に ならない");
   await a.click("#regLine"); await a.waitForTimeout(200);
+  const opened = (await a.evaluate(() => window.__opened))[0] || "";
+  check(opened.startsWith("https://line.me/R/share?text="), "A：「LINEで おくる」は LINE を 直接ひらく");
   const shared = (await a.evaluate(() => window.__shared))[0] || "";
-  check(/まだ ゲームは はじまりません/.test(shared), "A：LINE の文に「まだ ゲームは はじまりません」");
+  check(/^ゆうくんです。テレビ電話をしながらリバーシで遊べるアプリがあるので/.test(shared) && !/なかま|まだ ゲーム/.test(shared), "A：送る文は 決めた文（なかま・まだゲーム… は 入らない）");
+  check(/LINE で おくったら/.test(await txt(a, "ringNote")), "A：送ったか わからないので「おくったら〜」と 言う（「おくりました」と 言いきらない）");
   const regUrl = (shared.match(/https:\/\/\S+/) || [""])[0];
   check(/[?&]m=reg/.test(regUrl) && !/[?&]r=/.test(regUrl) && regUrl.includes("fd=" + aid), "A：リンクは とうろく用（部屋なし・A の端末番号）");
-  check(!(await vis(a, "regOv")) && /おくりました/.test(await txt(a, "ringNote")), "A：送ると 開始画面に もどって「おくりました」");
+  check(!(await vis(a, "regOv")), "A：LINE を ひらくと 開始画面に もどる");
+  // ほかの アプリで おくる（共有画面）：閉じただけ／コピー／送った
+  await a.evaluate(() => { window.__shareResult = { ok: false, act: "" }; document.getElementById("regOv").hidden = false; });
+  await a.click("#regOther"); await a.waitForTimeout(300);
+  check(await vis(a, "regOv"), "A：共有画面を 閉じただけなら さそう画面の まま（「おくりました」と 出ない）");
+  await a.evaluate(() => { window.__shareResult = { ok: true, act: "com.apple.UIKit.activity.CopyToPasteboard" }; });
+  await a.click("#regOther"); await a.waitForTimeout(300);
+  check(!(await vis(a, "regOv")) && /コピーしました/.test(await txt(a, "ringNote")), "A：コピーを えらんだら「コピーしました。はりつけて おくってね」");
+  await a.evaluate(() => { window.__shareResult = { ok: true, act: "jp.naver.line.Share" }; document.getElementById("regOv").hidden = false; });
+  await a.click("#regOther"); await a.waitForTimeout(300);
+  check(!(await vis(a, "regOv")) && /おくりました/.test(await txt(a, "ringNote")), "A：本当に 送ったときだけ「おくりました」");
 
   // ---------- B（おばあちゃん）が リンクを ひらく ----------
   const { page: g } = await phone();
@@ -67,7 +80,7 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   check(await vis(g, "nameOv"), "B：はじめては なまえを きかれる");
   check(!(await vis(g, "inviteOv")) && await g.evaluate(() => NET.role === null), "B：対局には ならない");
   await g.fill("#myName", "ばあば"); await g.click("#nameOk"); await g.waitForTimeout(400);
-  check(await vis(g, "regDoneOv") && /ゆうくんと なかまに なりました/.test(await txt(g, "regDoneTitle")), "B：「ゆうくんと なかまに なりました！」");
+  check(await vis(g, "regDoneOv") && /ゆうくんを とうろく しました/.test(await txt(g, "regDoneTitle")), "B：「ゆうくんを とうろく しました！」");
   check(await g.evaluate(() => window.__media) === 0, "B：カメラは つかない");
   check(await g.evaluate(() => location.search === ""), "B：リンクの中身は 消す（開きなおしても くりかえさない）");
   let gp = await ppl(g);
@@ -76,8 +89,8 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   await g.click("#regDoneOk");
 
   // ---------- A が うけとる（開いたまま：20秒ごとに たしかめる） ----------
-  await a.waitForFunction(() => /ばあばが なかまに なりました/.test(document.getElementById("ringNote").textContent), null, { timeout: 30000 }).catch(() => { });
-  check(/ばあばが なかまに なりました/.test(await txt(a, "ringNote")), "A：開いたままでも「ばあばが なかまに なりました」");
+  await a.waitForFunction(() => /ばあばが とうろく しました/.test(document.getElementById("ringNote").textContent), null, { timeout: 30000 }).catch(() => { });
+  check(/ばあばが とうろく しました/.test(await txt(a, "ringNote")), "A：開いたままでも「ばあばが とうろく しました」");
   let ap = await ppl(a);
   check(ap.length === 1 && ap[0].dev === gid && ap[0].name === "ばあば", "A：とうろくした ひと に ばあば（B の端末番号）");
 
@@ -87,12 +100,14 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   await g.click("#whoList button");
   await g.waitForFunction(() => !document.getElementById("inviteOv").hidden, null, { timeout: 15000 }).catch(() => { });
   check(await vis(g, "inviteOv") && /ゆうくんに しらせる/.test(await txt(g, "inviteTitle")), "B：自分の部屋で まって「ゆうくんに しらせる」");
-  await g.click("#lineBtn"); await g.waitForTimeout(200);
+  await g.evaluate(() => document.getElementById("lineBtn").click());
+  const waitTxt = await g.evaluate(() => document.getElementById("camB").textContent + document.getElementById("camA").textContent);
+  await g.waitForTimeout(200);
   const playMsg = (await g.evaluate(() => window.__shared)).pop() || "";
   const playUrl = (playMsg.match(/https:\/\/\S+/) || [""])[0];
   const groom = await g.evaluate(() => NET.room);
-  check(/いま テレビ電話リバーシで あそべるよ/.test(playMsg) && /[?&]m=play/.test(playUrl) && playUrl.includes("r=" + groom) && playUrl.includes("fd=" + gid), "B：LINE の文は あそぶリンク（B の部屋・B の端末番号）");
-  check(/ゆうくんを まっています/.test(await g.evaluate(() => document.body.textContent)), "B：「ゆうくんを まっています」");
+  check(/いまリバーシで遊べるよ/.test(playMsg) && /[?&]m=play/.test(playUrl) && playUrl.includes("r=" + groom) && playUrl.includes("fd=" + gid), "B：LINE の文は あそぶリンク（B の部屋・B の端末番号）");
+  check(/ゆうくんを まっています/.test(waitTxt), "B：「ゆうくんを まっています」");
 
   // ---------- A が あそぶリンクを ひらく ----------
   await open(a, "?" + playUrl.split("?")[1]);

@@ -46,11 +46,14 @@ const CALL = (() => {
   const toApp = m => { try { window.ReactNativeWebView.postMessage(JSON.stringify(m)); } catch (e) { } };
   let tokenWait = null;
   window.RV = window.RV || {};
-  let mediaWait = null;
+  let mediaWait = null, shareWait = null;
+  // 共有画面（ほかの アプリで おくる）：送ったか・閉じただけか を 殻から うけとる（iPhone だけ わかる。Android は いつも ok）
+  C.share = text => new Promise(res => { shareWait = res; toApp({ t: "share", text }); setTimeout(() => { if (shareWait) { shareWait({ ok: false, act: "" }); shareWait = null; } }, 10 * 60 * 1000); });
   window.RV.askMedia = () => new Promise(res => { mediaWait = res; toApp({ t: "needMedia" }); setTimeout(() => { if (mediaWait) { mediaWait(); mediaWait = null; } }, 20000); });
   window.RV.native = m => {
     if (!m) return;
     if (m.t === "media") { if (mediaWait) { mediaWait(); mediaWait = null; } }
+    if (m.t === "shared") { if (shareWait) { shareWait({ ok: !!m.ok, act: m.act || "" }); shareWait = null; } }
     if (m.t === "token") { dev.pushDenied = false; if (m.expo && m.expo !== dev.expo) { dev.expo = m.expo; save(); } if (tokenWait) { tokenWait(m.expo || null); tokenWait = null; } }
     if (m.t === "denied") { dev.pushDenied = true; dev.expo = ""; save(); if (tokenWait) { tokenWait(null); tokenWait = null; } }
   };

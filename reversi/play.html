@@ -361,7 +361,7 @@ body {
       <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と あそぶ」を押すだけでつながります。</p>
     </div>
     <button class="adultBtn" id="adultBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Zm7.4-2.1.9-.7-1.5-2.6-1.1.3a6 6 0 0 0-1.3-.8l-.2-1.1h-3l-.2 1.1a6 6 0 0 0-1.3.8l-1.1-.3-1.5 2.6.9.7v1.3l-.9.7 1.5 2.6 1.1-.3a6 6 0 0 0 1.3.8l.2 1.1h3l.2-1.1a6 6 0 0 0 1.3-.8l1.1.3 1.5-2.6-.9-.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>おとなの せってい</button>
-    <p class="ver">v2026.11.19 521c165</p>
+    <p class="ver">v2026.11.21 6eab205</p>
   </div>
 </div>
 <!-- 相手が 2人以上 登録されているときだけ：だれと あそぶ？ -->
@@ -387,11 +387,13 @@ body {
 <div class="cover" id="inviteOv" hidden>
   <div class="panel invite" role="dialog" aria-label="たいせんあいてを よぶ">
     <h2 id="inviteTitle">たいせんあいてに リンクを おくる</h2>
-    <p class="lead" id="inviteLead">「LINEで おくる」→ 出てきた画面で LINE を えらんで 送ってね。送ると この画面に もどります。<br>あいてが リンクを ひらいて アプリを いれ、「アプリで ひらく」を おすと、つながります。</p>
+    <p class="lead" id="inviteLead">「LINEで おくる」で LINE が ひらきます。あいてを えらんで 送ってね。<br>あいてが リンクを ひらいて アプリを いれ、「アプリで ひらく」を おすと、つながります。</p>
     <div class="qr" id="qr" aria-label="リンクの QRコード"></div>
     <div class="panelBtns">
       <button type="button" class="lineBtn" id="lineBtn">LINEで おくる</button>
     </div>
+    <div class="panelBtns testOnly"><button type="button" id="lineBtn2">LINEで おくる（ためし２）</button></div>
+    <div class="panelBtns"><button type="button" id="otherBtn">ほかの アプリで おくる</button></div>
     <p class="link" id="inviteLink"></p>
     <p class="lead small" id="inviteAgain" hidden>まえに おくった リンクと おなじです。あいての がめんの「○○と 対戦する」からも はいれます。</p>
     <p class="warn" id="inviteWarn" hidden>無料分（10回）は使い切っています。相手が解放ずみなら遊べます。そうでなければ、つながったあとに解放の案内が出ます。</p>
@@ -399,18 +401,20 @@ body {
   </div>
 </div>
 <div class="cover" id="regOv" hidden>
-  <div class="panel invite" role="dialog" aria-label="なかまを さそう">
-    <h2>なかまを さそう</h2>
-    <p class="lead">「LINEで おくる」で リンクを おくってね。あいてが アプリを いれて リンクを タップすると、おたがいの「とうろくした ひと」に はいります。<br>ゲームは まだ はじまりません。あそぶときは「だれと あそぶ？」から よびます。</p>
+  <div class="panel invite" role="dialog" aria-label="あいてを さそう">
+    <h2>あいてを さそう</h2>
+    <p class="lead">「LINEで おくる」で リンクを おくってね。あいてが アプリを いれて ひらくと、おたがいの「とうろくした ひと」に はいります。<br><small>おくっても すぐには はじまりません。あそぶときは「だれと あそぶ？」から よびます。</small></p>
     <div class="qr" id="regQr" aria-label="リンクの QRコード"></div>
     <div class="panelBtns"><button type="button" class="lineBtn" id="regLine">LINEで おくる</button></div>
+    <div class="panelBtns testOnly"><button type="button" id="regLine2">LINEで おくる（ためし２）</button></div>
+    <div class="panelBtns"><button type="button" id="regOther">ほかの アプリで おくる</button></div>
     <p class="link" id="regLinkTxt"></p>
     <div class="panelBtns"><button type="button" id="regCopy">リンクを コピー</button><button type="button" id="regClose" class="primary">とじる</button></div>
   </div>
 </div>
 <div class="cover" id="regDoneOv" hidden>
-  <div class="panel invite" role="dialog" aria-label="なかまに なりました">
-    <h2 id="regDoneTitle">なかまに なりました！</h2>
+  <div class="panel invite" role="dialog" aria-label="とうろく しました">
+    <h2 id="regDoneTitle">とうろく しました！</h2>
     <p class="lead" id="regDoneLead"></p>
     <div class="panelBtns"><button type="button" id="regDoneOk" class="primary">OK</button></div>
   </div>
@@ -479,7 +483,7 @@ body {
     <div class="row"><span>音が出ないとき</span><div class="panelBtns"><button type="button" id="sndTest">音の テスト（なおす）</button></div><span class="route" id="sndInfo"></span></div>
     <h3>なまえと あいて</h3>
     <div class="row"><span class="route" id="partnerInfo"></span>
-      <div class="panelBtns"><button type="button" id="nameBtn2">なまえを かえる</button><button type="button" id="reinviteBtn">なかまを さそう（リンクを おくる）</button></div>
+      <div class="panelBtns"><button type="button" id="nameBtn2">なまえを かえる</button><button type="button" id="reinviteBtn">あいてを さそう（リンクを おくる）</button></div>
       <div class="peopleSet" id="peopleSet"></div></div>
     <h3>よびだし（通知）</h3>
     <div class="row"><span class="route" id="pushInfo"></span>
@@ -549,11 +553,14 @@ const CALL = (() => {
   const toApp = m => { try { window.ReactNativeWebView.postMessage(JSON.stringify(m)); } catch (e) { } };
   let tokenWait = null;
   window.RV = window.RV || {};
-  let mediaWait = null;
+  let mediaWait = null, shareWait = null;
+  // 共有画面（ほかの アプリで おくる）：送ったか・閉じただけか を 殻から うけとる（iPhone だけ わかる。Android は いつも ok）
+  C.share = text => new Promise(res => { shareWait = res; toApp({ t: "share", text }); setTimeout(() => { if (shareWait) { shareWait({ ok: false, act: "" }); shareWait = null; } }, 10 * 60 * 1000); });
   window.RV.askMedia = () => new Promise(res => { mediaWait = res; toApp({ t: "needMedia" }); setTimeout(() => { if (mediaWait) { mediaWait(); mediaWait = null; } }, 20000); });
   window.RV.native = m => {
     if (!m) return;
     if (m.t === "media") { if (mediaWait) { mediaWait(); mediaWait = null; } }
+    if (m.t === "shared") { if (shareWait) { shareWait({ ok: !!m.ok, act: m.act || "" }); shareWait = null; } }
     if (m.t === "token") { dev.pushDenied = false; if (m.expo && m.expo !== dev.expo) { dev.expo = m.expo; save(); } if (tokenWait) { tokenWait(m.expo || null); tokenWait = null; } }
     if (m.t === "denied") { dev.pushDenied = true; dev.expo = ""; save(); if (tokenWait) { tokenWait(null); tokenWait = null; } }
   };
@@ -1671,7 +1678,7 @@ function undoDepth(history, player) {
 
 /* ---------- とうろくした ひと（2026-11-19）・リンクの種類 ----------
    「とうろく」と「あそぶ」を分けた（あまねさん 2026-11-19）。
-   ・とうろく（さそう）リンク：?m=reg&n=名前&fd=端末番号 … ひらくと なかまに なるだけ（ゲームは始まらない）
+   ・とうろく（さそう）リンク：?m=reg&n=名前&fd=端末番号 … ひらくと とうろく するだけ（ゲームは始まらない）
    ・あそぶ リンク        ：?m=play&r=部屋&n=名前&fd=端末番号 … ひらくと その部屋で 対局
    ・むかしの リンク（m なし）：?r=部屋&n=&fd= … 1.0.4 までの招待。これまでどおり 登録して 対局
    とうろくした ひと は 1つの表（端末番号＋名前。むかしの記録は 部屋だけのものもある）。
@@ -1726,13 +1733,16 @@ function regLink(base, name, dev) {
 function playLink(base, room, name, dev) {
   return base + "?m=play&r=" + room + (name ? "&n=" + encodeURIComponent(name) : "") + (dev ? "&fd=" + dev : "") + "&openExternalBrowser=1";
 }
-// LINE で送る文
+// LINE で送る文（受けとるのは おとな。ふつうの漢字かなまじり。2026-11-21 あまねさん）
 function regText(myName, url) {
-  return `${myName ? myName + "です。" : ""}テレビ電話リバーシに さそいました。アプリを いれて、この リンクを タップすると なかまに なれます（まだ ゲームは はじまりません）\n${url}`;
+  return `${myName ? myName + "です。" : ""}テレビ電話をしながらリバーシで遊べるアプリがあるので、いっしょに遊びませんか？\n下のリンクからアプリを入れて（無料）、開いてください。\n${url}`;
 }
 function playText(myName, url) {
-  return `${myName ? myName + "です。" : ""}いま テレビ電話リバーシで あそべるよ！ ここを タップしてね\n${url}`;
+  return `${myName ? myName + "です。" : ""}いまリバーシで遊べるよ！ このリンクをタップしてね。\n${url}`;
 }
+// LINE を直接ひらく（相手を選んだあと、送る前に 文を見て 直せる…かを 実機で ためす。2026-11-21）
+const lineShareURL = text => "https://line.me/R/share?text=" + encodeURIComponent(text);
+const lineMsgURL = text => "line://msg/text/" + encodeURIComponent(text);
 
 
 /* 読み上げの文（voice/gen_lines.py が作る） */
@@ -2856,7 +2866,7 @@ $("nameBtn2").addEventListener("click", () => { setPanel.hidden = true; showName
 // とうろくした ひと：1人ずつ「けす」（2回おして けす。2026-11-19）
 function renderPeopleSet() {
   const box = $("peopleSet"); box.innerHTML = "";
-  $("partnerInfo").textContent = people.list.length ? "とうろくした ひと：" : "とうろくした ひとは まだ いません。「なかまを さそう」で リンクを おくると、あいてが ひらいたときに はいります。";
+  $("partnerInfo").textContent = people.list.length ? "とうろくした ひと：" : "とうろくした ひとは まだ いません。「あいてを さそう」で リンクを おくると、あいてが ひらいたときに はいります。";
   people.list.forEach(p => {
     const row = document.createElement("div"); row.className = "personRow";
     const nm = document.createElement("span"); nm.textContent = p.name;
@@ -3397,16 +3407,30 @@ $("copyBtn").addEventListener("click", () => {
   const pick = () => { const r = document.createRange(); r.selectNodeContents($("inviteLink")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
   try { navigator.clipboard.writeText(url).then(done, pick); } catch (e) { pick(); }
 });
-/* LINEで おくる：iPad の「共有」画面を出す（LINE を選ぶ）。共有画面は この画面の上に重なるだけなので、
-   送り終わると 自動でリバーシの画面に戻る。共有画面が使えない端末だけ、LINE アプリを直接ひらく */
-const inviteText = () => "テレビ電話リバーシで あそぼう！ ここを タップして、アプリを いれてね\n" + NET.inviteURL();
+/* おくる（2026-11-21）：
+   ・LINEで おくる … LINE を直接ひらく（相手を選んで、送る前に 文を見られる）。送ったかは わからないので 言い方は「おくったら〜」
+   ・ほかの アプリで おくる … 共有画面。iPhone は 送ったか・閉じただけか が わかる（閉じただけなら この画面のまま） */
+const inviteText = () => regText(CFG.myName, NET.inviteURL()).replace("下のリンクからアプリを入れて（無料）、開いてください。", "下のリンクからアプリを入れて（無料）、開いてください。開くと、そのままつながります。");
 const waitMsg = () => target ? `${target.name}を まっています…` : "まっています…";
-$("lineBtn").addEventListener("click", async () => {
-  const text = INV.text || inviteText();
-  if (window.RVNative) { CALL.toApp({ t: "share", text }); $("inviteOv").hidden = true; camMsg(otherSide(), waitMsg()); return; }
-  if (navigator.share) {
-    try { await navigator.share({ text }); $("inviteOv").hidden = true; camMsg(otherSide(), waitMsg()); } catch (e) { /* やめたときは そのまま */ }
-  } else location.href = "line://msg/text/" + encodeURIComponent(text);
+const isAndroid = () => !!(window.RVNative && window.RVNative.platform === "android");
+const isCopyAct = act => /copy|pasteboard/i.test(act || "");
+function openLine(text, alt) {
+  const url = alt ? lineMsgURL(text) : lineShareURL(text);
+  if (window.RVNative) CALL.toApp({ t: "open", url }); else location.href = url;
+}
+// 共有画面で おくる。{ ok:送った, copy:コピーを選んだ, sure:送ったか本当に わかる } を返す
+async function shareSheet(text) {
+  if (window.RVNative) { const r = await CALL.share(text); return { ok: r.ok, copy: isCopyAct(r.act), sure: !isAndroid() }; }
+  if (navigator.share) { try { await navigator.share({ text }); return { ok: true, copy: false, sure: false }; } catch (e) { return { ok: false }; } }
+  return { ok: false };
+}
+function inviteGone(note) { $("inviteOv").hidden = true; camMsg(otherSide(), note || waitMsg()); }
+$("lineBtn").addEventListener("click", () => { openLine(INV.text || inviteText()); inviteGone(); });
+$("lineBtn2").addEventListener("click", () => { openLine(INV.text || inviteText(), true); inviteGone(); });
+$("otherBtn").addEventListener("click", async () => {
+  const r = await shareSheet(INV.text || inviteText());
+  if (!r.ok) return;                       // 閉じただけ：この画面のまま
+  inviteGone(r.copy ? "コピーしました。LINE などに はりつけて おくってね" : waitMsg());
 });
 // リンクの画面をとじて待つあいだも、「リンクを おくる」を出しておく（また LINE で送れる）
 $("inviteClose").addEventListener("click", () => { $("inviteOv").hidden = true; if (NET.role === "host" && !NET.open) $("resendBtn").hidden = false; });
@@ -3526,7 +3550,7 @@ $("tellBtn").addEventListener("click", async () => {
   try { await navigator.share({ text }); } catch (e) { try { await navigator.clipboard.writeText(text); $("tellBtn").textContent = "コピーしました（LINE に はりつけてね）"; } catch (e2) { } }
 });
 
-/* ---------- なかまを さそう（とうろくだけ。2026-11-19 あまねさん「まずは互いの登録だけ」） ----------
+/* ---------- あいてを さそう（とうろくだけ。2026-11-19 あまねさん「まずは互いの登録だけ」） ----------
    カメラも ゲームも うごかさない。LINE で リンクを おくって 開始画面に もどる。
    あいてが リンクを ひらく → なまえ → 中継に「とうろく」を残す → こちらは pending で うけとる */
 let pendTimer = 0, pendUntil = 0;
@@ -3538,18 +3562,21 @@ function showRegInvite() {
   $("regOv").hidden = false;
   CALL.refresh(CFG.myName);
 }
-function regSent() {
+// note：開始画面に出す ことば。送ったか わからないときは「おくったら〜」と言う
+function regSent(note) {
   $("regOv").hidden = true;
-  $("ringNote").textContent = "おくりました。あいてが リンクを ひらくと「とうろくした ひと」に はいります"; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
+  $("ringNote").textContent = note || "LINE で おくったら、あいてが リンクを ひらくのを まってね。とうろく されると ここに でます"; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
   // しばらく（15分）は 20秒ごとに たしかめる
   pendUntil = Date.now() + 15 * 60 * 1000; clearInterval(pendTimer);
   pendTimer = setInterval(() => { if (Date.now() > pendUntil || G.started) { clearInterval(pendTimer); return; } checkPending(); }, 20000);
 }
-$("regLine").addEventListener("click", async () => {
-  const text = regText(CFG.myName, regLink(BASE, CFG.myName, CALL.id));
-  if (window.RVNative) { CALL.toApp({ t: "share", text }); regSent(); return; }
-  if (navigator.share) { try { await navigator.share({ text }); regSent(); } catch (e) { } }
-  else location.href = "line://msg/text/" + encodeURIComponent(text);
+const regMsg = () => regText(CFG.myName, regLink(BASE, CFG.myName, CALL.id));
+$("regLine").addEventListener("click", () => { openLine(regMsg()); regSent(); });
+$("regLine2").addEventListener("click", () => { openLine(regMsg(), true); regSent(); });
+$("regOther").addEventListener("click", async () => {
+  const r = await shareSheet(regMsg());
+  if (!r.ok) return;                       // 閉じただけ：この画面のまま
+  regSent(r.copy ? "コピーしました。LINE などに はりつけて おくってね" : r.sure ? "おくりました。あいてが リンクを ひらくと「とうろくした ひと」に はいります" : "");
 });
 $("regCopy").addEventListener("click", () => {
   const url = regLink(BASE, CFG.myName, CALL.id);
@@ -3561,13 +3588,13 @@ function checkPending() {
     if (!list.length) return;
     list.forEach(x => registerCaller(x.dev, x.name));
     if (!G.started && !answeringRing) {
-      $("ringNote").textContent = `${list.map(x => x.name || "あいて").join("・")}が なかまに なりました`; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
+      $("ringNote").textContent = `${list.map(x => x.name || "あいて").join("・")}が とうろく しました`; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
       if (!$("whoOv").hidden) pressPlay();
     }
   });
 }
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && NET.role !== "guest" && !G.started) checkPending(); });
-// さそう リンクを ひらいた人：なまえ（はじめてだけ）→ なかまに なる。ゲームは はじめない
+// さそう リンクを ひらいた人：なまえ（はじめてだけ）→ とうろく する。ゲームは はじめない
 function gotRegLink() {
   try { history.replaceState(null, "", location.pathname); } catch (e) { }
   if (LINK.dev === CALL.id) { $("ringNote").textContent = "これは じぶんが おくった さそいの リンクです"; $("ringNote").hidden = false; $("ringNote").classList.add("calm"); return; }
@@ -3575,7 +3602,7 @@ function gotRegLink() {
     addPerson({ dev: LINK.dev, name: LINK.name }); renderPartners();
     CALL.accept(LINK.dev, CFG.myName);
     const who = LINK.name || "あいて";
-    $("regDoneTitle").textContent = `${who}と なかまに なりました！`;
+    $("regDoneTitle").textContent = `${who}を とうろく しました！`;
     $("regDoneLead").textContent = `あそぶときは「とおくの ひとと あそぶ」→「${who}と あそぶ」を おしてね。`;
     $("regDoneOv").hidden = false;
   };

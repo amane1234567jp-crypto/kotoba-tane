@@ -1,6 +1,6 @@
 /* ---------- とうろくした ひと（2026-11-19）・リンクの種類 ----------
    「とうろく」と「あそぶ」を分けた（あまねさん 2026-11-19）。
-   ・とうろく（さそう）リンク：?m=reg&n=名前&fd=端末番号 … ひらくと なかまに なるだけ（ゲームは始まらない）
+   ・とうろく（さそう）リンク：?m=reg&n=名前&fd=端末番号 … ひらくと とうろく するだけ（ゲームは始まらない）
    ・あそぶ リンク        ：?m=play&r=部屋&n=名前&fd=端末番号 … ひらくと その部屋で 対局
    ・むかしの リンク（m なし）：?r=部屋&n=&fd= … 1.0.4 までの招待。これまでどおり 登録して 対局
    とうろくした ひと は 1つの表（端末番号＋名前。むかしの記録は 部屋だけのものもある）。
@@ -55,12 +55,15 @@ function regLink(base, name, dev) {
 function playLink(base, room, name, dev) {
   return base + "?m=play&r=" + room + (name ? "&n=" + encodeURIComponent(name) : "") + (dev ? "&fd=" + dev : "") + "&openExternalBrowser=1";
 }
-// LINE で送る文
+// LINE で送る文（受けとるのは おとな。ふつうの漢字かなまじり。2026-11-21 あまねさん）
 function regText(myName, url) {
-  return `${myName ? myName + "です。" : ""}テレビ電話リバーシに さそいました。アプリを いれて、この リンクを タップすると なかまに なれます（まだ ゲームは はじまりません）\n${url}`;
+  return `${myName ? myName + "です。" : ""}テレビ電話をしながらリバーシで遊べるアプリがあるので、いっしょに遊びませんか？\n下のリンクからアプリを入れて（無料）、開いてください。\n${url}`;
 }
 function playText(myName, url) {
-  return `${myName ? myName + "です。" : ""}いま テレビ電話リバーシで あそべるよ！ ここを タップしてね\n${url}`;
+  return `${myName ? myName + "です。" : ""}いまリバーシで遊べるよ！ このリンクをタップしてね。\n${url}`;
 }
+// LINE を直接ひらく（相手を選んだあと、送る前に 文を見て 直せる…かを 実機で ためす。2026-11-21）
+const lineShareURL = text => "https://line.me/R/share?text=" + encodeURIComponent(text);
+const lineMsgURL = text => "line://msg/text/" + encodeURIComponent(text);
 
-if (typeof module !== "undefined") module.exports = { peopleUpsert, peopleRemove, peopleKey, peopleMigrate, parseLink, regLink, playLink, regText, playText, PEOPLE_MAX };
+if (typeof module !== "undefined") module.exports = { peopleUpsert, peopleRemove, peopleKey, peopleMigrate, parseLink, regLink, playLink, regText, playText, lineShareURL, lineMsgURL, PEOPLE_MAX };

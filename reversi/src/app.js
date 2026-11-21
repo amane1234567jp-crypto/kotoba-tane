@@ -596,7 +596,7 @@ $("nameBtn2").addEventListener("click", () => { setPanel.hidden = true; showName
 // とうろくした ひと：1人ずつ「けす」（2回おして けす。2026-11-19）
 function renderPeopleSet() {
   const box = $("peopleSet"); box.innerHTML = "";
-  $("partnerInfo").textContent = people.list.length ? "とうろくした ひと：" : "とうろくした ひとは まだ いません。「なかまを さそう」で リンクを おくると、あいてが ひらいたときに はいります。";
+  $("partnerInfo").textContent = people.list.length ? "とうろくした ひと：" : "とうろくした ひとは まだ いません。「あいてを さそう」で リンクを おくると、あいてが ひらいたときに はいります。";
   people.list.forEach(p => {
     const row = document.createElement("div"); row.className = "personRow";
     const nm = document.createElement("span"); nm.textContent = p.name;
@@ -1137,16 +1137,30 @@ $("copyBtn").addEventListener("click", () => {
   const pick = () => { const r = document.createRange(); r.selectNodeContents($("inviteLink")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
   try { navigator.clipboard.writeText(url).then(done, pick); } catch (e) { pick(); }
 });
-/* LINEで おくる：iPad の「共有」画面を出す（LINE を選ぶ）。共有画面は この画面の上に重なるだけなので、
-   送り終わると 自動でリバーシの画面に戻る。共有画面が使えない端末だけ、LINE アプリを直接ひらく */
-const inviteText = () => "テレビ電話リバーシで あそぼう！ ここを タップして、アプリを いれてね\n" + NET.inviteURL();
+/* おくる（2026-11-21）：
+   ・LINEで おくる … LINE を直接ひらく（相手を選んで、送る前に 文を見られる）。送ったかは わからないので 言い方は「おくったら〜」
+   ・ほかの アプリで おくる … 共有画面。iPhone は 送ったか・閉じただけか が わかる（閉じただけなら この画面のまま） */
+const inviteText = () => regText(CFG.myName, NET.inviteURL()).replace("下のリンクからアプリを入れて（無料）、開いてください。", "下のリンクからアプリを入れて（無料）、開いてください。開くと、そのままつながります。");
 const waitMsg = () => target ? `${target.name}を まっています…` : "まっています…";
-$("lineBtn").addEventListener("click", async () => {
-  const text = INV.text || inviteText();
-  if (window.RVNative) { CALL.toApp({ t: "share", text }); $("inviteOv").hidden = true; camMsg(otherSide(), waitMsg()); return; }
-  if (navigator.share) {
-    try { await navigator.share({ text }); $("inviteOv").hidden = true; camMsg(otherSide(), waitMsg()); } catch (e) { /* やめたときは そのまま */ }
-  } else location.href = "line://msg/text/" + encodeURIComponent(text);
+const isAndroid = () => !!(window.RVNative && window.RVNative.platform === "android");
+const isCopyAct = act => /copy|pasteboard/i.test(act || "");
+function openLine(text, alt) {
+  const url = alt ? lineMsgURL(text) : lineShareURL(text);
+  if (window.RVNative) CALL.toApp({ t: "open", url }); else location.href = url;
+}
+// 共有画面で おくる。{ ok:送った, copy:コピーを選んだ, sure:送ったか本当に わかる } を返す
+async function shareSheet(text) {
+  if (window.RVNative) { const r = await CALL.share(text); return { ok: r.ok, copy: isCopyAct(r.act), sure: !isAndroid() }; }
+  if (navigator.share) { try { await navigator.share({ text }); return { ok: true, copy: false, sure: false }; } catch (e) { return { ok: false }; } }
+  return { ok: false };
+}
+function inviteGone(note) { $("inviteOv").hidden = true; camMsg(otherSide(), note || waitMsg()); }
+$("lineBtn").addEventListener("click", () => { openLine(INV.text || inviteText()); inviteGone(); });
+$("lineBtn2").addEventListener("click", () => { openLine(INV.text || inviteText(), true); inviteGone(); });
+$("otherBtn").addEventListener("click", async () => {
+  const r = await shareSheet(INV.text || inviteText());
+  if (!r.ok) return;                       // 閉じただけ：この画面のまま
+  inviteGone(r.copy ? "コピーしました。LINE などに はりつけて おくってね" : waitMsg());
 });
 // リンクの画面をとじて待つあいだも、「リンクを おくる」を出しておく（また LINE で送れる）
 $("inviteClose").addEventListener("click", () => { $("inviteOv").hidden = true; if (NET.role === "host" && !NET.open) $("resendBtn").hidden = false; });
@@ -1266,7 +1280,7 @@ $("tellBtn").addEventListener("click", async () => {
   try { await navigator.share({ text }); } catch (e) { try { await navigator.clipboard.writeText(text); $("tellBtn").textContent = "コピーしました（LINE に はりつけてね）"; } catch (e2) { } }
 });
 
-/* ---------- なかまを さそう（とうろくだけ。2026-11-19 あまねさん「まずは互いの登録だけ」） ----------
+/* ---------- あいてを さそう（とうろくだけ。2026-11-19 あまねさん「まずは互いの登録だけ」） ----------
    カメラも ゲームも うごかさない。LINE で リンクを おくって 開始画面に もどる。
    あいてが リンクを ひらく → なまえ → 中継に「とうろく」を残す → こちらは pending で うけとる */
 let pendTimer = 0, pendUntil = 0;
@@ -1278,18 +1292,21 @@ function showRegInvite() {
   $("regOv").hidden = false;
   CALL.refresh(CFG.myName);
 }
-function regSent() {
+// note：開始画面に出す ことば。送ったか わからないときは「おくったら〜」と言う
+function regSent(note) {
   $("regOv").hidden = true;
-  $("ringNote").textContent = "おくりました。あいてが リンクを ひらくと「とうろくした ひと」に はいります"; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
+  $("ringNote").textContent = note || "LINE で おくったら、あいてが リンクを ひらくのを まってね。とうろく されると ここに でます"; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
   // しばらく（15分）は 20秒ごとに たしかめる
   pendUntil = Date.now() + 15 * 60 * 1000; clearInterval(pendTimer);
   pendTimer = setInterval(() => { if (Date.now() > pendUntil || G.started) { clearInterval(pendTimer); return; } checkPending(); }, 20000);
 }
-$("regLine").addEventListener("click", async () => {
-  const text = regText(CFG.myName, regLink(BASE, CFG.myName, CALL.id));
-  if (window.RVNative) { CALL.toApp({ t: "share", text }); regSent(); return; }
-  if (navigator.share) { try { await navigator.share({ text }); regSent(); } catch (e) { } }
-  else location.href = "line://msg/text/" + encodeURIComponent(text);
+const regMsg = () => regText(CFG.myName, regLink(BASE, CFG.myName, CALL.id));
+$("regLine").addEventListener("click", () => { openLine(regMsg()); regSent(); });
+$("regLine2").addEventListener("click", () => { openLine(regMsg(), true); regSent(); });
+$("regOther").addEventListener("click", async () => {
+  const r = await shareSheet(regMsg());
+  if (!r.ok) return;                       // 閉じただけ：この画面のまま
+  regSent(r.copy ? "コピーしました。LINE などに はりつけて おくってね" : r.sure ? "おくりました。あいてが リンクを ひらくと「とうろくした ひと」に はいります" : "");
 });
 $("regCopy").addEventListener("click", () => {
   const url = regLink(BASE, CFG.myName, CALL.id);
@@ -1301,13 +1318,13 @@ function checkPending() {
     if (!list.length) return;
     list.forEach(x => registerCaller(x.dev, x.name));
     if (!G.started && !answeringRing) {
-      $("ringNote").textContent = `${list.map(x => x.name || "あいて").join("・")}が なかまに なりました`; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
+      $("ringNote").textContent = `${list.map(x => x.name || "あいて").join("・")}が とうろく しました`; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
       if (!$("whoOv").hidden) pressPlay();
     }
   });
 }
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && NET.role !== "guest" && !G.started) checkPending(); });
-// さそう リンクを ひらいた人：なまえ（はじめてだけ）→ なかまに なる。ゲームは はじめない
+// さそう リンクを ひらいた人：なまえ（はじめてだけ）→ とうろく する。ゲームは はじめない
 function gotRegLink() {
   try { history.replaceState(null, "", location.pathname); } catch (e) { }
   if (LINK.dev === CALL.id) { $("ringNote").textContent = "これは じぶんが おくった さそいの リンクです"; $("ringNote").hidden = false; $("ringNote").classList.add("calm"); return; }
@@ -1315,7 +1332,7 @@ function gotRegLink() {
     addPerson({ dev: LINK.dev, name: LINK.name }); renderPartners();
     CALL.accept(LINK.dev, CFG.myName);
     const who = LINK.name || "あいて";
-    $("regDoneTitle").textContent = `${who}と なかまに なりました！`;
+    $("regDoneTitle").textContent = `${who}を とうろく しました！`;
     $("regDoneLead").textContent = `あそぶときは「とおくの ひとと あそぶ」→「${who}と あそぶ」を おしてね。`;
     $("regDoneOv").hidden = false;
   };

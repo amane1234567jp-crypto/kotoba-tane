@@ -47,8 +47,10 @@ R = P.peopleUpsert(R, { room: "room3333", dev: D1, name: "ばあば" });
 eq(R.length, 1, "部屋だけの記録と 端末番号つきが 同じ人なら 1つに");
 
 // 送る文
-eq(/まだ ゲームは はじまりません/.test(P.regText("ゆうくん", "u")), true, "さそう文に「まだ ゲームは はじまりません」");
-eq(P.playText("", "u").startsWith("いま"), true, "名前がなくても 文になる");
+eq(P.regText("ゆうくん", "U"), "ゆうくんです。テレビ電話をしながらリバーシで遊べるアプリがあるので、いっしょに遊びませんか？\n下のリンクからアプリを入れて（無料）、開いてください。\nU", "さそう文（あまねさんと決めた文）");
+eq(/なかま|まだ ゲーム/.test(P.regText("a", "u") + P.playText("a", "u")), false, "送る文に「なかま」「まだ ゲームは」を 入れない");
+eq(decodeURIComponent(P.lineShareURL("あ\nhttps://x/?a=1&b=2").split("text=")[1]), "あ\nhttps://x/?a=1&b=2", "LINE を ひらく URL に 文が そのまま 入る（& も こわれない）");
+eq(P.playText("", "u").startsWith("いまリバーシで遊べるよ"), true, "名前がなくても 文になる");
 
 console.log(fail ? `\n${fail} 件 NG` : "\nぜんぶ OK");
 process.exit(fail ? 1 : 0);
