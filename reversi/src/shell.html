@@ -251,9 +251,17 @@ body {
 .peopleSet { display: flex; flex-direction: column; gap: 6px; width: 100%; }
 .personRow { display: flex; align-items: center; justify-content: space-between; gap: 10px; font: 700 clamp(15px, 2.2vmin, 18px) var(--body); padding: 6px 4px; border-bottom: 1px dashed #D8D4CC; }
 .personRow button.confirm { background: #E2574C; color: #FFFFFF; }
+/* QRコードは おまけ（遠くの人には LINE で送るのが きほん。2026-11-21 あまねさん） */
+.qrFold { text-align: center; }
+.qrFold summary { cursor: pointer; font: 700 14px var(--body); color: #8A8790; padding: 6px; list-style: none; }
+.qrFold summary::-webkit-details-marker { display: none; }
+.qrFold summary::before { content: "▸ "; }
+.qrFold[open] summary::before { content: "▾ "; }
+.qrFold .qr { margin: 8px auto 0; }
+.panelBtns button.lineBtn { background: #06C755; color: #FFFFFF; font: 900 19px var(--body); padding: 14px; }
 .msgBox { display: grid; gap: 6px; text-align: left; }
 .msgBox label { font: 900 clamp(14px, 2.2vmin, 17px) var(--body); }
-.msgBox textarea { font: 500 16px/1.6 var(--body); padding: 10px 12px; border: 3px solid var(--ink); border-radius: 12px; background: #FFFFFF; color: var(--ink); resize: vertical; min-height: 10em; box-sizing: border-box; width: 100%; }
+.msgBox textarea { font: 500 16px/1.6 var(--body); padding: 10px 12px; border: 3px solid var(--ink); border-radius: 12px; background: #FFFFFF; color: var(--ink); resize: vertical; min-height: 11.5em; box-sizing: border-box; width: 100%; }
 .msgBox .msgLink { margin: 0; font: 700 13px var(--body); color: #8A8790; }
 .msgBox button { justify-self: start; }
 .whoEmpty { font: 700 clamp(15px, 2.4vmin, 19px) var(--body); color: #8A8790; margin: 2px 0; }
@@ -380,13 +388,12 @@ body {
   <div class="panel invite" role="dialog" aria-label="たいせんあいてを よぶ">
     <h2 id="inviteTitle">たいせんあいてに リンクを おくる</h2>
     <p class="lead" id="inviteLead">「LINEで おくる」で LINE が ひらきます。あいてを えらんで 送ってね。<br>あいてが リンクを ひらいて アプリを いれ、「アプリで ひらく」を おすと、つながります。</p>
-    <div class="msgBox"><label for="invMsg">おくる ぶん（なおせます）</label><textarea id="invMsg" rows="6" maxlength="300"></textarea><p class="msgLink">＋ リンク（さいごに じどうで つきます）</p><button type="button" id="invMsgReset" class="small" hidden>もとの ぶんに もどす</button></div>
-    <div class="qr" id="qr" aria-label="リンクの QRコード"></div>
+    <div class="msgBox"><label for="invMsg">おくる ぶん（なおせます）</label><textarea id="invMsg" rows="7" maxlength="300"></textarea><p class="msgLink">＋ リンク（さいごに じどうで つきます）</p><button type="button" id="invMsgReset" class="small" hidden>もとの ぶんに もどす</button></div>
     <div class="panelBtns">
       <button type="button" class="lineBtn" id="lineBtn">LINEで おくる</button>
     </div>
     <div class="panelBtns"><button type="button" id="otherBtn">ほかの アプリで おくる</button></div>
-    <p class="link" id="inviteLink"></p>
+    <details class="qrFold"><summary>そばに いる ひとには QRコード</summary><div class="qr" id="qr" aria-label="リンクの QRコード"></div><p class="link" id="inviteLink"></p></details>
     <p class="lead small" id="inviteAgain" hidden>まえに おくった リンクと おなじです。あいての がめんの「○○と 対戦する」からも はいれます。</p>
     <p class="warn" id="inviteWarn" hidden>無料分（10回）は使い切っています。相手が解放ずみなら遊べます。そうでなければ、つながったあとに解放の案内が出ます。</p>
     <div class="panelBtns"><button type="button" id="copyBtn">リンクを コピー</button><button type="button" id="inviteClose" class="primary">とじる（まつ）</button></div>
@@ -396,11 +403,10 @@ body {
   <div class="panel invite" role="dialog" aria-label="あいてを さそう">
     <h2>あいてを さそう</h2>
     <p class="lead">「LINEで おくる」で リンクを おくってね。あいてが アプリを いれて ひらくと、おたがいの「とうろくした ひと」に はいります。<br><small>おくっても すぐには はじまりません。あそぶときは「だれと あそぶ？」から よびます。</small></p>
-    <div class="msgBox"><label for="regMsg">おくる ぶん（なおせます）</label><textarea id="regMsg" rows="6" maxlength="300"></textarea><p class="msgLink">＋ リンク（さいごに じどうで つきます）</p><button type="button" id="regMsgReset" class="small" hidden>もとの ぶんに もどす</button></div>
-    <div class="qr" id="regQr" aria-label="リンクの QRコード"></div>
+    <div class="msgBox"><label for="regMsg">おくる ぶん（なおせます）</label><textarea id="regMsg" rows="7" maxlength="300"></textarea><p class="msgLink">＋ リンク（さいごに じどうで つきます）</p><button type="button" id="regMsgReset" class="small" hidden>もとの ぶんに もどす</button></div>
     <div class="panelBtns"><button type="button" class="lineBtn" id="regLine">LINEで おくる</button></div>
     <div class="panelBtns"><button type="button" id="regOther">ほかの アプリで おくる</button></div>
-    <p class="link" id="regLinkTxt"></p>
+    <details class="qrFold"><summary>そばに いる ひとには QRコード</summary><div class="qr" id="regQr" aria-label="リンクの QRコード"></div><p class="link" id="regLinkTxt"></p></details>
     <div class="panelBtns"><button type="button" id="regCopy">リンクを コピー</button><button type="button" id="regClose" class="primary">とじる</button></div>
   </div>
 </div>
