@@ -49,6 +49,9 @@ eq(R.length, 1, "部屋だけの記録と 端末番号つきが 同じ人なら 
 // 送る文
 eq(P.regText("ゆうくん", "U"), "ゆうくんです。テレビ電話をしながらリバーシで遊べるアプリがあるので、いっしょに遊びませんか？\n下のリンクからアプリを入れて（無料）、開いてください。\nU", "さそう文（あまねさんと決めた文）");
 eq(/なかま|まだ ゲーム/.test(P.regText("a", "u") + P.playText("a", "u")), false, "送る文に「なかま」「まだ ゲームは」を 入れない");
+eq(P.withLink("  ばあばへ  ", "U"), "ばあばへ\nU", "本文＋リンク（前後の空白は とる）");
+eq(P.withLink("", "U"), "U", "本文を ぜんぶ消しても リンクだけは 送る");
+eq(P.withLink("あ".repeat(500), "U").length, 302, "本文は 300字まで（リンクは かならず つく）");
 eq(decodeURIComponent(P.lineShareURL("あ\nhttps://x/?a=1&b=2").split("text=")[1]), "あ\nhttps://x/?a=1&b=2", "LINE を ひらく URL に 文が そのまま 入る（& も こわれない）");
 eq(P.playText("", "u").startsWith("いまリバーシで遊べるよ"), true, "名前がなくても 文になる");
 

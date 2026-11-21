@@ -62,6 +62,25 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   const regUrl = (shared.match(/https:\/\/\S+/) || [""])[0];
   check(/[?&]m=reg/.test(regUrl) && !/[?&]r=/.test(regUrl) && regUrl.includes("fd=" + aid), "A：リンクは とうろく用（部屋なし・A の端末番号）");
   check(!(await vis(a, "regOv")), "A：LINE を ひらくと 開始画面に もどる");
+  // 送る前に 本文を 見て 直せる（LINE 側では 見えない：11/21 実機）
+  await a.evaluate(() => showRegInvite()); await a.waitForTimeout(200);
+  check(await a.evaluate(() => document.getElementById("regMsg").value) === shared.split("\n").slice(0, -1).join("\n"), "A：さそう画面に 送る本文が 出ている（送った本文と おなじ）");
+  check(!(await vis(a, "regMsgReset")), "A：直していなければ「もとの ぶんに もどす」は 出ない");
+  await a.fill("#regMsg", "ばあばへ\nこんど いっしょに リバーシ しよう！");
+  check(await vis(a, "regMsgReset"), "A：直すと「もとの ぶんに もどす」が 出る");
+  await a.click("#regLine"); await a.waitForTimeout(200);
+  const edited = (await a.evaluate(() => window.__shared)).pop() || "";
+  check(edited.startsWith("ばあばへ\nこんど いっしょに リバーシ しよう！\nhttps://") && /[?&]m=reg/.test(edited), "A：直した本文で 送る（リンクは 最後に つく）");
+  await a.evaluate(() => showRegInvite()); await a.waitForTimeout(100);
+  check((await a.evaluate(() => document.getElementById("regMsg").value)).startsWith("ばあばへ"), "A：直した本文は 次も 出る");
+  await a.click("#regMsgReset");
+  check((await a.evaluate(() => document.getElementById("regMsg").value)).startsWith("ゆうくんです。テレビ電話を"), "A：「もとの ぶんに もどす」で もどる");
+  await a.fill("#regMsg", "");
+  await a.click("#regLine"); await a.waitForTimeout(200);
+  check(/^https:\/\/\S+m=reg/.test((await a.evaluate(() => window.__shared)).pop() || ""), "A：本文を 消しても リンクは 送る");
+  await a.click("#callBtn").catch(() => { }); await a.evaluate(() => { document.getElementById("whoOv").hidden = true; });
+  await a.evaluate(() => showRegInvite()); await a.click("#regMsgReset").catch(() => { }); await a.click("#regClose");
+
   // ほかの アプリで おくる（共有画面）：閉じただけ／コピー／送った
   await a.evaluate(() => { window.__shareResult = { ok: false, act: "" }; document.getElementById("regOv").hidden = false; });
   await a.click("#regOther"); await a.waitForTimeout(300);

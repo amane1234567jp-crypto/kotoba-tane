@@ -1068,15 +1068,16 @@ let INV = { url: "", text: "" };
 function showInvite(again) {
   if (target) {
     const url = playLink(BASE, NET.room, CFG.myName, CALL.id);
-    INV = { url, text: playText(CFG.myName, url) };
+    INV = { url, def: playBody(CFG.myName), key: "playMsg" };
     $("inviteTitle").textContent = `${target.name}に しらせる`;
     $("inviteLead").textContent = `「LINEで おくる」で ${target.name}に しらせてね。${target.name}が リンクを タップすると、つながります。`;
   } else {
-    INV = { url: NET.inviteURL(), text: inviteText() };
+    INV = { url: NET.inviteURL(), def: inviteBody(), key: "" };
     $("inviteTitle").textContent = "たいせんあいてに リンクを おくる";
     $("inviteLead").innerHTML = INVITE_LEAD;
   }
   const url = INV.url;
+  fillMsg("invMsg", INV.def, INV.key);
   $("inviteAgain").hidden = !again || !!target;
   try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("qr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("qr").textContent = ""; }
   $("inviteLink").textContent = url;
@@ -1140,12 +1141,31 @@ $("copyBtn").addEventListener("click", () => {
 /* おくる（2026-11-21）：
    ・LINEで おくる … LINE を直接ひらく（相手を選んで、送る前に 文を見られる）。送ったかは わからないので 言い方は「おくったら〜」
    ・ほかの アプリで おくる … 共有画面。iPhone は 送ったか・閉じただけか が わかる（閉じただけなら この画面のまま） */
-const inviteText = () => regText(CFG.myName, NET.inviteURL()).replace("下のリンクからアプリを入れて（無料）、開いてください。", "下のリンクからアプリを入れて（無料）、開いてください。開くと、そのままつながります。");
+const inviteBody = () => regBody(CFG.myName) + "開くと、そのままつながります。";
+const inviteText = () => withLink(inviteBody(), NET.inviteURL());
+/* 送る ぶん：送る前に 見せて 直せる（2026-11-21 あまねさん）。直した ぶんは 次のために 覚える（CFG.regMsg／CFG.playMsg）。
+   なまえが 変わったら 最初の ぶんも 変わるので、直していないときは 覚えない */
+function fillMsg(box, def, key) {
+  const t = $(box);
+  t.value = (key && CFG[key]) || def;
+  t.dataset.def = def; t.dataset.key = key || "";
+  $(box + "Reset").hidden = t.value === def;
+}
+function msgInput(box) {
+  const t = $(box), key = t.dataset.key, same = t.value === t.dataset.def;
+  if (key) { if (same) delete CFG[key]; else CFG[key] = t.value.slice(0, 300); saveCfg(); }
+  $(box + "Reset").hidden = same;
+}
+["regMsg", "invMsg"].forEach(box => {
+  $(box).addEventListener("input", () => msgInput(box));
+  $(box + "Reset").addEventListener("click", () => { $(box).value = $(box).dataset.def; msgInput(box); });
+});
+const invText = () => withLink($("invMsg").value, INV.url || NET.inviteURL());
 const waitMsg = () => target ? `${target.name}を まっています…` : "まっています…";
 const isAndroid = () => !!(window.RVNative && window.RVNative.platform === "android");
 const isCopyAct = act => /copy|pasteboard/i.test(act || "");
-function openLine(text, alt) {
-  const url = alt ? lineMsgURL(text) : lineShareURL(text);
+function openLine(text) {
+  const url = lineShareURL(text);
   if (window.RVNative) CALL.toApp({ t: "open", url }); else location.href = url;
 }
 // 共有画面で おくる。{ ok:送った, copy:コピーを選んだ, sure:送ったか本当に わかる } を返す
@@ -1155,10 +1175,9 @@ async function shareSheet(text) {
   return { ok: false };
 }
 function inviteGone(note) { $("inviteOv").hidden = true; camMsg(otherSide(), note || waitMsg()); }
-$("lineBtn").addEventListener("click", () => { openLine(INV.text || inviteText()); inviteGone(); });
-$("lineBtn2").addEventListener("click", () => { openLine(INV.text || inviteText(), true); inviteGone(); });
+$("lineBtn").addEventListener("click", () => { openLine(invText()); inviteGone(); });
 $("otherBtn").addEventListener("click", async () => {
-  const r = await shareSheet(INV.text || inviteText());
+  const r = await shareSheet(invText());
   if (!r.ok) return;                       // 閉じただけ：この画面のまま
   inviteGone(r.copy ? "コピーしました。LINE などに はりつけて おくってね" : waitMsg());
 });
@@ -1289,6 +1308,7 @@ function showRegInvite() {
   const url = regLink(BASE, CFG.myName, CALL.id);
   try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("regQr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("regQr").textContent = ""; }
   $("regLinkTxt").textContent = url;
+  fillMsg("regMsg", regBody(CFG.myName), "regMsg");
   $("regOv").hidden = false;
   CALL.refresh(CFG.myName);
 }
@@ -1300,9 +1320,8 @@ function regSent(note) {
   pendUntil = Date.now() + 15 * 60 * 1000; clearInterval(pendTimer);
   pendTimer = setInterval(() => { if (Date.now() > pendUntil || G.started) { clearInterval(pendTimer); return; } checkPending(); }, 20000);
 }
-const regMsg = () => regText(CFG.myName, regLink(BASE, CFG.myName, CALL.id));
+const regMsg = () => withLink($("regMsg").value, regLink(BASE, CFG.myName, CALL.id));
 $("regLine").addEventListener("click", () => { openLine(regMsg()); regSent(); });
-$("regLine2").addEventListener("click", () => { openLine(regMsg(), true); regSent(); });
 $("regOther").addEventListener("click", async () => {
   const r = await shareSheet(regMsg());
   if (!r.ok) return;                       // 閉じただけ：この画面のまま

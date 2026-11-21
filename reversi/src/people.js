@@ -56,14 +56,15 @@ function playLink(base, room, name, dev) {
   return base + "?m=play&r=" + room + (name ? "&n=" + encodeURIComponent(name) : "") + (dev ? "&fd=" + dev : "") + "&openExternalBrowser=1";
 }
 // LINE で送る文（受けとるのは おとな。ふつうの漢字かなまじり。2026-11-21 あまねさん）
-function regText(myName, url) {
-  return `${myName ? myName + "です。" : ""}テレビ電話をしながらリバーシで遊べるアプリがあるので、いっしょに遊びませんか？\n下のリンクからアプリを入れて（無料）、開いてください。\n${url}`;
-}
-function playText(myName, url) {
-  return `${myName ? myName + "です。" : ""}いまリバーシで遊べるよ！ このリンクをタップしてね。\n${url}`;
-}
+// 本文（リンクの前）。送る前に アプリの中で 見せて 直せる（LINE 側では 本文が見えない・直せない：11/21 実機で確認）
+const regBody = myName => `${myName ? myName + "です。" : ""}テレビ電話をしながらリバーシで遊べるアプリがあるので、いっしょに遊びませんか？\n下のリンクからアプリを入れて（無料）、開いてください。`;
+const playBody = myName => `${myName ? myName + "です。" : ""}いまリバーシで遊べるよ！ このリンクをタップしてね。`;
+// 本文 ＋ リンク（リンクは かならず 最後に つける。本文を 消しても リンクだけは 送る）
+const withLink = (body, url) => (String(body || "").trim() ? String(body).trim().slice(0, 300) + "\n" : "") + url;
+const regText = (myName, url) => withLink(regBody(myName), url);
+const playText = (myName, url) => withLink(playBody(myName), url);
 // LINE を直接ひらく（相手を選んだあと、送る前に 文を見て 直せる…かを 実機で ためす。2026-11-21）
 const lineShareURL = text => "https://line.me/R/share?text=" + encodeURIComponent(text);
 const lineMsgURL = text => "line://msg/text/" + encodeURIComponent(text);
 
-if (typeof module !== "undefined") module.exports = { peopleUpsert, peopleRemove, peopleKey, peopleMigrate, parseLink, regLink, playLink, regText, playText, lineShareURL, lineMsgURL, PEOPLE_MAX };
+if (typeof module !== "undefined") module.exports = { peopleUpsert, peopleRemove, peopleKey, peopleMigrate, parseLink, regLink, playLink, regText, playText, regBody, playBody, withLink, lineShareURL, lineMsgURL, PEOPLE_MAX };
