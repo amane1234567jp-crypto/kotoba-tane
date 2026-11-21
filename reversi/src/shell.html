@@ -251,13 +251,15 @@ body {
 .peopleSet { display: flex; flex-direction: column; gap: 6px; width: 100%; }
 .personRow { display: flex; align-items: center; justify-content: space-between; gap: 10px; font: 700 clamp(15px, 2.2vmin, 18px) var(--body); padding: 6px 4px; border-bottom: 1px dashed #D8D4CC; }
 .personRow button.confirm { background: #E2574C; color: #FFFFFF; }
-/* QRコードは おまけ（遠くの人には LINE で送るのが きほん。2026-11-21 あまねさん） */
-.qrFold { text-align: center; }
-.qrFold summary { cursor: pointer; font: 700 14px var(--body); color: #8A8790; padding: 6px; list-style: none; }
-.qrFold summary::-webkit-details-marker { display: none; }
-.qrFold summary::before { content: "▸ "; }
-.qrFold[open] summary::before { content: "▾ "; }
-.qrFold .qr { margin: 8px auto 0; }
+/* LINE が きほん（日本人は ほぼ みんな LINE。2026-11-21 あまねさん）。ほかのアプリ・コピー・QRコード は 小さく たたんでおく */
+.otherFold { text-align: center; display: grid; gap: 8px; }
+.otherFold summary { cursor: pointer; font: 700 14px var(--body); color: #8A8790; padding: 6px; list-style: none; }
+.otherFold summary::-webkit-details-marker { display: none; }
+.otherFold summary::before { content: "▸ "; }
+.otherFold[open] summary::before { content: "▾ "; }
+.otherFold .panelBtns button { font-size: 15px; padding: 10px; }
+.otherFold .foldNote { margin: 4px 0 0; font: 500 13px var(--body); color: #6A6770; }
+.otherFold .qr { margin: 0 auto; }
 .panelBtns button.lineBtn { background: #06C755; color: #FFFFFF; font: 900 19px var(--body); padding: 14px; }
 .msgBox { display: grid; gap: 6px; text-align: left; }
 .msgBox label { font: 900 clamp(14px, 2.2vmin, 17px) var(--body); }
@@ -386,33 +388,39 @@ body {
 </div>
 <div class="cover" id="inviteOv" hidden>
   <div class="panel invite" role="dialog" aria-label="たいせんあいてを よぶ">
-    <h2 id="inviteTitle">たいせんあいてに リンクを おくる</h2>
-    <p class="lead" id="inviteLead">「LINEで おくる」で LINE が ひらきます。あいてを えらんで 送ってね。<br>あいてが リンクを ひらいて アプリを いれ、「アプリで ひらく」を おすと、つながります。</p>
-    <div class="msgBox"><label for="invMsg">おくる ぶん（なおせます）</label><textarea id="invMsg" rows="7" maxlength="300"></textarea><p class="msgLink">＋ リンク（さいごに じどうで つきます）</p><button type="button" id="invMsgReset" class="small" hidden>もとの ぶんに もどす</button></div>
+    <h2 id="inviteTitle">対戦相手にリンクを送る</h2>
+    <p class="lead" id="inviteLead">「LINEで送る」でLINEが開きます。相手を選んで送ってください。<br>相手がリンクを開いてアプリを入れ、「アプリで開く」を押すと、つながります。</p>
+    <div class="msgBox"><label for="invMsg">送る文面（書きかえられます）</label><textarea id="invMsg" rows="7" maxlength="300"></textarea><p class="msgLink">＋ リンク（最後に自動で付きます）</p><button type="button" id="invMsgReset" class="small" hidden>最初の文面に戻す</button></div>
     <div class="panelBtns">
-      <button type="button" class="lineBtn" id="lineBtn">LINEで おくる</button>
+      <button type="button" class="lineBtn" id="lineBtn">LINEで送る</button>
     </div>
-    <div class="panelBtns"><button type="button" id="otherBtn">ほかの アプリで おくる</button></div>
-    <details class="qrFold"><summary>そばに いる ひとには QRコード</summary><div class="qr" id="qr" aria-label="リンクの QRコード"></div><p class="link" id="inviteLink"></p></details>
-    <p class="lead small" id="inviteAgain" hidden>まえに おくった リンクと おなじです。あいての がめんの「○○と 対戦する」からも はいれます。</p>
+    <details class="otherFold"><summary>ほかの方法で送る</summary>
+      <div class="panelBtns"><button type="button" id="otherBtn">ほかのアプリで送る</button><button type="button" id="copyBtn">文面をコピー</button></div>
+      <p class="foldNote">近くにいる人は、このQRコードを読み取っても参加できます。</p>
+      <div class="qr" id="qr" aria-label="リンクの QRコード"></div><p class="link" id="inviteLink"></p>
+    </details>
+    <p class="lead small" id="inviteAgain" hidden>前に送ったリンクと同じです。</p>
     <p class="warn" id="inviteWarn" hidden>無料分（10回）は使い切っています。相手が解放ずみなら遊べます。そうでなければ、つながったあとに解放の案内が出ます。</p>
-    <div class="panelBtns"><button type="button" id="copyBtn">リンクを コピー</button><button type="button" id="inviteClose" class="primary">とじる（まつ）</button></div>
+    <div class="panelBtns"><button type="button" id="inviteClose">閉じる（待つ）</button></div>
   </div>
 </div>
 <div class="cover" id="regOv" hidden>
   <div class="panel invite" role="dialog" aria-label="あいてを さそう">
-    <h2>あいてを さそう</h2>
-    <p class="lead">「LINEで おくる」で リンクを おくってね。あいてが アプリを いれて ひらくと、おたがいの「とうろくした ひと」に はいります。<br><small>おくっても すぐには はじまりません。あそぶときは「だれと あそぶ？」から よびます。</small></p>
-    <div class="msgBox"><label for="regMsg">おくる ぶん（なおせます）</label><textarea id="regMsg" rows="7" maxlength="300"></textarea><p class="msgLink">＋ リンク（さいごに じどうで つきます）</p><button type="button" id="regMsgReset" class="small" hidden>もとの ぶんに もどす</button></div>
-    <div class="panelBtns"><button type="button" class="lineBtn" id="regLine">LINEで おくる</button></div>
-    <div class="panelBtns"><button type="button" id="regOther">ほかの アプリで おくる</button></div>
-    <details class="qrFold"><summary>そばに いる ひとには QRコード</summary><div class="qr" id="regQr" aria-label="リンクの QRコード"></div><p class="link" id="regLinkTxt"></p></details>
-    <div class="panelBtns"><button type="button" id="regCopy">リンクを コピー</button><button type="button" id="regClose" class="primary">とじる</button></div>
+    <h2>相手を誘う</h2>
+    <p class="lead">「LINEで送る」でリンクを送ってください。相手がアプリを入れて開くと、お互いの「とうろくした ひと」に入ります。<br><small>送ってもすぐにはゲームは始まりません。遊ぶときは「だれと あそぶ？」から相手を呼びます。</small></p>
+    <div class="msgBox"><label for="regMsg">送る文面（書きかえられます）</label><textarea id="regMsg" rows="7" maxlength="300"></textarea><p class="msgLink">＋ リンク（最後に自動で付きます）</p><button type="button" id="regMsgReset" class="small" hidden>最初の文面に戻す</button></div>
+    <div class="panelBtns"><button type="button" class="lineBtn" id="regLine">LINEで送る</button></div>
+    <details class="otherFold"><summary>ほかの方法で送る</summary>
+      <div class="panelBtns"><button type="button" id="regOther">ほかのアプリで送る</button><button type="button" id="regCopy">文面をコピー</button></div>
+      <p class="foldNote">近くにいる人は、このQRコードを読み取っても登録できます。</p>
+      <div class="qr" id="regQr" aria-label="リンクの QRコード"></div><p class="link" id="regLinkTxt"></p>
+    </details>
+    <div class="panelBtns"><button type="button" id="regClose">閉じる</button></div>
   </div>
 </div>
 <div class="cover" id="regDoneOv" hidden>
   <div class="panel invite" role="dialog" aria-label="とうろく しました">
-    <h2 id="regDoneTitle">とうろく しました！</h2>
+    <h2 id="regDoneTitle">登録しました！</h2>
     <p class="lead" id="regDoneLead"></p>
     <div class="panelBtns"><button type="button" id="regDoneOk" class="primary">OK</button></div>
   </div>

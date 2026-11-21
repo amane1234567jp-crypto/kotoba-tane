@@ -264,13 +264,15 @@ body {
 .peopleSet { display: flex; flex-direction: column; gap: 6px; width: 100%; }
 .personRow { display: flex; align-items: center; justify-content: space-between; gap: 10px; font: 700 clamp(15px, 2.2vmin, 18px) var(--body); padding: 6px 4px; border-bottom: 1px dashed #D8D4CC; }
 .personRow button.confirm { background: #E2574C; color: #FFFFFF; }
-/* QRコードは おまけ（遠くの人には LINE で送るのが きほん。2026-11-21 あまねさん） */
-.qrFold { text-align: center; }
-.qrFold summary { cursor: pointer; font: 700 14px var(--body); color: #8A8790; padding: 6px; list-style: none; }
-.qrFold summary::-webkit-details-marker { display: none; }
-.qrFold summary::before { content: "▸ "; }
-.qrFold[open] summary::before { content: "▾ "; }
-.qrFold .qr { margin: 8px auto 0; }
+/* LINE が きほん（日本人は ほぼ みんな LINE。2026-11-21 あまねさん）。ほかのアプリ・コピー・QRコード は 小さく たたんでおく */
+.otherFold { text-align: center; display: grid; gap: 8px; }
+.otherFold summary { cursor: pointer; font: 700 14px var(--body); color: #8A8790; padding: 6px; list-style: none; }
+.otherFold summary::-webkit-details-marker { display: none; }
+.otherFold summary::before { content: "▸ "; }
+.otherFold[open] summary::before { content: "▾ "; }
+.otherFold .panelBtns button { font-size: 15px; padding: 10px; }
+.otherFold .foldNote { margin: 4px 0 0; font: 500 13px var(--body); color: #6A6770; }
+.otherFold .qr { margin: 0 auto; }
 .panelBtns button.lineBtn { background: #06C755; color: #FFFFFF; font: 900 19px var(--body); padding: 14px; }
 .msgBox { display: grid; gap: 6px; text-align: left; }
 .msgBox label { font: 900 clamp(14px, 2.2vmin, 17px) var(--body); }
@@ -374,7 +376,7 @@ body {
       <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と あそぶ」を押すだけでつながります。</p>
     </div>
     <button class="adultBtn" id="adultBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Zm7.4-2.1.9-.7-1.5-2.6-1.1.3a6 6 0 0 0-1.3-.8l-.2-1.1h-3l-.2 1.1a6 6 0 0 0-1.3.8l-1.1-.3-1.5 2.6.9.7v1.3l-.9.7 1.5 2.6 1.1-.3a6 6 0 0 0 1.3.8l.2 1.1h3l.2-1.1a6 6 0 0 0 1.3-.8l1.1.3 1.5-2.6-.9-.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>おとなの せってい</button>
-    <p class="ver">v2026.11.21 25588e8</p>
+    <p class="ver">v2026.11.21 8abcaee</p>
   </div>
 </div>
 <!-- 相手が 2人以上 登録されているときだけ：だれと あそぶ？ -->
@@ -399,33 +401,39 @@ body {
 </div>
 <div class="cover" id="inviteOv" hidden>
   <div class="panel invite" role="dialog" aria-label="たいせんあいてを よぶ">
-    <h2 id="inviteTitle">たいせんあいてに リンクを おくる</h2>
-    <p class="lead" id="inviteLead">「LINEで おくる」で LINE が ひらきます。あいてを えらんで 送ってね。<br>あいてが リンクを ひらいて アプリを いれ、「アプリで ひらく」を おすと、つながります。</p>
-    <div class="msgBox"><label for="invMsg">おくる ぶん（なおせます）</label><textarea id="invMsg" rows="7" maxlength="300"></textarea><p class="msgLink">＋ リンク（さいごに じどうで つきます）</p><button type="button" id="invMsgReset" class="small" hidden>もとの ぶんに もどす</button></div>
+    <h2 id="inviteTitle">対戦相手にリンクを送る</h2>
+    <p class="lead" id="inviteLead">「LINEで送る」でLINEが開きます。相手を選んで送ってください。<br>相手がリンクを開いてアプリを入れ、「アプリで開く」を押すと、つながります。</p>
+    <div class="msgBox"><label for="invMsg">送る文面（書きかえられます）</label><textarea id="invMsg" rows="7" maxlength="300"></textarea><p class="msgLink">＋ リンク（最後に自動で付きます）</p><button type="button" id="invMsgReset" class="small" hidden>最初の文面に戻す</button></div>
     <div class="panelBtns">
-      <button type="button" class="lineBtn" id="lineBtn">LINEで おくる</button>
+      <button type="button" class="lineBtn" id="lineBtn">LINEで送る</button>
     </div>
-    <div class="panelBtns"><button type="button" id="otherBtn">ほかの アプリで おくる</button></div>
-    <details class="qrFold"><summary>そばに いる ひとには QRコード</summary><div class="qr" id="qr" aria-label="リンクの QRコード"></div><p class="link" id="inviteLink"></p></details>
-    <p class="lead small" id="inviteAgain" hidden>まえに おくった リンクと おなじです。あいての がめんの「○○と 対戦する」からも はいれます。</p>
+    <details class="otherFold"><summary>ほかの方法で送る</summary>
+      <div class="panelBtns"><button type="button" id="otherBtn">ほかのアプリで送る</button><button type="button" id="copyBtn">文面をコピー</button></div>
+      <p class="foldNote">近くにいる人は、このQRコードを読み取っても参加できます。</p>
+      <div class="qr" id="qr" aria-label="リンクの QRコード"></div><p class="link" id="inviteLink"></p>
+    </details>
+    <p class="lead small" id="inviteAgain" hidden>前に送ったリンクと同じです。</p>
     <p class="warn" id="inviteWarn" hidden>無料分（10回）は使い切っています。相手が解放ずみなら遊べます。そうでなければ、つながったあとに解放の案内が出ます。</p>
-    <div class="panelBtns"><button type="button" id="copyBtn">リンクを コピー</button><button type="button" id="inviteClose" class="primary">とじる（まつ）</button></div>
+    <div class="panelBtns"><button type="button" id="inviteClose">閉じる（待つ）</button></div>
   </div>
 </div>
 <div class="cover" id="regOv" hidden>
   <div class="panel invite" role="dialog" aria-label="あいてを さそう">
-    <h2>あいてを さそう</h2>
-    <p class="lead">「LINEで おくる」で リンクを おくってね。あいてが アプリを いれて ひらくと、おたがいの「とうろくした ひと」に はいります。<br><small>おくっても すぐには はじまりません。あそぶときは「だれと あそぶ？」から よびます。</small></p>
-    <div class="msgBox"><label for="regMsg">おくる ぶん（なおせます）</label><textarea id="regMsg" rows="7" maxlength="300"></textarea><p class="msgLink">＋ リンク（さいごに じどうで つきます）</p><button type="button" id="regMsgReset" class="small" hidden>もとの ぶんに もどす</button></div>
-    <div class="panelBtns"><button type="button" class="lineBtn" id="regLine">LINEで おくる</button></div>
-    <div class="panelBtns"><button type="button" id="regOther">ほかの アプリで おくる</button></div>
-    <details class="qrFold"><summary>そばに いる ひとには QRコード</summary><div class="qr" id="regQr" aria-label="リンクの QRコード"></div><p class="link" id="regLinkTxt"></p></details>
-    <div class="panelBtns"><button type="button" id="regCopy">リンクを コピー</button><button type="button" id="regClose" class="primary">とじる</button></div>
+    <h2>相手を誘う</h2>
+    <p class="lead">「LINEで送る」でリンクを送ってください。相手がアプリを入れて開くと、お互いの「とうろくした ひと」に入ります。<br><small>送ってもすぐにはゲームは始まりません。遊ぶときは「だれと あそぶ？」から相手を呼びます。</small></p>
+    <div class="msgBox"><label for="regMsg">送る文面（書きかえられます）</label><textarea id="regMsg" rows="7" maxlength="300"></textarea><p class="msgLink">＋ リンク（最後に自動で付きます）</p><button type="button" id="regMsgReset" class="small" hidden>最初の文面に戻す</button></div>
+    <div class="panelBtns"><button type="button" class="lineBtn" id="regLine">LINEで送る</button></div>
+    <details class="otherFold"><summary>ほかの方法で送る</summary>
+      <div class="panelBtns"><button type="button" id="regOther">ほかのアプリで送る</button><button type="button" id="regCopy">文面をコピー</button></div>
+      <p class="foldNote">近くにいる人は、このQRコードを読み取っても登録できます。</p>
+      <div class="qr" id="regQr" aria-label="リンクの QRコード"></div><p class="link" id="regLinkTxt"></p>
+    </details>
+    <div class="panelBtns"><button type="button" id="regClose">閉じる</button></div>
   </div>
 </div>
 <div class="cover" id="regDoneOv" hidden>
   <div class="panel invite" role="dialog" aria-label="とうろく しました">
-    <h2 id="regDoneTitle">とうろく しました！</h2>
+    <h2 id="regDoneTitle">登録しました！</h2>
     <p class="lead" id="regDoneLead"></p>
     <div class="panelBtns"><button type="button" id="regDoneOk" class="primary">OK</button></div>
   </div>
@@ -3351,11 +3359,12 @@ function showInvite(again) {
   if (target) {
     const url = playLink(BASE, NET.room, CFG.myName, CALL.id);
     INV = { url, def: playBody(CFG.myName), key: "playMsg" };
-    $("inviteTitle").textContent = `${target.name}に しらせる`;
-    $("inviteLead").textContent = `「LINEで おくる」で ${target.name}に しらせてね。${target.name}が リンクを タップすると、つながります。`;
+    // ここは 親が さわる画面なので ふつうの漢字かなまじり（2026-11-21 あまねさん）
+    $("inviteTitle").textContent = `${target.name}に知らせる`;
+    $("inviteLead").textContent = `「LINEで送る」で${target.name}に知らせてください。${target.name}がリンクをタップすると、テレビ電話がつながります。`;
   } else {
     INV = { url: NET.inviteURL(), def: inviteBody(), key: "" };
-    $("inviteTitle").textContent = "たいせんあいてに リンクを おくる";
+    $("inviteTitle").textContent = "対戦相手にリンクを送る";
     $("inviteLead").innerHTML = INVITE_LEAD;
   }
   const url = INV.url;
@@ -3416,9 +3425,10 @@ const answeringRing = !NET.role && new URLSearchParams(location.search).get("rin
 $("callBtn").addEventListener("click", pressPlay);
 const INVITE_LEAD = $("inviteLead").innerHTML;
 $("copyBtn").addEventListener("click", () => {
-  const url = INV.url || NET.inviteURL(), done = () => { $("copyBtn").textContent = "コピーしました"; setTimeout(() => $("copyBtn").textContent = "リンクを コピー", 2000); };
+  // 文面とリンクを まとめて コピー（メッセージやメールに 貼るだけで 送れる）
+  const done = () => { $("copyBtn").textContent = "コピーしました"; setTimeout(() => $("copyBtn").textContent = "文面をコピー", 2000); };
   const pick = () => { const r = document.createRange(); r.selectNodeContents($("inviteLink")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
-  try { navigator.clipboard.writeText(url).then(done, pick); } catch (e) { pick(); }
+  try { navigator.clipboard.writeText(invText()).then(done, pick); } catch (e) { pick(); }
 });
 /* おくる（2026-11-21）：
    ・LINEで おくる … LINE を直接ひらく（相手を選んで、送る前に 文を見られる）。送ったかは わからないので 言い方は「おくったら〜」
@@ -3461,7 +3471,7 @@ $("lineBtn").addEventListener("click", () => { openLine(invText()); inviteGone()
 $("otherBtn").addEventListener("click", async () => {
   const r = await shareSheet(invText());
   if (!r.ok) return;                       // 閉じただけ：この画面のまま
-  inviteGone(r.copy ? "コピーしました。LINE などに はりつけて おくってね" : waitMsg());
+  inviteGone(r.copy ? "コピーしました。LINEなどに貼り付けて送ってください" : waitMsg());
 });
 // リンクの画面をとじて待つあいだも、「リンクを おくる」を出しておく（また LINE で送れる）
 $("inviteClose").addEventListener("click", () => { $("inviteOv").hidden = true; if (NET.role === "host" && !NET.open) $("resendBtn").hidden = false; });
@@ -3597,7 +3607,7 @@ function showRegInvite() {
 // note：開始画面に出す ことば。送ったか わからないときは「おくったら〜」と言う
 function regSent(note) {
   $("regOv").hidden = true;
-  $("ringNote").textContent = note || "LINE で おくったら、あいてが リンクを ひらくのを まってね。とうろく されると ここに でます"; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
+  $("ringNote").textContent = note || "LINEで送ったら、相手がリンクを開くのを待ってください。登録されると、ここに表示されます"; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
   // しばらく（15分）は 20秒ごとに たしかめる
   pendUntil = Date.now() + 15 * 60 * 1000; clearInterval(pendTimer);
   pendTimer = setInterval(() => { if (Date.now() > pendUntil || G.started) { clearInterval(pendTimer); return; } checkPending(); }, 20000);
@@ -3607,11 +3617,10 @@ $("regLine").addEventListener("click", () => { openLine(regMsg()); regSent(); })
 $("regOther").addEventListener("click", async () => {
   const r = await shareSheet(regMsg());
   if (!r.ok) return;                       // 閉じただけ：この画面のまま
-  regSent(r.copy ? "コピーしました。LINE などに はりつけて おくってね" : r.sure ? "おくりました。あいてが リンクを ひらくと「とうろくした ひと」に はいります" : "");
+  regSent(r.copy ? "コピーしました。LINEなどに貼り付けて送ってください" : r.sure ? "送りました。相手がリンクを開くと「とうろくした ひと」に入ります" : "");
 });
 $("regCopy").addEventListener("click", () => {
-  const url = regLink(BASE, CFG.myName, CALL.id);
-  try { navigator.clipboard.writeText(url).then(() => { $("regCopy").textContent = "コピーしました"; setTimeout(() => $("regCopy").textContent = "リンクを コピー", 2000); }); } catch (e) { }
+  try { navigator.clipboard.writeText(regMsg()).then(() => { $("regCopy").textContent = "コピーしました"; setTimeout(() => $("regCopy").textContent = "文面をコピー", 2000); }); } catch (e) { }
 });
 $("regClose").addEventListener("click", () => { $("regOv").hidden = true; });
 function checkPending() {
@@ -3633,8 +3642,8 @@ function gotRegLink() {
     addPerson({ dev: LINK.dev, name: LINK.name }); renderPartners();
     CALL.accept(LINK.dev, CFG.myName);
     const who = LINK.name || "あいて";
-    $("regDoneTitle").textContent = `${who}を とうろく しました！`;
-    $("regDoneLead").textContent = `あそぶときは「とおくの ひとと あそぶ」→「${who}と あそぶ」を おしてね。`;
+    $("regDoneTitle").textContent = `${who}を登録しました！`;
+    $("regDoneLead").textContent = `遊ぶときは「とおくの ひとと あそぶ」→「${who}と あそぶ」を押してください。`;
     $("regDoneOv").hidden = false;
   };
   if (!CFG.myName) showNames(done, true); else done();

@@ -58,7 +58,7 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   check(opened.startsWith("https://line.me/R/share?text="), "A：「LINEで おくる」は LINE を 直接ひらく");
   const shared = (await a.evaluate(() => window.__shared))[0] || "";
   check(/^ゆうくんです。テレビ電話をしながらリバーシで遊べるアプリがあるので/.test(shared) && !/なかま|まだ ゲーム/.test(shared), "A：送る文は 決めた文（なかま・まだゲーム… は 入らない）");
-  check(/LINE で おくったら/.test(await txt(a, "ringNote")), "A：送ったか わからないので「おくったら〜」と 言う（「おくりました」と 言いきらない）");
+  check(/LINEで送ったら/.test(await txt(a, "ringNote")), "A：送ったか わからないので「おくったら〜」と 言う（「おくりました」と 言いきらない）");
   const regUrl = (shared.match(/https:\/\/\S+/) || [""])[0];
   check(/[?&]m=reg/.test(regUrl) && !/[?&]r=/.test(regUrl) && regUrl.includes("fd=" + aid), "A：リンクは とうろく用（部屋なし・A の端末番号）");
   check(!(await vis(a, "regOv")), "A：LINE を ひらくと 開始画面に もどる");
@@ -82,6 +82,8 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   await a.evaluate(() => showRegInvite()); await a.click("#regMsgReset").catch(() => { }); await a.click("#regClose");
 
   // ほかの アプリで おくる（共有画面）：閉じただけ／コピー／送った
+  check(await a.evaluate(() => !document.querySelector("#regOv .otherFold").open), "A：「ほかの方法で送る」は 最初 たたんである（LINE が きほん）");
+  await a.evaluate(() => { document.querySelector("#regOv .otherFold").open = true; });
   await a.evaluate(() => { window.__shareResult = { ok: false, act: "" }; document.getElementById("regOv").hidden = false; });
   await a.click("#regOther"); await a.waitForTimeout(300);
   check(await vis(a, "regOv"), "A：共有画面を 閉じただけなら さそう画面の まま（「おくりました」と 出ない）");
@@ -90,7 +92,7 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   check(!(await vis(a, "regOv")) && /コピーしました/.test(await txt(a, "ringNote")), "A：コピーを えらんだら「コピーしました。はりつけて おくってね」");
   await a.evaluate(() => { window.__shareResult = { ok: true, act: "jp.naver.line.Share" }; document.getElementById("regOv").hidden = false; });
   await a.click("#regOther"); await a.waitForTimeout(300);
-  check(!(await vis(a, "regOv")) && /おくりました/.test(await txt(a, "ringNote")), "A：本当に 送ったときだけ「おくりました」");
+  check(!(await vis(a, "regOv")) && /送りました/.test(await txt(a, "ringNote")), "A：本当に 送ったときだけ「おくりました」");
 
   // ---------- B（おばあちゃん）が リンクを ひらく ----------
   const { page: g } = await phone();
@@ -99,7 +101,7 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   check(await vis(g, "nameOv"), "B：はじめては なまえを きかれる");
   check(!(await vis(g, "inviteOv")) && await g.evaluate(() => NET.role === null), "B：対局には ならない");
   await g.fill("#myName", "ばあば"); await g.click("#nameOk"); await g.waitForTimeout(400);
-  check(await vis(g, "regDoneOv") && /ゆうくんを とうろく しました/.test(await txt(g, "regDoneTitle")), "B：「ゆうくんを とうろく しました！」");
+  check(await vis(g, "regDoneOv") && /ゆうくんを登録しました/.test(await txt(g, "regDoneTitle")), "B：「ゆうくんを登録しました！」");
   check(await g.evaluate(() => window.__media) === 0, "B：カメラは つかない");
   check(await g.evaluate(() => location.search === ""), "B：リンクの中身は 消す（開きなおしても くりかえさない）");
   let gp = await ppl(g);
@@ -118,7 +120,7 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   check(/ゆうくんと あそぶ/.test(await txt(g, "whoList")), "B：だれと あそぶ？ に ゆうくん");
   await g.click("#whoList button");
   await g.waitForFunction(() => !document.getElementById("inviteOv").hidden, null, { timeout: 15000 }).catch(() => { });
-  check(await vis(g, "inviteOv") && /ゆうくんに しらせる/.test(await txt(g, "inviteTitle")), "B：自分の部屋で まって「ゆうくんに しらせる」");
+  check(await vis(g, "inviteOv") && /ゆうくんに知らせる/.test(await txt(g, "inviteTitle")), "B：自分の部屋で まって「ゆうくんに知らせる」");
   await g.evaluate(() => document.getElementById("lineBtn").click());
   const waitTxt = await g.evaluate(() => document.getElementById("camB").textContent + document.getElementById("camA").textContent);
   await g.waitForTimeout(200);

@@ -1069,11 +1069,12 @@ function showInvite(again) {
   if (target) {
     const url = playLink(BASE, NET.room, CFG.myName, CALL.id);
     INV = { url, def: playBody(CFG.myName), key: "playMsg" };
-    $("inviteTitle").textContent = `${target.name}に しらせる`;
-    $("inviteLead").textContent = `「LINEで おくる」で ${target.name}に しらせてね。${target.name}が リンクを タップすると、つながります。`;
+    // ここは 親が さわる画面なので ふつうの漢字かなまじり（2026-11-21 あまねさん）
+    $("inviteTitle").textContent = `${target.name}に知らせる`;
+    $("inviteLead").textContent = `「LINEで送る」で${target.name}に知らせてください。${target.name}がリンクをタップすると、テレビ電話がつながります。`;
   } else {
     INV = { url: NET.inviteURL(), def: inviteBody(), key: "" };
-    $("inviteTitle").textContent = "たいせんあいてに リンクを おくる";
+    $("inviteTitle").textContent = "対戦相手にリンクを送る";
     $("inviteLead").innerHTML = INVITE_LEAD;
   }
   const url = INV.url;
@@ -1134,9 +1135,10 @@ const answeringRing = !NET.role && new URLSearchParams(location.search).get("rin
 $("callBtn").addEventListener("click", pressPlay);
 const INVITE_LEAD = $("inviteLead").innerHTML;
 $("copyBtn").addEventListener("click", () => {
-  const url = INV.url || NET.inviteURL(), done = () => { $("copyBtn").textContent = "コピーしました"; setTimeout(() => $("copyBtn").textContent = "リンクを コピー", 2000); };
+  // 文面とリンクを まとめて コピー（メッセージやメールに 貼るだけで 送れる）
+  const done = () => { $("copyBtn").textContent = "コピーしました"; setTimeout(() => $("copyBtn").textContent = "文面をコピー", 2000); };
   const pick = () => { const r = document.createRange(); r.selectNodeContents($("inviteLink")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
-  try { navigator.clipboard.writeText(url).then(done, pick); } catch (e) { pick(); }
+  try { navigator.clipboard.writeText(invText()).then(done, pick); } catch (e) { pick(); }
 });
 /* おくる（2026-11-21）：
    ・LINEで おくる … LINE を直接ひらく（相手を選んで、送る前に 文を見られる）。送ったかは わからないので 言い方は「おくったら〜」
@@ -1179,7 +1181,7 @@ $("lineBtn").addEventListener("click", () => { openLine(invText()); inviteGone()
 $("otherBtn").addEventListener("click", async () => {
   const r = await shareSheet(invText());
   if (!r.ok) return;                       // 閉じただけ：この画面のまま
-  inviteGone(r.copy ? "コピーしました。LINE などに はりつけて おくってね" : waitMsg());
+  inviteGone(r.copy ? "コピーしました。LINEなどに貼り付けて送ってください" : waitMsg());
 });
 // リンクの画面をとじて待つあいだも、「リンクを おくる」を出しておく（また LINE で送れる）
 $("inviteClose").addEventListener("click", () => { $("inviteOv").hidden = true; if (NET.role === "host" && !NET.open) $("resendBtn").hidden = false; });
@@ -1315,7 +1317,7 @@ function showRegInvite() {
 // note：開始画面に出す ことば。送ったか わからないときは「おくったら〜」と言う
 function regSent(note) {
   $("regOv").hidden = true;
-  $("ringNote").textContent = note || "LINE で おくったら、あいてが リンクを ひらくのを まってね。とうろく されると ここに でます"; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
+  $("ringNote").textContent = note || "LINEで送ったら、相手がリンクを開くのを待ってください。登録されると、ここに表示されます"; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
   // しばらく（15分）は 20秒ごとに たしかめる
   pendUntil = Date.now() + 15 * 60 * 1000; clearInterval(pendTimer);
   pendTimer = setInterval(() => { if (Date.now() > pendUntil || G.started) { clearInterval(pendTimer); return; } checkPending(); }, 20000);
@@ -1325,11 +1327,10 @@ $("regLine").addEventListener("click", () => { openLine(regMsg()); regSent(); })
 $("regOther").addEventListener("click", async () => {
   const r = await shareSheet(regMsg());
   if (!r.ok) return;                       // 閉じただけ：この画面のまま
-  regSent(r.copy ? "コピーしました。LINE などに はりつけて おくってね" : r.sure ? "おくりました。あいてが リンクを ひらくと「とうろくした ひと」に はいります" : "");
+  regSent(r.copy ? "コピーしました。LINEなどに貼り付けて送ってください" : r.sure ? "送りました。相手がリンクを開くと「とうろくした ひと」に入ります" : "");
 });
 $("regCopy").addEventListener("click", () => {
-  const url = regLink(BASE, CFG.myName, CALL.id);
-  try { navigator.clipboard.writeText(url).then(() => { $("regCopy").textContent = "コピーしました"; setTimeout(() => $("regCopy").textContent = "リンクを コピー", 2000); }); } catch (e) { }
+  try { navigator.clipboard.writeText(regMsg()).then(() => { $("regCopy").textContent = "コピーしました"; setTimeout(() => $("regCopy").textContent = "文面をコピー", 2000); }); } catch (e) { }
 });
 $("regClose").addEventListener("click", () => { $("regOv").hidden = true; });
 function checkPending() {
@@ -1351,8 +1352,8 @@ function gotRegLink() {
     addPerson({ dev: LINK.dev, name: LINK.name }); renderPartners();
     CALL.accept(LINK.dev, CFG.myName);
     const who = LINK.name || "あいて";
-    $("regDoneTitle").textContent = `${who}を とうろく しました！`;
-    $("regDoneLead").textContent = `あそぶときは「とおくの ひとと あそぶ」→「${who}と あそぶ」を おしてね。`;
+    $("regDoneTitle").textContent = `${who}を登録しました！`;
+    $("regDoneLead").textContent = `遊ぶときは「とおくの ひとと あそぶ」→「${who}と あそぶ」を押してください。`;
     $("regDoneOv").hidden = false;
   };
   if (!CFG.myName) showNames(done, true); else done();
