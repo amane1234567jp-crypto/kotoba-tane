@@ -263,7 +263,7 @@ body {
 .panelBtns button.lineBtn { background: #06C755; color: #FFFFFF; font: 900 19px var(--body); padding: 14px; }
 .msgBox { display: grid; gap: 6px; text-align: left; }
 .msgBox label { font: 900 clamp(14px, 2.2vmin, 17px) var(--body); }
-.msgBox textarea { font: 500 16px/1.6 var(--body); padding: 10px 12px; border: 3px solid var(--ink); border-radius: 12px; background: #FFFFFF; color: var(--ink); resize: vertical; min-height: 11.5em; box-sizing: border-box; width: 100%; }
+.msgBox textarea { font: 500 16px/1.6 var(--body); padding: 10px 12px; border: 3px solid var(--ink); border-radius: 12px; background: #FFFFFF; color: var(--ink); resize: vertical; min-height: 14em; overflow-wrap: anywhere; box-sizing: border-box; width: 100%; }
 .msgBox .msgLink { margin: 0; font: 700 13px var(--body); color: #8A8790; }
 .msgBox button { justify-self: start; }
 .whoEmpty { font: 700 clamp(15px, 2.4vmin, 19px) var(--body); color: #8A8790; margin: 2px 0; }
@@ -390,7 +390,7 @@ body {
   <div class="panel invite" role="dialog" aria-label="たいせんあいてを よぶ">
     <h2 id="inviteTitle">対戦相手にリンクを送る</h2>
     <p class="lead" id="inviteLead">「LINEで送る」でLINEが開きます。相手を選んで送ってください。<br>相手がリンクを開いてアプリを入れ、「アプリで開く」を押すと、つながります。</p>
-    <div class="msgBox"><label for="invMsg">送る文面（書きかえられます）</label><textarea id="invMsg" rows="7" maxlength="300"></textarea><p class="msgLink">＋ リンク（最後に自動で付きます）</p><button type="button" id="invMsgReset" class="small" hidden>最初の文面に戻す</button></div>
+    <div class="msgBox"><label for="invMsg">送る文面（書きかえられます）</label><textarea id="invMsg" rows="9" maxlength="600"></textarea><p class="msgLink">リンクを消してしまっても、送るときに自動で付けます。</p><button type="button" id="invMsgReset" class="small" hidden>最初の文面に戻す</button></div>
     <div class="panelBtns">
       <button type="button" class="lineBtn" id="lineBtn">LINEで送る</button>
     </div>
@@ -408,7 +408,7 @@ body {
   <div class="panel invite" role="dialog" aria-label="あいてを さそう">
     <h2>相手を誘う</h2>
     <p class="lead">「LINEで送る」でリンクを送ってください。相手がアプリを入れて開くと、お互いの「とうろくした ひと」に入ります。<br><small>送ってもすぐにはゲームは始まりません。遊ぶときは「だれと あそぶ？」から相手を呼びます。</small></p>
-    <div class="msgBox"><label for="regMsg">送る文面（書きかえられます）</label><textarea id="regMsg" rows="7" maxlength="300"></textarea><p class="msgLink">＋ リンク（最後に自動で付きます）</p><button type="button" id="regMsgReset" class="small" hidden>最初の文面に戻す</button></div>
+    <div class="msgBox"><label for="regMsg">送る文面（書きかえられます）</label><textarea id="regMsg" rows="9" maxlength="600"></textarea><p class="msgLink">リンクを消してしまっても、送るときに自動で付けます。</p><button type="button" id="regMsgReset" class="small" hidden>最初の文面に戻す</button></div>
     <div class="panelBtns"><button type="button" class="lineBtn" id="regLine">LINEで送る</button></div>
     <details class="otherFold"><summary>ほかの方法で送る</summary>
       <div class="panelBtns"><button type="button" id="regOther">ほかのアプリで送る</button><button type="button" id="regCopy">文面をコピー</button></div>

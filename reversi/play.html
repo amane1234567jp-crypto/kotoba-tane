@@ -276,7 +276,7 @@ body {
 .panelBtns button.lineBtn { background: #06C755; color: #FFFFFF; font: 900 19px var(--body); padding: 14px; }
 .msgBox { display: grid; gap: 6px; text-align: left; }
 .msgBox label { font: 900 clamp(14px, 2.2vmin, 17px) var(--body); }
-.msgBox textarea { font: 500 16px/1.6 var(--body); padding: 10px 12px; border: 3px solid var(--ink); border-radius: 12px; background: #FFFFFF; color: var(--ink); resize: vertical; min-height: 11.5em; box-sizing: border-box; width: 100%; }
+.msgBox textarea { font: 500 16px/1.6 var(--body); padding: 10px 12px; border: 3px solid var(--ink); border-radius: 12px; background: #FFFFFF; color: var(--ink); resize: vertical; min-height: 14em; overflow-wrap: anywhere; box-sizing: border-box; width: 100%; }
 .msgBox .msgLink { margin: 0; font: 700 13px var(--body); color: #8A8790; }
 .msgBox button { justify-self: start; }
 .whoEmpty { font: 700 clamp(15px, 2.4vmin, 19px) var(--body); color: #8A8790; margin: 2px 0; }
@@ -376,7 +376,7 @@ body {
       <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と あそぶ」を押すだけでつながります。</p>
     </div>
     <button class="adultBtn" id="adultBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Zm7.4-2.1.9-.7-1.5-2.6-1.1.3a6 6 0 0 0-1.3-.8l-.2-1.1h-3l-.2 1.1a6 6 0 0 0-1.3.8l-1.1-.3-1.5 2.6.9.7v1.3l-.9.7 1.5 2.6 1.1-.3a6 6 0 0 0 1.3.8l.2 1.1h3l.2-1.1a6 6 0 0 0 1.3-.8l1.1.3 1.5-2.6-.9-.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>おとなの せってい</button>
-    <p class="ver">v2026.11.21 8abcaee</p>
+    <p class="ver">v2026.11.21 b487e4e</p>
   </div>
 </div>
 <!-- 相手が 2人以上 登録されているときだけ：だれと あそぶ？ -->
@@ -403,7 +403,7 @@ body {
   <div class="panel invite" role="dialog" aria-label="たいせんあいてを よぶ">
     <h2 id="inviteTitle">対戦相手にリンクを送る</h2>
     <p class="lead" id="inviteLead">「LINEで送る」でLINEが開きます。相手を選んで送ってください。<br>相手がリンクを開いてアプリを入れ、「アプリで開く」を押すと、つながります。</p>
-    <div class="msgBox"><label for="invMsg">送る文面（書きかえられます）</label><textarea id="invMsg" rows="7" maxlength="300"></textarea><p class="msgLink">＋ リンク（最後に自動で付きます）</p><button type="button" id="invMsgReset" class="small" hidden>最初の文面に戻す</button></div>
+    <div class="msgBox"><label for="invMsg">送る文面（書きかえられます）</label><textarea id="invMsg" rows="9" maxlength="600"></textarea><p class="msgLink">リンクを消してしまっても、送るときに自動で付けます。</p><button type="button" id="invMsgReset" class="small" hidden>最初の文面に戻す</button></div>
     <div class="panelBtns">
       <button type="button" class="lineBtn" id="lineBtn">LINEで送る</button>
     </div>
@@ -421,7 +421,7 @@ body {
   <div class="panel invite" role="dialog" aria-label="あいてを さそう">
     <h2>相手を誘う</h2>
     <p class="lead">「LINEで送る」でリンクを送ってください。相手がアプリを入れて開くと、お互いの「とうろくした ひと」に入ります。<br><small>送ってもすぐにはゲームは始まりません。遊ぶときは「だれと あそぶ？」から相手を呼びます。</small></p>
-    <div class="msgBox"><label for="regMsg">送る文面（書きかえられます）</label><textarea id="regMsg" rows="7" maxlength="300"></textarea><p class="msgLink">＋ リンク（最後に自動で付きます）</p><button type="button" id="regMsgReset" class="small" hidden>最初の文面に戻す</button></div>
+    <div class="msgBox"><label for="regMsg">送る文面（書きかえられます）</label><textarea id="regMsg" rows="9" maxlength="600"></textarea><p class="msgLink">リンクを消してしまっても、送るときに自動で付けます。</p><button type="button" id="regMsgReset" class="small" hidden>最初の文面に戻す</button></div>
     <div class="panelBtns"><button type="button" class="lineBtn" id="regLine">LINEで送る</button></div>
     <details class="otherFold"><summary>ほかの方法で送る</summary>
       <div class="panelBtns"><button type="button" id="regOther">ほかのアプリで送る</button><button type="button" id="regCopy">文面をコピー</button></div>
@@ -1758,6 +1758,15 @@ const regBody = myName => `${myName ? myName + "です。" : ""}テレビ電話�
 const playBody = myName => `${myName ? myName + "です。" : ""}いまリバーシで遊べるよ！ このリンクをタップしてね。`;
 // 本文 ＋ リンク（リンクは かならず 最後に つける。本文を 消しても リンクだけは 送る）
 const withLink = (body, url) => (String(body || "").trim() ? String(body).trim().slice(0, 300) + "\n" : "") + url;
+// リンクも 文面の中に 見せる（2026-11-21 あまねさん「あとから追加されるのは分かりづらい」）。
+// 送るときは 文面の中の このアプリの リンクを いまの 正しい リンクに 置きかえる（書きかえで 壊れても・名前が変わっても 大丈夫）。
+// 消してしまっていたら 最後に つける。2つ以上あれば 最初の1つだけ 残す
+const OUR_LINK = /https?:\/\/(?:www\.uchinoaji\.com\/rv\/|amane1234567jp-crypto\.github\.io\/kotoba-tane\/reversi\/)[^\s]*/g;
+function fixLink(text, url) {
+  let t = String(text || "").slice(0, 600), seen = false;
+  t = t.replace(OUR_LINK, () => { if (seen) return ""; seen = true; return url; }).replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+  return seen ? t : (t ? t + "\n" : "") + url;
+}
 const regText = (myName, url) => withLink(regBody(myName), url);
 const playText = (myName, url) => withLink(playBody(myName), url);
 // LINE を直接ひらく（相手を選んだあと、送る前に 文を見て 直せる…かを 実機で ためす。2026-11-21）
@@ -3368,7 +3377,7 @@ function showInvite(again) {
     $("inviteLead").innerHTML = INVITE_LEAD;
   }
   const url = INV.url;
-  fillMsg("invMsg", INV.def, INV.key);
+  fillMsg("invMsg", INV.def, INV.key, INV.url);
   $("inviteAgain").hidden = !again || !!target;
   try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("qr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("qr").textContent = ""; }
   $("inviteLink").textContent = url;
@@ -3437,22 +3446,23 @@ const inviteBody = () => regBody(CFG.myName) + "開くと、そのままつな�
 const inviteText = () => withLink(inviteBody(), NET.inviteURL());
 /* 送る ぶん：送る前に 見せて 直せる（2026-11-21 あまねさん）。直した ぶんは 次のために 覚える（CFG.regMsg／CFG.playMsg）。
    なまえが 変わったら 最初の ぶんも 変わるので、直していないときは 覚えない */
-function fillMsg(box, def, key) {
-  const t = $(box);
-  t.value = (key && CFG[key]) || def;
-  t.dataset.def = def; t.dataset.key = key || "";
-  $(box + "Reset").hidden = t.value === def;
+// リンクも 文面の中に 出す（url）。送るときは fixLink で 正しい リンクに そろえる
+function fillMsg(box, def, key, url) {
+  const t = $(box), full = withLink(def, url);
+  t.value = key && CFG[key] ? fixLink(CFG[key], url) : full;
+  t.dataset.def = full; t.dataset.key = key || ""; t.dataset.url = url;
+  $(box + "Reset").hidden = t.value === full;
 }
 function msgInput(box) {
   const t = $(box), key = t.dataset.key, same = t.value === t.dataset.def;
-  if (key) { if (same) delete CFG[key]; else CFG[key] = t.value.slice(0, 300); saveCfg(); }
+  if (key) { if (same) delete CFG[key]; else CFG[key] = t.value.slice(0, 600); saveCfg(); }
   $(box + "Reset").hidden = same;
 }
 ["regMsg", "invMsg"].forEach(box => {
   $(box).addEventListener("input", () => msgInput(box));
   $(box + "Reset").addEventListener("click", () => { $(box).value = $(box).dataset.def; msgInput(box); });
 });
-const invText = () => withLink($("invMsg").value, INV.url || NET.inviteURL());
+const invText = () => fixLink($("invMsg").value, INV.url || NET.inviteURL());
 const waitMsg = () => target ? `${target.name}を まっています…` : "まっています…";
 const isAndroid = () => !!(window.RVNative && window.RVNative.platform === "android");
 const isCopyAct = act => /copy|pasteboard/i.test(act || "");
@@ -3600,7 +3610,7 @@ function showRegInvite() {
   const url = regLink(BASE, CFG.myName, CALL.id);
   try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("regQr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("regQr").textContent = ""; }
   $("regLinkTxt").textContent = url;
-  fillMsg("regMsg", regBody(CFG.myName), "regMsg");
+  fillMsg("regMsg", regBody(CFG.myName), "regMsg", url);
   $("regOv").hidden = false;
   CALL.refresh(CFG.myName);
 }
@@ -3612,7 +3622,7 @@ function regSent(note) {
   pendUntil = Date.now() + 15 * 60 * 1000; clearInterval(pendTimer);
   pendTimer = setInterval(() => { if (Date.now() > pendUntil || G.started) { clearInterval(pendTimer); return; } checkPending(); }, 20000);
 }
-const regMsg = () => withLink($("regMsg").value, regLink(BASE, CFG.myName, CALL.id));
+const regMsg = () => fixLink($("regMsg").value, regLink(BASE, CFG.myName, CALL.id));
 $("regLine").addEventListener("click", () => { openLine(regMsg()); regSent(); });
 $("regOther").addEventListener("click", async () => {
   const r = await shareSheet(regMsg());

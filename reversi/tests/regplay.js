@@ -64,7 +64,7 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   check(!(await vis(a, "regOv")), "A：LINE を ひらくと 開始画面に もどる");
   // 送る前に 本文を 見て 直せる（LINE 側では 見えない：11/21 実機）
   await a.evaluate(() => showRegInvite()); await a.waitForTimeout(200);
-  check(await a.evaluate(() => document.getElementById("regMsg").value) === shared.split("\n").slice(0, -1).join("\n"), "A：さそう画面に 送る本文が 出ている（送った本文と おなじ）");
+  check(await a.evaluate(() => document.getElementById("regMsg").value) === shared, "A：さそう画面に 送る文面が リンクごと 出ている（送った文面と おなじ）");
   check(!(await vis(a, "regMsgReset")), "A：直していなければ「もとの ぶんに もどす」は 出ない");
   await a.fill("#regMsg", "ばあばへ\nこんど いっしょに リバーシ しよう！");
   check(await vis(a, "regMsgReset"), "A：直すと「もとの ぶんに もどす」が 出る");
@@ -75,6 +75,11 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   check((await a.evaluate(() => document.getElementById("regMsg").value)).startsWith("ばあばへ"), "A：直した本文は 次も 出る");
   await a.click("#regMsgReset");
   check((await a.evaluate(() => document.getElementById("regMsg").value)).startsWith("ゆうくんです。テレビ電話を"), "A：「もとの ぶんに もどす」で もどる");
+  await a.fill("#regMsg", "ばあばへ\nhttps://www.uchinoaji.com/rv/?m=reg&n=こわれ");
+  await a.click("#regLine"); await a.waitForTimeout(200);
+  const fixed = (await a.evaluate(() => window.__shared)).pop() || "";
+  check(fixed.startsWith("ばあばへ\nhttps://") && fixed.includes("fd=" + aid) && fixed.split("https://").length === 2, "A：リンクを 書きかえて 壊しても 正しい リンクで 送る");
+  await a.evaluate(() => showRegInvite());
   await a.fill("#regMsg", "");
   await a.click("#regLine"); await a.waitForTimeout(200);
   check(/^https:\/\/\S+m=reg/.test((await a.evaluate(() => window.__shared)).pop() || ""), "A：本文を 消しても リンクは 送る");

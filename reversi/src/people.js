@@ -61,10 +61,19 @@ const regBody = myName => `${myName ? myName + "です。" : ""}テレビ電話�
 const playBody = myName => `${myName ? myName + "です。" : ""}いまリバーシで遊べるよ！ このリンクをタップしてね。`;
 // 本文 ＋ リンク（リンクは かならず 最後に つける。本文を 消しても リンクだけは 送る）
 const withLink = (body, url) => (String(body || "").trim() ? String(body).trim().slice(0, 300) + "\n" : "") + url;
+// リンクも 文面の中に 見せる（2026-11-21 あまねさん「あとから追加されるのは分かりづらい」）。
+// 送るときは 文面の中の このアプリの リンクを いまの 正しい リンクに 置きかえる（書きかえで 壊れても・名前が変わっても 大丈夫）。
+// 消してしまっていたら 最後に つける。2つ以上あれば 最初の1つだけ 残す
+const OUR_LINK = /https?:\/\/(?:www\.uchinoaji\.com\/rv\/|amane1234567jp-crypto\.github\.io\/kotoba-tane\/reversi\/)[^\s]*/g;
+function fixLink(text, url) {
+  let t = String(text || "").slice(0, 600), seen = false;
+  t = t.replace(OUR_LINK, () => { if (seen) return ""; seen = true; return url; }).replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+  return seen ? t : (t ? t + "\n" : "") + url;
+}
 const regText = (myName, url) => withLink(regBody(myName), url);
 const playText = (myName, url) => withLink(playBody(myName), url);
 // LINE を直接ひらく（相手を選んだあと、送る前に 文を見て 直せる…かを 実機で ためす。2026-11-21）
 const lineShareURL = text => "https://line.me/R/share?text=" + encodeURIComponent(text);
 const lineMsgURL = text => "line://msg/text/" + encodeURIComponent(text);
 
-if (typeof module !== "undefined") module.exports = { peopleUpsert, peopleRemove, peopleKey, peopleMigrate, parseLink, regLink, playLink, regText, playText, regBody, playBody, withLink, lineShareURL, lineMsgURL, PEOPLE_MAX };
+if (typeof module !== "undefined") module.exports = { peopleUpsert, peopleRemove, peopleKey, peopleMigrate, parseLink, regLink, playLink, regText, playText, regBody, playBody, withLink, fixLink, lineShareURL, lineMsgURL, PEOPLE_MAX };

@@ -1078,7 +1078,7 @@ function showInvite(again) {
     $("inviteLead").innerHTML = INVITE_LEAD;
   }
   const url = INV.url;
-  fillMsg("invMsg", INV.def, INV.key);
+  fillMsg("invMsg", INV.def, INV.key, INV.url);
   $("inviteAgain").hidden = !again || !!target;
   try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("qr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("qr").textContent = ""; }
   $("inviteLink").textContent = url;
@@ -1147,22 +1147,23 @@ const inviteBody = () => regBody(CFG.myName) + "開くと、そのままつな�
 const inviteText = () => withLink(inviteBody(), NET.inviteURL());
 /* 送る ぶん：送る前に 見せて 直せる（2026-11-21 あまねさん）。直した ぶんは 次のために 覚える（CFG.regMsg／CFG.playMsg）。
    なまえが 変わったら 最初の ぶんも 変わるので、直していないときは 覚えない */
-function fillMsg(box, def, key) {
-  const t = $(box);
-  t.value = (key && CFG[key]) || def;
-  t.dataset.def = def; t.dataset.key = key || "";
-  $(box + "Reset").hidden = t.value === def;
+// リンクも 文面の中に 出す（url）。送るときは fixLink で 正しい リンクに そろえる
+function fillMsg(box, def, key, url) {
+  const t = $(box), full = withLink(def, url);
+  t.value = key && CFG[key] ? fixLink(CFG[key], url) : full;
+  t.dataset.def = full; t.dataset.key = key || ""; t.dataset.url = url;
+  $(box + "Reset").hidden = t.value === full;
 }
 function msgInput(box) {
   const t = $(box), key = t.dataset.key, same = t.value === t.dataset.def;
-  if (key) { if (same) delete CFG[key]; else CFG[key] = t.value.slice(0, 300); saveCfg(); }
+  if (key) { if (same) delete CFG[key]; else CFG[key] = t.value.slice(0, 600); saveCfg(); }
   $(box + "Reset").hidden = same;
 }
 ["regMsg", "invMsg"].forEach(box => {
   $(box).addEventListener("input", () => msgInput(box));
   $(box + "Reset").addEventListener("click", () => { $(box).value = $(box).dataset.def; msgInput(box); });
 });
-const invText = () => withLink($("invMsg").value, INV.url || NET.inviteURL());
+const invText = () => fixLink($("invMsg").value, INV.url || NET.inviteURL());
 const waitMsg = () => target ? `${target.name}を まっています…` : "まっています…";
 const isAndroid = () => !!(window.RVNative && window.RVNative.platform === "android");
 const isCopyAct = act => /copy|pasteboard/i.test(act || "");
@@ -1310,7 +1311,7 @@ function showRegInvite() {
   const url = regLink(BASE, CFG.myName, CALL.id);
   try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("regQr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("regQr").textContent = ""; }
   $("regLinkTxt").textContent = url;
-  fillMsg("regMsg", regBody(CFG.myName), "regMsg");
+  fillMsg("regMsg", regBody(CFG.myName), "regMsg", url);
   $("regOv").hidden = false;
   CALL.refresh(CFG.myName);
 }
@@ -1322,7 +1323,7 @@ function regSent(note) {
   pendUntil = Date.now() + 15 * 60 * 1000; clearInterval(pendTimer);
   pendTimer = setInterval(() => { if (Date.now() > pendUntil || G.started) { clearInterval(pendTimer); return; } checkPending(); }, 20000);
 }
-const regMsg = () => withLink($("regMsg").value, regLink(BASE, CFG.myName, CALL.id));
+const regMsg = () => fixLink($("regMsg").value, regLink(BASE, CFG.myName, CALL.id));
 $("regLine").addEventListener("click", () => { openLine(regMsg()); regSent(); });
 $("regOther").addEventListener("click", async () => {
   const r = await shareSheet(regMsg());

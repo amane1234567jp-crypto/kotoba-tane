@@ -52,6 +52,13 @@ eq(/なかま|まだ ゲーム/.test(P.regText("a", "u") + P.playText("a", "u"))
 eq(P.withLink("  ばあばへ  ", "U"), "ばあばへ\nU", "本文＋リンク（前後の空白は とる）");
 eq(P.withLink("", "U"), "U", "本文を ぜんぶ消しても リンクだけは 送る");
 eq(P.withLink("あ".repeat(500), "U").length, 302, "本文は 300字まで（リンクは かならず つく）");
+const U = "https://www.uchinoaji.com/rv/?m=reg&n=a&fd=AAAAAAAAAAAAAAAAAAAA&openExternalBrowser=1";
+eq(P.fixLink("こんにちは\n" + U, U), "こんにちは\n" + U, "文面の中の リンクは そのまま");
+eq(P.fixLink("こんにちは\nhttps://www.uchinoaji.com/rv/?m=reg&n=OLD", U), "こんにちは\n" + U, "古い・壊れた リンクは 正しい リンクに 置きかえる");
+eq(P.fixLink("こんにちは", U), "こんにちは\n" + U, "リンクを 消していたら 最後に つける");
+eq(P.fixLink("上 " + U + " 下 " + U, U), "上 " + U + " 下", "リンクが 2つなら 1つに");
+eq(P.fixLink("", U), U, "ぜんぶ 消しても リンクは 送る");
+eq(P.fixLink("リンクは https://example.com/ だよ", U), "リンクは https://example.com/ だよ\n" + U, "ほかの サイトの リンクには さわらない");
 eq(decodeURIComponent(P.lineShareURL("あ\nhttps://x/?a=1&b=2").split("text=")[1]), "あ\nhttps://x/?a=1&b=2", "LINE を ひらく URL に 文が そのまま 入る（& も こわれない）");
 eq(P.playText("", "u").startsWith("いまリバーシで遊べるよ"), true, "名前がなくても 文になる");
 
