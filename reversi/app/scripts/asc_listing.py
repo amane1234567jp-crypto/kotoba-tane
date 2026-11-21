@@ -294,3 +294,13 @@ if MODE == "autorelease":
     # 審査に通ったら 自動で公開する（あまねさんの指示があるときだけ使う）
     s, j = api("PATCH", f"/v1/appStoreVersions/{ver['id']}", {"data": {"type": "appStoreVersions", "id": ver["id"], "attributes": {"releaseType": "AFTER_APPROVAL"}}})
     log("releaseType AFTER_APPROVAL:", ver["attributes"]["versionString"], s, err(s, j))
+
+if MODE == "withdraw":
+    # 審査を とりさげる（あまねさんの指示があるときだけ。ビルドを差しかえて 出しなおすため）
+    s, j = api("GET", f"/v1/reviewSubmissions?filter[app]={APP}&filter[platform]=IOS")
+    for sub in j.get("data", []):
+        st = sub["attributes"].get("state")
+        log("submission:", sub["id"], st)
+        if st in ("WAITING_FOR_REVIEW", "IN_REVIEW", "UNRESOLVED_ISSUES", "READY_FOR_REVIEW"):
+            s2, r = api("PATCH", f"/v1/reviewSubmissions/{sub['id']}", {"data": {"type": "reviewSubmissions", "id": sub["id"], "attributes": {"canceled": True}}})
+            log("  cancel:", s2, err(s2, r))
