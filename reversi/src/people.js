@@ -48,12 +48,12 @@ function parseLink(search) {
   if (r && ROOM_RE.test(r)) return { mode: m === "play" ? "play" : "legacy", room: r, name: n, dev: fd };
   return { mode: null };
 }
-// リンクを作る（openExternalBrowser=1：LINE の中のブラウザではなく Safari／Chrome で開かせる）
+// リンクを作る。openExternalBrowser=1 は 付けない（2026-11-22 あまねさん：Safari を強制すると アプリが直接ひらかない）
 function regLink(base, name, dev) {
-  return base + "?m=reg" + (name ? "&n=" + encodeURIComponent(name) : "") + "&fd=" + dev + "&openExternalBrowser=1";
+  return base + "?m=reg" + (name ? "&n=" + encodeURIComponent(name) : "") + "&fd=" + dev;
 }
 function playLink(base, room, name, dev) {
-  return base + "?m=play&r=" + room + (name ? "&n=" + encodeURIComponent(name) : "") + (dev ? "&fd=" + dev : "") + "&openExternalBrowser=1";
+  return base + "?m=play&r=" + room + (name ? "&n=" + encodeURIComponent(name) : "") + (dev ? "&fd=" + dev : "");
 }
 // LINE で送る文（受けとるのは おとな。ふつうの漢字かなまじり。2026-11-21 あまねさん）
 // 本文（リンクの前）。送る前に アプリの中で 見せて 直せる（LINE 側では 本文が見えない・直せない：11/21 実機で確認）

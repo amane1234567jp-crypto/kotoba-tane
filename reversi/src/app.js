@@ -820,6 +820,8 @@ function pressPlay() {
   // いつも おなじ順番（2026-11-17 あまねさん）：①はじめては 自分の なまえ → ②かならず「だれと あそぶ？」→ ③えらんだ相手 or さそう
   // とうろくした ひとが いなくても ②を出す（リンクを もらった ひとが「さそう」画面に 迷いこまないように、案内も ここに置く）
   if (!CFG.myName) return showNames(() => pressPlay(), true);
+  // 「だれと あそぶ？」を ひらいた ときにも たしかめる（とうろくが とどいていれば すぐ 一覧に出る。出たら この画面を 描きなおす）
+  if (NET.role !== "guest" && !pressPlay.checking) { pressPlay.checking = true; checkPending().finally(() => { pressPlay.checking = false; }); }
   const cs = candidates();
   const box = $("whoList"); box.innerHTML = "";
   if (!cs.length) { const p = document.createElement("p"); p.className = "whoEmpty"; p.textContent = "まだ いません"; box.appendChild(p); }
@@ -1210,9 +1212,10 @@ let forceLink = false;
   }
   else if (!NET.available) $("callBtn").hidden = true;
   refreshLeft(); renderPartners(); renderNameBtn(); renderPush();
-  CALL.refresh(CFG.myName);
+  // 端末の登録が すんでから たしかめる（はじめての起動で 登録より先に 確認が届くと 断られる：11/22 の 403）
+  const regDone = CALL.refresh(CFG.myName);
   // さそった人：リンクを開いてくれた相手を 受けとって「とうろくした ひと」に入れる
-  if (NET.role !== "guest") checkPending();
+  if (NET.role !== "guest") regDone.then(() => checkPending());
   if (LINK.mode === "reg") gotRegLink();
   if (!NET.role) setTimeout(maybeAskPush, 600);
   // 相手からの よびだしを タップして 開いたとき（よぶ側の端末）
@@ -1305,7 +1308,21 @@ $("tellBtn").addEventListener("click", async () => {
 /* ---------- あいてを さそう（とうろくだけ。2026-11-19 あまねさん「まずは互いの登録だけ」） ----------
    カメラも ゲームも うごかさない。LINE で リンクを おくって 開始画面に もどる。
    あいてが リンクを ひらく → なまえ → 中継に「とうろく」を残す → こちらは pending で うけとる */
-let pendTimer = 0, pendUntil = 0;
+/* 相手が とうろく したかを たしかめる（2026-11-22）。
+   誘ってから 24時間は、アプリが 前に出ている あいだ たしかめつづける。はじめの 15分は 10秒ごと、そのあとは 30秒ごと。
+   「いつまで たしかめるか」は 保存しておく（LINE から もどったときに iPhone が 画面を 作りなおしても とまらない。11/22 けい の件） */
+let pendTimer = 0;
+function pendTick() {
+  clearTimeout(pendTimer); pendTimer = 0;
+  const now = Date.now();
+  if (!CFG.pendUntil || now > CFG.pendUntil) { if (CFG.pendUntil) { delete CFG.pendUntil; delete CFG.pendSince; saveCfg(); } return; }
+  if (document.visibilityState === "visible" && !G.started && NET.role !== "guest") checkPending();
+  pendTimer = setTimeout(pendTick, now - (CFG.pendSince || 0) < 15 * 60 * 1000 ? 10000 : 30000);
+}
+function startPendWatch() {
+  CFG.pendSince = Date.now(); CFG.pendUntil = Date.now() + 24 * 3600 * 1000; saveCfg();
+  clearTimeout(pendTimer); pendTimer = setTimeout(pendTick, 10000);
+}
 function showRegInvite() {
   if (!CFG.myName) return showNames(() => showRegInvite(), true);
   const url = regLink(BASE, CFG.myName, CALL.id);
@@ -1319,9 +1336,7 @@ function showRegInvite() {
 function regSent(note) {
   $("regOv").hidden = true;
   $("ringNote").textContent = note || "LINEで送ったら、相手がリンクを開くのを待ってください。登録されると、ここに表示されます"; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
-  // しばらく（15分）は 20秒ごとに たしかめる
-  pendUntil = Date.now() + 15 * 60 * 1000; clearInterval(pendTimer);
-  pendTimer = setInterval(() => { if (Date.now() > pendUntil || G.started) { clearInterval(pendTimer); return; } checkPending(); }, 20000);
+  startPendWatch();
 }
 const regMsg = () => fixLink($("regMsg").value, regLink(BASE, CFG.myName, CALL.id));
 $("regLine").addEventListener("click", () => { openLine(regMsg()); regSent(); });
@@ -1344,7 +1359,9 @@ function checkPending() {
     }
   });
 }
-document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && NET.role !== "guest" && !G.started) checkPending(); });
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && NET.role !== "guest" && !G.started) { checkPending(); if (CFG.pendUntil && !pendTimer) pendTick(); } });
+// 起動したとき：誘ってから 24時間 以内なら たしかめつづける
+if (CFG.pendUntil) setTimeout(pendTick, 10000);
 // さそう リンクを ひらいた人：なまえ（はじめてだけ）→ とうろく する。ゲームは はじめない
 function gotRegLink() {
   try { history.replaceState(null, "", location.pathname); } catch (e) { }

@@ -60,7 +60,7 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   check(/^ゆうくんです。テレビ電話をしながらリバーシで遊べるアプリがあるので/.test(shared) && !/なかま|まだ ゲーム/.test(shared), "A：送る文は 決めた文（なかま・まだゲーム… は 入らない）");
   check(/LINEで送ったら/.test(await txt(a, "ringNote")), "A：送ったか わからないので「おくったら〜」と 言う（「おくりました」と 言いきらない）");
   const regUrl = (shared.match(/https:\/\/\S+/) || [""])[0];
-  check(/[?&]m=reg/.test(regUrl) && !/[?&]r=/.test(regUrl) && regUrl.includes("fd=" + aid), "A：リンクは とうろく用（部屋なし・A の端末番号）");
+  check(/[?&]m=reg/.test(regUrl) && !/openExternalBrowser/.test(regUrl) && !/[?&]r=/.test(regUrl) && regUrl.includes("fd=" + aid), "A：リンクは とうろく用（部屋なし・A の端末番号）");
   check(!(await vis(a, "regOv")), "A：LINE を ひらくと 開始画面に もどる");
   // 送る前に 本文を 見て 直せる（LINE 側では 見えない：11/21 実機）
   await a.evaluate(() => showRegInvite()); await a.waitForTimeout(200);

@@ -41,16 +41,18 @@ footer a { color: var(--sub); }
   <h1>テレビ電話リバーシ</h1>
   <p class="tag">はなれて暮らす家族と、顔を見ながらリバーシ</p>
   <p class="from" id="from"></p>
+  <!-- 大人が読む ページなので ふつうの漢字かなまじり。「まだ入れていない」「もう入っている」を はっきり分ける（2026-11-22 けい の件） -->
   <ol>
-    <li><span class="num">1</span><span class="step">アプリを いれる（むりょう）</span>
-      <a class="btn" id="ios" href="https://apps.apple.com/jp/app/id6832225234">App Store で いれる（iPhone・iPad）</a>
-      <a class="btn" id="android" href="https://play.google.com/store/apps/details?id=com.uchinoaji.marushima.reversi">Google Play で いれる（Android）</a>
-      <p class="note" id="had">いれおわったら、App Store の「ひらく」を おしてね。そのまま あいてと つながります。</p></li>
-    <li id="openStep"><span class="num">2</span><span class="step">もう アプリが ある ひと・つながらない とき</span>
-      <a class="btn primary" id="open" href="#">アプリで ひらく</a>
-      <p class="note">あいてと つながって、テレビ電話で あそべます。</p></li>
+    <li><span class="step">まだアプリを入れていない方</span>
+      <a class="btn primary" id="ios" href="https://apps.apple.com/jp/app/id6832225234">App Storeで入れる（無料）</a>
+      <a class="btn primary" id="android" href="https://play.google.com/store/apps/details?id=com.uchinoaji.marushima.reversi">Google Playで入れる（無料）</a>
+      <p class="note" id="had">入れ終わったら、App Storeの「開く」を押してください。そのまま相手とつながります。</p></li>
+    <li id="openStep"><span class="step">もうアプリを入れている方</span>
+      <a class="btn" id="open" href="#">アプリで開く</a>
+      <p class="note">相手とつながって、テレビ電話で遊べます。</p></li>
   </ol>
-  <p class="note" id="webFallback" style="margin-top:18px"><a href="#" id="webLink">アプリが うまく ひらかない ときは、ブラウザで あそぶ</a></p>
+  <p class="note" id="lineNote" hidden>LINEの中で開いています。うまくいかないときは、右上の「…」から「ブラウザで開く」を選んでください。</p>
+  <p class="note" id="webFallback" style="margin-top:18px"><a href="#" id="webLink">アプリがうまく開かないときは、ブラウザで遊ぶ</a></p>
   <footer><a href="legal/support.html">サポート</a>　<a href="legal/privacy.html">プライバシーポリシー</a></footer>
 </main>
 <script>
@@ -70,10 +72,12 @@ footer a { color: var(--sub); }
   const reg = !r && q.get("m") === "reg" && fdOk;
   if (!r && !reg) { document.getElementById("openStep").hidden = true; document.getElementById("had").hidden = true; document.getElementById("webFallback").hidden = true; return; }
   const fromEl = document.getElementById("from");
-  fromEl.textContent = (n ? n + " から" : "") + (reg ? " テレビ電話リバーシの おさそいです" : " テレビ電話リバーシの おさそいです");
+  fromEl.textContent = (n ? n + "さんから、" : "") + "テレビ電話リバーシへのお誘いです";
+  if (/ Line\//i.test(ua)) document.getElementById("lineNote").hidden = false;
   if (reg) {
-    document.getElementById("had").textContent = "いれおわったら、App Store の「ひらく」を おしてね。" + (n ? n + "が" : "あいてが") + " とうろく されます。";
-    document.querySelector("#openStep .note").textContent = "とうろく されます。あそぶときは アプリの「とおくの ひとと あそぶ」から。";
+    const who = n ? n + "さん" : "相手";
+    document.getElementById("had").textContent = "入れ終わったら、" + (isAndroid ? "Google Play" : "App Store") + "の「開く」を押して、お名前を入れてください。" + who + "とお互いに登録されます。";
+    document.querySelector("#openStep .note").textContent = "開いてお名前を入れると、" + who + "とお互いに登録されます。遊ぶときは、アプリの「とおくの ひとと あそぶ」から相手を選びます。";
     document.getElementById("webFallback").hidden = true;
   }
   const pass = new URLSearchParams(); if (reg) pass.set("m", "reg"); else pass.set("r", r); if (n) pass.set("n", n);

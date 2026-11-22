@@ -99,7 +99,7 @@ async function handle(b: Record<string, any>) {
     if (to && to.sub && to.sub.expo) {
       try {
         await fetch("https://exp.host/--/api/v2/push/send", { method: "POST", headers: { "content-type": "application/json", accept: "application/json" }, body: JSON.stringify({
-          to: to.sub.expo, title: "テレビ電話リバーシ", body: `${name || "あいて"}が じゅんび できたよ。タップして あそぼう`, sound: "default", priority: "high", ttl: 3600, channelId: "call",
+          to: to.sub.expo, title: "テレビ電話リバーシ", body: `${name || "あいて"}が とうろく しました`, sound: "default", priority: "high", ttl: 3600, channelId: "call",
           data: { url: clip(b.url, 400), tag: "rv-accept", from: from.id, at: Date.now() } }) });
       } catch (e) { /* 通知できなくても 登録は残る */ }
     }
@@ -169,6 +169,8 @@ Deno.serve(async req => {
   try {
     const b = await req.json();
     [status, body] = (b && (b.op === "hint" || b.op === "claim") ? await handleInvite(b, ip) : await handle(b)) as [number, unknown];
-  } catch (e) { body = { error: String(e).slice(0, 200) }; }
+    // うまくいかなかったときだけ 記録する（どの op が なぜ 失敗したか。端末の番号は 先頭6文字だけ）（2026-11-22）
+    if (status >= 400) console.log(JSON.stringify({ op: b && b.op, status, error: (body as any) && (body as any).error, id: String((b && b.id) || "").slice(0, 6), to: String((b && b.to) || "").slice(0, 6) }));
+  } catch (e) { body = { error: String(e).slice(0, 200) }; console.log(JSON.stringify({ status: 500, error: String(e).slice(0, 200) })); }
   return new Response(JSON.stringify(body), { status, headers: { ...cors, "Content-Type": "application/json" } });
 });
