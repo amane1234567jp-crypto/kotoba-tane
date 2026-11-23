@@ -103,6 +103,10 @@ const CALL = (() => {
     dev.push = false; save(); post({ op: "reg", clear: true }).catch(() => { });
   };
   // 相手をよぶ。url は 相手が通知をタップしたときに開く場所
+  // 待ちあわせ（2026-11-23）：だれが だれを 待っているか。失敗しても 遊べる（LINE で しらせる道は 残る）
+  C.wait = async (to, room) => { try { return await post({ op: "wait", to, room }); } catch (e) { return {}; } };
+  C.peek = async to => { try { return await post({ op: "peek", to }); } catch (e) { return {}; } };
+  C.unwait = () => { try { fetch(API, { method: "POST", keepalive: true, headers: { "content-type": "application/json" }, body: JSON.stringify({ op: "unwait", id: dev.id, secret: dev.secret }) }); } catch (e) { } };
   C.ring = async (to, name, url) => {
     if (!to) return { ok: false, reason: "noid" };
     try {

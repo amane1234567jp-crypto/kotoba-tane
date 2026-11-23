@@ -758,6 +758,7 @@ addEventListener("pageshow", e => { if (e.persisted) location.reload(); });
    確認してから、盤をすてて はじめの画面へ。遠隔対戦なら 相手にも知らせて、カメラと通話を止める */
 function toMenu() {
   try { ringing.forEach(c => CALL.cancel(c.dev)); } catch (e) { }
+  if (holdUntil) { clearTimeout(holdTimer); CALL.unwait(); }
   G.hist = []; G.ended = false; saveGame();
   try { NET.local?.getTracks().forEach(tr => tr.stop()); NET.peer?.destroy(); } catch (e) { /* もう切れている */ }
   location.replace(location.pathname);   // ページを読みなおすのが いちばん確実に まっさらに もどる
@@ -814,7 +815,30 @@ function renderPartners() {
 }
 // 端末番号を知っている人：自分の部屋で まって、LINE（通知が使えれば 通知）で しらせる。どちらからでも よべる（2026-11-19）
 // 部屋だけ覚えている むかしの記録：これまでどおり 相手の部屋に はいりに行く
-function playWith(c) { if (c.p.dev) callGrandma(false, false, c.p); else joinPartner(c.p); }
+/* 待ちあわせ（2026-11-23 あまねさん「同時に 相手の名前を押したら どうなる？」）
+   ・「〇〇と あそぶ」を押したら、まず 相手が もう 自分を 待っていないか たしかめる → 待っていれば その部屋に入る（LINE いらず）
+   ・待っていなければ 自分の部屋で待ち、5秒ごとに「待っている」と 中継に伝える
+   ・2人が ほぼ同時に 押して おたがい待ちになったら、端末番号の 大きいほうが 相手の部屋に入る（どちらも 同じ決まりで 判断するので 必ず 片方に そろう） */
+async function playWith(c) {
+  if (!c.p.dev) return joinPartner(c.p);
+  const r = await CALL.peek(c.p.dev);
+  if (r && r.other && r.other.room) return joinWaiting(c.p, r.other.room);
+  callGrandma(false, false, c.p);
+}
+function joinWaiting(p, room) {
+  clearTimeout(holdTimer); CALL.unwait();
+  try { NET.local?.getTracks().forEach(tr => tr.stop()); NET.peer?.destroy(); } catch (e) { }
+  location.replace(location.pathname + "?" + playLink("", room, p.name, p.dev).slice(1) + "&go=1");
+}
+let holdTimer = 0, holdUntil = 0;
+async function holdWait() {
+  clearTimeout(holdTimer);
+  if (!target || !target.dev || NET.open || Date.now() > holdUntil) { if (NET.open || Date.now() > holdUntil) CALL.unwait(); return; }
+  const r = await CALL.wait(target.dev, NET.room);
+  if (r && r.other && r.other.room && !NET.open && CALL.id > target.dev) { joinWaiting(target, r.other.room); return "join"; }
+  holdTimer = setTimeout(holdWait, 5000);
+}
+addEventListener("pagehide", () => { if (holdUntil && !NET.open) CALL.unwait(); });
 function pressPlay() {
   if (answeringRing) return callGrandma(false, true);
   // いつも おなじ順番（2026-11-17 あまねさん）：①はじめては 自分の なまえ → ②かならず「だれと あそぶ？」→ ③えらんだ相手 or さそう
@@ -978,7 +1002,7 @@ function applyState(m) {
 }
 let lostSaid = false;
 NET.on("open", () => {
-  $("tellBtn").hidden = true; clearTimeout(waitTimer);
+  $("tellBtn").hidden = true; clearTimeout(waitTimer); if (holdUntil) { clearTimeout(holdTimer); holdUntil = 0; CALL.unwait(); }
   const back = lostSaid; G.paused = false; lostSaid = false; $("inviteOv").hidden = true; camMsg(otherSide(), "");
   if (back && !G.animating) speak(host.pony, "rv_back");
   setTimeout(() => { if (NET.open && !NET.remote) camMsg(otherSide(), "あいての カメラが うつりません（ゲームは できます）"); }, 9000);
@@ -1048,6 +1072,9 @@ async function callGrandma(fresh, answering, who) {
     // 10分 だれも来なければ カメラを止めて 開始画面へ
     clearTimeout(waitTimer);
     waitTimer = setTimeout(() => { if (NET.open) return; camMsg(otherSide(), "きょうは もう おわりに するね。また よんでね"); setTimeout(() => { if (!NET.open) toMenu(); }, 4000); }, 10 * 60 * 1000);
+    // 相手も いま アプリで 自分の名前を押していれば、LINE なしで つながる
+    holdUntil = Date.now() + 10 * 60 * 1000;
+    if (await holdWait() === "join") return;
     const ok = target.dev ? await ringOut([{ dev: target.dev, name: target.name }], playLink(BASE, NET.room, CFG.myName, CALL.id) + "&ring=1") : false;
     if (!ok && !NET.open) showInvite();
     return;
@@ -1209,6 +1236,8 @@ let forceLink = false;
     $("callBtn").hidden = true; $("startOv").classList.add("guest");
     $("startBtn").textContent = "はじめる"; $("startBtn").classList.remove("sub");
     $("guestLead").hidden = false; $("callBtn").before($("guestLead"));   // 説明を「はじめる」の上に
+    // 待ちあわせで 相手の部屋に 入るときは「はじめる」を 押さなくても すぐ つなぐ
+    if (/[?&]go=1/.test(location.search) && CFG.myName) setTimeout(() => $("startBtn").click(), 300);
   }
   else if (!NET.available) $("callBtn").hidden = true;
   refreshLeft(); renderPartners(); renderNameBtn(); renderPush();

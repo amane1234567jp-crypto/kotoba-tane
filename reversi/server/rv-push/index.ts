@@ -7,6 +7,9 @@
 //   POST {op:"accept", id, secret, to, name}          … 招待リンクを開いた：招待した人（to）に「とうろく」を伝える（通知を受けとれれば 通知も）
 //   POST {op:"pending", id, secret}                   … 自分あての「とうろく」を受けとる（受けとったら消す）
 //   POST {op:"claim", fp}                             … アプリを初めて開いた：さっきの招待があれば その部屋を返す（返したら消す）
+//   POST {op:"wait", id, secret, to, room}            … to を 自分の部屋で 待っている（5秒ごとに 送りなおす）。to が 自分を待っていれば other で返す
+//   POST {op:"peek", id, secret, to}                  … to が 自分を 待っているか（待っていれば other：{room}）
+//   POST {op:"unwait", id, secret}                    … 待つのを やめた（2026-11-23：2人が同時に名前を押しても つながるように）
 import { createClient } from "npm:@supabase/supabase-js@2.45.4";
 import webpush from "npm:web-push@3.6.7";
 
@@ -111,6 +114,20 @@ async function handle(b: Record<string, any>) {
     const { data } = await db.from("rv_pairs").select("from_id,name,at").eq("to_id", meRow.id).order("at", { ascending: true }).limit(20);
     if (data && data.length) await db.from("rv_pairs").delete().eq("to_id", meRow.id);
     return [200, { ok: true, list: (data || []).map((r: any) => ({ dev: r.from_id, name: r.name })) }];
+  }
+  if (b.op === "wait" || b.op === "peek" || b.op === "unwait") {
+    const meRow = await me(b.id, b.secret);
+    if (!meRow) return [403, { error: "who" }];
+    if (b.op === "unwait") { await db.from("rv_waits").delete().eq("host_id", meRow.id); return [200, { ok: true }]; }
+    if (!ok(b.to) || b.to === meRow.id) return [400, { error: "bad to" }];
+    if (b.op === "wait") {
+      if (!/^[a-z0-9]{4,40}$/.test(String(b.room || ""))) return [400, { error: "bad room" }];
+      const { error } = await db.from("rv_waits").upsert({ host_id: meRow.id, to_id: b.to, room: b.room, at: new Date().toISOString() });
+      if (error) return [500, { error: error.message }];
+    }
+    // 相手が 自分を 待っているか（20秒 以内に 更新されたものだけ。古いのは 部屋が もう ない かもしれない）
+    const { data } = await db.from("rv_waits").select("room,at").eq("host_id", b.to).eq("to_id", meRow.id).gt("at", new Date(Date.now() - 20e3).toISOString()).maybeSingle();
+    return [200, { ok: true, other: data ? { room: data.room } : null }];
   }
   if (b.op === "call" || b.op === "cancel") {
     const from = await me(b.id, b.secret);
