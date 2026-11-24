@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="manifest" href="manifest.json">
 <style>body{margin:0}</style>
-<script>const PACK_VER="5f4b697c36";{const f0=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&/(^|\/)packs\/[^?]+\.json$/.test(u))u+="?v="+PACK_VER;return f0.call(this,u,o);};}</script>
+<script>const PACK_VER="5e6894d6e4";{const f0=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&/(^|\/)packs\/[^?]+\.json$/.test(u))u+="?v="+PACK_VER;return f0.call(this,u,o);};}</script>
 <script>if("serviceWorker" in navigator&&location.protocol==="https:")addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));</script>
 </head><body>
 <div id="ktpre" style="position:fixed;inset:0;z-index:99999;background:#FFF8E8;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:sans-serif;color:#2B2A33"><svg viewBox="-80 -80 160 160" width="160" height="160" style="animation:ktspin 3s linear infinite"><g fill="#FF8FA3" stroke="#2B2A33" stroke-width="5"><circle cx="0" cy="-42" r="28"/><circle cx="40" cy="-13" r="28"/><circle cx="25" cy="35" r="28"/><circle cx="-25" cy="35" r="28"/><circle cx="-40" cy="-13" r="28"/></g><circle r="26" fill="#FFD25E" stroke="#2B2A33" stroke-width="5"/></svg><div style="font-size:32px;margin-top:20px">はじまるよ！</div><style>@keyframes ktspin{to{transform:rotate(360deg)}}</style></div><script>addEventListener("load",function(){var e=document.getElementById("ktpre");if(e)e.remove();});</script>
@@ -66769,7 +66769,7 @@ const SL_TH = {
     item: "ほし", obs: "いんせき", call: "うちゅうじん", deco: [["🪐", 120, 990], ["⭐", 520, 990], ["🛸", 1500, 760], ["🌙", 140, 560], ["☄️", 1480, 450], ["👽", 760, 230], ["🌟", 1060, 990], ["🚀", 1500, 990], ["🌍", 640, 520]] },
   eki: { name: "えきの だいぼうけん", icon: "🚉", areas: ["かいさつ", "ホーム", "でんしゃの なか", "しゅうてん"], fills: ["#E6EEF5", "#FFF1C2", "#D7F0D2", "#FFE0E6"], ground: "#DDE6EE",
     blk: { who: "kamejii", intro: ["sl_eki_blk", "えきいんさんの かめじいが きっぷを しらべて いるよ"], say: ["blk_densha", "すみません、とおして ください"], to: "かめじいに いおう", keys: [["すみません", "済みません"], ["とおして", "通して", "とうして"], ["ください", "下さい"]], res: ["rs_densha", "おお、すまんのう。どうぞ"] },
-    item: "でんしゃ", obs: "でんしゃ", call: "えきいんさん", deco: [["🚉", 120, 990], ["🎫", 520, 990], ["🚦", 1500, 760], ["🕰️", 140, 470], ["🚃", 1480, 450], ["🍱", 760, 130], ["🛤️", 1060, 990], ["🚄", 1500, 990], ["🏙️", 1300, 130]] },
+    item: "でんしゃ", obs: "でんしゃ", call: "えきいんさん", deco: [["🎫", 120, 990], ["🚦", 1500, 760], ["🕰️", 140, 560], ["🍱", 1480, 560], ["🚄", 1500, 990]] },
   // おでかけ だいぼうけん（2026-10-19）：まえはんぶんは あるいて、うしろはんぶんは じてんしゃ。こうつう ルールの マスが いっぱい（odekake.js）
   odekake: { name: "おでかけ だいぼうけん", icon: "🚲", areas: ["いえの まわり", "しょうてんがい", "こうえん", "かわぞいの みち"], fills: ["#FFF1D6", "#FFE0E6", "#D9F0C8", "#D7ECFF"], ground: "#CFE8C0",
     blk: { who: "kamejii", intro: ["sl_odekake_blk", "かめじいが ほどうを ゆっくり あるいて いるよ。こえを かけて とおして もらおう"], say: ["blk_jitensha", "すみません、とおります"], to: "かめじいに いおう", keys: [["すみません", "済みません"]], res: ["rs_jitensha", "ほっほ、ていねいに ありがとう"] },
@@ -66859,10 +66859,7 @@ const SL_SHAPE = { // 47マス＋ゴール（まえは 65＋1。ながすぎた�
     for (let k = 0; k < C * R; k++) { P.push(xy(x, y)); seen.add(x + "," + y); const nx = x + dx, ny = y + dy;
       if (nx < 0 || nx >= C || ny < 0 || ny >= R || seen.has(nx + "," + ny)) { [dx, dy] = [dy, -dx]; } x += dx; y += dy; }
     return P.slice(0, 48); },
-  eki() { const V = [[170, 930], [1320, 930], [1440, 840], [1320, 750], [280, 750], [170, 660], [280, 570], [1320, 570], [1440, 480], [1320, 390], [280, 390], [170, 300], [280, 225], [1180, 225]]; // ろせんずの ような ジグザグ
-    const seg = V.slice(1).map((p, i) => Math.hypot(p[0] - V[i][0], p[1] - V[i][1])), tot = seg.reduce((a, b) => a + b, 0), P = [];
-    for (let k = 0; k < 48; k++) { let d = tot * k / 47, i = 0; while (i < seg.length - 1 && d > seg[i]) { d -= seg[i]; i++; } const t = Math.min(1, d / seg[i]); P.push([V[i][0] + (V[i + 1][0] - V[i][0]) * t, V[i][1] + (V[i + 1][1] - V[i][1]) * t]); }
-    return P; },
+  eki() { return SL_SHAPE.suchu(); }, // 2026-11-24：うちゅうに ならって、そとから まんなかの しゅうてんへ ぐるぐる（かんじょうせん）。まえは ろせんずの ジグザグ（backup-2026-11-24-before-eki-remake）
   kimochi() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + Math.sin(col * .8 + r * 1.3) * 22]); } }); return P; }, // 4だん＝4つの ばしょ（いえ・がっこう・こうえん・おでかけ）
   makete() { return SL_SHAPE.kimochi(); },
   yuen() { return SL_SHAPE.kimochi(); },
@@ -66891,7 +66888,7 @@ SL.forEach(sid => {
   ids.forEach((id, i) => { if (i === 0 || id === "4" || id === "15") return;
     const slot = i % 5; // 5マスに 2つ しかけ、ことば・おもしろ が 1〜2つずつ
     if ((slot === 1 || slot === 3) && e < EVS.length && i < ids.length - 3) { const t = EVS[e++]; ev[id] = [t, 0, `sl_${sid}_${t}`, t === "tsukkomi" ? "つっこみマス！" : SL_EVT[sid][t]]; }
-    else if (slot === 0 || slot === 4 ? w <= f : w < f) { const t = WORD[w++ % WORD.length]; task[id] = sid === "eki" && t === "gag" ? "scene" : t; } /* えきに がっこうの にせもの せんせいは ださない */ else task[id] = FUN[f++ % FUN.length]; });
+    else if (slot === 0 || slot === 4 ? w <= f : w < f) { const t = WORD[w++ % WORD.length]; task[id] = sid === "eki" && ["kaiwa", "scene", "gag"].includes(t) ? "ek" : t; } /* えきは 駅専用の 会話（eki2.js、2026-11-24） */ else task[id] = FUN[f++ % FUN.length]; });
   EVENTS[sid] = ev; LONG_TASKS[sid] = task;
   LEGENDS[sid] = [["kaiwa", "ことば"], ["scene", "いってみよう"], ["stop", "おもしろ"], ["monomane", "こえ"]]; // 「おおきな こえで よぼう」は なし（2026-10-31。きんじょ めいわく）
   const SCHOOL = ["げんかん", "きゅうしょく", "きょうしつ", "ほけんしつ", "しょくいんしつ", "としょしつ", "トラック"]; // えきの コースでは がっこうの 会話を ださない
@@ -66903,7 +66900,7 @@ Object.assign(LTASK, { stop: ["#FFE27A", "🎯"], catch: ["#FFE27A", "🖐"], ba
 function slBG(sid, L) {
   const T = SL_TH[sid];
   if (sid === "suchu") { el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#1E2550" }, L); for (let i = 0; i < 70; i++) el("circle", { cx: (i * 233) % 1600, cy: (i * 137) % 1000, r: 2 + (i % 3), fill: "#FFF6C8", opacity: .8 }, L); }
-  else if (sid === "eki") { el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#DDE6EE" }, L); [[60, 160, 120, 300], [240, 120, 90, 340], [1300, 100, 110, 360], [1440, 180, 130, 280], [600, 60, 80, 200]].forEach(([x, y, w, h]) => { el("rect", { x, y, width: w, height: h, fill: "#C3CFDA", ...S6(4) }, L); for (let yy = y + 20; yy < y + h - 20; yy += 40) for (let xx = x + 15; xx < x + w - 20; xx += 30) el("rect", { x: xx, y: yy, width: 16, height: 20, fill: "#FFF6C8" }, L); }); }
+  else if (sid === "eki") ekNightBG(L); // よるの えき（eki2.js、2026-11-24）
   else if (sid === "sokashi") { el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#FFE3EE" }, L); for (let i = 0; i < 30; i++) el("circle", { cx: (i * 211) % 1600, cy: (i * 157) % 1000, r: 10, fill: ["#FF8FA3", "#7FCBF0", "#FFD25E", "#7BD389"][i % 4], opacity: .35 }, L); }
   else { el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#8FD3F0" }, L); for (let y = 60; y < 1000; y += 90) el("path", { d: `M0 ${y} Q100 ${y - 14} 200 ${y} T400 ${y} T600 ${y} T800 ${y} T1000 ${y} T1200 ${y} T1400 ${y} T1600 ${y}`, fill: "none", stroke: "#FFFFFF", "stroke-width": 4, opacity: .35 }, L); }
   if (sid !== "eki") el("path", { d: "M90 990 Q30 820 90 640 Q50 420 160 300 Q300 230 560 250 Q900 210 1240 250 Q1530 270 1560 430 Q1590 640 1545 830 Q1505 995 1300 995 Z", fill: T.fills[0], opacity: sid === "suchu" ? .22 : .55, ...S6(5) }, L);
@@ -66964,7 +66961,7 @@ const slFlag = (pc, k) => { if (pc.player) pc.player[k] = 1; };
       await warpTo(pc, O[j]); await speak(C.pony, d > 0 ? "sl_rand_f" : "sl_rand_b", d > 0 ? "やったね、まえに とんだ！" : "あれれ、うしろに とんじゃった！"); }
     else if (type === "rest") { slFlag(pc, "rest"); markAbove(pc, "z", { i: 1 }); }
     else if (type === "again") { slFlag(pc, "again"); }
-    else if (type === "home") { const e = SL_VEH[curStage] && SL_VEH[curStage].home; if (e === "🐳") await slSwallow(pc, e); else if (e === "🌑") await slSwallow(pc, e, true); else if (e) await slRide(pc, "0", e, { arc: 60, ms: 1800, noflip: true }); else await warpTo(pc, "0"); }
+    else if (type === "home") { const e = SL_VEH[curStage] && SL_VEH[curStage].home; if (e === "🐳") await slSwallow(pc, e); else if (e === "🌑" || e === "TUN") await slSwallow(pc, e, true); else if (e) await slRide(pc, "0", e, { arc: 60, ms: 1800, noflip: true }); else await warpTo(pc, "0"); }
     else if (type === "back10") { await slGo(pc, -10); }
     else if (type === "bonus") { if (pc.player) pc.player.ok += 3; GS.ok += 3; GS.pend = 0; confetti(50); for (let i = 0; i < 3; i++) later(i * 250, () => blip(900 + i * 200, 1300, .1, "square")); }
     else if (type === "allf" || type === "allb") { const d = type === "allf" ? 2 : -2; for (const o of PLAYERS.map(p => p.pc)) { jump(o, .5); await slGo(o, d); if (winner) break; } }
@@ -67269,8 +67266,8 @@ Object.assign(LTASK_RUN, { stop: slStop, catch: slCatch, balloon: slBalloon, mor
 // 0マスの ときは マスの 課題も しない（つぎの ばんで もとに もどす）
 { const lc = landChild; landChild = async function (pc = P.shima) { if (isSL() && pc.player && pc.player.stay) { pc.player.stay = 0; return; } return lc(pc); }; }
 // 🐬 のりもの：イルカ・ジェットコースター・ロケットなどが コマを のせて はこぶ（盤の 上で うごく）
-const SL_VEH = { sumi: { warp: "🐬", bigwarp: "🚤", home: "🐳" }, sokashi: { warp: "🚃", bigwarp: "☁️", home: "🍫" }, suchu: { warp: "🌀", bigwarp: "🚀", home: "🌑" }, eki: { warp: "🚅", bigwarp: "LIN", home: "🚃" }, odekake: { warp: "🚌", bigwarp: "🚕", home: "🚌" } };
-const SL_SWALLOW = { sumi: "home", suchu: "home" }; // くじら・ブラックホールは のみこむ（コマが きえて、スタートで でてくる）
+const SL_VEH = { sumi: { warp: "🐬", bigwarp: "🚤", home: "🐳" }, sokashi: { warp: "🚃", bigwarp: "☁️", home: "🍫" }, suchu: { warp: "🌀", bigwarp: "🚀", home: "🌑" }, eki: { warp: "🚅", bigwarp: "LIN", home: "TUN" }, odekake: { warp: "🚌", bigwarp: "🚕", home: "🚌" } };
+const SL_SWALLOW = { sumi: "home", suchu: "home", eki: "home" }; // くじら・ブラックホールは のみこむ（コマが きえて、スタートで でてくる）
 // リニアモーターカー（えもじが ないので 絵で）：ひだりむき、ながい はなさき、しゃりん なしで ういて いる
 function linearG(g, size) { const k = size / 130, o = el("g", {}, g), t = el("g", { transform: `scale(${k.toFixed(3)})` }, o);
   el("ellipse", { cx: -20, cy: 40, rx: 150, ry: 9, fill: "#9FE8FF", opacity: .8 }, t); el("rect", { x: -170, y: 46, width: 320, height: 10, rx: 5, fill: "#C9D3DE", stroke: INK, "stroke-width": 3 }, t);
@@ -67278,7 +67275,7 @@ function linearG(g, size) { const k = size / 130, o = el("g", {}, g), t = el("g"
   el("path", { d: "M-150 8 L130 6 L130 14 L-170 16 Z", fill: "#3E5BD6" }, t); el("path", { d: "M-96 -12 Q-80 -24 -50 -24 L-50 -6 L-100 -6 Z", fill: "#2B2A33" }, t);
   [-20, 20, 60, 100].forEach(x => el("rect", { x, y: -20, width: 26, height: 16, rx: 4, fill: "#BDE3F2", stroke: INK, "stroke-width": 3 }, t));
   [0, 1, 2].forEach(i => el("path", { d: `M${150 + i * 18} ${-14 + i * 12} h${24 + i * 6}`, stroke: "#7FCBF0", "stroke-width": 5, "stroke-linecap": "round" }, t)); return o; }
-function slEmoji(e, x, y, size = 120) { const g = el("g", {}, front()); const t = e === "LIN" ? linearG(g, size) : txt(g, 0, size * .36, e, size, { "text-anchor": "middle" }); g.setAttribute("transform", `translate(${x.toFixed(0)} ${y.toFixed(0)})`); g.__t = t; return g; }
+function slEmoji(e, x, y, size = 120) { const g = el("g", {}, front()); const t = e === "LIN" ? linearG(g, size) : e === "TUN" ? ekTunnelArt(g, size) : txt(g, 0, size * .36, e, size, { "text-anchor": "middle" }); g.setAttribute("transform", `translate(${x.toFixed(0)} ${y.toFixed(0)})`); g.__t = t; return g; }
 async function slRide(pc, toId, e, opt = {}) {
   const [tx, ty] = nodeXY(pc, toId), x0 = pc.px, y0 = pc.py, dir = tx >= x0 ? 1 : -1, sz = opt.size || 130;
   const v = slEmoji(e, x0 - dir * 900, y0 + 10, sz); const faceL = ["🚅", "🚄", "🚃", "LIN", "🚌", "🚕"].includes(e); // でんしゃの えもじは ひだりむき → すすむ ほうに むける（2026-10-18 ぎゃくそう なおし）
@@ -67374,8 +67371,7 @@ async function slSanju(pc) {
   await sleep(500); g.remove(); await delta(pc, sjStep(n)); return n >= 3;
 }
 Object.assign(LTASK_RUN, { sanju: slSanju }); Object.assign(LTASK, { sanju: ["#FFC6E0", "⏱"] });
-// えきの コースは ことばの マスの いくつかを「30びょう いえるかな」に
-{ const O = SL_ORDER.eki, T = LONG_TASKS.eki; const cand = O.filter(id => T[id] && !["sanju"].includes(T[id])); [5, 13, 21, 29, 37, 43].forEach(i => { const id = cand[Math.min(cand.length - 1, Math.round(i / 48 * cand.length))]; if (id) T[id] = "sanju"; }); }
+// 2026-11-24：えきの コースから「30びょう いえるかな」を はずした（うちゅうと おなじ ならびに。あまねさん）。しくみ（slSanju）は のこして ある。
 // ゴールの しめかたは ほかの コースと おなじ（チャンピオン はっぴょうは やめた 2026-10-18）
 
 /* ================= ちょうロング「おでかけ だいぼうけん（とほ・じてんしゃ）」（2026-10-19） =================
@@ -72401,6 +72397,134 @@ Object.assign(ICON_DRAW, {
   "👽": g => { IC.E(g, 0, -10, 70, 80, "#8FE08A", 7); IC.E(g, -26, -16, 20, 26, "#1E2A3A", 0); IC.E(g, 26, -16, 20, 26, "#1E2A3A", 0); IC.P(g, "M-14 36 Q0 46 14 36", "none", 5); IC.P(g, "M-40 -80 Q-60 -110 -80 -120 M40 -80 Q60 -110 80 -120", "none", 7); IC.C(g, -84, -124, 10, "#FFE27A", 3); IC.C(g, 84, -124, 10, "#FFE27A", 3); },
   "☄": g => { IC.P(g, "M-100 70 Q-20 10 60 -60", "none", 14); IC.P(g, "M0 0 L40 -50 L20 -100 L-30 -90 L-50 -40 Z", "#8E929C", 6, 0); IC.P(g, "M-10 -40 l12 -18 M8 -60 l16 -6", "none", 4); },
 });
+
+/* sit/eki2_gen.py で つくる（てで なおさない） */
+const EK = {"sc": [{"id": "kippu", "area": 1, "place": "かいさつ", "who": "kamejii", "n": "かいさつに ついたよ。えきいんさんの かめじいが、にこにこ して いる", "say": "はい、きっぷです", "keys": [["きっぷ", "切符", "はい"]], "line": "きっぷは もって いるかな？", "res": "はい、どうぞ。いってらっしゃい"}, {"id": "card", "area": 1, "place": "かいさつ", "who": "kamejii", "n": "カードを タッチしたら、ピンポーン！ かいさつが しまっちゃった", "say": "とおれません。たすけて ください", "keys": [["とおれ", "通れ", "たすけて", "助けて", "おしえて", "教えて"]], "line": "おや、どう しましたか？", "res": "ちょっと みせてね。……はい、これで とおれるよ"}, {"id": "michi", "area": 1, "place": "かいさつ", "who": "meebaa", "n": "ひつじの おばあさんが、きょろきょろ こまって いるよ", "say": "あっちです。いっしょに いきましょう", "keys": [["あっち", "こっち", "いっしょ", "一緒", "いきましょう", "行きましょう"]], "line": "ちょいと、3ばんせんは どこかねえ", "res": "まあ、やさしい こだねえ。ありがとう"}, {"id": "maigo", "area": 1, "place": "かいさつ", "who": "kamejii", "n": "あれれ？ ママが いない！ ひとが いっぱいで、はぐれちゃった", "say": "ママと はぐれました", "keys": [["はぐれ", "まいご", "迷子", "いない", "ママ"]], "line": "ぼく、ひとりかな？ どうしたの？", "res": "だいじょうぶ。アナウンスで ママを よんで あげるね", "t2": {"line": "ママの なまえは わかるかな？", "say": "まるシマの ママです", "keys": [["ママ", "まるしま", "まるシマ"]], "res": "ピンポンパンポーン。……あっ、ママが きたよ"}}, {"id": "nodo", "area": 1, "place": "かいさつ", "who": "mama", "n": "のどが からから。じはんきの まえに きたよ", "say": "おちゃを ください", "keys": [["おちゃ", "お茶", "みず", "水", "ください", "下さい"]], "line": "どれに する？", "res": "はい、おちゃね。ボタンを おして ごらん"}, {"id": "escala", "area": 1, "place": "かいさつ", "who": "tora", "n": "エスカレーターに、みんな ならんで のって いるよ。とらくんが よこから……", "say": "ならんで、じゅんばんに のろう", "keys": [["ならんで", "並んで", "じゅんばん", "順番"]], "line": "おれ、さきに のっちゃおう！", "res": "あっ、そっか。ごめん、うしろに ならぶよ"}, {"id": "sen", "area": 2, "place": "ホーム", "who": "pyon", "n": "でんしゃが くるよ。でも ぴょんちゃんが、きいろい せんの そとに いる！", "say": "きいろい せんの うちがわに さがって", "keys": [["きいろい", "黄色い", "さがって", "下がって", "うちがわ", "内側"]], "line": "でんしゃ、まだかなあ", "res": "あっ、ほんとだ。ありがとう"}, {"id": "announce", "area": 2, "place": "ホーム", "who": "mama", "n": "ピンポーン。「まもなく、1ばんせんに でんしゃが まいります」", "say": "1ばんせんに でんしゃが くるって", "keys": [["1ばんせん", "いちばんせん", "一番線", "1番線", "くる", "来る", "まいります"]], "line": "いま、なんて いってた？", "res": "よく きいてたね。さあ、いこう"}, {"id": "boushi", "area": 2, "place": "ホーム", "who": "kamejii", "n": "あっ！ かぜで ぼうしが とばされて、せんろに おちちゃった！", "say": "ぼうしが せんろに おちました", "keys": [["ぼうし", "帽子", "おちました", "落ちました", "せんろ", "線路"]], "line": "どう しましたか？", "res": "とりに いっては だめだよ。ながい ぼうで とって あげよう", "t2": {"line": "はい、とれたよ。どうぞ", "say": "ありがとうございます", "keys": [["ありがとう", "有難う"]], "res": "どういたしまして。きを つけてね"}}, {"id": "oriru", "area": 2, "place": "ホーム", "who": "tora", "n": "でんしゃの ドアが ひらいた。なかから ひとが おりて くるよ", "say": "おりる ひとが さきだよ", "keys": [["おりる", "降りる", "さき", "先", "まって", "待って"]], "line": "はやく のろうぜ！", "res": "そっか。まってから のるんだね"}, {"id": "kakekomi", "area": 2, "place": "ホーム", "who": "kamejii", "n": "ドアが しまりそう！ はしって のろうと したら……", "say": "つぎの でんしゃに します", "keys": [["つぎ", "次", "まちます", "待ちます", "まつ", "待つ"]], "line": "かけこみは あぶないですよ", "res": "えらいね。つぎの でんしゃも すぐ くるよ"}, {"id": "sukima", "area": 2, "place": "ホーム", "who": "pyon", "n": "でんしゃと ホームの あいだに、すきまが あいて いるよ", "say": "あしもとに きを つけて", "keys": [["あしもと", "足元", "足もと", "きをつけて", "気をつけて", "きを つけて"]], "line": "えいっ、とびのっちゃおう！", "res": "うん。ゆっくり のるね"}, {"id": "yuzuru", "area": 3, "place": "でんしゃの なか", "who": "meebaa", "n": "でんしゃは いっぱい。ひつじの おばあさんが、ゆれて たいへんそう", "say": "どうぞ、すわって ください", "keys": [["どうぞ", "すわって", "座って"]], "line": "ふう……よく ゆれるねえ", "res": "まあ、ありがとう。たすかるわ", "t2": {"line": "ぼうやは、どこまで いくの？", "say": "しゅうてんまで いきます", "keys": [["しゅうてん", "終点", "いきます", "行きます"]], "res": "まあ、おばあちゃんと おなじね"}}, {"id": "shizuka", "area": 3, "place": "でんしゃの なか", "who": "mama", "n": "でんしゃの なかは しずか。まるシマは、ママに はなしたい ことが ある", "say": "ちいさい こえで はなすね", "keys": [["ちいさい", "小さい", "こごえ", "小声", "こえ", "声"]], "line": "しーっ。でんしゃの なかよ", "res": "そうそう。じょうずね"}, {"id": "yure", "area": 3, "place": "でんしゃの なか", "who": "mama", "n": "ガタン！ でんしゃが おおきく ゆれた", "say": "つりかわに つかまるね", "keys": [["つりかわ", "吊り革", "つかまる", "捕まる", "てすり", "手すり"]], "line": "だいじょうぶ？", "res": "そうね。しっかり つかまっててね"}, {"id": "mado", "area": 3, "place": "でんしゃの なか", "who": "pyon", "n": "まどの そとに、おおきな かわと てっきょうが みえるよ", "say": "おおきな かわが みえる", "keys": [["かわ", "川", "みえる", "見える", "てっきょう", "鉄橋", "はし", "橋"]], "line": "ねえ、なにが みえる？", "res": "ほんとだ！ きらきら して きれい"}, {"id": "nemuri", "area": 3, "place": "でんしゃの なか", "who": "mama", "n": "あれ？ ママが うとうと。つぎは おりる えきだよ", "say": "ママ、つぎで おりるよ", "keys": [["つぎ", "次", "おりる", "降りる", "おきて", "起きて"]], "line": "すう……すう……", "res": "はっ！ ありがとう。おしえて くれて たすかったわ"}, {"id": "saifu", "area": 3, "place": "でんしゃの なか", "who": "kamejii", "n": "せきの したに、さいふが おちて いるよ。しゃしょうさんが とおりかかった", "say": "さいふが おちて いました", "keys": [["さいふ", "財布", "おちて", "落ちて"]], "line": "なにか ありましたか？", "res": "とどけて くれて ありがとう。おとした ひとが よろこぶよ"}, {"id": "shuten", "area": 4, "place": "しゅうてん", "who": "kamejii", "n": "しゅうてんに ついたよ。えきいんさんが、ホームで みおくって いる", "say": "ありがとうございました", "keys": [["ありがとう", "有難う"]], "line": "しゅうてんです。おわすれものの ないように", "res": "どういたしまして。きを つけてね"}, {"id": "wasure", "area": 4, "place": "しゅうてん", "who": "kamejii", "n": "あっ！ でんしゃの なかに、ぼうしを わすれちゃった！", "say": "でんしゃに ぼうしを わすれました", "keys": [["わすれ", "忘れ", "ぼうし", "帽子"]], "line": "どう しましたか？", "res": "みて くるから、ここで まって いてね", "t2": {"line": "これかな？ あおい ぼうし", "say": "それです。ありがとうございます", "keys": [["それ", "ありがとう", "有難う"]], "res": "みつかって よかったね"}}, {"id": "toire", "area": 4, "place": "しゅうてん", "who": "mama", "n": "なんだか おなかが むずむず。もじもじ しちゃう", "say": "トイレに いきたい", "keys": [["トイレ", "といれ", "いきたい", "行きたい"]], "line": "どうしたの？ もじもじ して", "res": "あそこに あるわ。いっしょに いこう"}, {"id": "chizu", "area": 4, "place": "しゅうてん", "who": "pyon", "n": "えきの そとに でたよ。おおきな ちずの かんばんが ある", "say": "ちずを みて みよう", "keys": [["ちず", "地図", "みて", "見て", "みよう", "見よう"]], "line": "こうえんって、どっちかな？", "res": "あっ、こっちだ！ ありがとう"}, {"id": "ekiben", "area": 4, "place": "しゅうてん", "who": "doshin", "n": "おいしそうな においが する。どしんの えきべんやさんだ", "say": "これを ひとつ ください", "keys": [["ひとつ", "一つ", "ください", "下さい"]], "line": "いらっしゃい！ えきべん、いかが？", "res": "まいど！ はい、どうぞ。あったかいよ", "t2": {"line": "どれに する？ からあげと、おにぎり", "say": "からあげに します", "keys": [["からあげ", "唐揚げ", "おにぎり", "します"]], "res": "はい、まいど！"}}, {"id": "tanoshi", "area": 4, "place": "しゅうてん", "who": "mama", "n": "でんしゃの たびも、もう おしまい", "say": "たのしかった。また のりたい", "keys": [["たのしかった", "楽しかった", "また", "のりたい", "乗りたい"]], "line": "でんしゃ、どうだった？", "res": "また いっしょに こようね"}], "txt": {"ekp_intro": "えきの だいぼうけんに しゅっぱつ！ まるシマに なりきって、おてほんを まねして いって みよう", "ekp_ok": "じょうずに いえたね！", "ekp_good": "そう いえば、つたわるね！", "sl_eki2_home": "まっくらな トンネルに すいこまれた！ スタートに もどる！"}};
+
+/* ================= ロングコース「えきの だいぼうけん」作り替え（eki2、2026-11-24） =================
+   あまねさん：こどもは「うちゅうの だいぼうけん」（suchu）が やたら すき → えきを うちゅうに ならって 作り替え。
+   ・盤：うちゅうと おなじ うずまき（slong.js の SL_SHAPE.eki）。そとから まんなかの しゅうてんへ。よるの えきの 背景（ekNightBG）。
+   ・しかけ：うちゅうと おなじ ならび（slong.js の EVS）。🔀 くみかえも 2かしょ。ふりだしは まっくらな トンネルに のみこまれる（ekTunnelArt）。
+   ・課題：「30びょう いえるかな」を やめ、ことば・いってみよう の マスは 駅専用の 会話 💬（ekScene）。
+   データと 声：sit/eki2_gen.py → eki2_data.js・sit/pony_eki2.json・aivis/jobs/ek1。
+   もとに もどす とき：ブランチ backup-2026-11-24-before-eki-remake。 */
+const EK_N = new Map(); let EK_CUR = "";
+{ const ap = applyStage; applyStage = function (id, ...a) { if (id === "eki") EK_N.clear(); return ap(id, ...a); }; }
+Object.assign(LTASK, { ek: ["#E6EEF5", "💬"] });
+LEGENDS.eki = [["ek", "おはなし"], ["stop", "おもしろ"], ["monomane", "こえ"]];
+// ふりだしの マス：トンネルの ことばと 声
+Object.entries(EVENTS.eki).forEach(([id, e]) => { if (e[0] === "home") EVENTS.eki[id] = ["home", 0, "sl_eki2_home", EK.txt.sl_eki2_home]; });
+SL_EVT.eki.home = EK.txt.sl_eki2_home;
+/* ---------- トンネル（ふりだしに もどる） ---------- */
+function ekTunnelArt(g, size) { const k = size / 130, o = el("g", {}, g), t = el("g", { transform: `scale(${k.toFixed(3)})` }, o);
+  el("path", { d: "M-95 40 V-10 A95 95 0 0 1 95 -10 V40 Z", fill: "#7A7368", stroke: INK, "stroke-width": 6 }, t); // いしの わく
+  [[-80, -20], [-62, -62], [-24, -88], [24, -88], [62, -62], [80, -20]].forEach(([x, y]) => el("rect", { x: x - 12, y: y - 9, width: 24, height: 18, rx: 4, fill: "#9A9284", stroke: INK, "stroke-width": 3 }, t));
+  el("path", { d: "M-66 40 V-6 A66 66 0 0 1 66 -6 V40 Z", fill: "#0E0E16", stroke: INK, "stroke-width": 5 }, t); // まっくら
+  const eye = el("g", {}, t); el("circle", { cx: -18, cy: -10, r: 6, fill: "#FFE27A" }, eye); el("circle", { cx: 18, cy: -10, r: 6, fill: "#FFE27A" }, eye); // おくから でんしゃの あかり
+  el("animate", { attributeName: "opacity", values: ".2;1;.2", dur: "1s", repeatCount: "indefinite" }, eye);
+  el("path", { d: "M-40 40 L-12 0 M40 40 L12 0", stroke: "#8C8C99", "stroke-width": 5 }, t); // せんろ
+  for (let i = 0; i < 4; i++) el("path", { d: `M${-30 + i * 2} ${34 - i * 10} H${30 - i * 2}`, stroke: "#6B5B4B", "stroke-width": 4 }, t);
+  return o; }
+/* ---------- よるの えき（盤の 背景） ---------- */
+function ekNightBG(L) {
+  el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#1B2348" }, L);
+  el("rect", { x: 0, y: 0, width: 1600, height: 260, fill: "#263068", opacity: .7 }, L);
+  for (let i = 0; i < 55; i++) el("circle", { cx: (i * 233) % 1600, cy: (i * 97) % 300, r: 1.5 + (i % 3), fill: "#FFF6C8", opacity: .75 }, L); // ほし
+  el("circle", { cx: 1460, cy: 110, r: 52, fill: "#FFF3B8", ...S6(4) }, L); el("circle", { cx: 1484, cy: 96, r: 46, fill: "#263068" }, L); // みかづき
+  // ビルの かげと あかりの ついた まど（うえの はし と よこ）
+  [[0, 170, 120, 200], [130, 120, 90, 250], [1250, 150, 100, 220], [1360, 200, 140, 170], [1500, 130, 100, 240], [520, 190, 80, 140], [980, 170, 90, 160]].forEach(([x, y, w, h], j) => {
+    el("rect", { x, y, width: w, height: h, fill: "#11173A", stroke: "#0A0E24", "stroke-width": 4 }, L);
+    for (let yy = y + 18; yy < y + h - 14; yy += 34) for (let xx = x + 12; xx < x + w - 16; xx += 26) if ((xx * 7 + yy * 3 + j) % 5) el("rect", { x: xx, y: yy, width: 14, height: 18, fill: (xx + yy) % 3 ? "#FFE27A" : "#FFB36B", opacity: .85 }, L); });
+  // まんなかの しゅうてん：ひかる えきの たてもの
+  const st = el("g", { transform: "translate(800 600)" }, L);
+  el("ellipse", { cx: 0, cy: 10, rx: 240, ry: 110, fill: "#FFE27A", opacity: .12 }, st);
+  // ホームの あかり（はしらと ランプ）
+  [[90, 990], [1520, 990], [90, 700], [1520, 760]].forEach(([x, y]) => { el("path", { d: `M${x} ${y} V${y - 150}`, stroke: "#3B3F5C", "stroke-width": 8 }, L); el("circle", { cx: x, cy: y - 158, r: 14, fill: "#FFF3B8", ...S6(3) }, L); el("circle", { cx: x, cy: y - 158, r: 40, fill: "#FFF3B8", opacity: .18 }, L); });
+}
+/* ---------- 場面の へや ---------- */
+function ekSign(L, place) { const g = el("g", {}, L); el("rect", { x: 620, y: 24, width: 360, height: 92, rx: 20, fill: "#FFFFFF", ...S6(6) }, g); txt(g, 800, 88, place, place.length > 6 ? 38 : 46, { "text-anchor": "middle" }); }
+function ekGateRoom(L) { // かいさつ：かいさつきが ならぶ
+  el("rect", { x: 0, y: 0, width: 1600, height: 760, fill: "#E6EEF5" }, L); el("rect", { x: 0, y: 760, width: 1600, height: 240, fill: "#C9CED6" }, L); el("path", { d: "M0 760 H1600", ...S6(6) }, L);
+  for (let x = 0; x < 1600; x += 120) el("path", { d: `M${x} 760 L${x - 60} 1000`, stroke: "#00000014", "stroke-width": 4 }, L);
+  el("rect", { x: 200, y: 150, width: 1200, height: 70, rx: 10, fill: "#2E5AAC", ...S6(5) }, L); txt(L, 800, 198, "のりば →　　かいさつ　　← でぐち", 34, { "text-anchor": "middle", fill: "#FFFFFF" });
+  el("rect", { x: 1180, y: 280, width: 300, height: 260, rx: 10, fill: "#F6EEDF", ...S6(6) }, L); el("rect", { x: 1210, y: 320, width: 240, height: 120, rx: 8, fill: "#BDE3F2", ...S6(4) }, L); txt(L, 1330, 500, "きっぷうりば", 28, { "text-anchor": "middle" });
+  for (let i = 0; i < 4; i++) { const x = 760 + i * 120; el("rect", { x, y: 640, width: 46, height: 140, rx: 10, fill: "#D9DEE6", ...S6(5) }, L); el("rect", { x: x + 6, y: 652, width: 34, height: 16, rx: 4, fill: "#3E7FD6" }, L); el("circle", { cx: x + 23, cy: 700, r: 8, fill: "#7BD389" }, L); }
+  el("circle", { cx: 160, cy: 330, r: 70, fill: "#FFFFFF", ...S6(6) }, L); el("path", { d: "M160 290 V330 L190 348", ...S6(6), fill: "none" }, L); }
+function ekTrainRoom(L) { // でんしゃの なか：まどの そとが ながれる
+  el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#F3EEE2" }, L); el("rect", { x: 0, y: 780, width: 1600, height: 220, fill: "#9AA3AE" }, L); el("path", { d: "M0 780 H1600", ...S6(6) }, L);
+  const sc = el("g", {}, L), clip = "ekwin"; const d = el("defs", {}, L), cp = el("clipPath", { id: clip }, d);
+  for (let x = 120; x < 1600; x += 380) el("rect", { x, y: 230, width: 300, height: 220, rx: 18 }, cp);
+  const out = el("g", { "clip-path": `url(#${clip})` }, sc); el("rect", { x: 0, y: 220, width: 1600, height: 240, fill: "#BDE3F2" }, out);
+  const mv = el("g", {}, out); for (let i = 0; i < 16; i++) { const x = i * 220; el("path", { d: `M${x} 450 Q${x + 60} ${360 - (i % 3) * 30} ${x + 120} 450 Z`, fill: i % 2 ? "#7BD389" : "#5FB35A" }, mv); if (i % 4 === 1) el("rect", { x: x + 40, y: 360, width: 40, height: 90, fill: "#FFFFFF", ...S6(3) }, mv); }
+  let t = 0; addTick(dt => { if (!mv.isConnected) return false; t += dt; mv.setAttribute("transform", `translate(${(-(t * 160) % 880).toFixed(0)} 0)`); });
+  for (let x = 120; x < 1600; x += 380) el("rect", { x, y: 230, width: 300, height: 220, rx: 18, fill: "none", ...S6(6) }, L);
+  el("rect", { x: 300, y: 700, width: 620, height: 80, rx: 16, fill: "#5F8FCB", ...S6(6) }, L); el("path", { d: "M0 150 H1600", ...S6(6) }, L);
+  for (let x = 160; x < 1600; x += 160) { el("path", { d: `M${x} 150 V200`, ...S6(4) }, L); el("circle", { cx: x, cy: 214, r: 14, fill: "none", ...S6(5) }, L); } }
+const ROOMS_EK = { "かいさつ": L => ekGateRoom(L), "でんしゃの なか": L => ekTrainRoom(L) };
+{ const dr = drawRoom; drawRoom = function (place, noSign = false) {
+    if (curStage !== "eki") return dr(place, noSign);
+    if (ROOMS_EK[place]) { sceneLayer.innerHTML = ""; ROOMS_EK[place](sceneLayer); if (!noSign) ekSign(sceneLayer, place); return; }
+    if (place === "ホーム" || place === "しゅうてん") { dr("えき", true); if (place === "しゅうてん") { const L = sceneLayer; // くるまどめ と でぐちの あんない
+        el("rect", { x: 40, y: 640, width: 120, height: 60, rx: 8, fill: "#FFD25E", ...S6(5) }, L); for (let i = 0; i < 3; i++) el("path", { d: `M${56 + i * 36} 640 l20 60`, stroke: INK, "stroke-width": 8 }, L);
+        el("rect", { x: 620, y: 360, width: 300, height: 70, rx: 12, fill: "#FFE27A", ...S6(5) }, L); txt(L, 770, 408, "でぐち →", 36, { "text-anchor": "middle" }); }
+      if (!noSign) ekSign(sceneLayer, place); return; }
+    return dr(place, noSign); }; }
+/* ---------- 場面の 小道具 ---------- */
+function ekProp(sc, h, a) {
+  const G = el("g", {}, propG), hx = h.x + 200 * h.s, ax = a ? a.x + 200 * a.s : 1200, base = 975, id = sc.id;
+  if (id === "kippu") { const k = el("g", { transform: `translate(${hx + 120} ${base - 330}) rotate(-12)` }, G); el("rect", { x: -40, y: -24, width: 80, height: 48, rx: 6, fill: "#FFF1C2", ...S6(4) }, k); txt(k, 0, 8, "きっぷ", 18, { "text-anchor": "middle" }); }
+  else if (id === "card") { for (let i = 0; i < 4; i++) later(i * 500, () => { blip(1200, 1200, .08, "square"); markAbove(h, "ex"); }); const b = el("rect", { x: 1006, y: 652, width: 34, height: 16, rx: 4, fill: "#FF6F61" }, G); el("animate", { attributeName: "opacity", values: "1;.2;1", dur: ".5s", repeatCount: "indefinite" }, b); }
+  else if (id === "nodo") { const v = el("g", { transform: `translate(${ax + 150} ${base - 120})` }, G); el("rect", { x: -70, y: -360, width: 140, height: 360, rx: 10, fill: "#3E7FD6", ...S6(5) }, v); for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) el("rect", { x: -54 + c * 38, y: -330 + r * 70, width: 26, height: 46, rx: 6, fill: ["#FF8FA3", "#7BD389", "#FFD25E"][(r + c) % 3], ...S6(2) }, v); el("rect", { x: -40, y: -90, width: 80, height: 40, rx: 6, fill: "#2B2A33" }, v); }
+  else if (id === "sen" || id === "announce" || id === "oriru" || id === "kakekomi" || id === "sukima" || id === "shuten") { // ホームに でんしゃが くる
+    const tr = el("g", {}, G); const draw = x => { tr.innerHTML = ""; el("rect", { x, y: 560, width: 900, height: 150, rx: 26, fill: "#F4F7FA", ...S6(6) }, tr); el("rect", { x, y: 640, width: 900, height: 18, fill: "#3E7FD6" }, tr); for (let i = 0; i < 5; i++) el("rect", { x: x + 40 + i * 170, y: 580, width: 110, height: 50, rx: 8, fill: "#BDE3F2", ...S6(3) }, tr); };
+    const stop = id === "sen" ? 1700 : 700; let x = 1700; draw(x); if (id !== "sen") { noise(.8, 500, .25); addTick(dt => { if (!tr.isConnected) return false; x = Math.max(stop, x - dt * 900); draw(x); if (x <= stop) return false; }); } else later(3500, () => { noise(.8, 500, .25); addTick(dt => { if (!tr.isConnected) return false; x = Math.max(700, x - dt * 900); draw(x); if (x <= 700) return false; }); });
+    if (id === "announce") { const sp = el("g", { transform: "translate(1000 300)" }, G); el("path", { d: "M-30 -20 L0 -20 L30 -45 V45 L0 20 L-30 20 Z", fill: "#D9DEE6", ...S6(4) }, sp); for (let k = 0; k < 3; k++) { const w = el("path", { d: `M${45 + k * 22} -30 q16 30 0 60`, fill: "none", stroke: "#3E7FD6", "stroke-width": 5 }, sp); el("animate", { attributeName: "opacity", values: "0;1;0", dur: "1s", begin: `${k * .2}s`, repeatCount: "indefinite" }, w); } blip(1046, 1046, .15, "sine"); later(250, () => blip(784, 784, .15, "sine")); }
+    if (id === "kakekomi") later(1200, () => { for (let i = 0; i < 3; i++) later(i * 300, () => blip(1500, 1500, .08, "square")); }); }
+  else if (id === "boushi") { const b = el("g", { transform: `translate(1000 720)` }, G); el("path", { d: "M-40 0 Q-36 -40 0 -42 Q36 -40 40 0 Z", fill: "#3E7FD6", ...S6(4) }, b); el("path", { d: "M-56 0 H56", stroke: INK, "stroke-width": 8, "stroke-linecap": "round" }, b); }
+  else if (id === "yure") { let t = 0; addTick(dt => { if (!sceneLayer.isConnected) return false; t += dt; if (t > 2) { sceneLayer.setAttribute("transform", ""); return false; } sceneLayer.setAttribute("transform", `translate(${(Math.sin(t * 40) * 10 * (1 - t / 2)).toFixed(1)} 0)`); }); noise(.6, 300, .4); }
+  else if (id === "nemuri") { later(100, () => { a.eyesClosed = true; }); for (let i = 0; i < 4; i++) later(400 + i * 900, () => markAbove(a, "z", { i })); }
+  else if (id === "saifu" || id === "wasure") { const w = el("g", { transform: `translate(${id === "saifu" ? 460 : 1000} ${id === "saifu" ? 770 : 700})` }, G); el("rect", { x: -34, y: -22, width: 68, height: 44, rx: 8, fill: id === "saifu" ? "#C98A4B" : "#3E7FD6", ...S6(4) }, w); const sp = el("path", { d: "M40 -30 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4z", fill: "#FFE27A" }, w); el("animate", { attributeName: "opacity", values: "1;.2;1", dur: ".8s", repeatCount: "indefinite" }, sp); }
+  else if (id === "chizu") { const m = el("g", { transform: "translate(1100 420)" }, G); el("rect", { x: -150, y: -110, width: 300, height: 220, rx: 12, fill: "#FFFFFF", ...S6(5) }, m); el("path", { d: "M-120 60 H120 M-40 -90 V90 M60 -90 L90 90", stroke: "#BFC6CF", "stroke-width": 10 }, m); el("circle", { cx: 80, cy: -50, r: 20, fill: "#7BD389", ...S6(3) }, m); txt(m, 80, -80, "こうえん", 18, { "text-anchor": "middle" }); el("circle", { cx: -40, cy: 60, r: 12, fill: "#FF6F61", ...S6(3) }, m); txt(m, -40, 96, "いま ここ", 16, { "text-anchor": "middle" }); }
+  else if (id === "ekiben") { const b = el("g", { transform: `translate(${ax - 140} ${base - 300})` }, G); el("rect", { x: -60, y: -30, width: 120, height: 60, rx: 8, fill: "#FFF1C2", ...S6(4) }, b); el("path", { d: "M-60 -6 H60 M0 -30 V30", stroke: "#FF6F61", "stroke-width": 6 }, b); for (let k = 0; k < 3; k++) later(k * 600, () => mark("puff", ax - 140 + k * 20, base - 340, { vy: -60, life: .8, s: .4 })); }
+  else if (id === "maigo") { for (let i = 0; i < 3; i++) later(300 + i * 700, () => markAbove(h, "q")); h.sadMouth = true; }
+  else if (id === "escala") { later(800, () => { a.dx.t = -120; hold(a, "run", .8); }); }
+  else if (id === "tanoshi") { later(600, () => { joy(h); }); }
+  return G; }
+/* ---------- 💬 えきの おはなし ---------- */
+function ekPick(area) { let pool = EK.sc.filter(s => s.area === area); const m = Math.min(...pool.map(s => EK_N.get(s.id) || 0)); pool = pool.filter(s => (EK_N.get(s.id) || 0) === m); return pool[rnd(pool.length)]; }
+async function ekScene(pc) {
+  const hero = pc.kind, sc = ekPick(nArea(pc.node)), t = tierOf(); EK_N.set(sc.id, (EK_N.get(sc.id) || 0) + 1);
+  showEngine(null, `えきの おはなし（${sc.id}・段${t + 1}）`);
+  EK_CUR = sc.id; const { hero: h, ask: a } = setSitView({ id: "ek_" + sc.id, place: sc.place, asker: sc.who, intro: "ek" }, hero);
+  a.dx.v = a.dx.t = 0;
+  enter(h); await sleep(900);
+  if (!EK_N.get("_intro")) { EK_N.set("_intro", 1); await speak(C.pony, "ekp_intro", EK.txt.ekp_intro); }
+  ekProp(sc, h, a);
+  await speak(C.pony, `ekn_${sc.id}`, sc.n);
+  if (["card", "maigo", "boushi", "wasure", "toire", "nodo"].includes(sc.id)) { h.sadMouth = true; playMove(h, "think"); }
+  if (sc.line) { playMove(a, "nod"); await speak(a, `ekw_${sc.id}`, sc.line); }
+  let okN = 0, nSay = 0; const log = [];
+  const step = async (key, text, keys, tag) => { nSay++; const r = await kmSay(h, key, text, keys, tag); if (r.ok) okN++; log.push(`${r.ok ? "○" : "×"}${r.heard}`); return r.ok; };
+  await step(`eks_${sc.id}`, sc.say, sc.keys, "まるシマに なって いおう");
+  h.sadMouth = false; if (sc.id === "nemuri") a.eyesClosed = false;
+  if (sc.res) { playMove(a, "nod"); await speak(a, `ekr_${sc.id}`, sc.res); }
+  const t2 = sc.t2 && (t >= 1 || !sc.res) ? sc.t2 : null;
+  if (t2) { if (t2.line) { playMove(a, "nod"); await speak(a, `ekw2_${sc.id}`, t2.line); }
+    await step(`eks2_${sc.id}`, t2.say, t2.keys, "つづけて いおう");
+    if (t2.res) { joy(a); await speak(a, `ekr2_${sc.id}`, t2.res); } }
+  const ok = okN * 2 >= nSay; grade(ok); GS.tasks++;
+  playLog({ type: "eki2", id: sc.id, tier: t, okN, nSay, tries: log, ...(MODE === "multi" ? { who: NAMES[hero] } : {}) });
+  if (ok) { confetti(36); joy(h); const k = rnd(2) ? "ekp_ok" : "ekp_good"; await speak(C.pony, k, EK.txt[k]); }
+  await sleep(400); setView("board"); return ok; }
+Object.assign(LTASK_RUN, { ek: ekScene });
+/* ---------- 声の パック ---------- */
+{ const lp = loadPack; loadPack = async function (id) { const r = await lp(id); if (id !== "eki") return r;
+    if (!PACK.loaded.eki2) { try { const q = await fetch("packs/eki2.json", { cache: "no-cache" }); if (q.ok) { const d = await q.json(); Object.keys(d).forEach(k => AUD[k] = "data:audio/mpeg;base64," + d[k]); PACK.loaded.eki2 = Object.keys(d); } } catch (e) { } }
+    return r; }; }
+/* ---------- 盤の しるし：ふりだしマスは トンネルの え ---------- */
+{ const db = drawBoard; drawBoard = function () { db(); if (curStage !== "eki") return;
+    Object.entries(EVENTS.eki).forEach(([id, [type]]) => { if (type !== "home") return; const [x, y] = NODES[id];
+      el("circle", { cx: x, cy: y, r: 38, fill: "#3B3A55", ...S6(4) }, boardLayer); const g = el("g", { transform: `translate(${x} ${y + 6})` }, boardLayer); ekTunnelArt(g, 52); }); }; }
 
 /* sit/kaidan_gen.py で つくる（てで なおさない） */
 const KD = {"pony": {"kdp_intro": "まるシマと おにいちゃんが、2かいへ あがるよ。まるシマは、いつも いちばんが いいんだって", "kdp_moshi": "もしも、さきに いく おにいちゃんを、ひっぱっちゃったら……どう なるかな？", "kdp_push": "おにいちゃんは きょうそう して いないのに、まるシマは おにいちゃんを ひっぱっちゃった！", "kdp_fall": "おにいちゃんが、かいだんから おちて しまった！ ママを よぼう", "kdp_amb": "ピーポー、ピーポー。きゅうきゅうしゃが きたよ", "kdp_hosp": "びょういんに ついたよ。おにいちゃんの あしは、まっしろな ギプスで ぐるぐる", "kdp_hosp2": "おにいちゃんは、とても かなしそう。まるシマの むねが、ぎゅっと いたく なったよ", "kdp_police": "そこへ、おまわりさんが やって きたよ", "kdp_patrol": "まるシマは、パトカーに のって、けいさつしょへ いく ことに なった", "kdp_cell": "てつの ぼうの ある、つめたい へや。ママにも、おにいちゃんにも あえない。ひとりぼっちだよ", "kdp_wake": "……はっ！ ゆめ だったんだ！", "kdp_real": "おにいちゃんは、げんき いっぱい。こんどは、ほんとうの かいだんだよ", "kdp_real2": "あれれ、まるシマは また、おにいちゃんより さきに いきたく なっちゃった", "kdp_mozu": "ほんとうは、いちばんに なりたかったね。むずむず する きもちを、ことばで いって みよう", "kdp_park": "こうえんの ひろば だよ。たいらで ひろい ところなら、きょうそう しても あんしん", "kdp_race_end": "おもいきり はしれて、たのしいね", "kdp_more": "おはなしの つづきを みよう", "kdp_finale": "あっ！ ゆめで あった、おまわりさんと おいしゃさんだ", "kdp_end": "おにいちゃんを たいせつに できたね。かいだんでは きょうそう しない。ひっぱったり、おしたり しない。やくそくだよ", "kdp_ok": "じょうずに いえたね！", "kdp_good": "そう いえば、つたわるね！", "kdp_x_slide": "すべりだいの かいだんで、とらおくんが うしろから せかして くるよ", "kdp_x_eki": "えきの かいだんは、ひとが いっぱい", "kdp_x_ok": "かいだんでは、あんぜんが いちばんだね", "p_blk_kaidan": "どしんが、かいだんの まんなかに すわりこんで いて、とおれないよ", "ev_kaidanf": "てすりを もって、すいすい！ 2マス すすむよ", "ev_kaidanb": "あっ、くつひもが ほどけた！ むすびなおして、2マス もどるよ"}, "say": {"kds_tasukete": {"text": "たすけて！ おにいちゃんが、かいだんから おちた", "keys": [["たすけて", "助けて", "おちた", "落ちた", "おにいちゃん", "お兄ちゃん"]]}, "kds_gomen": {"text": "ぼくが ひっぱりました。ごめんなさい", "keys": [["ごめん", "ひっぱり", "引っ張り", "ひっぱった", "引っ張った"]]}, "kds_boku": {"text": "ぼくです", "keys": [["ぼく", "僕", "ボク", "わたし", "私"]]}, "kds_kaeritai": {"text": "さびしいよ。おうちに かえりたい", "keys": [["かえりたい", "帰りたい", "さびしい", "寂しい", "淋しい"]]}, "kds_yume": {"text": "こわい ゆめを みたの", "keys": [["ゆめ", "夢", "こわい", "怖い"]]}, "kds_kyousou": {"text": "かいだんでは、きょうそう しない", "keys": [["きょうそう", "競争", "しない"]]}, "kds_saki": {"text": "さきに いって いいよ", "keys": [["さき", "先", "いいよ", "どうぞ"]]}, "kds_daijoubu": {"text": "いちばんじゃなくても だいじょうぶ", "keys": [["だいじょうぶ", "大丈夫", "いちばん", "一番"]]}, "kds_kakekko": {"text": "ひろい ところで、かけっこ しよう", "keys": [["かけっこ", "駆けっこ", "きょうそう", "競争", "はしろう", "走ろう"]]}, "kds_x_osanai": {"text": "おさないで。かいだんは あぶないよ", "keys": [["おさない", "押さない", "あぶない", "危ない"]]}, "kds_x_tesuri": {"text": "てすりを もって、ゆっくり のぼる", "keys": [["てすり", "手すり", "ゆっくり"]]}}, "line": {"kdw_onii_iku": {"who": "onii", "text": "さきに 2かいへ いってるね"}, "kdw_shima_saki": {"who": "shima", "text": "ぼくが さきに いきたい！"}, "kdw_onii_itai": {"who": "onii", "text": "いたいよう……あしが いたい……"}, "kdw_mama_dou": {"who": "mama", "text": "どうしたの！？"}, "kdw_mama_kyu": {"who": "mama", "text": "たいへん！ きゅうきゅうしゃを よぶわ！"}, "kdw_dr_hone": {"who": "kumadr", "text": "あしの ほねが おれて います。しばらく あるけません"}, "kdw_dr_naze": {"who": "kumadr", "text": "どうして、かいだんから おちたのかな？"}, "kdw_onii_iya": {"who": "onii", "text": "……いたかったよ。もう、まるシマとは あそばない"}, "kdw_pol_dare": {"who": "inukei", "text": "おにいさんを ひっぱって、おおけがを させたのは、だれですか？"}, "kdw_pol_ikenai": {"who": "inukei", "text": "ひとを ひっぱって けがを させるのは、とても いけない ことです。けいさつしょに いっしょに きて もらいます"}, "kdw_mama_ohayo": {"who": "mama", "text": "おはよう。うなされて いたよ。どうしたの？"}, "kdw_mama_daijobu": {"who": "mama", "text": "こわかったね。もう だいじょうぶよ。ぎゅっ"}, "kdw_onii_arigato": {"who": "onii", "text": "ありがとう。てすりを もって、ゆっくり のぼろうな"}, "kdw_onii_ii": {"who": "onii", "text": "いいね！ よーい、どん！"}, "kdw_onii_hayai": {"who": "onii", "text": "はあ、はあ。まるシマ、はやく なったなあ！"}, "kdw_pol_erai": {"who": "inukei", "text": "かいだんで、おにいちゃんに さきを ゆずったんだって？ えらいね"}, "kdw_dr_ichiban": {"who": "kumadr", "text": "けがを しないのが、いちばんだよ"}, "kdw_onii_daisuki": {"who": "onii", "text": "まるシマ、また いっしょに あそぼうな"}, "kdw_tora_hayaku": {"who": "tora", "text": "はやく のぼってよ！"}, "kdw_tora_gomen": {"who": "tora", "text": "あっ、ごめん。ゆっくり のぼるね"}, "kdw_mama_eki": {"who": "mama", "text": "ひとが いっぱいね。どう やって のぼる？"}, "kdw_mama_erai": {"who": "mama", "text": "えらいね。それなら あんしんね"}}};

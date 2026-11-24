@@ -36,6 +36,5 @@ async function slSanju(pc) {
   await sleep(500); g.remove(); await delta(pc, sjStep(n)); return n >= 3;
 }
 Object.assign(LTASK_RUN, { sanju: slSanju }); Object.assign(LTASK, { sanju: ["#FFC6E0", "⏱"] });
-// えきの コースは ことばの マスの いくつかを「30びょう いえるかな」に
-{ const O = SL_ORDER.eki, T = LONG_TASKS.eki; const cand = O.filter(id => T[id] && !["sanju"].includes(T[id])); [5, 13, 21, 29, 37, 43].forEach(i => { const id = cand[Math.min(cand.length - 1, Math.round(i / 48 * cand.length))]; if (id) T[id] = "sanju"; }); }
+// 2026-11-24：えきの コースから「30びょう いえるかな」を はずした（うちゅうと おなじ ならびに。あまねさん）。しくみ（slSanju）は のこして ある。
 // ゴールの しめかたは ほかの コースと おなじ（チャンピオン はっぴょうは やめた 2026-10-18）

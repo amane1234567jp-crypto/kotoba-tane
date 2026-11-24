@@ -26,7 +26,7 @@ const SL_TH = {
     item: "ほし", obs: "いんせき", call: "うちゅうじん", deco: [["🪐", 120, 990], ["⭐", 520, 990], ["🛸", 1500, 760], ["🌙", 140, 560], ["☄️", 1480, 450], ["👽", 760, 230], ["🌟", 1060, 990], ["🚀", 1500, 990], ["🌍", 640, 520]] },
   eki: { name: "えきの だいぼうけん", icon: "🚉", areas: ["かいさつ", "ホーム", "でんしゃの なか", "しゅうてん"], fills: ["#E6EEF5", "#FFF1C2", "#D7F0D2", "#FFE0E6"], ground: "#DDE6EE",
     blk: { who: "kamejii", intro: ["sl_eki_blk", "えきいんさんの かめじいが きっぷを しらべて いるよ"], say: ["blk_densha", "すみません、とおして ください"], to: "かめじいに いおう", keys: [["すみません", "済みません"], ["とおして", "通して", "とうして"], ["ください", "下さい"]], res: ["rs_densha", "おお、すまんのう。どうぞ"] },
-    item: "でんしゃ", obs: "でんしゃ", call: "えきいんさん", deco: [["🚉", 120, 990], ["🎫", 520, 990], ["🚦", 1500, 760], ["🕰️", 140, 470], ["🚃", 1480, 450], ["🍱", 760, 130], ["🛤️", 1060, 990], ["🚄", 1500, 990], ["🏙️", 1300, 130]] },
+    item: "でんしゃ", obs: "でんしゃ", call: "えきいんさん", deco: [["🎫", 120, 990], ["🚦", 1500, 760], ["🕰️", 140, 560], ["🍱", 1480, 560], ["🚄", 1500, 990]] },
   // おでかけ だいぼうけん（2026-10-19）：まえはんぶんは あるいて、うしろはんぶんは じてんしゃ。こうつう ルールの マスが いっぱい（odekake.js）
   odekake: { name: "おでかけ だいぼうけん", icon: "🚲", areas: ["いえの まわり", "しょうてんがい", "こうえん", "かわぞいの みち"], fills: ["#FFF1D6", "#FFE0E6", "#D9F0C8", "#D7ECFF"], ground: "#CFE8C0",
     blk: { who: "kamejii", intro: ["sl_odekake_blk", "かめじいが ほどうを ゆっくり あるいて いるよ。こえを かけて とおして もらおう"], say: ["blk_jitensha", "すみません、とおります"], to: "かめじいに いおう", keys: [["すみません", "済みません"]], res: ["rs_jitensha", "ほっほ、ていねいに ありがとう"] },
@@ -116,10 +116,7 @@ const SL_SHAPE = { // 47マス＋ゴール（まえは 65＋1。ながすぎた�
     for (let k = 0; k < C * R; k++) { P.push(xy(x, y)); seen.add(x + "," + y); const nx = x + dx, ny = y + dy;
       if (nx < 0 || nx >= C || ny < 0 || ny >= R || seen.has(nx + "," + ny)) { [dx, dy] = [dy, -dx]; } x += dx; y += dy; }
     return P.slice(0, 48); },
-  eki() { const V = [[170, 930], [1320, 930], [1440, 840], [1320, 750], [280, 750], [170, 660], [280, 570], [1320, 570], [1440, 480], [1320, 390], [280, 390], [170, 300], [280, 225], [1180, 225]]; // ろせんずの ような ジグザグ
-    const seg = V.slice(1).map((p, i) => Math.hypot(p[0] - V[i][0], p[1] - V[i][1])), tot = seg.reduce((a, b) => a + b, 0), P = [];
-    for (let k = 0; k < 48; k++) { let d = tot * k / 47, i = 0; while (i < seg.length - 1 && d > seg[i]) { d -= seg[i]; i++; } const t = Math.min(1, d / seg[i]); P.push([V[i][0] + (V[i + 1][0] - V[i][0]) * t, V[i][1] + (V[i + 1][1] - V[i][1]) * t]); }
-    return P; },
+  eki() { return SL_SHAPE.suchu(); }, // 2026-11-24：うちゅうに ならって、そとから まんなかの しゅうてんへ ぐるぐる（かんじょうせん）。まえは ろせんずの ジグザグ（backup-2026-11-24-before-eki-remake）
   kimochi() { const P = [], ROWS = [930, 765, 600, 435]; ROWS.forEach((y, r) => { for (let j = 0; j < 12; j++) { const col = r % 2 ? 11 - j : j; P.push([175 + col * 114, y + Math.sin(col * .8 + r * 1.3) * 22]); } }); return P; }, // 4だん＝4つの ばしょ（いえ・がっこう・こうえん・おでかけ）
   makete() { return SL_SHAPE.kimochi(); },
   yuen() { return SL_SHAPE.kimochi(); },
@@ -148,7 +145,7 @@ SL.forEach(sid => {
   ids.forEach((id, i) => { if (i === 0 || id === "4" || id === "15") return;
     const slot = i % 5; // 5マスに 2つ しかけ、ことば・おもしろ が 1〜2つずつ
     if ((slot === 1 || slot === 3) && e < EVS.length && i < ids.length - 3) { const t = EVS[e++]; ev[id] = [t, 0, `sl_${sid}_${t}`, t === "tsukkomi" ? "つっこみマス！" : SL_EVT[sid][t]]; }
-    else if (slot === 0 || slot === 4 ? w <= f : w < f) { const t = WORD[w++ % WORD.length]; task[id] = sid === "eki" && t === "gag" ? "scene" : t; } /* えきに がっこうの にせもの せんせいは ださない */ else task[id] = FUN[f++ % FUN.length]; });
+    else if (slot === 0 || slot === 4 ? w <= f : w < f) { const t = WORD[w++ % WORD.length]; task[id] = sid === "eki" && ["kaiwa", "scene", "gag"].includes(t) ? "ek" : t; } /* えきは 駅専用の 会話（eki2.js、2026-11-24） */ else task[id] = FUN[f++ % FUN.length]; });
   EVENTS[sid] = ev; LONG_TASKS[sid] = task;
   LEGENDS[sid] = [["kaiwa", "ことば"], ["scene", "いってみよう"], ["stop", "おもしろ"], ["monomane", "こえ"]]; // 「おおきな こえで よぼう」は なし（2026-10-31。きんじょ めいわく）
   const SCHOOL = ["げんかん", "きゅうしょく", "きょうしつ", "ほけんしつ", "しょくいんしつ", "としょしつ", "トラック"]; // えきの コースでは がっこうの 会話を ださない
@@ -160,7 +157,7 @@ Object.assign(LTASK, { stop: ["#FFE27A", "🎯"], catch: ["#FFE27A", "🖐"], ba
 function slBG(sid, L) {
   const T = SL_TH[sid];
   if (sid === "suchu") { el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#1E2550" }, L); for (let i = 0; i < 70; i++) el("circle", { cx: (i * 233) % 1600, cy: (i * 137) % 1000, r: 2 + (i % 3), fill: "#FFF6C8", opacity: .8 }, L); }
-  else if (sid === "eki") { el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#DDE6EE" }, L); [[60, 160, 120, 300], [240, 120, 90, 340], [1300, 100, 110, 360], [1440, 180, 130, 280], [600, 60, 80, 200]].forEach(([x, y, w, h]) => { el("rect", { x, y, width: w, height: h, fill: "#C3CFDA", ...S6(4) }, L); for (let yy = y + 20; yy < y + h - 20; yy += 40) for (let xx = x + 15; xx < x + w - 20; xx += 30) el("rect", { x: xx, y: yy, width: 16, height: 20, fill: "#FFF6C8" }, L); }); }
+  else if (sid === "eki") ekNightBG(L); // よるの えき（eki2.js、2026-11-24）
   else if (sid === "sokashi") { el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#FFE3EE" }, L); for (let i = 0; i < 30; i++) el("circle", { cx: (i * 211) % 1600, cy: (i * 157) % 1000, r: 10, fill: ["#FF8FA3", "#7FCBF0", "#FFD25E", "#7BD389"][i % 4], opacity: .35 }, L); }
   else { el("rect", { x: 0, y: 0, width: 1600, height: 1000, fill: "#8FD3F0" }, L); for (let y = 60; y < 1000; y += 90) el("path", { d: `M0 ${y} Q100 ${y - 14} 200 ${y} T400 ${y} T600 ${y} T800 ${y} T1000 ${y} T1200 ${y} T1400 ${y} T1600 ${y}`, fill: "none", stroke: "#FFFFFF", "stroke-width": 4, opacity: .35 }, L); }
   if (sid !== "eki") el("path", { d: "M90 990 Q30 820 90 640 Q50 420 160 300 Q300 230 560 250 Q900 210 1240 250 Q1530 270 1560 430 Q1590 640 1545 830 Q1505 995 1300 995 Z", fill: T.fills[0], opacity: sid === "suchu" ? .22 : .55, ...S6(5) }, L);
@@ -221,7 +218,7 @@ const slFlag = (pc, k) => { if (pc.player) pc.player[k] = 1; };
       await warpTo(pc, O[j]); await speak(C.pony, d > 0 ? "sl_rand_f" : "sl_rand_b", d > 0 ? "やったね、まえに とんだ！" : "あれれ、うしろに とんじゃった！"); }
     else if (type === "rest") { slFlag(pc, "rest"); markAbove(pc, "z", { i: 1 }); }
     else if (type === "again") { slFlag(pc, "again"); }
-    else if (type === "home") { const e = SL_VEH[curStage] && SL_VEH[curStage].home; if (e === "🐳") await slSwallow(pc, e); else if (e === "🌑") await slSwallow(pc, e, true); else if (e) await slRide(pc, "0", e, { arc: 60, ms: 1800, noflip: true }); else await warpTo(pc, "0"); }
+    else if (type === "home") { const e = SL_VEH[curStage] && SL_VEH[curStage].home; if (e === "🐳") await slSwallow(pc, e); else if (e === "🌑" || e === "TUN") await slSwallow(pc, e, true); else if (e) await slRide(pc, "0", e, { arc: 60, ms: 1800, noflip: true }); else await warpTo(pc, "0"); }
     else if (type === "back10") { await slGo(pc, -10); }
     else if (type === "bonus") { if (pc.player) pc.player.ok += 3; GS.ok += 3; GS.pend = 0; confetti(50); for (let i = 0; i < 3; i++) later(i * 250, () => blip(900 + i * 200, 1300, .1, "square")); }
     else if (type === "allf" || type === "allb") { const d = type === "allf" ? 2 : -2; for (const o of PLAYERS.map(p => p.pc)) { jump(o, .5); await slGo(o, d); if (winner) break; } }
@@ -526,8 +523,8 @@ Object.assign(LTASK_RUN, { stop: slStop, catch: slCatch, balloon: slBalloon, mor
 // 0マスの ときは マスの 課題も しない（つぎの ばんで もとに もどす）
 { const lc = landChild; landChild = async function (pc = P.shima) { if (isSL() && pc.player && pc.player.stay) { pc.player.stay = 0; return; } return lc(pc); }; }
 // 🐬 のりもの：イルカ・ジェットコースター・ロケットなどが コマを のせて はこぶ（盤の 上で うごく）
-const SL_VEH = { sumi: { warp: "🐬", bigwarp: "🚤", home: "🐳" }, sokashi: { warp: "🚃", bigwarp: "☁️", home: "🍫" }, suchu: { warp: "🌀", bigwarp: "🚀", home: "🌑" }, eki: { warp: "🚅", bigwarp: "LIN", home: "🚃" }, odekake: { warp: "🚌", bigwarp: "🚕", home: "🚌" } };
-const SL_SWALLOW = { sumi: "home", suchu: "home" }; // くじら・ブラックホールは のみこむ（コマが きえて、スタートで でてくる）
+const SL_VEH = { sumi: { warp: "🐬", bigwarp: "🚤", home: "🐳" }, sokashi: { warp: "🚃", bigwarp: "☁️", home: "🍫" }, suchu: { warp: "🌀", bigwarp: "🚀", home: "🌑" }, eki: { warp: "🚅", bigwarp: "LIN", home: "TUN" }, odekake: { warp: "🚌", bigwarp: "🚕", home: "🚌" } };
+const SL_SWALLOW = { sumi: "home", suchu: "home", eki: "home" }; // くじら・ブラックホールは のみこむ（コマが きえて、スタートで でてくる）
 // リニアモーターカー（えもじが ないので 絵で）：ひだりむき、ながい はなさき、しゃりん なしで ういて いる
 function linearG(g, size) { const k = size / 130, o = el("g", {}, g), t = el("g", { transform: `scale(${k.toFixed(3)})` }, o);
   el("ellipse", { cx: -20, cy: 40, rx: 150, ry: 9, fill: "#9FE8FF", opacity: .8 }, t); el("rect", { x: -170, y: 46, width: 320, height: 10, rx: 5, fill: "#C9D3DE", stroke: INK, "stroke-width": 3 }, t);
@@ -535,7 +532,7 @@ function linearG(g, size) { const k = size / 130, o = el("g", {}, g), t = el("g"
   el("path", { d: "M-150 8 L130 6 L130 14 L-170 16 Z", fill: "#3E5BD6" }, t); el("path", { d: "M-96 -12 Q-80 -24 -50 -24 L-50 -6 L-100 -6 Z", fill: "#2B2A33" }, t);
   [-20, 20, 60, 100].forEach(x => el("rect", { x, y: -20, width: 26, height: 16, rx: 4, fill: "#BDE3F2", stroke: INK, "stroke-width": 3 }, t));
   [0, 1, 2].forEach(i => el("path", { d: `M${150 + i * 18} ${-14 + i * 12} h${24 + i * 6}`, stroke: "#7FCBF0", "stroke-width": 5, "stroke-linecap": "round" }, t)); return o; }
-function slEmoji(e, x, y, size = 120) { const g = el("g", {}, front()); const t = e === "LIN" ? linearG(g, size) : txt(g, 0, size * .36, e, size, { "text-anchor": "middle" }); g.setAttribute("transform", `translate(${x.toFixed(0)} ${y.toFixed(0)})`); g.__t = t; return g; }
+function slEmoji(e, x, y, size = 120) { const g = el("g", {}, front()); const t = e === "LIN" ? linearG(g, size) : e === "TUN" ? ekTunnelArt(g, size) : txt(g, 0, size * .36, e, size, { "text-anchor": "middle" }); g.setAttribute("transform", `translate(${x.toFixed(0)} ${y.toFixed(0)})`); g.__t = t; return g; }
 async function slRide(pc, toId, e, opt = {}) {
   const [tx, ty] = nodeXY(pc, toId), x0 = pc.px, y0 = pc.py, dir = tx >= x0 ? 1 : -1, sz = opt.size || 130;
   const v = slEmoji(e, x0 - dir * 900, y0 + 10, sz); const faceL = ["🚅", "🚄", "🚃", "LIN", "🚌", "🚕"].includes(e); // でんしゃの えもじは ひだりむき → すすむ ほうに むける（2026-10-18 ぎゃくそう なおし）

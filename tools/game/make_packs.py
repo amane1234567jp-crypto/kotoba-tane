@@ -158,6 +158,13 @@ for k in [p[0] for p in json.loads((G / "sit/pony_uchu2.json").read_text())] + [
     if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
     else: missing.append(k)
 (OUT / "uchu2.json").write_text(json.dumps(pack, separators=(",", ":"))); print("uchu2", len(pack), round((OUT / "uchu2.json").stat().st_size / 1e6, 2), "MB")
+# えきの だいぼうけん 作り替え（ロング、2026-11-24）：駅専用の 会話。ぽにー（sit/pony_eki2.json）・あいて（aivis/jobs/ek1）
+pack = {}
+for k in [p[0] for p in json.loads((G / "sit/pony_eki2.json").read_text())] + [l["key"] for l in json.loads((R / "tools/aivis/jobs/ek1/lines.json").read_text())]:
+    p = A / f"{k}.mp3"
+    if p.exists(): pack[k] = base64.b64encode(p.read_bytes()).decode()
+    else: missing.append(k)
+(OUT / "eki2.json").write_text(json.dumps(pack, separators=(",", ":"))); print("eki2", len(pack), round((OUT / "eki2.json").stat().st_size / 1e6, 2), "MB")
 # じゅぎょうの いちにち（ロング、2026-10-21）：ぽにー（sit/pony_jugyou.json）＋ ちょうロングの きょうつうの 声（slong・long の lk_ の いちぶ）＋ BGM。
 # 場面の 声は ショートコースの パック（kokugo・sansu・ongaku・zukou・taiiku・tokei・gakkou2・sensei1・seki1）を その ときに よむ
 import re as _re
