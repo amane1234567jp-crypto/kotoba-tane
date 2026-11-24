@@ -1,0 +1,347 @@
+[
+ {
+  "key": "ogw_nani",
+  "who": "ojisan",
+  "text": "そんなに いそいで、なにを して いるの？"
+ },
+ {
+  "key": "ogr_nani",
+  "who": "ojisan",
+  "text": "おにごっこか。つかまらないように、がんばれよ"
+ },
+ {
+  "key": "ogw2_nani",
+  "who": "ojisan",
+  "text": "おには だれが やって いるの？"
+ },
+ {
+  "key": "ogr2_nani",
+  "who": "ojisan",
+  "text": "ほんものか！ それは にげなきゃ"
+ },
+ {
+  "key": "ogw_tasukete",
+  "who": "momotaro",
+  "text": "どうしたの？ いきが きれて いるよ"
+ },
+ {
+  "key": "ogr_tasukete",
+  "who": "momotaro",
+  "text": "まかせて！ ぼくが まもって あげる"
+ },
+ {
+  "key": "ogw2_tasukete",
+  "who": "momotaro",
+  "text": "おには いま、どこに いるの？"
+ },
+ {
+  "key": "ogr2_tasukete",
+  "who": "momotaro",
+  "text": "よし、ぼくが まえに でる！"
+ },
+ {
+  "key": "ogw_obaasan",
+  "who": "meebaa",
+  "text": "おや、どこへ いくんだい？"
+ },
+ {
+  "key": "ogr_obaasan",
+  "who": "meebaa",
+  "text": "それは たいへん。うらの ちかみちを おいき"
+ },
+ {
+  "key": "ogw_inu1",
+  "who": "inu",
+  "text": "わん！ こしの きびだんご、ひとつ ください"
+ },
+ {
+  "key": "ogr_inu1",
+  "who": "inu",
+  "text": "わん！ なかまに なるよ。おにから まもって あげる"
+ },
+ {
+  "key": "ogw_tomo",
+  "who": "tora",
+  "text": "まって！ おにが こっちに くる！"
+ },
+ {
+  "key": "ogr_tomo",
+  "who": "tora",
+  "text": "うん！ てを つないで はしろう"
+ },
+ {
+  "key": "ogw_hashi",
+  "who": "doshin",
+  "text": "そっちの はしは こわれて いるよ"
+ },
+ {
+  "key": "ogr_hashi",
+  "who": "doshin",
+  "text": "きを つけてな。おにも あの はしは わたれんよ"
+ },
+ {
+  "key": "ogw_saru1",
+  "who": "saru",
+  "text": "キキッ！ なにを あわてて いるの？"
+ },
+ {
+  "key": "ogr_saru1",
+  "who": "saru",
+  "text": "それなら、きの うえに かくれな！"
+ },
+ {
+  "key": "ogw2_saru1",
+  "who": "saru",
+  "text": "きの ぼりは できるかな？"
+ },
+ {
+  "key": "ogr2_saru1",
+  "who": "saru",
+  "text": "キキッ、じょうず じょうず！"
+ },
+ {
+  "key": "ogw_saru2",
+  "who": "saru",
+  "text": "キキッ、その きびだんご、ちょうだい"
+ },
+ {
+  "key": "ogr_saru2",
+  "who": "saru",
+  "text": "キキッ！ なかまに なる！ おにが きたら おしえるね"
+ },
+ {
+  "key": "ogw_michi",
+  "who": "nobbo",
+  "text": "なにを さがして いるの？"
+ },
+ {
+  "key": "ogr_michi",
+  "who": "nobbo",
+  "text": "それなら、みぎの みちが いいよ"
+ },
+ {
+  "key": "ogw_tsukare",
+  "who": "pyon",
+  "text": "もう はしれないよう……"
+ },
+ {
+  "key": "ogr_tsukare",
+  "who": "pyon",
+  "text": "うん……がんばる！"
+ },
+ {
+  "key": "ogw_oni1",
+  "who": "oni",
+  "text": "まてー！ つかまえるぞー！"
+ },
+ {
+  "key": "ogr_oni1",
+  "who": "oni",
+  "text": "ぐぬぬ……すばしっこいな"
+ },
+ {
+  "key": "ogw_shizuka",
+  "who": "kuma",
+  "text": "しーっ。おにが ちかくに いるよ"
+ },
+ {
+  "key": "ogr_shizuka",
+  "who": "kuma",
+  "text": "そうそう。そっと いこう"
+ },
+ {
+  "key": "ogw_kiji1",
+  "who": "kiji",
+  "text": "ケーン！ どこへ いくの？"
+ },
+ {
+  "key": "ogr_kiji1",
+  "who": "kiji",
+  "text": "そらから みちを おしえて あげる"
+ },
+ {
+  "key": "ogw_kiji2",
+  "who": "kiji",
+  "text": "ケーン、きびだんご ひとつ ください"
+ },
+ {
+  "key": "ogr_kiji2",
+  "who": "kiji",
+  "text": "ケーン！ なかまに なるよ"
+ },
+ {
+  "key": "ogw_momo",
+  "who": "momotaro",
+  "text": "ももに のって いこう！ かけごえは？"
+ },
+ {
+  "key": "ogr_momo",
+  "who": "momotaro",
+  "text": "それー、しゅっぱつ！"
+ },
+ {
+  "key": "ogw_fune",
+  "who": "kamejii",
+  "text": "ふねに のるかい？"
+ },
+ {
+  "key": "ogr_fune",
+  "who": "kamejii",
+  "text": "よし、まかせておけ。おにには おいつかせないぞ"
+ },
+ {
+  "key": "ogw2_fune",
+  "who": "kamejii",
+  "text": "どこまで いくんだい？"
+ },
+ {
+  "key": "ogr2_fune",
+  "who": "kamejii",
+  "text": "よしきた。しっかり つかまって"
+ },
+ {
+  "key": "ogw_abunai",
+  "who": "mama",
+  "text": "にげる とき、どこを はしったら あぶない？"
+ },
+ {
+  "key": "ogr_abunai",
+  "who": "mama",
+  "text": "えらい！ あんぜんが いちばんね"
+ },
+ {
+  "key": "ogw_inu2",
+  "who": "inu",
+  "text": "わん！ おにの においが する！"
+ },
+ {
+  "key": "ogr_inu2",
+  "who": "inu",
+  "text": "わん！ こっちに にげよう"
+ },
+ {
+  "key": "ogw_mon",
+  "who": "oni",
+  "text": "なにしに きた？"
+ },
+ {
+  "key": "ogr_mon",
+  "who": "oni",
+  "text": "う……そう いわれると……"
+ },
+ {
+  "key": "ogw_issho",
+  "who": "momotaro",
+  "text": "さあ、いっしょに いくぞ！"
+ },
+ {
+  "key": "ogr_issho",
+  "who": "momotaro",
+  "text": "えい、えい、おー！"
+ },
+ {
+  "key": "ogw_gomen",
+  "who": "oni",
+  "text": "もう いじわるは しないよ。ごめんね"
+ },
+ {
+  "key": "ogr_gomen",
+  "who": "oni",
+  "text": "ほんとに？ うれしいなあ"
+ },
+ {
+  "key": "ogw2_gomen",
+  "who": "oni",
+  "text": "ほんとに また あそんで くれる？"
+ },
+ {
+  "key": "ogr2_gomen",
+  "who": "oni",
+  "text": "やったあ！ ゆびきりだ"
+ },
+ {
+  "key": "ogw_tobira",
+  "who": "saru",
+  "text": "キキッ、もんが おもくて あかない！"
+ },
+ {
+  "key": "ogr_tobira",
+  "who": "saru",
+  "text": "せーの！ ぎぎぎ……あいた！"
+ },
+ {
+  "key": "ogw_yobu",
+  "who": "kiji",
+  "text": "ケーン！ おにが いっぱい いるよ"
+ },
+ {
+  "key": "ogr_yobu",
+  "who": "kiji",
+  "text": "たのむよ！ はやく はやく！"
+ },
+ {
+  "key": "ogw_owari",
+  "who": "oni",
+  "text": "おにごっこ、たのしかったね"
+ },
+ {
+  "key": "ogr_owari",
+  "who": "oni",
+  "text": "よーし、こんどは おれが にげるぞー！"
+ },
+ {
+  "key": "ogo_go",
+  "who": "oni",
+  "text": "まてー！ つかまえるぞー！"
+ },
+ {
+  "key": "ogo_hit",
+  "who": "oni",
+  "text": "えいっ！ つかまえたぞー！"
+ },
+ {
+  "key": "ogo_start",
+  "who": "oni",
+  "text": "ぐおー！ おにごっこの はじまりだ！ 10かぞえたら おいかけるぞー"
+ },
+ {
+  "key": "ogo_back",
+  "who": "oni",
+  "text": "うわー！ ももたろうだー！"
+ },
+ {
+  "key": "ogo_fly",
+  "who": "oni",
+  "text": "あーれー！"
+ },
+ {
+  "key": "ogo_army",
+  "who": "oni",
+  "text": "おにの ぐんだん、しゅつげきだー！"
+ },
+ {
+  "key": "ogm_tank",
+  "who": "momotaro",
+  "text": "スーパーももたろう、さんじょう！ ももたまを くらえー！"
+ },
+ {
+  "key": "ogm_army",
+  "who": "momotaro",
+  "text": "ももたろう ぐんだん、しゅつじん！"
+ },
+ {
+  "key": "ogi_wan",
+  "who": "inu",
+  "text": "わん！ こっちだよ！"
+ },
+ {
+  "key": "ogk_ken",
+  "who": "kiji",
+  "text": "ケーン！ つかまって！"
+ },
+ {
+  "key": "ogs_kiki",
+  "who": "saru",
+  "text": "キキッ！ この えだを つたって いけば はやいよ"
+ }
+]

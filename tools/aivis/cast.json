@@ -337,6 +337,38 @@
    "model": "47e53151-a378-46f3-abee-ce13aa07feb1",
    "style": "Calm",
    "speed": 0.85
+  },
+  "oni": {
+   "model": "47e53151-a378-46f3-abee-ce13aa07feb1",
+   "style": "Mid",
+   "speed": 0.9,
+   "pitch": -0.08,
+   "into": 1.3
+  },
+  "momotaro": {
+   "model": "a670e6b8-0852-45b2-8704-1bc9862f2fe6",
+   "style": "ノーマル",
+   "speed": 1.05,
+   "into": 1.3
+  },
+  "inu": {
+   "model": "80fe2db4-5891-4550-a3f3-dff9a91c0946",
+   "style": "ノーマル",
+   "speed": 1.05,
+   "into": 1.2
+  },
+  "kiji": {
+   "model": "4f281e78-eba6-495a-8e50-5c322d02b5b1",
+   "style": "ノーマル",
+   "speed": 1.1,
+   "pitch": 0.04
+  },
+  "saru": {
+   "model": "e40d5b99-8cde-4442-a45b-0ebec9167506",
+   "style": "ノーマル",
+   "speed": 1.15,
+   "pitch": 0.04,
+   "into": 1.3
   }
  },
  "lines": {
