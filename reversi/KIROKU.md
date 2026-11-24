@@ -325,3 +325,4 @@
 - 11/24 あまねさん「ウェブ版が残ってたら削除」「すぐ消してOK」→ play.html の dev=1 の抜け道をなくした（アプリの外で開くと 案内ページへ）。案内ページの「ブラウザで遊ぶ」と Android の Web 版への転送をなくし、Android は「Android版は準備中です」。sw.js は 自分で消える版に（Web Push の登録は 0件だった）。Android 版（AAB）を 1.0.8（versionCode 21）で作りなおし。
 
 - 2026-11-25: privacy.html を改定（名前をテレビ電話リバーシに、Web版の記載を削除、7. 情報の削除に手順・対象・期限を明記＝Google Play のデータ削除URL用 #delete）。support.html の名前も変更。
+- 2026-11-25: Play 提出前に AAB の権限を確認。expo-audio 由来の FOREGROUND_SERVICE_MEDIA_PLAYBACK（Play でフォアグラウンドサービス申告と動画が要る）と SYSTEM_ALERT_WINDOW を blockedPermissions で外し、versionCode 22 で作り直し。
