@@ -52,7 +52,7 @@ footer a { color: var(--sub); }
       <p class="note">相手とつながって、テレビ電話で遊べます。</p></li>
   </ol>
   <p class="note" id="lineNote" hidden>LINEの中で開いています。うまくいかないときは、右上の「…」から「ブラウザで開く」を選んでください。</p>
-  <p class="note" id="webFallback" style="margin-top:18px"><a href="#" id="webLink">アプリがうまく開かないときは、ブラウザで遊ぶ</a></p>
+  <p class="note" id="androidNote" hidden>Android版は準備中です。もうしばらくお待ちください。</p>
   <footer><a href="legal/support.html">サポート</a>　<a href="legal/privacy.html">プライバシーポリシー</a></footer>
 </main>
 <script>
@@ -62,15 +62,15 @@ footer a { color: var(--sub); }
   const ua = navigator.userAgent;
   const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   const isAndroid = /Android/.test(ua);
-  // Google Play に出るまでは Android の人には これまでの Web 版を出す（出たら true に）
+  // Web 版は 2026-11-24 に なくした（あまねさん）。Google Play に出るまでは Android の人には「準備中」と出す（出たら true に）
   const PLAY_LIVE = false;
-  if (isAndroid && !PLAY_LIVE) { const q2 = new URLSearchParams(location.search); q2.set("dev", "1"); location.replace("play.html?" + q2.toString()); return; }
+  if (isAndroid && !PLAY_LIVE) { document.getElementById("android").hidden = true; document.getElementById("openStep").hidden = true; document.getElementById("had").hidden = true; document.getElementById("androidNote").hidden = false; }
   if (isIOS) document.getElementById("android").hidden = true;
   if (isAndroid) document.getElementById("ios").hidden = true;
   // さそい（とうろくだけ。2026-11-19）：?m=reg&n=名前&fd=端末番号（部屋なし）
   const fdOk = /^[A-Za-z0-9_-]{16,64}$/.test(q.get("fd") || "");
   const reg = !r && q.get("m") === "reg" && fdOk;
-  if (!r && !reg) { document.getElementById("openStep").hidden = true; document.getElementById("had").hidden = true; document.getElementById("webFallback").hidden = true; return; }
+  if (!r && !reg) { document.getElementById("openStep").hidden = true; document.getElementById("had").hidden = true; return; }
   const fromEl = document.getElementById("from");
   fromEl.textContent = (n ? n + "さんから、" : "") + "テレビ電話リバーシへのお誘いです";
   if (/ Line\//i.test(ua)) document.getElementById("lineNote").hidden = false;
@@ -78,7 +78,6 @@ footer a { color: var(--sub); }
     const who = n ? n + "さん" : "相手";
     document.getElementById("had").textContent = "入れ終わったら、" + (isAndroid ? "Google Play" : "App Store") + "の「開く」を押して、お名前を入れてください。" + who + "とお互いに登録されます。";
     document.querySelector("#openStep .note").textContent = "開いてお名前を入れると、" + who + "とお互いに登録されます。遊ぶときは、アプリの「とおくの ひとと あそぶ」から相手を選びます。";
-    document.getElementById("webFallback").hidden = true;
   }
   const pass = new URLSearchParams(); if (reg) pass.set("m", "reg"); else pass.set("r", r); if (n) pass.set("n", n);
   for (const k of ["ring", "fd", "m"]) if (q.get(k) && !pass.has(k)) pass.set(k, q.get(k));
@@ -91,10 +90,6 @@ footer a { color: var(--sub); }
   const hint = () => { try { fetch("https://rlqeoyvevaglwngxtvrw.supabase.co/functions/v1/rv-push", { method: "POST", keepalive: true, headers: { "content-type": "application/json" }, body: JSON.stringify({ op: "hint", r: reg ? "reg" : r, n, fd: q.get("fd") || "", fp }) }).catch(() => { }); } catch (e) { } };
   hint();
   for (const id of ["ios", "android"]) document.getElementById(id).addEventListener("click", hint);
-  // 切りかえの あいだだけ：アプリの更新が行きわたるまで ブラウザ版への道も残す（WEB_FALLBACK を false にすれば消える）
-  const WEB_FALLBACK = true;
-  if (WEB_FALLBACK) { const q3 = new URLSearchParams(location.search); q3.set("dev", "1"); document.getElementById("webLink").href = "play.html?" + q3.toString(); }
-  else document.getElementById("webFallback").hidden = true;
   const open = document.getElementById("open");
   // Android は intent:（入っていなければ Google Play へ）、iPhone・iPad は アプリの URL（marushima://）
   open.href = isAndroid

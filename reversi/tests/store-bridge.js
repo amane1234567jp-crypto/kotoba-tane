@@ -31,7 +31,7 @@ const check = (ok, msg) => { console.log((ok ? "OK  " : "NG  ") + msg); if (!ok)
     // 殻とおなじ順：RVNative と ReactNativeWebView を用意 → 控えを戻すスクリプト
     await page.addInitScript(`window.ReactNativeWebView={postMessage:function(m){window.__toNative(m)}};window.RVNative={platform:"ios",version:"1.0.4",push:false};`);
     await page.addInitScript(storeScript(snapshot));
-    await page.goto(`http://127.0.0.1:${port}/play.html?dev=1`);
+    await page.goto(`http://127.0.0.1:${port}/play.html`);
     await page.waitForTimeout(800);
     return { ctx, page };
   }
