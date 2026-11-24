@@ -326,3 +326,4 @@
 
 - 2026-11-25: privacy.html を改定（名前をテレビ電話リバーシに、Web版の記載を削除、7. 情報の削除に手順・対象・期限を明記＝Google Play のデータ削除URL用 #delete）。support.html の名前も変更。
 - 2026-11-25: Play 提出前に AAB の権限を確認。expo-audio 由来の FOREGROUND_SERVICE_MEDIA_PLAYBACK（Play でフォアグラウンドサービス申告と動画が要る）と SYSTEM_ALERT_WINDOW を blockedPermissions で外し、versionCode 22 で作り直し。
+- 2026-11-25: Play Console 入力。データセーフティ（名前・端末ID・操作回数＝収集、共有なし、暗号化あり、削除URL=privacy.html#delete）、広告ID=なし、行政=いいえ、金融=なし、健康=なし、カテゴリ=ゲーム/ボード、連絡先=info@uchinoaji.com、説明文（下書き保存）、製品版の国=日本。AAB は versionCode 22（71e1f7ec）。画像とAABのアップロードはブラウザの制限で本人が行う。
