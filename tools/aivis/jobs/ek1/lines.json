@@ -1,0 +1,292 @@
+[
+ {
+  "key": "ekw_kippu",
+  "who": "kamejii",
+  "text": "きっぷは もって いるかな？"
+ },
+ {
+  "key": "ekr_kippu",
+  "who": "kamejii",
+  "text": "はい、どうぞ。いってらっしゃい"
+ },
+ {
+  "key": "ekw_card",
+  "who": "kamejii",
+  "text": "おや、どう しましたか？"
+ },
+ {
+  "key": "ekr_card",
+  "who": "kamejii",
+  "text": "ちょっと みせてね。……はい、これで とおれるよ"
+ },
+ {
+  "key": "ekw_michi",
+  "who": "meebaa",
+  "text": "ちょいと、3ばんせんは どこかねえ"
+ },
+ {
+  "key": "ekr_michi",
+  "who": "meebaa",
+  "text": "まあ、やさしい こだねえ。ありがとう"
+ },
+ {
+  "key": "ekw_maigo",
+  "who": "kamejii",
+  "text": "ぼく、ひとりかな？ どうしたの？"
+ },
+ {
+  "key": "ekr_maigo",
+  "who": "kamejii",
+  "text": "だいじょうぶ。アナウンスで ママを よんで あげるね"
+ },
+ {
+  "key": "ekw2_maigo",
+  "who": "kamejii",
+  "text": "ママの なまえは わかるかな？"
+ },
+ {
+  "key": "ekr2_maigo",
+  "who": "kamejii",
+  "text": "ピンポンパンポーン。……あっ、ママが きたよ"
+ },
+ {
+  "key": "ekw_nodo",
+  "who": "mama",
+  "text": "どれに する？"
+ },
+ {
+  "key": "ekr_nodo",
+  "who": "mama",
+  "text": "はい、おちゃね。ボタンを おして ごらん"
+ },
+ {
+  "key": "ekw_escala",
+  "who": "tora",
+  "text": "おれ、さきに のっちゃおう！"
+ },
+ {
+  "key": "ekr_escala",
+  "who": "tora",
+  "text": "あっ、そっか。ごめん、うしろに ならぶよ"
+ },
+ {
+  "key": "ekw_sen",
+  "who": "pyon",
+  "text": "でんしゃ、まだかなあ"
+ },
+ {
+  "key": "ekr_sen",
+  "who": "pyon",
+  "text": "あっ、ほんとだ。ありがとう"
+ },
+ {
+  "key": "ekw_announce",
+  "who": "mama",
+  "text": "いま、なんて いってた？"
+ },
+ {
+  "key": "ekr_announce",
+  "who": "mama",
+  "text": "よく きいてたね。さあ、いこう"
+ },
+ {
+  "key": "ekw_boushi",
+  "who": "kamejii",
+  "text": "どう しましたか？"
+ },
+ {
+  "key": "ekr_boushi",
+  "who": "kamejii",
+  "text": "とりに いっては だめだよ。ながい ぼうで とって あげよう"
+ },
+ {
+  "key": "ekw2_boushi",
+  "who": "kamejii",
+  "text": "はい、とれたよ。どうぞ"
+ },
+ {
+  "key": "ekr2_boushi",
+  "who": "kamejii",
+  "text": "どういたしまして。きを つけてね"
+ },
+ {
+  "key": "ekw_oriru",
+  "who": "tora",
+  "text": "はやく のろうぜ！"
+ },
+ {
+  "key": "ekr_oriru",
+  "who": "tora",
+  "text": "そっか。まってから のるんだね"
+ },
+ {
+  "key": "ekw_kakekomi",
+  "who": "kamejii",
+  "text": "かけこみは あぶないですよ"
+ },
+ {
+  "key": "ekr_kakekomi",
+  "who": "kamejii",
+  "text": "えらいね。つぎの でんしゃも すぐ くるよ"
+ },
+ {
+  "key": "ekw_sukima",
+  "who": "pyon",
+  "text": "えいっ、とびのっちゃおう！"
+ },
+ {
+  "key": "ekr_sukima",
+  "who": "pyon",
+  "text": "うん。ゆっくり のるね"
+ },
+ {
+  "key": "ekw_yuzuru",
+  "who": "meebaa",
+  "text": "ふう……よく ゆれるねえ"
+ },
+ {
+  "key": "ekr_yuzuru",
+  "who": "meebaa",
+  "text": "まあ、ありがとう。たすかるわ"
+ },
+ {
+  "key": "ekw2_yuzuru",
+  "who": "meebaa",
+  "text": "ぼうやは、どこまで いくの？"
+ },
+ {
+  "key": "ekr2_yuzuru",
+  "who": "meebaa",
+  "text": "まあ、おばあちゃんと おなじね"
+ },
+ {
+  "key": "ekw_shizuka",
+  "who": "mama",
+  "text": "しーっ。でんしゃの なかよ"
+ },
+ {
+  "key": "ekr_shizuka",
+  "who": "mama",
+  "text": "そうそう。じょうずね"
+ },
+ {
+  "key": "ekw_yure",
+  "who": "mama",
+  "text": "だいじょうぶ？"
+ },
+ {
+  "key": "ekr_yure",
+  "who": "mama",
+  "text": "そうね。しっかり つかまっててね"
+ },
+ {
+  "key": "ekw_mado",
+  "who": "pyon",
+  "text": "ねえ、なにが みえる？"
+ },
+ {
+  "key": "ekr_mado",
+  "who": "pyon",
+  "text": "ほんとだ！ きらきら して きれい"
+ },
+ {
+  "key": "ekw_nemuri",
+  "who": "mama",
+  "text": "すう……すう……"
+ },
+ {
+  "key": "ekr_nemuri",
+  "who": "mama",
+  "text": "はっ！ ありがとう。おしえて くれて たすかったわ"
+ },
+ {
+  "key": "ekw_saifu",
+  "who": "kamejii",
+  "text": "なにか ありましたか？"
+ },
+ {
+  "key": "ekr_saifu",
+  "who": "kamejii",
+  "text": "とどけて くれて ありがとう。おとした ひとが よろこぶよ"
+ },
+ {
+  "key": "ekw_shuten",
+  "who": "kamejii",
+  "text": "しゅうてんです。おわすれものの ないように"
+ },
+ {
+  "key": "ekr_shuten",
+  "who": "kamejii",
+  "text": "どういたしまして。きを つけてね"
+ },
+ {
+  "key": "ekw_wasure",
+  "who": "kamejii",
+  "text": "どう しましたか？"
+ },
+ {
+  "key": "ekr_wasure",
+  "who": "kamejii",
+  "text": "みて くるから、ここで まって いてね"
+ },
+ {
+  "key": "ekw2_wasure",
+  "who": "kamejii",
+  "text": "これかな？ あおい ぼうし"
+ },
+ {
+  "key": "ekr2_wasure",
+  "who": "kamejii",
+  "text": "みつかって よかったね"
+ },
+ {
+  "key": "ekw_toire",
+  "who": "mama",
+  "text": "どうしたの？ もじもじ して"
+ },
+ {
+  "key": "ekr_toire",
+  "who": "mama",
+  "text": "あそこに あるわ。いっしょに いこう"
+ },
+ {
+  "key": "ekw_chizu",
+  "who": "pyon",
+  "text": "こうえんって、どっちかな？"
+ },
+ {
+  "key": "ekr_chizu",
+  "who": "pyon",
+  "text": "あっ、こっちだ！ ありがとう"
+ },
+ {
+  "key": "ekw_ekiben",
+  "who": "doshin",
+  "text": "いらっしゃい！ えきべん、いかが？"
+ },
+ {
+  "key": "ekr_ekiben",
+  "who": "doshin",
+  "text": "まいど！ はい、どうぞ。あったかいよ"
+ },
+ {
+  "key": "ekw2_ekiben",
+  "who": "doshin",
+  "text": "どれに する？ からあげと、おにぎり"
+ },
+ {
+  "key": "ekr2_ekiben",
+  "who": "doshin",
+  "text": "はい、まいど！"
+ },
+ {
+  "key": "ekw_tanoshi",
+  "who": "mama",
+  "text": "でんしゃ、どうだった？"
+ },
+ {
+  "key": "ekr_tanoshi",
+  "who": "mama",
+  "text": "また いっしょに こようね"
+ }
+]
