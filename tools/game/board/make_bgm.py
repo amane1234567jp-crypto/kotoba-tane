@@ -377,6 +377,10 @@ SONGS = {
  "uchu2": dict(bpm=92, root=64, scale=MAJ, bars=8, lead=glock, lead2=flute, drums=D_easy, comp="pad", bass="tri", swing=0, extra=X_bell,
    mel="1 - 5 - 1' - 5 - | 6 - 5 - 3 - - - | 4 - 1' - 6 - 4 - | 5 - - - . . . . | 1 - 3 - 5 - 1' - | 7 - 5 - 6 - 3 - | 4 - 6 - 2 - 5, - | 1 - - - . . . .",
    chords=[1, 4, 4, 5, 1, 6, 5, 1]),
+# 2026-11-24 おにごっこ：おいかけっこの はやい マーチ（ブラスと ピチカート、どきどきの マイナーから あかるく）
+ "oni": dict(bpm=152, root=62, scale=MIN, bars=8, lead=brass, lead2=clar, drums=D_adv, comp="pluck", bass="sq", swing=.1, extra=X_bell,
+   mel="1 - 1 - 3 - 5 - | 4 - 3 - 2 - - - | 1 - 1 - 3 - 5 - | 6 - 5 - 4 - - - | 5 - 6 - 7 - 1' - | 6 - 5 - 4 - 3 - | 2 - 4 - 3 - 7, - | 1 - - - . . . .",
+   chords=[1, 4, 1, 6, 5, 4, 5, 1]),
 }
 
 if __name__ == "__main__":
