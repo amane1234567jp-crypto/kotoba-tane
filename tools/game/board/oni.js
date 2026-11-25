@@ -202,6 +202,77 @@ const ROOMS_OG = {
 };
 { const dr = drawRoom; drawRoom = function (place, noSign = false) {
     if (curStage !== "oni" || !ROOMS_OG[place]) return dr(place, noSign); sceneLayer.innerHTML = ""; ROOMS_OG[place](sceneLayer); if (!noSign) ogSign(sceneLayer, place); }; }
+/* ---------- 場面の 小道具と うごき（ナレーションと 絵を そろえる、2026-11-25） ---------- */
+function ogProp(sc, h, a) {
+  const G = el("g", {}, propG), hx = h.x + 200 * h.s, ax = a.x + 200 * a.s, base = 975, id = sc.id;
+  const live = () => G.isConnected;
+  const F = () => { const g = el("g", {}, front()); addTick(() => { if (!live()) { g.remove(); return false; } }); return g; }; // キャラの まえに かく もの
+  const loop = fn => { let t = 0; addTick(dt => { if (!live()) return false; t += dt; return fn(t, dt); }); };
+  const word = (x, y, w, col = "#FFFFFF") => { const g = el("g", {}, G); txt(g, x, y, w, 40, { "text-anchor": "middle", fill: col, stroke: INK, "stroke-width": 7, "paint-order": "stroke", "font-weight": 700 }); return g; };
+  const dango = (L, x, y, k = 1) => { const g = el("g", { transform: `translate(${x} ${y}) scale(${k}) rotate(-20)` }, L); el("path", { d: "M0 70 V-80", stroke: "#B8946A", "stroke-width": 6 }, g); [["#FFFFFF", -50], ["#FFB3C1", -10], ["#9CCB7E", 30]].forEach(([c, y]) => el("circle", { cy: y, r: 22, fill: c, ...S6(4) }, g)); return g; };
+  const sniff = c => loop(t => { if (t > 4) return false; if (Math.floor(t * 2) !== Math.floor((t - .016) * 2)) { const p = world(c, 290, c.top + 60); const w = el("g", { transform: `translate(${p.x + 30} ${p.y})` }, G); txt(w, 0, 0, "くん", 30, { fill: "#8B5A3C", stroke: "#FFFFFF", "stroke-width": 5, "paint-order": "stroke" }); later(700, () => w.remove()); } });
+  if (id === "nani") { a.headRot.t = 12; for (let i = 0; i < 3; i++) later(300 + i * 800, () => markAbove(a, "q")); }
+  else if (id === "tasukete") { // とおくから おにが はしって くる
+    const o = xtra("oni", -140, .42); o.y = 760; o.dx.t = 330; hold(o, "run", 6); o.lean.t = -10; h.sadMouth = true; for (let i = 0; i < 3; i++) later(i * 700, () => markAbove(h, "drop")); }
+  else if (id === "obaasan") { // おばあさんが かわで せんたく
+    const line = el("g", {}, G); el("path", { d: "M1450 560 V760 M1580 560 V760 M1450 580 Q1515 610 1580 580", fill: "none", stroke: "#8B5A3C", "stroke-width": 6 }, line);
+    [["#FFB3C1", 1470], ["#9CC9F0", 1530]].forEach(([c, x]) => el("rect", { x, y: 590, width: 40, height: 50, rx: 6, fill: c, ...S6(3) }, line));
+    const f = F(), tx = ax - 20, ty = base - 40; el("ellipse", { cx: tx, cy: ty, rx: 150, ry: 46, fill: "#C98A4B", ...S6(5) }, f); el("ellipse", { cx: tx, cy: ty - 22, rx: 130, ry: 26, fill: "#BDE3F2", ...S6(4) }, f);
+    const cloth = el("rect", { x: tx - 60, y: ty - 58, width: 90, height: 40, rx: 8, fill: "#FFFFFF", ...S6(4) }, f);
+    a.lean.t = 18; loop(t => { const k = Math.sin(t * 7); a.armL.t = 40 + k * 30; a.armR.t = -40 - k * 30; a.lean.t = 18 + k * 4; cloth.setAttribute("x", (tx - 60 + k * 24).toFixed(0));
+      if (Math.random() < .08) mark("puff", tx - 80 + Math.random() * 160, ty - 50, { vy: -90, life: .9, s: .35 }); if (Math.random() < .02) noise(.12, 900, .25); });
+    later(5200, () => { if (!live()) return; a.lean.t = 0; a.armL.t = a.armR.t = 0; }); word(ax, base - 470, "ざぶざぶ"); }
+  else if (id === "inu1" || id === "kiji2" || id === "saru2") { // こしの きびだんご
+    dango(F(), hx + 110 * h.s, base - 180, .9);
+    if (id === "inu1") loop(t => { if (t > 6) return false; a.lean.t = Math.sin(t * 14) * 5; if (Math.floor(t) !== Math.floor(t - .016)) jump(a, .25); });
+    if (id === "kiji2") sniff(a);
+    if (id === "saru2") { a.eyeScale.t = 1.35; later(400, () => word(ax - 60, base - 440, "じーっ")); later(3000, () => a.eyeScale.t = 1); } }
+  else if (id === "tomo") { a.dx.v = 1000; a.dx.t = 0; hold(a, "run", 1.2); a.lean.t = -16; for (let i = 0; i < 6; i++) later(i * 140, () => mark("puff", ax + 300 - i * 50, base - 20, { vy: -40, life: .6, s: .5 })); later(1200, () => { a.lean.t = 0; markAbove(a, "ex"); }); }
+  else if (id === "hashi") { // はたけ と こわれた はし
+    const b = el("g", {}, G); el("path", { d: "M300 640 Q500 610 700 640 V720 H300 Z", fill: "#8FC8E8", ...S6(4) }, b);
+    el("path", { d: "M280 640 L420 600", stroke: "#8B5A3C", "stroke-width": 16, "stroke-linecap": "round" }, b); el("path", { d: "M720 640 L560 596", stroke: "#8B5A3C", "stroke-width": 16, "stroke-linecap": "round" }, b);
+    el("path", { d: "M430 600 l20 30 M550 598 l-16 34", stroke: "#8B5A3C", "stroke-width": 8 }, b); txt(b, 490, 580, "✕", 40, { "text-anchor": "middle", fill: "#E8473C" });
+    const f = F(); el("rect", { x: ax - 260, y: base - 110, width: 520, height: 130, rx: 30, fill: "#8B5A3C", ...S6(5) }, f);
+    for (let i = 0; i < 6; i++) { const x = ax - 220 + i * 88; el("path", { d: `M${x} ${base - 110} q-16 -40 -30 -46 M${x} ${base - 110} q16 -44 32 -46`, fill: "#7BD389", stroke: INK, "stroke-width": 4 }, f); }
+    const y0 = a.y; a.y = y0 + 260; let t = 0; later(600, () => addTick(dt => { if (!live()) return false; t += dt; a.y = y0 + 260 * Math.max(0, 1 - t / .7); if (t > .7) { a.y = y0; jump(a, .3); return false; } })); }
+  else if (id === "saru1") { // きの えだから ぶらさがる
+    const b = el("g", {}, G); el("path", { d: `M1600 150 Q${ax + 200} 170 ${ax - 120} 210`, fill: "none", stroke: "#8B5A3C", "stroke-width": 34, "stroke-linecap": "round" }, b); [ax - 100, ax + 60, ax + 220].forEach(x => el("circle", { cx: x, cy: 180, r: 50, fill: "#5FB35A", ...S6(4) }, b));
+    const y0 = a.y; a.y = y0 - 330; const vine = el("path", { stroke: "#5A7A3A", "stroke-width": 8 }, G);
+    loop(t => { a.lean.t = Math.sin(t * 2.6) * 14; const p = world(a, 200, a.top); vine.setAttribute("d", `M${ax} 205 L${p.x.toFixed(0)} ${(p.y + 20).toFixed(0)}`); if (t > 5.5) { a.lean.t = 0; } });
+    a.armR.t = -160; a.armL.t = -160; }
+  else if (id === "michi") { // ふたまたの みち
+    const b = el("g", {}, G); el("path", { d: "M720 1000 L780 720 L520 520 M780 720 L1060 520", fill: "none", stroke: "#D9B98A", "stroke-width": 70, "stroke-linecap": "round", "stroke-linejoin": "round" }, b);
+    const s2 = el("g", { transform: "translate(880 650)" }, b); el("path", { d: "M0 110 V-40", stroke: "#8B5A3C", "stroke-width": 10 }, s2); el("path", { d: "M-80 -60 H-10 V-20 H-80 L-100 -40 Z M10 -60 H80 L100 -40 L80 -20 H10 Z", fill: "#F6E7C8", ...S6(4) }, s2); txt(s2, -45, -30, "？", 26, { "text-anchor": "middle" }); txt(s2, 45, -30, "？", 26, { "text-anchor": "middle" }); a.headRot.t = -10; }
+  else if (id === "tsukare") { a.squash.t = .8; a.sadMouth = true; a.armL.t = 30; a.armR.t = -30; for (let i = 0; i < 4; i++) later(i * 600, () => markAbove(a, "drop")); word(ax, base - 330, "はあ はあ"); }
+  else if (id === "oni1") { // しげみから とびだす
+    const f = F(); const bush = el("g", {}, f); [[-120, 0], [0, -30], [120, 0], [-60, 20], [60, 20]].forEach(([x, y]) => el("circle", { cx: ax + x, cy: base - 80 + y, r: 90, fill: "#5FB35A", ...S6(5) }, bush));
+    const y0 = a.y; a.y = y0 + 420; loop(t => { if (t < .9) { bush.setAttribute("transform", `translate(${(Math.sin(t * 50) * 8).toFixed(1)} 0)`); if (Math.random() < .2) noise(.05, 1500, .3); return; }
+      if (t < 1.3) { a.y = y0 + 420 - 520 * ((t - .9) / .4); return; } if (t < 1.6) { a.y = y0 - 100 + 100 * ((t - 1.3) / .3); return; } a.y = y0; bush.setAttribute("transform", "translate(0 60)"); a.armR.t = -150; markAbove(h, "ex"); return false; });
+    word(ax, base - 520, "がさがさっ！", "#FFE27A"); }
+  else if (id === "shizuka") { // とおくの きの かげから おにが のぞく
+    const o = el("g", {}, G); ogMiniOni(o, 1020, 650, .7); const tr = el("g", {}, G); ogTree(tr, 1020, 700, 1.4, "#4E9A4B");
+    loop(t => { o.setAttribute("transform", `translate(${(Math.sin(t * 1.4) * 70 - 60).toFixed(0)} 0)`); });
+    a.armR.t = -110; const sh = el("g", {}, G); txt(sh, ax - 160, base - 440, "しーっ", 42, { fill: "#FFFFFF", stroke: INK, "stroke-width": 7, "paint-order": "stroke" }); h.roundMouth = true; later(3000, () => h.roundMouth = false); }
+  else if (id === "kiji1") { // そらから まいおりる
+    const y0 = a.y; a.y = y0 - 700; let t = 0; addTick(dt => { if (!live()) return false; t += dt; const k = Math.min(1, t / 1.6); a.y = y0 - 700 * (1 - k) * (1 - k); a.lean.t = (1 - k) * 20 * Math.sin(t * 12); a.armL.t = a.armR.t = (1 - k) * 80 * Math.sin(t * 20); if (k >= 1) { a.lean.t = 0; a.armL.t = a.armR.t = 0; return false; } }); }
+  else if (id === "momo") { // かわを ももが ながれて くる
+    const pg = el("g", {}, G); const pe = ogPeachArt(pg, 230); loop(t => { const x = Math.min(900, -200 + t * 260); pg.setAttribute("transform", `translate(${x.toFixed(0)} ${(560 + Math.sin(t * 3) * 10).toFixed(0)}) rotate(${(Math.sin(t * 2) * 6).toFixed(1)})`); });
+    word(800, 380, "どんぶらこ、どんぶらこ"); }
+  else if (id === "fune") { const bt = el("g", {}, G); el("path", { d: "M-200 0 H200 L150 70 H-150 Z", fill: "#B8946A", ...S6(5) }, bt); el("path", { d: "M100 0 L180 -200", stroke: "#8B5A3C", "stroke-width": 10 }, bt); loop(t => bt.setAttribute("transform", `translate(${ax - 60} ${(620 + Math.sin(t * 2.2) * 8).toFixed(0)}) rotate(${(Math.sin(t * 1.6) * 3).toFixed(1)})`)); }
+  else if (id === "abunai") { for (let i = 0; i < 3; i++) later(i * 800, () => markAbove(a, "drop")); }
+  else if (id === "inu2") { sniff(a); a.lean.t = 16; later(4200, () => a.lean.t = 0); // おにの あしあと
+    for (let i = 0; i < 5; i++) { const x = 820 + i * 80, y = base - 30 - (i % 2) * 30; const f2 = el("g", { transform: `translate(${x} ${y})` }, G); el("ellipse", { rx: 20, ry: 12, fill: "#8B5A3C", opacity: .6 }, f2); [-14, 0, 14].forEach(d => el("circle", { cx: d + 4, cy: -16, r: 5, fill: "#8B5A3C", opacity: .6 }, f2)); } }
+  else if (id === "mon") { a.armL.t = 40; a.armR.t = -40; later(300, () => markAbove(h, "ex")); }
+  else if (id === "issho") { // ももたろうと いぬ・さる・きじ
+    const i1 = xtra("inu", 880, .62), s1 = xtra("saru", 1060, .62), k1 = xtra("kiji", 1280, .5); k1.y = 560; [i1, s1, k1].forEach(c => c.dx.v = c.dx.t = 0);
+    loop(t => { k1.armL.t = k1.armR.t = Math.sin(t * 18) * 50; k1.y = 560 + Math.sin(t * 3) * 14; if (t > 1 && t < 1.05) [i1, s1].forEach(c => jump(c, .4)); }); a.armR.t = -150; }
+  else if (id === "gomen") { a.sadMouth = true; a.headRot.t = 10; for (let i = 0; i < 3; i++) later(400 + i * 700, () => mark("drop", ax - 30, base - 360 * a.s, { vy: 120, life: .7 })); }
+  else if (id === "tobira") { a.lean.t = -18; a.armL.t = a.armR.t = -90; loop(t => { if (t > 4) { a.lean.t = 0; a.armL.t = a.armR.t = 0; return false; } a.lean.t = -18 + Math.sin(t * 10) * 3; }); word(ax, base - 380, "うーん！"); }
+  else if (id === "yobu") { // もんの うえから おにが いっぱい
+    const o = el("g", {}, G); for (let i = 0; i < 7; i++) ogMiniOni(o, 430 + i * 125, 330 + (i % 2) * 24, .55, ["#F0645A", "#5B8DEF", "#7BD389"][i % 3]);
+    loop(t => o.setAttribute("transform", `translate(0 ${(Math.abs(Math.sin(t * 4)) * -14).toFixed(1)})`)); h.roundMouth = true; later(2500, () => h.roundMouth = false); }
+  else if (id === "owari") { later(400, () => joy(a)); later(900, () => confetti(30)); }
+  return G; }
 /* ---------- 💬 おにごっこの おはなし ---------- */
 function ogPick(area) { let pool = OG.sc.filter(s => s.area === area); const m = Math.min(...pool.map(s => OG_N.get(s.id) || 0)); pool = pool.filter(s => (OG_N.get(s.id) || 0) === m); return pool[rnd(pool.length)]; }
 async function ogScene(pc) {
@@ -209,17 +280,16 @@ async function ogScene(pc) {
   showEngine(null, `おにごっこの おはなし（${sc.id}・段${t + 1}）`);
   OG_CUR = sc.id; const { hero: h, ask: a } = setSitView({ id: "og_" + sc.id, place: sc.place, asker: sc.who, intro: "og" }, hero);
   a.dx.v = a.dx.t = 0;
-  // おにが せなかを おいかけて くる（もり・かわ の 場面で ときどき）
-  let chaser = null; if (sc.who !== "oni" && (sc.area === 2 || sc.area === 3) && rnd(2)) { chaser = xtra("oni", -260, .7); chaser.dx.t = 120; }
   enter(h); await sleep(900);
   if (!OG_N.get("_intro")) { OG_N.set("_intro", 1); await speak(C.pony, "ogp_say", OG.txt.ogp_say); }
+  ogProp(sc, h, a);
   await speak(C.pony, `ogn_${sc.id}`, sc.n);
-  if (["tasukete", "tsukare", "oni1", "abunai"].includes(sc.id)) { h.sadMouth = true; playMove(h, "think"); }
+  if (["tasukete", "oni1", "abunai"].includes(sc.id)) { h.sadMouth = true; playMove(h, "think"); }
   playMove(a, "nod"); await speak(a, `ogw_${sc.id}`, sc.line);
   let okN = 0, nSay = 0; const log = [];
   const step = async (key, text, keys, tag) => { nSay++; const r = await kmSay(h, key, text, keys, tag); if (r.ok) okN++; log.push(`${r.ok ? "○" : "×"}${r.heard}`); return r.ok; };
   await step(`ogs_${sc.id}`, sc.say, sc.keys, "まるシマに なって いおう");
-  h.sadMouth = false; if (chaser) { chaser.dx.t = -600; }
+  h.sadMouth = false;
   playMove(a, "nod"); if (SPECIAL[sc.who]) SPECIAL[sc.who](a); await speak(a, `ogr_${sc.id}`, sc.res);
   if (sc.t2 && t >= 1) { playMove(a, "nod"); await speak(a, `ogw2_${sc.id}`, sc.t2.line); await step(`ogs2_${sc.id}`, sc.t2.say, sc.t2.keys, "つづけて いおう"); joy(a); await speak(a, `ogr2_${sc.id}`, sc.t2.res); }
   const ok = okN * 2 >= nSay; grade(ok); GS.tasks++;
