@@ -275,7 +275,7 @@ function nbProp(sc, h, a) {
   else if (id === "osoba") { stall(); nbFace(a, "face"); const k1 = kid("onna", 760, .62, "face"), k2 = kid("okusan", 930, .62, "face"); const f = F(); nbBowl(f, ax - 130, base - 175, 1); nbBowl(f, ax + 110, base - 175, 1); const hb = el("g", {}, f); nbBowl(hb, hx + 130, base - 210, 1.1);
     loop(t => { h.armR.t = -70 + Math.sin(t * 6) * 20; if (Math.random() < .03) blip(300, 260, .08, "sawtooth"); }); NB_CLEAN.push(() => h.armR.t = 0); after2 = async () => { joy(a); await sleep(600); }; }
   else if (id === "asa") { nbFace(a, "face"); const k1 = kid("sobaya", 1420, .55, "face"), k2 = kid("okusan", 1010, .55, "face"); [a, k1, k2].forEach((c, i) => { c.armR.t = -150; loop(t => { c.armR.t = -150 + Math.sin(t * 7 + i) * 20; }); }); NB_CLEAN.push(() => { [a, k1, k2].forEach(c => c.armR.t = 0); h.armL.t = 0; });
-    later(5200, () => { if (live()) word(800, 240, "めでたし、めでたし", "#C0504D"); }); after = async () => { h.armL.t = 150; await sleep(400); }; after2 = async () => { confetti(30); await sleep(600); }; }
+    later(5200, () => { if (live()) word(800, 240, "めでたし、めでたし", "#C0504D"); }); after = async () => { h.armL.t = 150; await sleep(400); }; after2 = async () => { confetti(30); [a, k1, k2].forEach(c => { hold(c, "run", 1.6); c.dx.t = 700; }); await sleep(1500); }; } // てを ふって かえって いく
   return { G, after: () => after && after(), after2: () => after2 && after2() }; }
 /* ---------- 🎭 げき ---------- */
 function nbPick(area) { const pool = NB.sc.filter(s => s.area === area); const m = Math.min(...pool.map(s => NB_N.get(s.id) || 0)); return pool.find(s => (NB_N.get(s.id) || 0) === m); }
