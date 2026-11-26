@@ -35,7 +35,7 @@ const vis = (page, id) => page.evaluate(i => { const e = document.getElementById
   await page.fill("#myName", "ばあば"); await page.click("#nameOk"); await page.waitForTimeout(300);
   check(!(await vis(page, "nameOv")) && await vis(page, "whoOv"), "なまえの あとは かならず「だれと あそぶ？」");
   check(/まだ いません/.test(await page.textContent("#whoList")), "とうろくした ひとが いなければ「まだ いません」");
-  check(/リンクを タップ/.test(await page.textContent("#whoOv")), "リンクを もらった ひと への 案内が ある");
+  check(/お誘いの番号を入れる/.test(await page.textContent("#whoOv")), "お誘いを もらった ひと への「お誘いの番号を入れる」が ある（2026-11-26）");
   check((await page.textContent("#whoNew")).includes("さそう"), "ボタンは「あたらしい ひとを さそう」");
   await page.click("#whoNew"); await page.waitForTimeout(500);
   check(!(await vis(page, "whoOv")), "さそう を押すと だれと？ は とじる");

@@ -15,7 +15,7 @@
     },
     "ios": {
       "bundleIdentifier": "com.uchinoaji.marushima.reversi",
-      "buildNumber": "23",
+      "buildNumber": "24",
       "supportsTablet": true,
       "infoPlist": {
         "NSCameraUsageDescription": "とおくの相手と顔を見ながら対戦するために、カメラを使います。",
@@ -31,7 +31,7 @@
     },
     "android": {
       "package": "com.uchinoaji.marushima.reversi",
-      "versionCode": 24,
+      "versionCode": 25,
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",

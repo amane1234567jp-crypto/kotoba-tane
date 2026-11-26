@@ -117,6 +117,9 @@ const CALL = (() => {
     } catch (e) { return { ok: false, reason: "net" }; }
   };
   // 招待リンクを開いた：招待した人に「とうろく」を伝える ／ 自分あての「とうろく」を受けとる（2026-11-16）
+  // お誘いの番号（2026-11-26）：code＝自分の番号を もらう（24時間 同じ番号）／redeem＝もらった番号を 入れる
+  C.code = async name => { try { let r = await post({ op: "code", name: name || "" }); if (!r.code) { await post({ op: "reg", name: name || "" }); r = await post({ op: "code", name: name || "" }); } return r.code || ""; } catch (e) { return ""; } };
+  C.redeem = async (code, name) => { try { await post({ op: "reg", name: name || "" }); return await post({ op: "redeem", code, name: name || "" }); } catch (e) { return { ok: false, reason: "net" }; } };
   C.accept = async (to, name) => { if (!to || to === dev.id) return; try { await post({ op: "reg", name: name || "" }); await post({ op: "accept", to, name: name || "" }); } catch (e) { } };
   // list＝自分あての「とうろく」、waits＝いま自分を 待っている人（{dev, room, name}。2026-11-26）
   C.pending = async () => { try { const r = await post({ op: "pending" }); return { list: (r && r.list) || [], waits: (r && r.waits) || [] }; } catch (e) { return { list: [], waits: [] }; } };

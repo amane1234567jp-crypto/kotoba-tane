@@ -809,6 +809,7 @@ function registerPartner(room, name, dev) { if (room) addPerson({ room, name, de
    押したあとの判断（通知で よぶ／リンクを出す／だれと？を聞く）は アプリがやる */
 function candidates() { return people.list.map(p => ({ name: p.name, p })); }
 function renderPartners() {
+  if (typeof renderCodeBtn === "function") try { renderCodeBtn(); } catch (e) { }
   if (NET.role === "guest" || answeringRing) return;
   const cs = candidates();
   $("callBtn").innerHTML = "とおくの ひとと あそぶ<small>テレビでんわで つながるよ</small>";
@@ -1359,12 +1360,18 @@ function startPendWatch() {
   CFG.pendSince = Date.now(); CFG.pendUntil = Date.now() + 24 * 3600 * 1000; saveCfg();
   clearTimeout(pendTimer); pendTimer = setTimeout(pendTick, 2000);
 }
-function showRegInvite() {
+let myCode = "";
+const withCode = t => myCode ? String(t).replace(/(「お誘いの番号」を聞かれたら )\d{6}/, "$1" + myCode) : t;   // 前に書きかえた文面でも 番号は いまのものに
+async function showRegInvite() {
   if (!CFG.myName) return showNames(() => showRegInvite(), true);
-  const url = regLink(BASE, CFG.myName, CALL.id);
+  // お誘いの番号（2026-11-26）：リンクで うまく引きつげなかったとき、相手が アプリで 入れる。もらえなくても リンクだけで 送れる
+  if (!myCode) myCode = await Promise.race([CALL.code(CFG.myName), new Promise(r => setTimeout(() => r(""), 5000))]) || "";
+  const url = regLink(BASE, CFG.myName, CALL.id, myCode);
   try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("regQr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("regQr").textContent = ""; }
   $("regLinkTxt").textContent = url;
-  fillMsg("regMsg", regBody(CFG.myName), "regMsg", url);
+  $("regCodeBox").hidden = !myCode; $("regCode").textContent = myCode;
+  fillMsg("regMsg", regBody(CFG.myName, myCode), "regMsg", url);
+  $("regMsg").value = withCode($("regMsg").value);
   $("regOv").hidden = false;
   CALL.refresh(CFG.myName);
 }
@@ -1374,7 +1381,7 @@ function regSent(note) {
   $("ringNote").textContent = note || "LINEで送ったら、相手がリンクを開くのを待ってください。登録されると、ここに表示されます"; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
   startPendWatch();
 }
-const regMsg = () => fixLink($("regMsg").value, regLink(BASE, CFG.myName, CALL.id));
+const regMsg = () => withCode(fixLink($("regMsg").value, regLink(BASE, CFG.myName, CALL.id, myCode)));
 $("regLine").addEventListener("click", () => { openLine(regMsg()); regSent(); });
 $("regOther").addEventListener("click", async () => {
   const r = await shareSheet(regMsg());
@@ -1385,6 +1392,40 @@ $("regCopy").addEventListener("click", () => {
   try { navigator.clipboard.writeText(regMsg()).then(() => { $("regCopy").textContent = "コピーしました"; setTimeout(() => $("regCopy").textContent = "文面をコピー", 2000); }); } catch (e) { }
 });
 $("regClose").addEventListener("click", () => { $("regOv").hidden = true; });
+/* お誘いの番号を入れる（2026-11-26 あまねさん「番号を入力したら つながる だけで よいのでは」）
+   リンクから うまく 引きつげなかった人は、ここで 6けたの番号を 入れる → 登録 → そのまま 招待した人を 待つ（リンクのときと 同じ） */
+function showCode() { $("codeErr").textContent = ""; $("codeIn").value = ""; $("whoOv").hidden = true; $("codeOv").hidden = false; setTimeout(() => { try { $("codeIn").focus(); } catch (e) { } }, 50); }
+$("codeBtn").addEventListener("click", showCode);
+$("whoCode").addEventListener("click", showCode);
+$("codeClose").addEventListener("click", () => { $("codeOv").hidden = true; });
+$("codeIn").addEventListener("input", () => { const v = $("codeIn").value.replace(/\D/g, "").slice(0, 6); if (v !== $("codeIn").value) $("codeIn").value = v; $("codeErr").textContent = ""; });
+$("codeIn").addEventListener("keydown", e => { if (e.key === "Enter") $("codeGo").click(); });
+async function redeemCode(code) {
+  $("codeGo").disabled = true; $("codeErr").textContent = "たしかめています…";
+  const r = await CALL.redeem(code, CFG.myName);
+  $("codeGo").disabled = false;
+  if (!r || !r.ok) {
+    $("codeErr").textContent = r && r.reason === "self" ? "これは、ご自分で送ったお誘いの番号です"
+      : r && r.reason === "nocode" ? "この番号は見つかりませんでした。番号をもう一度たしかめてください（番号は送ってから24時間使えます）"
+      : r && r.error === "too many" ? "まちがいが続いたので、しばらく（1時間ほど）たってから入れてください"
+      : "つながりませんでした。インターネットにつながっているか、たしかめてください";
+    if (!$("codeOv").hidden) return;
+    $("codeOv").hidden = false; return;
+  }
+  $("codeOv").hidden = true; $("codeErr").textContent = "";
+  addPerson({ dev: r.dev, name: r.name || "あいて" }); renderPartners();
+  const p = people.list.find(x => x.dev === r.dev);
+  if (p) callGrandma(false, false, p, { justRegistered: true });
+}
+$("codeGo").addEventListener("click", () => {
+  const code = $("codeIn").value.replace(/\D/g, "");
+  if (code.length !== 6) { $("codeErr").textContent = "6けたの番号を入れてください"; return; }
+  if (!CFG.myName) { $("codeOv").hidden = true; return showNames(() => redeemCode(code), true); }
+  redeemCode(code);
+});
+// 開始画面の「お誘いの番号を入れる」：まだ だれも 登録していない人にだけ 出す（登録ずみの人は「だれと あそぶ？」の中から）
+function renderCodeBtn() { $("codeBtn").hidden = people.list.length > 0 || NET.role === "guest" || answeringRing; }
+renderCodeBtn();
 /* 待っている人に つなぐ（2026-11-26 あまねさん「登録の流れが長すぎる」）
    ・この画面で「とうろく」が届いた人（さそって 登録してくれた人）が 待っていれば、そのまま つなぐ（初回は LINE の 2通目が いらない）
    ・前から 登録している人が 待っていれば「〇〇が まっているよ」を出す（リンクから ひらけなくても、アプリを ひらけば つながる） */

@@ -250,6 +250,13 @@ body {
 .big.partner small { font: 700 .42em var(--body); color: var(--muted); letter-spacing: .06em; }
 .resend { align-self: center; margin-top: -4px; }
 .nameRow { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+.codeBtn { font: 700 clamp(15px, 2.4vmin, 19px) var(--body); color: var(--ink); background: #FFFFFF; border: 3px solid var(--ink); border-radius: 14px; padding: 10px 18px; margin: 4px 0 0; cursor: pointer; }
+.codeBtn small { display: block; font-size: .78em; font-weight: 500; opacity: .8; }
+.codeIn { display: block; width: 100%; max-width: 12em; margin: 8px auto 4px; font: 800 clamp(30px, 8vmin, 44px) var(--body); letter-spacing: .25em; text-align: center; padding: 8px 6px 8px 14px; border: 3px solid var(--ink); border-radius: 14px; background: #FFFFFF; color: var(--ink); }
+.codeErr { min-height: 1.4em; margin: 2px 0 6px; font: 700 15px var(--body); color: #B3261E; text-align: center; }
+.regCodeBox { margin: 6px 0 10px; padding: 10px 14px; border: 3px dashed var(--ink); border-radius: 14px; background: #FFFFFF; font: 700 15px var(--body); text-align: center; }
+.regCodeBox b { display: block; font-size: 32px; letter-spacing: .2em; margin: 2px 0; }
+.regCodeBox small { display: block; font-weight: 500; opacity: .8; }
 .linkNote { font: 700 clamp(14px, 2.2vmin, 18px) var(--body); color: var(--ink); background: #FFFFFF; border: 3px dashed var(--ink); border-radius: 14px; padding: 10px 14px; margin: 4px 0 0; max-width: 30em; line-height: 1.6; }
 .nameHint { font-size: 15px; color: var(--ink); background: #FFF6D6; border-radius: 12px; padding: 8px 12px; margin: 4px 0 8px; line-height: 1.6; }
 .ringNote.calm { animation: none; background: var(--glow); color: var(--ink); }
@@ -375,8 +382,9 @@ body {
       <p class="gNote">お孫さんの顔が映ったら、黒と白の石を交互に置いて遊びます。</p>
       <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と あそぶ」を押すだけでつながります。</p>
     </div>
+    <button class="codeBtn" id="codeBtn" type="button" hidden>お誘いの番号を入れる<small>LINEなどで番号が届いた方</small></button>
     <button class="adultBtn" id="adultBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Zm7.4-2.1.9-.7-1.5-2.6-1.1.3a6 6 0 0 0-1.3-.8l-.2-1.1h-3l-.2 1.1a6 6 0 0 0-1.3.8l-1.1-.3-1.5 2.6.9.7v1.3l-.9.7 1.5 2.6 1.1-.3a6 6 0 0 0 1.3.8l.2 1.1h3l.2-1.1a6 6 0 0 0 1.3-.8l1.1.3 1.5-2.6-.9-.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>おとなの せってい</button>
-    <p class="ver">v2026.11.26 1dd4689d</p>
+    <p class="ver">v2026.11.26 d3de4970</p>
   </div>
 </div>
 <!-- 相手が 2人以上 登録されているときだけ：だれと あそぶ？ -->
@@ -387,8 +395,18 @@ body {
     <div class="partners" id="whoList"></div>
     <h3 class="plain">はじめての ひと</h3>
     <div class="panelBtns"><button type="button" id="whoNew" class="primary">あたらしい ひとを さそう</button></div>
-    <p class="linkNote whoNote">LINE などで <b>おさそいの リンク</b>を もらった ひとは、ここではなく その リンクを タップしてね</p>
+    <div class="panelBtns"><button type="button" id="whoCode">お誘いの番号を入れる</button></div>
     <div class="panelBtns"><button type="button" id="whoClose">やめる</button></div>
+  </div>
+</div>
+<!-- お誘いの番号を入れる（2026-11-26）：入れるのは おとな。ふつうの漢字かなまじり -->
+<div class="cover" id="codeOv" hidden>
+  <div class="panel invite" role="dialog" aria-label="お誘いの番号">
+    <h2>お誘いの番号</h2>
+    <p class="lead">LINEなどで届いたお誘いに書いてある、6けたの番号を入れてください。</p>
+    <input id="codeIn" class="codeIn" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000" aria-label="お誘いの番号（6けた）">
+    <p class="codeErr" id="codeErr" role="status"></p>
+    <div class="panelBtns"><button type="button" id="codeGo" class="primary">つなぐ</button><button type="button" id="codeClose">やめる</button></div>
   </div>
 </div>
 <!-- 登録した人が いま 待っている（2026-11-26） -->
@@ -428,7 +446,8 @@ body {
 <div class="cover" id="regOv" hidden>
   <div class="panel invite" role="dialog" aria-label="あいてを さそう">
     <h2>相手を誘う</h2>
-    <p class="lead">「LINEで送る」でリンクを送ってください。相手がアプリを入れて開くと、お互いの「とうろくした ひと」に入ります。<br><small>送ってもすぐにはゲームは始まりません。遊ぶときは「だれと あそぶ？」から相手を呼びます。</small></p>
+    <p class="lead">「LINEで送る」でお誘いを送ってください。相手がアプリを入れて開くと、お互いに登録され、そのままテレビ電話がつながります。<br><small>送ったら、この画面を閉じて待っていてください。</small></p>
+    <p class="regCodeBox" id="regCodeBox" hidden>お誘いの番号<b id="regCode"></b><small>電話で伝えてもかまいません（24時間有効）</small></p>
     <div class="msgBox"><label for="regMsg">送る文面（書きかえられます）</label><textarea id="regMsg" rows="9" maxlength="600"></textarea><p class="msgLink">リンクを消してしまっても、送るときに自動で付けます。</p><button type="button" id="regMsgReset" class="small" hidden>最初の文面に戻す</button></div>
     <div class="panelBtns"><button type="button" class="lineBtn" id="regLine">LINEで送る</button></div>
     <details class="otherFold"><summary>ほかの方法で送る</summary>
@@ -651,6 +670,9 @@ const CALL = (() => {
     } catch (e) { return { ok: false, reason: "net" }; }
   };
   // 招待リンクを開いた：招待した人に「とうろく」を伝える ／ 自分あての「とうろく」を受けとる（2026-11-16）
+  // お誘いの番号（2026-11-26）：code＝自分の番号を もらう（24時間 同じ番号）／redeem＝もらった番号を 入れる
+  C.code = async name => { try { let r = await post({ op: "code", name: name || "" }); if (!r.code) { await post({ op: "reg", name: name || "" }); r = await post({ op: "code", name: name || "" }); } return r.code || ""; } catch (e) { return ""; } };
+  C.redeem = async (code, name) => { try { await post({ op: "reg", name: name || "" }); return await post({ op: "redeem", code, name: name || "" }); } catch (e) { return { ok: false, reason: "net" }; } };
   C.accept = async (to, name) => { if (!to || to === dev.id) return; try { await post({ op: "reg", name: name || "" }); await post({ op: "accept", to, name: name || "" }); } catch (e) { } };
   // list＝自分あての「とうろく」、waits＝いま自分を 待っている人（{dev, room, name}。2026-11-26）
   C.pending = async () => { try { const r = await post({ op: "pending" }); return { list: (r && r.list) || [], waits: (r && r.waits) || [] }; } catch (e) { return { list: [], waits: [] }; } };
@@ -1919,15 +1941,17 @@ function parseLink(search) {
   return { mode: null };
 }
 // リンクを作る。openExternalBrowser=1 は 付けない（2026-11-22 あまねさん：Safari を強制すると アプリが直接ひらかない）
-function regLink(base, name, dev) {
-  return base + "?m=reg" + (name ? "&n=" + encodeURIComponent(name) : "") + "&fd=" + dev;
+function regLink(base, name, dev, code) {
+  return base + "?m=reg" + (name ? "&n=" + encodeURIComponent(name) : "") + "&fd=" + dev + (/^\d{6}$/.test(code || "") ? "&c=" + code : "");
 }
 function playLink(base, room, name, dev) {
   return base + "?m=play&r=" + room + (name ? "&n=" + encodeURIComponent(name) : "") + (dev ? "&fd=" + dev : "");
 }
 // LINE で送る文（受けとるのは おとな。ふつうの漢字かなまじり。2026-11-21 あまねさん）
 // 本文（リンクの前）。送る前に アプリの中で 見せて 直せる（LINE 側では 本文が見えない・直せない：11/21 実機で確認）
-const regBody = myName => `${myName ? myName + "です。" : ""}テレビ電話をしながらリバーシで遊べるアプリがあるので、いっしょに遊びませんか？\n下のリンクからアプリを入れて（無料）、開いてください。`;
+// お誘いの番号（2026-11-26）：リンクから うまく引きつげなかったときに 入れてもらう
+const regBody = (myName, code) => `${myName ? myName + "です。" : ""}テレビ電話をしながらリバーシで遊べるアプリがあるので、いっしょに遊びませんか？\n下のリンクからアプリを入れて（無料）、開いてください。` +
+  (/^\d{6}$/.test(code || "") ? `\n「お誘いの番号」を聞かれたら ${code} と入れてください。` : "");
 const playBody = myName => `${myName ? myName + "です。" : ""}いまリバーシで遊べるよ！ このリンクをタップしてね。`;
 // 本文 ＋ リンク（リンクは かならず 最後に つける。本文を 消しても リンクだけは 送る）
 const withLink = (body, url) => (String(body || "").trim() ? String(body).trim().slice(0, 300) + "\n" : "") + url;
@@ -1940,7 +1964,7 @@ function fixLink(text, url) {
   t = t.replace(OUR_LINK, () => { if (seen) return ""; seen = true; return url; }).replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
   return seen ? t : (t ? t + "\n" : "") + url;
 }
-const regText = (myName, url) => withLink(regBody(myName), url);
+const regText = (myName, url, code) => withLink(regBody(myName, code), url);
 const playText = (myName, url) => withLink(playBody(myName), url);
 // LINE を直接ひらく（相手を選んだあと、送る前に 文を見て 直せる…かを 実機で ためす。2026-11-21）
 const lineShareURL = text => "https://line.me/R/share?text=" + encodeURIComponent(text);
@@ -3282,6 +3306,7 @@ function registerPartner(room, name, dev) { if (room) addPerson({ room, name, de
    押したあとの判断（通知で よぶ／リンクを出す／だれと？を聞く）は アプリがやる */
 function candidates() { return people.list.map(p => ({ name: p.name, p })); }
 function renderPartners() {
+  if (typeof renderCodeBtn === "function") try { renderCodeBtn(); } catch (e) { }
   if (NET.role === "guest" || answeringRing) return;
   const cs = candidates();
   $("callBtn").innerHTML = "とおくの ひとと あそぶ<small>テレビでんわで つながるよ</small>";
@@ -3832,12 +3857,18 @@ function startPendWatch() {
   CFG.pendSince = Date.now(); CFG.pendUntil = Date.now() + 24 * 3600 * 1000; saveCfg();
   clearTimeout(pendTimer); pendTimer = setTimeout(pendTick, 2000);
 }
-function showRegInvite() {
+let myCode = "";
+const withCode = t => myCode ? String(t).replace(/(「お誘いの番号」を聞かれたら )\d{6}/, "$1" + myCode) : t;   // 前に書きかえた文面でも 番号は いまのものに
+async function showRegInvite() {
   if (!CFG.myName) return showNames(() => showRegInvite(), true);
-  const url = regLink(BASE, CFG.myName, CALL.id);
+  // お誘いの番号（2026-11-26）：リンクで うまく引きつげなかったとき、相手が アプリで 入れる。もらえなくても リンクだけで 送れる
+  if (!myCode) myCode = await Promise.race([CALL.code(CFG.myName), new Promise(r => setTimeout(() => r(""), 5000))]) || "";
+  const url = regLink(BASE, CFG.myName, CALL.id, myCode);
   try { const q = qrcode(0, "M"); q.addData(url); q.make(); $("regQr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { $("regQr").textContent = ""; }
   $("regLinkTxt").textContent = url;
-  fillMsg("regMsg", regBody(CFG.myName), "regMsg", url);
+  $("regCodeBox").hidden = !myCode; $("regCode").textContent = myCode;
+  fillMsg("regMsg", regBody(CFG.myName, myCode), "regMsg", url);
+  $("regMsg").value = withCode($("regMsg").value);
   $("regOv").hidden = false;
   CALL.refresh(CFG.myName);
 }
@@ -3847,7 +3878,7 @@ function regSent(note) {
   $("ringNote").textContent = note || "LINEで送ったら、相手がリンクを開くのを待ってください。登録されると、ここに表示されます"; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
   startPendWatch();
 }
-const regMsg = () => fixLink($("regMsg").value, regLink(BASE, CFG.myName, CALL.id));
+const regMsg = () => withCode(fixLink($("regMsg").value, regLink(BASE, CFG.myName, CALL.id, myCode)));
 $("regLine").addEventListener("click", () => { openLine(regMsg()); regSent(); });
 $("regOther").addEventListener("click", async () => {
   const r = await shareSheet(regMsg());
@@ -3858,6 +3889,40 @@ $("regCopy").addEventListener("click", () => {
   try { navigator.clipboard.writeText(regMsg()).then(() => { $("regCopy").textContent = "コピーしました"; setTimeout(() => $("regCopy").textContent = "文面をコピー", 2000); }); } catch (e) { }
 });
 $("regClose").addEventListener("click", () => { $("regOv").hidden = true; });
+/* お誘いの番号を入れる（2026-11-26 あまねさん「番号を入力したら つながる だけで よいのでは」）
+   リンクから うまく 引きつげなかった人は、ここで 6けたの番号を 入れる → 登録 → そのまま 招待した人を 待つ（リンクのときと 同じ） */
+function showCode() { $("codeErr").textContent = ""; $("codeIn").value = ""; $("whoOv").hidden = true; $("codeOv").hidden = false; setTimeout(() => { try { $("codeIn").focus(); } catch (e) { } }, 50); }
+$("codeBtn").addEventListener("click", showCode);
+$("whoCode").addEventListener("click", showCode);
+$("codeClose").addEventListener("click", () => { $("codeOv").hidden = true; });
+$("codeIn").addEventListener("input", () => { const v = $("codeIn").value.replace(/\D/g, "").slice(0, 6); if (v !== $("codeIn").value) $("codeIn").value = v; $("codeErr").textContent = ""; });
+$("codeIn").addEventListener("keydown", e => { if (e.key === "Enter") $("codeGo").click(); });
+async function redeemCode(code) {
+  $("codeGo").disabled = true; $("codeErr").textContent = "たしかめています…";
+  const r = await CALL.redeem(code, CFG.myName);
+  $("codeGo").disabled = false;
+  if (!r || !r.ok) {
+    $("codeErr").textContent = r && r.reason === "self" ? "これは、ご自分で送ったお誘いの番号です"
+      : r && r.reason === "nocode" ? "この番号は見つかりませんでした。番号をもう一度たしかめてください（番号は送ってから24時間使えます）"
+      : r && r.error === "too many" ? "まちがいが続いたので、しばらく（1時間ほど）たってから入れてください"
+      : "つながりませんでした。インターネットにつながっているか、たしかめてください";
+    if (!$("codeOv").hidden) return;
+    $("codeOv").hidden = false; return;
+  }
+  $("codeOv").hidden = true; $("codeErr").textContent = "";
+  addPerson({ dev: r.dev, name: r.name || "あいて" }); renderPartners();
+  const p = people.list.find(x => x.dev === r.dev);
+  if (p) callGrandma(false, false, p, { justRegistered: true });
+}
+$("codeGo").addEventListener("click", () => {
+  const code = $("codeIn").value.replace(/\D/g, "");
+  if (code.length !== 6) { $("codeErr").textContent = "6けたの番号を入れてください"; return; }
+  if (!CFG.myName) { $("codeOv").hidden = true; return showNames(() => redeemCode(code), true); }
+  redeemCode(code);
+});
+// 開始画面の「お誘いの番号を入れる」：まだ だれも 登録していない人にだけ 出す（登録ずみの人は「だれと あそぶ？」の中から）
+function renderCodeBtn() { $("codeBtn").hidden = people.list.length > 0 || NET.role === "guest" || answeringRing; }
+renderCodeBtn();
 /* 待っている人に つなぐ（2026-11-26 あまねさん「登録の流れが長すぎる」）
    ・この画面で「とうろく」が届いた人（さそって 登録してくれた人）が 待っていれば、そのまま つなぐ（初回は LINE の 2通目が いらない）
    ・前から 登録している人が 待っていれば「〇〇が まっているよ」を出す（リンクから ひらけなくても、アプリを ひらけば つながる） */

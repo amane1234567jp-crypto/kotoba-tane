@@ -34,6 +34,9 @@ footer a { color: var(--sub); }
   .btn { background: #2f2e36; } .btn.primary { background: var(--glow); color: #2B2A33; }
   .num { background: #eeeae2; color: #1d1c22; }
 }
+.code { margin: 8px 0 14px; padding: 10px 14px; border: 3px dashed #222; border-radius: 14px; background: #fff; text-align: center; font-weight: 700; }
+.code b { display: block; font-size: 32px; letter-spacing: .2em; margin: 2px 0; }
+.code small { display: block; font-weight: 500; }
 </style>
 </head><body>
 <main>
@@ -41,6 +44,7 @@ footer a { color: var(--sub); }
   <h1>テレビ電話リバーシ</h1>
   <p class="tag">はなれて暮らす家族と、顔を見ながらリバーシ</p>
   <p class="from" id="from"></p>
+  <p class="code" id="codeBox" hidden>お誘いの番号<b id="codeNum"></b><small>アプリを開いて番号を聞かれたら、この番号を入れてください</small></p>
   <!-- 大人が読む ページなので ふつうの漢字かなまじり。「まだ入れていない」「もう入っている」を はっきり分ける（2026-11-22 けい の件） -->
   <ol>
     <li><span class="step">まだアプリを入れていない方</span>
@@ -71,6 +75,9 @@ footer a { color: var(--sub); }
   const fdOk = /^[A-Za-z0-9_-]{16,64}$/.test(q.get("fd") || "");
   const reg = !r && q.get("m") === "reg" && fdOk;
   if (!r && !reg) { document.getElementById("openStep").hidden = true; document.getElementById("had").hidden = true; return; }
+  // お誘いの番号（2026-11-26）：アプリが うまく引きつげなかったときに 入れてもらう
+  const code = (q.get("c") || "").replace(/\D/g, "");
+  if (/^\d{6}$/.test(code) && q.get("m") === "reg") { document.getElementById("codeNum").textContent = code; document.getElementById("codeBox").hidden = false; }
   const fromEl = document.getElementById("from");
   fromEl.textContent = (n ? n + "さんから、" : "") + "テレビ電話リバーシへのお誘いです";
   if (/ Line\//i.test(ua)) document.getElementById("lineNote").hidden = false;

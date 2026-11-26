@@ -1,0 +1,14 @@
+const API="https://rlqeoyvevaglwngxtvrw.supabase.co/functions/v1/rv-push";
+const rnd=()=>Array.from(crypto.getRandomValues(new Uint8Array(16)),b=>"abcdefghijklmnopqrstuvwxyz0123456789"[b%36]).join("")+"zz";
+const A={id:"TESTcodeA"+rnd().slice(0,12),secret:rnd()+rnd()}, B={id:"TESTcodeB"+rnd().slice(0,12),secret:rnd()+rnd()};
+const post=async(d,b)=>{const r=await fetch(API,{method:"POST",headers:{"content-type":"application/json",origin:"https://www.uchinoaji.com"},body:JSON.stringify({...d,...b})});return [r.status,await r.json()]};
+let fail=0;const ck=(c,m)=>{console.log((c?"OK  ":"NG  ")+m);if(!c)fail++};
+await post(A,{op:"reg",name:"テストA"}); await post(B,{op:"reg",name:"テストB"});
+const [s1,c1]=await post(A,{op:"code",name:"テストA"}); ck(s1===200&&/^\d{6}$/.test(c1.code),"A：番号をもらえた "+c1.code);
+const [,c2]=await post(A,{op:"code",name:"テストA"}); ck(c2.code===c1.code,"A：もう一度もらっても同じ番号");
+const [,r0]=await post(A,{op:"redeem",code:c1.code,name:"テストA"}); ck(r0.ok===false&&r0.reason==="self","A：自分の番号は使えない");
+const bad=c1.code==="999999"?"999998":"999999";
+const [,r1]=await post(B,{op:"redeem",code:bad,name:"テストB"}); ck(r1.ok===false&&r1.reason==="nocode","B：まちがった番号 → 見つからない");
+const [,r2]=await post(B,{op:"redeem",code:c1.code.slice(0,3)+" "+c1.code.slice(3),name:"テストB"}); ck(r2.ok===true&&r2.dev===A.id&&r2.name==="テストA","B：正しい番号（空白入り）→ Aと登録");
+const [,p]=await post(A,{op:"pending"}); ck(p.list.some(x=>x.dev===B.id&&x.name==="テストB"),"A：pending に Bが来た");
+console.log(JSON.stringify({A:A.id,B:B.id})); process.exit(fail?1:0);

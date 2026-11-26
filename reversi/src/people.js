@@ -49,15 +49,17 @@ function parseLink(search) {
   return { mode: null };
 }
 // リンクを作る。openExternalBrowser=1 は 付けない（2026-11-22 あまねさん：Safari を強制すると アプリが直接ひらかない）
-function regLink(base, name, dev) {
-  return base + "?m=reg" + (name ? "&n=" + encodeURIComponent(name) : "") + "&fd=" + dev;
+function regLink(base, name, dev, code) {
+  return base + "?m=reg" + (name ? "&n=" + encodeURIComponent(name) : "") + "&fd=" + dev + (/^\d{6}$/.test(code || "") ? "&c=" + code : "");
 }
 function playLink(base, room, name, dev) {
   return base + "?m=play&r=" + room + (name ? "&n=" + encodeURIComponent(name) : "") + (dev ? "&fd=" + dev : "");
 }
 // LINE で送る文（受けとるのは おとな。ふつうの漢字かなまじり。2026-11-21 あまねさん）
 // 本文（リンクの前）。送る前に アプリの中で 見せて 直せる（LINE 側では 本文が見えない・直せない：11/21 実機で確認）
-const regBody = myName => `${myName ? myName + "です。" : ""}テレビ電話をしながらリバーシで遊べるアプリがあるので、いっしょに遊びませんか？\n下のリンクからアプリを入れて（無料）、開いてください。`;
+// お誘いの番号（2026-11-26）：リンクから うまく引きつげなかったときに 入れてもらう
+const regBody = (myName, code) => `${myName ? myName + "です。" : ""}テレビ電話をしながらリバーシで遊べるアプリがあるので、いっしょに遊びませんか？\n下のリンクからアプリを入れて（無料）、開いてください。` +
+  (/^\d{6}$/.test(code || "") ? `\n「お誘いの番号」を聞かれたら ${code} と入れてください。` : "");
 const playBody = myName => `${myName ? myName + "です。" : ""}いまリバーシで遊べるよ！ このリンクをタップしてね。`;
 // 本文 ＋ リンク（リンクは かならず 最後に つける。本文を 消しても リンクだけは 送る）
 const withLink = (body, url) => (String(body || "").trim() ? String(body).trim().slice(0, 300) + "\n" : "") + url;
@@ -70,7 +72,7 @@ function fixLink(text, url) {
   t = t.replace(OUR_LINK, () => { if (seen) return ""; seen = true; return url; }).replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
   return seen ? t : (t ? t + "\n" : "") + url;
 }
-const regText = (myName, url) => withLink(regBody(myName), url);
+const regText = (myName, url, code) => withLink(regBody(myName, code), url);
 const playText = (myName, url) => withLink(playBody(myName), url);
 // LINE を直接ひらく（相手を選んだあと、送る前に 文を見て 直せる…かを 実機で ためす。2026-11-21）
 const lineShareURL = text => "https://line.me/R/share?text=" + encodeURIComponent(text);

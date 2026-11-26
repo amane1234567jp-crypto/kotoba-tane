@@ -10,6 +10,8 @@
 //   POST {op:"wait", id, secret, to, room}            … to を 自分の部屋で 待っている（5秒ごとに 送りなおす）。to が 自分を待っていれば other で返す
 //   POST {op:"peek", id, secret, to}                  … to が 自分を 待っているか（待っていれば other：{room}）
 //   POST {op:"unwait", id, secret}                    … 待つのを やめた（2026-11-23：2人が同時に名前を押しても つながるように）
+//   POST {op:"code", id, secret, name}                … お誘いの番号（6けた・24時間）を もらう。まだ使える番号が あれば 同じ番号（2026-11-26）
+//   POST {op:"redeem", id, secret, code, name}        … お誘いの番号を入れた：番号を出した人に「とうろく」を伝える（accept と同じ）。{dev, name} を返す
 import { createClient } from "npm:@supabase/supabase-js@2.45.4";
 import webpush from "npm:web-push@3.6.7";
 
@@ -74,7 +76,22 @@ async function handleInvite(b: Record<string, any>, ip: string) {
   return [200, { ok: true, r: hit.room, n: hit.name, fd: (hit.fp && hit.fp.fd) || "" }];
 }
 
-async function handle(b: Record<string, any>) {
+// 「とうろく」を伝える（accept と redeem で つかう）。招待した人が アプリの通知を受けとれるなら しらせる（受けとれないときは 次に開いたとき pending で わかる）
+async function pairUp(to: string, fromId: string, name: string, url: string) {
+  const { error } = await db.from("rv_pairs").upsert({ to_id: to, from_id: fromId, name, at: new Date().toISOString() }, { onConflict: "to_id,from_id" });
+  if (error) return error.message;
+  const { data: t } = await db.from("rv_devices").select("id,sub").eq("id", to).maybeSingle();
+  if (t && t.sub && t.sub.expo) {
+    try {
+      await fetch("https://exp.host/--/api/v2/push/send", { method: "POST", headers: { "content-type": "application/json", accept: "application/json" }, body: JSON.stringify({
+        to: t.sub.expo, title: "テレビ電話リバーシ", body: `${name || "あいて"}が とうろく しました`, sound: "default", priority: "high", ttl: 3600, channelId: "call",
+        data: { url, tag: "rv-accept", from: fromId, at: Date.now() } }) });
+    } catch (e) { /* 通知できなくても 登録は残る */ }
+  }
+  return "";
+}
+
+async function handle(b: Record<string, any>, ip: string) {
   if (b.op === "reg") {
     if (!ok(b.id) || !ok(b.secret)) return [400, { error: "bad id" }];
     const h = await sha(b.secret);
@@ -95,18 +112,39 @@ async function handle(b: Record<string, any>) {
     if (!from) return [403, { error: "who" }];
     if (!ok(b.to) || b.to === from.id) return [400, { error: "bad to" }];
     const name = clip(b.name || from.name, 20);
-    const { error } = await db.from("rv_pairs").upsert({ to_id: b.to, from_id: from.id, name, at: new Date().toISOString() }, { onConflict: "to_id,from_id" });
-    if (error) return [500, { error: error.message }];
-    // 招待した人が アプリの通知を受けとれるなら しらせる（受けとれないときは 次に開いたとき pending で わかる）
-    const { data: to } = await db.from("rv_devices").select("id,sub").eq("id", b.to).maybeSingle();
-    if (to && to.sub && to.sub.expo) {
-      try {
-        await fetch("https://exp.host/--/api/v2/push/send", { method: "POST", headers: { "content-type": "application/json", accept: "application/json" }, body: JSON.stringify({
-          to: to.sub.expo, title: "テレビ電話リバーシ", body: `${name || "あいて"}が とうろく しました`, sound: "default", priority: "high", ttl: 3600, channelId: "call",
-          data: { url: clip(b.url, 400), tag: "rv-accept", from: from.id, at: Date.now() } }) });
-      } catch (e) { /* 通知できなくても 登録は残る */ }
-    }
+    const err = await pairUp(b.to, from.id, name, clip(b.url, 400));
+    if (err) return [500, { error: err }];
     return [200, { ok: true }];
+  }
+  if (b.op === "code") {
+    const meRow = await me(b.id, b.secret);
+    if (!meRow) return [403, { error: "who" }];
+    await db.from("rv_codes").delete().lt("at", new Date(Date.now() - 24 * 3600e3).toISOString());
+    // あと1時間 以上 使える番号が あれば それを返す（何度 さそう画面を 開いても 同じ番号）
+    const { data: cur } = await db.from("rv_codes").select("code,at").eq("host_id", meRow.id).gt("at", new Date(Date.now() - 23 * 3600e3).toISOString()).order("at", { ascending: false }).limit(1).maybeSingle();
+    if (cur) { await db.from("rv_codes").update({ name: clip(b.name || meRow.name, 20) }).eq("code", cur.code); return [200, { ok: true, code: cur.code }]; }
+    for (let i = 0; i < 8; i++) {
+      const code = String(100000 + (crypto.getRandomValues(new Uint32Array(1))[0] % 900000));
+      const { error } = await db.from("rv_codes").insert({ code, host_id: meRow.id, name: clip(b.name || meRow.name, 20) });
+      if (!error) return [200, { ok: true, code }];
+    }
+    return [500, { error: "code" }];
+  }
+  if (b.op === "redeem") {
+    const from = await me(b.id, b.secret);
+    if (!from) return [403, { error: "who" }];
+    const code = String(b.code || "").replace(/\D/g, "");
+    if (!/^[0-9]{6}$/.test(code)) return [400, { error: "bad code" }];
+    // 当てずっぽう よけ：まちがいは 通信元ごとに 1時間 20回まで
+    await db.from("rv_code_tries").delete().lt("at", new Date(Date.now() - 3600e3).toISOString());
+    const { count } = await db.from("rv_code_tries").select("id", { count: "exact", head: true }).eq("ip", ip);
+    if ((count || 0) >= 20) return [429, { error: "too many" }];
+    const { data: row } = await db.from("rv_codes").select("code,host_id,name,at").eq("code", code).gt("at", new Date(Date.now() - 24 * 3600e3).toISOString()).maybeSingle();
+    if (!row) { await db.from("rv_code_tries").insert({ ip }); return [200, { ok: false, reason: "nocode" }]; }
+    if (row.host_id === from.id) return [200, { ok: false, reason: "self" }];
+    const err = await pairUp(row.host_id, from.id, clip(b.name || from.name, 20), "");
+    if (err) return [500, { error: err }];
+    return [200, { ok: true, dev: row.host_id, name: row.name }];
   }
   if (b.op === "pending") {
     const meRow = await me(b.id, b.secret);
@@ -191,7 +229,7 @@ Deno.serve(async req => {
   const ip = (req.headers.get("cf-connecting-ip") || req.headers.get("x-real-ip") || (req.headers.get("x-forwarded-for") || "").split(",")[0] || "").trim().slice(0, 64);
   try {
     const b = await req.json();
-    [status, body] = (b && (b.op === "hint" || b.op === "claim") ? await handleInvite(b, ip) : await handle(b)) as [number, unknown];
+    [status, body] = (b && (b.op === "hint" || b.op === "claim") ? await handleInvite(b, ip) : await handle(b, ip)) as [number, unknown];
     // うまくいかなかったときだけ 記録する（どの op が なぜ 失敗したか。端末の番号は 先頭6文字だけ）（2026-11-22）
     if (status >= 400) console.log(JSON.stringify({ op: b && b.op, status, error: (body as any) && (body as any).error, id: String((b && b.id) || "").slice(0, 6), to: String((b && b.to) || "").slice(0, 6) }));
   } catch (e) { body = { error: String(e).slice(0, 200) }; console.log(JSON.stringify({ status: 500, error: String(e).slice(0, 200) })); }
