@@ -54,7 +54,7 @@ const CALL = (() => {
     if (!m) return;
     if (m.t === "media") { if (mediaWait) { mediaWait(); mediaWait = null; } }
     if (m.t === "shared") { if (shareWait) { shareWait({ ok: !!m.ok, act: m.act || "" }); shareWait = null; } }
-    if (m.t === "token") { dev.pushDenied = false; if (m.expo && m.expo !== dev.expo) { dev.expo = m.expo; save(); } if (tokenWait) { tokenWait(m.expo || null); tokenWait = null; } }
+    if (m.t === "token") { dev.pushDenied = false; const fresh = m.expo && m.expo !== dev.expo; if (fresh) { dev.expo = m.expo; save(); } if (tokenWait) { tokenWait(m.expo || null); tokenWait = null; } else if (fresh) post({ op: "reg", name: lastName, expo: m.expo }).catch(() => { }); }
     if (m.t === "denied") { dev.pushDenied = true; dev.expo = ""; save(); if (tokenWait) { tokenWait(null); tokenWait = null; } }
   };
   async function post(body) {
@@ -87,7 +87,10 @@ const CALL = (() => {
     } catch (e) { return { ok: false, why: "登録できませんでした（" + String(e && e.message || e).slice(0, 60) + "）" }; }
   };
   // 開くたびに 宛先と名前を登録しなおす（購読は ときどき 入れかわる）
+  // 通知が もう 許可ずみの端末（Android 12 まで など）は 起動したときに 宛先が届く → その場で 中継に登録（2026-11-26）
+  let lastName = "";
   C.refresh = async name => {
+    lastName = name || "";
     try {
       if (NATIVE) { if (dev.expo) await post({ op: "reg", name: name || "", expo: dev.expo }); else { await post({ op: "reg", name: name || "" }); toApp({ t: "pushIfGranted" }); } return; }
       if ("serviceWorker" in navigator) swReg().catch(() => { });   // ホーム画面に追加できるように いつも入れておく

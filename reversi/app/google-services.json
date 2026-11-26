@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "662611592534",
+    "project_id": "tvreversi",
+    "storage_bucket": "tvreversi.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662611592534:android:82886264e37c473ab282f7",
+        "android_client_info": {
+          "package_name": "com.uchinoaji.marushima.reversi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQXrKcJ-jC1OLU6D0x_Aw4gPUbAWUge2Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -331,3 +331,4 @@
 - 2026-11-26: Google Play で公開された（最終公開日 11/26、審査は約1時間）。uchinoaji の assetlinks に Play アプリ署名鍵 92:72:19:F9:…:03:0A を追加（97ca75c）。landing.html/index.html の PLAY_LIVE=true、Android では「入れ終わったら、Google Playの「開く」…」に。
 - 2026-11-26: 登録の流れを短く（あまねさん「長すぎる」）。(1) 誘った後の確認を2秒ごと（最初15分）。(2) 登録した人は そのまま招待主を待つ（LINEの画面は出さず「〇〇に LINEで 知らせる」ボタンだけ）。招待主はアプリで待っていれば自動でつながる。(3) 中継 rv-push v10：pending が waits（いま自分を待っている人）も返す。アプリを開けば リンクなしでも「〇〇が まっているよ／つなぐ」。(4) あそぶリンクから開いたら「はじめる」なしで開始。(5) 案内ページ：あそぶリンク（m=play）は すぐアプリを開く。
 - 11/26 1.0.9（iOS ビルド22・Android versionCode 23）を作る。
+- 11/26 通知（よびだし）を入れた。Firebase プロジェクト tvreversi（Spark・アナリティクス／Gemini なし）に Android アプリを登録 → google-services.json（公開してよい設定ファイル）を reversi/app に。FCM V1 のサービスアカウント鍵と Apple の APNs 鍵（Key ID SZSKR2V3B4・Sandbox&Production・チーム全体）を expo.dev の credentials に登録（鍵の本体はリポジトリに入れない）。app.json pushReady=true。許可ずみ端末は起動時に宛先を登録（call.js）。tests/push-native.js。1.0.9 は 通知ありで作りなおし（iOS ビルド23・Android versionCode 24。ビルド22 は途中で止めた）。

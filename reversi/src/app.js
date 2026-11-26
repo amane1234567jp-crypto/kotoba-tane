@@ -898,6 +898,7 @@ function renderPush() {
 function maybeAskPush() {
   // iPhone・iPad の Safari（ホーム画面に追加していない）では聞かない：手順がややこしいので、アプリ版まで待つ（あまねさん 2026-11-08）。設定からはいつでも
   if (CFG.pushAsked || CALL.on || CALL.blocked || !CALL.canPush || CALL.needsHome) return;
+  if (!$("meetOv").hidden || G.started || NET.role) return;   // 「まっているよ」や 対局の じゃまを しない（次に ひらいたとき 聞く）
   if (!people.list.length) return;
   CFG.pushAsked = 1; saveCfg();
   $("pushAskOv").hidden = false;
