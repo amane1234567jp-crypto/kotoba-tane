@@ -330,3 +330,4 @@
 - 2026-11-26: ノートPCの Claude 内蔵ブラウザ（info@ は /u/1/）で、画像6枚とAAB（versionCode 22）を GitHub raw から取り込んで設定。リリースノート「はじめての公開です。…」。ストア掲載情報を本保存し、公開の概要から 11 件の変更を審査に送信（製品版・日本のみ）。PC 版 Google Play Games のフォーム ファクタが有効のまま。承認後: assetlinks に Play 署名の SHA-256、landing.html の PLAY_LIVE=true。
 - 2026-11-26: Google Play で公開された（最終公開日 11/26、審査は約1時間）。uchinoaji の assetlinks に Play アプリ署名鍵 92:72:19:F9:…:03:0A を追加（97ca75c）。landing.html/index.html の PLAY_LIVE=true、Android では「入れ終わったら、Google Playの「開く」…」に。
 - 2026-11-26: 登録の流れを短く（あまねさん「長すぎる」）。(1) 誘った後の確認を2秒ごと（最初15分）。(2) 登録した人は そのまま招待主を待つ（LINEの画面は出さず「〇〇に LINEで 知らせる」ボタンだけ）。招待主はアプリで待っていれば自動でつながる。(3) 中継 rv-push v10：pending が waits（いま自分を待っている人）も返す。アプリを開けば リンクなしでも「〇〇が まっているよ／つなぐ」。(4) あそぶリンクから開いたら「はじめる」なしで開始。(5) 案内ページ：あそぶリンク（m=play）は すぐアプリを開く。
+- 11/26 1.0.9（iOS ビルド22・Android versionCode 23）を作る。
