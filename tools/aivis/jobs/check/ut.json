@@ -1,0 +1,530 @@
+[
+{
+"key": "utw_dekake",
+"who": "meebaa",
+"text": "たろう、きょうは どこへ いくんだい？",
+"yomi": "太郎、今日はどこへ行くんだい？",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_dekake",
+"who": "meebaa",
+"text": "きを つけて いくんだよ",
+"yomi": "気をつけて行くんだよ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_ijime",
+"who": "gao",
+"text": "やーい、のろまな かめ！",
+"yomi": "やーい、のろまなカメ！",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_ijime",
+"who": "gao",
+"text": "だって、おもしろいんだもん",
+"yomi": "だって、面白いんだもん",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw2_ijime",
+"who": "gao",
+"text": "じゃあ、どう すれば いいの？",
+"yomi": "じゃあ、どうすればいいの？",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr2_ijime",
+"who": "gao",
+"text": "……うん、わかった",
+"yomi": "……うん、わかった",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_ayamaru",
+"who": "urashima",
+"text": "いきものを いじめては いけないよ",
+"yomi": "生き物をいじめてはいけないよ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_ayamaru",
+"who": "urashima",
+"text": "わかって くれて、ありがとう",
+"yomi": "わかってくれて、ありがとう",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_nigasu",
+"who": "kame",
+"text": "たすけて くださって、ありがとう ございます",
+"yomi": "助けてくださって、ありがとうございます",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_nigasu",
+"who": "kame",
+"text": "この ごおんは、けっして わすれません",
+"yomi": "このご恩は、決して忘れません",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_mukae",
+"who": "urashima",
+"text": "おや、きのうの かめじゃ ないか",
+"yomi": "おや、昨日のカメじゃないか",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_mukae",
+"who": "urashima",
+"text": "りゅうぐうじょう？ いって みたいなあ",
+"yomi": "竜宮城？行ってみたいなあ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_noru",
+"who": "kame",
+"text": "さあ、わたしの せなかに のって ください",
+"yomi": "さあ、私の背中に乗ってください",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_noru",
+"who": "kame",
+"text": "しっかり つかまって いて くださいね",
+"yomi": "しっかりつかまっていてくださいね",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_moguru",
+"who": "kame",
+"text": "いきは、くるしく ありませんか？",
+"yomi": "息は、苦しくありませんか？",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_moguru",
+"who": "kame",
+"text": "もっと ふかく もぐりますよ",
+"yomi": "もっと深く潜りますよ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_sakana",
+"who": "tai",
+"text": "あなたは だあれ？ どこへ いくの？",
+"yomi": "あなたはだあれ？どこへ行くの？",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_sakana",
+"who": "tai",
+"text": "わあ、おきゃくさまだ！ みんなに しらせなくちゃ",
+"yomi": "わあ、お客様だ！みんなに知らせなくちゃ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw2_sakana",
+"who": "tai",
+"text": "りゅうぐうじょうへ、なにを しに いくの？",
+"yomi": "竜宮城へ、何をしに行くの？",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr2_sakana",
+"who": "tai",
+"text": "かめさんの おきゃくさまなのね",
+"yomi": "カメさんのお客様なのね",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_tako",
+"who": "tako",
+"text": "ここを とおりたいのかい？",
+"yomi": "ここを通りたいのかい？",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_tako",
+"who": "tako",
+"text": "れいぎ ただしいね。さあ、どうぞ",
+"yomi": "礼儀正しいね。さあ、どうぞ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_kurai",
+"who": "kame",
+"text": "こわく ありませんか？",
+"yomi": "怖くありませんか？",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_kurai",
+"who": "kame",
+"text": "ちょうちんあんこうが、あかりを つけて くれますよ",
+"yomi": "チョウチンアンコウが、明かりをつけてくれますよ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_mieta",
+"who": "urashima",
+"text": "あの ひかって いる ものは、なんだい？",
+"yomi": "あの光っているものは、何だい？",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_mieta",
+"who": "urashima",
+"text": "わあ、なんて きれいなんだ",
+"yomi": "わあ、なんて綺麗なんだ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_mon",
+"who": "ebi",
+"text": "とまれ！ なまえを なのりなさい",
+"yomi": "止まれ！名前を名乗りなさい",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_mon",
+"who": "ebi",
+"text": "かめを たすけた かたですね。どうぞ おとおり ください",
+"yomi": "カメを助けた方ですね。どうぞお通りください",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_otohime",
+"who": "otohime",
+"text": "ようこそ、りゅうぐうじょうへ",
+"yomi": "ようこそ、竜宮城へ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_otohime",
+"who": "otohime",
+"text": "かめを たすけて くださった、おれいです",
+"yomi": "カメを助けてくださった、お礼です",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_gochisou",
+"who": "otohime",
+"text": "さあ、たくさん めしあがれ",
+"yomi": "さあ、たくさん召し上がれ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_gochisou",
+"who": "otohime",
+"text": "おかわりも ありますよ",
+"yomi": "お代わりもありますよ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_odori",
+"who": "otohime",
+"text": "おどりは、いかがですか？",
+"yomi": "踊りは、いかがですか？",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_odori",
+"who": "otohime",
+"text": "みんな、よろこんで います",
+"yomi": "みんな、喜んでいます",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw2_odori",
+"who": "otohime",
+"text": "ごいっしょに、おどりませんか？",
+"yomi": "ご一緒に、踊りませんか？",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr2_odori",
+"who": "otohime",
+"text": "まあ、おじょうず！",
+"yomi": "まあ、お上手！",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_zutto",
+"who": "urashima",
+"text": "ここは、ゆめの ように たのしい ところですね",
+"yomi": "ここは、夢のように楽しい所ですね",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_zutto",
+"who": "urashima",
+"text": "ありがとう ございます",
+"yomi": "ありがとうございます",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_kaeritai",
+"who": "otohime",
+"text": "どう なさったの？ げんきが ありませんね",
+"yomi": "どうなさったの？元気がありませんね",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_kaeritai",
+"who": "otohime",
+"text": "それは、さびしく なりますね",
+"yomi": "それは、寂しくなりますね",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_tamate",
+"who": "otohime",
+"text": "おみやげに、たまてばこを さしあげます。けっして あけては いけませんよ",
+"yomi": "お土産に、玉手箱を差し上げます。決して開けてはいけませんよ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_tamate",
+"who": "otohime",
+"text": "やくそく ですよ",
+"yomi": "約束ですよ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw2_tamate",
+"who": "otohime",
+"text": "あけては いけない ものは、なんでしたか？",
+"yomi": "開けてはいけないものは、何でしたか？",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr2_tamate",
+"who": "otohime",
+"text": "そう。わすれないで くださいね",
+"yomi": "そう。忘れないでくださいね",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_wakare",
+"who": "otohime",
+"text": "どうか、おげんきで",
+"yomi": "どうか、お元気で",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_wakare",
+"who": "otohime",
+"text": "さようなら、たろうさん",
+"yomi": "さようなら、太郎さん",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_okuru",
+"who": "kame",
+"text": "はまべに つきましたよ",
+"yomi": "浜辺に着きましたよ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_okuru",
+"who": "kame",
+"text": "どうぞ、おげんきで",
+"yomi": "どうぞ、お元気で",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_shiranai",
+"who": "ojisan",
+"text": "おや、みかけない かおだね",
+"yomi": "おや、見かけない顔だね",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_shiranai",
+"who": "ojisan",
+"text": "うらしま？ その いえなら、ずっと むかしに なくなったよ",
+"yomi": "浦島？その家なら、ずっと昔になくなったよ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw2_shiranai",
+"who": "ojisan",
+"text": "あんた、どこから きたんだい？",
+"yomi": "あんた、どこから来たんだい？",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr2_shiranai",
+"who": "ojisan",
+"text": "りゅうぐうじょう？ ゆめでも みたのかい",
+"yomi": "竜宮城？夢でも見たのかい",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_nannen",
+"who": "miibaa",
+"text": "うらしまたろうは、300ねんも まえの ひとだよ",
+"yomi": "浦島太郎は、三百年も前の人だよ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_nannen",
+"who": "miibaa",
+"text": "ふしぎな ことも、ある もんだねえ",
+"yomi": "不思議なことも、あるもんだねえ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_hako",
+"who": "chu",
+"text": "その はこ、なにが はいって いるの？",
+"yomi": "その箱、何が入っているの？",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_hako",
+"who": "chu",
+"text": "ええー、きに なるなあ",
+"yomi": "ええー、気になるなあ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utw_kemuri",
+"who": "chu",
+"text": "わあ！ おじいさんに なっちゃった！",
+"yomi": "わあ！おじいさんになっちゃった！",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utr_kemuri",
+"who": "chu",
+"text": "うん。やくそくは、だいじだね",
+"yomi": "うん。約束は、大事だね",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utl_kame",
+"who": "kame",
+"text": "おのり ください。すーい、すーい",
+"yomi": "お乗りください。すーい、すーい",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utl_iruka",
+"who": "tai",
+"text": "キュイキュイ！ おして あげる！",
+"yomi": "キュイキュイ！押してあげる！",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utl_kujira",
+"who": "tako",
+"text": "ぶおーん！ しっかり つかまって！",
+"yomi": "ブオーン！しっかりつかまって！",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utl_odori",
+"who": "tai",
+"text": "それ、おどれや おどれ！",
+"yomi": "それ、踊れや踊れ！",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utl_oto_ask",
+"who": "otohime",
+"text": "けっして あけては いけませんよ",
+"yomi": "決して開けてはいけませんよ",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utl_oto_keep",
+"who": "otohime",
+"text": "やくそくを まもって くださって、うれしいです",
+"yomi": "約束を守ってくださって、嬉しいです",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utl_oto_open",
+"who": "otohime",
+"text": "あら、あけて しまったのですね",
+"yomi": "あら、開けてしまったのですね",
+"acc": null,
+"job": "ut1"
+},
+{
+"key": "utl_jii",
+"who": "kamejii",
+"text": "ふぉっふぉっ。こしが いたいのう",
+"yomi": "ふぉっふぉっ。腰が痛いのう",
+"acc": null,
+"job": "ut1"
+}
+]

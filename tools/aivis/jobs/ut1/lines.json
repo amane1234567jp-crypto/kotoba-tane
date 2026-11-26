@@ -1,0 +1,332 @@
+[
+ {
+  "key": "utw_dekake",
+  "who": "meebaa",
+  "text": "たろう、きょうは どこへ いくんだい？"
+ },
+ {
+  "key": "utr_dekake",
+  "who": "meebaa",
+  "text": "きを つけて いくんだよ"
+ },
+ {
+  "key": "utw_ijime",
+  "who": "gao",
+  "text": "やーい、のろまな かめ！"
+ },
+ {
+  "key": "utr_ijime",
+  "who": "gao",
+  "text": "だって、おもしろいんだもん"
+ },
+ {
+  "key": "utw2_ijime",
+  "who": "gao",
+  "text": "じゃあ、どう すれば いいの？"
+ },
+ {
+  "key": "utr2_ijime",
+  "who": "gao",
+  "text": "……うん、わかった"
+ },
+ {
+  "key": "utw_ayamaru",
+  "who": "urashima",
+  "text": "いきものを いじめては いけないよ"
+ },
+ {
+  "key": "utr_ayamaru",
+  "who": "urashima",
+  "text": "わかって くれて、ありがとう"
+ },
+ {
+  "key": "utw_nigasu",
+  "who": "kame",
+  "text": "たすけて くださって、ありがとう ございます"
+ },
+ {
+  "key": "utr_nigasu",
+  "who": "kame",
+  "text": "この ごおんは、けっして わすれません"
+ },
+ {
+  "key": "utw_mukae",
+  "who": "urashima",
+  "text": "おや、きのうの かめじゃ ないか"
+ },
+ {
+  "key": "utr_mukae",
+  "who": "urashima",
+  "text": "りゅうぐうじょう？ いって みたいなあ"
+ },
+ {
+  "key": "utw_noru",
+  "who": "kame",
+  "text": "さあ、わたしの せなかに のって ください"
+ },
+ {
+  "key": "utr_noru",
+  "who": "kame",
+  "text": "しっかり つかまって いて くださいね"
+ },
+ {
+  "key": "utw_moguru",
+  "who": "kame",
+  "text": "いきは、くるしく ありませんか？"
+ },
+ {
+  "key": "utr_moguru",
+  "who": "kame",
+  "text": "もっと ふかく もぐりますよ"
+ },
+ {
+  "key": "utw_sakana",
+  "who": "tai",
+  "text": "あなたは だあれ？ どこへ いくの？"
+ },
+ {
+  "key": "utr_sakana",
+  "who": "tai",
+  "text": "わあ、おきゃくさまだ！ みんなに しらせなくちゃ"
+ },
+ {
+  "key": "utw2_sakana",
+  "who": "tai",
+  "text": "りゅうぐうじょうへ、なにを しに いくの？"
+ },
+ {
+  "key": "utr2_sakana",
+  "who": "tai",
+  "text": "かめさんの おきゃくさまなのね"
+ },
+ {
+  "key": "utw_tako",
+  "who": "tako",
+  "text": "ここを とおりたいのかい？"
+ },
+ {
+  "key": "utr_tako",
+  "who": "tako",
+  "text": "れいぎ ただしいね。さあ、どうぞ"
+ },
+ {
+  "key": "utw_kurai",
+  "who": "kame",
+  "text": "こわく ありませんか？"
+ },
+ {
+  "key": "utr_kurai",
+  "who": "kame",
+  "text": "ちょうちんあんこうが、あかりを つけて くれますよ"
+ },
+ {
+  "key": "utw_mieta",
+  "who": "urashima",
+  "text": "あの ひかって いる ものは、なんだい？"
+ },
+ {
+  "key": "utr_mieta",
+  "who": "urashima",
+  "text": "わあ、なんて きれいなんだ"
+ },
+ {
+  "key": "utw_mon",
+  "who": "ebi",
+  "text": "とまれ！ なまえを なのりなさい"
+ },
+ {
+  "key": "utr_mon",
+  "who": "ebi",
+  "text": "かめを たすけた かたですね。どうぞ おとおり ください"
+ },
+ {
+  "key": "utw_otohime",
+  "who": "otohime",
+  "text": "ようこそ、りゅうぐうじょうへ"
+ },
+ {
+  "key": "utr_otohime",
+  "who": "otohime",
+  "text": "かめを たすけて くださった、おれいです"
+ },
+ {
+  "key": "utw_gochisou",
+  "who": "otohime",
+  "text": "さあ、たくさん めしあがれ"
+ },
+ {
+  "key": "utr_gochisou",
+  "who": "otohime",
+  "text": "おかわりも ありますよ"
+ },
+ {
+  "key": "utw_odori",
+  "who": "otohime",
+  "text": "おどりは、いかがですか？"
+ },
+ {
+  "key": "utr_odori",
+  "who": "otohime",
+  "text": "みんな、よろこんで います"
+ },
+ {
+  "key": "utw2_odori",
+  "who": "otohime",
+  "text": "ごいっしょに、おどりませんか？"
+ },
+ {
+  "key": "utr2_odori",
+  "who": "otohime",
+  "text": "まあ、おじょうず！"
+ },
+ {
+  "key": "utw_zutto",
+  "who": "urashima",
+  "text": "ここは、ゆめの ように たのしい ところですね"
+ },
+ {
+  "key": "utr_zutto",
+  "who": "urashima",
+  "text": "ありがとう ございます"
+ },
+ {
+  "key": "utw_kaeritai",
+  "who": "otohime",
+  "text": "どう なさったの？ げんきが ありませんね"
+ },
+ {
+  "key": "utr_kaeritai",
+  "who": "otohime",
+  "text": "それは、さびしく なりますね"
+ },
+ {
+  "key": "utw_tamate",
+  "who": "otohime",
+  "text": "おみやげに、たまてばこを さしあげます。けっして あけては いけませんよ"
+ },
+ {
+  "key": "utr_tamate",
+  "who": "otohime",
+  "text": "やくそく ですよ"
+ },
+ {
+  "key": "utw2_tamate",
+  "who": "otohime",
+  "text": "あけては いけない ものは、なんでしたか？"
+ },
+ {
+  "key": "utr2_tamate",
+  "who": "otohime",
+  "text": "そう。わすれないで くださいね"
+ },
+ {
+  "key": "utw_wakare",
+  "who": "otohime",
+  "text": "どうか、おげんきで"
+ },
+ {
+  "key": "utr_wakare",
+  "who": "otohime",
+  "text": "さようなら、たろうさん"
+ },
+ {
+  "key": "utw_okuru",
+  "who": "kame",
+  "text": "はまべに つきましたよ"
+ },
+ {
+  "key": "utr_okuru",
+  "who": "kame",
+  "text": "どうぞ、おげんきで"
+ },
+ {
+  "key": "utw_shiranai",
+  "who": "ojisan",
+  "text": "おや、みかけない かおだね"
+ },
+ {
+  "key": "utr_shiranai",
+  "who": "ojisan",
+  "text": "うらしま？ その いえなら、ずっと むかしに なくなったよ"
+ },
+ {
+  "key": "utw2_shiranai",
+  "who": "ojisan",
+  "text": "あんた、どこから きたんだい？"
+ },
+ {
+  "key": "utr2_shiranai",
+  "who": "ojisan",
+  "text": "りゅうぐうじょう？ ゆめでも みたのかい"
+ },
+ {
+  "key": "utw_nannen",
+  "who": "miibaa",
+  "text": "うらしまたろうは、300ねんも まえの ひとだよ"
+ },
+ {
+  "key": "utr_nannen",
+  "who": "miibaa",
+  "text": "ふしぎな ことも、ある もんだねえ"
+ },
+ {
+  "key": "utw_hako",
+  "who": "chu",
+  "text": "その はこ、なにが はいって いるの？"
+ },
+ {
+  "key": "utr_hako",
+  "who": "chu",
+  "text": "ええー、きに なるなあ"
+ },
+ {
+  "key": "utw_kemuri",
+  "who": "chu",
+  "text": "わあ！ おじいさんに なっちゃった！"
+ },
+ {
+  "key": "utr_kemuri",
+  "who": "chu",
+  "text": "うん。やくそくは、だいじだね"
+ },
+ {
+  "key": "utl_kame",
+  "who": "kame",
+  "text": "おのり ください。すーい、すーい"
+ },
+ {
+  "key": "utl_iruka",
+  "who": "tai",
+  "text": "キュイキュイ！ おして あげる！"
+ },
+ {
+  "key": "utl_kujira",
+  "who": "tako",
+  "text": "ぶおーん！ しっかり つかまって！"
+ },
+ {
+  "key": "utl_odori",
+  "who": "tai",
+  "text": "それ、おどれや おどれ！"
+ },
+ {
+  "key": "utl_oto_ask",
+  "who": "otohime",
+  "text": "けっして あけては いけませんよ"
+ },
+ {
+  "key": "utl_oto_keep",
+  "who": "otohime",
+  "text": "やくそくを まもって くださって、うれしいです"
+ },
+ {
+  "key": "utl_oto_open",
+  "who": "otohime",
+  "text": "あら、あけて しまったのですね"
+ },
+ {
+  "key": "utl_jii",
+  "who": "kamejii",
+  "text": "ふぉっふぉっ。こしが いたいのう"
+ }
+]
