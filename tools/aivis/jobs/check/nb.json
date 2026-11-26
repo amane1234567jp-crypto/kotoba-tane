@@ -1,0 +1,514 @@
+[
+{
+"key": "nbw_dekake",
+"who": "meebaa",
+"text": "こんな よるに、どこへ いくんだい？",
+"yomi": "こんな夜に、どこへ行くんだい？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_dekake",
+"who": "meebaa",
+"text": "この さかには、おばけが でると いうよ。きを つけてね",
+"yomi": "この坂には、お化けが出るというよ。気をつけてね",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_chouchin",
+"who": "ojisan",
+"text": "くらいねえ。この ちょうちんを かして あげようか？",
+"yomi": "暗いねえ。この提灯を貸してあげようか？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_chouchin",
+"who": "ojisan",
+"text": "あしもとに、きを つけてな",
+"yomi": "足元に、気をつけてな",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_naku",
+"who": "onna",
+"text": "しくしく、しくしく……",
+"yomi": "しくしく、しくしく……",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_naku",
+"who": "onna",
+"text": "しくしく……",
+"yomi": "しくしく……",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_tetsudau",
+"who": "onna",
+"text": "うっ、うっ……こまって いるんです",
+"yomi": "うっ、うっ……困っているんです",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_tetsudau",
+"who": "onna",
+"text": "……ほんとうですか？",
+"yomi": "……本当ですか？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw2_tetsudau",
+"who": "onna",
+"text": "なくした ものを、いっしょに さがして くれますか？",
+"yomi": "なくした物を、一緒に探してくれますか？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr2_tetsudau",
+"who": "onna",
+"text": "……わたしの、かおです",
+"yomi": "……私の、顔です",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_furimuku",
+"who": "onna",
+"text": "わたしの かお、みて くださいな",
+"yomi": "私の顔、見てくださいな",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_furimuku",
+"who": "onna",
+"text": "うふふふふ",
+"yomi": "うふふふふ",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_nigeru",
+"who": "mii",
+"text": "にゃあ。どうして はしって いるの？",
+"yomi": "ニャア。どうして走っているの？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_nigeru",
+"who": "mii",
+"text": "あっちに、あかりが みえるよ",
+"yomi": "あっちに、明かりが見えるよ",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_akari",
+"who": "sobaya",
+"text": "いらっしゃい。どう しました？",
+"yomi": "いらっしゃい。どうしました？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_akari",
+"who": "sobaya",
+"text": "はい、どうぞ。まあ、おちついて",
+"yomi": "はい、どうぞ。まあ、落ち着いて",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_hanasu",
+"who": "sobaya",
+"text": "そんなに あわてて、なにが あったんです？",
+"yomi": "そんなに慌てて、何があったんです？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_hanasu",
+"who": "sobaya",
+"text": "ほう、おばけですか",
+"yomi": "ほう、お化けですか",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw2_hanasu",
+"who": "sobaya",
+"text": "どこで あったんです？",
+"yomi": "どこで会ったんです？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr2_hanasu",
+"who": "sobaya",
+"text": "あそこは、よく でるんですよ",
+"yomi": "あそこは、よく出るんですよ",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_donna",
+"who": "sobaya",
+"text": "それは、どんな おばけでしたか？",
+"yomi": "それは、どんなお化けでしたか？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_donna",
+"who": "sobaya",
+"text": "へえ、それは こわいですねえ",
+"yomi": "へえ、それは怖いですねえ",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_konnakao",
+"who": "sobaya",
+"text": "それは……こんな かおでしたか？",
+"yomi": "それは……こんな顔でしたか？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_konnakao",
+"who": "sobaya",
+"text": "ひっひっひっひ",
+"yomi": "ひっひっひっひ",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_kieru",
+"who": "chu",
+"text": "ちゅう。まっくらで、なにも みえないね",
+"yomi": "チュウ。真っ暗で、何も見えないね",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_kieru",
+"who": "chu",
+"text": "ほたるを よんで くるね",
+"yomi": "ホタルを呼んでくるね",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_otomo",
+"who": "wanko",
+"text": "わん！ どこへ いくの？",
+"yomi": "ワン！どこへ行くの？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_otomo",
+"who": "wanko",
+"text": "わん！ まかせて",
+"yomi": "ワン！任せて",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_tadaima",
+"who": "okusan",
+"text": "おかえりなさい。おそかったですね",
+"yomi": "お帰りなさい。遅かったですね",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_tadaima",
+"who": "okusan",
+"text": "まあ、なにが あったんです？",
+"yomi": "まあ、何があったんです？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_nikai",
+"who": "okusan",
+"text": "くわしく はなして くださいな",
+"yomi": "詳しく話してくださいな",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_nikai",
+"who": "okusan",
+"text": "まあ、2かいも",
+"yomi": "まあ、二回も",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_okusan",
+"who": "tabibito",
+"text": "どうして、こっちを みないんだい？",
+"yomi": "どうして、こっちを見ないんだい？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_okusan",
+"who": "tabibito",
+"text": "うわあ、でたあ！",
+"yomi": "うわあ、出たあ！",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_futon",
+"who": "okusan",
+"text": "もう おどかしませんから、でて きて くださいな",
+"yomi": "もう脅かしませんから、出てきてくださいな",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_futon",
+"who": "okusan",
+"text": "ほんとうですよ。うふふ",
+"yomi": "本当ですよ。うふふ",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_naze",
+"who": "okusan",
+"text": "なにを ききたいんです？",
+"yomi": "何を聞きたいんです？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_naze",
+"who": "okusan",
+"text": "だって、だれも あそんで くれないんですもの",
+"yomi": "だって、誰も遊んでくれないんですもの",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_tomodachi",
+"who": "okusan",
+"text": "わたしたち、ほんとうは さびしいんです",
+"yomi": "私たち、本当は寂しいんです",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_tomodachi",
+"who": "okusan",
+"text": "まあ、うれしい！",
+"yomi": "まあ、嬉しい！",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw2_tomodachi",
+"who": "okusan",
+"text": "ほんとうに、あそんで くれますか？",
+"yomi": "本当に、遊んでくれますか？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr2_tomodachi",
+"who": "okusan",
+"text": "やくそくですよ",
+"yomi": "約束ですよ",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_minna",
+"who": "sobaya",
+"text": "わたしたちも、なかまに いれて ください",
+"yomi": "私たちも、仲間に入れてください",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_minna",
+"who": "sobaya",
+"text": "やったあ！ ありがとう",
+"yomi": "やったあ！ありがとう",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_fude",
+"who": "onna",
+"text": "その ふでで、なにを するんですか？",
+"yomi": "その筆で、何をするんですか？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_fude",
+"who": "onna",
+"text": "わあ、たのしみ！",
+"yomi": "わあ、楽しみ！",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw2_fude",
+"who": "onna",
+"text": "どんな かおに して くれますか？",
+"yomi": "どんな顔にしてくれますか？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr2_fude",
+"who": "onna",
+"text": "すてき！ おねがい します",
+"yomi": "素敵！お願いします",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_kaketa",
+"who": "onna",
+"text": "どうですか？ にあいますか？",
+"yomi": "どうですか？似合いますか？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_kaketa",
+"who": "onna",
+"text": "うれしい！ ありがとう",
+"yomi": "嬉しい！ありがとう",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_kagami",
+"who": "tabibito",
+"text": "さあ、かがみを みて ごらん",
+"yomi": "さあ、鏡を見てごらん",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_kagami",
+"who": "tabibito",
+"text": "よかったね。にあって いるよ",
+"yomi": "良かったね。似合っているよ",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_osoba",
+"who": "sobaya",
+"text": "おそばの おあじは、いかがですか？",
+"yomi": "お蕎麦のお味は、いかがですか？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_osoba",
+"who": "sobaya",
+"text": "まいど あり！",
+"yomi": "まいどあり！",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw2_osoba",
+"who": "sobaya",
+"text": "おかわりは、いかがです？",
+"yomi": "お代わりは、いかがです？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr2_osoba",
+"who": "sobaya",
+"text": "へい、おまち！",
+"yomi": "へい、お待ち！",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbw_asa",
+"who": "onna",
+"text": "また、あそんで くれますか？",
+"yomi": "また、遊んでくれますか？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbr_asa",
+"who": "onna",
+"text": "やくそくですよ。さようなら",
+"yomi": "約束ですよ。さようなら",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbl_konnakao",
+"who": "onna",
+"text": "それは、こんな かおでしたか？",
+"yomi": "それは、こんな顔でしたか？",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbl_kago",
+"who": "sobaya",
+"text": "えっさ、ほいさ。のって いきな",
+"yomi": "えっさ、ほいさ。乗って行きな",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbl_karakasa",
+"who": "sobaya",
+"text": "ばあ！ つかまりな！",
+"yomi": "ばあ！つかまりな！",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbl_gyouretsu",
+"who": "onna",
+"text": "いっしょに いきましょう。そーれ、そーれ",
+"yomi": "一緒に行きましょう。そーれ、そーれ",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbl_michi",
+"who": "okusan",
+"text": "この みちを まっすぐですよ",
+"yomi": "この道をまっすぐですよ",
+"acc": null,
+"job": "nb1"
+},
+{
+"key": "nbl_tanuki",
+"who": "sobaya",
+"text": "ぽんぽこ ぽん。ばれちゃった",
+"yomi": "ぽんぽこぽん。ばれちゃった",
+"acc": null,
+"job": "nb1"
+}
+]

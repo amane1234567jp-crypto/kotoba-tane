@@ -1,0 +1,322 @@
+[
+ {
+  "key": "nbw_dekake",
+  "who": "meebaa",
+  "text": "こんな よるに、どこへ いくんだい？"
+ },
+ {
+  "key": "nbr_dekake",
+  "who": "meebaa",
+  "text": "この さかには、おばけが でると いうよ。きを つけてね"
+ },
+ {
+  "key": "nbw_chouchin",
+  "who": "ojisan",
+  "text": "くらいねえ。この ちょうちんを かして あげようか？"
+ },
+ {
+  "key": "nbr_chouchin",
+  "who": "ojisan",
+  "text": "あしもとに、きを つけてな"
+ },
+ {
+  "key": "nbw_naku",
+  "who": "onna",
+  "text": "しくしく、しくしく……"
+ },
+ {
+  "key": "nbr_naku",
+  "who": "onna",
+  "text": "しくしく……"
+ },
+ {
+  "key": "nbw_tetsudau",
+  "who": "onna",
+  "text": "うっ、うっ……こまって いるんです"
+ },
+ {
+  "key": "nbr_tetsudau",
+  "who": "onna",
+  "text": "……ほんとうですか？"
+ },
+ {
+  "key": "nbw2_tetsudau",
+  "who": "onna",
+  "text": "なくした ものを、いっしょに さがして くれますか？"
+ },
+ {
+  "key": "nbr2_tetsudau",
+  "who": "onna",
+  "text": "……わたしの、かおです"
+ },
+ {
+  "key": "nbw_furimuku",
+  "who": "onna",
+  "text": "わたしの かお、みて くださいな"
+ },
+ {
+  "key": "nbr_furimuku",
+  "who": "onna",
+  "text": "うふふふふ"
+ },
+ {
+  "key": "nbw_nigeru",
+  "who": "mii",
+  "text": "にゃあ。どうして はしって いるの？"
+ },
+ {
+  "key": "nbr_nigeru",
+  "who": "mii",
+  "text": "あっちに、あかりが みえるよ"
+ },
+ {
+  "key": "nbw_akari",
+  "who": "sobaya",
+  "text": "いらっしゃい。どう しました？"
+ },
+ {
+  "key": "nbr_akari",
+  "who": "sobaya",
+  "text": "はい、どうぞ。まあ、おちついて"
+ },
+ {
+  "key": "nbw_hanasu",
+  "who": "sobaya",
+  "text": "そんなに あわてて、なにが あったんです？"
+ },
+ {
+  "key": "nbr_hanasu",
+  "who": "sobaya",
+  "text": "ほう、おばけですか"
+ },
+ {
+  "key": "nbw2_hanasu",
+  "who": "sobaya",
+  "text": "どこで あったんです？"
+ },
+ {
+  "key": "nbr2_hanasu",
+  "who": "sobaya",
+  "text": "あそこは、よく でるんですよ"
+ },
+ {
+  "key": "nbw_donna",
+  "who": "sobaya",
+  "text": "それは、どんな おばけでしたか？"
+ },
+ {
+  "key": "nbr_donna",
+  "who": "sobaya",
+  "text": "へえ、それは こわいですねえ"
+ },
+ {
+  "key": "nbw_konnakao",
+  "who": "sobaya",
+  "text": "それは……こんな かおでしたか？"
+ },
+ {
+  "key": "nbr_konnakao",
+  "who": "sobaya",
+  "text": "ひっひっひっひ"
+ },
+ {
+  "key": "nbw_kieru",
+  "who": "chu",
+  "text": "ちゅう。まっくらで、なにも みえないね"
+ },
+ {
+  "key": "nbr_kieru",
+  "who": "chu",
+  "text": "ほたるを よんで くるね"
+ },
+ {
+  "key": "nbw_otomo",
+  "who": "wanko",
+  "text": "わん！ どこへ いくの？"
+ },
+ {
+  "key": "nbr_otomo",
+  "who": "wanko",
+  "text": "わん！ まかせて"
+ },
+ {
+  "key": "nbw_tadaima",
+  "who": "okusan",
+  "text": "おかえりなさい。おそかったですね"
+ },
+ {
+  "key": "nbr_tadaima",
+  "who": "okusan",
+  "text": "まあ、なにが あったんです？"
+ },
+ {
+  "key": "nbw_nikai",
+  "who": "okusan",
+  "text": "くわしく はなして くださいな"
+ },
+ {
+  "key": "nbr_nikai",
+  "who": "okusan",
+  "text": "まあ、2かいも"
+ },
+ {
+  "key": "nbw_okusan",
+  "who": "tabibito",
+  "text": "どうして、こっちを みないんだい？"
+ },
+ {
+  "key": "nbr_okusan",
+  "who": "tabibito",
+  "text": "うわあ、でたあ！"
+ },
+ {
+  "key": "nbw_futon",
+  "who": "okusan",
+  "text": "もう おどかしませんから、でて きて くださいな"
+ },
+ {
+  "key": "nbr_futon",
+  "who": "okusan",
+  "text": "ほんとうですよ。うふふ"
+ },
+ {
+  "key": "nbw_naze",
+  "who": "okusan",
+  "text": "なにを ききたいんです？"
+ },
+ {
+  "key": "nbr_naze",
+  "who": "okusan",
+  "text": "だって、だれも あそんで くれないんですもの"
+ },
+ {
+  "key": "nbw_tomodachi",
+  "who": "okusan",
+  "text": "わたしたち、ほんとうは さびしいんです"
+ },
+ {
+  "key": "nbr_tomodachi",
+  "who": "okusan",
+  "text": "まあ、うれしい！"
+ },
+ {
+  "key": "nbw2_tomodachi",
+  "who": "okusan",
+  "text": "ほんとうに、あそんで くれますか？"
+ },
+ {
+  "key": "nbr2_tomodachi",
+  "who": "okusan",
+  "text": "やくそくですよ"
+ },
+ {
+  "key": "nbw_minna",
+  "who": "sobaya",
+  "text": "わたしたちも、なかまに いれて ください"
+ },
+ {
+  "key": "nbr_minna",
+  "who": "sobaya",
+  "text": "やったあ！ ありがとう"
+ },
+ {
+  "key": "nbw_fude",
+  "who": "onna",
+  "text": "その ふでで、なにを するんですか？"
+ },
+ {
+  "key": "nbr_fude",
+  "who": "onna",
+  "text": "わあ、たのしみ！"
+ },
+ {
+  "key": "nbw2_fude",
+  "who": "onna",
+  "text": "どんな かおに して くれますか？"
+ },
+ {
+  "key": "nbr2_fude",
+  "who": "onna",
+  "text": "すてき！ おねがい します"
+ },
+ {
+  "key": "nbw_kaketa",
+  "who": "onna",
+  "text": "どうですか？ にあいますか？"
+ },
+ {
+  "key": "nbr_kaketa",
+  "who": "onna",
+  "text": "うれしい！ ありがとう"
+ },
+ {
+  "key": "nbw_kagami",
+  "who": "tabibito",
+  "text": "さあ、かがみを みて ごらん"
+ },
+ {
+  "key": "nbr_kagami",
+  "who": "tabibito",
+  "text": "よかったね。にあって いるよ"
+ },
+ {
+  "key": "nbw_osoba",
+  "who": "sobaya",
+  "text": "おそばの おあじは、いかがですか？"
+ },
+ {
+  "key": "nbr_osoba",
+  "who": "sobaya",
+  "text": "まいど あり！"
+ },
+ {
+  "key": "nbw2_osoba",
+  "who": "sobaya",
+  "text": "おかわりは、いかがです？"
+ },
+ {
+  "key": "nbr2_osoba",
+  "who": "sobaya",
+  "text": "へい、おまち！"
+ },
+ {
+  "key": "nbw_asa",
+  "who": "onna",
+  "text": "また、あそんで くれますか？"
+ },
+ {
+  "key": "nbr_asa",
+  "who": "onna",
+  "text": "やくそくですよ。さようなら"
+ },
+ {
+  "key": "nbl_konnakao",
+  "who": "onna",
+  "text": "それは、こんな かおでしたか？"
+ },
+ {
+  "key": "nbl_kago",
+  "who": "sobaya",
+  "text": "えっさ、ほいさ。のって いきな"
+ },
+ {
+  "key": "nbl_karakasa",
+  "who": "sobaya",
+  "text": "ばあ！ つかまりな！"
+ },
+ {
+  "key": "nbl_gyouretsu",
+  "who": "onna",
+  "text": "いっしょに いきましょう。そーれ、そーれ"
+ },
+ {
+  "key": "nbl_michi",
+  "who": "okusan",
+  "text": "この みちを まっすぐですよ"
+ },
+ {
+  "key": "nbl_tanuki",
+  "who": "sobaya",
+  "text": "ぽんぽこ ぽん。ばれちゃった"
+ }
+]
