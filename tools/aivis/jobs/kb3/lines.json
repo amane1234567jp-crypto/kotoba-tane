@@ -82,12 +82,12 @@
  {
   "key": "kbw_harapeko",
   "who": "kon",
-  "text": "おおかみさん、どこへ いくの？"
+  "text": "たいへんだよ。おおかみが、こぶたを さがして いるよ"
  },
  {
   "key": "kbr_harapeko",
   "who": "kon",
-  "text": "わるい ことは、やめた ほうが いいよ"
+  "text": "ドアを しっかり しめてね"
  },
  {
   "key": "kbw_tonton",
@@ -111,13 +111,13 @@
  },
  {
   "key": "kbw_fuku_wara",
-  "who": "kobuta1",
-  "text": "いくら ふいても、あけないよ！"
+  "who": "ookamik",
+  "text": "いいか、ふくぞ。せーの！"
  },
  {
   "key": "kbr_fuku_wara",
-  "who": "kobuta1",
-  "text": "うわあ！ いえが とんで いくー！"
+  "who": "ookamik",
+  "text": "ふーーっ！"
  },
  {
   "key": "kbw_nigeru",
@@ -161,13 +161,13 @@
  },
  {
   "key": "kbw_ki_fuku",
-  "who": "kobuta2",
-  "text": "きの いえは、じょうぶなんだぞ！"
+  "who": "ookamik",
+  "text": "こんどは、もっと おおきく ふくぞ。せーの！"
  },
  {
   "key": "kbr_ki_fuku",
-  "who": "kobuta2",
-  "text": "うわあ！ きの いえも とばされたー！"
+  "who": "ookamik",
+  "text": "ふーーーっ！"
  },
  {
   "key": "kbw_ki_nigeru",
@@ -201,23 +201,23 @@
  },
  {
   "key": "kbw_renga_fuku",
-  "who": "kobuta3",
-  "text": "どうだ、まいったか！"
+  "who": "ookamik",
+  "text": "ふーっ、ふーっ！ どうして とばないんだ！"
  },
  {
   "key": "kbr_renga_fuku",
-  "who": "kobuta3",
-  "text": "やったあ！ れんがの いえは つよいぞ"
+  "who": "ookamik",
+  "text": "はあ、はあ。もう ふけないよ"
  },
  {
   "key": "kbw_entotsu",
-  "who": "kon",
-  "text": "おおかみさん、やねに のぼって、なにを するの？"
+  "who": "ookamik",
+  "text": "ようし、えんとつから はいって やるぞ"
  },
  {
   "key": "kbr_entotsu",
-  "who": "kon",
-  "text": "あぶないから、やめた ほうが いいよ"
+  "who": "ookamik",
+  "text": "へっへっへ。まって いろよ"
  },
  {
   "key": "kbw_oyu",
@@ -251,13 +251,13 @@
  },
  {
   "key": "kbw_ayamaru",
-  "who": "kobuta3",
-  "text": "もう いえを ふきとばさないで くださいね"
+  "who": "ookamik",
+  "text": "ごめんなさい。もう しません"
  },
  {
   "key": "kbr_ayamaru",
-  "who": "kobuta3",
-  "text": "わかれば いいんだよ"
+  "who": "ookamik",
+  "text": "はい。やくそく します"
  },
  {
   "key": "kbw_yorokobu",

@@ -1,0 +1,98 @@
+[
+{
+"key": "kbw_harapeko",
+"who": "kon",
+"text": "たいへんだよ。おおかみが、こぶたを さがして いるよ",
+"yomi": "大変だよ。オオカミが、子ブタを探しているよ",
+"acc": null,
+"job": "kb4"
+},
+{
+"key": "kbr_harapeko",
+"who": "kon",
+"text": "ドアを しっかり しめてね",
+"yomi": "ドアをしっかり閉めてね",
+"acc": null,
+"job": "kb4"
+},
+{
+"key": "kbw_fuku_wara",
+"who": "ookamik",
+"text": "いいか、ふくぞ。せーの！",
+"yomi": "いいか、吹くぞ。せーの！",
+"acc": null,
+"job": "kb4"
+},
+{
+"key": "kbr_fuku_wara",
+"who": "ookamik",
+"text": "ふーーっ！",
+"yomi": "ふーーっ！",
+"acc": null,
+"job": "kb4"
+},
+{
+"key": "kbw_ki_fuku",
+"who": "ookamik",
+"text": "こんどは、もっと おおきく ふくぞ。せーの！",
+"yomi": "今度は、もっと大きく吹くぞ。せーの！",
+"acc": null,
+"job": "kb4"
+},
+{
+"key": "kbr_ki_fuku",
+"who": "ookamik",
+"text": "ふーーーっ！",
+"yomi": "ふーーーっ！",
+"acc": null,
+"job": "kb4"
+},
+{
+"key": "kbw_renga_fuku",
+"who": "ookamik",
+"text": "ふーっ、ふーっ！ どうして とばないんだ！",
+"yomi": "ふーっ、ふーっ！どうして飛ばないんだ！",
+"acc": null,
+"job": "kb4"
+},
+{
+"key": "kbr_renga_fuku",
+"who": "ookamik",
+"text": "はあ、はあ。もう ふけないよ",
+"yomi": "はあ、はあ。もう吹けないよ",
+"acc": null,
+"job": "kb4"
+},
+{
+"key": "kbw_entotsu",
+"who": "ookamik",
+"text": "ようし、えんとつから はいって やるぞ",
+"yomi": "ようし、煙突から入ってやるぞ",
+"acc": null,
+"job": "kb4"
+},
+{
+"key": "kbr_entotsu",
+"who": "ookamik",
+"text": "へっへっへ。まって いろよ",
+"yomi": "へっへっへ。待っていろよ",
+"acc": null,
+"job": "kb4"
+},
+{
+"key": "kbw_ayamaru",
+"who": "ookamik",
+"text": "ごめんなさい。もう しません",
+"yomi": "ごめんなさい。もうしません",
+"acc": null,
+"job": "kb4"
+},
+{
+"key": "kbr_ayamaru",
+"who": "ookamik",
+"text": "はい。やくそく します",
+"yomi": "はい。約束します",
+"acc": null,
+"job": "kb4"
+}
+]

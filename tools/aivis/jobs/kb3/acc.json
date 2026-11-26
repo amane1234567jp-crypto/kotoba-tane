@@ -1,131 +1,96 @@
 {
-"kbw_tabidachi": {
-"acc": {
-"クラスノヨ": 0
-}
-},
-"kbr2_tabidachi": {
-"split": [
-[
-"ソレワイイワネ",
-3,
-0,
-1
-]
-]
-},
-"kbw_wara_morau": {
-"acc": {
-"コブタクン": 0
-}
-},
-"kbr_wara_morau": {
-"acc": {
-"イイトモ": 1
-}
-},
-"kbw_ki_morau": {
-"acc": {
-"コブタクン": 0
-},
-"join": {
-"ドオシタンダイ": 1
-}
-},
-"kbr_ki_morau": {
-"acc": {
-"キオツケテネ": 4
-}
-},
-"kbr_renga_morau": {
-"acc": {
-"アゲヨオ": 3
-}
-},
-"kbr_dekita": {
-"acc": {
-"オオチガイダ": 3
-}
-},
-"kbw_harapeko": {
-"acc": {
-"オオカミサン": 1
-}
-},
-"kbr_harapeko": {
-"split": [
-[
-"ヤメタホオガ",
-3,
-0,
-1
-]
-]
-},
-"kbw_entotsu": {
-"acc": {
-"オオカミサン": 1
-}
-},
-"kbr_entotsu": {
-"split": [
-[
-"ヤメタホオガ",
-3,
-0,
-1
-]
-]
-},
-"kbw_tonton": {
-"acc": {
-"コブタクン": 0
-}
-},
-"kbw_ki_tonton": {
-"acc": {
-"コブタクンタチ": 5
-}
-},
-"kbw_renga_tonton": {
-"acc": {
-"コブタクンタチ": 5,
-"アケナイト": 0
-}
-},
-"kbw_fuku_wara": {
-"acc": {
-"アケナイヨ": 0
-}
-},
-"kbw_ireru": {
-"acc": {
-"イエニ": 2
-}
-},
-"kbw_ochiru": {
-"join": {
-"アチチチチ": 2
-}
-},
-"kbr_ochiru": {
-"acc": {
-"ユルシテオクレ": 2
-}
-},
-"kbr_mama": {
-"acc": {
-"ソオネ": 1
-}
-},
-"kbl_mitsuketa": {
-"acc": {
-"コブタクン": 0
-}
-},
-"kbl_makeru": {
-"join": {
-"ツヨスギル": 4
-}
-}
+ "kbw_tabidachi": {
+  "acc": {
+   "クラスノヨ": 0
+  }
+ },
+ "kbr2_tabidachi": {
+  "split": [
+   [
+    "ソレワイイワネ",
+    3,
+    0,
+    1
+   ]
+  ]
+ },
+ "kbw_wara_morau": {
+  "acc": {
+   "コブタクン": 0
+  }
+ },
+ "kbr_wara_morau": {
+  "acc": {
+   "イイトモ": 1
+  }
+ },
+ "kbw_ki_morau": {
+  "acc": {
+   "コブタクン": 0
+  },
+  "join": {
+   "ドオシタンダイ": 1
+  }
+ },
+ "kbr_ki_morau": {
+  "acc": {
+   "キオツケテネ": 4
+  }
+ },
+ "kbr_renga_morau": {
+  "acc": {
+   "アゲヨオ": 3
+  }
+ },
+ "kbr_dekita": {
+  "acc": {
+   "オオチガイダ": 3
+  }
+ },
+ "kbw_tonton": {
+  "acc": {
+   "コブタクン": 0
+  }
+ },
+ "kbw_ki_tonton": {
+  "acc": {
+   "コブタクンタチ": 5
+  }
+ },
+ "kbw_renga_tonton": {
+  "acc": {
+   "コブタクンタチ": 5,
+   "アケナイト": 0
+  }
+ },
+ "kbw_ireru": {
+  "acc": {
+   "イエニ": 2
+  }
+ },
+ "kbw_ochiru": {
+  "join": {
+   "アチチチチ": 2
+  }
+ },
+ "kbr_ochiru": {
+  "acc": {
+   "ユルシテオクレ": 2
+  }
+ },
+ "kbr_mama": {
+  "acc": {
+   "ソオネ": 1
+  }
+ },
+ "kbl_mitsuketa": {
+  "acc": {
+   "コブタクン": 0
+  }
+ },
+ "kbl_makeru": {
+  "join": {
+   "ツヨスギル": 4
+  }
+ }
 }
