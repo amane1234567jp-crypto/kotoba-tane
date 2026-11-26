@@ -615,10 +615,49 @@ const BUILD = {
     const tl = el("g", {}); root.insertBefore(tl, root.firstChild); el("path", { d: "M262 352 Q340 350 344 290 Q346 250 314 254 Q292 260 304 284", fill: "none", stroke: "#A9744A", "stroke-width": 16, "stroke-linecap": "round" }, tl);
     el("path", { d: "M108 108 Q200 80 292 108 L290 124 Q200 98 110 124 Z", fill: "#FFFFFF", ...ST(5) }, hd); el("circle", { cx: 200, cy: 102, r: 10, fill: "#FF8FA3", ...ST(3) }, hd);
     p.tempo = 1.2; return p; },
+  // ===== うらしまたろう（ロング、2026-11-26）：うらしまたろう・おとひめさま・うみがめ =====
+  urashima(root) { // うらしまたろう：はだいろ・くろい かみと まげ・あおみどりの きもの・こしみの・せなかに つりざお
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); p.tail.g.setAttribute("display", "none"); if (p.brows) p.brows.innerHTML = ""; p.ears.forEach(e => e.g.setAttribute("display", "none"));
+    recolor(root, { "#FFC94D": "#FFDCC0", "#FFF1D6": "#FFEADB", "#FFB3C1": "#FFB8A0" }); neckFill(root, p, "#FFDCC0");
+    const rod = el("g", {}); root.insertBefore(rod, root.firstChild); el("path", { d: "M262 384 L332 40", stroke: "#B9824A", "stroke-width": 8, "stroke-linecap": "round" }, rod);
+    el("path", { d: "M332 40 Q372 120 352 210", fill: "none", stroke: INK, "stroke-width": 3 }, rod); el("path", { d: "M352 210 q-8 16 6 20", fill: "none", stroke: INK, "stroke-width": 4, "stroke-linecap": "round" }, rod);
+    const hd = p.head.g; el("path", { d: "M108 152 Q108 72 200 66 Q292 72 292 152 Q262 110 200 108 Q138 110 108 152 Z", fill: "#2B2A33", ...ST(5) }, hd);
+    el("path", { d: "M186 72 Q180 22 204 18 Q226 22 214 72 Z", fill: "#2B2A33", ...ST(5) }, hd); el("path", { d: "M184 64 H216", stroke: "#E8473C", "stroke-width": 8, "stroke-linecap": "round" }, hd);
+    [["M146 148 L176 144"], ["M224 144 L254 148"]].forEach(([d]) => el("path", { d, fill: "none", ...ST(7) }, hd));
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M138 292 Q200 276 262 292 L268 346 L132 346 Z", fill: "#3FA7A0", ...ST(5) }, bd);
+    el("path", { d: "M176 290 L200 330 L224 290", fill: "none", ...ST(5) }, bd);
+    el("path", { d: "M128 340 H272 L282 396 L262 384 L248 400 L232 384 L216 400 L200 384 L184 400 L168 384 L152 400 L138 384 L118 396 Z", fill: "#E9C46A", ...ST(5) }, bd);
+    ["M152 346 L148 384", "M176 346 L174 386", "M200 346 V386", "M224 346 L226 386", "M248 346 L252 384"].forEach(d => el("path", { d, stroke: "#B8946A", "stroke-width": 5, "stroke-linecap": "round" }, bd));
+    el("path", { d: "M130 338 H270", stroke: "#8B5A3C", "stroke-width": 9, "stroke-linecap": "round" }, bd);
+    recolor(p.arms[0].g, { "#FFDCC0": "#3FA7A0" }); recolor(p.arms[1].g, { "#FFDCC0": "#3FA7A0" });
+    p.tempo = 1.0; return p; },
+  otohime(root) { // おとひめさま：はだいろ・ながい くろかみと ふたつの わ・きんの かんむり・ももいろの きもの・みずいろの はごろも
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); p.tail.g.setAttribute("display", "none"); if (p.brows) p.brows.innerHTML = ""; p.ears.forEach(e => e.g.setAttribute("display", "none"));
+    recolor(root, { "#FFC94D": "#FFE3CF", "#FFF1D6": "#FFF0E4", "#FFB3C1": "#FFB8C8" }); neckFill(root, p, "#FFE3CF");
+    const hg = el("g", {}); root.insertBefore(hg, root.firstChild); // はごろも と うしろがみ
+    el("path", { d: "M70 300 Q20 180 110 120 Q60 220 120 320 Z M330 300 Q380 180 290 120 Q340 220 280 320 Z", fill: "#BDE9F5", ...ST(5), opacity: .9 }, hg);
+    el("path", { d: "M104 150 Q92 260 124 330 L276 330 Q308 260 296 150 Z", fill: "#2B2A33", ...ST(5) }, hg);
+    const hd = p.head.g; const bk = el("g", {}); hd.insertBefore(bk, hd.firstChild);
+    [[160, -1], [240, 1]].forEach(([x, s]) => { el("ellipse", { cx: x, cy: 50, rx: 30, ry: 38, fill: "#2B2A33", ...ST(6), transform: `rotate(${s * 14} ${x} 80)` }, bk); el("ellipse", { cx: x, cy: 52, rx: 12, ry: 18, fill: "#BFE3F2", ...ST(3), transform: `rotate(${s * 14} ${x} 80)` }, bk); });
+    el("path", { d: "M106 160 Q104 76 200 70 Q296 76 294 160 Q270 116 200 112 Q130 116 106 160 Z", fill: "#2B2A33", ...ST(5) }, hd);
+    el("path", { d: "M158 104 L170 70 L186 96 L200 60 L214 96 L230 70 L242 104 Z", fill: "#FFD25E", ...ST(4) }, hd); [[170, 70], [200, 60], [230, 70]].forEach(([x, y]) => el("circle", { cx: x, cy: y, r: 7, fill: "#FF6F91", ...ST(3) }, hd));
+    p.eyes.forEach(e => el("path", { d: `M${e.cx + (e.cx < 200 ? -18 : 18)} 152 l${e.cx < 200 ? -10 : 10} -8`, fill: "none", ...ST(4) }, hd));
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M136 292 Q200 276 264 292 L286 398 Q200 410 114 398 Z", fill: "#FF9FBF", ...ST(5) }, bd);
+    el("path", { d: "M174 290 L200 332 L226 290", fill: "none", stroke: "#FFFFFF", "stroke-width": 9, "stroke-linejoin": "round" }, bd); el("path", { d: "M174 290 L200 332 L226 290", fill: "none", ...ST(4) }, bd);
+    el("path", { d: "M134 334 H266 L268 356 H132 Z", fill: "#FFD25E", ...ST(5) }, bd); el("circle", { cx: 200, cy: 345, r: 9, fill: "#E8473C", ...ST(3) }, bd);
+    [[150, 380], [200, 388], [250, 380]].forEach(([x, y]) => el("circle", { cx: x, cy: y, r: 7, fill: "#FFFFFF", opacity: .8 }, bd));
+    recolor(p.arms[0].g, { "#FFE3CF": "#FF9FBF" }); recolor(p.arms[1].g, { "#FFE3CF": "#FF9FBF" });
+    p.tempo = .9; return p; },
+  kame(root) { // たすけられた うみがめ：かめじいから つえ・まゆげ・ひげを とった、わかい かめ
+    const p = BUILD.kamejii(root); root.querySelectorAll("path").forEach(e => { const d = e.getAttribute("d") || ""; if (d.startsWith("M306 250") || d.startsWith("M158 222") || d.startsWith("M200 214") || d.startsWith("M186 262") || d.startsWith("M172 104")) e.setAttribute("display", "none"); });
+    if (p.brows) p.brows.innerHTML = ""; recolor(root, { "#8CC27A": "#9ADB8A", "#8A6A3C": "#4E9A6B", "#F3E3B3": "#C9EBB5" });
+    p.eyes.forEach(e => { el("circle", { cx: e.cx, cy: 170, r: 13, fill: INK }, e.g); el("circle", { cx: e.cx - 4, cy: 165, r: 4.5, fill: "#FFFFFF" }, e.g); });
+    [138, 262].forEach(x => el("ellipse", { cx: x, cy: 206, rx: 14, ry: 9, fill: "#FF9FB0" }, p.head.g));
+    p.tempo = .95; return p; },
 };
 
 const NAMES = { pony: "ぽにー", shima: "まるシマ", doshin: "どしん", nobbo: "のっぽ", gao: "がお", chu: "ちゅう", pyon: "ぴょん", mii: "みい", kamejii: "かめじい", kamedr: "かめせんせい", meebaa: "めえばあ",
-  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", papa: "パパ", gaopapa: "がおの パパ", gaonii: "がおの おにいちゃん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "かんごしさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くま", piyo: "ぴよこ", ekiin: "えきいんさん", tenin: "てんいんさん", onii: "おにいちゃん", inukei: "おまわりさん", kumadr: "おいしゃさん", piko: "ピコ", gabo: "ガボ", oni: "おに", momotaro: "ももたろう", inu: "いぬ", kiji: "きじ", saru: "さる" };
+  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", papa: "パパ", gaopapa: "がおの パパ", gaonii: "がおの おにいちゃん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "かんごしさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くま", piyo: "ぴよこ", ekiin: "えきいんさん", tenin: "てんいんさん", onii: "おにいちゃん", inukei: "おまわりさん", kumadr: "おいしゃさん", piko: "ピコ", gabo: "ガボ", oni: "おに", momotaro: "ももたろう", inu: "いぬ", kiji: "きじ", saru: "さる", urashima: "うらしまたろう", otohime: "おとひめさま", kame: "かめ" };
 const LINES = { pony: "きょねん、うみに いったね", shima: "やったー！ いえたね！", doshin: "どいて、あげるよ", nobbo: "それは、ずかんに のって いますよ", gao: "つぎは、まけないぞ",
   chu: "こ、こわかったよう", pyon: "いっしょに あそぼう！", mii: "ふーん。まあまあ じゃない", kamejii: "よく いえましたね", kamedr: "よく いえましたね", meebaa: "いらっしゃいませ" };
 

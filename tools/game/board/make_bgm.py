@@ -381,6 +381,10 @@ SONGS = {
  "oni": dict(bpm=152, root=62, scale=MIN, bars=8, lead=brass, lead2=clar, drums=D_adv, comp="pluck", bass="sq", swing=.1, extra=X_bell,
    mel="1 - 1 - 3 - 5 - | 4 - 3 - 2 - - - | 1 - 1 - 3 - 5 - | 6 - 5 - 4 - - - | 5 - 6 - 7 - 1' - | 6 - 5 - 4 - 3 - | 2 - 4 - 3 - 7, - | 1 - - - . . . .",
    chords=[1, 4, 1, 6, 5, 4, 5, 1]),
+# 2026-11-26 うらしまたろう：うみの そこの ゆったり した わらべうた ふう（ヨナぬき、ベルと ピチカート）
+ "urashima": dict(bpm=96, root=65, scale=MAJ, bars=8, lead=clar, lead2=brass, drums=D_easy, comp="pluck", bass="sq", swing=.12, extra=X_bell,
+   mel="1 - 2 - 3 - 5 - | 5 - 6 - 5 - - - | 3 - 5 - 6 - 1' - | 6 - 5 - 3 - - - | 2 - 3 - 5 - 3 - | 2 - 1 - 6, - - - | 1 - 2 - 3 - 5 - | 2 - - - 1 - . .",
+   chords=[1, 4, 1, 6, 5, 4, 5, 1]),
 }
 
 if __name__ == "__main__":
