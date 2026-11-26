@@ -385,6 +385,10 @@ SONGS = {
  "urashima": dict(bpm=96, root=65, scale=MAJ, bars=8, lead=clar, lead2=brass, drums=D_easy, comp="pluck", bass="sq", swing=.12, extra=X_bell,
    mel="1 - 2 - 3 - 5 - | 5 - 6 - 5 - - - | 3 - 5 - 6 - 1' - | 6 - 5 - 3 - - - | 2 - 3 - 5 - 3 - | 2 - 1 - 6, - - - | 1 - 2 - 3 - 5 - | 2 - - - 1 - . .",
    chords=[1, 4, 1, 6, 5, 4, 5, 1]),
+# 2026-11-26 3びきの こぶた：とことこ あるく ような あかるい マーチ（クラリネットと ピチカート）
+ "kobuta": dict(bpm=126, root=60, scale=MAJ, bars=8, lead=clar, lead2=brass, drums=D_march, comp="pluck", bass="sq", swing=.14, extra=X_bell,
+   mel="5 - 3 - 5 - 3 - | 1 - 2 - 3 - - - | 4 - 2 - 4 - 2 - | 7, - 1 - 2 - - - | 5 - 3 - 5 - 1' - | 6 - 4 - 6 - - - | 5 - 4 - 3 - 2 - | 1 - - - 1 - . .",
+   chords=[1, 1, 5, 5, 1, 4, 5, 1]),
 }
 
 if __name__ == "__main__":
