@@ -63,7 +63,7 @@ const SL_TH = {
     deco: [] },
   // うらしまたろう（2026-11-26、urashima.js）：おはなしを みんなで さいげん する げき。あたらしい しかけ＝たまてばこ
   urashima: { name: "うらしまたろう", icon: "🐢", areas: ["はまべ", "うみの なか", "りゅうぐうじょう", "かえりみち"], fills: ["#FFF1C9", "#CFE9F7", "#FFD9E8", "#E6E9FF"], ground: "#BFE3F2",
-    blk: { who: "kamejii", intro: ["sl_urashima_blk", "かめじいが、みちの まんなかで ひるねを して いて、とおれないよ"], say: ["blk_jitensha", "すみません、とおります"], to: "かめじいに いおう", keys: [["すみません", "済みません"]], res: ["rs_jitensha", "ほっほ、ていねいに ありがとう"] },
+    blk: { who: "kamejii", intro: ["sl_urashima_blk", "かめじいが、みちの まんなかで ひとやすみ して いて、とおれないよ"], say: ["blk_jitensha", "すみません、とおります"], to: "かめじいに いおう", keys: [["すみません", "済みません"]], res: ["rs_jitensha", "ほっほ、ていねいに ありがとう"] },
     deco: [] },
   // うちゅう たんけん（2026-11-05、uchu2.js）：ロケット・つき・ふねの そと・うちゅうじんの ほし。みんな うちゅうふく
   uchu2: { name: "うちゅう たんけん", icon: "🪐", areas: ["ロケット", "つき", "うちゅう", "うちゅうじんの ほし"], fills: ["#E6E9FF", "#EEEFF5", "#D9C2F0", "#D3F5E6"], ground: "#161A3C",

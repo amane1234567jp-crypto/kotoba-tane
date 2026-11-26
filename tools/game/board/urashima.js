@@ -222,6 +222,10 @@ async function utTamate(pc) { // 🎁 たまてばこ：あける？ あけな�
     if (!ev || (pc.player && pc.player.stay)) return be(pc);
     const t = ev[4] || ev[0];
     if (t === "tamate") { await sleep(300); markAbove(pc, "ex"); chime(); return utTamate(pc); }
+    if (["gochisou", "ougi", "tai", "sango"].includes(t)) { const g = el("g", {}, front()), m = el("g", {}, g); UT_MARK[t](m); let k = 0; addTick(dt => { if (!g.isConnected) return false; k += dt; g.setAttribute("transform", `translate(${pc.px.toFixed(0)} ${(pc.py - 120 + Math.sin(k * 5) * (t === "sango" ? 2 : 10)).toFixed(0)}) scale(${Math.min(2.6, k * 8).toFixed(2)}) rotate(${(t === "tai" || t === "ougi" ? Math.sin(k * 8) * 14 : 0).toFixed(0)})`); if (k > 4.5) { g.remove(); return false; } });
+      if (t === "ougi") for (let i = 0; i < 5; i++) later(300 + i * 300, () => mark("puff", pc.px - 80, pc.py - 110 + rnd(40), { vx: 260, vy: 0, life: .6, s: .4 })); return be(pc); }
+    if (t === "kumikae") { const g = el("g", {}, front()); for (let r = 0; r < 3; r++) el("path", { d: `M-400 ${300 + r * 220} q60 -70 120 0 t120 0 t120 0 t120 0 V${520 + r * 220} H-400 Z`, fill: r % 2 ? "#7FCBF0" : "#FFFFFF", opacity: .85, ...S6(4) }, g); noise(1.2, 500, .5);
+      tween(1500, k => g.setAttribute("transform", `translate(${(-200 + k * 2300).toFixed(0)} 0)`)).then(() => g.remove()); return be(pc); }
     if (!["iruka", "tobiuo", "kame", "kame2", "uzu", "kurage", "odori", "kujira", "wakame"].includes(t)) return be(pc);
     const bad = ["uzu", "kurage", "wakame"].includes(t); await sleep(300); markAbove(pc, bad ? "drop" : "sparkle"); chime(); await slSay(ev[2], ev[3]);
     if (t === "iruka") { utVoice("kame", pc.px, pc.py, "utl_iruka"); await slRide(pc, utTo(pc, 2), "IRUKA", { arc: 40, ms: 1400, size: 130 }); }
@@ -330,6 +334,9 @@ function utProp(sc, h, a) {
   const word = (x, y, w, col = "#FFFFFF", L = G) => { const g = el("g", {}, L); txt(g, x, y, w, 40, { "text-anchor": "middle", fill: col, stroke: INK, "stroke-width": 7, "paint-order": "stroke", "font-weight": 700 }); return g; };
   const bob = (g, x, y, s, amp = 10, sp = 2.4) => loop(t => g.setAttribute("transform", `translate(${x} ${(y + Math.sin(t * sp) * amp).toFixed(1)}) scale(${s})`));
   const box = (L, x, y, s = .8) => utBox(L, x, y, s);
+  if (id === "moguru" || id === "kurai") { // かめは たろうを のせて およぐ：よこむきの かめの せなかに のる
+    a.root.style.display = "none"; place(a, hx + 330, base - 60, .9); const tg = el("g", {}, G); utTurtle(tg, 0, 0, 1); const y0 = h.y; UT_CLEAN.push(() => { h.y = y0; });
+    loop(t => { const b = Math.sin(t * 2.2) * 10; tg.setAttribute("transform", `translate(${hx + 30} ${(base - 150 + b).toFixed(1)}) scale(2.3)`); h.y = y0 - 236 + b; if (Math.random() < .05) mark("puff", hx - 190, base - 150 - rnd(60), { vx: -80, vy: -60, life: .9, s: .3 }); }); }
   if (id === "dekake") { const b = el("g", {}, G); el("path", { d: "M-110 0 H110 L80 50 H-80 Z", fill: "#B8946A", ...S6(5) }, b); loop(t => b.setAttribute("transform", `translate(900 ${(560 + Math.sin(t * 2) * 8).toFixed(1)}) rotate(${(Math.sin(t * 1.5) * 3).toFixed(1)})`)); a.armR.t = -150; later(1500, () => a.armR.t = 0); }
   else if (id === "ijime" || id === "ayamaru") { // はまべの ちいさな かめ
     const f = F(), tg = utTurtle(f, 0, 0, 1); const tx = (hx + ax) / 2 + 20; loop(t => tg.setAttribute("transform", `translate(${(tx + Math.sin(t * 9) * (id === "ijime" ? 5 : 0)).toFixed(1)} ${base - 30}) scale(.8)`));
@@ -376,7 +383,7 @@ function utPick(area) { const pool = UT.sc.filter(s => s.area === area); const m
 async function utScene(pc) {
   const hero = pc.kind, sc = utPick(nArea(pc.node)), t = tierOf(); UT_N.set(sc.id, (UT_N.get(sc.id) || 0) + 1);
   showEngine(null, `うらしまたろうの げき（${sc.id}・段${t + 1}）`);
-  const art = ["tai", "tako", "ebi"].includes(sc.who), who = art ? "kame" : sc.who === hero ? (hero === "gao" ? "tora" : "gao") : sc.who; /* あそぶ ひとと おなじ キャラは だせないので かわりの こ */
+  const art = ["tai", "tako", "ebi"].includes(sc.who) || ["moguru", "kurai"].includes(sc.id), who = art ? "kame" : sc.who === hero ? (hero === "gao" ? "tora" : "gao") : sc.who; /* あそぶ ひとと おなじ キャラは だせないので かわりの こ */
   const { hero: h, ask: a } = setSitView({ id: "ut_" + sc.id, place: sc.place, asker: who, intro: "ut" }, hero);
   a.dx.v = a.dx.t = 0; UT_CLEAN.push(utCostume(h, sc.role));
   const role = UT.role[sc.role], chip = el("g", {}, propG); el("rect", { x: 40, y: 150, width: 430, height: 70, rx: 35, fill: "#FFE27A", ...S6(5) }, chip); txt(chip, 255, 200, `やく：${role}`, 36, { "text-anchor": "middle", "font-weight": 700 });
@@ -391,7 +398,9 @@ async function utScene(pc) {
     await step(`uts_${sc.id}`, sc.say, sc.keys, `${role}に なって いおう`);
     if (sc.id !== "kemuri") h.sadMouth = false;
     if (!art) { playMove(a, "nod"); if (SPECIAL[who]) SPECIAL[who](a); } await speak(a, `utr_${sc.id}`, sc.res);
-    if (sc.t2 && t >= 1) { await speak(a, `utw2_${sc.id}`, sc.t2.line); await step(`uts2_${sc.id}`, sc.t2.say, sc.t2.keys, "つづけて いおう"); if (!art) joy(a); await speak(a, `utr2_${sc.id}`, sc.t2.res); }
+    if (sc.t2 && t >= 1) { await speak(a, `utw2_${sc.id}`, sc.t2.line); await step(`uts2_${sc.id}`, sc.t2.say, sc.t2.keys, "つづけて いおう"); if (sc.id === "odori") { hold(h, "dance", 2.6); h.happyOn = true; later(2600, () => h.happyOn = false); } if (!art) joy(a); await speak(a, `utr2_${sc.id}`, sc.t2.res); }
+    if (sc.id === "nigasu") { hold(a, "run", 1.4); a.dx.t = 700; noise(.4, 1200, .35); await sleep(1100); } // かめは うみへ かえって いく
+    if (sc.id === "tako") await sleep(300);
     const ok = okN * 2 >= nSay; grade(ok); GS.tasks++;
     playLog({ type: "urashima", id: sc.id, role: sc.role, tier: t, okN, nSay, tries: log, ...(MODE === "multi" ? { who: NAMES[hero] } : {}) });
     if (ok) { confetti(36); joy(h); const k = rnd(2) ? "utp_ok" : "utp_good"; await speak(C.pony, k, UT.txt[k]); }
