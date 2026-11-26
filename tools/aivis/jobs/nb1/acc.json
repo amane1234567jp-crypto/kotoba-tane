@@ -1,0 +1,62 @@
+{
+ "nbw_dekake": {
+  "join": {
+   "イクンダイ": 4
+  }
+ },
+ "nbr_dekake": {
+  "acc": {
+   "キオツケテネ": 4
+  }
+ },
+ "nbr_chouchin": {
+  "acc": {
+   "キオツケテナ": 4
+  }
+ },
+ "nbw2_tetsudau": {
+  "acc": {
+   "ナクシタモノオ": 5
+  }
+ },
+ "nbw_kieru": {
+  "acc": {
+   "ナニモ": 0
+  }
+ },
+ "nbr_naze": {
+  "acc": {
+   "ダレモ": 0
+  }
+ },
+ "nbw_osoba": {
+  "join": {
+   "イカガデスカ": 2
+  }
+ },
+ "nbr_osoba": {
+  "join": {
+   "マイドアリ": 4
+  }
+ },
+ "nbw2_osoba": {
+  "acc": {
+   "オカワリワ": 2
+  }
+ },
+ "nbr_asa": {
+  "acc": {
+   "サヨオナラ": 4
+  }
+ },
+ "nbl_kago": {
+  "acc": {
+   "ホイサ": 1
+  }
+ },
+ "nbl_karakasa": {
+  "acc": {
+   "バア": 1
+  }
+ }
+}

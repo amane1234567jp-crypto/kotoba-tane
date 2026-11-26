@@ -161,13 +161,13 @@
  },
  {
   "key": "nbw_okusan",
-  "who": "tabibito",
-  "text": "どうして、こっちを みないんだい？"
+  "who": "okusan",
+  "text": "ねえ、あなた"
  },
  {
   "key": "nbr_okusan",
-  "who": "tabibito",
-  "text": "うわあ、でたあ！"
+  "who": "okusan",
+  "text": "それは……こんな かおでしたか？"
  },
  {
   "key": "nbw_futon",
@@ -251,13 +251,13 @@
  },
  {
   "key": "nbw_kagami",
-  "who": "tabibito",
-  "text": "さあ、かがみを みて ごらん"
+  "who": "onna",
+  "text": "わあ、かおが ある！ うれしいな"
  },
  {
   "key": "nbr_kagami",
-  "who": "tabibito",
-  "text": "よかったね。にあって いるよ"
+  "who": "onna",
+  "text": "ありがとう。たからものに します"
  },
  {
   "key": "nbw_osoba",
@@ -307,7 +307,7 @@
  {
   "key": "nbl_gyouretsu",
   "who": "onna",
-  "text": "いっしょに いきましょう。そーれ、そーれ"
+  "text": "いっしょに いきましょう。さあ、さあ"
  },
  {
   "key": "nbl_michi",
