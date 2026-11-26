@@ -1,0 +1,102 @@
+[
+{
+"key": "ogw2_nani",
+"who": "ojisan",
+"text": "おには だれが やって いるの？"
+},
+{
+"key": "ogw_tasukete",
+"who": "momotaro",
+"text": "どうしたの？ いきが きれて いるよ"
+},
+{
+"key": "ogw_obaasan",
+"who": "meebaa",
+"text": "おや、どこへ いくんだい？"
+},
+{
+"key": "ogw_saru1",
+"who": "saru",
+"text": "キキッ！ なにを あわてて いるの？"
+},
+{
+"key": "ogw_oni1",
+"who": "oni",
+"text": "まてー！ つかまえるぞー！"
+},
+{
+"key": "ogw_shizuka",
+"who": "kuma",
+"text": "しーっ。おにが ちかくに いるよ"
+},
+{
+"key": "ogw_kiji1",
+"who": "kiji",
+"text": "ケーン！ どこへ いくの？"
+},
+{
+"key": "ogr_kiji1",
+"who": "kiji",
+"text": "そらから みちを おしえて あげる"
+},
+{
+"key": "ogw_kiji2",
+"who": "kiji",
+"text": "ケーン、きびだんご ひとつ ください"
+},
+{
+"key": "ogw_momo",
+"who": "momotaro",
+"text": "ももに のって いこう！ かけごえは？"
+},
+{
+"key": "ogw2_fune",
+"who": "kamejii",
+"text": "どこまで いくんだい？"
+},
+{
+"key": "ogw_abunai",
+"who": "mama",
+"text": "にげる とき、どこを はしったら あぶない？"
+},
+{
+"key": "ogr_mon",
+"who": "oni",
+"text": "う……そう いわれると……"
+},
+{
+"key": "ogr2_gomen",
+"who": "oni",
+"text": "やったあ！ ゆびきりだ"
+},
+{
+"key": "ogw_tobira",
+"who": "saru",
+"text": "キキッ、もんが おもくて あかない！"
+},
+{
+"key": "ogr_tobira",
+"who": "saru",
+"text": "せーの！ ぎぎぎ……あいた！"
+},
+{
+"key": "ogr_yobu",
+"who": "kiji",
+"text": "たのむよ！ はやく はやく！"
+},
+{
+"key": "ogo_go",
+"who": "oni",
+"text": "まてー！ つかまえるぞー！"
+},
+{
+"key": "ogo_back",
+"who": "oni",
+"text": "うわー！ ももたろうだー！"
+},
+{
+"key": "ogm_tank",
+"who": "momotaro",
+"text": "スーパーももたろう、さんじょう！ ももたまを くらえー！"
+}
+]
