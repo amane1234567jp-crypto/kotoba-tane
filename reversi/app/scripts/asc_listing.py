@@ -290,6 +290,13 @@ if MODE == "cap":
         if a.get("profileType") == "IOS_APP_STORE":
             s, r = api("DELETE", f"/v1/profiles/{p['id']}"); log("  delete:", s, err(s, r))
 
+if MODE in ("notes", "newver"):
+    # 審査メモ（reviewNotes）だけ 入れなおす（2026-11-26）。newver のときも 前の版から引きついだ メモを 新しい流れに
+    s, j = api("GET", f"/v1/appStoreVersions/{ver['id']}/appStoreReviewDetail")
+    if j.get("data"):
+        rid = j["data"]["id"]; s, j = api("PATCH", f"/v1/appStoreReviewDetails/{rid}", {"data": {"type": "appStoreReviewDetails", "id": rid, "attributes": {"notes": L["reviewNotes"]}}})
+        log("review notes:", s, err(s, j))
+
 if MODE == "autorelease":
     # 審査に通ったら 自動で公開する（あまねさんの指示があるときだけ使う）
     s, j = api("PATCH", f"/v1/appStoreVersions/{ver['id']}", {"data": {"type": "appStoreVersions", "id": ver["id"], "attributes": {"releaseType": "AFTER_APPROVAL"}}})
