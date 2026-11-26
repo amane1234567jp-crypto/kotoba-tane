@@ -1,0 +1,514 @@
+[
+{
+"key": "kbw_tabidachi",
+"who": "butamama",
+"text": "みんな、じぶんの いえを つくって、げんきに くらすのよ",
+"yomi": "みんな、自分の家を作って、元気に暮らすのよ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_tabidachi",
+"who": "butamama",
+"text": "おおかみには、きを つけるのよ",
+"yomi": "オオカミには、気をつけるのよ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw2_tabidachi",
+"who": "butamama",
+"text": "どんな いえを つくりたい？",
+"yomi": "どんな家を作りたい？",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr2_tabidachi",
+"who": "butamama",
+"text": "それは いいわね",
+"yomi": "それはいいわね",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_wara_morau",
+"who": "ojisan",
+"text": "おや、こぶたくん。なにか ごようかな？",
+"yomi": "おや、子ブタくん。何かご用かな？",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_wara_morau",
+"who": "ojisan",
+"text": "いいとも。すきなだけ もって いきなさい",
+"yomi": "いいとも。好きなだけ持って行きなさい",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_ki_morau",
+"who": "kuma",
+"text": "こぶたくん、どう したんだい？",
+"yomi": "子ブタくん、どうしたんだい？",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_ki_morau",
+"who": "kuma",
+"text": "いいよ。おもいから きを つけてね",
+"yomi": "いいよ。重いから気をつけてね",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_renga_morau",
+"who": "doshin",
+"text": "れんがは おもいよ。だいじょうぶかい？",
+"yomi": "レンガは重いよ。大丈夫かい？",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_renga_morau",
+"who": "doshin",
+"text": "えらいなあ。それなら たくさん あげよう",
+"yomi": "偉いなあ。それならたくさんあげよう",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_asobou",
+"who": "kobuta1",
+"text": "まだ つくって いるの？ いっしょに あそぼうよ",
+"yomi": "まだ作っているの？一緒に遊ぼうよ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_asobou",
+"who": "kobuta1",
+"text": "ふうん。まじめだなあ",
+"yomi": "ふうん。真面目だなあ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw2_asobou",
+"who": "kobuta1",
+"text": "どうして そんなに がんばるの？",
+"yomi": "どうしてそんなに頑張るの？",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr2_asobou",
+"who": "kobuta1",
+"text": "おおかみなんて、こないよ",
+"yomi": "オオカミなんて、来ないよ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_dekita",
+"who": "kobuta2",
+"text": "わあ、りっぱな いえだね",
+"yomi": "わあ、立派な家だね",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_dekita",
+"who": "kobuta2",
+"text": "すごいなあ。ぼくの いえとは おおちがいだ",
+"yomi": "すごいなあ。僕の家とは大違いだ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_harapeko",
+"who": "kon",
+"text": "おおかみさん、どこへ いくの？",
+"yomi": "オオカミさん、どこへ行くの？",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_harapeko",
+"who": "kon",
+"text": "わるい ことは、やめた ほうが いいよ",
+"yomi": "悪いことは、やめたほうがいいよ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_tonton",
+"who": "ookamik",
+"text": "こぶたくん、こぶたくん。ドアを あけて おくれ",
+"yomi": "子ブタくん、子ブタくん。ドアを開けておくれ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_tonton",
+"who": "ookamik",
+"text": "やさしい やさしい、おおかみだよ",
+"yomi": "優しい優しい、オオカミだよ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_dame",
+"who": "ookamik",
+"text": "おねがいだよ。なかに いれて おくれ",
+"yomi": "お願いだよ。中に入れておくれ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_dame",
+"who": "ookamik",
+"text": "それなら、ふーっと ふいて、ふきとばして やる！",
+"yomi": "それなら、ふーっと吹いて、吹き飛ばしてやる！",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_fuku_wara",
+"who": "kobuta1",
+"text": "いくら ふいても、あけないよ！",
+"yomi": "いくら吹いても、開けないよ！",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_fuku_wara",
+"who": "kobuta1",
+"text": "うわあ！ いえが とんで いくー！",
+"yomi": "うわあ！家が飛んでいくー！",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_nigeru",
+"who": "kobuta2",
+"text": "どう したの？ そんなに あわてて",
+"yomi": "どうしたの？そんなに慌てて",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_nigeru",
+"who": "kobuta2",
+"text": "たいへんだ！ はやく ぼくの いえに おいで",
+"yomi": "大変だ！早く僕の家においで",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw2_nigeru",
+"who": "kobuta2",
+"text": "おおかみは、いま どこ？",
+"yomi": "オオカミは、今どこ？",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr2_nigeru",
+"who": "kobuta2",
+"text": "ドアを しめなくちゃ！",
+"yomi": "ドアを閉めなくちゃ！",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_ireru",
+"who": "kobuta1",
+"text": "おねがい、いえに いれて！",
+"yomi": "お願い、家に入れて！",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_ireru",
+"who": "kobuta1",
+"text": "ありがとう。たすかったよ",
+"yomi": "ありがとう。助かったよ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_ki_tonton",
+"who": "ookamik",
+"text": "こぶたくんたち、ドアを あけて おくれ",
+"yomi": "子ブタくんたち、ドアを開けておくれ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_ki_tonton",
+"who": "ookamik",
+"text": "それなら、この いえも ふきとばして やる！",
+"yomi": "それなら、この家も吹き飛ばしてやる！",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_ki_fuku",
+"who": "kobuta2",
+"text": "きの いえは、じょうぶなんだぞ！",
+"yomi": "木の家は、丈夫なんだぞ！",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_ki_fuku",
+"who": "kobuta2",
+"text": "うわあ！ きの いえも とばされたー！",
+"yomi": "うわあ！木の家も飛ばされたー！",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_ki_nigeru",
+"who": "kobuta3",
+"text": "ふたりとも、どう したの？",
+"yomi": "二人とも、どうしたの？",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_ki_nigeru",
+"who": "kobuta3",
+"text": "それは たいへん。はやく なかに はいって",
+"yomi": "それは大変。早く中に入って",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_renga_hairu",
+"who": "kobuta1",
+"text": "おおかみが、すぐ そこまで きて いるよ",
+"yomi": "オオカミが、すぐそこまで来ているよ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_renga_hairu",
+"who": "kobuta1",
+"text": "ほんとうに だいじょうぶかなあ",
+"yomi": "本当に大丈夫かなあ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_renga_tonton",
+"who": "ookamik",
+"text": "こぶたくんたち、ドアを あけないと ふきとばすぞ",
+"yomi": "子ブタくんたち、ドアを開けないと吹き飛ばすぞ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_renga_tonton",
+"who": "ookamik",
+"text": "なんだと！ よーし、みて いろ！",
+"yomi": "なんだと！よーし、見ていろ！",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_renga_fuku",
+"who": "kobuta3",
+"text": "どうだ、まいったか！",
+"yomi": "どうだ、参ったか！",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_renga_fuku",
+"who": "kobuta3",
+"text": "やったあ！ れんがの いえは つよいぞ",
+"yomi": "やったあ！レンガの家は強いぞ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_entotsu",
+"who": "kon",
+"text": "おおかみさん、やねに のぼって、なにを するの？",
+"yomi": "オオカミさん、屋根に登って、何をするの？",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_entotsu",
+"who": "kon",
+"text": "あぶないから、やめた ほうが いいよ",
+"yomi": "危ないから、やめたほうがいいよ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_oyu",
+"who": "kobuta1",
+"text": "たいへん！ おおかみが、えんとつから はいって くるよ",
+"yomi": "大変！オオカミが、煙突から入ってくるよ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_oyu",
+"who": "kobuta1",
+"text": "わかった！ ひを つけるね",
+"yomi": "わかった！火をつけるね",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_ochiru",
+"who": "ookamik",
+"text": "あちちちち！ たすけて くれー！",
+"yomi": "アチチチチ！助けてくれー！",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_ochiru",
+"who": "ookamik",
+"text": "しません、しません！ ゆるして おくれ",
+"yomi": "しません、しません！許しておくれ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw2_ochiru",
+"who": "ookamik",
+"text": "ゆるして くれるかい？",
+"yomi": "許してくれるかい？",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr2_ochiru",
+"who": "ookamik",
+"text": "やくそく する！ やくそく するよ！",
+"yomi": "約束する！約束するよ！",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_ayamaru",
+"who": "kobuta3",
+"text": "もう いえを ふきとばさないで くださいね",
+"yomi": "もう家を吹き飛ばさないでくださいね",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_ayamaru",
+"who": "kobuta3",
+"text": "わかれば いいんだよ",
+"yomi": "わかればいいんだよ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_yorokobu",
+"who": "kobuta1",
+"text": "れんがの いえの おかげで、たすかったよ",
+"yomi": "レンガの家のおかげで、助かったよ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_yorokobu",
+"who": "kobuta1",
+"text": "ぼくたちも、れんがで つくりなおすよ",
+"yomi": "僕たちも、レンガで作り直すよ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw2_yorokobu",
+"who": "kobuta1",
+"text": "つくりかたを おしえて くれる？",
+"yomi": "作り方を教えてくれる？",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr2_yorokobu",
+"who": "kobuta1",
+"text": "ありがとう！ がんばるぞ",
+"yomi": "ありがとう！頑張るぞ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbw_mama",
+"who": "butamama",
+"text": "みんな、よく がんばったわね",
+"yomi": "みんな、よく頑張ったわね",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbr_mama",
+"who": "butamama",
+"text": "ほんとうに そうね。えらかったわ",
+"yomi": "本当にそうね。偉かったわ",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbl_fuu",
+"who": "ookamik",
+"text": "ふーっと ふいて、ふきとばして やる！ ふーーっ！",
+"yomi": "ふーっと吹いて、吹き飛ばしてやる！ふーーっ！",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbl_mitsuketa",
+"who": "ookamik",
+"text": "みつけたぞ、こぶたくん！",
+"yomi": "見つけたぞ、子ブタくん！",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbl_makeru",
+"who": "ookamik",
+"text": "ぜえ、ぜえ。この いえは つよすぎる",
+"yomi": "ぜえ、ぜえ。この家は強すぎる",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbl_kyoudai",
+"who": "kobuta1",
+"text": "いち、に、いち、に。みんなで いこう！",
+"yomi": "いち、に、いち、に。みんなで行こう！",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbl_taru",
+"who": "kobuta2",
+"text": "たるに はいって！ いくよー！",
+"yomi": "樽に入って！行くよー！",
+"acc": null,
+"job": "kb3"
+},
+{
+"key": "kbl_niguruma",
+"who": "ojisan",
+"text": "のって いきなさい",
+"yomi": "乗って行きなさい",
+"acc": null,
+"job": "kb3"
+}
+]

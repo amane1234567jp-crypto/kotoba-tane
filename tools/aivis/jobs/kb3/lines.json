@@ -1,0 +1,322 @@
+[
+ {
+  "key": "kbw_tabidachi",
+  "who": "butamama",
+  "text": "みんな、じぶんの いえを つくって、げんきに くらすのよ"
+ },
+ {
+  "key": "kbr_tabidachi",
+  "who": "butamama",
+  "text": "おおかみには、きを つけるのよ"
+ },
+ {
+  "key": "kbw2_tabidachi",
+  "who": "butamama",
+  "text": "どんな いえを つくりたい？"
+ },
+ {
+  "key": "kbr2_tabidachi",
+  "who": "butamama",
+  "text": "それは いいわね"
+ },
+ {
+  "key": "kbw_wara_morau",
+  "who": "ojisan",
+  "text": "おや、こぶたくん。なにか ごようかな？"
+ },
+ {
+  "key": "kbr_wara_morau",
+  "who": "ojisan",
+  "text": "いいとも。すきなだけ もって いきなさい"
+ },
+ {
+  "key": "kbw_ki_morau",
+  "who": "kuma",
+  "text": "こぶたくん、どう したんだい？"
+ },
+ {
+  "key": "kbr_ki_morau",
+  "who": "kuma",
+  "text": "いいよ。おもいから きを つけてね"
+ },
+ {
+  "key": "kbw_renga_morau",
+  "who": "doshin",
+  "text": "れんがは おもいよ。だいじょうぶかい？"
+ },
+ {
+  "key": "kbr_renga_morau",
+  "who": "doshin",
+  "text": "えらいなあ。それなら たくさん あげよう"
+ },
+ {
+  "key": "kbw_asobou",
+  "who": "kobuta1",
+  "text": "まだ つくって いるの？ いっしょに あそぼうよ"
+ },
+ {
+  "key": "kbr_asobou",
+  "who": "kobuta1",
+  "text": "ふうん。まじめだなあ"
+ },
+ {
+  "key": "kbw2_asobou",
+  "who": "kobuta1",
+  "text": "どうして そんなに がんばるの？"
+ },
+ {
+  "key": "kbr2_asobou",
+  "who": "kobuta1",
+  "text": "おおかみなんて、こないよ"
+ },
+ {
+  "key": "kbw_dekita",
+  "who": "kobuta2",
+  "text": "わあ、りっぱな いえだね"
+ },
+ {
+  "key": "kbr_dekita",
+  "who": "kobuta2",
+  "text": "すごいなあ。ぼくの いえとは おおちがいだ"
+ },
+ {
+  "key": "kbw_harapeko",
+  "who": "kon",
+  "text": "おおかみさん、どこへ いくの？"
+ },
+ {
+  "key": "kbr_harapeko",
+  "who": "kon",
+  "text": "わるい ことは、やめた ほうが いいよ"
+ },
+ {
+  "key": "kbw_tonton",
+  "who": "ookamik",
+  "text": "こぶたくん、こぶたくん。ドアを あけて おくれ"
+ },
+ {
+  "key": "kbr_tonton",
+  "who": "ookamik",
+  "text": "やさしい やさしい、おおかみだよ"
+ },
+ {
+  "key": "kbw_dame",
+  "who": "ookamik",
+  "text": "おねがいだよ。なかに いれて おくれ"
+ },
+ {
+  "key": "kbr_dame",
+  "who": "ookamik",
+  "text": "それなら、ふーっと ふいて、ふきとばして やる！"
+ },
+ {
+  "key": "kbw_fuku_wara",
+  "who": "kobuta1",
+  "text": "いくら ふいても、あけないよ！"
+ },
+ {
+  "key": "kbr_fuku_wara",
+  "who": "kobuta1",
+  "text": "うわあ！ いえが とんで いくー！"
+ },
+ {
+  "key": "kbw_nigeru",
+  "who": "kobuta2",
+  "text": "どう したの？ そんなに あわてて"
+ },
+ {
+  "key": "kbr_nigeru",
+  "who": "kobuta2",
+  "text": "たいへんだ！ はやく ぼくの いえに おいで"
+ },
+ {
+  "key": "kbw2_nigeru",
+  "who": "kobuta2",
+  "text": "おおかみは、いま どこ？"
+ },
+ {
+  "key": "kbr2_nigeru",
+  "who": "kobuta2",
+  "text": "ドアを しめなくちゃ！"
+ },
+ {
+  "key": "kbw_ireru",
+  "who": "kobuta1",
+  "text": "おねがい、いえに いれて！"
+ },
+ {
+  "key": "kbr_ireru",
+  "who": "kobuta1",
+  "text": "ありがとう。たすかったよ"
+ },
+ {
+  "key": "kbw_ki_tonton",
+  "who": "ookamik",
+  "text": "こぶたくんたち、ドアを あけて おくれ"
+ },
+ {
+  "key": "kbr_ki_tonton",
+  "who": "ookamik",
+  "text": "それなら、この いえも ふきとばして やる！"
+ },
+ {
+  "key": "kbw_ki_fuku",
+  "who": "kobuta2",
+  "text": "きの いえは、じょうぶなんだぞ！"
+ },
+ {
+  "key": "kbr_ki_fuku",
+  "who": "kobuta2",
+  "text": "うわあ！ きの いえも とばされたー！"
+ },
+ {
+  "key": "kbw_ki_nigeru",
+  "who": "kobuta3",
+  "text": "ふたりとも、どう したの？"
+ },
+ {
+  "key": "kbr_ki_nigeru",
+  "who": "kobuta3",
+  "text": "それは たいへん。はやく なかに はいって"
+ },
+ {
+  "key": "kbw_renga_hairu",
+  "who": "kobuta1",
+  "text": "おおかみが、すぐ そこまで きて いるよ"
+ },
+ {
+  "key": "kbr_renga_hairu",
+  "who": "kobuta1",
+  "text": "ほんとうに だいじょうぶかなあ"
+ },
+ {
+  "key": "kbw_renga_tonton",
+  "who": "ookamik",
+  "text": "こぶたくんたち、ドアを あけないと ふきとばすぞ"
+ },
+ {
+  "key": "kbr_renga_tonton",
+  "who": "ookamik",
+  "text": "なんだと！ よーし、みて いろ！"
+ },
+ {
+  "key": "kbw_renga_fuku",
+  "who": "kobuta3",
+  "text": "どうだ、まいったか！"
+ },
+ {
+  "key": "kbr_renga_fuku",
+  "who": "kobuta3",
+  "text": "やったあ！ れんがの いえは つよいぞ"
+ },
+ {
+  "key": "kbw_entotsu",
+  "who": "kon",
+  "text": "おおかみさん、やねに のぼって、なにを するの？"
+ },
+ {
+  "key": "kbr_entotsu",
+  "who": "kon",
+  "text": "あぶないから、やめた ほうが いいよ"
+ },
+ {
+  "key": "kbw_oyu",
+  "who": "kobuta1",
+  "text": "たいへん！ おおかみが、えんとつから はいって くるよ"
+ },
+ {
+  "key": "kbr_oyu",
+  "who": "kobuta1",
+  "text": "わかった！ ひを つけるね"
+ },
+ {
+  "key": "kbw_ochiru",
+  "who": "ookamik",
+  "text": "あちちちち！ たすけて くれー！"
+ },
+ {
+  "key": "kbr_ochiru",
+  "who": "ookamik",
+  "text": "しません、しません！ ゆるして おくれ"
+ },
+ {
+  "key": "kbw2_ochiru",
+  "who": "ookamik",
+  "text": "ゆるして くれるかい？"
+ },
+ {
+  "key": "kbr2_ochiru",
+  "who": "ookamik",
+  "text": "やくそく する！ やくそく するよ！"
+ },
+ {
+  "key": "kbw_ayamaru",
+  "who": "kobuta3",
+  "text": "もう いえを ふきとばさないで くださいね"
+ },
+ {
+  "key": "kbr_ayamaru",
+  "who": "kobuta3",
+  "text": "わかれば いいんだよ"
+ },
+ {
+  "key": "kbw_yorokobu",
+  "who": "kobuta1",
+  "text": "れんがの いえの おかげで、たすかったよ"
+ },
+ {
+  "key": "kbr_yorokobu",
+  "who": "kobuta1",
+  "text": "ぼくたちも、れんがで つくりなおすよ"
+ },
+ {
+  "key": "kbw2_yorokobu",
+  "who": "kobuta1",
+  "text": "つくりかたを おしえて くれる？"
+ },
+ {
+  "key": "kbr2_yorokobu",
+  "who": "kobuta1",
+  "text": "ありがとう！ がんばるぞ"
+ },
+ {
+  "key": "kbw_mama",
+  "who": "butamama",
+  "text": "みんな、よく がんばったわね"
+ },
+ {
+  "key": "kbr_mama",
+  "who": "butamama",
+  "text": "ほんとうに そうね。えらかったわ"
+ },
+ {
+  "key": "kbl_fuu",
+  "who": "ookamik",
+  "text": "ふーっと ふいて、ふきとばして やる！ ふーーっ！"
+ },
+ {
+  "key": "kbl_mitsuketa",
+  "who": "ookamik",
+  "text": "みつけたぞ、こぶたくん！"
+ },
+ {
+  "key": "kbl_makeru",
+  "who": "ookamik",
+  "text": "ぜえ、ぜえ。この いえは つよすぎる"
+ },
+ {
+  "key": "kbl_kyoudai",
+  "who": "kobuta1",
+  "text": "いち、に、いち、に。みんなで いこう！"
+ },
+ {
+  "key": "kbl_taru",
+  "who": "kobuta2",
+  "text": "たるに はいって！ いくよー！"
+ },
+ {
+  "key": "kbl_niguruma",
+  "who": "ojisan",
+  "text": "のって いきなさい"
+ }
+]

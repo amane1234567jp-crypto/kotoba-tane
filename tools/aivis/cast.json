@@ -400,6 +400,32 @@
    "model": "3dabea2b-cc10-41da-955b-4618ce84e716",
    "style": "ノーマル",
    "speed": 1.0
+  },
+  "kobuta1": {
+   "model": "e40d5b99-8cde-4442-a45b-0ebec9167506",
+   "style": "ノーマル",
+   "speed": 1.08
+  },
+  "kobuta2": {
+   "model": "a670e6b8-0852-45b2-8704-1bc9862f2fe6",
+   "style": "ノーマル",
+   "speed": 1.05
+  },
+  "kobuta3": {
+   "model": "6d11c6c2-f4a4-4435-887e-23dd60f8b8dd",
+   "style": "ノーマル",
+   "speed": 1.03
+  },
+  "butamama": {
+   "model": "18972473-ca36-4e06-a33a-5cc14adba0c4",
+   "style": "hutuu_hutuu",
+   "speed": 0.95
+  },
+  "ookamik": {
+   "model": "b2bee8fc-3f65-4c99-9607-a1075a10066b",
+   "style": "ノーマル",
+   "speed": 0.93,
+   "into": 1.3
   }
  },
  "lines": {
