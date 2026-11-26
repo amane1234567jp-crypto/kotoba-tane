@@ -1,0 +1,38 @@
++ exec gosu user /opt/python/bin/poetry run python ./run.py --host 0.0.0.0
+[0;93m2026-11-26 05:56:26.191092690 [W:onnxruntime:Default, device_discovery.cc:325 DiscoverDevicesForPlatform] GPU device discovery failed: device_discovery.cc:92 ReadFileContents Failed to open file: "/sys/class/drm/card0/device/vendor"[m
+[2026/11/26 05:56:28.457] INFO:     AivisSpeech Engine version latest
+[2026/11/26 05:56:28.458] INFO:     Engine root directory: /opt/aivisspeech-engine
+[2026/11/26 05:56:28.458] INFO:     User data directory: /home/user/.local/share/AivisSpeech-Engine-Dev
+[2026/11/26 05:56:28.458] INFO:     Models directory: /home/user/.local/share/AivisSpeech-Engine-Dev/Models
+[2026/11/26 05:56:28.458] INFO:     Cache file not found, will load models directly.
+[2026/11/26 05:56:28.458] INFO:     Scanning installed models ...
+[2026/11/26 05:56:28.458] INFO:     Scanned 0 installed models. (0.00s)
+[2026/11/26 05:56:28.459] INFO:     Updated latest version information.
+[2026/11/26 05:56:29.324] INFO:     Installing default model 22e8ed77-94fe-4ef2-871f-a86f94e9a579 (v1.1.0) specified by AivisHub.
+[2026/11/26 05:56:29.324] INFO:     Downloading AIVMX file from https://api.aivis-project.com/v1/aivm-models/22e8ed77-94fe-4ef2-871f-a86f94e9a579/download?model_type=AIVMX (Attempt 1/3)...
+[2026/11/26 05:56:34.129] INFO:     Downloaded AIVMX file.
+[2026/11/26 05:56:34.216] INFO:     Installing AIVMX file ...
+[2026/11/26 05:56:34.282] INFO:     Installed AIVMX file to /home/user/.local/share/AivisSpeech-Engine-Dev/Models/22e8ed77-94fe-4ef2-871f-a86f94e9a579.aivmx.
+[2026/11/26 05:56:34.742] INFO:     Updated latest version information.
+[2026/11/26 05:56:34.773] INFO:     Installing default model a59cb814-0083-4369-8542-f51a29e72af7 (v1.2.0) specified by AivisHub.
+[2026/11/26 05:56:34.773] INFO:     Downloading AIVMX file from https://api.aivis-project.com/v1/aivm-models/a59cb814-0083-4369-8542-f51a29e72af7/download?model_type=AIVMX (Attempt 1/3)...
+[2026/11/26 05:56:36.821] INFO:     Downloaded AIVMX file.
+[2026/11/26 05:56:36.898] INFO:     Installing AIVMX file ...
+[2026/11/26 05:56:36.965] INFO:     Installed AIVMX file to /home/user/.local/share/AivisSpeech-Engine-Dev/Models/a59cb814-0083-4369-8542-f51a29e72af7.aivmx.
+[2026/11/26 05:56:37.533] INFO:     Updated latest version information.
+[2026/11/26 05:56:37.682] INFO:     Installed models:
+[2026/11/26 05:56:37.682] INFO:     - コハク (22e8ed77-94fe-4ef2-871f-a86f94e9a579) (default)
+[2026/11/26 05:56:37.682] INFO:     - まお (a59cb814-0083-4369-8542-f51a29e72af7) (default)
+[2026/11/26 05:56:38.480] INFO:     Using CPU for inference.
+[2026/11/26 05:56:38.480] INFO:     Loading BERT model and tokenizer...
+[2026/11/26 05:56:44.303] INFO:     BERT model and tokenizer loaded. (5.82s)
+[2026/11/26 05:56:44.327] INFO:     Current user dictionary (CSV format):
+[2026/11/26 05:56:44.327] INFO:     - 担々麺,1348,1348,8609,名詞,固有名詞,一般,*,*,*,担々麺,タンタンメン,タンタンメン,3/6,*
+reading /home/user/.local/share/AivisSpeech-Engine-Dev/user.dict_csv-796eae07-5af5-4af8-ba31-5f913e3d23f6.tmp ... 1
+emitting double-array: 100% |###########################################| 
+[2026/11/26 05:56:44.329] INFO:     User dictionary applied. (0.00s)
+[2026/11/26 05:56:45.041] INFO:     Started server process [1]
+[2026/11/26 05:56:45.041] INFO:     Waiting for application startup.
+[2026/11/26 05:56:45.041] INFO:     Application startup complete.
+[2026/11/26 05:56:45.041] INFO:     Uvicorn running on http://0.0.0.0:10101 (Press CTRL+C to quit)
+[2026/11/26 05:56:54.509] INFO:     172.17.0.1:35372 - "GET /version HTTP/1.1" 200 OK
