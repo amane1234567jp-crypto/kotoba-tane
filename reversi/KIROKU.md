@@ -328,3 +328,4 @@
 - 2026-11-25: Play 提出前に AAB の権限を確認。expo-audio 由来の FOREGROUND_SERVICE_MEDIA_PLAYBACK（Play でフォアグラウンドサービス申告と動画が要る）と SYSTEM_ALERT_WINDOW を blockedPermissions で外し、versionCode 22 で作り直し。
 - 2026-11-25: Play Console 入力。データセーフティ（名前・端末ID・操作回数＝収集、共有なし、暗号化あり、削除URL=privacy.html#delete）、広告ID=なし、行政=いいえ、金融=なし、健康=なし、カテゴリ=ゲーム/ボード、連絡先=info@uchinoaji.com、説明文（下書き保存）、製品版の国=日本。AAB は versionCode 22（71e1f7ec）。画像とAABのアップロードはブラウザの制限で本人が行う。
 - 2026-11-26: ノートPCの Claude 内蔵ブラウザ（info@ は /u/1/）で、画像6枚とAAB（versionCode 22）を GitHub raw から取り込んで設定。リリースノート「はじめての公開です。…」。ストア掲載情報を本保存し、公開の概要から 11 件の変更を審査に送信（製品版・日本のみ）。PC 版 Google Play Games のフォーム ファクタが有効のまま。承認後: assetlinks に Play 署名の SHA-256、landing.html の PLAY_LIVE=true。
+- 2026-11-26: Google Play で公開された（最終公開日 11/26、審査は約1時間）。uchinoaji の assetlinks に Play アプリ署名鍵 92:72:19:F9:…:03:0A を追加（97ca75c）。landing.html/index.html の PLAY_LIVE=true、Android では「入れ終わったら、Google Playの「開く」…」に。

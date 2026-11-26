@@ -63,10 +63,10 @@ footer a { color: var(--sub); }
   const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   const isAndroid = /Android/.test(ua);
   // Web 版は 2026-11-24 に なくした（あまねさん）。Google Play に出るまでは Android の人には「準備中」と出す（出たら true に）
-  const PLAY_LIVE = false;
+  const PLAY_LIVE = true; // 2026-11-26 Google Play で公開
   if (isAndroid && !PLAY_LIVE) { document.getElementById("android").hidden = true; document.getElementById("openStep").hidden = true; document.getElementById("had").hidden = true; document.getElementById("androidNote").hidden = false; }
   if (isIOS) document.getElementById("android").hidden = true;
-  if (isAndroid) document.getElementById("ios").hidden = true;
+  if (isAndroid) { document.getElementById("ios").hidden = true; const h = document.getElementById("had"); h.textContent = h.textContent.replace("App Store", "Google Play"); }
   // さそい（とうろくだけ。2026-11-19）：?m=reg&n=名前&fd=端末番号（部屋なし）
   const fdOk = /^[A-Za-z0-9_-]{16,64}$/.test(q.get("fd") || "");
   const reg = !r && q.get("m") === "reg" && fdOk;
