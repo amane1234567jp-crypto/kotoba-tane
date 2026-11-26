@@ -12,11 +12,12 @@ const txt = (page, id) => page.evaluate(i => document.getElementById(i).textCont
 const ppl = page => page.evaluate(() => JSON.parse(localStorage.getItem("marushima-reversi-people") || "[]"));
 
 // にせの中継：reg（端末の登録）・accept（とうろくを残す）・pending（受けとる）だけ
-const pairs = [];
+const pairs = [], accepts = [], waitsLog = [];
 async function relay(route) {
   let b = {}; try { b = JSON.parse(route.request().postData() || "{}"); } catch (e) { }
   let out = { ok: true };
-  if (b.op === "accept") pairs.push({ to: b.to, from: b.id, name: b.name });
+  if (b.op === "accept") { pairs.push({ to: b.to, from: b.id, name: b.name }); accepts.push({ to: b.to, from: b.id, name: b.name }); }
+  if (b.op === "wait") waitsLog.push({ from: b.id, to: b.to, room: b.room });
   if (b.op === "pending") { const mine = pairs.filter(p => p.to === b.id); for (const m of mine) pairs.splice(pairs.indexOf(m), 1); out = { ok: true, list: mine.map(m => ({ dev: m.from, name: m.name })) }; }
   if (b.op === "call") out = { ok: false, reason: "nosub" };
   await route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: JSON.stringify(out) });
@@ -106,13 +107,17 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   check(await vis(g, "nameOv"), "B：はじめては なまえを きかれる");
   check(!(await vis(g, "inviteOv")) && await g.evaluate(() => NET.role === null), "B：対局には ならない");
   await g.fill("#myName", "ばあば"); await g.click("#nameOk"); await g.waitForTimeout(400);
-  check(await vis(g, "regDoneOv") && /ゆうくんを登録しました/.test(await txt(g, "regDoneTitle")), "B：「ゆうくんを登録しました！」");
-  check(await g.evaluate(() => window.__media) === 0, "B：カメラは つかない");
+  // 2026-11-26：登録したら そのまま ゆうくんを 待つ（LINE の画面は 出さない）
+  await g.waitForFunction(() => /ゆうくんを とうろくしました/.test(document.getElementById("camA").textContent + document.getElementById("camB").textContent), null, { timeout: 15000 }).catch(() => { });
+  check(await g.evaluate(() => NET.role === "host") && !(await vis(g, "inviteOv")), "B：登録したら そのまま ゆうくんを 待つ（LINE の画面は 出さない）");
+  await g.waitForTimeout(600);
+  check(await g.evaluate(() => target && target.name === "ゆうくん") && waitsLog.some(w => w.from === gid && w.to === aid), "B：ゆうくんを 待っていると 中継に 伝えた（wait）");
+  check(/ゆうくんに LINEで 知らせる/.test(await txt(g, "resendBtn")) && await vis(g, "resendBtn"), "B：「ゆうくんに LINEで 知らせる」を 出しておく");
   check(await g.evaluate(() => location.search === ""), "B：リンクの中身は 消す（開きなおしても くりかえさない）");
   let gp = await ppl(g);
   check(gp.length === 1 && gp[0].dev === aid && gp[0].name === "ゆうくん", "B：とうろくした ひと に ゆうくん（A の端末番号）");
-  check(pairs.some(p => p.to === aid && p.from === gid && p.name === "ばあば"), "B：中継に「ばあば → ゆうくん」の とうろくを 残した");
-  await g.click("#regDoneOk");
+  check(accepts.some(p => p.to === aid && p.from === gid && p.name === "ばあば"), "B：中継に「ばあば → ゆうくん」の とうろくを 残した");
+  await open(g);   // 開始画面に もどる
 
   // ---------- A が うけとる（開いたまま：20秒ごとに たしかめる） ----------
   await a.waitForFunction(() => /ばあばが とうろく しました/.test(document.getElementById("ringNote").textContent), null, { timeout: 30000 }).catch(() => { });

@@ -1055,8 +1055,8 @@ function startOnline() {
 }
 // たいせんあいてを よぶ（ホスト）
 let target = null, waitTimer = 0;
-async function callGrandma(fresh, answering, who) {
-  target = who || null;
+async function callGrandma(fresh, answering, who, opts) {
+  target = who || null; opts = opts || {};
   NET.role = "host"; if (ctx) soundForCall(); unlock(); NET.relayOnly = !!CFG.relay; startOnline();
   // 相手を よんだら、1台で遊んでいた とちゅうの盤は すてて、新しい対局から始める（くろ＝こども）
   G.hist = []; G.blackSide = "A"; G.ended = false; G.begun = false; saveGame(); clearHalo();
@@ -1076,6 +1076,11 @@ async function callGrandma(fresh, answering, who) {
     holdUntil = Date.now() + 10 * 60 * 1000;
     if (await holdWait() === "join") return;
     const ok = target.dev ? await ringOut([{ dev: target.dev, name: target.name }], playLink(BASE, NET.room, CFG.myName, CALL.id) + "&ring=1") : false;
+    if (opts.justRegistered) {
+      // 登録した すぐあと：招待した人は アプリで 待っていることが多い（2秒ごとに たしかめている）。LINE の画面は すぐには 出さない
+      if (!ok && !NET.open) { camMsg(otherSide(), `${target.name}を とうろくしました。${target.name}が アプリを ひらくと つながります`); $("resendBtn").textContent = `${target.name}に LINEで 知らせる`; }
+      return;
+    }
     if (!ok && !NET.open) showInvite();
     return;
   }
@@ -1237,7 +1242,8 @@ let forceLink = false;
     $("startBtn").textContent = "はじめる"; $("startBtn").classList.remove("sub");
     $("guestLead").hidden = false; $("callBtn").before($("guestLead"));   // 説明を「はじめる」の上に
     // 待ちあわせで 相手の部屋に 入るときは「はじめる」を 押さなくても すぐ つなぐ
-    if (/[?&]go=1/.test(location.search) && CFG.myName) setTimeout(() => $("startBtn").click(), 300);
+    // あそぶ リンク（相手が 待っている）から ひらいたときも 同じ（2026-11-26：押す回数を へらす）
+    if ((/[?&]go=1/.test(location.search) || LINK.mode === "play") && CFG.myName) setTimeout(() => $("startBtn").click(), 300);
   }
   else if (!NET.available) $("callBtn").hidden = true;
   refreshLeft(); renderPartners(); renderNameBtn(); renderPush();
@@ -1338,7 +1344,7 @@ $("tellBtn").addEventListener("click", async () => {
    カメラも ゲームも うごかさない。LINE で リンクを おくって 開始画面に もどる。
    あいてが リンクを ひらく → なまえ → 中継に「とうろく」を残す → こちらは pending で うけとる */
 /* 相手が とうろく したかを たしかめる（2026-11-22）。
-   誘ってから 24時間は、アプリが 前に出ている あいだ たしかめつづける。はじめの 15分は 10秒ごと、そのあとは 30秒ごと。
+   誘ってから 24時間は、アプリが 前に出ている あいだ たしかめつづける。はじめの 15分は 2秒ごと（11/26 あまねさん）、そのあとは 30秒ごと。
    「いつまで たしかめるか」は 保存しておく（LINE から もどったときに iPhone が 画面を 作りなおしても とまらない。11/22 けい の件） */
 let pendTimer = 0;
 function pendTick() {
@@ -1346,11 +1352,11 @@ function pendTick() {
   const now = Date.now();
   if (!CFG.pendUntil || now > CFG.pendUntil) { if (CFG.pendUntil) { delete CFG.pendUntil; delete CFG.pendSince; saveCfg(); } return; }
   if (document.visibilityState === "visible" && !G.started && NET.role !== "guest") checkPending();
-  pendTimer = setTimeout(pendTick, now - (CFG.pendSince || 0) < 15 * 60 * 1000 ? 10000 : 30000);
+  pendTimer = setTimeout(pendTick, now - (CFG.pendSince || 0) < 15 * 60 * 1000 ? 2000 : 30000);
 }
 function startPendWatch() {
   CFG.pendSince = Date.now(); CFG.pendUntil = Date.now() + 24 * 3600 * 1000; saveCfg();
-  clearTimeout(pendTimer); pendTimer = setTimeout(pendTick, 10000);
+  clearTimeout(pendTimer); pendTimer = setTimeout(pendTick, 2000);
 }
 function showRegInvite() {
   if (!CFG.myName) return showNames(() => showRegInvite(), true);
@@ -1378,30 +1384,51 @@ $("regCopy").addEventListener("click", () => {
   try { navigator.clipboard.writeText(regMsg()).then(() => { $("regCopy").textContent = "コピーしました"; setTimeout(() => $("regCopy").textContent = "文面をコピー", 2000); }); } catch (e) { }
 });
 $("regClose").addEventListener("click", () => { $("regOv").hidden = true; });
+/* 待っている人に つなぐ（2026-11-26 あまねさん「登録の流れが長すぎる」）
+   ・この画面で「とうろく」が届いた人（さそって 登録してくれた人）が 待っていれば、そのまま つなぐ（初回は LINE の 2通目が いらない）
+   ・前から 登録している人が 待っていれば「〇〇が まっているよ」を出す（リンクから ひらけなくても、アプリを ひらけば つながる） */
+const freshDevs = new Set();
+let meetSkip = "", meetFor = null;
+function gotWaits(waits) {
+  if (!waits.length || G.started || NET.role || answeringRing || !$("inviteOv").hidden || !$("regOv").hidden) return;
+  const w = waits.find(x => people.list.some(p => p.dev && p.dev === x.dev));
+  if (!w) return;                                  // 登録していない人からは 受けない
+  const p = people.list.find(q => q.dev === w.dev);
+  if (freshDevs.has(p.dev)) { $("meetOv").hidden = true; $("whoOv").hidden = true; return joinWaiting(p, w.room); }
+  if (meetSkip === w.room || !$("meetOv").hidden) return;
+  meetFor = { p, room: w.room };
+  $("meetTitle").textContent = `${p.name}が まっているよ`;
+  $("meetGo").textContent = `${p.name}と つなぐ`;
+  $("whoOv").hidden = true; $("meetOv").hidden = false;
+}
+$("meetGo").addEventListener("click", () => { $("meetOv").hidden = true; if (meetFor) joinWaiting(meetFor.p, meetFor.room); });
+$("meetNo").addEventListener("click", () => { $("meetOv").hidden = true; if (meetFor) meetSkip = meetFor.room; });
 function checkPending() {
-  return CALL.pending().then(list => {
-    if (!list.length) return;
-    list.forEach(x => registerCaller(x.dev, x.name));
-    if (!G.started && !answeringRing) {
-      $("ringNote").textContent = `${list.map(x => x.name || "あいて").join("・")}が とうろく しました`; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
-      if (!$("whoOv").hidden) pressPlay();
+  return CALL.pending().then(({ list, waits }) => {
+    if (list.length) {
+      list.forEach(x => { registerCaller(x.dev, x.name); freshDevs.add(x.dev); });
+      if (!G.started && !answeringRing) {
+        $("ringNote").textContent = `${list.map(x => x.name || "あいて").join("・")}が とうろく しました`; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
+        if (!$("whoOv").hidden) pressPlay();
+      }
     }
+    gotWaits(waits);
   });
 }
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && NET.role !== "guest" && !G.started) { checkPending(); if (CFG.pendUntil && !pendTimer) pendTick(); } });
 // 起動したとき：誘ってから 24時間 以内なら たしかめつづける
-if (CFG.pendUntil) setTimeout(pendTick, 10000);
+if (CFG.pendUntil) setTimeout(pendTick, 2000);
 // さそう リンクを ひらいた人：なまえ（はじめてだけ）→ とうろく する。ゲームは はじめない
 function gotRegLink() {
   try { history.replaceState(null, "", location.pathname); } catch (e) { }
   if (LINK.dev === CALL.id) { $("ringNote").textContent = "これは じぶんが おくった さそいの リンクです"; $("ringNote").hidden = false; $("ringNote").classList.add("calm"); return; }
-  const done = () => {
+  const done = async () => {
     addPerson({ dev: LINK.dev, name: LINK.name }); renderPartners();
-    CALL.accept(LINK.dev, CFG.myName);
-    const who = LINK.name || "あいて";
-    $("regDoneTitle").textContent = `${who}を登録しました！`;
-    $("regDoneLead").textContent = `遊ぶときは「とおくの ひとと あそぶ」→「${who}と あそぶ」を押してください。`;
-    $("regDoneOv").hidden = false;
+    await CALL.accept(LINK.dev, CFG.myName);
+    // 登録したら そのまま 招待した人を 待つ（2026-11-26）。招待した人の アプリが ひらいていれば すぐ つながる。
+    // ひらいていなければ 通知（使えれば）、それも だめなら「LINEで 知らせる」を 出しておく（自動では ひらかない）
+    const p = people.list.find(x => x.dev === LINK.dev);
+    if (p) callGrandma(false, false, p, { justRegistered: true });
   };
   if (!CFG.myName) showNames(done, true); else done();
 }

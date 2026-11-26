@@ -376,7 +376,7 @@ body {
       <p class="gNote" id="regNote" hidden>この相手を登録しました。次からは、このリンクをもう一度タップするか、このページを開いて「○○と あそぶ」を押すだけでつながります。</p>
     </div>
     <button class="adultBtn" id="adultBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Zm7.4-2.1.9-.7-1.5-2.6-1.1.3a6 6 0 0 0-1.3-.8l-.2-1.1h-3l-.2 1.1a6 6 0 0 0-1.3.8l-1.1-.3-1.5 2.6.9.7v1.3l-.9.7 1.5 2.6 1.1-.3a6 6 0 0 0 1.3.8l.2 1.1h3l.2-1.1a6 6 0 0 0 1.3-.8l1.1.3 1.5-2.6-.9-.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>おとなの せってい</button>
-    <p class="ver">v2026.11.24 b2b683f</p>
+    <p class="ver">v2026.11.26 f82198c5</p>
   </div>
 </div>
 <!-- 相手が 2人以上 登録されているときだけ：だれと あそぶ？ -->
@@ -389,6 +389,14 @@ body {
     <div class="panelBtns"><button type="button" id="whoNew" class="primary">あたらしい ひとを さそう</button></div>
     <p class="linkNote whoNote">LINE などで <b>おさそいの リンク</b>を もらった ひとは、ここではなく その リンクを タップしてね</p>
     <div class="panelBtns"><button type="button" id="whoClose">やめる</button></div>
+  </div>
+</div>
+<!-- 登録した人が いま 待っている（2026-11-26） -->
+<div class="cover" id="meetOv" hidden>
+  <div class="panel who" role="dialog" aria-label="まっているよ">
+    <h2 id="meetTitle">まっているよ</h2>
+    <p class="lead">おすと テレビでんわが つながるよ。</p>
+    <div class="panelBtns"><button type="button" id="meetGo" class="primary">つなぐ</button><button type="button" id="meetNo">あとで</button></div>
   </div>
 </div>
 <!-- 一度だけ聞く：つぎから よびだしで つながる？ -->
@@ -641,7 +649,8 @@ const CALL = (() => {
   };
   // 招待リンクを開いた：招待した人に「とうろく」を伝える ／ 自分あての「とうろく」を受けとる（2026-11-16）
   C.accept = async (to, name) => { if (!to || to === dev.id) return; try { await post({ op: "reg", name: name || "" }); await post({ op: "accept", to, name: name || "" }); } catch (e) { } };
-  C.pending = async () => { try { const r = await post({ op: "pending" }); return (r && r.list) || []; } catch (e) { return []; } };
+  // list＝自分あての「とうろく」、waits＝いま自分を 待っている人（{dev, room, name}。2026-11-26）
+  C.pending = async () => { try { const r = await post({ op: "pending" }); return { list: (r && r.list) || [], waits: (r && r.waits) || [] }; } catch (e) { return { list: [], waits: [] }; } };
   C.toApp = toApp;
   C.cancel = to => { if (to) post({ op: "cancel", to, tag: "rv-call" }).catch(() => { }); };
   // 引っこし用のリンク（iPhone・iPad で ホーム画面に追加する前に、この URL に切り替える）
@@ -727,6 +736,46 @@ function momize(root, p, col, rib, at = [262, 70]) { const bd = el("g", {}); roo
 function coatOn(root, p, col) { const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g);
   el("path", { d: "M134 286 Q200 270 266 286 L280 392 Q200 408 120 392 Z", fill: col, ...ST(5) }, bd); el("path", { d: "M176 282 L200 330 L224 282 M200 330 V404", fill: "none", ...ST(4) }, bd);
   el("rect", { x: 222, y: 340, width: 32, height: 26, rx: 4, fill: "none", ...ST(3) }, bd); }
+// こぶた（3びきの こぶた）：がおの からだを もとに、ももいろ・ぶたの はな・たれみみ・くるんと した しっぽ
+// のっぺらぼうの コース（2026-11-26）の ひとたち：がおの からだを はだいろに して、かみ・きものを かく。
+// data-nb="blank"＝めも はなも くちも ない かお、data-nb="back"＝うしろむきの あたま（noppera.js の nbFace で きりかえる）
+function nbHuman(root, o) {
+  const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); p.tail.g.setAttribute("display", "none"); if (p.brows) p.brows.innerHTML = ""; p.ears.forEach(e => e.g.setAttribute("display", "none"));
+  const SK = "#FFE3CF", HA = "#2B2A33"; recolor(root, { "#FFC94D": SK, "#FFF1D6": "#FFF0E4", "#FFB3C1": "#FFB8C8" }); neckFill(root, p, SK);
+  const hd = p.head.g;
+  if (o.long) { const hg = el("g", {}); root.insertBefore(hg, root.firstChild); el("path", { d: "M104 150 Q88 270 122 340 L278 340 Q312 270 296 150 Z", fill: HA, ...ST(5) }, hg); }
+  const bl = el("g", { "data-nb": "blank", display: "none" }, hd); el("ellipse", { cx: 200, cy: 178, rx: 86, ry: 78, fill: SK }, bl);
+  if (o.hair === "long") el("path", { d: "M106 170 Q100 76 200 70 Q300 76 294 170 Q276 118 200 108 Q124 118 106 170 Z", fill: HA, ...ST(5) }, hd);
+  else if (o.hair === "mage") { el("ellipse", { cx: 200, cy: 62, rx: 40, ry: 26, fill: HA, ...ST(5) }, hd); el("path", { d: "M106 158 Q104 76 200 72 Q296 76 294 158 Q270 112 200 108 Q130 112 106 158 Z", fill: HA, ...ST(5) }, hd);
+    el("path", { d: "M236 56 L286 34", stroke: "#FFD25E", "stroke-width": 6, "stroke-linecap": "round" }, hd); el("circle", { cx: 288, cy: 33, r: 8, fill: "#E8473C", ...ST(3) }, hd); }
+  else { el("path", { d: "M108 152 Q108 74 200 68 Q292 74 292 152 Q262 112 200 110 Q138 112 108 152 Z", fill: HA, ...ST(5) }, hd);
+    el("path", { d: "M108 124 Q200 96 292 124 L292 142 Q200 114 108 142 Z", fill: "#FFFFFF", ...ST(4) }, hd); el("path", { d: "M286 128 l26 -14 l-4 22 l22 4 l-30 8 Z", fill: "#FFFFFF", ...ST(4) }, hd); } // はちまき
+  const bk = el("g", { "data-nb": "back", display: "none" }, hd); el("ellipse", { cx: 200, cy: 172, rx: 92, ry: 86, fill: HA, ...ST(5) }, bk);
+  if (o.hair === "mage") { el("ellipse", { cx: 200, cy: 62, rx: 40, ry: 26, fill: HA, ...ST(5) }, bk); el("path", { d: "M164 56 L114 34", stroke: "#FFD25E", "stroke-width": 6, "stroke-linecap": "round" }, bk); }
+  else if (o.hair === "hachi") { el("path", { d: "M108 124 Q200 150 292 124 L292 142 Q200 168 108 142 Z", fill: "#FFFFFF", ...ST(4) }, bk); el("path", { d: "M190 150 l-16 40 l14 -6 l6 14 l10 -46 Z", fill: "#FFFFFF", ...ST(4) }, bk); }
+  else el("path", { d: "M150 110 Q170 190 160 250 M200 100 Q206 190 200 256 M250 110 Q232 190 240 250", fill: "none", stroke: "#4A4856", "stroke-width": 5, "stroke-linecap": "round" }, bk);
+  const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M136 292 Q200 276 264 292 L286 398 Q200 410 114 398 Z", fill: o.kimono, ...ST(5) }, bd);
+  el("path", { d: "M174 290 L200 332 L226 290", fill: "none", stroke: "#FFFFFF", "stroke-width": 9, "stroke-linejoin": "round" }, bd); el("path", { d: "M174 290 L200 332 L226 290", fill: "none", ...ST(4) }, bd);
+  if (o.apron) el("path", { d: "M150 340 H250 L258 400 Q200 408 142 400 Z", fill: "#FFFFFF", ...ST(5) }, bd);
+  el("path", { d: "M134 334 H266 L268 354 H132 Z", fill: o.obi, ...ST(5) }, bd);
+  recolor(p.arms[0].g, { [SK]: o.kimono }); recolor(p.arms[1].g, { [SK]: o.kimono });
+  p.tempo = o.tempo || .95; return p; }
+function butaBuild(root, o) {
+  const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); p.tail.g.setAttribute("display", "none"); if (p.brows) p.brows.innerHTML = ""; p.ears.forEach(e => e.g.setAttribute("display", "none"));
+  recolor(root, { "#FFC94D": "#FFC2CF", "#FFF1D6": "#FFE3EA", "#FFB3C1": "#FF9FB5" }); neckFill(root, p, "#FFC2CF");
+  const tl = el("g", {}); root.insertBefore(tl, root.firstChild); el("path", { d: "M262 356 q34 -6 30 -30 q-4 -18 -20 -10 q-10 8 2 18", fill: "none", stroke: INK, "stroke-width": 13, "stroke-linecap": "round" }, tl); el("path", { d: "M262 356 q34 -6 30 -30 q-4 -18 -20 -10 q-10 8 2 18", fill: "none", stroke: "#FF9FB5", "stroke-width": 6, "stroke-linecap": "round" }, tl);
+  const hd = p.head.g, eg = el("g", {}); hd.insertBefore(eg, hd.firstChild);
+  [[128, -1], [272, 1]].forEach(([x, s]) => el("path", { d: `M${x - s * 26} 118 Q${x + s * 10} 60 ${x + s * 44} 104 Q${x + s * 30} 130 ${x} 136 Z`, fill: "#FF9FB5", ...ST(6) }, eg));
+  hd.querySelectorAll("path").forEach(e => { if ((e.getAttribute("d") || "").startsWith("M186 194")) e.setAttribute("display", "none"); });
+  el("ellipse", { cx: 200, cy: 198, rx: 32, ry: 20, fill: "#FF9FB5", ...ST(5) }, hd); [189, 211].forEach(x => el("ellipse", { cx: x, cy: 198, rx: 5, ry: 8, fill: "#C45A78" }, hd));
+  const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g);
+  el("path", { d: "M140 322 Q200 308 260 322 L268 390 Q200 402 132 390 Z", fill: o.ov, ...ST(5) }, bd); el("path", { d: "M160 322 L168 286 M240 322 L232 286", stroke: o.ov, "stroke-width": 12, "stroke-linecap": "round" }, bd); [168, 232].forEach(x => el("circle", { cx: x, cy: 326, r: 6, fill: "#FFD25E", ...ST(2) }, bd));
+  if (o.apron) { el("path", { d: "M160 312 H240 L250 388 Q200 398 150 388 Z", fill: "#FFFFFF", ...ST(4) }, bd); el("path", { d: "M186 350 q14 -14 28 0 q-14 16 -28 0", fill: "#FF9FB5" }, bd); }
+  if (o.hat === "wara") { el("ellipse", { cx: 200, cy: 100, rx: 104, ry: 20, fill: "#E9C46A", ...ST(5) }, hd); el("path", { d: "M146 100 Q150 44 200 42 Q250 44 254 100 Z", fill: "#E9C46A", ...ST(5) }, hd); el("path", { d: "M148 88 Q200 74 252 88", fill: "none", stroke: "#E8473C", "stroke-width": 9 }, hd); }
+  else if (o.hat === "cap") { el("path", { d: "M126 108 Q130 46 200 44 Q270 46 274 108 Z", fill: "#3E8E6E", ...ST(5) }, hd); el("path", { d: "M200 108 Q270 100 306 118 L300 130 Q256 116 196 122 Z", fill: "#2E6B52", ...ST(5) }, hd); el("circle", { cx: 200, cy: 46, r: 8, fill: "#2E6B52", ...ST(3) }, hd); }
+  else if (o.hat === "met") { el("path", { d: "M120 110 Q122 40 200 38 Q278 40 280 110 Z", fill: "#FFD25E", ...ST(5) }, hd); el("path", { d: "M108 108 H292 L288 122 H112 Z", fill: "#FFD25E", ...ST(5) }, hd); el("path", { d: "M200 40 V108", stroke: INK, "stroke-width": 4 }, hd); }
+  else if (o.hat === "scarf") { el("path", { d: "M110 122 Q120 50 200 46 Q280 50 290 122 Q200 92 110 122 Z", fill: "#FF8FA3", ...ST(5) }, hd); [[150, 84], [200, 70], [250, 84]].forEach(([x, y]) => el("circle", { cx: x, cy: y, r: 6, fill: "#FFFFFF" }, hd)); }
+  p.tempo = 1.05; return p; }
 const BUILD = {
   pony(root) {
     const s = ST(), B = "#D98A4E", H = "#6B4A36", T = "#FFD36E";
@@ -1233,10 +1282,122 @@ const BUILD = {
     p.eyes.forEach(e => { e.g.querySelectorAll("ellipse,circle").forEach(q => q.setAttribute("display", "none")); el("ellipse", { cx: e.cx, cy: 164, rx: 20, ry: 24, fill: "#1E2A3A", ...ST(4) }, e.g); el("ellipse", { cx: e.cx - 6, cy: 154, rx: 7, ry: 8, fill: "#FFFFFF" }, e.g); });
     [[176, 322], [224, 322], [200, 352]].forEach(([x, y]) => el("circle", { cx: x, cy: y, r: 9, fill: "#7A5CB0", opacity: .45 }, root));
     p.tempo = .8; return p; },
+  // ===== おにごっこ（ロング、2026-11-24）：あかおに・ももたろう・いぬ・きじ・さる =====
+  oni(root) { // あかおに：あかい からだ・きいろい つの・くろい まきげ・きばの 2ほん・とらがらの パンツ・かなぼう（みぎての うで いっしょに うごく）
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); p.ears.forEach(e => e.g.setAttribute("display", "none")); p.tail.g.setAttribute("display", "none");
+    recolor(root, { "#FFC94D": "#F0645A", "#FFF1D6": "#FFC8BC", "#FFB3C1": "#FF9F8F" }); neckFill(root, p, "#F0645A");
+    const hd = p.head.g, hair = el("g", {}); hd.insertBefore(hair, hd.firstChild);
+    [[124, 104], [150, 84], [178, 74], [222, 74], [250, 84], [276, 104], [200, 70]].forEach(([x, y]) => el("circle", { cx: x, cy: y, r: 22, fill: "#3A2E2E", ...ST(5) }, hair));
+    [[150, 1], [250, -1]].forEach(([x, s]) => el("path", { d: `M${x - 18} 96 L${x + s * 8} 40 L${x + 18} 96 Z`, fill: "#FFD25E", ...ST(5) }, hd));
+    [[186, 1], [214, -1]].forEach(([x]) => el("path", { d: `M${x - 7} 224 L${x} 240 L${x + 7} 224 Z`, fill: "#FFFFFF", ...ST(3) }, hd));
+    const pt = el("g", {}); root.insertBefore(pt, p.arms[0].g); el("path", { d: "M136 336 Q200 322 264 336 L270 384 Q200 398 130 384 Z", fill: "#FFD25E", ...ST(5) }, pt);
+    ["M150 340 L160 380", "M178 334 L184 388", "M222 334 L216 388", "M250 340 L240 380"].forEach(d => el("path", { d, stroke: INK, "stroke-width": 8, "stroke-linecap": "round" }, pt));
+    const kb = el("g", {}, p.arms[1].g); el("path", { d: "M286 372 L318 300", stroke: "#5A4E48", "stroke-width": 16, "stroke-linecap": "round" }, kb);
+    el("path", { d: "M304 316 L326 324 L404 92 Q408 66 384 60 Q362 58 356 84 Z", fill: "#6E6560", ...ST(6) }, kb);
+    [[330, 270], [346, 226], [362, 182], [376, 138], [388, 96], [366, 110], [350, 156], [334, 200], [318, 246]].forEach(([x, y]) => el("circle", { cx: x, cy: y, r: 6, fill: "#D9D4CF", ...ST(3) }, kb));
+    p.kanabo = kb; p.tempo = .85; return p; },
+  momotaro(root) { // ももたろう：はだいろの かお・くろい かみと まげ・ももの はちまき・あおい きもの・はかま・せなかに「にっぽんいち」の はた
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); p.tail.g.setAttribute("display", "none"); if (p.brows) p.brows.innerHTML = "";
+    recolor(root, { "#FFC94D": "#FFDCC0", "#FFF1D6": "#FFEADB", "#FFB3C1": "#FFB8A0" }); neckFill(root, p, "#FFDCC0");
+    const fl = el("g", {}); root.insertBefore(fl, root.firstChild); el("path", { d: "M268 380 L300 60", stroke: "#8B5A3C", "stroke-width": 8 }, fl);
+    el("path", { d: "M298 64 L370 72 L362 190 L290 182 Z", fill: "#FFFFFF", ...ST(5) }, fl); el("circle", { cx: 330, cy: 96, r: 16, fill: "#FF8FA3", ...ST(3) }, fl);
+    ["に", "っ", "ぽ", "ん", "い", "ち"].forEach((c, i) => { const t = el("text", { x: 316 + (i > 2 ? 0 : 26), y: 130 + (i % 3) * 22, "font-size": 20, "font-weight": 700, fill: INK }, fl); t.textContent = c; });
+    const hd = p.head.g; el("path", { d: "M108 150 Q110 70 200 66 Q290 70 292 150 Q260 112 200 110 Q140 112 108 150 Z", fill: "#2B2A33", ...ST(5) }, hd);
+    el("path", { d: "M184 70 Q200 30 216 70 Z", fill: "#2B2A33", ...ST(5) }, hd);
+    el("path", { d: "M106 128 Q200 100 294 128 L294 146 Q200 120 106 146 Z", fill: "#FFFFFF", ...ST(5) }, hd); el("path", { d: "M188 132 Q200 106 212 132 Q200 146 188 132 Z", fill: "#FF8FA3", ...ST(3) }, hd);
+    el("path", { d: "M294 132 l26 -12 l-6 22 z M294 138 l24 10 l-14 10 z", fill: "#FFFFFF", ...ST(4) }, hd);
+    [[160, "M146 150 L176 146"], [240, "M224 146 L254 150"]].forEach(([, d]) => el("path", { d, fill: "none", ...ST(7) }, hd));
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M138 292 Q200 276 262 292 L268 344 L132 344 Z", fill: "#5B8DEF", ...ST(5) }, bd);
+    el("path", { d: "M176 290 L200 330 L224 290", fill: "none", ...ST(5) }, bd); el("path", { d: "M132 340 H268 L276 392 Q200 404 124 392 Z", fill: "#E8E1D0", ...ST(5) }, bd);
+    ["M160 346 L156 392", "M200 346 V398", "M240 346 L244 392"].forEach(d => el("path", { d, stroke: "#9A8F7A", "stroke-width": 6 }, bd));
+    recolor(p.arms[0].g, { "#FFDCC0": "#5B8DEF" }); recolor(p.arms[1].g, { "#FFDCC0": "#5B8DEF" });
+    p.tempo = 1.05; return p; },
+  inu(root) { // ももたろうの いぬ：しろい いぬ・ちゃいろの たれみみ・あかい くびわ・ももの はちまき
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); if (p.brows) p.brows.innerHTML = ""; recolor(root, { "#FFC94D": "#F6EEE2", "#FFF1D6": "#FFFFFF" });
+    neckFill(root, p, "#F6EEE2"); p.ears.forEach(e => e.g.setAttribute("display", "none"));
+    [[104, 20], [296, -20]].forEach(([x, r]) => el("ellipse", { cx: x, cy: 176, rx: 28, ry: 60, fill: "#C98A4B", ...ST(6), transform: `rotate(${r} ${x} 150)` }, p.head.g));
+    el("path", { d: "M108 112 Q200 84 292 112 L290 128 Q200 102 110 128 Z", fill: "#FFFFFF", ...ST(5) }, p.head.g); el("circle", { cx: 200, cy: 106, r: 10, fill: "#FF8FA3", ...ST(3) }, p.head.g);
+    const c = el("g", {}); root.insertBefore(c, p.arms[0].g); el("path", { d: "M152 290 Q200 306 248 290", fill: "none", stroke: "#E8473C", "stroke-width": 14, "stroke-linecap": "round" }, c); el("circle", { cx: 200, cy: 306, r: 10, fill: "#FFD25E", ...ST(3) }, c);
+    p.tempo = 1.1; return p; },
+  kiji(root) { // ももたろうの きじ：みどりの からだ・あかい かお・ながい しっぽの はね・きいろい くちばし
+    const p = BUILD.chu(root); recolor(root, { "#C9C5D6": "#3E8E6E", "#F1EFF6": "#BFE3B0", "#FFB3C1": "#FFD25E" });
+    p.ears.forEach(e => e.g.setAttribute("display", "none")); if (p.tail) p.tail.g.setAttribute("display", "none");
+    p.head.g.querySelectorAll("path").forEach(e => { const d = e.getAttribute("d") || ""; if (d.startsWith("M118 214") || d.startsWith("M126 140")) e.setAttribute("display", "none"); });
+    p.head.g.querySelectorAll("ellipse").forEach(e => { if (e.getAttribute("fill") === "#FF6F91") e.setAttribute("display", "none"); });
+    const tl = el("g", {}); root.insertBefore(tl, root.firstChild); [[-8, "#5B4636"], [6, "#3E8E6E"], [20, "#8B6A4B"]].forEach(([r, f]) => el("path", { d: "M250 350 Q360 330 430 250 Q440 270 420 290 Q360 360 256 372 Z", fill: f, ...ST(5), transform: `rotate(${r} 250 360)` }, tl));
+    p.eyes.forEach(e => el("ellipse", { cx: e.cx, cy: e.cy + 2, rx: 36, ry: 32, fill: "#E8473C", ...ST(4) }, p.head.g).parentNode.insertBefore(p.head.g.lastChild, e.g));
+    el("path", { d: "M180 204 L220 204 L200 232 Z", fill: "#FFB13B", ...ST(5) }, p.head.g);
+    el("path", { d: "M180 82 Q196 40 212 80", fill: "#2E6B52", ...ST(4) }, p.head.g);
+    p.tempo = 1.15; return p; },
+  saru(root) { // ももたろうの さる：ちゃいろ・はだいろの かお・おおきな みみ・くるっと した しっぽ
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); if (p.brows) p.brows.innerHTML = ""; recolor(root, { "#FFC94D": "#A9744A", "#FFF1D6": "#F5C9A6", "#FFB3C1": "#F5C9A6" });
+    neckFill(root, p, "#A9744A"); p.ears.forEach(e => e.g.setAttribute("display", "none")); p.tail.g.setAttribute("display", "none");
+    const hd = p.head.g; [92, 308].forEach(x => { const g = el("g", {}); hd.insertBefore(g, hd.firstChild); el("circle", { cx: x, cy: 170, r: 34, fill: "#F5C9A6", ...ST(6) }, g); el("circle", { cx: x, cy: 170, r: 16, fill: "#E8A98A" }, g); });
+    const face = el("path", { d: "M126 178 Q128 120 172 122 Q200 136 228 122 Q272 120 274 178 Q270 252 200 256 Q130 252 126 178 Z", fill: "#F5C9A6", ...ST(5) }, hd);
+    hd.insertBefore(face, p.eyes[0].g); [...hd.querySelectorAll("ellipse")].filter(e => e.getAttribute("cy") === "214").forEach(e => e.setAttribute("display", "none"));
+    const tl = el("g", {}); root.insertBefore(tl, root.firstChild); el("path", { d: "M262 352 Q340 350 344 290 Q346 250 314 254 Q292 260 304 284", fill: "none", stroke: "#A9744A", "stroke-width": 16, "stroke-linecap": "round" }, tl);
+    el("path", { d: "M108 108 Q200 80 292 108 L290 124 Q200 98 110 124 Z", fill: "#FFFFFF", ...ST(5) }, hd); el("circle", { cx: 200, cy: 102, r: 10, fill: "#FF8FA3", ...ST(3) }, hd);
+    p.tempo = 1.2; return p; },
+  // ===== うらしまたろう（ロング、2026-11-26）：うらしまたろう・おとひめさま・うみがめ =====
+  urashima(root) { // うらしまたろう：はだいろ・くろい かみと まげ・あおみどりの きもの・こしみの・せなかに つりざお
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); p.tail.g.setAttribute("display", "none"); if (p.brows) p.brows.innerHTML = ""; p.ears.forEach(e => e.g.setAttribute("display", "none"));
+    recolor(root, { "#FFC94D": "#FFDCC0", "#FFF1D6": "#FFEADB", "#FFB3C1": "#FFB8A0" }); neckFill(root, p, "#FFDCC0");
+    const rod = el("g", {}); root.insertBefore(rod, root.firstChild); el("path", { d: "M262 384 L332 40", stroke: "#B9824A", "stroke-width": 8, "stroke-linecap": "round" }, rod);
+    el("path", { d: "M332 40 Q372 120 352 210", fill: "none", stroke: INK, "stroke-width": 3 }, rod); el("path", { d: "M352 210 q-8 16 6 20", fill: "none", stroke: INK, "stroke-width": 4, "stroke-linecap": "round" }, rod);
+    const hd = p.head.g; el("path", { d: "M108 152 Q108 72 200 66 Q292 72 292 152 Q262 110 200 108 Q138 110 108 152 Z", fill: "#2B2A33", ...ST(5) }, hd);
+    el("path", { d: "M186 72 Q180 22 204 18 Q226 22 214 72 Z", fill: "#2B2A33", ...ST(5) }, hd); el("path", { d: "M184 64 H216", stroke: "#E8473C", "stroke-width": 8, "stroke-linecap": "round" }, hd);
+    [["M146 148 L176 144"], ["M224 144 L254 148"]].forEach(([d]) => el("path", { d, fill: "none", ...ST(7) }, hd));
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M138 292 Q200 276 262 292 L268 346 L132 346 Z", fill: "#3FA7A0", ...ST(5) }, bd);
+    el("path", { d: "M176 290 L200 330 L224 290", fill: "none", ...ST(5) }, bd);
+    el("path", { d: "M128 340 H272 L282 396 L262 384 L248 400 L232 384 L216 400 L200 384 L184 400 L168 384 L152 400 L138 384 L118 396 Z", fill: "#E9C46A", ...ST(5) }, bd);
+    ["M152 346 L148 384", "M176 346 L174 386", "M200 346 V386", "M224 346 L226 386", "M248 346 L252 384"].forEach(d => el("path", { d, stroke: "#B8946A", "stroke-width": 5, "stroke-linecap": "round" }, bd));
+    el("path", { d: "M130 338 H270", stroke: "#8B5A3C", "stroke-width": 9, "stroke-linecap": "round" }, bd);
+    recolor(p.arms[0].g, { "#FFDCC0": "#3FA7A0" }); recolor(p.arms[1].g, { "#FFDCC0": "#3FA7A0" });
+    p.tempo = 1.0; return p; },
+  otohime(root) { // おとひめさま：はだいろ・ながい くろかみと ふたつの わ・きんの かんむり・ももいろの きもの・みずいろの はごろも
+    const p = BUILD.gao(root); hideFill(root, ["#C8662B"]); p.tail.g.setAttribute("display", "none"); if (p.brows) p.brows.innerHTML = ""; p.ears.forEach(e => e.g.setAttribute("display", "none"));
+    recolor(root, { "#FFC94D": "#FFE3CF", "#FFF1D6": "#FFF0E4", "#FFB3C1": "#FFB8C8" }); neckFill(root, p, "#FFE3CF");
+    const hg = el("g", {}); root.insertBefore(hg, root.firstChild); // はごろも と うしろがみ
+    el("path", { d: "M70 300 Q20 180 110 120 Q60 220 120 320 Z M330 300 Q380 180 290 120 Q340 220 280 320 Z", fill: "#BDE9F5", ...ST(5), opacity: .9 }, hg);
+    el("path", { d: "M104 150 Q92 260 124 330 L276 330 Q308 260 296 150 Z", fill: "#2B2A33", ...ST(5) }, hg);
+    const hd = p.head.g; const bk = el("g", {}); hd.insertBefore(bk, hd.firstChild);
+    [[160, -1], [240, 1]].forEach(([x, s]) => { el("ellipse", { cx: x, cy: 50, rx: 30, ry: 38, fill: "#2B2A33", ...ST(6), transform: `rotate(${s * 14} ${x} 80)` }, bk); el("ellipse", { cx: x, cy: 52, rx: 12, ry: 18, fill: "#BFE3F2", ...ST(3), transform: `rotate(${s * 14} ${x} 80)` }, bk); });
+    el("path", { d: "M106 160 Q104 76 200 70 Q296 76 294 160 Q270 116 200 112 Q130 116 106 160 Z", fill: "#2B2A33", ...ST(5) }, hd);
+    el("path", { d: "M158 104 L170 70 L186 96 L200 60 L214 96 L230 70 L242 104 Z", fill: "#FFD25E", ...ST(4) }, hd); [[170, 70], [200, 60], [230, 70]].forEach(([x, y]) => el("circle", { cx: x, cy: y, r: 7, fill: "#FF6F91", ...ST(3) }, hd));
+    p.eyes.forEach(e => el("path", { d: `M${e.cx + (e.cx < 200 ? -18 : 18)} 152 l${e.cx < 200 ? -10 : 10} -8`, fill: "none", ...ST(4) }, hd));
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M136 292 Q200 276 264 292 L286 398 Q200 410 114 398 Z", fill: "#FF9FBF", ...ST(5) }, bd);
+    el("path", { d: "M174 290 L200 332 L226 290", fill: "none", stroke: "#FFFFFF", "stroke-width": 9, "stroke-linejoin": "round" }, bd); el("path", { d: "M174 290 L200 332 L226 290", fill: "none", ...ST(4) }, bd);
+    el("path", { d: "M134 334 H266 L268 356 H132 Z", fill: "#FFD25E", ...ST(5) }, bd); el("circle", { cx: 200, cy: 345, r: 9, fill: "#E8473C", ...ST(3) }, bd);
+    [[150, 380], [200, 388], [250, 380]].forEach(([x, y]) => el("circle", { cx: x, cy: y, r: 7, fill: "#FFFFFF", opacity: .8 }, bd));
+    recolor(p.arms[0].g, { "#FFE3CF": "#FF9FBF" }); recolor(p.arms[1].g, { "#FFE3CF": "#FF9FBF" });
+    p.tempo = .9; return p; },
+  kame(root) { // たすけられた うみがめ：かめじいから つえ・まゆげ・ひげを とった、わかい かめ
+    const p = BUILD.kamejii(root); root.querySelectorAll("path").forEach(e => { const d = e.getAttribute("d") || ""; if (d.startsWith("M306 250") || d.startsWith("M158 222") || d.startsWith("M200 214") || d.startsWith("M186 262") || d.startsWith("M172 104")) e.setAttribute("display", "none"); });
+    if (p.brows) p.brows.innerHTML = ""; recolor(root, { "#8CC27A": "#9ADB8A", "#8A6A3C": "#4E9A6B", "#F3E3B3": "#C9EBB5" });
+    p.eyes.forEach(e => { el("circle", { cx: e.cx, cy: 170, r: 13, fill: INK }, e.g); el("circle", { cx: e.cx - 4, cy: 165, r: 4.5, fill: "#FFFFFF" }, e.g); });
+    [138, 262].forEach(x => el("ellipse", { cx: x, cy: 206, rx: 14, ry: 9, fill: "#FF9FB0" }, p.head.g));
+    p.tempo = .95; return p; },
+  // ===== 3びきの こぶた（ロング、2026-11-26）：こぶた 3びき・おかあさんぶた・おおかみ =====
+  kobuta1(root) { return butaBuild(root, { ov: "#5B8DEF", hat: "wara" }); }, // 1ばんめ：むぎわらぼうし・あおい ふく
+  kobuta2(root) { return butaBuild(root, { ov: "#5FB35A", hat: "cap" }); },  // 2ばんめ：みどりの ぼうし・みどりの ふく
+  kobuta3(root) { return butaBuild(root, { ov: "#E8473C", hat: "met" }); },  // 3ばんめ：きいろい ヘルメット・あかい ふく
+  butamama(root) { const p = butaBuild(root, { ov: "#B9A8D9", hat: "scarf", apron: true }); p.eyes.forEach(e => el("path", { d: `M${e.cx + (e.cx < 200 ? -18 : 18)} 152 l${e.cx < 200 ? -10 : 10} -8`, fill: "none", ...ST(4) }, p.head.g)); p.tempo = .9; return p; },
+  ookamik(root) { // おはなしの おおかみ：はいいろ・きば・つぎはぎの ズボン（あやしい おおかみ とは べつ）
+    const p = BUILD.kon(root); recolor(root, { "#F29F4C": "#8E8E9E", "#FFF6E9": "#E6E6EE", "#7CC36A": "#4A4A58", "#7A4A2A": "#4A4A58" });
+    const hd = p.head.g; [[186], [214]].forEach(([x]) => el("path", { d: `M${x - 6} 226 L${x} 242 L${x + 6} 226 Z`, fill: "#FFFFFF", ...ST(3) }, hd));
+    [[150, "M132 138 L178 152"], [250, "M268 138 L222 152"]].forEach(([, d]) => el("path", { d, fill: "none", ...ST(8) }, hd));
+    const bd = el("g", {}); root.insertBefore(bd, p.arms[0].g); el("path", { d: "M134 336 Q200 324 266 336 L274 392 Q200 404 126 392 Z", fill: "#8B5A3C", ...ST(5) }, bd);
+    el("rect", { x: 216, y: 350, width: 30, height: 26, fill: "#E9C46A", ...ST(3) }, bd); el("path", { d: "M222 356 l18 14 M240 356 l-18 14", stroke: INK, "stroke-width": 2 }, bd);
+    el("path", { d: "M160 336 L170 290 M240 336 L230 290", stroke: "#8B5A3C", "stroke-width": 10, "stroke-linecap": "round" }, bd);
+    p.tempo = .95; return p; },
+  // ===== のっぺらぼう（ロング、2026-11-26）：おんなの ひと・そばやさん・おくさん（みんな のっぺらぼう） =====
+  onna(root) { return nbHuman(root, { hair: "long", long: true, kimono: "#B9A8D9", obi: "#E8473C", tempo: .9 }); },
+  sobaya(root) { return nbHuman(root, { hair: "hachi", kimono: "#3A5A8C", obi: "#2B2A33", apron: true }); },
+  okusan(root) { return nbHuman(root, { hair: "mage", kimono: "#7FB069", obi: "#FFD25E", tempo: .9 }); },
 };
 
 const NAMES = { pony: "ぽにー", shima: "まるシマ", doshin: "どしん", nobbo: "のっぽ", gao: "がお", chu: "ちゅう", pyon: "ぴょん", mii: "みい", kamejii: "かめじい", kamedr: "かめせんせい", meebaa: "めえばあ",
-  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", papa: "パパ", gaopapa: "がおの パパ", gaonii: "がおの おにいちゃん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "かんごしさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くま", piyo: "ぴよこ", ekiin: "えきいんさん", tenin: "てんいんさん", onii: "おにいちゃん", inukei: "おまわりさん", kumadr: "おいしゃさん", piko: "ピコ", gabo: "ガボ" };
+  pyonmama: "ぴょんの おかあさん", gaojii: "がおの おじいちゃん", miibaa: "みいの おばあちゃん", doshinpapa: "どしんの おとうさん", papa: "パパ", gaopapa: "がおの パパ", gaonii: "がおの おにいちゃん", kon: "こん", panna: "ぱんな", pannamama: "ぱんなの おかあさん", mama: "ママ", gaomama: "がおの ママ", miimama: "みいの ママ", chumama: "ちゅうの ママ", wanko: "わんこせんせい", biba: "ビバせんせい", piyoko: "かんごしさん", ookami: "しらない ひと", ojisan: "うんてんしゅさん", omawari: "おまわりさん", tora: "とらお", kuma: "くま", piyo: "ぴよこ", ekiin: "えきいんさん", tenin: "てんいんさん", onii: "おにいちゃん", inukei: "おまわりさん", kumadr: "おいしゃさん", piko: "ピコ", gabo: "ガボ", oni: "おに", momotaro: "ももたろう", inu: "いぬ", kiji: "きじ", saru: "さる", urashima: "うらしまたろう", otohime: "おとひめさま", kame: "かめ", kobuta1: "1ばんめの こぶた", kobuta2: "2ばんめの こぶた", kobuta3: "3ばんめの こぶた", butamama: "おかあさんぶた", ookamik: "おおかみ", onna: "おんなの ひと", sobaya: "そばやさん", okusan: "おくさん" };
 const LINES = { pony: "きょねん、うみに いったね", shima: "やったー！ いえたね！", doshin: "どいて、あげるよ", nobbo: "それは、ずかんに のって いますよ", gao: "つぎは、まけないぞ",
   chu: "こ、こわかったよう", pyon: "いっしょに あそぼう！", mii: "ふーん。まあまあ じゃない", kamejii: "よく いえましたね", kamedr: "よく いえましたね", meebaa: "いらっしゃいませ" };
 
@@ -1392,6 +1553,11 @@ const SPECIAL = {
   piko: c => { c.tm.dance = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
   gabo: c => { c.tm.nod = 1.6; c.happyOn = true; later(1600, () => c.happyOn = false); },
   inukei: c => { c.tm.nod = 1.2; c.armR.t = -150; later(1000, () => c.armR.t = 0); }, // けいれい
+  oni: c => { c.armR.t = -160; later(500, () => c.armR.t = 30); later(1100, () => c.armR.t = 0); }, // かなぼうを ふる
+  momotaro: c => { c.armR.t = -170; c.happyOn = true; later(1300, () => { c.armR.t = 0; c.happyOn = false; }); },
+  inu: c => { jump(c, .5); c.happyOn = true; later(1200, () => c.happyOn = false); },
+  kiji: c => { c.armL.t = -70; c.armR.t = 70; jump(c, .6); later(900, () => { c.armL.t = 0; c.armR.t = 0; }); },
+  saru: c => { jump(c, .7); c.happyOn = true; later(1200, () => c.happyOn = false); },
   kumadr: c => { c.tm.nod = 1.4; c.happyOn = true; later(1400, () => c.happyOn = false); },
   meebaa: c => { c.armL.t = -55; c.armR.t = 55; c.happyOn = true; c.lean.t = 6; later(500, () => c.lean.t = -6); later(1000, () => c.lean.t = 0); later(1400, () => { c.armL.t = 0; c.armR.t = 0; c.happyOn = false; }); },
 };
@@ -3359,8 +3525,8 @@ function startOnline() {
 }
 // たいせんあいてを よぶ（ホスト）
 let target = null, waitTimer = 0;
-async function callGrandma(fresh, answering, who) {
-  target = who || null;
+async function callGrandma(fresh, answering, who, opts) {
+  target = who || null; opts = opts || {};
   NET.role = "host"; if (ctx) soundForCall(); unlock(); NET.relayOnly = !!CFG.relay; startOnline();
   // 相手を よんだら、1台で遊んでいた とちゅうの盤は すてて、新しい対局から始める（くろ＝こども）
   G.hist = []; G.blackSide = "A"; G.ended = false; G.begun = false; saveGame(); clearHalo();
@@ -3380,6 +3546,11 @@ async function callGrandma(fresh, answering, who) {
     holdUntil = Date.now() + 10 * 60 * 1000;
     if (await holdWait() === "join") return;
     const ok = target.dev ? await ringOut([{ dev: target.dev, name: target.name }], playLink(BASE, NET.room, CFG.myName, CALL.id) + "&ring=1") : false;
+    if (opts.justRegistered) {
+      // 登録した すぐあと：招待した人は アプリで 待っていることが多い（2秒ごとに たしかめている）。LINE の画面は すぐには 出さない
+      if (!ok && !NET.open) { camMsg(otherSide(), `${target.name}を とうろくしました。${target.name}が アプリを ひらくと つながります`); $("resendBtn").textContent = `${target.name}に LINEで 知らせる`; }
+      return;
+    }
     if (!ok && !NET.open) showInvite();
     return;
   }
@@ -3541,7 +3712,8 @@ let forceLink = false;
     $("startBtn").textContent = "はじめる"; $("startBtn").classList.remove("sub");
     $("guestLead").hidden = false; $("callBtn").before($("guestLead"));   // 説明を「はじめる」の上に
     // 待ちあわせで 相手の部屋に 入るときは「はじめる」を 押さなくても すぐ つなぐ
-    if (/[?&]go=1/.test(location.search) && CFG.myName) setTimeout(() => $("startBtn").click(), 300);
+    // あそぶ リンク（相手が 待っている）から ひらいたときも 同じ（2026-11-26：押す回数を へらす）
+    if ((/[?&]go=1/.test(location.search) || LINK.mode === "play") && CFG.myName) setTimeout(() => $("startBtn").click(), 300);
   }
   else if (!NET.available) $("callBtn").hidden = true;
   refreshLeft(); renderPartners(); renderNameBtn(); renderPush();
@@ -3642,7 +3814,7 @@ $("tellBtn").addEventListener("click", async () => {
    カメラも ゲームも うごかさない。LINE で リンクを おくって 開始画面に もどる。
    あいてが リンクを ひらく → なまえ → 中継に「とうろく」を残す → こちらは pending で うけとる */
 /* 相手が とうろく したかを たしかめる（2026-11-22）。
-   誘ってから 24時間は、アプリが 前に出ている あいだ たしかめつづける。はじめの 15分は 10秒ごと、そのあとは 30秒ごと。
+   誘ってから 24時間は、アプリが 前に出ている あいだ たしかめつづける。はじめの 15分は 2秒ごと（11/26 あまねさん）、そのあとは 30秒ごと。
    「いつまで たしかめるか」は 保存しておく（LINE から もどったときに iPhone が 画面を 作りなおしても とまらない。11/22 けい の件） */
 let pendTimer = 0;
 function pendTick() {
@@ -3650,11 +3822,11 @@ function pendTick() {
   const now = Date.now();
   if (!CFG.pendUntil || now > CFG.pendUntil) { if (CFG.pendUntil) { delete CFG.pendUntil; delete CFG.pendSince; saveCfg(); } return; }
   if (document.visibilityState === "visible" && !G.started && NET.role !== "guest") checkPending();
-  pendTimer = setTimeout(pendTick, now - (CFG.pendSince || 0) < 15 * 60 * 1000 ? 10000 : 30000);
+  pendTimer = setTimeout(pendTick, now - (CFG.pendSince || 0) < 15 * 60 * 1000 ? 2000 : 30000);
 }
 function startPendWatch() {
   CFG.pendSince = Date.now(); CFG.pendUntil = Date.now() + 24 * 3600 * 1000; saveCfg();
-  clearTimeout(pendTimer); pendTimer = setTimeout(pendTick, 10000);
+  clearTimeout(pendTimer); pendTimer = setTimeout(pendTick, 2000);
 }
 function showRegInvite() {
   if (!CFG.myName) return showNames(() => showRegInvite(), true);
@@ -3682,30 +3854,51 @@ $("regCopy").addEventListener("click", () => {
   try { navigator.clipboard.writeText(regMsg()).then(() => { $("regCopy").textContent = "コピーしました"; setTimeout(() => $("regCopy").textContent = "文面をコピー", 2000); }); } catch (e) { }
 });
 $("regClose").addEventListener("click", () => { $("regOv").hidden = true; });
+/* 待っている人に つなぐ（2026-11-26 あまねさん「登録の流れが長すぎる」）
+   ・この画面で「とうろく」が届いた人（さそって 登録してくれた人）が 待っていれば、そのまま つなぐ（初回は LINE の 2通目が いらない）
+   ・前から 登録している人が 待っていれば「〇〇が まっているよ」を出す（リンクから ひらけなくても、アプリを ひらけば つながる） */
+const freshDevs = new Set();
+let meetSkip = "", meetFor = null;
+function gotWaits(waits) {
+  if (!waits.length || G.started || NET.role || answeringRing || !$("inviteOv").hidden || !$("regOv").hidden) return;
+  const w = waits.find(x => people.list.some(p => p.dev && p.dev === x.dev));
+  if (!w) return;                                  // 登録していない人からは 受けない
+  const p = people.list.find(q => q.dev === w.dev);
+  if (freshDevs.has(p.dev)) { $("meetOv").hidden = true; $("whoOv").hidden = true; return joinWaiting(p, w.room); }
+  if (meetSkip === w.room || !$("meetOv").hidden) return;
+  meetFor = { p, room: w.room };
+  $("meetTitle").textContent = `${p.name}が まっているよ`;
+  $("meetGo").textContent = `${p.name}と つなぐ`;
+  $("whoOv").hidden = true; $("meetOv").hidden = false;
+}
+$("meetGo").addEventListener("click", () => { $("meetOv").hidden = true; if (meetFor) joinWaiting(meetFor.p, meetFor.room); });
+$("meetNo").addEventListener("click", () => { $("meetOv").hidden = true; if (meetFor) meetSkip = meetFor.room; });
 function checkPending() {
-  return CALL.pending().then(list => {
-    if (!list.length) return;
-    list.forEach(x => registerCaller(x.dev, x.name));
-    if (!G.started && !answeringRing) {
-      $("ringNote").textContent = `${list.map(x => x.name || "あいて").join("・")}が とうろく しました`; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
-      if (!$("whoOv").hidden) pressPlay();
+  return CALL.pending().then(({ list, waits }) => {
+    if (list.length) {
+      list.forEach(x => { registerCaller(x.dev, x.name); freshDevs.add(x.dev); });
+      if (!G.started && !answeringRing) {
+        $("ringNote").textContent = `${list.map(x => x.name || "あいて").join("・")}が とうろく しました`; $("ringNote").hidden = false; $("ringNote").classList.add("calm");
+        if (!$("whoOv").hidden) pressPlay();
+      }
     }
+    gotWaits(waits);
   });
 }
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && NET.role !== "guest" && !G.started) { checkPending(); if (CFG.pendUntil && !pendTimer) pendTick(); } });
 // 起動したとき：誘ってから 24時間 以内なら たしかめつづける
-if (CFG.pendUntil) setTimeout(pendTick, 10000);
+if (CFG.pendUntil) setTimeout(pendTick, 2000);
 // さそう リンクを ひらいた人：なまえ（はじめてだけ）→ とうろく する。ゲームは はじめない
 function gotRegLink() {
   try { history.replaceState(null, "", location.pathname); } catch (e) { }
   if (LINK.dev === CALL.id) { $("ringNote").textContent = "これは じぶんが おくった さそいの リンクです"; $("ringNote").hidden = false; $("ringNote").classList.add("calm"); return; }
-  const done = () => {
+  const done = async () => {
     addPerson({ dev: LINK.dev, name: LINK.name }); renderPartners();
-    CALL.accept(LINK.dev, CFG.myName);
-    const who = LINK.name || "あいて";
-    $("regDoneTitle").textContent = `${who}を登録しました！`;
-    $("regDoneLead").textContent = `遊ぶときは「とおくの ひとと あそぶ」→「${who}と あそぶ」を押してください。`;
-    $("regDoneOv").hidden = false;
+    await CALL.accept(LINK.dev, CFG.myName);
+    // 登録したら そのまま 招待した人を 待つ（2026-11-26）。招待した人の アプリが ひらいていれば すぐ つながる。
+    // ひらいていなければ 通知（使えれば）、それも だめなら「LINEで 知らせる」を 出しておく（自動では ひらかない）
+    const p = people.list.find(x => x.dev === LINK.dev);
+    if (p) callGrandma(false, false, p, { justRegistered: true });
   };
   if (!CFG.myName) showNames(done, true); else done();
 }

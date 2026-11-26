@@ -95,6 +95,16 @@ footer a { color: var(--sub); }
   open.href = isAndroid
     ? "intent://join?" + pass + "#Intent;scheme=marushima;package=com.uchinoaji.marushima.reversi;S.browser_fallback_url=" + encodeURIComponent("https://play.google.com/store/apps/details?id=com.uchinoaji.marushima.reversi") + ";end"
     : "marushima://join?" + pass;
+  // あそぶ リンク（2026-11-26）：受けとるのは 登録ずみ＝アプリが入っている人。案内を見せずに すぐ アプリを ひらく。
+  // ひらけなかったとき（LINE の中で止められた・アプリを消した）のために、「アプリで開く」を いちばん上に出しておく
+  if (q.get("m") === "play" && r && (isIOS || isAndroid)) {
+    fromEl.textContent = (n ? n + "さんが" : "相手が") + "テレビ電話リバーシで待っています";
+    const ol = document.querySelector("ol"), step = document.getElementById("openStep");
+    ol.insertBefore(step, ol.firstElementChild);
+    step.querySelector(".step").textContent = "アプリが開かないときは";
+    step.nextElementSibling.querySelector(".step").textContent = "まだアプリを入れていない方";
+    setTimeout(() => { location.href = open.href; }, 200);
+  }
 })();
 </script>
 </body></html>

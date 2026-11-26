@@ -5,7 +5,7 @@
 //   POST {op:"cancel", id, secret, to, tag}          … 呼び出しを取り消す（相手の通知を消す）
 //   POST {op:"hint", r, n, fd, fp}                    … 招待の案内ページ：この端末で アプリを入れに行った、と一時的に記録（1時間）
 //   POST {op:"accept", id, secret, to, name}          … 招待リンクを開いた：招待した人（to）に「とうろく」を伝える（通知を受けとれれば 通知も）
-//   POST {op:"pending", id, secret}                   … 自分あての「とうろく」を受けとる（受けとったら消す）
+//   POST {op:"pending", id, secret}                   … 自分あての「とうろく」を受けとる（受けとったら消す）＋ いま自分を待っている人（waits）
 //   POST {op:"claim", fp}                             … アプリを初めて開いた：さっきの招待があれば その部屋を返す（返したら消す）
 //   POST {op:"wait", id, secret, to, room}            … to を 自分の部屋で 待っている（5秒ごとに 送りなおす）。to が 自分を待っていれば other で返す
 //   POST {op:"peek", id, secret, to}                  … to が 自分を 待っているか（待っていれば other：{room}）
@@ -113,7 +113,13 @@ async function handle(b: Record<string, any>) {
     if (!meRow) return [403, { error: "who" }];
     const { data } = await db.from("rv_pairs").select("from_id,name,at").eq("to_id", meRow.id).order("at", { ascending: true }).limit(20);
     if (data && data.length) await db.from("rv_pairs").delete().eq("to_id", meRow.id);
-    return [200, { ok: true, list: (data || []).map((r: any) => ({ dev: r.from_id, name: r.name })) }];
+    // 自分を いま 待っている人（2026-11-26）：アプリを ひらいたら リンクなしでも その部屋に 入れるように。20秒 以内に 更新されたものだけ
+    const { data: w } = await db.from("rv_waits").select("host_id,room,at").eq("to_id", meRow.id).gt("at", new Date(Date.now() - 20e3).toISOString()).limit(5);
+    const ids = (w || []).map((r: any) => r.host_id);
+    const { data: nm } = ids.length ? await db.from("rv_devices").select("id,name").in("id", ids) : { data: [] };
+    const names = Object.fromEntries((nm || []).map((r: any) => [r.id, r.name]));
+    const waits = (w || []).map((r: any) => ({ dev: r.host_id, room: r.room, name: names[r.host_id] || "" }));
+    return [200, { ok: true, list: (data || []).map((r: any) => ({ dev: r.from_id, name: r.name })), waits }];
   }
   if (b.op === "wait" || b.op === "peek" || b.op === "unwait") {
     const meRow = await me(b.id, b.secret);

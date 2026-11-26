@@ -35,20 +35,36 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   const regUrl = ((await a.evaluate(() => window.__shared))[0].match(/https:\/\/\S+/) || [""])[0];
   check(/m=reg/.test(regUrl) && await a.evaluate(() => window.__media) === 0, "A：さそう（とうろくだけ・カメラなし）");
 
+  // 2026-11-26：はじめては 登録と同時に つながる（LINE の 2通目なし）
+  const until = async (page, fn, ms) => { const end = Date.now() + ms; while (Date.now() < end) { try { if (await page.evaluate(fn)) return true; } catch (e) { } await page.waitForTimeout(500); } return false; };
   const g = await phone(); await open(g, "?" + regUrl.split("?")[1]);
   const gid = await g.evaluate(() => CALL.id);
   const acc = g.waitForResponse(r => (r.request().postData() || "").includes('"accept"'), { timeout: 20000 }).catch(() => null);
   await g.fill("#myName", "ばあばE2E"); await g.click("#nameOk");
   const r = await acc;
   check(!!r && r.status() === 200, "B：本物の中継に とうろくを 残した（" + (r ? r.status() : "なし") + "）");
-  check(await g.evaluate(() => !document.getElementById("regDoneOv").hidden) && await g.evaluate(() => window.__media) === 0, "B：なかまに なった（カメラなし）");
-
-  await a.waitForFunction(() => /ばあばE2Eが とうろく しました/.test(document.getElementById("ringNote").textContent), null, { timeout: 45000 }).catch(() => { });
+  check(await until(g, () => NET.role === "host" && document.getElementById("inviteOv").hidden, 15000), "B：登録したら そのまま A を待つ（LINE の画面は 出さない）");
+  const t0 = Date.now();
+  const okA1 = await until(a, () => NET.open, 60000), okG1 = await until(g, () => NET.open, 10000);
+  check(okA1 && okG1, `はじめて：A が 何も押さずに つながった（${Math.round((Date.now() - t0) / 1000)}秒）`);
   const ap = await a.evaluate(() => JSON.parse(localStorage.getItem("marushima-reversi-people") || "[]"));
-  check(ap.some(p => p.dev === gid && p.name === "ばあばE2E"), "A：開いたまま 本物の中継から ばあば を うけとった");
+  check(ap.some(p => p.dev === gid && p.name === "ばあばE2E"), "A：ばあば が とうろくした ひとに 入った");
 
-  // B（さそわれた側）から あそぶ → A が あそぶリンクを ひらく → 本当に つながる
-  await g.click("#regDoneOk");
+  // 2回目：B が「A と あそぶ」→ A は リンクなしで アプリを ひらくだけ →「〇〇が まっているよ」→ つなぐ
+  await open(a); await open(g);
+  await g.click("#callBtn"); await g.waitForTimeout(500);
+  await g.click("#whoList button");
+  await g.waitForFunction(() => !document.getElementById("inviteOv").hidden, null, { timeout: 30000 }).catch(() => { });
+  await g.click("#inviteClose").catch(() => { });
+  await open(a);
+  const meet = await until(a, () => !document.getElementById("meetOv").hidden && /ばあばE2E/.test(document.getElementById("meetTitle").textContent), 15000);
+  check(meet, "A：アプリを ひらいただけで「ばあばE2Eが まっているよ」が出た");
+  if (meet) await a.click("#meetGo");
+  const okA2 = await until(a, () => NET.open, 60000), okG2 = await until(g, () => NET.open, 10000);
+  check(okA2 && okG2, "2回目：まっているよ → つなぐ で つながった");
+
+  // あそぶ リンクから ひらいたら「はじめる」を押さずに つながる
+  await open(a); await open(g);
   await g.click("#callBtn"); await g.waitForTimeout(500);
   await g.click("#whoList button");
   await g.waitForFunction(() => !document.getElementById("inviteOv").hidden, null, { timeout: 30000 }).catch(() => { });
@@ -56,14 +72,9 @@ try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}
   const playUrl = (((await g.evaluate(() => window.__shared)).pop() || "").match(/https:\/\/\S+/) || [""])[0];
   check(/m=play/.test(playUrl), "B：あそぶリンクを おくった");
   await open(a, "?" + playUrl.split("?")[1]);
-  await a.click("#startBtn").catch(() => { });
-  const okA = await a.waitForFunction(() => NET.open, null, { timeout: 60000 }).then(() => true).catch(() => false);
-  const okG = await g.waitForFunction(() => NET.open, null, { timeout: 10000 }).then(() => true).catch(() => false);
-  check(okA && okG, "B（さそわれた側）から よんで、A と 本当に つながった");
-  if (okA && okG) {
-    await a.waitForTimeout(4000);
-    check(await g.evaluate(() => G.begun) === true, "対局が はじまった");
-  }
+  const okA3 = await until(a, () => NET.open, 60000), okG3 = await until(g, () => NET.open, 10000);
+  check(okA3 && okG3, "あそぶリンク：はじめるを 押さずに つながった");
+  if (okA3 && okG3) { await a.waitForTimeout(4000); check(await g.evaluate(() => G.begun) === true, "対局が はじまった"); }
 
   await browser.close(); srv.close();
   console.log(fail ? `\n${fail} 件 NG` : "\nぜんぶ OK");
