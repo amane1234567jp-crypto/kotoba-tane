@@ -1,0 +1,634 @@
+[
+{
+"key": "ogw_nani",
+"who": "ojisan",
+"text": "そんなに いそいで、なにを して いるの？",
+"yomi": "そんなに急いで、何をしているの？",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_nani",
+"who": "ojisan",
+"text": "おにごっこか。つかまらないように、がんばれよ",
+"yomi": "鬼ごっこか。捕まらないように、頑張れよ",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw2_nani",
+"who": "ojisan",
+"text": "おには だれが やって いるの？",
+"yomi": "鬼は誰がやっているの？",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr2_nani",
+"who": "ojisan",
+"text": "ほんものか！ それは にげなきゃ",
+"yomi": "本物か！それは逃げなきゃ",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_tasukete",
+"who": "momotaro",
+"text": "どうしたの？ いきが きれて いるよ",
+"yomi": "どうしたの？息が切れているよ",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_tasukete",
+"who": "momotaro",
+"text": "まかせて！ ぼくが まもって あげる",
+"yomi": "任せて！僕が守ってあげる",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw2_tasukete",
+"who": "momotaro",
+"text": "おには いま、どこに いるの？",
+"yomi": "鬼は今、どこにいるの？",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr2_tasukete",
+"who": "momotaro",
+"text": "よし、ぼくが まえに でる！",
+"yomi": "よし、僕が前に出る！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_obaasan",
+"who": "meebaa",
+"text": "おや、どこへ いくんだい？",
+"yomi": "おや、どこへ行くんだい？",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_obaasan",
+"who": "meebaa",
+"text": "それは たいへん。うらの ちかみちを おいき",
+"yomi": "それは大変。裏の近道をお行き",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_inu1",
+"who": "inu",
+"text": "わん！ こしの きびだんご、ひとつ ください",
+"yomi": "わん！腰のきびだんご、一つください",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_inu1",
+"who": "inu",
+"text": "わん！ なかまに なるよ。おにから まもって あげる",
+"yomi": "わん！仲間になるよ。鬼から守ってあげる",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_tomo",
+"who": "tora",
+"text": "まって！ おにが こっちに くる！",
+"yomi": "待って！鬼がこっちに来る！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_tomo",
+"who": "tora",
+"text": "うん！ てを つないで はしろう",
+"yomi": "うん！手をつないで走ろう",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_hashi",
+"who": "doshin",
+"text": "そっちの はしは こわれて いるよ",
+"yomi": "そっちの橋は壊れているよ",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_hashi",
+"who": "doshin",
+"text": "きを つけてな。おにも あの はしは わたれんよ",
+"yomi": "気をつけてな。鬼もあの橋は渡れんよ",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_saru1",
+"who": "saru",
+"text": "キキッ！ なにを あわてて いるの？",
+"yomi": "キキッ！何を慌てているの？",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_saru1",
+"who": "saru",
+"text": "それなら、きの うえに かくれな！",
+"yomi": "それなら、木の上に隠れな！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw2_saru1",
+"who": "saru",
+"text": "きの ぼりは できるかな？",
+"yomi": "木登りはできるかな？",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr2_saru1",
+"who": "saru",
+"text": "キキッ、じょうず じょうず！",
+"yomi": "キキッ、上手上手！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_saru2",
+"who": "saru",
+"text": "キキッ、その きびだんご、ちょうだい",
+"yomi": "キキッ、そのきびだんご、ちょうだい",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_saru2",
+"who": "saru",
+"text": "キキッ！ なかまに なる！ おにが きたら おしえるね",
+"yomi": "キキッ！仲間になる！鬼が来たら教えるね",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_michi",
+"who": "nobbo",
+"text": "なにを さがして いるの？",
+"yomi": "何を探しているの？",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_michi",
+"who": "nobbo",
+"text": "それなら、みぎの みちが いいよ",
+"yomi": "それなら、右の道がいいよ",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_tsukare",
+"who": "pyon",
+"text": "もう はしれないよう……",
+"yomi": "もう走れないよう……",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_tsukare",
+"who": "pyon",
+"text": "うん……がんばる！",
+"yomi": "うん……頑張る！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_oni1",
+"who": "oni",
+"text": "まてー！ つかまえるぞー！",
+"yomi": "待てー！捕まえるぞー！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_oni1",
+"who": "oni",
+"text": "ぐぬぬ……すばしっこいな",
+"yomi": "ぐぬぬ……すばしっこいな",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_shizuka",
+"who": "kuma",
+"text": "しーっ。おにが ちかくに いるよ",
+"yomi": "しーっ。鬼が近くにいるよ",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_shizuka",
+"who": "kuma",
+"text": "そうそう。そっと いこう",
+"yomi": "そうそう。そっと行こう",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_kiji1",
+"who": "kiji",
+"text": "ケーン！ どこへ いくの？",
+"yomi": "ケーン！どこへ行くの？",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_kiji1",
+"who": "kiji",
+"text": "そらから みちを おしえて あげる",
+"yomi": "空から道を教えてあげる",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_kiji2",
+"who": "kiji",
+"text": "ケーン、きびだんご ひとつ ください",
+"yomi": "ケーン、きびだんご一つください",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_kiji2",
+"who": "kiji",
+"text": "ケーン！ なかまに なるよ",
+"yomi": "ケーン！仲間になるよ",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_momo",
+"who": "momotaro",
+"text": "ももに のって いこう！ かけごえは？",
+"yomi": "桃に乗って行こう！掛け声は？",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_momo",
+"who": "momotaro",
+"text": "それー、しゅっぱつ！",
+"yomi": "それー、出発！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_fune",
+"who": "kamejii",
+"text": "ふねに のるかい？",
+"yomi": "舟に乗るかい？",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_fune",
+"who": "kamejii",
+"text": "よし、まかせておけ。おにには おいつかせないぞ",
+"yomi": "よし、任せておけ。鬼には追いつかせないぞ",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw2_fune",
+"who": "kamejii",
+"text": "どこまで いくんだい？",
+"yomi": "どこまで行くんだい？",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr2_fune",
+"who": "kamejii",
+"text": "よしきた。しっかり つかまって",
+"yomi": "よしきた。しっかりつかまって",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_abunai",
+"who": "mama",
+"text": "にげる とき、どこを はしったら あぶない？",
+"yomi": "逃げる時、どこを走ったら危ない？",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_abunai",
+"who": "mama",
+"text": "えらい！ あんぜんが いちばんね",
+"yomi": "偉い！安全が一番ね",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_inu2",
+"who": "inu",
+"text": "わん！ おにの においが する！",
+"yomi": "わん！鬼の匂いがする！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_inu2",
+"who": "inu",
+"text": "わん！ こっちに にげよう",
+"yomi": "わん！こっちに逃げよう",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_mon",
+"who": "oni",
+"text": "なにしに きた？",
+"yomi": "何しに来た？",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_mon",
+"who": "oni",
+"text": "う……そう いわれると……",
+"yomi": "う……そう言われると……",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_issho",
+"who": "momotaro",
+"text": "さあ、いっしょに いくぞ！",
+"yomi": "さあ、一緒に行くぞ！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_issho",
+"who": "momotaro",
+"text": "えい、えい、おー！",
+"yomi": "えい、えい、おー！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_gomen",
+"who": "oni",
+"text": "もう いじわるは しないよ。ごめんね",
+"yomi": "もう意地悪はしないよ。ごめんね",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_gomen",
+"who": "oni",
+"text": "ほんとに？ うれしいなあ",
+"yomi": "本当に？嬉しいなあ",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw2_gomen",
+"who": "oni",
+"text": "ほんとに また あそんで くれる？",
+"yomi": "本当にまた遊んでくれる？",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr2_gomen",
+"who": "oni",
+"text": "やったあ！ ゆびきりだ",
+"yomi": "やったあ！指切りだ",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_tobira",
+"who": "saru",
+"text": "キキッ、もんが おもくて あかない！",
+"yomi": "キキッ、門が重くて開かない！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_tobira",
+"who": "saru",
+"text": "せーの！ ぎぎぎ……あいた！",
+"yomi": "せーの！ぎぎぎ……開いた！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_yobu",
+"who": "kiji",
+"text": "ケーン！ おにが いっぱい いるよ",
+"yomi": "ケーン！鬼がいっぱいいるよ",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_yobu",
+"who": "kiji",
+"text": "たのむよ！ はやく はやく！",
+"yomi": "頼むよ！早く早く！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_owari",
+"who": "oni",
+"text": "おにごっこ、たのしかったね",
+"yomi": "鬼ごっこ、楽しかったね",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_owari",
+"who": "oni",
+"text": "よーし、こんどは おれが にげるぞー！",
+"yomi": "よーし、今度は俺が逃げるぞー！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogo_go",
+"who": "oni",
+"text": "まてー！ つかまえるぞー！",
+"yomi": "待てー！捕まえるぞー！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogo_hit",
+"who": "oni",
+"text": "えいっ！ つかまえたぞー！",
+"yomi": "えいっ！捕まえたぞー！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogo_start",
+"who": "oni",
+"text": "ぐおー！ おにごっこの はじまりだ！ 10かぞえたら おいかけるぞー",
+"yomi": "ぐおー！鬼ごっこの始まりだ！十数えたら追いかけるぞー",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogo_back",
+"who": "oni",
+"text": "うわー！ ももたろうだー！",
+"yomi": "うわー！桃太郎だー！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogo_fly",
+"who": "oni",
+"text": "あーれー！",
+"yomi": "あーれー！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogo_army",
+"who": "oni",
+"text": "おにの ぐんだん、しゅつげきだー！",
+"yomi": "鬼の軍団、出撃だー！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogm_tank",
+"who": "momotaro",
+"text": "スーパーももたろう、さんじょう！ ももたまを くらえー！",
+"yomi": "スーパー桃太郎、参上！桃玉をくらえー！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogm_army",
+"who": "momotaro",
+"text": "ももたろう ぐんだん、しゅつじん！",
+"yomi": "桃太郎軍団、出陣！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogi_wan",
+"who": "inu",
+"text": "わん！ こっちだよ！",
+"yomi": "わん！こっちだよ！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogk_ken",
+"who": "kiji",
+"text": "ケーン！ つかまって！",
+"yomi": "ケーン！つかまって！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogs_kiki",
+"who": "saru",
+"text": "キキッ！ この えだを つたって いけば はやいよ",
+"yomi": "キキッ！この枝を伝って行けば早いよ",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_tobira__v2",
+"who": "saru",
+"text": "キキッ、もんが おもくて あかない！",
+"yomi": "キキッ、門が重くて、あかない！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_tobira__v2",
+"who": "saru",
+"text": "せーの！ ぎぎぎ……あいた！",
+"yomi": "せーの！ぎぎぎ……あいた！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr2_gomen__v2",
+"who": "oni",
+"text": "やったあ！ ゆびきりだ",
+"yomi": "やったー！指切りだ",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_obaasan__v2",
+"who": "meebaa",
+"text": "おや、どこへ いくんだい？",
+"yomi": "おや、どこへいくんだい？",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw2_fune__v2",
+"who": "kamejii",
+"text": "どこまで いくんだい？",
+"yomi": "どこまでいくんだい？",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_kiji2__v2",
+"who": "kiji",
+"text": "ケーン、きびだんご ひとつ ください",
+"yomi": "ケーン、きびだんご、ひとつください",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogr_yobu__v2",
+"who": "kiji",
+"text": "たのむよ！ はやく はやく！",
+"yomi": "頼むよ！早く、早く！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogo_go__v2",
+"who": "oni",
+"text": "まてー！ つかまえるぞー！",
+"yomi": "まてー！つかまえるぞー！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogo_back__v2",
+"who": "oni",
+"text": "うわー！ ももたろうだー！",
+"yomi": "うわー！ももたろうだー！",
+"acc": null,
+"job": "og1"
+},
+{
+"key": "ogw_abunai__v2",
+"who": "mama",
+"text": "にげる とき、どこを はしったら あぶない？",
+"yomi": "逃げるとき、どこを走ったら、あぶない？",
+"acc": null,
+"job": "og1"
+}
+]

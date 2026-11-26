@@ -2,7 +2,7 @@
 import json, sys, urllib.request, urllib.parse
 from pathlib import Path
 OUT = Path(sys.argv[1]); E = "http://127.0.0.1:10101"
-cast = json.loads(Path("cast.json").read_text()); items = json.loads(Path("jobs/check/check.json").read_text())
+cast = json.loads(Path("cast.json").read_text()); items = json.loads(Path(sys.argv[2] if len(sys.argv) > 2 else "jobs/check/check.json").read_text())
 def call(method, path, data=None, ctype=None):
     req = urllib.request.Request(E + path, data=data, method=method)
     if ctype: req.add_header("Content-Type", ctype)
