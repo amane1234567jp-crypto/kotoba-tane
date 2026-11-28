@@ -1,0 +1,40 @@
+== https://www.uchinoaji.com/.well-known/apple-app-site-association
+HTTP/2 200 
+content-type: application/json
+{"applinks":{"details":[{"appIDs":["ZGYPGQ9WPN.com.uchinoaji.marushima.reversi"],"components":[{"/":"/rv"},{"/":"/rv/*"}]},{"appIDs":["ZGYPGQ9WPN.com.uchinoaji.app"],"components":[{"/":"/i/*"},{"/":"/m/*"}]}]}}
+== https://www.uchinoaji.com/.well-known/assetlinks.json
+HTTP/2 200 
+content-type: application/json
+[{"relation":["delegate_permission/common.handle_all_urls"],"target":{"namespace":"android_app","package_name":"com.uchinoaji.marushima.reversi","sha256_cert_fingerprints":["AC:B0:6B:A7:39:FB:3E:09:E0:A2:94:E2:09:D3:43:46:E8:1C:C5:E3:52:C3:E5:91:78:E9:42:50:9E:88:DE:4A","92:72:19:F9:50:D9:52:8D:66:E0:F9:32:19:FB:F6:88:D6:22:4C:DA:0C:17:23:0C:7D:7C:92:B4:93:7C:03:0A"]}},{"relation":["delegate_permission/common.handle_all_urls"],"target":{"namespace":"android_app","package_name":"com.uchinoaji.app","sha256_cert_fingerprints":["EF:E1:8F:B7:7D:6D:1A:79:45:AB:D8:EE:7E:A9:BD:26:3A:71:47:52:09:2B:D8:F5:7F:96:67:1B:9C:57:8F:F6"]}}]
+== https://app-site-association.cdn-apple.com/a/v1/www.uchinoaji.com
+HTTP/2 200 
+content-type: application/json
+{"applinks":{"details":[{"appIDs":["ZGYPGQ9WPN.com.uchinoaji.marushima.reversi"],"components":[{"/":"/rv"},{"/":"/rv/*"}]},{"appIDs":["ZGYPGQ9WPN.com.uchinoaji.app"],"components":[{"/":"/i/*"},{"/":"/m/*"}]}]}}
+== /rv/?r=test
+<base href="https://amane1234567jp-crypto.github.io/kotoba-tane/reversi/">
+<title>テレビ電話リバーシ</title>
+1) 案内ページ: https://amane1234567jp-crypto.github.io/kotoba-tane/reversi/?r=e2erlfzr3sp&n=%E3%83%86%E3%82%B9%E3%83%88 記録: 200 {"ok":true}
+   アプリで ひらく: marushima://join?r=e2erlfzr3sp&n=%E3%83%86%E3%82%B9%E3%83%88
+2) アプリ初回の照合: 200 （本文は移動で読めず）
+3) アプリの行き先: https://amane1234567jp-crypto.github.io/kotoba-tane/reversi/play.html?r=e2erlfzr3sp&n=%E3%83%86%E3%82%B9%E3%83%88 → 成功（その部屋につながる）
+A の端末: wl1wVN…
+B → accept: 200 {"ok":true}
+B の とうろくした ひと: null
+A が受けとった: [{"dev":"OIw8sWNccRPIT9BEpsVhL8","room":"","name":"あいて","at":1795862022936}] ／ 開始画面: あいてが とうろく しました
+→ 成功
+OK  A：さそう（とうろくだけ・カメラなし）
+OK  B：本物の中継に とうろくを 残した（200）
+OK  B：登録したら そのまま A を待つ（LINE の画面は 出さない）
+OK  はじめて：A が 何も押さずに つながった（3秒）
+OK  A：ばあば が とうろくした ひとに 入った
+OK  A：アプリを ひらいただけで「ばあばE2Eが まっているよ」が出た
+OK  2回目：まっているよ → つなぐ で つながった
+OK  B：あそぶリンクを おくった
+OK  あそぶリンク：はじめるを 押さずに つながった
+OK  対局が はじまった
+
+ぜんぶ OK
+OK  2人が 同時に 名前を押して、LINE なしで つながった（A:host,kvou3dmg B:guest,kvou3dmg）
+OK  片方が 待ち・片方が 入る に そろった
+
+ぜんぶ OK
