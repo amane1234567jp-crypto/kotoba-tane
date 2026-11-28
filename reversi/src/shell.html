@@ -237,6 +237,9 @@ body {
 .big.partner small { font: 700 .42em var(--body); color: var(--muted); letter-spacing: .06em; }
 .resend { align-self: center; margin-top: -4px; }
 .nameRow { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+.welcomeBtn { display: block; width: 100%; margin: 10px 0; padding: 14px 12px; font: 800 clamp(18px, 3vmin, 22px) var(--body); border: 3px solid var(--ink); border-radius: 16px; background: #FFFFFF; color: var(--ink); cursor: pointer; }
+.welcomeBtn.primary { background: var(--glow); }
+.welcomeBtn small { display: block; margin-top: 4px; font-size: .72em; font-weight: 500; opacity: .85; }
 .codeBtn { font: 700 clamp(15px, 2.4vmin, 19px) var(--body); color: var(--ink); background: #FFFFFF; border: 3px solid var(--ink); border-radius: 14px; padding: 10px 18px; margin: 4px 0 0; cursor: pointer; }
 .codeBtn small { display: block; font-size: .78em; font-weight: 500; opacity: .8; }
 .codeIn { display: block; width: 100%; max-width: 12em; margin: 8px auto 4px; font: 800 clamp(30px, 8vmin, 44px) var(--body); letter-spacing: .25em; text-align: center; padding: 8px 6px 8px 14px; border: 3px solid var(--ink); border-radius: 14px; background: #FFFFFF; color: var(--ink); }
@@ -384,6 +387,15 @@ body {
     <div class="panelBtns"><button type="button" id="whoNew" class="primary">あたらしい ひとを さそう</button></div>
     <div class="panelBtns"><button type="button" id="whoCode">お誘いの番号を入れる</button></div>
     <div class="panelBtns"><button type="button" id="whoClose">やめる</button></div>
+  </div>
+</div>
+<!-- はじめに（2026-11-28）：アプリを入れて はじめて開き、招待を 引きつげなかったときに 1回だけ -->
+<div class="cover" id="welcomeOv" hidden>
+  <div class="panel invite" role="dialog" aria-label="はじめに">
+    <h2>はじめに</h2>
+    <p class="lead">どちらか選んでください。</p>
+    <button type="button" id="welcomeCode" class="welcomeBtn primary">お誘いの番号を入れる<small>LINEなどで誘われてアプリを入れた方</small></button>
+    <button type="button" id="welcomeStart" class="welcomeBtn">このまま始める<small>自分でアプリを入れた方</small></button>
   </div>
 </div>
 <!-- お誘いの番号を入れる（2026-11-26）：入れるのは おとな。ふつうの漢字かなまじり -->

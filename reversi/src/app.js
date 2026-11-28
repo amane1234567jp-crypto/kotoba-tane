@@ -1320,12 +1320,21 @@ setTimeout(() => { try { if (CFG.voice) preloadVoices(); } catch (e) { } }, 400)
   try { localStorage.setItem(KEY, String(Date.now())); } catch (e) { }
   fetch("https://rlqeoyvevaglwngxtvrw.supabase.co/functions/v1/rv-push", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ op: "claim", fp: deviceHint() }) })
     .then(r => r.json()).then(j => {
-      if (!j || !j.ok || !j.r || G.started) return;
+      if (!j || !j.ok || !j.r) return showWelcome();
+      if (G.started) return;
       // さそう（とうろくだけ）リンクは 部屋のかわりに "reg" と 残してある
       const q = new URLSearchParams(); if (j.r === "reg") q.set("m", "reg"); else q.set("r", j.r); if (j.n) q.set("n", j.n); if (j.fd) q.set("fd", j.fd);
       location.replace(location.pathname + "?" + q.toString());
-    }).catch(() => { });
+    }).catch(() => showWelcome());
 })();
+/* はじめに（2026-11-28 あまねさん）：アプリを入れて はじめて開き、招待を 引きつげなかったときに 1回だけ。
+   誘われた人は 番号を入れる／自分で入れた人は そのまま始める。招待を 引きつげた人・前から使っている人には 出さない */
+function showWelcome() {
+  if (G.started || NET.role || LINK.mode || people.list.length || !$("inviteOv").hidden) return;
+  $("welcomeOv").hidden = false;
+}
+$("welcomeCode").addEventListener("click", () => { $("welcomeOv").hidden = true; showCode(); });
+$("welcomeStart").addEventListener("click", () => { $("welcomeOv").hidden = true; });
 function deviceHint() {
   const ua = navigator.userAgent; let os = "";
   let m = ua.match(/OS (\d+)_(\d+)/); if (m && /iPhone|iPad|iPod|Macintosh/.test(ua)) os = "iOS " + m[1] + "." + m[2];
@@ -1361,7 +1370,7 @@ function startPendWatch() {
   clearTimeout(pendTimer); pendTimer = setTimeout(pendTick, 2000);
 }
 let myCode = "";
-const withCode = t => myCode ? String(t).replace(/(「お誘いの番号」を聞かれたら )\d{6}/, "$1" + myCode) : t;   // 前に書きかえた文面でも 番号は いまのものに
+const withCode = t => myCode ? String(t).replace(/(「お誘いの番号」を聞かれたら |「お誘いの番号を入れる」が出たら、)\d{6}/, "$1" + myCode) : t;   // 前に書きかえた文面でも 番号は いまのものに
 async function showRegInvite() {
   if (!CFG.myName) return showNames(() => showRegInvite(), true);
   // お誘いの番号（2026-11-26）：リンクで うまく引きつげなかったとき、相手が アプリで 入れる。もらえなくても リンクだけで 送れる

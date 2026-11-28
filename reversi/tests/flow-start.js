@@ -25,6 +25,10 @@ const vis = (page, id) => page.evaluate(i => { const e = document.getElementById
   // ① はじめて
   await page.goto("http://127.0.0.1:47914/play.html");
   await page.waitForTimeout(800);
+  // はじめて開いて 引きつげなかった →「はじめに」（2026-11-28）。自分で入れた人として「このまま始める」
+  check(!(await page.evaluate(() => document.getElementById("welcomeOv").hidden)), "はじめて開いたら「はじめに」（誘われた／自分で入れた）");
+  await page.click("#welcomeStart"); await page.waitForTimeout(200);
+  await page.waitForTimeout(800);
   check(!(await vis(page, "linkNote")), "開始画面に 点線の案内は 出ない");
   await page.click("#callBtn");
   await page.waitForTimeout(300);

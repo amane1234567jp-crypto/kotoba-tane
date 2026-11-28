@@ -250,6 +250,9 @@ body {
 .big.partner small { font: 700 .42em var(--body); color: var(--muted); letter-spacing: .06em; }
 .resend { align-self: center; margin-top: -4px; }
 .nameRow { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+.welcomeBtn { display: block; width: 100%; margin: 10px 0; padding: 14px 12px; font: 800 clamp(18px, 3vmin, 22px) var(--body); border: 3px solid var(--ink); border-radius: 16px; background: #FFFFFF; color: var(--ink); cursor: pointer; }
+.welcomeBtn.primary { background: var(--glow); }
+.welcomeBtn small { display: block; margin-top: 4px; font-size: .72em; font-weight: 500; opacity: .85; }
 .codeBtn { font: 700 clamp(15px, 2.4vmin, 19px) var(--body); color: var(--ink); background: #FFFFFF; border: 3px solid var(--ink); border-radius: 14px; padding: 10px 18px; margin: 4px 0 0; cursor: pointer; }
 .codeBtn small { display: block; font-size: .78em; font-weight: 500; opacity: .8; }
 .codeIn { display: block; width: 100%; max-width: 12em; margin: 8px auto 4px; font: 800 clamp(30px, 8vmin, 44px) var(--body); letter-spacing: .25em; text-align: center; padding: 8px 6px 8px 14px; border: 3px solid var(--ink); border-radius: 14px; background: #FFFFFF; color: var(--ink); }
@@ -384,7 +387,7 @@ body {
     </div>
     <button class="codeBtn" id="codeBtn" type="button" hidden>お誘いの番号を入れる<small>LINEなどで番号が届いた方</small></button>
     <button class="adultBtn" id="adultBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Zm7.4-2.1.9-.7-1.5-2.6-1.1.3a6 6 0 0 0-1.3-.8l-.2-1.1h-3l-.2 1.1a6 6 0 0 0-1.3.8l-1.1-.3-1.5 2.6.9.7v1.3l-.9.7 1.5 2.6 1.1-.3a6 6 0 0 0 1.3.8l.2 1.1h3l.2-1.1a6 6 0 0 0 1.3-.8l1.1.3 1.5-2.6-.9-.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>おとなの せってい</button>
-    <p class="ver">v2026.11.26 d3de4970</p>
+    <p class="ver">v2026.11.28 81095bdb</p>
   </div>
 </div>
 <!-- 相手が 2人以上 登録されているときだけ：だれと あそぶ？ -->
@@ -397,6 +400,15 @@ body {
     <div class="panelBtns"><button type="button" id="whoNew" class="primary">あたらしい ひとを さそう</button></div>
     <div class="panelBtns"><button type="button" id="whoCode">お誘いの番号を入れる</button></div>
     <div class="panelBtns"><button type="button" id="whoClose">やめる</button></div>
+  </div>
+</div>
+<!-- はじめに（2026-11-28）：アプリを入れて はじめて開き、招待を 引きつげなかったときに 1回だけ -->
+<div class="cover" id="welcomeOv" hidden>
+  <div class="panel invite" role="dialog" aria-label="はじめに">
+    <h2>はじめに</h2>
+    <p class="lead">どちらか選んでください。</p>
+    <button type="button" id="welcomeCode" class="welcomeBtn primary">お誘いの番号を入れる<small>LINEなどで誘われてアプリを入れた方</small></button>
+    <button type="button" id="welcomeStart" class="welcomeBtn">このまま始める<small>自分でアプリを入れた方</small></button>
   </div>
 </div>
 <!-- お誘いの番号を入れる（2026-11-26）：入れるのは おとな。ふつうの漢字かなまじり -->
@@ -1951,7 +1963,7 @@ function playLink(base, room, name, dev) {
 // 本文（リンクの前）。送る前に アプリの中で 見せて 直せる（LINE 側では 本文が見えない・直せない：11/21 実機で確認）
 // お誘いの番号（2026-11-26）：リンクから うまく引きつげなかったときに 入れてもらう
 const regBody = (myName, code) => `${myName ? myName + "です。" : ""}テレビ電話をしながらリバーシで遊べるアプリがあるので、いっしょに遊びませんか？\n下のリンクからアプリを入れて（無料）、開いてください。` +
-  (/^\d{6}$/.test(code || "") ? `\n「お誘いの番号」を聞かれたら ${code} と入れてください。` : "");
+  (/^\d{6}$/.test(code || "") ? `\nアプリを開いて「お誘いの番号を入れる」が出たら、${code} と入れてください。` : "");
 const playBody = myName => `${myName ? myName + "です。" : ""}いまリバーシで遊べるよ！ このリンクをタップしてね。`;
 // 本文 ＋ リンク（リンクは かならず 最後に つける。本文を 消しても リンクだけは 送る）
 const withLink = (body, url) => (String(body || "").trim() ? String(body).trim().slice(0, 300) + "\n" : "") + url;
@@ -3817,12 +3829,21 @@ setTimeout(() => { try { if (CFG.voice) preloadVoices(); } catch (e) { } }, 400)
   try { localStorage.setItem(KEY, String(Date.now())); } catch (e) { }
   fetch("https://rlqeoyvevaglwngxtvrw.supabase.co/functions/v1/rv-push", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ op: "claim", fp: deviceHint() }) })
     .then(r => r.json()).then(j => {
-      if (!j || !j.ok || !j.r || G.started) return;
+      if (!j || !j.ok || !j.r) return showWelcome();
+      if (G.started) return;
       // さそう（とうろくだけ）リンクは 部屋のかわりに "reg" と 残してある
       const q = new URLSearchParams(); if (j.r === "reg") q.set("m", "reg"); else q.set("r", j.r); if (j.n) q.set("n", j.n); if (j.fd) q.set("fd", j.fd);
       location.replace(location.pathname + "?" + q.toString());
-    }).catch(() => { });
+    }).catch(() => showWelcome());
 })();
+/* はじめに（2026-11-28 あまねさん）：アプリを入れて はじめて開き、招待を 引きつげなかったときに 1回だけ。
+   誘われた人は 番号を入れる／自分で入れた人は そのまま始める。招待を 引きつげた人・前から使っている人には 出さない */
+function showWelcome() {
+  if (G.started || NET.role || LINK.mode || people.list.length || !$("inviteOv").hidden) return;
+  $("welcomeOv").hidden = false;
+}
+$("welcomeCode").addEventListener("click", () => { $("welcomeOv").hidden = true; showCode(); });
+$("welcomeStart").addEventListener("click", () => { $("welcomeOv").hidden = true; });
 function deviceHint() {
   const ua = navigator.userAgent; let os = "";
   let m = ua.match(/OS (\d+)_(\d+)/); if (m && /iPhone|iPad|iPod|Macintosh/.test(ua)) os = "iOS " + m[1] + "." + m[2];
@@ -3858,7 +3879,7 @@ function startPendWatch() {
   clearTimeout(pendTimer); pendTimer = setTimeout(pendTick, 2000);
 }
 let myCode = "";
-const withCode = t => myCode ? String(t).replace(/(「お誘いの番号」を聞かれたら )\d{6}/, "$1" + myCode) : t;   // 前に書きかえた文面でも 番号は いまのものに
+const withCode = t => myCode ? String(t).replace(/(「お誘いの番号」を聞かれたら |「お誘いの番号を入れる」が出たら、)\d{6}/, "$1" + myCode) : t;   // 前に書きかえた文面でも 番号は いまのものに
 async function showRegInvite() {
   if (!CFG.myName) return showNames(() => showRegInvite(), true);
   // お誘いの番号（2026-11-26）：リンクで うまく引きつげなかったとき、相手が アプリで 入れる。もらえなくても リンクだけで 送れる

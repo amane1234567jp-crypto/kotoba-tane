@@ -32,7 +32,7 @@ window.RVNative={platform:"ios",version:"1.0.10",push:false};try{localStorage.se
   await a.waitForFunction(() => !document.getElementById("regOv").hidden, null, { timeout: 8000 }).catch(() => { });
   check(await a.evaluate(() => document.getElementById("regCode").textContent) === "482915" && await vis(a, "regCodeBox"), "A：さそう画面に 番号 482915 が 大きく出る");
   const msg = await a.evaluate(() => document.getElementById("regMsg").value);
-  check(/「お誘いの番号」を聞かれたら 482915 と入れてください/.test(msg), "A：LINE の文面に 番号が入る");
+  check(/「お誘いの番号を入れる」が出たら、482915 と入れてください/.test(msg), "A：LINE の文面に 番号が入る");
   await a.click("#regLine"); await a.waitForTimeout(300);
   const sent = (await a.evaluate(() => window.__shared)).map(x => { try { return decodeURIComponent(x); } catch (e) { return x; } }).join("\n");
   check(/482915/.test(sent) && /[?&]c=482915/.test(sent), "A：送る文面に 番号、リンクにも c=482915");
@@ -56,6 +56,23 @@ window.RVNative={platform:"ios",version:"1.0.10",push:false};try{localStorage.se
   await a.goto(HOST); await a.waitForTimeout(500);
   await a.evaluate(() => { showCode(); }); await a.fill("#codeIn", "482915"); await a.click("#codeGo"); await a.waitForTimeout(400);
   check(/ご自分で送った/.test(await a.evaluate(() => document.getElementById("codeErr").textContent)), "A：自分の番号を入れると「ご自分で送った番号です」");
+  // はじめて開いて 引きつげなかったとき：「はじめに」（2026-11-28）
+  async function fresh() {
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, permissions: ["camera", "microphone"] });
+    await ctx.addInitScript(native.replace('try{localStorage.setItem("marushima-reversi-claimed","1")}catch(e){}', ""));
+    await ctx.route("**/functions/v1/rv-push", async route => { let q = {}; try { q = JSON.parse(route.request().postData() || "{}"); } catch (e) { } if (q.op === "claim") return route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: JSON.stringify({ ok: false }) }); return relay(route); });
+    await ctx.route("**/0.peerjs.com/**", r => r.abort());
+    const p = await ctx.newPage(); await p.goto(HOST); await p.waitForTimeout(1000); return p;
+  }
+  const c = await fresh();
+  check(await vis(c, "welcomeOv"), "はじめて開いて 引きつげなかった →「はじめに」が出る");
+  await c.click("#welcomeCode"); await c.waitForTimeout(200);
+  check(!(await vis(c, "welcomeOv")) && await vis(c, "codeOv"), "「お誘いの番号を入れる」→ 番号の画面");
+  const d = await fresh();
+  await d.click("#welcomeStart"); await d.waitForTimeout(200);
+  check(!(await vis(d, "welcomeOv")) && !(await vis(d, "codeOv")) && await vis(d, "startOv"), "「このまま始める」→ ふつうの開始画面");
+  await d.reload(); await d.waitForTimeout(1000);
+  check(!(await vis(d, "welcomeOv")), "2回目からは 出ない");
   await browser.close(); srv.close();
   console.log(fail ? `\n${fail} 件 NG` : "\nぜんぶ OK"); process.exit(fail ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(1); });
